@@ -1,6 +1,8 @@
 <template>
   <a-layout class="gi-main">
-    <router-view></router-view>
+    <transition name="fade-transform" mode="out-in">
+      <router-view></router-view>
+    </transition>
   </a-layout>
 </template>
 

@@ -19,7 +19,7 @@
 
 // 通用盒子
 .gi_box {
-  background: #fff;
+  background: var(--color-bg-1);
   border-radius: $box-radius;
   overflow: hidden;
 }
@@ -74,12 +74,21 @@
   -webkit-box-orient: vertical; // 设置伸缩盒子元素排列方式
 }
 
+.gi_flex_box {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
 .gi_lr_page {
   flex: 1;
   padding: $padding;
+  box-sizing: border-box;
   width: 100%;
   height: 100%;
   overflow: hidden;
+  display: flex;
   > .left {
     @extend .gi_box;
     flex: 1;

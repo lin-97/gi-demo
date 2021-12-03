@@ -32,6 +32,10 @@ body {
   background: $background-color;
 }
 
+body[arco-theme='dark'] #app {
+  background-color: var(--color-bg-5);
+}
+
 // 阿里巴巴项目图标默认样式
 .iconfont {
   font-family: 'iconfont' !important;
