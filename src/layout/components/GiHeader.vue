@@ -46,6 +46,7 @@ const changeTheme = () => {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  border-bottom: 1px solid var(--color-text-4);
   .sys-name {
     font-weight: bold;
     color: var(--color-text-1);
