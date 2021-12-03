@@ -1,0 +1,23 @@
+/* 美化滚动条 */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 8px;
+  background-color: #fff;
+}
+
+::-webkit-scrollbar-thumb {
+  width: 6px;
+  border-radius: 6px;
+  background-color: rgba(0, 0, 0, 0.2);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  width: 6px;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+::-ms-scrollbar-thumb {
+  width: 6px;
+  border-radius: 6px;
+  background-color: rgba(0, 0, 0, 0.2);
+}

@@ -1,0 +1,52 @@
+@import './var.scss';
+
+:root {
+  --el-header-height: 40px;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+}
+
+html,
+body,
+#app {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+}
+
+html {
+  font-size: 12px;
+}
+
+body {
+  overflow-y: hidden;
+}
+
+#app {
+  font-family: Avenir, Helvetica, Arial, sans-serif;
+  overflow: hidden;
+  color: $text-color;
+  background: $background-color;
+}
+
+// 阿里巴巴项目图标默认样式
+.iconfont {
+  font-family: 'iconfont' !important;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+  vertical-align: baseline;
+  display: inline-block;
+  -webkit-font-smoothing: antialiased;
+}
+
+// nprogress插件进度条颜色
+#nprogress .bar {
+  background: rgba($color: $theme-color, $alpha: 0.5) !important; //自定义颜色
+}
