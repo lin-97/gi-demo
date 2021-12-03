@@ -1,6 +1,6 @@
 <template>
   <div class="cate-tree">
-    <a-input-search style="margin-bottom: 8px; width: 100%" v-model="searchKey" />
+    <a-input-search placeholder="请输入关键字" style="margin-bottom: 8px; width: 100%" v-model="searchKey" />
     <section class="tree-wrap">
       <a-tree
         default-expand-all
