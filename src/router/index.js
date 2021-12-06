@@ -25,10 +25,10 @@ const routes = [
         meta: { title: '指标管理', keepAlive: false }
       },
       {
-        path: '/test',
-        name: 'test',
-        component: () => import('@/views/test/index.vue'),
-        meta: { title: '测试', keepAlive: false }
+        path: '/user',
+        name: 'user',
+        component: () => import('@/views/user/index.vue'),
+        meta: { title: '个人中心', keepAlive: false }
       }
     ]
   }

@@ -19,8 +19,8 @@ const state = {
     {
       icon: 'iconfont icon-zhibiaoguanli',
       id: 'ZBGL',
-      name: '测试',
-      path: '/test'
+      name: '个人中心',
+      path: '/user'
     }
   ]
 }

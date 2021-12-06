@@ -1,8 +1,11 @@
 <template>
   <a-layout class="gi-main">
-    <transition name="fade-transform" mode="out-in">
-      <router-view></router-view>
-    </transition>
+    <!-- <router-view #default="{ Component }">
+      <transition name="fade-transform" class="abs">
+        <component :is="Component" :key="key" />
+      </transition>
+    </router-view> -->
+    <router-view></router-view>
   </a-layout>
 </template>
 
@@ -11,7 +14,7 @@ import { computed } from 'vue'
 import { useRoute } from 'vue-router'
 
 const route = useRoute()
-const key = computed(() => route.path)
+let key = computed(() => route.path)
 </script>
 
 <style lang="scss" scoped>
@@ -22,6 +25,13 @@ const key = computed(() => route.path)
   flex-direction: column;
   overflow: hidden;
   position: relative;
+}
+
+.abs {
+  width: 100%;
+  position: absolute;
+  left: 0;
+  top: 0;
 }
 
 .fade-transform-leave-active,
