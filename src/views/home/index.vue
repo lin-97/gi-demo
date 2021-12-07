@@ -6,13 +6,12 @@
 
     <div class="wrap">
       <section class="left">
-        <ItemList></ItemList>
-        <MsgList style="margin-top: 10px"></MsgList>
+        <div class="item"><ItemList></ItemList></div>
+        <div class="item"><MsgList></MsgList></div>
       </section>
       <section class="right">
-        <div class="pic">
-          <img src="../../assets/images/home/home-design.svg" />
-        </div>
+        <div class="item"><Chart></Chart></div>
+        <div class="item"><HomeImg></HomeImg></div>
       </section>
     </div>
   </div>
@@ -22,6 +21,8 @@
 import WorkPlatform from './WorkPlatform.vue'
 import ItemList from './ItemList.vue'
 import MsgList from './MsgList.vue'
+import Chart from './Chart.vue'
+import HomeImg from './HomeImg.vue'
 </script>
 
 <style lang="scss" scoped>
@@ -31,7 +32,7 @@ import MsgList from './MsgList.vue'
   .wrap {
     display: flex;
     flex-wrap: wrap;
-    padding: $padding;
+    padding: 5px;
     .left,
     .right {
       flex: 1;
@@ -39,15 +40,10 @@ import MsgList from './MsgList.vue'
       min-width: 450px;
     }
     .right {
-      margin-left: $margin;
-      .pic {
-        padding: 20px;
-        box-sizing: border-box;
-        background: var(--color-bg-2);
-        img {
-          width: 100%;
-        }
-      }
+      overflow: hidden;
+    }
+    .item {
+      padding: 5px;
     }
   }
 }

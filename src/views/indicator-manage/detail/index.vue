@@ -1,13 +1,29 @@
 <template>
   <div class="detail">
-    <section class="item">
+    <section class="head">
+      <a-page-header title="详情" subtitle="指标管理详情">
+        <template #breadcrumb>
+          <a-breadcrumb>
+            <a-breadcrumb-item>Home</a-breadcrumb-item>
+            <a-breadcrumb-item>Channel</a-breadcrumb-item>
+            <a-breadcrumb-item>News</a-breadcrumb-item>
+          </a-breadcrumb>
+        </template>
+        <template #extra>
+          <a-button @click="back">返回</a-button>
+        </template>
+      </a-page-header>
+    </section>
+    <section class="item" v-for="i in 3" :key="i">
       <a-descriptions :data="data.list" title="基本信息" layout="inline-horizontal" />
     </section>
   </div>
 </template>
 
 <script setup>
-import { reactive, ref } from '@vue/reactivity'
+import { reactive, ref } from 'vue'
+import { useRouter } from 'vue-router'
+const router = useRouter()
 
 const data = reactive({
   list: [
@@ -33,13 +49,22 @@ const data = reactive({
     }
   ]
 })
+
+const back = () => {
+  router.back()
+}
 </script>
 
 <style lang="scss" scoped>
 .detail {
-  background: var(--color-bg-2);
+  .head {
+    background: var(--color-bg-2);
+  }
   .item {
+    margin: 0 $margin;
+    margin-top: $margin;
     padding: 20px 30px;
+    background: var(--color-bg-2);
   }
 }
 </style>
