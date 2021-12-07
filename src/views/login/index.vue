@@ -24,7 +24,7 @@
             <a-checkbox v-model="isKeepLoginStatus">保持登录状态</a-checkbox>
           </div>
           <div>
-            <a-button type="primary" size="large" long>登录</a-button>
+            <a-button type="primary" size="large" long :loading="showBtnLoading" @click="login">登录</a-button>
           </div>
         </section>
       </div>
@@ -34,6 +34,8 @@
 
 <script setup>
 import { reactive, ref } from 'vue'
+import { useRouter } from 'vue-router'
+const router = useRouter()
 
 const form = reactive({
   username: '',
@@ -41,6 +43,15 @@ const form = reactive({
 })
 
 let isKeepLoginStatus = ref(false)
+let showBtnLoading = ref(false)
+
+const login = () => {
+  showBtnLoading.value = true
+  setTimeout(() => {
+    router.push('/home')
+    showBtnLoading.value = false
+  }, 1000)
+}
 </script>
 
 <style lang="scss" scoped>

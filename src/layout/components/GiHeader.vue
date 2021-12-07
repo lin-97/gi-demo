@@ -1,6 +1,6 @@
 <template>
   <a-layout-header>
-    <section class="sys-name">DEMO管理系统</section>
+    <section class="sys-name">Admin管理系统</section>
     <section class="sys-head">
       <a-button size="mini" @click="changeTheme" :style="{ marginRight: '10px' }">
         <template #icon>
@@ -13,8 +13,12 @@
       <a-dropdown trigger="hover">
         <a-button type="text">admin</a-button>
         <template #content>
-          <a-doption>个人中心</a-doption>
-          <a-doption>退出登录</a-doption>
+          <a-doption>
+            <template #icon><icon-user /></template><span style="margin-left: 4px">个人中心</span>
+          </a-doption>
+          <a-doption @click="logout">
+            <template #icon><icon-export /></template><span style="margin-left: 4px">退出登录</span>
+          </a-doption>
         </template>
       </a-dropdown>
     </section>
@@ -23,6 +27,9 @@
 
 <script setup>
 import { computed, ref } from '@vue/reactivity'
+import { Modal } from '@arco-design/web-vue'
+import { useRouter } from 'vue-router'
+const router = useRouter()
 
 let light = ref('')
 
@@ -36,6 +43,16 @@ const changeTheme = () => {
     document.body.removeAttribute('arco-theme')
   }
 }
+
+const logout = () => {
+  Modal.warning({
+    title: '温馨提示',
+    content: '确认退出登录？',
+    onOk: () => {
+      router.replace('/login')
+    }
+  })
+}
 </script>
 
 <style lang="scss" scoped>
@@ -48,7 +65,8 @@ const changeTheme = () => {
   align-items: center;
   border-bottom: 1px solid var(--color-text-4);
   .sys-name {
-    font-weight: bold;
+    font-size: 18px;
+    font-weight: 600;
     color: var(--color-text-1);
   }
   .sys-head {

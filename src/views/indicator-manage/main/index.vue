@@ -50,7 +50,7 @@
           <a-table-column title="工资" data-index="salary"></a-table-column>
           <a-table-column title="地址" data-index="address"></a-table-column>
           <a-table-column title="邮箱" data-index="email"></a-table-column>
-          <a-table-column title="状态">
+          <a-table-column title="状态" width="100">
             <template #cell="{ record }">
               <a-switch v-model="record.status">
                 <template #checked> ON </template>
@@ -62,10 +62,13 @@
             <template #cell="{ record }">
               <a-space>
                 <a-button type="primary">修改</a-button>
-                <a-button type="primary" status="warning" @click="$modal.info({ title: 'Name', content: record.name })"
-                  >预览</a-button
+                <a-button type="primary" status="warning" @click="onDetail">详情</a-button>
+                <a-button
+                  type="primary"
+                  status="danger"
+                  @click="$modal.warning({ title: '提示', content: '是否确认删除？' })"
+                  >删除</a-button
                 >
-                <a-button type="primary" status="danger">删除</a-button>
               </a-space>
             </template>
           </a-table-column>
@@ -78,6 +81,8 @@
 <script setup>
 import { reactive, ref } from 'vue'
 import GiCateTree from '@/views/components/GiCateTree.vue'
+import { useRouter } from 'vue-router'
+const router = useRouter()
 
 let data = reactive({
   tableData: [
@@ -123,6 +128,10 @@ let data = reactive({
     }
   ]
 })
+
+const onDetail = () => {
+  router.push({ path: '/indicator-manage/detail' })
+}
 </script>
 
 <style lang="scss" scoped>

@@ -5,19 +5,19 @@ const state = {
   activePath: JSON.parse(localStorage.getItem('ActivePath')) || '/home', // 当前激活的路径
   menuList: [
     {
-      icon: 'iconfont icon-gongzuotai',
+      icon: 'IconRobot',
       id: 'GZT',
       name: '工作台',
       path: '/home'
     },
     {
-      icon: 'iconfont icon-gongzuotai',
+      icon: 'IconCopyright',
       id: 'ZBGL',
       name: '指标管理',
       path: '/indicator-manage'
     },
     {
-      icon: 'iconfont icon-zhibiaoguanli',
+      icon: 'IconSettings',
       id: 'ZBGL',
       name: '个人中心',
       path: '/user'

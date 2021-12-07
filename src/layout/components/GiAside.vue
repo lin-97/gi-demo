@@ -1,9 +1,13 @@
 <template>
   <a-layout-sider collapsible breakpoint="xl" class="gi-aside">
     <div class="logo" />
-    <a-menu :defaultSelectedKeys="[activePath]" :style="{ width: '100%' }" @menuItemClick="onClickMenuItem">
+    <a-menu
+      :defaultSelectedKeys="[activePath]"
+      :style="{ width: '100%', height: '100%' }"
+      @menuItemClick="onClickMenuItem"
+    >
       <a-menu-item v-for="item in menuList" :key="item.path" @click="handleClickItem(item)">
-        <IconHome />
+        <component :is="item.icon"></component>
         {{ item.name }}
       </a-menu-item>
     </a-menu>
