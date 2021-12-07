@@ -16,7 +16,7 @@
     <div class="right">
       <a-row justify="space-between" style="margin-bottom: 10px">
         <a-space>
-          <a-button type="primary">
+          <a-button type="primary" @click="onAdd">
             <template #icon>
               <icon-plus />
             </template>
@@ -128,6 +128,10 @@ let data = reactive({
     }
   ]
 })
+
+const onAdd = () => {
+  router.push({ path: '/indicator-manage/add' })
+}
 
 const onDetail = () => {
   router.push({ path: '/indicator-manage/detail' })

@@ -15,7 +15,7 @@
       </a-page-header>
     </section>
     <section class="item" v-for="i in 3" :key="i">
-      <a-descriptions :data="data.list" title="基本信息" layout="inline-horizontal" />
+      <a-descriptions :data="data.list" title="基本信息" layout="inline-horizontal"> </a-descriptions>
     </section>
   </div>
 </template>

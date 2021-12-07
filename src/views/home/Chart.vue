@@ -43,7 +43,7 @@ onMounted(() => {
 <style lang="scss" scoped>
 .chart {
   padding: 20px;
-  height: 300px;
+  height: 250px;
   background: var(--color-bg-2);
 }
 </style>

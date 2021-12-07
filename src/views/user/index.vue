@@ -1,8 +1,8 @@
 <template>
   <div class="user">
     <div class="head">
-      <a-avatar :size="60" :trigger-icon-style="{ color: '#3491FA' }" :style="{ backgroundColor: '#ccc' }">
-        A
+      <a-avatar :size="60" :trigger-icon-style="{ color: '#3491FA' }">
+        <img src="@/assets/images/avatar.jpg" />
         <template #trigger-icon>
           <IconCamera />
         </template>
@@ -14,9 +14,7 @@
         <div><icon-location /><span>广州</span></div>
       </section>
       <a-button type="primary" class="edit-btn"
-        ><template #icon>
-          <icon-edit /> </template
-        >编辑信息</a-button
+        ><template #icon> <icon-edit /> </template>编辑信息</a-button
       >
     </div>
   </div>

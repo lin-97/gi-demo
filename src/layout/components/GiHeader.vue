@@ -9,7 +9,9 @@
         </template>
       </a-button>
 
-      <a-avatar :size="32" :style="{ marginRight: '8px' }">A</a-avatar>
+      <a-avatar :size="32" :style="{ marginRight: '8px' }">
+        <img src="@/assets/images/avatar.jpg" />
+      </a-avatar>
       <a-dropdown trigger="hover">
         <a-button type="text">admin</a-button>
         <template #content>

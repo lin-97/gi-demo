@@ -25,6 +25,12 @@ const routes = [
         meta: { title: '指标管理', keepAlive: false }
       },
       {
+        path: '/indicator-manage/add',
+        name: 'IndicatorManageAdd',
+        component: () => import('@/views/indicator-manage/add/index.vue'),
+        meta: { title: '指标管理-新增', keepAlive: false }
+      },
+      {
         path: '/indicator-manage/detail',
         name: 'IndicatorManageDetail',
         component: () => import('@/views/indicator-manage/detail/index.vue'),
