@@ -30,11 +30,13 @@ import MsgList from './MsgList.vue'
   overflow-y: scroll;
   .wrap {
     display: flex;
+    flex-wrap: wrap;
     padding: $padding;
     .left,
     .right {
       flex: 1;
       flex-shrink: 0;
+      min-width: 450px;
     }
     .right {
       margin-left: $margin;
