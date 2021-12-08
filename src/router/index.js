@@ -10,6 +10,7 @@ const routes = [
   {
     path: '/',
     redirect: '/home',
+    name: 'Layout',
     component: () => import('@/layout/index.vue'),
     children: [
       {
@@ -52,7 +53,7 @@ const routes = [
 const router = createRouter({
   // hash模式：createWebHashHistory，
   // history模式：createWebHistory
-  history: createWebHistory('/'),
+  history: createWebHistory(),
   // history:createWebHashHistory(),
   routes
 })
