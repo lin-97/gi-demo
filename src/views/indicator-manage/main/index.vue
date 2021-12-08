@@ -25,7 +25,7 @@
             <template #icon>
               <icon-delete />
             </template>
-            <template #default>Delete</template>
+            <template #default>删除</template>
           </a-button>
           <a-button type="primary" status="success">
             <template #icon>
