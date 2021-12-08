@@ -6,7 +6,7 @@ export default defineConfig({
   // 项目根目录
   root: process.cwd(),
   // 在生产中服务时的基本公共路径
-  base: 'http://lin0716.gitee.io/gi-demo',
+  base: './',
   plugins: [vue()],
   resolve: {
     // 设置别名
@@ -28,7 +28,7 @@ export default defineConfig({
   // 构建
   build: {
     // target: 'modules', // 浏览器兼容性  "esnext"|"modules"
-    outDir: 'dist' // 输出路径
+    // outDir: 'dist' // 输出路径
     // assetsDir: 'assets', // 生成静态资源的存放路径
     // sourcemap: false // 构建后是否生成 source map 文件
   }
