@@ -24,7 +24,7 @@ export default defineConfig({
     }
   },
   // 静态资源服务的文件夹
-  // publicDir: 'public',
+  publicDir: 'public',
   // 构建
   build: {
     // target: 'modules', // 浏览器兼容性  "esnext"|"modules"

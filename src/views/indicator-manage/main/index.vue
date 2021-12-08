@@ -46,7 +46,7 @@
 
       <a-table :data="data.tableData">
         <template #columns>
-          <a-table-column title="名称" data-index="name"></a-table-column>
+          <a-table-column title="名称1" data-index="name"></a-table-column>
           <a-table-column title="工资" data-index="salary"></a-table-column>
           <a-table-column title="地址" data-index="address"></a-table-column>
           <a-table-column title="邮箱" data-index="email"></a-table-column>
