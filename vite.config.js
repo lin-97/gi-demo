@@ -6,7 +6,7 @@ export default defineConfig({
   // 项目根目录
   // root: process.cwd(),
   // 在生产中服务时的基本公共路径
-  base: '/gi-demo/',
+  // base: '/gi-demo/',
   plugins: [vue()],
   resolve: {
     // 设置别名
