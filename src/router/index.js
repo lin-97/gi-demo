@@ -53,7 +53,7 @@ const routes = [
 const router = createRouter({
   // hash模式：createWebHashHistory，
   // history模式：createWebHistory
-  history: createWebHistory('/gi-demo'),
+  history: createWebHistory(),
   // history:createWebHashHistory(),
   routes
 })
