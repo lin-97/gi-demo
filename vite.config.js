@@ -4,7 +4,7 @@ import path from 'path'
 
 export default defineConfig({
   plugins: [vue()],
-  // base: './',
+  base: '/gi-demo/',
   resolve: {
     alias: {
       '@': path.resolve(__dirname, 'src')
