@@ -1,12 +1,10 @@
 <template>
   <div class="add">
     <section class="head">
-      <a-page-header title="新增" subtitle="指标管理新增">
+      <a-page-header title="新增" subtitle="指标管理新增" @back="cancel">
         <template #breadcrumb>
           <a-breadcrumb>
-            <a-breadcrumb-item>Home</a-breadcrumb-item>
-            <a-breadcrumb-item>Channel</a-breadcrumb-item>
-            <a-breadcrumb-item>News</a-breadcrumb-item>
+            <a-breadcrumb-item>{{ route.meta.title }}</a-breadcrumb-item>
           </a-breadcrumb>
         </template>
         <template #extra>
@@ -67,8 +65,11 @@
 
 <script setup>
 import { reactive } from '@vue/reactivity'
-import { useRouter } from 'vue-router'
+import { useRouter, useRoute } from 'vue-router'
 const router = useRouter()
+const route = useRoute()
+
+console.log(route, '111')
 
 const form = reactive({
   name: '',

@@ -17,8 +17,14 @@
         ><template #icon> <icon-edit /> </template>编辑信息</a-button
       >
     </div>
+    <!-- 用户设置 -->
+    <UserSet></UserSet>
   </div>
 </template>
+
+<script setup>
+import UserSet from './UserSet.vue'
+</script>
 
 <style lang="scss" scoped>
 .edit-btn {
