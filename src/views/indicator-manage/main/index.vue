@@ -44,7 +44,7 @@
         </a-space>
       </a-row>
 
-      <a-table :data="data.tableData">
+      <a-table :data="tableData">
         <template #columns>
           <a-table-column title="名称1" data-index="name"></a-table-column>
           <a-table-column title="工资" data-index="salary"></a-table-column>
@@ -61,14 +61,9 @@
           <a-table-column title="操作" width="200">
             <template #cell="{ record }">
               <a-space>
-                <a-button type="primary">修改</a-button>
-                <a-button type="primary" status="warning" @click="onDetail">详情</a-button>
-                <a-button
-                  type="primary"
-                  status="danger"
-                  @click="$modal.warning({ title: '提示', content: '是否确认删除？' })"
-                  >删除</a-button
-                >
+                <a-button type="primary" size="small">修改</a-button>
+                <a-button type="primary" status="warning" size="small" @click="onDetail">详情</a-button>
+                <a-button type="primary" status="danger" size="small" @click="onDelete">删除</a-button>
               </a-space>
             </template>
           </a-table-column>
@@ -80,54 +75,53 @@
 
 <script lang="ts" setup>
 import { reactive, ref } from 'vue'
-import GiCateTree from '@/views/components/GiCateTree.vue'
 import { useRouter } from 'vue-router'
+import GiCateTree from '@/views/components/GiCateTree.vue'
+import { Modal } from '@arco-design/web-vue'
 const router = useRouter()
 
-let data = reactive({
-  tableData: [
-    {
-      key: '1',
-      name: 'Jane Doe',
-      salary: 23000,
-      address: '32 Park Road, London',
-      email: 'jane.doe@example.com',
-      status: true
-    },
-    {
-      key: '2',
-      name: 'Alisa Ross',
-      salary: 25000,
-      address: '35 Park Road, London',
-      email: 'alisa.ross@example.com',
-      status: false
-    },
-    {
-      key: '3',
-      name: 'Kevin Sandra',
-      salary: 22000,
-      address: '31 Park Road, London',
-      email: 'kevin.sandra@example.com',
-      status: true
-    },
-    {
-      key: '4',
-      name: 'Ed Hellen',
-      salary: 17000,
-      address: '42 Park Road, London',
-      email: 'ed.hellen@example.com',
-      status: true
-    },
-    {
-      key: '5',
-      name: 'William Smith',
-      salary: 27000,
-      address: '62 Park Road, London',
-      email: 'william.smith@example.com',
-      status: false
-    }
-  ]
-})
+let tableData = reactive([
+  {
+    key: '1',
+    name: 'Jane Doe',
+    salary: 23000,
+    address: '32 Park Road, London',
+    email: 'jane.doe@example.com',
+    status: true
+  },
+  {
+    key: '2',
+    name: 'Alisa Ross',
+    salary: 25000,
+    address: '35 Park Road, London',
+    email: 'alisa.ross@example.com',
+    status: false
+  },
+  {
+    key: '3',
+    name: 'Kevin Sandra',
+    salary: 22000,
+    address: '31 Park Road, London',
+    email: 'kevin.sandra@example.com',
+    status: true
+  },
+  {
+    key: '4',
+    name: 'Ed Hellen',
+    salary: 17000,
+    address: '42 Park Road, London',
+    email: 'ed.hellen@example.com',
+    status: true
+  },
+  {
+    key: '5',
+    name: 'William Smith',
+    salary: 27000,
+    address: '62 Park Road, London',
+    email: 'william.smith@example.com',
+    status: false
+  }
+])
 
 const onAdd = () => {
   router.push({ path: '/indicator-manage/add' })
@@ -135,6 +129,14 @@ const onAdd = () => {
 
 const onDetail = () => {
   router.push({ path: '/indicator-manage/detail' })
+}
+
+const onDelete = (row) => {
+  Modal.warning({
+    title: '提示',
+    content: '是否确认删除？',
+    hideCancel: false
+  })
 }
 </script>
 

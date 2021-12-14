@@ -26,7 +26,7 @@ const router = useRouter()
 const menuList = computed(() => store.state.app.menuList)
 const activePath = computed(() => store.state.app.activePath)
 
-const handleClickItem = (item: MenuItem): void => {
+const handleClickItem = (item: MenuItem) => {
   store.commit('app/storeSetActivePath', item.path)
   router.push(item.path)
 }

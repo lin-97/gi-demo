@@ -43,7 +43,7 @@
   </div>
 </template>
 
-<script setup>
+<script lang="ts" setup>
 import { reactive } from '@vue/reactivity'
 
 const form = reactive({

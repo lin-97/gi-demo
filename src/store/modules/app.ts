@@ -39,7 +39,7 @@ const getters = {
 
 const mutations = {
   // 设置激活路径地址
-  storeSetActivePath(state, path) {
+  storeSetActivePath(state, path: string) {
     state.activePath = path
     localStorage.setItem('ActivePath', JSON.stringify(path))
   }

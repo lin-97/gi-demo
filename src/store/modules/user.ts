@@ -1,5 +1,5 @@
 // 用户信息
-import { User } from '../../models/modules/user'
+import { User } from '@/models'
 
 const state = {
   user: JSON.parse(localStorage.getItem('USER')) || {
