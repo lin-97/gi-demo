@@ -6,9 +6,10 @@ export default defineConfig({
   plugins: [vue()],
   // base: './',
   resolve: {
-    alias: {
-      '@': path.resolve(__dirname, 'src')
-    }
+    alias: [
+      // '@': path.resolve(__dirname, 'src')
+      { find: /^@/, replacement: '/src' }
+    ]
   },
   // 引入SASS全局变量/样式
   css: {

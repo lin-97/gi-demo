@@ -14,11 +14,12 @@
     "vuex": "^4.0.2"
   },
   "devDependencies": {
-    "@arco-design/web-vue": "^2.8.0",
+    "@arco-design/web-vue": "^2.10.0",
     "@vitejs/plugin-vue": "^1.9.3",
     "node-sass": "^6.0.1",
     "sass": "^1.44.0",
     "sass-loader": "^12.3.0",
+    "typescript": "^4.5.4",
     "vite": "^2.6.4"
   }
 }

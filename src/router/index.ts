@@ -1,7 +1,6 @@
-// 引入vue-router对象
-import { createRouter, createWebHistory } from 'vue-router'
+import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router'
 
-const routes = [
+const routes: Array<RouteRecordRaw> = [
   {
     path: '/login',
     name: 'Login',
@@ -47,9 +46,6 @@ const routes = [
   }
 ]
 
-/**
- * 创建路由
- */
 const router = createRouter({
   // hash模式：createWebHashHistory，
   // history模式：createWebHistory
@@ -58,21 +54,4 @@ const router = createRouter({
   routes
 })
 
-/**
- * 路由守卫
- */
-// router.beforeEach((guard) => {
-//   beforeEach.checkAuth(guard, router)
-// })
-
-/**
- * 路由错误回调
- */
-router.onError((handler) => {
-  console.log('error:', handler)
-})
-
-/**
- * 输出对象
- */
 export default router

@@ -27,15 +27,15 @@
   </a-layout-header>
 </template>
 
-<script setup>
-import { computed, ref } from '@vue/reactivity'
+<script lang="ts" setup>
+import { ref } from 'vue'
 import { Modal } from '@arco-design/web-vue'
 import { useRouter } from 'vue-router'
 const router = useRouter()
 
 let light = ref('')
 
-const changeTheme = () => {
+const changeTheme = (): void => {
   let theme = document.body.getAttribute('arco-theme')
   light.value = theme
   if (!theme) {
