@@ -4,7 +4,7 @@
     <section class="sys-head">
       <a-button size="mini" @click="changeTheme" :style="{ marginRight: '10px' }">
         <template #icon>
-          <icon-sun-fill v-if="light" />
+          <icon-sun-fill v-if="!isDarkMode" />
           <icon-moon-fill v-else />
         </template>
       </a-button>
@@ -28,24 +28,33 @@
 </template>
 
 <script lang="ts" setup>
-import { ref } from 'vue'
+import { computed, onMounted } from 'vue'
 import { Modal } from '@arco-design/web-vue'
 import { useRouter } from 'vue-router'
+import { useStore } from 'vuex'
 const router = useRouter()
+const store = useStore()
 
-let light = ref('')
+const isDarkMode = computed(() => store.state.app.isDarkMode)
 
 // 暗黑模式切换
-const changeTheme = (): void => {
-  let theme = document.body.getAttribute('arco-theme')
-  light.value = theme
-  if (!theme) {
+const changeTheme = () => {
+  // let theme = document.body.getAttribute('arco-theme')
+  if (!isDarkMode.value) {
     // 设置为暗黑主题
+    store.commit('app/storeSetDarkMode', true)
     document.body.setAttribute('arco-theme', 'dark')
   } else {
+    store.commit('app/storeSetDarkMode', true)
     document.body.removeAttribute('arco-theme')
   }
+  console.log(isDarkMode.value)
 }
+
+onMounted(() => {
+  changeTheme()
+  console.log(isDarkMode.value)
+})
 
 // 退出登录
 const logout = () => {

@@ -4,6 +4,10 @@
       <WorkPlatform></WorkPlatform>
     </a-card>
 
+    <!-- <div class="site">
+      <img src="../../assets/svgs/juejin.svg" />
+    </div> -->
+
     <div class="wrap">
       <section class="left">
         <div class="item"><ItemList></ItemList></div>
