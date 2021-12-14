@@ -2,7 +2,7 @@
 
 const state = {
   systemName: 'GI数据采集管理系统', // 系统名称
-  isDarkMode: JSON.parse(localStorage.getItem('DarkMode')) || false, // 暗黑模式
+  isDarkMode: localStorage.getItem('DarkMode') || 'light', // light简白模式  dark暗黑模式
   activePath: JSON.parse(localStorage.getItem('ActivePath')) || '/home', // 当前激活的路径
   menuList: [
     {
@@ -45,9 +45,9 @@ const mutations = {
     localStorage.setItem('ActivePath', JSON.stringify(path))
   },
   // 设置暗黑模式
-  storeSetDarkMode(state, value: boolean) {
+  storeSetDarkMode(state, value: string) {
     state.isDarkMode = value
-    localStorage.setItem('isDarkMode', JSON.stringify(value))
+    localStorage.setItem('DarkMode', value)
   }
 }
 
