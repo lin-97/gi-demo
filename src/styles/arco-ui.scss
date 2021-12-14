@@ -1,0 +1,16 @@
+.arco-modal {
+  padding: 15px;
+  top: 50%;
+  transform: translateY(-50%);
+  .arco-modal-header {
+    margin-bottom: 20px;
+    .arco-modal-title {
+      justify-content: flex-start;
+      font-size: 18px;
+    }
+  }
+  .arco-modal-footer {
+    margin-top: 15px;
+    text-align: right;
+  }
+}

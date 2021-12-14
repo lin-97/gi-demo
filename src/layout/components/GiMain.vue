@@ -1,7 +1,7 @@
 <template>
   <a-layout class="gi-main">
     <router-view v-slot="{ Component }">
-      <transition name="fade-transform" class="abs">
+      <transition name="fade-transform">
         <component :is="Component" :key="key" />
       </transition>
     </router-view>
@@ -12,8 +12,8 @@
 <script lang="ts" setup>
 import { computed } from 'vue'
 import { useRoute } from 'vue-router'
-
 const route = useRoute()
+
 let key = computed(() => route.path)
 </script>
 

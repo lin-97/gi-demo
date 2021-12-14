@@ -63,13 +63,11 @@
   </div>
 </template>
 
-<script setup>
+<script lang="ts" setup>
 import { reactive } from '@vue/reactivity'
 import { useRouter, useRoute } from 'vue-router'
 const router = useRouter()
 const route = useRoute()
-
-console.log(route, '111')
 
 const form = reactive({
   name: '',

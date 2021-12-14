@@ -21,10 +21,10 @@
             <input type="password" placeholder="密码" v-model="form.password" />
           </div>
           <div class="check">
-            <a-checkbox v-model="isKeepLoginStatus">保持登录状态</a-checkbox>
+            <a-checkbox v-model="checked">保持登录状态</a-checkbox>
           </div>
           <div>
-            <a-button type="primary" size="large" long :loading="showBtnLoading" @click="login">登录</a-button>
+            <a-button type="primary" size="large" long :loading="showLoading" @click="login">登录</a-button>
           </div>
         </section>
       </div>
@@ -32,24 +32,36 @@
   </div>
 </template>
 
-<script setup>
+<script lang="ts" setup>
 import { reactive, ref } from 'vue'
 import { useRouter } from 'vue-router'
+import { Message } from '@arco-design/web-vue'
 const router = useRouter()
 
-const form = reactive({
-  username: '',
-  password: ''
+type LoginForm = { username: string; password: string }
+
+const form = reactive<LoginForm>({
+  username: 'admin',
+  password: '123'
 })
 
-let isKeepLoginStatus = ref(false)
-let showBtnLoading = ref(false)
+// 记住密码
+let checked = ref(false)
+// 登录加载
+let showLoading = ref(false)
 
-const login = () => {
-  showBtnLoading.value = true
+// 点击登录
+const login = (): any => {
+  if (!form.username) {
+    return Message.warning('请输入账户名称')
+  }
+  if (!form.password) {
+    return Message.warning('请输入账户密码')
+  }
+  showLoading.value = true
   setTimeout(() => {
     router.push('/home')
-    showBtnLoading.value = false
+    showLoading.value = false
   }, 1000)
 }
 </script>

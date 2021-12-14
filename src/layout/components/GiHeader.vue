@@ -18,8 +18,8 @@
           <a-doption>
             <template #icon><icon-user /></template><span style="margin-left: 4px">个人中心</span>
           </a-doption>
-          <a-doption @click="logout">
-            <template #icon><icon-export /></template><span style="margin-left: 4px">退出登录</span>
+          <a-doption>
+            <template #icon><icon-export /></template><span style="margin-left: 4px" @click="logout">退出登录</span>
           </a-doption>
         </template>
       </a-dropdown>
@@ -35,6 +35,7 @@ const router = useRouter()
 
 let light = ref('')
 
+// 暗黑模式切换
 const changeTheme = (): void => {
   let theme = document.body.getAttribute('arco-theme')
   light.value = theme
@@ -46,10 +47,12 @@ const changeTheme = (): void => {
   }
 }
 
+// 退出登录
 const logout = () => {
   Modal.warning({
-    title: '温馨提示',
+    title: '提示',
     content: '确认退出登录？',
+    hideCancel: false,
     onOk: () => {
       router.replace('/login')
     }

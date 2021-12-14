@@ -21,6 +21,12 @@ const state = {
       id: 'ZBGL',
       name: '个人中心',
       path: '/user'
+    },
+    {
+      icon: 'IconSettings',
+      id: 'TEST',
+      name: '测试',
+      path: '/test'
     }
   ]
 }

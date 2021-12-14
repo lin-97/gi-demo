@@ -78,7 +78,7 @@
   </section>
 </template>
 
-<script setup>
+<script lang="ts" setup>
 import { reactive, ref } from 'vue'
 import GiCateTree from '@/views/components/GiCateTree.vue'
 import { useRouter } from 'vue-router'

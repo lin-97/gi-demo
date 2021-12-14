@@ -7,8 +7,8 @@
   </div>
 </template>
 
-<script setup>
-import { computed, defineEmits } from 'vue'
+<script lang="ts" setup>
+import { computed } from 'vue'
 
 const props = defineProps({
   // 图标类名
@@ -93,8 +93,8 @@ const getLabelStyle = computed(() => {
 })
 
 // 判断传入的值，是否带有单位，如果没有，就默认用px单位
-const getUnitValue = (value) => {
-  return /(px|em|rem|%)$/.test(value) ? value : value + 'px'
+const getUnitValue = (value: string | number) => {
+  return /(px|em|rem|%)$/.test(value.toString()) ? value : value + 'px'
 }
 
 const handleClick = () => {
@@ -112,13 +112,13 @@ const handleClick = () => {
   cursor: pointer;
 }
 .gi-icon-icon {
-  color: $theme-color;
+  color: rgba(var(--primary-6));
 }
 .gi-icon-label {
   transition: color 0.3s;
   &.hover {
     &:hover {
-      color: $theme-color;
+      color: rgba(var(--primary-6));
     }
   }
 }

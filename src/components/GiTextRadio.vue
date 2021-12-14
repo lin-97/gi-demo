@@ -12,7 +12,7 @@
   </div>
 </template>
 
-<script setup>
+<script lang="ts" setup>
 const emit = defineEmits(['update:modelValue', 'change'])
 const props = defineProps({
   // 绑定的值
@@ -27,7 +27,11 @@ const props = defineProps({
   }
 })
 
-const handleClick = (item) => {
+type Item = {
+  label: string
+  value: string | number
+}
+const handleClick = (item: Item) => {
   emit('update:modelValue', item.value)
   emit('change', item)
 }
@@ -46,12 +50,14 @@ const handleClick = (item) => {
     justify-content: center;
     align-items: center;
     user-select: none;
+    transition: all 0.15s;
     &:hover {
-      background: #f6f6f6;
+      color: var(--color-text-2);
+      background: var(--color-secondary-hover);
     }
     &.active {
       color: #fff;
-      background: $theme-color;
+      background: rgba(var(--primary-6));
     }
   }
 }

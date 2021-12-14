@@ -4,7 +4,8 @@ const routes: Array<RouteRecordRaw> = [
   {
     path: '/login',
     name: 'Login',
-    component: () => import('@/views/login/index.vue')
+    component: () => import('@/views/login/index.vue'),
+    meta: { title: '登录', keepAlive: false }
   },
   {
     path: '/',
@@ -38,9 +39,15 @@ const routes: Array<RouteRecordRaw> = [
       },
       {
         path: '/user',
-        name: 'user',
+        name: 'User',
         component: () => import('@/views/user/index.vue'),
         meta: { title: '个人中心', keepAlive: false }
+      },
+      {
+        path: '/test',
+        name: 'Test',
+        component: () => import('@/views/test/index.vue'),
+        meta: { title: '测试页', keepAlive: false }
       }
     ]
   }

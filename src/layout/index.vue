@@ -8,7 +8,7 @@
   </a-layout>
 </template>
 
-<script setup>
+<script lang="ts" setup>
 import GiAside from './components/GiAside.vue'
 import GiHeader from './components/GiHeader.vue'
 import GiMain from './components/GiMain.vue'

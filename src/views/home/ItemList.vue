@@ -13,8 +13,7 @@
   </a-card>
 </template>
 
-<script setup>
-import { ref } from 'vue'
+<script lang="ts" setup>
 const list = [
   {
     name: 'Github',
