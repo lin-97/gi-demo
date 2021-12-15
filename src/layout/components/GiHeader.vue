@@ -3,10 +3,9 @@
     <section class="sys-name">Admin管理系统</section>
     <a-space class="sys-head" size="medium">
       <!-- 消息通知 -->
-      <a-popover position="bl">
+      <a-tooltip content="消息通知" position="bl">
         <icon-notification class="gi_hover" style="font-size: 18px" />
-        <template #content>消息通知</template>
-      </a-popover>
+      </a-tooltip>
 
       <!-- 全屏切换组件 -->
       <GiFullScreenIcon></GiFullScreenIcon>
@@ -14,8 +13,8 @@
       <!-- 暗黑模式切换 -->
       <a-button size="mini" @click="changeTheme">
         <template #icon>
-          <icon-sun-fill v-if="ThemeMode === 'light'" />
-          <icon-moon-fill v-else />
+          <icon-sun-fill style="font-size: 18px" v-if="ThemeMode === 'light'" />
+          <icon-moon-fill style="font-size: 18px" v-else />
         </template>
       </a-button>
 
