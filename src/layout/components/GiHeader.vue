@@ -18,8 +18,8 @@
           <a-doption>
             <template #icon><icon-user /></template><span style="margin-left: 4px">个人中心</span>
           </a-doption>
-          <a-doption>
-            <template #icon><icon-export /></template><span style="margin-left: 4px" @click="logout">退出登录</span>
+          <a-doption @click="logout">
+            <template #icon><icon-export /></template><span style="margin-left: 4px">退出登录</span>
           </a-doption>
         </template>
       </a-dropdown>
@@ -52,7 +52,7 @@ const changeTheme = () => {
 }
 
 const initTheme = () => {
-  if(isDarkMode.value  === 'dark') {
+  if (isDarkMode.value === 'dark') {
     document.body.setAttribute('arco-theme', 'dark')
   } else {
     document.body.removeAttribute('arco-theme')
