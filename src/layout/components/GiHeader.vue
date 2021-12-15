@@ -2,8 +2,16 @@
   <a-layout-header>
     <section class="sys-name">Admin管理系统</section>
     <a-space class="sys-head" size="medium">
+      <!-- 消息通知 -->
+      <a-popover position="bl">
+        <icon-notification class="gi_hover" style="font-size: 18px" />
+        <template #content>消息通知</template>
+      </a-popover>
+
+      <!-- 全屏切换组件 -->
       <GiFullScreenIcon></GiFullScreenIcon>
 
+      <!-- 暗黑模式切换 -->
       <a-button size="mini" @click="changeTheme">
         <template #icon>
           <icon-sun-fill v-if="ThemeMode === 'light'" />
@@ -11,10 +19,12 @@
         </template>
       </a-button>
 
+      <!-- 管理员头像 -->
       <a-avatar :size="32">
         <img src="@/assets/images/avatar.jpg" />
       </a-avatar>
 
+      <!-- 管理员账户 -->
       <a-dropdown trigger="hover">
         <a-button type="text" class="username">admin</a-button>
         <template #content>

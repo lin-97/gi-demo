@@ -1,9 +1,5 @@
 @import './var.scss';
 
-:root {
-  --el-header-height: 40px;
-}
-
 * {
   margin: 0;
   padding: 0;
@@ -33,7 +29,7 @@ body {
 }
 
 body[arco-theme='dark'] #app {
-  background-color: var(--color-bg-5);
+  background-color: #373739;
 }
 
 // 阿里巴巴项目图标默认样式

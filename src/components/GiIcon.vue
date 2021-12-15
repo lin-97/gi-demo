@@ -112,13 +112,13 @@ const handleClick = () => {
   cursor: pointer;
 }
 .gi-icon-icon {
-  color: rgba(var(--primary-6));
+  color: $theme-color;
 }
 .gi-icon-label {
   transition: color 0.3s;
   &.hover {
     &:hover {
-      color: rgba(var(--primary-6));
+      color: $theme-color;
     }
   }
 }

@@ -52,12 +52,12 @@ const handleClick = (item: Item) => {
     user-select: none;
     transition: all 0.15s;
     &:hover {
-      color: var(--color-text-2);
+      color: $text-color;
       background: var(--color-secondary-hover);
     }
     &.active {
       color: #fff;
-      background: rgba(var(--primary-6));
+      background: $theme-color;
     }
   }
 }
