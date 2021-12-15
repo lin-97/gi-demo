@@ -1,11 +1,11 @@
 <template>
   <a-layout class="gi-main">
-    <router-view v-slot="{ Component }">
+    <!-- <router-view v-slot="{ Component }">
       <transition name="fade-transform">
         <component :is="Component" :key="key" />
       </transition>
-    </router-view>
-    <!-- <router-view></router-view> -->
+    </router-view> -->
+    <router-view></router-view>
   </a-layout>
 </template>
 

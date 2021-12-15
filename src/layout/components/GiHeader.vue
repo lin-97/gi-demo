@@ -1,19 +1,22 @@
 <template>
   <a-layout-header>
     <section class="sys-name">Admin管理系统</section>
-    <section class="sys-head">
-      <a-button size="mini" @click="changeTheme" :style="{ marginRight: '10px' }">
+    <a-space class="sys-head" size="medium">
+      <GiFullScreenIcon></GiFullScreenIcon>
+
+      <a-button size="mini" @click="changeTheme">
         <template #icon>
-          <icon-sun-fill v-if="isDarkMode === 'light'" />
+          <icon-sun-fill v-if="ThemeMode === 'light'" />
           <icon-moon-fill v-else />
         </template>
       </a-button>
 
-      <a-avatar :size="32" :style="{ marginRight: '8px' }">
+      <a-avatar :size="32">
         <img src="@/assets/images/avatar.jpg" />
       </a-avatar>
+
       <a-dropdown trigger="hover">
-        <a-button type="text">admin</a-button>
+        <a-button type="text" class="username">admin</a-button>
         <template #content>
           <a-doption>
             <template #icon><icon-user /></template><span style="margin-left: 4px">个人中心</span>
@@ -23,47 +26,41 @@
           </a-doption>
         </template>
       </a-dropdown>
-    </section>
+    </a-space>
   </a-layout-header>
 </template>
 
 <script lang="ts" setup>
-import { computed, onMounted } from 'vue'
+import { computed, onMounted, ref } from 'vue'
 import { Modal } from '@arco-design/web-vue'
 import { useRouter } from 'vue-router'
 import { useStore } from 'vuex'
+import GiFullScreenIcon from '@/components/GiFullScreenIcon.vue'
 const router = useRouter()
 const store = useStore()
 
-const isDarkMode = computed(() => store.state.app.isDarkMode)
+const ThemeMode = computed(() => store.state.app.ThemeMode)
 
 // 暗黑模式切换
 const changeTheme = () => {
   // let theme = document.body.getAttribute('arco-theme')
-  if (isDarkMode.value === 'light') {
-    // 设置为暗黑主题
-    store.commit('app/storeSetDarkMode', 'dark')
+  if (ThemeMode.value === 'light') {
+    store.commit('app/storeSetThemeMode', 'dark')
     document.body.setAttribute('arco-theme', 'dark')
   } else {
-    store.commit('app/storeSetDarkMode', 'light')
+    store.commit('app/storeSetThemeMode', 'light')
     document.body.removeAttribute('arco-theme')
   }
-  console.log(isDarkMode.value)
 }
 
 const initTheme = () => {
-  if (isDarkMode.value === 'dark') {
+  if (ThemeMode.value === 'dark') {
     document.body.setAttribute('arco-theme', 'dark')
   } else {
     document.body.removeAttribute('arco-theme')
   }
 }
 initTheme()
-
-// onMounted(() => {
-//   initTheme()
-//   console.log('isDarkMode', isDarkMode.value)
-// })
 
 // 退出登录
 const logout = () => {
@@ -86,7 +83,7 @@ const logout = () => {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  border-bottom: 1px solid var(--color-text-4);
+  border-bottom: 1px solid var(--color-border-2);
   .sys-name {
     font-size: 18px;
     font-weight: 600;
@@ -96,7 +93,7 @@ const logout = () => {
     display: flex;
     align-items: center;
   }
-  .user {
+  .username {
     color: var(--color-text-2);
   }
 }
