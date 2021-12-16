@@ -58,7 +58,8 @@ const router = createRouter({
   // history模式：createWebHistory
   history: createWebHistory(),
   // history:createWebHashHistory(),
-  routes
+  routes,
+  scrollBehavior: () => ({ left: 0, top: 0 })
 })
 
 export default router

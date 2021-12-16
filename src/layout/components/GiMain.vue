@@ -1,11 +1,13 @@
 <template>
   <a-layout class="gi-main">
-    <!-- <router-view v-slot="{ Component }">
-      <transition name="fade-transform">
-        <component :is="Component" :key="key" />
-      </transition>
-    </router-view> -->
-    <router-view></router-view>
+    <router-view>
+      <template #default="{ Component, route }">
+        <transition name="fade-transform">
+          <component :is="Component" :key="route.fullPath" />
+        </transition>
+      </template>
+    </router-view>
+    <!-- <router-view></router-view> -->
   </a-layout>
 </template>
 
@@ -45,5 +47,73 @@ let key = computed(() => route.path)
 .fade-transform-leave-to {
   opacity: 0;
   transform: translateX(30px);
+}
+
+.slide-y-transition {
+  &-enter-active,
+  &-leave-active {
+    transition: 0.3s cubic-bezier(0.25, 0.8, 0.5, 1) !important;
+  }
+
+  &-move {
+    transition: transform 0.4s;
+  }
+
+  &-enter-from,
+  &-leave-to {
+    opacity: 0;
+    transform: translateY(-15px);
+  }
+}
+
+.slide-y-reverse-transition {
+  &-enter-active,
+  &-leave-active {
+    transition: 0.3s cubic-bezier(0.25, 0.8, 0.5, 1) !important;
+  }
+
+  &-move {
+    transition: transform 0.4s;
+  }
+
+  &-enter-from,
+  &-leave-to {
+    opacity: 0;
+    transform: translateY(15px);
+  }
+}
+
+.slide-x-transition {
+  &-enter-active,
+  &-leave-active {
+    transition: 0.3s cubic-bezier(0.25, 0.8, 0.5, 1) !important;
+  }
+
+  &-move {
+    transition: transform 0.4s;
+  }
+
+  &-enter-from,
+  &-leave-to {
+    opacity: 0;
+    transform: translateX(-15px);
+  }
+}
+
+.slide-x-reverse-transition {
+  &-enter-active,
+  &-leave-active {
+    transition: 0.3s cubic-bezier(0.25, 0.8, 0.5, 1) !important;
+  }
+
+  &-move {
+    transition: transform 0.4s;
+  }
+
+  &-enter-from,
+  &-leave-to {
+    opacity: 0;
+    transform: translateX(15px);
+  }
 }
 </style>
