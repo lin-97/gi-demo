@@ -11,10 +11,15 @@
       <GiFullScreenIcon></GiFullScreenIcon>
 
       <!-- 暗黑模式切换 -->
-      <a-button size="mini" @click="changeTheme">
+      <a-button size="mini" style="line-height: 1" @click="changeTheme">
         <template #icon>
+<<<<<<< Updated upstream
           <icon-sun-fill style="font-size: 18px" v-if="ThemeMode === 'light'" />
           <icon-moon-fill style="font-size: 18px" v-else />
+=======
+          <icon-sun-fill style="font-size: 16px" v-if="ThemeMode === 'light'" />
+          <icon-moon-fill style="font-size: 16px" v-else />
+>>>>>>> Stashed changes
         </template>
       </a-button>
 
