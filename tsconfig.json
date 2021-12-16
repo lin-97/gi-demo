@@ -6,7 +6,7 @@
     // 基本选项
     "target": "ESNext",          // 指定 ECMAScript 目标版本: 'ES3' (default), 'ES5', 'ES6'/'ES2015', 'ES2016', 'ES2017', or 'ESNEXT'
     "module": "commonjs",          // 指定使用模块: 'commonjs', 'amd', 'system', 'umd' or 'es2015'
-    "lib": ["esnext", "dom"],    // 指定要包含在编译中的库文件
+    "lib": ["esnext", "dom"],    // 指定要包含在编译中的库文件, 默认 ["dom", "es6","DOM.Iterable"] 等
     "allowJs": true,             // 允许编译 javascript 文件
     "checkJs": true,             // 报告 javascript 文件中的错误
     "jsx": "preserve",           // 指定 jsx 代码的生成: 'preserve', 'react-native', or 'react'
@@ -21,19 +21,19 @@
     "isolatedModules": true,  // 将每个文件做为单独的模块 (与 'ts.transpileModule' 类似)
 
     // 额外的检查
-    "noUnusedLocals": true,                // 有未使用的变量时，抛出错误
-    "noUnusedParameters": true,            // 有未使用的参数时，抛出错误
-    "noImplicitReturns": true,             // 并不是所有函数里的代码都有返回值时，抛出错误
+    "noUnusedLocals": true,                // 有未使用的变量时, 抛出错误
+    "noUnusedParameters": true,            // 有未使用的参数时, 抛出错误
+    "noImplicitReturns": true,             // 并不是所有函数里的代码都有返回值时, 抛出错误
 
     // 模块解析选项
-    "moduleResolution": "node",            // 选择模块解析策略： 'node' (Node.js) or 'classic' (TypeScript pre-1.6)
-    "baseUrl": "./",                       // 用于解析非相对模块名称的基目录
+    "moduleResolution": "node",            // 选择模块解析策略: 'node' (Node.js) or 'classic' (TypeScript pre-1.6)
+    "baseUrl": "./",                       // 用于解析非相对模块名称的基目录, 默认值 "./"
     "paths": {
       "@/*": [
         "./src/*"
       ]
-    },                           // 模块名到基于 baseUrl 的路径映射的列表
-    "rootDirs": [],                        // 根文件夹列表，其组合内容表示项目运行时的结构内容
+    },                                     // 模块名到基于 baseUrl 的路径映射的列表
+    "rootDirs": [],                        // 根文件夹列表, 其组合内容表示项目运行时的结构内容
     "typeRoots": [],                       // 包含类型声明的文件列表
     // "types": ["node"],                     // 需要包含的类型声明文件名列表
     "allowSyntheticDefaultImports": true,  // 允许从没有设置默认导出的模块中默认导入
@@ -41,6 +41,5 @@
   // 设置需要进行编译的文件, 支持路径模式匹配
   "include": ["src/*", "src/**/*.vue", "src/**/*.tsx", "src/**/*.jsx", "src/**/*.ts", "src/**/*.js"],
   // 设置无需进行编译的文件, 支持路径模式匹配
-  "exclude": [ "node_modules" ],
-  
+  "exclude": [ "node_modules" ]
 }
