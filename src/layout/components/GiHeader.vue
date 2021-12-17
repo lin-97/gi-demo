@@ -8,7 +8,7 @@
       </a-tooltip>
 
       <!-- 全屏切换组件 -->
-      <GiFullScreenIcon></GiFullScreenIcon>
+      <FullScreenIcon class="gi_hover"></FullScreenIcon>
 
       <!-- 暗黑模式切换 -->
       <a-button size="mini" style="line-height: 1" @click="changeTheme">
@@ -25,7 +25,10 @@
 
       <!-- 管理员账户 -->
       <a-dropdown trigger="hover">
-        <a-button type="text" class="username">admin</a-button>
+        <a-button type="text" class="username">
+          <span>admin</span>
+          <icon-down />
+        </a-button>
         <template #content>
           <a-doption>
             <template #icon><icon-user /></template><span style="margin-left: 4px">个人中心</span>
@@ -44,7 +47,7 @@ import { computed, onMounted, ref } from 'vue'
 import { Modal } from '@arco-design/web-vue'
 import { useRouter } from 'vue-router'
 import { useStore } from 'vuex'
-import GiFullScreenIcon from '@/components/GiFullScreenIcon.vue'
+import FullScreenIcon from './FullScreenIcon.vue'
 const router = useRouter()
 const store = useStore()
 

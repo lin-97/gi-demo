@@ -23,11 +23,7 @@
 }
 .fade-transform-leave-active,
 .fade-transform-enter-active {
-  position: absolute;
-  width: 100%;
-  height: 100%;
   transition: all 0.5s;
-  z-index: 999;
 }
 .fade-transform-enter-from {
   opacity: 0;
