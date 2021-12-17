@@ -2,8 +2,8 @@
   <a-layout class="gi-main">
     <router-view>
       <template #default="{ Component, route }">
-        <transition name="fade-transform">
-          <component :is="Component" :key="route.fullPath" />
+        <transition name="fade-transform" mode="out-in" appear>
+          <component :is="Component" :key="route.path" />
         </transition>
       </template>
     </router-view>
@@ -28,17 +28,13 @@ let key = computed(() => route.path)
   overflow: hidden;
   position: relative;
 }
-
-.abs {
-  width: 100%;
-  position: absolute;
-  left: 0;
-  top: 0;
-}
-
 .fade-transform-leave-active,
 .fade-transform-enter-active {
+  position: absolute;
+  width: 100%;
+  height: 100%;
   transition: all 0.5s;
+  z-index: 999;
 }
 .fade-transform-enter-from {
   opacity: 0;
@@ -47,73 +43,5 @@ let key = computed(() => route.path)
 .fade-transform-leave-to {
   opacity: 0;
   transform: translateX(30px);
-}
-
-.slide-y-transition {
-  &-enter-active,
-  &-leave-active {
-    transition: 0.3s cubic-bezier(0.25, 0.8, 0.5, 1) !important;
-  }
-
-  &-move {
-    transition: transform 0.4s;
-  }
-
-  &-enter-from,
-  &-leave-to {
-    opacity: 0;
-    transform: translateY(-15px);
-  }
-}
-
-.slide-y-reverse-transition {
-  &-enter-active,
-  &-leave-active {
-    transition: 0.3s cubic-bezier(0.25, 0.8, 0.5, 1) !important;
-  }
-
-  &-move {
-    transition: transform 0.4s;
-  }
-
-  &-enter-from,
-  &-leave-to {
-    opacity: 0;
-    transform: translateY(15px);
-  }
-}
-
-.slide-x-transition {
-  &-enter-active,
-  &-leave-active {
-    transition: 0.3s cubic-bezier(0.25, 0.8, 0.5, 1) !important;
-  }
-
-  &-move {
-    transition: transform 0.4s;
-  }
-
-  &-enter-from,
-  &-leave-to {
-    opacity: 0;
-    transform: translateX(-15px);
-  }
-}
-
-.slide-x-reverse-transition {
-  &-enter-active,
-  &-leave-active {
-    transition: 0.3s cubic-bezier(0.25, 0.8, 0.5, 1) !important;
-  }
-
-  &-move {
-    transition: transform 0.4s;
-  }
-
-  &-enter-from,
-  &-leave-to {
-    opacity: 0;
-    transform: translateX(15px);
-  }
 }
 </style>
