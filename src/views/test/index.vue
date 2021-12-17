@@ -2,8 +2,9 @@
   <div class="gi_box test">
     <a-space direction="vertical" size="medium">
       <GiTextRadio :list="list" v-model="current"></GiTextRadio>
-      <GiSwitch v-model="checked" off-text="暂停中"></GiSwitch>
-      <GiSwitch v-model="checked1"></GiSwitch>
+      <GiTextSwitch v-model="checked" off-text="暂停中"></GiTextSwitch>
+      <GiTextSwitch v-model="checked1"></GiTextSwitch>
+      <GiTextSwitch v-model="checked1" disabled></GiTextSwitch>
     </a-space>
   </div>
 </template>
@@ -11,7 +12,7 @@
 <script lang="ts" setup>
 import { ref } from 'vue'
 import GiTextRadio from '@/components/GiTextRadio.vue'
-import GiSwitch from '@/components/GiSwitch.vue'
+import GiTextSwitch from '@/components/GiTextSwitch.vue'
 
 const list = [
   { label: '嘎嘎', value: '01' },

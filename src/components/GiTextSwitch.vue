@@ -1,11 +1,16 @@
 <template>
-  <div class="gi-switch">
+  <div class="gi-switch" :class="{ disabled: disabled }">
     <div class="gi-switch-wrap">
       <section class="slide-bar" :style="getSlideBarStyle"></section>
-      <section ref="OnRef" class="item left" :class="{ on: modelValue }" @click="onSwitch(true)">
+      <section ref="OnRef" class="item left" :class="{ on: modelValue, disabled: disabled }" @click="onSwitch(true)">
         {{ onText }}
       </section>
-      <section ref="OffRef" class="item right" :class="{ off: !modelValue }" @click="onSwitch(false)">
+      <section
+        ref="OffRef"
+        class="item right"
+        :class="{ off: !modelValue, disabled: disabled }"
+        @click="onSwitch(false)"
+      >
         {{ offText }}
       </section>
     </div>
@@ -28,6 +33,10 @@ const props = defineProps({
   offText: {
     type: String,
     default: '暂停'
+  },
+  disabled: {
+    type: Boolean,
+    default: false
   }
 })
 const emit = defineEmits(['update:modelValue'])
@@ -49,7 +58,7 @@ const getSlideBarStyle = computed(() => {
 })
 
 const onSwitch = (flag: boolean) => {
-  if (flag === props.modelValue) return
+  if (flag === props.modelValue || props.disabled) return
   emit('update:modelValue', !props.modelValue)
 }
 </script>
@@ -61,6 +70,9 @@ const onSwitch = (flag: boolean) => {
   background: var(--color-fill-3);
   padding: 0.16em;
   box-sizing: border-box;
+  &.disabled {
+    opacity: 0.5;
+  }
   &-wrap {
     display: flex;
     align-items: center;
@@ -86,6 +98,9 @@ const onSwitch = (flag: boolean) => {
       user-select: none;
     }
     .item {
+      &.disabled {
+        cursor: not-allowed;
+      }
       &.on {
         color: rgb(var(--primary-6));
       }
