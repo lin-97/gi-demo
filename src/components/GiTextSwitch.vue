@@ -66,7 +66,7 @@ const onSwitch = (flag: boolean) => {
 <style lang="scss" scoped>
 .gi-switch {
   display: inline-flex;
-  height: 30px;
+  height: 28px;
   background: var(--color-fill-3);
   padding: 0.16em;
   box-sizing: border-box;
