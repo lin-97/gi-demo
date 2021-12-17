@@ -21,7 +21,7 @@
               <icon-plus />
             </template>
           </a-button>
-          <a-button type="primary">
+          <a-button type="primary" @click="onMulDelete">
             <template #icon>
               <icon-delete />
             </template>
@@ -123,6 +123,15 @@ let tableData = reactive([
   }
 ])
 
+// 批量删除
+const onMulDelete = () => {
+  Modal.warning({
+    title: '提示',
+    content: '是否确认删除？',
+    hideCancel: false
+  })
+}
+
 const onAdd = () => {
   router.push({ path: '/indicator-manage/add' })
 }
@@ -142,7 +151,6 @@ const onDelete = (row) => {
 
 <style lang="scss" scoped>
 .tab {
-  padding: 0 $padding;
   background: var(--color-bg-3);
 }
 :deep(.arco-tabs-content) {

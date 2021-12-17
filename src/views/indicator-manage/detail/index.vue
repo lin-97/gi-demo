@@ -1,7 +1,7 @@
 <template>
   <div class="detail">
     <section class="head">
-      <a-page-header title="详情" subtitle="指标管理详情">
+      <a-page-header title="详情" subtitle="指标管理详情" @back="back">
         <template #breadcrumb>
           <a-breadcrumb>
             <a-breadcrumb-item>Home</a-breadcrumb-item>
