@@ -3,21 +3,14 @@
     <router-view>
       <template #default="{ Component, route }">
         <transition name="fade-transform" mode="out-in" appear>
-          <component :is="Component" :key="route.path" />
+          <component :is="Component" :key="route.fullPath" />
         </transition>
       </template>
     </router-view>
-    <!-- <router-view></router-view> -->
   </a-layout>
 </template>
 
-<script lang="ts" setup>
-import { computed } from 'vue'
-import { useRoute } from 'vue-router'
-const route = useRoute()
-
-let key = computed(() => route.path)
-</script>
+<script lang="ts" setup></script>
 
 <style lang="scss" scoped>
 .gi-main {
