@@ -10,7 +10,7 @@
       </a-tabs>
     </section>
 
-    <section class="gi_lr_page indicator-manage">
+    <section class="gi_lr_page wrap">
       <div class="left">
         <GiCateTree></GiCateTree>
       </div>
@@ -154,9 +154,16 @@ const onDelete = (row) => {
 <style lang="scss" scoped>
 .manage {
   width: 100%;
-  height: 100%;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
   .tab {
     background: var(--color-bg-3);
+  }
+  .wrap {
+    flex: 1;
+    overflow: hidden;
   }
 }
 

@@ -2,10 +2,24 @@
 
 type ThemeMode = 'light' | 'dark'
 
-const state = {
-  systemName: 'GI数据采集管理系统', // 系统名称
-  ThemeMode: localStorage.getItem('ThemeMode') || 'light', // light简白模式  dark暗黑模式
-  activePath: JSON.parse(localStorage.getItem('ActivePath')) || '/home', // 当前激活的路径
+type MenuItem = {
+  icon: string
+  id: string
+  name: string
+  path: string
+}
+
+type State = {
+  systemName: string
+  ThemeMode: string
+  activePath: string
+  menuList: MenuItem[]
+}
+
+const state: State = {
+  systemName: 'Admin管理系统', // 系统名称
+  ThemeMode: (window.localStorage.getItem('ThemeMode') || 'light') as ThemeMode, // light简白模式  dark暗黑模式
+  activePath: JSON.parse(window.localStorage.getItem('ActivePath')) || '/home', // 当前激活的路径
   menuList: [
     {
       icon: 'IconRobot',
@@ -44,12 +58,12 @@ const mutations = {
   // 设置激活路径地址
   storeSetActivePath(state, path: string) {
     state.activePath = path
-    localStorage.setItem('ActivePath', JSON.stringify(path))
+    window.localStorage.setItem('ActivePath', JSON.stringify(path))
   },
   // 设置暗黑模式
   storeSetThemeMode(state, value: ThemeMode) {
     state.ThemeMode = value
-    localStorage.setItem('ThemeMode', value)
+    window.localStorage.setItem('ThemeMode', value)
   }
 }
 

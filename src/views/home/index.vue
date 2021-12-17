@@ -8,10 +8,12 @@
       <section class="left">
         <div class="item"><ItemList></ItemList></div>
         <div class="item"><MsgList></MsgList></div>
+        <div class="item"><MsgList></MsgList></div>
       </section>
       <section class="right">
         <div class="item"><Chart></Chart></div>
         <div class="item"><HomeImg></HomeImg></div>
+        <div class="item"><HomeImg2></HomeImg2></div>
       </section>
     </div>
   </div>
@@ -23,6 +25,7 @@ import ItemList from './ItemList.vue'
 import MsgList from './MsgList.vue'
 import Chart from './Chart.vue'
 import HomeImg from './HomeImg.vue'
+import HomeImg2 from './HomeImg2.vue'
 </script>
 
 <style lang="scss" scoped>

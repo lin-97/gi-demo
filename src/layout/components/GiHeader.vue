@@ -1,6 +1,9 @@
 <template>
   <a-layout-header>
-    <section class="sys-name">Admin管理系统</section>
+    <section class="sys-name">
+      <img src="@/assets/logo.png" />
+      <span>Admin管理系统</span>
+    </section>
     <a-space class="sys-head" size="medium">
       <!-- 消息通知 -->
       <a-tooltip content="消息通知" position="bl">
@@ -100,6 +103,17 @@ const logout = () => {
     font-size: 18px;
     font-weight: 600;
     color: var(--color-text-1);
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    img {
+      width: 30px;
+      height: 30px;
+      border-radius: 6px;
+    }
+    span {
+      margin-left: 10px;
+    }
   }
   .sys-head {
     display: flex;
