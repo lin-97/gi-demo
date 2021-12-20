@@ -45,7 +45,7 @@
           </a-space>
         </a-row>
 
-        <a-table :data="tableData">
+        <a-table :data="tableData" :loading="showLoading" :scroll="{ x: 0, y: 200 }">
           <template #columns>
             <a-table-column title="名称" data-index="name"></a-table-column>
             <a-table-column title="创建时间" data-index="createTime"></a-table-column>
@@ -94,23 +94,25 @@ let activeName = ref('3')
 //   console.log('activeName', activeName.value)
 // })
 
-let tableData = reactive([])
+let tableData = ref([])
+let showLoading = ref(false)
 
 const pageInfo = reactive({
   page: 1,
-  size: 15
+  size: 20
 })
 
 const getTableData = async () => {
   try {
+    showLoading.value = true
     const res = await getTableList(pageInfo)
-    tableData = res.data.list
-    console.log('tableData', tableData)
+    tableData.value = res.data.list
+    showLoading.value = false
   } catch (error) {
+    showLoading.value = false
     return error
   }
 }
-
 getTableData()
 
 // 批量删除
