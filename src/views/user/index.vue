@@ -31,6 +31,10 @@ import UserSet from './UserSet.vue'
   color: #fff;
   border-color: #fff;
   background: transparent;
+  &:hover {
+    background: rgb(var(--primary-5));
+    border-color: rgb(var(--primary-5));
+  }
 }
 .user {
   .head {

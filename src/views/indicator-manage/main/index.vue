@@ -47,8 +47,9 @@
 
         <a-table :data="tableData">
           <template #columns>
-            <a-table-column title="名称1" data-index="name"></a-table-column>
-            <a-table-column title="工资" data-index="salary"></a-table-column>
+            <a-table-column title="名称" data-index="name"></a-table-column>
+            <a-table-column title="创建时间" data-index="createTime"></a-table-column>
+            <!-- <a-table-column title="工资" data-index="salary"></a-table-column>
             <a-table-column title="地址" data-index="address"></a-table-column>
             <a-table-column title="邮箱" data-index="email"></a-table-column>
             <a-table-column title="状态" width="100">
@@ -58,7 +59,7 @@
                   <template #unchecked> OFF </template>
                 </a-switch>
               </template>
-            </a-table-column>
+            </a-table-column> -->
             <a-table-column title="操作" width="200">
               <template #cell="{ record }">
                 <a-space>
@@ -75,11 +76,12 @@
   </div>
 </template>
 
-<script lang="ts" setup>
+<script setup>
 import { onMounted, reactive, ref } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import GiCateTree from '@/views/components/GiCateTree.vue'
 import { Modal } from '@arco-design/web-vue'
+import { getTableList } from '@/apis/table'
 const route = useRoute()
 const router = useRouter()
 
@@ -92,48 +94,24 @@ let activeName = ref('3')
 //   console.log('activeName', activeName.value)
 // })
 
-let tableData = reactive([
-  {
-    key: '1',
-    name: 'Jane Doe',
-    salary: 23000,
-    address: '32 Park Road, London',
-    email: 'jane.doe@example.com',
-    status: true
-  },
-  {
-    key: '2',
-    name: 'Alisa Ross',
-    salary: 25000,
-    address: '35 Park Road, London',
-    email: 'alisa.ross@example.com',
-    status: false
-  },
-  {
-    key: '3',
-    name: 'Kevin Sandra',
-    salary: 22000,
-    address: '31 Park Road, London',
-    email: 'kevin.sandra@example.com',
-    status: true
-  },
-  {
-    key: '4',
-    name: 'Ed Hellen',
-    salary: 17000,
-    address: '42 Park Road, London',
-    email: 'ed.hellen@example.com',
-    status: true
-  },
-  {
-    key: '5',
-    name: 'William Smith',
-    salary: 27000,
-    address: '62 Park Road, London',
-    email: 'william.smith@example.com',
-    status: false
+let tableData = reactive([])
+
+const pageInfo = reactive({
+  page: 1,
+  size: 15
+})
+
+const getTableData = async () => {
+  try {
+    const res = await getTableList(pageInfo)
+    tableData = res.data.list
+    console.log('tableData', tableData)
+  } catch (error) {
+    return error
   }
-])
+}
+
+getTableData()
 
 // 批量删除
 const onMulDelete = () => {

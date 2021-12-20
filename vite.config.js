@@ -18,6 +18,15 @@ export default defineConfig({
         additionalData: `@import "@/styles/var.scss";`
       }
     }
+  },
+  server: {
+    proxy: {
+      '/api': {
+        target: 'https://www.fastmock.site/mock/4a6ede552f5ceef195285323eadcfd49',
+        changeOrigin: true,
+        rewrite: (path) => path.replace(/^\/api/, '/api')
+      }
+    }
   }
   // 构建
   // build: {

@@ -41,7 +41,7 @@
           </a-doption>
           <a-doption @click="logout">
             <div class="option-item">
-              <span style="background: #e44d26"><icon-export /></span>
+              <span style="background: #ff7d00"><icon-export /></span>
               <span>退出登录</span>
             </div>
           </a-doption>

@@ -49,4 +49,23 @@ http.interceptors.response.use(
   }
 )
 
-export default http
+// export default http
+export default {
+  post(url, data, headers = {}) {
+    return http({
+      method: 'post',
+      url,
+      data,
+      headers
+    })
+  },
+
+  get(url, params, headers = {}) {
+    return http({
+      method: 'get',
+      url,
+      params,
+      headers
+    })
+  }
+}
