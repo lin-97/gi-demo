@@ -1,7 +1,7 @@
 <template>
   <div class="manage">
     <section class="tab">
-      <a-tabs default-active-key="2">
+      <a-tabs v-model="activeName">
         <a-tab-pane key="1" title="原子指标管理"> </a-tab-pane>
         <a-tab-pane key="2" title="时间周期管理"> </a-tab-pane>
         <a-tab-pane key="3" title="维度管理"> </a-tab-pane>
@@ -76,11 +76,21 @@
 </template>
 
 <script lang="ts" setup>
-import { reactive, ref } from 'vue'
-import { useRouter } from 'vue-router'
+import { onMounted, reactive, ref } from 'vue'
+import { useRoute, useRouter } from 'vue-router'
 import GiCateTree from '@/views/components/GiCateTree.vue'
 import { Modal } from '@arco-design/web-vue'
+const route = useRoute()
 const router = useRouter()
+
+let activeName = ref('3')
+// onMounted(() => {
+//   console.log(route.query)
+//   if (route.query.tab) {
+//     activeName.value = '3'
+//   }
+//   console.log('activeName', activeName.value)
+// })
 
 let tableData = reactive([
   {

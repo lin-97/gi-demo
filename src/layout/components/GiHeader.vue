@@ -33,11 +33,17 @@
           <icon-down />
         </a-button>
         <template #content>
-          <a-doption>
-            <template #icon><icon-user /></template><span style="margin-left: 4px">个人中心</span>
+          <a-doption @click="toUser">
+            <div class="option-item">
+              <span style="background: #1677ff"><icon-user /></span>
+              <span>个人中心</span>
+            </div>
           </a-doption>
           <a-doption @click="logout">
-            <template #icon><icon-export /></template><span style="margin-left: 4px">退出登录</span>
+            <div class="option-item">
+              <span style="background: #e44d26"><icon-export /></span>
+              <span>退出登录</span>
+            </div>
           </a-doption>
         </template>
       </a-dropdown>
@@ -77,6 +83,11 @@ const initTheme = () => {
 }
 initTheme()
 
+// 跳转个人中心
+const toUser = () => {
+  router.push('/user')
+}
+
 // 退出登录
 const logout = () => {
   Modal.warning({
@@ -91,6 +102,24 @@ const logout = () => {
 </script>
 
 <style lang="scss" scoped>
+.option-item {
+  display: flex;
+  align-items: center;
+  span {
+    &:first-child {
+      width: 20px;
+      height: 20px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: #fff;
+      border-radius: 4px;
+    }
+    &:last-child {
+      margin-left: 5px;
+    }
+  }
+}
 .arco-layout-header {
   padding: 0 $padding;
   height: 50px;
