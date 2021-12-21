@@ -45,7 +45,7 @@
           </a-space>
         </a-row>
 
-        <a-table :data="tableData" :loading="showLoading" :scroll="{ x: 0, y: 200 }">
+        <a-table :data="tableData" :loading="showLoading" :scroll="{ y: 600 }" :pagination="{ 'show-page-size': true }">
           <template #columns>
             <a-table-column title="名称" data-index="name"></a-table-column>
             <a-table-column title="创建时间" data-index="createTime"></a-table-column>
@@ -99,7 +99,7 @@ let showLoading = ref(false)
 
 const pageInfo = reactive({
   page: 1,
-  size: 20
+  size: 1000
 })
 
 const getTableData = async () => {
@@ -154,6 +154,10 @@ const onDelete = (row) => {
   .wrap {
     flex: 1;
     overflow: hidden;
+    .right {
+      display: flex;
+      flex-direction: column;
+    }
   }
 }
 
