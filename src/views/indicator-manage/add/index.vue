@@ -4,7 +4,9 @@
       <a-page-header title="新增" subtitle="指标管理新增" @back="cancel">
         <template #breadcrumb>
           <a-breadcrumb>
-            <a-breadcrumb-item>{{ route.meta.title }}</a-breadcrumb-item>
+            <a-breadcrumb-item v-for="(item, index) in route.matched" :key="index">{{
+              item.meta.title
+            }}</a-breadcrumb-item>
           </a-breadcrumb>
         </template>
         <template #extra>

@@ -1,5 +1,9 @@
 import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router'
 
+/**
+ * @desc 规定了数组元素类型是RouteRecordRaw, 它可以在定义路由时进行友善地提示
+ */
+
 const routes: Array<RouteRecordRaw> = [
   {
     path: '/login',
@@ -12,6 +16,7 @@ const routes: Array<RouteRecordRaw> = [
     redirect: '/home',
     name: 'Layout',
     component: () => import('@/layout/index.vue'),
+    meta: { title: '首页', keepAlive: false },
     children: [
       {
         path: '/home',
@@ -54,10 +59,7 @@ const routes: Array<RouteRecordRaw> = [
 ]
 
 const router = createRouter({
-  // hash模式：createWebHashHistory，
-  // history模式：createWebHistory
   history: createWebHistory(),
-  // history:createWebHashHistory(),
   routes,
   scrollBehavior: () => ({ left: 0, top: 0 })
 })

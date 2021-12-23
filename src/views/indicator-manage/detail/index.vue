@@ -4,9 +4,9 @@
       <a-page-header title="详情" subtitle="指标管理详情" @back="back">
         <template #breadcrumb>
           <a-breadcrumb>
-            <a-breadcrumb-item>Home</a-breadcrumb-item>
-            <a-breadcrumb-item>Channel</a-breadcrumb-item>
-            <a-breadcrumb-item>News</a-breadcrumb-item>
+            <a-breadcrumb-item v-for="(item, index) in route.matched" :key="index">{{
+              item.meta.title
+            }}</a-breadcrumb-item>
           </a-breadcrumb>
         </template>
         <template #extra>
@@ -14,41 +14,45 @@
         </template>
       </a-page-header>
     </section>
-    <section class="item" v-for="i in 3" :key="i">
-      <a-descriptions :data="data.list" title="基本信息" layout="inline-horizontal"> </a-descriptions>
+    <section class="item">
+      <a-descriptions :data="list" title="基本信息" layout="inline-horizontal"> </a-descriptions>
     </section>
   </div>
 </template>
 
 <script lang="ts" setup>
-import { reactive, ref } from 'vue'
-import { useRouter } from 'vue-router'
+import { onMounted, reactive, ref } from 'vue'
+import { useRoute, useRouter } from 'vue-router'
+const route = useRoute()
 const router = useRouter()
 
-const data = reactive({
-  list: [
-    {
-      label: '姓名：',
-      value: 'Lin'
-    },
-    {
-      label: '手机号：',
-      value: '123-1234-1234'
-    },
-    {
-      label: '邮箱：',
-      value: '326010228@qq.com'
-    },
-    {
-      label: '性别：',
-      value: '男'
-    },
-    {
-      label: '地址：',
-      value: '广州天河区'
-    }
-  ]
-})
+type ListItem = {
+  label: string
+  value: string | number
+}
+
+const list = ref<ListItem[]>([
+  {
+    label: '姓名：',
+    value: 'Lin'
+  },
+  {
+    label: '手机号：',
+    value: '123-1234-1234'
+  },
+  {
+    label: '邮箱：',
+    value: '326010228@qq.com'
+  },
+  {
+    label: '性别：',
+    value: '男'
+  },
+  {
+    label: '地址：',
+    value: '广州天河区'
+  }
+])
 
 const back = () => {
   router.back()
