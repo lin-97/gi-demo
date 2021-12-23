@@ -70,6 +70,7 @@ const login = (): any => {
 :deep(.arco-checkbox-icon) {
   width: 16px;
   height: 16px;
+  border-width: 1px;
 }
 .login {
   height: 100%;
