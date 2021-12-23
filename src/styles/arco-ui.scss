@@ -1,4 +1,18 @@
 .arco-modal {
+  .arco-modal-header {
+    .arco-modal-title {
+      justify-content: flex-start;
+    }
+  }
+  .arco-modal-body {
+    padding-bottom: 0;
+  }
+  .arco-modal-footer {
+    border-top: none;
+  }
+}
+
+.arco-modal-simple {
   padding: 15px;
   top: 50%;
   transform: translateY(-50%);

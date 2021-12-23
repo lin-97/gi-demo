@@ -42,11 +42,24 @@
               <a-option>广州</a-option>
             </a-select>
             <a-input-search class="gi_search_input" placeholder="请输入" />
+            <a-button type="primary" @click="getTableData">
+              <template #icon>
+                <icon-refresh />
+              </template>
+            </a-button>
           </a-space>
         </a-row>
 
-        <a-table :data="tableData" :loading="showLoading" :scroll="{ y: 600 }" :pagination="{ 'show-page-size': true }">
+        <a-table
+          :data="tableData"
+          :loading="showLoading"
+          :scroll="{ x: 1000, y: 600 }"
+          :pagination="{ 'show-page-size': true }"
+        >
           <template #columns>
+            <a-table-column title="序号" width="50">
+              <template #cell="{ rowIndex }">{{ rowIndex + 1 }}</template>
+            </a-table-column>
             <a-table-column title="名称" data-index="name" width="150"></a-table-column>
             <a-table-column title="创建时间" data-index="createTime"></a-table-column>
             <a-table-column title="地址" data-index="address"></a-table-column>
@@ -66,7 +79,7 @@
             <a-table-column title="操作" width="230">
               <template #cell="{ record }">
                 <a-space>
-                  <a-button type="primary" size="small">修改</a-button>
+                  <a-button type="primary" size="small" @click="onEdit(record)">修改</a-button>
                   <a-button type="primary" status="warning" size="small" @click="onDetail">详情</a-button>
                   <a-button type="primary" status="danger" size="small" @click="onDelete">删除</a-button>
                 </a-space>
@@ -75,6 +88,8 @@
           </template>
         </a-table>
       </div>
+
+      <EditDialog v-model="showEditDialog" :form-data="formData"></EditDialog>
     </section>
   </div>
 </template>
@@ -82,8 +97,9 @@
 <script setup>
 import { onMounted, reactive, ref } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
-import GiCateTree from '@/views/components/GiCateTree.vue'
 import { Modal } from '@arco-design/web-vue'
+import GiCateTree from '@/views/components/GiCateTree.vue'
+import EditDialog from './EditDialog.vue'
 import { getTableList } from '@/apis/table'
 const route = useRoute()
 const router = useRouter()
@@ -125,6 +141,14 @@ const onMulDelete = () => {
     content: '是否确认删除？',
     hideCancel: false
   })
+}
+
+let showEditDialog = ref(false)
+
+const formData = ref({})
+const onEdit = (row) => {
+  formData.value = row
+  showEditDialog.value = true
 }
 
 const onAdd = () => {
