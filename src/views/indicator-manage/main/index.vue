@@ -47,11 +47,14 @@
 
         <a-table :data="tableData" :loading="showLoading" :scroll="{ y: 600 }" :pagination="{ 'show-page-size': true }">
           <template #columns>
-            <a-table-column title="名称" data-index="name"></a-table-column>
+            <a-table-column title="名称" data-index="name" width="150"></a-table-column>
             <a-table-column title="创建时间" data-index="createTime"></a-table-column>
-            <!-- <a-table-column title="工资" data-index="salary"></a-table-column>
             <a-table-column title="地址" data-index="address"></a-table-column>
-            <a-table-column title="邮箱" data-index="email"></a-table-column>
+            <a-table-column title="比例" width="200">
+              <template #cell="{ record }">
+                <a-progress status="warning" :percent="record.proportion / 100" />
+              </template>
+            </a-table-column>
             <a-table-column title="状态" width="100">
               <template #cell="{ record }">
                 <a-switch v-model="record.status">
@@ -59,8 +62,8 @@
                   <template #unchecked> OFF </template>
                 </a-switch>
               </template>
-            </a-table-column> -->
-            <a-table-column title="操作" width="200">
+            </a-table-column>
+            <a-table-column title="操作" width="230">
               <template #cell="{ record }">
                 <a-space>
                   <a-button type="primary" size="small">修改</a-button>
