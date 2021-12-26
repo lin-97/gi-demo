@@ -11,6 +11,7 @@ import '@arco-design/web-vue/dist/arco.css'
 import '@/styles/index.scss' // 导入scss主文件
 
 const app = createApp(App)
+
 app.use(router)
 app.use(store)
 app.use(ArcoVue)

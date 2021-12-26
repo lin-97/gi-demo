@@ -16,7 +16,7 @@
     "vuex": "^4.0.2"
   },
   "devDependencies": {
-    "@arco-design/web-vue": "^2.11.1",
+    "@arco-design/web-vue": "^2.12.1",
     "@vitejs/plugin-vue": "^1.9.3",
     "node-sass": "^6.0.1",
     "sass": "^1.44.0",
