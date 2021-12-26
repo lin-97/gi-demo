@@ -475,6 +475,12 @@ const scrollChange = () => {}
 .ztree li span.button.center_close {
   background-position: -74px -16px;
 }
+.ztree li span.button.bottom_open {
+  background-position: -92px -34px;
+}
+.ztree li span.button.bottom_close {
+  background-position: -74px -34px;
+}
 .option-popup {
   font-size: 12px;
   display: flex;

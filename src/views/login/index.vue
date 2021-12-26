@@ -1,6 +1,6 @@
 <template>
   <div class="login">
-    <section class="login-box">
+    <section class="login-box animated flipInY">
       <!-- 左侧 -->
       <div class="login-left">
         <img class="bg" src="../../assets/images/login-bg.png" />
@@ -144,6 +144,7 @@ const login = (): any => {
   width: 270px;
   height: 100%;
   position: relative;
+  background: var(--color-bg-2);
   .form {
     padding: 80px 35px;
     &-item {
@@ -153,6 +154,7 @@ const login = (): any => {
       display: flex;
       align-items: center;
       input {
+        color: var(--color-text-2);
         height: 100%;
         margin: 0;
         margin-left: 5px;
