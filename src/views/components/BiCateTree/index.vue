@@ -193,7 +193,7 @@ function getNewNodeName(arr: string[], name: string = '新建分类'): string {
 // 新增
 const onAdd = () => {
   showContentMenu.value = false
-  let childrens = currentNode.children
+  let childrens: any[] = currentNode.children
   let name = '新建分类1'
   if (childrens && childrens.length) {
     let arr = childrens.map((i) => i.name)
@@ -307,6 +307,10 @@ const onDelete = () => {
 </style>
 
 <style lang="scss" scoped>
+.ztree {
+  flex: 1;
+  overflow: scroll;
+}
 .cate-ztree {
   flex: 1;
   overflow: hidden;
@@ -317,23 +321,6 @@ const onDelete = () => {
     display: flex;
     align-items: center;
     margin-bottom: 10px;
-    i {
-      color: #409eff;
-      font-size: 18px;
-      cursor: pointer;
-      margin-left: 5px;
-    }
-  }
-  .ztree {
-    flex: 1;
-    overflow: scroll;
-    li {
-      a {
-        &:hover {
-          background: #f6f6f6 !important;
-        }
-      }
-    }
   }
 }
 </style>
