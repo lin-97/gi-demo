@@ -3,7 +3,7 @@
     <div
       class="gi-content-menu"
       ref="contentMenuRef"
-      :style="[contentMenuStyle]"
+      :style="contentMenuStyle"
       v-show="getShow"
       v-clickoutside="handleClose"
     >
@@ -17,8 +17,8 @@ import { reactive, ref, watch, nextTick, computed } from 'vue'
 const props = defineProps({
   // 绑定的值
   modelValue: {
-    type: [Number, String],
-    default: ''
+    type: Boolean,
+    default: false
   },
   axis: {
     type: Object,
@@ -34,11 +34,11 @@ const props = defineProps({
   }
 })
 
-const transitionName = ref('')
+let transitionName = ref('slide-dynamic-origin')
 const contentMenuHeight = ref(0)
-const contentMenuStyle = reactive({})
+let contentMenuStyle = ref({})
 
-const contentMenuRef = ref(null)
+let contentMenuRef = ref(null)
 
 const emit = defineEmits(['update:modelValue'])
 
@@ -53,6 +53,7 @@ let getShow = computed({
 
 const getStyle = () => {
   const obj = {}
+  console.log('contentMenuHeight.value', contentMenuHeight.value)
   obj.left = props.axis.x + 2 + 'px'
   if (props.axis.y > window.innerHeight - contentMenuHeight.value) {
     obj.bottom = window.innerHeight - props.axis.y + 'px'
@@ -62,54 +63,28 @@ const getStyle = () => {
   obj.width = props.width
   obj.height = props.height
   obj['z-index'] = 999
+  if (props.axis.y > window.innerHeight - contentMenuHeight.value) {
+    obj['transform-origin'] = 'center bottom'
+  } else {
+    obj['transform-origin'] = 'center top'
+  }
   contentMenuStyle.value = obj
 }
 
-watch(props.axis.x, (newVal) => {
+watch(props.axis, () => {
+  getShow.value = false
+  if (props.axis.x === 0 || props.axis.y === 0) return
   nextTick(() => {
-    getShow.value = false
-    setTimeout(async () => {
+    contentMenuHeight.value = contentMenuRef.value.offsetHeight
+    setTimeout(() => {
       getStyle()
       getShow.value = true
-    }, 0)
-  })
-})
-
-watch(props.axis.y, (newVal) => {
-  nextTick(() => {
-    contentMenuHeight.value = contentMenuRef.offsetHeight
-    transitionName.value =
-      props.axis.y > window.innerHeight - contentMenuHeight.value ? 'el-zoom-in-bottom' : 'el-zoom-in-top'
-    getShow.value = false
-    setTimeout(async () => {
-      getStyle()
-      getShow.value = true
-    }, 0)
+    }, 300)
   })
 })
 
 const handleClose = () => {
   emit('update:modelValue', false)
-}
-</script>
-
-<script>
-export default {
-  methods: {
-    getStyle() {
-      const obj = {}
-      obj.left = this.axis.x + 2 + 'px'
-      if (this.axis.y > window.innerHeight - this.contentMenuHeight) {
-        obj.bottom = window.innerHeight - this.axis.y + 'px'
-      } else {
-        obj.top = this.axis.y + 2 + 'px'
-      }
-      obj.width = this.width
-      obj.height = this.height
-      obj['z-index'] = 999
-      this.contentMenuStyle = obj
-    }
-  }
 }
 </script>
 
@@ -121,5 +96,6 @@ export default {
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.12), 0 0 6px rgba(0, 0, 0, 0.04);
   border-radius: 4px;
   overflow: hidden;
+  border: 1px solid var(--color-border);
 }
 </style>

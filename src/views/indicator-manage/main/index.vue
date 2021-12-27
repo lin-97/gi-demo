@@ -12,7 +12,7 @@
 
     <section class="gi_lr_page wrap">
       <div class="left">
-        <BiCateTree></BiCateTree>
+        <BiCateTree @node-click="getTableData"></BiCateTree>
       </div>
       <div class="right">
         <a-row justify="space-between" style="margin-bottom: 10px">
@@ -58,7 +58,7 @@
         >
           <template #columns>
             <a-table-column title="序号" width="60">
-              <template #cell="{ rowIndex }">{{ rowIndex + 1 }}</template>
+              <template #cell="{ record }">{{ record.index + 1 }}</template>
             </a-table-column>
             <a-table-column title="名称" data-index="name" width="150"></a-table-column>
             <a-table-column title="创建时间" data-index="createTime"></a-table-column>
