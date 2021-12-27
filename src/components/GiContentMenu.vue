@@ -53,32 +53,31 @@ let getShow = computed({
 
 const getStyle = () => {
   const obj = {}
-  console.log('contentMenuHeight.value', contentMenuHeight.value)
+  console.log('props.axis.y', props.axis.y)
+  console.log('window.innerHeight', window.innerHeight)
+  console.log('contentMenuHeight', contentMenuHeight.value)
+
   obj.left = props.axis.x + 2 + 'px'
   if (props.axis.y > window.innerHeight - contentMenuHeight.value) {
     obj.bottom = window.innerHeight - props.axis.y + 'px'
+    obj['transform-origin'] = 'center bottom'
   } else {
     obj.top = props.axis.y + 2 + 'px'
+    obj['transform-origin'] = 'center top'
   }
   obj.width = props.width
   obj.height = props.height
   obj['z-index'] = 999
-  if (props.axis.y > window.innerHeight - contentMenuHeight.value) {
-    obj['transform-origin'] = 'center bottom'
-  } else {
-    obj['transform-origin'] = 'center top'
-  }
   contentMenuStyle.value = obj
 }
 
 watch(props.axis, () => {
   getShow.value = false
-  if (props.axis.x === 0 || props.axis.y === 0) return
-  nextTick(() => {
+  nextTick(async () => {
     contentMenuHeight.value = contentMenuRef.value.offsetHeight
     setTimeout(() => {
-      getStyle()
       getShow.value = true
+      getStyle()
     }, 300)
   })
 })
