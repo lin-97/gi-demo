@@ -30,9 +30,9 @@ export default defineConfig({
   }
   // 构建
   // build: {
-  //   // target: 'modules', // 浏览器兼容性  "esnext"|"modules"
-  //   // outDir: 'dist' // 输出路径
-  //   // assetsDir: 'assets', // 生成静态资源的存放路径
-  //   // sourcemap: false // 构建后是否生成 source map 文件
+  // target: 'modules', // 浏览器兼容性  "esnext"|"modules"
+  // outDir: 'dist' // 输出路径
+  // assetsDir: 'assets', // 生成静态资源的存放路径
+  // sourcemap: false // 构建后是否生成 source map 文件
   // }
 })
