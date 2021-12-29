@@ -2,7 +2,13 @@
   <div class="cate-ztree">
     <!-- 搜索框 -->
     <div class="search-wrap">
-      <a-input allow-clear :maxlength="20" :placeholder="placeholder" v-model="inputValue"></a-input>
+      <a-input
+        allow-clear
+        :maxlength="20"
+        :placeholder="placeholder"
+        v-model="inputValue"
+        @input="handleInput"
+      ></a-input>
     </div>
     <!-- 分类树 -->
     <ul id="treeDemo" ref="treeRef" class="ztree" @mousewheel="scrollChange"></ul>
@@ -39,6 +45,7 @@ import GiContentMenu from '@/components/GiContentMenu.vue'
 import MoveTree from './MoveTree.vue'
 import Option from './Option.vue'
 import OptionItem from './OptionItem.vue'
+import { getNewNodeName } from './function'
 import { Axis } from './type'
 import { data } from './tree'
 const props = defineProps({
@@ -173,33 +180,16 @@ let showDelete = computed(() => {
   return true
 })
 
-// 节点默认命名, 包含新建分类
-// 如果同一个父节点，子节点存在['新建分类1', '新建分类4'], 那么在当前父节点新增一个子节点, 那么新增节点应为 '新建分类2'
-// 如果同一个父节点，子节点存在['新建分类2', '新建分类3'], 那么在当前父节点新增一个子节点, 那么新增节点应为 '新建分类1'
-// 该方法就是获取新建分类后面的数字
-function getNewNodeName(arr: string[], name: string = '新建分类'): string {
-  let num = 0
-  for (let i = 0; i < arr.length + 1; i++) {
-    if (arr.includes(`${name}${i + 1}`)) {
-      continue
-    } else {
-      num = i + 1
-      break
-    }
-  }
-  return `${name}${num}`
-}
-
 // 新增
 const onAdd = () => {
   showContentMenu.value = false
   let childrens: any[] = currentNode.children
   let name = '新建分类1'
   if (childrens && childrens.length) {
-    let arr = childrens.map((i) => i.name)
+    let arr: string[] = childrens.map((i) => i.name)
     name = getNewNodeName(arr, '新建分类')
   }
-  let id = new Date().getTime().toString()
+  let id: string = new Date().getTime().toString()
   let newChildrenNode = {
     id: id,
     name: name,
@@ -239,6 +229,46 @@ const onDelete = () => {
     content: '是否确认删除？',
     hideCancel: false
   })
+}
+
+// 搜索-节点过滤
+const nodeFilter = (node, nameSearch) => {
+  let flag = false
+  if (node.name.indexOf(nameSearch) > -1) {
+    flag = true
+  }
+  if (node.children) {
+    let cNodes = node.children
+    for (let i = 0; i < cNodes.length; i++) {
+      let cNode = cNodes[i]
+      if (nodeFilter(cNode, nameSearch)) {
+        flag = true
+      } else {
+        cNodes.splice(i--, 1)
+      }
+    }
+  }
+  return flag
+}
+
+// 搜索-搜索框值改变触发
+const handleInput = () => {
+  let value = inputValue.value
+  console.log('value', value)
+  if (!value) {
+    treeObj = $.fn.zTree.init($('#treeDemo'), treeSetting, treeData.value)
+    treeObj.expandAll(true)
+  } else {
+    let arr = JSON.parse(JSON.stringify(treeData.value))
+    for (let i = 0; i < arr.length; i++) {
+      if (!nodeFilter(arr[i], value)) {
+        arr.splice(i--, 1)
+      }
+    }
+    console.log('arr', arr)
+    treeObj = $.fn.zTree.init($('#treeDemo'), treeSetting, arr)
+    treeObj.expandAll(true)
+  }
 }
 </script>
 
