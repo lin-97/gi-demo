@@ -170,7 +170,6 @@ watch(showContentMenu, (newVal) => {
 })
 
 let showRename = computed(() => {
-  console.log('111', currentNode)
   return true
 })
 let showMove = computed(() => {
