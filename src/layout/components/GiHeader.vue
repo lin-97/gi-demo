@@ -1,13 +1,13 @@
 <template>
   <a-layout-header>
-    <section class="sys-name">
+    <section class="system-logo">
       <img src="@/assets/logo.png" />
       <span>Admin管理系统</span>
     </section>
-    <a-space class="sys-head" size="medium">
+    <a-space class="system-head" size="medium">
       <!-- 消息通知 -->
       <a-tooltip content="消息通知" position="bl">
-        <icon-notification class="gi_hover" style="font-size: 18px" />
+        <icon-notification class="gi_hover" size="18" />
       </a-tooltip>
 
       <!-- 全屏切换组件 -->
@@ -16,8 +16,8 @@
       <!-- 暗黑模式切换 -->
       <a-button size="mini" style="line-height: 1" @click="changeTheme">
         <template #icon>
-          <icon-sun-fill style="font-size: 18px" v-if="ThemeMode === 'light'" />
-          <icon-moon-fill style="font-size: 18px" v-else />
+          <icon-sun-fill :size="18" v-if="ThemeMode === 'light'" />
+          <icon-moon-fill :size="18" v-else />
         </template>
       </a-button>
 
@@ -128,7 +128,7 @@ const logout = () => {
   justify-content: space-between;
   align-items: center;
   border-bottom: 1px solid var(--color-border-2);
-  .sys-name {
+  .system-logo {
     font-size: 18px;
     font-weight: 600;
     color: var(--color-text-1);
@@ -144,7 +144,7 @@ const logout = () => {
       margin-left: 10px;
     }
   }
-  .sys-head {
+  .system-head {
     display: flex;
     align-items: center;
   }
