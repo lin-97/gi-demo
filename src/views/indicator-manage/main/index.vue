@@ -79,9 +79,9 @@
             <a-table-column title="操作" width="230">
               <template #cell="{ record }">
                 <a-space>
-                  <a-button type="primary" size="mini" @click="onEdit(record)">修改</a-button>
-                  <a-button size="mini" @click="onDetail">详情</a-button>
-                  <a-button type="primary" size="mini" status="danger" @click="onDelete">删除</a-button>
+                  <a-button type="primary" @click="onEdit(record)">修改</a-button>
+                  <a-button @click="onDetail">详情</a-button>
+                  <a-button type="primary" status="danger" @click="onDelete">删除</a-button>
                 </a-space>
               </template>
             </a-table-column>
