@@ -74,6 +74,7 @@ const changeTheme = () => {
   }
 }
 
+// 初始化主题
 const initTheme = () => {
   if (ThemeMode.value === 'dark') {
     document.body.setAttribute('arco-theme', 'dark')

@@ -22,7 +22,7 @@
                 <icon-plus />
               </template>
             </a-button>
-            <a-button type="primary" @click="onMulDelete">
+            <a-button type="primary" status="danger" @click="onMulDelete">
               <template #icon>
                 <icon-delete />
               </template>
@@ -70,18 +70,18 @@
             </a-table-column>
             <a-table-column title="状态" width="100">
               <template #cell="{ record }">
-                <a-switch v-model="record.status">
-                  <template #checked> ON </template>
-                  <template #unchecked> OFF </template>
+                <a-switch v-model="record.status" size="medium">
+                  <template #checked>开启</template>
+                  <template #unchecked>关闭</template>
                 </a-switch>
               </template>
             </a-table-column>
             <a-table-column title="操作" width="230">
               <template #cell="{ record }">
                 <a-space>
-                  <a-button type="primary" size="small" @click="onEdit(record)">修改</a-button>
-                  <a-button type="primary" status="warning" size="small" @click="onDetail">详情</a-button>
-                  <a-button type="primary" status="danger" size="small" @click="onDelete">删除</a-button>
+                  <a-button type="primary" size="mini" @click="onEdit(record)">修改</a-button>
+                  <a-button size="mini" @click="onDetail">详情</a-button>
+                  <a-button type="primary" size="mini" status="danger" @click="onDelete">删除</a-button>
                 </a-space>
               </template>
             </a-table-column>
@@ -105,15 +105,8 @@ const route = useRoute()
 const router = useRouter()
 
 let activeName = ref('3')
-// onMounted(() => {
-//   console.log(route.query)
-//   if (route.query.tab) {
-//     activeName.value = '3'
-//   }
-//   console.log('activeName', activeName.value)
-// })
 
-let tableData = ref([])
+const tableData = ref([])
 let showLoading = ref(false)
 
 const pageInfo = reactive({

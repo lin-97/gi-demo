@@ -28,3 +28,37 @@
     text-align: right;
   }
 }
+
+.arco-radio-icon {
+  border: 1px solid var(--color-neutral-3);
+  width: 16px;
+  height: 16px;
+}
+.arco-radio-icon::after {
+  top: 0px;
+  left: 0px;
+  width: 14px;
+  height: 14px;
+}
+.arco-radio-checked .arco-radio-icon {
+  background-color: var(--bg-color-2);
+  flex-shrink: 0;
+}
+.arco-radio-checked .arco-radio-icon::after {
+  transform: scale(0.6) !important;
+  background-color: rgb(var(--primary-6));
+  top: -1px;
+  left: -1px;
+  width: 16px;
+  height: 16px;
+}
+
+.arco-checkbox-icon {
+  width: 16px;
+  height: 16px;
+  border: 1px solid var(--color-fill-3);
+}
+.arco-checkbox-icon-check {
+  width: 12px;
+  font-weight: 200;
+}

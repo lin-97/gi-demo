@@ -305,8 +305,8 @@ const handleInput = () => {
 .ztree li a.curSelectedNode {
   height: 20px;
   border: none;
-  color: #fff;
-  background: rgb(var(--primary-6));
+  color: rgb(var(--primary-6));
+  background-color: var(--color-primary-light-1);
 }
 .ztree li a.curSelectedNode_Edit {
   background: none !important;

@@ -1,5 +1,7 @@
 import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
+import Components from 'unplugin-vue-components/vite'
+import { ArcoResolver } from 'unplugin-vue-components/resolvers'
 import path from 'path'
 
 export default defineConfig({
@@ -7,10 +9,11 @@ export default defineConfig({
   base: './',
   resolve: {
     alias: {
-      '@': path.resolve(__dirname, 'src')
+      '@': path.resolve(__dirname, 'src'),
+      _c: path.resolve(__dirname, 'src/components')
     }
   },
-  // 引入SASS全局变量/样式
+  // 引入sass全局样式变量
   css: {
     preprocessorOptions: {
       scss: {
