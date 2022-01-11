@@ -14,7 +14,7 @@
       <FullScreenIcon class="gi_hover"></FullScreenIcon>
 
       <!-- 暗黑模式切换 -->
-      <a-button size="mini" style="line-height: 1" @click="changeTheme">
+      <a-button size="mini" @click="changeTheme">
         <template #icon>
           <icon-sun-fill :size="18" v-if="ThemeMode === 'light'" />
           <icon-moon-fill :size="18" v-else />
