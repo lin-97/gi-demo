@@ -38,6 +38,12 @@ export const useAppStore = defineStore({
         },
         {
           icon: 'IconSettings',
+          id: 'P404',
+          name: '404页',
+          path: '/404'
+        },
+        {
+          icon: 'IconSettings',
           id: 'TEST',
           name: '测试',
           path: '/test'

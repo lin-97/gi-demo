@@ -49,6 +49,12 @@ const routes: Array<RouteRecordRaw> = [
         meta: { title: '个人中心', keepAlive: false }
       },
       {
+        path: '/404',
+        name: '404',
+        component: () => import('@/views/404/index.vue'),
+        meta: { title: '404页', keepAlive: false }
+      },
+      {
         path: '/test',
         name: 'Test',
         component: () => import('@/views/test/index.vue'),

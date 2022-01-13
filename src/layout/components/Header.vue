@@ -1,8 +1,8 @@
 <template>
   <a-layout-header>
-    <section class="system-logo">
+    <section class="system-logo" @click="toHome">
       <img src="@/assets/logo.png" />
-      <span>{{ app.systemName }}</span>
+      <span class="gi_hover">{{ app.systemName }}</span>
     </section>
     <a-space class="system-head" size="medium">
       <!-- 消息通知 -->
@@ -84,6 +84,11 @@ const initTheme = () => {
   }
 }
 initTheme()
+
+// 跳转首页
+const toHome = () => {
+  router.push('/')
+}
 
 // 跳转个人中心
 const toUser = () => {
