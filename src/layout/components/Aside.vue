@@ -1,8 +1,8 @@
 <template>
   <a-layout-sider collapsible breakpoint="xl" class="gi-aside">
     <div class="logo" />
-    <a-menu :defaultSelectedKeys="[activePath]" :style="{ width: '100%', height: '100%' }">
-      <a-menu-item v-for="item in menuList" :key="item.path" @click="handleClickItem(item)">
+    <a-menu :defaultSelectedKeys="[app.activePath]" :style="{ width: '100%', height: '100%' }">
+      <a-menu-item v-for="item in app.menuList" :key="item.path" @click="handleClickItem(item)">
         <component :is="item.icon"></component>
         {{ item.name }}
       </a-menu-item>
@@ -20,14 +20,12 @@ import { computed } from 'vue'
 import { useStore } from 'vuex'
 import { useRouter } from 'vue-router'
 import { MenuItem } from '@/models'
-const store = useStore()
+import { useAppStore } from '@/store/app'
 const router = useRouter()
-
-const menuList = computed(() => store.state.app.menuList)
-const activePath = computed(() => store.state.app.activePath)
+const app = useAppStore()
 
 const handleClickItem = (item: MenuItem) => {
-  store.commit('app/storeSetActivePath', item.path)
+  app.setActivePath('item.path')
   router.push(item.path)
 }
 </script>

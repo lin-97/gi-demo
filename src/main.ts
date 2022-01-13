@@ -1,12 +1,13 @@
 import { createApp } from 'vue'
 import App from './App.vue'
 import router from './router'
-import store from './store'
+import { createPinia } from 'pinia'
 
+// 引入Arco Design组件库
 import ArcoVue from '@arco-design/web-vue'
-// 额外引入图标库
-import ArcoVueIcon from '@arco-design/web-vue/es/icon'
 import '@arco-design/web-vue/dist/arco.css'
+// 额外引入Arco Design图标库
+import ArcoVueIcon from '@arco-design/web-vue/es/icon'
 
 import '@/styles/index.scss' // 导入scss主文件
 // import clickOutside from '@/directives/clickoutside'
@@ -40,7 +41,7 @@ app.directive('clickoutside', {
 })
 
 app.use(router)
-app.use(store)
+app.use(createPinia())
 app.use(ArcoVue)
 app.use(ArcoVueIcon)
 app.mount('#app')

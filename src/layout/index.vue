@@ -1,17 +1,17 @@
 <template>
   <a-layout class="gi-layout">
-    <GiAside></GiAside>
+    <Aside></Aside>
     <a-layout>
-      <GiHeader></GiHeader>
-      <GiMain></GiMain>
+      <Header></Header>
+      <Main></Main>
     </a-layout>
   </a-layout>
 </template>
 
 <script lang="ts" setup>
-import GiAside from './components/GiAside.vue'
-import GiHeader from './components/GiHeader.vue'
-import GiMain from './components/GiMain.vue'
+import Aside from './components/Aside.vue'
+import Header from './components/Header.vue'
+import Main from './components/Main.vue'
 </script>
 
 <style scoped>

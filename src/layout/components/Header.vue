@@ -2,7 +2,7 @@
   <a-layout-header>
     <section class="system-logo">
       <img src="@/assets/logo.png" />
-      <span>Admin管理系统</span>
+      <span>{{ app.systemName }}</span>
     </section>
     <a-space class="system-head" size="medium">
       <!-- 消息通知 -->
@@ -11,12 +11,12 @@
       </a-tooltip>
 
       <!-- 全屏切换组件 -->
-      <FullScreenIcon class="gi_hover"></FullScreenIcon>
+      <GiFullScreenIcon class="gi_hover"></GiFullScreenIcon>
 
       <!-- 暗黑模式切换 -->
       <a-button size="mini" @click="changeTheme">
         <template #icon>
-          <icon-sun-fill :size="18" v-if="ThemeMode === 'light'" />
+          <icon-sun-fill :size="18" v-if="app.ThemeMode === 'light'" />
           <icon-moon-fill :size="18" v-else />
         </template>
       </a-button>
@@ -29,7 +29,7 @@
       <!-- 管理员账户 -->
       <a-dropdown trigger="hover">
         <a-button type="text" class="username">
-          <span>admin</span>
+          <span>{{ user.userName }}</span>
           <icon-down />
         </a-button>
         <template #content>
@@ -56,27 +56,28 @@ import { computed, onMounted, ref } from 'vue'
 import { Modal } from '@arco-design/web-vue'
 import { useRouter } from 'vue-router'
 import { useStore } from 'vuex'
-import FullScreenIcon from './FullScreenIcon.vue'
+import GiFullScreenIcon from '@/components/GiFullScreenIcon.vue'
+import { useAppStore } from '@/store/app'
+import { useUserStore } from '@/store/user'
 const router = useRouter()
-const store = useStore()
-
-const ThemeMode = computed(() => store.state.app.ThemeMode)
+const app = useAppStore()
+const user = useUserStore()
 
 // 暗黑模式切换
 const changeTheme = () => {
   // let theme = document.body.getAttribute('arco-theme')
-  if (ThemeMode.value === 'light') {
-    store.commit('app/storeSetThemeMode', 'dark')
+  if (app.ThemeMode === 'light') {
+    app.setThemeMode('dark')
     document.body.setAttribute('arco-theme', 'dark')
   } else {
-    store.commit('app/storeSetThemeMode', 'light')
+    app.setThemeMode('light')
     document.body.removeAttribute('arco-theme')
   }
 }
 
 // 初始化主题
 const initTheme = () => {
-  if (ThemeMode.value === 'dark') {
+  if (app.ThemeMode === 'dark') {
     document.body.setAttribute('arco-theme', 'dark')
   } else {
     document.body.removeAttribute('arco-theme')
