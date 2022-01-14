@@ -58,7 +58,7 @@ const countDownTime = () => {
 }
 
 .container {
-  width: 40%;
+  width: 30%;
   .pic-box {
     width: 100%;
     position: relative;
