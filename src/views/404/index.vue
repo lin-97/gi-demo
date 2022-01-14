@@ -2,7 +2,7 @@
   <div class="error-page">
     <section class="container">
       <div class="pic-box">
-        <img class="pic-parent" src="@/assets/images/error/404.png" />
+        <img class="pic-parent" src="@/assets/svgs/404.svg" />
         <img class="pic-child left" src="@/assets/images/error/cloud.png" />
         <img class="pic-child" src="@/assets/images/error/cloud.png" />
         <img class="pic-child" src="@/assets/images/error/cloud.png" />
@@ -60,6 +60,7 @@ const countDownTime = () => {
 .container {
   width: 40%;
   .pic-box {
+    width: 100%;
     position: relative;
     float: left;
     overflow: hidden;
