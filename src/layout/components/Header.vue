@@ -149,6 +149,7 @@ const logout = () => {
     }
     span {
       margin-left: 10px;
+      white-space: nowrap;
     }
   }
   .system-head {

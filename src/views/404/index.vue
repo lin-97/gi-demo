@@ -12,7 +12,7 @@
         <div class="oops">抱歉!</div>
         <div class="tip">当前页面不存在...</div>
         <div class="info">请检查您输入的网址是否正确，或点击下面的按钮返回首页</div>
-        <a-button type="primary" shape="round" size="large">{{ jumpTime }}返回首页</a-button>
+        <a-button type="primary" shape="round" size="large" @click="back">{{ jumpTime }} 返回首页</a-button>
       </div>
     </section>
   </div>
@@ -34,12 +34,18 @@ onBeforeUnmount(() => {
   clearInterval(timer.value)
 })
 
+// 返回页面
+const back = () => {
+  router.back()
+}
+
+// 倒计时
 const countDownTime = () => {
   timer.value = setInterval(() => {
     if (jumpTime.value) {
       jumpTime.value--
     } else {
-      // router.back()
+      // back()
       clearInterval(timer.value)
     }
   }, 1000)
