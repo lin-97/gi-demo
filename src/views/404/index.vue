@@ -12,7 +12,7 @@
         <div class="oops">抱歉!</div>
         <div class="tip">当前页面不存在...</div>
         <div class="info">请检查您输入的网址是否正确，或点击下面的按钮返回首页</div>
-        <a-button type="primary" shape="round" size="large" @click="back">{{ jumpTime }} 返回首页</a-button>
+        <a-button type="primary" shape="round" size="large" @click="back">{{ countDownTime }} 返回首页</a-button>
       </div>
     </section>
   </div>
@@ -23,11 +23,11 @@ import { onBeforeUnmount, onMounted, ref } from 'vue'
 import { useRouter } from 'vue-router'
 const router = useRouter()
 
-let jumpTime = ref(5)
+let countDownTime = ref(5)
 let timer = ref(0)
 
 onMounted(() => {
-  countDownTime()
+  onCountDownTime()
 })
 
 onBeforeUnmount(() => {
@@ -40,10 +40,10 @@ const back = () => {
 }
 
 // 倒计时
-const countDownTime = () => {
+const onCountDownTime = () => {
   timer.value = setInterval(() => {
-    if (jumpTime.value) {
-      jumpTime.value--
+    if (countDownTime.value) {
+      countDownTime.value--
     } else {
       // back()
       clearInterval(timer.value)
