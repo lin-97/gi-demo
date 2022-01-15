@@ -17,7 +17,7 @@
 
     <!-- 点击设置图标弹窗 -->
     <GiContentMenu :axis="axis" v-model="showContentMenu">
-      <Option>
+      <Option ref="option">
         <OptionItem icon="IconPlusCircle" @click="onAdd">新增</OptionItem>
         <OptionItem icon="IconEdit" @click="onRename" v-if="showRename">重命名</OptionItem>
         <a-popover
@@ -27,7 +27,7 @@
           :popup-visible="showTreePopover"
           v-if="showMove"
         >
-          <OptionItem mode="more" icon="IconExport" @click="onMove"> 移动 </OptionItem>
+          <OptionItem mode="more" icon="IconExport" :active="showTreePopover" @click="onMove"> 移动 </OptionItem>
           <template #content>
             <section style="width: 250px; min-height: 200px; max-height: 500px; overflow: scroll">
               <MoveTree :tree-data="treeData" @node-click="moveTreeNodeClick"></MoveTree>
@@ -172,7 +172,7 @@ watch(showContentMenu, (newVal) => {
 })
 
 let showRename = computed(() => {
-  return true
+  return currentNode.type !== null
 })
 let showMove = computed(() => {
   return true

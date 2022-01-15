@@ -1,5 +1,5 @@
 <template>
-  <div class="option-item" :class="{ more: mode === 'more' }" @click="handleClick">
+  <div class="option-item" :class="{ more: mode === 'more', active: active }" @click="handleClick">
     <section class="wrap">
       <component :is="icon" size="16" :stroke-width="2" style="margin-right: 2px"></component>
       <slot
@@ -24,6 +24,11 @@ const props = defineProps({
   mode: {
     type: String,
     default: ''
+  },
+  // 选中高亮
+  active: {
+    type: Boolean,
+    default: false
   }
 })
 
@@ -43,11 +48,12 @@ const handleClick = () => {
   position: relative;
   display: flex;
   align-items: center;
-  font-size: 13px;
+  font-size: 1.08em;
   .wrap {
     display: flex;
     align-items: center;
   }
+  &.active,
   &:hover {
     color: rgb(var(--primary-6));
     background: var(--color-primary-light-1);
