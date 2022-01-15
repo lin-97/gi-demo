@@ -6,12 +6,13 @@
 
 <style lang="scss" scoped>
 .option {
+  width: 100px;
+  height: 100%;
   font-size: 12px;
   display: flex;
   flex-direction: column;
   justify-content: center;
   box-sizing: border-box;
-  height: 100%;
   background: var(--color-bg-2);
   position: relative;
 }

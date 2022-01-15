@@ -16,7 +16,7 @@
     </div>
 
     <!-- 点击设置图标弹窗 -->
-    <GiContentMenu :axis="axis" width="90px" v-model="showContentMenu">
+    <GiContentMenu :axis="axis" v-model="showContentMenu">
       <Option>
         <OptionItem icon="IconPlusCircle" @click="onAdd">新增</OptionItem>
         <OptionItem icon="IconEdit" @click="onRename" v-if="showRename">重命名</OptionItem>
