@@ -3,9 +3,10 @@ import vue from '@vitejs/plugin-vue'
 import Components from 'unplugin-vue-components/vite'
 import { ArcoResolver } from 'unplugin-vue-components/resolvers'
 import path from 'path'
+import { svgBuilder } from './src/plugins/svgBuilder'
 
 export default defineConfig({
-  plugins: [vue()],
+  plugins: [vue(), svgBuilder('./src/assets/svgs/file/')],
   base: './',
   resolve: {
     alias: {

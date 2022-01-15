@@ -10,6 +10,7 @@
     "axios": "^0.24.0",
     "clipboard": "^2.0.8",
     "echarts": "^5.2.2",
+    "fs": "0.0.1-security",
     "js-cookie": "^3.0.1",
     "pinia": "^2.0.0-rc.10",
     "screenfull": "^5.1.0",
