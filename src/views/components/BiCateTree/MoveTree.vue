@@ -1,6 +1,6 @@
 <template>
   <!-- 移动树 -->
-  <ul id="movetree" ref="moveTreeRef" class="move-tree ztree"></ul>
+  <ul id="movetree" ref="moveTreeRef" class="ztree move-tree"></ul>
 </template>
 
 <script setup lang="ts">
@@ -38,3 +38,5 @@ function handleNodeClick(event, treeId, treeNode) {
   emit('node-click', treeNode)
 }
 </script>
+
+<style lang="scss" scoped></style>

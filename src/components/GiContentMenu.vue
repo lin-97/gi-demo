@@ -73,13 +73,13 @@ const getStyle = () => {
 
 watch(props.axis, () => {
   getShow.value = false
-  nextTick(async () => {
-    setTimeout(() => {
-      getShow.value = true
+  setTimeout(() => {
+    getShow.value = true
+    nextTick(() => {
       contentMenuHeight.value = contentMenuRef.value.offsetHeight
       getStyle()
-    }, 500)
-  })
+    })
+  }, 300)
 })
 
 const handleClose = () => {

@@ -1,5 +1,5 @@
 <template>
-  <div class="cate-ztree">
+  <div class="cate-tree">
     <!-- 搜索框 -->
     <div class="search-wrap">
       <a-input
@@ -11,7 +11,9 @@
       ></a-input>
     </div>
     <!-- 分类树 -->
-    <ul id="treeDemo" ref="treeRef" class="ztree" @mousewheel="scrollChange"></ul>
+    <div class="wrap">
+      <ul id="treeDemo" ref="treeRef" class="ztree cate-ztree" @mousewheel="scrollChange"></ul>
+    </div>
 
     <!-- 点击设置图标弹窗 -->
     <GiContentMenu :axis="axis" width="90px" v-model="showContentMenu">
@@ -336,11 +338,11 @@ const handleInput = () => {
 </style>
 
 <style lang="scss" scoped>
-.ztree {
-  flex: 1;
-  overflow: scroll;
-}
-.cate-ztree {
+// .ztree {
+//   flex: 1;
+//   overflow: scroll;
+// }
+.cate-tree {
   flex: 1;
   overflow: hidden;
   position: relative;
@@ -350,6 +352,10 @@ const handleInput = () => {
     display: flex;
     align-items: center;
     margin-bottom: 10px;
+  }
+  > .wrap {
+    flex: 1;
+    overflow: scroll;
   }
 }
 </style>
