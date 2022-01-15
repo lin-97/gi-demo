@@ -31,6 +31,12 @@ export const useAppStore = defineStore({
           path: '/indicator-manage'
         },
         {
+          icon: 'IconCopyright',
+          id: 'WJGL',
+          name: '文件管理',
+          path: '/file-manage'
+        },
+        {
           icon: 'IconSettings',
           id: 'ZBGL',
           name: '个人中心',

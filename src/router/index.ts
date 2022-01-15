@@ -43,6 +43,12 @@ const routes: Array<RouteRecordRaw> = [
         meta: { title: '指标管理-详情', keepAlive: false }
       },
       {
+        path: '/file-manage',
+        name: 'FileManage',
+        component: () => import('@/views/file-manage/main/index.vue'),
+        meta: { title: '文件管理', keepAlive: false }
+      },
+      {
         path: '/user',
         name: 'User',
         component: () => import('@/views/user/index.vue'),
