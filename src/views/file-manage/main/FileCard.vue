@@ -1,8 +1,8 @@
 <template>
   <div class="file-card" @click="handleClick">
     <div class="file-image">
-      <!-- <img :src="fileIMg" /> -->
-      <GiFileIcon name="wps"></GiFileIcon>
+      <!-- <img src="../../../assets/svgs/file/files.svg" /> -->
+      <GiFileIcon name="wps" class="svg"></GiFileIcon>
     </div>
     <div class="file-name">{{ data.name }}</div>
 
@@ -72,6 +72,10 @@ const handleChange = (v) => {
     justify-content: center;
     img {
       width: 50%;
+    }
+    .svg {
+      width: 50%;
+      height: 60px;
     }
   }
   .file-name {

@@ -1,12 +1,11 @@
 <template>
   <svg :class="svgClass" v-bind="$attrs" :style="{ color: color }">
-    <use :xlink:href="iconName" />
+    <use :xlink:href="iconName"></use>
   </svg>
 </template>
 
-<script setup>
-import { defineProps, computed } from 'vue'
-
+<script setup lang="ts">
+import { computed, defineProps } from 'vue'
 const props = defineProps({
   name: {
     type: String,
@@ -17,21 +16,17 @@ const props = defineProps({
     default: ''
   }
 })
-
 const iconName = computed(() => `#icon-${props.name}`)
 const svgClass = computed(() => {
-  console.log(props.name, 'props.name')
-  if (props.name) {
-    return `svg-icon icon-${props.name}`
-  }
-  return 'svg-icon'
+  if (props.name) return `file-svg-icon icon-${props.name}`
+  return 'file-svg-icon'
 })
 </script>
 
-<style lang="scss">
-.svg-icon {
-  width: 1em;
-  height: 1em;
+<style scoped>
+.file-svg-icon {
+  width: auto;
+  height: auto;
   fill: currentColor;
   vertical-align: middle;
 }
