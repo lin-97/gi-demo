@@ -9,7 +9,9 @@ export const useFileStore = defineStore({
       // 视图: 1宫格模式 2列表模式
       viewMode: 1 as ViewMode,
       // 当前批量勾选的文件列表
-      selectedFileList: JSON.parse(window.sessionStorage.getItem('FILE_LIST')) || []
+      selectedFileList: JSON.parse(window.sessionStorage.getItem('FILE_LIST')) || [],
+      // 是否批量操作: true:批量 false:单文件
+      isBatchMode: false
     }
   },
   getters: {
@@ -20,7 +22,7 @@ export const useFileStore = defineStore({
   },
   actions: {
     // 设置视图模式
-    setViewMode(value: ViewMode) {
+    changeViewMode(value: ViewMode) {
       this.viewMode = value
     },
     // 添加选中的文件到文件勾选列表

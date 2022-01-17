@@ -59,9 +59,9 @@
             </a-button>
           </a-tooltip>
           <a-tooltip content="视图" position="bottom">
-            <a-button @click="file.setViewMode(file.viewMode == 1 ? 2 : 1)">
+            <a-button @click="fileStore.changeViewMode(fileStore.viewMode == 1 ? 2 : 1)">
               <template #icon>
-                <icon-apps v-if="file.viewMode == 1" />
+                <icon-apps v-if="fileStore.viewMode == 1" />
                 <icon-list v-else />
               </template>
             </a-button>
@@ -71,20 +71,20 @@
     </a-row>
 
     <!-- 文件列表-宫格模式 -->
-    <section class="file-wrap" v-if="file.viewMode == 1">
+    <section class="file-wrap" v-if="fileStore.viewMode == 1">
       <FileCard
         v-for="item in fileList"
         :key="item.id"
         :data="item"
         :check-mode="isBatchMode"
-        :checked="file.selectedFileIdList.includes(item.id)"
+        :checked="fileStore.selectedFileIdList.includes(item.id)"
         @click="handleClickFile(item)"
         @check="handleCheckFile(item)"
       ></FileCard>
     </section>
 
     <!-- 文件列表-列表模式 -->
-    <FileList :data="fileList" v-if="file.viewMode == 2"></FileList>
+    <FileList :data="fileList" v-if="fileStore.viewMode == 2"></FileList>
   </div>
 </template>
 
@@ -97,7 +97,7 @@ import { Message } from '@arco-design/web-vue'
 import { fileTypeList } from '@/libs/file-map'
 import { useFileStore } from '@/store/file'
 
-const file = useFileStore()
+const fileStore = useFileStore()
 
 let fileList = ref([])
 fileList.value = fileData
@@ -112,7 +112,7 @@ const handleClickFile = (item) => {
 
 // 勾选文件
 const handleCheckFile = (item) => {
-  file.addSelectedFileItem(item)
+  fileStore.addSelectedFileItem(item)
 }
 </script>
 
