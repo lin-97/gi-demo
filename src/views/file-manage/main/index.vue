@@ -20,7 +20,7 @@
           </template>
         </a-dropdown>
 
-        <a-button type="primary" @click="isBatchMode = !isBatchMode"
+        <a-button type="primary" :status="isBatchMode ? 'warning' : ''" @click="isBatchMode = !isBatchMode"
           ><icon-select-all /> {{ isBatchMode ? '取消批量操作' : '批量操作' }}</a-button
         >
         <a-input-group>
@@ -76,7 +76,7 @@
         :key="item.id"
         :data="item"
         :check-mode="isBatchMode"
-        :checked="checkedFileList.includes(item.id)"
+        :checked="file.selectedFileIdList.includes(item.id)"
         @click="handleClickFile(item)"
         @check="handleCheckFile(item)"
       ></FileCard>
@@ -90,6 +90,9 @@ import FileCard from './FileCard.vue'
 import fileData from './filedata'
 import { Message } from '@arco-design/web-vue'
 import { fileTypeList } from '@/libs/file-map'
+import { useFileStore } from '@/store/file'
+
+const file = useFileStore()
 
 let fileList = ref([])
 fileList.value = fileData
@@ -102,16 +105,9 @@ const handleClickFile = (item) => {
   Message.success(`点击了文件-${item.name}`)
 }
 
-const checkedFileList = ref([])
-
 // 勾选文件
 const handleCheckFile = (item) => {
-  if (checkedFileList.value.includes(item.id)) {
-    let index = checkedFileList.value.findIndex((id) => id === item.id)
-    checkedFileList.value.splice(index, 1)
-  } else {
-    checkedFileList.value.push(item.id)
-  }
+  file.addSelectedFileItem(item)
 }
 </script>
 
@@ -136,6 +132,7 @@ const handleCheckFile = (item) => {
     background: var(--color-bg-4);
     display: flex;
     flex-wrap: wrap;
+    align-content: flex-start;
   }
 }
 </style>
