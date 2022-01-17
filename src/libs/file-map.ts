@@ -14,21 +14,21 @@ export const fileTypeList = [
 
 // 文件类型图标 Map 映射
 export const fileImgMap = {
-  mp3: 'music',
-  mp4: 'video',
-  dir: 'files',
-  ppt: 'ppt',
-  doc: 'wps',
-  docx: 'wps',
-  xls: 'excel',
-  xlsx: 'excel',
-  txt: 'txt',
-  rar: 'rar',
-  zip: 'zip',
-  html: 'html',
-  css: 'css',
-  js: 'javascript',
-  other: 'other' // 未知文件
+  mp3: 'file-music',
+  mp4: 'file-video',
+  dir: 'file-dir',
+  ppt: 'file-ppt',
+  doc: 'file-wps',
+  docx: 'file-wps',
+  xls: 'file-excel',
+  xlsx: 'file-excel',
+  txt: 'file-txt',
+  rar: 'file-rar',
+  zip: 'file-zip',
+  html: 'file-html',
+  css: 'file-css',
+  js: 'file-js',
+  other: 'file-other' // 未知文件
 }
 
 export const imageTypeList = ['jpg', 'png', 'gif', 'jpeg']

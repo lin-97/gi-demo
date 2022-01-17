@@ -2,8 +2,6 @@
   <div class="file-card" @click="handleClick">
     <div class="file-image">
       <FileImg :data="data"></FileImg>
-      <!-- <img v-if="imageTypeList.includes(data.extendName)" :src="data.src" />
-      <GiFileIcon v-else :name="fileImgMap[data.extendName]" class="svg"></GiFileIcon> -->
     </div>
     <div class="file-name">{{ data.name }}{{ data.extendName ? `.${data.extendName}` : '' }}</div>
 

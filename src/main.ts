@@ -12,10 +12,10 @@ import ArcoVueIcon from '@arco-design/web-vue/es/icon'
 import '@/styles/index.scss' // 导入scss主文件
 // import clickOutside from '@/directives/clickoutside'
 
-import GiFileIcon from '@/components/GiFileIcon.vue'
+import GiSvgIcon from '@/components/GiSvgIcon.vue'
 
 const app = createApp(App)
-app.component('GiFileIcon', GiFileIcon)
+app.component('GiSvgIcon', GiSvgIcon)
 // app.directive('clickoutside', clickOutside)
 
 app.directive('clickoutside', {

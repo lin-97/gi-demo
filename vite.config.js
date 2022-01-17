@@ -6,7 +6,7 @@ import path from 'path'
 import { svgBuilder } from './src/plugins/svgBuilder'
 
 export default defineConfig({
-  plugins: [vue(), svgBuilder('./src/assets/svgs/file/')],
+  plugins: [vue(), svgBuilder('./src/icons/')],
   base: './',
   resolve: {
     alias: {

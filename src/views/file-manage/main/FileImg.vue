@@ -1,6 +1,6 @@
 <template>
   <img class="img" :src="props.data.src" v-if="isImg" />
-  <GiFileIcon class="svg" :name="getFileImg" v-else></GiFileIcon>
+  <GiSvgIcon class="svg" :name="getFileImg" v-else></GiSvgIcon>
 </template>
 
 <script setup lang="ts">
@@ -21,11 +21,11 @@ let isImg = computed(() => {
 
 let getFileImg = computed(() => {
   if (props.data.isDir) {
-    return 'files'
+    return fileImgMap['dir']
   } else if (imageTypeList.includes(props.data.extendName)) {
     return props.data.src
   } else if (!Object.keys(fileImgMap).includes(props.data.extendName)) {
-    return 'other'
+    return fileImgMap['other']
   } else {
     return fileImgMap[props.data.extendName]
   }
