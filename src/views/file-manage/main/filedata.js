@@ -6,7 +6,8 @@ const list = [
     extendName: '',
     src: null,
     updateTime: '2022-01-20 18:30:00',
-    isDir: true
+    isDir: true,
+    filePath: '/'
   },
   {
     id: '002',
@@ -15,7 +16,8 @@ const list = [
     extendName: '',
     src: null,
     updateTime: '2022-01-20 18:30:00',
-    isDir: true
+    isDir: true,
+    filePath: '/'
   },
   {
     id: '003',
@@ -24,7 +26,8 @@ const list = [
     extendName: 'doc',
     src: null,
     updateTime: '2022-01-20 18:30:00',
-    isDir: false
+    isDir: false,
+    filePath: '/'
   },
   {
     id: '004',
@@ -33,7 +36,8 @@ const list = [
     extendName: 'mp3',
     src: null,
     updateTime: '2022-01-20 18:30:00',
-    isDir: false
+    isDir: false,
+    filePath: '/'
   },
   {
     id: '005',
@@ -42,7 +46,8 @@ const list = [
     extendName: 'mp4',
     src: null,
     updateTime: '2022-01-20 18:30:00',
-    isDir: false
+    isDir: false,
+    filePath: '/'
   },
   {
     id: '006',
@@ -51,7 +56,8 @@ const list = [
     extendName: 'zip',
     src: null,
     updateTime: '2022-01-20 18:30:00',
-    isDir: false
+    isDir: false,
+    filePath: '/'
   },
   {
     id: '007',
@@ -60,7 +66,8 @@ const list = [
     extendName: 'rar',
     src: null,
     updateTime: '2022-01-20 18:30:00',
-    isDir: false
+    isDir: false,
+    filePath: '/'
   },
   {
     id: '008',
@@ -69,7 +76,8 @@ const list = [
     extendName: 'xls',
     src: null,
     updateTime: '2022-01-20 18:30:00',
-    isDir: false
+    isDir: false,
+    filePath: '/'
   },
   {
     id: '009',
@@ -78,7 +86,8 @@ const list = [
     extendName: 'ppt',
     src: null,
     updateTime: '2022-01-20 18:30:00',
-    isDir: false
+    isDir: false,
+    filePath: '/'
   },
   {
     id: '010',
@@ -87,7 +96,8 @@ const list = [
     extendName: 'txt',
     src: null,
     updateTime: '2022-01-20 18:30:00',
-    isDir: false
+    isDir: false,
+    filePath: '/'
   },
   {
     id: '011',
@@ -96,7 +106,8 @@ const list = [
     extendName: '',
     src: null,
     updateTime: '2022-01-20 18:30:00',
-    isDir: false
+    isDir: false,
+    filePath: '/'
   },
   {
     id: '012',
@@ -104,7 +115,8 @@ const list = [
     name: '首页',
     extendName: 'html',
     src: null,
-    updateTime: '2022-01-20 18:30:00'
+    updateTime: '2022-01-20 18:30:00',
+    filePath: '/'
   },
   {
     id: '013',
@@ -113,7 +125,8 @@ const list = [
     extendName: 'css',
     src: null,
     updateTime: '2022-01-20 18:30:00',
-    isDir: false
+    isDir: false,
+    filePath: '/'
   },
   {
     id: '014',
@@ -122,7 +135,8 @@ const list = [
     extendName: 'js',
     src: null,
     updateTime: '2022-01-20 18:30:00',
-    isDir: false
+    isDir: false,
+    filePath: '/'
   },
   {
     id: '106',
@@ -131,7 +145,8 @@ const list = [
     extendName: 'png',
     src: 'https://img0.baidu.com/it/u=2746352008,2041591833&fm=253&fmt=auto&app=138&f=JPEG?w=360&h=360',
     updateTime: '2022-01-20 18:30:00',
-    isDir: false
+    isDir: false,
+    filePath: '/'
   },
   {
     id: '107',
@@ -140,7 +155,8 @@ const list = [
     extendName: 'png',
     src: 'https://img2.baidu.com/it/u=304294273,3088990845&fm=253&fmt=auto&app=138&f=JPEG?w=400&h=400',
     updateTime: '2022-01-20 18:30:00',
-    isDir: false
+    isDir: false,
+    filePath: '/'
   },
   {
     id: '108',
@@ -149,7 +165,8 @@ const list = [
     extendName: 'png',
     src: 'https://img0.baidu.com/it/u=3745738950,3664021749&fm=253&fmt=auto&app=138&f=JPEG?w=500&h=500',
     updateTime: '2022-01-20 18:30:00',
-    isDir: false
+    isDir: false,
+    filePath: '/'
   },
   {
     id: '109',
@@ -158,7 +175,8 @@ const list = [
     extendName: 'png',
     src: 'https://img1.baidu.com/it/u=1817951587,3188870642&fm=253&fmt=auto&app=138&f=JPEG?w=500&h=500',
     updateTime: '2022-01-20 18:30:00',
-    isDir: false
+    isDir: false,
+    filePath: '/'
   },
   {
     id: '110',
@@ -167,7 +185,8 @@ const list = [
     extendName: 'png',
     src: 'https://img0.baidu.com/it/u=2927161611,205964738&fm=253&fmt=auto&app=138&f=JPEG?w=360&h=360',
     updateTime: '2022-01-20 18:30:00',
-    isDir: false
+    isDir: false,
+    filePath: '/'
   }
 ]
 

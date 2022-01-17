@@ -31,4 +31,8 @@ export const fileImgMap = {
   other: 'file-other' // 未知文件
 }
 
+// 图片类型
 export const imageTypeList = ['jpg', 'png', 'gif', 'jpeg']
+
+// WPS、Office文件类型
+export const officeFileType = ['ppt', 'pptx', 'doc', 'docx', 'xls', 'xlsx']
