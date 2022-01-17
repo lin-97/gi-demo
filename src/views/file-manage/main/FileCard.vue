@@ -1,10 +1,11 @@
 <template>
   <div class="file-card" @click="handleClick">
     <div class="file-image">
-      <img v-if="imageTypeList.includes(data.extendName)" :src="data.src" />
-      <GiFileIcon v-else :name="fileImgMap[data.extendName]" class="svg"></GiFileIcon>
+      <FileImg :data="data"></FileImg>
+      <!-- <img v-if="imageTypeList.includes(data.extendName)" :src="data.src" />
+      <GiFileIcon v-else :name="fileImgMap[data.extendName]" class="svg"></GiFileIcon> -->
     </div>
-    <div class="file-name">{{ data.name }}.{{ data.extendName }}</div>
+    <div class="file-name">{{ data.name }}{{ data.extendName ? `.${data.extendName}` : '' }}</div>
 
     <!-- 勾选模式 -->
     <section class="check-mode" :class="{ checked: checked }" v-show="checkMode" @click.stop="handleClick">
@@ -14,6 +15,7 @@
 </template>
 
 <script setup lang="ts">
+import FileImg from './FileImg.vue'
 import { fileImgMap, imageTypeList } from '@/libs/file-map'
 
 const props = defineProps({
@@ -71,14 +73,15 @@ const handleChange = (v) => {
   }
   .file-image {
     width: 100%;
+    height: 60px;
     display: flex;
     justify-content: center;
-    img {
-      width: 50%;
+    .img {
+      width: auto;
+      height: 100%;
     }
-    .svg {
-      width: 50%;
-      height: 60px;
+    .svg-img {
+      height: 100%;
     }
   }
   .file-name {

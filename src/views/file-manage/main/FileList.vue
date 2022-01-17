@@ -5,7 +5,16 @@
         <!-- <a-table-column title="序号" width="60">
           <template #cell="{ record }">{{ record.index + 1 }}</template>
         </a-table-column> -->
-        <a-table-column title="名称" data-index="name"></a-table-column>
+        <a-table-column title="名称">
+          <template #cell="{ record }">
+            <div class="file-name">
+              <div class="file-image">
+                <FileImg :data="record"></FileImg>
+              </div>
+              <span>{{ record.name }}</span>
+            </div>
+          </template>
+        </a-table-column>
         <a-table-column title="扩展名" data-index="extendName" width="100"></a-table-column>
         <a-table-column title="更改时间" data-index="updateTime" width="200"></a-table-column>
         <!-- <a-table-column title="操作" width="230">
@@ -23,6 +32,8 @@
 </template>
 
 <script setup lang="ts">
+import FileImg from './FileImg.vue'
+
 const props = defineProps({
   // 文件数据
   data: {
@@ -37,5 +48,14 @@ const props = defineProps({
   margin-top: $margin;
   overflow: hidden;
   overflow-y: scroll;
+  .file-name {
+    display: flex;
+    align-items: center;
+    .file-image {
+      width: 30px;
+      height: 30px;
+      margin-right: 10px;
+    }
+  }
 }
 </style>
