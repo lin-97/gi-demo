@@ -40,7 +40,12 @@
       </a-space>
       <!-- 右侧区域 -->
       <a-space>
-        <a-button v-if="isBatchMode" type="primary" status="danger"
+        <a-button
+          v-if="isBatchMode"
+          :disabled="!fileStore.selectedFileIdList.length"
+          type="primary"
+          status="danger"
+          @click="handleMulDelete"
           ><template #icon><icon-delete /></template
         ></a-button>
         <a-button-group>
@@ -93,7 +98,7 @@ import { ref } from 'vue'
 import FileCard from './FileCard.vue'
 import FileList from './FileList.vue'
 import fileData from './filedata'
-import { Message } from '@arco-design/web-vue'
+import { Message, Modal } from '@arco-design/web-vue'
 import { fileTypeList } from '@/libs/file-map'
 import { useFileStore } from '@/store/file'
 
@@ -113,6 +118,15 @@ const handleClickFile = (item) => {
 // 勾选文件
 const handleCheckFile = (item) => {
   fileStore.addSelectedFileItem(item)
+}
+
+// 批量删除
+const handleMulDelete = () => {
+  Modal.warning({
+    title: '提示',
+    content: '是否确认删除？',
+    hideCancel: false
+  })
 }
 </script>
 
