@@ -3,7 +3,7 @@
     <div class="file-image">
       <FileImg :data="data"></FileImg>
     </div>
-    <div class="file-name">{{ data.name }}{{ data.extendName ? `.${data.extendName}` : '' }}</div>
+    <div class="file-name">{{ fileName }}</div>
 
     <!-- 勾选模式 -->
     <section class="check-mode" :class="{ checked: checked }" v-show="checkMode" @click.stop="handleClick">
@@ -15,6 +15,7 @@
 <script setup lang="ts">
 import FileImg from './FileImg.vue'
 import { fileImgMap, imageTypeList } from '@/libs/file-map'
+import { computed } from 'vue-demi'
 
 const props = defineProps({
   // 文件数据
@@ -34,7 +35,10 @@ const props = defineProps({
   }
 })
 
-// let fileIMg = require('../../../assets/svgs/file/files.svg')
+// 文件名称带后缀
+let fileName = computed(() => {
+  return `${props.data.name}${props.data.extendName ? `.${props.data.extendName}` : ''}`
+})
 
 const emit = defineEmits(['click', 'check'])
 
