@@ -4,7 +4,7 @@
       <img v-if="imageTypeList.includes(data.extendName)" :src="data.src" />
       <GiFileIcon v-else :name="fileImgMap[data.extendName]" class="svg"></GiFileIcon>
     </div>
-    <div class="file-name">{{ data.name }}</div>
+    <div class="file-name">{{ data.name }}.{{ data.extendName }}</div>
 
     <!-- 勾选模式 -->
     <section class="check-mode" :class="{ checked: checked }" v-show="checkMode" @click.stop="handleClick">
