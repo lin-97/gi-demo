@@ -12,12 +12,31 @@
     <a-row justify="space-between">
       <!-- 左侧区域 -->
       <a-space>
-        <a-button type="primary"><icon-upload /> 上传文件</a-button>
+        <a-dropdown>
+          <a-button type="primary"><icon-upload /> 上传</a-button>
+          <template #content>
+            <a-doption>上传文件</a-doption>
+            <a-doption>上传文件夹</a-doption>
+          </template>
+        </a-dropdown>
+
         <a-button type="primary" @click="isBatchMode = !isBatchMode"
           ><icon-select-all /> {{ isBatchMode ? '取消批量操作' : '批量操作' }}</a-button
         >
-        <a-input-search :style="{ width: '360px' }" placeholder="请输入关键词..." allow-clear search-button>
-        </a-input-search>
+        <a-input-group>
+          <a-select style="width: 120px" placeholder="请选择...">
+            <a-option v-for="item in fileTypeList" :key="item.value">
+              <component :is="item.icon" size="18" style="color: #bbb; margin-right: 5px"></component>{{ item.name }}
+            </a-option>
+          </a-select>
+          <a-input-search :style="{ width: '360px' }" placeholder="请输入关键词..." allow-clear search-button>
+            <template #append>
+              <a-button type="primary"
+                ><template #icon><icon-search /></template>查询</a-button
+              >
+            </template>
+          </a-input-search>
+        </a-input-group>
       </a-space>
       <!-- 右侧区域 -->
       <a-space>
@@ -70,6 +89,7 @@ import { ref } from 'vue'
 import FileCard from './FileCard.vue'
 import fileData from './filedata'
 import { Message } from '@arco-design/web-vue'
+import { fileTypeList } from '@/libs/file-map'
 
 let fileList = ref([])
 fileList.value = fileData
@@ -113,7 +133,7 @@ const handleCheckFile = (item) => {
     margin-top: $margin;
     overflow: hidden;
     overflow-y: scroll;
-    background: var(--color-fill-1);
+    background: var(--color-bg-4);
     display: flex;
     flex-wrap: wrap;
   }

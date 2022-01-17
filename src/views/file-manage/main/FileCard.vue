@@ -1,19 +1,21 @@
 <template>
   <div class="file-card" @click="handleClick">
     <div class="file-image">
-      <!-- <img src="../../../assets/svgs/file/files.svg" /> -->
-      <GiFileIcon name="wps" class="svg"></GiFileIcon>
+      <img v-if="imageTypeList.includes(data.extendName)" :src="data.src" />
+      <GiFileIcon v-else :name="fileImgMap[data.extendName]" class="svg"></GiFileIcon>
     </div>
     <div class="file-name">{{ data.name }}</div>
 
     <!-- 勾选模式 -->
-    <section class="check-mode" v-show="checkMode" @click.stop="handleClick">
+    <section class="check-mode" :class="{ checked: checked }" v-show="checkMode" @click.stop="handleClick">
       <a-checkbox class="checkbox" :model-value="checked" @change="handleChange"></a-checkbox>
     </section>
   </div>
 </template>
 
 <script setup lang="ts">
+import { fileImgMap, imageTypeList } from '@/libs/file-map'
+
 const props = defineProps({
   // 文件数据
   data: {
@@ -63,6 +65,7 @@ const handleChange = (v) => {
   margin-bottom: 20px;
   cursor: pointer;
   position: relative;
+  z-index: 1;
   &:hover {
     background: var(--color-primary-light-1);
   }
@@ -88,7 +91,11 @@ const handleChange = (v) => {
     right: 0;
     top: 0;
     bottom: 0;
-    background: rgba(0, 0, 0, 0.5);
+    background: rgba(0, 0, 0, 0.1);
+    z-index: 9;
+    &.checked {
+      background: none;
+    }
     .checkbox {
       position: absolute;
       top: 5px;
