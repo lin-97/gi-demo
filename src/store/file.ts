@@ -1,9 +1,13 @@
 import { defineStore } from 'pinia'
 
+type ViewMode = 1 | 2
+
 export const useFileStore = defineStore({
   id: 'File',
   state() {
     return {
+      // 视图: 1宫格模式 2列表模式
+      viewMode: 1 as ViewMode,
       // 当前批量勾选的文件列表
       selectedFileList: JSON.parse(window.sessionStorage.getItem('FILE_LIST')) || []
     }
@@ -15,6 +19,10 @@ export const useFileStore = defineStore({
     }
   },
   actions: {
+    // 设置视图模式
+    setViewMode(value: ViewMode) {
+      this.viewMode = value
+    },
     // 添加选中的文件到文件勾选列表
     addSelectedFileItem(item) {
       if (this.selectedFileIdList.includes(item.id)) {

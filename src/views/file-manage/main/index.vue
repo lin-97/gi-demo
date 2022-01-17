@@ -59,9 +59,10 @@
             </a-button>
           </a-tooltip>
           <a-tooltip content="视图" position="bottom">
-            <a-button>
+            <a-button @click="file.setViewMode(file.viewMode == 1 ? 2 : 1)">
               <template #icon>
-                <icon-apps />
+                <icon-apps v-if="file.viewMode == 1" />
+                <icon-list v-else />
               </template>
             </a-button>
           </a-tooltip>
@@ -69,8 +70,8 @@
       </a-space>
     </a-row>
 
-    <!-- 文件列表区域 -->
-    <section class="file-wrap">
+    <!-- 文件列表-宫格模式 -->
+    <section class="file-wrap" v-if="file.viewMode == 1">
       <FileCard
         v-for="item in fileList"
         :key="item.id"
@@ -81,12 +82,16 @@
         @check="handleCheckFile(item)"
       ></FileCard>
     </section>
+
+    <!-- 文件列表-列表模式 -->
+    <FileList :data="fileList" v-if="file.viewMode == 2"></FileList>
   </div>
 </template>
 
 <script setup lang="ts">
 import { ref } from 'vue'
 import FileCard from './FileCard.vue'
+import FileList from './FileList.vue'
 import fileData from './filedata'
 import { Message } from '@arco-design/web-vue'
 import { fileTypeList } from '@/libs/file-map'
@@ -122,7 +127,7 @@ const handleCheckFile = (item) => {
   flex-direction: column;
   overflow: hidden;
   .nav-path {
-    margin-bottom: $margin;
+    margin-bottom: 20px;
   }
   .file-wrap {
     flex: 1;
