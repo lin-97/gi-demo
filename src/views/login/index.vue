@@ -6,7 +6,7 @@
         <img class="bg" src="../../assets/images/login-bg.png" />
         <div class="system">
           <img src="../../assets/images/system-logo.png" class="system-logo" />
-          <div class="system-name"><span>GI</span><span>管理系统</span></div>
+          <div class="system-name"><span>Admin</span><span>管理系统</span></div>
         </div>
       </div>
       <!-- 右侧 -->

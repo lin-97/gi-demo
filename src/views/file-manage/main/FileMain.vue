@@ -1,13 +1,7 @@
 <template>
   <div class="file-main">
     <!-- 面包屑导航 -->
-    <div class="nav-path">
-      <a-breadcrumb>
-        <a-breadcrumb-item>全部</a-breadcrumb-item>
-        <a-breadcrumb-item>文件夹1</a-breadcrumb-item>
-        <a-breadcrumb-item>分类</a-breadcrumb-item>
-      </a-breadcrumb>
-    </div>
+    <FileNavPath></FileNavPath>
 
     <a-row justify="space-between">
       <!-- 左侧区域 -->
@@ -95,6 +89,7 @@
 
 <script setup lang="ts">
 import { ref } from 'vue'
+import FileNavPath from './FileNavPath.vue'
 import FileCard from './FileCard.vue'
 import FileList from './FileList.vue'
 import fileData from './filedata'
@@ -140,9 +135,6 @@ const handleMulDelete = () => {
   display: flex;
   flex-direction: column;
   overflow: hidden;
-  .nav-path {
-    margin-bottom: 20px;
-  }
   .file-wrap {
     flex: 1;
     margin-top: $margin;

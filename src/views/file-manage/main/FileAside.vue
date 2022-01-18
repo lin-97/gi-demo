@@ -1,12 +1,12 @@
 <template>
   <div class="file-aside">
     <a-menu :style="{ width: '250px', height: '100%' }" :default-open-keys="['0']" :default-selected-keys="['0_0']">
-      <a-menu-item key="0_0_0" data-obj="1">文件管理</a-menu-item>
+      <div class="title">文件管理</div>
       <a-sub-menu key="0">
         <template #icon><icon-apps></icon-apps></template>
         <template #title>文件类型</template>
         <a-menu-item key="0_0">
-          <template #icon><GiSvgIcon class="icon" name="file-dir"></GiSvgIcon></template>
+          <template #icon><GiSvgIcon class="icon" name="menu-file"></GiSvgIcon></template>
           全部</a-menu-item
         >
         <a-menu-item key="0_1"
@@ -38,6 +38,15 @@
   .icon {
     width: 28px;
     height: 28px;
+  }
+  .title {
+    height: 40px;
+    display: flex;
+    align-items: center;
+    padding-left: 12px;
+    font-size: 14px;
+    border-bottom: 1px solid var(--color-border-2);
+    margin-bottom: 10px;
   }
 }
 </style>
