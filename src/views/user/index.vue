@@ -37,6 +37,10 @@ import UserSet from './UserSet.vue'
   }
 }
 .user {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
   .head {
     height: 204px;
     background-color: rgb(var(--arcoblue-6));

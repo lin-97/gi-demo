@@ -8,10 +8,10 @@
       </a-menu-item>
     </a-menu>
     <!-- trigger -->
-    <template #trigger="{ collapsed }">
+    <!-- <template #trigger="{ collapsed }">
       <IconCaretRight v-if="collapsed" />
       <IconCaretLeft v-else />
-    </template>
+    </template> -->
   </a-layout-sider>
 </template>
 
@@ -31,6 +31,21 @@ const handleClickItem = (item: MenuItem) => {
 </script>
 
 <style lang="scss" scoped>
+:deep(.arco-menu.arco-menu-vertical.arco-menu-collapsed) {
+  // Menu菜单组件修改
+  .arco-menu-icon {
+    margin-right: 0;
+  }
+  .arco-menu-has-icon {
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .arco-menu-title {
+    display: none;
+  }
+}
 .gi-aside {
   z-index: 999;
   .menu-icon {

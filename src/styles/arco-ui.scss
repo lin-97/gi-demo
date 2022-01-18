@@ -6,6 +6,13 @@
   }
 }
 
+// 禁止文本复制
+.arco-menu-title,
+.arco-menu-item-inner {
+  user-select: none;
+}
+
+// Modal对话框修改
 .arco-modal {
   .arco-modal-header {
     .arco-modal-title {

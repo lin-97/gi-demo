@@ -1,11 +1,17 @@
 <template>
   <div class="user-set">
     <section class="menu">
-      <a-menu :style="{ width: '200px', borderRadius: '4px' }">
-        <a-menu-item key="0_0">个人信息</a-menu-item>
-        <a-menu-item key="0_1">账号设置</a-menu-item>
-        <a-menu-item key="0_2">密码</a-menu-item>
-        <a-menu-item key="0_3">消息通知</a-menu-item>
+      <a-menu
+        :default-open-keys="['0']"
+        :default-selected-keys="['0_0']"
+        :style="{ width: '200px', borderRadius: '4px' }"
+      >
+        <a-sub-menu key="0">
+          <a-menu-item key="0_0">个人信息</a-menu-item>
+          <a-menu-item key="0_1">账号设置</a-menu-item>
+          <a-menu-item key="0_2">密码</a-menu-item>
+          <a-menu-item key="0_3">消息通知</a-menu-item>
+        </a-sub-menu>
       </a-menu>
     </section>
     <section class="form">
@@ -19,10 +25,10 @@
           </a-avatar>
         </a-form-item>
         <a-form-item field="name" label="用户名">
-          <a-input v-model="form.name" style="width: 360px" />
+          <a-input v-model="form.name" style="width: 280px" />
         </a-form-item>
         <a-form-item field="map" label="办公地址">
-          <a-select v-model="form.map" style="width: 360px">
+          <a-select v-model="form.map" style="width: 280px">
             <a-option value="a">广州</a-option>
             <a-option value="b">深圳</a-option>
             <a-option value="c">上海</a-option>
@@ -30,7 +36,7 @@
           </a-select>
         </a-form-item>
         <a-form-item field="desc" label="个人简介">
-          <a-textarea v-model="form.desc" allow-clear style="width: 360px" />
+          <a-textarea v-model="form.desc" allow-clear style="width: 280px" />
         </a-form-item>
         <a-form-item>
           <a-space>
@@ -58,9 +64,11 @@ const form = reactive({
 //   background-color: rgb(var(--primary-6));
 // }
 .user-set {
+  flex: 1;
   margin: $margin;
   display: flex;
   background: var(--color-bg-2);
+  overflow: hidden;
   .menu {
     border-right: 1px solid var(--color-border-2);
   }
