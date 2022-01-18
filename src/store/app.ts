@@ -19,37 +19,37 @@ export const useAppStore = defineStore({
       activePath: (JSON.parse(window.localStorage.getItem('ActivePath')) || '/home') as string, // 当前激活的路径
       menuList: [
         {
-          icon: 'IconRobot',
+          icon: 'menu-work',
           id: 'GZT',
           name: '工作台',
           path: '/home'
         },
         {
-          icon: 'IconCopyright',
+          icon: 'menu-indicator',
           id: 'ZBGL',
           name: '指标管理',
           path: '/indicator-manage'
         },
         {
-          icon: 'IconCopyright',
+          icon: 'menu-file',
           id: 'WJGL',
           name: '文件管理',
           path: '/file-manage'
         },
         {
-          icon: 'IconSettings',
+          icon: 'menu-user',
           id: 'ZBGL',
           name: '个人中心',
           path: '/user'
         },
         {
-          icon: 'IconSettings',
+          icon: 'menu-page',
           id: 'P404',
           name: '404页',
           path: '/404'
         },
         {
-          icon: 'IconSettings',
+          icon: 'menu-test',
           id: 'TEST',
           name: '测试',
           path: '/test'

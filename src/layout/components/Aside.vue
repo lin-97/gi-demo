@@ -1,9 +1,9 @@
 <template>
   <a-layout-sider collapsible breakpoint="xl" class="gi-aside">
     <div class="logo" />
-    <a-menu :defaultSelectedKeys="[app.activePath]" :style="{ width: '100%', height: '100%' }">
+    <a-menu :selected-keys="[app.activePath]" :style="{ width: '100%', height: '100%' }">
       <a-menu-item v-for="item in app.menuList" :key="item.path" @click="handleClickItem(item)">
-        <component :is="item.icon"></component>
+        <template #icon><GiSvgIcon class="menu-icon" :name="item.icon"></GiSvgIcon></template>
         {{ item.name }}
       </a-menu-item>
     </a-menu>
@@ -25,7 +25,7 @@ const router = useRouter()
 const app = useAppStore()
 
 const handleClickItem = (item: MenuItem) => {
-  app.setActivePath('item.path')
+  app.setActivePath(item.path)
   router.push(item.path)
 }
 </script>
@@ -33,5 +33,9 @@ const handleClickItem = (item: MenuItem) => {
 <style lang="scss" scoped>
 .gi-aside {
   z-index: 999;
+  .menu-icon {
+    width: 24px;
+    height: 24px;
+  }
 }
 </style>

@@ -1,3 +1,11 @@
+.arco-btn.arco-btn-status-normal.arco-btn-secondary:not(.arco-btn-only-icon) {
+  background: none;
+  border: 1px solid var(--color-border-3);
+  &:active {
+    background: var(--color-secondary-hover);
+  }
+}
+
 .arco-modal {
   .arco-modal-header {
     .arco-modal-title {
