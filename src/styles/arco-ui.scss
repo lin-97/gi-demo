@@ -1,3 +1,9 @@
+body {
+  --border-radius-small: 4px;
+  --border-radius-medium: 6px;
+  --border-radius-large: 8px;
+}
+
 .arco-btn.arco-btn-status-normal.arco-btn-secondary:not(.arco-btn-only-icon) {
   background: none;
   border: 1px solid var(--color-border-3);
@@ -13,6 +19,14 @@
 }
 
 // Modal对话框修改
+.arco-modal-title .arco-icon-exclamation-circle-fill {
+  font-size: 24px;
+}
+.arco-modal-title-icon {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 .arco-modal {
   .arco-modal-header {
     .arco-modal-title {
