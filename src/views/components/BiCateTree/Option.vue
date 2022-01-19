@@ -13,7 +13,7 @@
   flex-direction: column;
   justify-content: center;
   box-sizing: border-box;
-  background: var(--color-bg-2);
+  background: var(--color-bg-popup);
   position: relative;
 }
 </style>

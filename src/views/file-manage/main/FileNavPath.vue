@@ -1,19 +1,19 @@
 <template>
   <div class="file-nav-path">
-    <a-input ref="inputRef" v-show="isShowInput" placeholder="请输入路径" allow-clear @blur="onBlur" />
+    <a-input ref="inputRef" v-show="isShowInput" size="medium" placeholder="请输入路径" allow-clear @blur="onBlur" />
 
-    <section @click="onNavBar">
-      <a-breadcrumb v-show="!isShowInput">
-        <a-breadcrumb-item>全部</a-breadcrumb-item>
-        <a-breadcrumb-item>文件夹1</a-breadcrumb-item>
-        <a-breadcrumb-item>分类</a-breadcrumb-item>
+    <section class="path" @click="onNavBar" v-show="!isShowInput">
+      <a-breadcrumb>
+        <a-breadcrumb-item><span class="path-item">全部</span></a-breadcrumb-item>
+        <a-breadcrumb-item><span class="path-item">文件夹1</span></a-breadcrumb-item>
+        <a-breadcrumb-item><span class="path-item">分类</span></a-breadcrumb-item>
       </a-breadcrumb>
     </section>
   </div>
 </template>
 
 <script setup lang="ts">
-import { nextTick, ref } from 'vue-demi'
+import { nextTick, ref } from 'vue'
 
 let isShowInput = ref(false)
 let inputRef = ref(null)
@@ -21,7 +21,7 @@ let inputRef = ref(null)
 const onNavBar = () => {
   isShowInput.value = true
   nextTick(() => {
-    inputRef.focus()
+    inputRef.value.focus()
   })
 }
 
@@ -32,6 +32,24 @@ const onBlur = () => {
 
 <style lang="scss" scoped>
 .file-nav-path {
-  margin-bottom: 20px;
+  margin-bottom: 14px;
+  .path {
+    height: 32px;
+    display: flex;
+    align-items: center;
+    border-radius: var(--border-radius-small);
+    cursor: pointer;
+    &:hover {
+      background: var(--color-secondary-hover);
+    }
+    .path-item {
+      transition: all 0.15s ease-in;
+      &:hover {
+        color: rgba(var(--primary-6));
+        font-size: 1.1em;
+        font-weight: bold;
+      }
+    }
+  }
 }
 </style>
