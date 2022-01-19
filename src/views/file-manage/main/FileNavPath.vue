@@ -2,7 +2,7 @@
   <div class="file-nav-path">
     <a-input ref="inputRef" v-show="isShowInput" size="medium" placeholder="请输入路径" allow-clear @blur="onBlur" />
 
-    <section class="path" @click="onNavBar" v-show="!isShowInput">
+    <section class="path" @click.self="onNavBar" v-show="!isShowInput">
       <a-breadcrumb>
         <a-breadcrumb-item><span class="path-item">全部</span></a-breadcrumb-item>
         <a-breadcrumb-item><span class="path-item">文件夹1</span></a-breadcrumb-item>
