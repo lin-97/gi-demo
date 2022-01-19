@@ -1,6 +1,10 @@
 <template>
   <div class="file-aside">
-    <a-menu :style="{ width: '250px', height: '100%' }" :default-open-keys="['0']" :default-selected-keys="['0_0']">
+    <a-menu
+      :style="{ width: '250px', height: '100%', 'border-radius': '2px' }"
+      :default-open-keys="['0']"
+      :default-selected-keys="['0_0']"
+    >
       <div class="title">文件管理</div>
       <a-sub-menu key="0">
         <template #icon><icon-apps></icon-apps></template>
