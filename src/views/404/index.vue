@@ -65,6 +65,10 @@ const onCountDownTime = () => {
 
 .container {
   width: 30%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 10%;
   .pic-box {
     width: 100%;
     position: relative;
@@ -177,11 +181,9 @@ const onCountDownTime = () => {
     }
   }
   .tip-box {
-    position: relative;
-    float: left;
-    width: 300px;
-    padding: 30px 0;
-    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     .oops {
       margin-bottom: 20px;
       font-size: 32px;

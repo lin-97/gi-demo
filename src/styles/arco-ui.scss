@@ -96,3 +96,10 @@ body {
   width: 12px;
   font-weight: 200;
 }
+
+.arco-input-wrapper,
+.arco-select-view-single,
+.arco-textarea-wrapper {
+  background: none;
+  border: 1px solid var(--color-border-3);
+}
