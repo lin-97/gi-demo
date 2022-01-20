@@ -18,7 +18,7 @@ import { ref } from 'vue'
 export default {
   name: 'GiLoading',
   setup() {
-    let loadingText = ref('加载中...')
+    let loadingText = ref('')
     // 设置加载文本
     function setLoadingText(value) {
       loadingText.value = value
@@ -30,11 +30,14 @@ export default {
     }
   }
 }
-
-// 加载文本
 </script>
 
 <style lang="scss" scoped>
+body[arco-theme='dark'] {
+  .gi-loading {
+    background: rgba(0, 0, 0, 0.7);
+  }
+}
 .gi-loading {
   width: 100%;
   height: 100%;

@@ -13,6 +13,8 @@ import { isObject } from '@/utils/common'
  *     modifiers 一个包含修饰符的对象
  */
 
+const name = Loading.name // 组件名(实例key)
+
 function addClass(el, className: string) {
   if (!el.classList.contains(className)) {
     el.classList.add(className)
@@ -24,7 +26,6 @@ function removeClass(el, className: string) {
 }
 
 function append(el) {
-  const name = Loading.name
   if (el.style.position !== 'relative') {
     addClass(el, 'gi_relative')
   }
@@ -32,7 +33,6 @@ function append(el) {
 }
 
 function remove(el) {
-  const name = Loading.name
   removeClass(el, 'gi_relative')
   el.removeChild(el[name].instance.$el)
 }
@@ -58,7 +58,6 @@ const loadingObj = {
     if (binding.arg && isObject(binding.arg) && binding.arg.title) {
       instance.setLoadingText(binding.arg.title)
     }
-    const name = Loading.name
     if (!el[name]) {
       el[name] = {}
     }
@@ -71,7 +70,6 @@ const loadingObj = {
   beforeUpdate(el, binding) {},
   // 在包含组件的 VNode 及其子组件的 VNode 更新后调用
   updated(el, binding) {
-    const name = Loading.name
     if (!el[name]) {
       el[name] = {}
     }
