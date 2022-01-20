@@ -26,7 +26,7 @@ function removeClass(el, className: string) {
 }
 
 function append(el) {
-  if (el.style.position !== 'relative') {
+  if (!['relative', 'absolute', 'fixed'].includes(el.style.position)) {
     addClass(el, 'gi_relative')
   }
   el.appendChild(el[name].instance.$el)
