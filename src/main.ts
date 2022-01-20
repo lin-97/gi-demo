@@ -13,12 +13,12 @@ import '@/styles/index.scss' // 导入scss主文件
 // import clickOutside from '@/directives/clickoutside'
 
 import GiSvgIcon from '@/components/GiSvgIcon.vue'
-// import loading from '@/directives/loading/index'
+import loading from '@/directives/v-loading/index'
 
 const app = createApp(App)
 app.component('GiSvgIcon', GiSvgIcon)
 // app.directive('clickoutside', clickOutside)
-// app.directive('loading', loading).mount('#app')
+app.directive('loading', loading)
 
 app.directive('clickoutside', {
   // 初始化指令

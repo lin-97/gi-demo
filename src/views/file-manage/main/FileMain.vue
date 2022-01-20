@@ -44,7 +44,7 @@
         ></a-button>
         <a-button-group>
           <a-tooltip content="传输列表" position="bottom">
-            <a-button>
+            <a-button @click="showLoading = !showLoading">
               <template #icon>
                 <icon-swap />
               </template>
@@ -70,7 +70,7 @@
     </a-row>
 
     <!-- 文件列表-宫格模式 -->
-    <section class="file-wrap" v-if="fileStore.viewMode == 1">
+    <section class="file-wrap" v-if="fileStore.viewMode == 1" v-loading:[loadingText]="showLoading">
       <FileCard
         v-for="item in fileList"
         :key="item.id"
@@ -98,6 +98,9 @@ import { fileTypeList } from '@/libs/file-map'
 import { useFileStore } from '@/store/file'
 
 const fileStore = useFileStore()
+
+let loadingText = ref('等待中...')
+let showLoading = ref(false)
 
 let fileList = ref([])
 fileList.value = fileData

@@ -17,6 +17,14 @@
   padding: $padding;
 }
 
+.gi_relative {
+  position: relative;
+}
+
+.gi_absolute {
+  position: absolute;
+}
+
 // 通用盒子
 .gi_box {
   background: $border-color;
