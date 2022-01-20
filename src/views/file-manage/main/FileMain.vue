@@ -131,9 +131,7 @@ const handleMulDelete = () => {
 const handleFilter = () => {
   testComp({
     title: '这是传进来的title',
-    onClose() {
-      console.log('close')
-    }
+    content: '哈哈哈哈'
   })
 }
 </script>

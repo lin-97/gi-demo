@@ -1,10 +1,7 @@
 <template>
-  <a-modal :visible="visible" @cancel="handleCancel">
+  <a-modal v-model:visible="visible" @cancel="onCancel">
     <template #title> {{ title }} </template>
-    <div>
-      You can cusstomize modal body text by the current situation. This modal will be closed immediately once you press
-      the OK button.
-    </div>
+    <div>{{ content }}</div>
   </a-modal>
 </template>
 
@@ -12,19 +9,18 @@
 import { defineComponent, ref } from 'vue'
 export default defineComponent({
   props: {
-    title: String
+    title: String,
+    content: String,
+    onCancel: Function
   },
   setup() {
     const visible = ref(true)
-    function handleCancel() {}
-
-    function setShow(v) {
-      visible.value = v
+    const close = () => {
+      visible.value = false
     }
     return {
       visible,
-      setShow,
-      handleCancel
+      close
     }
   }
 })
