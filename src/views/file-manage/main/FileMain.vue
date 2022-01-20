@@ -51,7 +51,7 @@
             </a-button>
           </a-tooltip>
           <a-tooltip content="排序" position="bottom">
-            <a-button>
+            <a-button @click="handleFilter">
               <template #icon>
                 <icon-filter />
               </template>
@@ -96,6 +96,7 @@ import fileData from './filedata'
 import { Message, Modal } from '@arco-design/web-vue'
 import { fileTypeList } from '@/libs/file-map'
 import { useFileStore } from '@/store/file'
+import testComp from './FileContextMenu/index'
 
 const fileStore = useFileStore()
 
@@ -124,6 +125,15 @@ const handleMulDelete = () => {
     title: '提示',
     content: '是否确认删除？',
     hideCancel: false
+  })
+}
+
+const handleFilter = () => {
+  testComp({
+    title: '这是传进来的title',
+    onClose() {
+      console.log('close')
+    }
   })
 }
 </script>

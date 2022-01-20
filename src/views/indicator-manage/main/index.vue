@@ -52,7 +52,7 @@
 
         <a-table
           :data="tableData"
-          :loading="showLoading"
+          v-loading="showLoading"
           :scroll="{ x: 1000, y: 600 }"
           :pagination="{ 'show-page-size': true }"
         >

@@ -13,7 +13,7 @@ import { isObject } from '@/utils/common'
  *     modifiers 一个包含修饰符的对象
  */
 
-const name = Loading.name // 组件名(实例key)
+const name: string = Loading.name // 组件名(实例key)
 
 function addClass(el, className: string) {
   if (!el.classList.contains(className)) {
