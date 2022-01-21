@@ -79,6 +79,7 @@
         :checked="fileStore.selectedFileIdList.includes(item.id)"
         @click="handleClickFile(item)"
         @check="handleCheckFile(item)"
+        @contextmenu="handleContextMenu"
       ></FileCard>
     </section>
 
@@ -88,7 +89,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
+import { reactive, ref } from 'vue'
 import FileNavPath from './FileNavPath.vue'
 import FileCard from './FileCard.vue'
 import FileList from './FileList.vue'
@@ -96,7 +97,7 @@ import fileData from './filedata'
 import { Message, Modal } from '@arco-design/web-vue'
 import { fileTypeList } from '@/libs/file-map'
 import { useFileStore } from '@/store/file'
-import testComp from './FileContextMenu/index'
+import FileContextMenu from './FileContextMenu/index'
 
 const fileStore = useFileStore()
 
@@ -119,19 +120,19 @@ const handleCheckFile = (item) => {
   fileStore.addSelectedFileItem(item)
 }
 
+// 鼠标右键
+const handleContextMenu = (e, fileItem) => {
+  FileContextMenu(e, fileItem).then((res) => {
+    console.log('右键点击选项', res)
+  })
+}
+
 // 批量删除
 const handleMulDelete = () => {
   Modal.warning({
     title: '提示',
     content: '是否确认删除？',
     hideCancel: false
-  })
-}
-
-const handleFilter = () => {
-  testComp({
-    title: '这是传进来的title',
-    content: '哈哈哈哈'
   })
 }
 </script>

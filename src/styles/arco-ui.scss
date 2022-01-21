@@ -101,6 +101,6 @@ body {
 .arco-select-view-single,
 .arco-select-view-multiple,
 .arco-textarea-wrapper {
-  background: none;
+  background: var(--color-bg-4);
   border: 1px solid var(--color-border-3);
 }

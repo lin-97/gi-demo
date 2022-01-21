@@ -1,5 +1,5 @@
 <template>
-  <div class="file-card" @click="handleClick">
+  <div class="file-card" @click="handleClick" @contextmenu="handleContextmenu">
     <div class="file-image">
       <FileImg :data="data"></FileImg>
     </div>
@@ -40,8 +40,9 @@ let fileName = computed(() => {
   return `${props.data.name}${props.data.extendName ? `.${props.data.extendName}` : ''}`
 })
 
-const emit = defineEmits(['click', 'check'])
+const emit = defineEmits(['click', 'check', 'contextmenu'])
 
+// 点击事件
 const handleClick = () => {
   console.log('点击了')
   if (props.checkMode) {
@@ -49,6 +50,13 @@ const handleClick = () => {
   } else {
     emit('click', props.data)
   }
+}
+
+// 鼠标右键事件
+const handleContextmenu = (e) => {
+  // console.log('右键', e)
+  e.preventDefault()
+  emit('contextmenu', e, props.data)
 }
 
 const handleChange = (v) => {
