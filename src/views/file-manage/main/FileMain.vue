@@ -14,7 +14,7 @@
           </template>
         </a-dropdown>
 
-        <a-button type="primary" :status="isBatchMode ? 'warning' : ''" @click="isBatchMode = !isBatchMode"
+        <a-button type="primary" @click="isBatchMode = !isBatchMode"
           ><icon-select-all /> {{ isBatchMode ? '取消批量操作' : '批量操作' }}</a-button
         >
         <a-input-group>
@@ -24,11 +24,10 @@
             </a-option>
           </a-select>
           <a-input-search :style="{ width: '360px' }" placeholder="请输入关键词..." allow-clear search-button>
-            <template #append>
-              <a-button type="primary"
-                ><template #icon><icon-search /></template>查询</a-button
-              >
+            <template #button-icon>
+              <icon-search />
             </template>
+            <template #button-default> 查询 </template>
           </a-input-search>
         </a-input-group>
       </a-space>

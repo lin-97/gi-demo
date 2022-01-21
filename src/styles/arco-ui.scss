@@ -1,16 +1,16 @@
 body {
-  --border-radius-small: 4px;
-  --border-radius-medium: 6px;
-  --border-radius-large: 8px;
+  // --border-radius-small: 4px;
+  // --border-radius-medium: 6px;
+  // --border-radius-large: 8px;
 }
 
-.arco-btn.arco-btn-status-normal.arco-btn-secondary:not(.arco-btn-only-icon) {
-  background: none;
-  border: 1px solid var(--color-border-3);
-  &:active {
-    background: var(--color-secondary-hover);
-  }
-}
+// .arco-btn.arco-btn-status-normal.arco-btn-secondary:not(.arco-btn-only-icon) {
+//   background: none;
+//   border: 1px solid var(--color-border-3);
+//   &:active {
+//     background: var(--color-secondary-hover);
+//   }
+// }
 
 // 禁止文本复制
 .arco-menu-title,
@@ -85,22 +85,4 @@ body {
   left: -1px;
   width: 16px;
   height: 16px;
-}
-
-.arco-checkbox-icon {
-  width: 16px;
-  height: 16px;
-  border: 1px solid var(--color-fill-3);
-}
-.arco-checkbox-icon-check {
-  width: 12px;
-  font-weight: 200;
-}
-
-.arco-input-wrapper,
-.arco-select-view-single,
-.arco-select-view-multiple,
-.arco-textarea-wrapper {
-  background: var(--color-bg-4);
-  border: 1px solid var(--color-border-3);
 }
