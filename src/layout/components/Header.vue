@@ -14,7 +14,7 @@
       <GiFullScreenIcon class="gi_hover"></GiFullScreenIcon>
 
       <!-- 暗黑模式切换 -->
-      <a-button size="mini" @click="changeTheme">
+      <a-button class="switch-theme-btn" size="mini" @click="changeTheme">
         <template #icon>
           <icon-sun-fill :size="18" v-if="app.ThemeMode === 'light'" />
           <icon-moon-fill :size="18" v-else />
@@ -158,6 +158,16 @@ const logout = () => {
   }
   .username {
     color: var(--color-text-2);
+  }
+
+  .switch-theme-btn {
+    border: 0;
+    &:hover {
+      background: var(--color-secondary-hover);
+    }
+    &:active {
+      background: var(--color-secondary-active);
+    }
   }
 }
 </style>
