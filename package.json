@@ -7,7 +7,7 @@
     "serve": "vite preview"
   },
   "dependencies": {
-    "@arco-themes/vue-demo": "0.0.4",
+    "@arco-themes/vue-demo": "0.0.6",
     "axios": "^0.24.0",
     "clipboard": "^2.0.8",
     "echarts": "^5.2.2",
