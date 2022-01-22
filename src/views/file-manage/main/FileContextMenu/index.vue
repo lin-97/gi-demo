@@ -7,7 +7,9 @@
         <OptionItem icon="icon-copy" @click="handleClickMenuItem('copy')">复制</OptionItem>
         <OptionItem icon="icon-download" @click="handleClickMenuItem('download')">下载</OptionItem>
         <a-popover position="right" :content-style="{ padding: 0, overflow: 'hidden' }">
-          <OptionItem icon="icon-download" @click="handleClickMenuItem('zip')">解压</OptionItem>
+          <OptionItem icon="icon-layers" @click="handleClickMenuItem('zip')" v-if="fileInfo.extendName === 'zip'"
+            >解压</OptionItem
+          >
           <template #content>
             <Option>
               <OptionItem icon="icon-download" @click="handleClickMenuItem('zip1')">解压1</OptionItem>
