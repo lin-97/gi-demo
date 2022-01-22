@@ -53,7 +53,7 @@
         <a-table
           :data="tableData"
           v-loading="showLoading"
-          :scroll="{ x: 1000, y: 600 }"
+          :scroll="{ x: 1000, y: '62vh' }"
           :pagination="{ 'show-page-size': true }"
         >
           <template #columns>
