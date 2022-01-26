@@ -1,12 +1,6 @@
 <template>
-  <transition :name="transitionName">
-    <div
-      class="gi-content-menu"
-      ref="contentMenuRef"
-      :style="contentMenuStyle"
-      v-show="getShow"
-      v-clickoutside="handleClose"
-    >
+  <transition name="slide-dynamic-origin">
+    <div class="gi-context-menu" ref="contextMenuRef" :style="contextMenuStyle" v-show="getShow">
       <slot></slot>
     </div>
   </transition>
@@ -14,31 +8,34 @@
 
 <script setup lang="ts">
 import { reactive, ref, watch, nextTick, computed } from 'vue'
+import { onClickOutside } from '@vueuse/core'
+
 const props = defineProps({
   // 绑定的值
   modelValue: {
     type: Boolean,
     default: false
   },
+  // 坐标
   axis: {
     type: Object,
-    default: () => {}
+    default: () => ({ x: 0, y: 0 })
   },
+  // 宽度
   width: {
     type: String,
     default: 'auto'
   },
+  // 高度
   height: {
     type: String,
     default: 'auto'
   }
 })
 
-let transitionName = ref('slide-dynamic-origin')
-const contentMenuHeight = ref(0)
-let contentMenuStyle = ref({})
-
-let contentMenuRef = ref(null)
+const contextMenuHeight = ref(0)
+let contextMenuStyle = ref({})
+let contextMenuRef = ref(null)
 
 const emit = defineEmits(['update:modelValue'])
 
@@ -53,12 +50,11 @@ let getShow = computed({
 
 const getStyle = () => {
   const obj = {}
-  console.log('props.axis.y', props.axis.y)
-  console.log('window.innerHeight', window.innerHeight)
-  console.log('contentMenuHeight', contentMenuHeight.value)
-
+  // console.log('props.axis.y', props.axis.y)
+  // console.log('window.innerHeight', window.innerHeight)
+  // console.log('contextMenuHeight', contextMenuHeight.value)
   obj.left = props.axis.x + 2 + 'px'
-  if (props.axis.y > window.innerHeight - contentMenuHeight.value) {
+  if (props.axis.y > window.innerHeight - contextMenuHeight.value) {
     obj.bottom = window.innerHeight - props.axis.y + 'px'
     obj['transform-origin'] = 'center bottom'
   } else {
@@ -68,7 +64,7 @@ const getStyle = () => {
   obj.width = props.width
   obj.height = props.height
   obj['z-index'] = 999
-  contentMenuStyle.value = obj
+  contextMenuStyle.value = obj
 }
 
 watch(props.axis, () => {
@@ -76,19 +72,25 @@ watch(props.axis, () => {
   setTimeout(() => {
     getShow.value = true
     nextTick(() => {
-      contentMenuHeight.value = contentMenuRef.value.offsetHeight
+      contextMenuHeight.value = contextMenuRef.value.offsetHeight
       getStyle()
     })
   }, 300)
 })
 
+// 关闭弹框
 const handleClose = () => {
   emit('update:modelValue', false)
 }
+
+// 检测在一个元素之外的任何点击
+onClickOutside(contextMenuRef, () => {
+  handleClose()
+})
 </script>
 
 <style lang="scss" scoped>
-.gi-content-menu {
+.gi-context-menu {
   // background: #fff;
   position: fixed;
   z-index: -999;
