@@ -2,7 +2,7 @@
   <a-layout-header>
     <section class="system-logo" @click="toHome">
       <img src="@/assets/logo.png" />
-      <span class="gi_hover">{{ app.systemName }}</span>
+      <span class="gi_hover">{{ app.SystemName }}</span>
     </section>
     <a-space class="system-head" size="medium">
       <!-- 消息通知 -->
@@ -11,15 +11,10 @@
       </a-tooltip>
 
       <!-- 全屏切换组件 -->
-      <GiFullScreenIcon class="gi_hover"></GiFullScreenIcon>
+      <GiFullScreenBtn class="gi_hover"></GiFullScreenBtn>
 
       <!-- 暗黑模式切换 -->
-      <a-button class="switch-theme-btn" size="mini" @click="changeTheme">
-        <template #icon>
-          <icon-sun-fill :size="18" v-if="app.ThemeMode === 'light'" />
-          <icon-moon-fill :size="18" v-else />
-        </template>
-      </a-button>
+      <GiSwitchThemeBtn></GiSwitchThemeBtn>
 
       <!-- 管理员头像 -->
       <a-avatar :size="32">
@@ -55,35 +50,13 @@
 import { computed, onMounted, ref } from 'vue'
 import { Modal } from '@arco-design/web-vue'
 import { useRouter } from 'vue-router'
-import { useStore } from 'vuex'
-import GiFullScreenIcon from '@/components/GiFullScreenIcon.vue'
+import GiFullScreenBtn from '@/components/GiFullScreenBtn.vue'
+import GiSwitchThemeBtn from '@/components/GiSwitchThemeBtn.vue'
 import { useAppStore } from '@/store/app'
 import { useUserStore } from '@/store/user'
 const router = useRouter()
 const app = useAppStore()
 const user = useUserStore()
-
-// 暗黑模式切换
-const changeTheme = () => {
-  // let theme = document.body.getAttribute('arco-theme')
-  if (app.ThemeMode === 'light') {
-    app.setThemeMode('dark')
-    document.body.setAttribute('arco-theme', 'dark')
-  } else {
-    app.setThemeMode('light')
-    document.body.removeAttribute('arco-theme')
-  }
-}
-
-// 初始化主题
-const initTheme = () => {
-  if (app.ThemeMode === 'dark') {
-    document.body.setAttribute('arco-theme', 'dark')
-  } else {
-    document.body.removeAttribute('arco-theme')
-  }
-}
-initTheme()
 
 // 跳转首页
 const toHome = () => {
@@ -158,16 +131,6 @@ const logout = () => {
   }
   .username {
     color: var(--color-text-2);
-  }
-
-  .switch-theme-btn {
-    border: 0;
-    &:hover {
-      background: var(--color-secondary-hover);
-    }
-    &:active {
-      background: var(--color-secondary-active);
-    }
   }
 }
 </style>

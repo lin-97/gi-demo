@@ -11,7 +11,8 @@ export default defineConfig({
   resolve: {
     alias: {
       '@': path.resolve(__dirname, 'src'),
-      _c: path.resolve(__dirname, 'src/components')
+      _c: path.resolve(__dirname, 'src/components'),
+      _vc: path.resolve(__dirname, 'src/views/components')
     }
   },
   // 引入sass全局样式变量

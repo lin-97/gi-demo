@@ -15,11 +15,9 @@ export const useUserStore = defineStore({
   actions: {
     // 设置用户信息
     setUser(userInfo) {
-      this.$patch((state) => {
-        const { id, name, phone } = userInfo
-        state.user = { id, name, phone }
-        localStorage.setItem('USER', JSON.stringify(state.user))
-      })
+      const { id, name, phone } = userInfo
+      this.user = { id, name, phone }
+      localStorage.setItem('USER', JSON.stringify(this.user))
     }
   }
 })

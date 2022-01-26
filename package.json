@@ -8,6 +8,7 @@
   },
   "dependencies": {
     "@arco-themes/vue-demo": "0.0.6",
+    "@vueuse/core": "^7.5.5",
     "axios": "^0.24.0",
     "clipboard": "^2.0.8",
     "echarts": "^5.2.2",

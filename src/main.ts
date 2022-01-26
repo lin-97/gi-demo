@@ -6,7 +6,8 @@ import { createPinia } from 'pinia'
 // 引入Arco Design组件库
 import ArcoVue from '@arco-design/web-vue'
 // import '@arco-design/web-vue/dist/arco.css'
-import '@arco-themes/vue-demo/index.less';
+import '@arco-themes/vue-demo/index.less'
+
 // 额外引入Arco Design图标库
 import ArcoVueIcon from '@arco-design/web-vue/es/icon'
 
