@@ -22,15 +22,17 @@ function contextMenu(e, fileInfo) {
     instance = createApp(FileContextMenu, {
       axis: { x: e.clientX, y: e.clientY },
       fileInfo: fileInfo,
-      handleClickMenuItem: (mode) => {
+      onClick: (mode) => {
+        resolve({ mode: mode, fileInfo: fileInfo })
         unmount()
         instance = null
         dom = null
-        resolve({ mode: mode, fileInfo: fileInfo })
       },
       onCancel: () => {
+        resolve('error')
         unmount()
-        reject(new Error())
+        instance = null
+        dom = null 
       }
     })
       .use(ArcoVue)
@@ -38,8 +40,12 @@ function contextMenu(e, fileInfo) {
 
     // 卸载组件
     function unmount() {
-      instance.unmount()
-      document.body.removeChild(dom)
+      if (instance !== null) {
+        instance.unmount()
+      }
+      if (dom !== null) {
+        document.body.removeChild(dom)
+      }
     }
     instance.mount(dom)
   })

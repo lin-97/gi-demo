@@ -1,6 +1,6 @@
 <template>
   <transition name="slide-dynamic-origin">
-    <div v-show="showContentMenu" class="wrap file-context-menu" ref="contentMenuRef" :style="contentMenuStyle">
+    <div v-show="showContentMenu" class="wrap file-context-menu" ref="contextMenuRef" :style="contentMenuStyle">
       <Option>
         <OptionItem icon="icon-edit" @click="handleClickMenuItem('edit')">编辑</OptionItem>
         <OptionItem icon="icon-delete" @click="handleClickMenuItem('delete')">删除</OptionItem>
@@ -23,9 +23,11 @@
 </template>
 
 <script>
-import { defineComponent, ref, nextTick, onMounted, onBeforeUnmount } from 'vue'
+import { defineComponent, ref, nextTick, onMounted } from 'vue'
 import Option from './Option.vue'
 import OptionItem from './OptionItem.vue'
+import { onClickOutside } from '@vueuse/core'
+
 export default defineComponent({
   components: {
     Option,
@@ -37,14 +39,15 @@ export default defineComponent({
       default: () => ({ x: 0, y: 0 })
     },
     fileInfo: Object,
-    handleClickMenuItem: Function
+    onClick: Function,
+    onCancel: Function
   },
   setup(props) {
     let showContentMenu = ref(false)
     let contentMenuStyle = ref({})
     let contentMenuWidth = ref(0)
     let contentMenuHeight = ref(0)
-    let contentMenuRef = ref(null)
+    let contextMenuRef = ref(null)
 
     const getStyle = () => {
       const obj = {}
@@ -71,34 +74,32 @@ export default defineComponent({
       contentMenuStyle.value = obj
     }
 
-    //  关闭右键菜单
-    function closeRightMenu() {
-      console.log('event.target', event.target.className)
-      if (!event.target.className.includes('file-context-menu')) {
-        showContentMenu.value = false
-      }
+    // 检测在一个元素之外的任何点击
+    onClickOutside(contextMenuRef, () => {
+      props.onCancel()
+    })
+
+    function handleClickMenuItem(item) {
+      console.log('点击', item)
+      props.onClick(item)
     }
 
     onMounted(() => {
-      document.body.addEventListener('click', closeRightMenu)
       setTimeout(() => {
         showContentMenu.value = true
         nextTick(() => {
-          contentMenuWidth.value = contentMenuRef.value.offsetWidth
-          contentMenuHeight.value = contentMenuRef.value.offsetHeight
+          contentMenuWidth.value = contextMenuRef.value.offsetWidth
+          contentMenuHeight.value = contextMenuRef.value.offsetHeight
           getStyle()
         })
       }, 100)
     })
 
-    onBeforeUnmount(() => {
-      document.body.removeEventListener('click', closeRightMenu)
-    })
-
     return {
       showContentMenu,
       contentMenuStyle,
-      contentMenuRef
+      contextMenuRef,
+      handleClickMenuItem
     }
   }
 })
