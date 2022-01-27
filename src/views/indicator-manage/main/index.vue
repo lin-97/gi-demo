@@ -94,7 +94,7 @@
   </div>
 </template>
 
-<script setup>
+<script setup lang="ts" name="IndicatorManage">
 import { onMounted, reactive, ref } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import { Modal } from '@arco-design/web-vue'

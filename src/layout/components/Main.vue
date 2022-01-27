@@ -4,7 +4,7 @@
       <template #default="{ Component, route }">
         <transition name="fade-transform" mode="out-in" appear>
           <keep-alive :include="navtab.cacheList">
-            <component :is="Component" :key="route.fullPath" />
+            <component :is="Component" />
           </keep-alive>
         </transition>
       </template>

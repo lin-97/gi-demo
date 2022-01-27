@@ -1,5 +1,6 @@
 import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router'
-
+// import { useAppStore } from '@/store/app'
+// const app = useAppStore()
 /**
  * @desc 规定了数组元素类型是RouteRecordRaw, 它可以在定义路由时进行友善地提示
  */
@@ -75,5 +76,14 @@ const router = createRouter({
   routes,
   scrollBehavior: () => ({ left: 0, top: 0 })
 })
+
+// router.beforeEach((to, from, next) => {
+//   // 设置侧边菜单栏的高亮路径
+//   const arr = app.menuList.map((i) => i.path)
+//   if (arr.includes(to.path)) {
+//     app.setActivePath(to.path)
+//   }
+//   next()
+// })
 
 export default router

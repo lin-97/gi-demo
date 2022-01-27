@@ -22,7 +22,7 @@
   </div>
 </template>
 
-<script lang="ts" setup>
+<script setup lang="ts" name="User">
 import UserSet from './UserSet.vue'
 </script>
 

@@ -11,13 +11,14 @@
   </div>
 </template>
 
-<script lang="ts" setup>
+<script lang="ts" setup name="Test">
 import { ref, onMounted } from 'vue'
 import { useRouter } from 'vue-router'
-const router = useRouter()
+import { Message } from '@arco-design/web-vue'
 import GiTextRadio from '@/components/GiTextRadio.vue'
 import GiTextSwitch from '@/components/GiTextSwitch.vue'
-import { Message } from '@arco-design/web-vue'
+
+const router = useRouter()
 
 const list = [
   { label: '嘎嘎', value: '01' },

@@ -5,7 +5,7 @@
   </div>
 </template>
 
-<script setup lang="ts">
+<script setup lang="ts" name="FileManage">
 import FileAside from './FileAside.vue'
 import FileMain from './FileMain.vue'
 </script>

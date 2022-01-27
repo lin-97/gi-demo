@@ -1,12 +1,13 @@
 import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
+import VueSetupExtend from 'vite-plugin-vue-setup-extend' // setup script支持 name 属性
 import Components from 'unplugin-vue-components/vite'
 import { ArcoResolver } from 'unplugin-vue-components/resolvers'
 import path from 'path'
 import { svgBuilder } from './src/plugins/svgBuilder'
 
 export default defineConfig({
-  plugins: [vue(), svgBuilder('./src/icons/')],
+  plugins: [vue(), VueSetupExtend(), svgBuilder('./src/icons/')],
   base: './',
   resolve: {
     alias: {

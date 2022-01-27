@@ -17,7 +17,7 @@
   </div>
 </template>
 
-<script lang="ts" setup>
+<script lang="ts" setup name="Home">
 import WorkPlatform from './WorkPlatform.vue'
 import ItemList from './ItemList.vue'
 import MsgList from './MsgList.vue'

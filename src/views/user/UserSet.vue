@@ -73,7 +73,9 @@ const form = reactive({
     border-right: 1px solid var(--color-border-2);
   }
   .form {
+    width: 100%;
     padding: 25px;
+    overflow: scroll;
   }
 }
 </style>

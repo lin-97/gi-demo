@@ -22,14 +22,15 @@ const navtab = useNavTabStore()
 
 onMounted(() => {
   handleNavTab()
-}),
-  // 监听路由变化
-  watch(
-    () => route.path,
-    () => {
-      handleNavTab()
-    }
-  )
+})
+
+// 监听路由变化
+watch(
+  () => route.path,
+  () => {
+    handleNavTab()
+  }
+)
 
 const handleNavTab = () => {
   // console.log('路由变化', newVal)
@@ -41,14 +42,11 @@ const handleNavTab = () => {
   })
   if (route.meta.keepAlive) {
     navtab.addCacheItem(route.name)
-    console.log('route.name', route.name)
-    console.log('navtab.cacheList', navtab.cacheList)
   }
 }
 
 // 点击页签
 const onClick = (key: string) => {
-  // console.log('点击页签', e)
   router.push({ path: key })
 }
 

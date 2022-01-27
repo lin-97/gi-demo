@@ -122,7 +122,7 @@ const handleCheckFile = (item) => {
 // 鼠标右键
 const handleContextMenu = (e, fileItem) => {
   FileContextMenu(e, fileItem).then((res) => {
-    console.log('右键点击选项', res)
+    Message.success('点击了' + res.mode)
   })
 }
 
