@@ -1,13 +1,13 @@
 <template>
   <div class="file-list-wrap">
-    <a-table :data="props.data" :bordered="false" :pagination="false">
+    <a-table :data="props.data" :bordered="false" :pagination="false" @row-click="handleRowClick">
       <template #columns>
         <!-- <a-table-column title="序号" width="60">
           <template #cell="{ record }">{{ record.index + 1 }}</template>
         </a-table-column> -->
         <a-table-column title="名称">
           <template #cell="{ record }">
-            <div class="file-name">
+            <div class="file-name" @contextmenu="handleContextMenu($event, record)">
               <div class="file-image">
                 <FileImg :data="record"></FileImg>
               </div>
@@ -41,6 +41,19 @@ const props = defineProps({
     default: () => []
   }
 })
+
+const emit = defineEmits(['click', 'contextmenu'])
+
+// 行点击事件
+const handleRowClick = (row) => {
+  emit('click', row)
+}
+
+// 右键事件
+const handleContextMenu = (e, row) => {
+  e.preventDefault()
+  emit('contextmenu', row)
+}
 </script>
 
 <style lang="scss" scoped>

@@ -83,7 +83,12 @@
     </section>
 
     <!-- 文件列表-列表模式 -->
-    <FileList :data="fileList" v-if="fileStore.viewMode == 2"></FileList>
+    <FileList
+      :data="fileList"
+      v-if="fileStore.viewMode == 2"
+      @click="handleClickFile"
+      @contextmenu="handleContextMenu"
+    ></FileList>
   </div>
 </template>
 
