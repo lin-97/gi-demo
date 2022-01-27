@@ -47,7 +47,7 @@ const handleNavTab = () => {
 
 // 点击页签
 const onClick = (key: string) => {
-  console.log(navtab.cacheList)
+  console.log('点击前', navtab.cacheList)
   router.push({ path: key })
 }
 
@@ -56,6 +56,7 @@ const onClose = (key: string) => {
   let item = navtab.tabList.find((i) => i.path === key)
   navtab.removeTabItem(key, route, router)
   navtab.removeCacheItem(item.componentName)
+  console.log('关闭后', navtab.cacheList)
 }
 </script>
 

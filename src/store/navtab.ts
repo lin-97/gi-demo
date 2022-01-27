@@ -38,7 +38,9 @@ export const useNavTabStore = defineStore({
     // 删除一个缓存页
     removeCacheItem(componentName: string) {
       let index = this.cacheList.findIndex((item) => item === componentName)
-      this.cacheList.splice(index, 1)
+      if (index >= 0) {
+        this.cacheList.splice(index, 1)
+      }
     }
   }
 })
