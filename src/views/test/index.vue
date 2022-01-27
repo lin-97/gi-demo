@@ -12,11 +12,12 @@
 </template>
 
 <script lang="ts" setup>
-import { ref } from 'vue'
+import { ref, onMounted } from 'vue'
 import { useRouter } from 'vue-router'
 const router = useRouter()
 import GiTextRadio from '@/components/GiTextRadio.vue'
 import GiTextSwitch from '@/components/GiTextSwitch.vue'
+import { Message } from '@arco-design/web-vue'
 
 const list = [
   { label: '嘎嘎', value: '01' },
@@ -26,6 +27,10 @@ const list = [
 let current = ref('01')
 let checked = ref(true)
 let checked1 = ref(false)
+
+onMounted(() => {
+  Message.success('进入测试页')
+})
 
 const toPage = () => {
   router.push({ path: '/indicator-manage', query: { tab: '3' } })

@@ -42,6 +42,7 @@ import UserSet from './UserSet.vue'
   flex-direction: column;
   overflow: hidden;
   .head {
+    margin-top: $margin;
     height: 204px;
     background-color: rgb(var(--arcoblue-6));
     display: flex;

@@ -24,15 +24,19 @@ function contextMenu(e, fileInfo) {
       fileInfo: fileInfo,
       onClick: (mode) => {
         resolve({ mode: mode, fileInfo: fileInfo })
-        unmount()
-        instance = null
-        dom = null
+        setTimeout(() => {
+          unmount()
+          instance = null
+          dom = null
+        }, 500)
       },
       onCancel: () => {
         resolve('error')
-        unmount()
-        instance = null
-        dom = null 
+        setTimeout(() => {
+          unmount()
+          instance = null
+          dom = null
+        }, 500)
       }
     })
       .use(ArcoVue)

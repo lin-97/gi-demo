@@ -12,7 +12,7 @@
   </a-layout>
 </template>
 
-<script lang="ts" setup>
+<script setup lang="ts">
 import { useNavTabStore } from '@/store/navtab'
 const navtab = useNavTabStore()
 </script>

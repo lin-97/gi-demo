@@ -22,13 +22,13 @@ const routes: Array<RouteRecordRaw> = [
         path: '/home',
         name: 'Home',
         component: () => import('@/views/home/index.vue'),
-        meta: { title: '首页', keepAlive: false }
+        meta: { title: '首页', keepAlive: true }
       },
       {
         path: '/indicator-manage',
         name: 'IndicatorManage',
         component: () => import('@/views/indicator-manage/main/index.vue'),
-        meta: { title: '指标管理', keepAlive: false }
+        meta: { title: '指标管理', keepAlive: true }
       },
       {
         path: '/indicator-manage/add',
@@ -46,7 +46,7 @@ const routes: Array<RouteRecordRaw> = [
         path: '/file-manage',
         name: 'FileManage',
         component: () => import('@/views/file-manage/main/index.vue'),
-        meta: { title: '文件管理', keepAlive: false }
+        meta: { title: '文件管理', keepAlive: true }
       },
       {
         path: '/user',
@@ -64,7 +64,7 @@ const routes: Array<RouteRecordRaw> = [
         path: '/test',
         name: 'Test',
         component: () => import('@/views/test/index.vue'),
-        meta: { title: '测试页', keepAlive: false }
+        meta: { title: '测试页', keepAlive: true }
       }
     ]
   }
