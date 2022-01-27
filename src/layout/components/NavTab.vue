@@ -7,6 +7,13 @@
         :title="item.name"
         :closable="item.path !== '/home'"
       ></a-tab-pane>
+      <template #extra>
+        <a-button type="primary" style="margin-right: 14px; margin-bottom: 5px">
+          <template #icon>
+            <icon-settings :size="18" />
+          </template>
+        </a-button>
+      </template>
     </a-tabs>
   </div>
 </template>
