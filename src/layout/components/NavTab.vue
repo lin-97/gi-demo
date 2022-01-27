@@ -47,6 +47,7 @@ const handleNavTab = () => {
 
 // 点击页签
 const onClick = (key: string) => {
+  console.log(navtab.cacheList)
   router.push({ path: key })
 }
 

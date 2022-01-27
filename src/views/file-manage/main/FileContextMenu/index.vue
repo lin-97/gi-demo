@@ -23,10 +23,10 @@
 </template>
 
 <script>
-import { defineComponent, ref, nextTick, onMounted } from 'vue'
+import { defineComponent, ref, nextTick, onMounted, watch, reactive } from 'vue'
 import Option from './Option.vue'
 import OptionItem from './OptionItem.vue'
-import { onClickOutside } from '@vueuse/core'
+import { onClickOutside, useWindowSize } from '@vueuse/core'
 
 export default defineComponent({
   components: {
@@ -80,10 +80,21 @@ export default defineComponent({
       props.onCancel()
     })
 
-    function handleClickMenuItem(item) {
+    // 点击菜单项
+    const handleClickMenuItem = (item) => {
       showContentMenu.value = false
       props.onClick(item)
     }
+
+    // 窗口尺寸变化关闭
+    const windowSize = reactive(useWindowSize())
+    watch(
+      () => [windowSize.width, windowSize.height],
+      () => {
+        showContentMenu.value = false
+        props.onCancel()
+      }
+    )
 
     onMounted(() => {
       setTimeout(() => {

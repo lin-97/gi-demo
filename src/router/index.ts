@@ -29,7 +29,7 @@ const routes: Array<RouteRecordRaw> = [
         path: '/indicator-manage',
         name: 'IndicatorManage',
         component: () => import('@/views/indicator-manage/main/index.vue'),
-        meta: { title: '指标管理', keepAlive: true }
+        meta: { title: '指标管理', keepAlive: false }
       },
       {
         path: '/indicator-manage/add',
