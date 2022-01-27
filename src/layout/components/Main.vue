@@ -3,14 +3,19 @@
     <router-view>
       <template #default="{ Component, route }">
         <transition name="fade-transform" mode="out-in" appear>
-          <component :is="Component" :key="route.fullPath" />
+          <keep-alive :include="navtab.cacheList">
+            <component :is="Component" :key="route.fullPath" />
+          </keep-alive>
         </transition>
       </template>
     </router-view>
   </a-layout>
 </template>
 
-<script lang="ts" setup></script>
+<script lang="ts" setup>
+import { useNavTabStore } from '@/store/navtab'
+const navtab = useNavTabStore()
+</script>
 
 <style lang="scss" scoped>
 .gi-main {

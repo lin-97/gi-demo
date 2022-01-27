@@ -76,12 +76,17 @@ export default defineComponent({
 
     // 检测在一个元素之外的任何点击
     onClickOutside(contextMenuRef, () => {
-      props.onCancel()
+      showContentMenu.value = false
+      setTimeout(() => {
+        props.onCancel()
+      }, 300)
     })
 
     function handleClickMenuItem(item) {
-      console.log('点击', item)
-      props.onClick(item)
+      showContentMenu.value = false
+      setTimeout(() => {
+        props.onClick(item)
+      }, 300)
     }
 
     onMounted(() => {
