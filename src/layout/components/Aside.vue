@@ -1,8 +1,8 @@
 <template>
   <a-layout-sider collapsible breakpoint="xl" class="gi-aside">
     <div class="logo" />
-    <a-menu :selected-keys="[app.activePath]" :style="{ width: '100%', height: '100%' }">
-      <a-menu-item v-for="item in app.menuList" :key="item.path" @click="handleClickItem(item)">
+    <a-menu :selected-keys="[appStore.activePath]" :style="{ width: '100%', height: '100%' }">
+      <a-menu-item v-for="item in appStore.menuList" :key="item.path" @click="handleClickItem(item)">
         <template #icon><GiSvgIcon class="menu-icon" :name="item.icon"></GiSvgIcon></template>
         {{ item.name }}
       </a-menu-item>
@@ -22,10 +22,10 @@ import { useRouter } from 'vue-router'
 import { MenuItem } from '@/models'
 import { useAppStore } from '@/store/app'
 const router = useRouter()
-const app = useAppStore()
+const appStore = useAppStore()
 
 const handleClickItem = (item: MenuItem) => {
-  app.setActivePath(item.path)
+  appStore.setActivePath(item.path)
   router.push(item.path)
 }
 </script>

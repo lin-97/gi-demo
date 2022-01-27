@@ -2,7 +2,7 @@
   <a-layout-header>
     <section class="system-logo" @click="toHome">
       <img src="@/assets/logo.png" />
-      <span class="gi_hover">{{ app.SystemName }}</span>
+      <span class="gi_hover">{{ appStore.SystemName }}</span>
     </section>
     <a-space class="system-head" size="medium">
       <!-- 消息通知 -->
@@ -24,7 +24,7 @@
       <!-- 管理员账户 -->
       <a-dropdown trigger="hover">
         <a-button type="text" class="username">
-          <span>{{ user.userName }}</span>
+          <span>{{ userStore.userName }}</span>
           <icon-down />
         </a-button>
         <template #content>
@@ -55,8 +55,8 @@ import GiSwitchThemeBtn from '@/components/GiSwitchThemeBtn.vue'
 import { useAppStore } from '@/store/app'
 import { useUserStore } from '@/store/user'
 const router = useRouter()
-const app = useAppStore()
-const user = useUserStore()
+const appStore = useAppStore()
+const userStore = useUserStore()
 
 // 跳转首页
 const toHome = () => {

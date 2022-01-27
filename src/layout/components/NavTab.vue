@@ -2,7 +2,7 @@
   <div class="nav-tab">
     <a-tabs type="card-gutter" editable v-model:active-key="route.path" @tab-click="onClick" @delete="onClose">
       <a-tab-pane
-        v-for="item of navtab.tabList"
+        v-for="item of navtabStore.tabList"
         :key="item.path"
         :title="item.name"
         :closable="item.path !== '/home'"
@@ -18,7 +18,7 @@ import { useNavTabStore } from '@/store/navtab'
 
 const route = useRoute()
 const router = useRouter()
-const navtab = useNavTabStore()
+const navtabStore = useNavTabStore()
 
 onMounted(() => {
   handleNavTab()
@@ -35,28 +35,28 @@ watch(
 const handleNavTab = () => {
   // console.log('路由变化', newVal)
   // console.log('路由对象', route)
-  navtab.addTabItem({
+  navtabStore.addTabItem({
     name: route.meta.title || '未命名',
     path: route.path,
     componentName: route.name
   })
   if (route.meta.keepAlive) {
-    navtab.addCacheItem(route.name)
+    navtabStore.addCacheItem(route.name)
   }
 }
 
 // 点击页签
 const onClick = (key: string) => {
-  console.log('点击前', navtab.cacheList)
+  console.log('点击前', navtabStore.cacheList)
   router.push({ path: key })
 }
 
 // 关闭页签
 const onClose = (key: string) => {
-  let item = navtab.tabList.find((i) => i.path === key)
-  navtab.removeTabItem(key, route, router)
-  navtab.removeCacheItem(item.componentName)
-  console.log('关闭后', navtab.cacheList)
+  let item = navtabStore.tabList.find((i) => i.path === key)
+  navtabStore.removeTabItem(key, route, router)
+  navtabStore.removeCacheItem(item.componentName)
+  console.log('关闭后', navtabStore.cacheList)
 }
 </script>
 

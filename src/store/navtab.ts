@@ -28,11 +28,13 @@ export const useNavTabStore = defineStore({
     // 删除一个页签
     removeTabItem(path: string, route, router) {
       let index = this.tabList.findIndex((item) => item.path === path)
-      let isActive = route.path === this.tabList[index]['path']
-      let len = this.tabList.length - 1
-      this.tabList.splice(index, 1)
-      if (index == len || isActive) {
-        router.push({ path: this.tabList[this.tabList.length - 1]['path'] })
+      if (index >= 0) {
+        let isActive = route.path === this.tabList[index]['path']
+        let len = this.tabList.length - 1
+        this.tabList.splice(index, 1)
+        if (index == len || isActive) {
+          router.push({ path: this.tabList[this.tabList.length - 1]['path'] })
+        }
       }
     },
     // 删除一个缓存页
