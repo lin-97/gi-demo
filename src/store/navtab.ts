@@ -4,9 +4,20 @@ const route = useRoute()
 const router = useRouter()
 console.log('router', router)
 
+type TabListItem = {
+  name: string
+  path: string
+  componentName: string
+}
+
+type NavTabState = {
+  tabList: TabListItem[]
+  cacheList: string[]
+}
+
 export const useNavTabStore = defineStore({
   id: 'NavTab', // 页签缓存
-  state() {
+  state: (): NavTabState => {
     return {
       tabList: [{ name: '首页', path: '/home', componentName: 'Home' }], // 保存页签tab的数组
       cacheList: [] // keep-alive缓存的数组, 元素是组件名
@@ -15,13 +26,13 @@ export const useNavTabStore = defineStore({
   getters: {},
   actions: {
     // 添加一个页签, 如果当前路由已经打开, 则不再重复添加
-    addTabItem(item) {
+    addTabItem(item: TabListItem) {
       let flag = this.tabList.findIndex((i) => i.path === item.path)
       if (flag >= 0) return
       this.tabList.push(item)
     },
     // 添加缓存页
-    addCacheItem(componentName) {
+    addCacheItem(componentName: string) {
       if (this.cacheList.includes(componentName)) return
       this.cacheList.push(componentName)
     },
