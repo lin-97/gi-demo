@@ -2,7 +2,7 @@
   <a-layout-header>
     <section class="system-logo" @click="toHome">
       <img src="@/assets/logo.png" />
-      <span class="gi_hover">{{ appStore.SystemName }}</span>
+      <span class="gi_hover">{{ appStore.systemName }}</span>
     </section>
     <a-space class="system-head" size="medium">
       <!-- 消息通知 -->
@@ -14,7 +14,7 @@
       <GiFullScreenBtn class="gi_hover"></GiFullScreenBtn>
 
       <!-- 暗黑模式切换 -->
-      <GiSwitchThemeBtn></GiSwitchThemeBtn>
+      <GiToggleThemeBtn></GiToggleThemeBtn>
 
       <!-- 管理员头像 -->
       <a-avatar :size="32">
@@ -51,7 +51,7 @@ import { computed, onMounted, ref } from 'vue'
 import { Modal } from '@arco-design/web-vue'
 import { useRouter } from 'vue-router'
 import GiFullScreenBtn from '@/components/GiFullScreenBtn.vue'
-import GiSwitchThemeBtn from '@/components/GiSwitchThemeBtn.vue'
+import GiToggleThemeBtn from '@/components/GiToggleThemeBtn.vue'
 import { useAppStore, useUserStore } from '@/store'
 const router = useRouter()
 const appStore = useAppStore()

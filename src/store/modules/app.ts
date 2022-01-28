@@ -1,6 +1,6 @@
 import { defineStore } from 'pinia'
 
-type ThemeMode = 'light' | 'dark'
+type Theme = 'light' | 'dark'
 
 type MenuItem = {
   icon: string
@@ -10,8 +10,8 @@ type MenuItem = {
 }
 
 interface AppState {
-  SystemName: string
-  ThemeMode: ThemeMode
+  systemName: string
+  theme: Theme
   activePath: string
   menuList: MenuItem[]
 }
@@ -22,8 +22,8 @@ export const useAppStore = defineStore({
   id: 'App',
   state: (): AppState => {
     return {
-      SystemName: 'Admin管理系统', // 系统名称
-      ThemeMode: window.localStorage.getItem('ThemeMode') || 'light', // light简白模式  dark暗黑模式
+      systemName: 'Admin管理系统', // 系统名称
+      theme: 'light', // light简白模式  dark暗黑模式
       activePath: JSON.parse(window.localStorage.getItem('ActivePath')) || '/home', // 当前激活的路径
       menuList: [
         {
@@ -72,10 +72,15 @@ export const useAppStore = defineStore({
       this.activePath = path
       window.localStorage.setItem('ActivePath', JSON.stringify(path))
     },
-    // 设置暗黑模式
-    setThemeMode(value: ThemeMode) {
-      this.ThemeMode = value
-      window.localStorage.setItem('ThemeMode', value)
+    // 切换主题  暗黑模式|简白模式
+    toggleTheme(dark: boolean) {
+      if (dark) {
+        this.theme = 'dark'
+        document.body.setAttribute('arco-theme', 'dark')
+      } else {
+        this.theme = 'light'
+        document.body.removeAttribute('arco-theme')
+      }
     }
   }
 })

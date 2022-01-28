@@ -5,7 +5,7 @@
 </template>
 
 <script setup lang="ts">
-import { computed, defineProps } from 'vue'
+import { computed } from 'vue'
 const props = defineProps({
   name: {
     type: String,
@@ -18,13 +18,13 @@ const props = defineProps({
 })
 const iconName = computed(() => `#icon-${props.name}`)
 const svgClass = computed(() => {
-  if (props.name) return `file-svg-icon icon-${props.name}`
-  return 'file-svg-icon'
+  if (props.name) return `svg-icon icon-${props.name}`
+  return 'svg-icon'
 })
 </script>
 
-<style scoped>
-.file-svg-icon {
+<style lang="scss" scoped>
+.svg-icon {
   width: auto;
   height: auto;
   fill: currentColor;

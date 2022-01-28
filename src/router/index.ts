@@ -1,6 +1,6 @@
 import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router'
 // import { useAppStore } from '@/store'
-// const app = useAppStore()
+// const appStore = useAppStore()
 /**
  * @desc 规定了数组元素类型是RouteRecordRaw, 它可以在定义路由时进行友善地提示
  */
