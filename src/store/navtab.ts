@@ -30,9 +30,10 @@ export const useNavTabStore = defineStore({
       let index = this.tabList.findIndex((item) => item.path === path)
       if (index >= 0) {
         let isActive = route.path === this.tabList[index]['path']
-        let len = this.tabList.length - 1
+        // let len = this.tabList.length - 1
         this.tabList.splice(index, 1)
-        if (index == len || isActive) {
+        // if (index == len || isActive) {
+        if (isActive) {
           router.push({ path: this.tabList[this.tabList.length - 1]['path'] })
         }
       }
