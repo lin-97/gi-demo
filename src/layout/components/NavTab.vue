@@ -94,6 +94,10 @@ const onCloseAll = () => {
   padding-top: 0;
   border: none;
 }
+
+:deep(.arco-tabs-nav-type-card-gutter .arco-tabs-tab) {
+  border-bottom-color: transparent !important;
+}
 .nav-tab {
   padding-top: 5px;
   background: var(--color-bg-2);

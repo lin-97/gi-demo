@@ -18,7 +18,7 @@ body {
   user-select: none;
 }
 
-// Modal对话框修改
+// 对话框组件
 .arco-modal-title .arco-icon-exclamation-circle-fill {
   font-size: 24px;
 }
@@ -40,7 +40,6 @@ body {
     border-top: none;
   }
 }
-
 .arco-modal-simple {
   padding: 15px;
   top: 50%;
@@ -58,6 +57,7 @@ body {
   }
 }
 
+// 下拉菜单组件
 .arco-dropdown-option {
   display: flex;
   align-items: center;
@@ -67,6 +67,7 @@ body {
   }
 }
 
+// 单选按钮组件
 .arco-radio-icon {
   border: 1px solid var(--color-neutral-3);
   width: 16px;
@@ -89,4 +90,10 @@ body {
   left: -1px;
   width: 16px;
   height: 16px;
+}
+
+// 分页组件
+.arco-pagination-item-active {
+  color: #fff;
+  background-color: rgb(var(--primary-6));
 }
