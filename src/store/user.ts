@@ -1,8 +1,17 @@
 import { defineStore } from 'pinia'
 
+type User = {
+  id: string
+  name: string
+}
+
+type UserState = {
+  user: User
+}
+
 export const useUserStore = defineStore({
   id: 'User',
-  state() {
+  state: (): UserState => {
     return {
       user: JSON.parse(localStorage.getItem('USER')) || { id: 'admin123456', name: 'admin' }
     }
@@ -14,9 +23,9 @@ export const useUserStore = defineStore({
   },
   actions: {
     // 设置用户信息
-    setUser(userInfo) {
-      const { id, name, phone } = userInfo
-      this.user = { id, name, phone }
+    setUser(userInfo: User) {
+      const { id, name } = userInfo
+      this.user = { id, name }
       localStorage.setItem('USER', JSON.stringify(this.user))
     }
   }

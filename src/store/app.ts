@@ -9,15 +9,22 @@ type MenuItem = {
   path: string
 }
 
+type AppState = {
+  SystemName: string
+  ThemeMode: ThemeMode
+  activePath: string
+  menuList: MenuItem[]
+}
+
 // 注意: id 是必填的, 并且所有 Store 中唯一, 因为Pinia会将它在devtools显示
 
 export const useAppStore = defineStore({
   id: 'App',
-  state() {
+  state: (): AppState => {
     return {
       SystemName: 'Admin管理系统', // 系统名称
-      ThemeMode: (window.localStorage.getItem('ThemeMode') || 'light') as ThemeMode, // light简白模式  dark暗黑模式
-      activePath: (JSON.parse(window.localStorage.getItem('ActivePath')) || '/home') as string, // 当前激活的路径
+      ThemeMode: window.localStorage.getItem('ThemeMode') || 'light', // light简白模式  dark暗黑模式
+      activePath: JSON.parse(window.localStorage.getItem('ActivePath')) || '/home', // 当前激活的路径
       menuList: [
         {
           icon: 'menu-work',

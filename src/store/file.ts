@@ -2,12 +2,18 @@ import { defineStore } from 'pinia'
 
 type ViewMode = 1 | 2
 
+type FileState = {
+  viewMode: ViewMode
+  selectedFileList: object[]
+  isBatchMode: boolean
+}
+
 export const useFileStore = defineStore({
   id: 'File',
-  state() {
+  state: (): FileState => {
     return {
       // 视图: 1宫格模式 2列表模式
-      viewMode: 1 as ViewMode,
+      viewMode: 1,
       // 当前批量勾选的文件列表
       selectedFileList: JSON.parse(window.sessionStorage.getItem('FILE_LIST')) || [],
       // 是否批量操作: true:批量 false:单文件
