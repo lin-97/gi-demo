@@ -2,7 +2,7 @@ import { defineStore } from 'pinia'
 
 type ViewMode = 1 | 2
 
-type FileState = {
+interface FileState {
   viewMode: ViewMode
   selectedFileList: object[]
   isBatchMode: boolean

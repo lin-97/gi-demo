@@ -5,7 +5,7 @@ type User = {
   name: string
 }
 
-type UserState = {
+interface UserState {
   user: User
 }
 

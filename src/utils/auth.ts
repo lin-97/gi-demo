@@ -1,23 +1,17 @@
-import Cookies from 'js-cookie'
-
-const TokenKey: string = 'Authorization'
-
-export function getToken() {
-  return Cookies.get(TokenKey)
+const isLogin = () => {
+  return !!localStorage.getItem('token')
 }
 
-export function setToken(token) {
-  return Cookies.set(TokenKey, token)
+const getToken = () => {
+  return localStorage.getItem('token')
 }
 
-export function removeToken() {
-  return Cookies.remove(TokenKey)
+const setToken = (token: string) => {
+  localStorage.setItem('token', token)
 }
 
-export function checkToken(): boolean {
-  if (Cookies.get(TokenKey)) {
-    return true
-  } else {
-    return false
-  }
+const clearToken = () => {
+  localStorage.removeItem('token')
 }
+
+export { isLogin, getToken, setToken, clearToken }

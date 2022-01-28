@@ -9,7 +9,7 @@ type MenuItem = {
   path: string
 }
 
-type AppState = {
+interface AppState {
   SystemName: string
   ThemeMode: ThemeMode
   activePath: string

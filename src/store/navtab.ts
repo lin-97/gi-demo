@@ -10,7 +10,7 @@ type TabListItem = {
   componentName: string
 }
 
-type NavTabState = {
+interface NavTabState {
   tabList: TabListItem[]
   cacheList: string[]
 }
