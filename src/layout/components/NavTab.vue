@@ -7,12 +7,29 @@
         :title="item.name"
         :closable="item.path !== '/home'"
       ></a-tab-pane>
+      <!-- 右侧按钮 -->
       <template #extra>
-        <a-button type="primary" style="margin-right: 14px; margin-bottom: 5px">
-          <template #icon>
-            <icon-settings :size="18" />
+        <a-dropdown trigger="hover">
+          <a-button type="primary" class="extra-btn">
+            <template #icon>
+              <icon-settings :size="18" />
+            </template>
+          </a-button>
+          <template #content>
+            <a-doption @click="onClose(route.path)"
+              ><template #icon>
+                <icon-minus-circle-fill :size="20" style="color: #ff7d00" />
+              </template>
+              <template #default>关闭当前页签</template></a-doption
+            >
+            <a-doption @click="onCloseAll"
+              ><template #icon>
+                <icon-close-circle-fill :size="20" style="color: #f53f3f" />
+              </template>
+              <template #default>关闭所有页签</template></a-doption
+            >
           </template>
-        </a-button>
+        </a-dropdown>
       </template>
     </a-tabs>
   </div>
@@ -61,9 +78,14 @@ const onClick = (key: string) => {
 // 关闭页签
 const onClose = (key: string) => {
   let item = navtabStore.tabList.find((i) => i.path === key)
-  navtabStore.removeTabItem(key, route, router)
+  navtabStore.removeTabItem(key)
   navtabStore.removeCacheItem(item.componentName)
   console.log('关闭后', navtabStore.cacheList)
+}
+
+// 关闭所有页签
+const onCloseAll = () => {
+  navtabStore.clearTabList()
 }
 </script>
 
@@ -75,5 +97,28 @@ const onClose = (key: string) => {
 .nav-tab {
   padding-top: 5px;
   background: var(--color-bg-2);
+}
+
+.extra-btn {
+  margin-right: 14px;
+  margin-bottom: 5px;
+  &:hover {
+    svg {
+      animation: turn 0.5s linear;
+      transform-origin: center;
+    }
+  }
+}
+
+@keyframes turn {
+  0% {
+    -webkit-transform: rotate(0deg);
+  }
+  50% {
+    -webkit-transform: rotate(90deg);
+  }
+  100% {
+    -webkit-transform: rotate(180deg);
+  }
 }
 </style>

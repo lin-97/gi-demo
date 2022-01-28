@@ -61,6 +61,10 @@ body {
 .arco-dropdown-option {
   display: flex;
   align-items: center;
+  .arco-dropdown-option-icon {
+    line-height: 1;
+    margin-right: 4px;
+  }
 }
 
 .arco-radio-icon {

@@ -1,7 +1,5 @@
 import { defineStore } from 'pinia'
-import { useRoute, useRouter } from 'vue-router'
-const route = useRoute()
-const router = useRouter()
+import router from '@/router'
 console.log('router', router)
 
 type TabListItem = {
@@ -15,11 +13,13 @@ interface NavTabState {
   cacheList: string[]
 }
 
+const defaultTabItem = { name: '首页', path: '/home', componentName: 'Home' }
+
 export const useNavTabStore = defineStore({
   id: 'NavTab', // 页签缓存
   state: (): NavTabState => {
     return {
-      tabList: [{ name: '首页', path: '/home', componentName: 'Home' }], // 保存页签tab的数组
+      tabList: [defaultTabItem], // 保存页签tab的数组
       cacheList: [] // keep-alive缓存的数组, 元素是组件名
     }
   },
@@ -37,10 +37,11 @@ export const useNavTabStore = defineStore({
       this.cacheList.push(componentName)
     },
     // 删除一个页签
-    removeTabItem(path: string, route, router) {
+    removeTabItem(path: string) {
+      if (path === defaultTabItem.path) return
       let index = this.tabList.findIndex((item) => item.path === path)
       if (index >= 0) {
-        let isActive = route.path === this.tabList[index]['path']
+        let isActive = router.currentRoute.value.path === this.tabList[index]['path']
         // let len = this.tabList.length - 1
         this.tabList.splice(index, 1)
         // if (index == len || isActive) {
@@ -55,6 +56,15 @@ export const useNavTabStore = defineStore({
       if (index >= 0) {
         this.cacheList.splice(index, 1)
       }
+    },
+    // 清空页签
+    clearTabList() {
+      this.tabList = [defaultTabItem]
+      router.push(defaultTabItem.path)
+    },
+    // 清空缓存页
+    clearCacheList() {
+      this.cacheList = []
     }
   }
 })

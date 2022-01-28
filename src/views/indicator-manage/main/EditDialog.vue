@@ -1,13 +1,16 @@
 <template>
   <a-modal v-model:visible="visible" title="编辑" @ok="confirm" @cancel="cancel">
     <a-form ref="formRef" :model="form" :style="{ width: '450px' }">
-      <a-form-item field="name" label="姓名">
+      <a-form-item field="name" label="姓名" :rules="rules.name">
         <a-input v-model="form.name" placeholder="请输入姓名" style="width: 280px" />
+        <template #extra>
+          <div>仅支持中文姓名</div>
+        </template>
       </a-form-item>
       <a-form-item field="address" label="地址">
         <a-input v-model="form.address" placeholder="请输入地址" style="width: 280px" />
       </a-form-item>
-      <a-form-item field="status" label="状态">
+      <a-form-item field="status" label="状态" :rules="rules.status">
         <a-radio-group v-model="form.status">
           <a-radio :value="false">否</a-radio>
           <a-radio :value="true">是</a-radio>
@@ -37,6 +40,18 @@ const form = reactive({
   name: '',
   address: '',
   status: false
+})
+
+const rules = reactive({
+  name: [
+    { required: true, message: '请输入姓名' },
+    { minLength: 1, maxLength: 4, message: '名字最长不超过4个字符' }
+  ],
+  status: [
+    {
+      required: true
+    }
+  ]
 })
 
 let visible = computed<boolean>({
