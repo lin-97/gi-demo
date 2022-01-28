@@ -1,8 +1,8 @@
 import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
 import VueSetupExtend from 'vite-plugin-vue-setup-extend' // setup script支持 name 属性
-import Components from 'unplugin-vue-components/vite'
-import { ArcoResolver } from 'unplugin-vue-components/resolvers'
+// import Components from 'unplugin-vue-components/vite'
+// import { ArcoResolver } from 'unplugin-vue-components/resolvers'
 import path from 'path'
 import { svgBuilder } from './src/plugins/svgBuilder'
 
@@ -33,12 +33,12 @@ export default defineConfig({
         rewrite: (path) => path.replace(/^\/api/, '/api')
       }
     }
-  },
-  // 构建
-  build: {
-    target: 'modules', // 浏览器兼容性  "esnext"|"modules"
-    outDir: 'dist', // 输出路径
-    assetsDir: 'assets', // 生成静态资源的存放路径
-    sourcemap: false // 构建后是否生成 source map 文件
   }
+  // 构建
+  // build: {
+  //   target: 'modules', // 浏览器兼容性  "esnext"|"modules"
+  //   outDir: 'dist', // 输出路径
+  //   assetsDir: 'assets', // 生成静态资源的存放路径
+  //   sourcemap: false // 构建后是否生成 source map 文件
+  // }
 })

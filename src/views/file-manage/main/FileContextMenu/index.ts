@@ -31,7 +31,7 @@ function contextMenu(e, fileInfo) {
         }, 500)
       },
       onCancel: () => {
-        resolve('error')
+        reject('error')
         setTimeout(() => {
           unmount()
           instance = null
