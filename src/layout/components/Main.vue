@@ -13,7 +13,7 @@
 </template>
 
 <script setup lang="ts">
-import { useNavTabStore } from '@/store/navtab'
+import { useNavTabStore } from '@/store'
 const navtabStore = useNavTabStore()
 </script>
 

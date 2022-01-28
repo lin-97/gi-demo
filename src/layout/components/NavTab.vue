@@ -21,7 +21,7 @@
 <script setup lang="ts">
 import { watch, onMounted } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
-import { useNavTabStore } from '@/store/navtab'
+import { useNavTabStore } from '@/store'
 
 const route = useRoute()
 const router = useRouter()

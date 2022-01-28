@@ -52,8 +52,7 @@ import { Modal } from '@arco-design/web-vue'
 import { useRouter } from 'vue-router'
 import GiFullScreenBtn from '@/components/GiFullScreenBtn.vue'
 import GiSwitchThemeBtn from '@/components/GiSwitchThemeBtn.vue'
-import { useAppStore } from '@/store/app'
-import { useUserStore } from '@/store/user'
+import { useAppStore, useUserStore } from '@/store'
 const router = useRouter()
 const appStore = useAppStore()
 const userStore = useUserStore()

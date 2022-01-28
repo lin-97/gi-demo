@@ -7,7 +7,7 @@
 </template>
 
 <script setup lang="ts">
-import { useAppStore } from '@/store/app'
+import { useAppStore } from '@/store'
 const app = useAppStore()
 
 // 暗黑模式切换

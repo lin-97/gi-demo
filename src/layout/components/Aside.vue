@@ -20,7 +20,7 @@ import { computed } from 'vue'
 import { useStore } from 'vuex'
 import { useRouter } from 'vue-router'
 import { MenuItem } from '@/models'
-import { useAppStore } from '@/store/app'
+import { useAppStore } from '@/store'
 const router = useRouter()
 const appStore = useAppStore()
 

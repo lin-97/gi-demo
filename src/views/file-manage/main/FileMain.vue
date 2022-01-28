@@ -100,7 +100,7 @@ import FileList from './FileList.vue'
 import fileData from './filedata'
 import { Message, Modal } from '@arco-design/web-vue'
 import { fileTypeList } from '@/libs/file-map'
-import { useFileStore } from '@/store/file'
+import { useFileStore } from '@/store'
 import FileContextMenu from './FileContextMenu/index'
 
 const fileStore = useFileStore()
