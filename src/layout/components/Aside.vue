@@ -17,14 +17,12 @@
 
 <script lang="ts" setup>
 import { computed } from 'vue'
-import { useStore } from 'vuex'
 import { useRouter } from 'vue-router'
-import { MenuItem } from '@/models'
 import { useAppStore } from '@/store'
 const router = useRouter()
 const appStore = useAppStore()
 
-const handleClickItem = (item: MenuItem) => {
+const handleClickItem = (item) => {
   appStore.setActivePath(item.path)
   router.push(item.path)
 }

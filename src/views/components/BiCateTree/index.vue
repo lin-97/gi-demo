@@ -48,7 +48,6 @@ import MoveTree from './MoveTree.vue'
 import Option from './Option.vue'
 import OptionItem from './OptionItem.vue'
 import { getNewNodeName } from './function'
-import { Axis } from './type'
 import { data } from './tree'
 const props = defineProps({
   // 分类树: 2表单、3任务、4计量单位、5原子指标、6时间周期、7维度、8查询模板设计、101任务实例、 103指标数据查看
