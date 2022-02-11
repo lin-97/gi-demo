@@ -1,6 +1,6 @@
 import { defineStore } from 'pinia'
 import router from '@/router'
-console.log('router', router)
+// console.log('router', router)
 
 type TabListItem = {
   name: string
