@@ -1,49 +1,59 @@
 <template>
-  <div class="gi_box test">
-    <a-space direction="vertical" size="medium">
-      <GiTextRadio :list="list" v-model="current"></GiTextRadio>
-      <GiTextSwitch v-model="checked" off-text="暂停中"></GiTextSwitch>
-      <GiTextSwitch v-model="checked1"></GiTextSwitch>
-      <GiTextSwitch v-model="checked1" disabled></GiTextSwitch>
+  <div class="test">
+    <a-menu
+      v-model:selected-keys="selectedKeys"
+      :style="{ width: '200px', borderRadius: '4px' }"
+      @menu-item-click="menuItemClick"
+    >
+      <a-menu-item>自定义组件</a-menu-item>
+      <a-divider style="margin-top: 0" />
+      <a-menu-item v-for="item in menuList" :key="item.value">{{ item.name }}</a-menu-item>
+    </a-menu>
 
-      <a-button type="primary" @click="toPage">跳转</a-button>
-    </a-space>
+    <div class="content">
+      <component :is="selectedKeys[0]"></component>
+    </div>
   </div>
 </template>
 
 <script lang="ts" setup name="Test">
-import { ref, onMounted } from 'vue'
-import { useRouter } from 'vue-router'
-import { Message } from '@arco-design/web-vue'
-import GiTextRadio from '@/components/GiTextRadio.vue'
-import GiTextSwitch from '@/components/GiTextSwitch.vue'
+import { ref } from 'vue'
+import TextRadio from './components/TextRadio.vue'
+import TextSwitch from './components/TextSwitch.vue'
+import Tag from './components/Tag.vue'
+import NavBar from './components/NavBar.vue'
+import Title from './components/Title.vue'
 
-const router = useRouter()
+const selectedKeys = ref([TextRadio])
 
-const list = [
-  { label: '嘎嘎', value: '01' },
-  { label: '哈哈', value: '02' },
-  { label: '嘻嘻', value: '03' }
-]
-let current = ref('01')
-let checked = ref(true)
-let checked1 = ref(false)
+const menuList = ref([
+  { name: 'GiTextRadio', value: TextRadio },
+  { name: 'GiTextSwitch', value: TextSwitch },
+  { name: 'GiTag', value: Tag },
+  { name: 'GiNavBar', value: NavBar },
+  { name: 'GiTitle', value: Title }
+])
 
-onMounted(() => {
-  Message.success('进入测试页')
-})
-
-const toPage = () => {
-  router.push({ path: '/indicator-manage', query: { tab: '3' } })
+const menuItemClick = () => {
+  console.log(selectedKeys.value)
 }
 </script>
 
 <style lang="scss" scoped>
 .test {
   flex: 1;
-  margin: $margin;
   padding: $padding;
   box-sizing: border-box;
   overflow: hidden;
+  display: flex;
+  .content {
+    flex: 1;
+    height: 100%;
+    padding: $padding;
+    background: var(--color-bg-3);
+    margin-left: $margin;
+    border-radius: $box-radius;
+    box-sizing: border-box;
+  }
 }
 </style>
