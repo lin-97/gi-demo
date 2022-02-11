@@ -1,5 +1,5 @@
 <template>
-  <a-layout class="gi-main">
+  <a-layout class="the-main">
     <router-view>
       <template #default="{ Component, route }">
         <transition name="fade-transform" mode="out-in" appear>
@@ -18,7 +18,7 @@ const navtabStore = useNavTabStore()
 </script>
 
 <style lang="scss" scoped>
-.gi-main {
+.the-main {
   width: 100%;
   height: 100%;
   display: flex;

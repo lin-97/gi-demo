@@ -1,5 +1,5 @@
 <template>
-  <a-layout-sider collapsible breakpoint="xl" class="gi-aside">
+  <a-layout-sider collapsible breakpoint="xl" class="the-aside">
     <div class="logo" />
     <a-menu :selected-keys="[appStore.activePath]" :style="{ width: '100%', height: '100%' }">
       <a-menu-item v-for="item in appStore.menuList" :key="item.path" @click="handleClickItem(item)">
@@ -44,7 +44,7 @@ const handleClickItem = (item) => {
     display: none;
   }
 }
-.gi-aside {
+.the-aside {
   z-index: 999;
   .menu-icon {
     width: 24px;

@@ -12,7 +12,7 @@
 
     <section class="gi_lr_page wrap">
       <div class="left">
-        <BiCateTree @node-click="getTableData"></BiCateTree>
+        <TheCateTree @node-click="getTableData"></TheCateTree>
       </div>
       <div class="right">
         <a-row justify="space-between" style="margin-bottom: 10px">
@@ -98,7 +98,7 @@
 import { onMounted, reactive, ref } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import { Modal } from '@arco-design/web-vue'
-import BiCateTree from '@/views/components/BiCateTree/index.vue'
+import TheCateTree from '@/views/components/TheCateTree/index.vue'
 import EditDialog from './EditDialog.vue'
 import { getTableList } from '@/apis/table'
 const route = useRoute()

@@ -1,5 +1,5 @@
 <template>
-  <div class="nav-tab">
+  <div class="the-nav-tab">
     <a-tabs type="card-gutter" editable @tab-click="onClick" @delete="onClose">
       <a-tab-pane
         v-for="item of navtabStore.tabList"
@@ -98,7 +98,7 @@ const onCloseAll = () => {
 :deep(.arco-tabs-nav-type-card-gutter .arco-tabs-tab) {
   border-bottom-color: transparent !important;
 }
-.nav-tab {
+.the-nav-tab {
   padding-top: 5px;
   background: var(--color-bg-2);
 }

@@ -7,7 +7,7 @@
     <a-space class="system-head" size="medium">
       <!-- 消息通知 -->
       <a-tooltip content="消息通知" position="bl">
-        <icon-notification class="gi_hover" size="18" />
+        <icon-notification class="gi_hover" :size="18" />
       </a-tooltip>
 
       <!-- 全屏切换组件 -->

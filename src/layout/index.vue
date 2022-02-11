@@ -1,5 +1,5 @@
 <template>
-  <a-layout class="gi-layout">
+  <a-layout class="the-layout">
     <Aside></Aside>
     <a-layout>
       <Header></Header>
@@ -17,7 +17,7 @@ import NavTab from './components/NavTab.vue'
 </script>
 
 <style scoped>
-.gi-layout {
+.the-layout {
   height: 100%;
 }
 </style>
