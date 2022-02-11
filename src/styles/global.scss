@@ -101,7 +101,6 @@
     @extend .gi_box;
     flex: 1;
     min-width: 280px;
-    padding: $padding;
     box-sizing: border-box;
     overflow: hidden;
     display: flex;
@@ -111,7 +110,6 @@
     @extend .gi_box;
     flex: 5;
     margin-left: $margin;
-    padding: $padding;
     box-sizing: border-box;
     overflow: hidden;
   }

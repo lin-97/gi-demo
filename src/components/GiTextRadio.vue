@@ -1,15 +1,13 @@
 <template>
-  <div class="gi-text-radio">
-    <div
-      class="item"
-      :class="{ active: item.value === modelValue }"
+  <a-space :size="15" class="gi-text-radio">
+    <a-button
+      :type="item.value === modelValue ? 'primary' : 'text'"
       v-for="item in list"
       :key="item.value"
       @click="handleClick(item)"
+      >{{ item.label }}</a-button
     >
-      {{ item.label }}
-    </div>
-  </div>
+  </a-space>
 </template>
 
 <script lang="ts" setup>
@@ -39,26 +37,8 @@ const handleClick = (item: Item) => {
 
 <style lang="scss" scoped>
 .gi-text-radio {
-  display: flex;
-  > .item {
-    height: 28px;
-    padding: 0 14px;
-    cursor: pointer;
-    border-radius: 4px;
-    margin-right: 20px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    user-select: none;
-    transition: all 0.15s;
-    &:hover {
-      color: $text-color;
-      background: var(--color-secondary-hover);
-    }
-    &.active {
-      color: #fff;
-      background: $theme-color;
-    }
+  :deep(.arco-btn-text) {
+    color: var(--color-text-2);
   }
 }
 </style>

@@ -1,6 +1,6 @@
 <template>
   <div class="the-nav-tab">
-    <a-tabs type="card-gutter" editable @tab-click="onClick" @delete="onClose">
+    <a-tabs type="card-gutter" :active-key="route.path" editable @tab-click="onClick" @delete="onClose">
       <a-tab-pane
         v-for="item of navtabStore.tabList"
         :key="item.path"

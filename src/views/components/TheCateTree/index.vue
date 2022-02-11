@@ -2,13 +2,11 @@
   <div class="cate-tree">
     <!-- 搜索框 -->
     <div class="search-wrap">
-      <a-input
-        allow-clear
-        :maxlength="20"
-        :placeholder="placeholder"
-        v-model="inputValue"
-        @input="handleInput"
-      ></a-input>
+      <a-input allow-clear :maxlength="20" :placeholder="placeholder" v-model="inputValue" @input="handleInput">
+        <template #prefix>
+          <icon-search />
+        </template>
+      </a-input>
     </div>
     <!-- 分类树 -->
     <div class="wrap">
@@ -343,10 +341,12 @@ const handleInput = () => {
 // }
 .cate-tree {
   flex: 1;
+  padding: $padding;
   overflow: hidden;
   position: relative;
   display: flex;
   flex-direction: column;
+  box-sizing: border-box;
   .search-wrap {
     display: flex;
     align-items: center;

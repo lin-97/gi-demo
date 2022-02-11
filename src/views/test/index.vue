@@ -5,8 +5,7 @@
       :style="{ width: '200px', borderRadius: '4px' }"
       @menu-item-click="menuItemClick"
     >
-      <a-menu-item>自定义组件</a-menu-item>
-      <a-divider style="margin-top: 0" />
+      <GiTitle title="自定义组件" style="margin-bottom: 14px"></GiTitle>
       <a-menu-item v-for="item in menuList" :key="item.value">{{ item.name }}</a-menu-item>
     </a-menu>
 
@@ -18,6 +17,7 @@
 
 <script lang="ts" setup name="Test">
 import { ref } from 'vue'
+import GiTitle from '@/components/GiTitle.vue'
 import TextRadio from './components/TextRadio.vue'
 import TextSwitch from './components/TextSwitch.vue'
 import Tag from './components/Tag.vue'
