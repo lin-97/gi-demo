@@ -13,7 +13,7 @@ export default defineConfig({
       '@': fileURLToPath(new URL('./src', import.meta.url))
     }
   },
-  base: './',
+  base: '/gi-demo/',
   // 引入sass全局样式变量
   css: {
     preprocessorOptions: {
