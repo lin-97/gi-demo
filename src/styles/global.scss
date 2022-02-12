@@ -27,7 +27,7 @@
 
 // 通用盒子
 .gi_box {
-  background: $border-color;
+  background: var(--color-bg-2);
   border-radius: $box-radius;
   overflow: hidden;
 }

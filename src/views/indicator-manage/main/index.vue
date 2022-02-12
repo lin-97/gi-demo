@@ -175,7 +175,7 @@ const onDelete = (row) => {
   flex-direction: column;
   overflow: hidden;
   .tab {
-    background: var(--color-bg-3);
+    background: var(--color-bg-2);
   }
   .wrap {
     flex: 1;

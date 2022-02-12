@@ -102,7 +102,7 @@ const logout = () => {
 .arco-layout-header {
   padding: 0 $padding;
   height: 50px;
-  background: var(--color-bg-3);
+  background: var(--color-bg-2);
   display: flex;
   justify-content: space-between;
   align-items: center;

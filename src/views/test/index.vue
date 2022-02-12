@@ -50,7 +50,7 @@ const menuItemClick = () => {
     flex: 1;
     height: 100%;
     padding: $padding;
-    background: var(--color-bg-3);
+    background: var(--color-bg-2);
     margin-left: $margin;
     border-radius: $box-radius;
     box-sizing: border-box;

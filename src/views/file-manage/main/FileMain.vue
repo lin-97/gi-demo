@@ -161,7 +161,7 @@ const handleMulDelete = () => {
     margin-top: $margin;
     overflow: hidden;
     overflow-y: scroll;
-    background: var(--color-bg-4);
+    background: var(--color-bg-5);
     display: flex;
     flex-wrap: wrap;
     align-content: flex-start;
