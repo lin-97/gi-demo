@@ -7,7 +7,7 @@
           <IconCamera />
         </template>
       </a-avatar>
-      <section class="user-name">黄林</section>
+      <section class="user-name">Lin</section>
       <section class="label-list">
         <div><icon-user /><span>前端开发工程师</span></div>
         <div><icon-safe /><span>前端</span></div>

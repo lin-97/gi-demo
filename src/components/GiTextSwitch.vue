@@ -98,6 +98,7 @@ const onSwitch = (flag: boolean) => {
       user-select: none;
     }
     .item {
+      white-space: nowrap;
       &.disabled {
         cursor: not-allowed;
       }

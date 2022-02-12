@@ -5,18 +5,20 @@
 
     <a-row justify="space-between">
       <!-- 左侧区域 -->
-      <a-space>
-        <a-dropdown>
-          <a-button type="primary"><icon-upload /> 上传</a-button>
-          <template #content>
-            <a-doption>上传文件</a-doption>
-            <a-doption>上传文件夹</a-doption>
-          </template>
-        </a-dropdown>
+      <a-space :direction="width < 1280 ? 'vertical' : 'horizontal'">
+        <a-space>
+          <a-dropdown>
+            <a-button type="primary"><icon-upload /> 上传</a-button>
+            <template #content>
+              <a-doption>上传文件</a-doption>
+              <a-doption>上传文件夹</a-doption>
+            </template>
+          </a-dropdown>
 
-        <a-button type="primary" @click="isBatchMode = !isBatchMode"
-          ><icon-select-all /> {{ isBatchMode ? '取消批量操作' : '批量操作' }}</a-button
-        >
+          <a-button type="primary" @click="isBatchMode = !isBatchMode"
+            ><icon-select-all /> {{ isBatchMode ? '取消批量操作' : '批量操作' }}</a-button
+          >
+        </a-space>
         <a-input-group>
           <a-select style="width: 120px" placeholder="请选择...">
             <a-option v-for="item in fileTypeList" :key="item.value">
@@ -102,6 +104,9 @@ import { Message, Modal } from '@arco-design/web-vue'
 import { fileTypeList } from '@/libs/file-map'
 import { useFileStore } from '@/store'
 import FileContextMenu from './FileContextMenu/index'
+import { useWindowSize } from '@vueuse/core'
+
+const { width } = useWindowSize()
 
 const fileStore = useFileStore()
 

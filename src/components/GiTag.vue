@@ -34,6 +34,7 @@ let getClassName = computed(() => {
   color: #fff;
   justify-content: center;
   align-items: center;
+  white-space: nowrap;
   cursor: pointer;
 }
 .gi-tag-dark {

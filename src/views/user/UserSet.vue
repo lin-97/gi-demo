@@ -68,6 +68,7 @@ const form = reactive({
   margin: $margin;
   display: flex;
   background: var(--color-bg-2);
+  overflow: hidden;
   .menu {
     border-right: 1px solid var(--color-border-2);
   }
