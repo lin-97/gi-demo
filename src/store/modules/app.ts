@@ -73,8 +73,8 @@ export const useAppStore = defineStore({
       window.localStorage.setItem('ActivePath', JSON.stringify(path))
     },
     // 切换主题  暗黑模式|简白模式
-    toggleTheme(dark: boolean) {
-      if (dark) {
+    toggleTheme(isDark: boolean) {
+      if (isDark) {
         this.theme = 'dark'
         document.body.setAttribute('arco-theme', 'dark')
       } else {

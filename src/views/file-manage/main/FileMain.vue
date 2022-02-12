@@ -59,9 +59,9 @@
             </a-button>
           </a-tooltip>
           <a-tooltip content="视图" position="bottom">
-            <a-button @click="fileStore.changeViewMode(fileStore.viewMode == 1 ? 2 : 1)">
+            <a-button @click="fileStore.changeViewMode">
               <template #icon>
-                <icon-apps v-if="fileStore.viewMode == 1" />
+                <icon-apps v-if="fileStore.viewMode === 'grid'" />
                 <icon-list v-else />
               </template>
             </a-button>
@@ -71,7 +71,7 @@
     </a-row>
 
     <!-- 文件列表-宫格模式 -->
-    <section class="file-wrap" v-if="fileStore.viewMode == 1" v-loading:[loadingText]="showLoading">
+    <section class="file-wrap" v-if="fileStore.viewMode == 'grid'" v-loading:[loadingText]="showLoading">
       <FileCard
         v-for="item in fileList"
         :key="item.id"
@@ -87,7 +87,7 @@
     <!-- 文件列表-列表模式 -->
     <FileList
       :data="fileList"
-      v-if="fileStore.viewMode == 2"
+      v-if="fileStore.viewMode == 'list'"
       @click="handleClickFile"
       @contextmenu="handleContextMenu"
     ></FileList>
