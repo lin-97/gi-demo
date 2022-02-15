@@ -96,32 +96,39 @@
 
 <script setup lang="ts">
 import { reactive, ref } from 'vue'
+import { Message, Modal } from '@arco-design/web-vue'
+import { fileTypeList, imageTypeList } from '@/libs/file-map'
+import { useFileStore } from '@/store'
+import { useWindowSize } from '@vueuse/core'
+import { api as viewerApi } from 'v-viewer'
+import 'viewerjs/dist/viewer.css'
 import FileNavPath from './FileNavPath.vue'
 import FileCard from './FileCard.vue'
 import FileList from './FileList.vue'
-import fileData from './filedata'
-import { Message, Modal } from '@arco-design/web-vue'
-import { fileTypeList } from '@/libs/file-map'
-import { useFileStore } from '@/store'
 import FileContextMenu from './FileContextMenu/index'
-import { useWindowSize } from '@vueuse/core'
+import fileData from './filedata'
 
 const { width } = useWindowSize()
-
 const fileStore = useFileStore()
 
-let loadingText = ref('等待中...')
-let showLoading = ref(false)
+let loadingText = ref<string>('等待中...')
+let showLoading = ref<boolean>(false)
 
+// 文件列表数据
 let fileList = ref([])
 fileList.value = fileData
 
 // 批量操作
-let isBatchMode = ref(false)
+let isBatchMode = ref<boolean>(false)
 
 // 点击文件
 const handleClickFile = (item) => {
   Message.success(`点击了文件-${item.name}`)
+  if (imageTypeList.includes(item.extendName)) {
+    viewerApi({
+      images: [item.src]
+    })
+  }
 }
 
 // 勾选文件

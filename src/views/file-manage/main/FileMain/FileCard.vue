@@ -14,7 +14,7 @@
 
 <script setup lang="ts">
 import FileImg from './FileImg.vue'
-import { fileImgMap, imageTypeList } from '@/libs/file-map'
+// import { fileImgMap, imageTypeList } from '@/libs/file-map'
 import { computed } from 'vue-demi'
 
 const props = defineProps({
@@ -36,7 +36,7 @@ const props = defineProps({
 })
 
 // 文件名称带后缀
-let fileName = computed(() => {
+let fileName = computed<string>(() => {
   return `${props.data.name}${props.data.extendName ? `.${props.data.extendName}` : ''}`
 })
 
@@ -44,7 +44,6 @@ const emit = defineEmits(['click', 'check', 'contextmenu'])
 
 // 点击事件
 const handleClick = () => {
-  console.log('点击了')
   if (props.checkMode) {
     emit('check', props.data)
   } else {
@@ -53,13 +52,13 @@ const handleClick = () => {
 }
 
 // 鼠标右键事件
-const handleContextmenu = (e) => {
-  // console.log('右键', e)
+const handleContextmenu = (e: Event) => {
   e.preventDefault()
   emit('contextmenu', e, props.data)
 }
 
-const handleChange = (v) => {
+// 选中状态改变
+const handleChange = () => {
   emit('check', props.data)
 }
 </script>

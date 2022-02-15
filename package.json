@@ -16,6 +16,7 @@
     "echarts": "^5.3.0",
     "pinia": "^2.0.11",
     "screenfull": "^6.0.1",
+    "v-viewer": "^3.0.10",
     "vue": "^3.2.29",
     "vue-router": "^4.0.12"
   },

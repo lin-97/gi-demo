@@ -50,7 +50,7 @@ const handleRowClick = (row) => {
 }
 
 // 右键事件
-const handleContextMenu = (e, row) => {
+const handleContextMenu = (e: Event, row) => {
   e.preventDefault()
   emit('contextmenu', row)
 }
