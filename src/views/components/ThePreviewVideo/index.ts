@@ -1,12 +1,12 @@
 import { createApp } from 'vue'
-import FileContextMenu from './index.vue'
+import ThePreviewVideo from './index.vue'
 import ArcoVueIcon from '@arco-design/web-vue/es/icon'
 import ArcoVue from '@arco-design/web-vue'
 
 let instance = null
 let dom = null
 
-function contextMenu(e, fileInfo) {
+function contextMenu(e) {
   return new Promise((resolve, reject) => {
     if (instance !== null) {
       instance.unmount()
@@ -19,17 +19,15 @@ function contextMenu(e, fileInfo) {
     // 挂载组件
     document.body.appendChild(dom)
     // 实例化组件, createApp第二个参数是 props
-    instance = createApp(FileContextMenu, {
-      axis: { x: e.clientX, y: e.clientY },
-      fileInfo: fileInfo,
-      onClick: (mode) => {
-        resolve({ mode: mode, fileInfo: fileInfo })
-        setTimeout(() => {
-          unmount()
-          instance = null
-          dom = null
-        }, 500)
-      },
+    instance = createApp(ThePreviewVideo, {
+      // onClick: (mode) => {
+      //   resolve(mode)
+      //   setTimeout(() => {
+      //     unmount()
+      //     instance = null
+      //     dom = null
+      //   }, 500)
+      // },
       onCancel: () => {
         reject()
         setTimeout(() => {

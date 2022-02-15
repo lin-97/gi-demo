@@ -19,7 +19,8 @@
     "v-viewer": "^3.0.10",
     "vue": "^3.2.29",
     "vue-router": "^4.0.12",
-    "xgplayer": "^2.31.4"
+    "xgplayer": "^2.31.4",
+    "xgplayer-music": "^2.3.2"
   },
   "devDependencies": {
     "@arco-design/web-vue": "^2.17.0",

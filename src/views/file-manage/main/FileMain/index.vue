@@ -106,6 +106,8 @@ import FileNavPath from './FileNavPath.vue'
 import FileCard from './FileCard.vue'
 import FileList from './FileList.vue'
 import FileContextMenu from './FileContextMenu/index'
+import ThePreviewVideo from '@/views/components/ThePreviewVideo/index.ts'
+import ThePreviewAudio from '@/views/components/ThePreviewAudio/index.ts'
 import fileData from './filedata'
 
 const { width } = useWindowSize()
@@ -128,6 +130,12 @@ const handleClickFile = (item) => {
     viewerApi({
       images: [item.src]
     })
+  }
+  if (item.extendName === 'mp4') {
+    ThePreviewVideo().then((res) => {})
+  }
+  if (item.extendName === 'mp3') {
+    ThePreviewAudio().then((res) => {})
   }
 }
 
