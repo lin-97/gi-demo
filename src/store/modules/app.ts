@@ -2,18 +2,11 @@ import { defineStore } from 'pinia'
 
 type Theme = 'light' | 'dark'
 
-type MenuItem = {
-  icon: string
-  id: string
-  name: string
-  path: string
-}
-
 interface AppState {
   systemName: string
   theme: Theme
   activePath: string | null
-  menuList: MenuItem[]
+  menuList: App.MenuItem[]
 }
 
 // 注意: id 是必填的, 并且所有 Store 中唯一, 因为Pinia会将它在devtools显示
@@ -70,7 +63,7 @@ export const useAppStore = defineStore({
     // 设置激活路径地址
     setActivePath(path: string) {
       this.activePath = path
-      window.localStorage.setItem('ActivePath', JSON.stringify(path))
+      window.localStorage.setItem('ActivePath', path)
     },
     // 切换主题  暗黑模式|简白模式
     toggleTheme(isDark: boolean) {

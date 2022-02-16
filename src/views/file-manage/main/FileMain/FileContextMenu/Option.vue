@@ -6,7 +6,7 @@
 
 <style lang="scss" scoped>
 .option {
-  width: 100px;
+  width: 100%;
   height: 100%;
   font-size: 12px;
   display: flex;

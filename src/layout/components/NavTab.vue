@@ -1,5 +1,5 @@
 <template>
-  <div class="the-nav-tab">
+  <div class="nav-tab">
     <a-tabs type="card-gutter" :active-key="route.path" editable @tab-click="onClick" @delete="onClose">
       <a-tab-pane
         v-for="item of navtabStore.tabList"
@@ -63,7 +63,7 @@ const handleNavTab = () => {
     name: route.meta.title || '未命名',
     path: route.path,
     componentName: route.name
-  })
+  } as NavTab.NavTabItem)
   if (route.meta.keepAlive) {
     navtabStore.addCacheItem(route.name)
   }
@@ -98,7 +98,7 @@ const onCloseAll = () => {
 :deep(.arco-tabs-nav-type-card-gutter .arco-tabs-tab) {
   border-bottom-color: transparent !important;
 }
-.the-nav-tab {
+.nav-tab {
   padding-top: 5px;
   background: var(--color-bg-2);
 }

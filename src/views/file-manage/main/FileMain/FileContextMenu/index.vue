@@ -2,18 +2,18 @@
   <transition name="slide-dynamic-origin">
     <div v-show="showContentMenu" class="wrap file-context-menu" ref="contextMenuRef" :style="contentMenuStyle">
       <Option>
-        <OptionItem icon="icon-edit" @click="handleClickMenuItem('edit')">编辑</OptionItem>
-        <OptionItem icon="icon-delete" @click="handleClickMenuItem('delete')">删除</OptionItem>
-        <OptionItem icon="icon-copy" @click="handleClickMenuItem('copy')">复制</OptionItem>
-        <OptionItem icon="icon-download" @click="handleClickMenuItem('download')">下载</OptionItem>
+        <OptionItem icon="menu-edit" @click="handleClickMenuItem('edit')">编辑</OptionItem>
+        <OptionItem icon="menu-delete" @click="handleClickMenuItem('delete')">删除</OptionItem>
+        <OptionItem icon="menu-copy" @click="handleClickMenuItem('copy')">复制</OptionItem>
+        <OptionItem icon="menu-download" @click="handleClickMenuItem('download')">下载</OptionItem>
         <a-popover position="right" :content-style="{ padding: 0, overflow: 'hidden' }">
-          <OptionItem icon="icon-layers" @click="handleClickMenuItem('zip')" v-if="fileInfo.extendName === 'zip'"
+          <OptionItem icon="menu-zip" @click="handleClickMenuItem('zip')" v-if="fileInfo.extendName === 'zip'"
             >解压</OptionItem
           >
           <template #content>
             <Option>
-              <OptionItem icon="icon-download" @click="handleClickMenuItem('zip1')">解压1</OptionItem>
-              <OptionItem icon="icon-download" @click="handleClickMenuItem('zip2')">解压2</OptionItem>
+              <OptionItem icon="file-rar" @click="handleClickMenuItem('zip1')">解压1</OptionItem>
+              <OptionItem icon="file-rar" @click="handleClickMenuItem('zip2')">解压2</OptionItem>
             </Option>
           </template>
         </a-popover>
@@ -22,7 +22,7 @@
   </transition>
 </template>
 
-<script>
+<script lang="ts">
 import { defineComponent, ref, nextTick, onMounted, watch, reactive } from 'vue'
 import Option from './Option.vue'
 import OptionItem from './OptionItem.vue'
@@ -43,14 +43,14 @@ export default defineComponent({
     onCancel: Function
   },
   setup(props) {
-    let showContentMenu = ref(false)
-    let contentMenuStyle = ref({})
-    let contentMenuWidth = ref(0)
-    let contentMenuHeight = ref(0)
-    let contextMenuRef = ref(null)
+    let showContentMenu = ref<boolean>(false)
+    let contentMenuStyle = ref<object>({})
+    let contentMenuWidth = ref<number>(0)
+    let contentMenuHeight = ref<number>(0)
+    let contextMenuRef = ref<HTMLInputElement | null>(null)
 
     const getStyle = () => {
-      const obj = {}
+      const obj: any = {}
       // console.log('props.axis.x', props.axis.x)
       // console.log('props.axis.y', props.axis.y)
       // console.log('window.innerWidth', window.innerWidth)
@@ -81,7 +81,7 @@ export default defineComponent({
     })
 
     // 点击菜单项
-    const handleClickMenuItem = (item) => {
+    const handleClickMenuItem = (item: any) => {
       showContentMenu.value = false
       props.onClick(item)
     }
@@ -119,12 +119,12 @@ export default defineComponent({
 
 <style lang="scss" scoped>
 .wrap {
-  width: 100px;
+  width: 120px;
   position: fixed;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.12), 0 0 6px rgba(0, 0, 0, 0.04);
   border-radius: 4px;
   overflow: hidden;
-  border: 1px solid var(--color-border);
+  border: 1px solid var(--color-border-2);
   background: var(--color-bg-3);
   z-index: 999;
   color: var(--color-text-2);

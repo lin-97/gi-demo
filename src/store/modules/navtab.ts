@@ -2,18 +2,12 @@ import { defineStore } from 'pinia'
 import router from '@/router'
 // console.log('router', router)
 
-type TabListItem = {
-  name: string
-  path: string
-  componentName: string
-}
-
 interface NavTabState {
-  tabList: TabListItem[]
+  tabList: NavTab.NavTabItem[]
   cacheList: string[]
 }
 
-const defaultTabItem = { name: '首页', path: '/home', componentName: 'Home' }
+const defaultTabItem: NavTab.NavTabItem = { name: '首页', path: '/home', componentName: 'Home' }
 
 export const useNavTabStore = defineStore({
   id: 'NavTab', // 页签缓存
@@ -26,8 +20,8 @@ export const useNavTabStore = defineStore({
   getters: {},
   actions: {
     // 添加一个页签, 如果当前路由已经打开, 则不再重复添加
-    addTabItem(item: TabListItem) {
-      let flag = this.tabList.findIndex((i) => i.path === item.path)
+    addTabItem(item: NavTab.NavTabItem) {
+      const flag = this.tabList.findIndex((i) => i.path === item.path)
       if (flag >= 0) return
       this.tabList.push(item)
     },
@@ -39,9 +33,9 @@ export const useNavTabStore = defineStore({
     // 删除一个页签
     removeTabItem(path: string) {
       if (path === defaultTabItem.path) return
-      let index = this.tabList.findIndex((item) => item.path === path)
+      const index = this.tabList.findIndex((item) => item.path === path)
       if (index >= 0) {
-        let isActive = router.currentRoute.value.path === this.tabList[index]['path']
+        const isActive = router.currentRoute.value.path === this.tabList[index]['path']
         // let len = this.tabList.length - 1
         this.tabList.splice(index, 1)
         // if (index == len || isActive) {
@@ -52,7 +46,7 @@ export const useNavTabStore = defineStore({
     },
     // 删除一个缓存页
     removeCacheItem(componentName: string) {
-      let index = this.cacheList.findIndex((item) => item === componentName)
+      const index = this.cacheList.findIndex((item) => item === componentName)
       if (index >= 0) {
         this.cacheList.splice(index, 1)
       }

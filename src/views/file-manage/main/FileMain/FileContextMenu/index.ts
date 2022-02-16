@@ -3,10 +3,10 @@ import FileContextMenu from './index.vue'
 import ArcoVueIcon from '@arco-design/web-vue/es/icon'
 import ArcoVue from '@arco-design/web-vue'
 
-let instance = null
-let dom = null
+let instance: any = null
+let dom: HTMLElement | null = null
 
-function contextMenu(e, fileInfo) {
+function contextMenu(e: Event, fileInfo: File.FileItem) {
   return new Promise((resolve, reject) => {
     if (instance !== null) {
       instance.unmount()
@@ -22,7 +22,7 @@ function contextMenu(e, fileInfo) {
     instance = createApp(FileContextMenu, {
       axis: { x: e.clientX, y: e.clientY },
       fileInfo: fileInfo,
-      onClick: (mode) => {
+      onClick: (mode: string) => {
         resolve({ mode: mode, fileInfo: fileInfo })
         setTimeout(() => {
           unmount()

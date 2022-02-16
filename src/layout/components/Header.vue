@@ -46,13 +46,13 @@
   </a-layout-header>
 </template>
 
-<script lang="ts" setup>
-import { computed, onMounted, ref } from 'vue'
+<script setup lang="ts">
 import { Modal } from '@arco-design/web-vue'
 import { useRouter } from 'vue-router'
+import { useAppStore, useUserStore } from '@/store'
 import GiFullScreenBtn from '@/components/GiFullScreenBtn.vue'
 import GiToggleThemeBtn from '@/components/GiToggleThemeBtn.vue'
-import { useAppStore, useUserStore } from '@/store'
+
 const router = useRouter()
 const appStore = useAppStore()
 const userStore = useUserStore()

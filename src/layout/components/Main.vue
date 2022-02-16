@@ -1,7 +1,7 @@
 <template>
-  <a-layout class="the-main">
+  <a-layout class="main">
     <router-view>
-      <template #default="{ Component, route }">
+      <template #default="{ Component }">
         <transition name="fade-transform" mode="out-in" appear>
           <keep-alive :include="navtabStore.cacheList">
             <component :is="Component" />
@@ -18,7 +18,7 @@ const navtabStore = useNavTabStore()
 </script>
 
 <style lang="scss" scoped>
-.the-main {
+.main {
   width: 100%;
   height: 100%;
   display: flex;

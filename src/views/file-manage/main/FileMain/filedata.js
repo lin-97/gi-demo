@@ -32,9 +32,9 @@ const list = [
   {
     id: '004',
     type: 'file',
-    name: '哈哈',
+    name: '林宥嘉·脆弱一分钟',
     extendName: 'mp3',
-    src: null,
+    src: '//sf1-cdn-tos.huoshanstatic.com/obj/media-fe/xgplayer_doc_video/music/audio.mp3',
     updateTime: '2022-01-20 18:30:00',
     isDir: false,
     filePath: '/'
@@ -42,9 +42,9 @@ const list = [
   {
     id: '005',
     type: 'file',
-    name: '哈哈',
+    name: '西瓜视频介绍',
     extendName: 'mp4',
-    src: null,
+    src: '//sf1-cdn-tos.huoshanstatic.com/obj/media-fe/xgplayer_doc_video/mp4/xgplayer-demo-360p.mp4',
     updateTime: '2022-01-20 18:30:00',
     isDir: false,
     filePath: '/'

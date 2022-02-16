@@ -1,7 +1,7 @@
 <template>
   <div class="option-item" :class="{ more: mode === 'more', active: active }" @click="handleClick">
     <section class="wrap">
-      <component :is="icon" size="16" :stroke-width="2" style="margin-right: 2px"></component>
+      <GiSvgIcon :name="icon" style="margin-right: 4px"></GiSvgIcon>
       <slot
         ><span>{{ label }}</span></slot
       >
@@ -11,6 +11,7 @@
 </template>
 
 <script setup lang="ts">
+import GiSvgIcon from '@/components/GiSvgIcon.vue'
 const props = defineProps({
   icon: {
     type: String,
@@ -41,14 +42,14 @@ const handleClick = () => {
 <style lang="scss" scoped>
 .option-item {
   padding: 0 5px 0 8px;
-  height: 30px;
-  line-height: 30px;
+  height: 34px;
+  line-height: 34px;
   cursor: pointer;
   user-select: none;
   position: relative;
   display: flex;
   align-items: center;
-  font-size: 1.08em;
+  font-size: 14px;
   .wrap {
     display: flex;
     align-items: center;

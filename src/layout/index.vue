@@ -1,5 +1,5 @@
 <template>
-  <a-layout class="the-layout">
+  <a-layout class="layout">
     <Aside></Aside>
     <a-layout>
       <Header></Header>
@@ -9,15 +9,15 @@
   </a-layout>
 </template>
 
-<script lang="ts" setup>
+<script setup lang="ts">
 import Aside from './components/Aside.vue'
 import Header from './components/Header.vue'
 import Main from './components/Main.vue'
 import NavTab from './components/NavTab.vue'
 </script>
 
-<style scoped>
-.the-layout {
+<style lang="scss" scoped>
+.layout {
   height: 100%;
 }
 </style>

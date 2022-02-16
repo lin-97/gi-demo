@@ -6,25 +6,27 @@
 </template>
 
 <script lang="ts">
-import { ref, onMounted, defineComponent } from 'vue'
+import { ref, onMounted, onBeforeUnmount, defineComponent } from 'vue'
 import 'xgplayer'
 import Music from 'xgplayer-music'
 
 export default defineComponent({
   props: {
+    fileInfo: Object,
     onCancel: Function
   },
   setup(props) {
     let visible = ref<boolean>(false)
+    let player = ref<any>(null)
 
     onMounted(() => {
       visible.value = true
-      let player = new Music({
+      player.value = new Music({
         id: 'audio',
         url: [
           {
-            src: '//sf1-cdn-tos.huoshanstatic.com/obj/media-fe/xgplayer_doc_video/music/audio.mp3',
-            name: '林宥嘉·脆弱一分钟',
+            src: props.fileInfo?.src,
+            name: props.fileInfo?.name,
             poster: '//sf1-cdn-tos.huoshanstatic.com/obj/media-fe/xgplayer_doc_video/music/poster-small.jpeg'
           }
         ],
@@ -37,8 +39,12 @@ export default defineComponent({
         autoplay: true
       })
 
-      player.crossOrigin = 'anonymous'
-      player.analyze(document.querySelector('canvas'))
+      player.value.crossOrigin = 'anonymous'
+      player.value.analyze(document.querySelector('canvas'))
+    })
+
+    onBeforeUnmount(() => {
+      player.value = null
     })
 
     const handleCancel = () => {

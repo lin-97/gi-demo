@@ -5,23 +5,29 @@
 </template>
 
 <script lang="ts">
-import { ref, onMounted, defineComponent } from 'vue'
+import { ref, onMounted, onBeforeUnmount, defineComponent } from 'vue'
 import Player from 'xgplayer/dist/simple_player'
 
 export default defineComponent({
   props: {
+    fileInfo: Object,
     onCancel: Function
   },
   setup(props) {
     let visible = ref<boolean>(false)
+    let player = ref<any>(null)
 
     onMounted(() => {
       visible.value = true
-      let player = new Player({
+      player.value = new Player({
         id: 'video',
-        url: '//sf1-cdn-tos.huoshanstatic.com/obj/media-fe/xgplayer_doc_video/mp4/xgplayer-demo-360p.mp4',
+        url: props.fileInfo?.src,
         autoplay: true
       })
+    })
+
+    onBeforeUnmount(() => {
+      player.value = null
     })
 
     const handleCancel = () => {

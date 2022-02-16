@@ -1,6 +1,6 @@
 <template>
   <img class="img" :src="props.data.src" v-if="isImg" />
-  <GiSvgIcon class="svg" :name="getFileImg" v-else></GiSvgIcon>
+  <GiSvgIcon size="100%" :name="getFileImg" v-else></GiSvgIcon>
 </template>
 
 <script setup lang="ts">
@@ -32,10 +32,4 @@ let getFileImg = computed<string>(() => {
 })
 </script>
 
-<style lang="scss" scoped>
-.img,
-.svg {
-  width: 100%;
-  height: 100%;
-}
-</style>
+<style lang="scss" scoped></style>

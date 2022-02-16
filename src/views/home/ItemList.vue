@@ -3,7 +3,7 @@
     <div class="list">
       <section class="list-item" v-for="item in list" :key="item.name">
         <div class="head">
-          <GiSvgIcon class="icon" :name="item.icon"></GiSvgIcon>
+          <GiSvgIcon :size="30" :name="item.icon"></GiSvgIcon>
           <span>{{ item.name }}</span>
         </div>
         <p class="text">{{ item.text }}</p>
@@ -74,10 +74,6 @@ const list = [
     .head {
       display: flex;
       align-items: center;
-      .icon {
-        width: 30px;
-        height: 30px;
-      }
       span {
         margin-left: 10px;
         font-size: 1.125rem;

@@ -32,8 +32,16 @@ const onBlur = () => {
 
 <style lang="scss" scoped>
 .file-nav-path {
+  height: 44px;
+  padding: 0 $padding;
   margin-bottom: 14px;
+  display: flex;
+  align-items: flex-end;
+  :deep(.arco-input) {
+    width: 100%;
+  }
   .path {
+    width: 100%;
     height: 32px;
     display: flex;
     align-items: center;

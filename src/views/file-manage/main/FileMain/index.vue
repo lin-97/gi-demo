@@ -3,7 +3,7 @@
     <!-- 面包屑导航 -->
     <FileNavPath></FileNavPath>
 
-    <a-row justify="space-between">
+    <a-row justify="space-between" class="row-operate">
       <!-- 左侧区域 -->
       <a-space :direction="width < 1280 ? 'vertical' : 'horizontal'">
         <a-space>
@@ -16,7 +16,7 @@
           </a-dropdown>
 
           <a-button type="primary" @click="isBatchMode = !isBatchMode"
-            ><icon-select-all /> {{ isBatchMode ? '取消批量操作' : '批量操作' }}</a-button
+            ><icon-select-all /> {{ isBatchMode ? '取消批量' : '批量操作' }}</a-button
           >
         </a-space>
         <a-input-group>
@@ -71,26 +71,35 @@
     </a-row>
 
     <!-- 文件列表-宫格模式 -->
-    <section class="file-wrap" v-if="fileStore.viewMode == 'grid'" v-loading:[loadingText]="showLoading">
-      <FileCard
-        v-for="item in fileList"
-        :key="item.id"
-        :data="item"
-        :check-mode="isBatchMode"
-        :checked="fileStore.selectedFileIdList.includes(item.id)"
-        @click="handleClickFile(item)"
-        @check="handleCheckFile(item)"
-        @contextmenu="handleContextMenu"
-      ></FileCard>
-    </section>
+    <section class="file-wrap" v-loading:[loadingText]="showLoading">
+      <template v-if="fileStore.viewMode == 'grid'">
+        <!-- <div class="file-grid">
+          <FileCard
+            v-for="item in fileList"
+            :key="item.id"
+            :data="item"
+            :check-mode="isBatchMode"
+            :checked="fileStore.selectedFileIdList.includes(item.id)"
+            @click="handleClickFile(item)"
+            @check="handleCheckFile(item)"
+            @contextmenu="handleContextMenu"
+          ></FileCard>
+        </div> -->
+        <FileGrid
+          :data="fileList"
+          :is-batch-mode="isBatchMode"
+          :selectedFileIdList="fileStore.selectedFileIdList"
+          @click="handleClickFile"
+          @check="handleCheckFile"
+          @contextmenu="handleContextMenu"
+        ></FileGrid>
+      </template>
 
-    <!-- 文件列表-列表模式 -->
-    <FileList
-      :data="fileList"
-      v-if="fileStore.viewMode == 'list'"
-      @click="handleClickFile"
-      @contextmenu="handleContextMenu"
-    ></FileList>
+      <template v-else>
+        <!-- 文件列表-列表模式 -->
+        <FileList :data="fileList" @click="handleClickFile" @contextmenu="handleContextMenu"></FileList>
+      </template>
+    </section>
   </div>
 </template>
 
@@ -104,6 +113,7 @@ import { api as viewerApi } from 'v-viewer'
 import 'viewerjs/dist/viewer.css'
 import FileNavPath from './FileNavPath.vue'
 import FileCard from './FileCard.vue'
+import FileGrid from './FileGrid.vue'
 import FileList from './FileList.vue'
 import FileContextMenu from './FileContextMenu/index'
 import ThePreviewVideo from '@/views/components/ThePreviewVideo/index.ts'
@@ -132,10 +142,10 @@ const handleClickFile = (item) => {
     })
   }
   if (item.extendName === 'mp4') {
-    ThePreviewVideo().then((res) => {})
+    ThePreviewVideo(item)
   }
   if (item.extendName === 'mp3') {
-    ThePreviewAudio().then((res) => {})
+    ThePreviewAudio(item)
   }
 }
 
@@ -166,14 +176,26 @@ const handleMulDelete = () => {
   flex: 1;
   background: var(--color-bg-2);
   margin: $margin;
-  padding: $padding;
   border-radius: $box-radius;
   display: flex;
   flex-direction: column;
   overflow: hidden;
+  .row-operate {
+    border-bottom: 1px solid var(--color-border);
+    margin: 0 $padding;
+    padding-bottom: $padding;
+  }
   .file-wrap {
     flex: 1;
-    margin-top: $margin;
+    padding: 0 $padding $padding;
+    box-sizing: border-box;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+  }
+  .file-grid {
+    flex: 1;
+    padding-top: $margin;
     overflow: hidden;
     overflow-y: scroll;
     background: var(--color-bg-5);

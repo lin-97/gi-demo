@@ -2,20 +2,9 @@ import { defineStore } from 'pinia'
 
 type ViewMode = 'grid' | 'list'
 
-interface FileItem {
-  id: string,
-  type: string,
-  name: string,
-  extendName: string,
-  src: string | null,
-  updateTime: string,
-  isDir: boolean,
-  filePath: string
-}
-
 interface FileState {
   viewMode: ViewMode
-  selectedFileList: FileItem[]
+  selectedFileList: File.FileItem[]
   isBatchMode: boolean
 }
 
@@ -28,22 +17,22 @@ export const useFileStore = defineStore({
       // 是否批量操作: true:批量 false:单文件
       isBatchMode: false,
       // 当前批量勾选的文件列表
-      selectedFileList: JSON.parse(sessionStorage.getItem('FILE_LIST') as string) || [],
+      selectedFileList: JSON.parse(sessionStorage.getItem('FILE_LIST') as string) || []
     }
   },
   getters: {
     // 当前勾选文件的id数组
-    selectedFileIdList():string[] {
+    selectedFileIdList(): string[] {
       return this.selectedFileList.map((i) => i.id)
     }
   },
   actions: {
     // 改变视图模式
     changeViewMode() {
-      this.viewMode = this.viewMode === 'grid' ? 'list': 'grid'
+      this.viewMode = this.viewMode === 'grid' ? 'list' : 'grid'
     },
     // 添加选中的文件到文件勾选列表
-    addSelectedFileItem(item:FileItem) {
+    addSelectedFileItem(item: File.FileItem) {
       if (this.selectedFileIdList.includes(item.id)) {
         let index = this.selectedFileList.findIndex((i) => i.id === item.id)
         this.selectedFileList.splice(index, 1)
