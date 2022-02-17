@@ -73,18 +73,6 @@
     <!-- 文件列表-宫格模式 -->
     <section class="file-wrap" v-loading:[loadingText]="showLoading">
       <template v-if="fileStore.viewMode == 'grid'">
-        <!-- <div class="file-grid">
-          <FileCard
-            v-for="item in fileList"
-            :key="item.id"
-            :data="item"
-            :check-mode="isBatchMode"
-            :checked="fileStore.selectedFileIdList.includes(item.id)"
-            @click="handleClickFile(item)"
-            @check="handleCheckFile(item)"
-            @contextmenu="handleContextMenu"
-          ></FileCard>
-        </div> -->
         <FileGrid
           :data="fileList"
           :isBatchMode="isBatchMode"
@@ -117,7 +105,6 @@ import { useWindowSize } from '@vueuse/core'
 import { api as viewerApi } from 'v-viewer'
 import 'viewerjs/dist/viewer.css'
 import FileNavPath from './FileNavPath.vue'
-import FileCard from './FileCard.vue'
 import FileGrid from './FileGrid.vue'
 import FileList from './FileList.vue'
 import FileContextMenu from './FileContextMenu/index'
