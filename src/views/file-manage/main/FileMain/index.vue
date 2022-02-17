@@ -87,7 +87,7 @@
         </div> -->
         <FileGrid
           :data="fileList"
-          :is-batch-mode="isBatchMode"
+          :isBatchMode="isBatchMode"
           :selectedFileIdList="fileStore.selectedFileIdList"
           @click="handleClickFile"
           @check="handleCheckFile"
@@ -97,7 +97,12 @@
 
       <template v-else>
         <!-- 文件列表-列表模式 -->
-        <FileList :data="fileList" @click="handleClickFile" @contextmenu="handleContextMenu"></FileList>
+        <FileList
+          :data="fileList"
+          :isBatchMode="isBatchMode"
+          @click="handleClickFile"
+          @contextmenu="handleContextMenu"
+        ></FileList>
       </template>
     </section>
   </div>

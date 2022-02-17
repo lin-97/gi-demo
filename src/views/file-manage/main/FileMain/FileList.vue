@@ -1,14 +1,11 @@
 <template>
   <div class="file-list-wrap">
     <a-table
+      row-key="id"
       :data="props.data"
       :bordered="false"
       :pagination="false"
-      row-key="id"
-      :row-selection="{
-        type: 'checkbox',
-        showCheckedAll: isBatchMode
-      }"
+      :row-selection="isBatchMode ? rowSelection : undefined"
       @row-click="handleRowClick"
     >
       <template #columns>
@@ -30,6 +27,7 @@
 </template>
 
 <script setup lang="ts">
+import { reactive } from 'vue'
 import FileImg from './FileImg.vue'
 
 const props = defineProps({
@@ -43,6 +41,11 @@ const props = defineProps({
     type: Boolean,
     default: false
   }
+})
+
+const rowSelection = reactive({
+  type: 'checkbox',
+  showCheckedAll: true
 })
 
 const emit = defineEmits(['click', 'contextmenu'])
