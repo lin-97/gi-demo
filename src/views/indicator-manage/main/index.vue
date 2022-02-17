@@ -1,7 +1,7 @@
 <template>
   <div class="manage">
     <section class="tab">
-      <a-tabs v-model="activeName">
+      <a-tabs v-model:active-key="activeName">
         <a-tab-pane key="1" title="原子指标管理"> </a-tab-pane>
         <a-tab-pane key="2" title="时间周期管理"> </a-tab-pane>
         <a-tab-pane key="3" title="维度管理"> </a-tab-pane>
@@ -65,7 +65,7 @@
                 <template #cell="{ record }">{{ record.index + 1 }}</template>
               </a-table-column>
               <a-table-column title="名称" data-index="name" width="150"></a-table-column>
-              <a-table-column title="创建时间" data-index="createTime"></a-table-column>
+              <a-table-column title="创建时间" data-index="time"></a-table-column>
               <a-table-column title="地址" data-index="address"></a-table-column>
               <a-table-column title="比例" width="200">
                 <template #cell="{ record }">
@@ -100,22 +100,28 @@
 </template>
 
 <script setup lang="ts" name="IndicatorManage">
-import { onMounted, reactive, ref } from 'vue'
-import { useRoute, useRouter } from 'vue-router'
+import { reactive, ref } from 'vue'
+import { useRouter } from 'vue-router'
 import { Modal } from '@arco-design/web-vue'
 import GiTitle from '@/components/GiTitle.vue'
 import TheCateTree from '@/views/components/TheCateTree/index.vue'
 import EditDialog from './EditDialog.vue'
 import { getTableList } from '@/apis/table'
-const route = useRoute()
+import getData from './data.js'
+
 const router = useRouter()
 
-let activeName = ref('3')
+let activeName = ref<string>('2')
 
-const tableData = ref([])
-let showLoading = ref(false)
+const tableData = ref<object[]>([])
+let showLoading = ref<boolean>(false)
 
-const pageInfo = reactive({
+type PageInfo = {
+  page: number
+  size: number
+}
+
+const pageInfo = reactive<PageInfo>({
   page: 1,
   size: 1000
 })
@@ -127,10 +133,12 @@ const getTableData = async () => {
     tableData.value = res.data.list
     showLoading.value = false
   } catch (error) {
+    tableData.value = getData()
     showLoading.value = false
     return error
   }
 }
+
 getTableData()
 
 // 批量删除

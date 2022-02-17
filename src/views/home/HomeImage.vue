@@ -1,11 +1,11 @@
 <template>
-  <div class="home-img">
-    <img src="../../assets/images/home/home-design.svg" />
+  <div class="home-image">
+    <img src="@/assets/images/home/home-design.svg" />
   </div>
 </template>
 
 <style lang="scss" scoped>
-.home-img {
+.home-image {
   padding: 20px;
   box-sizing: border-box;
   background: var(--color-bg-2);

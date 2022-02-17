@@ -20,8 +20,8 @@
   </div>
 </template>
 
-<script lang="ts" setup>
-import { onMounted, reactive, ref } from 'vue'
+<script setup lang="ts">
+import { ref } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 const route = useRoute()
 const router = useRouter()
@@ -32,26 +32,11 @@ type ListItem = {
 }
 
 const list = ref<ListItem[]>([
-  {
-    label: '姓名：',
-    value: 'Lin'
-  },
-  {
-    label: '手机号：',
-    value: '123-1234-1234'
-  },
-  {
-    label: '邮箱：',
-    value: '326010228@qq.com'
-  },
-  {
-    label: '性别：',
-    value: '男'
-  },
-  {
-    label: '地址：',
-    value: '广州天河区'
-  }
+  { label: '姓名：', value: 'Lin' },
+  { label: '手机号：', value: '123-1234-1234' },
+  { label: '邮箱：', value: '326010228@qq.com' },
+  { label: '性别：', value: '男' },
+  { label: '地址：', value: '广州越秀区' }
 ])
 
 const back = () => {
@@ -69,6 +54,7 @@ const back = () => {
     margin-top: $margin;
     padding: 20px 30px;
     background: var(--color-bg-2);
+    border-radius: 2px;
   }
 }
 </style>

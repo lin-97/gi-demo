@@ -1,28 +1,28 @@
 <template>
   <div class="gi_flex_box home">
     <a-card title="工作台" :bordered="false" :style="{ marginTop: '10px' }">
-      <WorkPlatform></WorkPlatform>
+      <HomeWorkPlatform></HomeWorkPlatform>
     </a-card>
 
     <div class="wrap">
       <section class="left">
-        <div class="item"><ItemList></ItemList></div>
-        <div class="item"><MsgList></MsgList></div>
+        <div class="item"><HomeItemGrid></HomeItemGrid></div>
+        <div class="item"><HomeMsgList></HomeMsgList></div>
       </section>
       <section class="right">
-        <div class="item"><Chart></Chart></div>
-        <div class="item"><HomeImg></HomeImg></div>
+        <div class="item"><HomeChart></HomeChart></div>
+        <div class="item"><HomeImage></HomeImage></div>
       </section>
     </div>
   </div>
 </template>
 
-<script lang="ts" setup name="Home">
-import WorkPlatform from './WorkPlatform.vue'
-import ItemList from './ItemList.vue'
-import MsgList from './MsgList.vue'
-import Chart from './Chart.vue'
-import HomeImg from './HomeImg.vue'
+<script setup lang="ts" name="Home">
+import HomeWorkPlatform from './HomeWorkPlatform.vue'
+import HomeItemGrid from './HomeItemGrid.vue'
+import HomeMsgList from './HomeMsgList.vue'
+import HomeChart from './HomeChart.vue'
+import HomeImage from './HomeImage.vue'
 </script>
 
 <style lang="scss" scoped>

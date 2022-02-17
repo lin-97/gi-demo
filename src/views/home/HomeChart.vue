@@ -4,7 +4,7 @@
   </div>
 </template>
 
-<script lang="ts" setup>
+<script setup lang="ts">
 import { onMounted } from '@vue/runtime-core'
 import * as echarts from 'echarts'
 

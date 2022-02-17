@@ -22,7 +22,6 @@
 
 <script setup lang="ts">
 import { computed, reactive, watch } from 'vue'
-const emit = defineEmits(['update:modelValue'])
 
 const props = defineProps({
   // 绑定的值
@@ -36,7 +35,13 @@ const props = defineProps({
   }
 })
 
-const form = reactive({
+type Form = {
+  name: string
+  address: string
+  status: boolean
+}
+
+const form = reactive<Form>({
   name: '',
   address: '',
   status: false
@@ -47,12 +52,10 @@ const rules = reactive({
     { required: true, message: '请输入姓名' },
     { minLength: 1, maxLength: 4, message: '名字最长不超过4个字符' }
   ],
-  status: [
-    {
-      required: true
-    }
-  ]
+  status: [{ required: true }]
 })
+
+const emit = defineEmits(['update:modelValue'])
 
 let visible = computed<boolean>({
   get: () => {
