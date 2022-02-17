@@ -107,7 +107,6 @@ import GiTitle from '@/components/GiTitle.vue'
 import TheCateTree from '@/views/components/TheCateTree/index.vue'
 import EditDialog from './EditDialog.vue'
 import { getTableList } from '@/apis/table'
-import getData from './data.js'
 
 const router = useRouter()
 
@@ -133,7 +132,6 @@ const getTableData = async () => {
     tableData.value = res.data.list
     showLoading.value = false
   } catch (error) {
-    tableData.value = getData()
     showLoading.value = false
     return error
   }
