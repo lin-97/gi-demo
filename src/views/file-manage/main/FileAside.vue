@@ -1,7 +1,7 @@
 <template>
-  <div class="file-aside">
+  <div class="file-aside" v-if="width > 715">
     <a-menu
-      :style="{ width: '250px', height: '100%', 'border-radius': '2px' }"
+      :style="{ width: '220px', height: '100%', 'border-radius': '2px' }"
       :default-open-keys="['0']"
       :default-selected-keys="[currentKey]"
     >
@@ -25,8 +25,11 @@
 <script setup lang="ts">
 import { ref, watch } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
+import { useWindowSize } from '@vueuse/core'
 const route = useRoute()
 const router = useRouter()
+
+const { width } = useWindowSize()
 
 interface FileTypeListItem {
   key: string
@@ -64,7 +67,7 @@ const onClickMenuItem = (item: FileTypeListItem) => {
 
 <style lang="scss" scoped>
 .file-aside {
-  height: 60%;
+  height: fit-content;
   padding: $margin 0 $margin $margin;
   .title {
     height: 40px;

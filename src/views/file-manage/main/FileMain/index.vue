@@ -25,16 +25,16 @@
               <component :is="item.icon" size="18" style="color: #bbb; margin-right: 5px"></component>{{ item.name }}
             </a-option>
           </a-select>
-          <a-input-search :style="{ width: '360px' }" placeholder="请输入关键词..." allow-clear search-button>
+          <a-input-search :style="{ width: '100%' }" placeholder="请输入关键词..." allow-clear search-button>
             <template #button-icon>
               <icon-search />
             </template>
-            <template #button-default> 查询 </template>
+            <template #button-default>查询 </template>
           </a-input-search>
         </a-input-group>
       </a-space>
       <!-- 右侧区域 -->
-      <a-space>
+      <a-space v-if="width > 715">
         <a-button
           v-if="isBatchMode"
           :disabled="!fileStore.selectedFileIdList.length"
@@ -99,7 +99,7 @@
 <script setup lang="ts">
 import { reactive, ref } from 'vue'
 import { Message, Modal } from '@arco-design/web-vue'
-import { fileTypeList, imageTypeList } from '@/libs/file-map'
+import { imageTypeList } from '@/libs/file-map'
 import { useFileStore } from '@/store'
 import { useWindowSize } from '@vueuse/core'
 import { api as viewerApi } from 'v-viewer'
@@ -119,19 +119,21 @@ let loadingText = ref<string>('等待中...')
 let showLoading = ref<boolean>(false)
 
 // 文件列表数据
-let fileList = ref([])
+let fileList = ref<File.FileItem[]>([])
 fileList.value = fileData
 
 // 批量操作
 let isBatchMode = ref<boolean>(false)
 
 // 点击文件
-const handleClickFile = (item) => {
+const handleClickFile = (item: File.FileItem) => {
   Message.success(`点击了文件-${item.name}`)
   if (imageTypeList.includes(item.extendName)) {
-    viewerApi({
-      images: [item.src]
-    })
+    if (item.src) {
+      viewerApi({
+        images: [item.src]
+      })
+    }
   }
   if (item.extendName === 'mp4') {
     ThePreviewVideo(item)
@@ -142,13 +144,17 @@ const handleClickFile = (item) => {
 }
 
 // 勾选文件
-const handleCheckFile = (item) => {
+const handleCheckFile = (item: File.FileItem) => {
   fileStore.addSelectedFileItem(item)
 }
 
+interface FileItem extends File.FileItem {
+  mode: string
+}
+
 // 鼠标右键
-const handleContextMenu = (e, fileItem) => {
-  FileContextMenu(e, fileItem).then((res: object) => {
+const handleContextMenu = (e: Event, fileItem: File.FileItem) => {
+  FileContextMenu(e, fileItem).then((res: any) => {
     Message.success('点击了' + res.mode)
     if (res.mode === 'delete') {
       Modal.warning({

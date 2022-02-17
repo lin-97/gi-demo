@@ -1,6 +1,7 @@
 <template>
   <ul class="file-grid">
     <li
+      ref="fileItemRef"
       class="file-grid-item"
       v-for="item in props.data"
       :key="item.id"
@@ -30,7 +31,8 @@
 </template>
 
 <script setup lang="ts">
-// import { computed } from 'vue'
+import { ref } from 'vue'
+import { onLongPress } from '@vueuse/core'
 import FileImg from './FileImg.vue'
 
 const props = defineProps({
@@ -50,6 +52,16 @@ const props = defineProps({
     default: false
   }
 })
+
+const fileItemRef = ref<HTMLElement | null>(null)
+console.log(fileItemRef)
+
+const onLongPressCallbackHook = (e: PointerEvent) => {
+  console.log(fileItemRef)
+  // handleContextMenu(e, {})
+}
+
+onLongPress(fileItemRef, onLongPressCallbackHook)
 
 const emit = defineEmits(['click', 'check', 'contextmenu'])
 

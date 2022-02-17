@@ -85,7 +85,7 @@ export default defineComponent({
     })
 
     // 点击菜单项
-    const handleClickMenuItem = (item: any) => {
+    const handleClickMenuItem = (item: File.FileItem) => {
       showContentMenu.value = false
       props.onClick(item)
     }
