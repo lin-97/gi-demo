@@ -11,7 +11,8 @@
   },
   "dependencies": {
     "@arco-themes/vue-demo": "0.0.11",
-    "@vueuse/core": "^7.6.1",
+    "@vueuse/components": "^7.6.2",
+    "@vueuse/core": "^7.6.2",
     "axios": "^0.25.0",
     "echarts": "^5.3.0",
     "pinia": "^2.0.11",

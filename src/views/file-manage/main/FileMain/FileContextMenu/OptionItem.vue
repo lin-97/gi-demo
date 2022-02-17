@@ -12,6 +12,7 @@
 
 <script setup lang="ts">
 import GiSvgIcon from '@/components/GiSvgIcon.vue'
+
 const props = defineProps({
   icon: {
     type: String,

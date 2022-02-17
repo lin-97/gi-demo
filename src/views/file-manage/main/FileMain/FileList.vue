@@ -1,5 +1,5 @@
 <template>
-  <div class="file-list-wrap">
+  <div class="file-list">
     <a-table
       row-key="id"
       :data="props.data"
@@ -51,19 +51,19 @@ const rowSelection = reactive({
 const emit = defineEmits(['click', 'contextmenu'])
 
 // 行点击事件
-const handleRowClick = (row) => {
+const handleRowClick = (row: File.FileItem) => {
   emit('click', row)
 }
 
 // 右键事件
-const handleContextMenu = (e: Event, row) => {
+const handleContextMenu = (e: Event, row: File.FileItem) => {
   e.preventDefault()
   emit('contextmenu', e, row)
 }
 </script>
 
 <style lang="scss" scoped>
-.file-list-wrap {
+.file-list {
   width: 100%;
   padding-top: $margin;
   overflow: hidden;

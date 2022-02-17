@@ -1,7 +1,6 @@
 <template>
   <ul class="file-grid">
     <li
-      ref="fileItemRef"
       class="file-grid-item"
       v-for="item in props.data"
       :key="item.id"
@@ -31,8 +30,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
-import { onLongPress } from '@vueuse/core'
+import { onMounted, ref } from 'vue'
 import FileImg from './FileImg.vue'
 
 const props = defineProps({
@@ -53,37 +51,27 @@ const props = defineProps({
   }
 })
 
-const fileItemRef = ref<HTMLElement | null>(null)
-console.log(fileItemRef)
-
-const onLongPressCallbackHook = (e: PointerEvent) => {
-  console.log(fileItemRef)
-  // handleContextMenu(e, {})
-}
-
-onLongPress(fileItemRef, onLongPressCallbackHook)
-
 const emit = defineEmits(['click', 'check', 'contextmenu'])
 
 // 文件名称带后缀
-const getFileName = (item) => {
+const getFileName = (item: File.FileItem) => {
   return `${item.name}${item.extendName ? `.${item.extendName}` : ''}`
 }
 
 // 点击事件
-const handleClickFile = (item) => {
+const handleClickFile = (item: File.FileItem) => {
   emit('click', item)
 }
 
 // 选中事件
-const handleCheckFile = (item) => {
+const handleCheckFile = (item: File.FileItem) => {
   emit('check', item)
 }
 
 // 右键事件
-const handleContextMenu = (e: Event, fileInfo: any) => {
+const handleContextMenu = (e: Event, item: File.FileItem) => {
   e.preventDefault()
-  emit('contextmenu', e, fileInfo)
+  emit('contextmenu', e, item)
 }
 </script>
 
