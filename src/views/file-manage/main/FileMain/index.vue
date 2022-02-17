@@ -192,15 +192,5 @@ const handleMulDelete = () => {
     display: flex;
     flex-direction: column;
   }
-  .file-grid {
-    flex: 1;
-    padding-top: $margin;
-    overflow: hidden;
-    overflow-y: scroll;
-    background: var(--color-bg-5);
-    display: flex;
-    flex-wrap: wrap;
-    align-content: flex-start;
-  }
 }
 </style>

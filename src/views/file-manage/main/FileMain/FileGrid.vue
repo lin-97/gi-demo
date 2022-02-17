@@ -1,7 +1,7 @@
 <template>
-  <ul class="file-grid-wrap">
+  <ul class="file-grid">
     <li
-      class="file-card"
+      class="file-grid-item"
       v-for="item in props.data"
       :key="item.id"
       @click="handleClickFile(item)"
@@ -76,7 +76,7 @@ const handleContextMenu = (e: Event, fileInfo: any) => {
 </script>
 
 <style lang="scss" scoped>
-.file-grid-wrap {
+.file-grid {
   flex: 1;
   margin-top: $margin;
   overflow: hidden;
@@ -87,7 +87,7 @@ const handleContextMenu = (e: Event, fileInfo: any) => {
   align-content: flex-start;
 }
 
-.file-card {
+.file-grid-item {
   width: 100px;
   height: 100px;
   // background: pink;
