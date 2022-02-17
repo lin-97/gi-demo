@@ -1,7 +1,7 @@
 <template>
   <div class="option-item" :class="{ more: mode === 'more', active: active }" @click="handleClick">
     <section class="wrap">
-      <GiSvgIcon :name="icon" style="margin-right: 4px"></GiSvgIcon>
+      <GiSvgIcon :name="icon" style="margin-right: 5px"></GiSvgIcon>
       <slot
         ><span>{{ label }}</span></slot
       >
@@ -41,7 +41,7 @@ const handleClick = () => {
 
 <style lang="scss" scoped>
 .option-item {
-  padding: 0 5px 0 8px;
+  padding: 0 5px 0 10px;
   height: 34px;
   line-height: 34px;
   cursor: pointer;

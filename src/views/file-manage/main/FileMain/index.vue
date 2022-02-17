@@ -156,8 +156,15 @@ const handleCheckFile = (item) => {
 
 // 鼠标右键
 const handleContextMenu = (e, fileItem) => {
-  FileContextMenu(e, fileItem).then((res) => {
+  FileContextMenu(e, fileItem).then((res: object) => {
     Message.success('点击了' + res.mode)
+    if (res.mode === 'delete') {
+      Modal.warning({
+        title: '提示',
+        content: '是否删除该文件？',
+        hideCancel: false
+      })
+    }
   })
 }
 

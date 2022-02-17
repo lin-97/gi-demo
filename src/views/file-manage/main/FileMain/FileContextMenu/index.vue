@@ -6,7 +6,11 @@
         <OptionItem icon="menu-delete" @click="handleClickMenuItem('delete')">删除</OptionItem>
         <OptionItem icon="menu-copy" @click="handleClickMenuItem('copy')">复制</OptionItem>
         <OptionItem icon="menu-download" @click="handleClickMenuItem('download')">下载</OptionItem>
-        <a-popover position="right" :content-style="{ padding: 0, overflow: 'hidden' }">
+        <a-popover
+          position="right"
+          :content-style="{ padding: 0, overflow: 'hidden' }"
+          :arrow-style="{ display: 'none' }"
+        >
           <OptionItem icon="menu-zip" @click="handleClickMenuItem('zip')" v-if="fileInfo.extendName === 'zip'"
             >解压</OptionItem
           >
