@@ -110,6 +110,8 @@ import FileList from './FileList.vue'
 import FileContextMenu from './FileContextMenu/index'
 import ThePreviewVideo from '@/views/components/ThePreviewVideo/index.ts'
 import ThePreviewAudio from '@/views/components/ThePreviewAudio/index.ts'
+import TheFileRename from '@/views/components/TheFileRename/index.ts'
+import TheFileMove from '@/views/components/TheFileMove/index.ts'
 import fileData from './filedata'
 
 const { width } = useWindowSize()
@@ -162,6 +164,12 @@ const handleContextMenu = (e: Event, fileItem: File.FileItem) => {
         content: '是否删除该文件？',
         hideCancel: false
       })
+    }
+    if (res.mode === 'rename') {
+      TheFileRename(fileItem)
+    }
+    if (res.mode === 'move') {
+      TheFileMove(fileItem)
     }
   })
 }

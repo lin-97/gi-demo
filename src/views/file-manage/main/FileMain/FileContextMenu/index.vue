@@ -2,9 +2,9 @@
   <transition name="slide-dynamic-origin">
     <div v-show="showContentMenu" class="wrap file-context-menu" ref="contextMenuRef" :style="contentMenuStyle">
       <Option>
-        <OptionItem icon="menu-edit" @click="handleClickMenuItem('edit')">编辑</OptionItem>
-        <OptionItem icon="menu-delete" @click="handleClickMenuItem('delete')">删除</OptionItem>
-        <OptionItem icon="menu-copy" @click="handleClickMenuItem('copy')">复制</OptionItem>
+        <OptionItem icon="menu-edit" @click="handleClickMenuItem('rename')">重命名</OptionItem>
+        <OptionItem icon="menu-move" @click="handleClickMenuItem('move')">移动到</OptionItem>
+        <!-- <OptionItem icon="menu-copy" @click="handleClickMenuItem('copy')">复制到</OptionItem> -->
         <OptionItem icon="menu-download" @click="handleClickMenuItem('download')">下载</OptionItem>
         <a-popover
           position="right"
@@ -21,6 +21,7 @@
             </Option>
           </template>
         </a-popover>
+        <OptionItem icon="menu-delete" @click="handleClickMenuItem('delete')">删除</OptionItem>
       </Option>
     </div>
   </transition>
