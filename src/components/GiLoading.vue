@@ -12,15 +12,15 @@
   </div>
 </template>
 
-<script>
-import { ref } from 'vue'
+<script lang="ts">
+import { ref, defineComponent } from 'vue'
 
-export default {
+export default defineComponent({
   name: 'GiLoading',
   setup() {
-    let loadingText = ref('')
+    let loadingText = ref<string>('')
     // 设置加载文本
-    function setLoadingText(value) {
+    function setLoadingText(value: string) {
       loadingText.value = value
     }
 
@@ -29,7 +29,7 @@ export default {
       setLoadingText
     }
   }
-}
+})
 </script>
 
 <style lang="scss" scoped>

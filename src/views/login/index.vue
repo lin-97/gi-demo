@@ -3,9 +3,9 @@
     <section class="login-box animated flipInY">
       <!-- 左侧 -->
       <div class="login-left">
-        <img class="bg" src="../../assets/images/login-bg.png" />
+        <img class="bg" src="@/assets/images/login-bg.png" />
         <div class="system">
-          <img src="../../assets/images/system-logo.png" class="system-logo" />
+          <img src="@/assets/images/system-logo.png" class="system-logo" />
           <div class="system-name"><span>Admin</span><span>管理系统</span></div>
         </div>
       </div>
@@ -32,7 +32,7 @@
   </div>
 </template>
 
-<script lang="ts" setup name="Login">
+<script setup lang="ts" name="Login">
 import { reactive, ref } from 'vue'
 import { useRouter } from 'vue-router'
 import { Message } from '@arco-design/web-vue'
@@ -46,12 +46,12 @@ const form = reactive<LoginForm>({
 })
 
 // 记住密码
-let checked = ref(false)
+let checked = ref<boolean>(false)
 // 登录加载
-let showLoading = ref(false)
+let showLoading = ref<boolean>(false)
 
 // 点击登录
-const login = (): any => {
+const login = () => {
   if (!form.username) {
     return Message.warning('请输入账户名称')
   }
@@ -62,7 +62,7 @@ const login = (): any => {
   setTimeout(() => {
     router.push('/home')
     showLoading.value = false
-  }, 1000)
+  }, 800)
 }
 </script>
 

@@ -97,7 +97,7 @@
 </template>
 
 <script setup lang="ts">
-import { reactive, ref } from 'vue'
+import { ref } from 'vue'
 import { Message, Modal } from '@arco-design/web-vue'
 import { fileTypeList, imageTypeList } from '@/libs/file-map'
 import { useFileStore } from '@/store'
@@ -108,10 +108,10 @@ import FileNavPath from './FileNavPath.vue'
 import FileGrid from './FileGrid.vue'
 import FileList from './FileList.vue'
 import FileContextMenu from './FileContextMenu/index'
-import ThePreviewVideo from '@/views/components/ThePreviewVideo/index.ts'
-import ThePreviewAudio from '@/views/components/ThePreviewAudio/index.ts'
-import TheFileRename from '@/views/components/TheFileRename/index.ts'
-import TheFileMove from '@/views/components/TheFileMove/index.ts'
+import ThePreviewVideo from '@/views/components/ThePreviewVideo/index'
+import ThePreviewAudio from '@/views/components/ThePreviewAudio/index'
+import TheFileRename from '@/views/components/TheFileRename/index'
+import TheFileMove from '@/views/components/TheFileMove/index'
 import fileData from './filedata'
 
 const { width } = useWindowSize()

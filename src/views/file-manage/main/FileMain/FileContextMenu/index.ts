@@ -6,7 +6,7 @@ import ArcoVue from '@arco-design/web-vue'
 let instance: any = null
 let dom: HTMLElement | null = null
 
-function contextMenu(e: Event, fileInfo: File.FileItem) {
+function contextMenu(e: PointerEvent, fileInfo: File.FileItem) {
   return new Promise((resolve, reject) => {
     if (instance !== null) {
       instance.unmount()

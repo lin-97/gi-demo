@@ -1,6 +1,7 @@
 import axios from 'axios'
 import { Message } from '@arco-design/web-vue'
 import { useRouter } from 'vue-router'
+import { getToken, clearToken } from '@/utils/auth'
 const router = useRouter()
 
 const http = axios.create({
@@ -11,7 +12,7 @@ const http = axios.create({
 // 请求拦截器
 http.interceptors.request.use(
   function (config) {
-    let token = localStorage.getItem('token')
+    const token = getToken()
     if (token) {
       config.headers['token'] = token
     }
@@ -29,7 +30,7 @@ http.interceptors.response.use(
       if (response.data.code == 200) {
         return response.data
       } else if (response.data.code == 40301 || response.data.code == 40302) {
-        localStorage.removeItem('token')
+        clearToken()
         router.replace('/login')
         Message.error({ content: 'token已过期，请重新登录！' })
       } else {
@@ -49,9 +50,8 @@ http.interceptors.response.use(
   }
 )
 
-// export default http
 export default {
-  post(url, data, headers = {}) {
+  post(url: string, data: object, headers = {}) {
     return http({
       method: 'post',
       url,
@@ -60,7 +60,7 @@ export default {
     })
   },
 
-  get(url, params, headers = {}) {
+  get(url: string, params: object, headers = {}) {
     return http({
       method: 'get',
       url,

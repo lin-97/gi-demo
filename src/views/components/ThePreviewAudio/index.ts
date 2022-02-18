@@ -1,5 +1,5 @@
 import { createApp } from 'vue'
-import ThePreviewAudio from './index.vue'
+import Dialog from './Dialog.vue'
 import ArcoVueIcon from '@arco-design/web-vue/es/icon'
 import ArcoVue from '@arco-design/web-vue'
 
@@ -18,7 +18,7 @@ function previewAudio(fileInfo: File.FileItem) {
   // 挂载组件
   document.body.appendChild(dom)
   // 实例化组件, createApp第二个参数是 props
-  instance = createApp(ThePreviewAudio, {
+  instance = createApp(Dialog, {
     fileInfo: fileInfo,
     onCancel: () => {
       setTimeout(() => {
