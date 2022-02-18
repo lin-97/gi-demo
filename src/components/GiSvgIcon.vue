@@ -6,6 +6,7 @@
 
 <script setup lang="ts">
 import { computed } from 'vue'
+
 const props = defineProps({
   name: {
     type: String,
@@ -22,16 +23,16 @@ const props = defineProps({
 })
 
 // 判断传入的值，是否带有单位，如果没有，就默认用px单位
-const getUnitValue = (value: string | number) => {
+const getUnitValue = (value: string | number): string | number => {
   return /(px|em|rem|%)$/.test(value.toString()) ? value : value + 'px'
 }
 
-const iconSize = computed(() => {
+const iconSize = computed<string | number>(() => {
   return getUnitValue(props.size)
 })
 
-const iconName = computed(() => `#icon-${props.name}`)
-const svgClass = computed(() => {
+const iconName = computed<string>(() => `#icon-${props.name}`)
+const svgClass = computed<string>(() => {
   if (props.name) return `svg-icon icon-${props.name}`
   return 'svg-icon'
 })

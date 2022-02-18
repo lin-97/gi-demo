@@ -17,7 +17,7 @@
   </div>
 </template>
 
-<script lang="ts" setup>
+<script setup lang="ts">
 import { computed, onMounted, ref } from 'vue'
 
 const props = defineProps({
@@ -41,17 +41,18 @@ const props = defineProps({
 })
 const emit = defineEmits(['update:modelValue'])
 
-const OnRef = ref(null)
-const OffRef = ref(null)
-let onWidth = ref(0)
-let offWidth = ref(0)
+const OnRef = ref<HTMLInputElement | null>(null)
+const OffRef = ref<HTMLInputElement | null>(null)
+let onWidth = ref<number>(0)
+let offWidth = ref<number>(0)
+
 onMounted(() => {
-  onWidth.value = OnRef.value.clientWidth
-  offWidth.value = OffRef.value.clientWidth
+  onWidth.value = OnRef.value?.clientWidth || 0
+  offWidth.value = OffRef.value?.clientWidth || 0
 })
 
-const getSlideBarStyle = computed(() => {
-  const obj: object = {}
+const getSlideBarStyle = computed<object>(() => {
+  const obj: any = {}
   obj.width = props.modelValue ? `${onWidth.value}px` : `${offWidth.value}px`
   obj.left = props.modelValue ? 0 : `${onWidth.value}px`
   return obj

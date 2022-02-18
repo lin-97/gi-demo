@@ -1,13 +1,13 @@
 <template>
   <transition name="slide-dynamic-origin">
-    <div class="gi-context-menu" ref="contextMenuRef" :style="contextMenuStyle" v-show="getShow">
+    <div class="gi-context-menu" ref="contextMenuRef" :style="contextMenuStyle" v-show="visiable">
       <slot></slot>
     </div>
   </transition>
 </template>
 
 <script setup lang="ts">
-import { reactive, ref, watch, nextTick, computed } from 'vue'
+import { ref, watch, nextTick, computed } from 'vue'
 import { onClickOutside } from '@vueuse/core'
 
 const props = defineProps({
@@ -33,13 +33,13 @@ const props = defineProps({
   }
 })
 
-const contextMenuHeight = ref(0)
-let contextMenuStyle = ref({})
-let contextMenuRef = ref(null)
+const contextMenuHeight = ref<number>(0)
+let contextMenuStyle = ref<object>({})
+let contextMenuRef = ref<HTMLInputElement | null>(null)
 
 const emit = defineEmits(['update:modelValue'])
 
-let getShow = computed({
+let visiable = computed<boolean>({
   get: () => {
     return props.modelValue
   },
@@ -49,7 +49,7 @@ let getShow = computed({
 })
 
 const getStyle = () => {
-  const obj = {}
+  const obj: any = {}
   // console.log('props.axis.y', props.axis.y)
   // console.log('window.innerHeight', window.innerHeight)
   // console.log('contextMenuHeight', contextMenuHeight.value)
@@ -68,9 +68,9 @@ const getStyle = () => {
 }
 
 watch(props.axis, () => {
-  getShow.value = false
+  visiable.value = false
   setTimeout(() => {
-    getShow.value = true
+    visiable.value = true
     nextTick(() => {
       contextMenuHeight.value = contextMenuRef.value.offsetHeight
       getStyle()

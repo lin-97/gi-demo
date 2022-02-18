@@ -1,11 +1,11 @@
 <template>
   <span class="gi-fullscreen-icon" @click="onToggle">
-    <icon-fullscreen style="font-size: 18px" v-if="!isFullScreen" />
-    <icon-fullscreen-exit style="font-size: 18px" v-else />
+    <icon-fullscreen :size="18" v-if="!isFullScreen" />
+    <icon-fullscreen-exit :size="18" v-else />
   </span>
 </template>
 
-<script lang="ts" setup>
+<script setup lang="ts">
 /**
  * @desc 全屏图标组件
  */
@@ -13,7 +13,7 @@ import { ref, onMounted, onUnmounted } from 'vue'
 import screenfull from 'screenfull'
 
 // 是否全屏
-const isFullScreen = ref(false)
+const isFullScreen = ref<boolean>(false)
 
 // 监听变化
 const change = () => {

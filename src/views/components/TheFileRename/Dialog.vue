@@ -20,10 +20,12 @@ export default defineComponent({
   },
   setup(props) {
     let visible = ref<boolean>(false)
-    const form = reactive({
-      name: '1111'
+
+    type Form = { name: string }
+
+    const form: Form = reactive({
+      name: ''
     })
-    console.log(props.fileInfo.name)
     form.name = props.fileInfo?.name
     onMounted(() => {
       visible.value = true

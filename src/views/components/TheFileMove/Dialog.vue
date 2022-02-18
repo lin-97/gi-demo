@@ -22,7 +22,10 @@ export default defineComponent({
   },
   setup(props) {
     let visible = ref<boolean>(false)
-    const form = reactive({
+
+    type Form = { path: string }
+
+    const form: Form = reactive({
       path: '/'
     })
     let treeData = ref([])

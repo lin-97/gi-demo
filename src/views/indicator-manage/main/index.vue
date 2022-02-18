@@ -120,7 +120,7 @@ type PageInfo = {
   size: number
 }
 
-const pageInfo = reactive<PageInfo>({
+const pageInfo: PageInfo = reactive({
   page: 1,
   size: 1000
 })

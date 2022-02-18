@@ -23,8 +23,8 @@ import { onBeforeUnmount, onMounted, ref } from 'vue'
 import { useRouter } from 'vue-router'
 const router = useRouter()
 
-let countDownTime = ref(5)
-let timer = ref(0)
+let countDownTime = ref<number>(5)
+let timer = ref<number>(0)
 
 onMounted(() => {
   onCountDownTime()

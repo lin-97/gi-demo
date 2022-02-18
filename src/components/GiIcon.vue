@@ -7,7 +7,7 @@
   </div>
 </template>
 
-<script lang="ts" setup>
+<script setup lang="ts">
 import { computed } from 'vue'
 
 const props = defineProps({
@@ -65,9 +65,9 @@ const props = defineProps({
 
 const emit = defineEmits(['click'])
 
-const getStyle = computed(() => {
-  const obj = {}
-  const flexMap = {
+const getStyle = computed<object>(() => {
+  const obj: any = {}
+  const flexMap: any = {
     left: 'row-reverse',
     right: 'row',
     top: 'column-reverse',
@@ -76,8 +76,8 @@ const getStyle = computed(() => {
   obj['flex-direction'] = flexMap[props.labelPos]
   return obj
 })
-const getIconStyle = computed(() => {
-  const obj = {}
+const getIconStyle = computed<object>(() => {
+  const obj: any = {}
   obj['font-size'] = getUnitValue(props.size)
   obj['color'] = props.color
   obj[`margin-${props.labelPos}`] = getUnitValue(props.space)
@@ -85,15 +85,15 @@ const getIconStyle = computed(() => {
   return obj
 })
 
-const getLabelStyle = computed(() => {
-  const obj = {}
+const getLabelStyle = computed<object>(() => {
+  const obj: any = {}
   obj['font-size'] = getUnitValue(props.labelSize)
   obj['color'] = props.labelColor
   return obj
 })
 
 // 判断传入的值，是否带有单位，如果没有，就默认用px单位
-const getUnitValue = (value: string | number) => {
+const getUnitValue = (value: string | number): string | number => {
   return /(px|em|rem|%)$/.test(value.toString()) ? value : value + 'px'
 }
 

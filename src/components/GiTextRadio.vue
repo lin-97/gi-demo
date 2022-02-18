@@ -1,17 +1,18 @@
 <template>
   <a-space :size="15" class="gi-text-radio">
     <a-button
-      :type="item.value === modelValue ? 'primary' : 'text'"
       v-for="item in list"
       :key="item.value"
+      :type="item.value === modelValue ? 'primary' : 'text'"
       @click="handleClick(item)"
       >{{ item.label }}</a-button
     >
   </a-space>
 </template>
 
-<script lang="ts" setup>
+<script setup lang="ts">
 const emit = defineEmits(['update:modelValue', 'change'])
+
 const props = defineProps({
   // 绑定的值
   modelValue: {
@@ -29,6 +30,7 @@ type Item = {
   label: string
   value: string | number
 }
+
 const handleClick = (item: Item) => {
   emit('update:modelValue', item.value)
   emit('change', item)

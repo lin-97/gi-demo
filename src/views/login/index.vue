@@ -40,7 +40,7 @@ const router = useRouter()
 
 type LoginForm = { username: string; password: string }
 
-const form = reactive<LoginForm>({
+const form: LoginForm = reactive({
   username: 'admin',
   password: '123'
 })

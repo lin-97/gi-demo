@@ -49,10 +49,12 @@
   </div>
 </template>
 
-<script lang="ts" setup>
+<script setup lang="ts">
 import { reactive } from '@vue/reactivity'
 
-const form = reactive({
+type Form = { name: string; map: string; desc: string }
+
+const form: Form = reactive({
   name: 'Lin',
   map: 'a',
   desc: ''
@@ -60,9 +62,6 @@ const form = reactive({
 </script>
 
 <style lang="scss" scoped>
-// :deep(.arco-menu-light .arco-menu-item.arco-menu-selected) {
-//   background-color: rgb(var(--primary-6));
-// }
 .user-set {
   flex: 1;
   margin: $margin;

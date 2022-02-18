@@ -41,7 +41,7 @@ type Form = {
   status: boolean
 }
 
-const form = reactive<Form>({
+const form: Form = reactive({
   name: '',
   address: '',
   status: false
