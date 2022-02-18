@@ -17,7 +17,7 @@
         class="check-mode"
         :class="{ checked: props.selectedFileIdList.includes(item.id) }"
         v-show="props.isBatchMode"
-        @click.stop="handleClickFile(item)"
+        @click.stop="handleCheckFile(item)"
       >
         <a-checkbox
           class="checkbox"
