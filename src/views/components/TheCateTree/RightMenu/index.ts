@@ -1,15 +1,11 @@
 import { createApp } from 'vue'
 import ArcoVueIcon from '@arco-design/web-vue/es/icon'
-import ArcoVue from '@arco-design/web-vue'
 import ContextMenu from './Menu.vue'
-import GiContentMenu from '@/components/GiContentMenu.vue'
-import Option from '../Option.vue'
-import OptionItem from '../OptionItem.vue'
 
 let instance: any = null
 let dom: HTMLElement | null = null
 
-function contextMenu(e: PointerEvent, fileInfo: File.FileItem) {
+function contextMenu(e: PointerEvent, fileInfo: any) {
   return new Promise((resolve, reject) => {
     handleUnmount()
     // 创建一个挂载容器
@@ -33,11 +29,7 @@ function contextMenu(e: PointerEvent, fileInfo: File.FileItem) {
         }, 350)
       }
     })
-    instance.use(ArcoVue)
     instance.use(ArcoVueIcon)
-    instance.use(GiContentMenu)
-    instance.use(Option)
-    instance.use(OptionItem)
     instance.mount(dom)
 
     // 卸载组件

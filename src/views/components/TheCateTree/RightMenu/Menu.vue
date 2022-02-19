@@ -1,8 +1,8 @@
 <template>
   <GiContentMenu :axis="axis" v-model="showContentMenu" @close="onClose">
     <Option ref="option">
-      <OptionItem icon="IconPlusCircle">新增</OptionItem>
-      <OptionItem icon="IconEdit">重命名</OptionItem>
+      <OptionItem icon="IconPlusCircle" @click="onClickItem('add')">新增</OptionItem>
+      <OptionItem icon="IconEdit" @click="onClickItem('rename')">重命名</OptionItem>
       <!-- <a-popover
         position="right"
         trigger="click"
@@ -17,7 +17,7 @@
           </section>
         </template>
       </a-popover> -->
-      <OptionItem icon="IconDelete">删除</OptionItem>
+      <OptionItem icon="IconDelete" @click="onClickItem('delete')">删除</OptionItem>
     </Option>
   </GiContentMenu>
 </template>
@@ -53,8 +53,13 @@ export default defineComponent({
       props.onClose()
     }
 
+    const onClickItem = (mode: string) => {
+      props.onClick(mode)
+    }
+
     return {
-      onClose
+      onClose,
+      onClickItem
     }
   }
 })

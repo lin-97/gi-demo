@@ -1,21 +1,16 @@
 <template>
   <transition name="slide-dynamic-origin">
-    <div class="gi-context-menu" ref="contextMenuRef" :style="contextMenuStyle">
+    <div class="gi-context-menu" ref="contextMenuRef" :style="contextMenuStyle" v-show="visible">
       <slot></slot>
     </div>
   </transition>
 </template>
 
 <script setup lang="ts">
-import { ref, watch, nextTick, computed } from 'vue'
+import { ref, watch, nextTick, computed, onMounted } from 'vue'
 import { onClickOutside } from '@vueuse/core'
 
 const props = defineProps({
-  // 绑定的值
-  modelValue: {
-    type: Boolean,
-    default: false
-  },
   // 坐标
   axis: {
     type: Object,
@@ -33,20 +28,12 @@ const props = defineProps({
   }
 })
 
+let visible = ref<boolean>(false)
 const contextMenuHeight = ref<number>(0)
 let contextMenuStyle = ref<object>({})
 let contextMenuRef = ref<HTMLInputElement | null>(null)
 
-const emit = defineEmits(['update:modelValue', 'close'])
-
-let visiable = computed<boolean>({
-  get: () => {
-    return props.modelValue
-  },
-  set: (v) => {
-    emit('update:modelValue', v)
-  }
-})
+const emit = defineEmits(['close'])
 
 const getStyle = () => {
   const obj: any = {}
@@ -67,31 +54,17 @@ const getStyle = () => {
   contextMenuStyle.value = obj
 }
 
-watch(
-  props.axis,
-  () => {
-    visiable.value = false
-    setTimeout(() => {
-      visiable.value = true
-      nextTick(() => {
-        contextMenuHeight.value = contextMenuRef.value.offsetHeight
-        getStyle()
-      })
-    }, 300)
-  },
-  {
-    immediate: true
-  }
-)
-
-// 关闭弹框
-const handleClose = () => {
-  emit('update:modelValue', false)
-}
+onMounted(() => {
+  visible.value = true
+  nextTick(() => {
+    contextMenuHeight.value = contextMenuRef.value.offsetHeight
+    getStyle()
+  })
+})
 
 // 检测在一个元素之外的任何点击
 onClickOutside(contextMenuRef, () => {
-  handleClose()
+  visible.value = false
   emit('close')
 })
 </script>

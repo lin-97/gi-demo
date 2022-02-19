@@ -12,39 +12,12 @@
     <div class="wrap">
       <ul id="treeDemo" ref="treeRef" class="ztree cate-ztree" @mousewheel="scrollChange"></ul>
     </div>
-
-    <!-- 点击设置图标弹窗 -->
-    <GiContentMenu :axis="axis" v-model="showContentMenu">
-      <Option ref="option">
-        <OptionItem icon="IconPlusCircle" @click="onAdd">新增</OptionItem>
-        <OptionItem icon="IconEdit" @click="onRename" v-if="showRename">重命名</OptionItem>
-        <a-popover
-          position="right"
-          trigger="click"
-          :content-style="{ padding: 0, overflow: 'hidden' }"
-          :popup-visible="showTreePopover"
-          v-if="showMove"
-        >
-          <OptionItem mode="more" icon="IconExport" :active="showTreePopover" @click="onMove"> 移动 </OptionItem>
-          <template #content>
-            <section style="width: 250px; min-height: 200px; max-height: 500px; overflow: scroll">
-              <MoveTree :tree-data="treeData" @node-click="moveTreeNodeClick"></MoveTree>
-            </section>
-          </template>
-        </a-popover>
-        <OptionItem icon="IconDelete" @click="onDelete" v-if="showDelete">删除</OptionItem>
-      </Option>
-    </GiContentMenu>
   </div>
 </template>
 
 <script setup lang="ts">
 import { reactive, ref, nextTick, watch, computed, onMounted, onBeforeUnmount } from 'vue'
 import { Modal } from '@arco-design/web-vue'
-import GiContentMenu from '@/components/GiContentMenu.vue'
-import MoveTree from './MoveTree.vue'
-import Option from './Option.vue'
-import OptionItem from './OptionItem.vue'
 import { getNewNodeName } from './function'
 import { data } from './tree'
 import RightMenu from './RightMenu/index'
@@ -68,8 +41,6 @@ const props = defineProps({
 })
 
 let showLoading = ref<boolean>(false)
-let showContentMenu = ref<boolean>(false)
-let showTreePopover = ref<boolean>(false)
 let inputValue = ref<string>('')
 let treeData = ref<object[]>([])
 let treeSetting = reactive({
@@ -78,13 +49,19 @@ let treeSetting = reactive({
     onRightClick: (event: PointerEvent, treeId: string, treeNode: object) => {
       console.log('鼠标右键', treeNode)
       if (!treeNode || !props.allowEdit) return
-      // axis.x = event.clientX
-      // axis.y = event.clientY
-      // currentNode = treeNode
-      // showContentMenu.value = true
-
-      RightMenu(event, treeNode).then((res) => {
-        console.log('1111')
+      currentNode = treeNode
+      RightMenu(event, treeNode).then((res: any) => {
+        console.log('res', res)
+        if (res.mode === 'add') {
+          onAdd()
+        }
+        if (res.mode === 'rename') {
+          onRename()
+        }
+        if (res.mode === 'delete') {
+          console.log('res', res)
+          onDelete()
+        }
       })
     },
     // 点击节点
@@ -95,10 +72,6 @@ let treeSetting = reactive({
 })
 let treeObj = reactive({})
 let currentNode = reactive({})
-
-// GiContentMenu组件坐标轴
-type Axis = { x: number; y: number }
-const axis: Axis = reactive({ x: 0, y: 0 })
 
 const emit = defineEmits(['node-click'])
 const handleNodeClick = (event: PointerEvent, treeId: string, treeNode: object) => {
@@ -149,29 +122,8 @@ const getCateTree = async () => {
 
 getCateTree()
 
-const scrollChange = () => {
-  showContentMenu.value = false
-}
-
-watch(showContentMenu, (newVal) => {
-  if (!newVal) {
-    showTreePopover.value = false
-  }
-})
-
-let showRename = computed(() => {
-  return currentNode.type !== null
-})
-let showMove = computed(() => {
-  return true
-})
-let showDelete = computed(() => {
-  return true
-})
-
 // 新增
 const onAdd = () => {
-  showContentMenu.value = false
   let childrens: any[] = currentNode.children
   let name = '新建分类1'
   if (childrens && childrens.length) {
@@ -197,13 +149,7 @@ const onAdd = () => {
 
 // 重命名
 const onRename = () => {
-  showContentMenu.value = false
   treeObj.editName(currentNode)
-}
-
-// 移动
-const onMove = () => {
-  showTreePopover.value = !showTreePopover.value
 }
 
 // 点击移动树节点
