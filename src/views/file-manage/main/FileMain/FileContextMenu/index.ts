@@ -8,12 +8,7 @@ let dom: HTMLElement | null = null
 
 function contextMenu(e: PointerEvent, fileInfo: File.FileItem) {
   return new Promise((resolve, reject) => {
-    if (instance !== null) {
-      instance.unmount()
-    }
-    if (dom !== null) {
-      document.body.removeChild(dom)
-    }
+    handleUnmount()
     // 创建一个挂载容器
     dom = document.createElement('div')
     // 挂载组件
@@ -25,33 +20,31 @@ function contextMenu(e: PointerEvent, fileInfo: File.FileItem) {
       onClick: (mode: string) => {
         resolve({ mode: mode, fileInfo: fileInfo })
         setTimeout(() => {
-          unmount()
-          instance = null
-          dom = null
-        }, 500)
+          handleUnmount()
+        }, 350)
       },
-      onCancel: () => {
+      onClose: () => {
         reject()
         setTimeout(() => {
-          unmount()
-          instance = null
-          dom = null
-        }, 500)
+          handleUnmount()
+        }, 350)
       }
     })
-      .use(ArcoVue)
-      .use(ArcoVueIcon)
+    instance.use(ArcoVue)
+    instance.use(ArcoVueIcon)
+    instance.mount(dom)
 
     // 卸载组件
-    function unmount() {
+    function handleUnmount() {
       if (instance !== null) {
         instance.unmount()
+        instance = null
       }
       if (dom !== null) {
         document.body.removeChild(dom)
+        dom = null
       }
     }
-    instance.mount(dom)
   })
 }
 

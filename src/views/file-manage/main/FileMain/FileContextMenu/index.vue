@@ -45,7 +45,7 @@ export default defineComponent({
     },
     fileInfo: Object,
     onClick: Function,
-    onCancel: Function
+    onClose: Function
   },
   setup(props) {
     let showContentMenu = ref<boolean>(false)
@@ -82,7 +82,7 @@ export default defineComponent({
     // 检测在一个元素之外的任何点击
     onClickOutside(contextMenuRef, () => {
       showContentMenu.value = false
-      props.onCancel()
+      props.onClose()
     })
 
     // 点击菜单项
@@ -97,7 +97,7 @@ export default defineComponent({
       () => [windowSize.width, windowSize.height],
       () => {
         showContentMenu.value = false
-        props.onCancel()
+        props.onClose()
       }
     )
 
