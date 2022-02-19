@@ -16,7 +16,7 @@ import { ref, reactive, onMounted, defineComponent } from 'vue'
 export default defineComponent({
   props: {
     fileInfo: Object,
-    onCancel: Function
+    onClose: Function
   },
   setup(props) {
     let visible = ref<boolean>(false)
@@ -33,7 +33,7 @@ export default defineComponent({
 
     const handleCancel = () => {
       visible.value = false
-      props.onCancel()
+      props.onClose()
     }
 
     return {

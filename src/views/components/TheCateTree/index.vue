@@ -47,6 +47,7 @@ import Option from './Option.vue'
 import OptionItem from './OptionItem.vue'
 import { getNewNodeName } from './function'
 import { data } from './tree'
+
 const props = defineProps({
   // 分类树: 2表单、3任务、4计量单位、5原子指标、6时间周期、7维度、8查询模板设计、101任务实例、 103指标数据查看
   type: {
@@ -65,15 +66,15 @@ const props = defineProps({
   }
 })
 
-let showLoading = ref(false)
-let showContentMenu = ref(false)
-let showTreePopover = ref(false)
-let inputValue = ref('')
-let treeData = ref([])
+let showLoading = ref<boolean>(false)
+let showContentMenu = ref<boolean>(false)
+let showTreePopover = ref<boolean>(false)
+let inputValue = ref<string>('')
+let treeData = ref<object[]>([])
 let treeSetting = reactive({
   callback: {
     // 鼠标右键事件
-    onRightClick: (event, treeId, treeNode) => {
+    onRightClick: (event: PointerEvent, treeId: string, treeNode: object) => {
       console.log('鼠标右键', treeNode)
       if (!treeNode || !props.allowEdit) return
       axis.x = event.clientX
@@ -82,39 +83,24 @@ let treeSetting = reactive({
       showContentMenu.value = true
     },
     // 点击节点
-    onClick: (event, treeId, treeNode) => {
+    onClick: (event: PointerEvent, treeId: string, treeNode: object) => {
       handleNodeClick(event, treeId, treeNode)
     }
   }
 })
 let treeObj = reactive({})
 let currentNode = reactive({})
+
 // GiContentMenu组件坐标轴
-const axis = reactive<Axis>({
-  x: 0,
-  y: 0
-})
+type Axis = { x: number; y: number }
+const axis: Axis = reactive({ x: 0, y: 0 })
 
 const emit = defineEmits(['node-click'])
-const handleNodeClick = (event, treeId, treeNode) => {
+const handleNodeClick = (event: PointerEvent, treeId: string, treeNode: object) => {
   currentNode = treeNode
   emit('node-click')
   console.log('点击节点', treeNode)
 }
-
-// onMounted(() => {
-//   // 获取指定元素
-//   // 添加滚动监听, 该滚动监听了拖拽滚动条
-//   // 尾部的 true 最好加上, 我这边测试没加 true, 拖拽滚动条无法监听到滚动, 加上则可以监听到拖拽滚动条滚动回调
-//   const treeRef = ref(null)
-//   treeRef.addEventListener('scroll', scrollChange, true)
-// })
-
-// onBeforeUnmount(() => {
-//   // 获取指定元素, 并移除监听
-//   const treeRef = ref(null)
-//   treeRef.removeEventListener('scroll', scrollChange, true)
-// })
 
 // 递归树
 const formatTree = (arr: any[]): void => {
@@ -230,7 +216,7 @@ const onDelete = () => {
 }
 
 // 搜索-节点过滤
-const nodeFilter = (node, nameSearch) => {
+const nodeFilter = (node: any, nameSearch: string) => {
   let flag = false
   if (node.name.indexOf(nameSearch) > -1) {
     flag = true
@@ -335,10 +321,6 @@ const handleInput = () => {
 </style>
 
 <style lang="scss" scoped>
-// .ztree {
-//   flex: 1;
-//   overflow: scroll;
-// }
 .cate-tree {
   flex: 1;
   padding: $padding;

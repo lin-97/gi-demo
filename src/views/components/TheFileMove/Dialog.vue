@@ -18,17 +18,17 @@ import data from './treedata.js'
 export default defineComponent({
   props: {
     fileInfo: Object,
-    onCancel: Function
+    onClose: Function
   },
   setup(props) {
     let visible = ref<boolean>(false)
 
     type Form = { path: string }
-
     const form: Form = reactive({
       path: '/'
     })
-    let treeData = ref([])
+
+    let treeData = ref<object[]>([])
     treeData.value = data
     onMounted(() => {
       visible.value = true
@@ -40,7 +40,7 @@ export default defineComponent({
 
     const handleCancel = () => {
       visible.value = false
-      props.onCancel()
+      props.onClose()
     }
 
     return {
