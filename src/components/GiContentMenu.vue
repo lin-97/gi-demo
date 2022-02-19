@@ -1,6 +1,6 @@
 <template>
   <transition name="slide-dynamic-origin">
-    <div class="gi-context-menu" ref="contextMenuRef" :style="contextMenuStyle" v-show="visiable">
+    <div class="gi-context-menu" ref="contextMenuRef" :style="contextMenuStyle">
       <slot></slot>
     </div>
   </transition>
@@ -37,7 +37,7 @@ const contextMenuHeight = ref<number>(0)
 let contextMenuStyle = ref<object>({})
 let contextMenuRef = ref<HTMLInputElement | null>(null)
 
-const emit = defineEmits(['update:modelValue'])
+const emit = defineEmits(['update:modelValue', 'close'])
 
 let visiable = computed<boolean>({
   get: () => {
@@ -67,16 +67,22 @@ const getStyle = () => {
   contextMenuStyle.value = obj
 }
 
-watch(props.axis, () => {
-  visiable.value = false
-  setTimeout(() => {
-    visiable.value = true
-    nextTick(() => {
-      contextMenuHeight.value = contextMenuRef.value.offsetHeight
-      getStyle()
-    })
-  }, 300)
-})
+watch(
+  props.axis,
+  () => {
+    visiable.value = false
+    setTimeout(() => {
+      visiable.value = true
+      nextTick(() => {
+        contextMenuHeight.value = contextMenuRef.value.offsetHeight
+        getStyle()
+      })
+    }, 300)
+  },
+  {
+    immediate: true
+  }
+)
 
 // 关闭弹框
 const handleClose = () => {
@@ -86,6 +92,7 @@ const handleClose = () => {
 // 检测在一个元素之外的任何点击
 onClickOutside(contextMenuRef, () => {
   handleClose()
+  emit('close')
 })
 </script>
 
@@ -93,7 +100,6 @@ onClickOutside(contextMenuRef, () => {
 .gi-context-menu {
   // background: #fff;
   position: fixed;
-  z-index: -999;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.12), 0 0 6px rgba(0, 0, 0, 0.04);
   border-radius: 4px;
   overflow: hidden;

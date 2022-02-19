@@ -1,7 +1,10 @@
 import { createApp } from 'vue'
 import ArcoVueIcon from '@arco-design/web-vue/es/icon'
 import ArcoVue from '@arco-design/web-vue'
-import FileContextMenu from './index.vue'
+import ContextMenu from './Menu.vue'
+import GiContentMenu from '@/components/GiContentMenu.vue'
+import Option from '../Option.vue'
+import OptionItem from '../OptionItem.vue'
 
 let instance: any = null
 let dom: HTMLElement | null = null
@@ -14,7 +17,7 @@ function contextMenu(e: PointerEvent, fileInfo: File.FileItem) {
     // 挂载组件
     document.body.appendChild(dom)
     // 实例化组件, createApp第二个参数是 props
-    instance = createApp(FileContextMenu, {
+    instance = createApp(ContextMenu, {
       axis: { x: e.clientX, y: e.clientY },
       fileInfo: fileInfo,
       onClick: (mode: string) => {
@@ -32,6 +35,9 @@ function contextMenu(e: PointerEvent, fileInfo: File.FileItem) {
     })
     instance.use(ArcoVue)
     instance.use(ArcoVueIcon)
+    instance.use(GiContentMenu)
+    instance.use(Option)
+    instance.use(OptionItem)
     instance.mount(dom)
 
     // 卸载组件

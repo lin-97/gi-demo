@@ -47,6 +47,7 @@ import Option from './Option.vue'
 import OptionItem from './OptionItem.vue'
 import { getNewNodeName } from './function'
 import { data } from './tree'
+import RightMenu from './RightMenu/index'
 
 const props = defineProps({
   // 分类树: 2表单、3任务、4计量单位、5原子指标、6时间周期、7维度、8查询模板设计、101任务实例、 103指标数据查看
@@ -77,10 +78,14 @@ let treeSetting = reactive({
     onRightClick: (event: PointerEvent, treeId: string, treeNode: object) => {
       console.log('鼠标右键', treeNode)
       if (!treeNode || !props.allowEdit) return
-      axis.x = event.clientX
-      axis.y = event.clientY
-      currentNode = treeNode
-      showContentMenu.value = true
+      // axis.x = event.clientX
+      // axis.y = event.clientY
+      // currentNode = treeNode
+      // showContentMenu.value = true
+
+      RightMenu(event, treeNode).then((res) => {
+        console.log('1111')
+      })
     },
     // 点击节点
     onClick: (event: PointerEvent, treeId: string, treeNode: object) => {
