@@ -20,7 +20,7 @@ function contextMenu(e: PointerEvent, fileInfo: any) {
         resolve({ mode: mode, fileInfo: fileInfo })
         setTimeout(() => {
           handleUnmount()
-        }, 350)
+        }, 500)
       },
       onClose: () => {
         reject()

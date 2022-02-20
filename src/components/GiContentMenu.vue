@@ -1,13 +1,13 @@
 <template>
   <transition name="slide-dynamic-origin">
-    <div class="gi-context-menu" ref="contextMenuRef" :style="contextMenuStyle" v-show="visible">
+    <div class="gi-context-menu" ref="contextMenuRef" :style="contextMenuStyle" v-show="visiable">
       <slot></slot>
     </div>
   </transition>
 </template>
 
 <script setup lang="ts">
-import { ref, watch, nextTick, computed, onMounted } from 'vue'
+import { ref, nextTick, onMounted, defineExpose } from 'vue'
 import { onClickOutside } from '@vueuse/core'
 
 const props = defineProps({
@@ -28,7 +28,7 @@ const props = defineProps({
   }
 })
 
-let visible = ref<boolean>(false)
+let visiable = ref<boolean>(false)
 const contextMenuHeight = ref<number>(0)
 let contextMenuStyle = ref<object>({})
 let contextMenuRef = ref<HTMLInputElement | null>(null)
@@ -55,7 +55,7 @@ const getStyle = () => {
 }
 
 onMounted(() => {
-  visible.value = true
+  visiable.value = true
   nextTick(() => {
     contextMenuHeight.value = contextMenuRef.value.offsetHeight
     getStyle()
@@ -64,8 +64,18 @@ onMounted(() => {
 
 // 检测在一个元素之外的任何点击
 onClickOutside(contextMenuRef, () => {
-  visible.value = false
+  visiable.value = false
   emit('close')
+})
+
+const onHidden = () => {
+  visiable.value = false
+  console.log('hidden')
+}
+
+defineExpose({
+  visiable,
+  onHidden
 })
 </script>
 

@@ -1,5 +1,5 @@
 <template>
-  <GiContentMenu :axis="axis" v-model="showContentMenu" @close="onClose">
+  <GiContentMenu ref="menuRef" :axis="axis" @close="onClose">
     <Option ref="option">
       <OptionItem icon="IconPlusCircle" @click="onClickItem('add')">新增</OptionItem>
       <OptionItem icon="IconEdit" @click="onClickItem('rename')">重命名</OptionItem>
@@ -23,7 +23,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref, nextTick, onMounted, watch, reactive } from 'vue'
+import { defineComponent, ref, nextTick } from 'vue'
 import GiContentMenu from '@/components/GiContentMenu.vue'
 // import MoveTree from './MoveTree.vue'
 import Option from '../Option.vue'
@@ -43,18 +43,17 @@ export default defineComponent({
     onClick: Function
   },
   setup(props) {
-    let showContentMenu = ref<boolean>(false)
-
-    onMounted(() => {
-      showContentMenu.value = true
-    })
+    let menuRef = ref()
 
     const onClose = () => {
       props.onClose()
     }
 
     const onClickItem = (mode: string) => {
-      props.onClick(mode)
+      nextTick(() => {
+        props.onClick(mode)
+        menuRef.value.onHidden()
+      })
     }
 
     return {
