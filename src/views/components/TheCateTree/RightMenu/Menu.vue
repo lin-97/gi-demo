@@ -43,18 +43,16 @@ export default defineComponent({
     onClick: Function
   },
   setup(props) {
-    let menuRef = ref()
+    let menuRef = ref(null)
 
     const onClose = () => {
       props.onClose()
     }
 
     const onClickItem = (mode: string) => {
-      console.log(111)
       nextTick(() => {
-        console.log(111)
         props.onClick(mode)
-        // menuRef.value.onHidden()
+        menuRef.value.onHidden()
       })
     }
 
