@@ -10,7 +10,7 @@
     "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs,.ts,.tsx,.cts,.mts --fix --ignore-path .gitignore"
   },
   "dependencies": {
-    "@arco-themes/vue-demo": "0.0.11",
+    "@arco-themes/vue-demo": "0.0.12",
     "@vueuse/components": "^7.6.2",
     "@vueuse/core": "^7.6.2",
     "axios": "^0.25.0",
