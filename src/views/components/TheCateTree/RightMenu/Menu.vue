@@ -50,9 +50,11 @@ export default defineComponent({
     }
 
     const onClickItem = (mode: string) => {
+      console.log(111)
       nextTick(() => {
+        console.log(111)
         props.onClick(mode)
-        menuRef.value.onHidden()
+        // menuRef.value.onHidden()
       })
     }
 

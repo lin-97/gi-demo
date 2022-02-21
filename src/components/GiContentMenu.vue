@@ -6,7 +6,7 @@
   </transition>
 </template>
 
-<script setup lang="ts">
+<script setup lang="ts" name="GiContentMenu">
 import { ref, nextTick, onMounted, defineExpose } from 'vue'
 import { onClickOutside } from '@vueuse/core'
 
