@@ -57,6 +57,7 @@ export default defineComponent({
     }
 
     return {
+      menuRef,
       onClose,
       onClickItem
     }
