@@ -22,6 +22,10 @@ import { getNewNodeName } from './function'
 import { data } from './tree'
 import RightMenu from './RightMenu/index'
 
+import FileOpenIcon from '@/icons/com-file-open.svg'
+import FileCloseIcon from '@/icons/com-file-close.svg'
+import FileIcon from '@/icons/com-file.svg'
+
 const props = defineProps({
   // 分类树: 2表单、3任务、4计量单位、5原子指标、6时间周期、7维度、8查询模板设计、101任务实例、 103指标数据查看
   type: {
@@ -86,16 +90,16 @@ const formatTree = (arr: any[]): void => {
   function forTree(arr) {
     arr.forEach((item) => {
       if (item.children && item.children.length) {
-        item.iconOpen = './static/svgs/files-open.svg'
-        item.iconClose = './static/svgs/files-close.svg'
+        item.iconOpen = FileOpenIcon
+        item.iconClose = FileCloseIcon
         forTree(item.children)
       } else {
         item.children = null
-        item.iconOpen = './static/svgs/files-open.svg'
-        item.iconClose = './static/svgs/files-close.svg'
-        item.icon = './static/svgs/files-close.svg'
+        item.iconOpen = FileOpenIcon
+        item.iconClose = FileCloseIcon
+        item.icon = FileCloseIcon
         if (item.type == null) {
-          item.icon = './static/svgs/file.svg'
+          item.icon = FileIcon
         }
       }
     })
@@ -135,9 +139,9 @@ const onAdd = () => {
     id: id,
     name: name,
     children: null,
-    iconOpen: './static/svgs/files-open.svg',
-    iconClose: './static/svgs/files-close.svg',
-    icon: './static/svgs/files-close.svg',
+    iconOpen: FileOpenIcon,
+    iconClose: FileCloseIcon,
+    icon: FileCloseIcon,
     isParent: false
   }
   treeObj.addNodes(currentNode, newChildrenNode, true)

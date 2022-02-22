@@ -1,6 +1,6 @@
 import { createApp } from 'vue'
-import Loading from '@/components/GiLoading.vue'
 import { isObject } from '@/utils/common'
+import Loading from '@/components/GiLoading.vue'
 
 /**
  * @desc v-loading 指令
