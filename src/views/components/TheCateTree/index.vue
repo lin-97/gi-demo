@@ -18,7 +18,7 @@
 <script setup lang="ts">
 import { reactive, ref, nextTick, watch, computed, onMounted, onBeforeUnmount } from 'vue'
 import { Modal } from '@arco-design/web-vue'
-import { getNewNodeName } from './function'
+import { getNewNodeName } from '@/utils/tool'
 import { data } from './tree'
 import RightMenu from './RightMenu/index'
 

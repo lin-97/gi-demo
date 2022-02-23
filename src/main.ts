@@ -22,12 +22,20 @@ app.use(createPinia())
 app.use(ArcoVue)
 app.use(ArcoVueIcon)
 
-// 全局Svg图标组件
+// 全局SVG图标组件
 import GiSvgIcon from '@/components/GiSvgIcon.vue'
 app.component('GiSvgIcon', GiSvgIcon)
-// 全局Svg图标组件
+
 import GiTitle from '@/components/GiTitle.vue'
 app.component('GiTitle', GiTitle)
+
+import GiOption from '@/components/GiOption.vue'
+import GiOptionItem from '@/components/GiOptionItem.vue'
+app.component('GiOption', GiOption)
+app.component('GiOptionItem', GiOptionItem)
+
+import GiTag from '@/components/GiTag.vue'
+app.component('GiTag', GiTag)
 
 // 全局 v-loading 指令
 import loading from '@/directives/v-loading'

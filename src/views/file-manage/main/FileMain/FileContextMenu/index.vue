@@ -1,42 +1,63 @@
 <template>
   <transition name="slide-dynamic-origin">
     <div v-show="showContentMenu" class="wrap file-context-menu" ref="contextMenuRef" :style="contentMenuStyle">
-      <Option>
-        <OptionItem icon="menu-edit" @click="handleClickMenuItem('rename')">重命名</OptionItem>
-        <OptionItem icon="menu-move" @click="handleClickMenuItem('move')">移动到</OptionItem>
+      <GiOption>
+        <GiOptionItem @click="handleClickMenuItem('rename')">
+          <template #icon><GiSvgIcon name="menu-edit"></GiSvgIcon> </template>
+          重命名
+        </GiOptionItem>
+        <GiOptionItem @click="handleClickMenuItem('move')">
+          <template #icon><GiSvgIcon name="menu-move"></GiSvgIcon> </template>
+          移动到
+        </GiOptionItem>
         <!-- <OptionItem icon="menu-copy" @click="handleClickMenuItem('copy')">复制到</OptionItem> -->
-        <OptionItem icon="menu-download" @click="handleClickMenuItem('download')">下载</OptionItem>
+        <GiOptionItem @click="handleClickMenuItem('download')">
+          <template #icon><GiSvgIcon name="menu-download"></GiSvgIcon> </template>
+          下载
+        </GiOptionItem>
         <a-popover
           position="right"
           :content-style="{ padding: 0, overflow: 'hidden' }"
           :arrow-style="{ display: 'none' }"
         >
-          <OptionItem icon="menu-zip" @click="handleClickMenuItem('zip')" v-if="fileInfo.extendName === 'zip'"
-            >解压</OptionItem
-          >
+          <GiOptionItem more @click="handleClickMenuItem('zip')" v-if="fileInfo.extendName === 'zip'">
+            <template #icon><GiSvgIcon name="menu-zip"></GiSvgIcon> </template>
+            解压
+          </GiOptionItem>
           <template #content>
-            <Option>
-              <OptionItem icon="file-rar" @click="handleClickMenuItem('zip1')">解压1</OptionItem>
-              <OptionItem icon="file-rar" @click="handleClickMenuItem('zip2')">解压2</OptionItem>
-            </Option>
+            <GiOption>
+              <GiOptionItem @click="handleClickMenuItem('zip1')">
+                <template #icon><GiSvgIcon name="file-rar"></GiSvgIcon> </template>
+                解压1
+              </GiOptionItem>
+              <GiOptionItem @click="handleClickMenuItem('zip2')">
+                <template #icon><GiSvgIcon name="file-rar"></GiSvgIcon> </template>
+                解压2
+              </GiOptionItem>
+            </GiOption>
           </template>
         </a-popover>
-        <OptionItem icon="menu-delete" @click="handleClickMenuItem('delete')">删除</OptionItem>
-      </Option>
+        <GiOptionItem @click="handleClickMenuItem('delete')">
+          <template #icon><GiSvgIcon name="menu-delete"></GiSvgIcon> </template>
+          删除
+        </GiOptionItem>
+      </GiOption>
     </div>
   </transition>
 </template>
 
 <script lang="ts">
 import { defineComponent, ref, nextTick, onMounted, watch, reactive } from 'vue'
-import Option from './Option.vue'
-import OptionItem from './OptionItem.vue'
 import { onClickOutside, useWindowSize } from '@vueuse/core'
+import GiOption from '@/components/GiOption.vue'
+import GiOptionItem from '@/components/GiOptionItem.vue'
+import GiSvgIcon from '@/components/GiSvgIcon.vue'
 
 export default defineComponent({
   components: {
-    Option,
-    OptionItem
+    GiOption,
+    GiOptionItem,
+    GiSvgIcon
   },
   props: {
     axis: {

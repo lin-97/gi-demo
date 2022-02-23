@@ -1,8 +1,8 @@
 <template>
   <GiContentMenu ref="menuRef" :axis="axis" @close="onClose">
-    <Option ref="option">
-      <OptionItem icon="IconPlusCircle" @click="onClickItem('add')">新增</OptionItem>
-      <OptionItem icon="IconEdit" @click="onClickItem('rename')">重命名</OptionItem>
+    <GiOption ref="option">
+      <GiOptionItem icon="IconPlusCircle" @click="onClickItem('add')">新增</GiOptionItem>
+      <GiOptionItem icon="IconEdit" @click="onClickItem('rename')">重命名</GiOptionItem>
       <!-- <a-popover
         position="right"
         trigger="click"
@@ -17,24 +17,24 @@
           </section>
         </template>
       </a-popover> -->
-      <OptionItem icon="IconDelete" @click="onClickItem('delete')">删除</OptionItem>
-    </Option>
+      <GiOptionItem icon="IconDelete" @click="onClickItem('delete')">删除</GiOptionItem>
+    </GiOption>
   </GiContentMenu>
 </template>
 
 <script lang="ts">
 import { defineComponent, ref, nextTick } from 'vue'
 import GiContentMenu from '@/components/GiContentMenu.vue'
+import GiOption from '@/components/GiOption.vue'
+import GiOptionItem from '@/components/GiOptionItem.vue'
 // import MoveTree from './MoveTree.vue'
-import Option from '../Option.vue'
-import OptionItem from '../OptionItem.vue'
 
 export default defineComponent({
   components: {
     GiContentMenu,
+    GiOption,
+    GiOptionItem
     // MoveTree,
-    Option,
-    OptionItem
   },
   props: {
     axis: Object,

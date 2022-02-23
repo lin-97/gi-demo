@@ -1,13 +1,17 @@
 <template>
-  <div class="gi-option-item" :class="{ more: mode === 'more', active: active }" @click="handleClick">
+  <li class="gi-option-item" :class="{ more: more, active: active }" @click="handleClick">
     <section class="wrap">
-      <GiSvgIcon :name="icon" style="margin-right: 5px"></GiSvgIcon>
+      <span class="icon-wrapper">
+        <slot name="icon">
+          <component :is="icon" :size="16" :stroke-width="2"></component>
+        </slot>
+      </span>
       <slot
         ><span>{{ label }}</span></slot
       >
     </section>
-    <IconRight v-if="mode === 'more'" />
-  </div>
+    <IconRight v-if="more" />
+  </li>
 </template>
 
 <script setup lang="ts">
@@ -21,9 +25,9 @@ const props = defineProps({
     default: ''
   },
   // more
-  mode: {
-    type: String,
-    default: ''
+  more: {
+    type: Boolean,
+    default: false
   },
   // 选中高亮
   active: {
@@ -48,10 +52,16 @@ const handleClick = () => {
   position: relative;
   display: flex;
   align-items: center;
+  color: var(--color-text-2);
   font-size: 14px;
   .wrap {
     display: flex;
     align-items: center;
+    .icon-wrapper {
+      margin-right: 4px;
+      display: flex;
+      align-items: center;
+    }
   }
   &.active,
   &:hover {

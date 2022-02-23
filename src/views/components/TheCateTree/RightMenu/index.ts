@@ -31,8 +31,8 @@ function contextMenu(e: PointerEvent, fileInfo: any) {
         }, 350)
       }
     })
-    instance.use(ArcoVueIcon)
     instance.use(ArcoVue)
+    instance.use(ArcoVueIcon)
     instance.use(GiContentMenu)
     instance.mount(dom)
 
