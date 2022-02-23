@@ -25,6 +25,9 @@ app.use(ArcoVueIcon)
 // 全局Svg图标组件
 import GiSvgIcon from '@/components/GiSvgIcon.vue'
 app.component('GiSvgIcon', GiSvgIcon)
+// 全局Svg图标组件
+import GiTitle from '@/components/GiTitle.vue'
+app.component('GiTitle', GiTitle)
 
 // 全局 v-loading 指令
 import loading from '@/directives/v-loading'

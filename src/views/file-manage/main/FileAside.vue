@@ -1,11 +1,11 @@
 <template>
   <div class="file-aside" v-if="width > 715">
+    <GiTitle title="文件管理"></GiTitle>
     <a-menu
       :style="{ width: '220px', height: '100%', 'border-radius': '2px' }"
       :default-open-keys="['0']"
       :default-selected-keys="[currentKey]"
     >
-      <div class="title">文件管理</div>
       <a-sub-menu key="0">
         <template #icon>
           <icon-apps></icon-apps>
@@ -68,15 +68,8 @@ const onClickMenuItem = (item: FileTypeListItem) => {
 <style lang="scss" scoped>
 .file-aside {
   height: fit-content;
-  padding: $margin 0 $margin $margin;
-  .title {
-    height: 40px;
-    display: flex;
-    align-items: center;
-    padding-left: 12px;
-    font-size: 14px;
-    border-bottom: 1px solid var(--color-border-2);
-    margin-bottom: 10px;
-  }
+  margin: $margin 0 $margin $margin;
+  background: var(--color-bg-2);
+  border-radius: 2px;
 }
 </style>

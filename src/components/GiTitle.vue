@@ -31,6 +31,7 @@ const props = defineProps({
   > .wrapper {
     height: 100%;
     border-bottom: 1px solid var(--color-neutral-3);
+    box-sizing: border-box;
   }
   .title {
     font-size: 14px;
