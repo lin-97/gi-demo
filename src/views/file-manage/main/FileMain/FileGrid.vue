@@ -103,6 +103,12 @@ const handleContextMenu = (e: Event, item: File.FileItem) => {
   &:hover {
     background: var(--color-primary-light-1);
   }
+  &:active {
+    svg,
+    img {
+      transform: scale(0.9);
+    }
+  }
   .file-image {
     width: 100%;
     height: 60px;
@@ -111,9 +117,11 @@ const handleContextMenu = (e: Event, item: File.FileItem) => {
     .img {
       width: auto;
       height: 100%;
+      transition: all 0.3s;
     }
     .svg-img {
       height: 100%;
+      transition: all 0.3s;
     }
   }
   .file-name {
