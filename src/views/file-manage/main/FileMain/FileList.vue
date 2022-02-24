@@ -69,6 +69,7 @@ const handleContextMenu = (e: Event, row: File.FileItem) => {
   overflow: hidden;
   overflow-y: scroll;
   .file-name {
+    height: 100%;
     display: flex;
     align-items: center;
     .file-image {

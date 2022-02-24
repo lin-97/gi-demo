@@ -21,6 +21,8 @@ export const useNavTabStore = defineStore({
   actions: {
     // 添加一个页签, 如果当前路由已经打开, 则不再重复添加
     addTabItem(item: NavTab.NavTabItem) {
+      const ignoreTabList = ['Login']
+      if (ignoreTabList.includes(item.componentName)) return
       const flag = this.tabList.findIndex((i) => i.path === item.path)
       if (flag >= 0) return
       this.tabList.push(item)

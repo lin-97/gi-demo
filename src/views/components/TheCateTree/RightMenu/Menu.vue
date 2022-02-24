@@ -1,22 +1,23 @@
 <template>
   <GiContentMenu ref="menuRef" :axis="axis" @close="onClose">
-    <GiOption ref="option">
+    <GiOption width="110" ref="option">
       <GiOptionItem icon="IconPlusCircle" @click="onClickItem('add')">新增</GiOptionItem>
       <GiOptionItem icon="IconEdit" @click="onClickItem('rename')">重命名</GiOptionItem>
-      <!-- <a-popover
+      <a-popover
         position="right"
         trigger="click"
         :content-style="{ padding: 0, overflow: 'hidden' }"
-        :popup-visible="showTreePopover"
-        v-if="showMove"
+        :popup-visible="showMoveTreePopup"
       >
-        <OptionItem mode="more" icon="IconExport" :active="showTreePopover" @click="onMove"> 移动 </OptionItem>
+        <GiOptionItem more icon="IconExport" :active="showMoveTreePopup" @click="onClickItem('move')">
+          移动
+        </GiOptionItem>
         <template #content>
-          <section style="width: 250px; min-height: 200px; max-height: 500px; overflow: scroll">
-            <MoveTree :tree-data="treeData" @node-click="moveTreeNodeClick"></MoveTree>
+          <section class="move-tree-box">
+            <MoveTree :tree-data="treeData"></MoveTree>
           </section>
         </template>
-      </a-popover> -->
+      </a-popover>
       <GiOptionItem icon="IconDelete" @click="onClickItem('delete')">删除</GiOptionItem>
     </GiOption>
   </GiContentMenu>
@@ -27,29 +28,36 @@ import { defineComponent, ref, nextTick } from 'vue'
 import GiContentMenu from '@/components/GiContentMenu.vue'
 import GiOption from '@/components/GiOption.vue'
 import GiOptionItem from '@/components/GiOptionItem.vue'
-// import MoveTree from './MoveTree.vue'
+import MoveTree from '../MoveTree.vue'
 
 export default defineComponent({
   components: {
     GiContentMenu,
     GiOption,
-    GiOptionItem
-    // MoveTree,
+    GiOptionItem,
+    MoveTree
   },
   props: {
     axis: Object,
     fileInfo: Object,
+    treeData: Array,
     onClose: Function,
     onClick: Function
   },
   setup(props) {
     let menuRef = ref(null)
+    let showMoveTreePopup = ref<boolean>(false)
 
     const onClose = () => {
+      showMoveTreePopup.value = false
       props.onClose()
     }
 
     const onClickItem = (mode: string) => {
+      if (mode === 'move') {
+        showMoveTreePopup.value = !showMoveTreePopup.value
+        return false
+      }
       nextTick(() => {
         props.onClick(mode)
         menuRef.value.onHidden()
@@ -58,9 +66,19 @@ export default defineComponent({
 
     return {
       menuRef,
+      showMoveTreePopup,
       onClose,
       onClickItem
     }
   }
 })
 </script>
+
+<style lang="scss" scoped>
+.move-tree-box {
+  width: 250px;
+  min-height: 200px;
+  max-height: 500px;
+  overflow: scroll;
+}
+</style>

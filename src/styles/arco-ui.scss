@@ -14,7 +14,9 @@ body {
 
 // 禁止文本复制
 .arco-menu-title,
-.arco-menu-item-inner {
+.arco-menu-item-inner,
+.arco-tabs-tab-title,
+.arco-breadcrumb-item {
   user-select: none;
 }
 

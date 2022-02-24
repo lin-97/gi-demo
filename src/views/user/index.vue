@@ -44,7 +44,7 @@ import UserSet from './UserSet.vue'
   overflow-y: auto;
   .head {
     margin-top: $margin;
-    height: 204px;
+    min-height: 204px;
     background-color: rgb(var(--arcoblue-6));
     display: flex;
     flex-direction: column;

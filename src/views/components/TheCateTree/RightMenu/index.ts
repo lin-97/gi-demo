@@ -7,8 +7,15 @@ import ContextMenu from './Menu.vue'
 let instance: any = null
 let dom: HTMLElement | null = null
 
-function contextMenu(e: PointerEvent, fileInfo: any) {
-  return new Promise((resolve, reject) => {
+interface Params {
+  event: PointerEvent
+  fileInfo: object
+  treeData: any[]
+}
+
+function contextMenu(params: Params) {
+  const { event, fileInfo, treeData } = params
+  return new Promise((resolve) => {
     handleUnmount()
     // 创建一个挂载容器
     dom = document.createElement('div')
@@ -16,8 +23,9 @@ function contextMenu(e: PointerEvent, fileInfo: any) {
     document.body.appendChild(dom)
     // 实例化组件, createApp第二个参数是 props
     instance = createApp(ContextMenu, {
-      axis: { x: e.clientX, y: e.clientY },
+      axis: { x: event.clientX, y: event.clientY },
       fileInfo: fileInfo,
+      treeData: treeData,
       onClick: (mode: string) => {
         resolve({ mode: mode, fileInfo: fileInfo })
         setTimeout(() => {
@@ -25,7 +33,6 @@ function contextMenu(e: PointerEvent, fileInfo: any) {
         }, 500)
       },
       onClose: () => {
-        reject()
         setTimeout(() => {
           handleUnmount()
         }, 350)

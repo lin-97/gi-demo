@@ -10,13 +10,13 @@
     </div>
     <!-- 分类树 -->
     <div class="wrap">
-      <ul id="treeDemo" ref="treeRef" class="ztree cate-ztree" @mousewheel="scrollChange"></ul>
+      <ul id="treeDemo" ref="treeRef" class="ztree cate-ztree"></ul>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
-import { reactive, ref, nextTick, watch, computed, onMounted, onBeforeUnmount } from 'vue'
+import { reactive, ref, nextTick } from 'vue'
 import { Modal } from '@arco-design/web-vue'
 import { getNewNodeName } from '@/utils/tool'
 import { data } from './tree'
@@ -46,6 +46,7 @@ const props = defineProps({
 
 let showLoading = ref<boolean>(false)
 let inputValue = ref<string>('')
+const treeRef = ref<HTMLElement | null>(null)
 let treeData = ref<object[]>([])
 let treeSetting = reactive({
   callback: {
@@ -54,7 +55,7 @@ let treeSetting = reactive({
       console.log('鼠标右键', treeNode)
       if (!treeNode || !props.allowEdit) return
       currentNode = treeNode
-      RightMenu(event, treeNode).then((res: any) => {
+      RightMenu({ event: event, fileInfo: treeNode, treeData: treeData.value }).then((res: any) => {
         console.log('res', res)
         if (res.mode === 'add') {
           onAdd()
@@ -82,7 +83,22 @@ const handleNodeClick = (event: PointerEvent, treeId: string, treeNode: object) 
   currentNode = treeNode
   emit('node-click')
   console.log('点击节点', treeNode)
+  // onScrollToCenter(treeNode.tId)
 }
+
+// 滚动居中
+// const onScrollToCenter = (elementId: string) => {
+//   nextTick(() => {
+//     const parent = treeRef.value
+//     console.log('treeRef.value', treeRef.value)
+//     const { clientHeight, scrollTop } = parent
+//     let top1 = parent.getBoundingClientRect().top
+//     let el = document.getElementById(elementId)
+//     let top2 = el.getBoundingClientRect().top
+//     let y = top2 - (top1 + clientHeight / 2) + 10
+//     parent.scrollTo({ top: scrollTop + y, behavior: 'smooth' })
+//   })
+// }
 
 // 递归树
 const formatTree = (arr: any[]): void => {

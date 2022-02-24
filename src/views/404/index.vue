@@ -18,7 +18,7 @@
   </div>
 </template>
 
-<script setup lang="ts" name="404">
+<script setup lang="ts" name="404Page">
 import { onBeforeUnmount, onMounted, ref } from 'vue'
 import { useRouter } from 'vue-router'
 const router = useRouter()
