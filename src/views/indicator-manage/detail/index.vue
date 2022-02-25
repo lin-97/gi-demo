@@ -17,6 +17,17 @@
     <section class="item">
       <a-descriptions :data="list" title="基本信息" layout="inline-horizontal"> </a-descriptions>
     </section>
+
+    <section class="item">
+      <a-descriptions title="基本信息" :column="1">
+        <a-descriptions-item label="标签">hahaha</a-descriptions-item>
+        <a-descriptions-item label="标签">hahaha</a-descriptions-item>
+        <a-descriptions-item label="标签">hahaha</a-descriptions-item>
+        <a-descriptions-item label="标签">hahaha</a-descriptions-item>
+        <a-descriptions-item label="标签">hahaha</a-descriptions-item>
+        <a-descriptions-item label="标签">hahaha</a-descriptions-item>
+      </a-descriptions>
+    </section>
   </div>
 </template>
 
