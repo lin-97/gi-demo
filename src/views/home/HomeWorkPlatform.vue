@@ -16,8 +16,9 @@
       <div class="item">
         <span>待办</span
         ><span>
-          <a-statistic :value="3" :value-from="0" :start="true" animation> </a-statistic>/
-          <a-statistic :value="15" :value-from="0" :start="true"> </a-statistic>
+          <a-statistic :value="3" :value-from="0" :start="true" animation></a-statistic>
+          <span>/</span>
+          <a-statistic :value="15" :start="true"> </a-statistic>
         </span>
       </div>
       <div class="item">
