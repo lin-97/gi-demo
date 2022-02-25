@@ -14,6 +14,7 @@ import ArcoVueIcon from '@arco-design/web-vue/es/icon'
 
 // 导入全局scss主文件
 import '@/styles/index.scss'
+import '@/styles/transition.css'
 
 const app = createApp(App)
 
