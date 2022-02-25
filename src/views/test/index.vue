@@ -5,18 +5,21 @@
       :style="{ width: '200px', borderRadius: '4px' }"
       @menu-item-click="menuItemClick"
     >
-      <GiTitle title="自定义组件" style="margin-bottom: 14px"></GiTitle>
+      <GiTitle title="组件示例" style="margin-bottom: 14px"></GiTitle>
       <a-menu-item v-for="item in menuList" :key="item.value">{{ item.name }}</a-menu-item>
     </a-menu>
 
     <div class="content">
-      <component :is="selectedKeys[0]"></component>
+      <transition name="fade-slide" mode="out-in" appear>
+        <component :is="selectedKeys[0]"></component>
+      </transition>
     </div>
   </div>
 </template>
 
 <script lang="ts" setup name="Test">
 import { ref } from 'vue'
+import Button from './components/Button.vue'
 import GiTitle from '@/components/GiTitle.vue'
 import TextRadio from './components/TextRadio.vue'
 import TextSwitch from './components/TextSwitch.vue'
@@ -24,9 +27,10 @@ import Tag from './components/Tag.vue'
 import NavBar from './components/NavBar.vue'
 import Title from './components/Title.vue'
 
-const selectedKeys = ref([TextRadio])
+const selectedKeys = ref([Button])
 
 const menuList = ref([
+  { name: '按钮', value: Button },
   { name: 'GiTextRadio', value: TextRadio },
   { name: 'GiTextSwitch', value: TextSwitch },
   { name: 'GiTag', value: Tag },

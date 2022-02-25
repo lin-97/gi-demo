@@ -10,9 +10,19 @@
       </div>
     </section>
     <section class="right">
-      <div class="item"><span>项目数</span><span>16</span></div>
-      <div class="item"><span>待办</span><span>3/15</span></div>
-      <div class="item"><span>消息</span><span>35</span></div>
+      <div class="item">
+        <span>项目数</span><a-statistic :value="16" :value-from="0" :start="true" animation> </a-statistic>
+      </div>
+      <div class="item">
+        <span>待办</span
+        ><span>
+          <a-statistic :value="3" :value-from="0" :start="true" animation> </a-statistic>/
+          <a-statistic :value="15" :value-from="0" :start="true"> </a-statistic>
+        </span>
+      </div>
+      <div class="item">
+        <span>消息</span><a-statistic :value="35" :value-from="0" :start="true" animation> </a-statistic>
+      </div>
     </section>
   </div>
 </template>
