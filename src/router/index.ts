@@ -51,10 +51,10 @@ const routes = [
         meta: { title: '个人中心', keepAlive: false }
       },
       {
-        path: '/404',
-        name: '404',
-        component: () => import('@/views/404/index.vue'),
-        meta: { title: '404页', keepAlive: false }
+        path: '/error-page/:id',
+        name: 'ErrorPage',
+        component: () => import('@/views/error-page/index.vue'),
+        meta: { title: '异常页', keepAlive: false }
       },
       {
         path: '/test',

@@ -1,20 +1,4 @@
-/**
- * @desc js常见公共方法
- */
-
-// 判断值是否是对象
-export function isObject(value: any) {
-  return Object.prototype.toString.call(value) === '[object Object]'
-}
-
-// 判断值时候是数组
-export function isArray(value: any) {
-  if (typeof Array.isArray === 'function') {
-    return Array.isArray(value)
-  } else {
-    return Object.prototype.toString.call(value) === '[object Array]'
-  }
-}
+/** 常见公共方法 */
 
 /**
  * @desc 去除空格
@@ -35,4 +19,24 @@ export function trim(str: string, pos = 'both') {
   } else {
     return str
   }
+}
+
+/**
+ * 根据数字获取对应的汉字
+ * @param num - 数字(0-10)
+ */
+export function getHanByNumber(num: number) {
+  const HAN_STR = '零一二三四五六七八九十'
+  return HAN_STR.charAt(num)
+}
+
+/**
+ * 获取指定整数范围内的随机整数
+ * @param start - 开始范围
+ * @param end - 结束范围
+ */
+export function getRandomInterger(end: number, start = 0) {
+  const range = end - start
+  const random = Math.floor(Math.random() * range + start)
+  return random
 }

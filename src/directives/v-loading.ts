@@ -1,5 +1,5 @@
 import { createApp } from 'vue'
-import { isObject } from '@/utils/common'
+import { isObject } from '@/utils/typeof'
 import Loading from '@/components/GiLoading.vue'
 
 /**
@@ -15,35 +15,35 @@ import Loading from '@/components/GiLoading.vue'
 
 const name: string = Loading.name // 组件名(实例key)
 
-function addClass(el, className: string) {
+function addClass(el: HTMLElement, className: string) {
   if (!el.classList.contains(className)) {
     el.classList.add(className)
   }
 }
 
-function removeClass(el, className: string) {
+function removeClass(el: HTMLElement, className: string) {
   el.classList.remove(className)
 }
 
-function append(el) {
+function append(el: HTMLElement) {
   if (!['relative', 'absolute', 'fixed'].includes(el.style.position)) {
     addClass(el, 'gi_relative')
   }
   el.appendChild(el[name].instance.$el)
 }
 
-function remove(el) {
+function remove(el: HTMLElement) {
   removeClass(el, 'gi_relative')
   el.removeChild(el[name].instance.$el)
 }
 
 const loadingObj = {
   // 在绑定元素的 attribute 或事件监听器被应用之前调用
-  created(el, binding) {},
+  created(el: HTMLElement, binding) {},
   // 当指令第一次绑定到元素并且在挂载父组件之前调用
-  beforeMount(el, binding) {},
+  beforeMount(el: HTMLElement, binding) {},
   // 在绑定元素的父组件被挂载前调用
-  mounted(el, binding) {
+  mounted(el: HTMLElement, binding) {
     // console.log('binding', binding)
     const app = createApp(Loading)
     const instance = app.mount(document.createElement('div'))
@@ -67,9 +67,9 @@ const loadingObj = {
     }
   },
   // 在更新包含组件的 VNode 之前调用
-  beforeUpdate(el, binding) {},
+  beforeUpdate(el: HTMLElement, binding) {},
   // 在包含组件的 VNode 及其子组件的 VNode 更新后调用
-  updated(el, binding) {
+  updated(el: HTMLElement, binding) {
     if (!el[name]) {
       el[name] = {}
     }
@@ -86,9 +86,9 @@ const loadingObj = {
     }
   },
   // 在卸载绑定元素的父组件之前调用
-  beforeUnmount(el, binding) {},
+  beforeUnmount(el: HTMLElement, binding) {},
   // 当指令与元素解除绑定且父组件已卸载时，只调用一次
-  unmounted(el, binding) {}
+  unmounted(el: HTMLElement, binding) {}
 }
 
 export default loadingObj

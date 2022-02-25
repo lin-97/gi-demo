@@ -45,9 +45,25 @@ export const useAppStore = defineStore({
         },
         {
           icon: 'menu-page',
-          id: 'P404',
-          name: '404页',
-          path: '/404'
+          id: 'ERROR',
+          name: '异常页',
+          children: [
+            {
+              id: 'error403',
+              name: '异常页403',
+              path: '/error-page/403'
+            },
+            {
+              id: 'error404',
+              name: '异常页404',
+              path: '/error-page/404'
+            },
+            {
+              id: 'error500',
+              name: '异常页500',
+              path: '/error-page/500'
+            }
+          ]
         },
         {
           icon: 'menu-test',

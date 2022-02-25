@@ -1,10 +1,26 @@
 <template>
   <a-layout-sider collapsible breakpoint="xl" class="aside">
     <a-menu :selected-keys="[appStore.activePath]" :style="{ width: '100%', height: '100%' }">
-      <a-menu-item v-for="item in appStore.menuList" :key="item.path" @click="handleClickItem(item)">
-        <template #icon><GiSvgIcon :size="24" :name="item.icon"></GiSvgIcon></template>
-        {{ item.name }}
-      </a-menu-item>
+      <template v-for="item in appStore.menuList">
+        <a-sub-menu :key="item.path" v-if="item.children && item.children.length">
+          <template #icon>
+            <GiSvgIcon :size="24" :name="item.icon"></GiSvgIcon>
+          </template>
+          <template #title>{{ item.name }}</template>
+          <template v-if="item.children && item.children.length">
+            <a-menu-item v-for="i in item.children" :key="i.path" @click="handleClickItem(i)">{{ i.name }}</a-menu-item>
+          </template>
+        </a-sub-menu>
+
+        <template v-else>
+          <a-menu-item :key="item.path" @click="handleClickItem(item)">
+            <template #icon>
+              <GiSvgIcon :size="24" :name="item.icon"></GiSvgIcon>
+            </template>
+            {{ item.name }}
+          </a-menu-item>
+        </template>
+      </template>
     </a-menu>
   </a-layout-sider>
 </template>
@@ -16,8 +32,10 @@ const router = useRouter()
 const appStore = useAppStore()
 
 const handleClickItem = (item: App.MenuItem) => {
-  appStore.setActivePath(item.path)
-  router.push(item.path)
+  if (item.path) {
+    appStore.setActivePath(item.path)
+    router.push({ path: item.path })
+  }
 }
 </script>
 

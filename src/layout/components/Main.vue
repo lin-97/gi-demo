@@ -1,10 +1,10 @@
 <template>
   <a-layout class="main">
     <router-view>
-      <template #default="{ Component }">
+      <template #default="{ Component, route }">
         <transition name="fade-transform" mode="out-in" appear>
           <keep-alive :include="navtabStore.cacheList">
-            <component :is="Component" />
+            <component :is="Component" :key="route.path" />
           </keep-alive>
         </transition>
       </template>
