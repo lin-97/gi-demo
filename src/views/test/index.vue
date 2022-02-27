@@ -2,7 +2,7 @@
   <div class="test">
     <a-menu
       v-model:selected-keys="selectedKeys"
-      :style="{ width: '200px', borderRadius: '4px' }"
+      :style="{ width: '200px', borderRadius: '4px', flexShrink: 0 }"
       @menu-item-click="menuItemClick"
     >
       <GiTitle title="组件示例" style="margin-bottom: 14px"></GiTitle>
@@ -58,6 +58,7 @@ const menuItemClick = () => {
     margin-left: $margin;
     border-radius: $box-radius;
     box-sizing: border-box;
+    overflow: auto;
   }
 }
 </style>

@@ -6,7 +6,11 @@
       </a-form-item>
     </a-form>
     <section class="tree-box">
-      <a-tree show-line :data="treeData" @select="handleClickNode"> </a-tree>
+      <a-tree show-line :data="treeData" @select="handleClickNode">
+        <template #icon>
+          <GiSvgIcon name="menu-zip"></GiSvgIcon>
+        </template>
+      </a-tree>
     </section>
   </a-modal>
 </template>
@@ -14,11 +18,15 @@
 <script lang="ts">
 import { ref, reactive, onMounted, defineComponent } from 'vue'
 import data from './treedata.js'
+import GiSvgIcon from '@/components/GiSvgIcon.vue'
 
 export default defineComponent({
   props: {
     fileInfo: Object,
     onClose: Function
+  },
+  components: {
+    GiSvgIcon
   },
   setup(props) {
     let visible = ref<boolean>(false)
