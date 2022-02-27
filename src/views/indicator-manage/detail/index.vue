@@ -19,13 +19,31 @@
     </section>
 
     <section class="item">
-      <a-descriptions title="基本信息" :column="1">
-        <a-descriptions-item label="标签">hahaha</a-descriptions-item>
-        <a-descriptions-item label="标签">hahaha</a-descriptions-item>
-        <a-descriptions-item label="标签">hahaha</a-descriptions-item>
-        <a-descriptions-item label="标签">hahaha</a-descriptions-item>
-        <a-descriptions-item label="标签">hahaha</a-descriptions-item>
-        <a-descriptions-item label="标签">hahaha</a-descriptions-item>
+      <a-descriptions title="其他信息" :column="1">
+        <a-descriptions-item label="星座">双鱼座</a-descriptions-item>
+        <a-descriptions-item label="生日">07月16日</a-descriptions-item>
+        <a-descriptions-item label="标签">
+          <a-space :size="5">
+            <a-tag color="#f53f3f">vue3</a-tag>
+            <a-tag color="#7816ff">pinia</a-tag>
+            <a-tag color="#00b42a">vite</a-tag>
+            <a-tag color="#165dff">ts</a-tag>
+            <a-tag color="#ff7d00">arco design</a-tag>
+          </a-space>
+        </a-descriptions-item>
+        <a-descriptions-item label="爱好">
+          <a-space :size="5">
+            <a-tag color="purple">王者荣耀</a-tag>
+            <a-tag color="magenta">打疫苗</a-tag>
+          </a-space>
+        </a-descriptions-item>
+        <a-descriptions-item label="性别">
+          <a-switch type="round" size="medium" :default-checked="true">
+            <template #checked> 男 </template>
+            <template #unchecked> 女 </template>
+          </a-switch>
+        </a-descriptions-item>
+        <a-descriptions-item label="座右铭">哈哈哈</a-descriptions-item>
       </a-descriptions>
     </section>
   </div>
@@ -57,12 +75,12 @@ const back = () => {
 
 <style lang="scss" scoped>
 .detail {
+  overflow: auto;
   .head {
     background: var(--color-bg-2);
   }
   .item {
-    margin: 0 $margin;
-    margin-top: $margin;
+    margin: $margin;
     padding: 20px 30px;
     background: var(--color-bg-2);
     border-radius: 2px;
