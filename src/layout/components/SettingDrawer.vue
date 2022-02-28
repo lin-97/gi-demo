@@ -2,13 +2,17 @@
   <a-drawer v-model:visible="visible" width="300px" unmount-on-close :footer="false">
     <template #title>项目配置</template>
     <a-space :size="15" direction="vertical" fill>
-      <a-divider orientation="center">
-        <a-typography-title :heading="6">系统主题</a-typography-title>
-      </a-divider>
+      <a-divider orientation="center"><span class="title">系统主题</span></a-divider>
+      <a-row justify="center">
+        <ColorPicker
+          theme="dark"
+          :color="themeStore.themeColor"
+          :sucker-hide="false"
+          @changeColor="changeColor"
+        ></ColorPicker>
+      </a-row>
 
-      <a-divider orientation="center">
-        <a-typography-title :heading="6">界面显示</a-typography-title>
-      </a-divider>
+      <a-divider orientation="center"><span class="title">界面显示</span></a-divider>
       <a-row justify="space-between" align="middle">
         <span class="label">页签显示</span>
         <a-switch size="medium" :model-value="themeStore.tab.visible" @change="themeStore.setTabVisible($event)" />
@@ -52,8 +56,14 @@
 </template>
 
 <script setup lang="ts">
-import { computed } from 'vue'
+import { computed, nextTick } from 'vue'
 import { useThemeStore } from '@/store'
+import { ColorPicker } from 'vue-color-kit'
+import 'vue-color-kit/dist/vue-color-kit.css'
+import { generate, presetColor, getRgbStr } from '@arco-design/color'
+
+console.log('themecolor', generate('#f42424', { list: true }))
+console.log(presetColor)
 
 const themeStore = useThemeStore()
 
@@ -75,9 +85,27 @@ let visible = computed<boolean>({
     emit('update:modelValue', v)
   }
 })
+
+const changeColor = (color: any) => {
+  console.log(color)
+  themeStore.setThemeColor = color.hex
+  changeThemeColor(color.hex)
+}
+
+const changeThemeColor = (color: string) => {
+  const list = generate(color, { list: true })
+  console.log('list', list)
+  list.forEach((color: string, index: number) => {
+    const rgbStr = getRgbStr(color)
+    document.body.style.setProperty(`--primary-${index + 1}`, rgbStr)
+  })
+}
 </script>
 
 <style lang="scss" scoped>
+.title {
+  font-size: 16px;
+}
 .label {
   font-size: 14px;
 }

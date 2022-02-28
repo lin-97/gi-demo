@@ -10,6 +10,7 @@
     "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs,.ts,.tsx,.cts,.mts --fix --ignore-path .gitignore"
   },
   "dependencies": {
+    "@arco-design/color": "^0.4.0",
     "@arco-themes/vue-demo": "0.0.12",
     "@vueuse/components": "^7.6.2",
     "@vueuse/core": "^7.6.2",
@@ -19,6 +20,7 @@
     "screenfull": "^6.0.1",
     "v-viewer": "^3.0.10",
     "vue": "^3.2.29",
+    "vue-color-kit": "^1.0.5",
     "vue-router": "^4.0.12",
     "xgplayer": "^2.31.4",
     "xgplayer-music": "^2.3.2"

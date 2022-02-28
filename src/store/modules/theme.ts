@@ -7,6 +7,7 @@ export const useThemeStore = defineStore({
   state: () => {
     return {
       theme: 'light', // light简白模式  dark暗黑模式
+      themeColor: '#1571FA',
       tab: {
         visible: true,
         mode: 'card-gutter',
@@ -45,6 +46,10 @@ export const useThemeStore = defineStore({
         this.theme = 'light'
         document.body.removeAttribute('arco-theme')
       }
+    },
+    // 设置主题色
+    setThemeColor(color: string) {
+      this.themeColor = color
     },
     // 设置页签可见
     setTabVisible(visible: boolean) {

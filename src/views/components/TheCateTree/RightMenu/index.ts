@@ -1,7 +1,6 @@
 import { createApp } from 'vue'
 import ArcoVueIcon from '@arco-design/web-vue/es/icon'
 import ArcoVue from '@arco-design/web-vue'
-import GiContentMenu from '@/components/GiContentMenu.vue'
 import ContextMenu from './Menu.vue'
 
 let instance: any = null
@@ -40,7 +39,6 @@ function contextMenu(params: Params) {
     })
     instance.use(ArcoVue)
     instance.use(ArcoVueIcon)
-    instance.use(GiContentMenu)
     instance.mount(dom)
 
     // 卸载组件

@@ -1,5 +1,5 @@
 <template>
-  <GiContentMenu ref="menuRef" :axis="axis" @close="onClose">
+  <GiContextMenu ref="menuRef" :axis="axis" @close="onClose">
     <GiOption width="110" ref="option">
       <GiOptionItem icon="IconPlusCircle" @click="onClickItem('add')">新增</GiOptionItem>
       <GiOptionItem icon="IconEdit" @click="onClickItem('rename')">重命名</GiOptionItem>
@@ -7,6 +7,7 @@
         position="right"
         trigger="click"
         :content-style="{ padding: 0, overflow: 'hidden' }"
+        :unmount-on-close="false"
         :popup-visible="showMoveTreePopup"
       >
         <GiOptionItem more icon="IconExport" :active="showMoveTreePopup" @click="onClickItem('move')">
@@ -20,19 +21,19 @@
       </a-popover>
       <GiOptionItem icon="IconDelete" @click="onClickItem('delete')">删除</GiOptionItem>
     </GiOption>
-  </GiContentMenu>
+  </GiContextMenu>
 </template>
 
 <script lang="ts">
 import { defineComponent, ref, nextTick } from 'vue'
-import GiContentMenu from '@/components/GiContentMenu.vue'
+import GiContextMenu from '@/components/GiContextMenu.vue'
 import GiOption from '@/components/GiOption.vue'
 import GiOptionItem from '@/components/GiOptionItem.vue'
 import MoveTree from '../MoveTree.vue'
 
 export default defineComponent({
   components: {
-    GiContentMenu,
+    GiContextMenu,
     GiOption,
     GiOptionItem,
     MoveTree
