@@ -6,22 +6,36 @@
     </section>
     <a-space class="system-head" size="medium">
       <!-- 项目配置 -->
-      <a-button shape="circle" size="mini" @click="showSettingDrawer = !showSettingDrawer">
+      <a-button size="mini" class="gi_hover_btn" @click="showSettingDrawer = !showSettingDrawer">
         <template #icon>
-          <icon-settings :size="14" />
+          <icon-settings :size="18" />
         </template>
       </a-button>
 
       <!-- 消息通知 -->
       <a-tooltip content="消息通知" position="bl">
-        <icon-notification class="gi_hover" :size="18" />
+        <a-button size="mini" class="gi_hover_btn">
+          <template #icon>
+            <icon-notification :size="18" />
+          </template>
+        </a-button>
       </a-tooltip>
 
       <!-- 全屏切换组件 -->
-      <GiFullScreenBtn class="gi_hover"></GiFullScreenBtn>
+      <a-button size="mini" class="gi_hover_btn" @click="onToggleFullScreen">
+        <template #icon>
+          <icon-fullscreen :size="18" v-if="!isFullScreen" />
+          <icon-fullscreen-exit :size="18" v-else />
+        </template>
+      </a-button>
 
       <!-- 暗黑模式切换 -->
-      <GiToggleThemeBtn></GiToggleThemeBtn>
+      <a-button size="mini" class="gi_hover_btn" @click="onToggleThemeDark">
+        <template #icon>
+          <icon-sun-fill :size="18" v-if="themeStore.theme === 'light'"></icon-sun-fill>
+          <icon-moon-fill :size="18" v-else></icon-moon-fill>
+        </template>
+      </a-button>
 
       <!-- 管理员头像 -->
       <a-avatar :size="32">
@@ -59,14 +73,17 @@
 import { ref } from 'vue'
 import { Modal } from '@arco-design/web-vue'
 import { useRouter } from 'vue-router'
-import { useAppStore, useUserStore } from '@/store'
-import GiFullScreenBtn from '@/components/GiFullScreenBtn.vue'
-import GiToggleThemeBtn from '@/components/GiToggleThemeBtn.vue'
+import { useAppStore, useUserStore, useThemeStore } from '@/store'
+import { useFullScreen, useThemeDark } from '@/hooks'
 import SettingDrawer from './SettingDrawer.vue'
 
 const router = useRouter()
 const appStore = useAppStore()
 const userStore = useUserStore()
+const themeStore = useThemeStore()
+
+const { isFullScreen, onToggleFullScreen } = useFullScreen()
+const { onToggleThemeDark } = useThemeDark()
 
 let showSettingDrawer = ref<boolean>(false)
 

@@ -114,3 +114,13 @@
     overflow: hidden;
   }
 }
+
+.gi_hover_btn {
+  border: 0;
+  &:hover {
+    background: var(--color-secondary-hover);
+  }
+  &:active {
+    background: var(--color-secondary-active);
+  }
+}

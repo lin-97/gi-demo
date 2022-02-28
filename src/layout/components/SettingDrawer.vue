@@ -8,15 +8,18 @@
           theme="dark"
           :color="themeStore.themeColor"
           :sucker-hide="false"
+          :colors-default="defaultColorList"
           @changeColor="changeColor"
         ></ColorPicker>
       </a-row>
 
       <a-divider orientation="center"><span class="title">界面显示</span></a-divider>
+
       <a-row justify="space-between" align="middle">
         <span class="label">页签显示</span>
         <a-switch size="medium" :model-value="themeStore.tab.visible" @change="themeStore.setTabVisible($event)" />
       </a-row>
+
       <a-row justify="space-between" align="middle">
         <span class="label">页签风格</span>
         <a-select
@@ -39,6 +42,7 @@
           @change="themeStore.setAnimateVisible($event)"
         />
       </a-row>
+
       <a-row justify="space-between" align="middle">
         <span class="label">动画切换类型</span>
         <a-select
@@ -56,16 +60,14 @@
 </template>
 
 <script setup lang="ts">
-import { computed, nextTick } from 'vue'
+import { computed } from 'vue'
 import { useThemeStore } from '@/store'
+import { useTheme } from '@/hooks'
 import { ColorPicker } from 'vue-color-kit'
 import 'vue-color-kit/dist/vue-color-kit.css'
-import { generate, presetColor, getRgbStr } from '@arco-design/color'
-
-console.log('themecolor', generate('#f42424', { list: true }))
-console.log(presetColor)
 
 const themeStore = useThemeStore()
+const { changeThemeColor } = useTheme()
 
 const props = defineProps({
   // 绑定的值
@@ -74,6 +76,34 @@ const props = defineProps({
     default: false
   }
 })
+
+// 默认显示的主题色列表
+const defaultColorList = [
+  '#1890ff',
+  '#409EFF',
+  '#2d8cf0',
+  '#007AFF',
+  '#5ac8fa',
+  '#5856D6',
+  '#536dfe',
+  '#9c27b0',
+  '#AF52DE',
+  '#0096c7',
+  '#00C1D4',
+  '#34C759',
+  '#43a047',
+  '#7cb342',
+  '#c0ca33',
+  '#78DEC7',
+  '#e53935',
+  '#d81b60',
+  '#f4511e',
+  '#fb8c00',
+  '#ffb300',
+  '#fdd835',
+  '#6d4c41',
+  '#546e7a'
+]
 
 const emit = defineEmits(['update:modelValue'])
 
@@ -86,19 +116,13 @@ let visible = computed<boolean>({
   }
 })
 
-const changeColor = (color: any) => {
-  console.log(color)
-  themeStore.setThemeColor = color.hex
-  changeThemeColor(color.hex)
+if (themeStore.themeColor) {
+  changeThemeColor(themeStore.themeColor)
 }
 
-const changeThemeColor = (color: string) => {
-  const list = generate(color, { list: true })
-  console.log('list', list)
-  list.forEach((color: string, index: number) => {
-    const rgbStr = getRgbStr(color)
-    document.body.style.setProperty(`--primary-${index + 1}`, rgbStr)
-  })
+const changeColor = (color: any) => {
+  themeStore.setThemeColor(color.hex)
+  changeThemeColor(themeStore.themeColor)
 }
 </script>
 

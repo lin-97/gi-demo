@@ -38,7 +38,7 @@
           </a-space>
         </a-descriptions-item>
         <a-descriptions-item label="性别">
-          <a-switch type="round" size="medium" :default-checked="true">
+          <a-switch type="round" size="medium" :model-value="true">
             <template #checked> 男 </template>
             <template #unchecked> 女 </template>
           </a-switch>
