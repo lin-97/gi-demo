@@ -1,6 +1,6 @@
 <template>
-  <div class="nav-tab">
-    <a-tabs type="card-gutter" :active-key="route.path" editable @tab-click="onClick" @delete="onClose">
+  <div class="nav-tab" v-if="themeStore.tab.visible">
+    <a-tabs :type="themeStore.tab.mode" :active-key="route.path" editable @tab-click="onClick" @delete="onClose">
       <a-tab-pane
         v-for="item of navtabStore.tabList"
         :key="item.path"
@@ -38,11 +38,12 @@
 <script setup lang="ts">
 import { watch, onMounted } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
-import { useNavTabStore } from '@/store'
+import { useNavTabStore, useThemeStore } from '@/store'
 
 const route = useRoute()
 const router = useRouter()
 const navtabStore = useNavTabStore()
+const themeStore = useThemeStore()
 
 onMounted(() => {
   handleNavTab()
@@ -80,7 +81,6 @@ const onClose = (key: string) => {
   let item = navtabStore.tabList.find((i) => i.path === key)
   navtabStore.removeTabItem(key)
   navtabStore.removeCacheItem(item.componentName)
-  console.log('关闭后', navtabStore.cacheList)
 }
 
 // 关闭所有页签

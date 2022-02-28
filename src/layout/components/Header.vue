@@ -5,6 +5,13 @@
       <span class="gi_hover">{{ appStore.systemName }}</span>
     </section>
     <a-space class="system-head" size="medium">
+      <!-- 项目配置 -->
+      <a-button shape="circle" size="mini" @click="showSettingDrawer = !showSettingDrawer">
+        <template #icon>
+          <icon-settings :size="14" />
+        </template>
+      </a-button>
+
       <!-- 消息通知 -->
       <a-tooltip content="消息通知" position="bl">
         <icon-notification class="gi_hover" :size="18" />
@@ -43,19 +50,25 @@
         </template>
       </a-dropdown>
     </a-space>
+
+    <SettingDrawer v-model="showSettingDrawer"></SettingDrawer>
   </a-layout-header>
 </template>
 
 <script setup lang="ts">
+import { ref } from 'vue'
 import { Modal } from '@arco-design/web-vue'
 import { useRouter } from 'vue-router'
 import { useAppStore, useUserStore } from '@/store'
 import GiFullScreenBtn from '@/components/GiFullScreenBtn.vue'
 import GiToggleThemeBtn from '@/components/GiToggleThemeBtn.vue'
+import SettingDrawer from './SettingDrawer.vue'
 
 const router = useRouter()
 const appStore = useAppStore()
 const userStore = useUserStore()
+
+let showSettingDrawer = ref<boolean>(false)
 
 // 跳转首页
 const toHome = () => {

@@ -2,7 +2,7 @@
   <a-layout class="main">
     <router-view>
       <template #default="{ Component, route }">
-        <transition name="zoom-fade" mode="out-in" appear>
+        <transition :name="themeStore.transitionName" mode="out-in" appear>
           <keep-alive :include="navtabStore.cacheList">
             <component :is="Component" :key="route.path" />
           </keep-alive>
@@ -13,8 +13,9 @@
 </template>
 
 <script setup lang="ts">
-import { useNavTabStore } from '@/store'
+import { useNavTabStore, useThemeStore } from '@/store'
 const navtabStore = useNavTabStore()
+const themeStore = useThemeStore()
 </script>
 
 <style lang="scss" scoped>
