@@ -34,7 +34,7 @@ export const useFileStore = defineStore({
     // 添加选中的文件到文件勾选列表
     addSelectedFileItem(item: File.FileItem) {
       if (this.selectedFileIdList.includes(item.id)) {
-        let index = this.selectedFileList.findIndex((i) => i.id === item.id)
+        const index = this.selectedFileList.findIndex((i) => i.id === item.id)
         this.selectedFileList.splice(index, 1)
         window.sessionStorage.setItem('FILE_LIST', JSON.stringify(this.selectedFileList))
       } else {

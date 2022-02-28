@@ -20,6 +20,7 @@
           :model-value="themeStore.tab.mode"
           :disabled="!themeStore.tab.visible"
           :style="{ width: '120px' }"
+          :trigger-props="{ autoFitPopupMinWidth: true }"
           @change="themeStore.setTabMode($event)"
         >
           <a-option v-for="item in themeStore.tab.modeList" :key="item.value">{{ item.label }}</a-option>

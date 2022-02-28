@@ -1,10 +1,7 @@
 import { defineStore } from 'pinia'
 
-type Theme = 'light' | 'dark'
-
 interface AppState {
   systemName: string
-  theme: Theme
   activePath: string | null
   menuList: App.MenuItem[]
 }
@@ -16,7 +13,6 @@ export const useAppStore = defineStore({
   state: (): AppState => {
     return {
       systemName: 'Admin管理系统', // 系统名称
-      theme: 'light', // light简白模式  dark暗黑模式
       activePath: window.sessionStorage.getItem('ActivePath') || '/home', // 当前激活的路径
       menuList: [
         {
@@ -80,16 +76,6 @@ export const useAppStore = defineStore({
     setActivePath(path: string) {
       this.activePath = path
       window.sessionStorage.setItem('ActivePath', path)
-    },
-    // 切换主题  暗黑模式|简白模式
-    toggleTheme(isDark: boolean) {
-      if (isDark) {
-        this.theme = 'dark'
-        document.body.setAttribute('arco-theme', 'dark')
-      } else {
-        this.theme = 'light'
-        document.body.removeAttribute('arco-theme')
-      }
     }
   }
 })

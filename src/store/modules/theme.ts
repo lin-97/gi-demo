@@ -1,9 +1,12 @@
 import { defineStore } from 'pinia'
 
+type Theme = 'light' | 'dark'
+
 export const useThemeStore = defineStore({
   id: 'Theme',
   state: () => {
     return {
+      theme: 'light', // light简白模式  dark暗黑模式
       tab: {
         visible: true,
         mode: 'card-gutter',
@@ -33,6 +36,16 @@ export const useThemeStore = defineStore({
     }
   },
   actions: {
+    // 切换主题  暗黑模式|简白模式
+    toggleTheme(isDark: boolean) {
+      if (isDark) {
+        this.theme = 'dark'
+        document.body.setAttribute('arco-theme', 'dark')
+      } else {
+        this.theme = 'light'
+        document.body.removeAttribute('arco-theme')
+      }
+    },
     // 设置页签可见
     setTabVisible(visible: boolean) {
       this.tab.visible = visible

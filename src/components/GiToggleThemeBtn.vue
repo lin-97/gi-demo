@@ -1,16 +1,16 @@
 <template>
   <a-button class="toggle-theme-btn" size="mini" @click="toggleTheme">
     <template #icon>
-      <component :size="18" :is="appStore.theme === 'light' ? 'icon-sun-fill' : 'icon-moon-fill'"></component>
+      <component :size="18" :is="themeStore.theme === 'light' ? 'icon-sun-fill' : 'icon-moon-fill'"></component>
     </template>
   </a-button>
 </template>
 
 <script setup lang="ts">
 import { useDark, useToggle } from '@vueuse/core'
-import { useAppStore } from '@/store'
+import { useThemeStore } from '@/store'
 
-const appStore = useAppStore()
+const themeStore = useThemeStore()
 
 const isDark = useDark({
   selector: 'body',
@@ -19,7 +19,7 @@ const isDark = useDark({
   valueLight: 'light',
   storageKey: 'arco-theme',
   onChanged(dark: boolean) {
-    appStore.toggleTheme(dark)
+    themeStore.toggleTheme(dark)
   }
 })
 
