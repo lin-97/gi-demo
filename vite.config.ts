@@ -8,7 +8,13 @@ import { viteMockServe } from 'vite-plugin-mock'
 import { svgBuilder } from './src/plugins/svgBuilder'
 
 export default defineConfig({
-  plugins: [vue(), vueJsx(), VueSetupExtend(), svgBuilder('./src/icons/'), viteMockServe({ supportTs: false })],
+  plugins: [
+    vue(),
+    vueJsx(),
+    VueSetupExtend(),
+    svgBuilder('./src/icons/'),
+    viteMockServe({ mockPath: 'mock', supportTs: true, prodEnabled: true, watchFiles: true })
+  ],
   resolve: {
     alias: {
       '~': fileURLToPath(new URL('./', import.meta.url)),
