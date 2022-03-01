@@ -13,11 +13,16 @@
 
   <!-- animated.css动画库 -->
   <link rel="stylesheet" href="/static/css/animate.min.css" type="text/css" />
+  <link rel="stylesheet" href="/static/css/loading.css" type="text/css" />
   <title>管理系统</title>
 </head>
 
 <body>
-  <div id="app"></div>
+  <div id="app">
+    <section class="init-loading">
+      <img src="/static/images/loading.gif">
+    </section>
+  </div>
   <script type="module" src="/src/main.ts"></script>
 </body>
 
