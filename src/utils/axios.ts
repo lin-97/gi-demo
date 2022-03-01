@@ -27,12 +27,8 @@ http.interceptors.request.use(
 http.interceptors.response.use(
   function (response) {
     if (response.status == 200) {
-      if (response.data.code == 200) {
+      if (response.data.success) {
         return response.data
-      } else if (response.data.code == 40301 || response.data.code == 40302) {
-        clearToken()
-        router.replace('/login')
-        Message.error({ content: 'token已过期，请重新登录！' })
       } else {
         Message.clear()
         Message.error({ content: response.data.message || response.data.msg || '服务器端错误' })

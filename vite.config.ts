@@ -4,10 +4,11 @@ import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
 import vueJsx from '@vitejs/plugin-vue-jsx'
 import VueSetupExtend from 'vite-plugin-vue-setup-extend'
+import { viteMockServe } from 'vite-plugin-mock'
 import { svgBuilder } from './src/plugins/svgBuilder'
 
 export default defineConfig({
-  plugins: [vue(), vueJsx(), VueSetupExtend(), svgBuilder('./src/icons/')],
+  plugins: [vue(), vueJsx(), VueSetupExtend(), svgBuilder('./src/icons/'), viteMockServe({ supportTs: false })],
   resolve: {
     alias: {
       '~': fileURLToPath(new URL('./', import.meta.url)),

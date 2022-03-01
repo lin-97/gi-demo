@@ -64,8 +64,8 @@
               <a-table-column title="序号" width="60">
                 <template #cell="{ record }">{{ record.index + 1 }}</template>
               </a-table-column>
-              <a-table-column title="名称" data-index="name" width="150"></a-table-column>
-              <a-table-column title="创建时间" data-index="time"></a-table-column>
+              <a-table-column title="姓名" data-index="name" width="150"></a-table-column>
+              <a-table-column title="创建时间" data-index="startTime"></a-table-column>
               <a-table-column title="地址" data-index="address"></a-table-column>
               <a-table-column title="比例" width="200">
                 <template #cell="{ record }">
@@ -117,12 +117,12 @@ let showLoading = ref<boolean>(false)
 
 type PageInfo = {
   page: number
-  size: number
+  pageSize: number
 }
 
 const pageInfo: PageInfo = reactive({
   page: 1,
-  size: 1000
+  pageSize: 1000
 })
 
 const getTableData = async () => {
