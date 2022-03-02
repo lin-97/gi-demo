@@ -1,7 +1,7 @@
 <template>
   <a-layout-header>
     <section class="system-logo" @click="toHome">
-      <img src="@/assets/logo.png" />
+      <img src="@/assets/images/logo.gif" />
       <span class="gi_hover">{{ appStore.systemName }}</span>
     </section>
     <a-space class="system-head" size="medium">
@@ -145,8 +145,8 @@ const logout = () => {
     align-items: center;
     cursor: pointer;
     img {
-      width: 30px;
-      height: 30px;
+      width: 32px;
+      height: 32px;
       border-radius: 6px;
     }
     span {

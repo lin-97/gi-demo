@@ -1,10 +1,10 @@
 // 颜色变量
-$theme-color: #165dff;
-$primary-color: #409eff;
-$success-color: #71c031;
-$warning-color: #f2a827;
-$danger-color: #d40000;
-$info-color: #909399;
+$theme-color: rgb(var(--primary-6));
+$primary-color: rgb(var(--primary-6));
+$success-color: rgb(var(--success-6));
+$warning-color: rgb(var(--warning-6));
+$danger-color: rgb(var(--danger-6));
+$info-color: rgb(var(--gray-6));
 
 // $title-color: #262626; // 标题颜色
 // $text-color: #595959; // 文本颜色-全局默认字体颜色

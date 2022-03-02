@@ -5,7 +5,7 @@
       <div class="login-left">
         <img class="bg" src="@/assets/images/login-bg.png" />
         <div class="system">
-          <img src="@/assets/images/system-logo.png" class="system-logo" />
+          <img class="logo" src="@/assets/images/logo.gif" />
           <div class="system-name"><span>Admin</span><span>管理系统</span></div>
         </div>
       </div>
@@ -100,7 +100,7 @@ const login = () => {
     top: 0px;
     bottom: 0px;
     position: absolute;
-    background-color: rgba($color: #165dff, $alpha: 0.6);
+    background-color: rgba(var(--primary-6), 0.6);
     z-index: 99;
   }
   &:hover {
@@ -136,6 +136,10 @@ const login = () => {
           margin-right: 4px;
         }
       }
+    }
+    .logo {
+      width: 60px;
+      height: 60px;
     }
   }
 }

@@ -33,17 +33,23 @@ export default defineConfig({
   server: {
     proxy: {
       '/api': {
-        target: 'https://www.fastmock.site/mock/4a6ede552f5ceef195285323eadcfd49',
-        changeOrigin: true,
+        target: 'https://www.fastmock.site/mock/4a6ede552f5ceef195285323eadcfd49', // 后台服务器地址
+        changeOrigin: true, // 是否允许不同源
+        secure: false, // 支持https
         rewrite: (path) => path.replace(/^\/api/, '/api')
       }
     }
-  }
+  },
   // 构建
-  // build: {
-  //   target: 'modules', // 浏览器兼容性  "esnext"|"modules"
-  //   outDir: 'dist', // 输出路径
-  //   assetsDir: 'assets', // 生成静态资源的存放路径
-  //   sourcemap: false // 构建后是否生成 source map 文件
-  // }
+  build: {
+    outDir: 'dist', // 指定打包路径，默认为项目根目录下的 dist 目录
+    terserOptions: {
+      compress: {
+        keep_infinity: true, // 防止 Infinity 被压缩成 1/0，这可能会导致 Chrome 上的性能问题
+        drop_console: true, // 生产环境去除 console
+        drop_debugger: true // 生产环境去除 debugger
+      }
+    },
+    chunkSizeWarningLimit: 1500 // chunk 大小警告的限制（以 kbs 为单位）
+  }
 })
