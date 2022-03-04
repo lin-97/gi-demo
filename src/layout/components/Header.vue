@@ -50,16 +50,16 @@
         </a-button>
         <template #content>
           <a-doption @click="toUser">
-            <div class="option-item">
-              <span style="background: #1677ff"><icon-user /></span>
-              <span>个人中心</span>
-            </div>
+            <template #icon>
+              <span class="doption-icon" style="background: rgba(var(--primary-6))"><icon-user /></span>
+            </template>
+            <template #default>个人中心</template>
           </a-doption>
           <a-doption @click="logout">
-            <div class="option-item">
-              <span style="background: #ff7d00"><icon-export /></span>
-              <span>退出登录</span>
-            </div>
+            <template #icon>
+              <span class="doption-icon" style="background: rgba(var(--warning-6))"><icon-export /></span>
+            </template>
+            <template #default>退出登录</template>
           </a-doption>
         </template>
       </a-dropdown>
@@ -111,24 +111,17 @@ const logout = () => {
 </script>
 
 <style lang="scss" scoped>
-.option-item {
+.doption-icon {
+  width: 20px;
+  height: 20px;
   display: flex;
+  justify-content: center;
   align-items: center;
-  span {
-    &:first-child {
-      width: 20px;
-      height: 20px;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      color: #fff;
-      border-radius: 4px;
-    }
-    &:last-child {
-      margin-left: 5px;
-    }
-  }
+  flex-shrink: 0;
+  color: #fff;
+  border-radius: 4px;
 }
+
 .arco-layout-header {
   padding: 0 $padding;
   height: 50px;

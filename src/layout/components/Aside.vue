@@ -44,6 +44,7 @@ const handleClickItem = (item: App.MenuItem) => {
   // Menu菜单组件修改
   .arco-menu-icon {
     margin-right: 0;
+    padding: 10px 0;
   }
   .arco-menu-has-icon {
     padding: 0;

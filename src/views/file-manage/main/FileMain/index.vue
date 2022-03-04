@@ -20,9 +20,12 @@
           >
         </a-space>
         <a-input-group>
-          <a-select style="width: 120px" placeholder="请选择...">
+          <a-select style="width: 120px" placeholder="请选择">
             <a-option v-for="item in fileTypeList" :key="item.value">
-              <component :is="item.icon" size="18" style="color: #bbb; margin-right: 5px"></component>{{ item.name }}
+              <template #icon>
+                <component :is="item.icon" size="18" color="#bbb"></component>
+              </template>
+              <template #default>{{ item.name }}</template>
             </a-option>
           </a-select>
           <a-input-search :style="{ width: '100%' }" placeholder="请输入关键词..." allow-clear search-button>
