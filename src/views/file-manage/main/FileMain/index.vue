@@ -55,7 +55,7 @@
             </a-button>
           </a-tooltip>
           <a-tooltip content="排序" position="bottom">
-            <a-button @click="handleFilter">
+            <a-button>
               <template #icon>
                 <icon-filter />
               </template>

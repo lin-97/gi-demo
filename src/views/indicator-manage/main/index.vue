@@ -57,7 +57,7 @@
           <a-table
             :data="tableData"
             v-loading="showLoading"
-            :scroll="{ x: 1000, y: '62vh' }"
+            :scroll="{ x: '100%', y: '100%' }"
             :pagination="{ 'show-page-size': true }"
           >
             <template #columns>
@@ -193,6 +193,8 @@ const onDelete = (row) => {
         flex: 1;
         padding: $padding;
         overflow: hidden;
+        display: flex;
+        flex-direction: column;
       }
     }
   }
