@@ -16,6 +16,9 @@ import ArcoVueIcon from '@arco-design/web-vue/es/icon'
 import '@/styles/index.scss'
 import '@/styles/transition.css'
 
+// 支持SVG
+import 'virtual:svg-icons-register'
+
 const app = createApp(App)
 
 app.use(router)

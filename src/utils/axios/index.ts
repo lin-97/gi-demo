@@ -2,6 +2,14 @@ import axios, { AxiosInstance, AxiosRequestConfig, AxiosResponse } from 'axios'
 import { Message } from '@arco-design/web-vue'
 import { getToken, clearToken } from '@/utils/auth'
 
+// 返回res.data的interface
+export interface IResponse<T = any> {
+  code: number | string
+  result: T
+  message: string
+  status: string | number
+}
+
 const http: AxiosInstance = axios.create({
   // baseURL: process.env.VUE_APP_API_PREFIX,
   timeout: 30000

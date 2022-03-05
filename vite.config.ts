@@ -5,14 +5,20 @@ import vue from '@vitejs/plugin-vue'
 import vueJsx from '@vitejs/plugin-vue-jsx'
 import VueSetupExtend from 'vite-plugin-vue-setup-extend'
 import { viteMockServe } from 'vite-plugin-mock'
-import { svgBuilder } from './src/plugins/svgBuilder'
+import { createSvgIconsPlugin } from 'vite-plugin-svg-icons'
+import path from 'path'
 
 export default defineConfig({
   plugins: [
     vue(),
     vueJsx(),
     VueSetupExtend(),
-    svgBuilder('./src/icons/'),
+    createSvgIconsPlugin({
+      // 指定需要缓存的图标文件夹
+      iconDirs: [path.resolve(process.cwd(), 'src/icons')],
+      // 指定symbolId格式
+      symbolId: 'icon-[dir]-[name]'
+    }),
     viteMockServe({ mockPath: 'mock', supportTs: true, prodEnabled: true, watchFiles: true })
   ],
   resolve: {

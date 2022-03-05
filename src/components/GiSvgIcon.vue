@@ -1,5 +1,10 @@
 <template>
-  <svg :class="svgClass" v-bind="$attrs" :style="{ color: color, width: iconSize, height: iconSize }">
+  <svg
+    aria-hidden="true"
+    :class="svgClass"
+    v-bind="$attrs"
+    :style="{ color: color, fill: color, width: iconSize, height: iconSize }"
+  >
     <use :xlink:href="iconName"></use>
   </svg>
 </template>
@@ -32,6 +37,7 @@ const iconSize = computed<string | number>(() => {
 })
 
 const iconName = computed<string>(() => `#icon-${props.name}`)
+
 const svgClass = computed<string>(() => {
   if (props.name) return `svg-icon icon-${props.name}`
   return 'svg-icon'
@@ -42,7 +48,7 @@ const svgClass = computed<string>(() => {
 .svg-icon {
   width: auto;
   height: auto;
-  fill: currentColor;
+  // fill: currentColor;
   vertical-align: middle;
   flex-shrink: 0;
 }

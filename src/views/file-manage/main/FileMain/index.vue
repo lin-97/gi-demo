@@ -23,7 +23,7 @@
           <a-select style="width: 120px" placeholder="请选择">
             <a-option v-for="item in fileTypeList" :key="item.value">
               <template #icon>
-                <component :is="item.icon" size="18" color="#bbb"></component>
+                <component :is="item.icon" size="18" color="#999"></component>
               </template>
               <template #default>{{ item.name }}</template>
             </a-option>

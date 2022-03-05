@@ -21,7 +21,7 @@
             <input type="password" placeholder="密码" v-model="form.password" />
           </div>
           <div class="check">
-            <a-checkbox v-model="checked">保持登录状态</a-checkbox>
+            <a-checkbox v-model="checked"> 保持登录状态 </a-checkbox>
           </div>
           <div>
             <a-button type="primary" size="large" long :loading="showLoading" @click="login">登录</a-button>
