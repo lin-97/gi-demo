@@ -57,7 +57,7 @@
           <a-table
             :data="tableData"
             v-loading="showLoading"
-            :scroll="{ x: '100%', y: '100%' }"
+            :scroll="{ x: 'auto', y: '100%' }"
             :pagination="{ 'show-page-size': true }"
           >
             <template #columns>
