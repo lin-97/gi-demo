@@ -28,9 +28,14 @@
           :disabled="!themeStore.tab.visible"
           :style="{ width: '120px' }"
           :trigger-props="{ autoFitPopupMinWidth: true }"
-          @change="themeStore.setTabMode($event)"
         >
-          <a-option v-for="item in themeStore.tab.modeList" :key="item.value">{{ item.label }}</a-option>
+          <a-option
+            v-for="item in themeStore.tab.modeList"
+            :key="item.value"
+            :value="item.value"
+            @click="themeStore.setTabMode(item.value)"
+            >{{ item.label }}</a-option
+          >
         </a-select>
       </a-row>
 
@@ -50,9 +55,14 @@
           :model-value="themeStore.animate.mode"
           :disabled="!themeStore.animate.visible"
           :style="{ width: '120px' }"
-          @change="themeStore.setAnimateMode($event)"
         >
-          <a-option v-for="item in themeStore.animate.modeList" :key="item.value">{{ item.label }}</a-option>
+          <a-option
+            v-for="item in themeStore.animate.modeList"
+            :key="item.value"
+            :value="item.value"
+            @click="themeStore.setAnimateMode(item.value)"
+            >{{ item.label }}</a-option
+          >
         </a-select>
       </a-row>
     </a-space>

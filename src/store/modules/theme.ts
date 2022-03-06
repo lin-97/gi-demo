@@ -12,21 +12,21 @@ export const useThemeStore = defineStore({
         visible: true,
         mode: 'card-gutter',
         modeList: [
-          { label: 'card-gutter', value: 'card-gutter' },
-          { label: 'card', value: 'card' },
-          { label: 'rounded', value: 'rounded' }
+          { label: '间隔卡片', value: 'card-gutter' },
+          { label: '卡片', value: 'card' },
+          { label: '圆角', value: 'rounded' }
         ]
       },
       animate: {
         visible: true,
         mode: 'zoom-fade',
         modeList: [
-          { label: 'fade-slide', value: 'fade-slide' },
-          { label: 'fade', value: 'fade' },
-          { label: 'fade-bottom', value: 'fade-bottom' },
-          { label: 'fade-scale', value: 'fade-scale' },
-          { label: 'zoom-fade', value: 'zoom-fade' },
-          { label: 'zoom-out', value: 'zoom-out' }
+          { label: '滑动', value: 'fade-slide' },
+          { label: '消退', value: 'fade' },
+          { label: '底部消退', value: 'fade-bottom' },
+          { label: '缩放消退', value: 'fade-scale' },
+          { label: '渐变', value: 'zoom-fade' },
+          { label: '闪现', value: 'zoom-out' }
         ]
       }
     }
