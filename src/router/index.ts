@@ -45,6 +45,12 @@ const routes = [
         meta: { title: '文件管理', keepAlive: true }
       },
       {
+        path: '/form-manage',
+        name: 'FormManage',
+        component: () => import('@/views/form-manage/index.vue'),
+        meta: { title: '表单管理', keepAlive: false }
+      },
+      {
         path: '/user',
         name: 'User',
         component: () => import('@/views/user/index.vue'),

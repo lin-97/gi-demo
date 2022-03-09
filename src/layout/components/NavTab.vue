@@ -91,11 +91,10 @@ const onCloseAll = () => {
 
 <style lang="scss" scoped>
 :deep(.arco-tabs-content) {
-  padding-top: 0;
-  border: none;
+  display: none;
 }
 
-:deep(.arco-tabs-nav-type-card-gutter .arco-tabs-tab) {
+:deep(.arco-tabs-tab) {
   border-bottom-color: transparent !important;
 }
 .nav-tab {

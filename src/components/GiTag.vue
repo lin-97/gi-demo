@@ -104,7 +104,7 @@ let getClassName = computed<string>(() => {
   &.gi-tag-info {
     color: rgb(var(--gray-6));
     background: rgb(var(--gray-1));
-    border: 1px solid rgb(var(--gray-3));
+    border: 1px solid rgb(var(--gray-4));
   }
 }
 </style>

@@ -34,6 +34,12 @@ export const useAppStore = defineStore({
           path: '/file-manage'
         },
         {
+          icon: 'menu-form',
+          id: 'BDGL',
+          name: '表单管理',
+          path: '/form-manage'
+        },
+        {
           icon: 'menu-user',
           id: 'ZBGL',
           name: '个人中心',

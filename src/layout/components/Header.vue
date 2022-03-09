@@ -44,7 +44,7 @@
 
       <!-- 管理员账户 -->
       <a-dropdown trigger="hover">
-        <a-button type="text" class="username">
+        <a-button type="text" size="medium" class="username">
           <span>{{ userStore.userName }}</span>
           <icon-down />
         </a-button>
