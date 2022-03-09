@@ -11,7 +11,7 @@
   },
   "dependencies": {
     "@arco-design/color": "^0.4.0",
-    "@arco-themes/vue-demo": "0.0.13",
+    "@arco-themes/vue-demo": "0.0.14",
     "@vueuse/components": "^7.6.2",
     "@vueuse/core": "^7.6.2",
     "axios": "^0.25.0",
@@ -28,7 +28,7 @@
     "xgplayer-music": "^2.3.2"
   },
   "devDependencies": {
-    "@arco-design/web-vue": "^2.18.0",
+    "@arco-design/web-vue": "^2.18.1",
     "@rushstack/eslint-patch": "^1.1.0",
     "@types/node": "^16.11.22",
     "@vitejs/plugin-vue": "^2.1.0",

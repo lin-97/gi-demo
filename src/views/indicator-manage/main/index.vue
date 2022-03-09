@@ -57,14 +57,14 @@
           <a-table
             :data="tableData"
             v-loading="showLoading"
-            :scroll="{ x: 'auto', y: '100%' }"
+            :scroll="{ x: '100%', y: '100%' }"
             :pagination="{ 'show-page-size': true }"
           >
             <template #columns>
-              <a-table-column title="序号" width="60">
+              <a-table-column title="序号">
                 <template #cell="{ record }">{{ record.index + 1 }}</template>
               </a-table-column>
-              <a-table-column title="姓名" data-index="name" width="150"></a-table-column>
+              <a-table-column title="姓名" data-index="name"></a-table-column>
               <a-table-column title="创建时间" data-index="startTime"></a-table-column>
               <a-table-column title="地址" data-index="address"></a-table-column>
               <a-table-column title="比例" width="200">

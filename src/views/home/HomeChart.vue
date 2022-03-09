@@ -1,11 +1,11 @@
 <template>
   <div class="chart">
-    <div id="chart" style="width: 100%; height: 100%"></div>
+    <div id="chart" style="width: 100%; height: 250px"></div>
   </div>
 </template>
 
 <script setup lang="ts">
-import { onMounted } from '@vue/runtime-core'
+import { onMounted } from 'vue'
 import * as echarts from 'echarts'
 
 onMounted(() => {

@@ -37,7 +37,10 @@
             <a-checkbox v-model="form.isRead">我已阅读</a-checkbox>
           </a-form-item>
           <a-form-item>
-            <a-button type="primary">提交</a-button>
+            <a-space>
+              <a-button>重置</a-button>
+              <a-button type="primary">提交</a-button>
+            </a-space>
           </a-form-item>
         </a-form>
         <div>
