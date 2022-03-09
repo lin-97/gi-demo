@@ -104,7 +104,7 @@ const form = reactive({
 <style lang="scss" scoped>
 .form-manage {
   flex: 1;
-  background: #fff;
+  background: var(--color-bg-2);
   .content {
     flex: 1;
   }
