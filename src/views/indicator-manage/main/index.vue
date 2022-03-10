@@ -57,7 +57,7 @@
           <a-table
             :data="tableData"
             v-loading="showLoading"
-            :scroll="{ x: '100%', y: '100%' }"
+            :scroll="{ x: 'auto', y: '100%' }"
             :pagination="{ 'show-page-size': true }"
           >
             <template #columns>
@@ -174,6 +174,9 @@ const onDelete = (row) => {
 </script>
 
 <style lang="scss" scoped>
+// :deep(.arco-table-cell) {
+//   white-space: nowrap;
+// }
 .manage {
   width: 100%;
   flex: 1;

@@ -6,14 +6,16 @@
     </section>
     <a-space class="system-head" size="medium">
       <!-- 项目配置 -->
-      <a-button size="mini" class="gi_hover_btn" @click="showSettingDrawer = !showSettingDrawer">
-        <template #icon>
-          <icon-settings :size="18" />
-        </template>
-      </a-button>
+      <a-tooltip content="项目配置" position="bl">
+        <a-button size="mini" class="gi_hover_btn" @click="showSettingDrawer = !showSettingDrawer">
+          <template #icon>
+            <icon-settings :size="18" />
+          </template>
+        </a-button>
+      </a-tooltip>
 
       <!-- 消息通知 -->
-      <a-tooltip content="消息通知" position="bl">
+      <a-tooltip content="消息通知" position="bottom">
         <a-button size="mini" class="gi_hover_btn">
           <template #icon>
             <icon-notification :size="18" />
@@ -22,20 +24,24 @@
       </a-tooltip>
 
       <!-- 全屏切换组件 -->
-      <a-button size="mini" class="gi_hover_btn" @click="onToggleFullScreen">
-        <template #icon>
-          <icon-fullscreen :size="18" v-if="!isFullScreen" />
-          <icon-fullscreen-exit :size="18" v-else />
-        </template>
-      </a-button>
+      <a-tooltip content="全屏切换" position="bottom">
+        <a-button size="mini" class="gi_hover_btn" @click="onToggleFullScreen">
+          <template #icon>
+            <icon-fullscreen :size="18" v-if="!isFullScreen" />
+            <icon-fullscreen-exit :size="18" v-else />
+          </template>
+        </a-button>
+      </a-tooltip>
 
       <!-- 暗黑模式切换 -->
-      <a-button size="mini" class="gi_hover_btn" @click="onToggleThemeDark">
-        <template #icon>
-          <icon-sun-fill :size="18" v-if="themeStore.theme === 'light'"></icon-sun-fill>
-          <icon-moon-fill :size="18" v-else></icon-moon-fill>
-        </template>
-      </a-button>
+      <a-tooltip content="主题切换" position="bottom">
+        <a-button size="mini" class="gi_hover_btn" @click="onToggleThemeDark">
+          <template #icon>
+            <icon-sun-fill :size="18" v-if="themeStore.theme === 'light'"></icon-sun-fill>
+            <icon-moon-fill :size="18" v-else></icon-moon-fill>
+          </template>
+        </a-button>
+      </a-tooltip>
 
       <!-- 管理员头像 -->
       <a-avatar :size="32">
