@@ -20,7 +20,7 @@
           >
         </a-space>
         <a-input-group>
-          <a-select style="width: 120px" placeholder="请选择">
+          <a-select style="width: 150px" placeholder="请选择">
             <a-option v-for="item in fileTypeList" :key="item.value">
               <template #icon>
                 <component :is="item.icon" size="18" color="#999"></component>
@@ -28,12 +28,8 @@
               <template #default>{{ item.name }}</template>
             </a-option>
           </a-select>
-          <a-input-search :style="{ width: '100%' }" placeholder="请输入关键词..." allow-clear search-button>
-            <template #button-icon>
-              <icon-search />
-            </template>
-            <template #button-default>查询 </template>
-          </a-input-search>
+          <a-input placeholder="请输入关键词..." allow-clear> </a-input>
+          <a-button type="primary"><icon-search /> 搜索</a-button>
         </a-input-group>
       </a-space>
       <!-- 右侧区域 -->
