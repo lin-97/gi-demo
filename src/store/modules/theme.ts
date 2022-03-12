@@ -10,10 +10,10 @@ export const useThemeStore = defineStore({
       themeColor: localStorage.getItem('ThemeColor') || '#1571FA',
       tab: {
         visible: true,
-        mode: 'card-gutter',
+        mode: 'card',
         modeList: [
-          { label: '间隔卡片', value: 'card-gutter' },
           { label: '卡片', value: 'card' },
+          { label: '间隔卡片', value: 'card-gutter' },
           { label: '圆角', value: 'rounded' }
         ]
       },
