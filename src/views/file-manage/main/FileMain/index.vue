@@ -5,20 +5,20 @@
 
     <a-row justify="space-between" class="row-operate">
       <!-- 左侧区域 -->
-      <a-space :direction="width < 1280 ? 'vertical' : 'horizontal'">
-        <a-space>
-          <a-dropdown>
-            <a-button type="primary"><icon-upload /> 上传</a-button>
-            <template #content>
-              <a-doption>上传文件</a-doption>
-              <a-doption>上传文件夹</a-doption>
-            </template>
-          </a-dropdown>
 
-          <a-button type="primary" @click="isBatchMode = !isBatchMode"
-            ><icon-select-all /> {{ isBatchMode ? '取消批量' : '批量操作' }}</a-button
-          >
-        </a-space>
+      <a-space>
+        <a-dropdown>
+          <a-button type="primary"><icon-upload /> 上传</a-button>
+          <template #content>
+            <a-doption>上传文件</a-doption>
+            <a-doption>上传文件夹</a-doption>
+          </template>
+        </a-dropdown>
+
+        <a-button type="primary" @click="isBatchMode = !isBatchMode">
+          <icon-select-all /> {{ isBatchMode ? '取消批量' : '批量操作' }}
+        </a-button>
+
         <a-input-group>
           <a-select style="width: 150px" placeholder="请选择">
             <a-option v-for="item in fileTypeList" :key="item.value">
@@ -32,6 +32,7 @@
           <a-button type="primary"><icon-search /> 搜索</a-button>
         </a-input-group>
       </a-space>
+
       <!-- 右侧区域 -->
       <a-space v-if="width > 715">
         <a-button
