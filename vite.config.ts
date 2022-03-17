@@ -19,7 +19,18 @@ export default defineConfig({
       // 指定symbolId格式
       symbolId: 'icon-[dir]-[name]'
     }),
-    viteMockServe({ mockPath: 'mock', supportTs: true, prodEnabled: true, watchFiles: true })
+    viteMockServe({
+      mockPath: 'mock',
+      supportTs: false,
+      prodEnabled: true,
+      localEnabled: false,
+      watchFiles: true,
+      //  这样可以控制关闭mock的时候不让mock打包到最终代码内
+      injectCode: `
+        import { setupProdMockServer } from './mockProdServer';
+        setupProdMockServer();
+      `
+    })
   ],
   resolve: {
     alias: {
@@ -37,6 +48,7 @@ export default defineConfig({
     }
   },
   server: {
+    port: 8080,
     proxy: {
       '/api': {
         target: 'https://www.fastmock.site/mock/4a6ede552f5ceef195285323eadcfd49', // 后台服务器地址
@@ -44,6 +56,11 @@ export default defineConfig({
         secure: false, // 支持https
         rewrite: (path) => path.replace(/^\/api/, '/api')
       }
+      // '/mock': {
+      //   target: 'http://localhost:8080/', //对mock进行代理，为了区别非mock的代理
+      //   changeOrigin: true,
+      //   rewrite: (path) => path.replace(/^\/mock/, '/mock')
+      // }
     }
   },
   // 构建
