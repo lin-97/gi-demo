@@ -48,9 +48,7 @@ const handleClickItem = (item: App.MenuItem) => {
   }
   .arco-menu-has-icon {
     padding: 0;
-    display: flex;
     justify-content: center;
-    align-items: center;
   }
   .arco-menu-title {
     display: none;

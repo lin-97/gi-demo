@@ -25,9 +25,6 @@ const props = defineProps({
   padding: 0 $padding;
   box-sizing: border-box;
   z-index: 99;
-  :deep(.arco-btn) {
-    min-width: 80px;
-  }
   > .wrapper {
     height: 100%;
     border-bottom: 1px solid var(--color-neutral-3);

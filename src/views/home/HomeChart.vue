@@ -10,7 +10,9 @@ import * as echarts from 'echarts'
 
 onMounted(() => {
   // 基于准备好的dom，初始化echarts实例
-  const myChart = echarts.init(document.getElementById('chart'))
+  const el: HTMLElement | null = document.getElementById('chart')
+  if (!el) return
+  const myChart = echarts.init(el)
   // 指定图表的配置项和数据
   const option = {
     title: {

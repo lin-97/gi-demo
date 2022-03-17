@@ -1,6 +1,8 @@
 import { defineStore } from 'pinia'
 import router from '@/router'
 // console.log('router', router)
+import { useAppStore } from '@/store/index'
+const appStore = useAppStore()
 
 interface NavTabState {
   tabList: NavTab.NavTabItem[]
@@ -41,6 +43,7 @@ export const useNavTabStore = defineStore({
         this.tabList.splice(index, 1)
         if (isActive) {
           router.push({ path: this.tabList[this.tabList.length - 1]['path'] })
+          appStore.setActivePath(this.tabList[this.tabList.length - 1]['path'])
         }
       }
     },

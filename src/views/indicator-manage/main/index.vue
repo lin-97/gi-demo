@@ -54,43 +54,45 @@
             </a-space>
           </a-row>
 
-          <a-table
-            :data="tableData"
-            v-loading="showLoading"
-            :scroll="{ x: '100%', y: '100%' }"
-            :pagination="{ 'show-page-size': true }"
-          >
-            <template #columns>
-              <a-table-column title="序号">
-                <template #cell="{ record }">{{ record.index + 1 }}</template>
-              </a-table-column>
-              <a-table-column title="姓名" data-index="name"></a-table-column>
-              <a-table-column title="创建时间" data-index="startTime"></a-table-column>
-              <a-table-column title="地址" data-index="address"></a-table-column>
-              <a-table-column title="比例" width="200">
-                <template #cell="{ record }">
-                  <a-progress status="warning" :percent="record.proportion / 100" />
-                </template>
-              </a-table-column>
-              <a-table-column title="状态" width="100">
-                <template #cell="{ record }">
-                  <a-switch v-model="record.status" size="medium">
-                    <template #checked>开启</template>
-                    <template #unchecked>关闭</template>
-                  </a-switch>
-                </template>
-              </a-table-column>
-              <a-table-column title="操作" width="230">
-                <template #cell="{ record }">
-                  <a-space>
-                    <a-button type="primary" @click="onEdit(record)">修改</a-button>
-                    <a-button @click="onDetail">详情</a-button>
-                    <a-button type="primary" status="danger" @click="onDelete">删除</a-button>
-                  </a-space>
-                </template>
-              </a-table-column>
-            </template>
-          </a-table>
+          <section class="table-box">
+            <a-table
+              :data="tableData"
+              v-loading="showLoading"
+              :scroll="{ x: '100%', y: '100%' }"
+              :pagination="{ 'show-page-size': true }"
+            >
+              <template #columns>
+                <a-table-column title="序号">
+                  <template #cell="{ record }">{{ record.index + 1 }}</template>
+                </a-table-column>
+                <a-table-column title="姓名" data-index="name"></a-table-column>
+                <a-table-column title="创建时间" data-index="startTime"></a-table-column>
+                <a-table-column title="地址" data-index="address"></a-table-column>
+                <a-table-column title="比例" width="200">
+                  <template #cell="{ record }">
+                    <a-progress status="warning" :percent="record.proportion / 100" />
+                  </template>
+                </a-table-column>
+                <a-table-column title="状态" width="100">
+                  <template #cell="{ record }">
+                    <a-switch v-model="record.status" size="medium">
+                      <template #checked>开启</template>
+                      <template #unchecked>关闭</template>
+                    </a-switch>
+                  </template>
+                </a-table-column>
+                <a-table-column title="操作" width="230">
+                  <template #cell="{ record }">
+                    <a-space>
+                      <a-button type="primary" @click="onEdit(record)">修改</a-button>
+                      <a-button @click="onDetail">详情</a-button>
+                      <a-button type="primary" status="danger" @click="onDelete">删除</a-button>
+                    </a-space>
+                  </template>
+                </a-table-column>
+              </template>
+            </a-table>
+          </section>
         </div>
       </div>
 
@@ -195,6 +197,11 @@ const onDelete = (row) => {
         overflow: hidden;
         display: flex;
         flex-direction: column;
+        box-sizing: border-box;
+        .table-box {
+          flex: 1;
+          overflow: hidden;
+        }
       }
     }
   }

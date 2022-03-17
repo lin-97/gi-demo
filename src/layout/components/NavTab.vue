@@ -38,10 +38,11 @@
 <script setup lang="ts">
 import { watch, onMounted } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
-import { useNavTabStore, useThemeStore } from '@/store'
+import { useNavTabStore, useThemeStore, useAppStore } from '@/store'
 
 const route = useRoute()
 const router = useRouter()
+const appStore = useAppStore()
 const navtabStore = useNavTabStore()
 const themeStore = useThemeStore()
 
@@ -72,8 +73,9 @@ const handleNavTab = () => {
 
 // 点击页签
 const onClick = (key: string) => {
-  console.log('点击前', navtabStore.cacheList)
+  console.log('点击前', navtabStore.cacheList, key)
   router.push({ path: key })
+  appStore.setActivePath(key)
 }
 
 // 关闭页签
