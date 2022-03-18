@@ -7,7 +7,7 @@
         <ColorPicker
           theme="dark"
           :color="themeStore.themeColor"
-          :sucker-hide="false"
+          :sucker-hide="true"
           :colors-default="defaultColorList"
           @changeColor="changeColor"
         ></ColorPicker>
@@ -130,8 +130,11 @@ if (themeStore.themeColor) {
   changeThemeColor(themeStore.themeColor)
 }
 
-const changeColor = (color: any) => {
-  themeStore.setThemeColor(color.hex)
+const changeColor = (colorObj: any) => {
+  console.log(colorObj)
+  if (!/^#[0-9A-Za-z]{6}/.test(colorObj.hex)) return
+  console.log(colorObj)
+  themeStore.setThemeColor(colorObj.hex)
   changeThemeColor(themeStore.themeColor)
 }
 </script>
