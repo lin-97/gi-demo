@@ -72,7 +72,6 @@ const onCountDownTime = () => {
 }
 
 .container {
-  width: 30%;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -81,7 +80,7 @@ const onCountDownTime = () => {
     position: relative;
     overflow: hidden;
     .img-parent {
-      width: 100%;
+      height: 50vh;
     }
     .img-child {
       position: absolute;

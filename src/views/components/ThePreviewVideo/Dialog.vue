@@ -4,41 +4,38 @@
   </a-modal>
 </template>
 
-<script lang="ts">
-import { ref, onMounted, onBeforeUnmount, defineComponent } from 'vue'
+<script setup lang="ts">
+import { ref, onMounted, onBeforeUnmount } from 'vue'
 import Player from 'xgplayer/dist/simple_player'
 
-export default defineComponent({
-  props: {
-    fileInfo: Object,
-    onCancel: Function
-  },
-  setup(props) {
-    let visible = ref<boolean>(false)
-    let player = ref<any>(null)
+const props = defineProps({
+  fileInfo: Object,
+  onCancel: Function
+})
 
-    onMounted(() => {
-      visible.value = true
-      player.value = new Player({
-        id: 'video',
-        url: props.fileInfo?.src,
-        autoplay: true
-      })
-    })
+let visible = ref<boolean>(false)
+let player = ref<any>(null)
 
-    onBeforeUnmount(() => {
-      player.value = null
-    })
+onMounted(() => {
+  visible.value = true
+  player.value = new Player({
+    id: 'video',
+    url: props.fileInfo?.src,
+    autoplay: true
+  })
+})
 
-    const handleCancel = () => {
-      visible.value = false
-      props.onCancel()
-    }
+onBeforeUnmount(() => {
+  player.value = null
+})
 
-    return {
-      visible,
-      handleCancel
-    }
-  }
+const handleCancel = () => {
+  visible.value = false
+  props.onCancel()
+}
+
+defineExpose({
+  visible,
+  handleCancel
 })
 </script>

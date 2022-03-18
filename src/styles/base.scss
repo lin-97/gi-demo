@@ -19,6 +19,7 @@ html {
 
 body {
   overflow: hidden;
+  // transition: color 0.6s, background-color 0.6s;
 }
 
 #app {
@@ -26,6 +27,9 @@ body {
   overflow: hidden;
   color: $text-color;
   background: $background-color;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 body[arco-theme='dark'] #app {
@@ -39,20 +43,6 @@ pre {
   background: #333;
   padding: 15px;
   border-radius: 6px;
-}
-
-// 阿里巴巴项目图标默认样式
-.iconfont {
-  font-family: 'iconfont' !important;
-  font-size: 16px;
-  font-style: normal;
-  font-weight: 400;
-  font-variant: normal;
-  text-transform: none;
-  line-height: 1;
-  vertical-align: baseline;
-  display: inline-block;
-  -webkit-font-smoothing: antialiased;
 }
 
 // nprogress插件进度条颜色

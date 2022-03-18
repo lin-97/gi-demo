@@ -5,57 +5,54 @@
   </a-modal>
 </template>
 
-<script lang="ts">
-import { ref, onMounted, onBeforeUnmount, defineComponent } from 'vue'
+<script setup lang="ts">
+import { ref, onMounted, onBeforeUnmount } from 'vue'
 import 'xgplayer'
 import Music from 'xgplayer-music'
 
-export default defineComponent({
-  props: {
-    fileInfo: Object,
-    onCancel: Function
-  },
-  setup(props) {
-    let visible = ref<boolean>(false)
-    let player = ref<any>(null)
+const props = defineProps({
+  fileInfo: Object,
+  onCancel: Function
+})
 
-    onMounted(() => {
-      visible.value = true
-      player.value = new Music({
-        id: 'audio',
-        url: [
-          {
-            src: props.fileInfo?.src,
-            name: props.fileInfo?.name,
-            poster: '//sf1-cdn-tos.huoshanstatic.com/obj/media-fe/xgplayer_doc_video/music/poster-small.jpeg'
-          }
-        ],
-        volume: 0.8,
-        width: 900,
-        height: 50,
-        preloadNext: true,
-        switchKeepProgress: false,
-        volumeShow: true,
-        autoplay: true
-      })
+let visible = ref<boolean>(false)
+let player = ref<any>(null)
 
-      player.value.crossOrigin = 'anonymous'
-      player.value.analyze(document.querySelector('canvas'))
-    })
+onMounted(() => {
+  visible.value = true
+  player.value = new Music({
+    id: 'audio',
+    url: [
+      {
+        src: props.fileInfo?.src,
+        name: props.fileInfo?.name,
+        poster: '//sf1-cdn-tos.huoshanstatic.com/obj/media-fe/xgplayer_doc_video/music/poster-small.jpeg'
+      }
+    ],
+    volume: 0.8,
+    width: 900,
+    height: 50,
+    preloadNext: true,
+    switchKeepProgress: false,
+    volumeShow: true,
+    autoplay: true
+  })
 
-    onBeforeUnmount(() => {
-      player.value = null
-    })
+  player.value.crossOrigin = 'anonymous'
+  player.value.analyze(document.querySelector('canvas'))
+})
 
-    const handleCancel = () => {
-      visible.value = false
-      props.onCancel()
-    }
+onBeforeUnmount(() => {
+  player.value = null
+})
 
-    return {
-      visible,
-      handleCancel
-    }
-  }
+const handleCancel = () => {
+  visible.value = false
+  props.onCancel()
+}
+
+defineExpose({
+  visible,
+  handleCancel
 })
 </script>

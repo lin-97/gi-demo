@@ -28,7 +28,7 @@
           <a-input v-model="form.name" style="max-width: 280px" />
         </a-form-item>
         <a-form-item field="map" label="办公地址">
-          <a-select v-model="form.map" style="max-width: 280px">
+          <a-select v-model="form.map" style="max-width: 280px" :trigger-props="{ 'update-at-scroll': true }">
             <a-option value="a">广州</a-option>
             <a-option value="b">深圳</a-option>
             <a-option value="c">上海</a-option>

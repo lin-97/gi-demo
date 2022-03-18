@@ -46,100 +46,92 @@
   </transition>
 </template>
 
-<script lang="ts">
-import { defineComponent, ref, nextTick, onMounted, watch, reactive } from 'vue'
+<script setup lang="ts">
+import { ref, nextTick, onMounted, watch, reactive } from 'vue'
 import { onClickOutside, useWindowSize } from '@vueuse/core'
 import GiOption from '@/components/GiOption.vue'
 import GiOptionItem from '@/components/GiOptionItem.vue'
 import GiSvgIcon from '@/components/GiSvgIcon.vue'
 
-export default defineComponent({
-  components: {
-    GiOption,
-    GiOptionItem,
-    GiSvgIcon
+const props = defineProps({
+  axis: {
+    type: Object,
+    default: () => ({ x: 0, y: 0 })
   },
-  props: {
-    axis: {
-      type: Object,
-      default: () => ({ x: 0, y: 0 })
-    },
-    fileInfo: Object,
-    onClick: Function,
-    onClose: Function
-  },
-  setup(props) {
-    let showContentMenu = ref<boolean>(false)
-    let contentMenuStyle = ref<object>({})
-    let contentMenuWidth = ref<number>(0)
-    let contentMenuHeight = ref<number>(0)
-    let contextMenuRef = ref<HTMLInputElement | null>(null)
+  fileInfo: Object,
+  onClick: Function,
+  onClose: Function
+})
 
-    const getStyle = () => {
-      const obj: any = {}
-      // console.log('props.axis.x', props.axis.x)
-      // console.log('props.axis.y', props.axis.y)
-      // console.log('window.innerWidth', window.innerWidth)
-      // console.log('window.innerHeight', window.innerHeight)
-      // console.log('contentMenuWidth', contentMenuWidth.value)
-      // console.log('contentMenuHeight', contentMenuHeight.value)
+let showContentMenu = ref<boolean>(false)
+let contentMenuStyle = ref<object>({})
+let contentMenuWidth = ref<number>(0)
+let contentMenuHeight = ref<number>(0)
+let contextMenuRef = ref<HTMLInputElement | null>(null)
 
-      if (props.axis.x > window.innerWidth - contentMenuWidth.value) {
-        obj.right = window.innerWidth - props.axis.x + 'px'
-      } else {
-        obj.left = props.axis.x + 2 + 'px'
-      }
-      if (props.axis.y > window.innerHeight - contentMenuHeight.value) {
-        obj.bottom = window.innerHeight - props.axis.y + 'px'
-        obj['transform-origin'] = 'center bottom'
-      } else {
-        obj.top = props.axis.y + 2 + 'px'
-        obj['transform-origin'] = 'center top'
-      }
-      obj['z-index'] = 1000
-      contentMenuStyle.value = obj
-    }
+const getStyle = () => {
+  const obj: any = {}
+  // console.log('props.axis.x', props.axis.x)
+  // console.log('props.axis.y', props.axis.y)
+  // console.log('window.innerWidth', window.innerWidth)
+  // console.log('window.innerHeight', window.innerHeight)
+  // console.log('contentMenuWidth', contentMenuWidth.value)
+  // console.log('contentMenuHeight', contentMenuHeight.value)
 
-    // 检测在一个元素之外的任何点击
-    onClickOutside(contextMenuRef, () => {
-      showContentMenu.value = false
-      props.onClose()
-    })
-
-    // 点击菜单项
-    const handleClickMenuItem = (item: File.FileItem) => {
-      showContentMenu.value = false
-      props.onClick(item)
-    }
-
-    // 窗口尺寸变化关闭
-    const windowSize = reactive(useWindowSize())
-    watch(
-      () => [windowSize.width, windowSize.height],
-      () => {
-        showContentMenu.value = false
-        props.onClose()
-      }
-    )
-
-    onMounted(() => {
-      setTimeout(() => {
-        showContentMenu.value = true
-        nextTick(() => {
-          contentMenuWidth.value = contextMenuRef.value.offsetWidth
-          contentMenuHeight.value = contextMenuRef.value.offsetHeight
-          getStyle()
-        })
-      }, 100)
-    })
-
-    return {
-      showContentMenu,
-      contentMenuStyle,
-      contextMenuRef,
-      handleClickMenuItem
-    }
+  if (props.axis.x > window.innerWidth - contentMenuWidth.value) {
+    obj.right = window.innerWidth - props.axis.x + 'px'
+  } else {
+    obj.left = props.axis.x + 2 + 'px'
   }
+  if (props.axis.y > window.innerHeight - contentMenuHeight.value) {
+    obj.bottom = window.innerHeight - props.axis.y + 'px'
+    obj['transform-origin'] = 'center bottom'
+  } else {
+    obj.top = props.axis.y + 2 + 'px'
+    obj['transform-origin'] = 'center top'
+  }
+  obj['z-index'] = 1000
+  contentMenuStyle.value = obj
+}
+
+// 检测在一个元素之外的任何点击
+onClickOutside(contextMenuRef, () => {
+  showContentMenu.value = false
+  props.onClose()
+})
+
+// 点击菜单项
+const handleClickMenuItem = (item: File.FileItem) => {
+  showContentMenu.value = false
+  props.onClick(item)
+}
+
+// 窗口尺寸变化关闭
+const windowSize = reactive(useWindowSize())
+watch(
+  () => [windowSize.width, windowSize.height],
+  () => {
+    showContentMenu.value = false
+    props.onClose()
+  }
+)
+
+onMounted(() => {
+  setTimeout(() => {
+    showContentMenu.value = true
+    nextTick(() => {
+      contentMenuWidth.value = contextMenuRef.value.offsetWidth
+      contentMenuHeight.value = contextMenuRef.value.offsetHeight
+      getStyle()
+    })
+  }, 100)
+})
+
+defineExpose({
+  showContentMenu,
+  contentMenuStyle,
+  contextMenuRef,
+  handleClickMenuItem
 })
 </script>
 

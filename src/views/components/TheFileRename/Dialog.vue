@@ -10,38 +10,37 @@
   </a-modal>
 </template>
 
-<script lang="ts">
-import { ref, reactive, onMounted, defineComponent } from 'vue'
+<script setup lang="ts">
+import { ref, reactive, onMounted } from 'vue'
 
-export default defineComponent({
-  props: {
-    fileInfo: Object,
-    onClose: Function
-  },
-  setup(props) {
-    let visible = ref<boolean>(false)
+const props = defineProps({
+  fileInfo: Object,
+  onClose: Function
+})
 
-    type Form = { name: string }
+let visible = ref<boolean>(false)
 
-    const form: Form = reactive({
-      name: ''
-    })
-    form.name = props.fileInfo?.name
-    onMounted(() => {
-      visible.value = true
-    })
+type Form = { name: string }
 
-    const handleCancel = () => {
-      visible.value = false
-      props.onClose()
-    }
+const form: Form = reactive({
+  name: ''
+})
 
-    return {
-      form,
-      visible,
-      handleCancel
-    }
-  }
+form.name = props.fileInfo?.name
+
+onMounted(() => {
+  visible.value = true
+})
+
+const handleCancel = () => {
+  visible.value = false
+  props.onClose()
+}
+
+defineExpose({
+  form,
+  visible,
+  handleCancel
 })
 </script>
 

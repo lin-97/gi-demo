@@ -15,50 +15,45 @@
   </a-modal>
 </template>
 
-<script lang="ts">
-import { ref, reactive, onMounted, defineComponent } from 'vue'
-import data from './treedata.js'
+<script setup lang="ts">
+import { ref, reactive, onMounted } from 'vue'
+import data from './treedata'
 import GiSvgIcon from '@/components/GiSvgIcon.vue'
 
-export default defineComponent({
-  props: {
-    fileInfo: Object,
-    onClose: Function
-  },
-  components: {
-    GiSvgIcon
-  },
-  setup(props) {
-    let visible = ref<boolean>(false)
+const props = defineProps({
+  fileInfo: Object,
+  onClose: Function
+})
 
-    type Form = { path: string }
-    const form: Form = reactive({
-      path: '/'
-    })
+let visible = ref<boolean>(false)
 
-    let treeData = ref<object[]>([])
-    treeData.value = data
-    onMounted(() => {
-      visible.value = true
-    })
+type Form = { path: string }
+const form: Form = reactive({
+  path: '/'
+})
 
-    const handleClickNode = (selectedKeys, { selected, selectedNodes, node }) => {
-      form.path = `/${selectedNodes[0].title}`
-    }
+let treeData = ref<object[]>([])
 
-    const handleCancel = () => {
-      visible.value = false
-      props.onClose()
-    }
+treeData.value = data
+onMounted(() => {
+  visible.value = true
+})
 
-    return {
-      form,
-      visible,
-      treeData,
-      handleClickNode,
-      handleCancel
-    }
-  }
+const handleClickNode = (selectedKeys, { selected, selectedNodes, node }) => {
+  form.path = `/${selectedNodes[0].title}`
+}
+
+const handleCancel = () => {
+  visible.value = false
+  props.onClose()
+}
+
+defineExpose({
+  form,
+  visible,
+  treeData,
+  handleClickNode,
+  handleCancel
 })
 </script>
 
