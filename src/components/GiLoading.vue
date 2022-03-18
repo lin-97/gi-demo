@@ -12,23 +12,19 @@
   </div>
 </template>
 
-<script lang="ts">
-import { ref, defineComponent } from 'vue'
+<script setup lang="ts" name="GiLoading">
+import { ref } from 'vue'
 
-export default defineComponent({
-  name: 'GiLoading',
-  setup() {
-    let loadingText = ref<string>('')
-    // 设置加载文本
-    function setLoadingText(value: string) {
-      loadingText.value = value
-    }
+let loadingText = ref<string>('')
 
-    return {
-      loadingText,
-      setLoadingText
-    }
-  }
+// 设置加载文本
+const setLoadingText = (value: string) => {
+  loadingText.value = value
+}
+
+defineExpose({
+  loadingText,
+  setLoadingText
 })
 </script>
 

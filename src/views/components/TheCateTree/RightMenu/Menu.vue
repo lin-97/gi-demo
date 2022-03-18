@@ -24,54 +24,46 @@
   </GiContextMenu>
 </template>
 
-<script lang="ts">
-import { defineComponent, ref, nextTick } from 'vue'
+<script setup lang="ts">
+import { ref, nextTick } from 'vue'
 import GiContextMenu from '@/components/GiContextMenu.vue'
 import GiOption from '@/components/GiOption.vue'
 import GiOptionItem from '@/components/GiOptionItem.vue'
 import MoveTree from '../MoveTree.vue'
 
-export default defineComponent({
-  components: {
-    GiContextMenu,
-    GiOption,
-    GiOptionItem,
-    MoveTree
-  },
-  props: {
-    axis: Object,
-    fileInfo: Object,
-    treeData: Array,
-    onClose: Function,
-    onClick: Function
-  },
-  setup(props) {
-    let menuRef = ref(null)
-    let showMoveTreePopup = ref<boolean>(false)
+const props = defineProps({
+  axis: Object,
+  fileInfo: Object,
+  treeData: Array,
+  onClose: Function,
+  onClick: Function
+})
 
-    const onClose = () => {
-      showMoveTreePopup.value = false
-      props.onClose()
-    }
+let menuRef = ref<HTMLInputElement | null>(null)
 
-    const onClickItem = (mode: string) => {
-      if (mode === 'move') {
-        showMoveTreePopup.value = !showMoveTreePopup.value
-        return false
-      }
-      nextTick(() => {
-        props.onClick(mode)
-        menuRef.value.onHidden()
-      })
-    }
+let showMoveTreePopup = ref<boolean>(false)
 
-    return {
-      menuRef,
-      showMoveTreePopup,
-      onClose,
-      onClickItem
-    }
+const onClose = () => {
+  showMoveTreePopup.value = false
+  props.onClose()
+}
+
+const onClickItem = (mode: string) => {
+  if (mode === 'move') {
+    showMoveTreePopup.value = !showMoveTreePopup.value
+    return false
   }
+  nextTick(() => {
+    props.onClick(mode)
+    menuRef.value.onHidden()
+  })
+}
+
+defineExpose({
+  menuRef,
+  showMoveTreePopup,
+  onClose,
+  onClickItem
 })
 </script>
 

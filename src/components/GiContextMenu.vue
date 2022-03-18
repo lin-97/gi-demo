@@ -7,7 +7,7 @@
 </template>
 
 <script setup lang="ts" name="GiContextMenu">
-import { ref, nextTick, onMounted, defineExpose } from 'vue'
+import { ref, nextTick, onMounted } from 'vue'
 import { onClickOutside } from '@vueuse/core'
 
 const props = defineProps({
