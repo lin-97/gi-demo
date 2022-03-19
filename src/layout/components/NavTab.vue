@@ -111,6 +111,13 @@ const onCloseAll = () => {
   }
 }
 
+:deep(.arco-tabs-tab-active) {
+  background-color: rgba(var(--primary-6), $alpha: 0.05);
+  &:hover {
+    background-color: rgba(var(--primary-6), $alpha: 0.05);
+  }
+}
+
 .nav-tab {
   padding-top: 5px;
   background: var(--color-bg-2);
