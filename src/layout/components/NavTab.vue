@@ -100,13 +100,11 @@ const onCloseAll = () => {
   border-bottom-color: transparent !important;
   svg {
     width: 0;
-    height: 0;
     transition: all 0.15s;
   }
   &:hover {
     svg {
       width: 1em;
-      height: 1em;
     }
   }
 }

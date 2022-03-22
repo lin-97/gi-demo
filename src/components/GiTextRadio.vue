@@ -1,5 +1,5 @@
 <template>
-  <a-space :size="15" class="gi-text-radio">
+  <a-space :size="10" class="gi-text-radio">
     <a-button
       v-for="item in list"
       :key="item.value"
