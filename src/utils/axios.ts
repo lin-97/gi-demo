@@ -71,7 +71,7 @@ http.interceptors.response.use(
 
     NProgress.done()
 
-    return data
+    return response
   },
   (error: AxiosError) => {
     NProgress.done()
