@@ -13,7 +13,7 @@
     "@arco-design/color": "^0.4.0",
     "@arco-themes/vue-gi-demo": "0.0.1",
     "@vueuse/components": "^7.6.2",
-    "@vueuse/core": "^7.6.2",
+    "@vueuse/core": "^8.1.2",
     "axios": "^0.25.0",
     "echarts": "^5.3.0",
     "mockjs": "^1.1.0",

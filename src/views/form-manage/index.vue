@@ -5,8 +5,11 @@
     <section class="content">
       <a-space :size="50">
         <a-form :model="form" class="form">
-          <a-form-item field="name" label="姓名">
+          <a-form-item field="name" label="姓名" :rules="rules.name" :validate-trigger="['change', 'input']">
             <a-input v-model="form.name" placeholder="请输入姓名" />
+            <template #extra>
+              <div>请输入中文姓名</div>
+            </template>
           </a-form-item>
           <a-form-item field="age" label="年龄">
             <a-input v-model="form.age" placeholder="请输入年龄" />
@@ -99,6 +102,13 @@ const form = reactive({
   endTime: '',
   isRead: false
 })
+
+const rules = {
+  name: [
+    { required: true, message: '请输入姓名' },
+    { maxLength: 4, message: '姓名不超过4个字符' }
+  ]
+}
 </script>
 
 <style lang="scss" scoped>

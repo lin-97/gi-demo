@@ -26,6 +26,7 @@ import TextSwitch from './components/TextSwitch.vue'
 import Tag from './components/Tag.vue'
 import NavBar from './components/NavBar.vue'
 import Title from './components/Title.vue'
+import IconSelector from './components/IconSelector.vue'
 
 const selectedKeys = ref([Button])
 
@@ -35,7 +36,8 @@ const menuList = ref([
   { name: 'GiTextSwitch', value: TextSwitch },
   { name: 'GiTag', value: Tag },
   { name: 'GiNavBar', value: NavBar },
-  { name: 'GiTitle', value: Title }
+  { name: 'GiTitle', value: Title },
+  { name: 'GiIconSelector', value: IconSelector }
 ])
 
 const menuItemClick = () => {

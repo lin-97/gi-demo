@@ -70,7 +70,7 @@ export const useAppStore = defineStore({
         {
           icon: 'menu-test',
           id: 'TEST',
-          name: '测试',
+          name: '测试页',
           path: '/test'
         }
       ]
