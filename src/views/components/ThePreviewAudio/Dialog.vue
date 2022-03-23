@@ -1,6 +1,6 @@
 <template>
   <transition name="slide-dynamic-origin">
-    <div class="audio-preview-wrapper" ref="audioRef" :style="audioStyle" style="position: fixed" v-show="visible">
+    <div class="audio-preview-wrapper" ref="audioRef" :style="audioStyle" v-show="visible">
       <section style="padding: 10px 14px 14px 14px">
         <div class="head" ref="audioHeadRef">
           <div class="name">
@@ -53,7 +53,7 @@ const audioStyle = computed(() => {
     left = 0
   }
   if (y.value > windowSize.height.value - elSize.height.value) {
-    top = windowSize.height.value - elSize.height.value
+    top = windowSize.height.value - elSize.height.value + 'px'
   }
   if (y.value < 0) {
     top = 0
@@ -79,8 +79,6 @@ defineExpose({
 .audio-preview-wrapper {
   width: 300px;
   position: fixed;
-  top: 120px;
-  right: 0;
   border-radius: 8px;
   box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
   background: linear-gradient(to right, $theme-color, rgb(var(--primary-2)));
