@@ -40,10 +40,10 @@ export const useAppStore = defineStore({
           path: '/form-manage'
         },
         {
-          icon: 'menu-user',
-          id: 'ZBGL',
-          name: '个人中心',
-          path: '/user'
+          icon: 'menu-system',
+          id: 'XTGL',
+          name: '系统管理',
+          path: '/system-manage'
         },
         {
           icon: 'menu-page',

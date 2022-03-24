@@ -51,10 +51,10 @@ const routes = [
         meta: { title: '表单管理', keepAlive: false }
       },
       {
-        path: '/user',
-        name: 'User',
-        component: () => import('@/views/user/index.vue'),
-        meta: { title: '个人中心', keepAlive: false }
+        path: '/system-manage',
+        name: 'SystemManage',
+        component: () => import('@/views/system-manage/index.vue'),
+        meta: { title: '系统管理', keepAlive: false }
       },
       {
         path: '/error-page/:id',
