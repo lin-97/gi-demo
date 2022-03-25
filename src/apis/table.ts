@@ -3,5 +3,5 @@ import axios from '@/utils/axios'
 
 // 获取表格
 export function getTableList(data: any) {
-  return axios.get(`/mock/system-manage/dept/list`, data)
+  return axios.get(`/mock/getTable`, data)
 }

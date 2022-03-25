@@ -1,14 +1,12 @@
 <template>
   <div class="dept-manage">
-    <GiTitle title="部门管理">
+    <a-row class="head">
       <a-button type="primary">
         <template #icon>
           <icon-plus />
         </template>
-        <template #default>新增</template>
       </a-button>
-    </GiTitle>
-
+    </a-row>
     <section class="table-box">
       <a-table
         :data="tableData"
@@ -67,7 +65,7 @@ const pageData: Pagination.PageData = reactive({
 const getTableData = async () => {
   try {
     loading.value = true
-    const res = await getSystemDeptList({ ...pageData })
+    const res = await getSystemDeptList()
     if (res.success) {
       tableData.value = res.data.list
       total.value = res.data.total
@@ -88,6 +86,9 @@ getTableData()
   height: 100%;
   box-sizing: border-box;
   background: var(--color-bg-2);
+  .head {
+    padding: $padding $padding 0;
+  }
   .table-box {
     margin-top: $margin;
     padding: 0 $padding;

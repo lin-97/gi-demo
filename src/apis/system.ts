@@ -2,8 +2,8 @@ import axios from '@/utils/axios'
 // const prefix = '/api'
 
 // 获取部门数据
-export function getSystemDeptList(data: any) {
-  return axios.get(`/mock/system-manage/dept/list`, data)
+export function getSystemDeptList() {
+  return axios.get(`/mock/system-manage/dept/list`)
 }
 
 // 获取用户数据

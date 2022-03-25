@@ -69,5 +69,6 @@ getTableData()
   box-sizing: border-box;
   display: flex;
   background: var(--color-bg-2);
+  padding: $padding;
 }
 </style>

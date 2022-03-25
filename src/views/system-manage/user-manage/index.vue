@@ -1,28 +1,47 @@
 <template>
   <div class="user-manage">
     <section class="left" v-loading="treeLoading">
-      <a-tree
-        show-line
-        :data="treeData"
-        :default-expand-all="true"
-        block-node
-        :field-names="{
-          key: 'id',
-          title: 'name',
-          children: 'children'
-        }"
-        @select="getTableData"
-      ></a-tree>
+      <a-input v-model="treeInputValue" allow-clear style="margin-bottom: 10px">
+        <template #prefix>
+          <icon-search />
+        </template>
+      </a-input>
+      <div class="tree-box">
+        <a-tree
+          show-line
+          block-node
+          :data="treeData"
+          :default-expand-all="true"
+          :field-names="{
+            key: 'id',
+            title: 'name',
+            children: 'children'
+          }"
+          @select="getTableData"
+        ></a-tree>
+      </div>
     </section>
     <section class="right">
-      <GiTitle title="用户管理">
-        <a-button type="primary">
+      <a-row justify="space-between" class="head">
+        <a-space>
+          <a-button type="primary">
+            <template #icon>
+              <icon-plus />
+            </template>
+          </a-button>
+
+          <a-input-group>
+            <a-input placeholder="请输入关键词..." allow-clear style="width: 250px"> </a-input>
+            <a-button type="primary" @click="getTableData"><icon-search /> 搜索</a-button>
+          </a-input-group>
+        </a-space>
+
+        <a-button type="primary" status="danger">
           <template #icon>
-            <icon-plus />
+            <icon-delete />
           </template>
-          <template #default>新增</template>
         </a-button>
-      </GiTitle>
+      </a-row>
       <section class="table-box">
         <a-table
           :data="tableData"
@@ -83,6 +102,7 @@ import GiSvgIcon from '../../../components/GiSvgIcon.vue'
 
 let treeLoading = ref<boolean>(false)
 const treeData = ref<object[]>([])
+let treeInputValue = ref<string>('')
 
 let loading = ref<boolean>(false)
 const tableData = ref<object[]>([])
@@ -91,7 +111,7 @@ let total = ref<number>(0)
 const getTreeData = async () => {
   try {
     treeLoading.value = true
-    const res = await getSystemDeptList({})
+    const res = await getSystemDeptList()
     if (res.success) {
       treeData.value = res.data.list
       treeLoading.value = false
@@ -139,14 +159,23 @@ getTableData()
     border-right: 1px solid $border-color;
     padding: $padding;
     box-sizing: border-box;
-    overflow: auto;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    .tree-box {
+      flex: 1;
+      overflow: auto;
+    }
   }
   > .right {
-    flex: 4;
+    flex: 5;
     height: 100%;
     display: flex;
     flex-direction: column;
     overflow: hidden;
+    .head {
+      padding: $padding $padding 0;
+    }
     .table-box {
       flex: 1;
       margin-top: $margin;

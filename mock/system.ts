@@ -14,60 +14,54 @@ export default [
     url: '/mock/system-manage/dept/list',
     method: 'get',
     timeout: 300,
-    response: ({ query }) => {
+    response: () => {
       // const { pageCount = 1, pageSize = 10 } = query
       return resultSuccess({
         total: 6,
-        list: [
+        ['list|15']: [
           {
-            id: 1,
-            name: '总裁办',
-            deptCode: 'dp_code_manager', // 0男 1女
+            'id|+1': 1,
+            'name|+1': [
+              '综合办',
+              '组织部',
+              '销售部',
+              '技术部',
+              '财务部',
+              '人事部',
+              '采购部',
+              '市场部',
+              '设备部',
+              '人力资源部',
+              '生产部',
+              '计划部',
+              '实施部',
+              '售后服务部',
+              '质管部'
+            ],
+            deptCode: 'dp_code_manager',
             'order|+1': 1, // 0不是 1是
             createTime: Random.now('yyyy-MM-dd HH:mm:ss'),
-            status: 0 // 0 禁用 1正常
-          },
-          {
-            id: 2,
-            name: '市场部',
-            deptCode: 'dp_code_marketing', // 0男 1女
-            'order|+1': 1, // 0不是 1是
-            createTime: Random.now('yyyy-MM-dd HH:mm:ss'),
-            status: 1, // 0 禁用 1正常,
-            children: [
+            status: 0, // 0 禁用 1正常
+            ['children|3']: [
               {
-                id: 3,
-                name: '市场一部',
-                deptCode: 'dp_code_marketing_1', // 0男 1女
+                'id|+1': 999,
+                name: '子部门',
+                deptCode: 'dp_code_manager',
                 'order|+1': 1, // 0不是 1是
                 createTime: Random.now('yyyy-MM-dd HH:mm:ss'),
-                status: 1 // 0 禁用 1正常
-              },
-              {
-                id: 4,
-                name: '市场二部',
-                deptCode: 'dp_code_marketing_2', // 0男 1女
-                'order|+1': 1, // 0不是 1是
-                createTime: Random.now('yyyy-MM-dd HH:mm:ss'),
-                status: 1 // 0 禁用 1正常
+                status: 0, // 0 禁用 1正常
+                ['children|5']: [
+                  {
+                    'id|+1': 9999,
+                    name: '子子部门',
+                    deptCode: 'dp_code_manager',
+                    'order|+1': 1, // 0不是 1是
+                    createTime: Random.now('yyyy-MM-dd HH:mm:ss'),
+                    status: 0 // 0 禁用 1正常
+                  }
+                ]
               }
             ]
-          },
-          {
-            id: 5,
-            name: '技术部',
-            deptCode: 'dp_code_technology', // 0男 1女
-            'order|+1': 1, // 0不是 1是
-            createTime: Random.now('yyyy-MM-dd HH:mm:ss'),
-            status: 1 // 0 禁用 1正常
-          },
-          {
-            id: 6,
-            name: '销售部',
-            deptCode: 'dp_code_sale', // 0男 1女
-            'order|+1': 1, // 0不是 1是
-            createTime: Random.now('yyyy-MM-dd HH:mm:ss'),
-            status: 1 // 0 禁用 1正常
           }
         ]
       })
