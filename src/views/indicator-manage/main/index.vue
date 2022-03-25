@@ -63,7 +63,7 @@
             >
               <template #columns>
                 <a-table-column title="序号">
-                  <template #cell="{ record }">{{ record.index + 1 }}</template>
+                  <template #cell="cell">{{ cell.rowIndex + 1 }}</template>
                 </a-table-column>
                 <a-table-column title="姓名" data-index="name"></a-table-column>
                 <a-table-column title="创建时间" data-index="startTime"></a-table-column>

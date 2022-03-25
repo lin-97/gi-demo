@@ -43,7 +43,33 @@ export const useAppStore = defineStore({
           icon: 'menu-system',
           id: 'XTGL',
           name: '系统管理',
-          path: '/system-manage'
+          children: [
+            {
+              id: 'BMGL',
+              name: '部门管理',
+              path: '/system-manage/dept-manage'
+            },
+            {
+              id: 'YHGL',
+              name: '用户管理',
+              path: '/system-manage/user-manage'
+            },
+            {
+              id: 'JSGL',
+              name: '角色管理',
+              path: '/system-manage/role-manage'
+            },
+            {
+              id: 'CDGL',
+              name: '菜单管理',
+              path: '/system-manage/menu-manage'
+            },
+            {
+              id: 'NQST',
+              name: '内嵌页面',
+              path: '/system-manage'
+            }
+          ]
         },
         {
           icon: 'menu-page',

@@ -17,6 +17,10 @@
         :pagination="{ 'show-page-size': true }"
         :expandable="{ width: 80 }"
       >
+        <template #expand-icon="{ expanded }">
+          <IconDown v-if="expanded" />
+          <IconRight v-else />
+        </template>
         <template #columns>
           <a-table-column title="部门名称" data-index="name"></a-table-column>
           <a-table-column title="部门编码" data-index="deptCode"></a-table-column>
@@ -29,11 +33,15 @@
               </a-switch>
             </template>
           </a-table-column>
-          <a-table-column title="操作" width="200">
+          <a-table-column title="操作" width="100">
             <template #cell="{ record }">
               <a-space>
-                <a-button type="primary">编辑</a-button>
-                <a-button type="primary" status="danger">删除</a-button>
+                <a-button type="primary">
+                  <template #icon><icon-edit /></template>
+                </a-button>
+                <a-button type="primary" status="danger">
+                  <template #icon><icon-delete /></template>
+                </a-button>
               </a-space>
             </template>
           </a-table-column>
@@ -79,6 +87,7 @@ getTableData()
   width: 100%;
   height: 100%;
   box-sizing: border-box;
+  background: var(--color-bg-2);
   .table-box {
     margin-top: $margin;
     padding: 0 $padding;

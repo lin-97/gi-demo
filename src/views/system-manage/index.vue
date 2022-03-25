@@ -24,6 +24,7 @@
 import { ref, reactive } from 'vue'
 import UserCenter from './UserCenter/index.vue'
 import DeptManage from './dept-manage/index.vue'
+import UserManage from './user-manage/index.vue'
 
 let currentKey = ref<string>('01')
 let currentIndex = ref<number>(0)
@@ -36,7 +37,7 @@ interface MenuItem {
 const menuList: MenuItem[] = reactive([
   { id: '01', name: '个人中心', value: UserCenter },
   { id: '04', name: '部门管理', value: DeptManage },
-  { id: '02', name: '用户管理', value: UserCenter },
+  { id: '02', name: '用户管理', value: UserManage },
   { id: '03', name: '角色管理', value: UserCenter },
   { id: '05', name: '菜单管理', value: UserCenter }
 ])
