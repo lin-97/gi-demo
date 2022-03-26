@@ -86,12 +86,16 @@ getTableData()
   height: 100%;
   box-sizing: border-box;
   background: var(--color-bg-2);
+  display: flex;
+  flex-direction: column;
   .head {
     padding: $padding $padding 0;
   }
   .table-box {
+    flex: 1;
     margin-top: $margin;
-    padding: 0 $padding;
+    padding: 0 $padding $padding;
+    overflow: hidden;
   }
 }
 </style>
