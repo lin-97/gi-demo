@@ -42,6 +42,7 @@ export default [
             'order|+1': 1, // 0不是 1是
             createTime: Random.now('yyyy-MM-dd HH:mm:ss'),
             status: 0, // 0 禁用 1正常
+            level: 1,
             ['children|3']: [
               {
                 'id|+1': 999,
@@ -50,6 +51,7 @@ export default [
                 'order|+1': 1, // 0不是 1是
                 createTime: Random.now('yyyy-MM-dd HH:mm:ss'),
                 status: 0, // 0 禁用 1正常
+                level: 2,
                 ['children|5']: [
                   {
                     'id|+1': 9999,
@@ -57,7 +59,8 @@ export default [
                     deptCode: 'dp_code_manager',
                     'order|+1': 1, // 0不是 1是
                     createTime: Random.now('yyyy-MM-dd HH:mm:ss'),
-                    status: 0 // 0 禁用 1正常
+                    status: 0, // 0 禁用 1正常
+                    level: 3
                   }
                 ]
               }
