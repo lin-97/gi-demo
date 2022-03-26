@@ -21,6 +21,7 @@ export default [
         ['list|15']: [
           {
             'id|+1': 1,
+            'key|+1': 1,
             'name|+1': [
               '综合办',
               '组织部',
@@ -46,6 +47,7 @@ export default [
             ['children|3']: [
               {
                 'id|+1': 999,
+                'key|+1': 999,
                 name: '子部门',
                 deptCode: 'dp_code_manager',
                 'order|+1': 1, // 0不是 1是
@@ -55,6 +57,7 @@ export default [
                 ['children|5']: [
                   {
                     'id|+1': 9999,
+                    'key|+1': 9999,
                     name: '子子部门',
                     deptCode: 'dp_code_manager',
                     'order|+1': 1, // 0不是 1是
