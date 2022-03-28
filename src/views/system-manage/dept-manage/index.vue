@@ -1,7 +1,7 @@
 <template>
   <div class="dept-manage">
     <a-row class="head">
-      <a-button type="primary">
+      <a-button type="primary" @click="showAddDeptModal = true">
         <template #icon>
           <icon-plus />
         </template>
@@ -34,7 +34,7 @@
           <a-table-column title="操作" width="100">
             <template #cell="{ record }">
               <a-space>
-                <a-button type="primary">
+                <a-button type="primary" @click="showAddDeptModal = true">
                   <template #icon><icon-edit /></template>
                 </a-button>
                 <a-button type="primary" status="danger">
@@ -46,16 +46,20 @@
         </template>
       </a-table>
     </section>
+
+    <AddDeptModal :tree-data="tableData" v-model="showAddDeptModal"></AddDeptModal>
   </div>
 </template>
 
 <script setup lang="ts" name="DeptManage">
 import { ref, reactive } from 'vue'
+import AddDeptModal from './AddDeptModal.vue'
 import { getSystemDeptList } from '@/apis/system'
 
 const tableData = ref<object[]>([])
 let total = ref<number>(0)
 let loading = ref<boolean>(false)
+let showAddDeptModal = ref<boolean>(false)
 
 const pageData: Pagination.PageData = reactive({
   pageCount: 1,

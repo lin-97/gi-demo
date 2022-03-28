@@ -1,5 +1,12 @@
 <template>
   <div class="role-manage">
+    <a-row class="head">
+      <a-button type="primary" @click="showAddRoleModal = true">
+        <template #icon>
+          <icon-plus />
+        </template>
+      </a-button>
+    </a-row>
     <section class="table-box">
       <a-table
         :data="tableData"
@@ -30,16 +37,20 @@
         </template>
       </a-table>
     </section>
+
+    <AddRoleModal v-model="showAddRoleModal"></AddRoleModal>
   </div>
 </template>
 
 <script setup lang="ts">
 import { ref, reactive } from 'vue'
+import AddRoleModal from './AddRoleModal.vue'
 import { getSystemRoleList } from '@/apis/system'
 
 let loading = ref<boolean>(false)
 const tableData = ref<object[]>([])
 let total = ref<number>(0)
+let showAddRoleModal = ref<boolean>(false)
 
 const pageData: Pagination.PageData = reactive({
   pageCount: 1,
@@ -68,7 +79,16 @@ getTableData()
   height: 100%;
   box-sizing: border-box;
   display: flex;
+  flex-direction: column;
   background: var(--color-bg-2);
-  padding: $padding;
+  .head {
+    padding: $padding $padding 0;
+  }
+  .table-box {
+    flex: 1;
+    margin-top: $margin;
+    padding: 0 $padding $padding;
+    overflow: hidden;
+  }
 }
 </style>
