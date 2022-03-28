@@ -39,7 +39,7 @@ export default [
               '售后服务部',
               '质管部'
             ],
-            deptCode: 'dp_code_manager',
+            deptCode: 'dept_code_manager',
             'order|+1': 1, // 0不是 1是
             createTime: Random.now('yyyy-MM-dd HH:mm:ss'),
             status: 0, // 0 禁用 1正常
@@ -49,7 +49,7 @@ export default [
                 'id|+1': 999,
                 'key|+1': 999,
                 name: '子部门',
-                deptCode: 'dp_code_manager',
+                deptCode: 'dept_code_manager',
                 'order|+1': 1, // 0不是 1是
                 createTime: Random.now('yyyy-MM-dd HH:mm:ss'),
                 status: 0, // 0 禁用 1正常
@@ -59,7 +59,7 @@ export default [
                     'id|+1': 9999,
                     'key|+1': 9999,
                     name: '子子部门',
-                    deptCode: 'dp_code_manager',
+                    deptCode: 'dept_code_manager',
                     'order|+1': 1, // 0不是 1是
                     createTime: Random.now('yyyy-MM-dd HH:mm:ss'),
                     status: 0, // 0 禁用 1正常
@@ -113,14 +113,14 @@ export default [
           {
             id: 1,
             name: '超级管理员',
-            roleCode: 'ROLE_admin',
+            roleCode: 'role_code_admin',
             description: '超级管理员',
             createTime: Random.now('yyyy-MM-dd HH:mm:ss')
           },
           {
             id: 2,
             name: '编辑员',
-            roleCode: 'ROLE_editor',
+            roleCode: 'role_code_editor',
             description: '编辑员',
             createTime: Random.now('yyyy-MM-dd HH:mm:ss')
           }

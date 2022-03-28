@@ -48,7 +48,7 @@ const menuItemClick = () => {
 <style lang="scss" scoped>
 .test {
   flex: 1;
-  padding: $padding;
+  padding: $margin;
   box-sizing: border-box;
   overflow: hidden;
   display: flex;

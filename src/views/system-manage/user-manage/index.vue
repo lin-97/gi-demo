@@ -185,7 +185,7 @@ getTableData()
     .table-box {
       flex: 1;
       margin-top: $margin;
-      margin-bottom: $margin;
+      margin-bottom: $padding;
       padding: 0 $padding;
       overflow: hidden;
     }

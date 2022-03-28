@@ -19,7 +19,7 @@
         <GiTitle title="指标列表"></GiTitle>
 
         <div class="content">
-          <a-row justify="space-between" style="margin-bottom: 10px">
+          <a-row justify="space-between" style="margin-bottom: 12px">
             <a-space>
               <a-button type="primary" @click="onAdd">
                 <template #icon>
