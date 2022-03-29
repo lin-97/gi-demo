@@ -57,8 +57,10 @@ const getStyle = () => {
 onMounted(() => {
   visiable.value = true
   nextTick(() => {
-    contextMenuHeight.value = contextMenuRef.value.offsetHeight
-    getStyle()
+    if (contextMenuRef.value) {
+      contextMenuHeight.value = contextMenuRef.value.offsetHeight
+      getStyle()
+    }
   })
 })
 
@@ -69,20 +71,17 @@ onClickOutside(contextMenuRef, () => {
 })
 
 defineExpose({
-  visiable,
-  onHidden() {
-    visiable.value = false
-  }
+  visiable
 })
 </script>
 
 <style lang="scss" scoped>
 .gi-context-menu {
-  // background: #fff;
   position: fixed;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.12), 0 0 6px rgba(0, 0, 0, 0.04);
   border-radius: 4px;
   overflow: hidden;
   border: 1px solid var(--color-border-2);
+  box-sizing: border-box;
 }
 </style>

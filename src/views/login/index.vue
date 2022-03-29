@@ -3,7 +3,7 @@
     <section class="login-box animated flipInY">
       <!-- 左侧 -->
       <div class="login-left">
-        <img class="bg" src="@/assets/images/login-bg.png" />
+        <img class="login-bg" src="@/assets/svgs/login-bg.svg" />
         <div class="system">
           <img class="logo" src="@/assets/images/logo.gif" />
           <div class="system-name"><span>Admin</span><span>管理系统</span></div>
@@ -100,7 +100,7 @@ const login = () => {
     top: 0px;
     bottom: 0px;
     position: absolute;
-    background-color: rgba(var(--primary-6), 0.6);
+    background-color: rgba(0, 0, 0, 0.3);
     z-index: 99;
   }
   &:hover {
@@ -108,7 +108,9 @@ const login = () => {
       transform: scale(1.05);
     }
   }
-  .bg {
+  .login-bg {
+    width: 100%;
+    height: 100%;
     position: absolute;
     top: 0;
     bottom: 0;

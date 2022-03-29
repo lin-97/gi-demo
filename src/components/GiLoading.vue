@@ -7,7 +7,7 @@
         <span class="dot ccc"></span>
         <span class="dot ddd"></span>
       </section>
-      <span class="gi-loading-text" v-if="loadingText">{{ loadingText }}</span>
+      <span class="loading-text" v-if="loadingText">{{ loadingText }}</span>
     </div>
   </div>
 </template>
@@ -53,7 +53,7 @@ body[arco-theme='dark'] {
     flex-direction: column;
     align-items: center;
   }
-  &-text {
+  .loading-text {
     margin-top: 16px;
     color: rgb(var(--primary-5));
   }

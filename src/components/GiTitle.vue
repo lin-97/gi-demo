@@ -27,7 +27,7 @@ const props = defineProps({
   z-index: 99;
   > .wrapper {
     height: 100%;
-    border-bottom: 1px solid var(--color-neutral-3);
+    border-bottom: 1px solid $border-color;
     box-sizing: border-box;
   }
   .title {

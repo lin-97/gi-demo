@@ -1,6 +1,6 @@
 <template>
   <div class="gi-switch" :class="{ disabled: disabled }">
-    <div class="gi-switch-wrap">
+    <div class="gi-switch-wrap" ref="switchRef">
       <section class="slide-bar" :style="getSlideBarStyle"></section>
       <section ref="OnRef" class="item left" :class="{ on: modelValue, disabled: disabled }" @click="onSwitch(true)">
         {{ onText }}
@@ -45,6 +45,8 @@ const OnRef = ref<HTMLInputElement | null>(null)
 const OffRef = ref<HTMLInputElement | null>(null)
 let onWidth = ref<number>(0)
 let offWidth = ref<number>(0)
+
+const switchRef = ref<HTMLInputElement | null>(null)
 
 onMounted(() => {
   onWidth.value = OnRef.value?.clientWidth || 0
