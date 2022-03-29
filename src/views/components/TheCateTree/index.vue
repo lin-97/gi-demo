@@ -18,6 +18,7 @@
 <script setup lang="ts">
 import { reactive, ref, nextTick } from 'vue'
 import { Modal } from '@arco-design/web-vue'
+
 import { getNewNodeName } from '@/utils/tool'
 import { data } from './tree'
 import RightMenu from './RightMenu/index'
@@ -48,6 +49,7 @@ let showLoading = ref<boolean>(false)
 let inputValue = ref<string>('')
 const treeRef = ref<HTMLElement | null>(null)
 let treeData = ref<object[]>([])
+
 let treeSetting = reactive({
   callback: {
     // 鼠标右键事件
@@ -55,7 +57,7 @@ let treeSetting = reactive({
       console.log('鼠标右键', treeNode)
       if (!treeNode || !props.allowEdit) return
       currentNode = treeNode
-      RightMenu({ event: event, fileInfo: treeNode, treeData: treeData.value }).then((res: any) => {
+      RightMenu(event, treeNode, treeData.value).then((res: any) => {
         console.log('res', res)
         if (res.mode === 'add') {
           onAdd()
@@ -70,7 +72,7 @@ let treeSetting = reactive({
       })
     },
     // 点击节点
-    onClick: (event: PointerEvent, treeId: string, treeNode: object) => {
+    onClick: (event: PointerEvent, treeId: string, treeNode: ZTree.ITreeNode) => {
       handleNodeClick(event, treeId, treeNode)
     }
   }
@@ -79,7 +81,7 @@ let treeObj = reactive({})
 let currentNode = reactive({})
 
 const emit = defineEmits(['node-click'])
-const handleNodeClick = (event: PointerEvent, treeId: string, treeNode: object) => {
+const handleNodeClick = (event: PointerEvent, treeId: string, treeNode: ZTree.ITreeNode) => {
   currentNode = treeNode
   emit('node-click')
   console.log('点击节点', treeNode)
@@ -101,16 +103,16 @@ const handleNodeClick = (event: PointerEvent, treeId: string, treeNode: object) 
 // }
 
 // 递归树
-const formatTree = (arr: any[]): void => {
+const formatTree = (arr: ZTree.ITreeNode[]): void => {
   if (!arr.length) return
-  function forTree(arr) {
-    arr.forEach((item) => {
+  function forTree(arr: ZTree.ITreeNode[]) {
+    arr.forEach((item: ZTree.ITreeNode) => {
       if (item.children && item.children.length) {
         item.iconOpen = FileOpenIcon
         item.iconClose = FileCloseIcon
         forTree(item.children)
       } else {
-        item.children = null
+        item.children = []
         item.iconOpen = FileOpenIcon
         item.iconClose = FileCloseIcon
         item.icon = FileCloseIcon
@@ -170,11 +172,6 @@ const onAdd = () => {
 // 重命名
 const onRename = () => {
   treeObj.editName(currentNode)
-}
-
-// 点击移动树节点
-const moveTreeNodeClick = () => {
-  console.log('点击了移动树节点')
 }
 
 // 删除

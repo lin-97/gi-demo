@@ -16,7 +16,7 @@ let treeObj: object = reactive({})
 const treeSetting = reactive({
   callback: {
     // 点击节点
-    onClick: (event, treeId, treeNode) => {
+    onClick: (event: PointerEvent, treeId: string, treeNode: ZTree.ITreeNode) => {
       handleNodeClick(event, treeId, treeNode)
     }
   }
@@ -34,7 +34,8 @@ watch(
 )
 
 const emit = defineEmits(['node-click'])
-function handleNodeClick(event, treeId, treeNode) {
+
+function handleNodeClick(event: PointerEvent, treeId: string, treeNode: ZTree.ITreeNode) {
   emit('node-click', treeNode)
 }
 </script>

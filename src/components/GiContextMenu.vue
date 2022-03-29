@@ -68,11 +68,6 @@ onClickOutside(contextMenuRef, () => {
   emit('close')
 })
 
-// const onHidden = () => {
-//   visiable.value = false
-//   console.log('hidden')
-// }
-
 defineExpose({
   visiable,
   onHidden() {

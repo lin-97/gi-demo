@@ -6,7 +6,7 @@ import FileContextMenu from './index.vue'
 let instance: any = null
 let dom: HTMLElement | null = null
 
-function contextMenu(e: PointerEvent, fileInfo: File.FileItem) {
+function contextMenu(event: PointerEvent, fileInfo: File.FileItem) {
   return new Promise((resolve, reject) => {
     handleUnmount()
     // 创建一个挂载容器
@@ -15,7 +15,7 @@ function contextMenu(e: PointerEvent, fileInfo: File.FileItem) {
     document.body.appendChild(dom)
     // 实例化组件, createApp第二个参数是 props
     instance = createApp(FileContextMenu, {
-      axis: { x: e.clientX, y: e.clientY },
+      axis: { x: event.clientX, y: event.clientY },
       fileInfo: fileInfo,
       onClick: (mode: string) => {
         resolve({ mode: mode, fileInfo: fileInfo })

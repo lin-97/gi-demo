@@ -5,7 +5,7 @@ import Dialog from './Dialog.vue'
 
 function handleRenameFile(fileInfo: File.FileItem) {
   // 创建一个挂载容器
-  const dom:HTMLDivElement = document.createElement('div')
+  const dom: HTMLElement = document.createElement('div')
   // 挂载组件
   document.body.appendChild(dom)
   // 实例化组件, createApp第二个参数是 props

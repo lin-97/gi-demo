@@ -8,5 +8,6 @@ declare namespace File {
     updateTime: string
     isDir: boolean
     filePath: string
+    [propName: string]: any // 一个 interface 中任意属性只能有一个
   }
 }

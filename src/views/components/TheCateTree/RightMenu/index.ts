@@ -6,14 +6,7 @@ import ContextMenu from './Menu.vue'
 let instance: any = null
 let dom: HTMLElement | null = null
 
-interface Params {
-  event: PointerEvent
-  fileInfo: object
-  treeData: any[]
-}
-
-function contextMenu(params: Params) {
-  const { event, fileInfo, treeData } = params
+function contextMenu(event: PointerEvent, fileInfo: object, treeData?: any[]) {
   return new Promise((resolve) => {
     handleUnmount()
     // 创建一个挂载容器
@@ -29,12 +22,12 @@ function contextMenu(params: Params) {
         resolve({ mode: mode, fileInfo: fileInfo })
         setTimeout(() => {
           handleUnmount()
-        }, 500)
+        }, 360)
       },
       onClose: () => {
         setTimeout(() => {
           handleUnmount()
-        }, 350)
+        }, 360)
       }
     })
     instance.use(ArcoVue)
