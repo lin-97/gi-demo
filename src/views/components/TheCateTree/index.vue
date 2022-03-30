@@ -112,7 +112,7 @@ const formatTree = (arr: ZTree.ITreeNode[]): void => {
         item.iconClose = FileCloseIcon
         forTree(item.children)
       } else {
-        item.children = []
+        item.children = null
         item.iconOpen = FileOpenIcon
         item.iconClose = FileCloseIcon
         item.icon = FileCloseIcon
