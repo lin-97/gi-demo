@@ -3,7 +3,6 @@
     <section class="container">
       <div class="img-box">
         <img class="img-parent" :src="pageMap[route.params.id]" />
-        <img class="img-child cloud" src="@/assets/images/error/cloud.png" />
       </div>
 
       <div class="tip-box">
@@ -84,39 +83,6 @@ const onCountDownTime = () => {
     }
     .img-child {
       position: absolute;
-      &.cloud {
-        top: 18px;
-        left: 220px;
-        width: 80px;
-        opacity: 0;
-        animation-name: cloudLeft;
-        animation-duration: 2s;
-        animation-timing-function: linear;
-        animation-delay: 1s;
-        animation-fill-mode: forwards;
-      }
-      @keyframes cloudLeft {
-        0% {
-          top: 17px;
-          left: 220px;
-          opacity: 0;
-        }
-        20% {
-          top: 33px;
-          left: 188px;
-          opacity: 1;
-        }
-        80% {
-          top: 81px;
-          left: 92px;
-          opacity: 1;
-        }
-        100% {
-          top: 97px;
-          left: 60px;
-          opacity: 0;
-        }
-      }
     }
   }
   .tip-box {
