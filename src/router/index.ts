@@ -1,4 +1,5 @@
 import { createRouter, createWebHashHistory } from 'vue-router'
+import { useAppStore } from '@/store/modules/app'
 
 const routes = [
   {
@@ -102,13 +103,15 @@ const router = createRouter({
   scrollBehavior: () => ({ left: 0, top: 0 })
 })
 
-// router.beforeEach((to, from, next) => {
-//   // 设置侧边菜单栏的高亮路径
-//   const arr = app.menuList.map((i) => i.path)
-//   if (arr.includes(to.path)) {
-//     app.setActivePath(to.path)
-//   }
-//   next()
-// })
+router.beforeEach((to, from, next) => {
+  const appStore = useAppStore()
+  console.log('to', to)
+  // 设置侧边菜单栏的高亮路径
+  const arr = appStore.menuList.map((i) => i.path)
+  if (arr.includes(to.path)) {
+    appStore.setActivePath(to.path)
+  }
+  next()
+})
 
 export default router

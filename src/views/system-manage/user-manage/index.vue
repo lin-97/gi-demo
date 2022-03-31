@@ -8,10 +8,11 @@
       </a-input>
       <div class="tree-box">
         <a-tree
+          ref="treeRef"
           show-line
           block-node
+          default-expand-all
           :data="treeData"
-          :default-expand-all="true"
           :field-names="{
             key: 'id',
             title: 'name',
@@ -103,13 +104,14 @@
 </template>
 
 <script setup lang="ts" name="UserManage">
-import { ref, reactive } from 'vue'
+import { ref, reactive, nextTick } from 'vue'
 import { getSystemDeptList, getSystemUserList } from '@/apis/system'
 import GiSvgIcon from '../../../components/GiSvgIcon.vue'
 
 let treeLoading = ref<boolean>(false)
 const treeData = ref<object[]>([])
 let treeInputValue = ref<string>('')
+const treeRef = ref<HTMLInputElement | null>(null)
 
 let loading = ref<boolean>(false)
 const tableData = ref<object[]>([])
@@ -122,6 +124,9 @@ const getTreeData = async () => {
     if (res.success) {
       treeData.value = res.data.list
       treeLoading.value = false
+      nextTick(() => {
+        treeRef.value.expandNode(res.data.list[0].id)
+      })
     }
   } catch (error) {
     treeLoading.value = false

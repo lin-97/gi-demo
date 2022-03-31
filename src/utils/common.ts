@@ -2,6 +2,8 @@
 
 /**
  * @desc 去除空格
+ * @param str - 字符串
+ * @param pos - 去除空格的位置
  * pos="both": 去除两边空格
  * pos="left": 去除左边空格
  * pos="right": 去除右边空格

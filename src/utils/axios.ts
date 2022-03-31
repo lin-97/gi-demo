@@ -3,14 +3,14 @@ import { Message, Notification } from '@arco-design/web-vue'
 import { getToken } from '@/utils/auth'
 import NProgress from 'nprogress'
 
-export interface BaseResponse<T = any> {
+export interface IResponse<T = any> {
   code: number
   data: T
   message: string
   success: boolean
 }
 
-interface CodeMessage {
+interface ICodeMessage {
   [propName: number]: string
 }
 
@@ -18,7 +18,7 @@ interface CustomAxiosRequestConfig extends AxiosRequestConfig {
   hideLoading?: boolean
 }
 
-const StatusCodeMessage: CodeMessage = {
+const StatusCodeMessage: ICodeMessage = {
   200: '服务器成功返回请求的数据',
   201: '新建或修改数据成功。',
   202: '一个请求已经进入后台排队（异步任务）',
@@ -84,7 +84,7 @@ http.interceptors.response.use(
 const request = <T = any>(config: CustomAxiosRequestConfig): Promise<T> => {
   return new Promise((resolve, reject) => {
     http
-      .request<BaseResponse<T>>(config)
+      .request<IResponse<T>>(config)
       .then((res: AxiosResponse) => resolve(res.data))
       .catch((err: { message: string }) => reject(err))
   })

@@ -7,6 +7,10 @@
   user-select: none;
 }
 
+.arco-btn-size-small:not(.arco-btn-only-icon) .arco-btn-icon {
+  margin-right: 4px;
+}
+
 // 对话框组件
 .arco-modal-title .arco-icon-exclamation-circle-fill {
   font-size: 24px;
