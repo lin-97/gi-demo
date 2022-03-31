@@ -1,49 +1,47 @@
 <template>
-  <div class="gi_flex_box home">
-    <a-card title="工作台" :bordered="false" :style="{ marginTop: '10px' }">
-      <HomeWorkPlatform></HomeWorkPlatform>
-    </a-card>
+  <div class="home">
+    <WorkPlatform></WorkPlatform>
 
     <div class="wrap">
       <section class="left">
-        <div class="item"><HomeItemGrid></HomeItemGrid></div>
-        <div class="item"><HomeMsgList></HomeMsgList></div>
+        <div class="item"><GridCard></GridCard></div>
+        <div class="item"><ListCard></ListCard></div>
       </section>
       <section class="right">
-        <div class="item"><HomeChart></HomeChart></div>
-        <div class="item"><HomeImage></HomeImage></div>
+        <div class="item"><ChartCard></ChartCard></div>
+        <div class="item"><ImageCard></ImageCard></div>
       </section>
     </div>
   </div>
 </template>
 
 <script setup lang="ts" name="Home">
-import HomeWorkPlatform from './HomeWorkPlatform.vue'
-import HomeItemGrid from './HomeItemGrid.vue'
-import HomeMsgList from './HomeMsgList.vue'
-import HomeChart from './HomeChart.vue'
-import HomeImage from './HomeImage.vue'
+import WorkPlatform from './WorkPlatform.vue'
+import GridCard from './GridCard.vue'
+import ListCard from './ListCard.vue'
+import ChartCard from './ChartCard.vue'
+import ImageCard from './ImageCard.vue'
 </script>
 
 <style lang="scss" scoped>
 .home {
+  width: 100%;
   height: 100%;
+  overflow-x: hidden;
   overflow-y: scroll;
   .wrap {
     display: flex;
     flex-wrap: wrap;
-    padding: 5px;
+    padding: calc($margin / 2);
     .left,
     .right {
       flex: 1;
       flex-shrink: 0;
       min-width: 450px;
-    }
-    .right {
       overflow: hidden;
     }
     .item {
-      padding: 5px;
+      padding: calc($margin / 2);
     }
   }
 }

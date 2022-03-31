@@ -1,0 +1,51 @@
+<template>
+  <div class="chart-card">
+    <div id="chartId" style="width: 100%; height: 250px"></div>
+  </div>
+</template>
+
+<script setup lang="ts">
+import { onMounted } from 'vue'
+import * as echarts from 'echarts'
+
+onMounted(() => {
+  // 基于准备好的dom，初始化echarts实例
+  const el: HTMLElement | null = document.getElementById('chartId')
+  if (!el) return
+  const myChart = echarts.init(el)
+  // 指定图表的配置项和数据
+  const option = {
+    title: {
+      text: 'ECharts示例'
+    },
+    tooltip: {},
+    legend: {
+      data: ['销量']
+    },
+    xAxis: {
+      data: ['衬衫', '羊毛衫', '雪纺衫', '裤子', '高跟鞋', '袜子']
+    },
+    yAxis: {},
+    series: [
+      {
+        name: '销量',
+        type: 'bar',
+        data: [5, 20, 36, 10, 10, 20]
+      }
+    ]
+  }
+  // 使用刚指定的配置项和数据显示图表。
+  myChart.setOption(option)
+  window.addEventListener('resize', function () {
+    myChart.resize()
+  })
+})
+</script>
+
+<style lang="scss" scoped>
+.chart-card {
+  padding: 20px;
+  height: 250px;
+  background: var(--color-bg-2);
+}
+</style>
