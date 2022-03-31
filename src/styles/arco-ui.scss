@@ -11,6 +11,12 @@
   margin-right: 4px;
 }
 
+.arco-tree-show-line .arco-tree-node-is-leaf:not(.arco-tree-node-is-tail) .arco-tree-node-indent::after,
+.arco-tree-show-line .arco-tree-node-indent-block::before {
+  transform: translateX(0);
+  border-color: var(--color-border-2);
+}
+
 // 对话框组件
 .arco-modal-title .arco-icon-exclamation-circle-fill {
   font-size: 24px;
