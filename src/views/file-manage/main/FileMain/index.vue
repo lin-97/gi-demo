@@ -8,14 +8,14 @@
 
       <a-space>
         <a-dropdown>
-          <a-button type="primary"><icon-upload /> 上传</a-button>
+          <a-button type="primary" shape="round"><icon-upload /> 上传</a-button>
           <template #content>
             <a-doption>上传文件</a-doption>
             <a-doption>上传文件夹</a-doption>
           </template>
         </a-dropdown>
 
-        <a-button type="primary" @click="isBatchMode = !isBatchMode">
+        <a-button type="primary" shape="round" @click="isBatchMode = !isBatchMode">
           <icon-select-all /> {{ isBatchMode ? '取消批量' : '批量操作' }}
         </a-button>
 
