@@ -1,12 +1,12 @@
 <template>
-  <a-modal width="auto" v-model:visible="visible" @cancel="handleCancel">
-    <div id="video"></div>
+  <a-modal title="视频播放" width="auto" v-model:visible="visible" @cancel="handleCancel">
+    <div id="videoId"></div>
   </a-modal>
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted, onBeforeUnmount } from 'vue'
-import Player from 'xgplayer/dist/simple_player'
+import { ref, onMounted, onBeforeUnmount, nextTick } from 'vue'
+import Player from 'xgplayer'
 
 const props = defineProps({
   fileInfo: Object,
@@ -14,19 +14,18 @@ const props = defineProps({
 })
 
 let visible = ref<boolean>(false)
-let player = ref<any>(null)
 
 onMounted(() => {
   visible.value = true
-  player.value = new Player({
-    id: 'video',
-    url: props.fileInfo?.src,
-    autoplay: true
+  nextTick(() => {
+    new Player({
+      id: 'videoId',
+      url: props.fileInfo?.src,
+      autoplay: true,
+      width: 900,
+      height: 500
+    })
   })
-})
-
-onBeforeUnmount(() => {
-  player.value = null
 })
 
 const handleCancel = () => {

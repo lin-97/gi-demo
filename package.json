@@ -25,7 +25,7 @@
     "vue": "^3.2.29",
     "vue-color-kit": "^1.0.5",
     "vue-router": "^4.0.12",
-    "xgplayer": "^2.31.4",
+    "xgplayer": "^2.31.6",
     "xgplayer-music": "^2.3.2"
   },
   "devDependencies": {

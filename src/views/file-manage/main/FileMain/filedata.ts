@@ -32,19 +32,49 @@ const list = [
   {
     id: '004',
     type: 'file',
-    name: '林宥嘉·脆弱一分钟',
+    name: '致你-予星',
     extendName: 'mp3',
-    src: '//sf1-cdn-tos.huoshanstatic.com/obj/media-fe/xgplayer_doc_video/music/audio.mp3',
+    src: 'https://webfs.ali.kugou.com/202204012122/dc1d73941a057545cb43e9c91ff57e39/KGTX/CLTX001/f34b98bf8191b1724e3a6d934913b5f2.mp3',
     updateTime: '2022-01-20 18:30:00',
+    isDir: false,
+    filePath: '/'
+  },
+  {
+    id: '094',
+    type: 'file',
+    name: '南山南(DJ)-张磊',
+    extendName: 'mp3',
+    src: 'https://webfs.ali.kugou.com/202204012131/a5e1e865233904049417abf60b48cd9e/G053/M09/1F/08/FZQEAFaMl9KACO9ZAD9wLCIqc70955.mp3',
+    updateTime: '2022-01-20 18:30:00',
+    isDir: false,
+    filePath: '/'
+  },
+  {
+    id: '084',
+    type: 'file',
+    name: '须尽欢-渡',
+    extendName: 'mp3',
+    src: 'https://webfs.ali.kugou.com/202204012135/427c74d81057bdc2730e3f839d7d5cfb/KGTX/CLTX001/3b53e2510350f35d9737b4a6228a851d.mp3',
+    updateTime: '2022-01-20 18:30:00',
+    isDir: false,
+    filePath: '/'
+  },
+  {
+    id: '065',
+    type: 'file',
+    name: '这一生关于你的风景-隔壁老樊',
+    extendName: 'mp3',
+    src: 'https://webfs.ali.kugou.com/202204012139/f85713b77ac416d4eee3fd582e8f4b6d/KGTX/CLTX001/9af018aea4fba12bf9d18a23dfe996a6.mp3',
+    updateTime: '2022-01-20 16:30:00',
     isDir: false,
     filePath: '/'
   },
   {
     id: '005',
     type: 'file',
-    name: '西瓜视频介绍',
+    name: '老男孩',
     extendName: 'mp4',
-    src: '//sf1-cdn-tos.huoshanstatic.com/obj/media-fe/xgplayer_doc_video/mp4/xgplayer-demo-360p.mp4',
+    src: 'https://mvwebfs.tx.kugou.com/202204012150/7b4b6399247759f89a19ed1a6976d0f3/G091/M00/0D/07/-4YBAFtqF26ASRAuAnFIzZmLseg807.mp4',
     updateTime: '2022-01-20 18:30:00',
     isDir: false,
     filePath: '/'

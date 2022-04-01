@@ -5,23 +5,17 @@
 
     <a-row justify="space-between" class="row-operate">
       <!-- 左侧区域 -->
-
       <a-space>
         <a-dropdown>
           <a-button type="primary" shape="round">
             <template #icon><icon-upload /></template>
-            <template #default>删除</template>
+            <template #default>上传</template>
           </a-button>
           <template #content>
             <a-doption>上传文件</a-doption>
             <a-doption>上传文件夹</a-doption>
           </template>
         </a-dropdown>
-
-        <a-button type="primary" shape="round" @click="isBatchMode = !isBatchMode">
-          <template #icon><icon-select-all /></template>
-          <template #default>{{ isBatchMode ? '取消批量' : '批量操作' }}</template>
-        </a-button>
 
         <a-input-group>
           <a-select style="width: 150px" placeholder="请选择">
@@ -50,6 +44,10 @@
           @click="handleMulDelete"
           ><template #icon><icon-delete /></template
         ></a-button>
+        <a-button type="primary" @click="isBatchMode = !isBatchMode">
+          <template #icon><icon-select-all /></template>
+          <template #default>{{ isBatchMode ? '取消批量' : '批量操作' }}</template>
+        </a-button>
         <a-button-group>
           <a-tooltip content="传输列表" position="bottom">
             <a-button @click="showLoading = !showLoading">
@@ -201,9 +199,9 @@ const handleMulDelete = () => {
   flex-direction: column;
   overflow: hidden;
   .row-operate {
-    border-bottom: 1px solid var(--color-border);
+    border-bottom: 1px dashed var(--color-border-3);
     margin: 0 $padding;
-    padding-bottom: $padding;
+    padding-bottom: $margin;
   }
   .file-wrap {
     flex: 1;

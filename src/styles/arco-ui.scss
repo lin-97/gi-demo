@@ -32,6 +32,9 @@
 
 .arco-pagination-item {
   background-color: var(--color-fill-1);
+  &:hover {
+    background-color: var(--color-fill-3);
+  }
 }
 
 // 对话框组件

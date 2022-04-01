@@ -125,6 +125,7 @@ const handleContextMenu = (e: Event, item: File.FileItem) => {
     }
   }
   .file-name {
+    height: 2em;
     font-size: 12px;
     margin-top: 6px;
     padding: 0 5px;

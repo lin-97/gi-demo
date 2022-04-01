@@ -13,7 +13,7 @@
     <section class="gi_lr_page wrap">
       <div class="left">
         <GiTitle title="指标分类"></GiTitle>
-        <TheCateTree @node-click="getTableData"></TheCateTree>
+        <TheCateTree placeholder="请输入搜索关键词" @node-click="getTableData"></TheCateTree>
       </div>
       <div class="right">
         <GiTitle title="指标列表"></GiTitle>
@@ -34,7 +34,7 @@
               </a-button>
               <a-button type="primary" status="success">
                 <template #icon>
-                  <icon-upload />
+                  <icon-download />
                 </template>
               </a-button>
             </a-space>
@@ -45,7 +45,12 @@
                 <a-option>上海</a-option>
                 <a-option>广州</a-option>
               </a-select>
-              <a-input-search class="gi_search_input" placeholder="请输入" />
+              <a-input-group>
+                <a-input placeholder="请输入搜索关键词" allow-clear> </a-input>
+                <a-button type="primary">
+                  <icon-search />
+                </a-button>
+              </a-input-group>
               <a-button type="primary" @click="getTableData">
                 <template #icon>
                   <icon-refresh />
@@ -194,6 +199,7 @@ const onDelete = (row) => {
       .content {
         flex: 1;
         padding: $padding;
+        padding-top: $margin;
         overflow: hidden;
         display: flex;
         flex-direction: column;

@@ -4,7 +4,7 @@
       <GiTitle title="部门列表"></GiTitle>
 
       <div class="content">
-        <a-input v-model="treeInputValue" allow-clear style="margin-bottom: 10px">
+        <a-input v-model="treeInputValue" placeholder="请输入搜索关键词" allow-clear style="margin-bottom: 10px">
           <template #prefix>
             <icon-search />
           </template>
@@ -179,6 +179,7 @@ getTableData()
     .content {
       left: 1;
       padding: $padding;
+      padding-top: $margin;
       overflow: hidden;
       display: flex;
       flex-direction: column;

@@ -28,7 +28,7 @@ const props = defineProps({
   flex-shrink: 0;
   > .wrapper {
     height: 100%;
-    border-bottom: 1px dashed var(--color-border-2);
+    border-bottom: 1px dashed var(--color-border-3);
     box-sizing: border-box;
   }
   .title {

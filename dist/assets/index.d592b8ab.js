@@ -1,1 +1,0 @@
-import{_ as e}from"./index.b20256bd.js";import{o,h as r}from"./vendor.1278e709.js";const c={},n={class:"menu-manage"};function t(a,s){return o(),r("div",n,"\u83DC\u5355\u7BA1\u7406")}var f=e(c,[["render",t]]);export{f as default};

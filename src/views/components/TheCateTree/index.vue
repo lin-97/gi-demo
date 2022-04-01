@@ -292,6 +292,7 @@ const handleInput = () => {
 .cate-tree {
   flex: 1;
   padding: $padding;
+  padding-top: $margin;
   overflow: hidden;
   position: relative;
   display: flex;

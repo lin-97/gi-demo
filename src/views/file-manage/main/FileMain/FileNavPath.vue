@@ -34,9 +34,10 @@ const onBlur = () => {
 .file-nav-path {
   height: 44px;
   padding: 0 $padding;
-  margin-bottom: 14px;
+  margin-bottom: $margin;
   display: flex;
-  align-items: flex-end;
+  align-items: center;
+  // border-bottom: 1px dashed var(--color-border-3);
   :deep(.arco-input) {
     width: 100%;
   }
