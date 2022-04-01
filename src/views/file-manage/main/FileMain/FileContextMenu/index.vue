@@ -15,7 +15,7 @@
       </GiOptionItem>
       <a-popover
         position="right"
-        :content-style="{ padding: 0, overflow: 'hidden' }"
+        :content-style="{ padding: 0, overflow: 'hidden', width: '150px' }"
         :arrow-style="{ display: 'none' }"
         :popup-visible="showZipPopover"
       >
@@ -27,11 +27,11 @@
           <GiOption>
             <GiOptionItem @click="handleClickMenuItem('zip1')">
               <template #icon><GiSvgIcon name="file-rar"></GiSvgIcon> </template>
-              <span>解压1</span>
+              <span>解压到当前目录</span>
             </GiOptionItem>
             <GiOptionItem @click="handleClickMenuItem('zip2')">
               <template #icon><GiSvgIcon name="file-rar"></GiSvgIcon> </template>
-              <span>解压2</span>
+              <span>解压到其他目录</span>
             </GiOptionItem>
           </GiOption>
         </template>

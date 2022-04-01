@@ -48,5 +48,6 @@ defineExpose({
   overflow: hidden;
   border: 1px solid var(--color-border-2);
   box-sizing: border-box;
+  background: var(--color-bg-popup);
 }
 </style>
