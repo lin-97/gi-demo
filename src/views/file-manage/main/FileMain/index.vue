@@ -8,7 +8,10 @@
 
       <a-space>
         <a-dropdown>
-          <a-button type="primary" shape="round"><icon-upload /> 上传</a-button>
+          <a-button type="primary" shape="round">
+            <template #icon><icon-upload /></template>
+            <template #default>删除</template>
+          </a-button>
           <template #content>
             <a-doption>上传文件</a-doption>
             <a-doption>上传文件夹</a-doption>
@@ -16,7 +19,8 @@
         </a-dropdown>
 
         <a-button type="primary" shape="round" @click="isBatchMode = !isBatchMode">
-          <icon-select-all /> {{ isBatchMode ? '取消批量' : '批量操作' }}
+          <template #icon><icon-select-all /></template>
+          <template #default>{{ isBatchMode ? '取消批量' : '批量操作' }}</template>
         </a-button>
 
         <a-input-group>
@@ -29,12 +33,15 @@
             </a-option>
           </a-select>
           <a-input placeholder="请输入关键词..." allow-clear> </a-input>
-          <a-button type="primary"><icon-search /> 搜索</a-button>
+          <a-button type="primary">
+            <template #icon><icon-search /></template>
+            <template #default>搜索</template>
+          </a-button>
         </a-input-group>
       </a-space>
 
       <!-- 右侧区域 -->
-      <a-space v-if="width > 715">
+      <a-space v-if="windowWidth > 715">
         <a-button
           v-if="isBatchMode"
           :disabled="!fileStore.selectedFileIdList.length"
@@ -114,7 +121,7 @@ import TheFileRename from '@/views/components/TheFileRename/index'
 import TheFileMove from '@/views/components/TheFileMove/index'
 import fileData from './filedata'
 
-const { width } = useWindowSize()
+const { width: windowWidth } = useWindowSize()
 const fileStore = useFileStore()
 
 let loadingText = ref<string>('等待中...')

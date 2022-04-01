@@ -1,77 +1,42 @@
 <template>
   <transition name="slide-dynamic-origin">
-    <div class="gi-context-menu" ref="contextMenuRef" :style="contextMenuStyle" v-show="visiable">
+    <div class="gi-context-menu" ref="elRef" :style="getStyle()" v-show="visible">
       <slot></slot>
     </div>
   </transition>
 </template>
 
 <script setup lang="ts" name="GiContextMenu">
-import { ref, nextTick, onMounted } from 'vue'
-import { onClickOutside } from '@vueuse/core'
+import { ref, watch } from 'vue'
+import { onClickOutside, useWindowSize } from '@vueuse/core'
+import { useContextMenu } from '@/hooks'
 
-const props = defineProps({
-  // 坐标
-  axis: {
-    type: Object,
-    default: () => ({ x: 0, y: 0 })
-  },
-  // 宽度
-  width: {
-    type: String,
-    default: 'auto'
-  },
-  // 高度
-  height: {
-    type: String,
-    default: 'auto'
-  }
-})
+const props = defineProps<{
+  event: PointerEvent
+}>()
 
-let visiable = ref<boolean>(false)
-const contextMenuHeight = ref<number>(0)
-let contextMenuStyle = ref<object>({})
-let contextMenuRef = ref<HTMLInputElement | null>(null)
-
-const emit = defineEmits(['close'])
-
-const getStyle = () => {
-  const obj: any = {}
-  // console.log('props.axis.y', props.axis.y)
-  // console.log('window.innerHeight', window.innerHeight)
-  // console.log('contextMenuHeight', contextMenuHeight.value)
-  obj.left = props.axis.x + 2 + 'px'
-  if (props.axis.y > window.innerHeight - contextMenuHeight.value) {
-    obj.bottom = window.innerHeight - props.axis.y + 'px'
-    obj['transform-origin'] = 'center bottom'
-  } else {
-    obj.top = props.axis.y + 2 + 'px'
-    obj['transform-origin'] = 'center top'
-  }
-  obj.width = props.width
-  obj.height = props.height
-  obj['z-index'] = 999
-  contextMenuStyle.value = obj
-}
-
-onMounted(() => {
-  visiable.value = true
-  nextTick(() => {
-    if (contextMenuRef.value) {
-      contextMenuHeight.value = contextMenuRef.value.offsetHeight
-      getStyle()
-    }
-  })
-})
+let elRef = ref<HTMLElement | null>(null)
+const { visible, setVisible, getStyle } = useContextMenu(props.event, elRef)
 
 // 检测在一个元素之外的任何点击
-onClickOutside(contextMenuRef, () => {
-  visiable.value = false
+const emit = defineEmits(['close'])
+onClickOutside(elRef, () => {
+  setVisible(false)
   emit('close')
 })
 
+// 窗口尺寸变化关闭
+const { width: windowWidth, height: windowHeight } = useWindowSize()
+watch(
+  () => [windowWidth.value, windowHeight.value],
+  () => {
+    setVisible(false)
+    emit('close')
+  }
+)
+
 defineExpose({
-  visiable
+  visible
 })
 </script>
 

@@ -37,23 +37,23 @@ onMounted(() => {
   visible.value = true
 })
 
-const windowSize = useWindowSize()
-const elSize = useElementSize(audioRef)
+const { width: windowWidth, height: windowHeight } = useWindowSize()
+const { width: boxWidth, height: boxHeight } = useElementSize(audioRef)
 const { x, y } = useDraggable(audioRef, {
-  initialValue: { x: windowSize.width.value - elSize.width.value, y: 40 }
+  initialValue: { x: windowWidth.value - boxWidth.value, y: 40 }
 })
 
 const audioStyle = computed(() => {
   let left: number | string = x.value + 'px'
   let top: number | string = y.value + 'px'
-  if (x.value > windowSize.width.value - elSize.width.value) {
-    left = windowSize.width.value - elSize.width.value + 'px'
+  if (x.value > windowWidth.value - boxWidth.value) {
+    left = windowWidth.value - boxWidth.value + 'px'
   }
   if (x.value < 0) {
     left = 0
   }
-  if (y.value > windowSize.height.value - elSize.height.value) {
-    top = windowSize.height.value - elSize.height.value + 'px'
+  if (y.value > windowHeight.value - boxHeight.value) {
+    top = windowHeight.value - boxHeight.value + 'px'
   }
   if (y.value < 0) {
     top = 0

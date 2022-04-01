@@ -2,7 +2,8 @@
   <div class="role-manage">
     <a-row class="head">
       <a-button type="primary" @click="showAddRoleModal = true">
-        <template #icon><icon-plus /></template>新增角色
+        <template #icon><icon-plus /></template>
+        <span>新增角色</span>
       </a-button>
     </a-row>
     <section class="table-box">

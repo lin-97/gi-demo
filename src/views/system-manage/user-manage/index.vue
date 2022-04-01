@@ -32,22 +32,21 @@
       <a-row justify="space-between" class="head">
         <a-space>
           <a-button type="primary">
-            <template #icon>
-              <icon-plus />
-            </template>
-            新增用户
+            <template #icon><icon-plus /></template>
+            <span>新增用户</span>
           </a-button>
 
           <a-input-group>
             <a-input placeholder="请输入关键词..." allow-clear style="width: 250px"> </a-input>
-            <a-button type="primary" @click="getTableData"><icon-search /> 搜索</a-button>
+            <a-button type="primary" @click="getTableData">
+              <template #icon><icon-search /></template>
+              <span>搜索</span>
+            </a-button>
           </a-input-group>
         </a-space>
 
         <a-button type="primary" status="danger">
-          <template #icon>
-            <icon-delete />
-          </template>
+          <template #icon><icon-delete /></template>
         </a-button>
       </a-row>
       <section class="table-box">

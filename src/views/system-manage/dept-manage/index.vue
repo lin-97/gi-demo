@@ -2,7 +2,8 @@
   <div class="dept-manage">
     <a-row class="head">
       <a-button type="primary" @click="showAddDeptModal = true">
-        <template #icon><icon-plus /></template>新增部门
+        <template #icon><icon-plus /></template>
+        <span>新增部门</span>
       </a-button>
     </a-row>
     <section class="table-box">

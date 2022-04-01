@@ -15,7 +15,7 @@ function contextMenu(event: PointerEvent, fileInfo: File.FileItem) {
     document.body.appendChild(dom)
     // 实例化组件, createApp第二个参数是 props
     instance = createApp(FileContextMenu, {
-      axis: { x: event.clientX, y: event.clientY },
+      event: event,
       fileInfo: fileInfo,
       onClick: (mode: string) => {
         resolve({ mode: mode, fileInfo: fileInfo })
@@ -24,7 +24,6 @@ function contextMenu(event: PointerEvent, fileInfo: File.FileItem) {
         }, 350)
       },
       onClose: () => {
-        reject()
         setTimeout(() => {
           handleUnmount()
         }, 350)

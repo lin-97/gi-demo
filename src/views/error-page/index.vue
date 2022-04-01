@@ -2,7 +2,7 @@
   <div class="error-page">
     <section class="container">
       <div class="img-box">
-        <img class="img-parent" :src="pageMap[route.params.id]" />
+        <img class="img-parent" :src="pageMap[route.params.id || 404]" />
       </div>
 
       <div class="tip-box">

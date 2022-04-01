@@ -1,5 +1,5 @@
 <template>
-  <GiContextMenu ref="menuRef" :axis="axis" @close="onClose">
+  <GiContextMenu ref="menuRef" :event="event" @close="onClose">
     <GiOption width="110" ref="optionRef" style="position: relative">
       <GiOptionItem icon="IconPlusCircle" @click="onClickItem('add')" v-if="showAdd">新增</GiOptionItem>
       <GiOptionItem icon="IconEdit" @click="onClickItem('rename')" v-if="showRename">重命名</GiOptionItem>
@@ -31,13 +31,13 @@ import GiOption from '@/components/GiOption.vue'
 import GiOptionItem from '@/components/GiOptionItem.vue'
 import MoveTree from '../MoveTree.vue'
 
-const props = defineProps({
-  axis: Object,
-  fileInfo: Object,
-  treeData: Array,
-  onClose: Function,
-  onClick: Function
-})
+const props = defineProps<{
+  event: PointerEvent
+  fileInfo: File.FileItem
+  treeData: any
+  onClose: any
+  onClick: any
+}>()
 
 let menuRef = ref<HTMLInputElement | null>(null)
 

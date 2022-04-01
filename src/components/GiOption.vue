@@ -27,13 +27,12 @@ let getStyle = computed<any>(() => {
 
 <style lang="scss" scoped>
 .gi-option {
+  width: 100%;
   min-width: 100px;
   height: 100%;
   display: flex;
   flex-direction: column;
-  justify-content: center;
   box-sizing: border-box;
   background: var(--color-bg-popup);
-  position: relative;
 }
 </style>

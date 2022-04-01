@@ -15,7 +15,7 @@ function contextMenu(event: PointerEvent, fileInfo: object, treeData?: any[]) {
     document.body.appendChild(dom)
     // 实例化组件, createApp第二个参数是 props
     instance = createApp(ContextMenu, {
-      axis: { x: event.clientX, y: event.clientY },
+      event: event,
       fileInfo: fileInfo,
       treeData: treeData,
       onClick: (mode: string) => {

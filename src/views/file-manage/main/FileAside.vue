@@ -1,5 +1,5 @@
 <template>
-  <div class="file-aside" v-if="width > 715">
+  <div class="file-aside" v-if="windowWidth > 715">
     <GiTitle title="文件管理"></GiTitle>
     <a-menu
       :style="{ width: '220px', height: '100%', 'border-radius': '2px' }"
@@ -29,7 +29,7 @@ import { useWindowSize } from '@vueuse/core'
 const route = useRoute()
 const router = useRouter()
 
-const { width } = useWindowSize()
+const { width: windowWidth } = useWindowSize()
 
 interface FileTypeListItem {
   key: string
