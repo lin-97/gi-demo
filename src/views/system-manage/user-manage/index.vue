@@ -1,31 +1,35 @@
 <template>
   <div class="user-manage">
     <section class="left" v-loading="treeLoading">
-      <a-input v-model="treeInputValue" allow-clear style="margin-bottom: 10px">
-        <template #prefix>
-          <icon-search />
-        </template>
-      </a-input>
-      <div class="tree-box">
-        <a-tree
-          ref="treeRef"
-          show-line
-          block-node
-          default-expand-all
-          :data="treeData"
-          :field-names="{
-            key: 'id',
-            title: 'name',
-            children: 'children'
-          }"
-          @select="getTableData"
-        >
-          <template #icon="{ node }">
-            <GiSvgIcon name="com-dept" :size="14" v-if="node.level == 1"></GiSvgIcon>
-            <GiSvgIcon name="com-sub-dept" :size="14" v-if="node.level == 2"></GiSvgIcon>
-            <GiSvgIcon name="com-group" :size="14" v-if="node.level == 3"></GiSvgIcon>
+      <GiTitle title="部门列表"></GiTitle>
+
+      <div class="content">
+        <a-input v-model="treeInputValue" allow-clear style="margin-bottom: 10px">
+          <template #prefix>
+            <icon-search />
           </template>
-        </a-tree>
+        </a-input>
+        <div class="tree-box">
+          <a-tree
+            ref="treeRef"
+            show-line
+            block-node
+            default-expand-all
+            :data="treeData"
+            :field-names="{
+              key: 'id',
+              title: 'name',
+              children: 'children'
+            }"
+            @select="getTableData"
+          >
+            <template #icon="{ node }">
+              <GiSvgIcon name="com-dept" :size="14" v-if="node.level == 1"></GiSvgIcon>
+              <GiSvgIcon name="com-sub-dept" :size="14" v-if="node.level == 2"></GiSvgIcon>
+              <GiSvgIcon name="com-group" :size="14" v-if="node.level == 3"></GiSvgIcon>
+            </template>
+          </a-tree>
+        </div>
       </div>
     </section>
     <section class="right">
@@ -164,18 +168,25 @@ getTableData()
   background: var(--color-bg-2);
   > .left {
     flex: 1;
-    min-width: 220px;
+    min-width: 250px;
     height: 100%;
     flex-shrink: 0;
     border-right: 1px solid $border-color;
-    padding: $padding;
     box-sizing: border-box;
     overflow: hidden;
     display: flex;
     flex-direction: column;
+    .content {
+      left: 1;
+      padding: $padding;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
     .tree-box {
       flex: 1;
       overflow: auto;
+      padding-left: 4px;
     }
   }
   > .right {

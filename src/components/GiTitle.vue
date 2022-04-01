@@ -25,13 +25,14 @@ const props = defineProps({
   padding: 0 $padding;
   box-sizing: border-box;
   z-index: 99;
+  flex-shrink: 0;
   > .wrapper {
     height: 100%;
-    border-bottom: 1px solid $border-color;
+    border-bottom: 1px dashed var(--color-border-2);
     box-sizing: border-box;
   }
   .title {
-    font-size: 14px;
+    font-size: 16px;
     font-weight: normal;
     color: $title-color;
     margin-block-start: 0;
