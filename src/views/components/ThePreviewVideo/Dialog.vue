@@ -1,5 +1,5 @@
 <template>
-  <a-modal title="视频播放" width="auto" v-model:visible="visible" @cancel="handleCancel">
+  <a-modal title="视频播放" width="auto" draggable v-model:visible="visible" @cancel="handleCancel">
     <div id="videoId"></div>
   </a-modal>
 </template>
@@ -21,7 +21,11 @@ onMounted(() => {
     new Player({
       id: 'videoId',
       url: props.fileInfo?.src,
-      autoplay: true
+      lang: 'zh-cn',
+      autoplay: true,
+      closeVideoClick: true,
+      videoInit: true
+      // playbackRate: [0.5, 0.75, 1, 1.5, 2]
     })
   })
 })
