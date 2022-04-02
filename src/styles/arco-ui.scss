@@ -15,6 +15,7 @@
 .arco-tree-show-line .arco-tree-node-indent-block::before {
   transform: translateX(0);
   border-color: var(--color-border-2);
+  flex-shrink: 0;
 }
 
 // .arco-tree-node-minus-icon::after,

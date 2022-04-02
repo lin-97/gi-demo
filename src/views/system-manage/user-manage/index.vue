@@ -72,8 +72,9 @@
               </template>
             </a-table-column>
             <a-table-column title="头像" data-index="avatar">
-              <template #cell>
-                <GiSvgIcon name="avatar" :size="40"></GiSvgIcon>
+              <template #cell="{ record }">
+                <GiSvgIcon name="avatar-man" :size="40" v-if="record.sex === 1"></GiSvgIcon>
+                <GiSvgIcon name="avatar-woman" :size="40" v-else></GiSvgIcon>
               </template>
             </a-table-column>
             <a-table-column title="地址" data-index="address"></a-table-column>

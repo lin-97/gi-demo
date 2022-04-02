@@ -26,6 +26,8 @@ body {
 }
 
 #app {
+  width: 100vw;
+  height: 100vh;
   overflow: hidden;
   color: $text-color;
   background: $background-color;

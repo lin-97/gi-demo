@@ -75,7 +75,7 @@
                 <a-table-column title="地址" data-index="address"></a-table-column>
                 <a-table-column title="比例" width="200">
                   <template #cell="{ record }">
-                    <a-progress status="warning" :percent="record.proportion / 100" />
+                    <a-progress :status="getProportionColor(record.proportion)" :percent="record.proportion / 100" />
                   </template>
                 </a-table-column>
                 <a-table-column title="状态" width="100">
@@ -121,6 +121,13 @@ let activeName = ref<string>('2')
 
 const tableData = ref<object[]>([])
 let showLoading = ref<boolean>(false)
+
+// 比例进度条颜色
+const getProportionColor = (proportion: number) => {
+  if (proportion < 30) return 'danger'
+  if (proportion < 60) return 'warning'
+  return 'success'
+}
 
 type PageInfo = {
   page: number

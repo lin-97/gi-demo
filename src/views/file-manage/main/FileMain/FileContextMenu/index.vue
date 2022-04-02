@@ -62,6 +62,7 @@ let menuRef = ref<HTMLInputElement | null>(null)
 let showZipPopover = ref<boolean>(false)
 
 const onClose = () => {
+  showZipPopover.value = false
   props.onClose()
 }
 
