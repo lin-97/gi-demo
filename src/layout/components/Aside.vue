@@ -1,7 +1,7 @@
 <template>
   <a-layout-sider collapsible breakpoint="xl" class="aside">
     <a-menu :selected-keys="[appStore.activePath]" :style="{ width: '100%', height: '100%' }">
-      <template v-for="item in appStore.menuList">
+      <template v-for="item in menuStore.list">
         <a-sub-menu :key="item.path" v-if="item.children && item.children.length">
           <template #icon>
             <GiSvgIcon :size="24" :name="item.icon"></GiSvgIcon>
@@ -32,11 +32,12 @@
 
 <script setup lang="ts">
 import { useRouter } from 'vue-router'
-import { useAppStore } from '@/store'
+import { useAppStore, useMenuStore } from '@/store'
 const router = useRouter()
 const appStore = useAppStore()
+const menuStore = useMenuStore()
 
-const handleClickItem = (item: App.MenuItem) => {
+const handleClickItem = (item: Menu.MenuItem) => {
   if (item.path) {
     appStore.setActivePath(item.path)
     router.push({ path: item.path })

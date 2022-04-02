@@ -22,7 +22,7 @@
 
 <script setup lang="ts" name="SystemManage">
 import { ref, reactive } from 'vue'
-import UserCenter from './UserCenter/index.vue'
+import UserCenter from './user-center/index.vue'
 import DeptManage from './dept-manage/index.vue'
 import UserManage from './user-manage/index.vue'
 import RoleManage from './role-manage/index.vue'

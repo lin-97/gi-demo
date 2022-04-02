@@ -6,7 +6,7 @@
       :bordered="false"
       :pagination="false"
       :row-selection="isBatchMode ? rowSelection : undefined"
-      @row-click="handleRowClick"
+      @row-click.capture="handleRowClick"
     >
       <template #columns>
         <a-table-column title="名称">
@@ -21,6 +21,11 @@
         </a-table-column>
         <a-table-column title="扩展名" data-index="extendName" width="100"></a-table-column>
         <a-table-column title="更改时间" data-index="updateTime" width="200"></a-table-column>
+        <a-table-column title="操作" width="120" align="center">
+          <template #cell="{ record }">
+            <a-button type="text" @click="handleContextMenu($event, record)"><icon-more :size="16" /></a-button>
+          </template>
+        </a-table-column>
       </template>
     </a-table>
   </div>
@@ -56,7 +61,7 @@ const handleRowClick = (row: File.FileItem) => {
 }
 
 // 右键事件
-const handleContextMenu = (e: Event, row: File.FileItem) => {
+const handleContextMenu = (e: PointerEvent, row: File.FileItem) => {
   e.preventDefault()
   emit('contextmenu', e, row)
 }

@@ -1,3 +1,96 @@
 <template>
-  <div class="menu-manage">菜单管理</div>
+  <div class="menu-manage">
+    <a-row class="head">
+      <a-button type="primary" @click="showAddMenuModal = true">
+        <template #icon><icon-plus /></template>
+        <span>新增菜单</span>
+      </a-button>
+    </a-row>
+    <section class="table-box">
+      <a-table
+        :data="menuStore.list"
+        :scroll="{ x: '100%', y: '100%' }"
+        :pagination="false"
+        :expandable="{ width: 80 }"
+      >
+        <template #expand-icon="{ expanded }">
+          <IconDown v-if="expanded" />
+          <IconRight v-else />
+        </template>
+        <template #columns>
+          <a-table-column title="菜单名称" data-index="name"></a-table-column>
+          <a-table-column title="菜单地址" data-index="path">
+            <template #cell="{ record }">
+              <span v-if="record.path">{{ record.path }}</span>
+              <span class="no-text" v-else>无</span>
+            </template>
+          </a-table-column>
+          <a-table-column title="菜单图标" data-index="icon" width="200">
+            <template #cell="{ record }">
+              <GiSvgIcon :size="24" :name="record.icon" v-if="record.icon"></GiSvgIcon>
+              <span class="no-text" v-else>无</span>
+            </template>
+          </a-table-column>
+          <a-table-column title="是否缓存" data-index="keepAlive" width="200">
+            <template #cell="{ record }">
+              <a-button status="success" size="mini" v-if="record.keepAlive"><template #icon>是</template></a-button>
+              <a-button status="danger" size="mini" v-else><template #icon>否</template></a-button>
+            </template>
+          </a-table-column>
+          <a-table-column title="是否隐藏" data-index="hidden" width="200">
+            <template #cell="{ record }">
+              <a-button status="success" size="mini" v-if="record.hidden"><template #icon>是</template></a-button>
+              <a-button status="danger" size="mini" v-else><template #icon>否</template></a-button>
+            </template>
+          </a-table-column>
+          <a-table-column title="操作" width="100">
+            <template #cell="{ record }">
+              <a-space>
+                <a-button type="primary" @click="showAddMenuModal = true">
+                  <template #icon><icon-edit /></template>
+                </a-button>
+                <a-button type="primary" status="danger">
+                  <template #icon><icon-delete /></template>
+                </a-button>
+              </a-space>
+            </template>
+          </a-table-column>
+        </template>
+      </a-table>
+    </section>
+
+    <AddMenuModal :tree-data="menuStore.list" v-model="showAddMenuModal"></AddMenuModal>
+  </div>
 </template>
+
+<script setup lang="ts">
+import { ref } from 'vue'
+import { useMenuStore } from '@/store'
+import AddMenuModal from './AddMenuModal.vue'
+
+const menuStore = useMenuStore()
+let showAddMenuModal = ref<boolean>(false)
+</script>
+
+<style lang="scss" scoped>
+.menu-manage {
+  width: 100%;
+  height: 100%;
+  box-sizing: border-box;
+  background: var(--color-bg-2);
+  display: flex;
+  flex-direction: column;
+  .head {
+    padding: $padding $padding 0;
+  }
+  .table-box {
+    flex: 1;
+    margin-top: $margin;
+    padding: 0 $padding $padding;
+    overflow: hidden;
+  }
+  .no-text {
+    color: $text-sub-color;
+  }
+}
+</style>
