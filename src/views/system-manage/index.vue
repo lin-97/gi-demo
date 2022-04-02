@@ -2,15 +2,17 @@
   <div class="system-manage">
     <section class="left">
       <a-menu
-        :style="{ width: '220px', height: '100%', 'border-radius': '2px' }"
+        :style="{ width: '200px', height: '100%', 'border-radius': '2px' }"
         :default-open-keys="['0']"
         :default-selected-keys="[currentKey]"
+        show-collapse-button
       >
-        <a-sub-menu key="0">
-          <a-menu-item :key="item.id" v-for="(item, index) in menuList" @click="onClickMenuItem(item, index)">
-            <span>{{ item.name }}</span>
-          </a-menu-item>
-        </a-sub-menu>
+        <a-menu-item :key="item.id" v-for="(item, index) in menuList" @click="onClickMenuItem(item, index)">
+          <template #icon>
+            <component :is="item.icon" :size="18"></component>
+          </template>
+          <span>{{ item.name }}</span>
+        </a-menu-item>
       </a-menu>
     </section>
 
@@ -26,6 +28,7 @@ import UserCenter from './user-center/index.vue'
 import DeptManage from './dept-manage/index.vue'
 import UserManage from './user-manage/index.vue'
 import RoleManage from './role-manage/index.vue'
+import MenuManage from './menu-manage/index.vue'
 
 let currentKey = ref<string>('01')
 let currentIndex = ref<number>(0)
@@ -34,13 +37,14 @@ interface MenuItem {
   id: string
   name: string
   value: any
+  icon: string
 }
 const menuList: MenuItem[] = reactive([
-  { id: '01', name: '个人中心', value: UserCenter },
-  { id: '04', name: '部门管理', value: DeptManage },
-  { id: '02', name: '用户管理', value: UserManage },
-  { id: '03', name: '角色管理', value: RoleManage },
-  { id: '05', name: '菜单管理', value: UserCenter }
+  { id: '01', name: '个人中心', value: UserCenter, icon: 'icon-user' },
+  { id: '04', name: '部门管理', value: DeptManage, icon: 'icon-mind-mapping' },
+  { id: '02', name: '用户管理', value: UserManage, icon: 'icon-user-group' },
+  { id: '03', name: '角色管理', value: RoleManage, icon: 'icon-robot' },
+  { id: '05', name: '菜单管理', value: MenuManage, icon: 'icon-menu' }
 ])
 
 const onClickMenuItem = (item: MenuItem, index: number) => {
