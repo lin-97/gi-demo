@@ -21,9 +21,7 @@ onMounted(() => {
     new Player({
       id: 'videoId',
       url: props.fileInfo?.src,
-      autoplay: true,
-      width: 900,
-      height: 500
+      autoplay: true
     })
   })
 })

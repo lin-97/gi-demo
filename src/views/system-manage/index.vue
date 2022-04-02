@@ -40,11 +40,11 @@ interface MenuItem {
   icon: string
 }
 const menuList: MenuItem[] = reactive([
-  { id: '01', name: '个人中心', value: UserCenter, icon: 'icon-user' },
-  { id: '04', name: '部门管理', value: DeptManage, icon: 'icon-mind-mapping' },
+  { id: '01', name: '部门管理', value: DeptManage, icon: 'icon-mind-mapping' },
   { id: '02', name: '用户管理', value: UserManage, icon: 'icon-user-group' },
   { id: '03', name: '角色管理', value: RoleManage, icon: 'icon-robot' },
-  { id: '05', name: '菜单管理', value: MenuManage, icon: 'icon-menu' }
+  { id: '04', name: '菜单管理', value: MenuManage, icon: 'icon-menu' },
+  { id: '05', name: '个人中心', value: UserCenter, icon: 'icon-user' }
 ])
 
 const onClickMenuItem = (item: MenuItem, index: number) => {

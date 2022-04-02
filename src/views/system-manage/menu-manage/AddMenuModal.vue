@@ -1,7 +1,7 @@
 <template>
   <a-modal v-model:visible="visible" title="新增菜单">
     <a-form ref="formRef" :model="form" :labelCol="{ span: 4 }">
-      <a-form-item label="上级菜单" name="parentId">
+      <a-form-item label="上级菜单" parentId="name">
         <a-tree-select
           :data="treeData"
           v-model="form.parentId"

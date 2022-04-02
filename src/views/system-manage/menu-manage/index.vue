@@ -8,7 +8,9 @@
     </a-row>
     <section class="table-box">
       <a-table
-        :data="menuStore.list"
+        :data="treeData"
+        row-key="id"
+        v-loading="loading"
         :scroll="{ x: '100%', y: '100%' }"
         :pagination="false"
         :expandable="{ width: 80 }"
@@ -59,7 +61,7 @@
       </a-table>
     </section>
 
-    <AddMenuModal :tree-data="menuStore.list" v-model="showAddMenuModal"></AddMenuModal>
+    <AddMenuModal :tree-data="treeData" v-model="showAddMenuModal"></AddMenuModal>
   </div>
 </template>
 
@@ -67,9 +69,21 @@
 import { ref } from 'vue'
 import { useMenuStore } from '@/store'
 import AddMenuModal from './AddMenuModal.vue'
-
 const menuStore = useMenuStore()
+
+let loading = ref<boolean>(false)
 let showAddMenuModal = ref<boolean>(false)
+let treeData = ref<any>([])
+
+const getTreeData = () => {
+  loading.value = true
+  setTimeout(() => {
+    treeData.value = menuStore.list
+    loading.value = false
+  }, 300)
+}
+
+getTreeData()
 </script>
 
 <style lang="scss" scoped>

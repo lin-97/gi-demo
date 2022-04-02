@@ -36,7 +36,17 @@
           </a-radio-group>
         </a-form-item>
         <a-form-item field="treeSelect" label="发送表单">
-          <a-tree-select :data="treeData" v-model="form.formId" placeholder="请选择" style="width: 280px" />
+          <a-tree-select
+            :data="treeData"
+            :field-names="{
+              key: 'key',
+              title: 'title',
+              children: 'children'
+            }"
+            v-model="form.formId"
+            placeholder="请选择"
+            style="width: 280px"
+          />
         </a-form-item>
         <a-form-item field="isApprove" label="发送对象">
           <a-radio-group v-model="form.dept">

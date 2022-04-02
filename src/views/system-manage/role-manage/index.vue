@@ -9,6 +9,7 @@
     <section class="table-box">
       <a-table
         :data="tableData"
+        row-key="id"
         v-loading="loading"
         :scroll="{ x: '100%', y: '100%' }"
         :pagination="{ 'show-page-size': true }"
