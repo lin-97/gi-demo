@@ -40,7 +40,7 @@
             </a-space>
 
             <a-space>
-              <a-select class="gi_select_input" placeholder="请选择">
+              <a-select class="gi_select_input" placeholder="请选择" :trigger-props="{ 'update-at-scroll': true }">
                 <a-option>北京</a-option>
                 <a-option>上海</a-option>
                 <a-option>广州</a-option>

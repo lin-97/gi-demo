@@ -2,7 +2,14 @@
   <div class="cate-tree">
     <!-- 搜索框 -->
     <div class="search-wrap">
-      <a-input allow-clear :maxlength="20" :placeholder="placeholder" v-model="inputValue" @input="handleInput">
+      <a-input
+        allow-clear
+        :maxlength="20"
+        :placeholder="placeholder"
+        v-model="inputValue"
+        @input="handleInput"
+        @clear="handleInput"
+      >
         <template #prefix>
           <icon-search />
         </template>

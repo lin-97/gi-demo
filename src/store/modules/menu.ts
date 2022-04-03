@@ -12,11 +12,20 @@ export const useMenuStore = defineStore({
       list: [
         {
           icon: 'menu-work',
-          id: 'GZT',
-          name: '工作台',
-          path: '/home',
+          id: 'YBP',
+          name: '仪表盘',
+          path: '/',
           keepAlive: false,
-          hidden: false
+          hidden: false,
+          children: [
+            {
+              id: 'GZT',
+              name: '工作台',
+              path: '/home',
+              keepAlive: false,
+              hidden: false
+            }
+          ]
         },
         {
           icon: 'menu-indicator',

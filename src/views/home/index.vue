@@ -8,7 +8,7 @@
         <div class="item"><ListCard></ListCard></div>
       </section>
       <section class="right">
-        <div class="item"><ChartCard></ChartCard></div>
+        <div class="item"><FastCard></FastCard></div>
         <div class="item"><ImageCard></ImageCard></div>
       </section>
     </div>
@@ -19,7 +19,7 @@
 import WorkPlatform from './WorkPlatform.vue'
 import GridCard from './GridCard.vue'
 import ListCard from './ListCard.vue'
-import ChartCard from './ChartCard.vue'
+import FastCard from './FastCard.vue'
 import ImageCard from './ImageCard.vue'
 </script>
 

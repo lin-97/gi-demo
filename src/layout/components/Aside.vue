@@ -1,6 +1,10 @@
 <template>
   <a-layout-sider collapsible breakpoint="xl" class="aside">
-    <a-menu :selected-keys="[appStore.activePath]" :style="{ width: '100%', height: '100%' }">
+    <a-menu
+      :selected-keys="[appStore.activePath]"
+      :default-open-keys="['/']"
+      :style="{ width: '100%', height: '100%' }"
+    >
       <template v-for="item in menuStore.list">
         <a-sub-menu :key="item.path" v-if="item.children && item.children.length">
           <template #icon>

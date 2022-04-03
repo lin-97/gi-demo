@@ -33,6 +33,8 @@
       </div>
     </section>
     <section class="right">
+      <GiTitle title="用户列表"></GiTitle>
+
       <a-row justify="space-between" class="head">
         <a-space>
           <a-button type="primary">
@@ -193,13 +195,13 @@ getTableData()
     }
   }
   > .right {
-    flex: 5;
+    flex: 4;
     height: 100%;
     display: flex;
     flex-direction: column;
     overflow: hidden;
     .head {
-      padding: $padding $padding 0;
+      padding: $margin $padding 0;
     }
     .table-box {
       flex: 1;
