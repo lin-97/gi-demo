@@ -14,8 +14,13 @@
 .arco-tree-show-line .arco-tree-node-is-leaf:not(.arco-tree-node-is-tail) .arco-tree-node-indent::after,
 .arco-tree-show-line .arco-tree-node-indent-block::before {
   transform: translateX(0);
-  border-color: var(--color-border-2);
+  border-color: var(--color-border-3);
   flex-shrink: 0;
+}
+
+.arco-tree-show-line .arco-tree-node-indent-block::before,
+.arco-tree-show-line .arco-tree-node-is-leaf:not(.arco-tree-node-is-tail) .arco-tree-node-indent::after {
+  border-left-style: dotted;
 }
 
 // .arco-tree-node-minus-icon::after,
