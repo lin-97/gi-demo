@@ -6,7 +6,7 @@ import FileContextMenu from './index.vue'
 let instance: any = null
 let dom: HTMLElement | null = null
 
-function contextMenu(event: PointerEvent, fileInfo: File.FileItem) {
+function contextMenu(event: PointerEvent, fileInfo: File.FileItem, options: object) {
   return new Promise((resolve, reject) => {
     handleUnmount()
     // 创建一个挂载容器
@@ -17,6 +17,7 @@ function contextMenu(event: PointerEvent, fileInfo: File.FileItem) {
     instance = createApp(FileContextMenu, {
       event: event,
       fileInfo: fileInfo,
+      options: options,
       onClick: (mode: string) => {
         resolve({ mode: mode, fileInfo: fileInfo })
         setTimeout(() => {

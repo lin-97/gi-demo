@@ -160,8 +160,8 @@ interface FileItem extends File.FileItem {
 }
 
 // 鼠标右键
-const handleContextMenu = (event: PointerEvent, fileItem: File.FileItem) => {
-  FileContextMenu(event, fileItem).then((res: any) => {
+const handleContextMenu = (event: PointerEvent, fileItem: File.FileItem, options: object) => {
+  FileContextMenu(event, fileItem, options).then((res: any) => {
     Message.success('点击了' + res.mode)
     if (res.mode === 'delete') {
       Modal.warning({

@@ -23,7 +23,9 @@
         <a-table-column title="更改时间" data-index="updateTime" width="200"></a-table-column>
         <a-table-column title="操作" width="120" align="center">
           <template #cell="{ record }">
-            <a-button type="text" @click="handleContextMenu($event, record)"><icon-more :size="16" /></a-button>
+            <a-button type="text" @click.stop="handleContextMenuMore($event, record)"
+              ><icon-more :size="16"
+            /></a-button>
           </template>
         </a-table-column>
       </template>
@@ -64,6 +66,12 @@ const handleRowClick = (row: File.FileItem) => {
 const handleContextMenu = (e: PointerEvent, row: File.FileItem) => {
   e.preventDefault()
   emit('contextmenu', e, row)
+}
+
+// 右键事件
+const handleContextMenuMore = (e: PointerEvent, row: File.FileItem) => {
+  e.preventDefault()
+  emit('contextmenu', e, row, { isPointCenter: true })
 }
 </script>
 

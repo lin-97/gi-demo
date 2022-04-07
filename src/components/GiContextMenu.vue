@@ -13,10 +13,11 @@ import { useContextMenu } from '@/hooks'
 
 const props = defineProps<{
   event: PointerEvent
+  options: object
 }>()
 
 let elRef = ref<HTMLElement | null>(null)
-const { visible, setVisible, getStyle } = useContextMenu(props.event, elRef)
+const { visible, setVisible, getStyle } = useContextMenu(props.event, elRef, props.options)
 
 // 检测在一个元素之外的任何点击
 const emit = defineEmits(['close'])

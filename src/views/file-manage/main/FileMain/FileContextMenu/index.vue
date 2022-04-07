@@ -1,5 +1,5 @@
 <template>
-  <GiContextMenu ref="menuRef" :event="event" @close="onClose">
+  <GiContextMenu ref="menuRef" :event="event" :options="options" @close="onClose">
     <GiOption>
       <GiOptionItem @click="handleClickMenuItem('rename')">
         <template #icon><GiSvgIcon name="menu-edit"></GiSvgIcon> </template>
@@ -54,6 +54,7 @@ import GiSvgIcon from '@/components/GiSvgIcon.vue'
 const props = defineProps<{
   event: PointerEvent
   fileInfo: File.FileItem
+  options: object
   onClick: any
   onClose: any
 }>()
