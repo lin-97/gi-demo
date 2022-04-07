@@ -1,6 +1,6 @@
 <template>
   <div class="user-manage">
-    <section class="left" v-loading="treeLoading">
+    <section class="left">
       <GiTitle title="部门列表"></GiTitle>
 
       <div class="content">
@@ -9,7 +9,7 @@
             <icon-search />
           </template>
         </a-input>
-        <div class="tree-box">
+        <div class="tree-box" v-loading="treeLoading">
           <a-tree
             ref="treeRef"
             show-line
@@ -130,7 +130,9 @@ const getTreeData = async () => {
     const res = await getSystemDeptList()
     if (res.success) {
       treeData.value = res.data.list
-      treeLoading.value = false
+      setTimeout(() => {
+        treeLoading.value = false
+      }, 200)
       nextTick(() => {
         treeRef.value.expandNode(res.data.list[0].id)
       })
