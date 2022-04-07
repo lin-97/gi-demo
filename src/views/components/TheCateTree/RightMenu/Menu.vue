@@ -14,8 +14,8 @@
           移动
         </GiOptionItem>
         <template #content>
-          <section class="move-tree-box">
-            <MoveTree :tree-data="treeData"></MoveTree>
+          <section class="move-tree-box" @click.stop>
+            <MoveTree :tree-data="treeData" @node-click="moveTreeNodeClick"></MoveTree>
           </section>
         </template>
       </a-popover>
@@ -64,6 +64,10 @@ const onClickItem = (mode: string) => {
   })
 }
 
+const moveTreeNodeClick = () => {
+  menuRef.value.onHidden()
+}
+
 defineExpose({
   menuRef,
   showMoveTreePopup,
@@ -78,5 +82,6 @@ defineExpose({
   min-height: 200px;
   max-height: 500px;
   overflow: scroll;
+  z-index: 9999;
 }
 </style>

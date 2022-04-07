@@ -20,10 +20,14 @@ const { visible, setVisible, getStyle } = useContextMenu(props.event, elRef)
 
 // 检测在一个元素之外的任何点击
 const emit = defineEmits(['close'])
-onClickOutside(elRef, () => {
-  setVisible(false)
-  emit('close')
-})
+onClickOutside(
+  elRef,
+  () => {
+    setVisible(false)
+    emit('close')
+  },
+  { capture: false }
+)
 
 // 窗口尺寸变化关闭
 const { width: windowWidth, height: windowHeight } = useWindowSize()
@@ -35,8 +39,14 @@ watch(
   }
 )
 
+const onHidden = () => {
+  setVisible(false)
+  emit('close')
+}
+
 defineExpose({
-  visible
+  visible,
+  onHidden
 })
 </script>
 
