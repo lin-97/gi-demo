@@ -11,9 +11,16 @@
 </template>
 
 <script setup lang="ts">
+import type { PropType } from 'vue'
+
 const emit = defineEmits(['update:modelValue', 'change'])
 
-const props = defineProps({
+type Item = {
+  label: string
+  value: string | number
+}
+
+defineProps({
   // 绑定的值
   modelValue: {
     type: [Number, String],
@@ -21,15 +28,10 @@ const props = defineProps({
   },
   // 数据列表
   list: {
-    type: Array,
+    type: Array as PropType<Item[]>,
     default: () => []
   }
 })
-
-type Item = {
-  label: string
-  value: string | number
-}
 
 const handleClick = (item: Item) => {
   emit('update:modelValue', item.value)

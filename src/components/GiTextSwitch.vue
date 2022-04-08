@@ -1,18 +1,20 @@
 <template>
   <div class="gi-switch" :class="{ disabled: disabled }">
-    <div class="gi-switch-wrap" ref="switchRef">
+    <div class="gi-switch-wrap">
       <section class="slide-bar" :style="getSlideBarStyle"></section>
-      <section ref="OnRef" class="item left" :class="{ on: modelValue, disabled: disabled }" @click="onSwitch(true)">
-        {{ onText }}
-      </section>
-      <section
-        ref="OffRef"
-        class="item right"
-        :class="{ off: !modelValue, disabled: disabled }"
-        @click="onSwitch(false)"
-      >
-        {{ offText }}
-      </section>
+      <div class="item-box" ref="itemBoxRef">
+        <section ref="OnRef" class="item left" :class="{ on: modelValue, disabled: disabled }" @click="onSwitch(true)">
+          <slot name="on">启动</slot>
+        </section>
+        <section
+          ref="OffRef"
+          class="item right"
+          :class="{ off: !modelValue, disabled: disabled }"
+          @click="onSwitch(false)"
+        >
+          <slot name="off">暂停</slot>
+        </section>
+      </div>
     </div>
   </div>
 </template>
@@ -26,14 +28,6 @@ const props = defineProps({
     type: Boolean,
     default: false
   },
-  onText: {
-    type: String,
-    default: '启动'
-  },
-  offText: {
-    type: String,
-    default: '暂停'
-  },
   disabled: {
     type: Boolean,
     default: false
@@ -41,22 +35,21 @@ const props = defineProps({
 })
 const emit = defineEmits(['update:modelValue'])
 
-const OnRef = ref<HTMLInputElement | null>(null)
-const OffRef = ref<HTMLInputElement | null>(null)
-let onWidth = ref<number>(0)
-let offWidth = ref<number>(0)
-
-const switchRef = ref<HTMLInputElement | null>(null)
+let firstElWidth = ref<number>(0)
+let lastElWidth = ref<number>(0)
+const itemBoxRef = ref<HTMLElement | null>(null)
 
 onMounted(() => {
-  onWidth.value = OnRef.value?.clientWidth || 0
-  offWidth.value = OffRef.value?.clientWidth || 0
+  if (itemBoxRef.value) {
+    firstElWidth.value = itemBoxRef.value?.firstChild?.clientWidth || 0
+    lastElWidth.value = itemBoxRef.value?.lastChild?.clientWidth || 0
+  }
 })
 
 const getSlideBarStyle = computed<object>(() => {
   const obj: any = {}
-  obj.width = props.modelValue ? `${onWidth.value}px` : `${offWidth.value}px`
-  obj.left = props.modelValue ? 0 : `${onWidth.value}px`
+  obj.width = props.modelValue ? `${firstElWidth.value}px` : `${lastElWidth.value}px`
+  obj.left = props.modelValue ? 0 : `${firstElWidth.value}px`
   return obj
 })
 
@@ -71,12 +64,14 @@ const onSwitch = (flag: boolean) => {
   display: inline-flex;
   height: 28px;
   background: var(--color-fill-3);
-  padding: 0.16em;
+  padding: 0.15em;
   box-sizing: border-box;
   &.disabled {
     opacity: 0.5;
   }
   &-wrap {
+    width: 100%;
+    height: 100%;
     display: flex;
     align-items: center;
     position: relative;
@@ -88,6 +83,13 @@ const onSwitch = (flag: boolean) => {
       border-radius: 2px;
       overflow: hidden;
       transition: all 0.2s ease-in;
+    }
+    .item-box {
+      width: 100%;
+      height: 100%;
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
     }
     .left,
     .right {

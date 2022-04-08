@@ -71,7 +71,7 @@ const handleContextMenu = (e: PointerEvent, row: File.FileItem) => {
 // 右键事件
 const handleContextMenuMore = (e: PointerEvent, row: File.FileItem) => {
   e.preventDefault()
-  emit('contextmenu', e, row, { isPointCenter: true })
+  emit('contextmenu', e, row, { alignPoint: true })
 }
 </script>
 

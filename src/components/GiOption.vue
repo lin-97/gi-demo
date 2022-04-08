@@ -10,10 +10,5 @@
 .gi-option {
   width: 100%;
   min-width: 120px;
-  // height: 100%;
-  // display: flex;
-  // flex-direction: column;
-  // box-sizing: border-box;
-  // background: var(--color-bg-popup);
 }
 </style>

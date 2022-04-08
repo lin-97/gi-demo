@@ -1,13 +1,13 @@
 import { ref, onMounted, nextTick } from 'vue'
 
 interface Options {
-  isPointCenter: boolean
+  alignPoint: boolean // 对齐鼠标
 }
 
 export default function useContextMenu(
   event: PointerEvent,
   elRef: HTMLElement | null,
-  options: Options = { isPointCenter: false }
+  options: Options = { alignPoint: false }
 ) {
   const visible = ref<boolean>(false)
   const elWidth = ref<number>(0)
@@ -20,11 +20,11 @@ export default function useContextMenu(
   const getStyle = () => {
     const obj: any = {}
     if (event.clientX > window.innerWidth - elHeight.value) {
-      obj.right = options.isPointCenter
+      obj.right = options.alignPoint
         ? window.innerWidth - event.clientX - elWidth.value / 2 + 'px'
         : window.innerWidth - event.clientX + 'px'
     } else {
-      obj.left = options.isPointCenter ? event.clientX + elWidth.value / 2 + 'px' : event.clientX + 'px'
+      obj.left = options.alignPoint ? event.clientX + elWidth.value / 2 + 'px' : event.clientX + 'px'
     }
     if (event.clientY > window.innerHeight - elHeight.value) {
       obj.bottom = window.innerHeight - event.clientY + 'px'
