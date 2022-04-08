@@ -84,7 +84,7 @@
           :selectedFileIdList="fileStore.selectedFileIdList"
           @click="handleClickFile"
           @check="handleCheckFile"
-          @contextmenu="handleContextMenu"
+          @right-menu-click="handleRightMenuClick"
         ></FileGrid>
       </template>
 
@@ -94,7 +94,7 @@
           :data="fileList"
           :isBatchMode="isBatchMode"
           @click="handleClickFile"
-          @contextmenu="handleContextMenu"
+          @right-menu-click="handleRightMenuClick"
         ></FileList>
       </template>
     </section>
@@ -112,7 +112,6 @@ import 'viewerjs/dist/viewer.css'
 import FileNavPath from './FileNavPath.vue'
 import FileGrid from './FileGrid.vue'
 import FileList from './FileList.vue'
-import FileContextMenu from './FileContextMenu/index'
 import ThePreviewVideo from '@/views/components/ThePreviewVideo/index'
 import ThePreviewAudio from '@/views/components/ThePreviewAudio/index'
 import TheFileRename from '@/views/components/TheFileRename/index'
@@ -154,29 +153,22 @@ const handleClickFile = (item: File.FileItem) => {
 const handleCheckFile = (item: File.FileItem) => {
   fileStore.addSelectedFileItem(item)
 }
-
-interface FileItem extends File.FileItem {
-  mode: string
-}
-
 // 鼠标右键
-const handleContextMenu = (event: PointerEvent, fileItem: File.FileItem, options: object) => {
-  FileContextMenu(event, fileItem, options).then((res: any) => {
-    Message.success('点击了' + res.mode)
-    if (res.mode === 'delete') {
-      Modal.warning({
-        title: '提示',
-        content: '是否删除该文件？',
-        hideCancel: false
-      })
-    }
-    if (res.mode === 'rename') {
-      TheFileRename(fileItem)
-    }
-    if (res.mode === 'move') {
-      TheFileMove(fileItem)
-    }
-  })
+const handleRightMenuClick = (mode: string, fileInfo: File.FileItem) => {
+  Message.success('点击了' + mode)
+  if (mode === 'delete') {
+    Modal.warning({
+      title: '提示',
+      content: '是否删除该文件？',
+      hideCancel: false
+    })
+  }
+  if (mode === 'rename') {
+    TheFileRename(fileInfo)
+  }
+  if (mode === 'move') {
+    TheFileMove(fileInfo)
+  }
 }
 
 // 批量删除

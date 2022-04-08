@@ -3,13 +3,13 @@
     <a-trigger
       trigger="contextMenu"
       align-point
-      v-for="item in newData"
+      v-for="item in data"
       :key="item.id"
       animation-name="slide-dynamic-origin"
       position="bl"
-      v-model:popup-visible="item.visible"
+      update-at-scroll
     >
-      <li class="file-grid-item" @click.stop="handleClickFile(item)" @contextmenu="handleContextMenu($event, item)">
+      <li class="file-grid-item" @click.stop="handleClickFile(item)">
         <div class="file-image">
           <FileImg :data="item"></FileImg>
         </div>
@@ -30,83 +30,36 @@
         </section>
       </li>
       <template #content>
-        <GiOption class="option">
-          <GiOptionItem @click="item.visible = false">
-            <template #icon><GiSvgIcon name="menu-edit"></GiSvgIcon> </template>
-            <span>重命名</span>
-          </GiOptionItem>
-          <GiOptionItem>
-            <template #icon><GiSvgIcon name="menu-move"></GiSvgIcon> </template>
-            <span>移动到</span>
-          </GiOptionItem>
-          <GiOptionItem>
-            <template #icon><GiSvgIcon name="menu-download"></GiSvgIcon> </template>
-            <span>下载</span>
-          </GiOptionItem>
-          <a-popover
-            position="right"
-            :content-style="{ padding: 0, overflow: 'hidden', width: '150px' }"
-            :arrow-style="{ display: 'none' }"
-          >
-            <GiOptionItem more>
-              <template #icon><GiSvgIcon name="menu-zip"></GiSvgIcon> </template>
-              <span>解压</span>
-            </GiOptionItem>
-            <template #content>
-              <GiOption>
-                <GiOptionItem>
-                  <template #icon><GiSvgIcon name="file-rar"></GiSvgIcon> </template>
-                  <span>解压到当前目录</span>
-                </GiOptionItem>
-                <GiOptionItem>
-                  <template #icon><GiSvgIcon name="file-rar"></GiSvgIcon> </template>
-                  <span>解压到其他目录</span>
-                </GiOptionItem>
-              </GiOption>
-            </template>
-          </a-popover>
-          <GiOptionItem>
-            <template #icon><GiSvgIcon name="menu-delete"></GiSvgIcon> </template>
-            <span>删除</span>
-          </GiOptionItem>
-        </GiOption>
+        <FileRightMenu :file-info="item" @click="handleRightMenuItemClick($event, item)"></FileRightMenu>
       </template>
     </a-trigger>
   </ul>
 </template>
 
 <script setup lang="ts">
-import { ref, computed } from 'vue'
-import GiOption from '@/components/GiOption.vue'
-import GiOptionItem from '@/components/GiOptionItem.vue'
+import type { PropType } from 'vue'
 import FileImg from './FileImg.vue'
+import FileRightMenu from './FileRightMenu.vue'
 
 const props = defineProps({
   // 文件数据
   data: {
-    type: Array,
+    type: Array as PropType<File.FileItem[]>,
     default: () => []
   },
   // 批量模式下选中的文件id数组
   selectedFileIdList: {
-    type: Array,
+    type: Array as PropType<string[]>,
     default: () => []
   },
   // 是否是批量模式
   isBatchMode: {
-    type: Boolean,
+    type: Boolean as PropType<boolean>,
     default: false
   }
 })
 
-const emit = defineEmits(['click', 'check', 'contextmenu'])
-
-let visible = ref(false)
-
-const newData = ref([])
-props.data.forEach((i) => {
-  newData.value.push({ ...i, visible: false })
-})
+const emit = defineEmits(['click', 'check', 'right-menu-click'])
 
 // 文件名称带后缀
 const getFileName = (item: File.FileItem) => {
@@ -123,26 +76,17 @@ const handleCheckFile = (item: File.FileItem) => {
   emit('check', item)
 }
 
-// 右键事件
-const handleContextMenu = (e: Event, item: File.FileItem) => {
-  e.preventDefault()
-  // emit('contextmenu', e, item)
+// 右键菜单点击事件
+const handleRightMenuItemClick = (mode: string, item: File.FileItem) => {
+  emit('right-menu-click', mode, item)
 }
 </script>
 
 <style lang="scss" scoped>
-.option {
-  background: rgba(0, 0, 0, 0.5);
-  :deep(.gi-option-item) {
-    color: #fff;
-  }
-}
-
 .file-grid {
   flex: 1;
   margin-top: $margin;
-  overflow: hidden;
-  overflow-y: scroll;
+  overflow: scroll;
   background: var(--color-bg-4);
   display: flex;
   flex-wrap: wrap;

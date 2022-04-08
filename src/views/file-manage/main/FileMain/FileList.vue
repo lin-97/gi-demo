@@ -6,26 +6,39 @@
       :bordered="false"
       :pagination="false"
       :row-selection="isBatchMode ? rowSelection : undefined"
-      @row-click.capture="handleRowClick"
     >
       <template #columns>
         <a-table-column title="名称">
           <template #cell="{ record }">
-            <div class="file-name" @contextmenu="handleContextMenu($event, record)">
-              <div class="file-image">
-                <FileImg :data="record"></FileImg>
+            <a-trigger
+              trigger="contextMenu"
+              align-point
+              animation-name="slide-dynamic-origin"
+              position="bl"
+              update-at-scroll
+            >
+              <div class="file-name" @click="handleRowClick(record)">
+                <div class="file-image">
+                  <FileImg :data="record"></FileImg>
+                </div>
+                <span>{{ record.name }}</span>
               </div>
-              <span>{{ record.name }}</span>
-            </div>
+              <template #content>
+                <FileRightMenu :file-info="record" @click="handleRightMenuItemClick($event, record)"></FileRightMenu>
+              </template>
+            </a-trigger>
           </template>
         </a-table-column>
         <a-table-column title="扩展名" data-index="extendName" width="100"></a-table-column>
         <a-table-column title="更改时间" data-index="updateTime" width="200"></a-table-column>
         <a-table-column title="操作" width="120" align="center">
           <template #cell="{ record }">
-            <a-button type="text" @click.stop="handleContextMenuMore($event, record)"
-              ><icon-more :size="16"
-            /></a-button>
+            <a-trigger trigger="click" animation-name="slide-dynamic-origin" update-at-scroll>
+              <a-button type="text"><icon-more :size="16" /></a-button>
+              <template #content>
+                <FileRightMenu :file-info="record" @click="handleRightMenuItemClick($event, record)"></FileRightMenu>
+              </template>
+            </a-trigger>
           </template>
         </a-table-column>
       </template>
@@ -34,18 +47,20 @@
 </template>
 
 <script setup lang="ts">
+import type { PropType } from 'vue'
 import { reactive } from 'vue'
 import FileImg from './FileImg.vue'
+import FileRightMenu from './FileRightMenu.vue'
 
 const props = defineProps({
   // 文件数据
   data: {
-    type: Array,
+    type: Array as PropType<File.FileItem[]>,
     default: () => []
   },
   // 是否是批量模式
   isBatchMode: {
-    type: Boolean,
+    type: Boolean as PropType<boolean>,
     default: false
   }
 })
@@ -55,27 +70,24 @@ const rowSelection = reactive({
   showCheckedAll: true
 })
 
-const emit = defineEmits(['click', 'contextmenu'])
+const emit = defineEmits(['click', 'right-menu-click'])
 
 // 行点击事件
 const handleRowClick = (row: File.FileItem) => {
   emit('click', row)
 }
 
-// 右键事件
-const handleContextMenu = (e: PointerEvent, row: File.FileItem) => {
-  e.preventDefault()
-  emit('contextmenu', e, row)
-}
-
-// 右键事件
-const handleContextMenuMore = (e: PointerEvent, row: File.FileItem) => {
-  e.preventDefault()
-  emit('contextmenu', e, row, { alignPoint: true })
+// 右键菜单点击事件
+const handleRightMenuItemClick = (mode: string, item: File.FileItem) => {
+  emit('right-menu-click', mode, item)
 }
 </script>
 
 <style lang="scss" scoped>
+:deep(.arco-table-size-small .arco-table-cell) {
+  padding-top: 0;
+  padding-bottom: 0;
+}
 .file-list {
   width: 100%;
   padding-top: $margin;
@@ -85,6 +97,9 @@ const handleContextMenuMore = (e: PointerEvent, row: File.FileItem) => {
     height: 100%;
     display: flex;
     align-items: center;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    cursor: pointer;
     .file-image {
       width: 30px;
       height: 30px;

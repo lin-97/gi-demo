@@ -7,7 +7,7 @@
 </template>
 
 <script setup lang="ts" name="GiContextMenu">
-import { ref, watch, onMounted, onBeforeUnmount } from 'vue'
+import { ref, watch } from 'vue'
 import { onClickOutside, useWindowSize } from '@vueuse/core'
 import { useContextMenu } from '@/hooks'
 
@@ -19,19 +19,6 @@ const props = defineProps<{
 const elRef = ref<HTMLElement | null>(null)
 
 const { visible, setVisible, getStyle } = useContextMenu(props.event, elRef, props.options)
-
-onMounted(() => {
-  window.addEventListener('scroll', handleScroll, true) // 监听（绑定）滚轮滚动事件
-})
-
-onBeforeUnmount(() => {
-  window.removeEventListener('scroll', handleScroll)
-})
-
-const handleScroll = () => {
-  setVisible(false)
-  emit('close')
-}
 
 // 检测在一个元素之外的任何点击
 const emit = defineEmits(['close'])

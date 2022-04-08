@@ -4,13 +4,14 @@
 </template>
 
 <script setup lang="ts">
+import type { PropType } from 'vue'
 import { fileImgMap, imageTypeList } from '@/libs/file-map'
 import { computed } from 'vue-demi'
 
 const props = defineProps({
   // 文件数据
   data: {
-    type: Object,
+    type: Object as PropType<File.FileItem>,
     default: () => {}
   }
 })
