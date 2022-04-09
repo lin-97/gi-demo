@@ -33,12 +33,23 @@
         <a-table-column title="更改时间" data-index="updateTime" width="200"></a-table-column>
         <a-table-column title="操作" width="120" align="center">
           <template #cell="{ record }">
-            <a-trigger trigger="click" animation-name="slide-dynamic-origin" update-at-scroll>
+            <a-popover trigger="click" content-class="more-option" :content-style="{ padding: 0, 'margin-top': 0 }">
+              <a-button type="text"><icon-more :size="16" /></a-button>
+              <template #content>
+                <FileRightMenu
+                  :file-info="record"
+                  :show-class-style="false"
+                  @click="handleRightMenuItemClick($event, record)"
+                ></FileRightMenu>
+              </template>
+            </a-popover>
+
+            <!-- <a-trigger trigger="click" animation-name="slide-dynamic-origin" update-at-scroll>
               <a-button type="text"><icon-more :size="16" /></a-button>
               <template #content>
                 <FileRightMenu :file-info="record" @click="handleRightMenuItemClick($event, record)"></FileRightMenu>
               </template>
-            </a-trigger>
+            </a-trigger> -->
           </template>
         </a-table-column>
       </template>
@@ -82,6 +93,14 @@ const handleRightMenuItemClick = (mode: string, item: File.FileItem) => {
   emit('right-menu-click', mode, item)
 }
 </script>
+
+<style lang="scss">
+.more-option {
+  .arco-popover-content {
+    margin-top: 0 !important;
+  }
+}
+</style>
 
 <style lang="scss" scoped>
 :deep(.arco-table-size-small .arco-table-cell) {

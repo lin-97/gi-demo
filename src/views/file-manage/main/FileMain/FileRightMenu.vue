@@ -1,5 +1,5 @@
 <template>
-  <GiOption class="option">
+  <GiOption :class="{ option: showClassStyle }">
     <GiOptionItem @click="onClickItem('rename')">
       <template #icon><GiSvgIcon name="menu-edit"></GiSvgIcon> </template>
       <span>重命名</span>
@@ -52,6 +52,10 @@ const props = defineProps({
   fileInfo: {
     type: Object as PropType<File.FileItem>,
     default: () => {}
+  },
+  showClassStyle: {
+    type: Boolean,
+    default: true
   }
 })
 
