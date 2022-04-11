@@ -6,6 +6,7 @@
       v-for="item in data"
       :key="item.id"
       animation-name="slide-dynamic-origin"
+      auto-fit-transform-origin
       position="bl"
       update-at-scroll
     >
