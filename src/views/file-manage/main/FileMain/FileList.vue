@@ -34,7 +34,12 @@
         <a-table-column title="更改时间" data-index="updateTime" width="200"></a-table-column>
         <a-table-column title="操作" width="120" align="center">
           <template #cell="{ record }">
-            <a-popover trigger="click" content-class="more-option" :content-style="{ padding: 0, 'margin-top': 0 }">
+            <a-popover
+              trigger="click"
+              position="bottom"
+              content-class="more-option"
+              :content-style="{ padding: 0, 'margin-top': 0 }"
+            >
               <a-button type="text"><icon-more :size="16" /></a-button>
               <template #content>
                 <FileRightMenu
