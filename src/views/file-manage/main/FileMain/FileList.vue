@@ -14,6 +14,7 @@
               trigger="contextMenu"
               align-point
               animation-name="slide-dynamic-origin"
+              auto-fit-transform-origin
               position="bl"
               update-at-scroll
             >
