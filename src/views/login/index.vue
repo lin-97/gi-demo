@@ -3,7 +3,7 @@
     <section class="login-box animated flipInY">
       <!-- 左侧 -->
       <div class="login-left">
-        <img class="login-bg" src="@/assets/svgs/login-bg.svg" />
+        <img class="login-bg" src="@/assets/svgs/login-img.svg" />
         <div class="system">
           <img class="logo" src="@/assets/images/logo.gif" />
           <div class="system-name"><span>Admin</span><span>管理系统</span></div>
@@ -11,22 +11,29 @@
       </div>
       <!-- 右侧 -->
       <div class="login-right">
-        <section class="form">
-          <div class="form-item">
-            <icon-user :stroke-width="1" :style="{ fontSize: '20px' }" />
-            <input type="text" placeholder="账号" v-model="form.username" />
-          </div>
-          <div class="form-item">
-            <icon-lock :stroke-width="1" :style="{ fontSize: '20px' }" />
-            <input type="password" placeholder="密码" v-model="form.password" />
-          </div>
-          <div class="check">
-            <a-checkbox v-model="checked"> 保持登录状态 </a-checkbox>
-          </div>
-          <div>
+        <a-form
+          :model="form"
+          :style="{ width: '80%' }"
+          :label-col-style="{ display: 'none' }"
+          :wrapper-col-style="{ flex: 1 }"
+        >
+          <a-form-item field="username">
+            <a-input v-model="form.username" placeholder="账号" size="medium">
+              <template #prefix><icon-user :stroke-width="1" :style="{ fontSize: '20px' }" /></template>
+            </a-input>
+          </a-form-item>
+          <a-form-item field="password">
+            <a-input-password v-model="form.password" placeholder="密码" size="medium">
+              <template #prefix><icon-lock :stroke-width="1" :style="{ fontSize: '20px' }" /></template>
+            </a-input-password>
+          </a-form-item>
+          <a-form-item>
+            <a-checkbox v-model="checked">保持登录状态</a-checkbox>
+          </a-form-item>
+          <a-form-item>
             <a-button type="primary" size="large" long :loading="showLoading" @click="login">登录</a-button>
-          </div>
-        </section>
+          </a-form-item>
+        </a-form>
       </div>
     </section>
   </div>
@@ -77,11 +84,14 @@ const login = () => {
   display: flex;
   justify-content: center;
   align-items: center;
+  // background-color: var(--color-bg-2);
+  background-image: url('@/assets/svgs/login-bg.svg');
   &-box {
     width: 720px;
     height: 380px;
     background: #fff;
     display: flex;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.06);
   }
 }
 
@@ -149,32 +159,14 @@ const login = () => {
 .login-right {
   width: 270px;
   height: 100%;
-  position: relative;
   background: var(--color-bg-2);
-  .form {
-    padding: 80px 35px;
-    &-item {
-      border-bottom: 1px solid #dcdfe6;
-      padding-bottom: 10px;
-      margin-bottom: 40px;
-      display: flex;
-      align-items: center;
-      input {
-        color: var(--color-text-2);
-        height: 100%;
-        margin: 0;
-        margin-left: 5px;
-        padding: 0;
-        border: none;
-        outline: 0;
-        font-weight: 100;
-        font-size: 13px;
-        background-color: transparent;
-      }
-    }
-    .check {
-      margin-bottom: 30px;
-    }
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-top: 30px;
+  box-sizing: border-box;
+  :deep(.arco-input-wrapper) {
+    border-color: var(--color-border-2);
   }
 }
 </style>
