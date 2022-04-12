@@ -3,7 +3,7 @@
     <section class="login-box animated flipInY">
       <!-- 左侧 -->
       <div class="login-left">
-        <img class="login-bg" src="@/assets/svgs/login-img.svg" />
+        <img class="login-img" src="@/assets/svgs/login-img.svg" />
         <div class="system">
           <img class="logo" src="@/assets/images/logo.gif" />
           <div class="system-name"><span>Admin</span><span>管理系统</span></div>
@@ -31,7 +31,7 @@
             <a-checkbox v-model="checked">保持登录状态</a-checkbox>
           </a-form-item>
           <a-form-item>
-            <a-button type="primary" size="large" long :loading="showLoading" @click="login">登录</a-button>
+            <a-button type="primary" size="large" long :loading="loading" @click="login">登录</a-button>
           </a-form-item>
         </a-form>
       </div>
@@ -60,7 +60,7 @@ const form: LoginForm = reactive({
 // 记住密码
 let checked = ref<boolean>(false)
 // 登录加载
-let showLoading = ref<boolean>(false)
+let loading = ref<boolean>(false)
 
 // 点击登录
 const login = () => {
@@ -70,11 +70,11 @@ const login = () => {
   if (!form.password) {
     return Message.warning('请输入账户密码')
   }
-  showLoading.value = true
+  loading.value = true
   setTimeout(() => {
     router.push('/home')
-    showLoading.value = false
-  }, 800)
+    loading.value = false
+  }, 600)
 }
 </script>
 
@@ -107,6 +107,7 @@ const login = () => {
   align-items: center;
   position: relative;
   overflow: hidden;
+  background-color: rgba(var(--primary-6), 0.5);
   &::before {
     content: '';
     left: 0px;
@@ -118,11 +119,11 @@ const login = () => {
     z-index: 99;
   }
   &:hover {
-    .bg {
+    .login-img {
       transform: scale(1.05);
     }
   }
-  .login-bg {
+  .login-img {
     width: 100%;
     height: 100%;
     position: absolute;

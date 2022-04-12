@@ -13,9 +13,6 @@
           <template #title>{{ item.name }}</template>
           <template v-if="item.children && item.children.length">
             <a-menu-item v-for="i in item.children" :key="i.path" @click="handleClickItem(i)">
-              <template #icon>
-                <icon-menu :size="20" />
-              </template>
               {{ i.name }}
             </a-menu-item>
           </template>

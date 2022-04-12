@@ -46,7 +46,7 @@ export default [
   {
     url: '/mock/getTable',
     method: 'get',
-    timeout: 300,
+    timeout: 0,
     response: ({ query }) => {
       const { page = 1, pageSize = 10 } = query
       const list = tableList(Number(pageSize))

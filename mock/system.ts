@@ -13,7 +13,7 @@ export default [
   {
     url: '/mock/system-manage/dept/list',
     method: 'get',
-    timeout: 300,
+    timeout: 0,
     response: () => {
       // const { pageCount = 1, pageSize = 10 } = query
       return resultSuccess({
@@ -76,7 +76,7 @@ export default [
   {
     url: '/mock/system-manage/user/list',
     method: 'get',
-    timeout: 300,
+    timeout: 0,
     response: ({ query }) => {
       const { pageCount = 1, pageSize = 10 } = query
       return resultSuccess({
@@ -104,7 +104,7 @@ export default [
   {
     url: '/mock/system-manage/role/list',
     method: 'get',
-    timeout: 300,
+    timeout: 0,
     response: ({ query }) => {
       const { pageCount = 1, pageSize = 10 } = query
       return resultSuccess({

@@ -109,7 +109,7 @@ const handleRightMenuItemClick = (mode: string, item: File.FileItem) => {
 </style>
 
 <style lang="scss" scoped>
-:deep(.arco-table-size-small .arco-table-cell) {
+:deep(.arco-table-td .arco-table-cell) {
   padding-top: 0;
   padding-bottom: 0;
 }
@@ -122,8 +122,8 @@ const handleRightMenuItemClick = (mode: string, item: File.FileItem) => {
     height: 100%;
     display: flex;
     align-items: center;
-    padding-top: 5px;
-    padding-bottom: 5px;
+    padding-top: 6px;
+    padding-bottom: 6px;
     cursor: pointer;
     .file-image {
       width: 30px;
