@@ -37,10 +37,14 @@
       </div>
     </section>
 
-    <div class="fly bg-fly-circle1"></div>
-    <div class="fly bg-fly-circle2"></div>
-    <div class="fly bg-fly-circle3"></div>
-    <div class="fly bg-fly-circle4"></div>
+    <a-button size="mini" class="theme-btn gi_hover_btn" @click="onToggleThemeDark">
+      <template #icon>
+        <icon-sun-fill :size="18" v-if="themeStore.theme === 'light'"></icon-sun-fill>
+        <icon-moon-fill :size="18" v-else></icon-moon-fill>
+      </template>
+    </a-button>
+
+    <LoginBg></LoginBg>
   </div>
 </template>
 
@@ -48,7 +52,13 @@
 import { reactive, ref } from 'vue'
 import { useRouter } from 'vue-router'
 import { Message } from '@arco-design/web-vue'
+import LoginBg from './components/LoginBg/index.vue'
+import { useThemeStore } from '@/store'
+import { useThemeDark } from '@/hooks'
 const router = useRouter()
+const themeStore = useThemeStore()
+
+const { onToggleThemeDark } = useThemeDark()
 
 type LoginForm = { username: string; password: string }
 
@@ -84,18 +94,26 @@ const login = () => {
   height: 16px;
   border-width: 1px;
 }
+.theme-btn {
+  position: fixed;
+  top: 20px;
+  left: 30px;
+  z-index: 9999;
+}
+
 .login {
   height: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
-  // background-color: var(--color-bg-2);
+  background-color: var(--color-bg-5);
   &-box {
     width: 720px;
     height: 380px;
     background: #fff;
     display: flex;
-    // box-shadow: 0 2px 4px 2px rgba(0, 0, 0, 0.06);
+    z-index: 999;
+    box-shadow: 0 2px 4px 2px rgba(0, 0, 0, 0.08);
   }
 }
 
@@ -115,7 +133,7 @@ const login = () => {
     top: 0px;
     bottom: 0px;
     position: absolute;
-    background-color: rgba(0, 0, 0, 0.3);
+    background-color: rgba(0, 0, 0, 0.1);
     z-index: 99;
   }
   &:hover {
@@ -172,65 +190,6 @@ const login = () => {
   box-sizing: border-box;
   :deep(.arco-input-wrapper) {
     border-color: var(--color-border-2);
-  }
-}
-
-.fly {
-  pointer-events: none;
-  position: fixed;
-  z-index: 9999;
-}
-.bg-fly-circle1 {
-  left: 40px;
-  top: 100px;
-  width: 100px;
-  height: 100px;
-  border-radius: 50%;
-  background: linear-gradient(to right, rgba(100, 84, 239, 0.07) 0%, rgba(48, 33, 236, 0.04) 100%);
-  animation: move 2.5s linear infinite;
-}
-
-.bg-fly-circle2 {
-  left: 3%;
-  top: 60%;
-  width: 150px;
-  height: 150px;
-  border-radius: 50%;
-  background: linear-gradient(to right, rgba(100, 84, 239, 0.08) 0%, rgba(48, 33, 236, 0.04) 100%);
-  animation: move 3s linear infinite;
-}
-
-.bg-fly-circle3 {
-  right: 2%;
-  top: 140px;
-  width: 145px;
-  height: 145px;
-  border-radius: 50%;
-  background: linear-gradient(to right, rgba(100, 84, 239, 0.1) 0%, rgba(48, 33, 236, 0.04) 100%);
-  animation: move 2.5s linear infinite;
-}
-
-.bg-fly-circle4 {
-  right: 5%;
-  top: 60%;
-  width: 160px;
-  height: 160px;
-  border-radius: 50%;
-  background: linear-gradient(to right, rgba(100, 84, 239, 0.02) 0%, rgba(48, 33, 236, 0.04) 100%);
-  animation: move 3.5s linear infinite;
-}
-
-@keyframes move {
-  0% {
-    transform: translateY(0px) scale(1);
-  }
-
-  50% {
-    transform: translateY(25px) scale(1.1);
-  }
-
-  100% {
-    transform: translateY(0px) scale(1);
   }
 }
 </style>

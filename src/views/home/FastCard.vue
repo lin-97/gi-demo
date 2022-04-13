@@ -1,9 +1,9 @@
 <template>
   <a-card title="快捷操作" :bordered="false">
-    <a-card-grid :style="{ width: '33.33%' }" v-for="item in list" :key="item.name">
-      <a-card :bordered="false" hoverable style="cursor: pointer">
+    <a-card-grid :style="{ width: '33.33%' }" v-for="item in list" :key="item.name" class="card-grid">
+      <a-card :bordered="false" hoverable>
         <a-row justify="center" align="center">
-          <a-space direction="vertical" style="align-items: center">
+          <a-space direction="vertical" align="center">
             <component :is="item.icon" :size="30" :style="{ color: item.color }"></component>
             <span>{{ item.name }}</span>
           </a-space>
@@ -28,9 +28,13 @@ const list = [
 :deep(.arco-card-header) {
   border: none;
 }
-.fast-card {
-  // padding: 20px;
-  // height: 250px;
-  // background: var(--color-bg-2);
+.card-grid {
+  box-shadow: none;
+  border-top: 1px solid var(--color-neutral-3);
+  border-right: 1px solid var(--color-neutral-3);
+  cursor: pointer;
+  &:nth-child(3n) {
+    border-right: none;
+  }
 }
 </style>

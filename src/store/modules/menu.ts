@@ -104,21 +104,21 @@ export const useMenuStore = defineStore({
           children: [
             {
               id: 'error403',
-              name: '异常页403',
+              name: '403',
               path: '/error-page/403',
               keepAlive: false,
               hidden: false
             },
             {
               id: 'error404',
-              name: '异常页404',
+              name: '404',
               path: '/error-page/404',
               keepAlive: false,
               hidden: false
             },
             {
               id: 'error500',
-              name: '异常页500',
+              name: '500',
               path: '/error-page/500',
               keepAlive: false,
               hidden: false

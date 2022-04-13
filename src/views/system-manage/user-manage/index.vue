@@ -97,9 +97,11 @@
                   <a-button type="primary">
                     <template #icon><icon-edit /></template>
                   </a-button>
-                  <a-button type="primary" status="danger">
-                    <template #icon><icon-delete /></template>
-                  </a-button>
+                  <a-popconfirm content="你确定要删除该项吗?">
+                    <a-button type="primary" status="danger">
+                      <template #icon><icon-delete /></template>
+                    </a-button>
+                  </a-popconfirm>
                 </a-space>
               </template>
             </a-table-column>

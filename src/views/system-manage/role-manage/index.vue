@@ -15,21 +15,27 @@
         :pagination="{ 'show-page-size': true }"
       >
         <template #columns>
-          <a-table-column title="序号">
+          <a-table-column title="序号" width="60">
             <template #cell="cell">{{ cell.rowIndex + 1 }}</template>
           </a-table-column>
           <a-table-column title="角色名称" data-index="name"></a-table-column>
           <a-table-column title="角色编号" data-index="roleCode"></a-table-column>
           <a-table-column title="角色描述" data-index="description"></a-table-column>
           <a-table-column title="创建时间" data-index="createTime"></a-table-column>
-          <a-table-column title="操作" width="100">
+          <a-table-column title="操作" width="220">
             <template #cell="{ record }">
               <a-space>
+                <a-popconfirm content="你确定要删除该项吗?" @ok="onDelete">
+                  <a-button type="primary" status="danger">
+                    <template #icon><icon-delete /></template>
+                  </a-button>
+                </a-popconfirm>
                 <a-button type="primary">
                   <template #icon><icon-edit /></template>
                 </a-button>
-                <a-button type="primary" status="danger">
-                  <template #icon><icon-delete /></template>
+                <a-button type="primary" status="success">
+                  <template #icon><icon-safe /></template>
+                  <template #default>菜单权限</template>
                 </a-button>
               </a-space>
             </template>
@@ -44,6 +50,7 @@
 
 <script setup lang="ts">
 import { ref, reactive } from 'vue'
+import { Message } from '@arco-design/web-vue'
 import AddRoleModal from './AddRoleModal.vue'
 import { getSystemRoleList } from '@/apis/system'
 
@@ -71,6 +78,11 @@ const getTableData = async () => {
   }
 }
 getTableData()
+
+// 删除
+const onDelete = () => {
+  Message.info('点击了确认按钮')
+}
 </script>
 
 <style lang="scss" scoped>
