@@ -107,6 +107,18 @@ const routes = [
         meta: { title: '异常页500', keepAlive: false }
       },
       {
+        path: '/result-page/success',
+        name: 'ResultPageSuccess',
+        component: () => import('@/views/result-page/success.vue'),
+        meta: { title: '成功页', keepAlive: false }
+      },
+      {
+        path: '/result-page/fail',
+        name: 'ResultPageFail',
+        component: () => import('@/views/result-page/fail.vue'),
+        meta: { title: '失败页', keepAlive: false }
+      },
+      {
         path: '/test',
         name: 'Test',
         component: () => import('@/views/test/index.vue'),

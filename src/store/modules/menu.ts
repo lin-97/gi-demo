@@ -126,6 +126,29 @@ export const useMenuStore = defineStore({
           ]
         },
         {
+          icon: 'menu-result',
+          id: 'RESULT',
+          name: '结果页',
+          keepAlive: false,
+          hidden: false,
+          children: [
+            {
+              id: 'page-success',
+              name: '成功页',
+              path: '/result-page/success',
+              keepAlive: false,
+              hidden: false
+            },
+            {
+              id: 'page-fail',
+              name: '失败页',
+              path: '/result-page/fail',
+              keepAlive: false,
+              hidden: false
+            }
+          ]
+        },
+        {
           icon: 'menu-test',
           id: 'TEST',
           name: '测试页',
