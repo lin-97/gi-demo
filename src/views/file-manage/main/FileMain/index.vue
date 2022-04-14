@@ -117,11 +117,12 @@ import ThePreviewAudio from '@/views/components/ThePreviewAudio/index'
 import TheFileRename from '@/views/components/TheFileRename/index'
 import TheFileMove from '@/views/components/TheFileMove/index'
 import fileData from './filedata'
+import { useRouter } from 'vue-router'
+const router = useRouter()
 
 const { width: windowWidth } = useWindowSize()
 const fileStore = useFileStore()
 
-let loadingText = ref<string>('等待中...')
 let showLoading = ref<boolean>(false)
 
 // 文件列表数据
@@ -168,6 +169,9 @@ const handleRightMenuClick = (mode: string, fileInfo: File.FileItem) => {
   }
   if (mode === 'move') {
     TheFileMove(fileInfo)
+  }
+  if (mode === 'detail') {
+    router.push({ path: '/file-manage/file-detail' })
   }
 }
 

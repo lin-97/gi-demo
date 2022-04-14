@@ -44,7 +44,13 @@ const routes = [
         path: '/file-manage',
         name: 'FileManage',
         component: () => import('@/views/file-manage/main/index.vue'),
-        meta: { title: '文件管理', keepAlive: true }
+        meta: { title: '文件管理', keepAlive: false }
+      },
+      {
+        path: '/file-manage/file-detail',
+        name: 'FileManageFileDetail',
+        component: () => import('@/views/file-manage/file-detail/index.vue'),
+        meta: { title: '文件详情', keepAlive: false }
       },
       {
         path: '/form-manage',
