@@ -40,7 +40,7 @@ import { ref, reactive } from 'vue'
 import 'viewerjs/dist/viewer.css'
 import { component as Viewer } from 'v-viewer'
 
-let src = ref('https://img0.baidu.com/it/u=3261157327,1999065886&fm=253&fmt=auto&app=138&f=JPEG?w=800&h=500')
+let src = ref('https://pic.netbian.com/uploads/allimg/210216/191659-1613474219169f.jpg')
 // 实例
 const viewer = ref(null)
 // 缩放比例
@@ -52,7 +52,7 @@ const options = reactive({
   toolbar: false, // 是否显示工具栏
   navbar: false, // 是否显示导航栏
   rotatable: true, // 是否能够缩放
-  backdrop: false, // 是否显示遮罩背景
+  backdrop: true, // 是否显示遮罩背景
   button: true, // 是否显示右上角全屏按钮
   title: false, // 是否显示标题
   zoom: (e) => {
@@ -92,6 +92,9 @@ const handle = (value: string) => {
   img {
     display: none;
   }
+}
+:deep(.viewer-container:not(.viewer-fixed)) {
+  background: none;
 }
 .pre-image {
   width: 100%;

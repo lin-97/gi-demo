@@ -4,20 +4,24 @@
       <template #subtitle>
         <a-typography class="info">
           <a-typography-paragraph>您提交的内容有如下错误：</a-typography-paragraph>
-          <a-space align="center">
-            <a-row>
-              <icon-exclamation-circle-fill :size="20" style="color: rgb(240, 160, 32)" />
-              <span class="tip">认证照片不够清晰</span>
-            </a-row>
-            <a-button type="text">立即修改</a-button>
-          </a-space>
-          <a-space align="center">
-            <a-row>
-              <icon-exclamation-circle-fill :size="20" style="color: rgb(240, 160, 32)" />
-              <span class="tip">认证照片不够清晰</span>
-            </a-row>
-            <a-button type="text">立即修改</a-button>
-          </a-space>
+          <a-row justify="center">
+            <a-space align="center">
+              <a-row>
+                <icon-exclamation-circle-fill :size="20" style="color: rgb(240, 160, 32)" />
+                <span class="tip">认证照片不够清晰</span>
+              </a-row>
+              <a-button type="text">立即修改</a-button>
+            </a-space>
+          </a-row>
+          <a-row justify="center">
+            <a-space align="center">
+              <a-row>
+                <icon-exclamation-circle-fill :size="20" style="color: rgb(240, 160, 32)" />
+                <span class="tip">认证照片不够清晰</span>
+              </a-row>
+              <a-button type="text">立即修改</a-button>
+            </a-space>
+          </a-row>
         </a-typography>
       </template>
 

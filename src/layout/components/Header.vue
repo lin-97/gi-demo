@@ -5,6 +5,15 @@
       <span class="gi_hover">{{ appStore.systemName }}</span>
     </section>
     <a-space class="system-head" size="medium">
+      <!-- 项目地址-->
+      <a-tooltip content="项目地址" position="bl">
+        <a-button size="mini" class="gi_hover_btn" @click="toGitPath">
+          <template #icon>
+            <icon-github :size="18" />
+          </template>
+        </a-button>
+      </a-tooltip>
+
       <!-- 项目配置 -->
       <a-tooltip content="项目配置" position="bl">
         <a-button size="mini" class="gi_hover_btn" @click="showSettingDrawer = !showSettingDrawer">
@@ -113,6 +122,11 @@ const logout = () => {
       router.replace('/login')
     }
   })
+}
+
+// 跳转项目地址
+const toGitPath = () => {
+  window.open('https://gitee.com/lin0716/gi-demo')
 }
 </script>
 
