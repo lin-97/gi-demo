@@ -1,0 +1,1 @@
+import{u as t,a}from"./index.da5e3714.js";import{u as s}from"./index.03512435.js";var h="/gi-demo/assets/logo.b7792731.gif";function i(){const e=s(),o=t({selector:"body",attribute:"arco-theme",valueDark:"dark",valueLight:"light",storageKey:"arco-theme",onChanged(r){e.toggleTheme(r)}});return{onToggleThemeDark:a(o)}}export{h as _,i as u};
