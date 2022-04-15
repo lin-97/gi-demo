@@ -40,7 +40,9 @@ import { ref, reactive } from 'vue'
 import 'viewerjs/dist/viewer.css'
 import { component as Viewer } from 'v-viewer'
 
-let src = ref('https://pic.netbian.com/uploads/allimg/210216/191659-1613474219169f.jpg')
+let src = ref(
+  'https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fi0.hdslb.com%2Fbfs%2Farticle%2F09fc753c76d4a8575c105452c81b76ba563c0d8d.jpg&refer=http%3A%2F%2Fi0.hdslb.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=auto?sec=1652531003&t=100230590302237a20f8e136de146f6b'
+)
 // 实例
 const viewer = ref(null)
 // 缩放比例

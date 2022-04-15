@@ -74,7 +74,7 @@ const list = [
     type: 'file',
     name: '老男孩',
     extendName: 'mp4',
-    src: 'https://mvwebfs.tx.kugou.com/202204012150/7b4b6399247759f89a19ed1a6976d0f3/G091/M00/0D/07/-4YBAFtqF26ASRAuAnFIzZmLseg807.mp4',
+    src: 'https://vd2.bdstatic.com/mda-kkj20w77w1wyuxjd/hd/mda-kkj20w77w1wyuxjd.mp4?v_from_s=hkapp-haokan-hna&auth_key=1649941380-0-0-eba98dfae5fb0d636d6b7eaaf1cb5257&bcevod_channel=searchbox_feed&pd=1&cd=0&pt=3&logid=1980393476&vid=2459462156697942509&abtest=100815_2-101454_1-17451_2&klogid=1980393476',
     updateTime: '2022-01-20 18:30:00',
     isDir: false,
     filePath: '/'
