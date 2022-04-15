@@ -1,5 +1,11 @@
 <template>
-  <a-modal title="移动到" width="500px" v-model:visible="visible" @cancel="handleCancel">
+  <a-modal
+    title="移动到"
+    width="500px"
+    v-model:visible="visible"
+    modal-animation-name="el-fade-bottom"
+    @cancel="handleCancel"
+  >
     <a-form :model="form" :style="{ width: '100%' }" label-align="left">
       <a-form-item field="path" label="目标路径：" required>
         <a-input v-model="form.path" placeholder="请输入" />

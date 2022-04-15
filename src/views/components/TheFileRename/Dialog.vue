@@ -1,5 +1,11 @@
 <template>
-  <a-modal title="重命名" width="500px" v-model:visible="visible" @cancel="handleCancel">
+  <a-modal
+    title="重命名"
+    width="500px"
+    v-model:visible="visible"
+    modal-animation-name="el-fade-bottom"
+    @cancel="handleCancel"
+  >
     <a-row justify="center" align="center">
       <a-form :model="form" :style="{ width: '80%' }">
         <a-form-item field="name" label="文件名称：" required>
