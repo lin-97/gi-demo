@@ -13,25 +13,32 @@
       <div class="login-right">
         <a-form
           :model="form"
-          :style="{ width: '80%' }"
+          :style="{ width: '84%' }"
           :label-col-style="{ display: 'none' }"
           :wrapper-col-style="{ flex: 1 }"
         >
+          <h3 class="login-form-title" data-v-6b0ccce2="">账号登录</h3>
           <a-form-item field="username">
             <a-input v-model="form.username" placeholder="账号" size="medium">
               <template #prefix><icon-user :stroke-width="1" :style="{ fontSize: '20px' }" /></template>
             </a-input>
           </a-form-item>
           <a-form-item field="password">
-            <a-input-password v-model="form.password" placeholder="密码" size="medium">
+            <a-input-password v-model="form.password" placeholder="密码" size="medium" allow-clear>
               <template #prefix><icon-lock :stroke-width="1" :style="{ fontSize: '20px' }" /></template>
             </a-input-password>
           </a-form-item>
           <a-form-item>
-            <a-checkbox v-model="checked">保持登录状态</a-checkbox>
+            <a-row justify="space-between" align="center" style="width: 100%">
+              <a-checkbox v-model="checked">记住密码</a-checkbox>
+              <a-link>忘记密码</a-link>
+            </a-row>
           </a-form-item>
           <a-form-item>
-            <a-button type="primary" size="large" long :loading="loading" @click="login">登录</a-button>
+            <a-space direction="vertical" fill style="width: 100%">
+              <a-button type="primary" size="large" long :loading="loading" @click="login">登录</a-button>
+              <a-button type="text" size="large" long class="register-btn">注册账号</a-button>
+            </a-space>
           </a-form-item>
         </a-form>
       </div>
@@ -94,6 +101,20 @@ const login = () => {
   height: 16px;
   border-width: 1px;
 }
+.register-btn,
+.register-btn:hover {
+  color: var(--color-text-3);
+}
+
+.login-form-title {
+  color: var(--color-text-1);
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 32px;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
 .theme-btn {
   position: fixed;
   top: 20px;
