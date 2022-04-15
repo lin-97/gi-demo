@@ -106,7 +106,7 @@ const handle = (value: string) => {
   flex-direction: column;
   .viewer-box {
     flex: 1;
-    margin-bottom: 20px;
+    margin-bottom: 16px;
   }
   .zoom-proportion {
     padding: 0 12px;

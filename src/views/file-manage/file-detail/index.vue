@@ -9,23 +9,23 @@
       </div>
     </section>
     <section class="right">
-      <a-descriptions title="文件详情" :column="1">
-        <a-descriptions-item label="名称">头像01</a-descriptions-item>
-        <a-descriptions-item label="类型">jpg</a-descriptions-item>
-        <a-descriptions-item label="路径">/</a-descriptions-item>
-        <a-descriptions-item label="文件大小">256K</a-descriptions-item>
-        <a-descriptions-item label="创建人">Admin</a-descriptions-item>
-        <a-descriptions-item label="创建时间">2022-05-20 15:00:00</a-descriptions-item>
-        <a-descriptions-item label="文件ID">1511952522629615617</a-descriptions-item>
-        <a-descriptions-item label="标签">
+      <a-descriptions title="文件详情" :column="1" layout="inline-vertical">
+        <a-descriptions-item label="名称：">头像01</a-descriptions-item>
+        <a-descriptions-item label="类型：">jpg</a-descriptions-item>
+        <a-descriptions-item label="路径：">/</a-descriptions-item>
+        <a-descriptions-item label="文件大小：">256K</a-descriptions-item>
+        <a-descriptions-item label="创建人：">admin</a-descriptions-item>
+        <a-descriptions-item label="创建时间：">2022-05-18 15:25:08</a-descriptions-item>
+        <a-descriptions-item label="文件ID：">1511952522629615617</a-descriptions-item>
+        <a-descriptions-item label="标签：">
           <a-space :size="5">
             <a-tag color="red">头像</a-tag>
             <a-tag color="orangered">图片</a-tag>
             <a-tag color="purple">JPG</a-tag>
           </a-space>
         </a-descriptions-item>
-        <a-descriptions-item label="说明"
-          >基于 v-viewer vue3 实现自定义按钮的图片预览，其他功能还可自行扩展</a-descriptions-item
+        <a-descriptions-item label="说明："
+          >基于 v-viewer vue3 实现自定义按钮的图片预览，其他功能可自行扩展</a-descriptions-item
         >
       </a-descriptions>
 
@@ -62,6 +62,17 @@ const back = () => {
 <style lang="scss" scoped>
 :deep(.arco-btn) {
   border-radius: 4px;
+}
+:deep(.arco-descriptions-item) {
+  display: flex;
+  margin-bottom: 8px;
+  .arco-descriptions-item-label-inline {
+    white-space: nowrap;
+    font-size: 13px;
+  }
+  .arco-descriptions-item-value-inline {
+    font-size: 13px;
+  }
 }
 .file-detail {
   width: 100%;
