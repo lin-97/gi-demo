@@ -8,7 +8,6 @@
 
 <script setup lang="ts">
 import { ref } from 'vue'
-import GiTextSwitch from '@/components/GiTextSwitch.vue'
 
 let checked = ref(true)
 let checked1 = ref(false)

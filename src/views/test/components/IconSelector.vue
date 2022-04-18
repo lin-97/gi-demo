@@ -7,7 +7,5 @@
 
 <script setup lang="ts">
 import { ref } from 'vue'
-import GiIconSelector from '@/components/GiIconSelector.vue'
-
 let icon = ref('')
 </script>

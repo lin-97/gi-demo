@@ -42,7 +42,7 @@
   </a-popover>
 </template>
 
-<script setup lang="ts">
+<script setup lang="ts" name="GiIconSelector">
 import { ref, watch } from 'vue'
 import * as Icons from '@arco-design/web-vue/es/icon'
 import { useClipboard } from '@vueuse/core'

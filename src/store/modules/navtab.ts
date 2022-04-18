@@ -1,8 +1,6 @@
 import { defineStore } from 'pinia'
 import router from '@/router'
-// console.log('router', router)
-import { useAppStore } from '@/store/index'
-const appStore = useAppStore()
+import { useAppStore } from '@/store'
 
 interface NavTabState {
   tabList: NavTab.NavTabItem[]
@@ -36,6 +34,7 @@ export const useNavTabStore = defineStore({
     },
     // 删除一个页签
     removeTabItem(path: string) {
+      const appStore = useAppStore()
       if (path === defaultTabItem.path) return
       const index = this.tabList.findIndex((item) => item.path === path)
       if (index >= 0) {

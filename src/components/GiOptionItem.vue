@@ -14,7 +14,7 @@
   </li>
 </template>
 
-<script setup lang="ts">
+<script setup lang="ts" name="GiOptionItem">
 const props = defineProps({
   icon: {
     type: String,

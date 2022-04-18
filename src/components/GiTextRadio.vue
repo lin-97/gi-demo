@@ -10,7 +10,7 @@
   </a-space>
 </template>
 
-<script setup lang="ts">
+<script setup lang="ts" name="GiTextRadio">
 import type { PropType } from 'vue'
 
 const emit = defineEmits(['update:modelValue', 'change'])

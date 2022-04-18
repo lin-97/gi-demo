@@ -6,7 +6,6 @@
 
 <script setup lang="ts">
 import { ref } from 'vue'
-import GiTextRadio from '@/components/GiTextRadio.vue'
 
 const list = ref([
   { label: '嘎嘎', value: '01' },

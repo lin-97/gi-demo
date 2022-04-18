@@ -7,7 +7,7 @@
       <a-button>返回</a-button>
     </GiTitle>
 
-    <GiTitle title="基础详情">
+    <GiTitle title="基础详情" border-style="solid">
       <a-input :style="{ width: '250px' }" placeholder="请输入关键词搜索" allow-clear>
         <template #prefix>
           <icon-search />
@@ -17,6 +17,4 @@
   </a-space>
 </template>
 
-<script setup lang="ts">
-import GiTitle from '@/components/GiTitle.vue'
-</script>
+<script setup lang="ts"></script>

@@ -19,7 +19,7 @@
   </div>
 </template>
 
-<script setup lang="ts">
+<script setup lang="ts" name="GiTextSwitch">
 import { computed, onMounted, ref } from 'vue'
 
 const props = defineProps({

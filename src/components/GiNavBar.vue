@@ -7,7 +7,7 @@
   </a-row>
 </template>
 
-<script setup lang="ts">
+<script setup lang="ts" name="GiNavBar">
 const props = defineProps({
   // 标题
   title: {

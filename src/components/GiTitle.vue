@@ -9,16 +9,18 @@
   </div>
 </template>
 
-<script setup lang="ts">
+<script setup lang="ts" name="GiTitle">
+import type { PropType } from 'vue'
+
 const props = defineProps({
   // 标题
   title: {
-    type: String,
+    type: String as PropType<string>,
     default: ''
   },
   // 边框样式
   borderStyle: {
-    type: String,
+    type: String as PropType<string>,
     default: 'dashed'
   }
 })
@@ -34,7 +36,7 @@ const props = defineProps({
   > .wrapper {
     height: 100%;
     border-bottom-width: 1px;
-    border-bottom-color: var(--color-border-3);
+    border-bottom-color: var(--color-neutral-3);
     box-sizing: border-box;
   }
   .title {

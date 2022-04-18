@@ -62,7 +62,7 @@
           <section class="table-box">
             <a-table
               :data="tableData"
-              v-loading="showLoading"
+              v-loading="loading"
               :scroll="{ x: '100%', y: '100%' }"
               :pagination="{ 'show-page-size': true }"
             >
@@ -91,7 +91,9 @@
                     <a-space>
                       <a-button type="primary" @click="onEdit(record)">修改</a-button>
                       <a-button @click="onDetail">详情</a-button>
-                      <a-button type="primary" status="danger" @click="onDelete">删除</a-button>
+                      <a-popconfirm content="你确定要删除该项吗?" @ok="onDelete(record)">
+                        <a-button type="primary" status="danger">删除</a-button>
+                      </a-popconfirm>
                     </a-space>
                   </template>
                 </a-table-column>
@@ -109,7 +111,7 @@
 <script setup lang="ts" name="IndicatorManage">
 import { reactive, ref } from 'vue'
 import { useRouter } from 'vue-router'
-import { Modal } from '@arco-design/web-vue'
+import { Modal, Message } from '@arco-design/web-vue'
 import GiTitle from '@/components/GiTitle.vue'
 import TheCateTree from '@/views/components/TheCateTree/index.vue'
 import EditDialog from './EditDialog.vue'
@@ -120,7 +122,7 @@ const router = useRouter()
 let activeName = ref<string>('2')
 
 const tableData = ref<object[]>([])
-let showLoading = ref<boolean>(false)
+let loading = ref<boolean>(false)
 
 // 比例进度条颜色
 const getProportionColor = (proportion: number) => {
@@ -141,12 +143,12 @@ const pageInfo: PageInfo = reactive({
 
 const getTableData = async () => {
   try {
-    showLoading.value = true
+    loading.value = true
     const res = await getTableList(pageInfo)
     tableData.value = res.data.list
-    showLoading.value = false
+    loading.value = false
   } catch (error) {
-    showLoading.value = false
+    loading.value = false
     return error
   }
 }
@@ -179,11 +181,7 @@ const onDetail = () => {
 }
 
 const onDelete = (row) => {
-  Modal.warning({
-    title: '提示',
-    content: '是否确认删除？',
-    hideCancel: false
-  })
+  Message.success('删除成功')
 }
 </script>
 

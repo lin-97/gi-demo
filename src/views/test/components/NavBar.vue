@@ -7,6 +7,4 @@
   </div>
 </template>
 
-<script setup lang="ts">
-import GiNavBar from '@/components/GiNavBar.vue'
-</script>
+<script setup lang="ts"></script>

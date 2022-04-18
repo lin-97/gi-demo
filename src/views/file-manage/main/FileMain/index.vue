@@ -50,7 +50,7 @@
         </a-button>
         <a-button-group>
           <a-tooltip content="传输列表" position="bottom">
-            <a-button @click="showLoading = !showLoading">
+            <a-button @click="loading = !loading">
               <template #icon>
                 <icon-swap />
               </template>
@@ -76,7 +76,7 @@
     </a-row>
 
     <!-- 文件列表-宫格模式 -->
-    <section class="file-wrap" v-loading:[loadingText]="showLoading">
+    <section class="file-wrap" v-loading:[loadingText]="loading">
       <template v-if="fileStore.viewMode == 'grid'">
         <FileGrid
           :data="fileList"
@@ -123,7 +123,7 @@ const router = useRouter()
 const { width: windowWidth } = useWindowSize()
 const fileStore = useFileStore()
 
-let showLoading = ref<boolean>(false)
+let loading = ref<boolean>(false)
 
 // 文件列表数据
 let fileList = ref<File.FileItem[]>([])

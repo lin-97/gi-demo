@@ -52,7 +52,7 @@ const props = defineProps({
   }
 })
 
-let showLoading = ref<boolean>(false)
+let loading = ref<boolean>(false)
 let inputValue = ref<string>('')
 const treeRef = ref<HTMLElement | null>(null)
 let treeData = ref<object[]>([])
@@ -135,17 +135,17 @@ const formatTree = (arr: ZTree.ITreeNode[]): void => {
 // 获取分类树
 const getCateTree = async () => {
   try {
-    showLoading.value = true
+    loading.value = true
     treeData.value = data
     formatTree(treeData.value)
-    showLoading.value = false
+    loading.value = false
     nextTick(() => {
       treeObj = $.fn.zTree.init($('#treeDemo'), treeSetting, treeData.value)
       treeObj.expandAll(true)
-      showLoading.value = false
+      loading.value = false
     })
   } catch (error) {
-    showLoading.value = false
+    loading.value = false
   }
 }
 

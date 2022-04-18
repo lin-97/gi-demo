@@ -12,9 +12,9 @@ import '@arco-themes/vue-gi-demo/index.less'
 // 额外引入 Arco Design Icon图标库
 import ArcoVueIcon from '@arco-design/web-vue/es/icon'
 
+import '@/assets/css/transition.css'
 // 导入全局scss主文件
 import '@/styles/index.scss'
-import '@/styles/transition.css'
 
 // 支持SVG
 import 'virtual:svg-icons-register'
@@ -26,20 +26,13 @@ app.use(createPinia())
 app.use(ArcoVue)
 app.use(ArcoVueIcon)
 
-// 全局SVG图标组件
-import GiSvgIcon from '@/components/GiSvgIcon.vue'
-app.component('GiSvgIcon', GiSvgIcon)
-
-import GiTitle from '@/components/GiTitle.vue'
-app.component('GiTitle', GiTitle)
-
-import GiOption from '@/components/GiOption.vue'
-import GiOptionItem from '@/components/GiOptionItem.vue'
-app.component('GiOption', GiOption)
-app.component('GiOptionItem', GiOptionItem)
-
-import GiTag from '@/components/GiTag.vue'
-app.component('GiTag', GiTag)
+// 全局注册自定义组件(注：一定要定义组件的name！！！)
+const GiComponents = import.meta.globEager('/src/components/*.vue')
+const files = Object.assign(GiComponents)
+Object.keys(files).forEach((item) => {
+  const component = files[item]?.default
+  app.component(component.name, component)
+})
 
 // 全局 v-loading 指令
 import loading from '@/directives/v-loading'

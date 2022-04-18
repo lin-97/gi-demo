@@ -1,0 +1,1 @@
+import{u as a,n as r,q as s}from"./index.aecc2039.js";function h(){const e=a(),o=r({selector:"body",attribute:"arco-theme",valueDark:"dark",valueLight:"light",storageKey:"arco-theme",onChanged(t){e.toggleTheme(t)}});return{onToggleThemeDark:s(o)}}var n="/gi-demo/assets/logo.b7792731.gif";export{n as _,h as u};

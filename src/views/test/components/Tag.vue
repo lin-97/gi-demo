@@ -26,6 +26,4 @@
   </div>
 </template>
 
-<script setup lang="ts">
-import GiTag from '@/components/GiTag.vue'
-</script>
+<script setup lang="ts"></script>
