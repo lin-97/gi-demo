@@ -1,6 +1,13 @@
 <template>
   <div class="nav-tab" v-if="themeStore.tab.visible">
-    <a-tabs :type="themeStore.tab.mode" :active-key="route.path" editable @tab-click="onClick" @delete="onClose">
+    <a-tabs
+      editable
+      hide-content
+      :type="themeStore.tab.mode"
+      :active-key="route.path"
+      @tab-click="onClick"
+      @delete="onClose"
+    >
       <a-tab-pane
         v-for="item of navtabStore.tabList"
         :key="item.path"
@@ -92,10 +99,6 @@ const onCloseAll = () => {
 </script>
 
 <style lang="scss" scoped>
-:deep(.arco-tabs-content) {
-  display: none;
-}
-
 :deep(.arco-tabs-tab) {
   border-bottom-color: transparent !important;
   svg {

@@ -4,10 +4,6 @@
       <!-- 左侧 -->
       <div class="login-left">
         <img class="login-img" src="@/assets/svgs/login-img.svg" />
-        <div class="system">
-          <img class="logo" src="@/assets/images/logo.gif" />
-          <div class="system-name"><span>Admin</span><span>管理系统</span></div>
-        </div>
       </div>
       <!-- 右侧 -->
       <div class="login-right">
@@ -17,9 +13,11 @@
           :label-col-style="{ display: 'none' }"
           :wrapper-col-style="{ flex: 1 }"
         >
-          <h3 class="login-form-title" data-v-6b0ccce2="">账号登录</h3>
+          <h3 class="login-form-title" data-v-6b0ccce2="">
+            <img class="logo" src="@/assets/images/logo.gif" /><span>Admin Pro</span>
+          </h3>
           <a-form-item field="username">
-            <a-input v-model="form.username" placeholder="账号" size="medium">
+            <a-input v-model="form.username" placeholder="账号" size="medium" allow-clear>
               <template #prefix><icon-user :stroke-width="1" :style="{ fontSize: '20px' }" /></template>
             </a-input>
           </a-form-item>
@@ -103,7 +101,7 @@ const login = () => {
 }
 .register-btn,
 .register-btn:hover {
-  color: var(--color-text-3);
+  color: var(--color-text-2);
 }
 
 .login-form-title {
@@ -113,6 +111,14 @@ const login = () => {
   line-height: 32px;
   margin-bottom: 20px;
   text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  .logo {
+    width: 32px;
+    height: 32px;
+    margin-right: 6px;
+  }
 }
 
 .theme-btn {
@@ -131,7 +137,6 @@ const login = () => {
   &-box {
     width: 720px;
     height: 380px;
-    background: #fff;
     display: flex;
     z-index: 999;
     box-shadow: 0 2px 4px 2px rgba(0, 0, 0, 0.08);
@@ -146,7 +151,7 @@ const login = () => {
   align-items: center;
   position: relative;
   overflow: hidden;
-  background-color: rgba(var(--primary-6), 0.5);
+  background: linear-gradient(60deg, rgb(var(--primary-6)), rgb(var(--primary-3)));
   &::before {
     content: '';
     left: 0px;
@@ -154,7 +159,7 @@ const login = () => {
     top: 0px;
     bottom: 0px;
     position: absolute;
-    background-color: rgba(0, 0, 0, 0.1);
+    background-color: rgba(0, 0, 0, 0);
     z-index: 99;
   }
   &:hover {
@@ -173,37 +178,13 @@ const login = () => {
     transition: all 0.3s;
     object-fit: cover;
   }
-  .system {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    z-index: 99;
-    .system-name {
-      color: #fff;
-      margin-top: 8px;
-      font-size: 18px;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      span {
-        &:first-child {
-          font-size: 20px;
-          margin-right: 4px;
-        }
-      }
-    }
-    .logo {
-      width: 60px;
-      height: 60px;
-    }
-  }
 }
 
 .login-right {
   width: 270px;
   height: 100%;
   background: var(--color-bg-2);
+
   display: flex;
   justify-content: center;
   align-items: center;
@@ -211,6 +192,9 @@ const login = () => {
   box-sizing: border-box;
   :deep(.arco-input-wrapper) {
     border-color: var(--color-border-2);
+    &.arco-input-focus {
+      border-color: rgb(var(--primary-6));
+    }
   }
 }
 </style>

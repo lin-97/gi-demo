@@ -8,14 +8,18 @@
 
     <template #content>
       <div class="icon-container">
-        <a-input-search
+        <a-input
+          v-model="searchValue"
           placeholder="搜索图标名称"
-          press-enter
+          @input="onSearch"
+          @clear="onSearch"
+          allow-clear
           style="width: 100%"
-          @search="onSearch"
-          allowClear
-          search-button
-        />
+        >
+          <template #prefix>
+            <icon-search />
+          </template>
+        </a-input>
 
         <div class="icon-wrapper">
           <a-row :wrap="true">
@@ -62,6 +66,9 @@ const props = defineProps({
   }
 })
 
+// 搜索词
+let searchValue = ref<string>('')
+
 // 图标列表
 const iconList = Object.keys(Icons).filter((i) => i !== 'default')
 // 图标总数
@@ -96,15 +103,14 @@ function onPageChange(page: number) {
       : searchList.value.slice((page - 1) * pageSize, page * pageSize)
 }
 
-function onSearch(searchValue: string) {
-  if (searchValue) {
-    const temp = searchValue.toLowerCase()
-    searchList.value = iconList.filter((it) => {
-      return it.toLowerCase().startsWith((temp.startsWith('icon') ? '' : 'icon') + temp)
+function onSearch() {
+  if (searchValue.value) {
+    const temp = searchValue.value.toLowerCase()
+    searchList.value = iconList.filter((item) => {
+      return item.toLowerCase().startsWith((temp.startsWith('icon') ? '' : 'icon') + temp)
     })
     total.value = searchList.value.length
     currentPageIconList.value = searchList.value.slice(0, pageSize)
-    // console.log(currentPageIconList.value)
   } else {
     searchList.value = []
     total.value = iconList.length

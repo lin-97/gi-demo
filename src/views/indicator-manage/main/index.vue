@@ -1,7 +1,7 @@
 <template>
   <div class="manage">
     <section class="tab">
-      <a-tabs v-model:active-key="activeName">
+      <a-tabs hide-content v-model:active-key="activeName">
         <a-tab-pane key="1" title="原子指标管理"> </a-tab-pane>
         <a-tab-pane key="2" title="时间周期管理"> </a-tab-pane>
         <a-tab-pane key="3" title="维度管理"> </a-tab-pane>
@@ -216,9 +216,5 @@ const onDelete = (row) => {
       }
     }
   }
-}
-
-:deep(.arco-tabs-content) {
-  padding-top: 0;
 }
 </style>
