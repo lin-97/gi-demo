@@ -28,6 +28,7 @@ const tableList = (pageSize) => {
       id: '@integer(10,999999)',
       index: i,
       name: '@cname()',
+      phone: '15578728810',
       startTime: '@datetime',
       endTime: '@datetime',
       address: '@county(true)',
@@ -36,7 +37,8 @@ const tableList = (pageSize) => {
       time: `@time('HH:mm')`,
       'proportion|1-100': 10,
       'no|100000-10000000': 100000,
-      'status|1': [true, false]
+      'status|1': [true, false],
+      color: Mock.mock('@hex')
     })
   })
   return result

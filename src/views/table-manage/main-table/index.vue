@@ -1,8 +1,6 @@
 <template>
   <div class="main-table">
-    <a-alert banner>This is an info alert.</a-alert>
-
-    <a-form size="medium" label-align="right" auto-label-width :model="form" class="form">
+    <a-form label-align="right" auto-label-width :model="form" class="form">
       <a-row :gutter="16" wrap>
         <a-col :span="6">
           <a-form-item field="value1" label="姓名">
@@ -16,7 +14,7 @@
         </a-col>
         <a-col :span="6" v-show="collapsed">
           <a-form-item field="value3" label="类型">
-            <a-select placeholder="请选择" :trigger-props="{ 'update-at-scroll': true }">
+            <a-select placeholder="请选择">
               <a-option>北京</a-option>
               <a-option>上海</a-option>
               <a-option>广州</a-option>
@@ -25,14 +23,14 @@
         </a-col>
         <a-col :span="6" v-show="collapsed">
           <a-form-item field="value3" label="创建时间">
-            <a-date-picker v-model="form.value3" placeholder="请选择创建时间" />
+            <a-date-picker show-time v-model="form.value3" placeholder="请选择创建时间" />
           </a-form-item>
         </a-col>
         <a-col :span="6" v-show="collapsed">
           <a-form-item field="value4" label="状态">
-            <a-select placeholder="请选择" :trigger-props="{ 'update-at-scroll': true }">
-              <a-option>已审核</a-option>
-              <a-option>未审核</a-option>
+            <a-select placeholder="请选择">
+              <a-option>开启</a-option>
+              <a-option>关闭</a-option>
             </a-select>
           </a-form-item>
         </a-col>
@@ -43,20 +41,21 @@
         </a-col>
         <a-col :span="12">
           <a-space>
-            <a-button type="primary" size="medium">
+            <a-button type="primary" @click="getTableData">
               <template #icon>
                 <icon-search />
               </template>
               <template #default>查询</template>
             </a-button>
-            <a-button size="medium">
+            <a-button>
               <template #default>重置</template>
             </a-button>
-            <a-button type="text" size="medium" @click="collapsed = !collapsed">
+            <a-button type="text" class="collapsed-btn" @click="collapsed = !collapsed">
               <template #icon>
-                <icon-up />
+                <icon-up v-if="collapsed" />
+                <icon-down v-else />
               </template>
-              <template #default>收起</template>
+              <template #default>{{ !collapsed ? '展开' : '收起' }}</template>
             </a-button>
           </a-space>
         </a-col>
@@ -65,6 +64,8 @@
 
     <section class="table-box">
       <a-table
+        stripe
+        row-key="id"
         page-position="bottom"
         :data="tableData"
         v-loading="loading"
@@ -72,13 +73,19 @@
         :pagination="{ 'show-page-size': true }"
       >
         <template #columns>
-          <a-table-column title="序号">
+          <a-table-column title="序号" :width="60">
             <template #cell="cell">{{ cell.rowIndex + 1 }}</template>
           </a-table-column>
-          <a-table-column title="姓名" data-index="name"></a-table-column>
+          <a-table-column title="姓名" data-index="name" :width="150"></a-table-column>
+          <a-table-column title="头像" :width="100">
+            <template #cell="{ record }">
+              <a-avatar :size="30" :style="{ backgroundColor: record.color }">{{ record.name[0] }}</a-avatar>
+            </template>
+          </a-table-column>
+          <a-table-column title="手机号" data-index="phone" :width="150"></a-table-column>
           <a-table-column title="创建时间" data-index="startTime"></a-table-column>
           <a-table-column title="地址" data-index="address"></a-table-column>
-          <a-table-column title="状态" width="100">
+          <a-table-column title="状态" :width="100">
             <template #cell="{ record }">
               <a-switch v-model="record.status" size="medium">
                 <template #checked>开启</template>
@@ -150,6 +157,12 @@ getTableData()
 }
 :deep(.arco-grid-item) {
   min-width: 250px;
+}
+.collapsed-btn {
+  &:hover,
+  &:active {
+    background: none;
+  }
 }
 .main-table {
   height: 100%;

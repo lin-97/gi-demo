@@ -120,7 +120,7 @@ export const useMenuStore = defineStore({
           ]
         },
         {
-          icon: 'menu-page',
+          icon: 'menu-error',
           id: 'ERROR',
           name: '异常页',
           keepAlive: false,
