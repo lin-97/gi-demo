@@ -1,66 +1,67 @@
 <template>
   <div class="main-table">
     <a-alert banner>This is an info alert.</a-alert>
-    <a-space>
-      <a-form size="medium" label-align="right" auto-label-width :model="form" class="form">
-        <a-grid :cols="4" :colGap="12" :rowGap="0" :collapsed="collapsed">
-          <a-grid-item>
-            <a-form-item field="value1" label="姓名">
-              <a-input v-model="form.value1" placeholder="请输入姓名" />
-            </a-form-item>
-          </a-grid-item>
-          <a-grid-item>
-            <a-form-item field="value2" label="手机">
-              <a-input v-model="form.value2" placeholder="请输入手机号码" />
-            </a-form-item>
-          </a-grid-item>
-          <a-grid-item>
-            <a-form-item field="value3" label="类型">
-              <a-select placeholder="请选择" :trigger-props="{ 'update-at-scroll': true }">
-                <a-option>北京</a-option>
-                <a-option>上海</a-option>
-                <a-option>广州</a-option>
-              </a-select>
-            </a-form-item>
-          </a-grid-item>
-          <a-grid-item>
-            <a-form-item field="value3" label="创建时间">
-              <a-date-picker v-model="form.value3" placeholder="请选择创建时间" />
-            </a-form-item>
-          </a-grid-item>
-          <a-grid-item>
-            <a-form-item field="value4" label="状态">
-              <a-select placeholder="请选择" :trigger-props="{ 'update-at-scroll': true }">
-                <a-option>已审核</a-option>
-                <a-option>未审核</a-option>
-              </a-select>
-            </a-form-item>
-          </a-grid-item>
-          <a-grid-item>
-            <a-form-item field="value5" label="标题">
-              <a-input v-model="form.value5" placeholder="please enter..." />
-            </a-form-item>
-          </a-grid-item>
-        </a-grid>
-      </a-form>
-      <a-space>
-        <a-button type="primary" size="medium" @click="getTableData">
-          <template #icon>
-            <icon-search />
-          </template>
-          <template #default>查询</template>
-        </a-button>
-        <a-button size="medium">
-          <template #default>重置</template>
-        </a-button>
-        <a-button type="text" size="medium" @click="collapsed = !collapsed">
-          <template #icon>
-            <icon-up />
-          </template>
-          <template #default>收起</template>
-        </a-button>
-      </a-space>
-    </a-space>
+
+    <a-form size="medium" label-align="right" auto-label-width :model="form" class="form">
+      <a-row :gutter="16" wrap>
+        <a-col :span="6">
+          <a-form-item field="value1" label="姓名">
+            <a-input v-model="form.value1" placeholder="请输入姓名" />
+          </a-form-item>
+        </a-col>
+        <a-col :span="6">
+          <a-form-item field="value2" label="手机">
+            <a-input v-model="form.value2" placeholder="请输入手机号码" />
+          </a-form-item>
+        </a-col>
+        <a-col :span="6" v-show="collapsed">
+          <a-form-item field="value3" label="类型">
+            <a-select placeholder="请选择" :trigger-props="{ 'update-at-scroll': true }">
+              <a-option>北京</a-option>
+              <a-option>上海</a-option>
+              <a-option>广州</a-option>
+            </a-select>
+          </a-form-item>
+        </a-col>
+        <a-col :span="6" v-show="collapsed">
+          <a-form-item field="value3" label="创建时间">
+            <a-date-picker v-model="form.value3" placeholder="请选择创建时间" />
+          </a-form-item>
+        </a-col>
+        <a-col :span="6" v-show="collapsed">
+          <a-form-item field="value4" label="状态">
+            <a-select placeholder="请选择" :trigger-props="{ 'update-at-scroll': true }">
+              <a-option>已审核</a-option>
+              <a-option>未审核</a-option>
+            </a-select>
+          </a-form-item>
+        </a-col>
+        <a-col :span="6" v-show="collapsed">
+          <a-form-item field="value5" label="标题">
+            <a-input v-model="form.value5" placeholder="please enter..." />
+          </a-form-item>
+        </a-col>
+        <a-col :span="12">
+          <a-space>
+            <a-button type="primary" size="medium">
+              <template #icon>
+                <icon-search />
+              </template>
+              <template #default>查询</template>
+            </a-button>
+            <a-button size="medium">
+              <template #default>重置</template>
+            </a-button>
+            <a-button type="text" size="medium" @click="collapsed = !collapsed">
+              <template #icon>
+                <icon-up />
+              </template>
+              <template #default>收起</template>
+            </a-button>
+          </a-space>
+        </a-col>
+      </a-row>
+    </a-form>
 
     <section class="table-box">
       <a-table
