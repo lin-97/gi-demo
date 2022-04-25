@@ -52,6 +52,30 @@ export const useMenuStore = defineStore({
           hidden: false
         },
         {
+          icon: 'menu-table',
+          id: 'BGGL',
+          name: '表格管理',
+          path: '/table-manage',
+          keepAlive: true,
+          hidden: false,
+          children: [
+            {
+              id: 'ZHBG',
+              name: '综合表格',
+              path: '/table-manage/main-table',
+              keepAlive: false,
+              hidden: false
+            },
+            {
+              id: 'ZDYBG',
+              name: '自定义表格',
+              path: '/table-manage/custom-table',
+              keepAlive: false,
+              hidden: false
+            }
+          ]
+        },
+        {
           icon: 'menu-system',
           id: 'XTGL',
           name: '系统管理',

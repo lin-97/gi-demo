@@ -59,6 +59,18 @@ const routes = [
         meta: { title: '表单管理', keepAlive: false }
       },
       {
+        path: '/table-manage/main-table',
+        name: 'TableManageMainTable',
+        component: () => import('@/views/table-manage/main-table/index.vue'),
+        meta: { title: '综合表格', keepAlive: false }
+      },
+      {
+        path: '/table-manage/custom-table',
+        name: 'TableManageCustomTable',
+        component: () => import('@/views/table-manage/custom-table/index.vue'),
+        meta: { title: '自定义表格', keepAlive: false }
+      },
+      {
         path: '/system-manage',
         name: 'SystemManage',
         component: () => import('@/views/system-manage/index.vue'),
