@@ -1,5 +1,8 @@
 <template>
   <div class="main-table">
+    <a-alert type="success"
+      >三级路由【缓存路由、固定表格高度、并根据窗口大小自适应】的示例。详情页请点击操作列按钮，支持tab多开并高亮左侧菜单</a-alert
+    >
     <a-form label-align="right" auto-label-width :model="form" class="form">
       <a-row :gutter="16" wrap>
         <a-col :span="6">
@@ -22,7 +25,7 @@
           </a-form-item>
         </a-col>
         <a-col :span="6" v-show="collapsed">
-          <a-form-item field="value3" label="创建时间">
+          <a-form-item field="value3" label="时间">
             <a-date-picker show-time v-model="form.value3" placeholder="请选择创建时间" />
           </a-form-item>
         </a-col>
@@ -67,6 +70,7 @@
         stripe
         row-key="id"
         page-position="bottom"
+        size="large"
         :data="tableData"
         v-loading="loading"
         :scroll="{ x: '100%', y: '100%' }"
@@ -87,32 +91,35 @@
           <a-table-column title="地址" data-index="address"></a-table-column>
           <a-table-column title="状态" :width="100">
             <template #cell="{ record }">
-              <a-switch v-model="record.status" size="medium">
+              <a-switch :model-value="record.status" size="medium" checked-color="rgb(var(--success-6))">
                 <template #checked>开启</template>
                 <template #unchecked>关闭</template>
               </a-switch>
             </template>
           </a-table-column>
-          <a-table-column title="操作" width="230">
+          <a-table-column title="操作" :width="200">
             <template #cell="{ record }">
-              <a-space>
-                <a-button type="primary">修改</a-button>
-                <a-button>详情</a-button>
+              <a-row justify="center">
+                <a-button type="text" size="mini">修改</a-button>
+                <a-button type="text" size="mini">详情</a-button>
                 <a-popconfirm content="你确定要删除该项吗?">
-                  <a-button type="primary" status="danger">删除</a-button>
+                  <a-button type="text" status="danger" size="mini">删除</a-button>
                 </a-popconfirm>
-              </a-space>
+              </a-row>
             </template>
           </a-table-column>
         </template>
       </a-table>
     </section>
+
+    <GiFooter></GiFooter>
   </div>
 </template>
 
 <script setup lang="ts">
 import { reactive, ref } from 'vue'
 import { getTableList } from '@/apis/table'
+import GiFooter from '@/components/GiFooter.vue'
 
 const form = reactive({
   value1: '',
@@ -158,6 +165,15 @@ getTableData()
 :deep(.arco-grid-item) {
   min-width: 250px;
 }
+:deep(.arco-alert-success) {
+  padding: 5px 15px;
+  border-color: rgb(var(--success-6));
+  background-color: rgba(var(--success-6), 0.08);
+  .arco-alert-content {
+    color: rgb(var(--success-6));
+    font-size: 12px;
+  }
+}
 .collapsed-btn {
   &:hover,
   &:active {
@@ -170,6 +186,7 @@ getTableData()
   margin: $margin;
   background: var(--color-bg-2);
   padding: $margin $padding;
+  padding-bottom: 0;
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
