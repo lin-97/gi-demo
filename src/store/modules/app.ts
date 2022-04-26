@@ -10,7 +10,7 @@ export const useAppStore = defineStore({
   id: 'App',
   state: (): AppState => {
     return {
-      systemName: 'Admin管理系统', // 系统名称
+      systemName: 'Admin Pro', // 系统名称
       activePath: window.sessionStorage.getItem('ActivePath') || '/home' // 当前激活的路径
     }
   },

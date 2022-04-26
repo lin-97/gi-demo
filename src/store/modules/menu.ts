@@ -175,7 +175,7 @@ export const useMenuStore = defineStore({
         {
           icon: 'menu-test',
           id: 'TEST',
-          name: '测试页',
+          name: '功能页',
           path: '/test',
           keepAlive: false,
           hidden: false

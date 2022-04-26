@@ -151,8 +151,8 @@ const toGitPath = () => {
   align-items: center;
   border-bottom: 1px solid var(--color-border-2);
   .system-logo {
-    font-size: 18px;
-    font-weight: 600;
+    font-size: 20px;
+    line-height: 1;
     color: var(--color-text-1);
     display: flex;
     align-items: center;

@@ -32,7 +32,7 @@
             </template>
           </a-switch>
         </a-descriptions-item>
-        <a-descriptions-item label="座右铭">哈哈哈</a-descriptions-item>
+        <a-descriptions-item label="座右铭">优雅永不过时</a-descriptions-item>
       </a-descriptions>
     </section>
   </div>
