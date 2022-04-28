@@ -53,7 +53,7 @@
           </a-space>
         </a-descriptions-item>
         <a-descriptions-item label="座右铭：">哈哈哈</a-descriptions-item>
-        <a-descriptions-item label="图像">
+        <a-descriptions-item label="图像：">
           <img
             style="width: 400px"
             src="https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fi0.hdslb.com%2Fbfs%2Farticle%2F09fc753c76d4a8575c105452c81b76ba563c0d8d.jpg&refer=http%3A%2F%2Fi0.hdslb.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=auto?sec=1652531003&t=100230590302237a20f8e136de146f6b"
