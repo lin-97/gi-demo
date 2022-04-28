@@ -17,6 +17,29 @@
         </a-radio-group>
       </a-form-item>
     </a-form>
+    <a-collapse :bordered="false" :default-active-key="['1']">
+      <a-collapse-item :show-expand-icon="false" key="1">
+        <template #header>
+          <a-space>
+            <span>权限配置</span>
+            <a-tooltip position="right" :content-style="{ width: '200px' }">
+              <icon-question-circle-fill style="color: rgb(var(--warning-6))" />
+              <template #content>
+                <span>自定义管理员、编辑者的权限， 点击</span>
+                <a-link type="primary">了解更多权限</a-link>
+              </template>
+            </a-tooltip>
+          </a-space>
+        </template>
+        <a-row justify="space-between" v-for="i in 10" :key="i">
+          <span>编辑</span>
+          <a-checkbox-group>
+            <a-checkbox value="1">管理员</a-checkbox>
+            <a-checkbox value="2">编辑者</a-checkbox>
+          </a-checkbox-group>
+        </a-row>
+      </a-collapse-item>
+    </a-collapse>
   </a-modal>
 </template>
 
@@ -81,3 +104,9 @@ const confirm = () => {
   visible.value = false
 }
 </script>
+
+<style lang="scss" scoped>
+:deep(.arco-collapse-item-content) {
+  background: none;
+}
+</style>

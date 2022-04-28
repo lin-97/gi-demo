@@ -3,6 +3,7 @@
     <a-tabs
       editable
       hide-content
+      size="medium"
       :type="themeStore.tab.mode"
       :active-key="route.path"
       @tab-click="onClick"
