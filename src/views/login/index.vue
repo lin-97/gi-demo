@@ -42,12 +42,7 @@
       </div>
     </section>
 
-    <a-button size="mini" class="theme-btn gi_hover_btn" @click="onToggleThemeDark">
-      <template #icon>
-        <icon-sun-fill :size="18" v-if="themeStore.theme === 'light'"></icon-sun-fill>
-        <icon-moon-fill :size="18" v-else></icon-moon-fill>
-      </template>
-    </a-button>
+    <GiThemeBtn class="theme-btn"></GiThemeBtn>
 
     <LoginBg></LoginBg>
   </div>
@@ -58,12 +53,7 @@ import { reactive, ref } from 'vue'
 import { useRouter } from 'vue-router'
 import { Message } from '@arco-design/web-vue'
 import LoginBg from './components/LoginBg/index.vue'
-import { useThemeStore } from '@/store'
-import { useThemeDark } from '@/hooks'
 const router = useRouter()
-const themeStore = useThemeStore()
-
-const { onToggleThemeDark } = useThemeDark()
 
 type LoginForm = { username: string; password: string }
 
@@ -152,21 +142,6 @@ const login = () => {
   position: relative;
   overflow: hidden;
   background: linear-gradient(60deg, rgb(var(--primary-6)), rgb(var(--primary-3)));
-  &::before {
-    content: '';
-    left: 0px;
-    right: 0px;
-    top: 0px;
-    bottom: 0px;
-    position: absolute;
-    background-color: rgba(0, 0, 0, 0);
-    z-index: 99;
-  }
-  &:hover {
-    .login-img {
-      transform: scale(1.05);
-    }
-  }
   .login-img {
     width: 100%;
     height: 100%;
@@ -184,17 +159,10 @@ const login = () => {
   width: 270px;
   height: 100%;
   background: var(--color-bg-2);
-
   display: flex;
   justify-content: center;
   align-items: center;
   padding-top: 30px;
   box-sizing: border-box;
-  :deep(.arco-input-wrapper) {
-    border-color: var(--color-border-2);
-    &.arco-input-focus {
-      border-color: rgb(var(--primary-6));
-    }
-  }
 }
 </style>

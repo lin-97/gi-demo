@@ -5,15 +5,6 @@
       <span class="gi_hover">{{ appStore.systemName }}</span>
     </section>
     <a-space class="system-head" size="medium">
-      <!-- 项目地址-->
-      <a-tooltip content="项目地址" position="bl">
-        <a-button size="mini" class="gi_hover_btn" @click="toGitPath">
-          <template #icon>
-            <icon-github :size="18" />
-          </template>
-        </a-button>
-      </a-tooltip>
-
       <!-- 项目配置 -->
       <a-tooltip content="项目配置" position="bl">
         <a-button size="mini" class="gi_hover_btn" @click="showSettingDrawer = !showSettingDrawer">
@@ -44,12 +35,7 @@
 
       <!-- 暗黑模式切换 -->
       <a-tooltip content="主题切换" position="bottom">
-        <a-button size="mini" class="gi_hover_btn" @click="onToggleThemeDark">
-          <template #icon>
-            <icon-sun-fill :size="18" v-if="themeStore.theme === 'light'"></icon-sun-fill>
-            <icon-moon-fill :size="18" v-else></icon-moon-fill>
-          </template>
-        </a-button>
+        <GiThemeBtn></GiThemeBtn>
       </a-tooltip>
 
       <!-- 管理员头像 -->
@@ -65,15 +51,16 @@
         </a-button>
         <template #content>
           <a-doption @click="toUser">
-            <template #icon>
-              <span class="doption-icon" style="background: rgba(var(--primary-6))"><icon-user /></span>
-            </template>
+            <template #icon><icon-user class="doption-icon" :size="18" :stroke-width="3" /></template>
             <template #default>个人中心</template>
           </a-doption>
+          <a-doption @click="toGitPath">
+            <template #icon><icon-github class="doption-icon" :size="16" :stroke-width="3" /></template>
+            <template #default>项目地址</template>
+          </a-doption>
+          <a-divider style="margin: 0" />
           <a-doption @click="logout">
-            <template #icon>
-              <span class="doption-icon" style="background: rgba(var(--warning-6))"><icon-export /></span>
-            </template>
+            <template #icon><icon-export class="doption-icon" :size="18" :stroke-width="3" /></template>
             <template #default>退出登录</template>
           </a-doption>
         </template>
@@ -88,17 +75,15 @@
 import { ref } from 'vue'
 import { Modal } from '@arco-design/web-vue'
 import { useRouter } from 'vue-router'
-import { useAppStore, useUserStore, useThemeStore } from '@/store'
-import { useFullScreen, useThemeDark } from '@/hooks'
+import { useAppStore, useUserStore } from '@/store'
+import { useFullScreen } from '@/hooks'
 import SettingDrawer from './SettingDrawer.vue'
 
 const router = useRouter()
 const appStore = useAppStore()
 const userStore = useUserStore()
-const themeStore = useThemeStore()
 
 const { isFullScreen, onToggleFullScreen } = useFullScreen()
-const { onToggleThemeDark } = useThemeDark()
 
 let showSettingDrawer = ref<boolean>(false)
 
@@ -132,14 +117,7 @@ const toGitPath = () => {
 
 <style lang="scss" scoped>
 .doption-icon {
-  width: 20px;
-  height: 20px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-shrink: 0;
-  color: #fff;
-  border-radius: 4px;
+  color: var(--color-text-4);
 }
 
 .arco-layout-header {

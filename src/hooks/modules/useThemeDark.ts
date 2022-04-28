@@ -21,6 +21,7 @@ export default function () {
   // 切换主题
   const onToggleThemeDark = useToggle(isDark)
   return {
+    theme: themeStore.theme,
     onToggleThemeDark
   }
 }
