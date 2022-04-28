@@ -87,12 +87,14 @@ const onDelete = () => {
 
 <style lang="scss" scoped>
 .role-manage {
-  width: 100%;
+  flex: 1;
   height: 100%;
+  margin: $margin;
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
   background: var(--color-bg-2);
+  overflow: hidden;
   .head {
     padding: $padding $padding 0;
   }

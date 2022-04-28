@@ -3,7 +3,8 @@
     title="移动到"
     width="500px"
     v-model:visible="visible"
-    modal-animation-name="el-fade-bottom"
+    modal-animation-name="el-dialog"
+    mask-animation-name="el-mask"
     @cancel="handleCancel"
   >
     <a-form :model="form" :style="{ width: '100%' }" label-align="left">

@@ -111,9 +111,40 @@ export const useMenuStore = defineStore({
               hidden: false
             },
             {
+              id: 'GRZX',
+              name: '个人中心',
+              path: '/system-manage/user-center',
+              keepAlive: false,
+              hidden: false
+            },
+            {
               id: 'NQST',
               name: '内嵌页面',
               path: '/system-manage',
+              keepAlive: false,
+              hidden: false
+            }
+          ]
+        },
+        {
+          icon: 'menu-detail',
+          id: 'XQYM',
+          name: '详情页',
+          path: '/detail-page',
+          keepAlive: true,
+          hidden: false,
+          children: [
+            {
+              id: 'JCXQY',
+              name: '基础详情页',
+              path: '/detail-page/base-detail',
+              keepAlive: false,
+              hidden: false
+            },
+            {
+              id: 'GJXQY',
+              name: '高级详情页',
+              path: '/detail-page/senior-detail',
               keepAlive: false,
               hidden: false
             }

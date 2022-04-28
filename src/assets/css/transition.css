@@ -75,18 +75,59 @@
   transform: scale(0);
 }
 
-/* el-fade-bottom */
-.el-fade-bottom-enter-active,
-.el-fade-bottom-leave-active {
-  transition: opacity 0.3s, transform 0.3s;
+/* elementUI 的 Dialog 动画 */
+@keyframes dialog-fade-in {
+  0% {
+    transform: translate3d(0, -20px, 0);
+    opacity: 0;
+  }
+  100% {
+    transform: translate3d(0, 0, 0);
+    opacity: 1;
+  }
 }
-.el-fade-bottom-enter-from {
-  opacity: 0;
-  transform: translateY(-20px);
+
+@keyframes dialog-fade-out {
+  0% {
+    transform: translate3d(0, 0, 0);
+    opacity: 1;
+  }
+  100% {
+    transform: translate3d(0, -20px, 0);
+    opacity: 0;
+  }
 }
-.el-fade-bottom-leave-to {
-  opacity: 0;
-  transform: translateY(-20px);
+
+@keyframes modal-fade-in {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes modal-fade-out {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+.el-dialog-enter-active {
+  animation: dialog-fade-in 0.3s;
+}
+.el-dialog-leave-active {
+  animation: dialog-fade-out 0.3s;
+}
+
+.el-mask-enter-active {
+  animation: modal-fade-in 0.3s;
+}
+.el-mask-leave-active {
+  animation: modal-fade-out 0.3s;
 }
 
 /* el-fade-bottom */

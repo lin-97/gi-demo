@@ -44,9 +44,12 @@ import HeadBox from './HeadBox.vue'
 
 <style lang="scss" scoped>
 .user-center {
-  width: 100%;
+  flex: 1;
   height: 100%;
   padding: $padding;
+  margin: $margin;
+  background: var(--color-bg-2);
   box-sizing: border-box;
+  overflow: hidden;
 }
 </style>

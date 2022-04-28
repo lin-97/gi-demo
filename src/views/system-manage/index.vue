@@ -68,6 +68,12 @@ const onClickMenuItem = (item: MenuItem, index: number) => {
     overflow: hidden;
     margin: $margin $margin $margin 0;
     border-radius: 2px;
+    .dept-manage,
+    .menu-manage,
+    .role-manage,
+    .user-manage {
+      margin: 0;
+    }
   }
 }
 </style>

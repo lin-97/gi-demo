@@ -10,7 +10,7 @@
           </a-space>
         </template>
       </a-result>
-      <a-typography class="info">已提交申请，等待财务部门审核。</a-typography>
+      <div class="info">已提交申请，等待财务部门审核。</div>
     </section>
   </div>
 </template>

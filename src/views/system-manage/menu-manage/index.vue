@@ -90,12 +90,14 @@ getTreeData()
 
 <style lang="scss" scoped>
 .menu-manage {
-  width: 100%;
+  flex: 1;
   height: 100%;
+  margin: $margin;
   box-sizing: border-box;
   background: var(--color-bg-2);
   display: flex;
   flex-direction: column;
+  overflow: hidden;
   .head {
     padding: $padding $padding 0;
   }

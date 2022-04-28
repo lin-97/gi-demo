@@ -169,11 +169,13 @@ getTableData()
 
 <style lang="scss" scoped>
 .user-manage {
-  width: 100%;
+  flex: 1;
   height: 100%;
+  margin: $margin;
   box-sizing: border-box;
   display: flex;
   background: var(--color-bg-2);
+  overflow: hidden;
   > .left {
     flex: 1;
     min-width: 250px;

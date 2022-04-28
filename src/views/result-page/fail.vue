@@ -11,21 +11,21 @@
           </a-space>
         </template>
       </a-result>
-      <a-typography class="info">
+      <div class="info">
         <a-typography-paragraph>您提交的内容有如下错误：</a-typography-paragraph>
         <ul>
           <li>
-            <icon-exclamation-circle-fill :size="20" style="color: rgb(240, 160, 32)" />
+            <icon-exclamation-circle-fill :size="20" style="color: rgb(var(--warning-5))" />
             <span class="tip">认证照片不够清晰</span>
             <a-button type="text">立即修改</a-button>
           </li>
           <li>
-            <icon-exclamation-circle-fill :size="20" style="color: rgb(240, 160, 32)" />
+            <icon-exclamation-circle-fill :size="20" style="color: rgb(var(--warning-5))" />
             <span class="tip">你的用户不具有此操作权限</span>
             <a-button type="text">立即修改</a-button>
           </li>
         </ul>
-      </a-typography>
+      </div>
     </section>
   </div>
 </template>

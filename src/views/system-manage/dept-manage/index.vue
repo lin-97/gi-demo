@@ -88,8 +88,9 @@ getTableData()
 
 <style lang="scss" scoped>
 .dept-manage {
-  width: 100%;
+  flex: 1;
   height: 100%;
+  margin: $margin;
   box-sizing: border-box;
   background: var(--color-bg-2);
   display: flex;

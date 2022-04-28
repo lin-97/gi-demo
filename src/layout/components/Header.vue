@@ -51,16 +51,22 @@
         </a-button>
         <template #content>
           <a-doption @click="toUser">
-            <template #icon><icon-user class="doption-icon" :size="18" :stroke-width="3" /></template>
+            <template #icon>
+              <span class="doption-icon" style="background: rgba(var(--primary-6))"><icon-user /></span>
+            </template>
             <template #default>个人中心</template>
           </a-doption>
           <a-doption @click="toGitPath">
-            <template #icon><icon-github class="doption-icon" :size="16" :stroke-width="3" /></template>
+            <template #icon
+              ><span class="doption-icon" style="background: rgba(var(--success-6))"><icon-github /></span
+            ></template>
             <template #default>项目地址</template>
           </a-doption>
           <a-divider style="margin: 0" />
           <a-doption @click="logout">
-            <template #icon><icon-export class="doption-icon" :size="18" :stroke-width="3" /></template>
+            <template #icon>
+              <span class="doption-icon" style="background: rgba(var(--warning-6))"><icon-export /></span>
+            </template>
             <template #default>退出登录</template>
           </a-doption>
         </template>
@@ -117,7 +123,14 @@ const toGitPath = () => {
 
 <style lang="scss" scoped>
 .doption-icon {
-  color: var(--color-text-4);
+  width: 20px;
+  height: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-shrink: 0;
+  color: #fff;
+  border-radius: 4px;
 }
 
 .arco-layout-header {

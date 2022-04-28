@@ -100,6 +100,24 @@ const routes = [
         component: () => import('@/views/system-manage/menu-manage/index.vue'),
         meta: { title: '菜单管理', keepAlive: false }
       },
+      {
+        path: '/system-manage/user-center',
+        name: 'SystemManageUserCenter',
+        component: () => import('@/views/system-manage/user-center/index.vue'),
+        meta: { title: '个人中心', keepAlive: false }
+      },
+      {
+        path: '/detail-page/base-detail',
+        name: 'DetailPageBaseDetail',
+        component: () => import('@/views/detail-page/base-detail/index.vue'),
+        meta: { title: '基础详情页', keepAlive: false }
+      },
+      {
+        path: '/detail-page/senior-detail',
+        name: 'DetailPageSeniorDetail',
+        component: () => import('@/views/detail-page/senior-detail/index.vue'),
+        meta: { title: '高级详情页', keepAlive: false }
+      },
       // {
       //   path: '/error-page/:id',
       //   name: 'ErrorPage',
