@@ -1,7 +1,7 @@
 <template>
   <div class="gi-dot spinner-eff spinner-eff-3">
     <div class="circle circle-1"></div>
-    <!-- <div class="circle circle-2"></div> -->
+    <div class="circle circle-2"></div>
     <div class="circle circle-3"></div>
   </div>
 </template>
@@ -10,7 +10,7 @@
 
 <style lang="scss" scoped>
 $spinner-3-bg: #0cca4a;
-$spinner-dimensions: 10px;
+$spinner-dimensions: 28px;
 
 @mixin position-absolute($top: null, $left: null, $right: null, $bottom: null) {
   position: absolute;
@@ -24,10 +24,6 @@ $spinner-dimensions: 10px;
   position: relative;
   width: $spinner-dimensions;
   height: $spinner-dimensions;
-  flex-shrink: 0;
-  border-radius: 100px;
-  background-color: $spinner-3-bg;
-  z-index: 9;
 
   &:before,
   &:after {
@@ -80,33 +76,26 @@ $spinner-dimensions: 10px;
     transform-origin: center center;
 
     &-1 {
-      width: 150%;
-      height: 150%;
-      background-color: $spinner-3-bg;
-      top: -25%;
-      left: -25%;
-      animation: pulse 2s linear 0s infinite;
-      z-index: 1;
+      width: 100%;
+      height: 100%;
+      background-color: lighten($spinner-3-bg, 25%);
+      top: 0;
+      animation: pulse 1.6s linear 0s infinite;
     }
 
     &-2 {
-      width: 150%;
-      height: 150%;
+      width: 66.6%;
+      height: 66.6%;
       background-color: $spinner-3-bg;
-      top: -20%;
-      left: -10%;
-      transform: translate(-50%, -50%);
+      top: 16.5%;
       animation: pulse-2 1.6s linear 0s infinite;
     }
 
     &-3 {
-      width: 100%;
-      height: 100%;
+      width: 33.3%;
+      height: 33.3%;
       background-color: $spinner-3-bg;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      z-index: 10;
+      top: 33.3%;
     }
   }
 }
