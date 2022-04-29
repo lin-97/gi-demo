@@ -100,11 +100,13 @@
           <a-table-column title="操作" :width="200" align="center">
             <template #cell="{ record }">
               <a-row justify="center">
-                <a-button type="text" size="mini">修改</a-button>
-                <a-button type="text" size="mini">详情</a-button>
-                <a-popconfirm content="你确定要删除该项吗?">
-                  <a-button type="text" status="danger" size="mini">删除</a-button>
-                </a-popconfirm>
+                <a-space>
+                  <a-button type="primary" size="mini">修改</a-button>
+                  <a-button size="mini">详情</a-button>
+                  <a-popconfirm content="您确定要删除该项吗?">
+                    <a-button type="primary" status="danger" size="mini">删除</a-button>
+                  </a-popconfirm>
+                </a-space>
               </a-row>
             </template>
           </a-table-column>

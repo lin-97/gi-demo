@@ -79,6 +79,7 @@ const login = () => {
   setTimeout(() => {
     router.push('/home')
     loading.value = false
+    Message.success('登录成功')
   }, 600)
 }
 </script>

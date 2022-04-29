@@ -2,6 +2,7 @@
   <div class="file-list">
     <a-table
       row-key="id"
+      :scroll="{ x: '100%', y: '100%' }"
       :data="props.data"
       :bordered="false"
       :pagination="false"
@@ -117,7 +118,6 @@ const handleRightMenuItemClick = (mode: string, item: File.FileItem) => {
   width: 100%;
   padding-top: $margin;
   overflow: hidden;
-  overflow-y: scroll;
   .file-name {
     height: 100%;
     display: flex;

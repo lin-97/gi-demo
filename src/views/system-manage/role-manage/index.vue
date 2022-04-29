@@ -25,7 +25,7 @@
           <a-table-column title="操作" width="220">
             <template #cell="{ record }">
               <a-space>
-                <a-popconfirm content="你确定要删除该项吗?" @ok="onDelete">
+                <a-popconfirm content="您确定要删除该项吗?" @ok="onDelete">
                   <a-button type="primary" status="danger">
                     <template #icon><icon-delete /></template>
                   </a-button>

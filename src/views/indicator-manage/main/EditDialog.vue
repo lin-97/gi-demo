@@ -18,7 +18,7 @@
       </a-form-item>
     </a-form>
     <a-collapse :bordered="false" :default-active-key="['1']">
-      <a-collapse-item :show-expand-icon="false" key="1">
+      <a-collapse-item :show-expand-icon="true" key="1">
         <template #header>
           <a-space>
             <span>权限配置</span>

@@ -73,12 +73,12 @@
                 <a-table-column title="姓名" data-index="name"></a-table-column>
                 <a-table-column title="创建时间" data-index="startTime"></a-table-column>
                 <a-table-column title="地址" data-index="address"></a-table-column>
-                <a-table-column title="比例" width="200">
+                <a-table-column title="比例" :width="200">
                   <template #cell="{ record }">
                     <a-progress :status="getProportionColor(record.proportion)" :percent="record.proportion / 100" />
                   </template>
                 </a-table-column>
-                <a-table-column title="状态" width="100">
+                <a-table-column title="状态" :width="100">
                   <template #cell="{ record }">
                     <a-switch v-model="record.status" size="medium">
                       <template #checked>开启</template>
@@ -86,15 +86,17 @@
                     </a-switch>
                   </template>
                 </a-table-column>
-                <a-table-column title="操作" width="230">
+                <a-table-column title="操作" :width="200" align="center">
                   <template #cell="{ record }">
-                    <a-space>
-                      <a-button type="primary" @click="onEdit(record)">修改</a-button>
-                      <a-button @click="onDetail">详情</a-button>
-                      <a-popconfirm content="你确定要删除该项吗?" @ok="onDelete(record)">
-                        <a-button type="primary" status="danger">删除</a-button>
-                      </a-popconfirm>
-                    </a-space>
+                    <a-row justify="center">
+                      <a-space>
+                        <a-button type="primary" size="mini" @click="onEdit(record)">修改</a-button>
+                        <a-button size="mini" @click="onDetail">详情</a-button>
+                        <a-popconfirm content="您确定要删除该项吗?" @ok="onDelete(record)">
+                          <a-button type="primary" status="danger" size="mini">删除</a-button>
+                        </a-popconfirm>
+                      </a-space>
+                    </a-row>
                   </template>
                 </a-table-column>
               </template>
