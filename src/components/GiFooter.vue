@@ -9,7 +9,7 @@
   height: 50px;
   font-size: 12px;
   color: var(--color-text-3);
-  margin-top: $padding;
+  margin-top: $margin;
   border-top: 1px dashed var(--color-neutral-3);
   box-sizing: border-box;
   display: flex;

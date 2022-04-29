@@ -2,7 +2,7 @@
   <a-layout-header>
     <section class="system-logo" @click="toHome">
       <img src="@/assets/images/logo.gif" />
-      <span class="gi_hover">{{ appStore.systemName }}</span>
+      <span class="gi_hover system-name">{{ appStore.systemName }}</span>
     </section>
     <a-space class="system-head" size="medium">
       <!-- 项目配置 -->
@@ -148,13 +148,14 @@ const toGitPath = () => {
     display: flex;
     align-items: center;
     cursor: pointer;
+    user-select: none;
     img {
       width: 32px;
       height: 32px;
       border-radius: 6px;
     }
-    span {
-      margin-left: 10px;
+    .system-name {
+      padding-left: 10px;
       white-space: nowrap;
     }
   }
