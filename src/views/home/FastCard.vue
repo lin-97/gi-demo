@@ -1,5 +1,5 @@
 <template>
-  <a-card title="快捷操作" :bordered="false">
+  <a-card title="快捷操作" :bordered="false" size="medium">
     <a-card-grid :style="{ width: '33.33%' }" v-for="item in list" :key="item.name" class="card-grid">
       <a-card :bordered="false" hoverable>
         <a-row justify="center" align="center">

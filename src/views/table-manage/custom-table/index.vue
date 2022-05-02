@@ -1,84 +1,56 @@
 <template>
   <div class="main-table">
-    <a-alert banner>This is an info alert.</a-alert>
-    <a-form size="medium" label-align="right" auto-label-width :model="form" class="form">
-      <a-row :gutter="16" wrap>
-        <a-col :span="6">
-          <a-form-item field="value1" label="姓名">
-            <a-input v-model="form.value1" placeholder="请输入姓名" />
-          </a-form-item>
-        </a-col>
-        <a-col :span="6">
-          <a-form-item field="value2" label="手机">
-            <a-input v-model="form.value2" placeholder="请输入手机号码" />
-          </a-form-item>
-        </a-col>
-        <a-col :span="6">
-          <a-form-item field="value3" label="类型">
-            <a-select placeholder="请选择" :trigger-props="{ 'update-at-scroll': true }">
-              <a-option>北京</a-option>
-              <a-option>上海</a-option>
-              <a-option>广州</a-option>
-            </a-select>
-          </a-form-item>
-        </a-col>
-        <a-col :span="6">
-          <a-form-item field="value3" label="创建时间">
-            <a-date-picker v-model="form.value3" placeholder="请选择创建时间" />
-          </a-form-item>
-        </a-col>
-      </a-row>
-      <a-row :gutter="16" wrap>
-        <a-col :span="6">
-          <a-form-item field="value4" label="状态">
-            <a-select placeholder="请选择" :trigger-props="{ 'update-at-scroll': true }">
-              <a-option>已审核</a-option>
-              <a-option>未审核</a-option>
-            </a-select>
-          </a-form-item>
-        </a-col>
-        <a-col :span="6">
-          <a-form-item field="value5" label="标题">
-            <a-input v-model="form.value5" placeholder="please enter..." />
-          </a-form-item>
-        </a-col>
-        <a-col :span="12">
-          <a-space>
-            <a-button type="primary" size="medium">
-              <template #icon>
-                <icon-search />
-              </template>
-              <template #default>查询</template>
-            </a-button>
-            <a-button size="medium">
-              <template #default>重置</template>
-            </a-button>
-            <a-button type="text" size="medium">
-              <template #icon>
-                <icon-up />
-              </template>
-              <template #default>收起</template>
-            </a-button>
-          </a-space>
-        </a-col>
-      </a-row>
-    </a-form>
-
+    <a-row justify="space-between">
+      <a-space>
+        <a-button type="primary">
+          <template #icon><icon-plus /></template>
+          <span>新增</span>
+        </a-button>
+        <a-button type="primary" status="danger">
+          <template #icon><icon-delete /></template>
+          <span>删除</span>
+        </a-button>
+        <a-button>
+          <template #icon><icon-export /></template>
+          <span>导入</span>
+        </a-button>
+      </a-space>
+      <a-space :size="15">
+        <a-tooltip content="表格斑马纹">
+          <a-switch size="medium" />
+        </a-tooltip>
+        <a-tooltip content="刷新">
+          <icon-refresh :size="18" />
+        </a-tooltip>
+        <a-tooltip content="列设置">
+          <icon-settings :size="18" />
+        </a-tooltip>
+        <a-tooltip content="全屏">
+          <icon-fullscreen :size="18" />
+        </a-tooltip>
+      </a-space>
+    </a-row>
     <section class="table-box">
       <a-table
         :data="tableData"
         v-loading="loading"
-        :scroll="{ x: '100%', y: '100%' }"
+        :scroll="{ x: '100%', y: '100%', minWidth: 1000 }"
         :pagination="{ 'show-page-size': true }"
       >
         <template #columns>
-          <a-table-column title="序号">
+          <a-table-column title="序号" :width="60">
             <template #cell="cell">{{ cell.rowIndex + 1 }}</template>
           </a-table-column>
           <a-table-column title="姓名" data-index="name"></a-table-column>
+          <a-table-column title="头像" :width="100">
+            <template #cell="{ record }">
+              <a-avatar :size="30" :style="{ backgroundColor: record.color }">{{ record.name[0] }}</a-avatar>
+            </template>
+          </a-table-column>
+          <a-table-column title="手机号" data-index="phone" :width="150"></a-table-column>
           <a-table-column title="创建时间" data-index="startTime"></a-table-column>
           <a-table-column title="地址" data-index="address"></a-table-column>
-          <a-table-column title="状态" width="100">
+          <a-table-column title="状态" :width="100">
             <template #cell="{ record }">
               <a-switch v-model="record.status" size="medium">
                 <template #checked>开启</template>
@@ -86,13 +58,13 @@
               </a-switch>
             </template>
           </a-table-column>
-          <a-table-column title="操作" width="230">
+          <a-table-column title="操作" :width="200">
             <template #cell="{ record }">
               <a-space>
-                <a-button type="primary">修改</a-button>
-                <a-button>详情</a-button>
+                <a-button type="primary" size="mini">修改</a-button>
+                <a-button size="mini">详情</a-button>
                 <a-popconfirm content="您确定要删除该项吗?">
-                  <a-button type="primary" status="danger">删除</a-button>
+                  <a-button type="primary" status="danger" size="mini">删除</a-button>
                 </a-popconfirm>
               </a-space>
             </template>
@@ -100,12 +72,15 @@
         </template>
       </a-table>
     </section>
+
+    <GiFooter></GiFooter>
   </div>
 </template>
 
 <script setup lang="ts">
 import { reactive, ref } from 'vue'
 import { getTableList } from '@/apis/table'
+import GiFooter from '@/components/GiFooter.vue'
 
 const form = reactive({
   value1: '',
@@ -150,6 +125,7 @@ getTableData()
   margin: $margin;
   background: var(--color-bg-2);
   padding: $margin $padding;
+  padding-bottom: 0;
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
@@ -157,6 +133,7 @@ getTableData()
     margin-top: $margin;
   }
   .table-box {
+    margin-top: $margin;
     flex: 1;
     overflow: hidden;
   }

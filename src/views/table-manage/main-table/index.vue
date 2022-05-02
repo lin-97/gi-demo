@@ -73,7 +73,7 @@
         size="large"
         :data="tableData"
         v-loading="loading"
-        :scroll="{ x: '100%', y: '100%' }"
+        :scroll="{ x: '100%', y: '100%', minWidth: 1000 }"
         :pagination="{ 'show-page-size': true }"
       >
         <template #columns>

@@ -2,7 +2,7 @@
   <div class="file-list">
     <a-table
       row-key="id"
-      :scroll="{ x: '100%', y: '100%' }"
+      :scroll="{ x: '100%', y: '100%', minWidth: 600 }"
       :data="props.data"
       :bordered="false"
       :pagination="false"

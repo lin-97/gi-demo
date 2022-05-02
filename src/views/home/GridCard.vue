@@ -1,5 +1,5 @@
 <template>
-  <a-card title="项目" :bordered="false">
+  <a-card title="项目" :bordered="false" size="medium">
     <ul class="list">
       <li class="list-item" v-for="item in list" :key="item.name">
         <div class="head">

@@ -181,7 +181,7 @@ getTableData()
     min-width: 250px;
     height: 100%;
     flex-shrink: 0;
-    border-right: 1px solid $border-color;
+    border-right: 1px dashed $border-color;
     box-sizing: border-box;
     overflow: hidden;
     display: flex;

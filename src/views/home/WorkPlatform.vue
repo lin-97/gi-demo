@@ -1,5 +1,5 @@
 <template>
-  <a-card title="工作台" :bordered="false" class="card-box">
+  <a-card title="工作台" :bordered="false" size="medium" class="card-box">
     <a-row justify="space-between" align="center" class="work-platform">
       <a-space :size="15">
         <a-avatar :size="80">
