@@ -2,7 +2,7 @@
   <div class="detail" ref="containerRef">
     <a-affix :target="containerRef">
       <section class="head">
-        <a-page-header title="详情" subtitle="Base Detail Page">
+        <a-page-header title="详情" subtitle="Detail Page">
           <template #extra>
             <a-button>返回</a-button>
           </template>
@@ -78,7 +78,7 @@
       <a-card title="审批流程" size="medium" :bordered="false">
         <a-steps :current="2" style="margin: 20px 0">
           <a-step description="申请人：Lin">申请</a-step>
-          <a-step description="审批人：尤大大"
+          <a-step description="Mark"
             >领导审批<template #icon><GiDot></GiDot></template
           ></a-step>
           <a-step description="Echo">财务审批</a-step>

@@ -2,7 +2,7 @@
   <div class="detail" ref="containerRef">
     <a-affix :target="containerRef">
       <section class="head">
-        <a-page-header title="详情" subtitle="Base Detail Page">
+        <a-page-header title="详情" subtitle="Detail Page">
           <template #extra>
             <a-button>返回</a-button>
           </template>
@@ -38,7 +38,7 @@
     </section>
 
     <section class="item">
-      <a-descriptions title="其他信息" :column="1">
+      <a-descriptions title="其他信息" layout="inline-horizontal" :column="1">
         <a-descriptions-item label="姓名：">Lin</a-descriptions-item>
         <a-descriptions-item label="性别：">男</a-descriptions-item>
         <a-descriptions-item label="生日：">07月16日</a-descriptions-item>
@@ -90,6 +90,7 @@ const containerRef = ref()
     padding: 20px 30px;
     background: var(--color-bg-2);
     border-radius: 2px;
+    box-sizing: border-box;
   }
 }
 </style>
