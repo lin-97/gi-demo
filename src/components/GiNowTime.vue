@@ -1,19 +1,13 @@
 <template>
-  <div class="gi-now-time">
+  <div class="gi-now-time" v-if="timeStore.time">
     <GiSvgIcon name="time" :size="20"></GiSvgIcon>
-    <section class="time">{{ time }}</section>
+    <section class="time">{{ timeStore.time }}</section>
   </div>
 </template>
 
 <script setup lang="ts" name="GiNowTime">
-import { ref } from 'vue'
-import dayjs from 'dayjs'
-
-let time = ref('2022年01月01日 00:00:00')
-
-setInterval(() => {
-  time.value = dayjs(new Date()).format('YYYY年MM月DD日 HH:mm:ss')
-}, 1000)
+import { useTimeStore } from '@/store'
+const timeStore = useTimeStore()
 </script>
 
 <style lang="scss" scoped>
