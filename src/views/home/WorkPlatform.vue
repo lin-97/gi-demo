@@ -1,5 +1,8 @@
 <template>
   <a-card title="工作台" :bordered="false" size="medium" class="card-box">
+    <template #extra>
+      <GiNowTime></GiNowTime>
+    </template>
     <a-row justify="space-between" align="center" class="work-platform">
       <a-space :size="15">
         <a-avatar :size="80">
@@ -21,7 +24,9 @@
   </a-card>
 </template>
 
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import GiNowTime from '@/components/GiNowTime.vue'
+</script>
 
 <style lang="scss" scoped>
 :deep(.arco-statistic-title) {

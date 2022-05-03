@@ -26,7 +26,9 @@ import Step1 from './Step1.vue'
   display: flex;
   justify-content: center;
   .form-box {
-    width: 800px;
+    width: 50%;
+    min-width: 400px;
+    margin-top: 30px;
     flex-shrink: 0;
   }
 }
