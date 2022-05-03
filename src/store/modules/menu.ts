@@ -49,7 +49,23 @@ export const useMenuStore = defineStore({
           name: '表单管理',
           path: '/form-manage',
           keepAlive: true,
-          hidden: false
+          hidden: false,
+          children: [
+            {
+              id: 'JCBD',
+              name: '基础表单',
+              path: '/form-manage/base-form',
+              keepAlive: false,
+              hidden: false
+            },
+            {
+              id: 'FBBD',
+              name: '分步表单',
+              path: '/form-manage/step-form',
+              keepAlive: false,
+              hidden: false
+            }
+          ]
         },
         {
           icon: 'menu-table',

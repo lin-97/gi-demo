@@ -53,10 +53,16 @@ const routes = [
         meta: { title: '文件详情', keepAlive: false }
       },
       {
-        path: '/form-manage',
-        name: 'FormManage',
-        component: () => import('@/views/form-manage/index.vue'),
-        meta: { title: '表单管理', keepAlive: false }
+        path: '/form-manage/base-form',
+        name: 'FormManageBaseForm',
+        component: () => import('@/views/form-manage/base-form/index.vue'),
+        meta: { title: '基础表单', keepAlive: false }
+      },
+      {
+        path: '/form-manage/step-form',
+        name: 'FormManageStepForm',
+        component: () => import('@/views/form-manage/step-form/index.vue'),
+        meta: { title: '分步表单', keepAlive: false }
       },
       {
         path: '/table-manage/main-table',

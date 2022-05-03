@@ -1,6 +1,6 @@
 <template>
   <div class="form-manage">
-    <a-page-header title="表单管理" subtitle="Form Manage" :show-back="false"> </a-page-header>
+    <a-page-header title="基础表单" subtitle="Base Form" :show-back="false"> </a-page-header>
 
     <section class="content">
       <a-space :size="50">
@@ -54,7 +54,7 @@
   </div>
 </template>
 
-<script setup lang="ts">
+<script setup lang="ts" name="BaseForm">
 import { reactive, ref } from 'vue'
 const treeData = ref([
   {
