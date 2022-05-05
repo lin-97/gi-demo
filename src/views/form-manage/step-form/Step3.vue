@@ -45,7 +45,7 @@ const again = () => {
   display: flex;
   flex-direction: column;
   .info-box {
-    padding: 30px 50px;
+    padding: 20px 50px;
     margin-bottom: 30px;
     background: var(--color-fill-1);
   }

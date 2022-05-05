@@ -57,9 +57,10 @@ const next = async () => {
   // formRef.value.validate((res) => {
   //   console.log(res)
   // })
+  console.log('formRef', formRef)
   try {
     const res = await formRef.value.validate()
-    console.log(res)
+    console.log('000', res)
     emit('next', form)
   } catch (error) {
     console.log(error)
