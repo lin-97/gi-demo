@@ -85,11 +85,6 @@ const login = () => {
 </script>
 
 <style lang="scss" scoped>
-:deep(.arco-checkbox-icon) {
-  width: 16px;
-  height: 16px;
-  border-width: 1px;
-}
 .register-btn,
 .register-btn:hover {
   color: var(--color-text-2);

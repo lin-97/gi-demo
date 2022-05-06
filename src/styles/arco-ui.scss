@@ -115,3 +115,45 @@
     background-color: rgb(var(--primary-6));
   }
 }
+
+// 复选框
+.arco-checkbox {
+  .arco-checkbox-icon {
+    width: 14px;
+    height: 14px;
+    position: relative;
+    display: inline-block;
+    transition: border-color 0.25s cubic-bezier(0.71, -0.46, 0.29, 1.46),
+      background-color 0.25s cubic-bezier(0.71, -0.46, 0.29, 1.46);
+    &::after {
+      display: none;
+    }
+    &::before {
+      box-sizing: content-box;
+      content: '';
+      border: 1px solid #fff;
+      border-left: 0;
+      border-top: 0;
+      height: 7px;
+      left: 4px;
+      position: absolute;
+      top: 1px;
+      transform: rotate(45deg) scaleY(0);
+      width: 3px;
+      transition: transform 0.15s ease-in 0.05s;
+      transform-origin: center;
+    }
+    .arco-checkbox-icon-check {
+      display: none !important;
+      visibility: hidden;
+    }
+  }
+}
+.arco-checkbox-checked {
+  .arco-checkbox-icon {
+    &::before {
+      border-color: #fff;
+      transform: rotate(45deg);
+    }
+  }
+}
