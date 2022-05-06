@@ -1,14 +1,5 @@
 <template>
   <div class="test">
-    <!-- <a-menu
-      v-model:selected-keys="selectedKeys"
-      :style="{ width: '200px', borderRadius: '4px', flexShrink: 0 }"
-      @menu-item-click="menuItemClick"
-    >
-      
-      <a-menu-item v-for="item in menuList" :key="item.value">{{ item.name }}</a-menu-item>
-    </a-menu> -->
-
     <section class="left">
       <GiTitle title="组件示例" style="margin-bottom: 14px; padding: 0"></GiTitle>
       <a-tabs position="left" hide-content v-model:active-key="selectedKey">
