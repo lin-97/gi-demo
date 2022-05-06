@@ -8,9 +8,9 @@
       </a-steps>
 
       <div :key="current" :class="animatedName">
-        <Step1 v-if="current === 1" @next="next"></Step1>
-        <Step2 v-else-if="current === 2" :form="form" @next="next" @prev="prev"></Step2>
-        <Step3 v-else="current === 3" :form="form" @again="current = 1"></Step3>
+        <Step1 v-show="current === 1" @next="next"></Step1>
+        <Step2 v-show="current === 2" :form="form" @next="next" @prev="prev"></Step2>
+        <Step3 v-show="current === 3" :form="form" @again="current = 1"></Step3>
       </div>
     </section>
   </div>
@@ -21,12 +21,19 @@ import { ref, watch } from 'vue'
 import Step1 from './Step1.vue'
 import Step2 from './Step2.vue'
 import Step3 from './Step3.vue'
+import type { StepForm } from './type'
 
 let current = ref(1)
-let form = ref({})
-let animatedName = ref('aaa')
+let form = ref<StepForm>({
+  payAccount: '',
+  recAccount: '',
+  payType: 1,
+  recName: '',
+  amount: 0
+})
+let animatedName = ref('to-right')
 
-const next = (formData) => {
+const next = (formData: StepForm) => {
   current.value++
   if (formData) {
     form.value = formData
@@ -41,16 +48,16 @@ watch(
   () => current.value,
   (newVal, oldVal) => {
     if (newVal > oldVal || (newVal === 1 && oldVal === 3)) {
-      animatedName.value = 'aaa'
+      animatedName.value = 'to-right'
     } else {
-      animatedName.value = 'bbb'
+      animatedName.value = 'to-left'
     }
   }
 )
 </script>
 
 <style lang="scss" scoped>
-@keyframes to-right {
+@keyframes toRight {
   0% {
     opacity: 0.5;
     transform: translateX(-50px);
@@ -60,7 +67,7 @@ watch(
     transform: translateX(0);
   }
 }
-@keyframes to-left {
+@keyframes toLeft {
   0% {
     opacity: 0.5;
     transform: translateX(50px);
@@ -70,12 +77,12 @@ watch(
     transform: translateX(0);
   }
 }
-.aaa {
-  animation-name: to-right;
+.to-right {
+  animation-name: toRight;
   animation-duration: 0.5s;
 }
-.bbb {
-  animation-name: to-left;
+.to-left {
+  animation-name: toLeft;
   animation-duration: 0.5s;
 }
 .step-form {

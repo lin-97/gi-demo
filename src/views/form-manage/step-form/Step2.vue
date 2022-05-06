@@ -1,19 +1,5 @@
 <template>
   <div class="step-2">
-    <!-- <a-form size="medium" auto-label-width>
-      <a-form-item label="付款账户">
-        {{ form.payAccount }}
-      </a-form-item>
-      <a-form-item label="收款账户">
-        {{ form.recAccount }}
-      </a-form-item>
-      <a-form-item label="收款人姓名">
-        {{ form.recName }}
-      </a-form-item>
-      <a-form-item label="转账金额">
-        {{ form.amount }}
-      </a-form-item>
-    </a-form> -->
     <a-descriptions :column="1" size="medium">
       <a-descriptions-item label="付款账户">{{ form.payAccount }}</a-descriptions-item>
       <a-descriptions-item label="收款账户">{{ form.recAccount }}</a-descriptions-item>
@@ -38,13 +24,20 @@
 </template>
 
 <script setup lang="ts" name="Step2">
-import { reactive, ref } from 'vue'
+import { nextTick, reactive, ref, type PropType } from 'vue'
+import type { StepForm } from './type'
 const emit = defineEmits(['next', 'prev'])
 
-const props = defineProps({
+defineProps({
   form: {
-    type: Object,
-    default: () => {}
+    type: Object as PropType<StepForm>,
+    default: () => ({
+      payAccount: '',
+      recAccount: '',
+      payType: 1,
+      recName: '',
+      amount: 0
+    })
   }
 })
 
@@ -59,18 +52,24 @@ const rules = {
 let loading = ref(false)
 const formRef = ref()
 
-// 下一步
-const next = async () => {
-  try {
-    loading.value = true
-    await formRef.value.validate()
-    setTimeout(() => {
-      emit('next')
-      loading.value = false
-    }, 1000)
-  } catch (error) {
-    return error
-  }
+// 下一步|提交
+const next = () => {
+  nextTick(async () => {
+    try {
+      loading.value = true
+      const res = await formRef.value.validate()
+      if (!res) {
+        setTimeout(() => {
+          emit('next')
+          loading.value = false
+        }, 1000)
+      } else {
+        loading.value = false
+      }
+    } catch (error) {
+      return error
+    }
+  })
 }
 
 // 上一步

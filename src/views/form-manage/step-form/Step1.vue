@@ -32,10 +32,11 @@
 </template>
 
 <script setup lang="ts" name="Step1">
-import { reactive, ref } from 'vue'
+import { reactive, ref, nextTick } from 'vue'
+import type { StepForm } from './type'
 const emit = defineEmits(['next'])
 
-const form = reactive({
+const form: StepForm = reactive({
   payAccount: '',
   recAccount: '1997***6962@qq.com',
   payType: 1, // 1:微信 2: 支付宝
@@ -53,19 +54,13 @@ const rules = {
 const formRef = ref()
 
 // 下一步
-const next = async () => {
-  // formRef.value.validate((res) => {
-  //   console.log(res)
-  // })
-  console.log('formRef', formRef)
-  try {
+const next = () => {
+  nextTick(async () => {
     const res = await formRef.value.validate()
-    console.log('000', res)
-    emit('next', form)
-  } catch (error) {
-    console.log(error)
-    return error
-  }
+    if (!res) {
+      emit('next', form)
+    }
+  })
 }
 </script>
 

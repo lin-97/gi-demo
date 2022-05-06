@@ -22,7 +22,7 @@ const props = defineProps({
   height: 44px;
   background: var(--color-bg-3);
   padding: 0 $padding;
-  box-shadow: 0px 2px 6px 0px rgba(0, 0, 0, 0.08);
+  box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.08);
   z-index: 99;
   .title {
     font-size: 14px;
