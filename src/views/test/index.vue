@@ -73,6 +73,7 @@ const menuList = ref([
   left: 0;
 }
 ::v-deep .arco-tabs-nav-vertical {
+  float: none;
   flex-direction: row;
 }
 .test {
