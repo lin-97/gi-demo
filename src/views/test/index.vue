@@ -25,10 +25,12 @@ import Tag from './components/Tag.vue'
 import NavBar from './components/NavBar.vue'
 import Title from './components/Title.vue'
 import IconSelector from './components/IconSelector.vue'
+import Option from './components/Option.vue'
 
 const selectedKey = ref(0)
 
 const menuList = ref([
+  { name: '单选框/复选框', value: Option },
   { name: '按钮', value: Button },
   { name: 'GiTextRadio', value: TextRadio },
   { name: 'GiTextSwitch', value: TextSwitch },
@@ -80,6 +82,7 @@ const menuList = ref([
     background: var(--color-bg-2);
     box-sizing: border-box;
     border-radius: 2px;
+    overflow-y: auto;
   }
   .content {
     flex: 1;
