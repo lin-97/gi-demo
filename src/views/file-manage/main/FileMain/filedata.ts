@@ -34,7 +34,7 @@ const list = [
     type: 'file',
     name: '致你-予星',
     extendName: 'mp3',
-    src: 'https://webfs.ali.kugou.com/202204012122/dc1d73941a057545cb43e9c91ff57e39/KGTX/CLTX001/f34b98bf8191b1724e3a6d934913b5f2.mp3',
+    src: 'https://webfs.ali.kugou.com/202205080014/0b56ab5801cafaaf59d94eb86622e826/part/0/960111/KGTX/CLTX001/2ee15e52cecb80545bcaf91431a73dc8.mp3',
     updateTime: '2022-01-20 18:30:00',
     isDir: false,
     filePath: '/'
@@ -42,30 +42,10 @@ const list = [
   {
     id: '094',
     type: 'file',
-    name: '南山南(DJ)-张磊',
+    name: '水星记-郭顶',
     extendName: 'mp3',
-    src: 'https://webfs.ali.kugou.com/202204012131/a5e1e865233904049417abf60b48cd9e/G053/M09/1F/08/FZQEAFaMl9KACO9ZAD9wLCIqc70955.mp3',
+    src: 'http://win.web.ri01.sycdn.kuwo.cn/83e8d220cafbe04e70cb74b80b4a9e09/627698c9/resource/n3/48/98/2577088121.mp3',
     updateTime: '2022-01-20 18:30:00',
-    isDir: false,
-    filePath: '/'
-  },
-  {
-    id: '084',
-    type: 'file',
-    name: '须尽欢-渡',
-    extendName: 'mp3',
-    src: 'https://webfs.ali.kugou.com/202204012135/427c74d81057bdc2730e3f839d7d5cfb/KGTX/CLTX001/3b53e2510350f35d9737b4a6228a851d.mp3',
-    updateTime: '2022-01-20 18:30:00',
-    isDir: false,
-    filePath: '/'
-  },
-  {
-    id: '065',
-    type: 'file',
-    name: '这一生关于你的风景-隔壁老樊',
-    extendName: 'mp3',
-    src: 'https://webfs.ali.kugou.com/202204012139/f85713b77ac416d4eee3fd582e8f4b6d/KGTX/CLTX001/9af018aea4fba12bf9d18a23dfe996a6.mp3',
-    updateTime: '2022-01-20 16:30:00',
     isDir: false,
     filePath: '/'
   },
@@ -214,6 +194,16 @@ const list = [
     name: '头像3',
     extendName: 'png',
     src: 'https://img0.baidu.com/it/u=2927161611,205964738&fm=253&fmt=auto&app=138&f=JPEG?w=360&h=360',
+    updateTime: '2022-01-20 18:30:00',
+    isDir: false,
+    filePath: '/'
+  },
+  {
+    id: '111',
+    type: 'file',
+    name: '头像4',
+    extendName: 'png',
+    src: 'https://s1.ax1x.com/2022/05/07/Ol2fkF.jpg',
     updateTime: '2022-01-20 18:30:00',
     isDir: false,
     filePath: '/'

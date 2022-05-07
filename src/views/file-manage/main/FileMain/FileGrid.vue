@@ -121,6 +121,7 @@ const handleRightMenuItemClick = (mode: string, item: File.FileItem) => {
     height: 60px;
     display: flex;
     justify-content: center;
+    overflow: hidden;
     .img {
       width: auto;
       height: 100%;

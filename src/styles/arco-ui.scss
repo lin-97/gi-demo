@@ -129,29 +129,33 @@
     }
   }
   .arco-checkbox-icon {
-    width: 16px;
-    height: 16px;
+    width: 15px;
+    height: 15px;
     position: relative;
     display: inline-block;
     transition: border-color 0.25s cubic-bezier(0.71, -0.46, 0.29, 1.46),
       background-color 0.25s cubic-bezier(0.71, -0.46, 0.29, 1.46);
-    &::after {
+    &::before {
       display: none;
     }
-    &::before {
+    &::after {
       box-sizing: content-box;
       content: '';
       border: 1px solid #fff;
       border-left: 0;
       border-top: 0;
       height: 8px;
-      left: 5px;
+      left: 4px;
       position: absolute;
-      bottom: 0.26em;
+      bottom: 3px;
       transform: rotate(45deg) scaleY(0);
       width: 4px;
       transition: transform 0.15s ease-in 0.05s;
       transform-origin: center;
+      // 替换原有属性
+      background: none;
+      top: inherit;
+      border-radius: 0;
     }
     &:hover {
       border-color: rgb(var(--primary-6));
@@ -164,7 +168,7 @@
 }
 .arco-checkbox-checked {
   .arco-checkbox-icon {
-    &::before {
+    &::after {
       border-color: #fff;
       transform: rotate(45deg) scaleY(1);
     }
@@ -180,10 +184,13 @@
       background-color: #fff;
       width: 14px;
       height: 1px;
-      transform: scale(0.5) translateY(-50%);
+      transform: scaleX(0.6);
       left: 0;
       right: 0;
-      top: 50%;
+      top: 6px;
+    }
+    &::after {
+      display: none;
     }
   }
 }
