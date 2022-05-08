@@ -106,6 +106,13 @@
   height: 16px;
 }
 
+.arco-radio:hover .arco-radio-icon-hover::before {
+  background: none;
+}
+.arco-radio:hover .arco-icon-hover:not(.arco-icon-hover-disabled) .arco-radio-icon {
+  border-color: rgb(var(--primary-6));
+}
+
 // 分页组件
 .arco-pagination-item-active {
   color: #fff;
@@ -117,15 +124,27 @@
 }
 
 // 复选框
+.arco-checkbox:hover .arco-checkbox-icon-hover:not(.arco-icon-hover-disabled):before,
+.arco-checkbox > input[type='checkbox']:focus .arco-checkbox-icon-hover::before {
+  background: none;
+}
+
+.arco-checkbox > input[type='checkbox']:focus + .arco-checkbox-icon-hover::before {
+  background: none;
+}
+
+.arco-checkbox > input[type='checkbox']:focus + .arco-checkbox-icon {
+  border-color: rgb(var(--primary-6)) !important;
+}
+
 .arco-checkbox {
   .arco-icon-hover {
+    width: 15px;
+    height: 15px;
     &::before {
-      background: none;
-    }
-  }
-  .arco-checkbox-icon-hover {
-    &::before {
-      background: none;
+      &:hover {
+        background: none;
+      }
     }
   }
   .arco-checkbox-icon {
@@ -133,6 +152,7 @@
     height: 15px;
     position: relative;
     display: inline-block;
+    flex-shrink: 0;
     transition: border-color 0.25s cubic-bezier(0.71, -0.46, 0.29, 1.46),
       background-color 0.25s cubic-bezier(0.71, -0.46, 0.29, 1.46);
     &::before {
