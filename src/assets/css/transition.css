@@ -143,3 +143,34 @@
   opacity: 0;
   transform: scale(1.1, 0.2);
 }
+
+.my-zoom-modal-enter-from,
+.my-zoom-modal-appear-from {
+  transform: scale(0.5, 0.5);
+  opacity: 0;
+}
+
+.my-zoom-modal-enter-to,
+.my-zoom-modal-appear-to {
+  transform: scale(1, 1);
+  opacity: 1;
+}
+
+.my-zoom-modal-enter-active,
+.my-zoom-modal-appear-active {
+  transition: opacity 0.3s, transform 0.3s;
+}
+
+.my-zoom-modal-leave-from {
+  transform: scale(1, 1);
+  opacity: 1;
+}
+
+.my-zoom-modal-leave-to {
+  transform: scale(0.9, 0.9);
+  opacity: 0;
+}
+
+.my-zoom-modal-leave-active {
+  transition: opacity 0.3s, transform 0.3s;
+}

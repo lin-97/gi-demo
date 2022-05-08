@@ -11,7 +11,7 @@
         :data="tableData"
         row-key="id"
         v-loading="loading"
-        :scroll="{ x: '100%', y: '100%' }"
+        :scroll="{ x: '100%', y: '100%', minWidth: 900 }"
         :pagination="{ 'show-page-size': true }"
       >
         <template #columns>

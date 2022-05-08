@@ -1,0 +1,1 @@
+import{r as e}from"./axios.95a3b452.js";function m(){return e.get("/mock/system-manage/dept/list")}function r(t){return e.get("/mock/system-manage/user/list",t)}function n(t){return e.get("/mock/system-manage/role/list",t)}export{r as a,n as b,m as g};

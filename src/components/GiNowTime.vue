@@ -1,13 +1,13 @@
 <template>
-  <div class="gi-now-time" v-if="timeStore.time">
+  <div class="gi-now-time" v-if="appStore.time">
     <GiSvgIcon name="time" :size="20"></GiSvgIcon>
-    <section class="time">{{ timeStore.time }}</section>
+    <section class="time">{{ appStore.time }}</section>
   </div>
 </template>
 
 <script setup lang="ts" name="GiNowTime">
-import { useTimeStore } from '@/store'
-const timeStore = useTimeStore()
+import { useAppStore } from '@/store'
+const appStore = useAppStore()
 </script>
 
 <style lang="scss" scoped>

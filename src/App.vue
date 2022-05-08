@@ -5,8 +5,8 @@
 </template>
 
 <script setup lang="ts" name="App">
-import { useTimeStore } from '@/store'
-const timeStore = useTimeStore()
+import { useAppStore } from '@/store'
+const appStore = useAppStore()
 
-timeStore.initTime()
+appStore.initTime()
 </script>
