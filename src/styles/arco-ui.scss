@@ -129,6 +129,10 @@
   background: none;
 }
 
+.arco-checkbox-disabled:hover .arco-checkbox-icon {
+  border-color: var(--color-fill-3) !important;
+}
+
 .arco-checkbox > input[type='checkbox']:focus + .arco-checkbox-icon-hover::before {
   background: none;
 }
@@ -138,9 +142,12 @@
 }
 
 .arco-checkbox {
+  &:hover {
+    .arco-checkbox-icon {
+      border-color: rgb(var(--primary-6));
+    }
+  }
   .arco-icon-hover {
-    width: 15px;
-    height: 15px;
     &::before {
       &:hover {
         background: none;
@@ -148,11 +155,11 @@
     }
   }
   .arco-checkbox-icon {
-    width: 15px;
-    height: 15px;
+    width: 14px;
+    height: 14px;
     position: relative;
     display: inline-block;
-    flex-shrink: 0;
+    box-sizing: border-box;
     transition: border-color 0.25s cubic-bezier(0.71, -0.46, 0.29, 1.46),
       background-color 0.25s cubic-bezier(0.71, -0.46, 0.29, 1.46);
     &::before {
@@ -164,21 +171,18 @@
       border: 1px solid #fff;
       border-left: 0;
       border-top: 0;
-      height: 8px;
-      left: 4px;
+      height: 7px;
+      width: 3px;
       position: absolute;
-      bottom: 3px;
+      top: 1px !important;
+      left: 4px;
       transform: rotate(45deg) scaleY(0);
-      width: 4px;
       transition: transform 0.15s ease-in 0.05s;
       transform-origin: center;
       // 替换原有属性
       background: none;
       top: inherit;
       border-radius: 0;
-    }
-    &:hover {
-      border-color: rgb(var(--primary-6));
     }
     .arco-checkbox-icon-check {
       display: none !important;
@@ -191,26 +195,32 @@
     &::after {
       border-color: #fff;
       transform: rotate(45deg) scaleY(1);
+      background-color: rgb(var(--primary-6));
     }
   }
 }
 
 .arco-checkbox-indeterminate {
   .arco-checkbox-icon {
+    background-color: rgb(var(--primary-6));
+    border-color: rgb(var(--primary-6));
     &::before {
       content: '';
       position: absolute;
       display: block;
       background-color: #fff;
-      width: 14px;
-      height: 1px;
-      transform: scaleX(0.6);
+      height: 2px;
+      transform: scale(0.5);
       left: 0;
       right: 0;
-      top: 6px;
+      top: 5px;
     }
     &::after {
       display: none;
     }
   }
+}
+
+.arco-checkbox-label {
+  line-height: 1;
 }

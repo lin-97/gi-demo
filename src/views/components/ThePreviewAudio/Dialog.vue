@@ -39,28 +39,36 @@ onMounted(() => {
 
 const { width: windowWidth, height: windowHeight } = useWindowSize()
 const { width: boxWidth, height: boxHeight } = useElementSize(audioRef)
+
+const axis = ref({ top: 40, left: windowWidth.value - boxWidth.value })
+const obj = JSON.parse(sessionStorage.getItem('AudioDialogXY') as string)
+if (obj && obj.top && obj.left) {
+  axis.value.top = obj.top
+  axis.value.left = obj.left
+}
 const { x, y } = useDraggable(audioRef, {
-  initialValue: { x: windowWidth.value - boxWidth.value, y: 40 }
+  initialValue: { x: axis.value.left - boxWidth.value, y: axis.value.top }
 })
 
 const audioStyle = computed(() => {
-  let left: number | string = x.value + 'px'
-  let top: number | string = y.value + 'px'
+  let left: number | string = x.value
+  let top: number | string = y.value
   if (x.value > windowWidth.value - boxWidth.value) {
-    left = windowWidth.value - boxWidth.value + 'px'
+    left = windowWidth.value - boxWidth.value
   }
   if (x.value < 0) {
     left = 0
   }
   if (y.value > windowHeight.value - boxHeight.value) {
-    top = windowHeight.value - boxHeight.value + 'px'
+    top = windowHeight.value - boxHeight.value
   }
   if (y.value < 0) {
     top = 0
   }
+  sessionStorage.setItem('AudioDialogXY', JSON.stringify({ top, left }))
   return {
-    left: left,
-    top: top
+    left: left + 'px',
+    top: top + 'px'
   }
 })
 

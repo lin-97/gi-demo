@@ -61,10 +61,13 @@
 
           <section class="table-box">
             <a-table
+              size="mini"
+              row-key="id"
               :data="tableData"
               v-loading="loading"
               :scroll="{ x: '100%', y: '100%', minWidth: 800 }"
               :pagination="{ 'show-page-size': true }"
+              :row-selection="{ type: 'checkbox', showCheckedAll: true }"
             >
               <template #columns>
                 <a-table-column title="序号">

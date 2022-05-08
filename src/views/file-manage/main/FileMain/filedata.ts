@@ -193,16 +193,6 @@ const list = [
     type: 'file',
     name: '头像3',
     extendName: 'png',
-    src: 'https://img0.baidu.com/it/u=2927161611,205964738&fm=253&fmt=auto&app=138&f=JPEG?w=360&h=360',
-    updateTime: '2022-01-20 18:30:00',
-    isDir: false,
-    filePath: '/'
-  },
-  {
-    id: '111',
-    type: 'file',
-    name: '头像4',
-    extendName: 'png',
     src: 'https://s1.ax1x.com/2022/05/07/Ol2fkF.jpg',
     updateTime: '2022-01-20 18:30:00',
     isDir: false,
