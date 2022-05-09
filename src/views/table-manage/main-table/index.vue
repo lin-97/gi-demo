@@ -70,7 +70,6 @@
         stripe
         row-key="id"
         page-position="bottom"
-        size="mini"
         :data="tableData"
         v-loading="loading"
         :scroll="{ x: '100%', y: '100%', minWidth: 1000 }"

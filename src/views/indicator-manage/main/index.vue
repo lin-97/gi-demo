@@ -61,7 +61,6 @@
 
           <section class="table-box">
             <a-table
-              size="mini"
               row-key="id"
               :data="tableData"
               v-loading="loading"
