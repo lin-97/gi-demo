@@ -42,7 +42,7 @@ const menuList = ref([
 </script>
 
 <style lang="scss" scoped>
-::v-deep .arco-tabs-nav-vertical.arco-tabs-nav-type-line .arco-tabs-tab {
+:deep(.arco-tabs-nav-vertical.arco-tabs-nav-type-line .arco-tabs-tab) {
   padding: 0;
   margin: 0;
   padding: 8px 16px;
@@ -58,14 +58,14 @@ const menuList = ref([
     background: rgba(var(--primary-6), 0.08);
   }
 }
-::v-deep .arco-tabs-nav-vertical::before {
+:deep(.arco-tabs-nav-vertical::before) {
   left: 0;
   display: none;
 }
-::v-deep .arco-tabs-nav-vertical .arco-tabs-nav-ink {
+:deep(.arco-tabs-nav-vertical .arco-tabs-nav-ink) {
   left: 0;
 }
-::v-deep .arco-tabs-nav-vertical {
+:deep(.arco-tabs-nav-vertical) {
   float: none;
   flex-direction: row;
 }
