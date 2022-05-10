@@ -163,8 +163,22 @@
     box-sizing: border-box;
     transition: border-color 0.25s cubic-bezier(0.71, -0.46, 0.29, 1.46),
       background-color 0.25s cubic-bezier(0.71, -0.46, 0.29, 1.46);
+    // display: inline-flex;
+    // justify-content: center;
+    // align-items: center;
     &::before {
-      display: none;
+      // display: none;
+      content: '';
+      position: absolute;
+      display: block;
+      background-color: #fff;
+      width: 0;
+      height: 4px;
+      transform: scale(0.6, 0.5);
+      left: 50%;
+      right: 0;
+      top: 5px;
+      transition: all 0.25s;
     }
     &::after {
       box-sizing: content-box;
@@ -193,6 +207,9 @@
 }
 .arco-checkbox-checked {
   .arco-checkbox-icon {
+    &::before {
+      display: none;
+    }
     &::after {
       border-color: #fff;
       transform: rotate(45deg) scaleY(1);
@@ -205,6 +222,9 @@
   .arco-checkbox-icon {
     background-color: rgb(var(--primary-6));
     border-color: rgb(var(--primary-6));
+    // display: inline-flex;
+    // justify-content: center;
+    // align-items: center;
     &::before {
       content: '';
       position: absolute;
