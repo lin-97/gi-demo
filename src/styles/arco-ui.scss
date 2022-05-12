@@ -92,35 +92,12 @@
 }
 
 // 复选框
-.arco-checkbox:hover .arco-checkbox-icon-hover:not(.arco-icon-hover-disabled):before,
-.arco-checkbox > input[type='checkbox']:focus .arco-checkbox-icon-hover::before {
-  background: none;
-}
-
-.arco-checkbox-disabled:hover .arco-checkbox-icon {
-  border-color: var(--color-border-3) !important;
-}
-
-.arco-checkbox > input[type='checkbox']:focus + .arco-checkbox-icon-hover::before {
-  background: none;
-}
-
-.arco-checkbox > input[type='checkbox']:focus + .arco-checkbox-icon {
-  border-color: rgb(var(--primary-6)) !important;
-}
-
 .arco-checkbox {
-  &:hover {
-    .arco-checkbox-icon {
-      border-color: rgb(var(--primary-6));
-    }
-  }
   .arco-icon-hover {
+    width: 16px;
     height: 16px;
     &::before {
-      &:hover {
-        background: none;
-      }
+      background: none;
     }
   }
   .arco-checkbox-icon {
@@ -170,6 +147,7 @@
     }
   }
 }
+
 .arco-checkbox-checked {
   .arco-checkbox-icon {
     &::before {
@@ -180,6 +158,27 @@
       transform: rotate(45deg) scaleY(1);
     }
   }
+}
+
+.arco-checkbox:hover .arco-checkbox-icon {
+  border-color: rgb(var(--primary-6));
+}
+
+.arco-checkbox-disabled:hover .arco-checkbox-icon {
+  border-color: var(--color-fill-3);
+}
+
+.arco-checkbox:hover .arco-checkbox-icon-hover:not(.arco-icon-hover-disabled):before,
+.arco-checkbox > input[type='checkbox']:focus .arco-checkbox-icon-hover::before {
+  background: none;
+}
+
+.arco-checkbox > input[type='checkbox']:focus + .arco-checkbox-icon-hover::before {
+  background: none;
+}
+
+.arco-checkbox > input[type='checkbox']:focus + .arco-checkbox-icon {
+  border-color: rgb(var(--primary-6)) !important;
 }
 
 .arco-checkbox-indeterminate {
