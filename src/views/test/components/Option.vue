@@ -7,7 +7,7 @@
         <a-checkbox></a-checkbox>
         <a-checkbox></a-checkbox>
         <a-checkbox></a-checkbox>
-        <a-checkbox></a-checkbox>
+        <a-checkbox :default-checked="true" disabled>禁用</a-checkbox>
         <a-checkbox disabled>禁用</a-checkbox>
         <a-checkbox :indeterminate="flag">半选</a-checkbox>
         <a-switch v-model="flag"></a-switch>
@@ -30,6 +30,12 @@
         <a-radio value="C" disabled>C</a-radio>
         <a-radio value="D">D</a-radio>
       </a-radio-group>
+
+      <a-space style="margin-top: 20px">
+        <a-radio value="radio">Radio</a-radio>
+        <a-radio value="disabled radio" :default-checked="true" disabled>Disabled Radio</a-radio>
+        <a-radio value="disabled radio" disabled>Disabled Radio</a-radio>
+      </a-space>
     </a-card>
   </div>
 </template>

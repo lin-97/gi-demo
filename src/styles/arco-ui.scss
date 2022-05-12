@@ -81,38 +81,6 @@
   }
 }
 
-// 单选按钮组件
-.arco-radio-icon {
-  border: 1px solid var(--color-border-3);
-  width: 16px;
-  height: 16px;
-}
-.arco-radio-icon::after {
-  top: 0px;
-  left: 0px;
-  width: 14px;
-  height: 14px;
-}
-.arco-radio-checked .arco-radio-icon {
-  background-color: var(--bg-color-2);
-  flex-shrink: 0;
-}
-.arco-radio-checked .arco-radio-icon::after {
-  transform: scale(0.6) !important;
-  background-color: rgb(var(--primary-6));
-  top: -1px;
-  left: -1px;
-  width: 16px;
-  height: 16px;
-}
-
-.arco-radio:hover .arco-radio-icon-hover::before {
-  background: none;
-}
-.arco-radio:hover .arco-icon-hover:not(.arco-icon-hover-disabled) .arco-radio-icon {
-  border-color: rgb(var(--primary-6));
-}
-
 // 分页组件
 .arco-pagination-item-active {
   color: #fff;
@@ -163,9 +131,6 @@
     box-sizing: border-box;
     transition: border-color 0.25s cubic-bezier(0.71, -0.46, 0.29, 1.46),
       background-color 0.25s cubic-bezier(0.71, -0.46, 0.29, 1.46);
-    // display: inline-flex;
-    // justify-content: center;
-    // align-items: center;
     &::before {
       // display: none;
       content: '';
@@ -213,7 +178,6 @@
     &::after {
       border-color: #fff;
       transform: rotate(45deg) scaleY(1);
-      background-color: rgb(var(--primary-6));
     }
   }
 }
@@ -222,9 +186,6 @@
   .arco-checkbox-icon {
     background-color: rgb(var(--primary-6));
     border-color: rgb(var(--primary-6));
-    // display: inline-flex;
-    // justify-content: center;
-    // align-items: center;
     &::before {
       content: '';
       position: absolute;
@@ -245,4 +206,67 @@
 
 .arco-checkbox-label {
   line-height: 1;
+}
+
+// 单选框
+.arco-radio-icon {
+  border: 1px solid var(--color-border-3);
+  width: 16px;
+  height: 16px;
+  box-sizing: border-box;
+  &::after {
+    top: 0px;
+    left: 0px;
+    width: 14px;
+    height: 14px;
+    transform: scale(0);
+  }
+}
+
+.arco-radio-checked {
+  &:hover {
+    &.arco-radio-disabled {
+      .arco-radio-icon {
+        background-color: var(--color-bg-2);
+        border-color: var(--color-primary-light-3);
+        &:after {
+          background-color: var(--color-primary-light-3);
+        }
+      }
+    }
+  }
+  &.arco-radio-disabled {
+    .arco-radio-icon {
+      background-color: var(--color-bg-2);
+      border-color: var(--color-primary-light-3);
+      &:after {
+        background-color: var(--color-primary-light-3);
+      }
+    }
+  }
+  .arco-radio-icon {
+    background-color: var(--color-bg-2);
+    flex-shrink: 0;
+    &::after {
+      transform: scale(0.6) !important;
+      background-color: rgb(var(--primary-6));
+      top: -1px;
+      left: -1px;
+      width: 16px;
+      height: 16px;
+    }
+  }
+}
+
+.arco-radio-disabled {
+  .arco-radio-icon {
+    background-color: var(--color-fill-2);
+  }
+}
+
+.arco-radio:hover .arco-radio-icon-hover::before {
+  background: none;
+}
+.arco-radio:hover .arco-icon-hover:not(.arco-icon-hover-disabled) .arco-radio-icon {
+  border-color: rgb(var(--primary-6));
 }
