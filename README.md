@@ -1,46 +1,64 @@
-# vue-project
+<div align="center">
+	<img style="width: 80px;height: 80px" src="https://s1.ax1x.com/2022/05/12/OBUfSS.gif"/>
+	<h1>Gi Admin Pro</h1>
+</div>
 
-This template should help get you started developing with Vue 3 in Vite.
 
-## Recommended IDE Setup
+[![license](https://img.shields.io/badge/license-MIT-green.svg)](./LICENSE)
 
-[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=johnsoncodehk.volar) (and disable Vetur) + [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=johnsoncodehk.vscode-typescript-vue-plugin).
+## 简介
 
-## Type Support for `.vue` Imports in TS
+Gi Admin Pro  是一个基于 Vue3、Vite、TypeScript、Arco Design UI 的免费中后台模版，它使用了最新的前端技术栈，内置丰富的主题配置，有着极高的代码规范，基于mock实现的动态权限路由，开箱即用的中后台前端解决方案，也可用于学习参考。
 
-TypeScript cannot handle type information for `.vue` imports by default, so we replace the `tsc` CLI with `vue-tsc` for type checking. In editors, we need [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=johnsoncodehk.vscode-typescript-vue-plugin) to make the TypeScript language service aware of `.vue` types.
+## 特性
 
-If the standalone TypeScript plugin doesn't feel fast enough to you, Volar has also implemented a [Take Over Mode](https://github.com/johnsoncodehk/volar/discussions/471#discussioncomment-1361669) that is more performant. You can enable it by the following steps:
+- **最新技术栈**：使用 Vue3/vite2 等前端前沿技术开发, 使用高效率的npm包管理器pnpm
+- **TypeScript**: 应用程序级 JavaScript 的语言
+- **主题**：丰富可配置的主题、暗黑模式，基于windicss的动态主题颜色
+- **代码规范**：丰富的规范插件及极高的代码规范
+- **权限路由**：简易的路由配置、基于mock的动态路由能快速实现后端动态路由
+- **请求函数**：基于axios的完善的请求函数封装，提供Promise和hooks两种请求函数
 
-1. Disable the built-in TypeScript Extension
-    1) Run `Extensions: Show Built-in Extensions` from VSCode's command palette
-    2) Find `TypeScript and JavaScript Language Features`, right click and select `Disable (Workspace)`
-2. Reload the VSCode window by running `Developer: Reload Window` from the command palette.
+## 预览
 
-## Customize configuration
+- [Gi Admin Pro](http://lin0716.gitee.io/gi-demo)
 
-See [Vite Configuration Reference](https://vitejs.dev/config/).
+  
 
-## Project Setup
+## 代码仓库
 
-```sh
+- [gitee](https://gitee.com/lin0716/gi-demo)
+
+## 项目示例图
+
+
+
+## 安装使用
+
+- 安装依赖
+
+```bash
 npm install
 ```
 
-### Compile and Hot-Reload for Development
+- 运行
 
-```sh
+```bash
 npm run dev
 ```
 
-### Type-Check, Compile and Minify for Production
+- 打包
 
-```sh
+```bash
 npm run build
 ```
 
-### Lint with [ESLint](https://eslint.org/)
+## 开源作者
 
-```sh
-npm run lint
-```
+**Lin**
+
+## 交流
+
+QQ：326010228
+
+邮箱：326010228@qq.com
