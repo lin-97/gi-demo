@@ -31,7 +31,39 @@ Gi Admin Pro  是一个基于 Vue3、Vite、TypeScript、Arco Design UI 的免�
 
 ## 项目示例图
 
+<img src="https://s1.ax1x.com/2022/05/13/OrhNM4.png" />
 
+
+
+<img src="https://s1.ax1x.com/2022/05/13/OrhRLd.png" />
+
+
+
+<img src="https://s1.ax1x.com/2022/05/13/Orh4ot.png" />
+
+
+
+<img src="https://s1.ax1x.com/2022/05/13/OrhLLj.png" />
+
+
+
+<img src="https://s1.ax1x.com/2022/05/13/Or4SYV.png" />
+
+
+
+<img src="https://s1.ax1x.com/2022/05/13/Or4CSU.png" />
+
+
+
+<img src="https://s1.ax1x.com/2022/05/13/Or4EwR.png" />
+
+
+
+<img src="https://s1.ax1x.com/2022/05/13/Or40XQ.png" />
+
+
+
+<img src="https://s1.ax1x.com/2022/05/13/Or5ZuQ.png" />
 
 ## 安装使用
 
