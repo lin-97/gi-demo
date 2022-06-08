@@ -36,7 +36,7 @@
 .gi_hover {
   transition: color 0.3s;
   &:hover {
-    color: $theme-color !important;
+    color: $color-theme !important;
     cursor: pointer;
   }
 }

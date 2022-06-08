@@ -89,7 +89,7 @@ defineExpose({
   position: fixed;
   border-radius: 8px;
   box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
-  background: linear-gradient(to right, $theme-color, rgb(var(--primary-2)));
+  background: linear-gradient(to right, $color-theme, rgb(var(--primary-2)));
   z-index: 9999;
   .head {
     color: #fff;

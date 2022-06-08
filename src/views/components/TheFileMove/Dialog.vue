@@ -66,7 +66,7 @@ defineExpose({
 
 <style lang="scss" scoped>
 .label {
-  color: $text-color;
+  color: $color-text-2;
 }
 :deep(.arco-form-item-label-col > label) {
   white-space: nowrap;
@@ -76,7 +76,7 @@ defineExpose({
   height: 360px;
   padding: 0 $padding;
   box-sizing: border-box;
-  border: 1px solid $border-color;
+  border: 1px solid $color-border;
   overflow: auto;
 }
 </style>

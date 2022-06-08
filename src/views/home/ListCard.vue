@@ -66,7 +66,7 @@ const list = [
     box-sizing: border-box;
     display: flex;
     align-items: center;
-    border-bottom: 1px solid $border-color;
+    border-bottom: 1px solid $color-border;
     cursor: pointer;
     &:hover {
       background: var(--color-fill-1);
@@ -80,7 +80,7 @@ const list = [
           color: var(--color-text-2);
           transition: all 0.2s;
           &:hover {
-            color: $theme-color;
+            color: $color-theme;
           }
         }
         &:last-child {

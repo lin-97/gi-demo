@@ -27,7 +27,7 @@ const props = defineProps({
   .title {
     font-size: 14px;
     font-weight: 400;
-    color: $title-color;
+    color: $color-text-1;
     margin-block-start: 0;
     margin-block-end: 0;
   }

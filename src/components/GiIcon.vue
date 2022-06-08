@@ -112,13 +112,13 @@ const handleClick = () => {
   cursor: pointer;
 }
 .gi-icon-icon {
-  color: $theme-color;
+  color: $color-theme;
 }
 .gi-icon-label {
   transition: color 0.3s;
   &.hover {
     &:hover {
-      color: $theme-color;
+      color: $color-theme;
     }
   }
 }

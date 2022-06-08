@@ -108,7 +108,7 @@ getTreeData()
     overflow: hidden;
   }
   .no-text {
-    color: $text-sub-color;
+    color: $color-text-3;
   }
 }
 </style>

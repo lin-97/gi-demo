@@ -39,11 +39,11 @@ import GiNowTime from '@/components/GiNowTime.vue'
   padding: 0 20px;
   background: var(--color-bg-2);
   .tip {
-    color: $text-sub-color;
+    color: $color-text-3;
     p {
       &:first-child {
         font-size: 1.25rem;
-        color: $title-color;
+        color: $color-text-1;
         margin-bottom: 10px;
       }
     }

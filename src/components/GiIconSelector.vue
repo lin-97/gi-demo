@@ -154,7 +154,7 @@ async function onSelectItem(item: string) {
         width: 70%;
         margin: 0 auto;
         font-size: 12px;
-        color: $text-sub-color;
+        color: $color-text-3;
         margin-top: 5px;
         text-overflow: ellipsis;
         overflow: hidden;

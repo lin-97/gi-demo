@@ -29,8 +29,8 @@ body {
   width: 100vw;
   height: 100vh;
   overflow: hidden;
-  color: $text-color;
-  background: $background-color;
+  color: $color-text-2;
+  background: $color-bg;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -56,5 +56,5 @@ pre {
 
 // nprogress插件进度条颜色
 #nprogress .bar {
-  // background: rgba($color: $theme-color, $alpha: 0.5) !important; //自定义颜色
+  // background: rgba($color: $color-theme, $alpha: 0.5) !important; //自定义颜色
 }
