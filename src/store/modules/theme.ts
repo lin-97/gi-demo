@@ -45,6 +45,7 @@ export const useThemeStore = defineStore({
       } else {
         document.body.removeAttribute('arco-theme')
       }
+      this.changeThemeColor(this.themeColor)
     },
     // 切换主题  暗黑模式|简白模式
     toggleTheme() {
@@ -57,6 +58,7 @@ export const useThemeStore = defineStore({
         this.theme = 'light'
         localStorage.setItem('theme', 'light')
       }
+      this.changeThemeColor(this.themeColor)
     },
     // 设置主题色
     setThemeColor(color: string) {
@@ -65,7 +67,7 @@ export const useThemeStore = defineStore({
     },
     // 改变主题色
     changeThemeColor(themeColor: string) {
-      const list = generate(themeColor, { list: true })
+      const list = generate(themeColor, { list: true, dark: this.theme === 'dark' ? true : false })
       // console.log('list', list)
       list.forEach((color: string, index: number) => {
         const rgbStr = getRgbStr(color)

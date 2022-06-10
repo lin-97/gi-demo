@@ -6,16 +6,11 @@ $color-warning: rgb(var(--warning-6));
 $color-danger: rgb(var(--danger-6));
 $color-info: rgb(var(--gray-6));
 
-// $color-text-1: #262626; // 标题颜色
-// $color-text-2: #595959; // 文本颜色-全局默认字体颜色
-// $color-text-3: #8c8c8c; // 二级文本颜色
-// $color-text-4: #c0c4cc; // 辅助文本颜色
-$color-text-1: var(--color-text-1); // 标题颜色
-$color-text-2: var(--color-text-2); // 文本颜色-全局默认字体颜色
+$color-text-1: var(--color-text-1); // 标题、重点文本字体颜色
+$color-text-2: var(--color-text-2); // 文本-全局默认字体颜色
 $color-text-3: var(--color-text-3); // 二级文本颜色
 $color-text-4: var(--color-text-4); // 辅助文本颜色
 
-// $disabled-color: #bfbfbf; // 禁用、辅助颜色
 $color-border: var(--color-border); // 边框颜色、分割线颜色
 $color-bg: #f2f3f5; // 背景颜色
 
