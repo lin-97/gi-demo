@@ -72,12 +72,10 @@
 <script setup lang="ts">
 import { computed } from 'vue'
 import { useThemeStore } from '@/store'
-import { useTheme } from '@/hooks'
 import { ColorPicker } from 'vue-color-kit'
 import 'vue-color-kit/dist/vue-color-kit.css'
 
 const themeStore = useThemeStore()
-const { changeThemeColor } = useTheme()
 
 const props = defineProps({
   // 绑定的值
@@ -127,14 +125,14 @@ let visible = computed<boolean>({
 })
 
 if (themeStore.themeColor) {
-  changeThemeColor(themeStore.themeColor)
+  themeStore.changeThemeColor(themeStore.themeColor)
 }
 
 const changeColor = (colorObj: any) => {
   if (!/^#[0-9A-Za-z]{6}/.test(colorObj.hex)) return
   console.log(colorObj)
   themeStore.setThemeColor(colorObj.hex)
-  changeThemeColor(themeStore.themeColor)
+  themeStore.changeThemeColor(themeStore.themeColor)
 }
 </script>
 

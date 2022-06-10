@@ -1,4 +1,5 @@
 import { defineStore } from 'pinia'
+import { generate, getRgbStr } from '@arco-design/color'
 
 type Theme = 'light' | 'dark'
 
@@ -6,7 +7,7 @@ export const useThemeStore = defineStore({
   id: 'Theme',
   state: () => {
     return {
-      theme: 'light', // light简白模式  dark暗黑模式
+      theme: localStorage.getItem('theme') || 'light', // light简白模式  dark暗黑模式
       themeColor: localStorage.getItem('ThemeColor') || '#1571FA',
       tab: {
         visible: true,
@@ -37,20 +38,39 @@ export const useThemeStore = defineStore({
     }
   },
   actions: {
-    // 切换主题  暗黑模式|简白模式
-    toggleTheme(isDark: boolean) {
-      if (isDark) {
-        this.theme = 'dark'
+    // 初始化主题
+    initTheme() {
+      if (this.theme === 'dark') {
         document.body.setAttribute('arco-theme', 'dark')
       } else {
-        this.theme = 'light'
         document.body.removeAttribute('arco-theme')
+      }
+    },
+    // 切换主题  暗黑模式|简白模式
+    toggleTheme() {
+      if (this.theme === 'light') {
+        document.body.setAttribute('arco-theme', 'dark')
+        this.theme = 'dark'
+        localStorage.setItem('theme', 'dark')
+      } else {
+        document.body.removeAttribute('arco-theme')
+        this.theme = 'light'
+        localStorage.setItem('theme', 'light')
       }
     },
     // 设置主题色
     setThemeColor(color: string) {
       this.themeColor = color
       localStorage.setItem('ThemeColor', color)
+    },
+    // 改变主题色
+    changeThemeColor(themeColor: string) {
+      const list = generate(themeColor, { list: true })
+      // console.log('list', list)
+      list.forEach((color: string, index: number) => {
+        const rgbStr = getRgbStr(color)
+        document.body.style.setProperty(`--primary-${index + 1}`, rgbStr)
+      })
     },
     // 设置页签可见
     setTabVisible(visible: boolean) {
