@@ -26,6 +26,7 @@ import NavBar from './components/NavBar.vue'
 import Title from './components/Title.vue'
 import IconSelector from './components/IconSelector.vue'
 import Option from './components/Option.vue'
+import Dot from './components/Dot.vue'
 
 const selectedKey = ref(0)
 
@@ -37,7 +38,8 @@ const menuList = ref([
   { name: 'GiTag', value: Tag },
   { name: 'GiNavBar', value: NavBar },
   { name: 'GiTitle', value: Title },
-  { name: 'GiIconSelector', value: IconSelector }
+  { name: 'GiIconSelector', value: IconSelector },
+  { name: 'GiDot', value: Dot }
 ])
 </script>
 

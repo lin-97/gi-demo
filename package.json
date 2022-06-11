@@ -30,7 +30,7 @@
     "xgplayer-music": "^2.3.2"
   },
   "devDependencies": {
-    "@arco-design/web-vue": "^2.29.1",
+    "@arco-design/web-vue": "^2.30.1",
     "@rushstack/eslint-patch": "^1.1.0",
     "@types/node": "^16.11.22",
     "@vitejs/plugin-vue": "^2.1.0",
