@@ -3,6 +3,9 @@ import { generate, getRgbStr } from '@arco-design/color'
 
 type Theme = 'light' | 'dark'
 
+const tabMode = localStorage.getItem('TabMode')
+const animateMode = localStorage.getItem('AnimateMode')
+
 export const useThemeStore = defineStore({
   id: 'Theme',
   state: () => {
@@ -11,7 +14,7 @@ export const useThemeStore = defineStore({
       themeColor: localStorage.getItem('ThemeColor') || '#1571FA',
       tab: {
         visible: true,
-        mode: 'card',
+        mode: tabMode || 'card',
         modeList: [
           { label: '卡片', value: 'card' },
           { label: '间隔卡片', value: 'card-gutter' },
@@ -20,7 +23,7 @@ export const useThemeStore = defineStore({
       },
       animate: {
         visible: true,
-        mode: 'zoom-fade',
+        mode: animateMode || 'zoom-fade',
         modeList: [
           { label: '默认', value: 'zoom-fade' },
           { label: '动态滑动', value: 'slide-dynamic-origin' },
@@ -68,7 +71,6 @@ export const useThemeStore = defineStore({
     // 改变主题色
     changeThemeColor(themeColor: string) {
       const list = generate(themeColor, { list: true, dark: this.theme === 'dark' ? true : false })
-      // console.log('list', list)
       list.forEach((color: string, index: number) => {
         const rgbStr = getRgbStr(color)
         document.body.style.setProperty(`--primary-${index + 1}`, rgbStr)
@@ -81,6 +83,7 @@ export const useThemeStore = defineStore({
     // 设置页签的显示类型
     setTabMode(mode: string) {
       this.tab.mode = mode
+      localStorage.setItem('TabMode', mode)
     },
     // 设置是否使用过渡动画
     setAnimateVisible(visible: boolean) {
@@ -89,6 +92,7 @@ export const useThemeStore = defineStore({
     // 设置页面过渡动画类型
     setAnimateMode(mode: string) {
       this.animate.mode = mode
+      localStorage.setItem('AnimateMode', mode)
     }
   }
 })
