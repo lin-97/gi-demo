@@ -8,10 +8,16 @@
         </a-select>
       </a-form-item>
       <a-form-item field="recAccount" label="收款账户" :rules="rules.recAccount">
-        <a-input-group>
-          <a-select v-model="form.payType" :style="{ width: '150px' }">
-            <a-option :value="1">微信</a-option>
-            <a-option :value="2">支付宝</a-option>
+        <a-input-group style="width: 100%">
+          <a-select v-model="form.payType" style="width: 150px">
+            <a-option :value="1">
+              <template #icon><GiSvgIcon name="wechat"></GiSvgIcon></template>
+              <span>微信</span>
+            </a-option>
+            <a-option :value="2">
+              <template #icon><GiSvgIcon name="alipay"></GiSvgIcon></template>
+              <span>支付宝</span>
+            </a-option>
           </a-select>
           <a-input v-model="form.recAccount" placeholder="请输入收款账户" />
         </a-input-group>

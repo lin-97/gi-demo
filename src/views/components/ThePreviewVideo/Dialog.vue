@@ -5,7 +5,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted, onBeforeUnmount, nextTick } from 'vue'
+import { ref, onMounted, nextTick } from 'vue'
 import Player from 'xgplayer'
 
 const props = defineProps({
@@ -25,7 +25,6 @@ onMounted(() => {
       autoplay: true,
       closeVideoClick: true,
       videoInit: true
-      // playbackRate: [0.5, 0.75, 1, 1.5, 2]
     })
   })
 })

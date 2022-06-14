@@ -52,9 +52,9 @@ const list = [
   {
     id: '005',
     type: 'file',
-    name: '老男孩',
+    name: '视频',
     extendName: 'mp4',
-    src: 'https://vd2.bdstatic.com/mda-kkj20w77w1wyuxjd/hd/mda-kkj20w77w1wyuxjd.mp4?v_from_s=hkapp-haokan-hna&auth_key=1649941380-0-0-eba98dfae5fb0d636d6b7eaaf1cb5257&bcevod_channel=searchbox_feed&pd=1&cd=0&pt=3&logid=1980393476&vid=2459462156697942509&abtest=100815_2-101454_1-17451_2&klogid=1980393476',
+    src: '//lf9-cdn-tos.bytecdntp.com/cdn/expire-1-M/byted-player-videos/1.0.0/xgplayer-demo.mp4',
     updateTime: '2022-01-20 18:30:00',
     isDir: false,
     filePath: '/'
@@ -193,7 +193,127 @@ const list = [
     type: 'file',
     name: '头像3',
     extendName: 'png',
+    src: 'https://s1.ax1x.com/2022/06/14/XhYkqS.jpg',
+    updateTime: '2022-06-14 10:44:00',
+    isDir: false,
+    filePath: '/'
+  },
+  {
+    id: '111',
+    type: 'file',
+    name: '头像4',
+    extendName: 'png',
+    src: 'https://s1.ax1x.com/2022/06/14/XhYJIJ.jpg',
+    updateTime: '2022-06-14 10:44:00',
+    isDir: false,
+    filePath: '/'
+  },
+  {
+    id: '112',
+    type: 'file',
+    name: '头像5',
+    extendName: 'png',
+    src: 'https://s1.ax1x.com/2022/06/14/XhYyIH.jpg',
+    updateTime: '2022-06-14 10:44:00',
+    isDir: false,
+    filePath: '/'
+  },
+  {
+    id: '113',
+    type: 'file',
+    name: '头像6',
+    extendName: 'png',
+    src: 'https://s1.ax1x.com/2022/06/14/XhtSwF.jpg',
+    updateTime: '2022-06-14 10:44:00',
+    isDir: false,
+    filePath: '/'
+  },
+  {
+    id: '114',
+    type: 'file',
+    name: '头像7',
+    extendName: 'png',
+    src: 'https://s1.ax1x.com/2022/06/14/XhteeO.jpg',
+    updateTime: '2022-06-14 10:44:00',
+    isDir: false,
+    filePath: '/'
+  },
+  {
+    id: '115',
+    type: 'file',
+    name: '头像8',
+    extendName: 'png',
+    src: 'https://s1.ax1x.com/2022/06/14/XhtakQ.jpg',
+    updateTime: '2022-06-14 10:44:00',
+    isDir: false,
+    filePath: '/'
+  },
+  {
+    id: '120',
+    type: 'file',
+    name: '头像9',
+    extendName: 'png',
     src: 'https://s1.ax1x.com/2022/05/07/Ol2fkF.jpg',
+    updateTime: '2022-01-20 18:30:00',
+    isDir: false,
+    filePath: '/'
+  },
+  {
+    id: '120',
+    type: 'file',
+    name: '摄影-校园',
+    extendName: 'png',
+    src: 'https://s1.ax1x.com/2022/06/14/Xht7nK.jpg',
+    updateTime: '2022-01-20 18:30:00',
+    isDir: false,
+    filePath: '/'
+  },
+  {
+    id: '121',
+    type: 'file',
+    name: '摄影-校园2',
+    extendName: 'png',
+    src: 'https://s1.ax1x.com/2022/06/14/XhNUu6.jpg',
+    updateTime: '2022-01-20 18:30:00',
+    isDir: false,
+    filePath: '/'
+  },
+  {
+    id: '122',
+    type: 'file',
+    name: '摄影-校园3',
+    extendName: 'png',
+    src: 'https://s1.ax1x.com/2022/06/14/XhNRDf.jpg',
+    updateTime: '2022-01-20 18:30:00',
+    isDir: false,
+    filePath: '/'
+  },
+  {
+    id: '123',
+    type: 'file',
+    name: '摄影-花',
+    extendName: 'png',
+    src: 'https://s1.ax1x.com/2022/06/14/XhNlEF.jpg',
+    updateTime: '2022-01-20 18:30:00',
+    isDir: false,
+    filePath: '/'
+  },
+  {
+    id: '124',
+    type: 'file',
+    name: '摄影-01',
+    extendName: 'png',
+    src: 'https://s1.ax1x.com/2022/06/14/XhUuRA.jpg',
+    updateTime: '2022-01-20 18:30:00',
+    isDir: false,
+    filePath: '/'
+  },
+  {
+    id: '125',
+    type: 'file',
+    name: '摄影-02',
+    extendName: 'png',
+    src: 'https://s1.ax1x.com/2022/06/14/XhU8Z8.jpg',
     updateTime: '2022-01-20 18:30:00',
     isDir: false,
     filePath: '/'
