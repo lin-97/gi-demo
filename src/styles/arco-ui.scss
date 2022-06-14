@@ -85,6 +85,10 @@
   }
 }
 
+.arco-pagination-item {
+  border-radius: var(--border-radius-medium);
+}
+
 // 分页组件
 .arco-pagination-item-active {
   color: #fff;
