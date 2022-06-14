@@ -161,6 +161,12 @@ const routes = [
         meta: { title: '失败页', keepAlive: false }
       },
       {
+        path: '/about',
+        name: 'About',
+        component: () => import('@/views/about/index.vue'),
+        meta: { title: '关于', keepAlive: false }
+      },
+      {
         path: '/test',
         name: 'Test',
         component: () => import('@/views/test/index.vue'),
