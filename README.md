@@ -8,13 +8,13 @@
 
 ## 简介
 
-Gi Admin Pro  是一个基于 Vue3、Vite、TypeScript、Arco Design UI 、VueUse 的免费中后台模版，它使用了最新的前端技术栈，内置丰富的主题配置，有着极高的代码规范，基于mock实现的动态权限路由，开箱即用的中后台前端解决方案，也可用于学习参考。
+Gi Admin Pro  是一个基于 Vue3、Vite、TypeScript、Arco Design UI、Pinia、VueUse 的免费中后台模版，它使用了最新的前端技术栈，内置丰富的主题配置，有着极高的代码规范，基于mock实现的动态数据展示，开箱即用的模板，也可用于学习参考。
 
 > **Gi前缀含义：**
 >
-> ​	G：代表全局 
+> ​	G：代表 全局 
 >
-> ​	i：代表我的     
+> ​	i：代表 我的     
 >
 > Gi 用来定义全局组件前缀，如GiNavBar、GiTitle、GiLoading
 
