@@ -31,37 +31,74 @@
     </a-tabs>
 
     <section class="comment-box">
-      <a-comment author="Lin" datetime="1个小时之前" align="right" class="comment-item" v-for="i in 5" :key="i">
+      <a-comment
+        v-for="(item, index) in list"
+        :key="index"
+        :author="item.name"
+        datetime="1个小时之前"
+        align="right"
+        class="comment-item"
+      >
         <template #actions>
-          <span class="action" key="heart">
-            <span><IconHeart /></span>
-            <span>83</span>
-          </span>
-          <span class="action" key="star">
-            <span><IconStar /></span>
-            <span>3</span>
-          </span>
-          <span class="action" key="reply"> <IconMessage /><span>回复</span></span>
+          <a-space :size="20">
+            <span class="action" key="heart">
+              <span><IconHeart /></span>
+              <span>83</span>
+            </span>
+            <span class="action" key="star">
+              <span><IconStar /></span>
+              <span>3</span>
+            </span>
+            <span class="action" key="reply"> <IconMessage /><span>回复</span></span>
+          </a-space>
         </template>
         <template #avatar>
           <a-avatar>
-            <img
-              alt="avatar"
-              src="https://p1-arco.byteimg.com/tos-cn-i-uwbnlip3yd/3ee5f13fb09879ecb5185e440cef6eb9.png~tplv-uwbnlip3yd-webp.webp"
-            />
+            <img alt="avatar" :src="item.avatar" />
           </a-avatar>
         </template>
         <template #content>
-          <div class="text">
-            A design is a plan or specification for the construction of an object or system or for the implementation of
-            an activity or process, or the result of that plan or specification in the form of a prototype, product or
-            process.
-          </div>
+          <div class="text">{{ item.text }}</div>
         </template>
       </a-comment>
     </section>
   </div>
 </template>
+
+<script setup lang="ts" name="UserCenter">
+const list = [
+  {
+    avatar:
+      'https://p1-arco.byteimg.com/tos-cn-i-uwbnlip3yd/3ee5f13fb09879ecb5185e440cef6eb9.png~tplv-uwbnlip3yd-webp.webp',
+    name: 'Lin',
+    text: '生活会让你苦上一阵子，等你适应以后，再让你苦上一辈子'
+  },
+  {
+    avatar:
+      'https://p1-arco.byteimg.com/tos-cn-i-uwbnlip3yd/3ee5f13fb09879ecb5185e440cef6eb9.png~tplv-uwbnlip3yd-webp.webp',
+    name: 'Lin',
+    text: '我从一无所有，到资产过亿，从家徒四壁，到豪车别墅，这些不是靠的别人，完全是靠我自己，一点一滴，想出来的'
+  },
+  {
+    avatar:
+      'https://p1-arco.byteimg.com/tos-cn-i-uwbnlip3yd/3ee5f13fb09879ecb5185e440cef6eb9.png~tplv-uwbnlip3yd-webp.webp',
+    name: 'Lin',
+    text: '有很多事情你当时想不通，别着急，过一段时间你再想，就想不起来了'
+  },
+  {
+    avatar:
+      'https://p1-arco.byteimg.com/tos-cn-i-uwbnlip3yd/3ee5f13fb09879ecb5185e440cef6eb9.png~tplv-uwbnlip3yd-webp.webp',
+    name: 'Lin',
+    text: '⽐你优秀的⼈都⽐你努⼒，你努力还有什么用'
+  },
+  {
+    avatar:
+      'https://p1-arco.byteimg.com/tos-cn-i-uwbnlip3yd/3ee5f13fb09879ecb5185e440cef6eb9.png~tplv-uwbnlip3yd-webp.webp',
+    name: '窃·格瓦拉',
+    text: '打工这辈子是不可能打工的，做生意又不会做，就是偷这种东西，才可以维持生活这样子'
+  }
+]
+</script>
 
 <style lang="scss" scoped>
 .edit-btn {

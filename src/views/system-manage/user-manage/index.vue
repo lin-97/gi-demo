@@ -15,6 +15,7 @@
             show-line
             block-node
             default-expand-all
+            size="mini"
             :data="treeData"
             :field-names="{
               key: 'id',
@@ -25,8 +26,8 @@
           >
             <template #icon="{ node }">
               <GiSvgIcon name="com-dept" :size="14" v-if="node.level == 1"></GiSvgIcon>
-              <GiSvgIcon name="com-sub-dept" :size="14" v-if="node.level == 2"></GiSvgIcon>
-              <GiSvgIcon name="com-group" :size="14" v-if="node.level == 3"></GiSvgIcon>
+              <GiSvgIcon name="com-sub-dept" :size="12" v-if="node.level == 2"></GiSvgIcon>
+              <GiSvgIcon name="com-group" :size="12" v-if="node.level == 3"></GiSvgIcon>
             </template>
           </a-tree>
         </div>

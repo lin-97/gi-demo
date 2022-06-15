@@ -317,6 +317,36 @@ const list = [
     updateTime: '2022-01-20 18:30:00',
     isDir: false,
     filePath: '/'
+  },
+  {
+    id: '126',
+    type: 'file',
+    name: '图片01',
+    extendName: 'png',
+    src: 'https://s1.ax1x.com/2022/06/15/Xoherq.jpg',
+    updateTime: '2022-01-20 18:30:00',
+    isDir: false,
+    filePath: '/'
+  },
+  {
+    id: '127',
+    type: 'file',
+    name: '图片02',
+    extendName: 'png',
+    src: 'https://s1.ax1x.com/2022/06/15/XohKaT.jpg',
+    updateTime: '2022-01-20 18:30:00',
+    isDir: false,
+    filePath: '/'
+  },
+  {
+    id: '128',
+    type: 'file',
+    name: '图片03',
+    extendName: 'png',
+    src: 'https://s1.ax1x.com/2022/06/15/Xoh1G4.jpg',
+    updateTime: '2022-01-20 18:30:00',
+    isDir: false,
+    filePath: '/'
   }
 ]
 

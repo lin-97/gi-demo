@@ -13,9 +13,9 @@
       </a-form-item>
     </a-form>
     <section class="tree-box">
-      <a-tree show-line :data="treeData" @select="handleClickNode">
+      <a-tree show-line size="mini" blockNode :data="treeData" @select="handleClickNode">
         <template #icon>
-          <GiSvgIcon name="menu-zip"></GiSvgIcon>
+          <GiSvgIcon name="menu-zip" :size="16"></GiSvgIcon>
         </template>
       </a-tree>
     </section>
@@ -73,8 +73,8 @@ defineExpose({
 }
 .tree-box {
   width: 100%;
-  height: 360px;
-  padding: 0 $padding;
+  height: 300px;
+  padding: 10px $padding;
   box-sizing: border-box;
   border: 1px solid $color-border;
   overflow: auto;
