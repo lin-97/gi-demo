@@ -47,7 +47,7 @@
               </a-select>
               <a-input-group>
                 <a-input placeholder="请输入搜索关键词" allow-clear> </a-input>
-                <a-button type="primary">
+                <a-button type="primary" @click="getTableData">
                   <icon-search />
                 </a-button>
               </a-input-group>
@@ -164,7 +164,10 @@ const onMulDelete = () => {
   Modal.warning({
     title: '提示',
     content: '是否确认删除？',
-    hideCancel: false
+    hideCancel: false,
+    onOk: () => {
+      tableData.value = []
+    }
   })
 }
 

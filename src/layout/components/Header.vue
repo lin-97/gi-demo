@@ -15,13 +15,18 @@
       </a-tooltip>
 
       <!-- 消息通知 -->
-      <a-tooltip content="消息通知" position="bottom">
-        <a-button size="mini" class="gi_hover_btn">
-          <template #icon>
-            <icon-notification :size="18" />
-          </template>
-        </a-button>
-      </a-tooltip>
+      <a-popover position="br" trigger="click">
+        <a-badge :count="9" dot>
+          <a-button size="mini" class="gi_hover_btn">
+            <template #icon>
+              <icon-notification :size="18" />
+            </template>
+          </a-button>
+        </a-badge>
+        <template #content>
+          <Message></Message>
+        </template>
+      </a-popover>
 
       <!-- 全屏切换组件 -->
       <a-tooltip content="全屏切换" position="bottom">
@@ -84,6 +89,7 @@ import { useRouter } from 'vue-router'
 import { useAppStore, useUserStore } from '@/store'
 import { useFullScreen } from '@/hooks'
 import SettingDrawer from './SettingDrawer.vue'
+import Message from './Message.vue'
 
 const router = useRouter()
 const appStore = useAppStore()

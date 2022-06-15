@@ -47,6 +47,10 @@ $align-items-map: (
 // .flex-row-start-start   .flex-row-start-center   .flex-row-start-end   .flex-row-between-center ...
 // .flex-col-start-start   .flex-col-center-center  .flex-col-start-center  .flex-col-between-center ...
 
+.flex {
+  display: flex;
+}
+
 .flex-wrap {
   flex-wrap: wrap;
 }

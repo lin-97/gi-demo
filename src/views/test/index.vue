@@ -19,7 +19,6 @@
 import { ref } from 'vue'
 import Button from './components/Button.vue'
 import GiTitle from '@/components/GiTitle.vue'
-import TextRadio from './components/TextRadio.vue'
 import TextSwitch from './components/TextSwitch.vue'
 import Tag from './components/Tag.vue'
 import NavBar from './components/NavBar.vue'
@@ -34,7 +33,6 @@ const selectedKey = ref(0)
 const menuList = ref([
   { name: '单选框/复选框', value: Option },
   { name: '按钮', value: Button },
-  { name: 'GiTextRadio', value: TextRadio },
   { name: 'GiTextSwitch', value: TextSwitch },
   { name: 'GiTag', value: Tag },
   { name: 'GiNavBar', value: NavBar },
