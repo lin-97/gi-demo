@@ -1,4 +1,14 @@
+// 基础样式
 @import './base.scss';
+
+// 弹性布局样式类名
+@import './flex.scss';
+
+// 全局类名样式
 @import './global.scss';
+
+// 自定义原生滚动条样式
 @import './scrollbar-reset.scss';
-@import './arco-ui.scss';
+
+// 自定义 arco design 样式
+@import './arco-ui/index.scss';

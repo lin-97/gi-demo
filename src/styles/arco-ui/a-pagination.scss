@@ -1,0 +1,17 @@
+// 分页组件
+.arco-pagination-item {
+  background-color: var(--color-fill-2);
+  border-radius: var(--border-radius-medium);
+  &:hover {
+    background-color: var(--color-fill-3);
+  }
+}
+
+.arco-pagination-item-active {
+  color: #fff;
+  background-color: rgb(var(--primary-6));
+  &:hover {
+    color: #fff;
+    background-color: rgb(var(--primary-6));
+  }
+}

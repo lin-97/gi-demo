@@ -1,0 +1,35 @@
+.arco-modal-title .arco-icon-exclamation-circle-fill {
+  font-size: 24px;
+}
+.arco-modal-title-icon {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.arco-modal {
+  .arco-modal-header {
+    .arco-modal-title {
+      justify-content: flex-start;
+    }
+  }
+  .arco-modal-body {
+    padding-bottom: 0;
+  }
+  .arco-modal-footer {
+    border-top: none;
+  }
+}
+.arco-modal-simple {
+  padding: 15px;
+  .arco-modal-header {
+    margin-bottom: 20px;
+    .arco-modal-title {
+      justify-content: flex-start;
+      font-size: 18px;
+    }
+  }
+  .arco-modal-footer {
+    margin-top: 15px;
+    text-align: right;
+  }
+}

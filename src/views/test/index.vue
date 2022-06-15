@@ -27,6 +27,7 @@ import Title from './components/Title.vue'
 import IconSelector from './components/IconSelector.vue'
 import Option from './components/Option.vue'
 import Dot from './components/Dot.vue'
+import Flex from './components/Flex.vue'
 
 const selectedKey = ref(0)
 
@@ -39,7 +40,8 @@ const menuList = ref([
   { name: 'GiNavBar', value: NavBar },
   { name: 'GiTitle', value: Title },
   { name: 'GiIconSelector', value: IconSelector },
-  { name: 'GiDot', value: Dot }
+  { name: 'GiDot', value: Dot },
+  { name: 'Flex布局', value: Flex }
 ])
 </script>
 

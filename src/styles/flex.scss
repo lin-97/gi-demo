@@ -1,56 +1,51 @@
-.flex {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
+// flex方向变量
+$flex-direction-list: row, col;
+$justify-content-list: start, center, end, between, evenly;
+$align-items-list: start, center, end;
+
+$flex-direction-map: (
+  'row': row,
+  'col': column
+);
+
+$justify-content-map: (
+  'start': flex-start,
+  'center': center,
+  'end': flex-end,
+  'between': space-between,
+  'evenly': space-evenly
+);
+
+$align-items-map: (
+  'start': flex-start,
+  'center': center,
+  'end': flex-end
+);
+
+@each $d in $flex-direction-list {
+  @each $j in $justify-content-list {
+    @each $a in $align-items-list {
+      .flex-#{$d}-#{$j}-#{$a} {
+        display: flex;
+        flex-direction: map-get($flex-direction-map, $d);
+        justify-content: map-get($justify-content-map, $j);
+        align-items: map-get($align-items-map, $a);
+      }
+      @if ($d == row) {
+        .flex-#{$j}-#{$a} {
+          display: flex;
+          flex-direction: row;
+          justify-content: map-get($justify-content-map, $j);
+          align-items: map-get($align-items-map, $a);
+        }
+      }
+    }
+  }
 }
 
-.flex-row-start {
-  display: flex;
-  justify-content: flex-start;
-  align-items: center;
-}
-
-.flex-row-center {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.flex-row-end {
-  display: flex;
-  justify-content: flex-end;
-  align-items: center;
-}
-
-.flex-row-between {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.flex-row-around {
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-}
-
-.flex-row-evenly {
-  display: flex;
-  justify-content: space-evenly;
-  align-items: center;
-}
-
-.flex-col-start {
-  align-items: flex-start;
-}
-
-.flex-col-center {
-  align-items: center;
-}
-
-.flex-col-end {
-  align-items: flex-end;
-}
+// 使用
+// .flex-row-start-start   .flex-row-start-center   .flex-row-start-end   .flex-row-between-center ...
+// .flex-col-start-start   .flex-col-center-center  .flex-col-start-center  .flex-col-between-center ...
 
 .flex-wrap {
   flex-wrap: wrap;
@@ -58,10 +53,6 @@
 
 .flex-nowrap {
   flex-wrap: nowrap;
-}
-
-.flex-column {
-  flex-direction: column;
 }
 
 // 定义flex等分

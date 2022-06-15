@@ -1,0 +1,16 @@
+@import './a-button.scss';
+@import './a-checkbox.scss';
+@import './a-radio.scss';
+@import './a-modal.scss';
+@import './a-tree.scss';
+@import './a-pagination.scss';
+
+// 禁止文本复制
+.arco-link,
+.arco-menu-title,
+.arco-menu-item-inner,
+.arco-tabs-tab-title,
+.arco-breadcrumb-item,
+.arco-checkbox-label {
+  user-select: none;
+}
