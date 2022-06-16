@@ -23,7 +23,17 @@ $align-items-map: (
 );
 
 @each $d in $flex-direction-list {
+  .flex-#{$d} {
+    display: flex;
+    flex-direction: map-get($flex-direction-map, $d);
+  }
   @each $j in $justify-content-list {
+    .flex-#{$d}-#{$j} {
+      display: flex;
+      flex-direction: map-get($flex-direction-map, $d);
+      justify-content: map-get($justify-content-map, $j);
+      align-items: center;
+    }
     @each $a in $align-items-list {
       .flex-#{$d}-#{$j}-#{$a} {
         display: flex;
