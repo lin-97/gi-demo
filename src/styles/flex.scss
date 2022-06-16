@@ -34,6 +34,14 @@ $align-items-map: (
       justify-content: map-get($justify-content-map, $j);
       align-items: center;
     }
+    @if ($d == row) {
+      .flex-#{$j} {
+        display: flex;
+        flex-direction: row;
+        justify-content: map-get($justify-content-map, $j);
+        align-items: center;
+      }
+    }
     @each $a in $align-items-list {
       .flex-#{$d}-#{$j}-#{$a} {
         display: flex;
@@ -54,8 +62,11 @@ $align-items-map: (
 }
 
 // 使用
-// .flex-row-start-start   .flex-row-start-center   .flex-row-start-end   .flex-row-between-center ...
-// .flex-col-start-start   .flex-col-center-center  .flex-col-start-center  .flex-col-between-center ...
+// .flex
+// .flex-start  .flex-between
+// .flex-row-start  .flex-row-between
+// .flex-row-start-start  .flex-row-start-center  .flex-row-start-end  .flex-row-between-center ...
+// .flex-col-start-start  .flex-col-center-center  .flex-col-start-center  .flex-col-between-center ...
 
 .flex {
   display: flex;

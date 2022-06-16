@@ -4,6 +4,7 @@
 @import './a-modal.scss';
 @import './a-tree.scss';
 @import './a-pagination.scss';
+@import './a-menu.scss';
 
 // 禁止文本复制
 .arco-link,
@@ -13,4 +14,35 @@
 .arco-breadcrumb-item,
 .arco-checkbox-label {
   user-select: none;
+}
+
+.zoom-modal-enter-from,
+.zoom-modal-appear-from {
+  transform: scale(0.5, 0.5);
+  opacity: 0;
+}
+
+.zoom-modal-enter-to,
+.zoom-modal-appear-to {
+  transform: scale(1, 1);
+  opacity: 1;
+}
+
+.zoom-modal-enter-active,
+.zoom-modal-appear-active {
+  transition: all 0.3s;
+}
+
+.zoom-modal-leave-from {
+  transform: scale(1, 1);
+  opacity: 1;
+}
+
+.zoom-modal-leave-to {
+  transform: scale(0.5, 0.5);
+  opacity: 0;
+}
+
+.zoom-modal-leave-active {
+  transition: all 0.3s;
 }
