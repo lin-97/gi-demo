@@ -27,6 +27,7 @@ import IconSelector from './components/IconSelector.vue'
 import Option from './components/Option.vue'
 import Dot from './components/Dot.vue'
 import Flex from './components/Flex.vue'
+import ShrinkBox from './components/ShrinkBox.vue'
 
 const selectedKey = ref(0)
 
@@ -39,6 +40,7 @@ const menuList = ref([
   { name: 'GiTitle', value: Title },
   { name: 'GiIconSelector', value: IconSelector },
   { name: 'GiDot', value: Dot },
+  { name: 'GiShrinkBox', value: ShrinkBox },
   { name: 'Flex布局', value: Flex }
 ])
 </script>
