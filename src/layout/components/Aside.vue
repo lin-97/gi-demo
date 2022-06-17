@@ -5,32 +5,7 @@
       :default-open-keys="['/']"
       :style="{ width: '100%', height: '100%' }"
     >
-      <template v-for="item in menuStore.list">
-        <a-sub-menu :key="item.path" v-if="item.children && item.children.length">
-          <template #icon>
-            <GiSvgIcon :size="24" :name="item.icon"></GiSvgIcon>
-          </template>
-          <template #title>{{ item.name }}</template>
-          <template v-if="item.children && item.children.length">
-            <a-menu-item v-for="i in item.children" :key="i.path" @click="handleClickItem(i)">
-              <template #icon>
-                <!-- <GiSvgIcon :size="20" name="menu"></GiSvgIcon> -->
-                <icon-unordered-list :size="20" />
-              </template>
-              {{ i.name }}
-            </a-menu-item>
-          </template>
-        </a-sub-menu>
-
-        <template v-else>
-          <a-menu-item :key="item.path" @click="handleClickItem(item)">
-            <template #icon>
-              <GiSvgIcon :size="24" :name="item.icon"></GiSvgIcon>
-            </template>
-            {{ item.name }}
-          </a-menu-item>
-        </template>
-      </template>
+      <MenuItem v-for="item in menuStore.list" :key="item.id" :data="item" @click="handleClickItem"></MenuItem>
     </a-menu>
   </a-layout-sider>
 </template>
@@ -38,6 +13,8 @@
 <script setup lang="ts">
 import { useRouter } from 'vue-router'
 import { useAppStore, useMenuStore } from '@/store'
+import MenuItem from './MenuItem.vue'
+
 const router = useRouter()
 const appStore = useAppStore()
 const menuStore = useMenuStore()
