@@ -38,7 +38,7 @@ const handleClick = () => {
   padding-top: 1px;
   height: 20px;
   font-size: 12px;
-  border-radius: 2px;
+  border-radius: 3px;
   color: #fff;
   justify-content: center;
   align-items: center;
