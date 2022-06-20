@@ -3,7 +3,6 @@
     <section class="box">
       <a-result status="error" title="操作失败">
         <template #subtitle>表单提交失败，请重试</template>
-
         <template #extra>
           <a-space>
             <a-button size="medium">回到首页</a-button>

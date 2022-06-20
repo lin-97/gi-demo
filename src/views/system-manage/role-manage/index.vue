@@ -100,7 +100,7 @@ const onDelete = () => {
   }
   .table-box {
     flex: 1;
-    margin-top: $margin;
+    margin-top: 12px;
     padding: 0 $padding $padding;
     overflow: hidden;
   }

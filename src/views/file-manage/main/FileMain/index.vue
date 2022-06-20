@@ -197,7 +197,7 @@ const handleMulDelete = () => {
   .row-operate {
     border-bottom: 1px dashed var(--color-border-3);
     margin: 0 $padding;
-    padding-bottom: $margin;
+    padding-bottom: 12px;
   }
   .file-wrap {
     flex: 1;

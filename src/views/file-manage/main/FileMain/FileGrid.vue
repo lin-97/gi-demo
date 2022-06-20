@@ -86,7 +86,7 @@ const handleRightMenuItemClick = (mode: string, item: File.FileItem) => {
 <style lang="scss" scoped>
 .file-grid {
   flex: 1;
-  margin-top: $margin;
+  margin-top: 12px;
   overflow: scroll;
   background: var(--color-bg-4);
   display: flex;

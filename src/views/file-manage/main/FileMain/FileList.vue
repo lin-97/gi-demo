@@ -116,7 +116,7 @@ const handleRightMenuItemClick = (mode: string, item: File.FileItem) => {
 }
 .file-list {
   width: 100%;
-  padding-top: $margin;
+  padding-top: 12px;
   overflow: hidden;
   .file-name {
     height: 100%;

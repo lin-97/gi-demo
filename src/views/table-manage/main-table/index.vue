@@ -186,13 +186,13 @@ getTableData()
   overflow: hidden;
   margin: $margin;
   background: var(--color-bg-2);
-  padding: $margin $padding;
+  padding: $padding;
   padding-bottom: 0;
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
   .form {
-    margin-top: $margin;
+    margin-top: 12px;
   }
   .table-box {
     flex: 1;

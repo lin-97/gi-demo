@@ -95,7 +95,7 @@ const back = () => {
     .view-box {
       flex: 1;
       overflow: hidden;
-      margin-top: $margin;
+      margin-top: 12px;
     }
   }
 

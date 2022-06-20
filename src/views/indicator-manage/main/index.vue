@@ -211,7 +211,7 @@ const onDelete = (row) => {
       .content {
         flex: 1;
         padding: $padding;
-        padding-top: $margin;
+        padding-top: 12px;
         overflow: hidden;
         display: flex;
         flex-direction: column;
