@@ -1,5 +1,5 @@
 <template>
-  <div class="gi-tag" :class="getClassName">
+  <div class="gi-tag" :class="getClassName" @click="handleClick">
     <slot></slot>
   </div>
 </template>
@@ -23,13 +23,21 @@ const props = defineProps({
 let getClassName = computed<string>(() => {
   return `gi-tag-${props.type} gi-tag-${props.status}`
 })
+
+const emit = defineEmits(['click'])
+
+const handleClick = () => {
+  emit('click')
+}
 </script>
 
 <style lang="scss" scoped>
 .gi-tag {
   display: inline-flex;
   padding: 0 10px;
-  height: 22px;
+  padding-top: 1px;
+  height: 20px;
+  font-size: 12px;
   border-radius: 2px;
   color: #fff;
   justify-content: center;

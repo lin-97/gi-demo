@@ -11,6 +11,10 @@ const props = defineProps({
   modelValue: {
     type: Boolean,
     default: false
+  },
+  direction: {
+    type: String,
+    default: 'right'
   }
 })
 
@@ -18,7 +22,7 @@ const boxRef = ref()
 
 const style = computed(() => {
   const obj: any = {}
-  obj['margin-right'] =
+  obj[`margin-${props.direction}`] =
     !props.modelValue && boxRef.value && boxRef.value.clientWidth ? `-${boxRef.value.clientWidth}px` : 0
   return obj
 })
