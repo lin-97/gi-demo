@@ -7,7 +7,6 @@ interface AppState {
   time: string
 }
 
-// 注意: id 是必填的, 并且所有 Store 中唯一, 因为Pinia会将它在devtools显示
 export const useAppStore = defineStore({
   id: 'App',
   state: (): AppState => {
