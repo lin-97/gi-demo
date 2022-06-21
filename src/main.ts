@@ -19,6 +19,7 @@ import '@/styles/index.scss'
 // 支持SVG
 import 'virtual:svg-icons-register'
 
+// 自定义指令
 import directives from './directives'
 
 const app = createApp(App)

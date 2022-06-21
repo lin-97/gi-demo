@@ -11,8 +11,8 @@ const routes = [
   },
   {
     path: '/',
-    redirect: '/home',
     name: 'Layout',
+    redirect: '/home',
     component: () => import('@/layout/index.vue'),
     meta: { title: '首页', keepAlive: false },
     children: [
@@ -151,13 +151,13 @@ const routes = [
       {
         path: '/result-page/success',
         name: 'ResultPageSuccess',
-        component: () => import('@/views/result-page/success.vue'),
+        component: () => import('@/views/result-page/success/index.vue'),
         meta: { title: '成功页', keepAlive: false }
       },
       {
         path: '/result-page/fail',
         name: 'ResultPageFail',
-        component: () => import('@/views/result-page/fail.vue'),
+        component: () => import('@/views/result-page/fail/index.vue'),
         meta: { title: '失败页', keepAlive: false }
       },
       {
