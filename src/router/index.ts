@@ -1,6 +1,5 @@
 import { createRouter, createWebHashHistory } from 'vue-router'
-import { useAppStore } from '@/store/modules/app'
-import { useMenuStore } from '@/store/modules/menu'
+import { useAppStore, useMenuStore } from '@/store'
 
 const routes = [
   {
@@ -188,6 +187,7 @@ router.beforeEach((to, from, next) => {
   console.log('to', to)
   // 设置侧边菜单栏的高亮路径
   const arr = menuStore.list.map((i) => i.path)
+  console.log('arr', arr)
   if (arr.includes(to.path)) {
     appStore.setActivePath(to.path)
   }
