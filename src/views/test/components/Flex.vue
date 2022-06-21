@@ -2,26 +2,31 @@
   <div class="flex-css">
     <a-space wrap>
       <section>
+        <div>flex-start</div>
         <div>flex-start-center</div>
         <div>flex-row-start-center</div>
         <div class="item flex-start-center"><span></span></div>
       </section>
       <section>
+        <div>flex-center</div>
         <div>flex-center-center</div>
         <div>flex-row-center-center</div>
         <div class="item flex-center-center"><span></span></div>
       </section>
       <section>
+        <div>flex-end</div>
         <div>flex-end-center</div>
         <div>flex-row-end-center</div>
         <div class="item flex-end-center"><span></span></div>
       </section>
       <section>
+        <div>flex-between</div>
         <div>flex-between-center</div>
         <div>flex-row-between-center</div>
         <div class="item flex-between-center"><span></span><span></span></div>
       </section>
       <section>
+        <div>flex-evenly</div>
         <div>flex-evenly-center</div>
         <div>flex-row-evenly-center</div>
         <div class="item flex-evenly-center"><span></span><span></span></div>
