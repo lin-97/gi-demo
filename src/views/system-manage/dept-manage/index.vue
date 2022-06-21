@@ -22,8 +22,8 @@
         <template #columns>
           <a-table-column title="部门名称" data-index="name"></a-table-column>
           <a-table-column title="部门编码" data-index="deptCode"></a-table-column>
-          <a-table-column title="创建时间" data-index="createTime" width="200"></a-table-column>
-          <a-table-column title="状态" width="100">
+          <a-table-column title="创建时间" data-index="createTime" :width="200"></a-table-column>
+          <a-table-column title="状态" :width="100">
             <template #cell="{ record }">
               <a-switch v-model="record.status" size="medium" :checked-value="1" :unchecked-value="0">
                 <template #checked>正常</template>
@@ -31,7 +31,7 @@
               </a-switch>
             </template>
           </a-table-column>
-          <a-table-column title="操作" width="100">
+          <a-table-column title="操作" :width="100">
             <template #cell="{ record }">
               <a-space>
                 <a-button type="primary" @click="showAddDeptModal = true">
@@ -64,7 +64,7 @@ let loading = ref<boolean>(false)
 let showAddDeptModal = ref<boolean>(false)
 
 const pageData: Pagination.PageData = reactive({
-  pageCount: 1,
+  current: 1,
   pageSize: 1000
 })
 

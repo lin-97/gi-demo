@@ -1,16 +1,16 @@
-const isLogin = (): boolean => {
+const isLogin = () => {
   return !!localStorage.getItem('token')
 }
 
-const getToken = (): string | null => {
+const getToken = () => {
   return localStorage.getItem('token')
 }
 
-const setToken = (token: string): void => {
+const setToken = (token: string) => {
   localStorage.setItem('token', token)
 }
 
-const clearToken = (): void => {
+const clearToken = () => {
   localStorage.removeItem('token')
 }
 

@@ -1,6 +1,7 @@
 declare namespace Pagination {
   interface PageData {
-    pageCount: number
+    current: number
     pageSize: number
+    total?: number
   }
 }

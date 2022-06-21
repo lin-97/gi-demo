@@ -19,12 +19,15 @@ import '@/styles/index.scss'
 // 支持SVG
 import 'virtual:svg-icons-register'
 
+import directives from './directives'
+
 const app = createApp(App)
 
 app.use(router)
 app.use(createPinia())
 app.use(ArcoVue)
 app.use(ArcoVueIcon)
+app.use(directives)
 
 // 全局注册自定义组件(注：一定要定义组件的name！！！)
 const GiComponents = import.meta.globEager('/src/components/*.vue')
@@ -33,9 +36,5 @@ Object.keys(files).forEach((item) => {
   const component = files[item]?.default
   app.component(component.name, component)
 })
-
-// 全局 v-loading 指令
-import loading from '@/directives/v-loading'
-app.directive('loading', loading)
 
 app.mount('#app')

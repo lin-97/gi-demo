@@ -15,14 +15,14 @@
         :pagination="{ 'show-page-size': true }"
       >
         <template #columns>
-          <a-table-column title="序号" width="60">
+          <a-table-column title="序号" :width="60">
             <template #cell="cell">{{ cell.rowIndex + 1 }}</template>
           </a-table-column>
           <a-table-column title="角色名称" data-index="name"></a-table-column>
           <a-table-column title="角色编号" data-index="roleCode"></a-table-column>
           <a-table-column title="角色描述" data-index="description"></a-table-column>
           <a-table-column title="创建时间" data-index="createTime"></a-table-column>
-          <a-table-column title="操作" width="220">
+          <a-table-column title="操作" :width="220">
             <template #cell="{ record }">
               <a-space>
                 <a-popconfirm content="您确定要删除该项吗?" @ok="onDelete">
@@ -60,7 +60,7 @@ let total = ref<number>(0)
 let showAddRoleModal = ref<boolean>(false)
 
 const pageData: Pagination.PageData = reactive({
-  pageCount: 1,
+  current: 1,
   pageSize: 500
 })
 

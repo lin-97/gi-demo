@@ -84,7 +84,7 @@
             <a-table-column title="地址" data-index="address"></a-table-column>
             <a-table-column title="登录时间" data-index="lastLoginTime"></a-table-column>
             <a-table-column title="登录IP" data-index="lastLoginIp"></a-table-column>
-            <a-table-column title="状态" width="100">
+            <a-table-column title="状态" :width="100">
               <template #cell="{ record }">
                 <a-switch v-model="record.status" size="medium" :checked-value="1" :unchecked-value="0">
                   <template #checked>正常</template>
@@ -92,7 +92,7 @@
                 </a-switch>
               </template>
             </a-table-column>
-            <a-table-column title="操作" width="100">
+            <a-table-column title="操作" :width="100">
               <template #cell="{ record }">
                 <a-space>
                   <a-button type="primary">
@@ -148,7 +148,7 @@ const getTreeData = async () => {
 getTreeData()
 
 const pageData: Pagination.PageData = reactive({
-  pageCount: 1,
+  current: 1,
   pageSize: 500
 })
 
