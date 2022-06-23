@@ -23,15 +23,15 @@ import Step2 from './Step2.vue'
 import Step3 from './Step3.vue'
 import type { StepForm } from './type'
 
-let current = ref(1)
-let form = ref<StepForm>({
+const current = ref(1)
+const form = ref<StepForm>({
   payAccount: '',
   recAccount: '',
   payType: 1,
   recName: '',
   amount: 0
 })
-let animatedName = ref('to-right')
+const animatedName = ref('to-right')
 
 const next = (formData: StepForm) => {
   current.value++

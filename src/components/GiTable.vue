@@ -67,7 +67,7 @@ const tableRef = ref(null)
 const stripe = ref(false)
 const size = ref('small')
 const isBordered = ref(true)
-console.log('attrs', attrs)
+// console.log('attrs', attrs)
 
 const giTableRef = ref<HTMLElement | null>(null)
 const { isFullscreen, toggle } = useFullscreen(giTableRef)

@@ -116,16 +116,15 @@
 <script setup lang="ts" name="UserManage">
 import { ref, reactive, nextTick } from 'vue'
 import { getSystemDeptList, getSystemUserList } from '@/apis/system'
-import GiSvgIcon from '../../../components/GiSvgIcon.vue'
 
-let treeLoading = ref<boolean>(false)
+const treeLoading = ref(false)
 const treeData = ref<object[]>([])
-let treeInputValue = ref<string>('')
+const treeInputValue = ref('')
 const treeRef = ref<HTMLInputElement | null>(null)
 
-let loading = ref<boolean>(false)
+const loading = ref(false)
 const tableData = ref<object[]>([])
-let total = ref<number>(0)
+const total = ref(0)
 
 const getTreeData = async () => {
   try {

@@ -123,14 +123,14 @@ const router = useRouter()
 const { width: windowWidth } = useWindowSize()
 const fileStore = useFileStore()
 
-let loading = ref<boolean>(false)
+const loading = ref<boolean>(false)
 
 // 文件列表数据
-let fileList = ref<File.FileItem[]>([])
+const fileList = ref<File.FileItem[]>([])
 fileList.value = fileData
 
 // 批量操作
-let isBatchMode = ref<boolean>(false)
+const isBatchMode = ref<boolean>(false)
 
 // 点击文件
 const handleClickFile = (item: File.FileItem) => {

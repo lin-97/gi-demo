@@ -24,9 +24,7 @@
   </a-card>
 </template>
 
-<script setup lang="ts">
-import GiNowTime from '@/components/GiNowTime.vue'
-</script>
+<script setup lang="ts"></script>
 
 <style lang="scss" scoped>
 :deep(.arco-statistic-title) {

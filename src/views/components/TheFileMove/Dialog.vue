@@ -32,14 +32,14 @@ const props = defineProps({
   onClose: Function
 })
 
-let visible = ref<boolean>(false)
+const visible = ref(false)
 
 type Form = { path: string }
 const form: Form = reactive({
   path: '/'
 })
 
-let treeData = ref<object[]>([])
+const treeData = ref<object[]>([])
 
 treeData.value = data
 onMounted(() => {

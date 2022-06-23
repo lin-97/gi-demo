@@ -50,10 +50,10 @@ export default [
     method: 'get',
     timeout: 0,
     response: ({ query }) => {
-      const { page = 1, pageSize = 10 } = query
+      const { current = 1, pageSize = 10 } = query
       const list = tableList(Number(pageSize))
       return resultSuccess({
-        page: Number(page),
+        current: Number(current),
         pageSize: Number(pageSize),
         pageCount: 60,
         list: list

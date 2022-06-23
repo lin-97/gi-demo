@@ -39,14 +39,14 @@ const props = defineProps<{
   onClick: any
 }>()
 
-let menuRef = ref<HTMLInputElement | null>(null)
+const menuRef = ref<HTMLInputElement | null>(null)
 
-let showMoveTreePopup = ref<boolean>(false)
+const showMoveTreePopup = ref(false)
 
-let showAdd = computed<boolean>(() => props.fileInfo.id !== '')
-let showRename = computed<boolean>(() => props.fileInfo.id !== 'root')
-let showMove = computed<boolean>(() => props.fileInfo.id !== 'root')
-let showDelete = computed<boolean>(() => props.fileInfo.id !== 'root')
+const showAdd = computed<boolean>(() => props.fileInfo.id !== '')
+const showRename = computed<boolean>(() => props.fileInfo.id !== 'root')
+const showMove = computed<boolean>(() => props.fileInfo.id !== 'root')
+const showDelete = computed<boolean>(() => props.fileInfo.id !== 'root')
 
 const onClose = () => {
   showMoveTreePopup.value = false

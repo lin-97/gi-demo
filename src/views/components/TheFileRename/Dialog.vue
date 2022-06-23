@@ -18,7 +18,7 @@ const props = defineProps({
   onClose: Function
 })
 
-let visible = ref<boolean>(false)
+const visible = ref(false)
 
 type Form = { name: string }
 

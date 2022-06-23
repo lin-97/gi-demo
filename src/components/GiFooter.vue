@@ -3,6 +3,11 @@
 </template>
 
 <script setup lang="ts" name="GiFooter"></script>
+<script lang="ts">
+export default {
+  name: 'GiFooter'
+}
+</script>
 
 <style lang="scss" scoped>
 .gi-footer {

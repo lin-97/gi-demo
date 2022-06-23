@@ -1,5 +1,5 @@
 <template>
-  <div class="main-table">
+  <div class="table-page">
     <GiTable
       row-key="id"
       :data="tableData"
@@ -10,15 +10,15 @@
       @refresh="getTableData"
     >
       <template #left>
-        <a-button type="primary">
+        <a-button type="primary" @click="onAdd">
           <template #icon><icon-plus /></template>
           <span>新增</span>
         </a-button>
-        <a-button type="primary" status="danger">
+        <a-button type="primary" status="danger" @click="onDelete">
           <template #icon><icon-delete /></template>
           <span>删除</span>
         </a-button>
-        <a-button>
+        <a-button @click="onImport">
           <template #icon><icon-export /></template>
           <span>导入</span>
         </a-button>
@@ -65,26 +65,13 @@
 <script setup lang="ts">
 import { reactive, ref } from 'vue'
 import { getTableList } from '@/apis/table'
-import GiFooter from '@/components/GiFooter.vue'
+import { Message } from '@arco-design/web-vue'
 
-const form = reactive({
-  value1: '',
-  value2: '',
-  value3: '',
-  value4: '',
-  value5: ''
-})
+const tableData = ref([])
+const loading = ref(false)
 
-const tableData = ref<object[]>([])
-let loading = ref<boolean>(false)
-
-type PageInfo = {
-  page: number
-  pageSize: number
-}
-
-const pageInfo: PageInfo = reactive({
-  page: 1,
+const pageInfo: Pagination.PageData = reactive({
+  current: 1,
   pageSize: 1000
 })
 
@@ -101,10 +88,22 @@ const getTableData = async () => {
 }
 
 getTableData()
+
+const onAdd = () => {
+  Message.info('点击了新增')
+}
+
+const onDelete = () => {
+  Message.info('点击了删除')
+}
+
+const onImport = () => {
+  Message.info('点击了导入')
+}
 </script>
 
 <style lang="scss" scoped>
-.main-table {
+.table-page {
   height: 100%;
   overflow: hidden;
   margin: $margin;

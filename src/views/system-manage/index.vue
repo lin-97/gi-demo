@@ -30,8 +30,8 @@ import UserManage from './user-manage/index.vue'
 import RoleManage from './role-manage/index.vue'
 import MenuManage from './menu-manage/index.vue'
 
-let currentKey = ref<string>('01')
-let currentIndex = ref<number>(0)
+const currentKey = ref('01')
+const currentIndex = ref(0)
 
 interface MenuItem {
   id: string

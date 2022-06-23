@@ -20,7 +20,7 @@ const props = defineProps({
   }
 })
 
-let getClassName = computed<string>(() => {
+const getClassName = computed<string>(() => {
   return `gi-tag-${props.type} gi-tag-${props.status}`
 })
 

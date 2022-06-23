@@ -16,11 +16,11 @@ const props = defineProps({
   }
 })
 
-let isImg = computed<boolean>(() => {
+const isImg = computed<boolean>(() => {
   return imageTypeList.includes(props.data.extendName)
 })
 
-let getFileImg = computed<string>(() => {
+const getFileImg = computed<string>(() => {
   if (props.data.isDir) {
     return fileImgMap['dir']
   } else if (imageTypeList.includes(props.data.extendName)) {

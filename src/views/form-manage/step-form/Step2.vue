@@ -49,7 +49,7 @@ const rules = {
   password: [{ required: true, message: '请输入密码' }]
 }
 
-let loading = ref(false)
+const loading = ref(false)
 const formRef = ref()
 
 // 下一步|提交

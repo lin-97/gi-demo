@@ -1,5 +1,5 @@
 <template>
-  <a-modal v-model:visible="visible" title="编辑" @ok="confirm" @cancel="cancel">
+  <a-modal v-model:visible="visible" :title="isEdit ? '编辑' : '新增'" @ok="confirm" @cancel="cancel">
     <a-form ref="formRef" :model="form" :style="{ width: '450px' }">
       <a-form-item field="name" label="姓名" :rules="rules.name">
         <a-input v-model="form.name" placeholder="请输入姓名" style="width: 280px" />
@@ -31,8 +31,8 @@
             </a-tooltip>
           </a-space>
         </template>
-        <a-row justify="space-between" v-for="i in 10" :key="i">
-          <span>编辑</span>
+        <a-row justify="space-between" v-for="(item, index) in list" :key="index">
+          <span>{{ item.name }}</span>
           <a-checkbox-group>
             <a-checkbox value="1">管理员</a-checkbox>
             <a-checkbox value="2">编辑者</a-checkbox>
@@ -58,6 +58,8 @@ const props = defineProps({
   }
 })
 
+const list = [{ name: '新增' }, { name: '编辑' }, { name: '重命名' }, { name: '分享' }, { name: '删除' }]
+
 type Form = {
   name: string
   address: string
@@ -80,7 +82,12 @@ const rules = reactive({
 
 const emit = defineEmits(['update:modelValue'])
 
-let visible = computed<boolean>({
+// 判断是新增还是编辑
+const isEdit = computed<boolean>(() => {
+  return !!props.formData.id
+})
+
+const visible = computed<boolean>({
   get: () => {
     return props.modelValue
   },

@@ -54,10 +54,10 @@ import { Message } from '@arco-design/web-vue'
 import AddRoleModal from './AddRoleModal.vue'
 import { getSystemRoleList } from '@/apis/system'
 
-let loading = ref<boolean>(false)
-const tableData = ref<object[]>([])
-let total = ref<number>(0)
-let showAddRoleModal = ref<boolean>(false)
+const loading = ref(false)
+const tableData = ref([])
+const total = ref(0)
+const showAddRoleModal = ref(false)
 
 const pageData: Pagination.PageData = reactive({
   current: 1,

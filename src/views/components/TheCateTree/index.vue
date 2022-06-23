@@ -52,12 +52,12 @@ const props = defineProps({
   }
 })
 
-let loading = ref<boolean>(false)
-let inputValue = ref<string>('')
+const loading = ref(false)
+const inputValue = ref('')
 const treeRef = ref<HTMLElement | null>(null)
-let treeData = ref<object[]>([])
+const treeData = ref<object[]>([])
 
-let treeSetting = reactive({
+const treeSetting = reactive({
   callback: {
     // 鼠标右键事件
     onRightClick: (event: PointerEvent, treeId: string, treeNode: object) => {
@@ -84,8 +84,9 @@ let treeSetting = reactive({
     }
   }
 })
-let treeObj = reactive({})
-let currentNode = reactive({})
+
+const treeObj = reactive({})
+const currentNode = reactive({})
 
 const emit = defineEmits(['node-click'])
 const handleNodeClick = (event: PointerEvent, treeId: string, treeNode: ZTree.ITreeNode) => {

@@ -25,8 +25,8 @@ import Page500 from '@/assets/svgs/500.svg'
 const route = useRoute()
 const router = useRouter()
 
-let countDownTime = ref<number>(5)
-let timer = ref<number>(0)
+const countDownTime = ref(5)
+const timer = ref(0)
 
 const pageMap: any = reactive({
   403: Page403,

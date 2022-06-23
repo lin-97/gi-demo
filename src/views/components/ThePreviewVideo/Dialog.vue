@@ -13,7 +13,7 @@ const props = defineProps({
   onCancel: Function
 })
 
-let visible = ref<boolean>(false)
+const visible = ref(false)
 
 onMounted(() => {
   visible.value = true

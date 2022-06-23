@@ -80,7 +80,7 @@ const form = reactive({
   status: 1
 })
 
-let visible = computed<boolean>({
+const visible = computed<boolean>({
   get: () => {
     return props.modelValue
   },

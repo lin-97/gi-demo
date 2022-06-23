@@ -7,5 +7,5 @@
 
 <script setup lang="ts">
 import { ref } from 'vue'
-let icon = ref('')
+const icon = ref('')
 </script>

@@ -97,7 +97,7 @@ const userStore = useUserStore()
 
 const { isFullScreen, onToggleFullScreen } = useFullScreen()
 
-let showSettingDrawer = ref<boolean>(false)
+const showSettingDrawer = ref(false)
 
 // 跳转首页
 const toHome = () => {

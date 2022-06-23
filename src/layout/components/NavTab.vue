@@ -88,7 +88,7 @@ const onClick = (key: string) => {
 
 // 关闭页签
 const onClose = (key: string) => {
-  let item = navtabStore.tabList.find((i) => i.path === key)
+  const item = navtabStore.tabList.find((i) => i.path === key)
   navtabStore.removeTabItem(key)
   navtabStore.removeCacheItem(item.componentName)
 }

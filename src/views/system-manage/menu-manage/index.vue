@@ -73,9 +73,9 @@ import { useMenuStore } from '@/store'
 import AddMenuModal from './AddMenuModal.vue'
 const menuStore = useMenuStore()
 
-let loading = ref<boolean>(false)
-let showAddMenuModal = ref<boolean>(false)
-let treeData = ref<any>([])
+const loading = ref(false)
+const showAddMenuModal = ref(false)
+const treeData = ref([])
 
 const getTreeData = () => {
   loading.value = true

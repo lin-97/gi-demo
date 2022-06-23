@@ -58,10 +58,10 @@ import { ref, reactive } from 'vue'
 import AddDeptModal from './AddDeptModal.vue'
 import { getSystemDeptList } from '@/apis/system'
 
-const tableData = ref<object[]>([])
-let total = ref<number>(0)
-let loading = ref<boolean>(false)
-let showAddDeptModal = ref<boolean>(false)
+const tableData = ref([])
+const total = ref(0)
+const loading = ref(false)
+const showAddDeptModal = ref(false)
 
 const pageData: Pagination.PageData = reactive({
   current: 1,

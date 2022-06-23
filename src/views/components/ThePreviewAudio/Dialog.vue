@@ -28,7 +28,7 @@ const props = defineProps({
   onCancel: Function
 })
 
-let visible = ref<boolean>(false)
+const visible = ref(false)
 
 const audioRef = ref<HTMLElement | null>(null)
 const audioHeadRef = ref<HTMLElement | null>(null)

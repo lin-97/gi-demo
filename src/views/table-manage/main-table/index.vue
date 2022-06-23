@@ -1,5 +1,5 @@
 <template>
-  <div class="main-table">
+  <div class="table-page">
     <a-alert type="success"
       >三级路由【缓存路由、固定表格高度、并根据窗口大小自适应】的示例。详情页请点击操作列按钮，支持tab多开并高亮左侧菜单</a-alert
     >
@@ -70,13 +70,14 @@
         stripe
         row-key="id"
         page-position="bottom"
+        :bordered="{ cell: true }"
         :data="tableData"
         v-loading="loading"
         :scroll="{ x: '100%', y: '100%', minWidth: 1000 }"
         :pagination="{ 'show-page-size': true }"
       >
         <template #columns>
-          <a-table-column title="序号" :width="60">
+          <a-table-column title="序号" :width="68">
             <template #cell="cell">{{ cell.rowIndex + 1 }}</template>
           </a-table-column>
           <a-table-column title="姓名" data-index="name" :width="150"></a-table-column>
@@ -120,7 +121,6 @@
 <script setup lang="ts">
 import { reactive, ref } from 'vue'
 import { getTableList } from '@/apis/table'
-import GiFooter from '@/components/GiFooter.vue'
 
 const form = reactive({
   value1: '',
@@ -131,16 +131,11 @@ const form = reactive({
 })
 
 const tableData = ref<object[]>([])
-let loading = ref<boolean>(false)
-let collapsed = ref<boolean>(false)
+const loading = ref<boolean>(false)
+const collapsed = ref<boolean>(false)
 
-type PageInfo = {
-  page: number
-  pageSize: number
-}
-
-const pageInfo: PageInfo = reactive({
-  page: 1,
+const pageInfo: Pagination.PageData = reactive({
+  current: 1,
   pageSize: 1000
 })
 
@@ -181,7 +176,7 @@ getTableData()
     background: none;
   }
 }
-.main-table {
+.table-page {
   height: 100%;
   overflow: hidden;
   margin: $margin;

@@ -59,7 +59,7 @@ import { ref } from 'vue'
 import { Modal } from '@arco-design/web-vue'
 import GiShrinkBox from '@/components/GiShrinkBox.vue'
 
-let visible = ref(true)
+const visible = ref(true)
 
 // 解除认证
 const relieve = () => {

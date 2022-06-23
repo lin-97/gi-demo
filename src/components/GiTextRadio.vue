@@ -12,7 +12,6 @@
 
 <script setup lang="ts" name="GiTextRadio">
 import type { PropType } from 'vue'
-
 const emit = defineEmits(['update:modelValue', 'change'])
 
 type Item = {

@@ -15,8 +15,8 @@
 <script setup lang="ts">
 import { nextTick, ref } from 'vue'
 
-let isShowInput = ref<boolean>(false)
-let inputRef = ref<HTMLInputElement | null>(null)
+const isShowInput = ref<boolean>(false)
+const inputRef = ref<HTMLInputElement | null>(null)
 
 const onNavBar = () => {
   isShowInput.value = true

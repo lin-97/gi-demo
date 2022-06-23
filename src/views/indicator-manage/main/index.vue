@@ -61,10 +61,11 @@
 
           <section class="table-box">
             <a-table
-              row-key="id"
-              :data="tableData"
               v-loading="loading"
-              :scroll="{ x: '100%', y: '100%', minWidth: 800 }"
+              row-key="id"
+              :bordered="{ cell: true }"
+              :data="tableData"
+              :scroll="{ x: '100%', y: '100%', minWidth: 1000 }"
               :pagination="{ 'show-page-size': true }"
               :row-selection="{ type: 'checkbox', showCheckedAll: true }"
             >
@@ -73,8 +74,8 @@
                   <template #cell="cell">{{ cell.rowIndex + 1 }}</template>
                 </a-table-column>
                 <a-table-column title="姓名" data-index="name"></a-table-column>
-                <a-table-column title="创建时间" data-index="startTime"></a-table-column>
-                <a-table-column title="地址" data-index="address"></a-table-column>
+                <a-table-column title="创建时间" data-index="startTime" :width="180"></a-table-column>
+                <a-table-column title="地址" data-index="address" ellipsis tooltip></a-table-column>
                 <a-table-column title="比例" :width="200">
                   <template #cell="{ record }">
                     <a-progress :status="getProportionColor(record.proportion)" :percent="record.proportion / 100" />
@@ -116,17 +117,15 @@
 import { reactive, ref } from 'vue'
 import { useRouter } from 'vue-router'
 import { Modal, Message } from '@arco-design/web-vue'
-import GiTitle from '@/components/GiTitle.vue'
 import TheCateTree from '@/views/components/TheCateTree/index.vue'
 import EditDialog from './EditDialog.vue'
 import { getTableList } from '@/apis/table'
 
 const router = useRouter()
 
-let activeName = ref<string>('2')
-
+const activeName = ref<string>('2')
 const tableData = ref<object[]>([])
-let loading = ref<boolean>(false)
+const loading = ref<boolean>(false)
 
 // 比例进度条颜色
 const getProportionColor = (proportion: number) => {
@@ -135,13 +134,8 @@ const getProportionColor = (proportion: number) => {
   return 'success'
 }
 
-type PageInfo = {
-  page: number
-  pageSize: number
-}
-
-const pageInfo: PageInfo = reactive({
-  page: 1,
+const pageInfo: Pagination.PageData = reactive({
+  current: 1,
   pageSize: 1000
 })
 
@@ -171,23 +165,23 @@ const onMulDelete = () => {
   })
 }
 
-let showEditDialog = ref(false)
+const showEditDialog = ref(false)
 
 const formData = ref({})
-const onEdit = (row) => {
+const onEdit = (row: any) => {
   formData.value = row
   showEditDialog.value = true
 }
 
 const onAdd = () => {
-  router.push({ path: '/indicator-manage/add' })
+  showEditDialog.value = true
 }
 
 const onDetail = () => {
   router.push({ path: '/indicator-manage/detail' })
 }
 
-const onDelete = (row) => {
+const onDelete = (row: any) => {
   Message.success('删除成功')
 }
 </script>

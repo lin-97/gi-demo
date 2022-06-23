@@ -9,6 +9,6 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 
-let checked = ref(true)
-let checked1 = ref(false)
+const checked = ref(true)
+const checked1 = ref(false)
 </script>

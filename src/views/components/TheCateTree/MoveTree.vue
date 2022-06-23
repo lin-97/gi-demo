@@ -12,7 +12,7 @@ const props = defineProps({
   }
 })
 
-let treeObj: object = reactive({})
+const treeObj: object = reactive({})
 const treeSetting = reactive({
   callback: {
     // 点击节点

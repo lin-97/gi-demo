@@ -124,7 +124,6 @@
 
 <script setup lang="ts">
 import { ref } from 'vue'
-import GiDot from '@/components/GiDot.vue'
 
 const containerRef = ref()
 </script>

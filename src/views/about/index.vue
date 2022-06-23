@@ -20,7 +20,6 @@
 
 <script setup lang="ts" name="About">
 import { ref } from 'vue'
-import GiFooter from '@/components/GiFooter.vue'
 import packageJson from '../../../package.json'
 
 const data = ref(packageJson)

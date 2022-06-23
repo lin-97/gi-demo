@@ -46,7 +46,7 @@ const fileTypeList = ref<FileTypeListItem[]>([
   { key: '5', name: '其他', icon: 'file-other' }
 ])
 
-let currentKey = ref<string>('0')
+const currentKey = ref<string>('0')
 
 // 监听路由变化
 watch(

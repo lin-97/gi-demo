@@ -42,7 +42,7 @@
 
 <script setup lang="ts">
 import { ref } from 'vue'
-let flag = ref(false)
+const flag = ref(false)
 
 const indeterminate = ref(false)
 const checkedAll = ref(false)

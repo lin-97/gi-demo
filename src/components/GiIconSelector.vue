@@ -67,7 +67,7 @@ const props = defineProps({
 })
 
 // 搜索词
-let searchValue = ref<string>('')
+const searchValue = ref<string>('')
 
 // 图标列表
 const iconList = Object.keys(Icons).filter((i) => i !== 'default')
