@@ -7,7 +7,13 @@ export default function useArea() {
   // 根据上一级编码， 获取下一级对象
   const filter = (name: Name, code: number | string) => {
     const obj: any = {}
-    const reg = new RegExp('^' + code.toString().replace(/0+$/, '\\d+'))
+    let reg: any = null
+    if (name === 'city_list') {
+      reg = new RegExp('^' + code.toString().replace(/0000$/, ''))
+    } else if (name === 'county_list') {
+      reg = new RegExp('^' + code.toString().replace(/00$/, ''))
+    }
+
     for (const key in area[name]) {
       // eslint-disable-next-line no-prototype-builtins
       if (area[name].hasOwnProperty(key) && reg.test(key)) {
