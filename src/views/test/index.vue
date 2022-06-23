@@ -28,6 +28,7 @@ import Option from './components/Option.vue'
 import Dot from './components/Dot.vue'
 import Flex from './components/Flex.vue'
 import ShrinkBox from './components/ShrinkBox.vue'
+import Area from './components/Area.vue'
 
 const selectedKey = ref(0)
 
@@ -41,7 +42,8 @@ const menuList = ref([
   { name: 'GiIconSelector', value: IconSelector },
   { name: 'GiDot', value: Dot },
   { name: 'GiShrinkBox', value: ShrinkBox },
-  { name: 'Flex布局', value: Flex }
+  { name: 'Flex布局', value: Flex },
+  { name: '省市区', value: Area }
 ])
 </script>
 
