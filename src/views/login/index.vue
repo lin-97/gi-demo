@@ -63,9 +63,9 @@ const form: LoginForm = reactive({
 })
 
 // 记住密码
-const checked = ref<boolean>(false)
+const checked = ref(false)
 // 登录加载
-const loading = ref<boolean>(false)
+const loading = ref(false)
 
 // 点击登录
 const login = () => {

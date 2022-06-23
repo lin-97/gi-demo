@@ -15,7 +15,7 @@
 <script setup lang="ts" name="GiLoading">
 import { ref } from 'vue'
 
-const loadingText = ref<string>('')
+const loadingText = ref('')
 
 // 设置加载文本
 const setLoadingText = (value: string) => {

@@ -123,9 +123,9 @@ import { getTableList } from '@/apis/table'
 
 const router = useRouter()
 
-const activeName = ref<string>('2')
+const activeName = ref('2')
 const tableData = ref<object[]>([])
-const loading = ref<boolean>(false)
+const loading = ref(false)
 
 // 比例进度条颜色
 const getProportionColor = (proportion: number) => {

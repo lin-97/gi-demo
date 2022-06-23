@@ -6,7 +6,7 @@ import screenfull from 'screenfull'
  */
 export default function () {
   // 是否全屏
-  const isFullScreen = ref<boolean>(false)
+  const isFullScreen = ref(false)
 
   // 监听变化
   const change = () => {

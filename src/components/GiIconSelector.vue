@@ -67,15 +67,15 @@ const props = defineProps({
 })
 
 // 搜索词
-const searchValue = ref<string>('')
+const searchValue = ref('')
 
 // 图标列表
 const iconList = Object.keys(Icons).filter((i) => i !== 'default')
 // 图标总数
-const total = ref<number>(iconList.length)
+const total = ref(iconList.length)
 
 const pageSize = 36
-const currentPage = ref<number>(1)
+const currentPage = ref(1)
 
 // 当前页的图标列表
 const currentPageIconList = ref(iconList.slice(0, pageSize))
@@ -83,7 +83,7 @@ const currentPageIconList = ref(iconList.slice(0, pageSize))
 const searchList = ref<string[]>([])
 
 // 显示/隐藏弹框
-const visible = ref<boolean>(false)
+const visible = ref(false)
 
 // 当前选择的icon
 const seletedItem = ref<string>(props.modelValue)

@@ -4,7 +4,7 @@
 </template>
 
 <script setup lang="ts">
-import { reactive, watch, nextTick } from 'vue'
+import { reactive, ref, watch, nextTick } from 'vue'
 const props = defineProps({
   treeData: {
     type: Array,
@@ -12,7 +12,7 @@ const props = defineProps({
   }
 })
 
-const treeObj: object = reactive({})
+const treeObj = ref({})
 const treeSetting = reactive({
   callback: {
     // 点击节点
@@ -26,8 +26,8 @@ watch(
   props.treeData,
   () => {
     nextTick(() => {
-      treeObj = $.fn.zTree.init($('#movetree'), treeSetting, props.treeData)
-      treeObj.expandAll(true)
+      treeObj.value = $.fn.zTree.init($('#movetree'), treeSetting, props.treeData)
+      treeObj.value.expandAll(true)
     })
   },
   { deep: true, immediate: true }

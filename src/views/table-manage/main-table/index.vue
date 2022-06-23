@@ -67,7 +67,6 @@
 
     <section class="table-box">
       <a-table
-        stripe
         row-key="id"
         page-position="bottom"
         :bordered="{ cell: true }"
@@ -131,8 +130,8 @@ const form = reactive({
 })
 
 const tableData = ref<object[]>([])
-const loading = ref<boolean>(false)
-const collapsed = ref<boolean>(false)
+const loading = ref(false)
+const collapsed = ref(false)
 
 const pageInfo: Pagination.PageData = reactive({
   current: 1,

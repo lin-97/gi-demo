@@ -57,13 +57,16 @@ const inputValue = ref('')
 const treeRef = ref<HTMLElement | null>(null)
 const treeData = ref<object[]>([])
 
+const treeObj = ref({})
+const currentNode = ref({})
+
 const treeSetting = reactive({
   callback: {
     // 鼠标右键事件
     onRightClick: (event: PointerEvent, treeId: string, treeNode: object) => {
       console.log('鼠标右键', treeNode)
       if (!treeNode || !props.allowEdit) return
-      currentNode = treeNode
+      currentNode.value = treeNode
       RightMenu(event, treeNode, treeData.value).then((res: any) => {
         console.log('res', res)
         if (res.mode === 'add') {
@@ -85,12 +88,9 @@ const treeSetting = reactive({
   }
 })
 
-const treeObj = reactive({})
-const currentNode = reactive({})
-
 const emit = defineEmits(['node-click'])
 const handleNodeClick = (event: PointerEvent, treeId: string, treeNode: ZTree.ITreeNode) => {
-  currentNode = treeNode
+  currentNode.value = treeNode
   emit('node-click')
   console.log('点击节点', treeNode)
   // onScrollToCenter(treeNode.tId)
@@ -141,8 +141,8 @@ const getCateTree = async () => {
     formatTree(treeData.value)
     loading.value = false
     nextTick(() => {
-      treeObj = $.fn.zTree.init($('#treeDemo'), treeSetting, treeData.value)
-      treeObj.expandAll(true)
+      treeObj.value = $.fn.zTree.init($('#treeDemo'), treeSetting, treeData.value)
+      treeObj.value.expandAll(true)
       loading.value = false
     })
   } catch (error) {
@@ -154,14 +154,14 @@ getCateTree()
 
 // 新增
 const onAdd = () => {
-  let childrens: any[] = currentNode.children
+  const childrens: any[] = currentNode.value.children
   let name = '新建分类1'
   if (childrens && childrens.length) {
     let arr: string[] = childrens.map((i) => i.name)
     name = getNewNodeName(arr, '新建分类')
   }
   let id: string = new Date().getTime().toString()
-  let newChildrenNode = {
+  const newChildrenNode = {
     id: id,
     name: name,
     children: null,
@@ -170,16 +170,19 @@ const onAdd = () => {
     icon: FileCloseIcon,
     isParent: false
   }
-  treeObj.addNodes(currentNode, newChildrenNode, true)
-  let nodes = treeObj.getNodesByParam('id', id, null)
+  treeObj.value.addNodes(currentNode.value, newChildrenNode, true)
+  const nodes = treeObj.value.getNodesByParam('id', id, null)
   setTimeout(() => {
-    treeObj.editName(nodes[0])
+    treeObj.value.editName(nodes[0])
   }, 100)
 }
 
 // 重命名
 const onRename = () => {
-  treeObj.editName(currentNode)
+  nextTick(() => {
+    const nodes = treeObj.value.getNodesByParam('id', currentNode.value.id, null)
+    treeObj.value.editName(nodes[0])
+  })
 }
 
 // 删除
@@ -198,9 +201,9 @@ const nodeFilter = (node: any, nameSearch: string) => {
     flag = true
   }
   if (node.children) {
-    let cNodes = node.children
+    const cNodes = node.children
     for (let i = 0; i < cNodes.length; i++) {
-      let cNode = cNodes[i]
+      const cNode = cNodes[i]
       if (nodeFilter(cNode, nameSearch)) {
         flag = true
       } else {
@@ -216,18 +219,18 @@ const handleInput = () => {
   let value = inputValue.value
   console.log('value', value)
   if (!value) {
-    treeObj = $.fn.zTree.init($('#treeDemo'), treeSetting, treeData.value)
-    treeObj.expandAll(true)
+    treeObj.value = $.fn.zTree.init($('#treeDemo'), treeSetting, treeData.value)
+    treeObj.value.expandAll(true)
   } else {
-    let arr = JSON.parse(JSON.stringify(treeData.value))
+    const arr = JSON.parse(JSON.stringify(treeData.value))
     for (let i = 0; i < arr.length; i++) {
       if (!nodeFilter(arr[i], value)) {
         arr.splice(i--, 1)
       }
     }
     console.log('arr', arr)
-    treeObj = $.fn.zTree.init($('#treeDemo'), treeSetting, arr)
-    treeObj.expandAll(true)
+    treeObj.value = $.fn.zTree.init($('#treeDemo'), treeSetting, arr)
+    treeObj.value.expandAll(true)
   }
 }
 </script>

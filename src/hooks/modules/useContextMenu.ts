@@ -9,9 +9,9 @@ export default function useContextMenu(
   elRef: HTMLElement | null,
   options: Options = { alignPoint: false }
 ) {
-  const visible = ref<boolean>(false)
-  const elWidth = ref<number>(0)
-  const elHeight = ref<number>(0)
+  const visible = ref(false)
+  const elWidth = ref(0)
+  const elHeight = ref(0)
 
   const setVisible = (flag: boolean) => {
     visible.value = flag

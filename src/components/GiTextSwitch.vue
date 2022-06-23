@@ -35,8 +35,8 @@ const props = defineProps({
 })
 const emit = defineEmits(['update:modelValue'])
 
-const firstElWidth = ref<number>(0)
-const lastElWidth = ref<number>(0)
+const firstElWidth = ref(0)
+const lastElWidth = ref(0)
 const itemBoxRef = ref<HTMLElement | null>(null)
 
 onMounted(() => {
