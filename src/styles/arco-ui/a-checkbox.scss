@@ -4,7 +4,7 @@
     width: 16px;
     height: 16px;
     &::before {
-      background: none;
+      background-color: transparent;
     }
   }
   .arco-checkbox-icon {
@@ -40,7 +40,7 @@
       width: 3px;
       position: absolute;
       top: 2px !important;
-      left: 5px;
+      left: 0.3382em;
       transform: rotate(45deg) scaleY(0);
       transition: transform 0.15s ease-in 0.05s;
       transform-origin: center;
@@ -78,11 +78,11 @@
 
 .arco-checkbox:hover .arco-checkbox-icon-hover:not(.arco-icon-hover-disabled):before,
 .arco-checkbox > input[type='checkbox']:focus .arco-checkbox-icon-hover::before {
-  background: none;
+  background-color: transparent;
 }
 
 .arco-checkbox > input[type='checkbox']:focus + .arco-checkbox-icon-hover::before {
-  background: none;
+  background-color: transparent;
 }
 
 .arco-checkbox > input[type='checkbox']:focus + .arco-checkbox-icon {

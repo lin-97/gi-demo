@@ -42,9 +42,9 @@ const list = [
   {
     id: '094',
     type: 'file',
-    name: '水星记-郭顶',
+    name: '摇滚-电音',
     extendName: 'mp3',
-    src: 'http://win.web.ri01.sycdn.kuwo.cn/83e8d220cafbe04e70cb74b80b4a9e09/627698c9/resource/n3/48/98/2577088121.mp3',
+    src: 'http://music.163.com/song/media/outer/url?id=447925558.mp3',
     updateTime: '2022-01-20 18:30:00',
     isDir: false,
     filePath: '/'
