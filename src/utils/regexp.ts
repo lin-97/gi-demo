@@ -18,3 +18,6 @@ export const REGEXP_CODE_FOUR = /^\d{4}$/
 /** url链接正则 */
 export const REGEXP_URL =
   /(((^https?:(?:\/\/)?)(?:[-;:&=+$,\w]+@)?[A-Za-z0-9.-]+(?::\d+)?|(?:www.|[-;:&=+$,\w]+@)[A-Za-z0-9.-]+)((?:\/[+~%/.\w-_]*)?\??(?:[-+=&;%@.\w_]*)#?(?:[\w]*))?)$/
+
+/** 颜色值 */
+export const ColorRegex = /#(?:[\da-fA-F]{6}|[\da-fA-F]{3})/g

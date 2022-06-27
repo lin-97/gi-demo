@@ -28,8 +28,8 @@ export function trim(str: string, pos = 'both'): string {
  * @param num - 数字(0-10)
  */
 export function getHanByNumber(num: number): string {
-  const HAN_STR = '零一二三四五六七八九十'
-  return HAN_STR.charAt(num)
+  const str = '零一二三四五六七八九十'
+  return str.charAt(num)
 }
 
 /**
@@ -41,4 +41,30 @@ export function getRandomInterger(end: number, start = 0): number {
   const range = end - start
   const random = Math.floor(Math.random() * range + start)
   return random
+}
+
+// 千分位格式化
+export function formatMoney(money: string) {
+  return money.replace(new RegExp(`(?!^)(?=(\\d{3})+${money.includes('.') ? '\\.' : '$'})`, 'g'), ',')
+}
+
+// 格式化电话号码 183-7983-6654
+export function formatPhone(mobile: string, formatStr = '-') {
+  return mobile.replace(/(?=(\d{4})+$)/g, formatStr)
+}
+
+// 数据类型检测方法
+export function getDataType(value: string) {
+  return Object.prototype.toString.call(value)
+}
+
+// 检测数据是否为空数据
+export function isEmpty(data: any) {
+  if (data === '' || data === 'undefined' || data === undefined || data === null || data === 'null') {
+    return true
+  }
+  if (JSON.stringify(data) == '{}' || JSON.stringify(data) == '[]' || JSON.stringify(data) == '[{}]') {
+    return true
+  }
+  return false
 }
