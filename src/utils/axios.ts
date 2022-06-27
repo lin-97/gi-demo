@@ -1,4 +1,5 @@
-import axios, { AxiosInstance, AxiosRequestConfig, AxiosResponse, AxiosError } from 'axios'
+import axios from 'axios'
+import type { AxiosInstance, AxiosRequestConfig, AxiosResponse, AxiosError } from 'axios'
 import { Message, Notification } from '@arco-design/web-vue'
 import { getToken } from '@/utils/auth'
 import NProgress from 'nprogress'
@@ -10,12 +11,16 @@ export interface IResponse<T = any> {
   success: boolean
 }
 
-interface ICodeMessage {
-  [propName: number]: string
-}
-
 interface CustomAxiosRequestConfig extends AxiosRequestConfig {
   hideLoading?: boolean
+}
+
+interface AxiosRequestConfig {
+  headers?: any
+}
+
+interface ICodeMessage {
+  [propName: number]: string
 }
 
 const StatusCodeMessage: ICodeMessage = {
@@ -44,7 +49,6 @@ const http: AxiosInstance = axios.create({
 http.interceptors.request.use(
   (config: AxiosRequestConfig) => {
     NProgress.start() // 进度条
-
     const token = getToken()
     if (token) {
       config.headers['token'] = token
@@ -66,9 +70,7 @@ http.interceptors.response.use(
       Notification.error(message || msg || '服务器端错误')
       return Promise.reject(new Error(msg || 'Error'))
     }
-
     NProgress.done()
-
     return response
   },
   (error: AxiosError) => {
@@ -90,19 +92,21 @@ const request = <T = any>(config: CustomAxiosRequestConfig): Promise<T> => {
   })
 }
 
-request.get = <T = any>(url: string, params?: object): Promise<T> => {
+request.get = <T = any>(url: string, params?: object, headers?: any): Promise<T> => {
   return request({
     method: 'get',
     url,
-    params
+    params,
+    headers
   })
 }
 
-request.post = <T = any>(url: string, params?: object): Promise<T> => {
+request.post = <T = any>(url: string, params?: object, headers?: any): Promise<T> => {
   return request({
     method: 'post',
     url,
-    data: params
+    data: params,
+    headers
   })
 }
 

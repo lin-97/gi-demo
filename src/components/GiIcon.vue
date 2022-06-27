@@ -65,9 +65,13 @@ const props = defineProps({
 
 const emit = defineEmits(['click'])
 
+interface Style {
+  [propName: string]: string | number
+}
+
 const getStyle = computed<object>(() => {
-  const obj: any = {}
-  const flexMap: any = {
+  const obj: Style = {}
+  const flexMap: Style = {
     left: 'row-reverse',
     right: 'row',
     top: 'column-reverse',
@@ -77,7 +81,7 @@ const getStyle = computed<object>(() => {
   return obj
 })
 const getIconStyle = computed<object>(() => {
-  const obj: any = {}
+  const obj: Style = {}
   obj['font-size'] = getUnitValue(props.size)
   obj['color'] = props.color
   obj[`margin-${props.labelPos}`] = getUnitValue(props.space)
@@ -86,7 +90,7 @@ const getIconStyle = computed<object>(() => {
 })
 
 const getLabelStyle = computed<object>(() => {
-  const obj: any = {}
+  const obj: Style = {}
   obj['font-size'] = getUnitValue(props.labelSize)
   obj['color'] = props.labelColor
   return obj

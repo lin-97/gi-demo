@@ -2,7 +2,7 @@
   <div class="error-page">
     <section class="container">
       <div class="img-box">
-        <img class="img-parent" :src="pageMap[route.params.id || 404]" />
+        <img class="img-parent" :src="pageMap[current]" />
       </div>
 
       <div class="tip-box">
@@ -27,8 +27,17 @@ const router = useRouter()
 
 const countDownTime = ref(5)
 const timer = ref(0)
+const current = ref(404)
 
-const pageMap: any = reactive({
+if (route.params.id) {
+  current.value = Number(route.params.id)
+}
+
+interface ErrorPage {
+  [propName: number]: any
+}
+
+const pageMap: ErrorPage = reactive({
   403: Page403,
   404: Page404,
   500: Page500

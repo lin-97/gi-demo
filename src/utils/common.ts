@@ -9,7 +9,7 @@
  * pos="right": 去除右边空格
  * pos="all": 去除所有空格
  */
-export function trim(str: string, pos = 'both') {
+export function trim(str: string, pos = 'both'): string {
   if (pos == 'both') {
     return str.replace(/^\s+|\s+$/g, '')
   } else if (pos == 'left') {
@@ -27,7 +27,7 @@ export function trim(str: string, pos = 'both') {
  * 根据数字获取对应的汉字
  * @param num - 数字(0-10)
  */
-export function getHanByNumber(num: number) {
+export function getHanByNumber(num: number): string {
   const HAN_STR = '零一二三四五六七八九十'
   return HAN_STR.charAt(num)
 }
@@ -37,7 +37,7 @@ export function getHanByNumber(num: number) {
  * @param start - 开始范围
  * @param end - 结束范围
  */
-export function getRandomInterger(end: number, start = 0) {
+export function getRandomInterger(end: number, start = 0): number {
   const range = end - start
   const random = Math.floor(Math.random() * range + start)
   return random
