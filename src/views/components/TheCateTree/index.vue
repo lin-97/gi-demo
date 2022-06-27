@@ -57,7 +57,7 @@ const inputValue = ref('')
 const treeRef = ref<HTMLElement | null>(null)
 const treeData = ref<object[]>([])
 
-const treeObj = ref({})
+const treeObj = ref<ZTree.IzTreeObj | null>(null)
 const currentNode = ref({})
 
 const treeSetting = reactive({
@@ -142,7 +142,7 @@ const getCateTree = async () => {
     loading.value = false
     nextTick(() => {
       treeObj.value = $.fn.zTree.init($('#treeDemo'), treeSetting, treeData.value)
-      treeObj.value.expandAll(true)
+      treeObj.value?.expandAll(true)
       loading.value = false
     })
   } catch (error) {
@@ -170,18 +170,18 @@ const onAdd = () => {
     icon: FileCloseIcon,
     isParent: false
   }
-  treeObj.value.addNodes(currentNode.value, newChildrenNode, true)
-  const nodes = treeObj.value.getNodesByParam('id', id, null)
+  treeObj.value?.addNodes(currentNode.value, newChildrenNode, true)
+  const nodes = treeObj.value?.getNodesByParam('id', id, null)
   setTimeout(() => {
-    treeObj.value.editName(nodes[0])
+    treeObj.value?.editName(nodes[0])
   }, 100)
 }
 
 // 重命名
 const onRename = () => {
   nextTick(() => {
-    const nodes = treeObj.value.getNodesByParam('id', currentNode.value.id, null)
-    treeObj.value.editName(nodes[0])
+    const nodes = treeObj.value?.getNodesByParam('id', currentNode.value.id, null)
+    treeObj.value?.editName(nodes[0])
   })
 }
 
