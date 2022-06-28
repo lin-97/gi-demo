@@ -6,6 +6,7 @@ import vueJsx from '@vitejs/plugin-vue-jsx'
 import VueSetupExtend from 'vite-plugin-vue-setup-extend'
 import { viteMockServe } from 'vite-plugin-mock'
 import { createSvgIconsPlugin } from 'vite-plugin-svg-icons'
+import Components from 'unplugin-vue-components/vite'
 import path from 'path'
 
 export default defineConfig(({ command, mode }) => {
@@ -16,6 +17,13 @@ export default defineConfig(({ command, mode }) => {
       vue(),
       vueJsx(),
       VueSetupExtend(),
+      Components({
+        // 指定组件位置, 默认是src/components 自动导入自定义组件
+        dirs: ['src/components'],
+        extensions: ['vue'],
+        // 配置文件生成位置
+        dts: 'src/components.d.ts'
+      }),
       createSvgIconsPlugin({
         // 指定需要缓存的图标文件夹
         iconDirs: [path.resolve(process.cwd(), 'src/icons')],

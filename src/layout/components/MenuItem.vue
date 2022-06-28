@@ -19,7 +19,7 @@
 <script setup lang="ts" name="MenuItem">
 import type { PropType } from 'vue'
 
-const props = defineProps({
+defineProps({
   data: {
     type: Object as PropType<Menu.MenuItem>,
     default: () => {}

@@ -59,7 +59,7 @@ type LoginForm = { username: string; password: string }
 
 const form: LoginForm = reactive({
   username: 'admin',
-  password: '123'
+  password: '123456'
 })
 
 // 记住密码

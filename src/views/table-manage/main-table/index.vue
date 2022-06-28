@@ -73,7 +73,7 @@
         :data="tableData"
         v-loading="loading"
         :scroll="{ x: '100%', y: '100%', minWidth: 1000 }"
-        :pagination="{ 'show-page-size': true }"
+        :pagination="{ showPageSize: true }"
       >
         <template #columns>
           <a-table-column title="序号" :width="68">

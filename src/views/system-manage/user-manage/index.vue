@@ -62,7 +62,7 @@
           row-key="id"
           v-loading="loading"
           :scroll="{ x: '100%', y: '100%', minWidth: 900 }"
-          :pagination="{ 'show-page-size': true }"
+          :pagination="{ showPageSize: true }"
         >
           <template #columns>
             <a-table-column title="序号">

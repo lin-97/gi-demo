@@ -69,7 +69,7 @@
   </a-drawer>
 </template>
 
-<script setup lang="ts">
+<script setup lang="ts" name="SettingDrawer">
 import { computed } from 'vue'
 import { useThemeStore } from '@/store'
 import { ColorPicker } from 'vue-color-kit'

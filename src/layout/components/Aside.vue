@@ -10,7 +10,7 @@
   </a-layout-sider>
 </template>
 
-<script setup lang="ts">
+<script setup lang="ts" name="Aside">
 import { useRouter } from 'vue-router'
 import { useAppStore, useMenuStore } from '@/store'
 import MenuItem from './MenuItem.vue'
@@ -22,7 +22,11 @@ const menuStore = useMenuStore()
 const handleClickItem = (item: Menu.MenuItem) => {
   if (item.path) {
     appStore.setActivePath(item.path)
-    router.push({ path: item.path })
+    if (item.path === '/file-manage') {
+      router.push({ path: item.path, query: { fileType: 0 } })
+    } else {
+      router.push({ path: item.path })
+    }
   }
 }
 </script>

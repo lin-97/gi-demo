@@ -12,7 +12,7 @@
         row-key="id"
         v-loading="loading"
         :scroll="{ x: '100%', y: '100%', minWidth: 900 }"
-        :pagination="{ 'show-page-size': true }"
+        :pagination="{ showPageSize: true }"
       >
         <template #columns>
           <a-table-column title="序号" :width="60">
@@ -30,7 +30,7 @@
                     <template #icon><icon-delete /></template>
                   </a-button>
                 </a-popconfirm>
-                <a-button type="primary">
+                <a-button type="primary" @click="showAddRoleModal = true">
                   <template #icon><icon-edit /></template>
                 </a-button>
                 <a-button type="primary" status="success">

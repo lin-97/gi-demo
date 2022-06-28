@@ -12,7 +12,7 @@
   </a-layout>
 </template>
 
-<script setup lang="ts">
+<script setup lang="ts" name="Main">
 import { useNavTabStore, useThemeStore } from '@/store'
 const navtabStore = useNavTabStore()
 const themeStore = useThemeStore()

@@ -27,25 +27,25 @@
               <span class="no-text" v-else>无</span>
             </template>
           </a-table-column>
-          <a-table-column title="菜单图标" data-index="icon" width="200">
+          <a-table-column title="菜单图标" data-index="icon" :width="200">
             <template #cell="{ record }">
               <GiSvgIcon :size="24" :name="record.icon" v-if="record.icon"></GiSvgIcon>
               <span class="no-text" v-else>无</span>
             </template>
           </a-table-column>
-          <a-table-column title="是否缓存" data-index="keepAlive" width="200">
+          <a-table-column title="是否缓存" data-index="keepAlive" :width="200">
             <template #cell="{ record }">
               <a-button status="success" size="mini" v-if="record.keepAlive"><template #icon>是</template></a-button>
               <a-button status="danger" size="mini" v-else><template #icon>否</template></a-button>
             </template>
           </a-table-column>
-          <a-table-column title="是否隐藏" data-index="hidden" width="200">
+          <a-table-column title="是否隐藏" data-index="hidden" :width="200">
             <template #cell="{ record }">
               <a-button status="success" size="mini" v-if="record.hidden"><template #icon>是</template></a-button>
               <a-button status="danger" size="mini" v-else><template #icon>否</template></a-button>
             </template>
           </a-table-column>
-          <a-table-column title="操作" width="100">
+          <a-table-column title="操作" :width="100">
             <template #cell="{ record }">
               <a-space>
                 <a-button type="primary" @click="showAddMenuModal = true">

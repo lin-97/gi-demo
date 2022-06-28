@@ -12,7 +12,7 @@
         row-key="id"
         v-loading="loading"
         :scroll="{ x: '100%', y: '100%', minWidth: 800 }"
-        :pagination="{ 'show-page-size': true }"
+        :pagination="{ showPageSize: true }"
         :expandable="{ width: 80 }"
       >
         <template #expand-icon="{ expanded }">

@@ -1,23 +1,28 @@
-/** 手机号码正则 */
-export const REGEXP_PHONE =
-  /^[1](([3][0-9])|([4][0,1,4-9])|([5][0-3,5-9])|([6][2,5,6,7])|([7][0-8])|([8][0-9])|([9][0-3,5-9]))[0-9]{8}$/
+// 手机号码正则
+export const Phone = /^1[3-9]\d{9}$/
 
-/** 邮箱正则 */
-export const REGEXP_EMAIL = /^\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/
+// 邮箱正则
+export const Email = /^\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/
 
-/** 密码正则(密码为8-18位数字/字符/符号的组合) */
-export const REGEXP_PWD =
+// 密码正则(密码为8-18位数字/字符/符号的组合)
+export const Password =
   /^(?![0-9]+$)(?![a-z]+$)(?![A-Z]+$)(?!([^(0-9a-zA-Z)]|[()])+$)(?!^.*[\u4E00-\u9FA5].*$)([^(0-9a-zA-Z)]|[()]|[a-z]|[A-Z]|[0-9]){8,18}$/
 
-/** 6位数字验证码正则 */
-export const REGEXP_CODE_SIX = /^\d{6}$/
+// 6位数字验证码正则
+export const Code6 = /^\d{6}$/
 
-/** 4位数字验证码正则 */
-export const REGEXP_CODE_FOUR = /^\d{4}$/
+// 4位数字验证码正则
+export const Code4 = /^\d{4}$/
 
-/** url链接正则 */
-export const REGEXP_URL =
+// url链接正则
+export const Url =
   /(((^https?:(?:\/\/)?)(?:[-;:&=+$,\w]+@)?[A-Za-z0-9.-]+(?::\d+)?|(?:www.|[-;:&=+$,\w]+@)[A-Za-z0-9.-]+)((?:\/[+~%/.\w-_]*)?\??(?:[-+=&;%@.\w_]*)#?(?:[\w]*))?)$/
 
-/** 颜色值 */
-export const ColorRegex = /#(?:[\da-fA-F]{6}|[\da-fA-F]{3})/g
+// 16进颜色值 #333 #8c8c8c
+export const ColorRegex = /^#?([a-fA-F0-9]{6}|[a-fA-F0-9]{3})$/
+
+// 只能是中文
+export const Ch = /^[\u4e00-\u9fa5]+$/gi
+
+// 只能是英文
+export const En = /^[a-zA-Z]*$/

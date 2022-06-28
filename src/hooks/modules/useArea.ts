@@ -1,5 +1,5 @@
 import { area } from '@/libs/area'
-import { area as areaData } from '@/libs/area-new'
+import { area as areaData } from '@/libs/area-data'
 
 export default function useArea() {
   type Name = 'province_list' | 'city_list' | 'county_list'

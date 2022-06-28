@@ -5,7 +5,7 @@
       :data="tableData"
       v-loading="loading"
       :scroll="{ x: '100%', y: '100%', minWidth: 1000 }"
-      :pagination="{ 'show-page-size': true }"
+      :pagination="{ showPageSize: true }"
       :row-selection="{ type: 'checkbox', showCheckedAll: true }"
       @refresh="getTableData"
     >
