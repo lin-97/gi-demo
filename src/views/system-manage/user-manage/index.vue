@@ -15,7 +15,6 @@
             show-line
             block-node
             default-expand-all
-            size="mini"
             :data="treeData"
             :field-names="{
               key: 'id',
@@ -38,7 +37,7 @@
 
       <a-row justify="space-between" class="head">
         <a-space>
-          <a-button type="primary">
+          <a-button type="primary" @click="showAddUserModal = true">
             <template #icon><icon-plus /></template>
             <span>新增用户</span>
           </a-button>
@@ -95,7 +94,7 @@
             <a-table-column title="操作" :width="100">
               <template #cell="{ record }">
                 <a-space>
-                  <a-button type="primary">
+                  <a-button type="primary" @click="showAddUserModal = true">
                     <template #icon><icon-edit /></template>
                   </a-button>
                   <a-popconfirm content="您确定要删除该项吗?">
@@ -110,17 +109,21 @@
         </a-table>
       </section>
     </section>
+
+    <AddUserModal v-model="showAddUserModal"></AddUserModal>
   </div>
 </template>
 
 <script setup lang="ts" name="UserManage">
 import { ref, reactive, nextTick } from 'vue'
 import { getSystemDeptList, getSystemUserList } from '@/apis/system'
+import AddUserModal from './AddUserModal.vue'
 
 const treeLoading = ref(false)
 const treeData = ref<object[]>([])
 const treeInputValue = ref('')
 const treeRef = ref<HTMLInputElement | null>(null)
+const showAddUserModal = ref(false)
 
 const loading = ref(false)
 const tableData = ref<object[]>([])
