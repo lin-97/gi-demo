@@ -26,7 +26,7 @@
 import { reactive, ref, nextTick } from 'vue'
 import { Modal } from '@arco-design/web-vue'
 
-import { getNewNodeName } from '@/utils/tool'
+import { getNewNodeName } from './fn'
 import { data } from './tree'
 import RightMenu from './RightMenu/index'
 
