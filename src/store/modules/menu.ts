@@ -219,6 +219,36 @@ export const useMenuStore = defineStore({
           ]
         },
         {
+          icon: 'menu-document',
+          id: 'WD',
+          name: '文档',
+          keepAlive: false,
+          hidden: false,
+          children: [
+            {
+              id: 'vue3',
+              name: 'vue3文档',
+              path: '/document/vue3',
+              keepAlive: false,
+              hidden: false
+            },
+            {
+              id: 'arco-design',
+              name: 'arco ui文档',
+              path: '/document/arco-design',
+              keepAlive: false,
+              hidden: false
+            },
+            {
+              id: 'juejin',
+              name: '掘金',
+              path: '/document/juejin',
+              keepAlive: false,
+              hidden: false
+            }
+          ]
+        },
+        {
           icon: 'menu-test',
           id: 'TEST',
           name: '功能页',
