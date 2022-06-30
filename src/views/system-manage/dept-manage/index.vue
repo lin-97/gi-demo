@@ -54,7 +54,7 @@
 </template>
 
 <script setup lang="ts" name="DeptManage">
-import { ref, reactive } from 'vue'
+import { ref } from 'vue'
 import AddDeptModal from './AddDeptModal.vue'
 import { getSystemDeptList } from '@/apis/system'
 
@@ -62,11 +62,6 @@ const tableData = ref([])
 const total = ref(0)
 const loading = ref(false)
 const showAddDeptModal = ref(false)
-
-const pageData: Pagination.PageData = reactive({
-  current: 1,
-  pageSize: 1000
-})
 
 const getTableData = async () => {
   try {

@@ -49,7 +49,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, reactive } from 'vue'
+import { ref } from 'vue'
 import { Message } from '@arco-design/web-vue'
 import AddRoleModal from './AddRoleModal.vue'
 import { getSystemRoleList } from '@/apis/system'
@@ -59,15 +59,10 @@ const tableData = ref([])
 const total = ref(0)
 const showAddRoleModal = ref(false)
 
-const pageData: Pagination.PageData = reactive({
-  current: 1,
-  pageSize: 500
-})
-
 const getTableData = async () => {
   try {
     loading.value = true
-    const res = await getSystemRoleList({ ...pageData })
+    const res = await getSystemRoleList()
     if (res.success) {
       tableData.value = res.data.list
       total.value = res.data.total
