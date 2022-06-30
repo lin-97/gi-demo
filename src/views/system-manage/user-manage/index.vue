@@ -57,11 +57,13 @@
       </a-row>
       <section class="table-box">
         <a-table
-          :data="tableData"
           row-key="id"
           v-loading="loading"
+          :data="tableData"
           :scroll="{ x: '100%', y: '100%', minWidth: 900 }"
-          :pagination="{ showPageSize: true }"
+          :pagination="{ showPageSize: true, total: total, current: current, pageSize: pageSize }"
+          @page-change="changeCurrent"
+          @page-size-change="changePageSize"
         >
           <template #columns>
             <a-table-column title="序号">
@@ -115,7 +117,8 @@
 </template>
 
 <script setup lang="ts" name="UserManage">
-import { ref, reactive, nextTick } from 'vue'
+import { ref, nextTick } from 'vue'
+import { usePagination } from '@/hooks'
 import { getSystemDeptList, getSystemUserList } from '@/apis/system'
 import AddUserModal from './AddUserModal.vue'
 
@@ -127,7 +130,10 @@ const showAddUserModal = ref(false)
 
 const loading = ref(false)
 const tableData = ref<object[]>([])
-const total = ref(0)
+
+const { current, pageSize, total, changeCurrent, changePageSize, setTotal } = usePagination(() => {
+  getTableData()
+})
 
 const getTreeData = async () => {
   try {
@@ -139,7 +145,7 @@ const getTreeData = async () => {
         treeLoading.value = false
       }, 200)
       nextTick(() => {
-        treeRef.value.expandNode(res.data.list[0].id)
+        treeRef.value?.expandNode(res.data.list[0].id)
       })
     }
   } catch (error) {
@@ -149,22 +155,21 @@ const getTreeData = async () => {
 }
 getTreeData()
 
-const pageData: Pagination.PageData = reactive({
-  current: 1,
-  pageSize: 500
-})
-
 const getTableData = async () => {
   try {
     loading.value = true
-    const res = await getSystemUserList({ ...pageData })
+    const res = await getSystemUserList({
+      current: current.value,
+      pageSize: pageSize.value
+    })
     if (res.success) {
       tableData.value = res.data.list
-      total.value = res.data.total
-      loading.value = false
+      setTotal(res.data.total)
     }
   } catch (error) {
     return error
+  } finally {
+    loading.value = false
   }
 }
 getTableData()

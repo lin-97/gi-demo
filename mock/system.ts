@@ -78,9 +78,11 @@ export default [
     method: 'get',
     timeout: 0,
     response: ({ query }) => {
-      const { pageCount = 1, pageSize = 10 } = query
+      const { current = 1, pageSize = 10 } = query
       return resultSuccess({
-        total: 6,
+        current: Number(current),
+        pageSize: Number(pageSize),
+        total: 1000,
         [`list|${pageSize}`]: [
           {
             'id|+1': 1,
@@ -106,7 +108,7 @@ export default [
     method: 'get',
     timeout: 0,
     response: ({ query }) => {
-      const { pageCount = 1, pageSize = 10 } = query
+      const { current = 1, pageSize = 10 } = query
       return resultSuccess({
         total: 2,
         list: [

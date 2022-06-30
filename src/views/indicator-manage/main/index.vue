@@ -61,13 +61,15 @@
 
           <section class="table-box">
             <a-table
-              v-loading="loading"
               row-key="id"
+              v-loading="loading"
               :bordered="{ cell: true }"
               :data="tableData"
               :scroll="{ x: '100%', y: '100%', minWidth: 1000 }"
-              :pagination="{ showPageSize: true }"
               :row-selection="{ type: 'checkbox', showCheckedAll: true }"
+              :pagination="{ showPageSize: true, total: total, current: current, pageSize: pageSize }"
+              @page-change="changeCurrent"
+              @page-size-change="changePageSize"
             >
               <template #columns>
                 <a-table-column title="序号">
@@ -114,14 +116,19 @@
 </template>
 
 <script setup lang="ts" name="IndicatorManage">
-import { reactive, ref } from 'vue'
+import { ref } from 'vue'
 import { useRouter } from 'vue-router'
 import { Modal, Message } from '@arco-design/web-vue'
+import { usePagination } from '@/hooks'
 import TheCateTree from '@/views/components/TheCateTree/index.vue'
 import EditDialog from './EditDialog.vue'
 import { getTableList } from '@/apis/table'
 
 const router = useRouter()
+
+const { current, pageSize, total, changeCurrent, changePageSize, setTotal } = usePagination(() => {
+  getTableData()
+})
 
 const activeName = ref('2')
 const tableData = ref<object[]>([])
@@ -134,20 +141,19 @@ const getProportionColor = (proportion: number) => {
   return 'success'
 }
 
-const pageInfo: Pagination.PageData = reactive({
-  current: 1,
-  pageSize: 1000
-})
-
 const getTableData = async () => {
   try {
     loading.value = true
-    const res = await getTableList(pageInfo)
+    const res = await getTableList({
+      current: current.value,
+      pageSize: pageSize.value
+    })
     tableData.value = res.data.list
-    loading.value = false
+    setTotal(res.data.total)
   } catch (error) {
-    loading.value = false
     return error
+  } finally {
+    loading.value = false
   }
 }
 

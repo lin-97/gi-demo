@@ -70,10 +70,12 @@
         row-key="id"
         page-position="bottom"
         :bordered="{ cell: true }"
-        :data="tableData"
         v-loading="loading"
+        :data="tableData"
         :scroll="{ x: '100%', y: '100%', minWidth: 1000 }"
-        :pagination="{ showPageSize: true }"
+        :pagination="{ showPageSize: true, total: total, current: current, pageSize: pageSize }"
+        @page-change="changeCurrent"
+        @page-size-change="changePageSize"
       >
         <template #columns>
           <a-table-column title="序号" :width="68">
@@ -119,6 +121,7 @@
 
 <script setup lang="ts">
 import { reactive, ref } from 'vue'
+import { usePagination } from '@/hooks'
 import { getTableList } from '@/apis/table'
 
 const form = reactive({
@@ -129,24 +132,27 @@ const form = reactive({
   value5: ''
 })
 
-const tableData = ref<object[]>([])
 const loading = ref(false)
+const tableData = ref<object[]>([])
 const collapsed = ref(false)
 
-const pageInfo: Pagination.PageData = reactive({
-  current: 1,
-  pageSize: 1000
+const { current, pageSize, total, changeCurrent, changePageSize, setTotal } = usePagination(() => {
+  getTableData()
 })
 
 const getTableData = async () => {
   try {
     loading.value = true
-    const res = await getTableList(pageInfo)
+    const res = await getTableList({
+      current: current.value,
+      pageSize: pageSize.value
+    })
     tableData.value = res.data.list
-    loading.value = false
+    setTotal(res.data.total)
   } catch (error) {
-    loading.value = false
     return error
+  } finally {
+    loading.value = false
   }
 }
 

@@ -46,7 +46,7 @@ const tableList = (pageSize) => {
 
 export default [
   {
-    url: '/mock/getTable',
+    url: '/mock/table/list',
     method: 'get',
     timeout: 0,
     response: ({ query }) => {
@@ -55,7 +55,7 @@ export default [
       return resultSuccess({
         current: Number(current),
         pageSize: Number(pageSize),
-        pageCount: 60,
+        total: 1000,
         list: list
       })
     }

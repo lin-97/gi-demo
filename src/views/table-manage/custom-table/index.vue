@@ -2,11 +2,13 @@
   <div class="table-page">
     <GiTable
       row-key="id"
-      :data="tableData"
       v-loading="loading"
+      :data="tableData"
       :scroll="{ x: '100%', y: '100%', minWidth: 1000 }"
-      :pagination="{ showPageSize: true }"
       :row-selection="{ type: 'checkbox', showCheckedAll: true }"
+      :pagination="{ showPageSize: true, total: total, current: current, pageSize: pageSize }"
+      @page-change="changeCurrent"
+      @page-size-change="changePageSize"
       @refresh="getTableData"
     >
       <template #left>
@@ -63,27 +65,31 @@
 </template>
 
 <script setup lang="ts">
-import { reactive, ref } from 'vue'
-import { getTableList } from '@/apis/table'
+import { ref } from 'vue'
 import { Message } from '@arco-design/web-vue'
+import { usePagination } from '@/hooks'
+import { getTableList } from '@/apis/table'
 
-const tableData = ref([])
 const loading = ref(false)
+const tableData = ref([])
 
-const pageInfo: Pagination.PageData = reactive({
-  current: 1,
-  pageSize: 1000
+const { current, pageSize, total, changeCurrent, changePageSize, setTotal } = usePagination(() => {
+  getTableData()
 })
 
 const getTableData = async () => {
   try {
     loading.value = true
-    const res = await getTableList(pageInfo)
+    const res = await getTableList({
+      current: current.value,
+      pageSize: pageSize.value
+    })
     tableData.value = res.data.list
-    loading.value = false
+    setTotal(res.data.total)
   } catch (error) {
-    loading.value = false
     return error
+  } finally {
+    loading.value = false
   }
 }
 
