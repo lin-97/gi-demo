@@ -257,6 +257,14 @@ export const useMenuStore = defineStore({
           hidden: false
         },
         {
+          icon: 'menu-nav',
+          id: 'DHY',
+          name: '导航',
+          path: '/navigation',
+          keepAlive: false,
+          hidden: false
+        },
+        {
           icon: 'menu-about',
           id: 'ABOUT',
           name: '关于',

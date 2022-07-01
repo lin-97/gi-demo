@@ -178,6 +178,12 @@ const routes = [
         meta: { title: '掘金', keepAlive: false }
       },
       {
+        path: '/navigation',
+        name: 'Navigation',
+        component: () => import('@/views/navigation/index.vue'),
+        meta: { title: '导航', keepAlive: false }
+      },
+      {
         path: '/test',
         name: 'Test',
         component: () => import('@/views/test/index.vue'),
