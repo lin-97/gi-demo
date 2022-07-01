@@ -1,1 +1,0 @@
-import{r as e}from"./axios.1e8f3c56.js";const s="/mock";function n(){return e.get(`${s}/system-manage/dept/list`)}function m(t){return e.get(`${s}/system-manage/user/list`,t)}function a(t){return e.get(`${s}/system-manage/role/list`,t)}export{m as a,a as b,n as g};

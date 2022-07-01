@@ -1,6 +1,6 @@
 <template>
   <div class="group-box">
-    <section class="header">{{ title }}</section>
+    <section class="header" :id="id">{{ title }}</section>
     <section class="list">
       <slot></slot>
     </section>
@@ -12,23 +12,39 @@ defineProps({
   title: {
     type: String,
     default: ''
+  },
+  id: {
+    type: String,
+    default: ''
   }
 })
 </script>
 
 <style lang="scss" scoped>
 .group-box {
-  border-radius: 4px;
+  border-radius: 6px;
   background-color: var(--color-bg-2);
   margin-bottom: 20px;
   padding-bottom: 15px;
   .header {
+    height: 56px;
+    font-size: 15px;
+    padding: 0 20px;
+    position: relative;
+    display: flex;
+    align-items: center;
     &::before {
       content: '';
-      width: 4px;
-      height: 6px;
+      width: 6px;
+      height: 16px;
       background-color: $color-theme;
       position: absolute;
+      left: 0;
+      top: 50%;
+      transform: translateY(-50%);
+      z-index: 9;
+      border-top-right-radius: 2px;
+      border-bottom-right-radius: 2px;
     }
   }
   .list {
