@@ -43,8 +43,8 @@ defineProps({
       top: 50%;
       transform: translateY(-50%);
       z-index: 9;
-      border-top-right-radius: 2px;
-      border-bottom-right-radius: 2px;
+      border-top-right-radius: 3px;
+      border-bottom-right-radius: 3px;
     }
   }
   .list {

@@ -3,7 +3,7 @@
     <section class="left" id="leftId">
       <div class="search-box">
         <a-row justify="center" align="center">
-          <GiSvgIcon name="baidu" :size="36" style="margin-right: 6px"></GiSvgIcon>
+          <img class="baidu-logo" src="https://mbdp01.bdstatic.com/static/landing-pc/img/logo_top.79fdb8c2.png" />
           <a-input-group>
             <a-input placeholder="请输入搜索内容" size="large" style="width: 430px" />
             <a-button type="primary" size="large">搜索</a-button>
@@ -55,7 +55,7 @@ body[arco-theme='dark'] {
     justify-content: center;
     align-items: center;
     .baidu-logo {
-      height: 60px;
+      height: 50px;
       margin-right: 20px;
       margin-bottom: 14px;
     }

@@ -38,7 +38,7 @@ defineProps({
     margin-right: 16px;
     cursor: pointer;
     transition: all 0.2s;
-    border-radius: 15px;
+    border-radius: 12px;
     &:hover {
       background-color: rgba(var(--primary-6), 0.08);
       .content {
@@ -74,7 +74,7 @@ defineProps({
         color: $color-text-3;
         font-size: 12px;
         line-height: 1.5;
-        transition: all 0.3s;
+        transition: all 0.2s;
       }
     }
   }
