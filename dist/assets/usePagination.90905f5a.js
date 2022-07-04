@@ -1,1 +1,0 @@
-import{f as t}from"./index.43cb35c7.js";function g(o,r=10){const e=t(1),u=t(r),a=t(0);function i(n){e.value=n,o()}function c(n){e.value=1,u.value=n,o()}function f(n){a.value=n}return{current:e,pageSize:u,total:a,changeCurrent:i,changePageSize:c,setTotal:f}}export{g as u};

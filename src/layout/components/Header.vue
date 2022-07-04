@@ -43,17 +43,16 @@
         <GiThemeBtn></GiThemeBtn>
       </a-tooltip>
 
-      <!-- 管理员头像 -->
-      <a-avatar :size="32">
-        <img src="@/assets/images/avatar.jpg" />
-      </a-avatar>
-
       <!-- 管理员账户 -->
       <a-dropdown trigger="hover">
-        <a-button type="text" size="medium" class="username">
-          <span>{{ userStore.userName }}</span>
+        <a-row align="center" class="user">
+          <!-- 管理员头像 -->
+          <a-avatar :size="32">
+            <img src="@/assets/images/avatar.jpg" />
+          </a-avatar>
+          <span class="username">{{ userStore.userName }}</span>
           <icon-down />
-        </a-button>
+        </a-row>
         <template #content>
           <a-doption @click="toUser">
             <template #icon>
@@ -169,8 +168,12 @@ const toGitPath = () => {
     display: flex;
     align-items: center;
   }
-  .username {
+  .user {
     color: var(--color-text-2);
+    cursor: pointer;
+    .username {
+      margin-left: 10px;
+    }
   }
 }
 </style>

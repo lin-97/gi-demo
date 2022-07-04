@@ -1,22 +1,15 @@
 import axios from 'axios'
-import type { AxiosInstance, AxiosRequestConfig, AxiosResponse, AxiosError } from 'axios'
+import type { AxiosInstance, AxiosRequestConfig, AxiosResponse, AxiosError, AxiosRequestHeaders } from 'axios'
 import { Message, Notification } from '@arco-design/web-vue'
 import { getToken } from '@/utils/auth'
 import NProgress from 'nprogress'
 
-export interface IResponse<T = any> {
+export interface HttpResponse<T = unknown> {
   code: number
   data: T
   message: string
   success: boolean
-}
-
-interface CustomAxiosRequestConfig extends AxiosRequestConfig {
-  hideLoading?: boolean
-}
-
-interface AxiosRequestConfig {
-  headers?: any
+  msg?: string
 }
 
 interface ICodeMessage {
@@ -51,18 +44,21 @@ http.interceptors.request.use(
     NProgress.start() // 进度条
     const token = getToken()
     if (token) {
+      if (!config.headers) {
+        config.headers = {}
+      }
       config.headers['token'] = token
     }
     return config
   },
-  (error: { message: string }) => {
-    Message.error(error.message)
+  (error) => {
+    return Promise.reject(error)
   }
 )
 
 // 响应拦截器
 http.interceptors.response.use(
-  (response: AxiosResponse) => {
+  (response: AxiosResponse<HttpResponse>) => {
     const { data } = response
     const { msg, message, success } = data
 
@@ -73,26 +69,26 @@ http.interceptors.response.use(
     NProgress.done()
     return response
   },
-  (error: AxiosError) => {
+  (error) => {
     NProgress.done()
-    Message.clear()
-
-    const response = Object.assign({}, error.response)
-    response && Message.error(StatusCodeMessage[response.status] || '系统异常, 请检查网络或联系管理员！')
+    Message.error({
+      content: error.msg || '系统异常, 请检查网络或联系管理员！',
+      duration: 3 * 1000
+    })
     return Promise.reject(error)
   }
 )
 
-const request = <T = any>(config: CustomAxiosRequestConfig): Promise<T> => {
+const request = <T = unknown>(config: AxiosRequestConfig): Promise<T> => {
   return new Promise((resolve, reject) => {
     http
-      .request<IResponse<T>>(config)
+      .request<HttpResponse<T>>(config)
       .then((res: AxiosResponse) => resolve(res.data))
       .catch((err: { message: string }) => reject(err))
   })
 }
 
-request.get = <T = any>(url: string, params?: object, headers?: any): Promise<T> => {
+request.get = <T = unknown>(url: string, params?: object, headers?: AxiosRequestHeaders): Promise<T> => {
   return request({
     method: 'get',
     url,
@@ -101,7 +97,7 @@ request.get = <T = any>(url: string, params?: object, headers?: any): Promise<T>
   })
 }
 
-request.post = <T = any>(url: string, params?: object, headers?: any): Promise<T> => {
+request.post = <T = unknown>(url: string, params?: object, headers?: AxiosRequestHeaders): Promise<T> => {
   return request({
     method: 'post',
     url,

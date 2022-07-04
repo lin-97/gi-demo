@@ -72,7 +72,7 @@
               @page-size-change="changePageSize"
             >
               <template #columns>
-                <a-table-column title="序号">
+                <a-table-column title="序号" :width="68">
                   <template #cell="cell">{{ cell.rowIndex + 1 }}</template>
                 </a-table-column>
                 <a-table-column title="姓名" data-index="name"></a-table-column>

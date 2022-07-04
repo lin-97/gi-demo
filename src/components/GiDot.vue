@@ -3,10 +3,13 @@
 </template>
 
 <script setup lang="ts" name="GiDot">
+import type { PropType } from 'vue'
+type Type = 'primary' | 'success' | 'warning' | 'danger' | 'info'
+
 defineProps({
   // 类型
   type: {
-    type: String,
+    type: String as PropType<Type>,
     default: 'primary'
   }
 })
