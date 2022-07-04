@@ -1,13 +1,10 @@
 <template>
-  <div class="nav-item mode-1">
+  <div class="nav-item" :class="`mode-${mode}`" v-if="icon" @click="handleClick">
     <div class="icon"><img :src="icon" /></div>
     <div class="content">
       <div class="name">{{ name }}</div>
-      <div class="desc gi_line_2">
-        {{
-          desc ||
-          '企业的专业办公管理工具。与微信一致的沟通体验，提供丰富免费的办公应用，并与微信消息、小程序、微信支付等互通，助力企业高效办公和管理。'
-        }}
+      <div class="desc gi_line_2" v-if="desc">
+        {{ desc }}
       </div>
     </div>
   </div>
@@ -15,6 +12,10 @@
 
 <script setup lang="ts">
 defineProps({
+  mode: {
+    type: Number,
+    default: 1
+  },
   icon: {
     type: String
   },
@@ -25,18 +26,56 @@ defineProps({
     type: String
   }
 })
+
+const emit = defineEmits(['click'])
+
+const handleClick = () => {
+  emit('click')
+}
 </script>
 
 <style lang="scss" scoped>
 .nav-item {
+  cursor: pointer;
   &.mode-1 {
+    width: 120px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    &:hover {
+      .content {
+        .name {
+          color: $color-danger;
+        }
+      }
+    }
+    .icon {
+      width: 40px;
+      height: 40px;
+      img {
+        display: block;
+        width: 100%;
+        height: 100%;
+      }
+    }
+    .content {
+      margin-top: 5px;
+      .name {
+        font-size: 12px;
+        transition: all 0.2s;
+      }
+      .desc {
+        display: none;
+      }
+    }
+  }
+  &.mode-2 {
     width: 226px;
-    height: 89px;
     padding: 16px;
     box-sizing: border-box;
     display: flex;
     margin-right: 16px;
-    cursor: pointer;
     transition: all 0.2s;
     border-radius: 12px;
     &:hover {
