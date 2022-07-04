@@ -18,17 +18,18 @@
 
 <script setup lang="ts" name="MenuItem">
 import type { PropType } from 'vue'
+import type { MenuItem } from './type'
 
 defineProps({
   data: {
-    type: Object as PropType<Menu.MenuItem>,
+    type: Object as PropType<MenuItem>,
     default: () => {}
   }
 })
 
 const emit = defineEmits(['click'])
 
-const onClickMenuItem = (item: Menu.MenuItem) => {
+const onClickMenuItem = (item: MenuItem) => {
   emit('click', item)
 }
 </script>

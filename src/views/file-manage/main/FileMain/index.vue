@@ -118,6 +118,7 @@ import TheFileRename from '@/views/components/TheFileRename/index'
 import TheFileMove from '@/views/components/TheFileMove/index'
 import fileData from './filedata'
 import { useRouter } from 'vue-router'
+import type { FileItem } from '@/apis/file'
 const router = useRouter()
 
 const { width: windowWidth } = useWindowSize()
@@ -126,14 +127,14 @@ const fileStore = useFileStore()
 const loading = ref(false)
 
 // 文件列表数据
-const fileList = ref<File.FileItem[]>([])
+const fileList = ref<FileItem[]>([])
 fileList.value = fileData
 
 // 批量操作
 const isBatchMode = ref(false)
 
 // 点击文件
-const handleClickFile = (item: File.FileItem) => {
+const handleClickFile = (item: FileItem) => {
   Message.success(`点击了文件-${item.name}`)
   if (imageTypeList.includes(item.extendName)) {
     if (item.src) {
@@ -151,11 +152,11 @@ const handleClickFile = (item: File.FileItem) => {
 }
 
 // 勾选文件
-const handleCheckFile = (item: File.FileItem) => {
+const handleCheckFile = (item: FileItem) => {
   fileStore.addSelectedFileItem(item)
 }
 // 鼠标右键
-const handleRightMenuClick = (mode: string, fileInfo: File.FileItem) => {
+const handleRightMenuClick = (mode: string, fileInfo: FileItem) => {
   Message.success('点击了' + mode)
   if (mode === 'delete') {
     Modal.warning({

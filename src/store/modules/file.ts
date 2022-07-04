@@ -1,10 +1,11 @@
 import { defineStore } from 'pinia'
+import type { FileItem } from '@/apis/file'
 
 type ViewMode = 'grid' | 'list'
 
 interface FileState {
   viewMode: ViewMode
-  selectedFileList: File.FileItem[]
+  selectedFileList: FileItem[]
   isBatchMode: boolean
 }
 
@@ -32,7 +33,7 @@ export const useFileStore = defineStore({
       this.viewMode = this.viewMode === 'grid' ? 'list' : 'grid'
     },
     // 添加选中的文件到文件勾选列表
-    addSelectedFileItem(item: File.FileItem) {
+    addSelectedFileItem(item: FileItem) {
       if (this.selectedFileIdList.includes(item.id)) {
         const index = this.selectedFileList.findIndex((i) => i.id === item.id)
         this.selectedFileList.splice(index, 1)

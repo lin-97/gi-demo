@@ -1,7 +1,8 @@
 import { defineStore } from 'pinia'
+import type { MenuItem } from '@/layout/components/type'
 
 interface MenuState {
-  list: Menu.MenuItem[]
+  list: MenuItem[]
 }
 
 export const useMenuStore = defineStore({

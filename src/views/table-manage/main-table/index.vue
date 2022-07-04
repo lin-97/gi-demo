@@ -122,7 +122,7 @@
 <script setup lang="ts">
 import { reactive, ref } from 'vue'
 import { usePagination } from '@/hooks'
-import { getTableList } from '@/apis/table'
+import { getTableList, type TableItem } from '@/apis/table'
 
 const form = reactive({
   value1: '',
@@ -133,7 +133,7 @@ const form = reactive({
 })
 
 const loading = ref(false)
-const tableData = ref<object[]>([])
+const tableData = ref<TableItem[]>([])
 const collapsed = ref(false)
 
 const { current, pageSize, total, changeCurrent, changePageSize, setTotal } = usePagination(() => {

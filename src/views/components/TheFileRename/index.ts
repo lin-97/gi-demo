@@ -2,8 +2,9 @@ import { createApp } from 'vue'
 import ArcoVueIcon from '@arco-design/web-vue/es/icon'
 import ArcoVue from '@arco-design/web-vue'
 import Dialog from './Dialog.vue'
+import type { FileItem } from '@/apis/file'
 
-function handleRenameFile(fileInfo: File.FileItem) {
+function handleRenameFile(fileInfo: FileItem) {
   // 创建一个挂载容器
   const dom: HTMLElement = document.createElement('div')
   // 挂载组件

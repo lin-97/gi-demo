@@ -1,13 +1,14 @@
 import { defineStore } from 'pinia'
 import router from '@/router'
 import { useAppStore } from '@/store'
+import type { NavTabItem } from '@/layout/components/type'
 
 interface NavTabState {
-  tabList: NavTab.NavTabItem[]
+  tabList: NavTabItem[]
   cacheList: string[]
 }
 
-const defaultTabItem: NavTab.NavTabItem = { name: '首页', path: '/home', componentName: 'Home' }
+const defaultTabItem: NavTabItem = { name: '首页', path: '/home', componentName: 'Home' }
 
 export const useNavTabStore = defineStore({
   id: 'NavTab', // 页签缓存
@@ -20,7 +21,7 @@ export const useNavTabStore = defineStore({
   getters: {},
   actions: {
     // 添加一个页签, 如果当前路由已经打开, 则不再重复添加
-    addTabItem(item: NavTab.NavTabItem) {
+    addTabItem(item: NavTabItem) {
       const ignoreTabList = ['Login']
       if (ignoreTabList.includes(item.componentName)) return
       const flag = this.tabList.findIndex((i) => i.path === item.path)

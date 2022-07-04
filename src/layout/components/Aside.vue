@@ -14,12 +14,13 @@
 import { useRouter } from 'vue-router'
 import { useAppStore, useMenuStore } from '@/store'
 import MenuItem from './MenuItem.vue'
+import type { MenuItem as IMenuItem } from './type'
 
 const router = useRouter()
 const appStore = useAppStore()
 const menuStore = useMenuStore()
 
-const handleClickItem = (item: Menu.MenuItem) => {
+const handleClickItem = (item: IMenuItem) => {
   if (item.path) {
     appStore.setActivePath(item.path)
     if (item.path === '/file-manage') {

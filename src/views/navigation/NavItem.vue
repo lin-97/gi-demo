@@ -60,7 +60,7 @@ const handleClick = () => {
       }
     }
     .content {
-      margin-top: 5px;
+      margin-top: 10px;
       .name {
         font-size: 12px;
         transition: all 0.2s;

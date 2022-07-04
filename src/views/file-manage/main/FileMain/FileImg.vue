@@ -7,11 +7,12 @@
 import type { PropType } from 'vue'
 import { fileImgMap, imageTypeList } from '@/libs/file-map'
 import { computed } from 'vue-demi'
+import type { FileItem } from '@/apis/file'
 
 const props = defineProps({
   // 文件数据
   data: {
-    type: Object as PropType<File.FileItem>,
+    type: Object as PropType<FileItem>,
     default: () => {}
   }
 })

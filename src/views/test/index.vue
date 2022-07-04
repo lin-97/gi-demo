@@ -29,6 +29,7 @@ import Dot from './components/Dot.vue'
 import Flex from './components/Flex.vue'
 import ShrinkBox from './components/ShrinkBox.vue'
 import Area from './components/Area.vue'
+import Json from './components/Json.vue'
 
 const selectedKey = ref(0)
 
@@ -43,7 +44,8 @@ const menuList = ref([
   { name: 'GiDot', value: Dot },
   { name: 'GiShrinkBox', value: ShrinkBox },
   { name: 'Flex布局', value: Flex },
-  { name: '省市区', value: Area }
+  { name: '省市区', value: Area },
+  { name: 'JSON查看', value: Json }
 ])
 </script>
 

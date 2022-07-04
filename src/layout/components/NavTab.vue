@@ -47,6 +47,7 @@
 import { watch, onMounted } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import { useNavTabStore, useThemeStore, useAppStore } from '@/store'
+import type { NavTabItem } from './type'
 
 const route = useRoute()
 const router = useRouter()
@@ -73,7 +74,7 @@ const handleNavTab = () => {
     name: route.meta.title || '未命名',
     path: route.path,
     componentName: route.name
-  } as NavTab.NavTabItem)
+  } as NavTabItem)
   if (route.meta.keepAlive) {
     navtabStore.addCacheItem(route.name)
   }

@@ -30,7 +30,7 @@ export default [
         path: 'https://gitee.com/'
       },
       {
-        src: 'https://pic.616pic.com/ys_bnew_img/00/22/79/yO25LevkeC.jpg',
+        src: 'https://s1.ax1x.com/2022/07/04/jJeAIK.png',
         name: 'Github',
         path: 'https://github.com/'
       }
@@ -98,7 +98,7 @@ export default [
         desc: 'DJ清风'
       },
       {
-        src: 'https://www.kugou.com/root/favicon.ico',
+        src: 'https://s1.ax1x.com/2022/07/04/jJe6WF.png',
         name: '酷狗音乐',
         path: 'https://www.kugou.com/',
         desc: '酷狗音乐'

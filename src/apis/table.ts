@@ -1,6 +1,23 @@
 import axios from '@/utils/axios'
 const prefix = '/mock'
 
+export interface TableItem {
+  id: string
+  index: number
+  name: string
+  phone: string
+  startTime: string
+  endTime: string
+  address: string
+  avatar: string
+  date: string
+  time: string
+  proportion: number
+  no: number
+  status: true | false
+  color: string
+}
+
 // 获取表格
 export function getTableList(data: any) {
   return axios.get(`${prefix}/table/list`, data)

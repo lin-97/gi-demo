@@ -6,7 +6,8 @@ import router from './router'
 
 // 引入 Arco Design 组件库以及自定义主题
 import ArcoVue from '@arco-design/web-vue'
-import '@arco-themes/vue-gi-demo/index.less'
+import '@/styles/arco-ui/index.less'
+// import '@arco-themes/vue-gi-demo/index.less'
 // import '@arco-design/web-vue/dist/arco.css'
 
 // 额外引入 Arco Design Icon图标库
@@ -21,6 +22,8 @@ import 'virtual:svg-icons-register'
 
 // 自定义指令
 import directives from './directives'
+// 解决 json-editor-vue3 报错
+import 'jsoneditor'
 
 const app = createApp(App)
 

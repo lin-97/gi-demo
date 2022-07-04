@@ -1,11 +1,20 @@
-@import './a-button.scss';
-@import './a-checkbox.scss';
-@import './a-radio.scss';
-@import './a-modal.scss';
-@import './a-tree.scss';
-@import './a-pagination.scss';
-@import './a-menu.scss';
-@import './a-table.scss';
+@import '@arco-themes/vue-gi-demo/index.less';
+
+@import './a-button.less';
+@import './a-checkbox.less';
+@import './a-radio.less';
+@import './a-modal.less';
+@import './a-tree.less';
+@import './a-pagination.less';
+@import './a-menu.less';
+@import './a-table.less';
+@import './a-callapse.less';
+
+@transition-duration-1: 0.2s;
+@transition-duration-2: 0.3s;
+@transition-duration-3: 0.4s;
+@transition-duration-4: 0.5s;
+@transition-duration-5: 0.6s;
 
 // 禁止文本复制
 .arco-link,
@@ -31,7 +40,7 @@
 
 .zoom-modal-enter-active,
 .zoom-modal-appear-active {
-  transition: all 0.3s;
+  transition: all @transition-duration-2;
 }
 
 .zoom-modal-leave-from {
@@ -45,5 +54,5 @@
 }
 
 .zoom-modal-leave-active {
-  transition: all 0.3s;
+  transition: all @transition-duration-2;
 }

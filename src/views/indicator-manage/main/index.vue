@@ -40,7 +40,7 @@
             </a-space>
 
             <a-space>
-              <a-select class="gi_select_input" placeholder="请选择" :trigger-props="{ 'update-at-scroll': true }">
+              <a-select class="gi_select_input" placeholder="请选择" :trigger-props="{ updateAtScroll: true }">
                 <a-option>北京</a-option>
                 <a-option>上海</a-option>
                 <a-option>广州</a-option>
@@ -122,7 +122,7 @@ import { Modal, Message } from '@arco-design/web-vue'
 import { usePagination } from '@/hooks'
 import TheCateTree from '@/views/components/TheCateTree/index.vue'
 import EditDialog from './EditDialog.vue'
-import { getTableList } from '@/apis/table'
+import { getTableList, type TableItem } from '@/apis/table'
 
 const router = useRouter()
 
@@ -131,7 +131,7 @@ const { current, pageSize, total, changeCurrent, changePageSize, setTotal } = us
 })
 
 const activeName = ref('2')
-const tableData = ref<object[]>([])
+const tableData = ref<TableItem[]>([])
 const loading = ref(false)
 
 // 比例进度条颜色

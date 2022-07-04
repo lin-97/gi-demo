@@ -69,11 +69,12 @@ import type { PropType } from 'vue'
 import { reactive } from 'vue'
 import FileImg from './FileImg.vue'
 import FileRightMenu from './FileRightMenu.vue'
+import type { FileItem } from '@/apis/file'
 
 const props = defineProps({
   // 文件数据
   data: {
-    type: Array as PropType<File.FileItem[]>,
+    type: Array as PropType<FileItem[]>,
     default: () => []
   },
   // 是否是批量模式
@@ -91,12 +92,12 @@ const rowSelection = reactive({
 const emit = defineEmits(['click', 'right-menu-click'])
 
 // 行点击事件
-const handleRowClick = (row: File.FileItem) => {
+const handleRowClick = (row: FileItem) => {
   emit('click', row)
 }
 
 // 右键菜单点击事件
-const handleRightMenuItemClick = (mode: string, item: File.FileItem) => {
+const handleRightMenuItemClick = (mode: string, item: FileItem) => {
   emit('right-menu-click', mode, item)
 }
 </script>

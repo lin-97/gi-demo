@@ -30,10 +30,11 @@ import GiContextMenu from '@/components/GiContextMenu.vue'
 import GiOption from '@/components/GiOption.vue'
 import GiOptionItem from '@/components/GiOptionItem.vue'
 import MoveTree from '../MoveTree.vue'
+import type { FileItem } from '@/apis/file'
 
 const props = defineProps<{
   event: PointerEvent
-  fileInfo: File.FileItem
+  fileInfo: FileItem
   treeData: any
   onClose: any
   onClick: any

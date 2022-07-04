@@ -50,11 +50,12 @@
 import GiOption from '@/components/GiOption.vue'
 import GiOptionItem from '@/components/GiOptionItem.vue'
 import type { PropType } from 'vue'
+import type { FileItem } from '@/apis/file'
 
 const props = defineProps({
   // 文件数据
   fileInfo: {
-    type: Object as PropType<File.FileItem>,
+    type: Object as PropType<FileItem>,
     default: () => {}
   },
   showClassStyle: {
