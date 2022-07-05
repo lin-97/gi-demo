@@ -12,8 +12,8 @@
   "dependencies": {
     "@arco-design/color": "^0.4.0",
     "@arco-themes/vue-gi-demo": "0.0.19",
-    "@vueuse/components": "^8.6.0",
-    "@vueuse/core": "^8.6.0",
+    "@vueuse/components": "^8.7.5",
+    "@vueuse/core": "^8.7.5",
     "@ztree/ztree_v3": "^3.5.48",
     "axios": "^0.25.0",
     "dayjs": "^1.11.3",
