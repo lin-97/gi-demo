@@ -3,12 +3,12 @@
     <section class="user-card">
       <div class="head">
         <a-avatar :size="60" :trigger-icon-style="{ color: '#3491FA' }">
-          <img src="@/assets/images/avatar.jpg" />
+          <img :src="userStore.userInfo.avatar" />
           <template #trigger-icon>
             <IconCamera />
           </template>
         </a-avatar>
-        <div class="name">Lin</div>
+        <div class="name">{{ userStore.userName }}</div>
         <p class="desc">尘缘已定，不念过往</p>
       </div>
 
@@ -62,6 +62,9 @@
 
 <script setup lang="ts">
 import RightBox from './RightBox.vue'
+import { useUserStore } from '@/store'
+
+const userStore = useUserStore()
 </script>
 
 <style lang="scss" scoped>

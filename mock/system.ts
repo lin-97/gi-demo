@@ -1,13 +1,5 @@
-import Mock, { Random } from 'mockjs'
-
-export function resultSuccess(data, { message = 'ok' } = {}) {
-  return Mock.mock({
-    code: 200,
-    data,
-    message,
-    success: true
-  })
-}
+import { Random } from 'mockjs'
+import { successResponseWrap } from './mock'
 
 export default [
   {
@@ -16,7 +8,7 @@ export default [
     timeout: 0,
     response: () => {
       // const { pageCount = 1, pageSize = 10 } = query
-      return resultSuccess({
+      return successResponseWrap({
         total: 6,
         ['list|15']: [
           {
@@ -79,7 +71,7 @@ export default [
     timeout: 0,
     response: ({ query }) => {
       const { current = 1, pageSize = 10 } = query
-      return resultSuccess({
+      return successResponseWrap({
         current: Number(current),
         pageSize: Number(pageSize),
         total: 1000,
@@ -109,7 +101,7 @@ export default [
     timeout: 0,
     response: ({ query }) => {
       const { current = 1, pageSize = 10 } = query
-      return resultSuccess({
+      return successResponseWrap({
         total: 2,
         list: [
           {

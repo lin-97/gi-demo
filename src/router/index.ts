@@ -1,5 +1,6 @@
 import { createRouter, createWebHashHistory } from 'vue-router'
 import { useAppStore, useMenuStore } from '@/store'
+import { getToken } from '@/utils/auth'
 
 const routes = [
   {
@@ -209,7 +210,16 @@ router.beforeEach((to, from, next) => {
   if (arr.includes(to.path)) {
     appStore.setActivePath(to.path)
   }
-  next()
+  if (to.path === '/login') {
+    next()
+  } else {
+    const token = getToken()
+    if (!token) {
+      next('/login')
+    } else {
+      next()
+    }
+  }
 })
 
 export default router

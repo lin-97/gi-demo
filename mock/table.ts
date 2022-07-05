@@ -1,5 +1,6 @@
 import { Random } from 'mockjs'
 import Mock from 'mockjs'
+import { successResponseWrap } from './mock'
 
 /**
  * @param {Number} times 回调函数需要执行的次数
@@ -10,15 +11,6 @@ export function doCustomTimes(times: number, callback: any) {
   while (++i < times) {
     callback(i)
   }
-}
-
-export function resultSuccess(data, { message = 'ok' } = {}) {
-  return Mock.mock({
-    code: 200,
-    data,
-    message,
-    success: true
-  })
 }
 
 const tableList = (pageSize) => {
@@ -52,7 +44,7 @@ export default [
     response: ({ query }) => {
       const { current = 1, pageSize = 10 } = query
       const list = tableList(Number(pageSize))
-      return resultSuccess({
+      return successResponseWrap({
         current: Number(current),
         pageSize: Number(pageSize),
         total: 1000,

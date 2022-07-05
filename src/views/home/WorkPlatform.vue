@@ -6,10 +6,10 @@
     <a-row justify="space-between" align="center" class="work-platform">
       <a-space :size="15">
         <a-avatar :size="80">
-          <img src="@/assets/images/avatar.jpg" />
+          <img :src="userStore.userInfo.avatar" />
         </a-avatar>
         <div class="tip">
-          <p>早安，Lin，开始您一天的工作吧！</p>
+          <p>早安，{{ userStore.userName }}，开始您一天的工作吧！</p>
           <p>今日阴转大雨，15℃ - 25℃，出门记得带伞哦。</p>
         </div>
       </a-space>
@@ -24,7 +24,11 @@
   </a-card>
 </template>
 
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import { useUserStore } from '@/store'
+
+const userStore = useUserStore()
+</script>
 
 <style lang="scss" scoped>
 :deep(.arco-statistic-title) {

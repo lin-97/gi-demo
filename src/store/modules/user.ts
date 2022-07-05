@@ -1,32 +1,62 @@
 import { defineStore } from 'pinia'
+import { login as userLogin, logout as userLogout, type LoginData } from '@/apis/user'
+import { setToken, clearToken } from '@/utils/auth'
 
-type User = {
-  id: string
+export type RoleType = '' | '*' | 'admin' | 'user'
+
+export interface UserInfo {
   name: string
+  avatar?: string
+  phone?: string
+  registrationDate?: string
+  accountId?: string
+  role: RoleType
 }
 
 interface UserState {
-  user: User
+  userInfo: UserInfo
 }
 
 export const useUserStore = defineStore({
   id: 'User',
   state: (): UserState => {
     return {
-      user: JSON.parse(localStorage.getItem('USER') as string) || { id: 'admin123456', name: 'admin' }
+      userInfo: JSON.parse(localStorage.getItem('UserInfo') as string) || {
+        name: '',
+        avatar: '',
+        phone: '',
+        registrationDate: '',
+        accountId: '',
+        role: ''
+      }
     }
   },
   getters: {
     userName(): string {
-      return this.user.name
+      return this.userInfo.name
     }
   },
   actions: {
-    // 设置用户信息
-    setUser(userInfo: User) {
-      const { id, name } = userInfo
-      this.user = { id, name }
-      localStorage.setItem('USER', JSON.stringify(this.user))
+    // 登录
+    async login(loginForm: LoginData) {
+      try {
+        const res = await userLogin(loginForm)
+        setToken(res.data.token)
+        this.userInfo = res.data.userInfo
+        localStorage.setItem('UserInfo', JSON.stringify(this.userInfo))
+      } catch (err) {
+        clearToken()
+        throw err
+      }
+    },
+    // 退出登录
+    async logout() {
+      try {
+        await userLogout()
+        clearToken()
+      } catch (err) {
+        return err
+      }
     }
   }
 })

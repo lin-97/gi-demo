@@ -13,9 +13,7 @@
           :label-col-style="{ display: 'none' }"
           :wrapper-col-style="{ flex: 1 }"
         >
-          <h3 class="login-form-title" data-v-6b0ccce2="">
-            <img class="logo" src="@/assets/images/logo.gif" /><span>Admin Pro</span>
-          </h3>
+          <h3 class="login-form-title"><img class="logo" src="@/assets/images/logo.gif" /><span>Admin Pro</span></h3>
           <a-form-item field="username">
             <a-input v-model="form.username" placeholder="账号" size="medium" allow-clear>
               <template #prefix><icon-user :stroke-width="1" :style="{ fontSize: '20px' }" /></template>
@@ -51,13 +49,15 @@
 <script setup lang="ts" name="Login">
 import { reactive, ref } from 'vue'
 import { useRouter } from 'vue-router'
+import { useUserStore } from '@/store'
+import { useLoading } from '@/hooks'
 import { Message } from '@arco-design/web-vue'
 import LoginBg from './components/LoginBg/index.vue'
+import type { LoginData } from '@/apis/user'
 const router = useRouter()
+const userStore = useUserStore()
 
-type LoginForm = { username: string; password: string }
-
-const form: LoginForm = reactive({
+const form: LoginData = reactive({
   username: 'admin',
   password: '123456'
 })
@@ -65,22 +65,28 @@ const form: LoginForm = reactive({
 // 记住密码
 const checked = ref(false)
 // 登录加载
-const loading = ref(false)
+const { loading, setLoading } = useLoading()
+const errorMessage = ref('')
 
 // 点击登录
-const login = () => {
-  if (!form.username) {
-    return Message.warning('请输入账户名称')
-  }
-  if (!form.password) {
-    return Message.warning('请输入账户密码')
-  }
-  loading.value = true
-  setTimeout(() => {
+const login = async () => {
+  try {
+    if (!form.username) {
+      return Message.warning('请输入账户名称')
+    }
+    if (!form.password) {
+      return Message.warning('请输入账户密码')
+    }
+    setLoading(true)
+    await userStore.login(form)
     router.push('/home')
-    loading.value = false
+    setLoading(false)
     Message.success('登录成功')
-  }, 600)
+  } catch (error) {
+    errorMessage.value = (error as Error).message
+  } finally {
+    setLoading(false)
+  }
 }
 </script>
 

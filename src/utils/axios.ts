@@ -3,6 +3,9 @@ import type { AxiosInstance, AxiosRequestConfig, AxiosResponse, AxiosError, Axio
 import { Message, Notification } from '@arco-design/web-vue'
 import { getToken } from '@/utils/auth'
 import NProgress from 'nprogress'
+import 'nprogress/nprogress.css'
+
+NProgress.configure({ showSpinner: false }) // NProgress Configuration
 
 export interface HttpResponse<T = unknown> {
   code: number
@@ -63,6 +66,7 @@ http.interceptors.response.use(
     const { msg, message, success } = data
 
     if (!success) {
+      NProgress.done()
       Notification.error(message || msg || '服务器端错误')
       return Promise.reject(new Error(msg || 'Error'))
     }
@@ -71,10 +75,10 @@ http.interceptors.response.use(
   },
   (error) => {
     NProgress.done()
-    Message.error({
-      content: error.msg || '系统异常, 请检查网络或联系管理员！',
-      duration: 3 * 1000
-    })
+
+    Message.clear()
+    const response = Object.assign({}, error.response)
+    response && Message.error(StatusCodeMessage[response.status] || '系统异常, 请检查网络或联系管理员！')
     return Promise.reject(error)
   }
 )

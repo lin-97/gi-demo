@@ -48,7 +48,7 @@
         <a-row align="center" class="user">
           <!-- 管理员头像 -->
           <a-avatar :size="32">
-            <img src="@/assets/images/avatar.jpg" />
+            <img :src="userStore.userInfo.avatar" />
           </a-avatar>
           <span class="username">{{ userStore.userName }}</span>
           <icon-down />
@@ -115,6 +115,7 @@ const logout = () => {
     content: '确认退出登录？',
     hideCancel: false,
     onOk: () => {
+      userStore.logout()
       router.replace('/login')
     }
   })
