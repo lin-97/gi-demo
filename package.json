@@ -14,6 +14,8 @@
     "@arco-themes/vue-gi-demo": "0.0.19",
     "@vueuse/components": "^8.7.5",
     "@vueuse/core": "^8.7.5",
+    "@wangeditor/editor": "^5.1.1",
+    "@wangeditor/editor-for-vue": "^5.1.12",
     "@ztree/ztree_v3": "^3.5.48",
     "axios": "^0.25.0",
     "dayjs": "^1.11.3",

@@ -52,10 +52,10 @@ const routes = [
         meta: { title: '导航', keepAlive: false }
       },
       {
-        path: '/test',
-        name: 'Test',
-        component: () => import('@/views/test/index.vue'),
-        meta: { title: '测试页', keepAlive: true }
+        path: '/tool',
+        name: 'Tool',
+        component: () => import('@/views/tool/index.vue'),
+        meta: { title: '功能页', keepAlive: true }
       }
     ]
   }

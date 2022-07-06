@@ -30,6 +30,7 @@ import Flex from './components/Flex.vue'
 import ShrinkBox from './components/ShrinkBox.vue'
 import Area from './components/Area.vue'
 import Json from './components/Json.vue'
+import Editor from './components/Editor.vue'
 
 const selectedKey = ref(0)
 
@@ -45,7 +46,8 @@ const menuList = ref([
   { name: 'GiShrinkBox', value: ShrinkBox },
   { name: 'Flex布局', value: Flex },
   { name: '省市区', value: Area },
-  { name: 'JSON查看', value: Json }
+  { name: 'JSON查看', value: Json },
+  { name: '富文本', value: Editor }
 ])
 </script>
 
