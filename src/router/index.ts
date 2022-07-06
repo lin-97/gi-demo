@@ -3,6 +3,7 @@ import type { RouteRecordNormalized } from 'vue-router'
 import { useAppStore, useMenuStore } from '@/store'
 import { getToken } from '@/utils/auth'
 
+// 路由模块化自动导入
 const modules = import.meta.globEager('./modules/*.ts')
 
 function formatModules(_modules: any, result: RouteRecordNormalized[]) {
@@ -26,7 +27,9 @@ const routes = [
   },
   ...appRoutes,
   {
+    path: '/',
     name: 'Layout',
+    redirect: '/home',
     component: () => import('@/layout/index.vue'),
     meta: { title: '首页', keepAlive: false },
     children: [
