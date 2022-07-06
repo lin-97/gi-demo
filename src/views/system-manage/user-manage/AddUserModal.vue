@@ -39,11 +39,11 @@
 </template>
 
 <script setup lang="ts">
-import { ref, reactive, computed } from 'vue'
+import { ref, reactive } from 'vue'
 import { useArea } from '@/hooks'
-const { getAreaTreeData } = useArea()
+import { useVModel } from '@vueuse/core'
 
-const emit = defineEmits(['update:modelValue'])
+const { getAreaTreeData } = useArea()
 
 const props = defineProps({
   // 绑定的值
@@ -58,6 +58,9 @@ const props = defineProps({
   }
 })
 
+const emit = defineEmits(['update:modelValue'])
+const visible = useVModel(props, 'modelValue', emit)
+
 const form = reactive({
   userName: '',
   sex: 0,
@@ -66,13 +69,4 @@ const form = reactive({
 
 const treeData = ref([])
 treeData.value = getAreaTreeData()
-
-const visible = computed<boolean>({
-  get: () => {
-    return props.modelValue
-  },
-  set: (v) => {
-    emit('update:modelValue', v)
-  }
-})
 </script>

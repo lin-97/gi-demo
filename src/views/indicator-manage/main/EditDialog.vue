@@ -45,6 +45,7 @@
 
 <script setup lang="ts">
 import { computed, reactive, watch } from 'vue'
+import { useVModel } from '@vueuse/core'
 
 const props = defineProps({
   // 绑定的值
@@ -57,6 +58,9 @@ const props = defineProps({
     default: () => {}
   }
 })
+
+const emit = defineEmits(['update:modelValue'])
+const visible = useVModel(props, 'modelValue', emit)
 
 const list = [{ name: '新增' }, { name: '编辑' }, { name: '重命名' }, { name: '分享' }, { name: '删除' }]
 
@@ -80,20 +84,9 @@ const rules = reactive({
   status: [{ required: true }]
 })
 
-const emit = defineEmits(['update:modelValue'])
-
 // 判断是新增还是编辑
 const isEdit = computed<boolean>(() => {
   return !!props.formData.id
-})
-
-const visible = computed<boolean>({
-  get: () => {
-    return props.modelValue
-  },
-  set: (v) => {
-    emit('update:modelValue', v)
-  }
 })
 
 watch(visible, () => {

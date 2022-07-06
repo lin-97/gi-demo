@@ -28,7 +28,6 @@ export interface animateModeItem {
 
 export const animateModeList: animateModeItem[] = [
   { label: '默认', value: 'zoom-fade' },
-  { label: '动态滑动', value: 'slide-dynamic-origin' },
   { label: '滑动', value: 'fade-slide' },
   { label: '渐变', value: 'fade' },
   { label: '底部滑出', value: 'fade-bottom' },

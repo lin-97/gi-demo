@@ -55,9 +55,8 @@
 </template>
 
 <script setup lang="ts">
-import { reactive, computed } from 'vue'
-
-const emit = defineEmits(['update:modelValue'])
+import { reactive } from 'vue'
+import { useVModel } from '@vueuse/core'
 
 const props = defineProps({
   // 绑定的值
@@ -72,20 +71,14 @@ const props = defineProps({
   }
 })
 
+const emit = defineEmits(['update:modelValue'])
+const visible = useVModel(props, 'modelValue', emit)
+
 const form = reactive({
   parentId: '',
   name: '',
   deptCode: '',
   order: '',
   status: 1
-})
-
-const visible = computed<boolean>({
-  get: () => {
-    return props.modelValue
-  },
-  set: (v) => {
-    emit('update:modelValue', v)
-  }
 })
 </script>

@@ -66,21 +66,23 @@
 </template>
 
 <script setup lang="ts" name="SettingDrawer">
-import { computed } from 'vue'
 import { useThemeStore } from '@/store'
 import { ColorPicker } from 'vue-color-kit'
 import 'vue-color-kit/dist/vue-color-kit.css'
+import { useVModel } from '@vueuse/core'
 import { tabModeList, animateModeList } from '@/config/option'
 
 const themeStore = useThemeStore()
 
 const props = defineProps({
-  // 绑定的值
   modelValue: {
     type: Boolean,
     default: false
   }
 })
+
+const emit = defineEmits(['update:modelValue'])
+const visible = useVModel(props, 'modelValue', emit)
 
 // 默认显示的主题色列表
 const defaultColorList = [
@@ -109,17 +111,6 @@ const defaultColorList = [
   '#6d4c41',
   '#546e7a'
 ]
-
-const emit = defineEmits(['update:modelValue'])
-
-const visible = computed<boolean>({
-  get: () => {
-    return props.modelValue
-  },
-  set: (v) => {
-    emit('update:modelValue', v)
-  }
-})
 
 if (themeStore.themeColor) {
   themeStore.changeThemeColor(themeStore.themeColor)
