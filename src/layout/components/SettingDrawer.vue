@@ -17,20 +17,20 @@
 
       <a-row justify="space-between" align="middle">
         <span class="label">页签显示</span>
-        <a-switch size="medium" :model-value="themeStore.tab.visible" @change="themeStore.setTabVisible($event)" />
+        <a-switch size="medium" :model-value="themeStore.tab" @change="themeStore.setTabVisible($event)" />
       </a-row>
 
       <a-row justify="space-between" align="middle">
         <span class="label">页签风格</span>
         <a-select
           placeholder="请选择"
-          :model-value="themeStore.tab.mode"
-          :disabled="!themeStore.tab.visible"
+          :model-value="themeStore.tabMode"
+          :disabled="!themeStore.tab"
           :style="{ width: '120px' }"
           :trigger-props="{ autoFitPopupMinWidth: true }"
         >
           <a-option
-            v-for="item in themeStore.tab.modeList"
+            v-for="item in tabModeList"
             :key="item.value"
             :value="item.value"
             @click="themeStore.setTabMode(item.value)"
@@ -41,23 +41,19 @@
 
       <a-row justify="space-between" align="middle">
         <span class="label">动画显示</span>
-        <a-switch
-          size="medium"
-          :model-value="themeStore.animate.visible"
-          @change="themeStore.setAnimateVisible($event)"
-        />
+        <a-switch size="medium" :model-value="themeStore.animate" @change="themeStore.setAnimateVisible($event)" />
       </a-row>
 
       <a-row justify="space-between" align="middle">
         <span class="label">动画切换类型</span>
         <a-select
           placeholder="请选择"
-          :model-value="themeStore.animate.mode"
-          :disabled="!themeStore.animate.visible"
+          :model-value="themeStore.animateMode"
+          :disabled="!themeStore.animate"
           :style="{ width: '120px' }"
         >
           <a-option
-            v-for="item in themeStore.animate.modeList"
+            v-for="item in animateModeList"
             :key="item.value"
             :value="item.value"
             @click="themeStore.setAnimateMode(item.value)"
@@ -74,6 +70,7 @@ import { computed } from 'vue'
 import { useThemeStore } from '@/store'
 import { ColorPicker } from 'vue-color-kit'
 import 'vue-color-kit/dist/vue-color-kit.css'
+import { tabModeList, animateModeList } from '@/config/option'
 
 const themeStore = useThemeStore()
 

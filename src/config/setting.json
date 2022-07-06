@@ -1,0 +1,14 @@
+{
+  "theme": "light",
+  "themeColor": "#1571FA",
+  "header": true,
+  "footer": true,
+  "menu": true,
+  "hideMenu": false,
+  "menuWidth": 220,
+  "menuCollapse": false,
+  "tab": true,
+  "tabMode": "card",
+  "animate": true,
+  "animateMode": "zoom-fade"
+}

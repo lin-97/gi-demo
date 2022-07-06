@@ -1,43 +1,36 @@
 import { defineStore } from 'pinia'
 import { generate, getRgbStr } from '@arco-design/color'
+import defaultSettings from '@/config/setting.json'
+import type { TabModeType, animateModeType } from '@/config/option'
 
-type Theme = 'light' | 'dark'
+type ThemeState = {
+  theme: 'light' | 'dark'
+  themeColor: string
+  header: boolean
+  footer: boolean
+  menu: boolean
+  hideMenu: boolean
+  menuWidth: number
+  menuCollapse: boolean
+  tab: boolean
+  tabMode: string
+  animate: boolean
+  animateMode: string
+}
 
-const tabMode = localStorage.getItem('TabMode')
-const animateMode = localStorage.getItem('AnimateMode')
+const ThemeStorage = JSON.parse(localStorage.getItem('Theme') || '{}')
 
 export const useThemeStore = defineStore({
   id: 'Theme',
-  state: () => {
+  state: (): ThemeState => {
     return {
-      theme: localStorage.getItem('theme') || 'light', // light简白模式  dark暗黑模式
-      themeColor: localStorage.getItem('ThemeColor') || '#1571FA',
-      tab: {
-        visible: true,
-        mode: tabMode || 'card',
-        modeList: [
-          { label: '卡片', value: 'card' },
-          { label: '间隔卡片', value: 'card-gutter' },
-          { label: '圆角', value: 'rounded' }
-        ]
-      },
-      animate: {
-        visible: true,
-        mode: animateMode || 'zoom-fade',
-        modeList: [
-          { label: '默认', value: 'zoom-fade' },
-          { label: '动态滑动', value: 'slide-dynamic-origin' },
-          { label: '滑动', value: 'fade-slide' },
-          { label: '渐变', value: 'fade' },
-          { label: '底部滑出', value: 'fade-bottom' },
-          { label: '缩放消退', value: 'fade-scale' }
-        ]
-      }
+      ...defaultSettings,
+      ...ThemeStorage
     }
   },
   getters: {
     transitionName(): string {
-      return this.animate.visible ? this.animate.mode : ''
+      return this.animate ? this.animateMode : ''
     }
   },
   actions: {
@@ -55,18 +48,18 @@ export const useThemeStore = defineStore({
       if (this.theme === 'light') {
         document.body.setAttribute('arco-theme', 'dark')
         this.theme = 'dark'
-        localStorage.setItem('theme', 'dark')
+        localStorage.setItem('Theme', JSON.stringify(this.$state))
       } else {
         document.body.removeAttribute('arco-theme')
         this.theme = 'light'
-        localStorage.setItem('theme', 'light')
+        localStorage.setItem('Theme', JSON.stringify(this.$state))
       }
       this.changeThemeColor(this.themeColor)
     },
     // 设置主题色
     setThemeColor(color: string) {
       this.themeColor = color
-      localStorage.setItem('ThemeColor', color)
+      localStorage.setItem('Theme', JSON.stringify(this.$state))
     },
     // 改变主题色
     changeThemeColor(themeColor: string) {
@@ -78,21 +71,23 @@ export const useThemeStore = defineStore({
     },
     // 设置页签可见
     setTabVisible(visible: boolean) {
-      this.tab.visible = visible
+      this.tab = visible
+      localStorage.setItem('Theme', JSON.stringify(this.$state))
     },
-    // 设置页签的显示类型
-    setTabMode(mode: string) {
-      this.tab.mode = mode
-      localStorage.setItem('TabMode', mode)
+    // 设置页签的样式类型
+    setTabMode(mode: TabModeType) {
+      this.tabMode = mode
+      localStorage.setItem('Theme', JSON.stringify(this.$state))
     },
     // 设置是否使用过渡动画
     setAnimateVisible(visible: boolean) {
-      this.animate.visible = visible
+      this.animate = visible
+      localStorage.setItem('Theme', JSON.stringify(this.$state))
     },
     // 设置页面过渡动画类型
-    setAnimateMode(mode: string) {
-      this.animate.mode = mode
-      localStorage.setItem('AnimateMode', mode)
+    setAnimateMode(mode: animateModeType) {
+      this.animateMode = mode
+      localStorage.setItem('Theme', JSON.stringify(this.$state))
     }
   }
 })

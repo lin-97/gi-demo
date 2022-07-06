@@ -1,10 +1,10 @@
 <template>
-  <div class="nav-tab" v-if="themeStore.tab.visible">
+  <div class="nav-tab" v-if="themeStore.tab">
     <a-tabs
       editable
       hide-content
       size="medium"
-      :type="themeStore.tab.mode"
+      :type="themeStore.tabMode"
       :active-key="route.path"
       @tab-click="onClick"
       @delete="onClose"
