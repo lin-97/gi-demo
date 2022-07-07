@@ -66,6 +66,7 @@
       <a-space>
         <a-button type="primary">Square</a-button>
         <a-button type="primary" shape="round">Round</a-button>
+        <a-button type="primary"><icon-plus /></a-button>
         <a-button type="primary">
           <template #icon><icon-plus /></template>
         </a-button>
@@ -93,6 +94,7 @@
       <a-space>
         <a-button type="primary" status="success">Square</a-button>
         <a-button type="primary" shape="round" status="success">Round</a-button>
+        <a-button type="primary" status="success"><icon-plus /></a-button>
         <a-button type="primary" status="success">
           <template #icon><icon-plus /></template>
         </a-button>
@@ -120,6 +122,7 @@
       <a-space>
         <a-button type="primary" status="warning">Square</a-button>
         <a-button type="primary" shape="round" status="warning">Round</a-button>
+        <a-button type="primary" status="warning"><icon-plus /></a-button>
         <a-button type="primary" status="warning">
           <template #icon><icon-plus /></template>
         </a-button>
@@ -147,6 +150,7 @@
       <a-space>
         <a-button type="primary" status="danger">Square</a-button>
         <a-button type="primary" shape="round" status="danger">Round</a-button>
+        <a-button type="primary" status="danger"><icon-plus /></a-button>
         <a-button type="primary" status="danger">
           <template #icon><icon-plus /></template>
         </a-button>

@@ -46,5 +46,8 @@ const handleCreated = (editor: any) => {
 <style lang="less" scoped>
 .editor {
   border: 1px solid var(--color-border-3);
+  &.w-e-full-screen-container {
+    z-index: 9999;
+  }
 }
 </style>
