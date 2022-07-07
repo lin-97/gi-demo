@@ -12,7 +12,6 @@
         <div class="tree-box" v-loading="treeLoading">
           <a-tree
             ref="treeRef"
-            show-line
             block-node
             default-expand-all
             :data="treeData"
@@ -23,6 +22,9 @@
             }"
             @select="getTableData"
           >
+            <template #switcher-icon>
+              <IconDown />
+            </template>
             <template #icon="{ node }">
               <GiSvgIcon name="com-dept" :size="14" v-if="node.level == 1"></GiSvgIcon>
               <GiSvgIcon name="com-sub-dept" :size="12" v-if="node.level == 2"></GiSvgIcon>
@@ -43,6 +45,10 @@
           </a-button>
 
           <a-input-group>
+            <a-select placeholder="部门状态" allow-clear style="width: 120px">
+              <a-option :value="1">正常</a-option>
+              <a-option :value="0">禁用</a-option>
+            </a-select>
             <a-input placeholder="请输入关键词..." allow-clear style="width: 250px"> </a-input>
             <a-button type="primary" @click="getTableData">
               <template #icon><icon-search /></template>
@@ -66,10 +72,9 @@
           @page-size-change="changePageSize"
         >
           <template #columns>
-            <a-table-column title="序号">
-              <template #cell="cell">{{ cell.rowIndex + 1 }}</template>
-            </a-table-column>
-            <a-table-column title="名称" data-index="nickName"></a-table-column>
+            <a-table-column title="用户编号" data-index="userNo"></a-table-column>
+            <a-table-column title="用户名" data-index="userName"></a-table-column>
+            <a-table-column title="用户昵称" data-index="nickName"></a-table-column>
             <a-table-column title="性别" data-index="sex">
               <template #cell="{ record }">
                 <span v-if="record.sex === 1">男</span>
@@ -83,24 +88,21 @@
               </template>
             </a-table-column>
             <a-table-column title="地址" data-index="address"></a-table-column>
-            <a-table-column title="登录时间" data-index="lastLoginTime"></a-table-column>
-            <a-table-column title="登录IP" data-index="lastLoginIp"></a-table-column>
             <a-table-column title="状态" :width="100">
               <template #cell="{ record }">
-                <a-switch v-model="record.status" size="medium" :checked-value="1" :unchecked-value="0">
-                  <template #checked>正常</template>
-                  <template #unchecked>禁用</template>
-                </a-switch>
+                <a-tag v-if="record.status == 1" color="green">正常</a-tag>
+                <a-tag v-else color="red">禁用</a-tag>
               </template>
             </a-table-column>
-            <a-table-column title="操作" :width="100">
+            <a-table-column title="创建时间" data-index="createTime"></a-table-column>
+            <a-table-column title="操作" :width="100" align="center">
               <template #cell="{ record }">
                 <a-space>
-                  <a-button type="primary" @click="showAddUserModal = true">
+                  <a-button type="primary" size="mini" @click="showAddUserModal = true">
                     <template #icon><icon-edit /></template>
                   </a-button>
                   <a-popconfirm content="您确定要删除该项吗?">
-                    <a-button type="primary" status="danger">
+                    <a-button type="primary" status="danger" size="mini">
                       <template #icon><icon-delete /></template>
                     </a-button>
                   </a-popconfirm>
@@ -119,17 +121,17 @@
 <script setup lang="ts" name="UserManage">
 import { ref, nextTick } from 'vue'
 import { usePagination } from '@/hooks'
-import { getSystemDeptList, getSystemUserList } from '@/apis/system'
+import { getSystemDeptList, getSystemUserList, type UserItem, type DeptItem } from '@/apis/system'
 import AddUserModal from './AddUserModal.vue'
 
 const treeLoading = ref(false)
-const treeData = ref<object[]>([])
+const treeData = ref<DeptItem[]>([])
 const treeInputValue = ref('')
-const treeRef = ref<HTMLInputElement | null>(null)
+const treeRef = ref(null)
 const showAddUserModal = ref(false)
 
 const loading = ref(false)
-const tableData = ref<object[]>([])
+const tableData = ref<UserItem[]>([])
 
 const { current, pageSize, total, changeCurrent, changePageSize, setTotal } = usePagination(() => {
   getTableData()

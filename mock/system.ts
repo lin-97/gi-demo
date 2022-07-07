@@ -7,59 +7,50 @@ export default [
     method: 'get',
     timeout: 0,
     response: () => {
-      // const { pageCount = 1, pageSize = 10 } = query
       return successResponseWrap({
         total: 6,
-        ['list|15']: [
+        list: [
           {
-            'id|+1': 1,
-            'key|+1': 1,
-            'name|+1': [
-              '综合办',
-              '组织部',
-              '销售部',
-              '技术部',
-              '财务部',
-              '人事部',
-              '采购部',
-              '市场部',
-              '设备部',
-              '人力资源部',
-              '生产部',
-              '计划部',
-              '实施部',
-              '售后服务部',
-              '质管部'
-            ],
-            deptCode: 'dept_code_manager',
-            'order|+1': 1, // 0不是 1是
+            id: 'GS00A',
+            name: 'A公司',
+            sort: 1,
+            status: 1,
+            parentId: '',
             createTime: Random.now('yyyy-MM-dd HH:mm:ss'),
-            status: 0, // 0 禁用 1正常
-            level: 1,
-            ['children|3']: [
+            children: [
               {
-                'id|+1': 999,
-                'key|+1': 999,
-                name: '子部门',
-                deptCode: 'dept_code_manager',
-                'order|+1': 1, // 0不是 1是
-                createTime: Random.now('yyyy-MM-dd HH:mm:ss'),
-                status: 0, // 0 禁用 1正常
-                level: 2,
-                ['children|5']: [
-                  {
-                    'id|+1': 9999,
-                    'key|+1': 9999,
-                    name: '子子部门',
-                    deptCode: 'dept_code_manager',
-                    'order|+1': 1, // 0不是 1是
-                    createTime: Random.now('yyyy-MM-dd HH:mm:ss'),
-                    status: 0, // 0 禁用 1正常
-                    level: 3
-                  }
-                ]
+                id: 'DP001',
+                name: '技术部',
+                sort: 1,
+                status: 1,
+                parentId: 'GS00A',
+                createTime: Random.now('yyyy-MM-dd HH:mm:ss')
+              },
+              {
+                id: 'DP002',
+                name: '测试部',
+                sort: 2,
+                status: 1,
+                parentId: 'GS00A',
+                createTime: Random.now('yyyy-MM-dd HH:mm:ss')
+              },
+              {
+                id: 'DP003',
+                name: '产品部',
+                sort: 3,
+                status: 1,
+                parentId: 'GS00A',
+                createTime: Random.now('yyyy-MM-dd HH:mm:ss')
               }
             ]
+          },
+          {
+            id: 'GS00B',
+            name: 'B公司',
+            sort: 2,
+            status: 0,
+            parentId: '',
+            createTime: Random.now('yyyy-MM-dd HH:mm:ss')
           }
         ]
       })
@@ -68,28 +59,37 @@ export default [
   {
     url: '/mock/system/user/list',
     method: 'get',
-    timeout: 0,
+    timeout: 300,
     response: ({ query }) => {
       const { current = 1, pageSize = 10 } = query
       return successResponseWrap({
         current: Number(current),
         pageSize: Number(pageSize),
-        total: 1000,
-        [`list|${pageSize}`]: [
+        total: 2,
+        list: [
           {
-            'id|+1': 1,
-            nickName: '@cname()',
+            id: 'USER001',
+            userNo: 'A001',
+            userName: 'admin',
+            nickName: '超级管理员',
             avatar: '/static/images/img_avatar_01.jpeg',
-            'sex|0-1': 0, // 0男 1女
-            'vip|0-1': 0, // 0不是 1是
-            address: function () {
-              return Random.city(true)
-            },
-            lastLoginTime: Random.now('yyyy-MM-dd HH:mm:ss'),
-            lastLoginIp: function () {
-              return Random.ip()
-            },
-            'status|0-1': 1 // 0 禁用 1正常
+            sex: 1, // 1男 0女
+            status: 1,
+            address: Random.city(true),
+            phone: '199****6962',
+            createTime: Random.now('yyyy-MM-dd HH:mm:ss')
+          },
+          {
+            id: 'USER002',
+            userNo: 'A002',
+            userName: 'editor',
+            nickName: '编辑者',
+            avatar: '/static/images/img_avatar_01.jpeg',
+            sex: 0, // 1男 0女
+            status: 1,
+            address: Random.city(true),
+            phone: '155****8810',
+            createTime: Random.now('yyyy-MM-dd HH:mm:ss')
           }
         ]
       })
@@ -105,16 +105,18 @@ export default [
         total: 2,
         list: [
           {
-            id: 1,
+            id: 'R001',
             name: '超级管理员',
-            roleCode: 'role_code_admin',
+            roleCode: 'role_admin',
+            status: 1,
             description: '超级管理员',
             createTime: Random.now('yyyy-MM-dd HH:mm:ss')
           },
           {
-            id: 2,
+            id: 'R002',
             name: '编辑员',
-            roleCode: 'role_code_editor',
+            status: 0,
+            roleCode: 'role_editor',
             description: '编辑员',
             createTime: Random.now('yyyy-MM-dd HH:mm:ss')
           }

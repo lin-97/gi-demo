@@ -15,7 +15,7 @@
       </a-form-item>
       <a-form-item label="角色编号" name="roleCode">
         <a-input placeholder="请输入角色编号" v-model="form.roleCode">
-          <template #prepend>role_code_</template>
+          <template #prepend>role_</template>
         </a-input>
       </a-form-item>
       <a-form-item label="描述" name="remarks">

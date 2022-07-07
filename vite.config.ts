@@ -57,6 +57,7 @@ export default defineConfig(({ command, mode }) => {
       }
     },
     server: {
+      hmr: true,
       proxy: {
         '/api': {
           target: 'https://www.fastmock.site/mock/4a6ede552f5ceef195285323eadcfd49', // 后台服务器地址

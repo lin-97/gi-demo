@@ -48,11 +48,11 @@
           <a-table-column title="操作" :width="100">
             <template #cell="{ record }">
               <a-space>
-                <a-button type="primary" @click="showAddMenuModal = true">
+                <a-button type="primary" size="mini" @click="showAddMenuModal = true">
                   <template #icon><icon-edit /></template>
                 </a-button>
                 <a-popconfirm content="您确定要删除该项吗?">
-                  <a-button type="primary" status="danger">
+                  <a-button type="primary" status="danger" size="mini">
                     <template #icon><icon-delete /></template>
                   </a-button>
                 </a-popconfirm>

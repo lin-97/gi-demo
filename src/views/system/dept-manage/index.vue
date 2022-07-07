@@ -1,17 +1,41 @@
 <template>
   <div class="dept-manage">
+    <a-space :size="20" class="head">
+      <a-space>
+        <span>部门名称</span>
+        <a-input v-model="form.name" placeholder="请输入部门名称" allow-clear style="width: 250px" />
+      </a-space>
+      <a-space>
+        <span>状态</span>
+        <a-select v-model="form.status" placeholder="部门状态" style="width: 120px">
+          <a-option :value="1">正常</a-option>
+          <a-option :value="0">禁用</a-option>
+        </a-select>
+      </a-space>
+      <a-space>
+        <a-button type="primary" @click="search">
+          <template #icon><icon-search /></template>
+          <span>搜索</span>
+        </a-button>
+        <a-button @click="reset">
+          <template #icon><icon-sync /></template>
+          <span>重置</span>
+        </a-button>
+      </a-space>
+    </a-space>
     <a-row class="head">
-      <a-button type="primary" @click="showAddDeptModal = true">
+      <a-button type="primary" @click="onAdd">
         <template #icon><icon-plus /></template>
         <span>新增部门</span>
       </a-button>
     </a-row>
     <section class="table-box">
       <a-table
-        :data="tableData"
-        row-key="id"
         v-loading="loading"
-        :scroll="{ x: '100%', y: '100%', minWidth: 800 }"
+        ref="tableRef"
+        row-key="id"
+        :data="tableData"
+        :scroll="{ x: '100%', y: '100%', minWidth: 900 }"
         :pagination="{ showPageSize: true }"
         :expandable="{ width: 80 }"
       >
@@ -21,24 +45,25 @@
         </template>
         <template #columns>
           <a-table-column title="部门名称" data-index="name"></a-table-column>
-          <a-table-column title="部门编码" data-index="deptCode"></a-table-column>
-          <a-table-column title="创建时间" data-index="createTime" :width="200"></a-table-column>
+          <a-table-column title="排序" data-index="sort" :width="100"></a-table-column>
           <a-table-column title="状态" :width="100">
             <template #cell="{ record }">
-              <a-switch v-model="record.status" size="medium" :checked-value="1" :unchecked-value="0">
-                <template #checked>正常</template>
-                <template #unchecked>禁用</template>
-              </a-switch>
+              <a-tag v-if="record.status == 1" color="green">正常</a-tag>
+              <a-tag v-else color="red">禁用</a-tag>
             </template>
           </a-table-column>
-          <a-table-column title="操作" :width="100">
+          <a-table-column title="创建时间" data-index="createTime" :width="200"></a-table-column>
+          <a-table-column title="操作" :width="150" align="center">
             <template #cell="{ record }">
               <a-space>
-                <a-button type="primary" @click="showAddDeptModal = true">
+                <a-button type="primary" size="mini" @click="onEdit(record)">
                   <template #icon><icon-edit /></template>
                 </a-button>
-                <a-popconfirm content="您确定要删除该项吗?">
-                  <a-button type="primary" status="danger">
+                <a-button v-if="record.parentId" type="primary" status="success" size="mini" @click="onAdd(record)">
+                  <template #icon><icon-plus /></template>
+                </a-button>
+                <a-popconfirm type="warning" content="您确定要删除该项吗?">
+                  <a-button type="primary" status="danger" size="mini">
                     <template #icon><icon-delete /></template>
                   </a-button>
                 </a-popconfirm>
@@ -49,19 +74,25 @@
       </a-table>
     </section>
 
-    <AddDeptModal :tree-data="tableData" v-model="showAddDeptModal"></AddDeptModal>
+    <AddDeptModal :tree-data="tableData" v-model="showAddDeptModal" :currentData="currentData"></AddDeptModal>
   </div>
 </template>
 
 <script setup lang="ts" name="DeptManage">
-import { ref } from 'vue'
+import { ref, reactive, nextTick } from 'vue'
 import AddDeptModal from './AddDeptModal.vue'
-import { getSystemDeptList } from '@/apis/system'
+import { getSystemDeptList, type DeptItem } from '@/apis/system'
 
-const tableData = ref([])
+const tableData = ref<DeptItem[]>([])
 const total = ref(0)
 const loading = ref(false)
 const showAddDeptModal = ref(false)
+const form = reactive({
+  name: '',
+  status: ''
+})
+const currentData = ref({})
+const tableRef = ref()
 
 const getTableData = async () => {
   try {
@@ -70,6 +101,9 @@ const getTableData = async () => {
     if (res.success) {
       tableData.value = res.data.list
       total.value = res.data.total
+      nextTick(() => {
+        tableRef.value.expandAll()
+      })
       loading.value = false
     }
   } catch (error) {
@@ -79,6 +113,31 @@ const getTableData = async () => {
 }
 
 getTableData()
+
+const search = () => {
+  getTableData()
+}
+
+const reset = () => {
+  form.name = ''
+  form.status = ''
+}
+
+const onAdd = (item?: DeptItem) => {
+  currentData.value = {}
+  if (item) {
+    currentData.value.parentId = item.id
+    showAddDeptModal.value = true
+  } else {
+    currentData.value = {}
+    showAddDeptModal.value = true
+  }
+}
+
+const onEdit = (item: DeptItem) => {
+  currentData.value = item
+  showAddDeptModal.value = true
+}
 </script>
 
 <style lang="scss" scoped>
@@ -91,7 +150,7 @@ getTableData()
   display: flex;
   flex-direction: column;
   .head {
-    padding: $padding $padding 0;
+    padding: 12px $padding 0;
   }
   .table-box {
     flex: 1;

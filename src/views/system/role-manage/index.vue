@@ -20,20 +20,26 @@
           </a-table-column>
           <a-table-column title="角色名称" data-index="name"></a-table-column>
           <a-table-column title="角色编号" data-index="roleCode"></a-table-column>
+          <a-table-column title="状态" :width="100">
+            <template #cell="{ record }">
+              <a-tag v-if="record.status == 1" color="green">正常</a-tag>
+              <a-tag v-else color="red">禁用</a-tag>
+            </template>
+          </a-table-column>
           <a-table-column title="角色描述" data-index="description"></a-table-column>
           <a-table-column title="创建时间" data-index="createTime"></a-table-column>
-          <a-table-column title="操作" :width="220">
+          <a-table-column title="操作" :width="220" align="center">
             <template #cell="{ record }">
               <a-space>
                 <a-popconfirm content="您确定要删除该项吗?" @ok="onDelete">
-                  <a-button type="primary" status="danger">
+                  <a-button type="primary" status="danger" size="mini">
                     <template #icon><icon-delete /></template>
                   </a-button>
                 </a-popconfirm>
-                <a-button type="primary" @click="showAddRoleModal = true">
+                <a-button type="primary" size="mini" @click="showAddRoleModal = true">
                   <template #icon><icon-edit /></template>
                 </a-button>
-                <a-button type="primary" status="success">
+                <a-button type="primary" status="success" size="mini">
                   <template #icon><icon-safe /></template>
                   <template #default>菜单权限</template>
                 </a-button>
@@ -52,10 +58,10 @@
 import { ref } from 'vue'
 import { Message } from '@arco-design/web-vue'
 import AddRoleModal from './AddRoleModal.vue'
-import { getSystemRoleList } from '@/apis/system'
+import { getSystemRoleList, type RoleItem } from '@/apis/system'
 
 const loading = ref(false)
-const tableData = ref([])
+const tableData = ref<RoleItem[]>([])
 const total = ref(0)
 const showAddRoleModal = ref(false)
 
