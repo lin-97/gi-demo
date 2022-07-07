@@ -7,7 +7,7 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import JsonEditorVue from 'json-editor-vue3'
-import data from '@/views/file-manage/main/FileMain/filedata'
+import data from '@/views/file/main/FileMain/filedata'
 
 const jsonData = ref(data)
 </script>

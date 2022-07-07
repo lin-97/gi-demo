@@ -1,18 +1,18 @@
 export default {
-  path: '/indicator-manage',
-  name: '/IndicatorManage',
+  path: '/indicator',
+  name: '/Indicator',
   component: () => import('@/layout/index.vue'),
   children: [
     {
-      path: '/indicator-manage',
-      name: 'IndicatorManageMain',
-      component: () => import('@/views/indicator-manage/main/index.vue'),
+      path: '/indicator',
+      name: 'IndicatorMain',
+      component: () => import('@/views/indicator/main/index.vue'),
       meta: { title: '指标管理', keepAlive: false }
     },
     {
-      path: '/indicator-manage/detail',
-      name: 'IndicatorManageDetail',
-      component: () => import('@/views/indicator-manage/detail/index.vue'),
+      path: '/indicator/detail',
+      name: 'IndicatorDetail',
+      component: () => import('@/views/indicator/detail/index.vue'),
       meta: { title: '指标管理-详情', keepAlive: false }
     }
   ]

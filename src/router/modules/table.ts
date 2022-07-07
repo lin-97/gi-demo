@@ -1,18 +1,18 @@
 export default {
-  path: '/table-manage',
-  name: 'TableManage',
+  path: '/table',
+  name: 'Table',
   component: () => import('@/layout/index.vue'),
   children: [
     {
-      path: '/table-manage/main-table',
-      name: 'TableManageMainTable',
-      component: () => import('@/views/table-manage/main-table/index.vue'),
+      path: '/table/main-table',
+      name: 'TableMainTable',
+      component: () => import('@/views/table/main-table/index.vue'),
       meta: { title: '综合表格', keepAlive: false }
     },
     {
-      path: '/table-manage/custom-table',
-      name: 'TableManageCustomTable',
-      component: () => import('@/views/table-manage/custom-table/index.vue'),
+      path: '/table/custom-table',
+      name: 'TableCustomTable',
+      component: () => import('@/views/table/custom-table/index.vue'),
       meta: { title: '自定义表格', keepAlive: false }
     }
   ]

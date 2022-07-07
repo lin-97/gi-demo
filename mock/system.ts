@@ -3,7 +3,7 @@ import { successResponseWrap } from './mock'
 
 export default [
   {
-    url: '/mock/system-manage/dept/list',
+    url: '/mock/system/dept/list',
     method: 'get',
     timeout: 0,
     response: () => {
@@ -66,7 +66,7 @@ export default [
     }
   },
   {
-    url: '/mock/system-manage/user/list',
+    url: '/mock/system/user/list',
     method: 'get',
     timeout: 0,
     response: ({ query }) => {
@@ -96,7 +96,7 @@ export default [
     }
   },
   {
-    url: '/mock/system-manage/role/list',
+    url: '/mock/system/role/list',
     method: 'get',
     timeout: 0,
     response: ({ query }) => {

@@ -31,7 +31,7 @@ export const useMenuStore = defineStore({
           icon: 'menu-indicator',
           id: 'ZBGL',
           name: '指标管理',
-          path: '/indicator-manage',
+          path: '/indicator',
           keepAlive: true,
           hidden: false
         },
@@ -39,7 +39,7 @@ export const useMenuStore = defineStore({
           icon: 'menu-file',
           id: 'WJGL',
           name: '文件管理',
-          path: '/file-manage',
+          path: '/file',
           keepAlive: false,
           hidden: false
         },
@@ -47,21 +47,21 @@ export const useMenuStore = defineStore({
           icon: 'menu-form',
           id: 'BDGL',
           name: '表单管理',
-          path: '/form-manage',
+          path: '/form',
           keepAlive: true,
           hidden: false,
           children: [
             {
               id: 'JCBD',
               name: '基础表单',
-              path: '/form-manage/base-form',
+              path: '/form/base-form',
               keepAlive: false,
               hidden: false
             },
             {
               id: 'FBBD',
               name: '分步表单',
-              path: '/form-manage/step-form',
+              path: '/form/step-form',
               keepAlive: false,
               hidden: false
             }
@@ -71,21 +71,21 @@ export const useMenuStore = defineStore({
           icon: 'menu-table',
           id: 'BGGL',
           name: '表格管理',
-          path: '/table-manage',
+          path: '/table',
           keepAlive: true,
           hidden: false,
           children: [
             {
               id: 'ZHBG',
               name: '综合表格',
-              path: '/table-manage/main-table',
+              path: '/table/main-table',
               keepAlive: false,
               hidden: false
             },
             {
               id: 'ZDYBG',
               name: '自定义表格',
-              path: '/table-manage/custom-table',
+              path: '/table/custom-table',
               keepAlive: false,
               hidden: false
             }
@@ -101,42 +101,42 @@ export const useMenuStore = defineStore({
             {
               id: 'BMGL',
               name: '部门管理',
-              path: '/system-manage/dept-manage',
+              path: '/system/dept-manage',
               keepAlive: false,
               hidden: false
             },
             {
               id: 'YHGL',
               name: '用户管理',
-              path: '/system-manage/user-manage',
+              path: '/system/user-manage',
               keepAlive: false,
               hidden: false
             },
             {
               id: 'JSGL',
               name: '角色管理',
-              path: '/system-manage/role-manage',
+              path: '/system/role-manage',
               keepAlive: false,
               hidden: false
             },
             {
               id: 'CDGL',
               name: '菜单管理',
-              path: '/system-manage/menu-manage',
+              path: '/system/menu-manage',
               keepAlive: false,
               hidden: false
             },
             {
               id: 'GRZX',
               name: '个人中心',
-              path: '/system-manage/user-center',
+              path: '/system/user-center',
               keepAlive: false,
               hidden: false
             },
             {
               id: 'NQST',
               name: '内嵌页面',
-              path: '/system-manage',
+              path: '/system',
               keepAlive: false,
               hidden: false
             }
@@ -146,21 +146,21 @@ export const useMenuStore = defineStore({
           icon: 'menu-detail',
           id: 'XQYM',
           name: '详情页',
-          path: '/detail-page',
+          path: '/detail',
           keepAlive: true,
           hidden: false,
           children: [
             {
               id: 'JCXQY',
               name: '基础详情页',
-              path: '/detail-page/base-detail',
+              path: '/detail/base-detail',
               keepAlive: false,
               hidden: false
             },
             {
               id: 'GJXQY',
               name: '高级详情页',
-              path: '/detail-page/senior-detail',
+              path: '/detail/senior-detail',
               keepAlive: false,
               hidden: false
             }
@@ -176,21 +176,21 @@ export const useMenuStore = defineStore({
             {
               id: 'error403',
               name: '403',
-              path: '/error-page/403',
+              path: '/error/403',
               keepAlive: false,
               hidden: false
             },
             {
               id: 'error404',
               name: '404',
-              path: '/error-page/404',
+              path: '/error/404',
               keepAlive: false,
               hidden: false
             },
             {
               id: 'error500',
               name: '500',
-              path: '/error-page/500',
+              path: '/error/500',
               keepAlive: false,
               hidden: false
             }
@@ -206,14 +206,14 @@ export const useMenuStore = defineStore({
             {
               id: 'page-success',
               name: '成功页',
-              path: '/result-page/success',
+              path: '/result/success',
               keepAlive: false,
               hidden: false
             },
             {
               id: 'page-fail',
               name: '失败页',
-              path: '/result-page/fail',
+              path: '/result/fail',
               keepAlive: false,
               hidden: false
             }

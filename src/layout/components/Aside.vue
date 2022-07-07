@@ -23,7 +23,7 @@ const menuStore = useMenuStore()
 const handleClickItem = (item: IMenuItem) => {
   if (item.path) {
     appStore.setActivePath(item.path)
-    if (item.path === '/file-manage') {
+    if (item.path === '/file') {
       router.push({ path: item.path, query: { fileType: 0 } })
     } else {
       router.push({ path: item.path })

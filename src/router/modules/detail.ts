@@ -1,18 +1,18 @@
 export default {
-  path: '/detail-page',
-  name: 'DetailPage',
+  path: '/detail',
+  name: 'Detail',
   component: () => import('@/layout/index.vue'),
   children: [
     {
-      path: '/detail-page/base-detail',
-      name: 'DetailPageBaseDetail',
-      component: () => import('@/views/detail-page/base-detail/index.vue'),
+      path: '/detail/base-detail',
+      name: 'DetailBaseDetail',
+      component: () => import('@/views/detail/base-detail/index.vue'),
       meta: { title: '基础详情页', keepAlive: false }
     },
     {
-      path: '/detail-page/senior-detail',
-      name: 'DetailPageSeniorDetail',
-      component: () => import('@/views/detail-page/senior-detail/index.vue'),
+      path: '/detail/senior-detail',
+      name: 'DetailSeniorDetail',
+      component: () => import('@/views/detail/senior-detail/index.vue'),
       meta: { title: '高级详情页', keepAlive: false }
     }
   ]

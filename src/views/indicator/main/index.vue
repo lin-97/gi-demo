@@ -184,7 +184,7 @@ const onAdd = () => {
 }
 
 const onDetail = () => {
-  router.push({ path: '/indicator-manage/detail' })
+  router.push({ path: '/indicator/detail' })
 }
 
 const onDelete = (row: any) => {

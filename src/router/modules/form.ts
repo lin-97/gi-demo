@@ -1,18 +1,18 @@
 export default {
-  path: '/form-manage',
-  name: 'FormManage',
+  path: '/form',
+  name: 'Form',
   component: () => import('@/layout/index.vue'),
   children: [
     {
-      path: '/form-manage/base-form',
-      name: 'FormManageBaseForm',
-      component: () => import('@/views/form-manage/base-form/index.vue'),
+      path: '/form/base-form',
+      name: 'FormBaseForm',
+      component: () => import('@/views/form/base-form/index.vue'),
       meta: { title: '基础表单', keepAlive: false }
     },
     {
-      path: '/form-manage/step-form',
-      name: 'FormManageStepForm',
-      component: () => import('@/views/form-manage/step-form/index.vue'),
+      path: '/form/step-form',
+      name: 'FormStepForm',
+      component: () => import('@/views/form/step-form/index.vue'),
       meta: { title: '分步表单', keepAlive: false }
     }
   ]

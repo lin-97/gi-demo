@@ -172,7 +172,7 @@ const handleRightMenuClick = (mode: string, fileInfo: FileItem) => {
     TheFileMove(fileInfo)
   }
   if (mode === 'detail') {
-    router.push({ path: '/file-manage/file-detail' })
+    router.push({ path: '/file/detail' })
   }
 }
 

@@ -1,18 +1,18 @@
 export default {
-  path: '/result-page',
-  name: 'ResultPage',
+  path: '/result',
+  name: 'Result',
   component: () => import('@/layout/index.vue'),
   children: [
     {
-      path: '/result-page/success',
-      name: 'ResultPageSuccess',
-      component: () => import('@/views/result-page/success/index.vue'),
+      path: '/result/success',
+      name: 'ResultSuccess',
+      component: () => import('@/views/result/success/index.vue'),
       meta: { title: '成功页', keepAlive: false }
     },
     {
-      path: '/result-page/fail',
-      name: 'ResultPageFail',
-      component: () => import('@/views/result-page/fail/index.vue'),
+      path: '/result/fail',
+      name: 'ResultFail',
+      component: () => import('@/views/result/fail/index.vue'),
       meta: { title: '失败页', keepAlive: false }
     }
   ]

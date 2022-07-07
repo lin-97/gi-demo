@@ -105,7 +105,7 @@ const toHome = () => {
 
 // 跳转个人中心
 const toUser = () => {
-  router.push('/system-manage/user-center')
+  router.push('/system/user-center')
 }
 
 // 退出登录

@@ -61,7 +61,7 @@ watch(
 
 const onClickMenuItem = (item: FileTypeListItem) => {
   console.log(route)
-  router.push({ path: '/file-manage', query: { fileType: item.key } })
+  router.push({ path: '/file', query: { fileType: item.key } })
 }
 </script>
 
