@@ -6,9 +6,9 @@ type Options = {
   defaultPageSize: number
 }
 
-export default function usePagination(callback: Callback, { defaultPageSize = 10 }: Options) {
+export default function usePagination(callback: Callback, options: Options = { defaultPageSize: 10 }) {
   const current = ref(1)
-  const pageSize = ref(defaultPageSize)
+  const pageSize = ref(options.defaultPageSize)
   const total = ref(0)
 
   function changeCurrent(size: number) {

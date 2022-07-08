@@ -1,1 +1,0 @@
-import{r as t}from"./index.fcf38972.js";function g(o,{defaultPageSize:r=10}){const e=t(1),u=t(r),a=t(0);function i(n){e.value=n,o()}function c(n){e.value=1,u.value=n,o()}function s(n){a.value=n}return{current:e,pageSize:u,total:a,changeCurrent:i,changePageSize:c,setTotal:s}}export{g as u};
