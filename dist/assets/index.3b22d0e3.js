@@ -1,0 +1,1 @@
+import{_ as t,o as a,c as o,p as s,f as _,b as c}from"./index.fcf38972.js";const d={},n=e=>(s("data-v-61e0692b"),e=e(),_(),e),r={class:"link-page"},i=n(()=>c("iframe",{src:"https://staging-cn.vuejs.org/guide/introduction.html",frameborder:"0"},null,-1)),p=[i];function l(e,f){return a(),o("div",r,p)}var u=t(d,[["render",l],["__scopeId","data-v-61e0692b"]]);export{u as default};

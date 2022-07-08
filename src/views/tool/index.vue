@@ -21,13 +21,12 @@ import Button from './components/Button.vue'
 import GiTitle from '@/components/GiTitle.vue'
 import TextSwitch from './components/TextSwitch.vue'
 import Tag from './components/Tag.vue'
-import NavBar from './components/NavBar.vue'
 import Title from './components/Title.vue'
 import IconSelector from './components/IconSelector.vue'
 import Option from './components/Option.vue'
 import Dot from './components/Dot.vue'
 import Flex from './components/Flex.vue'
-import ShrinkBox from './components/ShrinkBox.vue'
+import FlexibleBox from './components/FlexibleBox.vue'
 import Area from './components/Area.vue'
 import Json from './components/Json.vue'
 import Editor from './components/Editor.vue'
@@ -39,11 +38,10 @@ const menuList = ref([
   { name: '按钮', value: Button },
   { name: 'GiTextSwitch', value: TextSwitch },
   { name: 'GiTag', value: Tag },
-  { name: 'GiNavBar', value: NavBar },
   { name: 'GiTitle', value: Title },
   { name: 'GiIconSelector', value: IconSelector },
   { name: 'GiDot', value: Dot },
-  { name: 'GiShrinkBox', value: ShrinkBox },
+  { name: 'GiFlexibleBox', value: FlexibleBox },
   { name: 'Flex布局', value: Flex },
   { name: '省市区', value: Area },
   { name: 'JSON查看', value: Json },

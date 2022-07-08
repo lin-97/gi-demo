@@ -10,7 +10,7 @@
       @delete="onClose"
     >
       <a-tab-pane
-        v-for="item of navtabStore.tabList"
+        v-for="item of navtabStore.tagList"
         :key="item.path"
         :title="item.name"
         :closable="item.path !== '/home'"
@@ -70,33 +70,35 @@ watch(
 const handleNavTab = () => {
   // console.log('路由变化', newVal)
   // console.log('路由对象', route)
-  navtabStore.addTabItem({
+  navtabStore.addTagItem({
     name: route.meta.title || '未命名',
     path: route.path,
     componentName: route.name
   } as NavTabItem)
   if (route.meta.keepAlive) {
-    navtabStore.addCacheItem(route.name)
+    navtabStore.addCacheItem(String(route.name))
   }
 }
 
 // 点击页签
-const onClick = (key: string) => {
-  console.log('点击前', navtabStore.cacheList, key)
-  router.push({ path: key })
-  appStore.setActivePath(key)
+const onClick = (key: string | number) => {
+  // console.log('点击前', navtabStore.cacheList, key)
+  router.push({ path: key.toString() })
+  appStore.setActivePath(key.toString())
 }
 
 // 关闭页签
-const onClose = (key: string) => {
-  const item = navtabStore.tabList.find((i) => i.path === key)
-  navtabStore.removeTabItem(key)
-  navtabStore.removeCacheItem(item.componentName)
+const onClose = (key: string | number) => {
+  const item = navtabStore.tagList.find((i) => i.path === key)
+  navtabStore.removeTagItem(key.toString())
+  if (item?.componentName) {
+    navtabStore.removeCacheItem(item.componentName)
+  }
 }
 
 // 关闭所有页签
 const onCloseAll = () => {
-  navtabStore.clearTabList()
+  navtabStore.clearTagList()
 }
 </script>
 

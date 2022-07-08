@@ -48,7 +48,7 @@
 
 <script setup lang="ts" name="GiIconSelector">
 import { ref, watch } from 'vue'
-import * as Icons from '@arco-design/web-vue/es/icon'
+import * as ArcoIcons from '@arco-design/web-vue/es/icon'
 import { useClipboard } from '@vueuse/core'
 import { Message } from '@arco-design/web-vue'
 
@@ -63,6 +63,11 @@ const props = defineProps({
   enableCopy: {
     type: Boolean,
     default: false
+  },
+  // 自定义图标数据源
+  customIconData: {
+    type: Array,
+    default: () => []
   }
 })
 
@@ -70,7 +75,8 @@ const props = defineProps({
 const searchValue = ref('')
 
 // 图标列表
-const iconList = Object.keys(Icons).filter((i) => i !== 'default')
+const data = props.customIconData.length ? props.customIconData : ArcoIcons
+const iconList = Object.keys(data).filter((i) => i !== 'default')
 // 图标总数
 const total = ref(iconList.length)
 

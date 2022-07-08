@@ -4,9 +4,13 @@ import { area as areaData } from '@/libs/area-data'
 export default function useArea() {
   type Name = 'province_list' | 'city_list' | 'county_list'
 
+  interface AnyObject {
+    [key: string]: string
+  }
+
   // 根据上一级编码， 获取下一级对象
   const filter = (name: Name, code: number | string) => {
-    const obj: any = {}
+    const obj: AnyObject = {}
     let reg: any = null
     if (name === 'city_list') {
       reg = new RegExp('^' + code.toString().replace(/0000$/, ''))
@@ -30,7 +34,7 @@ export default function useArea() {
   }
 
   // 把对象格式数据转化成对象数组形式
-  const getArr = (obj: any) => {
+  const getArr = (obj: AnyObject) => {
     const arr: AreaTreeNode[] = []
     for (const i in obj) {
       arr.push({ label: obj[i], code: i })

@@ -1,13 +1,13 @@
 <template>
   <a-sub-menu :key="data.path" v-if="data.children && data.children.length">
     <template #icon>
-      <GiSvgIcon :size="24" :name="data.icon"></GiSvgIcon>
+      <GiSvgIcon v-if="data.icon" :size="24" :name="data.icon"></GiSvgIcon>
     </template>
     <template #title>{{ data.name }}</template>
     <MenuItem v-for="item in data.children" :key="item.id" :data="item" @click="onClickMenuItem"></MenuItem>
   </a-sub-menu>
 
-  <a-menu-item v-else :key="data.path" @click="onClickMenuItem(data)">
+  <a-menu-item v-else :key="data.path + '1'" @click="onClickMenuItem(data)">
     <template #icon>
       <GiSvgIcon v-if="data.icon" :size="24" :name="data.icon"></GiSvgIcon>
       <icon-unordered-list v-else :size="20" />
@@ -23,6 +23,7 @@ import type { MenuItem } from './type'
 defineProps({
   data: {
     type: Object as PropType<MenuItem>,
+    // eslint-disable-next-line @typescript-eslint/no-empty-function
     default: () => {}
   }
 })

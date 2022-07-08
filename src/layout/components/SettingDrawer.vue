@@ -15,12 +15,12 @@
 
       <a-divider orientation="center"><span class="title">界面显示</span></a-divider>
 
-      <a-row justify="space-between" align="middle">
+      <a-row justify="space-between" align="center">
         <span class="label">页签显示</span>
         <a-switch size="medium" :model-value="themeStore.tab" @change="themeStore.setTabVisible($event)" />
       </a-row>
 
-      <a-row justify="space-between" align="middle">
+      <a-row justify="space-between" align="center">
         <span class="label">页签风格</span>
         <a-select
           placeholder="请选择"
@@ -39,12 +39,12 @@
         </a-select>
       </a-row>
 
-      <a-row justify="space-between" align="middle">
+      <a-row justify="space-between" align="center">
         <span class="label">动画显示</span>
         <a-switch size="medium" :model-value="themeStore.animate" @change="themeStore.setAnimateVisible($event)" />
       </a-row>
 
-      <a-row justify="space-between" align="middle">
+      <a-row justify="space-between" align="center">
         <span class="label">动画切换类型</span>
         <a-select
           placeholder="请选择"

@@ -13,9 +13,9 @@ type ThemeState = {
   menuWidth: number
   menuCollapse: boolean
   tab: boolean
-  tabMode: string
+  tabMode: TabModeType
   animate: boolean
-  animateMode: string
+  animateMode: animateModeType
 }
 
 const ThemeStorage = JSON.parse(localStorage.getItem('Theme') || '{}')

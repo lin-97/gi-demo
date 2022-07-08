@@ -4,7 +4,7 @@ import { useAppStore } from '@/store'
 import type { NavTabItem } from '@/layout/components/type'
 
 interface NavTabState {
-  tabList: NavTabItem[]
+  tagList: NavTabItem[]
   cacheList: string[]
 }
 
@@ -14,19 +14,19 @@ export const useNavTabStore = defineStore({
   id: 'NavTab', // 页签缓存
   state: (): NavTabState => {
     return {
-      tabList: [defaultTabItem], // 保存页签tab的数组
+      tagList: [defaultTabItem], // 保存页签tab的数组
       cacheList: [] // keep-alive缓存的数组, 元素是组件名
     }
   },
   getters: {},
   actions: {
     // 添加一个页签, 如果当前路由已经打开, 则不再重复添加
-    addTabItem(item: NavTabItem) {
-      const ignoreTabList = ['Login']
-      if (ignoreTabList.includes(item.componentName)) return
-      const flag = this.tabList.findIndex((i) => i.path === item.path)
+    addTagItem(item: NavTabItem) {
+      const ignoreTagList = ['Login']
+      if (ignoreTagList.includes(item.componentName)) return
+      const flag = this.tagList.findIndex((i) => i.path === item.path)
       if (flag >= 0) return
-      this.tabList.push(item)
+      this.tagList.push(item)
     },
     // 添加缓存页
     addCacheItem(componentName: string) {
@@ -34,16 +34,16 @@ export const useNavTabStore = defineStore({
       this.cacheList.push(componentName)
     },
     // 删除一个页签
-    removeTabItem(path: string) {
+    removeTagItem(path: string) {
       const appStore = useAppStore()
       if (path === defaultTabItem.path) return
-      const index = this.tabList.findIndex((item) => item.path === path)
+      const index = this.tagList.findIndex((item) => item.path === path)
       if (index >= 0) {
-        const isActive = router.currentRoute.value.path === this.tabList[index]['path']
-        this.tabList.splice(index, 1)
+        const isActive = router.currentRoute.value.path === this.tagList[index]['path']
+        this.tagList.splice(index, 1)
         if (isActive) {
-          router.push({ path: this.tabList[this.tabList.length - 1]['path'] })
-          appStore.setActivePath(this.tabList[this.tabList.length - 1]['path'])
+          router.push({ path: this.tagList[this.tagList.length - 1]['path'] })
+          appStore.setActivePath(this.tagList[this.tagList.length - 1]['path'])
         }
       }
     },
@@ -55,8 +55,8 @@ export const useNavTabStore = defineStore({
       }
     },
     // 清空页签
-    clearTabList() {
-      this.tabList = [defaultTabItem]
+    clearTagList() {
+      this.tagList = [defaultTabItem]
       router.push(defaultTabItem.path)
     },
     // 清空缓存页

@@ -9,7 +9,8 @@
  * pos="right": 去除右边空格
  * pos="all": 去除所有空格
  */
-export function trim(str: string, pos = 'both'): string {
+type Pos = 'both' | 'left' | 'right' | 'all'
+export function trim(str: string, pos: Pos = 'both'): string {
   if (pos == 'both') {
     return str.replace(/^\s+|\s+$/g, '')
   } else if (pos == 'left') {
@@ -59,7 +60,7 @@ export function getDataType(value: string) {
 }
 
 // 检测数据是否为空数据
-export function isEmpty(data: any) {
+export function isEmpty(data: unknown) {
   if (data === '' || data === 'undefined' || data === undefined || data === null || data === 'null') {
     return true
   }

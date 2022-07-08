@@ -22,7 +22,7 @@ export const Url =
 export const ColorRegex = /^#?([a-fA-F0-9]{6}|[a-fA-F0-9]{3})$/
 
 // 只能是中文
-export const Ch = /^[\u4e00-\u9fa5]+$/gi
+export const OnlyCh = /^[\u4e00-\u9fa5]+$/gi
 
 // 只能是英文
-export const En = /^[a-zA-Z]*$/
+export const OnlyEn = /^[a-zA-Z]*$/

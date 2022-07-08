@@ -6,6 +6,7 @@ import vueJsx from '@vitejs/plugin-vue-jsx'
 import VueSetupExtend from 'vite-plugin-vue-setup-extend'
 import { viteMockServe } from 'vite-plugin-mock'
 import { createSvgIconsPlugin } from 'vite-plugin-svg-icons'
+import svgLoader from 'vite-svg-loader'
 import Components from 'unplugin-vue-components/vite'
 import path from 'path'
 
@@ -30,6 +31,7 @@ export default defineConfig(({ command, mode }) => {
         // 指定symbolId格式
         symbolId: 'icon-[dir]-[name]'
       }),
+      svgLoader(),
       viteMockServe({
         mockPath: 'mock',
         localEnabled: command === 'serve',

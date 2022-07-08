@@ -1,6 +1,6 @@
 <template>
-  <div class="gi-title">
-    <a-row justify="space-between" align="center" class="wrapper" :style="{ 'border-bottom-style': borderStyle }">
+  <div class="gi-title" :class="{ 'is-fill': fill, shadow: shadow }">
+    <a-row justify="space-between" align="center" class="wrapper" :style="{ 'border-bottom-style': borderType }">
       <h3 class="title">{{ props.title }}</h3>
       <a-space>
         <slot></slot>
@@ -19,9 +19,19 @@ const props = defineProps({
     default: ''
   },
   // 边框样式
-  borderStyle: {
+  borderType: {
     type: String as PropType<string>,
     default: 'dashed'
+  },
+  // 是否撑满
+  fill: {
+    type: Boolean,
+    default: false
+  },
+  // 是否显示阴影
+  shadow: {
+    type: Boolean,
+    default: false
   }
 })
 </script>
@@ -33,6 +43,18 @@ const props = defineProps({
   box-sizing: border-box;
   z-index: 99;
   flex-shrink: 0;
+  &.is-fill {
+    padding: 0;
+    > .wrapper {
+      padding: 0 $padding;
+    }
+  }
+  &.shadow {
+    box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.08);
+    > .wrapper {
+      border: 0;
+    }
+  }
   > .wrapper {
     height: 100%;
     border-bottom-width: 1px;

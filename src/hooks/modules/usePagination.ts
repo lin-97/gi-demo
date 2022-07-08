@@ -2,7 +2,11 @@ import { ref } from 'vue'
 
 type Callback = () => void
 
-export default function usePagination(callback: Callback, defaultPageSize = 10) {
+type Options = {
+  defaultPageSize: number
+}
+
+export default function usePagination(callback: Callback, { defaultPageSize = 10 }: Options) {
   const current = ref(1)
   const pageSize = ref(defaultPageSize)
   const total = ref(0)
