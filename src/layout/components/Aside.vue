@@ -2,7 +2,7 @@
   <a-layout-sider collapsible breakpoint="xl" class="aside">
     <a-menu
       :selected-keys="[appStore.activePath]"
-      :default-open-keys="['/']"
+      :default-open-keys="['/home']"
       :style="{ width: '100%', height: '100%' }"
     >
       <MenuItem v-for="item in menuStore.list" :key="item.id" :data="item" @click="handleClickItem"></MenuItem>

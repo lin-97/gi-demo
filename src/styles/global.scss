@@ -25,6 +25,11 @@
   position: absolute;
 }
 
+.gi_rotate_90deg {
+  transition: all 0.3s;
+  transform:rotate(90deg);
+}
+
 // 通用盒子
 .gi_box {
   background: var(--color-bg-2);

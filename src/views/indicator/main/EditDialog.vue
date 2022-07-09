@@ -31,6 +31,9 @@
             </a-tooltip>
           </a-space>
         </template>
+        <template #expand-icon="{ active }">
+          <icon-right :class="{'gi_rotate_90deg': active}" />
+        </template>
         <a-row justify="space-between" v-for="(item, index) in list" :key="index">
           <span>{{ item.name }}</span>
           <a-checkbox-group>

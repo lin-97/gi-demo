@@ -14,7 +14,7 @@ export const useMenuStore = defineStore({
           icon: 'menu-work',
           id: 'YBP',
           name: '仪表盘',
-          path: '/',
+          path: '/home',
           keepAlive: false,
           hidden: false,
           children: [
