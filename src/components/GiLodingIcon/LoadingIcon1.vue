@@ -1,6 +1,6 @@
 <template>
-  <svg class="gi-loading-icon" version="1.1" xmlns="http://www.w3.org/2000/svg" width="50" height="50">
-    <circle class="circle" cx="25" cy="25" r="20" fill="none" stroke-width="2" stroke="#000" />
+  <svg class="gi-loading-icon" viewBox="25 25 50 50">
+    <circle class="circle" cx="50" cy="50" r="20" fill="none"></circle>
   </svg>
 </template>
 
@@ -8,6 +8,8 @@
 
 <style lang="scss" scoped>
 .gi-loading-icon {
+  width: 40px;
+  height: 40px;
   animation: loading-rotate 2s linear infinite;
 }
 @keyframes loading-rotate {
@@ -18,6 +20,10 @@
 
 .circle {
   stroke: rgb(var(--primary-5));
+  stroke-dasharray: 90, 150;
+  stroke-dashoffset: 0;
+  stroke-width: 2;
+  stroke-linecap: round;
   animation: loading-dash 1.5s ease-in-out infinite;
 }
 @keyframes loading-dash {

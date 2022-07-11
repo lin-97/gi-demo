@@ -32,6 +32,7 @@
       <a-radio-group type="button" v-model="loadingText">
         <a-radio value="Loading...">Loading...</a-radio>
         <a-radio value="加载中...">加载中...</a-radio>
+        <a-radio value=" ">空</a-radio>
       </a-radio-group>
 
       <a-button type="primary" @click="loading = !loading">点击</a-button>

@@ -2,7 +2,7 @@
   <div class="gi-loading">
     <div class="wrapper">
       <GiLoadingIcon :type="loadingType"></GiLoadingIcon>
-      <span class="loading-text" v-if="loadingText">{{ loadingText }}</span>
+      <span class="gi-loading-text" v-if="loadingText">{{ loadingText }}</span>
     </div>
   </div>
 </template>
@@ -57,8 +57,8 @@ body[arco-theme='dark'] {
     flex-direction: column;
     align-items: center;
   }
-  .loading-text {
-    margin-top: 16px;
+  &-text {
+    margin-top: 14px;
     color: rgb(var(--primary-5));
   }
 }

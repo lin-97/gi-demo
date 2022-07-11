@@ -1,5 +1,4 @@
 import { createApp } from 'vue'
-import { isObject } from '@/utils/typeof'
 import Loading from '@/components/GiLoading.vue'
 
 /**
@@ -15,76 +14,69 @@ import Loading from '@/components/GiLoading.vue'
 
 const name: string = Loading.name // 组件名(实例key)
 
+// 元素添加类名
 function addClass(el: HTMLElement, className: string) {
   if (!el.classList.contains(className)) {
     el.classList.add(className)
   }
 }
 
+// 删除元素类名
 function removeClass(el: HTMLElement, className: string) {
   el.classList.remove(className)
 }
 
-function append(el: any) {
+const appendEl = (el: any) => {
   if (!['relative', 'absolute', 'fixed'].includes(el.style.position)) {
     addClass(el, 'gi_relative')
   }
   el.style['pointer-events'] = 'none'
-  el.appendChild(el[name].instance.$el)
+  el.appendChild(el.instance.$el)
 }
 
-function remove(el: any) {
+const removeEl = (el: any) => {
   removeClass(el, 'gi_relative')
   el.style['pointer-events'] = 'inherit'
-  el.removeChild(el[name].instance.$el)
-}
-
-const app = createApp(Loading)
-const instance = app.mount(document.createElement('div'))
-
-// 创建实例
-function createInstance(el: any, binding) {
-  const loadingType = el.getAttribute('gi-loading-type')
-  const loadingText = el.getAttribute('gi-loading-text')
-
-  if (loadingType) {
-    instance.setLoadingType(loadingType)
-  }
-  if (loadingText) {
-    instance.setLoadingText(loadingText)
-  }
-  if (!el[name]) {
-    el[name] = {}
-  }
-  el[name].instance = instance
-  if (binding.value) {
-    append(el)
-  }
+  el.removeChild(el.instance.$el)
 }
 
 const loadingObj = {
   // 在绑定元素的父组件被挂载前调用
-  mounted(el: any, binding) {
-    console.log('el', el)
-    console.log('binding', binding)
-    createInstance(el, binding)
-  },
-  // 在包含组件的 VNode 及其子组件的 VNode 更新后调用
-  updated(el: HTMLElement, binding) {
-    if (!el[name]) {
-      el[name] = {}
+  mounted(el: any, binding: any) {
+    const app = createApp(Loading)
+    const instance = app.mount(document.createElement('div'))
+
+    const loadingType = el.getAttribute('gi-loading-type') || ''
+    const loadingText = el.getAttribute('gi-loading-text') || ''
+
+    if (loadingType) {
+      instance.setLoadingType(loadingType)
     }
+    if (loadingText) {
+      instance.setLoadingText(loadingText)
+    }
+
+    el.instance = instance
+
+    if (binding.value) {
+      appendEl(el)
+    }
+  },
+  // 更新后调用
+  updated(el: any, binding: any) {
     if (binding.value !== binding.oldValue) {
-      createInstance(el, binding)
-      if (!binding.value) {
-        remove(el)
+      const loadingType = el.getAttribute('gi-loading-type') || ''
+      const loadingText = el.getAttribute('gi-loading-text') || ''
+
+      if (loadingType) {
+        el.instance.setLoadingType(loadingType)
       }
+      if (loadingText) {
+        el.instance.setLoadingText(loadingText)
+      }
+      binding.value ? appendEl(el) : removeEl(el)
     }
-  },
-  // 在卸载绑定元素的父组件之前调用
-  beforeUnmount(el: HTMLElement, binding) {},
-  // 当指令与元素解除绑定且父组件已卸载时，只调用一次
-  unmounted(el: HTMLElement, binding) {}
+  }
 }
 
 export default loadingObj
