@@ -12,6 +12,7 @@ declare module '@vue/runtime-core' {
     GiIcon: typeof import('./components/GiIcon.vue')['default']
     GiIconSelector: typeof import('./components/GiIconSelector.vue')['default']
     GiLoading: typeof import('./components/GiLoading.vue')['default']
+    GiLodingIcon: typeof import('./components/GiLodingIcon/index.vue')['default']
     GiNowTime: typeof import('./components/GiNowTime.vue')['default']
     GiOption: typeof import('./components/GiOption.vue')['default']
     GiOptionItem: typeof import('./components/GiOptionItem.vue')['default']
@@ -22,6 +23,8 @@ declare module '@vue/runtime-core' {
     GiTextSwitch: typeof import('./components/GiTextSwitch.vue')['default']
     GiThemeBtn: typeof import('./components/GiThemeBtn.vue')['default']
     GiTitle: typeof import('./components/GiTitle.vue')['default']
+    LoadingIcon1: typeof import('./components/GiLodingIcon/LoadingIcon1.vue')['default']
+    LoadingIcon2: typeof import('./components/GiLodingIcon/LoadingIcon2.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
   }

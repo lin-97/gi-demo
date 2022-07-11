@@ -25,64 +25,60 @@ function removeClass(el: HTMLElement, className: string) {
   el.classList.remove(className)
 }
 
-function append(el: HTMLElement) {
+function append(el: any) {
   if (!['relative', 'absolute', 'fixed'].includes(el.style.position)) {
     addClass(el, 'gi_relative')
   }
+  el.style['pointer-events'] = 'none'
   el.appendChild(el[name].instance.$el)
 }
 
-function remove(el: HTMLElement) {
+function remove(el: any) {
   removeClass(el, 'gi_relative')
+  el.style['pointer-events'] = 'inherit'
   el.removeChild(el[name].instance.$el)
 }
 
+const app = createApp(Loading)
+const instance = app.mount(document.createElement('div'))
+
+// 创建实例
+function createInstance(el: any, binding) {
+  const loadingType = el.getAttribute('gi-loading-type')
+  const loadingText = el.getAttribute('gi-loading-text')
+
+  if (loadingType) {
+    instance.setLoadingType(loadingType)
+  }
+  if (loadingText) {
+    instance.setLoadingText(loadingText)
+  }
+  if (!el[name]) {
+    el[name] = {}
+  }
+  el[name].instance = instance
+  if (binding.value) {
+    append(el)
+  }
+}
+
 const loadingObj = {
-  // 在绑定元素的 attribute 或事件监听器被应用之前调用
-  created(el: HTMLElement, binding) {},
-  // 当指令第一次绑定到元素并且在挂载父组件之前调用
-  beforeMount(el: HTMLElement, binding) {},
   // 在绑定元素的父组件被挂载前调用
-  mounted(el: HTMLElement, binding) {
-    // console.log('binding', binding)
-    const app = createApp(Loading)
-    const instance = app.mount(document.createElement('div'))
-    if (binding.arg !== 'undefined') {
-      if (isObject(binding.arg) && binding.arg.title) {
-        instance.setLoadingText(binding.arg.title)
-      }
-      if (typeof binding.arg === 'string') {
-        instance.setLoadingText(binding.arg)
-      }
-    }
-    if (binding.arg && isObject(binding.arg) && binding.arg.title) {
-      instance.setLoadingText(binding.arg.title)
-    }
-    if (!el[name]) {
-      el[name] = {}
-    }
-    el[name].instance = instance
-    if (binding.value) {
-      append(el)
-    }
+  mounted(el: any, binding) {
+    console.log('el', el)
+    console.log('binding', binding)
+    createInstance(el, binding)
   },
-  // 在更新包含组件的 VNode 之前调用
-  beforeUpdate(el: HTMLElement, binding) {},
   // 在包含组件的 VNode 及其子组件的 VNode 更新后调用
   updated(el: HTMLElement, binding) {
     if (!el[name]) {
       el[name] = {}
     }
-    if (binding.arg !== 'undefined') {
-      if (isObject(binding.arg) && binding.arg.title) {
-        el[name].instance.setLoadingText(binding.arg.title)
-      }
-      if (typeof binding.arg === 'string') {
-        el[name].instance.setLoadingText(binding.arg)
-      }
-    }
     if (binding.value !== binding.oldValue) {
-      binding.value ? append(el) : remove(el)
+      createInstance(el, binding)
+      if (!binding.value) {
+        remove(el)
+      }
     }
   },
   // 在卸载绑定元素的父组件之前调用

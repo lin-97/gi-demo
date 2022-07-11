@@ -76,7 +76,7 @@
     </a-row>
 
     <!-- 文件列表-宫格模式 -->
-    <section class="file-wrap" v-loading:[loadingText]="loading">
+    <section class="file-wrap" v-loading="loading">
       <template v-if="fileStore.viewMode == 'grid'">
         <FileGrid
           :data="fileList"

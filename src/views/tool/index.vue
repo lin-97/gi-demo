@@ -30,6 +30,7 @@ import FlexibleBox from './components/FlexibleBox.vue'
 import Area from './components/Area.vue'
 import Json from './components/Json.vue'
 import Editor from './components/Editor.vue'
+import Loading from './components/Loading.vue'
 
 const selectedKey = ref(0)
 
@@ -42,6 +43,7 @@ const menuList = ref([
   { name: 'GiIconSelector', value: IconSelector },
   { name: 'GiDot', value: Dot },
   { name: 'GiFlexibleBox', value: FlexibleBox },
+  { name: '自定义加载指令', value: Loading },
   { name: 'Flex布局', value: Flex },
   { name: '省市区', value: Area },
   { name: 'JSON查看', value: Json },
