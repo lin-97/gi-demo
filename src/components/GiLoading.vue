@@ -2,7 +2,7 @@
   <div class="gi-loading">
     <div class="wrapper">
       <GiLoadingIcon :type="loadingType"></GiLoadingIcon>
-      <span class="gi-loading-text" v-if="loadingText">{{ loadingText }}</span>
+      <span class="gi-loading-text" v-if="trim(loadingText)">{{ loadingText }}</span>
     </div>
   </div>
 </template>
@@ -10,6 +10,7 @@
 <script setup lang="ts" name="GiLoading">
 import { ref } from 'vue'
 import GiLoadingIcon from '@/components/GiLodingIcon/index.vue'
+import { trim } from '@/utils/common'
 
 const loadingType = ref('dot')
 const loadingText = ref('')
@@ -58,7 +59,8 @@ body[arco-theme='dark'] {
     align-items: center;
   }
   &-text {
-    margin-top: 14px;
+    font-size: 13px;
+    margin-top: 12px;
     color: rgb(var(--primary-5));
   }
 }

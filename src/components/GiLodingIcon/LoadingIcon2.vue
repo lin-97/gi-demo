@@ -11,8 +11,8 @@
 
 <style lang="scss" scoped>
 .gi-loading-icon {
-  width: 20px;
-  height: 20px;
+  width: 30px;
+  height: 30px;
   position: relative;
   animation: turn 1s linear infinite;
   transform-origin: center;
@@ -24,23 +24,23 @@
     position: absolute;
     overflow: hidden;
     &.aaa {
-      left: -5px;
-      top: -5px;
+      left: 0;
+      top: 0;
       background: rgb(var(--primary-2));
     }
     &.bbb {
-      right: -5px;
-      top: -5px;
+      right: 0;
+      top: 0;
       background: rgb(var(--primary-3));
     }
     &.ccc {
-      left: -5px;
-      bottom: -5px;
+      left: 0;
+      bottom: 0;
       background: rgb(var(--primary-4));
     }
     &.ddd {
-      right: -5px;
-      bottom: -5px;
+      right: 0;
+      bottom: 0;
       background: rgb(var(--primary-5));
     }
   }
