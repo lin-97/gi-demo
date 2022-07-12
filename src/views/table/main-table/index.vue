@@ -104,7 +104,7 @@
                 <a-space>
                   <a-button type="primary" size="mini">修改</a-button>
                   <a-button size="mini">详情</a-button>
-                  <a-popconfirm content="您确定要删除该项吗?">
+                  <a-popconfirm type="warning" content="您确定要删除该项吗?">
                     <a-button type="primary" status="danger" size="mini">删除</a-button>
                   </a-popconfirm>
                 </a-space>

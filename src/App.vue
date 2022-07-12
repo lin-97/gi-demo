@@ -5,10 +5,8 @@
 </template>
 
 <script setup lang="ts" name="App">
-import { useAppStore, useThemeStore } from '@/store'
+import { useAppStore } from '@/store'
 const appStore = useAppStore()
-const themeStore = useThemeStore()
 
 appStore.initTime()
-themeStore.initTheme()
 </script>

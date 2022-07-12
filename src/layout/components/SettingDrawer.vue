@@ -118,7 +118,6 @@ if (themeStore.themeColor) {
 
 const changeColor = (colorObj: any) => {
   if (!/^#[0-9A-Za-z]{6}/.test(colorObj.hex)) return
-  console.log(colorObj)
   themeStore.setThemeColor(colorObj.hex)
   themeStore.changeThemeColor(themeStore.themeColor)
 }

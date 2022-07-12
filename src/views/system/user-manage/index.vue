@@ -101,7 +101,7 @@
                   <a-button type="primary" size="mini" @click="showAddUserModal = true">
                     <template #icon><icon-edit /></template>
                   </a-button>
-                  <a-popconfirm content="您确定要删除该项吗?">
+                  <a-popconfirm type="warning" content="您确定要删除该项吗?">
                     <a-button type="primary" status="danger" size="mini">
                       <template #icon><icon-delete /></template>
                     </a-button>

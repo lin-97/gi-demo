@@ -1,5 +1,5 @@
 <template>
-  <GiContextMenu ref="menuRef" :event="event" @close="onClose">
+  <GiContextMenu ref="menuRef" :event="event" :ignoreRefs="ignoreRefs" @close="onClose">
     <GiOption width="110" ref="optionRef" style="position: relative">
       <GiOptionItem icon="IconPlusCircle" @click="onClickItem('add')" v-if="showAdd">新增</GiOptionItem>
       <GiOptionItem icon="IconEdit" @click="onClickItem('rename')" v-if="showRename">重命名</GiOptionItem>
@@ -14,7 +14,7 @@
           移动
         </GiOptionItem>
         <template #content>
-          <section class="move-tree-box" @click.stop>
+          <section class="move-tree-box" ref="moveTreeBoxRef">
             <MoveTree :tree-data="treeData" @node-click="moveTreeNodeClick"></MoveTree>
           </section>
         </template>
@@ -41,6 +41,9 @@ const props = defineProps<{
 }>()
 
 const menuRef = ref<HTMLInputElement | null>(null)
+const moveTreeBoxRef = ref(null)
+
+const ignoreRefs = ref([moveTreeBoxRef])
 
 const showMoveTreePopup = ref(false)
 

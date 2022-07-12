@@ -85,7 +85,7 @@
                 </a-table-column>
                 <a-table-column title="状态" :width="100">
                   <template #cell="{ record }">
-                    <a-switch v-model="record.status" size="medium">
+                    <a-switch :model-value="record.status" size="medium">
                       <template #checked>开启</template>
                       <template #unchecked>关闭</template>
                     </a-switch>
@@ -97,7 +97,7 @@
                       <a-space>
                         <a-button type="primary" size="mini" @click="onEdit(record)">修改</a-button>
                         <a-button size="mini" @click="onDetail">详情</a-button>
-                        <a-popconfirm content="您确定要删除该项吗?" @ok="onDelete(record)">
+                        <a-popconfirm type="warning" content="您确定要删除该项吗?" @ok="onDelete(record)">
                           <a-button type="primary" status="danger" size="mini">删除</a-button>
                         </a-popconfirm>
                       </a-space>

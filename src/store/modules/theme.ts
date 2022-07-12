@@ -34,27 +34,17 @@ export const useThemeStore = defineStore({
     }
   },
   actions: {
-    // 初始化主题
-    initTheme() {
-      if (this.theme === 'dark') {
-        document.body.setAttribute('arco-theme', 'dark')
-      } else {
-        document.body.removeAttribute('arco-theme')
-      }
-      this.changeThemeColor(this.themeColor)
-    },
     // 切换主题  暗黑模式|简白模式
-    toggleTheme() {
-      if (this.theme === 'light') {
-        document.body.setAttribute('arco-theme', 'dark')
+    toggleTheme(dark: boolean) {
+      if (dark) {
         this.theme = 'dark'
+        document.body.setAttribute('arco-theme', 'dark')
         localStorage.setItem('Theme', JSON.stringify(this.$state))
       } else {
-        document.body.removeAttribute('arco-theme')
         this.theme = 'light'
+        document.body.removeAttribute('arco-theme')
         localStorage.setItem('Theme', JSON.stringify(this.$state))
       }
-      this.changeThemeColor(this.themeColor)
     },
     // 设置主题色
     setThemeColor(color: string) {

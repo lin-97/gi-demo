@@ -14,6 +14,7 @@ import { useContextMenu } from '@/hooks'
 const props = defineProps<{
   event: PointerEvent
   options: object
+  ignoreRefs: any[]
 }>()
 
 const elRef = ref(null)
@@ -28,7 +29,7 @@ onClickOutside(
     setVisible(false)
     emit('close')
   },
-  { capture: false }
+  { capture: false, ignore: props.ignoreRefs }
 )
 
 // 窗口尺寸变化关闭
