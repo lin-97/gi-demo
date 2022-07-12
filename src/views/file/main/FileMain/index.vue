@@ -13,11 +13,11 @@
           </a-button>
           <template #content>
             <a-doption>
-              <template #icon><GiSvgIcon name="com-file" /></template>
+              <template #icon><GiSvgIcon name="upload-file" /></template>
               <span>上传文件</span>
             </a-doption>
             <a-doption>
-              <template #icon><GiSvgIcon name="com-file-close" /></template>
+              <template #icon><GiSvgIcon name="upload-folder" /></template>
               <span>上传文件夹</span>
             </a-doption>
           </template>
@@ -110,7 +110,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, watch } from 'vue'
+import { ref, onMounted } from 'vue'
 import { Message, Modal } from '@arco-design/web-vue'
 import { fileTypeList, imageTypeList } from '@/libs/file-map'
 import { useFileStore } from '@/store'
@@ -137,7 +137,7 @@ const loading = ref(false)
 // 文件列表数据
 const fileList = ref<FileItem[]>([])
 const fileType = ref('0')
-fileType.value = route.query.fileType
+fileType.value = route.query.fileType || '0'
 
 const getListData = async () => {
   try {
@@ -152,7 +152,9 @@ const getListData = async () => {
   }
 }
 
-getListData()
+onMounted(() => {
+  getListData()
+})
 
 onBeforeRouteUpdate((to) => {
   fileType.value = to.query.fileType
