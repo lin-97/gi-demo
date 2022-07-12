@@ -57,18 +57,12 @@ export default defineConfig(({ command, mode }) => {
       }
     },
     server: {
-      hmr: true,
       proxy: {
-        '/api': {
-          target: 'https://www.fastmock.site/mock/4a6ede552f5ceef195285323eadcfd49', // 后台服务器地址
-          changeOrigin: true, // 是否允许不同源
-          secure: false, // 支持https
-          rewrite: (path) => path.replace(/^\/api/, '/api')
-        }
-        // '/mock': {
-        //   target: 'http://localhost:8080/', //对mock进行代理，为了区别非mock的代理
-        //   changeOrigin: true,
-        //   rewrite: (path) => path.replace(/^\/mock/, '/mock')
+        // '/api': {
+        //   target: 'http://localhost:8080/', // 后台服务器地址
+        //   changeOrigin: true, // 是否允许不同源
+        //   secure: false, // 支持https
+        //   rewrite: (path) => path.replace(/^\/api/, '/api')
         // }
       }
     },

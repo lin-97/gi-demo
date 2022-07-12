@@ -1,5 +1,13 @@
 import axios from '@/utils/axios'
 const prefix = '/mock'
+import type { Res, Pagination } from '@/types/global'
+
+interface ListData<T> {
+  total: number
+  list: T[]
+}
+
+type ResListData<T> = Res<ListData<T>>
 
 export interface TableItem {
   id: string
@@ -19,6 +27,6 @@ export interface TableItem {
 }
 
 // 获取表格
-export function getTableList(data: any) {
-  return axios.get(`${prefix}/table/list`, data)
+export function getTableList(data: Pagination) {
+  return axios.get<ResListData<TableItem>>(`${prefix}/table/list`, data)
 }

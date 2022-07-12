@@ -6,10 +6,6 @@ export interface LoginData {
   password: string
 }
 
-export interface LoginRes {
-  token: string
-}
-
 export function login(data: LoginData) {
   return axios.post(`${prefix}/user/login`, data)
 }

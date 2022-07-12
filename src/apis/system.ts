@@ -1,5 +1,13 @@
 import axios from '@/utils/axios'
 const prefix = '/mock'
+import type { Res } from '@/types/global'
+
+interface ListData<T> {
+  total: number
+  list: T[]
+}
+
+type ResListData<T> = Res<ListData<T>>
 
 // 获取部门数据
 export interface DeptItem {
@@ -13,7 +21,7 @@ export interface DeptItem {
 }
 
 export function getSystemDeptList() {
-  return axios.get(`${prefix}/system/dept/list`)
+  return axios.get<ResListData<DeptItem>>(`${prefix}/system/dept/list`)
 }
 
 // 获取用户数据
@@ -30,8 +38,8 @@ export interface UserItem {
   createTime: string
 }
 
-export function getSystemUserList(data: any) {
-  return axios.get(`${prefix}/system/user/list`, data)
+export function getSystemUserList() {
+  return axios.get<ResListData<UserItem>>(`${prefix}/system/user/list`, data)
 }
 
 // 获取角色数据
@@ -44,6 +52,6 @@ export interface RoleItem {
   createTime: string
 }
 
-export function getSystemRoleList(data?: any) {
-  return axios.get(`${prefix}/system/role/list`, data)
+export function getSystemRoleList() {
+  return axios.get<ResListData<RoleItem>>(`${prefix}/system/role/list`, data)
 }

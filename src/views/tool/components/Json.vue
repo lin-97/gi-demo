@@ -7,9 +7,28 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import JsonEditorVue from 'json-editor-vue3'
-import data from '@/views/file/main/FileMain/filedata'
 
-const jsonData = ref(data)
+const jsonData = ref({
+  sites: {
+    site: [
+      {
+        id: '1',
+        name: '菜鸟教程',
+        url: 'www.runoob.com'
+      },
+      {
+        id: '2',
+        name: '菜鸟工具',
+        url: 'c.runoob.com'
+      },
+      {
+        id: '3',
+        name: 'Google',
+        url: 'www.google.com'
+      }
+    ]
+  }
+})
 </script>
 
 <style lang="scss" scoped>

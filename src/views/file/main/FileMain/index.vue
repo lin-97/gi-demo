@@ -12,8 +12,14 @@
             <template #default>上传</template>
           </a-button>
           <template #content>
-            <a-doption>上传文件</a-doption>
-            <a-doption>上传文件夹</a-doption>
+            <a-doption>
+              <template #icon><GiSvgIcon name="com-file" /></template>
+              <span>上传文件</span>
+            </a-doption>
+            <a-doption>
+              <template #icon><GiSvgIcon name="com-file-close" /></template>
+              <span>上传文件夹</span>
+            </a-doption>
           </template>
         </a-dropdown>
 
@@ -77,7 +83,7 @@
 
     <!-- 文件列表-宫格模式 -->
     <section class="file-wrap" v-loading="loading">
-      <template v-if="fileStore.viewMode == 'grid'">
+      <template v-if="fileList.length && fileStore.viewMode == 'grid'">
         <FileGrid
           :data="fileList"
           :isBatchMode="isBatchMode"
@@ -88,7 +94,7 @@
         ></FileGrid>
       </template>
 
-      <template v-else>
+      <template v-else-if="fileList.length && fileStore.viewMode == 'list'">
         <!-- 文件列表-列表模式 -->
         <FileList
           :data="fileList"
@@ -97,12 +103,14 @@
           @right-menu-click="handleRightMenuClick"
         ></FileList>
       </template>
+
+      <a-empty v-else></a-empty>
     </section>
   </div>
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
+import { ref, watch } from 'vue'
 import { Message, Modal } from '@arco-design/web-vue'
 import { fileTypeList, imageTypeList } from '@/libs/file-map'
 import { useFileStore } from '@/store'
@@ -116,19 +124,40 @@ import ThePreviewVideo from '@/views/components/ThePreviewVideo/index'
 import ThePreviewAudio from '@/views/components/ThePreviewAudio/index'
 import TheFileRename from '@/views/components/TheFileRename/index'
 import TheFileMove from '@/views/components/TheFileMove/index'
-import fileData from './filedata'
-import { useRouter } from 'vue-router'
+import { useRoute, useRouter, onBeforeRouteUpdate } from 'vue-router'
+import { getFileList } from '@/apis/file'
 import type { FileItem } from '@/apis/file'
+const route = useRoute()
 const router = useRouter()
 
 const { width: windowWidth } = useWindowSize()
 const fileStore = useFileStore()
 
 const loading = ref(false)
-
 // 文件列表数据
 const fileList = ref<FileItem[]>([])
-fileList.value = fileData
+const fileType = ref('0')
+fileType.value = route.query.fileType
+
+const getListData = async () => {
+  try {
+    loading.value = true
+    isBatchMode.value = false
+    const res = await getFileList({ fileType: fileType.value })
+    fileList.value = res.data.list
+  } catch (error) {
+    return error
+  } finally {
+    loading.value = false
+  }
+}
+
+getListData()
+
+onBeforeRouteUpdate((to) => {
+  fileType.value = to.query.fileType
+  getListData()
+})
 
 // 批量操作
 const isBatchMode = ref(false)

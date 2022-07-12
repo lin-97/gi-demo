@@ -6,7 +6,8 @@ import { createProdMockServer } from 'vite-plugin-mock/es/createProdMockServer'
 import userModule from '../mock/user'
 import tableModule from '../mock/table'
 import systemModule from '../mock/system'
+import fileModule from '../mock/file'
 
 export function setupProdMockServer() {
-  createProdMockServer([...userModule, ...tableModule, ...systemModule])
+  createProdMockServer([...userModule, ...tableModule, ...systemModule, ...fileModule])
 }

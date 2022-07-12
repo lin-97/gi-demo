@@ -35,3 +35,11 @@ export interface GeneralChart {
   xAxis: string[]
   data: Array<{ name: string; value: number[] }>
 }
+
+export interface Res<T> {
+  code: number
+  msg?: string
+  message?: string
+  success: boolean
+  data: T
+}
