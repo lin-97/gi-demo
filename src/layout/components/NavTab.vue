@@ -132,7 +132,7 @@ const onCloseAll = () => {
 
 .nav-tab {
   padding-top: 5px;
-  background: var(--color-bg-2);
+  background: var(--color-bg-1);
 }
 
 .extra-btn {

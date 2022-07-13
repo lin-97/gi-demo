@@ -81,7 +81,7 @@ const userStore = useUserStore()
   margin: $margin;
   padding: $padding;
   box-sizing: border-box;
-  background: var(--color-bg-2);
+  background: var(--color-bg-1);
   border-radius: 2px;
   .head {
     display: flex;

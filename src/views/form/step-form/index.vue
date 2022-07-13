@@ -89,7 +89,7 @@ watch(
   flex: 1;
   margin: $margin;
   padding: $padding;
-  background: var(--color-bg-2);
+  background: var(--color-bg-1);
   display: flex;
   justify-content: center;
   .form-box {

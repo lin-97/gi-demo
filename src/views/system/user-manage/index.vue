@@ -184,7 +184,7 @@ getTableData()
   margin: $margin;
   box-sizing: border-box;
   display: flex;
-  background: var(--color-bg-2);
+  background: var(--color-bg-1);
   overflow: hidden;
   > .left {
     flex: 1;

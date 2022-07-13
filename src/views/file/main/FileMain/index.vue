@@ -220,9 +220,9 @@ const handleMulDelete = () => {
 <style lang="scss" scoped>
 .file-main {
   flex: 1;
-  background: var(--color-bg-2);
+  background: var(--color-bg-1);
   margin: $margin;
-  border-radius: $box-radius;
+  border-radius: $radius-box;
   display: flex;
   flex-direction: column;
   overflow: hidden;

@@ -142,7 +142,7 @@ const toGitPath = () => {
 .arco-layout-header {
   padding: 0 $padding;
   height: 50px;
-  background: var(--color-bg-2);
+  background: var(--color-bg-1);
   display: flex;
   justify-content: space-between;
   align-items: center;

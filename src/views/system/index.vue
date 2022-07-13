@@ -64,7 +64,7 @@ const onClickMenuItem = (item: MenuItem, index: number) => {
   }
   > .right {
     flex: 1;
-    background: var(--color-bg-2);
+    background: var(--color-bg-1);
     overflow: hidden;
     margin: $margin $margin $margin 0;
     border-radius: 2px;

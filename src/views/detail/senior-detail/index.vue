@@ -138,12 +138,12 @@ const containerRef = ref()
 .detail {
   overflow: auto;
   .head {
-    background: var(--color-bg-2);
+    background: var(--color-bg-1);
   }
   .item {
     margin: $margin;
     padding: 20px 30px;
-    background: var(--color-bg-2);
+    background: var(--color-bg-1);
     border-radius: 2px;
   }
 }

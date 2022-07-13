@@ -69,7 +69,7 @@ const onClickMenuItem = (item: FileTypeListItem) => {
 .file-aside {
   height: fit-content;
   margin: $margin 0 $margin $margin;
-  background: var(--color-bg-2);
+  background: var(--color-bg-1);
   border-radius: 2px;
 }
 </style>

@@ -185,7 +185,7 @@ getTableData()
   height: 100%;
   overflow: hidden;
   margin: $margin;
-  background: var(--color-bg-2);
+  background: var(--color-bg-1);
   padding: $padding;
   padding-bottom: 0;
   box-sizing: border-box;

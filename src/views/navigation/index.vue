@@ -65,7 +65,7 @@ body[arco-theme='dark'] {
     height: 110px;
     margin: 20px 0;
     padding: 20px;
-    background-color: var(--color-bg-2);
+    background-color: var(--color-bg-1);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -83,7 +83,7 @@ body[arco-theme='dark'] {
   }
   .right {
     padding: 14px 16px;
-    background-color: var(--color-bg-2);
+    background-color: var(--color-bg-1);
   }
 }
 </style>

@@ -27,13 +27,13 @@
 
 .gi_rotate_90deg {
   transition: all 0.3s;
-  transform:rotate(90deg);
+  transform: rotate(90deg);
 }
 
 // 通用盒子
 .gi_box {
-  background: var(--color-bg-2);
-  border-radius: $box-radius;
+  background: var(--color-bg-1);
+  border-radius: $radius-box;
   overflow: hidden;
 }
 

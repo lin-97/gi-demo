@@ -23,7 +23,7 @@ defineProps({
 <style lang="scss" scoped>
 .group-box {
   border-radius: 6px;
-  background-color: var(--color-bg-2);
+  background-color: var(--color-bg-1);
   margin-bottom: 20px;
   padding-bottom: 15px;
   .header {

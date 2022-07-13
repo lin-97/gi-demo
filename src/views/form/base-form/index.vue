@@ -115,7 +115,7 @@ const rules = {
 <style lang="scss" scoped>
 .form-manage {
   flex: 1;
-  background: var(--color-bg-2);
+  background: var(--color-bg-1);
   .content {
     flex: 1;
   }

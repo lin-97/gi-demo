@@ -160,7 +160,7 @@ const login = async () => {
 .login-right {
   width: 270px;
   height: 100%;
-  background: var(--color-bg-2);
+  background: var(--color-bg-1);
   display: flex;
   justify-content: center;
   align-items: center;

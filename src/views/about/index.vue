@@ -31,7 +31,7 @@ const data = ref(packageJson)
   box-sizing: border-box;
   overflow-y: auto;
   .content {
-    background: var(--color-bg-2);
+    background: var(--color-bg-1);
     padding: $padding;
     box-sizing: border-box;
   }

@@ -80,7 +80,7 @@ const back = () => {
   display: flex;
   > .left,
   > .right {
-    background-color: var(--color-bg-2);
+    background-color: var(--color-bg-1);
     border-radius: 2px;
     padding: $padding;
     box-sizing: border-box;

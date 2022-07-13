@@ -42,7 +42,7 @@
     justify-content: center;
     align-items: center;
     overflow: hidden;
-    background-color: var(--color-bg-2);
+    background-color: var(--color-bg-1);
   }
   .info {
     width: 50%;

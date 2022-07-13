@@ -8,7 +8,7 @@
 .image-card {
   padding: 20px;
   box-sizing: border-box;
-  background: var(--color-bg-2);
+  background: var(--color-bg-1);
   img {
     width: 100%;
   }

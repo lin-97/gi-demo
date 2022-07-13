@@ -118,7 +118,7 @@ const list = [
   flex: 1;
   margin: $margin;
   margin-left: 0;
-  background-color: var(--color-bg-2);
+  background-color: var(--color-bg-1);
   display: flex;
   flex-direction: column;
   border-radius: 2px;

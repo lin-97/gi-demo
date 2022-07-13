@@ -73,7 +73,7 @@ const onCountDownTime = () => {
 .error-page {
   width: 100%;
   height: 100%;
-  background: var(--color-bg-2);
+  background: var(--color-bg-1);
   display: flex;
   justify-content: center;
   align-items: center;

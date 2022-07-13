@@ -39,7 +39,6 @@ const userStore = useUserStore()
 }
 .work-platform {
   padding: 0 20px;
-  background: var(--color-bg-2);
   .tip {
     color: $color-text-3;
     p {

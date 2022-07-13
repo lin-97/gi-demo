@@ -94,7 +94,7 @@ const onDelete = () => {
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
-  background: var(--color-bg-2);
+  background: var(--color-bg-1);
   overflow: hidden;
   .head {
     padding: $padding $padding 0;

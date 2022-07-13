@@ -89,7 +89,7 @@ const menuList = ref([
     width: 180px;
     padding: $padding;
     padding-top: 0;
-    background: var(--color-bg-2);
+    background: var(--color-bg-1);
     box-sizing: border-box;
     border-radius: 2px;
     overflow-y: auto;
@@ -98,9 +98,9 @@ const menuList = ref([
     flex: 1;
     height: 100%;
     padding: $padding;
-    background: var(--color-bg-2);
+    background: var(--color-bg-1);
     margin-left: $margin;
-    border-radius: $box-radius;
+    border-radius: $radius-box;
     box-sizing: border-box;
     overflow: auto;
     overflow-x: hidden;

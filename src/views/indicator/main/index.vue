@@ -200,7 +200,7 @@ const onDelete = (row: any) => {
   flex-direction: column;
   overflow: hidden;
   .tab {
-    background: var(--color-bg-2);
+    background: var(--color-bg-1);
   }
   .wrap {
     flex: 1;

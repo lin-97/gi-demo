@@ -146,7 +146,7 @@ const onEdit = (item: DeptItem) => {
   height: 100%;
   margin: $margin;
   box-sizing: border-box;
-  background: var(--color-bg-2);
+  background: var(--color-bg-1);
   display: flex;
   flex-direction: column;
   .head {
