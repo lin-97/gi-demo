@@ -1,6 +1,5 @@
 import { defineStore } from 'pinia'
 import router from '@/router'
-import { useAppStore } from '@/store'
 import type { NavTabItem } from '@/layout/components/type'
 
 interface NavTabState {
@@ -35,7 +34,6 @@ export const useNavTabStore = defineStore({
     },
     // 删除一个页签
     removeTagItem(path: string) {
-      const appStore = useAppStore()
       if (path === defaultTabItem.path) return
       const index = this.tagList.findIndex((item) => item.path === path)
       if (index >= 0) {
@@ -43,7 +41,6 @@ export const useNavTabStore = defineStore({
         this.tagList.splice(index, 1)
         if (isActive) {
           router.push({ path: this.tagList[this.tagList.length - 1]['path'] })
-          appStore.setActivePath(this.tagList[this.tagList.length - 1]['path'])
         }
       }
     },

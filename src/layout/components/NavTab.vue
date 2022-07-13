@@ -46,12 +46,11 @@
 <script setup lang="ts" name="NavTab">
 import { watch, onMounted } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
-import { useNavTabStore, useThemeStore, useAppStore } from '@/store'
+import { useNavTabStore, useThemeStore } from '@/store'
 import type { NavTabItem } from './type'
 
 const route = useRoute()
 const router = useRouter()
-const appStore = useAppStore()
 const navtabStore = useNavTabStore()
 const themeStore = useThemeStore()
 
@@ -84,7 +83,6 @@ const handleNavTab = () => {
 const onClick = (key: string | number) => {
   // console.log('点击前', navtabStore.cacheList, key)
   router.push({ path: key.toString() })
-  appStore.setActivePath(key.toString())
 }
 
 // 关闭页签
