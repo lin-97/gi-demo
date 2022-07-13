@@ -1,6 +1,5 @@
 import { createRouter, createWebHashHistory } from 'vue-router'
 import type { RouteRecordNormalized } from 'vue-router'
-import { useAppStore, useMenuStore } from '@/store'
 import { getToken } from '@/utils/auth'
 
 // 路由模块化自动导入
@@ -68,15 +67,6 @@ const router = createRouter({
 })
 
 router.beforeEach((to, from, next) => {
-  const appStore = useAppStore()
-  const menuStore = useMenuStore()
-  console.log('to', to)
-  // 设置侧边菜单栏的高亮路径
-  const arr = menuStore.list.map((i) => i.path)
-  console.log('arr', arr)
-  if (arr.includes(to.path)) {
-    appStore.setActivePath(to.path)
-  }
   if (to.path === '/login') {
     next()
   } else {

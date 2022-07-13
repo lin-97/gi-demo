@@ -80,7 +80,7 @@ const treeData = ref([])
 const getTreeData = () => {
   loading.value = true
   setTimeout(() => {
-    treeData.value = menuStore.list
+    treeData.value = menuStore.menuTree
     loading.value = false
   }, 300)
 }

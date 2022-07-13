@@ -3,7 +3,6 @@ import dayjs from 'dayjs'
 
 interface AppState {
   systemName: string
-  activePath: string | null
   time: string
 }
 
@@ -12,17 +11,11 @@ export const useAppStore = defineStore({
   state: (): AppState => {
     return {
       systemName: 'Admin Pro', // 系统名称
-      activePath: window.sessionStorage.getItem('ActivePath') || '/home', // 当前激活的路径
       time: '' // 当前日期时间
     }
   },
   getters: {},
   actions: {
-    // 设置激活路径地址
-    setActivePath(path: string) {
-      this.activePath = path
-      window.sessionStorage.setItem('ActivePath', path)
-    },
     // 初始化时间
     initTime() {
       const weekList = ['日', '一', '二', '三', '四', '五', '六']
