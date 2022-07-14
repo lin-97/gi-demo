@@ -49,6 +49,8 @@ export const useAppStore = defineStore({
         document.body.removeAttribute('arco-theme')
         localStorage.setItem('Theme', JSON.stringify(this.$state))
       }
+      this.setThemeColor(this.themeColor)
+      this.changeThemeColor(this.themeColor)
     },
     // 设置主题色
     setThemeColor(color: string) {

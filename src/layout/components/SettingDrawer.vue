@@ -113,6 +113,7 @@ const defaultColorList = [
 ]
 
 if (appStore.themeColor) {
+  appStore.setThemeColor(appStore.themeColor)
   appStore.changeThemeColor(appStore.themeColor)
 }
 
