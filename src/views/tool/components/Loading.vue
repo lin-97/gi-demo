@@ -1,7 +1,7 @@
 <template>
   <div class="my-loading">
     <section class="box" v-loading="loading" :gi-loading-type="loadingType" :gi-loading-text="loadingText">
-      <a-typography :style="{ marginTop: '20px' }">
+      <a-typography :style="{ marginTop: '20px' }" v-if="!loading">
         <a-typography-title> Design system </a-typography-title>
         <a-typography-paragraph>
           A design is a plan or specification for the construction of an object or system or for the implementation of
@@ -25,7 +25,7 @@
 
     <a-space direction="vertical" fill>
       <a-radio-group type="button" v-model="loadingType">
-        <a-radio value="normal">normal</a-radio>
+        <a-radio value="circle">circle</a-radio>
         <a-radio value="dot">dot</a-radio>
       </a-radio-group>
 
@@ -35,7 +35,7 @@
         <a-radio value=" ">空</a-radio>
       </a-radio-group>
 
-      <a-button type="primary" @click="loading = !loading">点击</a-button>
+      <a-button type="primary" @click="getRequest">请求</a-button>
     </a-space>
   </div>
 </template>
@@ -43,10 +43,17 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 
-const loadingType = ref('normal')
+const loadingType = ref('circle')
 const loadingText = ref('Loading...')
 
 const loading = ref(false)
+
+const getRequest = () => {
+  loading.value = true
+  setTimeout(() => {
+    loading.value = false
+  }, 2000)
+}
 </script>
 
 <style lang="scss" scoped>
@@ -54,6 +61,7 @@ const loading = ref(false)
   width: 500px;
   height: 350px;
   border: 1px solid $color-border;
+  background-color: var(--color-bg-2);
   margin-bottom: 10px;
   padding-left: 15px;
   overflow-y: auto;

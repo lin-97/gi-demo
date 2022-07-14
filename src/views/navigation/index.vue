@@ -58,7 +58,6 @@ body[arco-theme='dark'] {
 }
 .navigation {
   flex: 1;
-  background-color: #f5f7fd;
   display: flex;
   overflow: hidden;
   .search-box {
