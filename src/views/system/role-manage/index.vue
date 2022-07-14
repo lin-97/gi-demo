@@ -54,7 +54,7 @@
   </div>
 </template>
 
-<script setup lang="ts">
+<script setup lang="ts" name="RoleManage">
 import { ref } from 'vue'
 import { Message } from '@arco-design/web-vue'
 import AddRoleModal from './AddRoleModal.vue'

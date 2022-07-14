@@ -122,7 +122,7 @@
   </div>
 </template>
 
-<script setup lang="ts">
+<script setup lang="ts" name="SeniorDetail">
 import { ref } from 'vue'
 
 const containerRef = ref()

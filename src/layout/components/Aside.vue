@@ -12,8 +12,8 @@
 </template>
 
 <script setup lang="ts" name="Aside">
-import { ref, onMounted } from 'vue'
-import { useRoute, useRouter, onBeforeRouteUpdate } from 'vue-router'
+import { ref, onMounted, watch } from 'vue'
+import { useRoute, useRouter } from 'vue-router'
 import { useMenuStore } from '@/store'
 import MenuItem from './MenuItem.vue'
 import type { MenuItem as IMenuItem } from './type'
@@ -47,13 +47,14 @@ onMounted(() => {
   }
 })
 
-onBeforeRouteUpdate((to) => {
-  if (menuKeyList.includes(to.path)) {
-    activeKey.value = to.path
-
-    console.log('route', route)
+watch(
+  () => route.path,
+  () => {
+    if (menuKeyList.includes(route.path)) {
+      activeKey.value = route.path
+    }
   }
-})
+)
 
 const handleClickItem = (item: IMenuItem) => {
   if (item.path) {

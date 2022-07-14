@@ -1,15 +1,15 @@
 <template>
-  <component :is="iconMap[type]"></component>
+  <component :is="loadingCom"></component>
 </template>
 
 <script setup lang="ts">
-import { reactive, type PropType } from 'vue'
+import { reactive, markRaw, type PropType } from 'vue'
 import LoadingIcon1 from './LoadingIcon1.vue'
 import LoadingIcon2 from './LoadingIcon2.vue'
 
 type LoadingIconType = 'normal' | 'dot'
 
-defineProps({
+const props = defineProps({
   type: {
     type: String as PropType<LoadingIconType>,
     default: 'normal'
@@ -17,9 +17,11 @@ defineProps({
 })
 
 const iconMap: any = reactive({
-  normal: LoadingIcon1,
-  dot: LoadingIcon2
+  normal: markRaw(LoadingIcon1),
+  dot: markRaw(LoadingIcon2)
 })
+
+const loadingCom = iconMap[props.type]
 </script>
 
 <style lang="scss" scoped></style>

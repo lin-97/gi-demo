@@ -67,7 +67,7 @@
   </div>
 </template>
 
-<script setup lang="ts">
+<script setup lang="ts" name="MenuManage">
 import { ref } from 'vue'
 import { useMenuStore } from '@/store'
 import AddMenuModal from './AddMenuModal.vue'

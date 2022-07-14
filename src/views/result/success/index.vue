@@ -15,6 +15,8 @@
   </div>
 </template>
 
+<script setup lang="ts" name="ResultSuccess"></script>
+
 <style lang="scss" scoped>
 .page {
   width: 100%;

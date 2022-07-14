@@ -119,7 +119,7 @@
   </div>
 </template>
 
-<script setup lang="ts">
+<script setup lang="ts" name="MainTable">
 import { reactive, ref } from 'vue'
 import { usePagination } from '@/hooks'
 import { getTableList, type TableItem } from '@/apis/table'

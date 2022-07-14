@@ -16,7 +16,7 @@
 </template>
 
 <script lang="ts" setup name="Test">
-import { ref } from 'vue'
+import { ref, markRaw } from 'vue'
 import Button from './components/Button.vue'
 import GiTitle from '@/components/GiTitle.vue'
 import TextSwitch from './components/TextSwitch.vue'
@@ -35,19 +35,19 @@ import Loading from './components/Loading.vue'
 const selectedKey = ref(0)
 
 const menuList = ref([
-  { name: '单选框/复选框', value: Option },
-  { name: '按钮', value: Button },
-  { name: 'GiTextSwitch', value: TextSwitch },
-  { name: 'GiTag', value: Tag },
-  { name: 'GiTitle', value: Title },
-  { name: 'GiIconSelector', value: IconSelector },
-  { name: 'GiDot', value: Dot },
-  { name: 'GiFlexibleBox', value: FlexibleBox },
-  { name: '自定义加载指令', value: Loading },
-  { name: 'Flex布局', value: Flex },
-  { name: '省市区', value: Area },
-  { name: 'JSON查看', value: Json },
-  { name: '富文本', value: Editor }
+  { name: '单选框/复选框', value: markRaw(Option) },
+  { name: '按钮', value: markRaw(Button) },
+  { name: 'GiTextSwitch', value: markRaw(TextSwitch) },
+  { name: 'GiTag', value: markRaw(Tag) },
+  { name: 'GiTitle', value: markRaw(Title) },
+  { name: 'GiIconSelector', value: markRaw(IconSelector) },
+  { name: 'GiDot', value: markRaw(Dot) },
+  { name: 'GiFlexibleBox', value: markRaw(FlexibleBox) },
+  { name: '自定义加载指令', value: markRaw(Loading) },
+  { name: 'Flex布局', value: markRaw(Flex) },
+  { name: '省市区', value: markRaw(Area) },
+  { name: 'JSON查看', value: markRaw(Json) },
+  { name: '富文本', value: markRaw(Editor) }
 ])
 </script>
 

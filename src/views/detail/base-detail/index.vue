@@ -73,7 +73,7 @@
   </div>
 </template>
 
-<script setup lang="ts">
+<script setup lang="ts" name="BaseDetail">
 import { ref } from 'vue'
 
 const containerRef = ref()

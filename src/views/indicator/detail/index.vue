@@ -80,7 +80,7 @@
   </div>
 </template>
 
-<script setup lang="ts">
+<script setup lang="ts" name="IndicatorDetail">
 import { ref } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 const route = useRoute()
