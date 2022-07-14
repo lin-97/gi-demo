@@ -9,10 +9,10 @@ NProgress.configure({ showSpinner: false }) // NProgress Configuration
 
 export interface HttpResponse<T = unknown> {
   code: number
-  data: T
-  message: string
-  success: boolean
   msg?: string
+  message?: string
+  data: T
+  success: boolean
 }
 
 interface ICodeMessage {
@@ -92,7 +92,7 @@ const request = <T = unknown>(config: AxiosRequestConfig): Promise<T> => {
   })
 }
 
-request.get = <T = unknown>(url: string, params?: object, headers?: AxiosRequestHeaders): Promise<T> => {
+request.get = <T = unknown>(url: string, params?: object, headers?: AxiosRequestHeaders): Promise<HttpResponse<T>> => {
   return request({
     method: 'get',
     url,
@@ -101,7 +101,7 @@ request.get = <T = unknown>(url: string, params?: object, headers?: AxiosRequest
   })
 }
 
-request.post = <T = unknown>(url: string, params?: object, headers?: AxiosRequestHeaders): Promise<T> => {
+request.post = <T = unknown>(url: string, params?: object, headers?: AxiosRequestHeaders): Promise<HttpResponse<T>> => {
   return request({
     method: 'post',
     url,
