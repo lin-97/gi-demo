@@ -83,6 +83,7 @@ const relieve = () => {
     flex: 1;
     padding: $padding;
     overflow-y: auto;
+    background: var(--color-bg-2);
   }
   .right {
     width: 100%;

@@ -18,16 +18,16 @@ body {
 }
 
 body[arco-theme='dark'] {
-  --w-e-textarea-bg-color: var(--color-bg-1);
+  --w-e-textarea-bg-color: var(--color-bg-2);
   --w-e-textarea-color: var(--color-text-1);
   --w-e-textarea-border-color: var(--color-border);
   --w-e-textarea-slight-border-color: var(--color-border-2);
   --w-e-textarea-slight-color: var(--color-text-4);
-  --w-e-textarea-slight-bg-color: var(--color-bg-1);
+  --w-e-textarea-slight-bg-color: var(--color-bg-2);
   --w-e-textarea-selected-border-color: var(--color-primary-light-1);
   --w-e-textarea-handler-bg-color: var(--color-primary-light-4);
   --w-e-toolbar-color: #ccc;
-  --w-e-toolbar-bg-color: var(--color-bg-1);
+  --w-e-toolbar-bg-color: var(--color-bg-2);
   --w-e-toolbar-active-color: #fff;
   --w-e-toolbar-active-bg-color: var(--color-secondary-active);
   --w-e-toolbar-disabled-color: var(--color-text-4);
