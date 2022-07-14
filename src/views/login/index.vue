@@ -53,11 +53,11 @@ import { useUserStore } from '@/store'
 import { useLoading } from '@/hooks'
 import { Message } from '@arco-design/web-vue'
 import LoginBg from './components/LoginBg/index.vue'
-import type { LoginData } from '@/apis/user'
+import type { ApiLoginParams } from '@/apis'
 const router = useRouter()
 const userStore = useUserStore()
 
-const form: LoginData = reactive({
+const form: ApiLoginParams = reactive({
   username: 'admin',
   password: '123456'
 })

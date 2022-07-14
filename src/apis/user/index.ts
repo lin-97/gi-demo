@@ -1,12 +1,8 @@
 import axios from '@/utils/axios'
 const prefix = '/mock'
+import type { ApiLoginParams } from './type'
 
-export interface LoginData {
-  username: string
-  password: string
-}
-
-export function login(data: LoginData) {
+export function login(data: ApiLoginParams) {
   return axios.post(`${prefix}/user/login`, data)
 }
 

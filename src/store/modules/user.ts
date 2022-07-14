@@ -1,5 +1,6 @@
 import { defineStore } from 'pinia'
-import { login as userLogin, logout as userLogout, type LoginData } from '@/apis/user'
+import { login as userLogin, logout as userLogout } from '@/apis'
+import type { ApiLoginParams } from '@/apis'
 import { setToken, clearToken } from '@/utils/auth'
 
 export type RoleType = '' | '*' | 'admin' | 'user'
@@ -38,7 +39,7 @@ export const useUserStore = defineStore({
   },
   actions: {
     // 登录
-    async login(loginForm: LoginData) {
+    async login(loginForm: ApiLoginParams) {
       try {
         const res = await userLogin(loginForm)
         setToken(res.data.token)

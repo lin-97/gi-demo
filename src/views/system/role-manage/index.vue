@@ -58,10 +58,11 @@
 import { ref } from 'vue'
 import { Message } from '@arco-design/web-vue'
 import AddRoleModal from './AddRoleModal.vue'
-import { getSystemRoleList, type RoleItem } from '@/apis/system'
+import { getSystemRoleList } from '@/apis'
+import type { ApiRoleItem } from '@/apis'
 
 const loading = ref(false)
-const tableData = ref<RoleItem[]>([])
+const tableData = ref<ApiRoleItem[]>([])
 const total = ref(0)
 const showAddRoleModal = ref(false)
 

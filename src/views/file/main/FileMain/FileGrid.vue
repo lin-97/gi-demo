@@ -41,12 +41,12 @@
 import type { PropType } from 'vue'
 import FileImg from './FileImg.vue'
 import FileRightMenu from './FileRightMenu.vue'
-import type { FileItem } from '@/apis/file'
+import type { ApiFileItem } from '@/apis'
 
 const props = defineProps({
   // 文件数据
   data: {
-    type: Array as PropType<FileItem[]>,
+    type: Array as PropType<ApiFileItem[]>,
     default: () => []
   },
   // 批量模式下选中的文件id数组
@@ -64,22 +64,22 @@ const props = defineProps({
 const emit = defineEmits(['click', 'check', 'right-menu-click'])
 
 // 文件名称带后缀
-const getFileName = (item: FileItem) => {
+const getFileName = (item: ApiFileItem) => {
   return `${item.name}${item.extendName ? `.${item.extendName}` : ''}`
 }
 
 // 点击事件
-const handleClickFile = (item: FileItem) => {
+const handleClickFile = (item: ApiFileItem) => {
   emit('click', item)
 }
 
 // 选中事件
-const handleCheckFile = (item: FileItem) => {
+const handleCheckFile = (item: ApiFileItem) => {
   emit('check', item)
 }
 
 // 右键菜单点击事件
-const handleRightMenuItemClick = (mode: string, item: FileItem) => {
+const handleRightMenuItemClick = (mode: string, item: ApiFileItem) => {
   emit('right-menu-click', mode, item)
 }
 </script>

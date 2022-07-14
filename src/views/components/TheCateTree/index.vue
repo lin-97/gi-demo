@@ -25,7 +25,6 @@
 <script setup lang="ts">
 import { reactive, ref, nextTick } from 'vue'
 import { Modal } from '@arco-design/web-vue'
-
 import { getNewNodeName } from './fn'
 import { data } from './tree'
 import RightMenu from './RightMenu/index'

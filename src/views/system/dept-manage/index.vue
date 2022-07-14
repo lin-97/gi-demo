@@ -81,9 +81,10 @@
 <script setup lang="ts" name="DeptManage">
 import { ref, reactive, nextTick } from 'vue'
 import AddDeptModal from './AddDeptModal.vue'
-import { getSystemDeptList, type DeptItem } from '@/apis/system'
+import { getSystemDeptList } from '@/apis'
+import type { ApiDeptItem } from '@/apis'
 
-const tableData = ref<DeptItem[]>([])
+const tableData = ref<ApiDeptItem[]>([])
 const total = ref(0)
 const loading = ref(false)
 const showAddDeptModal = ref(false)
@@ -123,7 +124,7 @@ const reset = () => {
   form.status = ''
 }
 
-const onAdd = (item?: DeptItem) => {
+const onAdd = (item?: ApiDeptItem) => {
   currentData.value = {}
   if (item) {
     currentData.value.parentId = item.id
@@ -134,7 +135,7 @@ const onAdd = (item?: DeptItem) => {
   }
 }
 
-const onEdit = (item: DeptItem) => {
+const onEdit = (item: ApiDeptItem) => {
   currentData.value = item
   showAddDeptModal.value = true
 }

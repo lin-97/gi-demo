@@ -68,10 +68,11 @@
 import { ref } from 'vue'
 import { Message } from '@arco-design/web-vue'
 import { usePagination } from '@/hooks'
-import { getTableList, type TableItem } from '@/apis/table'
+import { getTableList } from '@/apis'
+import type { ApiTableItem } from '@/apis'
 
 const loading = ref(false)
-const tableData = ref<TableItem[]>([])
+const tableData = ref<ApiTableItem[]>([])
 
 const { current, pageSize, total, changeCurrent, changePageSize, setTotal } = usePagination(() => {
   getTableData()

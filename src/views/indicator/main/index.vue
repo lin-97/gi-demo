@@ -122,7 +122,8 @@ import { Modal, Message } from '@arco-design/web-vue'
 import { usePagination } from '@/hooks'
 import TheCateTree from '@/views/components/TheCateTree/index.vue'
 import EditDialog from './EditDialog.vue'
-import { getTableList, type TableItem } from '@/apis/table'
+import { getTableList } from '@/apis'
+import type { ApiTableItem } from '@/apis'
 
 const router = useRouter()
 
@@ -131,7 +132,7 @@ const { current, pageSize, total, changeCurrent, changePageSize, setTotal } = us
 })
 
 const activeName = ref('2')
-const tableData = ref<TableItem[]>([])
+const tableData = ref<ApiTableItem[]>([])
 const loading = ref(false)
 
 // 比例进度条颜色

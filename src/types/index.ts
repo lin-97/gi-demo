@@ -36,10 +36,13 @@ export interface GeneralChart {
   data: Array<{ name: string; value: number[] }>
 }
 
-export interface Res<T> {
-  code: number
-  msg?: string
-  message?: string
-  success: boolean
-  data: T
+// 菜单项
+export interface MenuItem {
+  id: string
+  name: string
+  icon?: string
+  path?: string
+  children?: MenuItem[]
+  keepAlive?: boolean
+  hidden?: boolean
 }

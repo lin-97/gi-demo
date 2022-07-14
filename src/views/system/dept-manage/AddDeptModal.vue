@@ -54,7 +54,7 @@
 <script setup lang="ts">
 import { reactive, watch, computed, type PropType } from 'vue'
 import { useVModel } from '@vueuse/core'
-import type { DeptItem } from '@/apis/system'
+import type { ApiDeptItem } from '@/apis'
 
 const props = defineProps({
   // 绑定的值
@@ -69,7 +69,7 @@ const props = defineProps({
   },
   // 当前部门
   currentData: {
-    type: Object as PropType<DeptItem>,
+    type: Object as PropType<ApiDeptItem>,
     default: () => {}
   }
 })

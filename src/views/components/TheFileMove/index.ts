@@ -2,9 +2,9 @@ import { createApp } from 'vue'
 import ArcoVueIcon from '@arco-design/web-vue/es/icon'
 import ArcoVue from '@arco-design/web-vue'
 import Dialog from './Dialog.vue'
-import type { FileItem } from '@/apis/file'
+import type { ApiFileItem } from '@/apis'
 
-function handleMoveFile(fileInfo: FileItem) {
+function handleMoveFile(fileInfo: ApiFileItem) {
   // 创建一个挂载容器
   const dom: HTMLElement = document.createElement('div')
   // 挂载组件

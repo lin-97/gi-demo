@@ -121,17 +121,18 @@
 <script setup lang="ts" name="UserManage">
 import { ref, nextTick } from 'vue'
 import { usePagination } from '@/hooks'
-import { getSystemDeptList, getSystemUserList, type UserItem, type DeptItem } from '@/apis/system'
+import { getSystemDeptList, getSystemUserList } from '@/apis'
+import type { ApiUserItem, ApiDeptItem } from '@/apis'
 import AddUserModal from './AddUserModal.vue'
 
 const treeLoading = ref(false)
-const treeData = ref<DeptItem[]>([])
+const treeData = ref<ApiDeptItem[]>([])
 const treeInputValue = ref('')
 const treeRef = ref(null)
 const showAddUserModal = ref(false)
 
 const loading = ref(false)
-const tableData = ref<UserItem[]>([])
+const tableData = ref<ApiUserItem[]>([])
 
 const { current, pageSize, total, changeCurrent, changePageSize, setTotal } = usePagination(() => {
   getTableData()
@@ -160,10 +161,7 @@ getTreeData()
 const getTableData = async () => {
   try {
     loading.value = true
-    const res = await getSystemUserList({
-      current: current.value,
-      pageSize: pageSize.value
-    })
+    const res = await getSystemUserList()
     if (res.success) {
       tableData.value = res.data.list
       setTotal(res.data.total)

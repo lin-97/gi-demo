@@ -2,12 +2,12 @@ import { createApp } from 'vue'
 import Dialog from './Dialog.vue'
 import ArcoVueIcon from '@arco-design/web-vue/es/icon'
 import ArcoVue from '@arco-design/web-vue'
-import type { FileItem } from '@/apis/file'
+import type { ApiFileItem } from '@/apis'
 
 let instance: any = null
 let dom: HTMLElement | null = null
 
-function previewVideo(fileInfo: FileItem) {
+function previewVideo(fileInfo: ApiFileItem) {
   if (instance !== null) {
     instance.unmount()
   }
