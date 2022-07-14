@@ -6,7 +6,7 @@
       <a-row justify="center">
         <ColorPicker
           theme="dark"
-          :color="themeStore.themeColor"
+          :color="appStore.themeColor"
           :sucker-hide="true"
           :colors-default="defaultColorList"
           @changeColor="changeColor"
@@ -17,15 +17,15 @@
 
       <a-row justify="space-between" align="center">
         <span class="label">页签显示</span>
-        <a-switch size="medium" :model-value="themeStore.tab" @change="themeStore.setTabVisible($event)" />
+        <a-switch size="medium" :model-value="appStore.tab" @change="appStore.setTabVisible($event)" />
       </a-row>
 
       <a-row justify="space-between" align="center">
         <span class="label">页签风格</span>
         <a-select
           placeholder="请选择"
-          :model-value="themeStore.tabMode"
-          :disabled="!themeStore.tab"
+          :model-value="appStore.tabMode"
+          :disabled="!appStore.tab"
           :style="{ width: '120px' }"
           :trigger-props="{ autoFitPopupMinWidth: true }"
         >
@@ -33,7 +33,7 @@
             v-for="item in tabModeList"
             :key="item.value"
             :value="item.value"
-            @click="themeStore.setTabMode(item.value)"
+            @click="appStore.setTabMode(item.value)"
             >{{ item.label }}</a-option
           >
         </a-select>
@@ -41,22 +41,22 @@
 
       <a-row justify="space-between" align="center">
         <span class="label">动画显示</span>
-        <a-switch size="medium" :model-value="themeStore.animate" @change="themeStore.setAnimateVisible($event)" />
+        <a-switch size="medium" :model-value="appStore.animate" @change="appStore.setAnimateVisible($event)" />
       </a-row>
 
       <a-row justify="space-between" align="center">
         <span class="label">动画切换类型</span>
         <a-select
           placeholder="请选择"
-          :model-value="themeStore.animateMode"
-          :disabled="!themeStore.animate"
+          :model-value="appStore.animateMode"
+          :disabled="!appStore.animate"
           :style="{ width: '120px' }"
         >
           <a-option
             v-for="item in animateModeList"
             :key="item.value"
             :value="item.value"
-            @click="themeStore.setAnimateMode(item.value)"
+            @click="appStore.setAnimateMode(item.value)"
             >{{ item.label }}</a-option
           >
         </a-select>
@@ -66,13 +66,13 @@
 </template>
 
 <script setup lang="ts" name="SettingDrawer">
-import { useThemeStore } from '@/store'
+import { useAppStore } from '@/store'
 import { ColorPicker } from 'vue-color-kit'
 import 'vue-color-kit/dist/vue-color-kit.css'
 import { useVModel } from '@vueuse/core'
 import { tabModeList, animateModeList } from '@/config/option'
 
-const themeStore = useThemeStore()
+const appStore = useAppStore()
 
 const props = defineProps({
   modelValue: {
@@ -112,14 +112,20 @@ const defaultColorList = [
   '#546e7a'
 ]
 
-if (themeStore.themeColor) {
-  themeStore.changeThemeColor(themeStore.themeColor)
+if (appStore.themeColor) {
+  appStore.changeThemeColor(appStore.themeColor)
 }
 
-const changeColor = (colorObj: any) => {
+type ColorObj = {
+  hex: string
+  hsv: { h: number; s: number; v: number }
+  rgba: { r: number; g: number; b: number; a: number }
+}
+
+const changeColor = (colorObj: ColorObj) => {
   if (!/^#[0-9A-Za-z]{6}/.test(colorObj.hex)) return
-  themeStore.setThemeColor(colorObj.hex)
-  themeStore.changeThemeColor(themeStore.themeColor)
+  appStore.setThemeColor(colorObj.hex)
+  appStore.changeThemeColor(appStore.themeColor)
 }
 </script>
 

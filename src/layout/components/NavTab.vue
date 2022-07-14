@@ -1,10 +1,10 @@
 <template>
-  <div class="nav-tab" v-if="themeStore.tab">
+  <div class="nav-tab" v-if="appStore.tab">
     <a-tabs
       editable
       hide-content
       size="medium"
-      :type="themeStore.tabMode"
+      :type="appStore.tabMode"
       :active-key="route.path"
       @tab-click="onClick"
       @delete="onClose"
@@ -46,13 +46,13 @@
 <script setup lang="ts" name="NavTab">
 import { watch, onMounted } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
-import { useNavTabStore, useThemeStore } from '@/store'
+import { useNavTabStore, useAppStore } from '@/store'
 import type { NavTabItem } from './type'
 
 const route = useRoute()
 const router = useRouter()
 const navtabStore = useNavTabStore()
-const themeStore = useThemeStore()
+const appStore = useAppStore()
 
 onMounted(() => {
   handleNavTab()

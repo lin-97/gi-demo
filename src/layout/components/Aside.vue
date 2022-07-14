@@ -12,7 +12,7 @@
 </template>
 
 <script setup lang="ts" name="Aside">
-import { ref, onMounted, watch } from 'vue'
+import { ref, watch } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import { useMenuStore } from '@/store'
 import MenuItem from './MenuItem.vue'
@@ -41,19 +41,14 @@ const getMenuKeys = (params: IMenuItem[]) => {
 const activeKey = ref('/home')
 const menuKeyList = getMenuKeys(menuStore.menuTree)
 
-onMounted(() => {
-  if (menuKeyList.includes(route.path)) {
-    activeKey.value = route.path
-  }
-})
-
 watch(
   () => route.path,
   () => {
     if (menuKeyList.includes(route.path)) {
       activeKey.value = route.path
     }
-  }
+  },
+  { immediate: true }
 )
 
 const handleClickItem = (item: IMenuItem) => {

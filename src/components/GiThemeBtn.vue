@@ -1,7 +1,7 @@
 <template>
   <a-button size="mini" class="gi_hover_btn" @click="handleToggleTheme">
     <template #icon>
-      <icon-sun-fill :size="18" v-if="themeStore.theme === 'light'"></icon-sun-fill>
+      <icon-sun-fill :size="18" v-if="appStore.theme === 'light'"></icon-sun-fill>
       <icon-moon-fill :size="18" v-else></icon-moon-fill>
     </template>
   </a-button>
@@ -9,9 +9,9 @@
 
 <script setup lang="ts" name="GiThemeBtn">
 import { useDark, useToggle } from '@vueuse/core'
-import { useThemeStore } from '@/store'
+import { useAppStore } from '@/store'
 
-const themeStore = useThemeStore()
+const appStore = useAppStore()
 
 const isDark = useDark({
   selector: 'body',
@@ -20,7 +20,7 @@ const isDark = useDark({
   valueLight: 'light',
   storageKey: 'arco-theme',
   onChanged(dark: boolean) {
-    themeStore.toggleTheme(dark)
+    appStore.toggleTheme(dark)
   }
 })
 const toggleTheme = useToggle(isDark)
