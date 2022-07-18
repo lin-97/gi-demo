@@ -195,7 +195,7 @@ getTableData()
     display: flex;
     flex-direction: column;
     .content {
-      left: 1;
+      flex: 1;
       padding: $padding;
       padding-top: 12px;
       overflow: hidden;

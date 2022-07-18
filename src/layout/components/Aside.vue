@@ -80,7 +80,4 @@ const handleClickItem = (item: IMenuItem) => {
     display: none;
   }
 }
-.aside {
-  z-index: 999;
-}
 </style>
