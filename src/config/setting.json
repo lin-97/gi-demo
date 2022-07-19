@@ -9,6 +9,6 @@
   "menuCollapse": false,
   "tab": true,
   "tabMode": "card",
-  "animate": false,
+  "animate": true,
   "animateMode": "zoom-fade"
 }
