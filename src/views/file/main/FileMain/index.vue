@@ -169,9 +169,17 @@ const handleClickFile = (item: ApiFileItem) => {
   Message.success(`点击了文件-${item.name}`)
   if (imageTypeList.includes(item.extendName)) {
     if (item.src) {
-      viewerApi({
-        images: [item.src]
-      })
+      const imgList: string[] =
+        fileList.value && fileList.value.filter((i) => imageTypeList.includes(i.extendName)).map((a) => a.src)
+      const index = imgList.findIndex((i) => i === item.src)
+      if (imgList.length) {
+        viewerApi({
+          options: {
+            initialViewIndex: index
+          },
+          images: imgList
+        })
+      }
     }
   }
   if (item.extendName === 'mp4') {
