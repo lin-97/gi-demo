@@ -1,0 +1,1 @@
+import{r as n}from"./index.64ef6439.js";function s(a,i={defaultPageSize:10}){const t=n(1),u=n(i.defaultPageSize),o=n(0);function r(e){t.value=e,a()}function c(e){t.value=1,u.value=e,a()}function f(e){o.value=e}return{current:t,pageSize:u,total:o,changeCurrent:r,changePageSize:c,setTotal:f}}export{s as u};

@@ -1,10 +1,12 @@
 <template>
   <div class="test">
     <section class="left">
-      <GiTitle title="组件示例" style="margin-bottom: 14px; padding: 0"></GiTitle>
-      <a-tabs position="left" hide-content v-model:active-key="selectedKey">
-        <a-tab-pane :title="item.name" v-for="(item, index) in menuList" :key="index"></a-tab-pane>
-      </a-tabs>
+      <GiTitle title="组件示例" style="padding: 0"></GiTitle>
+      <div class="tab-box">
+        <a-tabs position="left" hide-content v-model:active-key="selectedKey">
+          <a-tab-pane :title="item.name" v-for="(item, index) in menuList" :key="index"></a-tab-pane>
+        </a-tabs>
+      </div>
     </section>
 
     <section class="content">
@@ -31,6 +33,7 @@ import Area from './components/Area.vue'
 import Json from './components/Json.vue'
 import Editor from './components/Editor.vue'
 import Loading from './components/Loading.vue'
+import ImagePreview from './components/ImagePreview.vue'
 
 const selectedKey = ref(0)
 
@@ -47,7 +50,8 @@ const menuList = ref([
   { name: 'Flex布局', value: markRaw(Flex) },
   { name: '省市区', value: markRaw(Area) },
   { name: 'JSON查看', value: markRaw(Json) },
-  { name: '富文本', value: markRaw(Editor) }
+  { name: '富文本', value: markRaw(Editor) },
+  { name: '美化图片预览', value: markRaw(ImagePreview) }
 ])
 </script>
 
@@ -92,7 +96,13 @@ const menuList = ref([
     background: var(--color-bg-1);
     box-sizing: border-box;
     border-radius: 2px;
-    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    .tab-box {
+      flex: 1;
+      overflow-y: auto;
+      padding-top: 12px;
+    }
   }
   .content {
     flex: 1;
