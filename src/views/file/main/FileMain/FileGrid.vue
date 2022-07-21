@@ -1,10 +1,10 @@
 <template>
   <ul class="file-grid">
     <a-trigger
-      trigger="contextMenu"
-      align-point
       v-for="item in data"
       :key="item.id"
+      trigger="contextMenu"
+      align-point
       animation-name="slide-dynamic-origin"
       auto-fit-transform-origin
       position="bl"

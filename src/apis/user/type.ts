@@ -1,4 +1,4 @@
-export interface ApiLoginParams {
+export interface UserLoginParams {
   username: string
   password: string
 }

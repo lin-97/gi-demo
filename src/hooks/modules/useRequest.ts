@@ -1,6 +1,6 @@
 import { ref, type UnwrapRef } from 'vue'
 import type { AxiosResponse } from 'axios'
-import type { HttpResponse } from '@/utils/axios'
+import type { HttpResponse } from '@/utils/http'
 import useLoading from './useLoading'
 
 export default function useRequest<T>(

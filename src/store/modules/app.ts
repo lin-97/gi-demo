@@ -1,5 +1,4 @@
 import { defineStore } from 'pinia'
-import dayjs from 'dayjs'
 import { generate, getRgbStr } from '@arco-design/color'
 import defaultSettings from '@/config/setting.json'
 import type { TabModeType, animateModeType } from '@/config/option'
@@ -29,10 +28,10 @@ export const useAppStore = defineStore({
       ...defaultSettings,
       ...ThemeStorage,
       systemName: 'Admin Pro', // 系统名称
-      time: '' // 当前日期时间
     }
   },
   getters: {
+    // 页面切换动画类名
     transitionName(): string {
       return this.animate ? this.animateMode : ''
     }
@@ -84,13 +83,6 @@ export const useAppStore = defineStore({
     setAnimateMode(mode: animateModeType) {
       this.animateMode = mode
       localStorage.setItem('Theme', JSON.stringify(this.$state))
-    },
-    // 初始化时间
-    initTime() {
-      const weekList = ['日', '一', '二', '三', '四', '五', '六']
-      setInterval(() => {
-        this.time = `${dayjs(new Date()).format('YYYY年MM月DD日 HH:mm:ss')} 星期${weekList[dayjs(new Date()).day()]}`
-      }, 1000)
     }
   }
 })

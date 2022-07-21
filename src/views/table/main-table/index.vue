@@ -78,18 +78,18 @@
         @page-size-change="changePageSize"
       >
         <template #columns>
-          <a-table-column title="序号" :width="68">
+          <a-table-column title="序号" :width="66" align="center">
             <template #cell="cell">{{ cell.rowIndex + 1 }}</template>
           </a-table-column>
-          <a-table-column title="姓名" data-index="name" :width="150"></a-table-column>
-          <a-table-column title="头像" :width="100">
+          <a-table-column title="姓名" data-index="name" :width="120"></a-table-column>
+          <a-table-column title="头像" :width="80">
             <template #cell="{ record }">
               <a-avatar :size="30" :style="{ backgroundColor: record.color }">{{ record.name[0] }}</a-avatar>
             </template>
           </a-table-column>
           <a-table-column title="手机号" data-index="phone" :width="150"></a-table-column>
-          <a-table-column title="创建时间" data-index="startTime"></a-table-column>
-          <a-table-column title="地址" data-index="address"></a-table-column>
+          <a-table-column title="创建时间" data-index="startTime" ellipsis tooltip></a-table-column>
+          <a-table-column title="地址" data-index="address" ellipsis tooltip></a-table-column>
           <a-table-column title="状态" :width="100">
             <template #cell="{ record }">
               <a-switch :model-value="record.status" size="medium" checked-color="rgb(var(--success-6))">
@@ -194,10 +194,14 @@ getTableData()
   flex-direction: column;
   .form {
     margin-top: 12px;
+    :deep(.arco-form-item) {
+      margin-bottom: 10px;
+    }
   }
   .table-box {
     flex: 1;
     overflow: hidden;
+    margin-top: 12px;
   }
 }
 </style>

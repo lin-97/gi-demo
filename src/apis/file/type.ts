@@ -11,4 +11,4 @@ export interface ApiFileItem {
   [propName: string]: any // 一个 interface 中任意属性只能有一个
 }
 
-export type GetFileListParams = { fileType: string | number }
+export type FileListParams = { fileType: string | number }

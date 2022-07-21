@@ -2,7 +2,7 @@
   <div class="gi-table" :class="{ fullscreen: isFullscreen }" ref="giTableRef">
     <a-row justify="space-between">
       <a-space>
-        <slot name="left"></slot>
+        <slot name="custom-extra"></slot>
       </a-space>
       <a-space :size="15">
         <a-tooltip content="斑马纹">

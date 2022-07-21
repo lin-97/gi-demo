@@ -4,9 +4,4 @@
   </a-config-provider>
 </template>
 
-<script setup lang="ts" name="App">
-import { useAppStore } from '@/store'
-const appStore = useAppStore()
-
-appStore.initTime()
-</script>
+<script setup lang="ts" name="App"></script>

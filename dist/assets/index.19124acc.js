@@ -1,0 +1,1 @@
+import{eC as t}from"./index.b2a0c0c7.js";const e="/mock";function r(){return t.get(`${e}/system/dept/list`)}function i(){return t.get(`${e}/system/user/list`)}function n(){return t.get(`${e}/system/role/list`)}export{i as a,n as b,r as g};

@@ -1,10 +1,10 @@
-import axios from '@/utils/axios'
+import http from '@/utils/http'
 const prefix = '/mock'
 import type { Pagination } from '@/types'
 import type { ApiListData } from '../type'
 import type { ApiTableItem } from './type'
 
-// 获取表格
+/** @desc 获取表格 */
 export function getTableList(data: Pagination) {
-  return axios.get<ApiListData<ApiTableItem>>(`${prefix}/table/list`, data)
+  return http.get<ApiListData<ApiTableItem[]>>(`${prefix}/table/list`, data)
 }

@@ -3,7 +3,6 @@ import { successResponseWrap } from './mock'
 const list = [
   {
     id: '001',
-    type: 'files',
     name: '文件夹',
     extendName: '',
     src: null,
@@ -13,7 +12,6 @@ const list = [
   },
   {
     id: '002',
-    type: 'files',
     name: '文件夹1',
     extendName: '',
     src: null,
@@ -23,7 +21,6 @@ const list = [
   },
   {
     id: '003',
-    type: 'file',
     name: '哈哈',
     extendName: 'doc',
     src: null,
@@ -33,7 +30,6 @@ const list = [
   },
   {
     id: '004',
-    type: 'file',
     name: '致你-予星',
     extendName: 'mp3',
     src: 'https://webfs.ali.kugou.com/202205080014/0b56ab5801cafaaf59d94eb86622e826/part/0/960111/KGTX/CLTX001/2ee15e52cecb80545bcaf91431a73dc8.mp3',
@@ -43,7 +39,6 @@ const list = [
   },
   {
     id: '094',
-    type: 'file',
     name: '摇滚-电音',
     extendName: 'mp3',
     src: 'http://music.163.com/song/media/outer/url?id=447925558.mp3',
@@ -53,7 +48,6 @@ const list = [
   },
   {
     id: '005',
-    type: 'file',
     name: '视频',
     extendName: 'mp4',
     src: '//lf9-cdn-tos.bytecdntp.com/cdn/expire-1-M/byted-player-videos/1.0.0/xgplayer-demo.mp4',
@@ -63,7 +57,6 @@ const list = [
   },
   {
     id: '006',
-    type: 'file',
     name: '压缩包',
     extendName: 'zip',
     src: null,
@@ -73,7 +66,6 @@ const list = [
   },
   {
     id: '007',
-    type: 'file',
     name: '项目',
     extendName: 'rar',
     src: null,
@@ -83,7 +75,6 @@ const list = [
   },
   {
     id: '008',
-    type: 'file',
     name: '数据表格',
     extendName: 'xls',
     src: null,
@@ -93,7 +84,6 @@ const list = [
   },
   {
     id: '009',
-    type: 'file',
     name: 'PPT演示',
     extendName: 'ppt',
     src: null,
@@ -103,7 +93,6 @@ const list = [
   },
   {
     id: '010',
-    type: 'file',
     name: '文本',
     extendName: 'txt',
     src: null,
@@ -113,7 +102,6 @@ const list = [
   },
   {
     id: '011',
-    type: 'file',
     name: '未知文件',
     extendName: '',
     src: null,
@@ -123,7 +111,6 @@ const list = [
   },
   {
     id: '012',
-    type: 'file',
     name: '首页',
     extendName: 'html',
     src: null,
@@ -132,7 +119,6 @@ const list = [
   },
   {
     id: '013',
-    type: 'file',
     name: '样式',
     extendName: 'css',
     src: null,
@@ -142,7 +128,6 @@ const list = [
   },
   {
     id: '014',
-    type: 'file',
     name: '代码',
     extendName: 'js',
     src: null,
@@ -152,7 +137,6 @@ const list = [
   },
   {
     id: '106',
-    type: 'file',
     name: '图片',
     extendName: 'png',
     src: 'https://img0.baidu.com/it/u=2746352008,2041591833&fm=253&fmt=auto&app=138&f=JPEG?w=360&h=360',
@@ -162,7 +146,6 @@ const list = [
   },
   {
     id: '107',
-    type: 'file',
     name: '头像',
     extendName: 'png',
     src: 'https://img2.baidu.com/it/u=304294273,3088990845&fm=253&fmt=auto&app=138&f=JPEG?w=400&h=400',
@@ -172,7 +155,6 @@ const list = [
   },
   {
     id: '108',
-    type: 'file',
     name: '头像1',
     extendName: 'png',
     src: 'https://img0.baidu.com/it/u=3745738950,3664021749&fm=253&fmt=auto&app=138&f=JPEG?w=500&h=500',
@@ -182,7 +164,6 @@ const list = [
   },
   {
     id: '109',
-    type: 'file',
     name: '头像2',
     extendName: 'png',
     src: 'https://img1.baidu.com/it/u=1817951587,3188870642&fm=253&fmt=auto&app=138&f=JPEG?w=500&h=500',
@@ -192,7 +173,6 @@ const list = [
   },
   {
     id: '110',
-    type: 'file',
     name: '头像3',
     extendName: 'png',
     src: 'https://s1.ax1x.com/2022/06/14/XhYkqS.jpg',
@@ -202,7 +182,6 @@ const list = [
   },
   {
     id: '111',
-    type: 'file',
     name: '头像4',
     extendName: 'png',
     src: 'https://s1.ax1x.com/2022/06/14/XhYJIJ.jpg',
@@ -212,7 +191,6 @@ const list = [
   },
   {
     id: '112',
-    type: 'file',
     name: '头像5',
     extendName: 'png',
     src: 'https://s1.ax1x.com/2022/06/14/XhYyIH.jpg',
@@ -222,7 +200,6 @@ const list = [
   },
   {
     id: '113',
-    type: 'file',
     name: '头像6',
     extendName: 'png',
     src: 'https://s1.ax1x.com/2022/06/14/XhtSwF.jpg',
@@ -232,7 +209,6 @@ const list = [
   },
   {
     id: '114',
-    type: 'file',
     name: '头像7',
     extendName: 'png',
     src: 'https://s1.ax1x.com/2022/06/14/XhteeO.jpg',
@@ -242,7 +218,6 @@ const list = [
   },
   {
     id: '115',
-    type: 'file',
     name: '头像8',
     extendName: 'png',
     src: 'https://s1.ax1x.com/2022/06/14/XhtakQ.jpg',
@@ -252,7 +227,6 @@ const list = [
   },
   {
     id: '120',
-    type: 'file',
     name: '头像9',
     extendName: 'png',
     src: 'https://s1.ax1x.com/2022/05/07/Ol2fkF.jpg',
@@ -262,7 +236,6 @@ const list = [
   },
   {
     id: '120',
-    type: 'file',
     name: '摄影-校园',
     extendName: 'png',
     src: 'https://s1.ax1x.com/2022/06/14/Xht7nK.jpg',
@@ -272,7 +245,6 @@ const list = [
   },
   {
     id: '121',
-    type: 'file',
     name: '摄影-校园2',
     extendName: 'png',
     src: 'https://s1.ax1x.com/2022/06/14/XhNUu6.jpg',
@@ -282,7 +254,6 @@ const list = [
   },
   {
     id: '122',
-    type: 'file',
     name: '摄影-校园3',
     extendName: 'png',
     src: 'https://s1.ax1x.com/2022/06/14/XhNRDf.jpg',
@@ -292,7 +263,6 @@ const list = [
   },
   {
     id: '123',
-    type: 'file',
     name: '摄影-花',
     extendName: 'png',
     src: 'https://s1.ax1x.com/2022/06/14/XhNlEF.jpg',
@@ -302,7 +272,6 @@ const list = [
   },
   {
     id: '124',
-    type: 'file',
     name: '摄影-01',
     extendName: 'png',
     src: 'https://s1.ax1x.com/2022/06/14/XhUuRA.jpg',
@@ -312,7 +281,6 @@ const list = [
   },
   {
     id: '125',
-    type: 'file',
     name: '摄影-02',
     extendName: 'png',
     src: 'https://s1.ax1x.com/2022/06/14/XhU8Z8.jpg',
@@ -322,7 +290,6 @@ const list = [
   },
   {
     id: '126',
-    type: 'file',
     name: '图片01',
     extendName: 'png',
     src: 'https://s1.ax1x.com/2022/06/15/Xoherq.jpg',
@@ -332,7 +299,6 @@ const list = [
   },
   {
     id: '127',
-    type: 'file',
     name: '图片02',
     extendName: 'png',
     src: 'https://s1.ax1x.com/2022/06/15/XohKaT.jpg',
@@ -342,7 +308,6 @@ const list = [
   },
   {
     id: '128',
-    type: 'file',
     name: '图片03',
     extendName: 'png',
     src: 'https://s1.ax1x.com/2022/06/15/Xoh1G4.jpg',

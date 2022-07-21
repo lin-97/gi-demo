@@ -1,8 +1,7 @@
 // 分页
-export interface Pagination {
+export type Pagination = {
   current: number
   pageSize: number
-  total?: number
 }
 
 // 菜单项

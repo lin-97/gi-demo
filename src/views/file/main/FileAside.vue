@@ -11,9 +11,9 @@
           <icon-apps></icon-apps>
         </template>
         <template #title>文件类型</template>
-        <a-menu-item :key="item.key" v-for="item in fileTypeList" @click="onClickMenuItem(item)">
+        <a-menu-item :key="item.value.toString()" v-for="item in fileTypeList" @click="onClickMenuItem(item)">
           <template #icon>
-            <GiSvgIcon :size="28" :name="item.icon"></GiSvgIcon>
+            <GiSvgIcon :size="28" :name="item.menuIcon"></GiSvgIcon>
           </template>
           <span>{{ item.name }}</span>
         </a-menu-item>
@@ -26,42 +26,28 @@
 import { ref, watch } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import { useWindowSize } from '@vueuse/core'
+import { fileTypeList, type fileTypeListItem } from '@/libs/file-map'
 const route = useRoute()
 const router = useRouter()
 
 const { width: windowWidth } = useWindowSize()
 
-interface FileTypeListItem {
-  key: string
-  name: string
-  icon: string
-}
-
-const fileTypeList = ref<FileTypeListItem[]>([
-  { key: '0', name: '全部', icon: 'menu-file' },
-  { key: '1', name: '图片', icon: 'file-image' },
-  { key: '2', name: '文档', icon: 'file-txt' },
-  { key: '3', name: '视频', icon: 'file-video' },
-  { key: '4', name: '音乐', icon: 'file-music' },
-  { key: '5', name: '其他', icon: 'file-other' }
-])
-
-const currentKey = ref<unknown>('0')
+const currentKey = ref(0)
 
 // 监听路由变化
 watch(
   () => route.query,
   () => {
-    currentKey.value = route.query.fileType
+    currentKey.value = Number(route.query.fileType)
   },
   {
     immediate: true
   }
 )
 
-const onClickMenuItem = (item: FileTypeListItem) => {
-  console.log(route)
-  router.push({ path: '/file', query: { fileType: item.key } })
+// 点击事件
+const onClickMenuItem = (item: fileTypeListItem) => {
+  router.push({ path: '/file', query: { fileType: item.value } })
 }
 </script>
 

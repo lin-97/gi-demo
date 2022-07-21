@@ -7,7 +7,7 @@
           <span>{{ item.name }}</span>
         </div>
         <p class="text">{{ item.text }}</p>
-        <p>{{ item.time }}</p>
+        <p class="desc">{{ item.time }}</p>
       </li>
     </ul>
   </a-card>
@@ -29,7 +29,7 @@ const list = [
   },
   {
     name: 'Html5',
-    text: 'HTML5是互联网的下一代标准。',
+    text: 'HTML5是互联网的下一代标准',
     time: '撸码也是一种艺术 2021-04-01',
     icon: 'item-html5'
   },
@@ -86,6 +86,9 @@ const list = [
     .text {
       margin-top: 10px;
       height: 50px;
+    }
+    .desc {
+      font-size: 12px;
     }
   }
 }

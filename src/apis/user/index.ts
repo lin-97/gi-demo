@@ -1,11 +1,13 @@
-import axios from '@/utils/axios'
+import axios from '@/utils/http'
 const prefix = '/mock'
-import type { ApiLoginParams } from './type'
+import type { UserLoginParams } from './type'
 
-export function login(data: ApiLoginParams) {
+/** @desc 登录 */
+export function login(data: UserLoginParams) {
   return axios.post(`${prefix}/user/login`, data)
 }
 
+/** @desc 退出登录 */
 export function logout() {
   return axios.post(`${prefix}/user/logout`)
 }

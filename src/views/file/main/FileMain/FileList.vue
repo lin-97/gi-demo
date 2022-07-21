@@ -50,13 +50,6 @@
                 ></FileRightMenu>
               </template>
             </a-popover>
-
-            <!-- <a-trigger trigger="click" animation-name="slide-dynamic-origin" update-at-scroll>
-              <a-button type="text"><icon-more :size="16" /></a-button>
-              <template #content>
-                <FileRightMenu :file-info="record" @click="handleRightMenuItemClick($event, record)"></FileRightMenu>
-              </template>
-            </a-trigger> -->
           </template>
         </a-table-column>
       </template>

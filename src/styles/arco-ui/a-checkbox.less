@@ -14,6 +14,7 @@
     position: relative;
     display: inline-block;
     box-sizing: border-box;
+    background-color: transparent;
     transition: border-color 0.25s cubic-bezier(0.71, -0.46, 0.29, 1.46),
       background-color 0.25s cubic-bezier(0.71, -0.46, 0.29, 1.46);
     &::before {
@@ -58,6 +59,7 @@
 
 .arco-checkbox-checked {
   .arco-checkbox-icon {
+    background-color: rgb(var(--primary-6));
     &::before {
       display: none;
     }
@@ -72,8 +74,10 @@
   border-color: rgb(var(--primary-6));
 }
 
+.arco-checkbox-disabled .arco-checkbox-icon,
 .arco-checkbox-disabled:hover .arco-checkbox-icon {
   border-color: var(--color-fill-3);
+  background-color: var(--color-fill-2);
 }
 
 .arco-checkbox:hover .arco-checkbox-icon-hover:not(.arco-icon-hover-disabled):before,
