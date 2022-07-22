@@ -83,28 +83,26 @@
 
     <!-- 文件列表-宫格模式 -->
     <section class="file-wrap" v-loading="loading">
-      <template v-if="fileList.length && fileStore.viewMode == 'grid'">
-        <FileGrid
-          :data="fileList"
-          :isBatchMode="isBatchMode"
-          :selectedFileIdList="fileStore.selectedFileIdList"
-          @click="handleClickFile"
-          @check="handleCheckFile"
-          @right-menu-click="handleRightMenuClick"
-        ></FileGrid>
-      </template>
+      <FileGrid
+        v-show="fileList.length && fileStore.viewMode == 'grid'"
+        :data="fileList"
+        :isBatchMode="isBatchMode"
+        :selectedFileIdList="fileStore.selectedFileIdList"
+        @click="handleClickFile"
+        @check="handleCheckFile"
+        @right-menu-click="handleRightMenuClick"
+      ></FileGrid>
 
-      <template v-else-if="fileList.length && fileStore.viewMode == 'list'">
-        <!-- 文件列表-列表模式 -->
-        <FileList
-          :data="fileList"
-          :isBatchMode="isBatchMode"
-          @click="handleClickFile"
-          @right-menu-click="handleRightMenuClick"
-        ></FileList>
-      </template>
+      <!-- 文件列表-列表模式 -->
+      <FileList
+        v-show="fileList.length && fileStore.viewMode == 'list'"
+        :data="fileList"
+        :isBatchMode="isBatchMode"
+        @click="handleClickFile"
+        @right-menu-click="handleRightMenuClick"
+      ></FileList>
 
-      <a-empty v-else></a-empty>
+      <a-empty v-show="!fileList.length"></a-empty>
     </section>
   </div>
 </template>
@@ -137,7 +135,7 @@ const loading = ref(false)
 // 文件列表数据
 const fileList = ref<ApiFileItem[]>([])
 const fileType = ref('0')
-fileType.value = route.query.fileType || '0'
+fileType.value = route.query.fileType?.toString() || '0'
 
 const getListData = async () => {
   try {
@@ -157,7 +155,8 @@ onMounted(() => {
 })
 
 onBeforeRouteUpdate((to) => {
-  fileType.value = to.query.fileType
+  if (!to.query.fileType) return
+  fileType.value = to.query.fileType?.toString()
   getListData()
 })
 
@@ -169,8 +168,9 @@ const handleClickFile = (item: ApiFileItem) => {
   Message.success(`点击了文件-${item.name}`)
   if (imageTypeList.includes(item.extendName)) {
     if (item.src) {
-      const imgList: string[] =
-        fileList.value && fileList.value.filter((i) => imageTypeList.includes(i.extendName)).map((a) => a.src)
+      const imgList: string[] = fileList.value
+        .filter((i) => imageTypeList.includes(i.extendName))
+        .map((a) => a.src || '')
       const index = imgList.findIndex((i) => i === item.src)
       if (imgList.length) {
         viewerApi({
