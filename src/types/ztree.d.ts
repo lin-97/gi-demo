@@ -9,7 +9,7 @@ declare namespace ZTree {
 
   interface ITreeNode {
     checked?: boolean
-    children?: Array<ITreeNode>
+    children?: Array<ITreeNode> | null
     chkDisabled?: boolean
     click?: CallBackOnFn
     getCheckStatus?: () => object

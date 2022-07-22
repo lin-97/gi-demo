@@ -32,13 +32,15 @@ const router = useRouter()
 
 const { width: windowWidth } = useWindowSize()
 
-const currentKey = ref(0)
+const currentKey = ref('0')
 
 // 监听路由变化
 watch(
   () => route.query,
   () => {
-    currentKey.value = Number(route.query.fileType)
+    if (route.query.fileType) {
+      currentKey.value = route.query.fileType.toString()
+    }
   },
   {
     immediate: true

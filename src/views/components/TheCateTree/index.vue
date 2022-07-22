@@ -219,7 +219,7 @@ const handleInput = () => {
   console.log('value', value)
   if (!value) {
     treeObj.value = $.fn.zTree.init($('#treeDemo'), treeSetting, treeData.value)
-    treeObj.value.expandAll(true)
+    treeObj.value?.expandAll(true)
   } else {
     const arr = JSON.parse(JSON.stringify(treeData.value))
     for (let i = 0; i < arr.length; i++) {
@@ -229,7 +229,7 @@ const handleInput = () => {
     }
     console.log('arr', arr)
     treeObj.value = $.fn.zTree.init($('#treeDemo'), treeSetting, arr)
-    treeObj.value.expandAll(true)
+    treeObj.value?.expandAll(true)
   }
 }
 </script>

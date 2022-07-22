@@ -13,10 +13,17 @@
   color: #fff;
 }
 
-.arco-image-preview-img-container,
-.arco-image-preview-img-container .arco-image-preview-img {
+.arco-image-preview-img-container {
   transition: all 0.3s;
   animation: image-fade-in 0.36s;
+}
+
+.arco-image-preview-img-container .arco-image-preview-img {
+  transition: all 0.38s;
+  animation: image-fade-in 0.36s;
+  &:active {
+    transition: none;
+  }
 }
 
 .arco-image-preview-close-btn {
