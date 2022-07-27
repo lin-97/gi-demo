@@ -16,7 +16,6 @@ interface ThemeState {
   tabMode: TabModeType
   animate: boolean
   animateMode: animateModeType
-  [propName: string]: any
 }
 
 const ThemeStorage = JSON.parse(localStorage.getItem('Theme') || '{}')
@@ -26,8 +25,7 @@ export const useAppStore = defineStore({
   state: (): ThemeState => {
     return {
       ...defaultSettings,
-      ...ThemeStorage,
-      systemName: 'Admin Pro', // 系统名称
+      ...ThemeStorage
     }
   },
   getters: {
@@ -42,27 +40,21 @@ export const useAppStore = defineStore({
       if (dark) {
         this.theme = 'dark'
         document.body.setAttribute('arco-theme', 'dark')
-        localStorage.setItem('Theme', JSON.stringify(this.$state))
       } else {
         this.theme = 'light'
         document.body.removeAttribute('arco-theme')
-        localStorage.setItem('Theme', JSON.stringify(this.$state))
       }
       this.setThemeColor(this.themeColor)
-      this.changeThemeColor(this.themeColor)
     },
     // 设置主题色
     setThemeColor(color: string) {
       this.themeColor = color
-      localStorage.setItem('Theme', JSON.stringify(this.$state))
-    },
-    // 改变主题色
-    changeThemeColor(themeColor: string) {
-      const list = generate(themeColor, { list: true, dark: this.theme === 'dark' ? true : false })
+      const list = generate(this.themeColor, { list: true, dark: this.theme === 'dark' })
       list.forEach((color: string, index: number) => {
         const rgbStr = getRgbStr(color)
         document.body.style.setProperty(`--primary-${index + 1}`, rgbStr)
       })
+      localStorage.setItem('Theme', JSON.stringify(this.$state))
     },
     // 设置页签可见
     setTabVisible(visible: boolean) {

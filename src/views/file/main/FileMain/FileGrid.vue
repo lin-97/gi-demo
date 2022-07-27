@@ -89,7 +89,7 @@ const handleRightMenuItemClick = (mode: string, item: ApiFileItem) => {
   flex: 1;
   margin-top: 12px;
   overflow: scroll;
-  background: var(--color-bg-4);
+  background: var(--color-bg-2);
   display: flex;
   flex-wrap: wrap;
   align-content: flex-start;

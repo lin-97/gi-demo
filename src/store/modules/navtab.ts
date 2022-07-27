@@ -27,11 +27,6 @@ export const useNavTabStore = defineStore({
       if (flag >= 0) return
       this.tagList.push(item)
     },
-    // 添加缓存页
-    addCacheItem(componentName: string) {
-      if (this.cacheList.includes(componentName)) return
-      this.cacheList.push(componentName)
-    },
     // 删除一个页签
     removeTagItem(path: string) {
       if (path === defaultTabItem.path) return
@@ -44,6 +39,16 @@ export const useNavTabStore = defineStore({
         }
       }
     },
+    // 清空页签
+    clearTagList() {
+      this.tagList = [defaultTabItem]
+      router.push(defaultTabItem.path)
+    },
+    // 添加缓存页
+    addCacheItem(componentName: string) {
+      if (this.cacheList.includes(componentName)) return
+      this.cacheList.push(componentName)
+    },
     // 删除一个缓存页
     removeCacheItem(componentName: string) {
       const index = this.cacheList.findIndex((item) => item === componentName)
@@ -51,14 +56,14 @@ export const useNavTabStore = defineStore({
         this.cacheList.splice(index, 1)
       }
     },
-    // 清空页签
-    clearTagList() {
-      this.tagList = [defaultTabItem]
-      router.push(defaultTabItem.path)
-    },
     // 清空缓存页
     clearCacheList() {
       this.cacheList = []
+    },
+    // 初始化
+    init() {
+      this.clearTagList()
+      this.clearCacheList()
     }
   }
 })

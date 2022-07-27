@@ -17,7 +17,7 @@
 
       <a-row justify="space-between" align="center">
         <span class="label">页签显示</span>
-        <a-switch size="medium" :model-value="appStore.tab" @change="appStore.setTabVisible($event)" />
+        <a-switch size="medium" :model-value="appStore.tab" @change="appStore.setTabVisible(Boolean($event))" />
       </a-row>
 
       <a-row justify="space-between" align="center">
@@ -41,7 +41,7 @@
 
       <a-row justify="space-between" align="center">
         <span class="label">动画显示</span>
-        <a-switch size="medium" :model-value="appStore.animate" @change="appStore.setAnimateVisible($event)" />
+        <a-switch size="medium" :model-value="appStore.animate" @change="appStore.setAnimateVisible(Boolean($event))" />
       </a-row>
 
       <a-row justify="space-between" align="center">
@@ -114,7 +114,6 @@ const defaultColorList = [
 
 if (appStore.themeColor) {
   appStore.setThemeColor(appStore.themeColor)
-  appStore.changeThemeColor(appStore.themeColor)
 }
 
 type ColorObj = {
@@ -123,10 +122,10 @@ type ColorObj = {
   rgba: { r: number; g: number; b: number; a: number }
 }
 
+// 改变主题色
 const changeColor = (colorObj: ColorObj) => {
   if (!/^#[0-9A-Za-z]{6}/.test(colorObj.hex)) return
   appStore.setThemeColor(colorObj.hex)
-  appStore.changeThemeColor(appStore.themeColor)
 }
 </script>
 

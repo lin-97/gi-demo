@@ -1,9 +1,7 @@
 import { ref, onMounted, onUnmounted } from 'vue'
 import screenfull from 'screenfull'
 
-/**
- * 使用全屏
- */
+/** @desc 使用全屏 */
 export default function () {
   // 是否全屏
   const isFullScreen = ref(false)
@@ -27,6 +25,7 @@ export default function () {
   onUnmounted(() => {
     screenfull.off('change', change)
   })
+
   return {
     isFullScreen,
     onToggleFullScreen

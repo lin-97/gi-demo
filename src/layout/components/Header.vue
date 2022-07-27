@@ -2,7 +2,7 @@
   <a-layout-header>
     <section class="system-logo" @click="toHome">
       <img src="@/assets/images/logo.gif" />
-      <span class="gi_hover system-name">{{ appStore.systemName }}</span>
+      <span class="gi_hover system-name">Admin Pro</span>
     </section>
     <a-space class="system-head" size="medium">
       <!-- 项目配置 -->

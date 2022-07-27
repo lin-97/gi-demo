@@ -7,6 +7,7 @@ export default function useImage() {
       images: [src]
     })
   }
+
   return {
     previewImage
   }
