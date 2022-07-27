@@ -87,6 +87,7 @@ defineExpose({
   display: flex;
   flex-direction: column;
   overflow: hidden;
+  background: var(--color-bg-1);
   &.fullscreen {
     padding: $padding;
   }

@@ -26,7 +26,7 @@
         </a-col>
         <a-col :md="6" :xxl="12" v-show="collapsed">
           <a-form-item field="value3" label="时间">
-            <a-date-picker show-time v-model="form.value3" placeholder="请选择创建时间" />
+            <a-date-picker show-time v-model="form.value3" placeholder="请选择创建时间" style="width: 100%" />
           </a-form-item>
         </a-col>
         <a-col :md="6" :xxl="12" v-show="collapsed">

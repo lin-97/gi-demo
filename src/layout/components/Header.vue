@@ -128,6 +128,10 @@ const toGitPath = () => {
 </script>
 
 <style lang="scss" scoped>
+.arco-dropdown-open .arco-icon-down {
+  transform: rotate(180deg);
+}
+
 .doption-icon {
   width: 20px;
   height: 20px;
@@ -174,6 +178,10 @@ const toGitPath = () => {
     cursor: pointer;
     .username {
       margin-left: 10px;
+    }
+    .arco-icon-down {
+      transition: all 0.3s;
+      margin-left: 2px;
     }
   }
 }

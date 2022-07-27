@@ -1,5 +1,5 @@
 <template>
-  <div class="home">
+  <div class="home" id="home-wrap">
     <WorkPlatform></WorkPlatform>
 
     <div class="wrap">
@@ -12,6 +12,10 @@
         <div class="item"><ImageCard></ImageCard></div>
       </section>
     </div>
+
+    <a-back-top target-container="#home-wrap">
+      <GiSvgIcon name="backtop" :size="50" style="cursor: pointer"></GiSvgIcon>
+    </a-back-top>
   </div>
 </template>
 
