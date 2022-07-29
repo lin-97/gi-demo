@@ -1,6 +1,6 @@
 import { fileURLToPath, URL } from 'url'
 
-import { defineConfig } from 'vite'
+import { defineConfig, loadEnv } from 'vite'
 import vue from '@vitejs/plugin-vue'
 import vueJsx from '@vitejs/plugin-vue-jsx'
 import VueSetupExtend from 'vite-plugin-vue-setup-extend'
@@ -10,8 +10,7 @@ import Components from 'unplugin-vue-components/vite'
 import path from 'path'
 
 export default defineConfig(({ command, mode }) => {
-  console.log('command', command)
-  console.log('mode', mode)
+  const env = loadEnv(mode, process.cwd(), '')
   return {
     plugins: [
       vue(),
@@ -58,12 +57,12 @@ export default defineConfig(({ command, mode }) => {
     },
     server: {
       proxy: {
-        // '/api': {
-        //   target: 'http://localhost:8080/', // 后台服务器地址
-        //   changeOrigin: true, // 是否允许不同源
-        //   secure: false, // 支持https
-        //   rewrite: (path) => path.replace(/^\/api/, '/api')
-        // }
+        '/api': {
+          target: env.VITE_APP_BASE_URL, // 后台服务器地址
+          changeOrigin: true, // 是否允许不同源
+          secure: false, // 支持https
+          rewrite: (path) => path.replace(/^\/api/, '/api')
+        }
       }
     },
     // 构建

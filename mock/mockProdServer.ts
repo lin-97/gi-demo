@@ -7,7 +7,8 @@ import userModule from '../mock/user'
 import tableModule from '../mock/table'
 import systemModule from '../mock/system'
 import fileModule from '../mock/file'
+import cateModule from '../mock/cate'
 
 export function setupProdMockServer() {
-  createProdMockServer([...userModule, ...tableModule, ...systemModule, ...fileModule])
+  createProdMockServer([...userModule, ...tableModule, ...systemModule, ...fileModule, ...cateModule])
 }

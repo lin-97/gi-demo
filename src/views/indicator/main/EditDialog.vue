@@ -12,8 +12,8 @@
       </a-form-item>
       <a-form-item field="status" label="状态" :rules="rules.status">
         <a-radio-group v-model="form.status">
-          <a-radio :value="false">否</a-radio>
-          <a-radio :value="true">是</a-radio>
+          <a-radio :value="false">关闭</a-radio>
+          <a-radio :value="true">开启</a-radio>
         </a-radio-group>
       </a-form-item>
     </a-form>
@@ -32,7 +32,7 @@
           </a-space>
         </template>
         <template #expand-icon="{ active }">
-          <icon-right :class="{'gi_rotate_90deg': active}" />
+          <icon-right :class="{ gi_rotate_90deg: active }" />
         </template>
         <a-row justify="space-between" v-for="(item, index) in list" :key="index">
           <span>{{ item.name }}</span>
@@ -96,7 +96,7 @@ watch(visible, () => {
   const { name, address, status } = props.formData
   form.name = name
   form.address = address
-  form.status = status
+  form.status = status || false
 })
 
 const cancel = () => {

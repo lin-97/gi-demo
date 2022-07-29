@@ -23,18 +23,19 @@
 </template>
 
 <script setup lang="ts">
-import { reactive, ref, nextTick } from 'vue'
+import { reactive, ref, nextTick, onMounted } from 'vue'
 import { Modal } from '@arco-design/web-vue'
 import { getNewNodeName } from './fn'
-import { data } from './tree'
 import RightMenu from './RightMenu/index'
-
 import FileOpenIcon from '@/icons/com-file-open.svg'
 import FileCloseIcon from '@/icons/com-file-close.svg'
 import FileIcon from '@/icons/com-file.svg'
 
+import { getCateTreeData } from '@/apis'
+import type { ApiCateTreeNode } from '@/apis'
+
 const props = defineProps({
-  // 分类树: 2表单、3任务、4计量单位、5原子指标、6时间周期、7维度、8查询模板设计、101任务实例、 103指标数据查看
+  // 分类
   type: {
     type: Number,
     default: 1
@@ -43,55 +44,24 @@ const props = defineProps({
   placeholder: {
     type: String,
     default: '请输入关键词'
-  },
-  // 是否允许编辑-增删改移
-  allowEdit: {
-    type: Boolean,
-    default: true
   }
 })
+
+type TreeNode = ZTree.ITreeNode & ApiCateTreeNode
 
 const loading = ref(false)
 const inputValue = ref('')
 const treeRef = ref<HTMLElement | null>(null)
-const treeData = ref<object[]>([])
-
+const treeData = ref<ApiCateTreeNode[]>([])
 const treeObj = ref<ZTree.IzTreeObj | null>(null)
-const currentNode = ref({})
-
-const treeSetting = reactive({
-  callback: {
-    // 鼠标右键事件
-    onRightClick: (event: PointerEvent, treeId: string, treeNode: object) => {
-      console.log('鼠标右键', treeNode)
-      if (!treeNode || !props.allowEdit) return
-      currentNode.value = treeNode
-      RightMenu(event, treeNode, treeData.value).then((res: any) => {
-        console.log('res', res)
-        if (res.mode === 'add') {
-          onAdd()
-        }
-        if (res.mode === 'rename') {
-          onRename()
-        }
-        if (res.mode === 'delete') {
-          console.log('res', res)
-          onDelete()
-        }
-      })
-    },
-    // 点击节点
-    onClick: (event: PointerEvent, treeId: string, treeNode: ZTree.ITreeNode) => {
-      handleNodeClick(event, treeId, treeNode)
-    }
-  }
-})
+const currentNode = ref<TreeNode | null>(null)
 
 const emit = defineEmits(['node-click'])
-const handleNodeClick = (event: PointerEvent, treeId: string, treeNode: ZTree.ITreeNode) => {
+
+const handleNodeClick = (event: PointerEvent, treeId: string, treeNode: TreeNode) => {
+  console.log('点击节点', treeNode)
   currentNode.value = treeNode
   emit('node-click')
-  console.log('点击节点', treeNode)
   // onScrollToCenter(treeNode.tId)
 }
 
@@ -109,11 +79,38 @@ const handleNodeClick = (event: PointerEvent, treeId: string, treeNode: ZTree.IT
 //   })
 // }
 
+const treeSetting = reactive({
+  callback: {
+    // 鼠标右键事件
+    onRightClick: (event: PointerEvent, treeId: string, treeNode: TreeNode) => {
+      console.log('鼠标右键', treeNode)
+      if (!treeNode) return
+      currentNode.value = treeNode
+      RightMenu(event, treeNode, treeData.value).then((res: any) => {
+        console.log('res', res)
+        if (res.mode === 'add') {
+          onAdd()
+        }
+        if (res.mode === 'rename') {
+          onRename()
+        }
+        if (res.mode === 'delete') {
+          onDelete()
+        }
+      })
+    },
+    // 点击节点
+    onClick: (event: PointerEvent, treeId: string, treeNode: TreeNode) => {
+      handleNodeClick(event, treeId, treeNode)
+    }
+  }
+})
+
 // 递归树
-const formatTree = (arr: ZTree.ITreeNode[]): void => {
-  if (!arr.length) return
-  function forTree(arr: ZTree.ITreeNode[]) {
-    arr.forEach((item: ZTree.ITreeNode) => {
+const formatTree = (treeData: TreeNode[]): void => {
+  if (!treeData.length) return
+  function forTree(arr: TreeNode[]) {
+    arr.forEach((item) => {
       if (item.children && item.children.length) {
         item.iconOpen = FileOpenIcon
         item.iconClose = FileCloseIcon
@@ -129,22 +126,26 @@ const formatTree = (arr: ZTree.ITreeNode[]): void => {
       }
     })
   }
-  forTree(arr)
+  forTree(treeData)
 }
 
 // 获取分类树
 const getCateTree = async () => {
   try {
     loading.value = true
-    treeData.value = data
-    formatTree(treeData.value)
-    loading.value = false
-    nextTick(() => {
-      treeObj.value = $.fn.zTree.init($('#treeDemo'), treeSetting, treeData.value)
-      treeObj.value?.expandAll(true)
-      loading.value = false
-    })
+    const res = await getCateTreeData()
+    if (res.success) {
+      const data = res.data
+      formatTree(data)
+      treeData.value = data
+      nextTick(() => {
+        treeObj.value = $.fn.zTree.init($('#treeDemo'), treeSetting, treeData.value)
+        treeObj.value?.expandAll(true)
+      })
+    }
   } catch (error) {
+    return error
+  } finally {
     loading.value = false
   }
 }
@@ -153,14 +154,14 @@ getCateTree()
 
 // 新增
 const onAdd = () => {
-  const childrens: any[] = currentNode.value.children
+  const childrens: any[] = currentNode.value?.children || []
   let name = '新建分类1'
   if (childrens && childrens.length) {
-    let arr: string[] = childrens.map((i) => i.name)
+    const arr: string[] = childrens.map((i) => i.name)
     name = getNewNodeName(arr, '新建分类')
   }
-  let id: string = new Date().getTime().toString()
-  const newChildrenNode = {
+  const id: string = new Date().getTime().toString()
+  const newChildrenNode: TreeNode = {
     id: id,
     name: name,
     children: null,
@@ -169,8 +170,8 @@ const onAdd = () => {
     icon: FileCloseIcon,
     isParent: false
   }
-  treeObj.value?.addNodes(currentNode.value, newChildrenNode, true)
-  const nodes = treeObj.value?.getNodesByParam('id', id, null)
+  treeObj.value?.addNodes(currentNode.value || {}, newChildrenNode, true)
+  const nodes: any = treeObj.value?.getNodesByParam('id', id)
   setTimeout(() => {
     treeObj.value?.editName(nodes[0])
   }, 100)
@@ -179,7 +180,7 @@ const onAdd = () => {
 // 重命名
 const onRename = () => {
   nextTick(() => {
-    const nodes = treeObj.value?.getNodesByParam('id', currentNode.value.id, null)
+    const nodes: any = treeObj.value?.getNodesByParam('id', currentNode.value?.id)
     treeObj.value?.editName(nodes[0])
   })
 }
@@ -216,7 +217,6 @@ const nodeFilter = (node: any, nameSearch: string) => {
 // 搜索-搜索框值改变触发
 const handleInput = () => {
   let value = inputValue.value
-  console.log('value', value)
   if (!value) {
     treeObj.value = $.fn.zTree.init($('#treeDemo'), treeSetting, treeData.value)
     treeObj.value?.expandAll(true)
@@ -227,7 +227,6 @@ const handleInput = () => {
         arr.splice(i--, 1)
       }
     }
-    console.log('arr', arr)
     treeObj.value = $.fn.zTree.init($('#treeDemo'), treeSetting, arr)
     treeObj.value?.expandAll(true)
   }
@@ -316,6 +315,7 @@ const handleInput = () => {
   > .wrap {
     flex: 1;
     overflow: scroll;
+    background-color: var(--color-bg-2);
   }
 }
 </style>
