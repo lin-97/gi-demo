@@ -14,6 +14,16 @@
     </a-form>
     <section class="tree-box">
       <a-tree show-line size="mini" blockNode :data="treeData" @select="handleClickNode">
+        <template #switcher-icon="node, { checked, selected, expanded }">
+          <GiSvgIcon name="plus-square" :size="16" v-if="node.children && expanded" />
+          <GiSvgIcon
+            name="minus-square"
+            :size="16"
+            style="transform: rotate(0deg)"
+            v-else-if="node.children && !expanded"
+          />
+          <icon-drive-file :size="16" v-else />
+        </template>
         <template #icon>
           <GiSvgIcon name="menu-zip" :size="16"></GiSvgIcon>
         </template>
@@ -70,6 +80,11 @@ defineExpose({
 }
 :deep(.arco-form-item-label-col > label) {
   white-space: nowrap;
+}
+:deep(.arco-tree-node-switcher-icon) {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 .tree-box {
   width: 100%;
