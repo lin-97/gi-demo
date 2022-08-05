@@ -29,8 +29,9 @@ const countDownTime = ref(5)
 const timer = ref(0)
 const current = ref(404)
 
-if (route.params.id) {
-  current.value = Number(route.params.id)
+if (route.fullPath) {
+  const arr = route.fullPath.split('/')
+  current.value = Number(arr[arr.length - 1])
 }
 
 interface ErrorPage {
