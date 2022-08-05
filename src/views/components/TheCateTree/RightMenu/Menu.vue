@@ -40,7 +40,7 @@ const props = defineProps<{
   onClick: any
 }>()
 
-const menuRef = ref<HTMLInputElement | null>(null)
+const menuRef = ref<InstanceType<typeof GiContextMenu> | null>(null)
 const moveTreeBoxRef = ref(null)
 
 const ignoreRefs = ref([moveTreeBoxRef])
@@ -64,12 +64,12 @@ const onClickItem = (mode: string) => {
   }
   nextTick(() => {
     props.onClick(mode)
-    menuRef.value.onHidden()
+    menuRef.value?.onHidden()
   })
 }
 
 const moveTreeNodeClick = () => {
-  menuRef.value.onHidden()
+  menuRef.value?.onHidden()
 }
 
 defineExpose({

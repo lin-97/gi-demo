@@ -66,10 +66,10 @@
 </template>
 
 <script setup lang="ts" name="SettingDrawer">
+import { computed } from 'vue'
 import { useAppStore } from '@/store'
 import { ColorPicker } from 'vue-color-kit'
 import 'vue-color-kit/dist/vue-color-kit.css'
-import { useVModel } from '@vueuse/core'
 import { tabModeList, animateModeList } from '@/config/option'
 
 const appStore = useAppStore()
@@ -82,7 +82,11 @@ const props = defineProps({
 })
 
 const emit = defineEmits(['update:modelValue'])
-const visible = useVModel(props, 'modelValue', emit)
+
+const visible = computed<boolean>({
+  get: () => props.modelValue,
+  set: (v) => emit('update:modelValue', v)
+})
 
 // 默认显示的主题色列表
 const defaultColorList = [

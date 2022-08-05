@@ -98,6 +98,13 @@ npm run dev
 ```bash
 npm run build
 ```
+## vs code插件安装
+```bash
+1. Prettier - Code formatter
+2. Vue Language Features (Volar)
+3. Vue 3 Snippets
+4. TypeScript Vue Plugin (Volar)
+```
 
 ## 开源作者
 

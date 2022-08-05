@@ -25,6 +25,7 @@
 
 <script setup lang="ts" name="Step2">
 import { nextTick, reactive, ref, type PropType } from 'vue'
+import type { Form } from '@arco-design/web-vue'
 import type { StepForm } from './type'
 const emit = defineEmits(['next', 'prev'])
 
@@ -50,14 +51,14 @@ const rules = {
 }
 
 const loading = ref(false)
-const formRef = ref()
+const formRef = ref<InstanceType<typeof Form>>()
 
 // 下一步|提交
 const next = () => {
   nextTick(async () => {
     try {
       loading.value = true
-      const res = await formRef.value.validate()
+      const res = await formRef.value?.validate()
       if (!res) {
         setTimeout(() => {
           emit('next')

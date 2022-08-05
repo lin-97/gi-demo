@@ -39,6 +39,7 @@
 
 <script setup lang="ts" name="Step1">
 import { reactive, ref, nextTick } from 'vue'
+import type { Form } from '@arco-design/web-vue'
 import type { StepForm } from './type'
 const emit = defineEmits(['next'])
 
@@ -47,7 +48,7 @@ const form: StepForm = reactive({
   recAccount: '1997***6962@qq.com',
   payType: 1, // 1:微信 2: 支付宝
   recName: 'Lin',
-  amount: 1980
+  amount: '1980'
 })
 
 const rules = {
@@ -57,12 +58,12 @@ const rules = {
   amount: [{ required: true, message: '请输入转账金额' }]
 }
 
-const formRef = ref()
+const formRef = ref<InstanceType<typeof Form>>()
 
 // 下一步
 const next = () => {
   nextTick(async () => {
-    const res = await formRef.value.validate()
+    const res = await formRef.value?.validate()
     if (!res) {
       emit('next', form)
     }

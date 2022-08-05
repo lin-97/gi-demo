@@ -13,7 +13,7 @@ const props = defineProps({
   }
 })
 
-const treeObj = ref({})
+const treeObj = ref<ZTree.IzTreeObj | null>(null)
 const treeSetting = reactive({
   callback: {
     // 点击节点
@@ -28,7 +28,7 @@ watch(
   () => {
     nextTick(() => {
       treeObj.value = $.fn.zTree.init($('#movetree'), treeSetting, props.treeData)
-      treeObj.value.expandAll(true)
+      treeObj.value?.expandAll(true)
     })
   },
   { deep: true, immediate: true }

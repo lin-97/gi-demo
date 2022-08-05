@@ -11,10 +11,11 @@
 </template>
 
 <script setup lang="ts">
-import { ref, reactive, onMounted } from 'vue'
+import { ref, reactive, onMounted, type PropType } from 'vue'
+import type { ApiFileItem } from '@/apis'
 
 const props = defineProps({
-  fileInfo: Object,
+  fileInfo: Object as PropType<ApiFileItem>,
   onClose: Function
 })
 
@@ -26,7 +27,7 @@ const form: Form = reactive({
   name: ''
 })
 
-form.name = props.fileInfo?.name
+form.name = props.fileInfo?.name || ''
 
 onMounted(() => {
   visible.value = true
@@ -34,7 +35,7 @@ onMounted(() => {
 
 const handleCancel = () => {
   visible.value = false
-  props.onClose()
+  props.onClose && props.onClose()
 }
 
 defineExpose({

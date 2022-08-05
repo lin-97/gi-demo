@@ -33,12 +33,14 @@
 </template>
 
 <script setup lang="ts">
-import { ref, reactive, onMounted } from 'vue'
+import { ref, reactive, onMounted, type PropType } from 'vue'
+import type { ApiFileItem } from '@/apis'
+import type { TreeNodeData } from '@arco-design/web-vue'
 import data from './treedata'
 import GiSvgIcon from '@/components/GiSvgIcon.vue'
 
 const props = defineProps({
-  fileInfo: Object,
+  fileInfo: Object as PropType<ApiFileItem>,
   onClose: Function
 })
 
@@ -56,13 +58,16 @@ onMounted(() => {
   visible.value = true
 })
 
-const handleClickNode = (selectedKeys, { selected, selectedNodes, node }) => {
-  form.path = `/${selectedNodes[0].title}`
+const handleClickNode = (
+  selectedKeys: Array<string | number>,
+  data: { selected?: boolean; selectedNodes: TreeNodeData[]; node?: TreeNodeData; e?: Event }
+) => {
+  form.path = `/${data.selectedNodes[0].title}`
 }
 
 const handleCancel = () => {
   visible.value = false
-  props.onClose()
+  props.onClose && props.onClose()
 }
 
 defineExpose({

@@ -46,7 +46,7 @@ http.interceptors.request.use(
   (config: AxiosRequestConfig) => {
     NProgress.start() // 进度条
     config.headers = {
-      'Content-Type':'application/x-www-form-urlencoded' // 配置请求头
+      'Content-Type': 'application/json' // 配置请求头
     }
     const token = getToken()
     if (token) {

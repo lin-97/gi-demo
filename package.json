@@ -1,6 +1,6 @@
 {
-  "name": "vue-demo",
-  "version": "0.0.0",
+  "name": "gi-demo",
+  "version": "1.0.0",
   "scripts": {
     "dev": "vite --host",
     "build": "vite build",
@@ -19,15 +19,17 @@
     "@ztree/ztree_v3": "^3.5.48",
     "axios": "^0.25.0",
     "dayjs": "^1.11.3",
-    "echarts": "^5.3.0",
+    "echarts": "^5.3.3",
     "json-editor-vue3": "^1.0.6",
     "mockjs": "^1.1.0",
     "nprogress": "^0.2.0",
     "pinia": "^2.0.14",
+    "qs": "^6.11.0",
     "screenfull": "^6.0.1",
     "v-viewer": "^3.0.10",
     "vue": "^3.2.36",
     "vue-color-kit": "^1.0.5",
+    "vue-echarts": "^6.2.3",
     "vue-router": "^4.0.15",
     "xgplayer": "^2.31.6",
     "xgplayer-music": "^2.3.2"

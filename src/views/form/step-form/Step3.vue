@@ -9,7 +9,7 @@
         <a-descriptions-item label="收款账户：">{{ form.recAccount }}</a-descriptions-item>
         <a-descriptions-item label="收款人姓名：">{{ form.recName }}</a-descriptions-item>
         <a-descriptions-item label="转账金额：">
-          <a-statistic :value="form.amount" :precision="2" :value-from="0" animation :animation-duration="600">
+          <a-statistic :value="Number(form.amount)" :precision="2" :value-from="0" animation :animation-duration="600">
             <template #prefix>￥</template>
             <template #suffix>元</template>
           </a-statistic>

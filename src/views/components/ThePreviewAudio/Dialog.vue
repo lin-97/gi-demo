@@ -20,11 +20,12 @@
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted, computed } from 'vue'
+import { ref, onMounted, computed, type PropType } from 'vue'
 import { useDraggable, useWindowSize, useElementSize } from '@vueuse/core'
+import type { ApiFileItem } from '@/apis'
 
 const props = defineProps({
-  fileInfo: Object,
+  fileInfo: Object as PropType<ApiFileItem>,
   onCancel: Function
 })
 
@@ -74,7 +75,7 @@ const audioStyle = computed(() => {
 
 const handleClose = () => {
   visible.value = false
-  props.onCancel()
+  props.onCancel && props.onCancel()
 }
 
 defineExpose({
