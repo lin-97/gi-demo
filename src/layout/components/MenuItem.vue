@@ -1,5 +1,5 @@
 <template>
-  <a-sub-menu :key="data.path" v-if="data.children && data.children.length">
+  <a-sub-menu :key="data.path" v-if="data.children && data.children.length && !data.hidden">
     <template #icon>
       <GiSvgIcon v-if="data.icon" :size="24" :name="data.icon"></GiSvgIcon>
     </template>
@@ -7,7 +7,7 @@
     <MenuItem v-for="item in data.children" :key="item.id" :data="item" @click="onClickMenuItem"></MenuItem>
   </a-sub-menu>
 
-  <a-menu-item v-else :key="data.path" @click="onClickMenuItem(data)">
+  <a-menu-item v-else :key="data.path" @click="onClickMenuItem(data)" v-if="!data.hidden">
     <template #icon>
       <GiSvgIcon v-if="data.icon" :size="24" :name="data.icon"></GiSvgIcon>
       <icon-unordered-list v-else :size="20" />
