@@ -105,6 +105,10 @@ npm run build
 3. Vue 3 Snippets
 4. TypeScript Vue Plugin (Volar)
 ```
+## 注意
+```bash
+由于升级了vite3，根据官方规定，node版本必须是14.18.0以上
+```
 
 ## 开源作者
 
