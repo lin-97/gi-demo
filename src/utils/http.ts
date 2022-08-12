@@ -7,14 +7,6 @@ import 'nprogress/nprogress.css'
 
 NProgress.configure({ showSpinner: false }) // NProgress Configuration
 
-export interface HttpResponse<T = unknown> {
-  code: number
-  msg?: string
-  message?: string
-  data: T
-  success: boolean
-}
-
 interface ICodeMessage {
   [propName: number]: string
 }
@@ -66,12 +58,12 @@ http.interceptors.request.use(
 http.interceptors.response.use(
   (response: AxiosResponse<HttpResponse>) => {
     const { data } = response
-    const { msg, message, success } = data
+    const { message, success } = data
 
     if (!success) {
       NProgress.done()
-      Notification.error(message || msg || '服务器端错误')
-      return Promise.reject(new Error(msg || 'Error'))
+      Notification.error(message || '服务器端错误')
+      return Promise.reject(new Error('Error'))
     }
     NProgress.done()
     return response

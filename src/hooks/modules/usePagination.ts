@@ -13,13 +13,13 @@ export default function usePagination(callback: Callback, options: Options = { d
 
   function changeCurrent(size: number) {
     current.value = size
-    callback()
+    callback && callback()
   }
 
   function changePageSize(size: number) {
     current.value = 1
     pageSize.value = size
-    callback()
+    callback && callback()
   }
 
   function setTotal(value: number) {

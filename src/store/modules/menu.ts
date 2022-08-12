@@ -1,5 +1,4 @@
 import { defineStore } from 'pinia'
-import type { MenuItem } from '@/layout/components/type'
 
 interface MenuState {
   menuTree: MenuItem[]

@@ -6,7 +6,12 @@
       :auto-open-selected="true"
       :style="{ width: '100%', height: '100%' }"
     >
-      <MenuItem v-for="item in menuStore.menuTree" :key="item.id" :data="item" @click="handleClickItem"></MenuItem>
+      <LoopMenuItem
+        v-for="item in menuStore.menuTree"
+        :key="item.id"
+        :data="item"
+        @click="handleClickItem"
+      ></LoopMenuItem>
     </a-menu>
   </a-layout-sider>
 </template>
@@ -15,17 +20,16 @@
 import { ref, watch } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import { useMenuStore } from '@/store'
-import MenuItem from './MenuItem.vue'
-import type { MenuItem as IMenuItem } from './type'
+import LoopMenuItem from './MenuItem.vue'
 
 const route = useRoute()
 const router = useRouter()
 const menuStore = useMenuStore()
 
-const getMenuKeys = (params: IMenuItem[]) => {
+const getMenuKeys = (params: MenuItem[]) => {
   const data: string[] = []
-  function forTree(arr: IMenuItem[]) {
-    arr.forEach((item: IMenuItem) => {
+  function forTree(arr: MenuItem[]) {
+    arr.forEach((item: MenuItem) => {
       if (item.path) {
         data.push(item.path)
       }
@@ -51,7 +55,7 @@ watch(
   { immediate: true }
 )
 
-const handleClickItem = (item: IMenuItem) => {
+const handleClickItem = (item: MenuItem) => {
   if (item.path) {
     if (item.path === '/file') {
       router.push({ path: item.path, query: { fileType: 0 } })

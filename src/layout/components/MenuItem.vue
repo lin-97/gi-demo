@@ -18,7 +18,6 @@
 
 <script setup lang="ts" name="MenuItem">
 import type { PropType } from 'vue'
-import type { MenuItem } from './type'
 
 defineProps({
   data: {

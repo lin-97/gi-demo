@@ -40,11 +40,10 @@ export default function useContextMenu(
   onMounted(() => {
     visible.value = true
     nextTick(() => {
-      if (elRef !== null && elRef.value) {
-        elHeight.value = elRef.value?.offsetHeight
-        elWidth.value = elRef.value?.offsetWidth
-        getStyle()
-      }
+      if (!elRef) return
+      elHeight.value = elRef?.offsetHeight
+      elWidth.value = elRef?.offsetWidth
+      getStyle()
     })
   })
 

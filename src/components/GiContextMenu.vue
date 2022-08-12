@@ -17,7 +17,7 @@ const props = defineProps<{
   ignoreRefs: any[]
 }>()
 
-const elRef = ref(null)
+const elRef = ref<HTMLElement | null>(null)
 
 const { visible, setVisible, getStyle } = useContextMenu(props.event, elRef, props.options)
 

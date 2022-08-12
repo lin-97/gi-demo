@@ -1,6 +1,5 @@
 import { defineStore } from 'pinia'
 import router from '@/router'
-import type { NavTabItem } from '@/layout/components/type'
 
 interface NavTabState {
   tagList: NavTabItem[]

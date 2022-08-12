@@ -47,7 +47,6 @@
 import { watch, onMounted } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import { useNavTabStore, useAppStore } from '@/store'
-import type { NavTabItem } from './type'
 
 const route = useRoute()
 const router = useRouter()

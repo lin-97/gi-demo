@@ -33,13 +33,13 @@ import MenuManage from './menu-manage/index.vue'
 const currentKey = ref('01')
 const currentIndex = ref(0)
 
-interface MenuItem {
+interface LeftMenuItem {
   id: string
   name: string
   value: any
   icon: string
 }
-const menuList: MenuItem[] = reactive([
+const menuList: LeftMenuItem[] = reactive([
   { id: '01', name: '部门管理', value: DeptManage, icon: 'icon-mind-mapping' },
   { id: '02', name: '用户管理', value: UserManage, icon: 'icon-user-group' },
   { id: '03', name: '角色管理', value: RoleManage, icon: 'icon-robot' },
@@ -47,7 +47,7 @@ const menuList: MenuItem[] = reactive([
   { id: '05', name: '个人中心', value: UserCenter, icon: 'icon-user' }
 ])
 
-const onClickMenuItem = (item: MenuItem, index: number) => {
+const onClickMenuItem = (item: LeftMenuItem, index: number) => {
   currentKey.value = item.id
   currentIndex.value = index
 }
