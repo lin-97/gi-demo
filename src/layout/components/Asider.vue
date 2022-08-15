@@ -1,5 +1,5 @@
 <template>
-  <a-layout-sider collapsible breakpoint="xl" class="aside">
+  <a-layout-sider collapsible breakpoint="xl" class="asider">
     <a-menu
       :selected-keys="[activeKey]"
       :default-open-keys="['/home']"
@@ -16,7 +16,7 @@
   </a-layout-sider>
 </template>
 
-<script setup lang="ts" name="Aside">
+<script setup lang="ts" name="Asider">
 import { ref, watch } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import { useMenuStore } from '@/store'
@@ -85,7 +85,7 @@ const handleClickItem = (item: MenuItem) => {
   }
 }
 
-.aside {
+.asider {
   z-index: 9;
 }
 </style>

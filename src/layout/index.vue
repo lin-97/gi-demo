@@ -1,6 +1,6 @@
 <template>
   <a-layout class="layout">
-    <Aside></Aside>
+    <Asider></Asider>
     <a-layout>
       <Header></Header>
       <NavTab></NavTab>
@@ -10,7 +10,7 @@
 </template>
 
 <script setup lang="ts">
-import Aside from './components/Aside.vue'
+import Asider from './components/Asider.vue'
 import Header from './components/Header.vue'
 import Main from './components/Main.vue'
 import NavTab from './components/NavTab.vue'
@@ -19,5 +19,6 @@ import NavTab from './components/NavTab.vue'
 <style lang="scss" scoped>
 .layout {
   height: 100%;
+  flex-direction: row;
 }
 </style>

@@ -18,7 +18,7 @@
       <!-- 右侧按钮 -->
       <template #extra>
         <a-dropdown trigger="hover">
-          <a-button type="primary" class="extra-btn">
+          <a-button type="primary" size="small" class="extra-btn">
             <template #icon>
               <icon-settings :size="18" />
             </template>

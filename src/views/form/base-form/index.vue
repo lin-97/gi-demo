@@ -4,7 +4,7 @@
 
     <section class="content">
       <a-space :size="50">
-        <a-form :model="form" size="small" class="form">
+        <a-form :model="form" size="medium" class="form">
           <a-form-item field="name" label="姓名" :rules="rules.name" :validate-trigger="['change', 'input']">
             <a-input v-model="form.name" placeholder="请输入姓名" />
             <template #extra>
