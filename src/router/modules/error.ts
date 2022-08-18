@@ -6,9 +6,10 @@ const Error: AppRouteRecordRaw = {
   name: 'Error',
   component: DEFAULT_LAYOUT,
   meta: {
+    title: '异常页',
     locale: 'menu.error',
     requiresAuth: true,
-    icon: 'icon-dashboard',
+    icon: 'menu-error',
     order: 7
   },
   children: [

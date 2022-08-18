@@ -10,5 +10,7 @@
   "tab": true,
   "tabMode": "card",
   "animate": true,
-  "animateMode": "zoom-fade"
+  "animateMode": "zoom-fade",
+  "menuFromServer": false,
+  "serverMenu": []
 }

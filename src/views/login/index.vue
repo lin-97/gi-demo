@@ -80,7 +80,7 @@ const login = async () => {
     }
     setLoading(true)
     await userStore.login(form)
-    router.push('/home')
+    router.push('/')
     setLoading(false)
     navTabStore.init()
     Message.success('登录成功')

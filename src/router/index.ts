@@ -1,6 +1,7 @@
 import { createRouter, createWebHashHistory } from 'vue-router'
 import type { RouteRecordNormalized } from 'vue-router'
 import { getToken } from '@/utils/auth'
+import { DEFAULT_LAYOUT } from './base'
 
 // 路由模块化自动导入
 const modules = import.meta.globEager('./modules/*.ts')
@@ -19,42 +20,70 @@ export const appRoutes: RouteRecordNormalized[] = formatModules(modules, [])
 
 const routes = [
   {
+    path: '/',
+    redirect: 'login'
+  },
+  {
     path: '/login',
     name: 'Login',
     component: () => import('@/views/login/index.vue'),
-    meta: { title: '登录', keepAlive: false }
+    meta: {
+      title: '登录',
+      keepAlive: false,
+      requiresAuth: false
+    }
   },
   ...appRoutes,
   {
-    path: '/',
+    path: '/layout',
     name: 'Layout',
-    redirect: '/home',
-    component: () => import('@/layout/index.vue'),
-    meta: { title: '首页', keepAlive: false },
+    component: DEFAULT_LAYOUT,
+    meta: {
+      title: '其他',
+      locale: 'menu.other',
+      requiresAuth: false,
+      icon: 'menu-nav',
+      order: 4
+    },
     children: [
       {
-        path: '/home',
-        name: 'Home',
-        component: () => import('@/views/home/index.vue'),
-        meta: { title: '首页', keepAlive: false }
-      },
-      {
-        path: '/about',
+        path: 'about',
         name: 'About',
         component: () => import('@/views/about/index.vue'),
-        meta: { title: '关于', keepAlive: false }
+        meta: {
+          icon: 'menu-about',
+          title: '关于',
+          keepAlive: false,
+          locale: 'menu.other.main',
+          requiresAuth: false,
+          roles: ['*']
+        }
       },
       {
-        path: '/navigation',
+        path: 'navigation',
         name: 'Navigation',
         component: () => import('@/views/navigation/index.vue'),
-        meta: { title: '导航', keepAlive: false }
+        meta: {
+          icon: 'menu-nav',
+          title: '导航',
+          keepAlive: false,
+          locale: 'menu.other.main',
+          requiresAuth: false,
+          roles: ['*']
+        }
       },
       {
-        path: '/tool',
+        path: 'tool',
         name: 'Tool',
         component: () => import('@/views/tool/index.vue'),
-        meta: { title: '功能页', keepAlive: true }
+        meta: {
+          icon: 'menu-test',
+          title: '功能页',
+          keepAlive: true,
+          locale: 'menu.other.main',
+          requiresAuth: false,
+          roles: ['*']
+        }
       }
     ]
   }

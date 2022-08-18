@@ -1,6 +1,6 @@
 <template>
   <GiContextMenu ref="menuRef" :event="event" :ignoreRefs="ignoreRefs" @close="onClose">
-    <GiOption width="110" ref="optionRef" style="position: relative">
+    <GiOption :width="110" ref="optionRef" style="position: relative">
       <GiOptionItem icon="IconPlusCircle" @click="onClickItem('add')" v-if="showAdd">新增</GiOptionItem>
       <GiOptionItem icon="IconEdit" @click="onClickItem('rename')" v-if="showRename">重命名</GiOptionItem>
       <a-popover

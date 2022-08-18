@@ -5,14 +5,27 @@ type Pagination = {
 }
 
 // 菜单项
+// interface MenuItem {
+//   id: string
+//   name: string
+//   icon?: string
+//   path?: string
+//   children?: MenuItem[]
+//   keepAlive?: boolean
+//   hidden?: boolean
+// }
+
 interface MenuItem {
-  id: string
-  name: string
-  icon?: string
-  path?: string
-  children?: MenuItem[]
-  keepAlive?: boolean
-  hidden?: boolean
+  path: string
+  name?: string | symbol
+  meta?: RouteMeta
+  redirect?: string
+  component: Component | string
+  children?: AppRouteRecordRaw[]
+  alias?: string | string[]
+  props?: Record<string, any>
+  beforeEnter?: NavigationGuard | NavigationGuard[]
+  fullPath?: string
 }
 
 // 导航标签项

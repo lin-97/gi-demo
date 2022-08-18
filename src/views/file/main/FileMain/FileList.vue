@@ -31,9 +31,9 @@
             </a-trigger>
           </template>
         </a-table-column>
-        <a-table-column title="扩展名" data-index="extendName" width="100"></a-table-column>
-        <a-table-column title="更改时间" data-index="updateTime" width="200"></a-table-column>
-        <a-table-column title="操作" width="120" align="center">
+        <a-table-column title="扩展名" data-index="extendName" :width="100"></a-table-column>
+        <a-table-column title="更改时间" data-index="updateTime" :width="200"></a-table-column>
+        <a-table-column title="操作" :width="120" align="center">
           <template #cell="{ record }">
             <a-popover
               trigger="click"

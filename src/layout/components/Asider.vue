@@ -6,12 +6,7 @@
       :auto-open-selected="true"
       :style="{ width: '100%', height: '100%' }"
     >
-      <LoopMenuItem
-        v-for="item in menuStore.menuTree"
-        :key="item.id"
-        :data="item"
-        @click="handleClickItem"
-      ></LoopMenuItem>
+      <LoopMenuItem v-for="item in menuTree" :key="item.id" :data="item" @click="handleClickItem"></LoopMenuItem>
     </a-menu>
   </a-layout-sider>
 </template>
@@ -19,12 +14,13 @@
 <script setup lang="ts" name="Asider">
 import { ref, watch } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
-import { useMenuStore } from '@/store'
 import LoopMenuItem from './MenuItem.vue'
+import useMenuTree from './useMenuTree'
 
 const route = useRoute()
 const router = useRouter()
-const menuStore = useMenuStore()
+
+const { menuTree } = useMenuTree()
 
 const getMenuKeys = (params: MenuItem[]) => {
   const data: string[] = []
@@ -43,7 +39,7 @@ const getMenuKeys = (params: MenuItem[]) => {
 }
 
 const activeKey = ref('/home')
-const menuKeyList = getMenuKeys(menuStore.menuTree)
+const menuKeyList = getMenuKeys([])
 
 watch(
   () => route.path,
@@ -57,10 +53,10 @@ watch(
 
 const handleClickItem = (item: MenuItem) => {
   if (item.path) {
-    if (item.path === '/file') {
-      router.push({ path: item.path, query: { fileType: 0 } })
+    if (item.name === 'File') {
+      router.push({ name: item.name, query: { fileType: 0 } })
     } else {
-      router.push({ path: item.path })
+      router.push({ name: item.name })
     }
     if (menuKeyList.includes(item.path)) {
       activeKey.value = item.path

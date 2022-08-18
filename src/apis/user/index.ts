@@ -14,5 +14,5 @@ export function logout() {
 
 /** @desc 获取动态菜单 */
 export function getMenuList() {
-  return axios.post(`${prefix}/user/menu`)
+  return axios.get(`${prefix}/user/menu`)
 }

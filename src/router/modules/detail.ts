@@ -6,9 +6,10 @@ const Deatail: AppRouteRecordRaw = {
   name: 'Detail',
   component: DEFAULT_LAYOUT,
   meta: {
+    title: '详情页',
     locale: 'menu.detail',
     requiresAuth: true,
-    icon: 'icon-dashboard',
+    icon: 'menu-detail',
     order: 6
   },
   children: [

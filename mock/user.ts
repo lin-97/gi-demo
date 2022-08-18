@@ -55,24 +55,29 @@ export default [
   {
     url: '/mock/user/menu',
     method: 'get',
-    timeout: 0,
+    timeout: 300,
     response: () => {
       return successResponseWrap([
         {
-          icon: 'menu-work',
-          id: 'YBP',
-          name: '仪表盘',
-          path: '/home',
-          keepAlive: false,
-          hidden: false,
+          path: '/dashboard',
+          name: 'dashboard',
+          meta: {
+            title: '仪表盘',
+            locale: 'menu.server.dashboard',
+            requiresAuth: true,
+            icon: 'menu-work',
+            order: 1
+          },
           children: [
             {
-              id: 'GZT',
-              name: '工作台',
-              path: '/home',
-              componentPath: 'home/index.vue',
-              keepAlive: false,
-              hidden: false
+              path: 'workplace',
+              name: 'Workplace',
+              meta: {
+                title: '工作台',
+                locale: 'menu.server.workplace',
+                requiresAuth: true,
+                roles: ['*']
+              }
             }
           ]
         }

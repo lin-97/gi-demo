@@ -6,9 +6,10 @@ const Form: AppRouteRecordRaw = {
   name: 'Form',
   component: DEFAULT_LAYOUT,
   meta: {
+    title: '表单管理',
     locale: 'menu.form',
     requiresAuth: true,
-    icon: 'icon-dashboard',
+    icon: 'menu-form',
     order: 3
   },
   children: [

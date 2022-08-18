@@ -6,9 +6,10 @@ const Table: AppRouteRecordRaw = {
   name: 'Table',
   component: DEFAULT_LAYOUT,
   meta: {
+    title: '表格管理',
     locale: 'menu.table',
     requiresAuth: true,
-    icon: 'icon-dashboard',
+    icon: 'menu-table',
     order: 4
   },
   children: [

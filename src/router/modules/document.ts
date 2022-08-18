@@ -6,9 +6,10 @@ const Document: AppRouteRecordRaw = {
   name: 'Document',
   component: DEFAULT_LAYOUT,
   meta: {
+    title: '文档',
     locale: 'menu.document',
     requiresAuth: true,
-    icon: 'icon-dashboard',
+    icon: 'menu-document',
     order: 9
   },
   children: [

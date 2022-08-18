@@ -6,9 +6,10 @@ const System: AppRouteRecordRaw = {
   name: 'System',
   component: DEFAULT_LAYOUT,
   meta: {
+    title: '系统管理',
     locale: 'menu.system',
     requiresAuth: true,
-    icon: 'icon-dashboard',
+    icon: 'menu-system',
     order: 5
   },
   children: [
@@ -16,7 +17,14 @@ const System: AppRouteRecordRaw = {
       path: '',
       name: 'SystemMain',
       component: () => import('@/views/system/index.vue'),
-      meta: { title: '系统管理', keepAlive: false, locale: 'menu.system.main', requiresAuth: true, roles: ['admin'] }
+      meta: {
+        title: '系统管理',
+        keepAlive: false,
+        locale: 'menu.system.main',
+        requiresAuth: true,
+        roles: ['admin'],
+        hideInMenu: true
+      }
     },
     {
       path: 'dept-manage',

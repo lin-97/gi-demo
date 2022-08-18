@@ -6,9 +6,10 @@ const Result: AppRouteRecordRaw = {
   name: 'Result',
   component: DEFAULT_LAYOUT,
   meta: {
+    title: '结果页',
     locale: 'menu.result',
     requiresAuth: true,
-    icon: 'icon-dashboard',
+    icon: 'menu-result',
     order: 8
   },
   children: [

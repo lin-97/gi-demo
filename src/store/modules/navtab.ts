@@ -6,7 +6,7 @@ interface NavTabState {
   cacheList: string[]
 }
 
-const defaultTabItem: NavTabItem = { name: '首页', path: '/home', componentName: 'Home' }
+const defaultTabItem: NavTabItem = { name: '首页', path: '/dashboard/workplace', componentName: 'Home' }
 
 export const useNavTabStore = defineStore({
   id: 'NavTab', // 页签缓存

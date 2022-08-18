@@ -61,6 +61,15 @@
           >
         </a-select>
       </a-row>
+
+      <a-row justify="space-between" align="center">
+        <span class="label">菜单来源于后台</span>
+        <a-switch
+          size="medium"
+          :model-value="appStore.menuFromServer"
+          @change="changeMenuFromServer(Boolean($event))"
+        />
+      </a-row>
     </a-space>
   </a-drawer>
 </template>
@@ -130,6 +139,14 @@ type ColorObj = {
 const changeColor = (colorObj: ColorObj) => {
   if (!/^#[0-9A-Za-z]{6}/.test(colorObj.hex)) return
   appStore.setThemeColor(colorObj.hex)
+}
+
+// 菜单来源于后台
+const changeMenuFromServer = (value: boolean) => {
+  appStore.changeMenuFromServer(value)
+  if (value) {
+    appStore.getServerMenus()
+  }
 }
 </script>
 

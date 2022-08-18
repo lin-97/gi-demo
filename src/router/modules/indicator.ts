@@ -6,17 +6,25 @@ const Indicator: AppRouteRecordRaw = {
   name: 'Indicator',
   component: DEFAULT_LAYOUT,
   meta: {
+    title: '指标管理',
     locale: 'menu.indicator',
     requiresAuth: true,
-    icon: 'icon-dashboard',
-    order: 2
+    icon: 'menu-indicator',
+    order: 2,
+    hideChildrenInMenu: true
   },
   children: [
     {
       path: '',
       name: 'IndicatorMain',
       component: () => import('@/views/indicator/main/index.vue'),
-      meta: { title: '指标管理', keepAlive: false, locale: 'menu.indicator.main', requiresAuth: true, roles: ['*'] }
+      meta: {
+        title: '指标管理',
+        keepAlive: false,
+        locale: 'menu.indicator.main',
+        requiresAuth: true,
+        roles: ['*']
+      }
     },
     {
       path: 'detail',
