@@ -17,7 +17,7 @@ type Pagination = {
 
 interface MenuItem {
   path: string
-  name?: string | symbol
+  name: string
   meta?: RouteMeta
   redirect?: string
   component: Component | string

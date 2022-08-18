@@ -2,11 +2,11 @@
   <a-layout-sider collapsible breakpoint="xl" class="asider">
     <a-menu
       :selected-keys="[activeKey]"
-      :default-open-keys="['/home']"
+      :default-open-keys="['Workplace']"
       :auto-open-selected="true"
       :style="{ width: '100%', height: '100%' }"
     >
-      <LoopMenuItem v-for="item in menuTree" :key="item.id" :data="item" @click="handleClickItem"></LoopMenuItem>
+      <LoopMenuItem v-for="item in menuTree" :key="item.name" :data="item" @click="handleClickItem"></LoopMenuItem>
     </a-menu>
   </a-layout-sider>
 </template>
@@ -26,8 +26,8 @@ const getMenuKeys = (params: MenuItem[]) => {
   const data: string[] = []
   function forTree(arr: MenuItem[]) {
     arr.forEach((item: MenuItem) => {
-      if (item.path) {
-        data.push(item.path)
+      if (item.name) {
+        data.push(item.name)
       }
       if (item.children?.length) {
         forTree(item.children)
@@ -38,28 +38,30 @@ const getMenuKeys = (params: MenuItem[]) => {
   return data
 }
 
-const activeKey = ref('/home')
-const menuKeyList = getMenuKeys([])
+const activeKey = ref('Workplace')
+const menuKeyList = getMenuKeys(menuTree.value)
 
 watch(
   () => route.path,
   () => {
-    if (menuKeyList.includes(route.path)) {
-      activeKey.value = route.path
+    console.log(route)
+    if (menuKeyList.includes(route.name?.toString() || '')) {
+      activeKey.value = route.name?.toString() || ''
     }
   },
   { immediate: true }
 )
 
 const handleClickItem = (item: MenuItem) => {
-  if (item.path) {
+  activeKey.value = item.name
+  if (item.name) {
     if (item.name === 'File') {
       router.push({ name: item.name, query: { fileType: 0 } })
     } else {
       router.push({ name: item.name })
     }
     if (menuKeyList.includes(item.path)) {
-      activeKey.value = item.path
+      activeKey.value = item.name
     }
   }
 }
