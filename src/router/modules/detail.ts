@@ -1,19 +1,42 @@
-export default {
+import { DEFAULT_LAYOUT } from '../base'
+import type { AppRouteRecordRaw } from '../types'
+
+const Deatail: AppRouteRecordRaw = {
   path: '/detail',
   name: 'Detail',
-  component: () => import('@/layout/index.vue'),
+  component: DEFAULT_LAYOUT,
+  meta: {
+    locale: 'menu.detail',
+    requiresAuth: true,
+    icon: 'icon-dashboard',
+    order: 6
+  },
   children: [
     {
-      path: '/detail/base-detail',
-      name: 'DetailBaseDetail',
-      component: () => import('@/views/detail/base-detail/index.vue'),
-      meta: { title: '基础详情页', keepAlive: false }
+      path: 'base',
+      name: 'BaseDetail',
+      component: () => import('@/views/detail/base/index.vue'),
+      meta: {
+        title: '基础详情页',
+        keepAlive: false,
+        locale: 'menu.detail.base',
+        requiresAuth: true,
+        roles: ['*']
+      }
     },
     {
-      path: '/detail/senior-detail',
-      name: 'DetailSeniorDetail',
-      component: () => import('@/views/detail/senior-detail/index.vue'),
-      meta: { title: '高级详情页', keepAlive: false }
+      path: 'senior',
+      name: 'SeniorDetail',
+      component: () => import('@/views/detail/senior/index.vue'),
+      meta: {
+        title: '高级详情页',
+        keepAlive: false,
+        locale: 'menu.detail.senior',
+        requiresAuth: true,
+        roles: ['*']
+      }
     }
   ]
 }
+
+export default Deatail

@@ -51,5 +51,32 @@ export default [
     response: () => {
       return successResponseWrap(null)
     }
+  },
+  {
+    url: '/mock/user/menu',
+    method: 'get',
+    timeout: 0,
+    response: () => {
+      return successResponseWrap([
+        {
+          icon: 'menu-work',
+          id: 'YBP',
+          name: '仪表盘',
+          path: '/home',
+          keepAlive: false,
+          hidden: false,
+          children: [
+            {
+              id: 'GZT',
+              name: '工作台',
+              path: '/home',
+              componentPath: 'home/index.vue',
+              keepAlive: false,
+              hidden: false
+            }
+          ]
+        }
+      ])
+    }
   }
 ]

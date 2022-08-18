@@ -2,7 +2,7 @@
   <div class="error-page">
     <section class="container">
       <div class="img-box">
-        <img class="img-parent" :src="pageMap[current]" />
+        <img class="img-parent" :src="Page500" />
       </div>
 
       <div class="tip-box">
@@ -16,33 +16,14 @@
 </template>
 
 <script setup lang="ts" name="ErrorPage">
-import { onBeforeUnmount, onMounted, ref, reactive } from 'vue'
-import { useRoute, useRouter } from 'vue-router'
-import Page403 from '@/assets/svgs/403.svg'
-import Page404 from '@/assets/svgs/404.svg'
+import { onBeforeUnmount, onMounted, ref } from 'vue'
+import { useRouter } from 'vue-router'
 import Page500 from '@/assets/svgs/500.svg'
 
-const route = useRoute()
 const router = useRouter()
 
 const countDownTime = ref(5)
 const timer = ref(0)
-const current = ref(404)
-
-if (route.fullPath) {
-  const arr = route.fullPath.split('/')
-  current.value = Number(arr[arr.length - 1])
-}
-
-interface ErrorPage {
-  [propName: number]: any
-}
-
-const pageMap: ErrorPage = reactive({
-  403: Page403,
-  404: Page404,
-  500: Page500
-})
 
 onMounted(() => {
   onCountDownTime()

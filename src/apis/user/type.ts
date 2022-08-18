@@ -1,4 +1,4 @@
-export interface UserLoginParams {
+export interface LoginParams {
   username: string
   password: string
 }

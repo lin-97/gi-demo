@@ -53,14 +53,14 @@ export const useMenuStore = defineStore({
             {
               id: 'JCBD',
               name: '基础表单',
-              path: '/form/base-form',
+              path: '/form/base',
               keepAlive: false,
               hidden: false
             },
             {
               id: 'FBBD',
               name: '分步表单',
-              path: '/form/step-form',
+              path: '/form/step',
               keepAlive: false,
               hidden: false
             }
@@ -77,14 +77,14 @@ export const useMenuStore = defineStore({
             {
               id: 'ZHBG',
               name: '综合表格',
-              path: '/table/main-table',
+              path: '/table/main',
               keepAlive: false,
               hidden: false
             },
             {
               id: 'ZDYBG',
               name: '自定义表格',
-              path: '/table/custom-table',
+              path: '/table/custom',
               keepAlive: false,
               hidden: false
             }
@@ -152,14 +152,14 @@ export const useMenuStore = defineStore({
             {
               id: 'JCXQY',
               name: '基础详情页',
-              path: '/detail/base-detail',
+              path: '/detail/base',
               keepAlive: false,
               hidden: false
             },
             {
               id: 'GJXQY',
               name: '高级详情页',
-              path: '/detail/senior-detail',
+              path: '/detail/senior',
               keepAlive: false,
               hidden: false
             }

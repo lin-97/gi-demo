@@ -53,12 +53,12 @@ import { useUserStore, useNavTabStore } from '@/store'
 import { useLoading } from '@/hooks'
 import { Message } from '@arco-design/web-vue'
 import LoginBg from './components/LoginBg/index.vue'
-import type { UserLoginParams } from '@/apis'
+import type { LoginParams } from '@/apis'
 const router = useRouter()
 const userStore = useUserStore()
 const navTabStore = useNavTabStore()
 
-const form: UserLoginParams = reactive({
+const form: LoginParams = reactive({
   username: 'admin',
   password: '123456'
 })

@@ -1,19 +1,30 @@
-export default {
+import { DEFAULT_LAYOUT } from '../base'
+import type { AppRouteRecordRaw } from '../types'
+
+const Table: AppRouteRecordRaw = {
   path: '/table',
   name: 'Table',
-  component: () => import('@/layout/index.vue'),
+  component: DEFAULT_LAYOUT,
+  meta: {
+    locale: 'menu.table',
+    requiresAuth: true,
+    icon: 'icon-dashboard',
+    order: 4
+  },
   children: [
     {
-      path: '/table/main-table',
-      name: 'TableMainTable',
-      component: () => import('@/views/table/main-table/index.vue'),
-      meta: { title: '综合表格', keepAlive: false }
+      path: 'main',
+      name: 'TableMain',
+      component: () => import('@/views/table/main/index.vue'),
+      meta: { title: '综合表格', keepAlive: false, locale: 'menu.table.main', requiresAuth: true, roles: ['*'] }
     },
     {
-      path: '/table/custom-table',
-      name: 'TableCustomTable',
-      component: () => import('@/views/table/custom-table/index.vue'),
-      meta: { title: '自定义表格', keepAlive: false }
+      path: 'custom',
+      name: 'TableCustom',
+      component: () => import('@/views/table/custom/index.vue'),
+      meta: { title: '自定义表格', keepAlive: false, locale: 'menu.table.custom', requiresAuth: true, roles: ['*'] }
     }
   ]
 }
+
+export default Table

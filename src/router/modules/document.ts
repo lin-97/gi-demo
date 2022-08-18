@@ -1,25 +1,42 @@
-export default {
+import { DEFAULT_LAYOUT } from '../base'
+import type { AppRouteRecordRaw } from '../types'
+
+const Document: AppRouteRecordRaw = {
   path: '/document',
   name: 'Document',
-  component: () => import('@/layout/index.vue'),
+  component: DEFAULT_LAYOUT,
+  meta: {
+    locale: 'menu.document',
+    requiresAuth: true,
+    icon: 'icon-dashboard',
+    order: 9
+  },
   children: [
     {
-      path: '/document/vue3',
+      path: 'vue3',
       name: 'DocumentVue3',
       component: () => import('@/views/document/vue3/index.vue'),
-      meta: { title: 'vue3文档', keepAlive: false }
+      meta: { title: 'vue3文档', keepAlive: false, locale: 'menu.document.vue3', requiresAuth: false, roles: ['*'] }
     },
     {
-      path: '/document/arco-design',
+      path: 'arco-design',
       name: 'DocumentArcoDesign',
       component: () => import('@/views/document/arco-design/index.vue'),
-      meta: { title: 'arco design文档', keepAlive: false }
+      meta: {
+        title: 'arco design文档',
+        keepAlive: false,
+        locale: 'menu.document.arco-design',
+        requiresAuth: false,
+        roles: ['*']
+      }
     },
     {
-      path: '/document/juejin',
+      path: 'juejin',
       name: 'DocumentJueJin',
       component: () => import('@/views/document/juejin/index.vue'),
-      meta: { title: '掘金', keepAlive: false }
+      meta: { title: '掘金', keepAlive: false, locale: 'menu.document.juejin', requiresAuth: false, roles: ['*'] }
     }
   ]
 }
+
+export default Document
