@@ -4,6 +4,7 @@ import type { AppRouteRecordRaw } from '../types'
 const Indicator: AppRouteRecordRaw = {
   path: '/indicator',
   name: 'Indicator',
+  redirect: '/indicator',
   component: DEFAULT_LAYOUT,
   meta: {
     title: '指标管理',

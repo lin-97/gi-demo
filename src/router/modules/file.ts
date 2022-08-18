@@ -4,6 +4,7 @@ import type { AppRouteRecordRaw } from '../types'
 const File: AppRouteRecordRaw = {
   path: '/file',
   name: 'File',
+  redirect: '/file',
   component: DEFAULT_LAYOUT,
   meta: {
     title: '文件管理',
