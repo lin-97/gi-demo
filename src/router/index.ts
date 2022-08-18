@@ -33,7 +33,6 @@ const routes = [
       requiresAuth: false
     }
   },
-  ...appRoutes,
   {
     path: '/layout',
     name: 'Layout',
@@ -86,7 +85,8 @@ const routes = [
         }
       }
     ]
-  }
+  },
+  ...appRoutes
 ]
 
 const router = createRouter({

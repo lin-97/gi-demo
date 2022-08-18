@@ -10,7 +10,7 @@ const Indicator: AppRouteRecordRaw = {
     locale: 'menu.indicator',
     requiresAuth: true,
     icon: 'menu-indicator',
-    order: 2,
+    order: 1,
     hideChildrenInMenu: true
   },
   children: [

@@ -5,38 +5,41 @@ import { appRoutes as appClientMenus } from '@/router'
 
 export default function useMenuTree() {
   const appStore = useAppStore()
+
   const appRoute = computed(() => {
     if (appStore.menuFromServer) {
       return appStore.asyncMenus
     }
     return appClientMenus
   })
+
   const menuTree = computed(() => {
     const copyRouter = JSON.parse(JSON.stringify(appRoute.value))
     copyRouter.sort((a: RouteRecordNormalized, b: RouteRecordNormalized) => {
       return (a.meta.order || 0) - (b.meta.order || 0)
     })
+    // 遍历方法
     function travel(_routes: RouteRecordRaw[], layer: number) {
       if (!_routes) return null
 
       const collector: any = _routes.map((element) => {
-        // leaf node
+        // 叶子节点
         if (element.meta?.hideChildrenInMenu || !element.children) {
           element.children = []
           return element
         }
 
-        // route filter hideInMenu true
+        // 路由过滤 hideInMenu 为 true
         element.children = element.children.filter((x) => x.meta?.hideInMenu !== true)
 
-        // Associated child node
+        // 相关子节点
         const subItem = travel(element.children, layer + 1)
 
         if (subItem.length) {
           element.children = subItem
           return element
         }
-        // the else logic
+        // 其他逻辑
         if (layer > 1) {
           element.children = subItem
           return element

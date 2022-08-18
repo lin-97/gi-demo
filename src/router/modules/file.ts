@@ -16,7 +16,7 @@ const File: AppRouteRecordRaw = {
   children: [
     {
       path: '',
-      name: 'FileMain',
+      name: 'File',
       component: () => import('@/views/file/main/index.vue'),
       meta: {
         title: '文件管理',
