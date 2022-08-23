@@ -63,7 +63,12 @@
       </a-row>
 
       <a-row justify="space-between" align="center">
-        <span class="label">菜单来源于后台</span>
+        <span class="label"
+          >菜单来源于后台
+          <a-tooltip content="异步菜单没做太仔细，只是简单抄了下Arco Vue Pro，如有需求可自行扩展...">
+            <icon-question-circle-fill style="color: rgb(var(--warning-6))" />
+          </a-tooltip>
+        </span>
         <a-switch
           size="medium"
           :model-value="appStore.menuFromServer"
