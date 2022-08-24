@@ -1,22 +1,24 @@
 <template>
   <a-modal v-model:visible="visible" :title="isEdit ? '编辑' : '新增'" @ok="confirm" @cancel="cancel">
-    <a-form ref="formRef" :model="form" :style="{ width: '450px' }">
-      <a-form-item field="name" label="姓名" :rules="rules.name">
-        <a-input v-model="form.name" placeholder="请输入姓名" style="width: 280px" />
-        <template #extra>
-          <div>仅支持中文姓名</div>
-        </template>
-      </a-form-item>
-      <a-form-item field="address" label="地址">
-        <a-input v-model="form.address" placeholder="请输入地址" style="width: 280px" />
-      </a-form-item>
-      <a-form-item field="status" label="状态" :rules="rules.status">
-        <a-radio-group v-model="form.status">
-          <a-radio :value="false">关闭</a-radio>
-          <a-radio :value="true">开启</a-radio>
-        </a-radio-group>
-      </a-form-item>
-    </a-form>
+    <a-row justify="center">
+      <a-form ref="formRef" :model="form" size="medium" auto-label-width :style="{ width: 'auto' }">
+        <a-form-item field="name" label="姓名" :rules="rules.name">
+          <a-input v-model="form.name" placeholder="请输入姓名" style="width: 300px" />
+          <template #extra>
+            <div>仅支持中文姓名</div>
+          </template>
+        </a-form-item>
+        <a-form-item field="address" label="地址">
+          <a-input v-model="form.address" placeholder="请输入地址" style="width: 300px" />
+        </a-form-item>
+        <a-form-item field="status" label="状态" :rules="rules.status">
+          <a-radio-group v-model="form.status">
+            <a-radio :value="false">关闭</a-radio>
+            <a-radio :value="true">开启</a-radio>
+          </a-radio-group>
+        </a-form-item>
+      </a-form>
+    </a-row>
     <a-collapse :bordered="false" :default-active-key="['1']">
       <a-collapse-item :show-expand-icon="true" key="1">
         <template #header>
@@ -26,7 +28,7 @@
               <icon-question-circle-fill style="color: rgb(var(--warning-6))" />
               <template #content>
                 <span>自定义管理员、编辑者的权限， 点击</span>
-                <a-link type="primary">了解更多权限</a-link>
+                <a-link type="primary" :hoverable="false">了解更多权限</a-link>
               </template>
             </a-tooltip>
           </a-space>

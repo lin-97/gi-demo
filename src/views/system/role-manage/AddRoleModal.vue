@@ -1,6 +1,6 @@
 <template>
   <a-modal v-model:visible="visible" title="新增角色">
-    <a-form>
+    <a-form :model="form" size="medium">
       <a-form-item
         label="角色名称"
         name="name"

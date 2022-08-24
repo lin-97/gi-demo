@@ -1,12 +1,12 @@
 <template>
   <a-modal v-model:visible="visible" title="新增用户">
-    <a-form ref="formRef" :model="form" :labelCol="{ span: 4 }" auto-label-width>
+    <a-form ref="formRef" :model="form" size="medium" :labelCol="{ span: 4 }" auto-label-width>
       <a-form-item
         label="姓名"
         field="userName"
         :rules="[
-          { required: true, message: '请输入部门名称', trigger: 'blur' },
-          { min: 2, max: 4, message: '长度在 2 - 4个字符', trigger: 'blur' }
+          { required: true, message: '请输入部门名称' },
+          { min: 2, max: 4, message: '长度在 2 - 4个字符' }
         ]"
         :validate-trigger="['change', 'input']"
       >

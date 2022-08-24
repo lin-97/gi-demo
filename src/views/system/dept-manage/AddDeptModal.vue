@@ -1,6 +1,6 @@
 <template>
   <a-modal v-model:visible="visible" :title="title">
-    <a-form ref="formRef" :model="form" :labelCol="{ span: 4 }">
+    <a-form ref="formRef" :model="form" size="medium" :labelCol="{ span: 4 }">
       <a-form-item label="上级部门" name="parentId">
         <a-tree-select
           v-model="form.parentId"
@@ -18,8 +18,8 @@
         label="部门名称"
         field="name"
         :rules="[
-          { required: true, message: '请输入部门名称', trigger: 'blur' },
-          { min: 3, max: 10, message: '长度在 3 - 10个字符', trigger: 'blur' }
+          { required: true, message: '请输入部门名称' },
+          { min: 3, max: 10, message: '长度在 3 - 10个字符' }
         ]"
         :validate-trigger="['change', 'input']"
       >
@@ -38,7 +38,7 @@
           <template #prepend>dept_code_</template>
         </a-input>
       </a-form-item> -->
-      <a-form-item label="排序" name="sort" :rules="[{ required: true, message: '请输入排序序号', trigger: 'blur' }]">
+      <a-form-item label="排序" name="sort" :rules="[{ required: true, message: '请输入排序序号' }]">
         <a-input-number v-model="form.sort" style="width: 120px" />
       </a-form-item>
       <a-form-item label="状态" name="status">
@@ -93,8 +93,8 @@ watch(
     form.id = newVal.id
     form.parentId = newVal.parentId
     form.name = newVal.name
-    form.sort = newVal.sort
-    form.status = newVal.status
+    form.sort = newVal.sort || 0
+    form.status = newVal.status || 0
   }
 )
 </script>

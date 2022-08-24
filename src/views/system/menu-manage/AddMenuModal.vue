@@ -1,6 +1,6 @@
 <template>
   <a-modal v-model:visible="visible" title="新增菜单">
-    <a-form ref="formRef" :model="form" :labelCol="{ span: 4 }">
+    <a-form ref="formRef" :model="form" size="medium" :labelCol="{ span: 4 }">
       <a-form-item label="上级菜单" parentId="name">
         <a-tree-select
           :data="treeData"
@@ -17,8 +17,8 @@
         label="菜单名称"
         field="name"
         :rules="[
-          { required: true, message: '请输入菜单名称', trigger: 'blur' },
-          { min: 3, max: 10, message: '长度在 3 - 10个字符', trigger: 'blur' }
+          { required: true, message: '请输入菜单名称' },
+          { min: 3, max: 10, message: '长度在 3 - 10个字符' }
         ]"
         :validate-trigger="['change', 'input']"
       >
@@ -28,8 +28,8 @@
         label="菜单地址"
         field="path"
         :rules="[
-          { required: true, message: '请输入菜单地址', trigger: 'blur' },
-          { min: 3, max: 10, message: '长度在 3 - 30个字符', trigger: 'blur' }
+          { required: true, message: '请输入菜单地址' },
+          { min: 3, max: 10, message: '长度在 3 - 30个字符' }
         ]"
         :validate-trigger="['change', 'input']"
       >
