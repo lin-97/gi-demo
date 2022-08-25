@@ -1,10 +1,9 @@
 import { ref, type UnwrapRef } from 'vue'
 import type { AxiosResponse } from 'axios'
-import type { HttpResponse } from '@/utils/http'
 import useLoading from './useLoading'
 
 export default function useRequest<T>(
-  api: () => Promise<AxiosResponse<HttpResponse>>,
+  api: () => Promise<AxiosResponse<ApiRes<T>>>,
   defaultValue = [] as unknown as T,
   isLoading = true
 ) {

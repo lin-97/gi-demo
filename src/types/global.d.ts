@@ -36,7 +36,7 @@ interface NavTabItem {
 }
 
 // 接口返回数据格式
-interface HttpResponse<T = unknown> {
+interface ApiRes<T> {
   code: number
   message: string
   data: T
@@ -44,7 +44,7 @@ interface HttpResponse<T = unknown> {
 }
 
 // 接口返回的列表数据
-interface IResListData<T> {
+interface ApiListData<T> {
   total: number
   list: T
   [propName: string]: unknown

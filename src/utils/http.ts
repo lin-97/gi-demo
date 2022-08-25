@@ -56,7 +56,7 @@ http.interceptors.request.use(
 
 // 响应拦截器
 http.interceptors.response.use(
-  (response: AxiosResponse<HttpResponse>) => {
+  (response: AxiosResponse) => {
     const { data } = response
     const { message, success } = data
 
@@ -81,13 +81,13 @@ http.interceptors.response.use(
 const request = <T = unknown>(config: AxiosRequestConfig): Promise<T> => {
   return new Promise((resolve, reject) => {
     http
-      .request<HttpResponse<T>>(config)
+      .request<T>(config)
       .then((res: AxiosResponse) => resolve(res.data))
       .catch((err: { message: string }) => reject(err))
   })
 }
 
-request.get = <T = unknown>(url: string, params?: object, headers?: AxiosRequestHeaders): Promise<HttpResponse<T>> => {
+request.get = <T = unknown>(url: string, params?: object, headers?: AxiosRequestHeaders): Promise<T> => {
   return request({
     method: 'get',
     url,
@@ -96,7 +96,7 @@ request.get = <T = unknown>(url: string, params?: object, headers?: AxiosRequest
   })
 }
 
-request.post = <T = unknown>(url: string, params?: object, headers?: AxiosRequestHeaders): Promise<HttpResponse<T>> => {
+request.post = <T = unknown>(url: string, params?: object, headers?: AxiosRequestHeaders): Promise<T> => {
   return request({
     method: 'post',
     url,
