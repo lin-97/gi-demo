@@ -31,6 +31,7 @@
     "vue-color-kit": "^1.0.5",
     "vue-echarts": "^6.2.3",
     "vue-router": "^4.1.2",
+    "vue3-lottie": "^2.3.0",
     "xgplayer": "^2.31.6",
     "xgplayer-music": "^2.3.2"
   },

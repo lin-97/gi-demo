@@ -13,6 +13,7 @@
           <p>今日阴转大雨，15℃ - 25℃，出门记得带伞哦。</p>
         </div>
       </a-space>
+
       <a-space :size="50">
         <a-statistic title="项目数" :value="16" :value-from="0" :start="true" animation> </a-statistic>
         <a-statistic title="待办" :value="3" :value-from="0" :start="true" animation>

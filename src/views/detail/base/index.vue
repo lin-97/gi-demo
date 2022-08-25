@@ -10,7 +10,7 @@
       </section>
     </a-affix>
     <section class="item">
-      <a-descriptions title="基本信息" layout="inline-horizontal" size="medium">
+      <a-descriptions title="基本信息">
         <a-descriptions-item label="姓名：">Lin</a-descriptions-item>
         <a-descriptions-item label="性别：">男</a-descriptions-item>
         <a-descriptions-item label="生日：">07月16日</a-descriptions-item>
@@ -38,7 +38,7 @@
     </section>
 
     <section class="item">
-      <a-descriptions title="其他信息" layout="inline-horizontal" :column="1">
+      <a-descriptions title="其他信息" :column="1">
         <a-descriptions-item label="姓名：">Lin</a-descriptions-item>
         <a-descriptions-item label="性别：">男</a-descriptions-item>
         <a-descriptions-item label="生日：">07月16日</a-descriptions-item>

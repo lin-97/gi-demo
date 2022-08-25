@@ -90,12 +90,10 @@
           <a-table-column title="手机号" data-index="phone" :width="150"></a-table-column>
           <a-table-column title="创建时间" data-index="startTime" ellipsis tooltip></a-table-column>
           <a-table-column title="地址" data-index="address" ellipsis tooltip></a-table-column>
-          <a-table-column title="状态" :width="100">
+          <a-table-column title="状态" :width="100" align="center">
             <template #cell="{ record }">
-              <a-switch :model-value="record.status" size="medium" checked-color="rgb(var(--success-6))">
-                <template #checked>开启</template>
-                <template #unchecked>关闭</template>
-              </a-switch>
+              <a-link v-if="record.status" status="success" :hoverable="false">开启</a-link>
+              <a-link v-else status="danger" :hoverable="false">关闭</a-link>
             </template>
           </a-table-column>
           <a-table-column title="操作" :width="200" align="center">

@@ -3,17 +3,11 @@
     <template #extra>
       <a-link>更多</a-link>
     </template>
-    <ul class="list">
-      <li class="list-item" v-for="item in list" :key="item.name">
-        <a-avatar :size="40">
-          <img src="@/assets/images/avatar.jpg" />
-        </a-avatar>
-        <div class="info">
-          <p>{{ item.name }}</p>
-          <p>{{ item.text }}</p>
-        </div>
-      </li>
-    </ul>
+    <a-comment v-for="item in list" :key="item.name" :author="item.name" :content="item.text" align="right">
+      <template #avatar>
+        <a-avatar><img src="https://s1.ax1x.com/2022/07/05/jtMjGq.jpg" /></a-avatar>
+      </template>
+    </a-comment>
   </a-card>
 </template>
 
@@ -60,35 +54,15 @@ const list = [
 </script>
 
 <style lang="scss" scoped>
-.list {
-  .list-item {
-    padding: 10px;
-    box-sizing: border-box;
-    display: flex;
-    align-items: center;
-    border-bottom: 1px solid $color-border;
-    cursor: pointer;
-    &:hover {
-      background: var(--color-fill-1);
-    }
-    .info {
-      margin-left: 10px;
-      p {
-        line-height: 1.5;
-        &:first-child {
-          font-size: 14px;
-          color: var(--color-text-2);
-          transition: all 0.2s;
-          &:hover {
-            color: $color-theme;
-          }
-        }
-        &:last-child {
-          font-size: 12px;
-          color: var(--color-text-3);
-        }
-      }
-    }
-  }
+:deep(.arco-comment:not(:first-of-type), .arco-comment-inner-comment) {
+  margin-top: 10px;
+}
+:deep(.arco-comment) {
+  border-bottom: 1px solid var(--color-border-1);
+  padding-bottom: 10px;
+}
+:deep(.arco-comment-content) {
+  font-size: 12px;
+  color: var(--color-text-3);
 }
 </style>

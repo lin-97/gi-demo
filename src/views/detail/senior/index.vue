@@ -11,7 +11,7 @@
     </a-affix>
 
     <section class="item">
-      <a-descriptions title="基本信息" layout="inline-horizontal" size="medium">
+      <a-descriptions title="基本信息">
         <a-descriptions-item label="姓名：">Lin</a-descriptions-item>
         <a-descriptions-item label="性别：">男</a-descriptions-item>
         <a-descriptions-item label="生日：">07月16日</a-descriptions-item>
@@ -47,7 +47,7 @@
         <a-step description="Echo">财务审批</a-step>
       </a-steps>
 
-      <a-descriptions title="基本信息" layout="inline-horizontal" size="medium" style="flex: 1; margin-left: 20%">
+      <a-descriptions title="基本信息" style="flex: 1; margin-left: 20%">
         <a-descriptions-item label="姓名：">Lin</a-descriptions-item>
         <a-descriptions-item label="性别：">男</a-descriptions-item>
         <a-descriptions-item label="生日：">07月16日</a-descriptions-item>

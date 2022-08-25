@@ -54,6 +54,8 @@ const loadingObj = {
     }
     if (loadingText) {
       instance.setLoadingText(loadingText)
+    } else {
+      instance.setLoadingText('')
     }
 
     el.instance = instance
@@ -73,6 +75,8 @@ const loadingObj = {
       }
       if (loadingText) {
         el.instance.setLoadingText(loadingText)
+      } else {
+        el.instance.setLoadingText('')
       }
       binding.value ? appendEl(el) : removeEl(el)
     }
