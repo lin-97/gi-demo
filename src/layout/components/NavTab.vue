@@ -18,24 +18,22 @@
       <!-- 右侧按钮 -->
       <template #extra>
         <a-dropdown trigger="hover">
-          <a-button type="primary" size="small" class="extra-btn">
-            <template #icon>
-              <icon-settings :size="18" />
-            </template>
+          <a-button type="primary" size="mini" class="extra-btn">
+            <template #icon><icon-settings :size="18" /></template>
           </a-button>
           <template #content>
-            <a-doption @click="onClose(route.path)"
-              ><template #icon>
-                <icon-minus-circle-fill :size="20" style="color: #ff7d00" />
+            <a-doption @click="onClose(route.path)">
+              <template #icon>
+                <icon-minus-circle-fill :size="20" style="color: rgb(var(--warning-6))" />
               </template>
-              <template #default>关闭当前页签</template></a-doption
-            >
-            <a-doption @click="onCloseAll"
-              ><template #icon>
-                <icon-close-circle-fill :size="20" style="color: #f53f3f" />
+              <template #default>关闭当前页签</template>
+            </a-doption>
+            <a-doption @click="onCloseAll">
+              <template #icon>
+                <icon-close-circle-fill :size="20" style="color: rgb(var(--danger-6))" />
               </template>
-              <template #default>关闭所有页签</template></a-doption
-            >
+              <template #default>关闭所有页签</template>
+            </a-doption>
           </template>
         </a-dropdown>
       </template>
@@ -133,6 +131,8 @@ const onCloseAll = () => {
 }
 
 .extra-btn {
+  width: 28px;
+  height: 28px;
   margin-right: 14px;
   margin-bottom: 5px;
   &:hover {

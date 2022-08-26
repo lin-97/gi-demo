@@ -44,7 +44,7 @@ const loadingObj = {
   // 在绑定元素的父组件被挂载前调用
   mounted(el: any, binding: any) {
     const app = createApp(Loading)
-    const instance = app.mount(document.createElement('div'))
+    const instance: any = app.mount(document.createElement('div'))
 
     const loadingType = el.getAttribute('gi-loading-type') || ''
     const loadingText = el.getAttribute('gi-loading-text') || ''

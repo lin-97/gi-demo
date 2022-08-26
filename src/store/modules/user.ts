@@ -1,18 +1,9 @@
 import { defineStore } from 'pinia'
 import { login as userLogin, logout as userLogout } from '@/apis'
-import type { LoginParams } from '@/apis'
+import type { LoginParams, UserInfo } from '@/apis'
 import { setToken, clearToken } from '@/utils/auth'
 
 export type RoleType = '' | '*' | 'admin' | 'user'
-
-export interface UserInfo {
-  name: string
-  avatar?: string
-  phone?: string
-  registrationDate?: string
-  accountId?: string
-  role: RoleType
-}
 
 interface UserState {
   userInfo: UserInfo

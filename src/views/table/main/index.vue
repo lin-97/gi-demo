@@ -96,17 +96,24 @@
               <a-link v-else status="danger" :hoverable="false">关闭</a-link>
             </template>
           </a-table-column>
-          <a-table-column title="操作" :width="200" align="center">
+          <a-table-column title="操作" :width="300" align="center">
             <template #cell="{ record }">
-              <a-row justify="center">
-                <a-space>
-                  <a-button type="primary" size="mini">修改</a-button>
-                  <a-button size="mini">详情</a-button>
-                  <a-popconfirm type="warning" content="您确定要删除该项吗?">
-                    <a-button type="primary" status="danger" size="mini">删除</a-button>
-                  </a-popconfirm>
-                </a-space>
-              </a-row>
+              <a-space>
+                <a-link>
+                  <template #icon><icon-edit :size="15" /></template>
+                  <template #default>编辑</template>
+                </a-link>
+                <a-link>
+                  <template #icon><icon-eye :size="15" /></template>
+                  <template #default>详情</template>
+                </a-link>
+                <a-popconfirm type="warning" content="您确定要删除该项吗?">
+                  <a-link status="danger">
+                    <template #icon><icon-delete :size="15" /></template>
+                    <template #default>删除</template>
+                  </a-link>
+                </a-popconfirm>
+              </a-space>
             </template>
           </a-table-column>
         </template>

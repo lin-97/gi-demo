@@ -1,10 +1,10 @@
 import axios from '@/utils/http'
 const prefix = '/mock'
-import type { LoginParams } from './type'
+import type { LoginParams, LoginRes } from './type'
 
 /** @desc 登录 */
 export function login(data: LoginParams) {
-  return axios.post(`${prefix}/user/login`, data)
+  return axios.post<ApiRes<LoginRes>>(`${prefix}/user/login`, data)
 }
 
 /** @desc 退出登录 */
