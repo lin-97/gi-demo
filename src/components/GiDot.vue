@@ -1,5 +1,5 @@
 <template>
-  <span class="gi-dot gi-dot-processing" :class="`gi-dot-${type}`"></span>
+  <span class="gi-dot" :class="[{ 'gi-dot-processing': animation }, `gi-dot-${type}`]"></span>
 </template>
 
 <script setup lang="ts" name="GiDot">
@@ -11,6 +11,11 @@ defineProps({
   type: {
     type: String as PropType<Type>,
     default: 'primary'
+  },
+  // 是否开启动画
+  animation: {
+    type: Boolean,
+    default: true
   }
 })
 </script>
@@ -24,9 +29,24 @@ defineProps({
   border-radius: 50%;
   vertical-align: middle;
 }
+
+$types: primary, success, warning, danger, info;
+
+@each $i in $types {
+  .gi-dot-#{$i} {
+    background-color: rgb(var(--#{$i}-6));
+  }
+  @if ($i == info) {
+    .gi-dot-#{$i} {
+      background-color: rgb(var(--gray-6));
+    }
+  }
+}
+
 .gi-dot-processing {
   position: relative;
 }
+
 .gi-dot-processing:after {
   position: absolute;
   top: 0px;
@@ -37,22 +57,6 @@ defineProps({
   background: inherit;
   content: '';
   animation: gi-dot-animated 1.2s ease-in-out infinite;
-}
-
-.gi-dot-primary {
-  background: $color-primary;
-}
-.gi-dot-success {
-  background: $color-success;
-}
-.gi-dot-warning {
-  background: $color-warning;
-}
-.gi-dot-danger {
-  background: $color-danger;
-}
-.gi-dot-info {
-  background: $color-info;
 }
 
 @keyframes gi-dot-animated {

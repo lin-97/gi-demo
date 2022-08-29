@@ -2,7 +2,6 @@
   <div class="gi-footer">Copyright 2022 Gi Admin Pro</div>
 </template>
 
-<script setup lang="ts" name="GiFooter"></script>
 <script lang="ts">
 export default {
   name: 'GiFooter'

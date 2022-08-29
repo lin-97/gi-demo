@@ -21,13 +21,11 @@
 import { ref } from 'vue'
 import Button from './components/Button.vue'
 import GiTitle from '@/components/GiTitle.vue'
-import TextSwitch from './components/TextSwitch.vue'
 import Tag from './components/Tag.vue'
 import Title from './components/Title.vue'
 import IconSelector from './components/IconSelector.vue'
 import Option from './components/Option.vue'
 import Dot from './components/Dot.vue'
-import Flex from './components/Flex.vue'
 import FlexibleBox from './components/FlexibleBox.vue'
 import Area from './components/Area.vue'
 import Json from './components/Json.vue'
@@ -41,14 +39,12 @@ const selectedKey = ref(0)
 const menuList = [
   { name: '单选框/复选框', value: Option },
   { name: '按钮', value: Button },
-  { name: 'GiTextSwitch', value: TextSwitch },
   { name: 'GiTag', value: Tag },
   { name: 'GiTitle', value: Title },
   { name: 'GiIconSelector', value: IconSelector },
   { name: 'GiDot', value: Dot },
   { name: 'GiFlexibleBox', value: FlexibleBox },
   { name: '自定义加载指令', value: Loading },
-  { name: 'Flex布局', value: Flex },
   { name: '省市区', value: Area },
   { name: 'JSON查看', value: Json },
   { name: '富文本', value: Editor },
