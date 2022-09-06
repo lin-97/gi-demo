@@ -21,7 +21,7 @@ export const appRoutes: RouteRecordNormalized[] = formatModules(modules, [])
 const routes = [
   {
     path: '/',
-    redirect: 'login'
+    redirect: '/dashboard/workplace'
   },
   {
     path: '/login',
@@ -29,33 +29,21 @@ const routes = [
     component: () => import('@/views/login/index.vue'),
     meta: {
       title: '登录',
-      keepAlive: false,
-      requiresAuth: false
+      keepAlive: false
     }
   },
   {
     path: '/layout',
     name: 'Layout',
     component: DEFAULT_LAYOUT,
-    meta: {
-      title: '其他',
-      locale: 'menu.other',
-      requiresAuth: false,
-      icon: 'menu-nav',
-      order: 4
-    },
     children: [
       {
         path: 'about',
         name: 'About',
         component: () => import('@/views/about/index.vue'),
         meta: {
-          icon: 'menu-about',
           title: '关于',
-          keepAlive: false,
-          locale: 'menu.other.main',
-          requiresAuth: false,
-          roles: ['*']
+          keepAlive: false
         }
       },
       {
@@ -63,12 +51,8 @@ const routes = [
         name: 'Navigation',
         component: () => import('@/views/navigation/index.vue'),
         meta: {
-          icon: 'menu-nav',
           title: '导航',
-          keepAlive: false,
-          locale: 'menu.other.main',
-          requiresAuth: false,
-          roles: ['*']
+          keepAlive: false
         }
       },
       {
@@ -76,12 +60,8 @@ const routes = [
         name: 'Tool',
         component: () => import('@/views/tool/index.vue'),
         meta: {
-          icon: 'menu-test',
           title: '功能页',
-          keepAlive: true,
-          locale: 'menu.other.main',
-          requiresAuth: false,
-          roles: ['*']
+          keepAlive: true
         }
       }
     ]

@@ -2,9 +2,6 @@ import { defineStore } from 'pinia'
 import { generate, getRgbStr } from '@arco-design/color'
 import defaultSettings from '@/config/setting.json'
 import type { TabModeType, animateModeType } from '@/config/option'
-import { Notification } from '@arco-design/web-vue'
-import type { NotificationReturn } from '@arco-design/web-vue'
-import { getMenuList } from '@/apis'
 
 interface ThemeState {
   theme: 'light' | 'dark'
@@ -20,7 +17,6 @@ interface ThemeState {
   animate: boolean
   animateMode: animateModeType
   menuFromServer: boolean
-  serverMenu: any[]
 }
 
 const storageAppSetting = JSON.parse(localStorage.getItem('AppSetting') || '{}')
@@ -33,10 +29,6 @@ export const useAppStore = defineStore({
     transitionName(): string {
       return this.animate ? this.animateMode : ''
     },
-    // 动态菜单
-    asyncMenus(): any {
-      return this.serverMenu
-    }
   },
   actions: {
     // 切换主题  暗黑模式|简白模式
@@ -79,39 +71,6 @@ export const useAppStore = defineStore({
     setAnimateMode(mode: animateModeType) {
       this.animateMode = mode
       localStorage.setItem('AppSetting', JSON.stringify(this.$state))
-    },
-    // 获取动态菜单
-    async getServerMenus() {
-      let notifyInstance: NotificationReturn | null = null
-      try {
-        notifyInstance = Notification.info({
-          id: 'menuNotice', // Keep the instance id the same
-          content: '动态菜单加载中',
-          closable: true
-        })
-        const { data } = await getMenuList()
-        this.serverMenu = data
-        notifyInstance = Notification.success({
-          id: 'menuNotice',
-          content: '加载成功',
-          closable: true
-        })
-      } catch (error) {
-        // eslint-disable-next-line @typescript-eslint/no-unused-vars
-        notifyInstance = Notification.error({
-          id: 'menuNotice',
-          content: '加载失败',
-          closable: true
-        })
-      }
-    },
-    // 清除服务菜单
-    clearServerMenu() {
-      this.serverMenu = []
-    },
-    // 改变菜单来源方式
-    changeMenuFromServer(value: boolean) {
-      this.menuFromServer = value
     }
   }
 })

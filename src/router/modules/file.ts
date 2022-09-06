@@ -1,42 +1,27 @@
 import { DEFAULT_LAYOUT } from '../base'
-import type { AppRouteRecordRaw } from '../types'
 
-const File: AppRouteRecordRaw = {
+const File = {
   path: '/file',
   name: 'File',
   redirect: '/file',
   component: DEFAULT_LAYOUT,
-  meta: {
-    title: '文件管理',
-    locale: 'menu.file',
-    requiresAuth: true,
-    icon: 'menu-file',
-    order: 2,
-    hideChildrenInMenu: true
-  },
   children: [
     {
-      path: '',
+      path: '/file',
       name: 'File',
       component: () => import('@/views/file/main/index.vue'),
       meta: {
         title: '文件管理',
-        keepAlive: false,
-        locale: 'menu.file.main',
-        requiresAuth: true,
-        roles: ['*']
+        keepAlive: false
       }
     },
     {
-      path: 'detail',
+      path: '/file/detail',
       name: 'FileDetail',
       component: () => import('@/views/file/detail/index.vue'),
       meta: {
         title: '文件详情',
-        keepAlive: false,
-        locale: 'menu.file.detail',
-        requiresAuth: true,
-        roles: ['*']
+        keepAlive: false
       }
     }
   ]

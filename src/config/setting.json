@@ -1,6 +1,6 @@
 {
   "theme": "light",
-  "themeColor": "#5856D6",
+  "themeColor": "#536dfe",
   "header": true,
   "footer": true,
   "menu": true,
@@ -10,7 +10,5 @@
   "tab": true,
   "tabMode": "card",
   "animate": true,
-  "animateMode": "zoom-fade",
-  "menuFromServer": false,
-  "serverMenu": []
+  "animateMode": "zoom-fade"
 }

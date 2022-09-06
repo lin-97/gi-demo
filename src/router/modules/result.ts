@@ -1,29 +1,21 @@
 import { DEFAULT_LAYOUT } from '../base'
-import type { AppRouteRecordRaw } from '../types'
 
-const Result: AppRouteRecordRaw = {
+const Result = {
   path: '/result',
   name: 'Result',
   component: DEFAULT_LAYOUT,
-  meta: {
-    title: '结果页',
-    locale: 'menu.result',
-    requiresAuth: true,
-    icon: 'menu-result',
-    order: 8
-  },
   children: [
     {
-      path: 'success',
+      path: '/result/success',
       name: 'ResultSuccess',
       component: () => import('@/views/result/success/index.vue'),
-      meta: { title: '成功页', keepAlive: false, locale: 'menu.result.success', requiresAuth: true, roles: ['*'] }
+      meta: { title: '成功页', keepAlive: false }
     },
     {
-      path: 'fail',
+      path: '/result/fail',
       name: 'ResultFail',
       component: () => import('@/views/result/fail/index.vue'),
-      meta: { title: '失败页', keepAlive: false, locale: 'menu.result.fail', requiresAuth: true, roles: ['*'] }
+      meta: { title: '失败页', keepAlive: false }
     }
   ]
 }
