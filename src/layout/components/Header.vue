@@ -116,7 +116,6 @@ const logout = () => {
     hideCancel: false,
     onOk: () => {
       userStore.logout()
-      appStore.clearServerMenu()
       router.replace('/login')
     }
   })

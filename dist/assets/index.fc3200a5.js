@@ -1,0 +1,1 @@
+import{d as t,o,c as s,p as _,e as a,a as c,_ as n}from"./index.2c315818.js";const d=e=>(_("data-v-4f39f09f"),e=e(),a(),e),p={class:"navigation"},f=d(()=>c("iframe",{src:"https://www.5cv.top/",frameborder:"0"},null,-1)),i=[f],r=t({name:"Navigation"}),l=t({...r,setup(e){return(u,m)=>(o(),s("div",p,i))}});const h=n(l,[["__scopeId","data-v-4f39f09f"]]);export{h as default};
