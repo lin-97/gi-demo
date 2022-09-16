@@ -1,12 +1,6 @@
 /* 全局样式 */
 @import './var.scss';
 
-// 通用标题
-.gi_title {
-  font-size: 14px;
-  margin-bottom: 12px;
-}
-
 // 通用外边距
 .gi_margin {
   margin: $margin;
@@ -26,23 +20,26 @@
 }
 
 .gi_rotate_90deg {
-  transition: all 0.3s;
   transform: rotate(90deg);
 }
 
 .gi_rotate_-90deg {
-  transition: all 0.3s;
   transform: rotate(-90deg);
 }
 
 .gi_rotate_180deg {
-  transition: all 0.3s;
   transform: rotate(180deg);
 }
 
 .gi_rotate_-180deg {
-  transition: all 0.3s;
   transform: rotate(-180deg);
+}
+
+.gi_rotate_90deg,
+.gi_rotate_-90deg,
+.gi_rotate_180deg,
+.gi_rotate_-180deg {
+  transition: all 0.3s;
 }
 
 // 通用盒子
@@ -50,15 +47,6 @@
   background: var(--color-bg-1);
   border-radius: $radius-box;
   overflow: hidden;
-}
-
-// 鼠标悬停
-.gi_hover {
-  transition: color 0.3s;
-  &:hover {
-    color: $color-theme !important;
-    cursor: pointer;
-  }
 }
 
 .gi_select_input {
@@ -102,13 +90,6 @@
   -webkit-box-orient: vertical; // 设置伸缩盒子元素排列方式
 }
 
-.gi_flex_box {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  overflow: hidden;
-}
-
 .gi_lr_page {
   flex: 1;
   padding: $margin;
@@ -144,4 +125,11 @@
   &:active {
     background: var(--color-secondary-active) !important;
   }
+}
+
+// 文本标签 作用于<a-tag class="gi_text_tag"></a-tag>
+.gi_text_tag {
+  font-size: 14px;
+  padding: 0;
+  background-color: transparent !important;
 }

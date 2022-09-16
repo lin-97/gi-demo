@@ -115,7 +115,7 @@
   </div>
 </template>
 
-<script setup lang="ts" name="IndicatorManage">
+<script setup lang="ts" name="QuotaManage">
 import { ref } from 'vue'
 import { useRouter } from 'vue-router'
 import { Modal, Message } from '@arco-design/web-vue'
@@ -185,7 +185,7 @@ const onAdd = () => {
 }
 
 const onDetail = () => {
-  router.push({ path: '/indicator/detail' })
+  router.push({ path: '/quota/detail' })
 }
 
 const onDelete = (row: any) => {

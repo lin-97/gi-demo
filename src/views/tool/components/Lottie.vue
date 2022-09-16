@@ -6,6 +6,6 @@
 </template>
 
 <script setup lang="ts">
-import * as lottie01 from '@/libs/lottie01.json'
-import * as lottie02 from '@/libs/lottie02.json'
+import * as lottie01 from '@/libs/lottie/lottie01.json'
+import * as lottie02 from '@/libs/lottie/lottie02.json'
 </script>

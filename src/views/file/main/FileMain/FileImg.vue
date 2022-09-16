@@ -5,7 +5,7 @@
 
 <script setup lang="ts">
 import { computed, type PropType } from 'vue'
-import { fileExtendNameIconMap, imageTypeList } from '@/libs/file-map'
+import { fileExtendNameIconMap, imageTypeList } from '@/libs/file/file-map'
 import type { ApiFileItem } from '@/apis'
 
 const props = defineProps({

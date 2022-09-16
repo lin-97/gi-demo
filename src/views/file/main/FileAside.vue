@@ -26,7 +26,7 @@
 import { ref, watch } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import { useWindowSize } from '@vueuse/core'
-import { fileTypeList, type fileTypeListItem } from '@/libs/file-map'
+import { fileTypeList, type fileTypeListItem } from '@/libs/file/file-map'
 const route = useRoute()
 const router = useRouter()
 

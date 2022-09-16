@@ -2,7 +2,7 @@
   <a-layout-header>
     <section class="system-logo" @click="toHome">
       <img src="@/assets/images/logo.gif" />
-      <span class="gi_hover system-name">Admin Pro</span>
+      <span class="system-name">Admin Pro</span>
     </section>
     <a-space class="system-head" size="medium">
       <!-- 项目配置 -->
@@ -167,6 +167,11 @@ const toGitPath = () => {
     .system-name {
       padding-left: 10px;
       white-space: nowrap;
+      transition: color 0.3s;
+      &:hover {
+        color: $color-theme !important;
+        cursor: pointer;
+      }
     }
   }
   .system-head {

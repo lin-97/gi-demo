@@ -27,10 +27,10 @@ export const useMenuStore = defineStore({
           ]
         },
         {
-          icon: 'menu-indicator',
+          icon: 'menu-quota',
           id: 'ZBGL',
           name: '指标管理',
-          path: '/indicator',
+          path: '/quota',
           keepAlive: true,
           hidden: false
         },
