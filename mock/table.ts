@@ -13,13 +13,13 @@ export function doCustomTimes(times: number, callback: any) {
   }
 }
 
-const tableList = (pageSize) => {
-  const result: any[] = []
-  doCustomTimes(pageSize, (i) => {
-    result.push({
+const getTableListData = (params) => {
+  const data: any[] = []
+  for (let i = 0; i < params.pageSize; i++) {
+    data.push({
       id: '@integer(10,999999)',
       index: i,
-      name: '@cname()',
+      name: params.name !== '' ? params.name : '@cname()',
       phone: '15578728810',
       startTime: '@datetime',
       endTime: '@datetime',
@@ -29,11 +29,11 @@ const tableList = (pageSize) => {
       time: `@time('HH:mm')`,
       'proportion|1-100': 10,
       'no|100000-10000000': 100000,
-      'status|1': [true, false],
+      status: params.status != '' ? Number(params.status) : Math.random() > 0.5 ? 1 : 0, // 0或1
       color: Mock.mock('@hex')
     })
-  })
-  return result
+  }
+  return data
 }
 
 export default [
@@ -42,8 +42,8 @@ export default [
     method: 'get',
     timeout: 0,
     response: ({ query }) => {
-      const { current = 1, pageSize = 10 } = query
-      const list = tableList(Number(pageSize))
+      const { current = 1, pageSize = 10, status = 0, name = '' } = query
+      const list = getTableListData({ current, pageSize, status, name })
       return successResponseWrap({
         current: Number(current),
         pageSize: Number(pageSize),
