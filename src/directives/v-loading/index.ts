@@ -40,10 +40,10 @@ const VLoading = {
     const instance: any = app.mount(document.createElement('div'))
     el.instance = instance
 
-    const loadingType = el.getAttribute('gi-loading-type') || ''
+    const loadingType = el.getAttribute('gi-loading-type')
     const loadingText = el.getAttribute('gi-loading-text') || ''
 
-    el.instance && el.instance.setLoadingType(loadingType)
+    el.instance && loadingType && el.instance.setLoadingType(loadingType)
     el.instance && el.instance.setLoadingText(loadingText)
 
     if (binding.value) {
@@ -53,10 +53,10 @@ const VLoading = {
   // 更新后调用
   updated(el: HTMLElement & Element, binding: DirectiveBinding) {
     if (binding.value !== binding.oldValue) {
-      const loadingType = el.getAttribute('gi-loading-type') || ''
+      const loadingType = el.getAttribute('gi-loading-type')
       const loadingText = el.getAttribute('gi-loading-text') || ''
 
-      el.instance && el.instance.setLoadingType(loadingType)
+      el.instance && loadingType && el.instance.setLoadingType(loadingType)
       el.instance && el.instance.setLoadingText(loadingText)
 
       binding.value ? appendEl(el) : removeEl(el)

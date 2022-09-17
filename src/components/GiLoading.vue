@@ -10,13 +10,14 @@
 <script setup lang="ts" name="GiLoading">
 import { ref } from 'vue'
 import GiLoadingIcon from '@/components/GiLodingIcon/index.vue'
+import type { LoadingIconType } from '@/components/GiLodingIcon/type'
 import { trim } from '@/utils/common'
 
-const loadingType = ref('dot')
+const loadingType = ref<LoadingIconType>('dot')
 const loadingText = ref('')
 
 // 设置加载类型
-const setLoadingType = (type: string) => {
+const setLoadingType = (type: LoadingIconType) => {
   loadingType.value = type
 }
 
