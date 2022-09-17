@@ -147,12 +147,36 @@ import { getUserList, saveUser } from '@/apis'
 > 页面变量命名 ()
 
 ~~~js
+// 变量
+const loading = ref(false) // 加载
+const tableData = ref([]) // 表格数据
+const showAddDialog = ref(false)
+const showAddModal = ref(false)
+const showEditDrawer = ref(false)
+const form = reactive({
+    name: '',
+    phone: '',
+    remark: ''
+})
+const userList = []
+const companyList = ref([]) // 列表数据最好后面加个 List 或者 Data
+const checkedList = ref([])
+const selectedList = ref([])
+
+// 方法
 编辑 onEdit     handleEdit     edit
 新增 onAdd      handleAdd      add
 删除 onDelete   handleDelete   delete
 批量删除 onMulDelete   handleMulDelete  mulDelete
+重命名 onRename
 搜索 search
 获取表格列表 getTableData  // 一般一个页面也就一个表格，gi-demo习惯用getTableData, 结合分页hooks的时候可以直接复制复用
+返回 back
+提交 submit
+确认 confirm  ok  submit
+取消 cancel
+关闭 close
+保存 save
 ~~~
 
 页面模板类名使用中划线
@@ -215,6 +239,46 @@ $color-text-1: var(--color-text-1); // 标题、重点文本字体颜色
 $color-text-2: var(--color-text-2); // 文本-全局默认字体颜色
 $color-text-3: var(--color-text-3); // 二级文本颜色
 $color-text-4: var(--color-text-4); // 辅助文本颜色
+~~~
+
+
+
+> 业务状态
+
+gi-demo的业务状态放在@/libs/status/xxx.ts      xxx为接口模块名
+
+~~~js
+type SubmitStatusItem = { name: string; value: number; color: string }
+/** @desc 指标提交状态 */
+export const SubmitStatusList: SubmitStatusItem[] = [
+  { name: '待提交', value: 0, color: 'orange' },
+  { name: '已提交', value: 1, color: 'green' }
+]
+
+type StatusItem = { name: string; value: number; color: string }
+/** @desc 指标启用状态 */
+export const StatusList: StatusItem[] = [
+  { name: '禁用', value: 0, color: '#f53f3f' },
+  { name: '启用', value: 1, color: '#00b42a' }
+]
+~~~
+
+使用的时候
+
+引入
+
+~~~js
+import { StatusList } from '@/libs/status/xxx' // 要具体到模块名
+~~~
+
+~~~vue
+<a-table-column title="状态" :width="100" align="center">
+	<template #cell="{ record }">
+		<template v-for="item in StatusList" :key="item.value">
+			<a-tag v-if="item.value === record.status" :color="item.color">{{ item.name }}</a-tag>
+		</template>
+	</template>
+</a-table-column>
 ~~~
 
 
