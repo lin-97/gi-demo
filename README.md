@@ -119,3 +119,106 @@ npm run build
 QQ：326010228
 
 邮箱：326010228@qq.com
+
+## 项目规范
+
+>  接口api的命名
+
+命名规范： 操作 + 后端模块名 + 功能名
+
+~~~
+/quota/getList   =>  getQuotaList
+/quota/getQuotaList  =>  getQuotaList   // 如果功能名包含了模块名，可省略
+
+/user/save  =>  saveUser
+/user/list  =>  getUserList  // 如果没有操作名，可以自行根据场景补充
+~~~
+
+以上命名规范可以确保api命名不会冲突
+
+引入接口
+
+~~~js
+import { getUserList, saveUser } from '@/apis'
+~~~
+
+
+
+> 页面变量命名 ()
+
+~~~js
+编辑 onEdit     handleEdit     edit
+新增 onAdd      handleAdd      add
+删除 onDelete   handleDelete   delete
+批量删除 onMulDelete   handleMulDelete  mulDelete
+搜索 search
+获取表格列表 getTableData  // 一般一个页面也就一个表格，gi-demo习惯用getTableData, 结合分页hooks的时候可以直接复制复用
+~~~
+
+页面模板类名使用中划线
+
+~~~vue
+<template>
+	<div class="detail">
+        <h3 class="title"></h3>
+        <section class="table-box">
+            <table></table>
+        </section>
+    </div>
+</template>
+~~~
+
+
+
+> 全局组件-命名规范
+
+~~~
+GiTitle   GiThemeBtn   GiSvgIcon
+~~~
+
+ 
+
+> 局部组件-命名规范
+
+~~~
+Pane1.vue   Pane2.vue    Step1.vue   Step2.vue   AddModal.vue   EditDrawer.vue
+~~~
+
+
+
+> 文件夹命名-命名规范 (采用中划线-)
+
+~~~
+home   quota-first/index.vue      quota-detail/index.vue 
+~~~
+
+
+
+> 全局类名-命名规范 (采用下划线_，好复制)
+
+~~~
+.gi_line_1   .gi_line_2   .gi_margin   .gi_box   .gi_text_tag
+~~~
+
+
+
+> 全局scss变量-命名规范
+
+~~~scss
+$title-color: xxx; // 已弃用，写起来繁琐，易忘
+$text-color: xxx; // 已弃用
+$text-sub-color: xxx; // 已弃用
+$text-sup-color: xxx; // 已弃用
+
+// 借鉴了Arco Design命名规则
+$color-text-1: var(--color-text-1); // 标题、重点文本字体颜色
+$color-text-2: var(--color-text-2); // 文本-全局默认字体颜色
+$color-text-3: var(--color-text-3); // 二级文本颜色
+$color-text-4: var(--color-text-4); // 辅助文本颜色
+~~~
+
+
+
+> 其他规范
+
+可参考gi-demo源码，如有更好的规范建议，可以联系作者本人
