@@ -1,11 +1,11 @@
 <template>
   <section class="gi_lr_page pane">
     <div class="left">
-      <GiTitle title="指标分类"></GiTitle>
-      <TheLeftTree placeholder="请输入搜索关键词"></TheLeftTree>
+      <GiTitle title="数据分类"></GiTitle>
+      <TheCateTree placeholder="请输入搜索关键词" @node-click="changeCurrent(1)"></TheCateTree>
     </div>
     <div class="right">
-      <GiTitle title="指标列表"></GiTitle>
+      <GiTitle title="数据列表"></GiTitle>
 
       <div class="content">
         <a-row justify="space-between" style="margin-bottom: 12px">
@@ -92,16 +92,16 @@
   </section>
 </template>
 
-<script setup lang="ts" name="QuotaManage">
+<script setup lang="ts" name="DataManage">
 import { reactive, ref } from 'vue'
 import { useRouter } from 'vue-router'
 import { Modal, Message } from '@arco-design/web-vue'
 import { usePagination } from '@/hooks'
-import TheLeftTree from '@/views/components/TheLeftTree/index.vue'
+import TheCateTree from '@/views/components/TheCateTree/index.vue'
 import EditDialog from './EditDialog.vue'
 import { getTableList } from '@/apis'
 import type { ApiTableItem } from '@/apis'
-import { StatusList } from '@/libs/status/quota'
+import { StatusList } from '@/libs/status/data'
 
 const router = useRouter()
 
@@ -168,7 +168,7 @@ const onAdd = () => {
 }
 
 const onDetail = () => {
-  router.push({ path: '/quota/detail' })
+  router.push({ path: '/data/detail' })
 }
 
 const onDelete = (id: string) => {

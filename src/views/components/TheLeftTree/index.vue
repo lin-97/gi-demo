@@ -32,7 +32,7 @@
               style="transform: rotate(0deg)"
               v-else-if="node.children && node.children.length && !expanded"
             />
-            <icon-drive-file class="switcher-icon" :size="16" v-else />
+            <icon-drive-file :size="16" v-else />
           </template>
           <template #icon="node">
             <GiSvgIcon name="com-file-close" :size="16" v-if="!node.children"></GiSvgIcon>
@@ -56,6 +56,50 @@
                 >
                   <GiOptionItem icon="IconPlusCircle">新增</GiOptionItem>
                   <GiOptionItem icon="IconEdit">重命名</GiOptionItem>
+                  <a-popover
+                    position="right"
+                    trigger="click"
+                    :content-style="{ padding: 0, overflow: 'hidden' }"
+                    :unmount-on-close="false"
+                  >
+                    <GiOptionItem more icon="IconExport"> 移动 </GiOptionItem>
+                    <template #content>
+                      <a-scrollbar style="height: 100%; overflow: auto" outer-style="width: 260px;height: 500px">
+                        <a-tree
+                          ref="treeMoveRef"
+                          show-line
+                          size="mini"
+                          :data="treeData[0].children"
+                          :fieldNames="{
+                            key: 'id',
+                            title: 'name'
+                          }"
+                        >
+                          <template #switcher-icon="node, { checked, selected, expanded }">
+                            <GiSvgIcon
+                              class="switcher-icon"
+                              name="plus-square"
+                              :size="16"
+                              v-if="node.children && node.children.length && expanded"
+                            />
+                            <GiSvgIcon
+                              class="switcher-icon"
+                              name="minus-square"
+                              :size="16"
+                              style="transform: rotate(0deg)"
+                              v-else-if="node.children && node.children.length && !expanded"
+                            />
+                            <icon-drive-file :size="16" v-else />
+                          </template>
+                          <template #icon="node">
+                            <GiSvgIcon name="com-file-close" :size="16" v-if="!node.children"></GiSvgIcon>
+                            <GiSvgIcon name="com-file-open" :size="16" v-else-if="node.children"></GiSvgIcon>
+                            <GiSvgIcon name="com-file" :size="16" v-else></GiSvgIcon>
+                          </template>
+                        </a-tree>
+                      </a-scrollbar>
+                    </template>
+                  </a-popover>
                   <GiOptionItem icon="IconDelete">删除</GiOptionItem>
                 </GiOption>
               </template>

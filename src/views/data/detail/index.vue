@@ -80,7 +80,7 @@
   </div>
 </template>
 
-<script setup lang="ts" name="QuotaDetail">
+<script setup lang="ts" name="DataDetail">
 import { ref } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 const route = useRoute()

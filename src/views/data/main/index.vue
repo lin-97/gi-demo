@@ -12,7 +12,7 @@
   </div>
 </template>
 
-<script setup lang="ts" name="QuotaManage">
+<script setup lang="ts" name="DataManage">
 import { ref } from 'vue'
 import Pane1 from './Pane1.vue'
 import Pane2 from './Pane2.vue'
