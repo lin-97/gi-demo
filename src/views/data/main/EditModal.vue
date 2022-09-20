@@ -1,5 +1,5 @@
 <template>
-  <a-modal v-model:visible="visible" :title="isEdit ? '编辑' : '新增'" @ok="confirm" @cancel="cancel">
+  <a-modal v-model:visible="visible" :title="title" @ok="confirm">
     <a-row justify="center">
       <a-form ref="formRef" :model="form" size="medium" auto-label-width :style="{ width: 'auto' }">
         <a-form-item field="name" label="姓名" :rules="rules.name">
@@ -49,23 +49,7 @@
 </template>
 
 <script setup lang="ts">
-import { computed, reactive, watch } from 'vue'
-import { useVModel } from '@vueuse/core'
-
-const props = defineProps({
-  // 绑定的值
-  modelValue: {
-    type: Boolean,
-    default: false
-  },
-  formData: {
-    type: Object,
-    default: () => {}
-  }
-})
-
-const emit = defineEmits(['update:modelValue'])
-const visible = useVModel(props, 'modelValue', emit)
+import { computed, reactive, ref } from 'vue'
 
 const list = [{ name: '新增' }, { name: '编辑' }, { name: '重命名' }, { name: '分享' }, { name: '删除' }]
 
@@ -81,33 +65,34 @@ const form: Form = reactive({
   status: false
 })
 
-const rules = reactive({
+const rules = {
   name: [
     { required: true, message: '请输入姓名' },
     { minLength: 1, maxLength: 4, message: '名字最长不超过4个字符' }
   ],
   status: [{ required: true }]
-})
-
-// 判断是新增还是编辑
-const isEdit = computed<boolean>(() => {
-  return !!props.formData.id
-})
-
-watch(visible, () => {
-  const { name, address, status } = props.formData
-  form.name = name
-  form.address = address
-  form.status = status || false
-})
-
-const cancel = () => {
-  visible.value = false
 }
+
+const visible = ref(false)
+const detailId = ref('')
+const isEditMode = computed(() => !!detailId.value) // 判断是新增还是编辑模式
+const title = computed(() => (isEditMode.value ? '编辑' : '新增'))
 
 const confirm = () => {
   visible.value = false
 }
+
+const add = () => {
+  detailId.value = ''
+  visible.value = true
+}
+
+const edit = (id: string) => {
+  detailId.value = id
+  visible.value = true
+}
+
+defineExpose({ add, edit })
 </script>
 
 <style lang="scss" scoped>

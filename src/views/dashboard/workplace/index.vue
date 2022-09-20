@@ -13,7 +13,7 @@
       </section>
     </div>
 
-    <a-back-top target-container="#home-wrap">
+    <a-back-top :visible-height="100" target-container="#home-wrap">
       <GiSvgIcon name="backtop" :size="50" style="cursor: pointer"></GiSvgIcon>
     </a-back-top>
   </div>

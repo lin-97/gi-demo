@@ -1,5 +1,5 @@
 // 表格项目
-export interface ApiTableItem {
+export interface PersonItem {
   id: string
   index: number
   name: string

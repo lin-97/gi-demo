@@ -35,7 +35,7 @@ export default defineConfig(({ command, mode }) => {
         prodEnabled: command !== 'serve' && true,
         // 这样可以控制关闭mock的时候不让mock打包到最终代码内
         injectCode: `
-          import { setupProdMockServer } from '../mock/mockProdServer';
+          import { setupProdMockServer } from '../mock/index';
           setupProdMockServer();
         `
       })

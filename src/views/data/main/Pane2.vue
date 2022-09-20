@@ -55,7 +55,6 @@
                 <template #cell="cell">{{ cell.rowIndex + 1 }}</template>
               </a-table-column>
               <a-table-column title="姓名" data-index="name"></a-table-column>
-              <a-table-column title="创建时间" data-index="startTime" :width="180"></a-table-column>
               <a-table-column title="地址" data-index="address" ellipsis tooltip></a-table-column>
               <a-table-column title="比例" :width="200">
                 <template #cell="{ record }">
@@ -69,17 +68,16 @@
                   </template>
                 </template>
               </a-table-column>
+              <a-table-column title="创建时间" data-index="startTime" :width="180"></a-table-column>
               <a-table-column title="操作" :width="200" align="center">
                 <template #cell="{ record }">
-                  <a-row justify="center">
-                    <a-space>
-                      <a-button type="primary" size="mini" @click="onEdit(record)">修改</a-button>
-                      <a-button size="mini" @click="onDetail">详情</a-button>
-                      <a-popconfirm type="warning" content="您确定要删除该项吗?" @ok="onDelete(record.id)">
-                        <a-button type="primary" status="danger" size="mini">删除</a-button>
-                      </a-popconfirm>
-                    </a-space>
-                  </a-row>
+                  <a-space>
+                    <a-button type="primary" size="mini" @click="onEdit(record)">修改</a-button>
+                    <a-button size="mini" @click="onDetail">详情</a-button>
+                    <a-popconfirm type="warning" content="您确定要删除该项吗?" @ok="onDelete(record.id)">
+                      <a-button type="primary" status="danger" size="mini">删除</a-button>
+                    </a-popconfirm>
+                  </a-space>
                 </template>
               </a-table-column>
             </template>
@@ -88,7 +86,7 @@
       </div>
     </div>
 
-    <EditDialog v-model="showEditDialog" :form-data="formData"></EditDialog>
+    <EditModal ref="EditModalRef"></EditModal>
   </section>
 </template>
 
@@ -98,10 +96,10 @@ import { useRouter } from 'vue-router'
 import { Modal, Message } from '@arco-design/web-vue'
 import { usePagination } from '@/hooks'
 import TheLeftTree from '@/views/components/TheLeftTree/index.vue'
-import EditDialog from './EditDialog.vue'
-import { getTableList } from '@/apis'
-import type { ApiTableItem } from '@/apis'
-import { StatusList } from '@/libs/status/data'
+import EditModal from './EditModal.vue'
+import { getPersonList } from '@/apis'
+import type { PersonItem } from '@/apis'
+import { StatusList } from '@/libs/status/person'
 
 const router = useRouter()
 
@@ -117,7 +115,7 @@ const form = reactive({
   status: ''
 })
 
-const tableData = ref<ApiTableItem[]>([])
+const tableData = ref<PersonItem[]>([])
 const loading = ref(false)
 
 // 比例进度条颜色
@@ -130,7 +128,7 @@ const getProportionColor = (proportion: number) => {
 const getTableData = async () => {
   try {
     loading.value = true
-    const res = await getTableList({
+    const res = await getPersonList({
       current: current.value,
       pageSize: pageSize.value,
       ...form
@@ -158,16 +156,14 @@ const onMulDelete = () => {
   })
 }
 
-const showEditDialog = ref(false)
-
-const formData = ref({})
-const onEdit = (row: any) => {
-  formData.value = row
-  showEditDialog.value = true
-}
+const EditModalRef = ref<InstanceType<typeof EditModal>>()
 
 const onAdd = () => {
-  showEditDialog.value = true
+  EditModalRef.value?.add()
+}
+
+const onEdit = (item: PersonItem) => {
+  EditModalRef.value?.edit(item.id)
 }
 
 const onDetail = () => {

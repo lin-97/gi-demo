@@ -8,7 +8,9 @@
       </a-tabs>
     </section>
 
-    <component :is="PaneMap[activeKey]"></component>
+    <keep-alive>
+      <component :is="PaneMap[activeKey]"></component>
+    </keep-alive>
   </div>
 </template>
 

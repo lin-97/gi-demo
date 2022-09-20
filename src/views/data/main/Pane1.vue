@@ -88,7 +88,7 @@
       </div>
     </div>
 
-    <EditDialog v-model="showEditDialog" :form-data="formData"></EditDialog>
+    <EditModal ref="EditModalRef"></EditModal>
   </section>
 </template>
 
@@ -98,10 +98,10 @@ import { useRouter } from 'vue-router'
 import { Modal, Message } from '@arco-design/web-vue'
 import { usePagination } from '@/hooks'
 import TheCateTree from '@/views/components/TheCateTree/index.vue'
-import EditDialog from './EditDialog.vue'
-import { getTableList } from '@/apis'
-import type { ApiTableItem } from '@/apis'
-import { StatusList } from '@/libs/status/data'
+import EditModal from './EditModal.vue'
+import { getPersonList } from '@/apis'
+import type { PersonItem } from '@/apis'
+import { StatusList } from '@/libs/status/person'
 
 const router = useRouter()
 
@@ -114,8 +114,9 @@ const form = reactive({
   status: ''
 })
 
-const tableData = ref<ApiTableItem[]>([])
+const tableData = ref<PersonItem[]>([])
 const loading = ref(false)
+const EditModalRef = ref<InstanceType<typeof EditModal>>()
 
 // 比例进度条颜色
 const getProportionColor = (proportion: number) => {
@@ -127,7 +128,7 @@ const getProportionColor = (proportion: number) => {
 const getTableData = async () => {
   try {
     loading.value = true
-    const res = await getTableList({
+    const res = await getPersonList({
       current: current.value,
       pageSize: pageSize.value,
       ...form
@@ -155,16 +156,12 @@ const onMulDelete = () => {
   })
 }
 
-const showEditDialog = ref(false)
-
-const formData = ref({})
-const onEdit = (row: any) => {
-  formData.value = row
-  showEditDialog.value = true
+const onAdd = () => {
+  EditModalRef.value?.add()
 }
 
-const onAdd = () => {
-  showEditDialog.value = true
+const onEdit = (item: PersonItem) => {
+  EditModalRef.value?.edit(item.id)
 }
 
 const onDetail = () => {

@@ -38,7 +38,7 @@ const getTableListData = (params) => {
 
 export default [
   {
-    url: '/mock/table/list',
+    url: '/mock/person/list',
     method: 'get',
     timeout: 0,
     response: ({ query }) => {

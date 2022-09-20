@@ -127,8 +127,8 @@
 <script setup lang="ts" name="MainTable">
 import { reactive, ref } from 'vue'
 import { usePagination } from '@/hooks'
-import { getTableList } from '@/apis'
-import type { ApiTableItem } from '@/apis'
+import { getPersonList } from '@/apis'
+import type { PersonItem } from '@/apis'
 
 const form = reactive({
   value1: '',
@@ -139,7 +139,7 @@ const form = reactive({
 })
 
 const loading = ref(false)
-const tableData = ref<ApiTableItem[]>([])
+const tableData = ref<PersonItem[]>([])
 const collapsed = ref(false)
 
 const { current, pageSize, total, changeCurrent, changePageSize, setTotal } = usePagination(() => {
@@ -149,7 +149,7 @@ const { current, pageSize, total, changeCurrent, changePageSize, setTotal } = us
 const getTableData = async () => {
   try {
     loading.value = true
-    const res = await getTableList({
+    const res = await getPersonList({
       current: current.value,
       pageSize: pageSize.value
     })

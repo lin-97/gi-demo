@@ -68,11 +68,11 @@
 import { ref } from 'vue'
 import { Message } from '@arco-design/web-vue'
 import { usePagination } from '@/hooks'
-import { getTableList } from '@/apis'
-import type { ApiTableItem } from '@/apis'
+import { getPersonList } from '@/apis'
+import type { PersonItem } from '@/apis'
 
 const loading = ref(false)
-const tableData = ref<ApiTableItem[]>([])
+const tableData = ref<PersonItem[]>([])
 
 const { current, pageSize, total, changeCurrent, changePageSize, setTotal } = usePagination(() => {
   getTableData()
@@ -81,7 +81,7 @@ const { current, pageSize, total, changeCurrent, changePageSize, setTotal } = us
 const getTableData = async () => {
   try {
     loading.value = true
-    const res = await getTableList({
+    const res = await getPersonList({
       current: current.value,
       pageSize: pageSize.value
     })
