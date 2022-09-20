@@ -26,9 +26,7 @@ export const useAppStore = defineStore({
   state: (): ThemeState => ({ ...defaultSettings, ...storageAppSetting }),
   getters: {
     // 页面切换动画类名
-    transitionName(): string {
-      return this.animate ? this.animateMode : ''
-    },
+    transitionName: (state) => (state.animate ? state.animateMode : '')
   },
   actions: {
     // 切换主题  暗黑模式|简白模式
@@ -44,6 +42,7 @@ export const useAppStore = defineStore({
     },
     // 设置主题色
     setThemeColor(color: string) {
+      if (!color) return
       this.themeColor = color
       const list = generate(this.themeColor, { list: true, dark: this.theme === 'dark' })
       list.forEach((color: string, index: number) => {
