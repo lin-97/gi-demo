@@ -23,7 +23,7 @@
           </a-space>
 
           <a-space>
-            <a-select v-model="form.status" class="gi_select_input" placeholder="请选择" allow-clear>
+            <a-select v-model="form.status" placeholder="请选择" allow-clear class="gi_select_input">
               <a-option v-for="item in StatusList" :key="item.value" :value="item.value">{{ item.name }}</a-option>
             </a-select>
             <a-input-group>
@@ -52,7 +52,7 @@
           >
             <template #columns>
               <a-table-column title="序号" :width="68">
-                <template #cell="cell">{{ cell.rowIndex + 1 }}</template>
+                <template #cell="{ rowIndex }">{{ rowIndex + 1 }}</template>
               </a-table-column>
               <a-table-column title="姓名" data-index="name"></a-table-column>
               <a-table-column title="创建时间" data-index="startTime" :width="180"></a-table-column>
@@ -71,15 +71,13 @@
               </a-table-column>
               <a-table-column title="操作" :width="200" align="center">
                 <template #cell="{ record }">
-                  <a-row justify="center">
-                    <a-space>
-                      <a-button type="primary" size="mini" @click="onEdit(record)">修改</a-button>
-                      <a-button size="mini" @click="onDetail">详情</a-button>
-                      <a-popconfirm type="warning" content="您确定要删除该项吗?" @ok="onDelete(record.id)">
-                        <a-button type="primary" status="danger" size="mini">删除</a-button>
-                      </a-popconfirm>
-                    </a-space>
-                  </a-row>
+                  <a-space>
+                    <a-button type="primary" size="mini" @click="onEdit(record)">修改</a-button>
+                    <a-button size="mini" @click="onDetail">详情</a-button>
+                    <a-popconfirm type="warning" content="您确定要删除该项吗?" @ok="onDelete(record.id)">
+                      <a-button type="primary" status="danger" size="mini">删除</a-button>
+                    </a-popconfirm>
+                  </a-space>
                 </template>
               </a-table-column>
             </template>
@@ -126,18 +124,17 @@ const getProportionColor = (proportion: number) => {
 }
 
 const getTableData = async () => {
-  try {
-    loading.value = true
-    const res = await getPersonList({
-      current: current.value,
-      pageSize: pageSize.value,
-      ...form
-    })
+  loading.value = true
+  const res = await getPersonList({
+    current: current.value,
+    pageSize: pageSize.value,
+    ...form
+  })
+  if (res.success) {
     tableData.value = res.data.list
     setTotal(res.data.total)
-  } catch (error) {
-    return error
-  } finally {
+    loading.value = false
+  } else {
     loading.value = false
   }
 }
