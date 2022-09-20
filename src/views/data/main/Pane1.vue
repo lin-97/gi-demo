@@ -1,10 +1,10 @@
 <template>
-  <section class="gi_lr_page pane">
-    <div class="left">
+  <div class="data-pane">
+    <section class="gi_box pane-left">
       <GiTitle title="数据分类"></GiTitle>
       <TheCateTree placeholder="请输入搜索关键词" @node-click="changeCurrent(1)"></TheCateTree>
-    </div>
-    <div class="right">
+    </section>
+    <section class="gi_box pane-right">
       <GiTitle title="数据列表"></GiTitle>
 
       <div class="content">
@@ -12,13 +12,15 @@
           <a-space>
             <a-button type="primary" @click="onAdd">
               <template #icon><icon-plus /></template>
+              <template #default>新增</template>
             </a-button>
             <a-button type="primary" status="danger" @click="onMulDelete">
               <template #icon><icon-delete /></template>
               <template #default>删除</template>
             </a-button>
-            <a-button type="primary" status="success">
-              <template #icon><icon-download /></template>
+            <a-button type="primary" status="success" @click="onExport">
+              <template #icon><icon-export /></template>
+              <template #default>导出</template>
             </a-button>
           </a-space>
 
@@ -49,6 +51,8 @@
             :pagination="{ showPageSize: true, total: total, current: current, pageSize: pageSize }"
             @page-change="changeCurrent"
             @page-size-change="changePageSize"
+            @select="select"
+            @select-all="selectAll"
           >
             <template #columns>
               <a-table-column title="序号" :width="68">
@@ -84,10 +88,10 @@
           </a-table>
         </section>
       </div>
-    </div>
+    </section>
 
     <EditModal ref="EditModalRef"></EditModal>
-  </section>
+  </div>
 </template>
 
 <script setup lang="ts" name="DataManage">
@@ -169,28 +173,28 @@ const onDelete = (id: string) => {
   Message.success('删除成功')
   getTableData()
 }
-</script>
 
-<style lang="scss" scoped>
-.pane {
-  flex: 1;
-  overflow: hidden;
-  .right {
-    display: flex;
-    flex-direction: column;
-    .content {
-      flex: 1;
-      padding: $padding;
-      padding-top: 12px;
-      overflow: hidden;
-      display: flex;
-      flex-direction: column;
-      box-sizing: border-box;
-      .table-box {
-        flex: 1;
-        overflow: hidden;
-      }
-    }
+const onExport = () => {
+  if (!selectRowKeys.value.length) {
+    return Message.warning('请勾选数据')
+  }
+  Message.success('点击了导出')
+}
+
+// 勾选
+const selectRowKeys = ref<string[]>([])
+const select: ATableSelect = (rowKeys, rowKey, record) => {
+  selectRowKeys.value = rowKeys
+}
+
+// 全选
+const selectAll = (checked: boolean) => {
+  if (checked) {
+    selectRowKeys.value = tableData.value.map((i) => i.id)
+  } else {
+    selectRowKeys.value = []
   }
 }
-</style>
+</script>
+
+<style lang="scss" scoped></style>

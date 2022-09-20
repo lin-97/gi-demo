@@ -27,7 +27,7 @@ const PaneMap: any = {
 const activeKey = ref(2)
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 .manage {
   width: 100%;
   flex: 1;
@@ -36,6 +36,45 @@ const activeKey = ref(2)
   overflow: hidden;
   .tab {
     background: var(--color-bg-1);
+  }
+}
+
+.data-pane {
+  flex: 1;
+  padding: $margin;
+  box-sizing: border-box;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  display: flex;
+  .pane-left {
+    flex: 1;
+    min-width: 260px;
+    box-sizing: border-box;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+  }
+  .pane-right {
+    flex: 5;
+    margin-left: $margin;
+    box-sizing: border-box;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    .content {
+      flex: 1;
+      padding: $padding;
+      padding-top: 12px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      box-sizing: border-box;
+      .table-box {
+        flex: 1;
+        overflow: hidden;
+      }
+    }
   }
 }
 </style>

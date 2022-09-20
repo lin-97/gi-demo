@@ -1,18 +1,18 @@
 <template>
   <div class="role-manage">
     <a-row class="head">
-      <a-button type="primary" @click="showAddRoleModal = true">
+      <a-button type="primary" @click="onAdd">
         <template #icon><icon-plus /></template>
         <span>新增角色</span>
       </a-button>
     </a-row>
     <section class="table-box">
       <a-table
-        :data="tableData"
+        :data="roleList"
         row-key="id"
         v-loading="loading"
         :scroll="{ x: '100%', y: '100%', minWidth: 900 }"
-        :pagination="{ showPageSize: true }"
+        :pagination="false"
       >
         <template #columns>
           <a-table-column title="序号" :width="60">
@@ -36,7 +36,7 @@
                     <template #icon><icon-delete /></template>
                   </a-button>
                 </a-popconfirm>
-                <a-button type="primary" size="mini" @click="showAddRoleModal = true">
+                <a-button type="primary" size="mini" @click="onEdit(record)">
                   <template #icon><icon-edit /></template>
                 </a-button>
                 <a-button type="primary" status="success" size="mini">
@@ -50,38 +50,29 @@
       </a-table>
     </section>
 
-    <AddRoleModal v-model="showAddRoleModal"></AddRoleModal>
+    <EditRoleModal ref="EditRoleModalRef"></EditRoleModal>
   </div>
 </template>
 
 <script setup lang="ts" name="RoleManage">
 import { ref } from 'vue'
 import { Message } from '@arco-design/web-vue'
-import AddRoleModal from './AddRoleModal.vue'
-import { getSystemRoleList } from '@/apis'
-import type { ApiRoleItem } from '@/apis'
+import EditRoleModal from './EditRoleModal.vue'
+import { useApiRole } from '@/hooks'
+import type { RoleItem } from '@/apis'
 
 const loading = ref(false)
-const tableData = ref<ApiRoleItem[]>([])
-const total = ref(0)
-const showAddRoleModal = ref(false)
+const EditRoleModalRef = ref<InstanceType<typeof EditRoleModal>>()
+const { roleList } = useApiRole()
 
-const getTableData = async () => {
-  try {
-    loading.value = true
-    const res = await getSystemRoleList()
-    if (res.success) {
-      tableData.value = res.data.list
-      total.value = res.data.total
-      loading.value = false
-    }
-  } catch (error) {
-    return error
-  }
+const onAdd = () => {
+  EditRoleModalRef.value?.add()
 }
-getTableData()
 
-// 删除
+const onEdit = (item: RoleItem) => {
+  EditRoleModalRef.value?.edit(item.id)
+}
+
 const onDelete = () => {
   Message.info('点击了确认按钮')
 }

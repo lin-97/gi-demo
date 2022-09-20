@@ -1,6 +1,6 @@
 <template>
-  <a-modal v-model:visible="visible" title="新增用户">
-    <a-form ref="formRef" :model="form" size="medium" :labelCol="{ span: 4 }" auto-label-width>
+  <a-modal v-model:visible="visible" :title="title">
+    <a-form ref="formRef" :model="form" size="medium" auto-label-width>
       <a-form-item
         label="姓名"
         field="userName"
@@ -39,27 +39,14 @@
 </template>
 
 <script setup lang="ts">
-import { ref, reactive } from 'vue'
+import { ref, reactive, computed } from 'vue'
 import { useArea } from '@/hooks'
-import { useVModel } from '@vueuse/core'
 
 const { getAreaTreeData } = useArea()
 
-const props = defineProps({
-  // 绑定的值
-  modelValue: {
-    type: Boolean,
-    default: false
-  },
-  // 部门树
-  treeData: {
-    type: Array,
-    default: () => []
-  }
-})
-
-const emit = defineEmits(['update:modelValue'])
-const visible = useVModel(props, 'modelValue', emit)
+const userId = ref('')
+const title = computed(() => (!!userId.value ? '编辑用户' : '新增用户'))
+const visible = ref(false)
 
 const form = reactive({
   userName: '',
@@ -69,4 +56,16 @@ const form = reactive({
 
 const treeData = ref([])
 treeData.value = getAreaTreeData()
+
+const add = () => {
+  userId.value = ''
+  visible.value = true
+}
+
+const edit = (id: string) => {
+  userId.value = id
+  visible.value = true
+}
+
+defineExpose({ add, edit })
 </script>

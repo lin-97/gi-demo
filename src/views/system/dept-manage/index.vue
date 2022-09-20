@@ -34,9 +34,9 @@
         v-loading="loading"
         ref="tableRef"
         row-key="id"
-        :data="tableData"
+        :data="deptList"
         :scroll="{ x: '100%', y: '100%', minWidth: 900 }"
-        :pagination="{ showPageSize: true }"
+        :pagination="false"
         :expandable="{ width: 80 }"
       >
         <template #expand-icon="{ expanded }">
@@ -74,49 +74,26 @@
       </a-table>
     </section>
 
-    <AddDeptModal :tree-data="tableData" v-model="showAddDeptModal" :currentData="currentData"></AddDeptModal>
+    <EditDeptModal ref="EditDeptModalRef"></EditDeptModal>
   </div>
 </template>
 
 <script setup lang="ts" name="DeptManage">
-import { ref, reactive, nextTick } from 'vue'
-import AddDeptModal from './AddDeptModal.vue'
-import { getSystemDeptList } from '@/apis'
-import type { ApiDeptItem } from '@/apis'
+import { ref, reactive } from 'vue'
+import EditDeptModal from './EditDeptModal.vue'
+import type { DeptItem } from '@/apis'
+import { useApiDept } from '@/hooks'
 
-const tableData = ref<ApiDeptItem[]>([])
-const total = ref(0)
-const loading = ref(false)
-const showAddDeptModal = ref(false)
+const { deptList, getDeptList } = useApiDept()
+const EditDeptModalRef = ref<InstanceType<typeof EditDeptModal>>()
+
 const form = reactive({
   name: '',
   status: ''
 })
-const currentData = ref({})
-const tableRef = ref()
-
-const getTableData = async () => {
-  try {
-    loading.value = true
-    const res = await getSystemDeptList()
-    if (res.success) {
-      tableData.value = res.data.list
-      total.value = res.data.total
-      nextTick(() => {
-        tableRef.value.expandAll()
-      })
-      loading.value = false
-    }
-  } catch (error) {
-    loading.value = false
-    return error
-  }
-}
-
-getTableData()
 
 const search = () => {
-  getTableData()
+  getDeptList()
 }
 
 const reset = () => {
@@ -124,20 +101,12 @@ const reset = () => {
   form.status = ''
 }
 
-const onAdd = (item?: ApiDeptItem) => {
-  currentData.value = {}
-  if (item) {
-    currentData.value.parentId = item.id
-    showAddDeptModal.value = true
-  } else {
-    currentData.value = {}
-    showAddDeptModal.value = true
-  }
+const onAdd = () => {
+  EditDeptModalRef.value?.add()
 }
 
-const onEdit = (item: ApiDeptItem) => {
-  currentData.value = item
-  showAddDeptModal.value = true
+const onEdit = (item: DeptItem) => {
+  EditDeptModalRef.value?.edit(item.id)
 }
 </script>
 

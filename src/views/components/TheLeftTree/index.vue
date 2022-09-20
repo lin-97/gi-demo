@@ -17,6 +17,7 @@
           :fieldNames="{
             key: 'id'
           }"
+          @select="select"
         >
           <template #switcher-icon="node, { checked, selected, expanded }">
             <GiSvgIcon
@@ -138,6 +139,12 @@ const loading = ref(false)
 const treeRef = ref()
 const inputValue = ref('')
 const treeData = ref<ApiCateTreeNode[]>([])
+
+const emit = defineEmits(['node-click'])
+
+const select = () => {
+  emit('node-click')
+}
 
 // 获取分类树
 const getCateTree = async () => {

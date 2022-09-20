@@ -14,7 +14,7 @@
             ref="treeRef"
             block-node
             default-expand-all
-            :data="treeData"
+            :data="deptList"
             :field-names="{
               key: 'id',
               title: 'name',
@@ -39,7 +39,7 @@
 
       <a-row justify="space-between" class="head">
         <a-space>
-          <a-button type="primary" @click="showAddUserModal = true">
+          <a-button type="primary" @click="onAdd">
             <template #icon><icon-plus /></template>
             <span>新增用户</span>
           </a-button>
@@ -98,7 +98,7 @@
             <a-table-column title="操作" :width="100" align="center">
               <template #cell="{ record }">
                 <a-space>
-                  <a-button type="primary" size="mini" @click="showAddUserModal = true">
+                  <a-button type="primary" size="mini" @click="onEdit(record)">
                     <template #icon><icon-edit /></template>
                   </a-button>
                   <a-popconfirm type="warning" content="您确定要删除该项吗?">
@@ -114,61 +114,52 @@
       </section>
     </section>
 
-    <AddUserModal v-model="showAddUserModal"></AddUserModal>
+    <EditUserModal ref="EditUserModalRef"></EditUserModal>
   </div>
 </template>
 
 <script setup lang="ts" name="UserManage">
 import { ref, nextTick } from 'vue'
-import { usePagination } from '@/hooks'
-import { getSystemDeptList, getSystemUserList } from '@/apis'
-import type { ApiUserItem, ApiDeptItem } from '@/apis'
-import AddUserModal from './AddUserModal.vue'
+import { usePagination, useApiDept } from '@/hooks'
+import { getSystemUserList } from '@/apis'
+import type { UserItem } from '@/apis'
+import EditUserModal from './EditUserModal.vue'
+import type { Tree } from '@arco-design/web-vue'
+
+const treeRef = ref<InstanceType<typeof Tree>>()
+const EditUserModalRef = ref<InstanceType<typeof EditUserModal>>()
 
 const treeLoading = ref(false)
-const treeData = ref<ApiDeptItem[]>([])
 const treeInputValue = ref('')
-const treeRef = ref(null)
-const showAddUserModal = ref(false)
-
 const loading = ref(false)
-const tableData = ref<ApiUserItem[]>([])
+const tableData = ref<UserItem[]>([])
 
 const { current, pageSize, total, changeCurrent, changePageSize, setTotal } = usePagination(() => {
   getTableData()
 })
 
-const getTreeData = async () => {
-  try {
-    treeLoading.value = true
-    const res = await getSystemDeptList()
-    if (res.success) {
-      treeData.value = res.data.list
-      setTimeout(() => {
-        treeLoading.value = false
-      }, 200)
-      nextTick(() => {
-        treeRef.value?.expandNode(res.data.list[0].id)
-      })
-    }
-  } catch (error) {
-    treeLoading.value = false
-    return error
-  }
+const { deptList, getDeptList } = useApiDept()
+
+nextTick(() => {
+  treeRef.value?.expandAll()
+})
+
+const onAdd = () => {
+  EditUserModalRef.value?.add()
 }
-getTreeData()
+
+const onEdit = (item: UserItem) => {
+  EditUserModalRef.value?.edit(item.id)
+}
 
 const getTableData = async () => {
-  try {
-    loading.value = true
-    const res = await getSystemUserList()
-    if (res.success) {
-      tableData.value = res.data.list
-      setTotal(res.data.total)
-    }
-  } catch (error) {
-    return error
-  } finally {
+  loading.value = true
+  const res = await getSystemUserList()
+  if (res.success) {
+    tableData.value = res.data.list
+    setTotal(res.data.total)
+    loading.value = false
+  } else {
     loading.value = false
   }
 }

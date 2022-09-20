@@ -1,9 +1,8 @@
 <template>
-  <a-modal v-model:visible="visible" title="新增菜单">
-    <a-form ref="formRef" :model="form" size="medium" :labelCol="{ span: 4 }">
+  <a-modal v-model:visible="visible" :title="title">
+    <a-form ref="formRef" :model="form" size="medium" auto-label-width>
       <a-form-item label="上级菜单" parentId="name">
         <a-tree-select
-          :data="treeData"
           v-model="form.parentId"
           placeholder="请选择"
           :field-names="{
@@ -46,24 +45,11 @@
 </template>
 
 <script setup lang="ts">
-import { reactive } from 'vue'
-import { useVModel } from '@vueuse/core'
+import { reactive, ref, computed } from 'vue'
 
-const props = defineProps({
-  // 绑定的值
-  modelValue: {
-    type: Boolean,
-    default: false
-  },
-  // 部门树
-  treeData: {
-    type: Array,
-    default: () => []
-  }
-})
-
-const emit = defineEmits(['update:modelValue'])
-const visible = useVModel(props, 'modelValue', emit)
+const menuId = ref('')
+const visible = ref(false)
+const title = computed(() => (!!menuId.value ? '编辑菜单' : '新增菜单'))
 
 const form = reactive({
   parentId: '',
@@ -73,4 +59,16 @@ const form = reactive({
   keepAlive: false,
   hidden: false
 })
+
+const add = () => {
+  menuId.value = ''
+  visible.value = true
+}
+
+const edit = async (id: string) => {
+  menuId.value = id
+  visible.value = true
+}
+
+defineExpose({ add, edit })
 </script>

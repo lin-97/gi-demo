@@ -90,32 +90,6 @@
   -webkit-box-orient: vertical; // 设置伸缩盒子元素排列方式
 }
 
-.gi_lr_page {
-  flex: 1;
-  padding: $margin;
-  box-sizing: border-box;
-  width: 100%;
-  height: 100%;
-  overflow: hidden;
-  display: flex;
-  > .left {
-    @extend .gi_box;
-    flex: 1;
-    min-width: 260px;
-    box-sizing: border-box;
-    overflow: hidden;
-    display: flex;
-    flex-direction: column;
-  }
-  > .right {
-    @extend .gi_box;
-    flex: 5;
-    margin-left: $margin;
-    box-sizing: border-box;
-    overflow: hidden;
-  }
-}
-
 .gi_hover_btn {
   border: 0 !important;
   background-color: transparent !important;

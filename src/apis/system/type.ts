@@ -1,16 +1,16 @@
 // 部门
-export interface ApiDeptItem {
+export interface DeptItem {
   id: string
   name: string
   sort: number
   status: 0 | 1
   createTime: string
   parentId: string
-  children?: ApiDeptItem[]
+  children?: DeptItem[]
 }
 
 // 角色
-export interface ApiRoleItem {
+export interface RoleItem {
   id: string
   name: string
   roleCode: string
@@ -19,7 +19,7 @@ export interface ApiRoleItem {
   createTime: string
 }
 
-export interface ApiUserItem {
+export interface UserItem {
   id: string
   userNo: string
   userName: string

@@ -1,13 +1,13 @@
 <template>
-  <a-modal v-model:visible="visible" title="新增角色">
-    <a-form :model="form" size="medium">
+  <a-modal v-model:visible="visible" :title="title">
+    <a-form :model="form" size="medium" auto-label-width>
       <a-form-item
         label="角色名称"
         name="name"
         field="name"
         :rules="[
-          { required: true, message: '请输入角色名称', trigger: 'blur' },
-          { min: 3, max: 10, message: '长度在 3 - 10个字符', trigger: 'blur' }
+          { required: true, message: '请输入角色名称' },
+          { min: 3, max: 10, message: '长度在 3 - 10个字符' }
         ]"
         :validate-trigger="['change', 'input']"
       >
@@ -25,22 +25,27 @@
 </template>
 
 <script setup lang="ts">
-import { reactive } from 'vue'
-import { useVModel } from '@vueuse/core'
+import { ref, reactive, computed } from 'vue'
 
-const props = defineProps({
-  modelValue: {
-    type: Boolean,
-    default: false
-  }
-})
-
-const emit = defineEmits(['update:modelValue'])
-const visible = useVModel(props, 'modelValue', emit)
+const roleId = ref('')
+const title = computed(() => (!!roleId.value ? '编辑角色' : '新增角色'))
+const visible = ref(false)
 
 const form = reactive({
   name: '',
   roleCode: '',
   remarks: ''
 })
+
+const add = () => {
+  roleId.value = ''
+  visible.value = true
+}
+
+const edit = (id: string) => {
+  roleId.value = id
+  visible.value = true
+}
+
+defineExpose({ add, edit })
 </script>

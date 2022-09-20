@@ -1,7 +1,7 @@
 <template>
   <div class="menu-manage">
     <a-row class="head">
-      <a-button type="primary" @click="showAddMenuModal = true">
+      <a-button type="primary" @click="onAdd">
         <template #icon><icon-plus /></template>
         <span>新增菜单</span>
       </a-button>
@@ -21,7 +21,7 @@
         </template>
         <template #columns>
           <a-table-column title="菜单名称">
-            <template #cell="{ record }">{{ record.meta.title || '' }}</template>
+            <template #cell="{ record }">{{ record.name }}</template>
           </a-table-column>
           <a-table-column title="菜单地址" data-index="path">
             <template #cell="{ record }">
@@ -31,28 +31,26 @@
           </a-table-column>
           <a-table-column title="菜单图标" data-index="icon" :width="200">
             <template #cell="{ record }">
-              <GiSvgIcon :size="24" :name="record.meta.icon" v-if="record.meta.icon"></GiSvgIcon>
+              <GiSvgIcon :size="24" :name="record.icon" v-if="record.icon"></GiSvgIcon>
               <span class="no-text" v-else>无</span>
             </template>
           </a-table-column>
           <a-table-column title="是否缓存" :width="200">
             <template #cell="{ record }">
-              <a-button status="success" size="mini" v-if="record.meta.keepAlive"
-                ><template #icon>是</template></a-button
-              >
+              <a-button status="success" size="mini" v-if="record.keepAlive"><template #icon>是</template></a-button>
               <a-button status="danger" size="mini" v-else><template #icon>否</template></a-button>
             </template>
           </a-table-column>
           <a-table-column title="是否隐藏" data-index="hidden" :width="200">
             <template #cell="{ record }">
-              <a-button status="success" size="mini" v-if="record.meta.hidden"><template #icon>是</template></a-button>
+              <a-button status="success" size="mini" v-if="record.hidden"><template #icon>是</template></a-button>
               <a-button status="danger" size="mini" v-else><template #icon>否</template></a-button>
             </template>
           </a-table-column>
           <a-table-column title="操作" :width="100">
             <template #cell="{ record }">
               <a-space>
-                <a-button type="primary" size="mini" @click="showAddMenuModal = true">
+                <a-button type="primary" size="mini" @click="onEdit(record)">
                   <template #icon><icon-edit /></template>
                 </a-button>
                 <a-popconfirm type="warning" content="您确定要删除该项吗?">
@@ -67,17 +65,17 @@
       </a-table>
     </section>
 
-    <AddMenuModal :tree-data="treeData" v-model="showAddMenuModal"></AddMenuModal>
+    <EditMenuModal ref="EditMenuModalRef"></EditMenuModal>
   </div>
 </template>
 
 <script setup lang="ts" name="MenuManage">
 import { ref } from 'vue'
-import AddMenuModal from './AddMenuModal.vue'
+import EditMenuModal from './EditMenuModal.vue'
 import { appRoutes } from '@/router'
 
+const EditMenuModalRef = ref<InstanceType<typeof EditMenuModal>>()
 const loading = ref(false)
-const showAddMenuModal = ref(false)
 const treeData = ref<any[]>([])
 
 const getTreeData = () => {
@@ -89,6 +87,14 @@ const getTreeData = () => {
 }
 
 getTreeData()
+
+const onAdd = () => {
+  EditMenuModalRef.value?.add()
+}
+
+const onEdit = (item: any) => {
+  EditMenuModalRef.value?.edit(item.path)
+}
 </script>
 
 <style lang="scss" scoped>
