@@ -375,7 +375,7 @@ const onEdit = (item: PersonItem) => {
 
 #### 分页Hooks的使用
 
-文件位置：@/hooks/usePagination.ts
+文件位置：@/hooks/modules/usePagination.ts
 
 ~~~ts
 import { ref } from 'vue'
