@@ -44,22 +44,22 @@ export function getRandomInterger(end: number, start = 0): number {
   return random
 }
 
-// 千分位格式化
+/** @desc 千分位格式化 */
 export function formatMoney(money: string) {
   return money.replace(new RegExp(`(?!^)(?=(\\d{3})+${money.includes('.') ? '\\.' : '$'})`, 'g'), ',')
 }
 
-// 格式化电话号码 183-7983-6654
+/** @desc 格式化电话号码 183-7983-6654 */
 export function formatPhone(mobile: string, formatStr = '-') {
   return mobile.replace(/(?=(\d{4})+$)/g, formatStr)
 }
 
-// 数据类型检测方法
+/** @desc 数据类型检测方法 */
 export function getDataType(value: string) {
   return Object.prototype.toString.call(value)
 }
 
-// 检测数据是否为空数据
+/** @desc 检测数据是否为空数据 */
 export function isEmpty(data: unknown) {
   if (data === '' || data === 'undefined' || data === undefined || data === null || data === 'null') {
     return true

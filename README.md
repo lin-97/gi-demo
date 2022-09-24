@@ -122,7 +122,7 @@ QQ：326010228
 
 ## 项目规范
 
->  接口api的命名
+#### 接口api的命名
 
 命名规范： 操作 + 后端模块名 + 功能名
 
@@ -144,7 +144,7 @@ import { getUserList, saveUser } from '@/apis'
 
 
 
-> 页面变量命名 ()
+#### 页面变量命名
 
 ~~~js
 // 变量
@@ -159,7 +159,8 @@ const form = reactive({
     remark: ''
 })
 const userList = []
-const companyList = ref([]) // 列表数据最好后面加个 List 或者 Data
+const ids = []
+const companyList = ref([]) // 列表数据最好后面加个 List 或者 Data 或者字母后面加s
 const checkedList = ref([])
 const selectedList = ref([])
 
@@ -194,7 +195,11 @@ const selectedList = ref([])
 
 
 
-> 全局组件-命名规范
+#### 全局组件--命名规范
+
+组件命名：**单文件组件的文件名应该要么始终是单词大写开头 (PascalCase)，要么始终是横线连接 (kebab-case)**
+
+可参考 Vue2官网-风格指南: https://v2.cn.vuejs.org/v2/style-guide/
 
 ~~~
 GiTitle   GiThemeBtn   GiSvgIcon
@@ -202,31 +207,38 @@ GiTitle   GiThemeBtn   GiSvgIcon
 
  
 
-> 局部组件-命名规范
+#### 局部组件--命名规范
+
+组件命名：**单文件组件的文件名应该要么始终是单词大写开头 (PascalCase)，要么始终是横线连接 (kebab-case)**
+
+可参考 Vue2官网-风格指南: https://v2.cn.vuejs.org/v2/style-guide/
 
 ~~~
-Pane1.vue   Pane2.vue    Step1.vue   Step2.vue   AddModal.vue   EditDrawer.vue
-~~~
-
-
-
-> 文件夹命名-命名规范 (采用中划线-)
-
-~~~
-home   quota-first/index.vue      quota-detail/index.vue 
+Pane1.vue   Pane2.vue   PaneQuota1.vue   PaneQuota2.vue   Step1.vue   Step2.vue   AddModal.vue   EditDrawer.vue
 ~~~
 
 
 
-> 全局类名-命名规范 (采用下划线_，好复制)
+#### 文件夹命名--命名规范 (采用中划线-)
+
+@/apis/ 目录下的文件最好以后端模块名为准，大小写也与模块名一致
 
 ~~~
+home/index.vue   quota-first/index.vue      quota-detail/index.vue 
+~~~
+
+
+
+#### 全局类名-命名规范 (采用下划线_，好复制)
+
+~~~scss
+// 文件位置: @/styles/global.scss
 .gi_line_1   .gi_line_2   .gi_margin   .gi_box   .gi_text_tag
 ~~~
 
 
 
-> 全局scss变量-命名规范
+#### 全局scss变量-命名规范
 
 ~~~scss
 $title-color: xxx; // 已弃用，写起来繁琐，易忘
@@ -243,7 +255,7 @@ $color-text-4: var(--color-text-4); // 辅助文本颜色
 
 
 
-> 业务状态
+#### 业务状态
 
 gi-demo的业务状态放在@/libs/status/xxx.ts      xxx为接口模块名
 
@@ -263,12 +275,12 @@ export const StatusList: StatusItem[] = [
 ]
 ~~~
 
-使用的时候
+使用的时候:
 
-引入
+引入模块
 
 ~~~js
-import { StatusList } from '@/libs/status/xxx' // 要具体到模块名
+import { StatusList } from '@/libs/status/xxx' // 要具体到模块名，因为不同模块可能会有StatusList一样的名称
 ~~~
 
 ~~~vue
@@ -283,6 +295,207 @@ import { StatusList } from '@/libs/status/xxx' // 要具体到模块名
 
 
 
-> 其他规范
+#### Arco组件事件ts类型存放位置
+
+建议存放在 @/types/arco.d.ts   直接全局使用
+
+~~~js
+type ALinkStatus = 'normal' | 'success' | 'warning' | 'danger'
+type AModalOnBeforeOk = (done: (closed: boolean) => void) => void | boolean
+type ADrawerOnBeforeOk = (done: (closed: boolean) => void) => void | boolean
+type ASelectChange = string | number | Record<string, any> | (string | number | Record<string, any>)[]
+type ATableSelect = ((rowKeys: BaseType[], rowKey: BaseType, record: TableData) => any) | undefined
+type ARadioGroupChange = (value: string | number | boolean, ev: Event) => void
+type AUploadBeforeRemove = ((fileItem: FileItem) => Promise<boolean>) | undefined
+~~~
+
+
+
+#### 弹出组件Modal、抽屉组件Drawer的一般封装
+
+~~~vue
+<template>
+  <a-modal v-model:visible="visible" :title="title" @ok="confirm">
+	<!-- 内容 -->
+  </a-modal>
+</template>
+
+<script setup lang="ts">
+import { computed, reactive, ref } from 'vue'
+
+const visible = ref(false)
+const detailId = ref('')
+const isEditMode = computed(() => !!detailId.value) // 判断是新增还是编辑模式
+const title = computed(() => (isEditMode.value ? '编辑' : '新增'))
+
+const add = () => {
+  detailId.value = ''
+  visible.value = true
+}
+
+const edit = (id: string) => {
+  detailId.value = id
+  // getDetail() 回显操作
+  visible.value = true
+}
+
+defineExpose({ add, edit })
+
+const confirm = () => {
+  console.log('点击了确认按钮')
+}
+</script>
+~~~
+
+使用
+
+~~~vue
+<template>
+  <EditModal ref="EditModalRef"></EditModal>
+</template>
+
+<script setup lang="ts">
+import EditModal from './EditModal.vue'
+
+const EditModalRef = ref<InstanceType<typeof EditModal>>()
+
+// 新增
+const onAdd = () => {
+  EditModalRef.value?.add()
+}
+
+// 编辑
+const onEdit = (item: PersonItem) => {
+  EditModalRef.value?.edit(item.id)
+}
+</script>
+~~~
+
+
+
+#### 分页Hooks的使用
+
+文件位置：@/hooks/usePagination.ts
+
+~~~ts
+import { ref } from 'vue'
+
+type Callback = () => void
+
+type Options = {
+  defaultPageSize: number
+}
+
+export default function usePagination(callback: Callback, options: Options = { defaultPageSize: 10 }) {
+  const current = ref(1)
+  const pageSize = ref(options.defaultPageSize)
+  const total = ref(0)
+  
+  const pagination = computed(() => {
+    return {
+      showPageSize: true,
+      // ...其他配置
+      total: total.value,
+      current: current.value,
+      pageSize: pageSize.value
+    }
+  })
+
+  function changeCurrent(size: number) {
+    current.value = size
+    callback && callback()
+  }
+
+  function changePageSize(size: number) {
+    current.value = 1
+    pageSize.value = size
+    callback && callback()
+  }
+
+  function setTotal(value: number) {
+    total.value = value
+  }
+
+  return {
+    current,
+    pageSize,
+    total,
+    pagination,
+    changeCurrent,
+    changePageSize,
+    setTotal
+  }
+}
+~~~
+
+使用方式1
+
+~~~vue
+<template>
+  <!-- ... -->
+  <div class="table-box">
+      <a-table
+         row-key="id"
+         v-loading="loading"
+         :bordered="{ cell: true }"
+         :columns="columns"
+         :data="tableData"
+         :scroll="{ x: '100%', y: '100%', minWidth: 1000 }"
+         :row-selection="{ type: 'checkbox', showCheckedAll: true }"
+         :pagination="{ showPageSize: true, total: total, current: current, pageSize: pageSize }"
+         @page-change="changeCurrent"
+         @page-size-change="changePageSize"
+         @select="select"
+         @select-all="selectAll">
+    </a-table>
+  </div>
+</template>
+
+<script setup lang="ts">
+import { usePagination } from '@/hooks'
+    
+const { current, pageSize, total, changeCurrent, changePageSize, setTotal } = usePagination(() => {
+  getTableData()
+})
+</script>
+~~~
+
+使用方法2
+
+~~~vue
+<template>
+  <!-- ... -->
+  <div class="table-box">
+      <a-table
+         row-key="id"
+         v-loading="loading"
+         :bordered="{ cell: true }"
+         :columns="columns"
+         :data="tableData"
+         :scroll="{ x: '100%', y: '100%', minWidth: 1000 }"
+         :row-selection="{ type: 'checkbox', showCheckedAll: true }"
+         :pagination="pagination"
+         @page-change="changeCurrent"
+         @page-size-change="changePageSize"
+         @select="select"
+         @select-all="selectAll">
+    </a-table>
+  </div>
+</template>
+
+<script setup lang="ts">
+import { usePagination } from '@/hooks'
+    
+const { pagination, changeCurrent, changePageSize, setTotal } = usePagination(() => {
+  getTableData()
+})
+</script>
+~~~
+
+
+
+#### 其他规范
+
+可参考 Vue2官网-风格指南: https://v2.cn.vuejs.org/v2/style-guide/ , 其中一些规范也可借鉴
 
 可参考gi-demo源码，如有更好的规范建议，可以联系作者本人
