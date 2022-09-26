@@ -49,6 +49,9 @@ defineExpose({
 .label {
   color: $color-text-2;
 }
+:deep(.arco-form-item) {
+  margin-bottom: 0;
+}
 :deep(.arco-form-item-label-col > label) {
   white-space: nowrap;
 }

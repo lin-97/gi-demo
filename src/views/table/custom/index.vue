@@ -6,9 +6,7 @@
       :data="tableData"
       :scroll="{ x: '100%', y: '100%', minWidth: 1000 }"
       :row-selection="{ type: 'checkbox', showCheckedAll: true }"
-      :pagination="{ showPageSize: true, total: total, current: current, pageSize: pageSize }"
-      @page-change="changeCurrent"
-      @page-size-change="changePageSize"
+      :pagination="pagination"
       @refresh="getTableData"
     >
       <template #custom-extra>
@@ -74,22 +72,21 @@ import type { PersonItem } from '@/apis'
 const loading = ref(false)
 const tableData = ref<PersonItem[]>([])
 
-const { current, pageSize, total, changeCurrent, changePageSize, setTotal } = usePagination(() => {
+const { pagination, setTotal } = usePagination(() => {
   getTableData()
 })
 
 const getTableData = async () => {
-  try {
-    loading.value = true
-    const res = await getPersonList({
-      current: current.value,
-      pageSize: pageSize.value
-    })
-    tableData.value = res.data.list
-    setTotal(res.data.total)
-  } catch (error) {
-    return error
-  } finally {
+  loading.value = true
+  const { success, data } = await getPersonList({
+    current: pagination.current,
+    pageSize: pagination.pageSize
+  })
+  if (success) {
+    tableData.value = data.list
+    setTotal(data.total)
+    loading.value = false
+  } else {
     loading.value = false
   }
 }

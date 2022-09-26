@@ -1,16 +1,15 @@
 <template>
   <div class="detail" ref="containerRef">
     <a-affix :target="containerRef">
-      <section class="head">
-        <a-page-header title="详情" subtitle="Detail Page">
-          <template #extra>
-            <a-button>返回</a-button>
-          </template>
-        </a-page-header>
-      </section>
+      <a-page-header title="详情" subtitle="Detail Page" class="head">
+        <template #extra>
+          <a-button>返回</a-button>
+        </template>
+      </a-page-header>
     </a-affix>
-    <section class="item">
-      <a-descriptions title="基本信息">
+
+    <a-card title="基本信息" :bordered="false" class="item">
+      <a-descriptions>
         <a-descriptions-item label="姓名：">Lin</a-descriptions-item>
         <a-descriptions-item label="性别：">男</a-descriptions-item>
         <a-descriptions-item label="生日：">07月16日</a-descriptions-item>
@@ -35,10 +34,10 @@
           </a-space>
         </a-descriptions-item>
       </a-descriptions>
-    </section>
+    </a-card>
 
-    <section class="item">
-      <a-descriptions title="其他信息" :column="1">
+    <a-card title="其他信息" :bordered="false" class="item">
+      <a-descriptions :column="1">
         <a-descriptions-item label="姓名：">Lin</a-descriptions-item>
         <a-descriptions-item label="性别：">男</a-descriptions-item>
         <a-descriptions-item label="生日：">07月16日</a-descriptions-item>
@@ -69,7 +68,7 @@
           </a-space>
         </a-descriptions-item>
       </a-descriptions>
-    </section>
+    </a-card>
   </div>
 </template>
 
@@ -84,10 +83,10 @@ const containerRef = ref()
   overflow: auto;
   .head {
     background: var(--color-bg-1);
+    box-shadow: 0 2px 5px 0 rgb(0 0 0 / 8%);
   }
   .item {
     margin: $margin;
-    padding: 20px 30px;
     background: var(--color-bg-1);
     border-radius: 2px;
     box-sizing: border-box;

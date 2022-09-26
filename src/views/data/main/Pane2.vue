@@ -2,7 +2,7 @@
   <div class="data-pane">
     <section class="gi_box pane-left">
       <GiTitle title="数据分类"></GiTitle>
-      <TheLeftTree placeholder="请输入搜索关键词" @node-click="changeCurrent(1)"></TheLeftTree>
+      <TheLeftTree placeholder="请输入搜索关键词" @node-click="pagination.onChange(1)"></TheLeftTree>
     </section>
     <section class="gi_box pane-right">
       <GiTitle title="数据列表"></GiTitle>
@@ -103,7 +103,7 @@ import { StatusList } from '@/libs/status/person'
 
 const router = useRouter()
 
-const { pagination, current, pageSize, changeCurrent, setTotal } = usePagination(
+const { pagination, setTotal } = usePagination(
   () => {
     getTableData()
   },
@@ -129,8 +129,8 @@ const getTableData = async () => {
   try {
     loading.value = true
     const res = await getPersonList({
-      current: current.value,
-      pageSize: pageSize.value,
+      current: pagination.current,
+      pageSize: pagination.pageSize,
       ...form
     })
     tableData.value = res.data.list

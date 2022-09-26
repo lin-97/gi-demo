@@ -1,24 +1,27 @@
 .arco-modal-title .arco-icon-exclamation-circle-fill {
   font-size: 24px;
 }
+
 .arco-modal-title-icon {
   display: flex;
   justify-content: center;
   align-items: center;
 }
-.arco-modal {
+
+.arco-modal:not(.arco-modal-simple) {
   .arco-modal-header {
     .arco-modal-title {
       justify-content: flex-start;
     }
   }
   .arco-modal-body {
-    padding-bottom: 0;
+    padding: 16px 20px;
   }
-  // .arco-modal-footer {
-  //   border-top: none;
-  // }
+  .arco-modal-footer {
+    padding: 10px 20px;
+  }
 }
+
 .arco-modal-simple {
   padding: 14px 15px;
   .arco-modal-header {

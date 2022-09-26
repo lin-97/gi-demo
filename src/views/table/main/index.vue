@@ -5,17 +5,17 @@
     >
     <a-form label-align="right" auto-label-width :model="form" class="form">
       <a-row :gutter="16" wrap>
-        <a-col :md="6" :xxl="12">
+        <a-col :md="12" :xl="9" :xxl="6">
           <a-form-item field="value1" label="姓名">
             <a-input v-model="form.value1" placeholder="请输入姓名" />
           </a-form-item>
         </a-col>
-        <a-col :md="6" :xxl="12">
+        <a-col :md="12" :xl="9" :xxl="6">
           <a-form-item field="value2" label="手机">
             <a-input v-model="form.value2" placeholder="请输入手机号码" />
           </a-form-item>
         </a-col>
-        <a-col :md="6" :xxl="12" v-show="collapsed">
+        <a-col :md="12" :xl="9" :xxl="6" v-show="collapsed">
           <a-form-item field="value3" label="类型">
             <a-select placeholder="请选择">
               <a-option>北京</a-option>
@@ -24,12 +24,12 @@
             </a-select>
           </a-form-item>
         </a-col>
-        <a-col :md="6" :xxl="12" v-show="collapsed">
+        <a-col :md="12" :xl="9" :xxl="6" v-show="collapsed">
           <a-form-item field="value3" label="时间">
             <a-date-picker show-time v-model="form.value3" placeholder="请选择创建时间" style="width: 100%" />
           </a-form-item>
         </a-col>
-        <a-col :md="6" :xxl="12" v-show="collapsed">
+        <a-col :md="12" :xl="9" :xxl="6" v-show="collapsed">
           <a-form-item field="value4" label="状态">
             <a-select placeholder="请选择">
               <a-option>开启</a-option>
@@ -37,7 +37,7 @@
             </a-select>
           </a-form-item>
         </a-col>
-        <a-col :md="6" :xxl="12" v-show="collapsed">
+        <a-col :md="12" :xl="9" :xxl="6" v-show="collapsed">
           <a-form-item field="value5" label="地址">
             <a-input v-model="form.value5" placeholder="请输入查询地址" />
           </a-form-item>
@@ -73,7 +73,7 @@
         v-loading="loading"
         :data="tableData"
         :scroll="{ x: '100%', y: '100%', minWidth: 1000 }"
-        :pagination="{ showPageSize: true, total: total, current: current, pageSize: pageSize }"
+        :pagination="{ showPageSize: true, size: 'small', total: total, current: current, pageSize: pageSize }"
         @page-change="changeCurrent"
         @page-size-change="changePageSize"
       >
@@ -147,17 +147,16 @@ const { current, pageSize, total, changeCurrent, changePageSize, setTotal } = us
 })
 
 const getTableData = async () => {
-  try {
-    loading.value = true
-    const res = await getPersonList({
-      current: current.value,
-      pageSize: pageSize.value
-    })
-    tableData.value = res.data.list
-    setTotal(res.data.total)
-  } catch (error) {
-    return error
-  } finally {
+  loading.value = true
+  const { success, data } = await getPersonList({
+    current: current.value,
+    pageSize: pageSize.value
+  })
+  if (success) {
+    tableData.value = data.list
+    setTotal(data.total)
+    loading.value = false
+  } else {
     loading.value = false
   }
 }
@@ -173,7 +172,7 @@ getTableData()
   min-width: 250px;
 }
 :deep(.arco-alert-success) {
-  padding: 5px 15px;
+  padding: 14px 16px;
   border-color: rgb(var(--success-6));
   background-color: rgba(var(--success-6), 0.08);
   .arco-alert-content {

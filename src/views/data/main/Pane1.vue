@@ -2,7 +2,7 @@
   <div class="data-pane">
     <section class="gi_box pane-left">
       <GiTitle title="数据分类"></GiTitle>
-      <TheCateTree placeholder="请输入搜索关键词" @node-click="changeCurrent(1)"></TheCateTree>
+      <TheCateTree placeholder="请输入搜索关键词" @node-click="pagination.onChange(1)"></TheCateTree>
     </section>
     <section class="gi_box pane-right">
       <GiTitle title="数据列表"></GiTitle>
@@ -48,9 +48,7 @@
             :data="tableData"
             :scroll="{ x: '100%', y: '100%', minWidth: 1000 }"
             :row-selection="{ type: 'checkbox', showCheckedAll: true }"
-            :pagination="{ showPageSize: true, total: total, current: current, pageSize: pageSize }"
-            @page-change="changeCurrent"
-            @page-size-change="changePageSize"
+            :pagination="pagination"
             @select="select"
             @select-all="selectAll"
           >
@@ -107,7 +105,7 @@ import { StatusList } from '@/libs/status/person'
 
 const router = useRouter()
 
-const { current, pageSize, total, changeCurrent, changePageSize, setTotal } = usePagination(() => {
+const { pagination, setTotal } = usePagination(() => {
   getTableData()
 })
 
@@ -130,8 +128,8 @@ const getProportionColor = (proportion: number) => {
 const getTableData = async () => {
   loading.value = true
   const res = await getPersonList({
-    current: current.value,
-    pageSize: pageSize.value,
+    current: pagination.current,
+    pageSize: pagination.pageSize,
     ...form
   })
   if (res.success) {

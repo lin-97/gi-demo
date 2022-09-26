@@ -86,6 +86,6 @@ const handleClickItem = (item: MenuItem) => {
 }
 
 .asider {
-  z-index: 9;
+  z-index: 1000;
 }
 </style>
