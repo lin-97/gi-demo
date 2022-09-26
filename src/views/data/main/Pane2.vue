@@ -46,9 +46,7 @@
             :data="tableData"
             :scroll="{ x: '100%', y: '100%', minWidth: 1000 }"
             :row-selection="{ type: 'checkbox', showCheckedAll: true }"
-            :pagination="{ showPageSize: true, total: total, current: current, pageSize: pageSize }"
-            @page-change="changeCurrent"
-            @page-size-change="changePageSize"
+            :pagination="pagination"
             @select="select"
             @select-all="selectAll"
           >
@@ -105,7 +103,7 @@ import { StatusList } from '@/libs/status/person'
 
 const router = useRouter()
 
-const { current, pageSize, total, changeCurrent, changePageSize, setTotal } = usePagination(
+const { pagination, current, pageSize, changeCurrent, setTotal } = usePagination(
   () => {
     getTableData()
   },

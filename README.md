@@ -390,16 +390,6 @@ export default function usePagination(callback: Callback, options: Options = { d
   const current = ref(1)
   const pageSize = ref(options.defaultPageSize)
   const total = ref(0)
-  
-  const pagination = computed(() => {
-    return {
-      showPageSize: true,
-      // ...其他配置
-      total: total.value,
-      current: current.value,
-      pageSize: pageSize.value
-    }
-  })
 
   function changeCurrent(size: number) {
     current.value = size
@@ -415,6 +405,18 @@ export default function usePagination(callback: Callback, options: Options = { d
   function setTotal(value: number) {
     total.value = value
   }
+    
+  const pagination = computed(() => {
+    return {
+      showPageSize: true,
+      // ...其他配置
+      total: total.value,
+      current: current.value,
+      pageSize: pageSize.value,
+      onChange: changeCurrent,
+      onPageSizeChange: changePageSize
+    }
+  })
 
   return {
     current,
@@ -475,8 +477,6 @@ const { current, pageSize, total, changeCurrent, changePageSize, setTotal } = us
          :scroll="{ x: '100%', y: '100%', minWidth: 1000 }"
          :row-selection="{ type: 'checkbox', showCheckedAll: true }"
          :pagination="pagination"
-         @page-change="changeCurrent"
-         @page-size-change="changePageSize"
          @select="select"
          @select-all="selectAll">
     </a-table>
@@ -486,7 +486,7 @@ const { current, pageSize, total, changeCurrent, changePageSize, setTotal } = us
 <script setup lang="ts">
 import { usePagination } from '@/hooks'
     
-const { pagination, changeCurrent, changePageSize, setTotal } = usePagination(() => {
+const { pagination, setTotal } = usePagination(() => {
   getTableData()
 })
 </script>

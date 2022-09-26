@@ -1,4 +1,4 @@
-import { ref } from 'vue'
+import { ref, computed } from 'vue'
 
 type Callback = () => void
 
@@ -26,12 +26,24 @@ export default function usePagination(callback: Callback, options: Options = { d
     total.value = value
   }
 
+  const pagination = computed(() => {
+    return {
+      showPageSize: true,
+      current: current.value,
+      pageSize: pageSize.value,
+      total: total.value,
+      onChange: changeCurrent,
+      onPageSizeChange: changePageSize
+    }
+  })
+
   return {
     current,
     pageSize,
     total,
     changeCurrent,
     changePageSize,
-    setTotal
+    setTotal,
+    pagination
   }
 }
