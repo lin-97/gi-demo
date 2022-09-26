@@ -1,4 +1,4 @@
-import { ref, computed } from 'vue'
+import { reactive, toRefs } from 'vue'
 
 type Callback = () => void
 
@@ -7,43 +7,37 @@ type Options = {
 }
 
 export default function usePagination(callback: Callback, options: Options = { defaultPageSize: 10 }) {
-  const current = ref(1)
-  const pageSize = ref(options.defaultPageSize)
-  const total = ref(0)
-
-  function changeCurrent(size: number) {
-    current.value = size
-    callback && callback()
-  }
-
-  function changePageSize(size: number) {
-    current.value = 1
-    pageSize.value = size
-    callback && callback()
-  }
-
-  function setTotal(value: number) {
-    total.value = value
-  }
-
-  const pagination = computed(() => {
-    return {
-      showPageSize: true,
-      current: current.value,
-      pageSize: pageSize.value,
-      total: total.value,
-      onChange: changeCurrent,
-      onPageSizeChange: changePageSize
+  const pagination = reactive({
+    showPageSize: true,
+    current: 1,
+    pageSize: options.defaultPageSize,
+    total: 0,
+    onChange: (size: number) => {
+      pagination.current = size
+      callback && callback()
+    },
+    onPageSizeChange: (size: number) => {
+      pagination.current = 1
+      pagination.pageSize = size
+      callback && callback()
     }
   })
+
+  const changeCurrent = pagination.onChange
+  const changePageSize = pagination.onPageSizeChange
+  function setTotal(value: number) {
+    pagination.total = value
+  }
+
+  const { current, pageSize, total } = toRefs(pagination)
 
   return {
     current,
     pageSize,
     total,
+    pagination,
     changeCurrent,
     changePageSize,
-    setTotal,
-    pagination
+    setTotal
   }
 }

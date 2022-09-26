@@ -377,6 +377,8 @@ const onEdit = (item: PersonItem) => {
 
 文件位置：@/hooks/modules/usePagination.ts
 
+旧版：
+
 ~~~ts
 import { ref } from 'vue'
 
@@ -429,6 +431,58 @@ export default function usePagination(callback: Callback, options: Options = { d
   }
 }
 ~~~
+
+上面这种方案已经废弃，最新方案如下
+
+改良版：
+
+~~~js
+import { reactive, toRefs } from 'vue'
+
+type Callback = () => void
+
+type Options = {
+  defaultPageSize: number
+}
+
+export default function usePagination(callback: Callback, options: Options = { defaultPageSize: 10 }) {
+  const pagination = reactive({
+    showPageSize: true,
+    current: 1,
+    pageSize: options.defaultPageSize,
+    total: 0,
+    onChange: (size: number) => {
+      pagination.current = size
+      callback && callback()
+    },
+    onPageSizeChange: (size: number) => {
+      pagination.current = 1
+      pagination.pageSize = size
+      callback && callback()
+    }
+  })
+
+  const changeCurrent = pagination.onChange
+  const changePageSize = pagination.onPageSizeChange
+  function setTotal(value: number) {
+    pagination.total = value
+  }
+
+  const { current, pageSize, total } = toRefs(pagination)
+
+  return {
+    current,
+    pageSize,
+    total,
+    pagination,
+    changeCurrent,
+    changePageSize,
+    setTotal
+  }
+}
+~~~
+
+
 
 使用方式1
 
