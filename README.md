@@ -169,7 +169,7 @@ const selectedList = ref([])
 新增 onAdd      handleAdd      add
 删除 onDelete   handleDelete   delete
 批量删除 onMulDelete   handleMulDelete  mulDelete
-重命名 onRename
+重命名 onRename   handleRename
 搜索 search
 获取表格列表 getTableData  // 一般一个页面也就一个表格，gi-demo习惯用getTableData, 结合分页hooks的时候可以直接复制复用
 返回 back
@@ -434,7 +434,7 @@ export default function usePagination(callback: Callback, options: Options = { d
 
 上面这种方案已经废弃，最新方案如下
 
-改良版：
+改良版（兼容旧版）：
 
 ~~~js
 import { reactive, toRefs } from 'vue'

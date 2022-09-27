@@ -25,6 +25,12 @@ const Document = {
       name: 'DocumentJueJin',
       component: () => import('@/views/document/juejin/index.vue'),
       meta: { title: '掘金', keepAlive: false }
+    },
+    {
+      path: '/document/itab',
+      name: 'DocumentITab',
+      component: () => import('@/views/document/itab/index.vue'),
+      meta: { title: '掘金', keepAlive: false }
     }
   ]
 }

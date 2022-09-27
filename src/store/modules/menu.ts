@@ -245,6 +245,13 @@ export const useMenuStore = defineStore({
               path: '/document/juejin',
               keepAlive: false,
               hidden: false
+            },
+            {
+              id: 'itab',
+              name: 'iTab',
+              path: '/document/itab',
+              keepAlive: false,
+              hidden: false
             }
           ]
         },

@@ -31,7 +31,7 @@
             <a-date-picker v-model="form.birthday" placeholder="请选择出生日期" />
           </a-form-item>
           <a-form-item field="dept" label="部门" allow-clear>
-            <a-tree-select :data="treeData" v-model="form.dept" multiple placeholder="请选择部门" />
+            <a-tree-select :data="treeData" v-model="form.dept" multiple placeholder="请选择部门"></a-tree-select>
           </a-form-item>
           <a-form-item field="grade" label="学历" allow-clear>
             <a-select v-model="form.grade" placeholder="请选择学历" style="width: 120px">
