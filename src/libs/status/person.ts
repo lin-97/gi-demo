@@ -8,6 +8,6 @@ export const SubmitStatusList: SubmitStatusItem[] = [
 type StatusItem = { name: string; value: number; color: string }
 /** @desc 指标启用状态 */
 export const StatusList: StatusItem[] = [
-  { name: '禁用', value: 0, color: '#f53f3f' },
-  { name: '启用', value: 1, color: '#00b42a' }
+  { name: '禁用', value: 0, color: 'red' },
+  { name: '启用', value: 1, color: 'green' }
 ]

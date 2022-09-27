@@ -45,6 +45,7 @@
             row-key="id"
             v-loading="loading"
             :bordered="{ cell: true }"
+            :columns="columns"
             :data="tableData"
             :scroll="{ x: '100%', y: '100%', minWidth: 1000 }"
             :row-selection="{ type: 'checkbox', showCheckedAll: true }"
@@ -52,36 +53,23 @@
             @select="select"
             @select-all="selectAll"
           >
-            <template #columns>
-              <a-table-column title="序号" :width="68">
-                <template #cell="{ rowIndex }">{{ rowIndex + 1 }}</template>
-              </a-table-column>
-              <a-table-column title="姓名" data-index="name"></a-table-column>
-              <a-table-column title="创建时间" data-index="startTime" :width="180"></a-table-column>
-              <a-table-column title="地址" data-index="address" ellipsis tooltip></a-table-column>
-              <a-table-column title="比例" :width="200">
-                <template #cell="{ record }">
-                  <a-progress :status="getProportionColor(record.proportion)" :percent="record.proportion / 100" />
-                </template>
-              </a-table-column>
-              <a-table-column title="状态" :width="100" align="center">
-                <template #cell="{ record }">
-                  <template v-for="item in StatusList" :key="item.value">
-                    <a-tag v-if="item.value === record.status" :color="item.color">{{ item.name }}</a-tag>
-                  </template>
-                </template>
-              </a-table-column>
-              <a-table-column title="操作" :width="200" align="center">
-                <template #cell="{ record }">
-                  <a-space>
-                    <a-button type="primary" size="mini" @click="onEdit(record)">修改</a-button>
-                    <a-button size="mini" @click="onDetail">详情</a-button>
-                    <a-popconfirm type="warning" content="您确定要删除该项吗?" @ok="onDelete(record.id)">
-                      <a-button type="primary" status="danger" size="mini">删除</a-button>
-                    </a-popconfirm>
-                  </a-space>
-                </template>
-              </a-table-column>
+            <template #index="{ rowIndex }">{{ rowIndex + 1 }}</template>
+            <template #proportion="{ record }">
+              <a-progress :status="getProportionColor(record.proportion)" :percent="record.proportion / 100" />
+            </template>
+            <template #status="{ record }">
+              <template v-for="item in StatusList" :key="item.value">
+                <a-tag size="small" v-if="item.value === record.status" :color="item.color">{{ item.name }}</a-tag>
+              </template>
+            </template>
+            <template #operation="{ record }">
+              <a-space>
+                <a-button type="primary" size="mini" @click="onEdit(record)">修改</a-button>
+                <a-button size="mini" @click="onDetail">详情</a-button>
+                <a-popconfirm type="warning" content="您确定要删除该项吗?" @ok="onDelete(record.id)">
+                  <a-button type="primary" status="danger" size="mini">删除</a-button>
+                </a-popconfirm>
+              </a-space>
             </template>
           </a-table>
         </section>
@@ -96,6 +84,7 @@
 import { reactive, ref } from 'vue'
 import { useRouter } from 'vue-router'
 import { Modal, Message } from '@arco-design/web-vue'
+import type { TableColumnData } from '@arco-design/web-vue'
 import { usePagination } from '@/hooks'
 import TheCateTree from '@/views/components/TheCateTree/index.vue'
 import EditModal from './EditModal.vue'
@@ -104,6 +93,46 @@ import type { PersonItem } from '@/apis'
 import { StatusList } from '@/libs/status/person'
 
 const router = useRouter()
+
+const columns: TableColumnData[] = [
+  {
+    title: '序号',
+    width: 68,
+    slotName: 'index'
+  },
+  {
+    title: '姓名',
+    dataIndex: 'name'
+  },
+  {
+    title: '创建时间',
+    dataIndex: 'startTime',
+    width: 180
+  },
+  {
+    title: '地址',
+    dataIndex: 'address',
+    ellipsis: true,
+    tooltip: true
+  },
+  {
+    title: '比例',
+    slotName: 'proportion',
+    width: 200
+  },
+  {
+    title: '状态',
+    slotName: 'status',
+    width: 100,
+    align: 'center'
+  },
+  {
+    title: '操作',
+    slotName: 'operation',
+    width: 200,
+    align: 'center'
+  }
+]
 
 const { pagination, setTotal } = usePagination(() => {
   getTableData()

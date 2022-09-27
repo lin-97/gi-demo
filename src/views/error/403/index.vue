@@ -17,7 +17,7 @@
 
 <script setup lang="ts" name="ErrorPage">
 import { onBeforeUnmount, onMounted, ref } from 'vue'
-import { useRoute, useRouter } from 'vue-router'
+import { useRouter } from 'vue-router'
 import Page403 from '@/assets/svgs/403.svg'
 
 const router = useRouter()

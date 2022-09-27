@@ -1,23 +1,22 @@
 <template>
   <div class="detail" ref="containerRef">
     <a-affix :target="containerRef">
-      <section class="head">
-        <a-page-header title="详情" subtitle="Base Detail Page" @back="back">
-          <template #breadcrumb>
-            <a-breadcrumb>
-              <a-breadcrumb-item v-for="(item, index) in route.matched" :key="index">{{
-                item.meta.title
-              }}</a-breadcrumb-item>
-            </a-breadcrumb>
-          </template>
-          <template #extra>
-            <a-button @click="back">返回</a-button>
-          </template>
-        </a-page-header>
-      </section>
+      <a-page-header title="详情" subtitle="Base Detail Page" @back="back" class="head">
+        <template #breadcrumb>
+          <a-breadcrumb>
+            <a-breadcrumb-item v-for="(item, index) in route.matched" :key="index">{{
+              item.meta.title
+            }}</a-breadcrumb-item>
+          </a-breadcrumb>
+        </template>
+        <template #extra>
+          <a-button @click="back">返回</a-button>
+        </template>
+      </a-page-header>
     </a-affix>
-    <section class="item">
-      <a-descriptions title="基本信息" size="small">
+
+    <a-card title="基本信息" :bordered="false" class="item">
+      <a-descriptions>
         <a-descriptions-item label="姓名">Lin</a-descriptions-item>
         <a-descriptions-item label="性别">男</a-descriptions-item>
         <a-descriptions-item label="生日">07月16日</a-descriptions-item>
@@ -42,10 +41,10 @@
           </a-space>
         </a-descriptions-item>
       </a-descriptions>
-    </section>
+    </a-card>
 
-    <section class="item">
-      <a-descriptions title="其他信息" :column="1" :label-style="{ dispaly: 'flex' }">
+    <a-card title="其他信息" :bordered="false" class="item">
+      <a-descriptions :column="1">
         <a-descriptions-item label="姓名">Lin</a-descriptions-item>
         <a-descriptions-item label="性别">男</a-descriptions-item>
         <a-descriptions-item label="生日">07月16日</a-descriptions-item>
@@ -76,7 +75,7 @@
           </a-space>
         </a-descriptions-item>
       </a-descriptions>
-    </section>
+    </a-card>
   </div>
 </template>
 
@@ -101,7 +100,6 @@ const back = () => {
   }
   .item {
     margin: $margin;
-    padding: 20px 30px;
     background: var(--color-bg-1);
     border-radius: 2px;
   }
