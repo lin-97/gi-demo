@@ -1,5 +1,5 @@
 <template>
-  <a-layout-sider collapsible breakpoint="xl" class="asider">
+  <a-layout-sider collapsible breakpoint="xl" :width="232" class="asider">
     <a-menu
       :selected-keys="[activeKey]"
       :default-open-keys="['Workplace']"

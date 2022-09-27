@@ -73,7 +73,7 @@
         v-loading="loading"
         :data="tableData"
         :scroll="{ x: '100%', y: '100%', minWidth: 1000 }"
-        :pagination="{ showPageSize: true, size: 'small', total: total, current: current, pageSize: pageSize }"
+        :pagination="{ showPageSize: true, total: total, current: current, pageSize: pageSize }"
         @page-change="changeCurrent"
         @page-size-change="changePageSize"
       >
@@ -88,28 +88,28 @@
             </template>
           </a-table-column>
           <a-table-column title="手机号" data-index="phone" :width="150"></a-table-column>
-          <a-table-column title="创建时间" data-index="startTime" ellipsis tooltip></a-table-column>
+          <a-table-column title="创建时间" data-index="createTime" ellipsis tooltip></a-table-column>
           <a-table-column title="地址" data-index="address" ellipsis tooltip></a-table-column>
           <a-table-column title="状态" :width="100" align="center">
             <template #cell="{ record }">
-              <a-link v-if="record.status" status="success" :hoverable="false">开启</a-link>
-              <a-link v-else status="danger" :hoverable="false">关闭</a-link>
+              <a-typography-text v-if="record.status" type="success">开启</a-typography-text>
+              <a-typography-text v-else type="danger">关闭</a-typography-text>
             </template>
           </a-table-column>
           <a-table-column title="操作" :width="300" align="center">
             <template #cell="{ record }">
-              <a-space>
+              <a-space :size="4">
                 <a-link>
-                  <template #icon><icon-edit :size="15" /></template>
+                  <template #icon><icon-edit :size="15" :stroke-width="3" /></template>
                   <template #default>编辑</template>
                 </a-link>
                 <a-link>
-                  <template #icon><icon-eye :size="15" /></template>
+                  <template #icon><icon-eye :size="15" :stroke-width="3" /></template>
                   <template #default>详情</template>
                 </a-link>
                 <a-popconfirm type="warning" content="您确定要删除该项吗?">
                   <a-link status="danger">
-                    <template #icon><icon-delete :size="15" /></template>
+                    <template #icon><icon-delete :size="15" :stroke-width="3" /></template>
                     <template #default>删除</template>
                   </a-link>
                 </a-popconfirm>

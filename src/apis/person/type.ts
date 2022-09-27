@@ -6,6 +6,7 @@ export interface PersonItem {
   phone: string
   startTime: string
   endTime: string
+  createTime: string
   address: string
   avatar: string
   date: string

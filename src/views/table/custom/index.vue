@@ -34,7 +34,7 @@
           </template>
         </a-table-column>
         <a-table-column title="手机号" data-index="phone" :width="150"></a-table-column>
-        <a-table-column title="创建时间" data-index="startTime" ellipsis tooltip></a-table-column>
+        <a-table-column title="创建时间" data-index="createTime" ellipsis tooltip></a-table-column>
         <a-table-column title="地址" data-index="address" ellipsis tooltip></a-table-column>
         <a-table-column title="状态" :width="100">
           <template #cell="{ record }">

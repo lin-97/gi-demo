@@ -23,6 +23,7 @@ const getTableListData = (params) => {
       phone: '15578728810',
       startTime: '@datetime',
       endTime: '@datetime',
+      createTime: '@datetime',
       address: '@county(true)',
       avatar: Random.image('400x400', Random.color(), Random.color(), Random.first()),
       date: `@date('yyyy-MM-dd')`,
