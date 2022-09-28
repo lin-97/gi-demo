@@ -1,14 +1,11 @@
-/** 常见公共方法 */
-
 /**
  * @desc 去除空格
- * @param str - 字符串
- * @param pos - 去除空格的位置
+ * @param {string} str - 字符串
+ * @param {string} pos - 去除空格的位置
  * pos="both": 去除两边空格
  * pos="left": 去除左边空格
  * pos="right": 去除右边空格
- * pos="all": 去除所有空格
- */
+ * pos="all": 去除所有空格 */
 type Pos = 'both' | 'left' | 'right' | 'all'
 export function trim(str: string, pos: Pos = 'both'): string {
   if (pos == 'both') {
@@ -26,8 +23,7 @@ export function trim(str: string, pos: Pos = 'both'): string {
 
 /**
  * 根据数字获取对应的汉字
- * @param num - 数字(0-10)
- */
+ * @param {number} num - 数字(0-10) */
 export function getHanByNumber(num: number): string {
   const str = '零一二三四五六七八九十'
   return str.charAt(num)
@@ -35,10 +31,9 @@ export function getHanByNumber(num: number): string {
 
 /**
  * 获取指定整数范围内的随机整数
- * @param start - 开始范围
- * @param end - 结束范围
- */
-export function getRandomInterger(end: number, start = 0): number {
+ * @param {number} start - 开始范围
+ * @param {number} end - 结束范围 */
+export function getRandomInterger(start = 0, end: number): number {
   const range = end - start
   const random = Math.floor(Math.random() * range + start)
   return random
@@ -97,8 +92,7 @@ export function toCase(str: string, type: number) {
 }
 
 /**
- * @desc 遍历树节点
- * */
+ * @desc 遍历树节点 */
 export function foreachTree(data: any, callback: Function, childrenName = 'children') {
   for (let i = 0; i < data.length; i++) {
     callback(data[i])
@@ -106,4 +100,49 @@ export function foreachTree(data: any, callback: Function, childrenName = 'child
       foreachTree(data[i][childrenName], callback, childrenName)
     }
   }
+}
+
+/**
+ * @desc 获取随机数
+ * @param {number} min 最小值
+ * @param {number} max 最大值
+ * */
+export const randomNum = (min: number, max: number) => {
+  return Math.floor(min + Math.random() * (max + 1 - min))
+}
+
+/**
+ * @desc 获取最大值 */
+export const max = (arr: number[]) => {
+  return Math.max.apply(null, arr)
+}
+
+/**
+ * @desc 获取最小值 */
+export const min = (arr: number[]) => {
+  return Math.min.apply(null, arr)
+}
+
+/**
+ * @desc 求和 */
+export const sum = (arr: number[]) => {
+  return arr.reduce((pre, cur) => pre + cur)
+}
+
+/**
+ * @desc 获取平均值 */
+export const average = (arr: number[]) => {
+  return sum(arr) / arr.length
+}
+
+/**
+ * @desc 文件大小格式化 */
+export const formatFileSize = (size: number) => {
+  const units = ['B', 'KB', 'MB', 'GB']
+  let index = 0
+  while (size > 1024 && index < units.length) {
+    size /= 1024
+    index++
+  }
+  return Math.round(size * 100) / 100 + units[index]
 }
