@@ -68,6 +68,7 @@
     <section class="table-box">
       <a-table
         row-key="id"
+        size="small"
         page-position="bottom"
         :bordered="{ cell: true }"
         v-loading="loading"
@@ -96,7 +97,7 @@
               <a-typography-text v-else type="danger">关闭</a-typography-text>
             </template>
           </a-table-column>
-          <a-table-column title="操作" :width="300" align="center">
+          <a-table-column title="操作" :width="230" align="center">
             <template #cell="{ record }">
               <a-space :size="4">
                 <a-link>

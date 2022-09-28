@@ -65,7 +65,7 @@ const slots = useSlots()
 const tableRef = ref(null)
 
 const stripe = ref(false)
-const size = ref('small')
+const size = ref<ATableSize>('small')
 const isBordered = ref(true)
 // console.log('attrs', attrs)
 

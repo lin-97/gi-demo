@@ -43,6 +43,7 @@
         <section class="table-box">
           <a-table
             row-key="id"
+            size="small"
             v-loading="loading"
             :bordered="{ cell: true }"
             :columns="columns"

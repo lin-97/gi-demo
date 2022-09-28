@@ -18,10 +18,12 @@
 import { ref } from 'vue'
 import Pane1 from './Pane1.vue'
 import Pane2 from './Pane2.vue'
+import Pane3 from './Pane3.vue'
 
 const PaneMap: any = {
   1: Pane1,
-  2: Pane2
+  2: Pane2,
+  3: Pane3
 }
 
 const activeKey = ref(2)

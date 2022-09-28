@@ -43,6 +43,9 @@
           <a-form-item field="rangDate" label="在校日期范围" allow-clear>
             <a-range-picker v-model="form.rangDate" />
           </a-form-item>
+          <a-form-item field="hobbys" label="爱好" allow-clear>
+            <a-select :options="hobbySelectList" v-model="form.hobbys" placeholder="请选择爱好" multiple></a-select>
+          </a-form-item>
           <a-form-item field="isRead">
             <a-checkbox v-model="form.isRead">我已阅读</a-checkbox>
           </a-form-item>
@@ -101,6 +104,15 @@ const treeData = ref([
     ]
   }
 ])
+
+const hobbySelectList = [
+  { label: '运动', value: '运动', tagProps: { color: 'red' } },
+  { label: '音乐', value: '音乐', tagProps: { color: 'green' } },
+  { label: '电影', value: '电影', tagProps: { color: 'cyan' } },
+  { label: '旅行', value: '旅行', tagProps: { color: 'arcoblue' } },
+  { label: '美食', value: '美食', tagProps: { color: 'purple' } }
+]
+
 const form = reactive({
   name: '',
   phone: '',
@@ -112,6 +124,7 @@ const form = reactive({
   dept: [],
   startTime: '',
   endTime: '',
+  hobbys: [],
   isRead: false
 })
 

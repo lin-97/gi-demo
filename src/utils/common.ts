@@ -49,14 +49,23 @@ export function formatMoney(money: string) {
   return money.replace(new RegExp(`(?!^)(?=(\\d{3})+${money.includes('.') ? '\\.' : '$'})`, 'g'), ',')
 }
 
-/** @desc 格式化电话号码 183-7983-6654 */
+/** @desc 数据类型检测方法 */
+export function getTypeOf(value: any) {
+  return Object.prototype.toString.call(value).slice(8, -1).toLowerCase()
+}
+
+/**
+ * @desc 格式化电话号码
+ * @demo 183-7983-6654 */
 export function formatPhone(mobile: string, formatStr = '-') {
   return mobile.replace(/(?=(\d{4})+$)/g, formatStr)
 }
 
-/** @desc 数据类型检测方法 */
-export function getDataType(value: string) {
-  return Object.prototype.toString.call(value)
+/**
+ * @desc 手机号脱敏
+ * @demo 155****8810  */
+export function hidePhone(phone: string) {
+  return phone.replace(/^(\d{3})\d{4}(\d{4})$/, '$1****$2')
 }
 
 /** @desc 检测数据是否为空数据 */
@@ -68,4 +77,33 @@ export function isEmpty(data: unknown) {
     return true
   }
   return false
+}
+
+/**
+ * @desc 大小写转换
+ * @param {string} str 待转换的字符串
+ * @param {number} type 1:全大写 2:全小写 3:首字母大写 */
+export function toCase(str: string, type: number) {
+  switch (type) {
+    case 1:
+      return str.toUpperCase()
+    case 2:
+      return str.toLowerCase()
+    case 3:
+      return str[0].toUpperCase() + str.substring(1).toLowerCase()
+    default:
+      return str
+  }
+}
+
+/**
+ * @desc 遍历树节点
+ * */
+export function foreachTree(data: any, callback: Function, childrenName = 'children') {
+  for (let i = 0; i < data.length; i++) {
+    callback(data[i])
+    if (data[i][childrenName] && data[i][childrenName].length > 0) {
+      foreachTree(data[i][childrenName], callback, childrenName)
+    }
+  }
 }
