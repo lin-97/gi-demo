@@ -8,6 +8,9 @@ type Options = {
 }
 
 interface APaginationProps extends PaginationProps {
+  current: number
+  pageSize: number
+  total: number
   onChange: (size: number) => void
   onPageSizeChange: (size: number) => void
 }
