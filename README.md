@@ -402,6 +402,7 @@ export default function usePagination(callback: Callback, options: Options = { d
 
 ```js
 import { reactive, toRefs } from 'vue'
+import type { PaginationProps } from '@arco-design/web-vue'
 
 type Callback = () => void
 
@@ -409,8 +410,13 @@ type Options = {
   defaultPageSize: number
 }
 
+interface APaginationProps extends PaginationProps {
+  onChange: (size: number) => void
+  onPageSizeChange: (size: number) => void
+}
+
 export default function usePagination(callback: Callback, options: Options = { defaultPageSize: 10 }) {
-  const pagination = reactive({
+  const pagination: APaginationProps = reactive({
     showPageSize: true,
     current: 1,
     pageSize: options.defaultPageSize,
