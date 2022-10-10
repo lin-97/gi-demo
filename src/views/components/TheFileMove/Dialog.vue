@@ -35,13 +35,13 @@
 
 <script setup lang="ts">
 import { ref, reactive, onMounted, type PropType } from 'vue'
-import type { ApiFileItem } from '@/apis'
+import type { FileItem } from '@/apis'
 import type { TreeNodeData } from '@arco-design/web-vue'
 import data from './treedata'
 import GiSvgIcon from '@/components/GiSvgIcon.vue'
 
 const props = defineProps({
-  fileInfo: Object as PropType<ApiFileItem>,
+  fileInfo: Object as PropType<FileItem>,
   onClose: Function
 })
 

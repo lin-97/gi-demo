@@ -120,7 +120,7 @@ import FileCloseIcon from '@/icons/com-file-close.svg'
 import FileIcon from '@/icons/com-file.svg'
 
 import { getCateTreeData } from '@/apis'
-import type { ApiCateTreeNode } from '@/apis'
+import type { CateItem } from '@/apis'
 
 const props = defineProps({
   // 分类
@@ -138,7 +138,7 @@ const props = defineProps({
 const loading = ref(false)
 const treeRef = ref()
 const inputValue = ref('')
-const treeData = ref<ApiCateTreeNode[]>([])
+const treeData = ref<CateItem[]>([])
 
 const emit = defineEmits(['node-click'])
 

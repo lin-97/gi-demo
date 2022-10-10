@@ -1,5 +1,5 @@
 // 文件
-export interface ApiFileItem {
+export interface FileItem {
   id: string
   type: string
   name: string
@@ -10,5 +10,3 @@ export interface ApiFileItem {
   filePath: string
   [propName: string]: any // 一个 interface 中任意属性只能有一个
 }
-
-export type FileListParams = { fileType: string | number }

@@ -22,10 +22,10 @@
 <script setup lang="ts">
 import { ref, onMounted, computed, type PropType } from 'vue'
 import { useDraggable, useWindowSize, useElementSize } from '@vueuse/core'
-import type { ApiFileItem } from '@/apis'
+import type { FileItem } from '@/apis'
 
 const props = defineProps({
-  fileInfo: Object as PropType<ApiFileItem>,
+  fileInfo: Object as PropType<FileItem>,
   onCancel: Function
 })
 

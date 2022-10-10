@@ -32,7 +32,7 @@ import FileCloseIcon from '@/icons/com-file-close.svg'
 import FileIcon from '@/icons/com-file.svg'
 
 import { getCateTreeData } from '@/apis'
-import type { ApiCateTreeNode } from '@/apis'
+import type { CateItem } from '@/apis'
 
 const props = defineProps({
   // 分类
@@ -47,12 +47,12 @@ const props = defineProps({
   }
 })
 
-type TreeNode = ZTree.ITreeNode & ApiCateTreeNode
+type TreeNode = ZTree.ITreeNode & CateItem
 
 const loading = ref(false)
 const inputValue = ref('')
 const treeRef = ref<HTMLElement | null>(null)
-const treeData = ref<ApiCateTreeNode[]>([])
+const treeData = ref<CateItem[]>([])
 const treeObj = ref<ZTree.IzTreeObj | null>(null)
 const currentNode = ref<TreeNode | null>(null)
 

@@ -124,7 +124,7 @@ import TheFileRename from '@/views/components/TheFileRename/index'
 import TheFileMove from '@/views/components/TheFileMove/index'
 import { useRoute, useRouter, onBeforeRouteUpdate } from 'vue-router'
 import { getFileList } from '@/apis'
-import type { ApiFileItem } from '@/apis'
+import type { FileItem } from '@/apis'
 const route = useRoute()
 const router = useRouter()
 
@@ -133,7 +133,7 @@ const fileStore = useFileStore()
 
 const loading = ref(false)
 // 文件列表数据
-const fileList = ref<ApiFileItem[]>([])
+const fileList = ref<FileItem[]>([])
 const fileType = ref('0')
 fileType.value = route.query.fileType?.toString() || '0'
 
@@ -164,7 +164,7 @@ onBeforeRouteUpdate((to) => {
 const isBatchMode = ref(false)
 
 // 点击文件
-const handleClickFile = (item: ApiFileItem) => {
+const handleClickFile = (item: FileItem) => {
   Message.success(`点击了文件-${item.name}`)
   if (imageTypeList.includes(item.extendName)) {
     if (item.src) {
@@ -191,11 +191,11 @@ const handleClickFile = (item: ApiFileItem) => {
 }
 
 // 勾选文件
-const handleCheckFile = (item: ApiFileItem) => {
+const handleCheckFile = (item: FileItem) => {
   fileStore.addSelectedFileItem(item)
 }
 // 鼠标右键
-const handleRightMenuClick = (mode: string, fileInfo: ApiFileItem) => {
+const handleRightMenuClick = (mode: string, fileInfo: FileItem) => {
   Message.success('点击了' + mode)
   if (mode === 'delete') {
     Modal.warning({

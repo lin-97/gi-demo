@@ -6,12 +6,12 @@
 <script setup lang="ts">
 import { computed, type PropType } from 'vue'
 import { fileExtendNameIconMap, imageTypeList } from '@/libs/file/file-map'
-import type { ApiFileItem } from '@/apis'
+import type { FileItem } from '@/apis'
 
 const props = defineProps({
   // 文件数据
   data: {
-    type: Object as PropType<ApiFileItem>,
+    type: Object as PropType<FileItem>,
     default: () => {}
   }
 })
