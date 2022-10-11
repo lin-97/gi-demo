@@ -1,8 +1,8 @@
 <template>
-  <a-card title="快捷操作" :bordered="false" size="medium" style="overflow: hidden">
+  <a-card title="快捷操作" :bordered="false" size="medium">
     <a-card-grid :style="{ width: '33.33%' }" v-for="(item, index) in list" :key="item.name" class="card-grid">
-      <a-card :bordered="false" hoverable :class="'animated-fade-up-' + (index + 2)">
-        <a-row justify="center" align="center">
+      <a-card :bordered="false" hoverable style="overflow: hidden">
+        <a-row justify="center" align="center" :class="'animated-fade-up-' + (index + 1)">
           <a-space direction="vertical" align="center">
             <component :is="item.icon" :size="30" :style="{ color: item.color }"></component>
             <span>{{ item.name }}</span>

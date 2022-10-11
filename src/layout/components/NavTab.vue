@@ -18,9 +18,10 @@
       <!-- 右侧按钮 -->
       <template #extra>
         <a-dropdown trigger="hover">
-          <a-button type="primary" size="mini" class="extra-btn">
+          <!-- <a-button type="primary" size="mini" class="extra-btn">
             <template #icon><icon-settings :size="18" /></template>
-          </a-button>
+          </a-button> -->
+          <GiMoreIcon></GiMoreIcon>
           <template #content>
             <a-doption @click="onClose(route.path)">
               <template #icon>

@@ -1,6 +1,6 @@
 <template>
   <div class="image-card">
-    <img src="@/assets/svgs/home-design.svg" />
+    <img class="animated-fade-up-1" src="@/assets/svgs/home-design.svg" />
   </div>
 </template>
 

@@ -14,6 +14,7 @@ declare module '@vue/runtime-core' {
     GiIconSelector: typeof import('./components/GiIconSelector.vue')['default']
     GiLoading: typeof import('./components/GiLoading.vue')['default']
     GiLodingIcon: typeof import('./components/GiLodingIcon/index.vue')['default']
+    GiMoreIcon: typeof import('./components/GiMoreIcon.vue')['default']
     GiNowTime: typeof import('./components/GiNowTime.vue')['default']
     GiOption: typeof import('./components/GiOption.vue')['default']
     GiOptionItem: typeof import('./components/GiOptionItem.vue')['default']
