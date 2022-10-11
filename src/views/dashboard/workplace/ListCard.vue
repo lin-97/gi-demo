@@ -3,7 +3,15 @@
     <template #extra>
       <a-link>更多</a-link>
     </template>
-    <a-comment v-for="item in list" :key="item.name" :author="item.name" :content="item.text" align="right">
+    <a-comment
+      v-for="(item, index) in list"
+      :key="item.name"
+      :author="item.name"
+      :content="item.text"
+      align="right"
+      :class="'animated-fade-up-' + index"
+      style="overflow: hidden"
+    >
       <template #avatar>
         <a-avatar><img src="https://s1.ax1x.com/2022/07/05/jtMjGq.jpg" /></a-avatar>
       </template>

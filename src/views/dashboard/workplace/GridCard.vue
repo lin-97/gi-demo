@@ -1,7 +1,7 @@
 <template>
-  <a-card title="项目" :bordered="false" size="medium">
+  <a-card title="项目" :bordered="false" size="medium" style="overflow: hidden">
     <ul class="list">
-      <li class="list-item" v-for="item in list" :key="item.name">
+      <li class="list-item" :class="'animated-fade-up-' + index" v-for="(item, index) in list" :key="item.name">
         <div class="head">
           <GiSvgIcon :size="30" :name="item.icon"></GiSvgIcon>
           <span>{{ item.name }}</span>
