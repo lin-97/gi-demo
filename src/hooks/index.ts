@@ -5,6 +5,7 @@ import usePagination from './modules/usePagination'
 import useRequest from './modules/useRequest'
 import useArea from './modules/useArea'
 import useImage from './modules/useImage'
+import useChart from './modules/useChart'
 
 import { useApiDept, useApiRole } from './modules/useApiSystem'
 
@@ -16,6 +17,7 @@ export {
   useRequest,
   useArea,
   useImage,
+  useChart,
   useApiDept,
   useApiRole
 }

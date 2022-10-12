@@ -7,6 +7,7 @@ export {}
 
 declare module '@vue/runtime-core' {
   export interface GlobalComponents {
+    GiChart: typeof import('./components/GiChart.vue')['default']
     GiContextMenu: typeof import('./components/GiContextMenu.vue')['default']
     GiDot: typeof import('./components/GiDot.vue')['default']
     GiFlexibleBox: typeof import('./components/GiFlexibleBox.vue')['default']

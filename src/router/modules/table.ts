@@ -1,8 +1,6 @@
 import { DEFAULT_LAYOUT } from '../base'
 
 const Table = {
-  path: '/table',
-  name: 'Table',
   component: DEFAULT_LAYOUT,
   children: [
     {

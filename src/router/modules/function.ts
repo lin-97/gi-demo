@@ -1,9 +1,6 @@
 import { DEFAULT_LAYOUT } from '../base'
 
 const Function = {
-  path: '/tool',
-  name: 'Tool',
-  redirect: '/tool',
   component: DEFAULT_LAYOUT,
   children: [
     {

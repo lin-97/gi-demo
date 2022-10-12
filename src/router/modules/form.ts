@@ -1,8 +1,6 @@
 import { DEFAULT_LAYOUT } from '../base'
 
 const Form = {
-  path: '/form',
-  name: 'Form',
   component: DEFAULT_LAYOUT,
   children: [
     {

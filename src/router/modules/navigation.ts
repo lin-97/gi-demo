@@ -1,9 +1,6 @@
 import { DEFAULT_LAYOUT } from '../base'
 
 const Navigation = {
-  path: '/navigation',
-  name: 'Navigation',
-  redirect: '/navigation',
   component: DEFAULT_LAYOUT,
   children: [
     {

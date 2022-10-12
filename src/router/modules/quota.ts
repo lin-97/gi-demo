@@ -1,9 +1,6 @@
 import { DEFAULT_LAYOUT } from '../base'
 
 const Data = {
-  path: '/data',
-  name: 'Data',
-  redirect: '/data',
   component: DEFAULT_LAYOUT,
   children: [
     {

@@ -1,8 +1,6 @@
 import { DEFAULT_LAYOUT } from '../base'
 
 const Result = {
-  path: '/result',
-  name: 'Result',
   component: DEFAULT_LAYOUT,
   children: [
     {

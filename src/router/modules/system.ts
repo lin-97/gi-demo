@@ -1,8 +1,6 @@
 import { DEFAULT_LAYOUT } from '../base'
 
 const System = {
-  path: '/system',
-  name: 'System',
   component: DEFAULT_LAYOUT,
   children: [
     {

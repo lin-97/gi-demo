@@ -1,8 +1,6 @@
 import { DEFAULT_LAYOUT } from '../base'
 
 const Error = {
-  path: '/error',
-  name: 'Error',
   component: DEFAULT_LAYOUT,
   children: [
     {

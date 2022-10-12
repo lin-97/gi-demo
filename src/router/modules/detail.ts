@@ -1,8 +1,6 @@
 import { DEFAULT_LAYOUT } from '../base'
 
 const Deatail = {
-  path: '/detail',
-  name: 'Detail',
   component: DEFAULT_LAYOUT,
   children: [
     {

@@ -1,9 +1,6 @@
 import { DEFAULT_LAYOUT } from '../base'
 
 const File = {
-  path: '/file',
-  name: 'File',
-  redirect: '/file',
   component: DEFAULT_LAYOUT,
   children: [
     {

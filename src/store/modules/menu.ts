@@ -23,6 +23,13 @@ export const useMenuStore = defineStore({
               path: '/dashboard/workplace',
               keepAlive: false,
               hidden: false
+            },
+            {
+              id: 'SJFX',
+              name: '分析页',
+              path: '/dashboard/analyse',
+              keepAlive: false,
+              hidden: false
             }
           ]
         },

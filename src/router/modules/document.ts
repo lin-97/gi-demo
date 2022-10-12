@@ -1,8 +1,6 @@
 import { DEFAULT_LAYOUT } from '../base'
 
 const Document = {
-  path: '/document',
-  name: 'Document',
   component: DEFAULT_LAYOUT,
   children: [
     {

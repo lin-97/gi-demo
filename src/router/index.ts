@@ -20,7 +20,7 @@ export const appRoutes: RouteRecordNormalized[] = formatModules(modules, [])
 
 const routes = [
   {
-    path: '/',
+    path: '',
     redirect: '/dashboard/workplace'
   },
   {
