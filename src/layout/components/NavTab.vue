@@ -21,7 +21,7 @@
           <!-- <a-button type="primary" size="mini" class="extra-btn">
             <template #icon><icon-settings :size="18" /></template>
           </a-button> -->
-          <GiMoreIcon></GiMoreIcon>
+          <GiMoreIcon class="mr"></GiMoreIcon>
           <template #content>
             <a-doption @click="onClose(route.path)">
               <template #icon>
@@ -131,28 +131,7 @@ const onCloseAll = () => {
   background: var(--color-bg-1);
 }
 
-.extra-btn {
-  width: 28px;
-  height: 28px;
-  margin-right: 14px;
-  margin-bottom: 5px;
-  &:hover {
-    svg {
-      animation: turn 0.5s linear;
-      transform-origin: center;
-    }
-  }
-}
-
-@keyframes turn {
-  0% {
-    -webkit-transform: rotate(0deg);
-  }
-  50% {
-    -webkit-transform: rotate(90deg);
-  }
-  100% {
-    -webkit-transform: rotate(180deg);
-  }
+.mr {
+  margin-right: $margin;
 }
 </style>

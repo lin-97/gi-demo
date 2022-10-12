@@ -14,12 +14,8 @@
   position: relative;
   box-sizing: border-box;
   display: flex;
-  text-align: left;
   justify-content: center;
   align-items: center;
-  margin-right: 15px;
-  margin-left: 5px;
-  top: -1px;
 
   .gi-more-icon {
     display: inline-block;
@@ -31,16 +27,18 @@
       position: relative;
       display: block;
       width: 14px;
-      height: 8px;
+      height: 6px;
 
-      .block-top:before {
-        transition: transform 0.3s ease-out 0.3s;
+      // &.block-top:before {
+      //   transition: transform 0.3s ease-out 0.3s;
+      // }
+      &.block-bottom {
+        margin-top: 2px;
       }
     }
 
     .block:before {
       position: absolute;
-      top: 2px;
       left: 0;
       width: 6px;
       height: 6px;
@@ -50,7 +48,6 @@
 
     .block:after {
       position: absolute;
-      top: 2px;
       left: 8px;
       width: 6px;
       height: 6px;
@@ -60,10 +57,15 @@
   }
 }
 
+.gi-more-icon-wrap:hover .gi-more-icon .block:first-child::before,
+.arco-dropdown-open .gi-more-icon .block:first-child::before {
+  transform: rotate(45deg);
+  background: rgb(var(--primary-3));
+}
+
 .gi-more-icon-wrap:hover .gi-more-icon .block:before,
 .arco-dropdown-open .gi-more-icon .block:before {
   background: rgb(var(--primary-6));
-  transform: rotate(45deg);
 }
 
 .gi-more-icon-wrap:hover .gi-more-icon .block:after,
