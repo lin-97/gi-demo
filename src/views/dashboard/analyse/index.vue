@@ -2,40 +2,92 @@
   <div class="analyse">
     <section class="head">
       <a-row :gutter="16">
-        <a-col :span="6">
-          <a-card title="访问量">
+        <a-col :xs="12" :md="12" :lg="6" :xl="6" :xxl="6">
+          <a-card title="访问量" :bordered="false" class="card-item">
             <template #extra>
               <a-button type="outline" status="success" size="small"><template #icon>日</template></a-button>
             </template>
-
-            <a-statistic :value="26868" :value-from="0" :start="true" animation show-group-separator>
-              <template #extra>
-                <a-space>
-                  <span><span>日同比 12.5%</span><icon-caret-up style="color: rgb(var(--success-6))" /></span>
-                  <span><span>周同比 5%</span><icon-caret-down style="color: rgb(var(--warning-6))" /></span>
-                </a-space>
-              </template>
-            </a-statistic>
+            <a-statistic :value="26868" :value-from="0" :start="true" animation show-group-separator> </a-statistic>
+            <section class="card-content">
+              <a-space>
+                <span><span>日同比 12.5%</span><icon-caret-up style="color: rgb(var(--success-6))" /></span>
+                <span><span>周同比 5%</span><icon-caret-down style="color: rgb(var(--warning-6))" /></span>
+              </a-space>
+            </section>
+            <a-divider></a-divider>
+            <a-row justify="space-between">
+              <a-typography-text type="secondary">总访问量</a-typography-text>
+              <a-typography-text type="secondary">280万</a-typography-text>
+            </a-row>
           </a-card>
         </a-col>
-        <a-col :span="6">
-          <a-card title="销售额">
+        <a-col :xs="12" :md="12" :lg="6" :xl="6" :xxl="6">
+          <a-card title="销售额" :bordered="false" class="card-item">
             <template #extra>
               <a-button type="outline" size="small"><template #icon>月</template></a-button>
             </template>
             <a-statistic :value="12000" show-group-separator></a-statistic>
-            <a-progress size="large" :percent="0.6" />
+            <section class="card-content">
+              <a-progress size="large" :percent="0.6" />
+            </section>
+            <a-divider></a-divider>
+            <a-row justify="space-between">
+              <a-typography-text type="secondary">总销售额</a-typography-text>
+              <a-typography-text type="secondary">68万</a-typography-text>
+            </a-row>
           </a-card>
         </a-col>
-        <a-col :span="6">
-          <a-card title="订单量">
+        <a-col :xs="12" :md="12" :lg="6" :xl="6" :xxl="6">
+          <a-card title="订单量" :bordered="false" class="card-item">
             <template #extra>
               <a-button type="outline" status="danger" size="small"><template #icon>周</template></a-button>
             </template>
+            <a-statistic :value="1680" show-group-separator></a-statistic>
+            <section class="card-content">
+              <OrderChart></OrderChart>
+            </section>
+            <a-divider></a-divider>
+            <a-row justify="space-between">
+              <a-typography-text type="secondary">转化率</a-typography-text>
+              <a-typography-text type="secondary">60%</a-typography-text>
+            </a-row>
           </a-card>
         </a-col>
-        <a-col :span="6">
-          <a-card title="新增用户"></a-card>
+        <a-col :xs="12" :md="12" :lg="6" :xl="6" :xxl="6">
+          <a-card title="新增用户" :bordered="false" class="card-item">
+            <template #extra>
+              <a-tooltip content="指标说明">
+                <icon-question-circle :size="24" :stroke-width="3" />
+              </a-tooltip>
+            </template>
+            <a-statistic :value="128">
+              <template #suffix>位</template>
+            </a-statistic>
+            <section class="card-content">
+              <a-avatar-group :size="24" :max-count="3">
+                <a-avatar :style="{ backgroundColor: '#7BC616' }">A</a-avatar>
+                <a-avatar :style="{ backgroundColor: '#14C9C9' }">B</a-avatar>
+                <a-avatar :style="{ backgroundColor: '#168CFF' }">C</a-avatar>
+                <a-avatar :style="{ backgroundColor: '#FF7D00' }">Arco</a-avatar>
+                <a-avatar :style="{ backgroundColor: '#FFC72E' }">Design</a-avatar>
+              </a-avatar-group>
+            </section>
+            <a-divider></a-divider>
+            <a-row justify="space-between">
+              <a-typography-text type="secondary">总用户</a-typography-text>
+              <a-typography-text type="secondary">10800人</a-typography-text>
+            </a-row>
+          </a-card>
+        </a-col>
+      </a-row>
+      <a-row :gutter="16">
+        <a-col :xs="12" :sm="8" :md="4" :lg="4" :xl="3" :xxl="3" v-for="item in list" :key="item.name">
+          <a-card hoverable :bordered="false" class="mini-card card-item">
+            <a-row justify="center" align="center" style="flex-direction: column">
+              <GiSvgIcon :name="item.icon" :size="30"></GiSvgIcon>
+              <span>{{ item.name }}</span>
+            </a-row>
+          </a-card>
         </a-col>
       </a-row>
     </section>
@@ -45,13 +97,53 @@
 
 <script lang="ts" setup name="Analyse">
 import DataChart from './DataChart.vue'
+import OrderChart from './OrderChart.vue'
+
+const list = [
+  { icon: 'icon-user', name: '用户' },
+  { icon: 'icon-analyse', name: '分析' },
+  { icon: 'icon-goods', name: '商品' },
+  { icon: 'icon-order', name: '订单' },
+  { icon: 'icon-paper', name: '票据' },
+  { icon: 'icon-label', name: '标签' },
+  { icon: 'icon-process', name: '流程' },
+  { icon: 'icon-config', name: '配置' }
+]
 </script>
 
 <style lang="scss" scoped>
+:deep(.arco-divider-horizontal) {
+  margin: 16px 0;
+}
+
+.card-item {
+  margin-top: 16px;
+}
+
+.card-content {
+  height: 30px;
+  display: flex;
+  align-items: center;
+}
+
 .analyse {
+  flex: 1;
+  overflow-y: auto;
   .head {
-    padding: $margin;
+    padding: 0 $margin;
     overflow: hidden;
+  }
+}
+
+.mini-card {
+  transition: all 0.3s;
+  &:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+  }
+  span {
+    margin-top: 8px;
   }
 }
 </style>
