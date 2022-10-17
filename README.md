@@ -11,9 +11,9 @@ Gi Admin Pro 是一个基于 Vue3、Vite、TypeScript、Arco Design UI、Pinia�
 
 > **Gi 前缀含义：**
 >
-> ​ G：代表 全局
+>  G：代表 全局
 >
-> ​ i：代表 我的
+>  i：代表 我的
 >
 > Gi 用来定义全局组件前缀，如 GiNavBar、GiTitle、GiLoading
 
@@ -107,6 +107,8 @@ QQ：326010228
 
 命名规范： 操作 + 后端模块名 + 功能名
 
+前缀为动词，动词 eg：`add / update / delete / get / save`
+
 ```
 /quota/getList   =>  getQuotaList
 /quota/getQuotaList  =>  getQuotaList   // 如果功能名包含了模块名，可省略
@@ -115,9 +117,9 @@ QQ：326010228
 /user/list  =>  getUserList  // 如果没有操作名，可以自行根据场景补充
 ```
 
-以上命名规范可以确保 api 命名不会冲突
+以上命名规范可以确保 api 命名不会冲突，加上模块名能快速定位以及更加方便维护
 
-引入接口
+引入接口：
 
 ```js
 import { getUserList, saveUser } from '@/apis'
@@ -137,11 +139,14 @@ const form = reactive({
     phone: '',
     remark: ''
 })
-const userList = []
-const ids = []
+
 const companyList = ref([]) // 列表数据最好后面加个 List 或者 Data 或者字母后面加s
 const checkedList = ref([])
 const selectedList = ref([])
+const addressList = ref([])
+const userList = []
+const ids = []
+const tableData = []
 
 // 方法
 编辑 onEdit     handleEdit     edit
@@ -179,7 +184,9 @@ const selectedList = ref([])
 可参考 Vue2 官网-风格指南: https://v2.cn.vuejs.org/v2/style-guide/
 
 ```
-GiTitle   GiThemeBtn   GiSvgIcon
+GiTitle.vue
+GiThemeBtn.vue
+GiSvgIcon.vue
 ```
 
 #### 局部组件--命名规范
@@ -189,12 +196,23 @@ GiTitle   GiThemeBtn   GiSvgIcon
 可参考 Vue2 官网-风格指南: https://v2.cn.vuejs.org/v2/style-guide/
 
 ```
-Pane1.vue   Pane2.vue   PaneQuota1.vue   PaneQuota2.vue   Step1.vue   Step2.vue   AddModal.vue   EditDrawer.vue
+Pane1.vue
+Pane2.vue
+PaneQuota1.vue
+PaneQuota2.vue
+Step1.vue
+Step2.vue
+AddModal.vue
+EditDrawer.vue
 ```
 
 #### 文件夹命名--命名规范 (采用中划线-)
 
 @/apis/ 目录下的文件最好以后端模块名为准，大小写也与模块名一致
+
+1、文件名建议只使用小写字母，不使用大写字母
+
+2、名称较长时采用半角连接符(-)分隔
 
 ```
 home/index.vue   quota-first/index.vue      quota-detail/index.vue
@@ -465,17 +483,11 @@ export default function usePagination(callback: Callback, options: Options = { d
   <div class="table-box">
     <a-table
       row-key="id"
-      v-loading="loading"
-      :bordered="{ cell: true }"
       :columns="columns"
       :data="tableData"
-      :scroll="{ x: '100%', y: '100%', minWidth: 1000 }"
-      :row-selection="{ type: 'checkbox', showCheckedAll: true }"
       :pagination="{ showPageSize: true, total: total, current: current, pageSize: pageSize }"
       @page-change="changeCurrent"
       @page-size-change="changePageSize"
-      @select="select"
-      @select-all="selectAll"
     >
     </a-table>
   </div>
@@ -498,15 +510,9 @@ const { current, pageSize, total, changeCurrent, changePageSize, setTotal } = us
   <div class="table-box">
     <a-table
       row-key="id"
-      v-loading="loading"
-      :bordered="{ cell: true }"
       :columns="columns"
       :data="tableData"
-      :scroll="{ x: '100%', y: '100%', minWidth: 1000 }"
-      :row-selection="{ type: 'checkbox', showCheckedAll: true }"
       :pagination="pagination"
-      @select="select"
-      @select-all="selectAll"
     >
     </a-table>
   </div>

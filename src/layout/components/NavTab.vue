@@ -7,7 +7,7 @@
       :type="appStore.tabMode"
       :active-key="route.path"
       @tab-click="onClick"
-      @delete="onClose"
+      @delete="navtabStore.closeCurrent"
     >
       <a-tab-pane
         v-for="item of navtabStore.tagList"
@@ -18,22 +18,19 @@
       <!-- 右侧按钮 -->
       <template #extra>
         <a-dropdown trigger="hover">
-          <!-- <a-button type="primary" size="mini" class="extra-btn">
-            <template #icon><icon-settings :size="18" /></template>
-          </a-button> -->
           <GiMoreIcon class="mr"></GiMoreIcon>
           <template #content>
-            <a-doption @click="onClose(route.path)">
-              <template #icon>
-                <icon-minus-circle-fill :size="20" style="color: rgb(var(--warning-6))" />
-              </template>
-              <template #default>关闭当前页签</template>
+            <a-doption @click="navtabStore.closeCurrent(route.path)">
+              <template #icon><icon-close /></template>
+              <template #default>关闭当前</template>
             </a-doption>
-            <a-doption @click="onCloseAll">
-              <template #icon>
-                <icon-close-circle-fill :size="20" style="color: rgb(var(--danger-6))" />
-              </template>
-              <template #default>关闭所有页签</template>
+            <a-doption @click="navtabStore.closeOther(route.path)">
+              <template #icon><icon-eraser /></template>
+              <template #default>关闭其他</template>
+            </a-doption>
+            <a-doption @click="navtabStore.closeAll">
+              <template #icon><icon-minus /></template>
+              <template #default>关闭全部</template>
             </a-doption>
           </template>
         </a-dropdown>
@@ -80,21 +77,7 @@ const handleNavTab = () => {
 // 点击页签
 const onClick = (key: string | number) => {
   // console.log('点击前', navtabStore.cacheList, key)
-  router.push({ path: key.toString() })
-}
-
-// 关闭页签
-const onClose = (key: string | number) => {
-  const item = navtabStore.tagList.find((i) => i.path === key)
-  navtabStore.removeTagItem(key.toString())
-  if (item?.componentName) {
-    navtabStore.removeCacheItem(item.componentName)
-  }
-}
-
-// 关闭所有页签
-const onCloseAll = () => {
-  navtabStore.clearTagList()
+  router.push({ path: String(key) })
 }
 </script>
 
@@ -124,6 +107,10 @@ const onCloseAll = () => {
       }
     }
   }
+}
+
+:deep(.arco-dropdown-option-icon) {
+  color: var(--color-text-3);
 }
 
 .nav-tab {

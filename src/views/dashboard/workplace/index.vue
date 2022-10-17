@@ -1,11 +1,11 @@
 <template>
   <div class="home" id="home-wrap">
-    <WorkPlatform></WorkPlatform>
+    <WorkCard></WorkCard>
 
     <div class="wrap">
       <section class="left">
-        <div class="item"><GridCard></GridCard></div>
-        <div class="item"><ListCard></ListCard></div>
+        <div class="item"><ProjectCard></ProjectCard></div>
+        <div class="item"><MessageCard></MessageCard></div>
       </section>
       <section class="right">
         <div class="item"><FastCard></FastCard></div>
@@ -20,9 +20,9 @@
 </template>
 
 <script setup lang="ts" name="Home">
-import WorkPlatform from './WorkPlatform.vue'
-import GridCard from './GridCard.vue'
-import ListCard from './ListCard.vue'
+import WorkCard from './WorkCard.vue'
+import ProjectCard from './ProjectCard.vue'
+import MessageCard from './MessageCard.vue'
 import FastCard from './FastCard.vue'
 import ImageCard from './ImageCard.vue'
 </script>

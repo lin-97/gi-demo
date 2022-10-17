@@ -59,6 +59,28 @@ export const useNavTabStore = defineStore({
     clearCacheList() {
       this.cacheList = []
     },
+    // 关闭当前
+    closeCurrent(key: string | number) {
+      const item = this.tagList.find((i) => i.path === key)
+      this.removeTagItem(key.toString())
+      if (item?.componentName) {
+        this.removeCacheItem(item.componentName)
+      }
+    },
+    // 关闭其他
+    closeOther(key: string | number) {
+      const arr = this.tagList.filter((i) => i.path !== key)
+      arr.forEach((item) => {
+        this.removeTagItem(item.path)
+        if (item?.componentName) {
+          this.removeCacheItem(item.componentName)
+        }
+      })
+    },
+    // 关闭全部
+    closeAll() {
+      this.clearTagList()
+    },
     // 初始化
     init() {
       this.clearTagList()

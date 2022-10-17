@@ -15,11 +15,31 @@
       </a-space>
 
       <a-space :size="50">
-        <a-statistic title="项目数" :value="16" :value-from="0" :start="true" animation> </a-statistic>
-        <a-statistic title="待办" :value="3" :value-from="0" :start="true" animation>
+        <a-statistic :value="16" :value-from="0" :start="true" animation>
+          <template #title>
+            <a-space>
+              <GiSvgIcon name="icon-num"></GiSvgIcon>
+              <span>项目数</span>
+            </a-space>
+          </template>
+        </a-statistic>
+        <a-statistic :value="3" :value-from="0" :start="true" animation>
+          <template #title>
+            <a-space>
+              <GiSvgIcon name="icon-wait"></GiSvgIcon>
+              <span>待办</span>
+            </a-space>
+          </template>
           <template #suffix>/15</template>
         </a-statistic>
-        <a-statistic title="消息" :value="35" :value-from="0" :start="true" animation> </a-statistic>
+        <a-statistic :value="35" :value-from="0" :start="true" animation>
+          <template #title>
+            <a-space>
+              <GiSvgIcon name="icon-msg"></GiSvgIcon>
+              <span>消息</span>
+            </a-space>
+          </template>
+        </a-statistic>
       </a-space>
     </a-row>
   </a-card>

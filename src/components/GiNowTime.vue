@@ -1,6 +1,6 @@
 <template>
   <div class="gi-now-time" v-if="time">
-    <GiSvgIcon name="time" :size="20"></GiSvgIcon>
+    <GiSvgIcon name="time" :size="22"></GiSvgIcon>
     <p class="time">{{ time }}</p>
   </div>
 </template>
@@ -32,7 +32,7 @@ initTime()
 .gi-now-time {
   display: flex;
   align-items: center;
-  font-size: 12px;
+  font-size: 14px;
   color: var(--color-text-1);
   .time {
     margin-left: 6px;

@@ -1,11 +1,11 @@
 <template>
   <a-card title="快捷操作" :bordered="false" size="medium" style="overflow: hidden">
-    <a-card-grid :style="{ width: '33.33%' }" v-for="(item, index) in list" :key="item.name" class="card-grid">
+    <a-card-grid :style="{ width: '33.33%' }" v-for="(item, index) in list" :key="item.name" class="card-grid-item">
       <a-card :bordered="false" hoverable>
         <a-row justify="center" align="center" :class="'animated-fade-up-' + (index + 1)">
           <a-space direction="vertical" align="center">
             <component :is="item.icon" :size="30" :style="{ color: item.color }"></component>
-            <span>{{ item.name }}</span>
+            <span class="text">{{ item.name }}</span>
           </a-space>
         </a-row>
       </a-card>
@@ -28,13 +28,7 @@ const list = [
 :deep(.arco-card-header) {
   border: none;
 }
-.card-grid {
-  box-shadow: none;
-  border-top: 1px solid var(--color-neutral-3);
-  border-right: 1px solid var(--color-neutral-3);
+.card-grid-item {
   cursor: pointer;
-  &:nth-child(3n) {
-    border-right: none;
-  }
 }
 </style>
