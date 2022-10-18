@@ -5,7 +5,7 @@
         <a-col :xs="12" :md="12" :lg="6" :xl="6" :xxl="6">
           <a-card title="访问量" :bordered="false" class="card-item">
             <template #extra>
-              <a-button type="outline" status="success" size="small"><template #icon>日</template></a-button>
+              <a-tag color="green" bordered>日</a-tag>
             </template>
             <a-statistic :value="26868" :value-from="0" :start="true" animation show-group-separator> </a-statistic>
             <section class="card-content">
@@ -24,11 +24,19 @@
         <a-col :xs="12" :md="12" :lg="6" :xl="6" :xxl="6">
           <a-card title="销售额" :bordered="false" class="card-item">
             <template #extra>
-              <a-button type="outline" size="small"><template #icon>月</template></a-button>
+              <a-tag color="arcoblue" bordered>月</a-tag>
             </template>
-            <a-statistic :value="12000" show-group-separator></a-statistic>
+            <a-statistic :value="12000" :value-from="0" :start="true" animation show-group-separator></a-statistic>
             <section class="card-content">
-              <a-progress size="large" :percent="0.6" />
+              <a-progress
+                size="large"
+                :percent="percent"
+                animation
+                :color="{
+                  '0%': 'rgb(var(--success-2))',
+                  '100%': 'rgb(var(--success-5))'
+                }"
+              />
             </section>
             <a-divider></a-divider>
             <a-row justify="space-between">
@@ -40,9 +48,9 @@
         <a-col :xs="12" :md="12" :lg="6" :xl="6" :xxl="6">
           <a-card title="订单量" :bordered="false" class="card-item">
             <template #extra>
-              <a-button type="outline" status="danger" size="small"><template #icon>周</template></a-button>
+              <a-tag color="orange" bordered>周</a-tag>
             </template>
-            <a-statistic :value="1680" show-group-separator></a-statistic>
+            <a-statistic :value="1680" :value-from="0" :start="true" animation show-group-separator></a-statistic>
             <section class="card-content">
               <OrderChart></OrderChart>
             </section>
@@ -56,11 +64,9 @@
         <a-col :xs="12" :md="12" :lg="6" :xl="6" :xxl="6">
           <a-card title="新增用户" :bordered="false" class="card-item">
             <template #extra>
-              <a-tooltip content="指标说明">
-                <icon-question-circle :size="24" :stroke-width="3" />
-              </a-tooltip>
+              <a-tag color="purple" bordered>日</a-tag>
             </template>
-            <a-statistic :value="128">
+            <a-statistic :value="128" :value-from="0" :start="true" animation>
               <template #suffix>位</template>
             </a-statistic>
             <section class="card-content">
@@ -81,10 +87,20 @@
         </a-col>
       </a-row>
       <a-row :gutter="16">
-        <a-col :xs="12" :sm="8" :md="4" :lg="4" :xl="3" :xxl="3" v-for="item in list" :key="item.name">
+        <a-col
+          :xs="12"
+          :sm="8"
+          :md="4"
+          :lg="4"
+          :xl="3"
+          :xxl="3"
+          v-for="(item, index) in list"
+          :key="item.name"
+          :class="'animated-fade-up-' + index"
+        >
           <a-card hoverable :bordered="false" class="mini-card card-item">
             <a-row justify="center" align="center" style="flex-direction: column">
-              <GiSvgIcon :name="item.icon" :size="30"></GiSvgIcon>
+              <GiSvgIcon :name="item.icon" :size="30" color="rgb(var(--primary-3))"></GiSvgIcon>
               <span>{{ item.name }}</span>
             </a-row>
           </a-card>
@@ -96,6 +112,7 @@
 </template>
 
 <script lang="ts" setup name="Analyse">
+import { ref } from 'vue'
 import DataChart from './DataChart.vue'
 import OrderChart from './OrderChart.vue'
 
@@ -109,6 +126,12 @@ const list = [
   { icon: 'icon-process', name: '流程' },
   { icon: 'icon-config', name: '配置' }
 ]
+
+const percent = ref(0)
+
+setTimeout(() => {
+  percent.value = 0.6
+}, 100)
 </script>
 
 <style lang="scss" scoped>
@@ -118,6 +141,11 @@ const list = [
 
 .card-item {
   margin-top: 16px;
+  :deep(.arco-tag-size-medium) {
+    width: 24px;
+    padding: 0;
+    justify-content: center;
+  }
 }
 
 .card-content {
@@ -136,7 +164,7 @@ const list = [
 }
 
 .mini-card {
-  transition: all 0.3s;
+  transition: transform 0.3s;
   &:hover {
     transform: translateY(-4px);
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);

@@ -97,7 +97,7 @@ const { chartOption } = useChart(() => {
         return `<div>
             <p class="tooltip-title">${firstElement.axisValueLabel}</p>
             <div class="content-panel"><span>订单量</span><span class="tooltip-value">${(
-              Number(firstElement.value) * 10000
+              Number(firstElement.value) * 100
             ).toLocaleString()}</span></div>
           </div>`
       },

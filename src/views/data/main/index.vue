@@ -8,9 +8,11 @@
       </a-tabs>
     </section>
 
-    <keep-alive>
-      <component :is="PaneMap[activeKey]"></component>
-    </keep-alive>
+    <transition name="fade-slide" mode="out-in" appear>
+      <keep-alive>
+        <component :is="PaneMap[activeKey]"></component>
+      </keep-alive>
+    </transition>
   </div>
 </template>
 

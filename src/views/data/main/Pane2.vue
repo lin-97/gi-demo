@@ -104,12 +104,7 @@ import { StatusList } from '@/libs/status/person'
 
 const router = useRouter()
 
-const { pagination, setTotal } = usePagination(
-  () => {
-    getTableData()
-  },
-  { defaultPageSize: 20 }
-)
+const { pagination, setTotal } = usePagination(() => getTableData())
 
 const form = reactive({
   name: '',

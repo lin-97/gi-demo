@@ -11,7 +11,7 @@
   },
   "dependencies": {
     "@arco-design/color": "^0.4.0",
-    "@arco-themes/vue-gi-demo": "0.0.23",
+    "@arco-themes/vue-gi-demo": "0.0.24",
     "@vueuse/components": "^8.9.1",
     "@vueuse/core": "^8.9.1",
     "@wangeditor/editor": "^5.1.1",
