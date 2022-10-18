@@ -5,17 +5,17 @@
     >
     <a-form label-align="right" auto-label-width :model="form" class="form">
       <a-row :gutter="16" wrap>
-        <a-col :md="12" :xl="9" :xxl="6">
+        <a-col :xs="12" :md="12" :lg="8" :xl="6" :xxl="6">
           <a-form-item field="value1" label="姓名">
             <a-input v-model="form.value1" placeholder="请输入姓名" />
           </a-form-item>
         </a-col>
-        <a-col :md="12" :xl="9" :xxl="6">
+        <a-col :xs="12" :md="12" :lg="8" :xl="6" :xxl="6">
           <a-form-item field="value2" label="手机">
             <a-input v-model="form.value2" placeholder="请输入手机号码" />
           </a-form-item>
         </a-col>
-        <a-col :md="12" :xl="9" :xxl="6" v-show="collapsed">
+        <a-col :xs="12" :md="12" :lg="8" :xl="6" :xxl="6" v-show="collapsed">
           <a-form-item field="value3" label="类型">
             <a-select placeholder="请选择">
               <a-option>北京</a-option>
@@ -24,12 +24,12 @@
             </a-select>
           </a-form-item>
         </a-col>
-        <a-col :md="12" :xl="9" :xxl="6" v-show="collapsed">
+        <a-col :xs="12" :md="12" :lg="8" :xl="6" :xxl="6" v-show="collapsed">
           <a-form-item field="value3" label="时间">
             <a-date-picker show-time v-model="form.value3" placeholder="请选择创建时间" style="width: 100%" />
           </a-form-item>
         </a-col>
-        <a-col :md="12" :xl="9" :xxl="6" v-show="collapsed">
+        <a-col :xs="12" :md="12" :lg="8" :xl="6" :xxl="6" v-show="collapsed">
           <a-form-item field="value4" label="状态">
             <a-select placeholder="请选择">
               <a-option>开启</a-option>
@@ -37,7 +37,7 @@
             </a-select>
           </a-form-item>
         </a-col>
-        <a-col :md="12" :xl="9" :xxl="6" v-show="collapsed">
+        <a-col :xs="12" :md="12" :lg="8" :xl="6" :xxl="6" v-show="collapsed">
           <a-form-item field="value5" label="地址">
             <a-input v-model="form.value5" placeholder="请输入查询地址" />
           </a-form-item>

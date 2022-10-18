@@ -32,7 +32,7 @@ const graphicElements = ref([graphicFactory({ left: '2.6%' }), graphicFactory({ 
 const { chartOption } = useChart(() => {
   return {
     grid: {
-      left: '2.6%',
+      left: '40',
       right: '0',
       top: '10',
       bottom: '30'
