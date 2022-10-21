@@ -72,9 +72,7 @@ import type { PersonItem } from '@/apis'
 const loading = ref(false)
 const tableData = ref<PersonItem[]>([])
 
-const { pagination, setTotal } = usePagination(() => {
-  getTableData()
-})
+const { pagination, setTotal } = usePagination(() => getTableData())
 
 const getTableData = async () => {
   loading.value = true

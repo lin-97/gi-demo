@@ -4,9 +4,7 @@
   </div>
 </template>
 
-<script setup lang="ts" name="Navigation">
-import { ref } from 'vue'
-</script>
+<script setup lang="ts" name="Navigation"></script>
 
 <style lang="scss" scoped>
 .navigation {

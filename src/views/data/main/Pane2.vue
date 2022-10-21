@@ -186,11 +186,7 @@ const select: ATableSelect = (rowKeys, rowKey, record) => {
 
 // 全选
 const selectAll = (checked: boolean) => {
-  if (checked) {
-    selectRowKeys.value = tableData.value.map((i) => i.id)
-  } else {
-    selectRowKeys.value = []
-  }
+  selectRowKeys.value = checked ? tableData.value.map((i) => i.id) : []
 }
 </script>
 

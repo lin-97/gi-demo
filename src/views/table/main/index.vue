@@ -143,9 +143,7 @@ const loading = ref(false)
 const tableData = ref<PersonItem[]>([])
 const collapsed = ref(false)
 
-const { current, pageSize, total, changeCurrent, changePageSize, setTotal } = usePagination(() => {
-  getTableData()
-})
+const { current, pageSize, total, changeCurrent, changePageSize, setTotal } = usePagination(() => getTableData())
 
 const getTableData = async () => {
   loading.value = true
