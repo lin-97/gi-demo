@@ -1,19 +1,18 @@
 <template>
-  <a-popover v-model:visible="visible" trigger="click">
-    <a-button v-if="!seletedItem" type="primary">请选择图标</a-button>
-    <a-button status="success" v-else>
-      已选择
-      <component :is="seletedItem" />
+  <a-popover trigger="click">
+    <a-button v-if="!modelValue" type="primary">请选择图标</a-button>
+    <a-button type="primary" status="success" v-else>
+      <component :size="16" :is="modelValue" />
     </a-button>
 
     <template #content>
-      <div class="icon-container">
+      <div class="container">
         <a-input
           v-model="searchValue"
           placeholder="搜索图标名称"
-          @input="onSearch"
-          @clear="onSearch"
           allow-clear
+          @input="search"
+          @clear="search"
           style="width: 100%"
         >
           <template #prefix>
@@ -21,18 +20,18 @@
           </template>
         </a-input>
 
-        <div class="icon-wrapper">
-          <a-row :wrap="true">
+        <div class="icon-list">
+          <a-row wrap :gutter="4">
             <a-col :span="4" v-for="item of currentPageIconList" :key="item">
-              <div class="icon-item" @click="onSelectItem(item)">
+              <div class="icon-item" :class="{ active: modelValue === item }" @click="handleSelectedIcon(item)">
                 <component :is="item" :size="26" />
-                <div class="icon-name">{{ item }}</div>
+                <div class="gi_line_1 icon-name">{{ item }}</div>
               </div>
             </a-col>
           </a-row>
         </div>
 
-        <a-row justify="center">
+        <a-row justify="center" align="center">
           <a-pagination
             size="mini"
             :pageSize="pageSize"
@@ -52,9 +51,10 @@ import * as ArcoIcons from '@arco-design/web-vue/es/icon'
 import { useClipboard } from '@vueuse/core'
 import { Message } from '@arco-design/web-vue'
 
-const emit = defineEmits(['onSelect', 'update:modelValue'])
+const emit = defineEmits(['select', 'update:modelValue'])
 
 const props = defineProps({
+  // 当前选择的icon
   modelValue: {
     type: String,
     default: ''
@@ -63,78 +63,59 @@ const props = defineProps({
   enableCopy: {
     type: Boolean,
     default: false
-  },
-  // 自定义图标数据源
-  customIconData: {
-    type: Array,
-    default: () => []
   }
 })
 
-// 搜索词
-const searchValue = ref('')
+const searchValue = ref('') // 搜索词
 
 // 图标列表
-const data = props.customIconData.length ? props.customIconData : ArcoIcons
-const iconList = Object.keys(data).filter((i) => i !== 'default')
-// 图标总数
-const total = ref(iconList.length)
+const IconList = Object.keys(ArcoIcons).filter((i) => i !== 'default')
 
 const pageSize = 36
-const currentPage = ref(1)
+const current = ref(1)
+const total = ref(IconList.length) // 图标总数
 
 // 当前页的图标列表
-const currentPageIconList = ref(iconList.slice(0, pageSize))
+const currentPageIconList = ref(IconList.slice(0, pageSize))
 // 搜索列表
 const searchList = ref<string[]>([])
 
-// 显示/隐藏弹框
-const visible = ref(false)
-
-// 当前选择的icon
-const seletedItem = ref<string>(props.modelValue)
-
-watch(
-  () => props.modelValue,
-  (newVal) => {
-    seletedItem.value = newVal
+// 页码改变
+const onPageChange = (page: number) => {
+  current.value = page
+  if (!searchList.value.length) {
+    currentPageIconList.value = IconList.slice((page - 1) * pageSize, page * pageSize)
+  } else {
+    currentPageIconList.value = searchList.value.slice((page - 1) * pageSize, page * pageSize)
   }
-)
-
-function onPageChange(page: number) {
-  currentPage.value = page
-  currentPageIconList.value =
-    searchList.value.length === 0
-      ? iconList.slice((page - 1) * pageSize, page * pageSize)
-      : searchList.value.slice((page - 1) * pageSize, page * pageSize)
 }
 
-function onSearch() {
+// 搜索
+const search = () => {
   if (searchValue.value) {
     const temp = searchValue.value.toLowerCase()
-    searchList.value = iconList.filter((item) => {
+    searchList.value = IconList.filter((item) => {
       return item.toLowerCase().startsWith((temp.startsWith('icon') ? '' : 'icon') + temp)
     })
     total.value = searchList.value.length
     currentPageIconList.value = searchList.value.slice(0, pageSize)
   } else {
     searchList.value = []
-    total.value = iconList.length
-    currentPageIconList.value = iconList.slice((currentPage.value - 1) * pageSize, currentPage.value * pageSize)
+    total.value = IconList.length
+    currentPageIconList.value = IconList.slice((current.value - 1) * pageSize, current.value * pageSize)
   }
 }
 
-async function onSelectItem(item: string) {
-  emit('onSelect', item)
-  emit('update:modelValue', item)
-  seletedItem.value = item
-  visible.value = false
+// 点击选择图标
+const handleSelectedIcon = async (icon: string) => {
+  emit('select', icon)
+  emit('update:modelValue', icon)
   if (props.enableCopy) {
     const { isSupported, copied, copy } = useClipboard()
     if (isSupported) {
-      await copy(`<${item} />`)
+      await copy(`<${icon} />`)
       if (copied) {
-        Message.success(`已选择并且复制成功 ${item} 图标`)
+        Message.success(`已选择并且复制成功 ${icon} 图标`)
       }
     }
   }
@@ -142,38 +123,38 @@ async function onSelectItem(item: string) {
 </script>
 
 <style lang="scss" scoped>
-.icon-container {
-  width: 360px;
+.container {
+  min-width: 360px;
+  max-width: 450px;
   overflow: hidden;
-  .icon-wrapper {
+  .icon-list {
     min-height: 300px;
     margin-top: 20px;
     margin-bottom: 10px;
     .icon-item {
       height: 60px;
+      margin-bottom: 4px;
       overflow: hidden;
       display: flex;
       flex-direction: column;
       justify-content: center;
       align-items: center;
+      cursor: pointer;
+      border: 1px dashed var(--color-bg-1);
+      &.active {
+        border: 1px dashed rgb(var(--primary-3));
+        background-color: rgba(var(--primary-6), 0.05);
+      }
       .icon-name {
         width: 70%;
         margin: 0 auto;
         font-size: 12px;
         color: $color-text-3;
         margin-top: 5px;
-        text-overflow: ellipsis;
-        overflow: hidden;
-        word-wrap: normal;
       }
-      .arco-icon {
-        transform: scale(1);
-        transition: transform 0.2s linear;
-      }
-      &:hover {
-        cursor: pointer;
-        .arco-icon {
-          transform: scale(1.3);
+      &:not(.active) {
+        &:hover {
+          border-color: var(--color-border-3);
         }
       }
     }
