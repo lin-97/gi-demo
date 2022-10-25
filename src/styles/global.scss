@@ -35,13 +35,6 @@
   transform: rotate(-180deg);
 }
 
-.gi_rotate_90deg,
-.gi_rotate_-90deg,
-.gi_rotate_180deg,
-.gi_rotate_-180deg {
-  transition: all 0.3s;
-}
-
 // 通用盒子
 .gi_box {
   background: var(--color-bg-1);

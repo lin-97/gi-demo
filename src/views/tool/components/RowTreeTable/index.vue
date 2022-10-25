@@ -44,6 +44,7 @@ const transformTableData = (tree: any) => {
 
 // 将普通树结构转换为横向树列表
 const toColTreeData = (treeData: any[]) => {
+  console.log('treeData', treeData)
   const options = { children: 'children' }
   const list: any[] = []
   const keyMap: any = {}
@@ -52,7 +53,11 @@ const toColTreeData = (treeData: any[]) => {
     (item, index, result, paths, parent) => {
       keyMap[item.id] = item
       item.keys = parent ? parent.keys.concat([item.id]) : [item.id]
+
       if (!item.children || !item.children.length) {
+        console.log(`item${item.name}`, item)
+        console.log('parent', parent)
+        console.log('-------------------')
         const row: any = {}
         item.keys.forEach((key: any, index: number) => {
           const level = index + 1
@@ -71,15 +76,16 @@ const toColTreeData = (treeData: any[]) => {
     options
   )
   console.log('list', list)
-  tableData.value = list
+  return list
 }
 
 const spanMethod: ATableSpanMethod = ({ record, rowIndex, column, columnIndex }) => {
-  console.log(record, rowIndex, column, columnIndex)
+  // console.log(record, rowIndex, column, columnIndex)
   const fields = ['name1', 'name2', 'name3']
   const cellValue = record[column.dataIndex]
   if (cellValue && fields.includes(column.dataIndex)) {
     const prevRow = tableData.value[rowIndex - 1]
+    console.log('上一行prevRow', prevRow)
     let nextRow = tableData.value[rowIndex + 1]
     if (prevRow && prevRow[column.dataIndex] === cellValue) {
       return { rowspan: 0, colspan: 0 }
@@ -95,10 +101,10 @@ const spanMethod: ATableSpanMethod = ({ record, rowIndex, column, columnIndex })
   }
 }
 
-const data = transformTableData(soureData)
-console.log('一维数据', data)
-const arr = XEUtils.toArrayTree(data)
-toColTreeData(arr)
+// const data = transformTableData(soureData)
+// console.log('一维数据', data)
+// const arr = XEUtils.toArrayTree(data)
+tableData.value = toColTreeData(soureData)
 </script>
 
 <style lang="scss" scoped></style>

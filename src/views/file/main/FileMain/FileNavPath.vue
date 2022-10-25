@@ -34,7 +34,6 @@ const onBlur = () => {
 .file-nav-path {
   height: 44px;
   padding: 0 $padding;
-  margin-bottom: 12px;
   display: flex;
   align-items: center;
   // border-bottom: 1px dashed var(--color-border-3);
