@@ -10,3 +10,9 @@ type ATableSelect =
   | undefined
 type ARadioGroupChange = (value: string | number | boolean, ev: Event) => void
 type AUploadBeforeRemove = ((fileItem: import('@arco-design/web-vue').FileItem) => Promise<boolean>) | undefined
+type ATableSpanMethod = (data: {
+  record: TableData
+  column: TableColumnData | TableOperationColumn
+  rowIndex: number
+  columnIndex: number
+}) => void

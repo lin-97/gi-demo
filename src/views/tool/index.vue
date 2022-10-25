@@ -33,6 +33,7 @@ import Editor from './components/Editor.vue'
 import Loading from './components/Loading.vue'
 import ImagePreview from './components/ImagePreview.vue'
 import Lottie from './components/Lottie.vue'
+import RowTreeTable from './components/RowTreeTable/index.vue'
 
 const selectedKey = ref(0)
 
@@ -44,6 +45,7 @@ const menuList = [
   { name: 'GiIconSelector', value: IconSelector },
   { name: 'GiDot', value: Dot },
   { name: 'GiFlexibleBox', value: FlexibleBox },
+  { name: '横向树表格', value: RowTreeTable },
   { name: '自定义加载指令', value: Loading },
   { name: '省市区', value: Area },
   { name: 'JSON查看', value: Json },
