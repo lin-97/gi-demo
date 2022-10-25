@@ -8,14 +8,14 @@
 <script setup lang="ts" name="GiTag">
 import { computed, type PropType } from 'vue'
 
-type GiTagType = 'normal' | 'plain' | 'light'
+type GiTagType = 'dark' | 'light' | 'outline' | 'light-outline'
 type GiTagStatus = 'primary' | 'success' | 'warning' | 'danger' | 'info'
 type GiTagSize = 'mini' | 'small' | 'large'
 
 const props = defineProps({
   type: {
     type: String as PropType<GiTagType>,
-    default: 'normal'
+    default: 'light'
   },
   status: {
     type: String as PropType<GiTagStatus>,
@@ -92,7 +92,7 @@ const handleClose = () => {
 
 $status: primary, success, warning, danger, info;
 
-.gi-tag-normal {
+.gi-tag-dark {
   color: #fff;
   @each $i in $status {
     &.gi-tag-status-#{$i} {
@@ -124,7 +124,39 @@ $status: primary, success, warning, danger, info;
   }
 }
 
-.gi-tag-plain {
+.gi-tag-light {
+  color: #fff;
+  @each $i in $status {
+    &.gi-tag-status-#{$i} {
+      color: rgb(var(--#{$i}-6));
+      background-color: rgb(var(--#{$i}-1));
+      .gi-tag-close-btn {
+        &:hover {
+          color: rgb(var(--#{$i}-6));
+          &::before {
+            background-color: rgb(var(--#{$i}-2));
+          }
+        }
+      }
+    }
+    @if ($i == info) {
+      &.gi-tag-status-#{$i} {
+        color: var(--color-text-2);
+        background-color: rgb(var(--gray-2));
+        .gi-tag-close-btn {
+          &:hover {
+            color: rgb(var(--gray-6));
+            &::before {
+              background-color: rgb(var(--gray-3));
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+.gi-tag-outline {
   background: transparent;
   @each $i in $status {
     &.gi-tag-status-#{$i} {
@@ -141,7 +173,7 @@ $status: primary, success, warning, danger, info;
     }
     @if ($i == info) {
       &.gi-tag-status-#{$i} {
-        color: rgb(var(--gray-6));
+        color: var(--color-text-2);
         border: 1px solid rgb(var(--gray-6));
         .gi-tag-close-btn {
           &:hover {
@@ -156,7 +188,7 @@ $status: primary, success, warning, danger, info;
   }
 }
 
-.gi-tag-light {
+.gi-tag-light-outline {
   @each $i in $status {
     &.gi-tag-status-#{$i} {
       color: rgb(var(--#{$i}-6));
@@ -173,8 +205,8 @@ $status: primary, success, warning, danger, info;
     }
     @if ($i == info) {
       &.gi-tag-status-#{$i} {
-        color: rgb(var(--gray-6));
-        background: rgba(var(--gray-6), 0.1);
+        color: var(--color-text-2);
+        background-color: rgb(var(--gray-2));
         border: 1px solid rgb(var(--gray-3));
         .gi-tag-close-btn {
           &:hover {
@@ -190,7 +222,8 @@ $status: primary, success, warning, danger, info;
 }
 
 .gi-tag-size-mini {
-  height: 20px;
+  height: 22px;
+  padding: 0 4px;
 }
 
 .gi-tag-size-small {
@@ -199,6 +232,7 @@ $status: primary, success, warning, danger, info;
 
 .gi-tag-size-large {
   height: 28px;
+  padding: 0 10px;
   font-size: 14px;
 }
 </style>
