@@ -146,3 +146,35 @@ export const formatFileSize = (size: number) => {
   }
   return Math.round(size * 100) / 100 + units[index]
 }
+
+/**
+ * @desc 深拷贝 */
+export const deepClone = (data: any) => {
+  if (typeof data !== 'object' || data === null) return '不是对象'
+  const newData: any = Array.isArray(data) ? [] : {}
+  for (let key in data) {
+    newData[key] = typeof data[key] === 'object' ? deepClone(data[key]) : data[key]
+  }
+  return newData
+}
+
+/**
+ * @desc 判断是否是闰年
+ * @param {number} year 年份 */
+export const isLeapYear = (year: number) => {
+  return (year % 4 === 0 && year % 100 !== 0) || year % 400 === 0
+}
+
+/**
+ * @desc 判断是否是奇数
+ * @param {number} num 数字 */
+export const isOdd = (num: number) => {
+  return num % 2 !== 0
+}
+
+/**
+ * @desc 判断是否是偶数
+ * @param {number} num 数字 */
+export const isEven = (num: number) => {
+  return !isOdd(num)
+}

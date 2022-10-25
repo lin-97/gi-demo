@@ -1,0 +1,1 @@
+import{_ as o,o as s,c as t,p as a,e as c,a as _}from"./index.bc30e737.js";const d={},n=e=>(a("data-v-317d8a46"),e=e(),c(),e),r={class:"navigation"},p=n(()=>_("iframe",{src:"https://www.5cv.top/",frameborder:"0"},null,-1)),i=[p];function l(e,f){return s(),t("div",r,i)}const u=o(d,[["render",l],["__scopeId","data-v-317d8a46"]]);export{u as default};

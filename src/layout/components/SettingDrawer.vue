@@ -90,7 +90,7 @@ const visible = computed<boolean>({
 
 // 默认显示的主题色列表
 const defaultColorList = [
-  '#1890ff',
+  '#165DFF',
   '#409EFF',
   '#2d8cf0',
   '#007AFF',
