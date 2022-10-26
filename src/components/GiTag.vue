@@ -32,7 +32,9 @@ const props = defineProps({
 })
 
 const getClassName = computed<string>(() => {
-  return `gi-tag-${props.type} gi-tag-size-${props.size} gi-tag-status-${props.status}`
+  return `gi-tag-${props.type} gi-tag-size-${props.size} gi-tag-status-${
+    props.status === 'info' ? 'gray' : props.status
+  }`
 })
 
 const emit = defineEmits(['click', 'close'])
@@ -90,7 +92,7 @@ const handleClose = () => {
   }
 }
 
-$status: primary, success, warning, danger, info;
+$status: primary, success, warning, danger, 'gray';
 
 .gi-tag-dark {
   color: #fff;
@@ -102,21 +104,7 @@ $status: primary, success, warning, danger, info;
         &:hover {
           color: rgb(var(--#{$i}-6));
           &::before {
-            background-color: rgb(var(--#{$i}-1));
-          }
-        }
-      }
-    }
-    @if ($i == info) {
-      &.gi-tag-status-#{$i} {
-        border: 1px solid rgb(var(--#{$i}-6));
-        background-color: rgb(var(--gray-6));
-        .gi-tag-close-btn {
-          &:hover {
-            color: rgb(var(--gray-6));
-            &::before {
-              background-color: rgb(var(--gray-1));
-            }
+            background-color: rgb(var(--#{$i}-2));
           }
         }
       }
@@ -132,23 +120,9 @@ $status: primary, success, warning, danger, info;
       background-color: rgb(var(--#{$i}-1));
       .gi-tag-close-btn {
         &:hover {
-          color: rgb(var(--#{$i}-6));
+          color: #fff;
           &::before {
-            background-color: rgb(var(--#{$i}-2));
-          }
-        }
-      }
-    }
-    @if ($i == info) {
-      &.gi-tag-status-#{$i} {
-        color: var(--color-text-2);
-        background-color: rgb(var(--gray-2));
-        .gi-tag-close-btn {
-          &:hover {
-            color: rgb(var(--gray-6));
-            &::before {
-              background-color: rgb(var(--gray-3));
-            }
+            background-color: rgb(var(--#{$i}-6));
           }
         }
       }
@@ -164,23 +138,9 @@ $status: primary, success, warning, danger, info;
       border: 1px solid rgb(var(--#{$i}-6));
       .gi-tag-close-btn {
         &:hover {
-          color: rgb(var(--#{$i}-6));
+          color: #fff;
           &::before {
-            background-color: rgb(var(--#{$i}-2));
-          }
-        }
-      }
-    }
-    @if ($i == info) {
-      &.gi-tag-status-#{$i} {
-        color: var(--color-text-2);
-        border: 1px solid rgb(var(--gray-6));
-        .gi-tag-close-btn {
-          &:hover {
-            color: rgb(var(--gray-6));
-            &::before {
-              background-color: rgb(var(--gray-3));
-            }
+            background-color: rgb(var(--#{$i}-6));
           }
         }
       }
@@ -193,27 +153,12 @@ $status: primary, success, warning, danger, info;
     &.gi-tag-status-#{$i} {
       color: rgb(var(--#{$i}-6));
       border: 1px solid rgb(var(--#{$i}-2));
-      background: rgba(var(--#{$i}-6), 0.1);
+      background-color: rgb(var(--#{$i}-1));
       .gi-tag-close-btn {
         &:hover {
-          color: rgb(var(--#{$i}-6));
+          color: #fff;
           &::before {
-            background-color: rgb(var(--#{$i}-2));
-          }
-        }
-      }
-    }
-    @if ($i == info) {
-      &.gi-tag-status-#{$i} {
-        color: var(--color-text-2);
-        background-color: rgb(var(--gray-2));
-        border: 1px solid rgb(var(--gray-3));
-        .gi-tag-close-btn {
-          &:hover {
-            color: rgb(var(--gray-6));
-            &::before {
-              background-color: rgb(var(--gray-3));
-            }
+            background-color: rgb(var(--#{$i}-6));
           }
         }
       }
@@ -224,6 +169,16 @@ $status: primary, success, warning, danger, info;
 .gi-tag-size-mini {
   height: 22px;
   padding: 0 4px;
+  .gi-tag-close-btn {
+    .close-icon {
+      width: 10px;
+      height: 10px;
+    }
+    &::before {
+      width: 14px;
+      height: 14px;
+    }
+  }
 }
 
 .gi-tag-size-small {
