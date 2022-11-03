@@ -178,3 +178,17 @@ export const isOdd = (num: number) => {
 export const isEven = (num: number) => {
   return !isOdd(num)
 }
+
+/**
+ * @desc 将RGB转化为十六机制 */
+export const rgbToHex = (r: number, g: number, b: number) => {
+  return '#' + ((1 << 24) + (r << 16) + (g << 8) + b).toString(16).slice(1)
+}
+
+/**
+ * @desc 获取随机十六进制颜色 */
+export const randomHex = () => {
+  return `#${Math.floor(Math.random() * 0xffffff)
+    .toString(16)
+    .padEnd(6, '0')}`
+}

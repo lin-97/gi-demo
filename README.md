@@ -681,6 +681,8 @@ flex布局尽量使用 Row 组件
 </template>
 ~~~
 
+Link组件使用场景
+
 ~~~vue
 <template>
   <a-table>
@@ -695,6 +697,79 @@ flex布局尽量使用 Row 组件
     </a-table-column>
   </a-table>
 </template>
+~~~
+
+
+
+#### 写法技巧
+
+尽量使用三元表达式
+
+~~~js
+// 优化前
+let marks = 26; 
+let result; 
+if (marks >= 30) {
+   result = 'Pass'; 
+} else { 
+   result = 'Fail'; 
+}
+
+// 优化后
+let result = marks >= 30 ? 'Pass' : 'Fail';
+~~~
+
+
+
+善用 includes 方法
+
+~~~js
+// 优化前
+if(type === 1 || type === 2 || type === 3)
+    
+// 优化后, 此种方式在vue模板也可使用
+[1, 2, 3].includes(type)
+~~~
+
+
+
+使用箭头函数简化函数
+
+~~~js
+// 优化前
+function add(num1, num2) {
+  return num1 + num2;
+}
+
+// 优化后
+const add = (num1, num2) => num1 + num2;
+~~~
+
+
+
+寻找数组中的最大和最小值
+
+~~~js
+const arr = [2, 8, 15, 4];
+Math.max(...arr); // 15
+Math.min(...arr); // 2
+~~~
+
+
+
+移除对象属性
+
+~~~js
+const obj = {x: 45, y: 72, z: 68, p: 98};
+
+// 优化前
+delete obj.x;
+delete obj.p;
+console.log(obj); // {y: 72, z: 68}
+
+// 优化后
+const {x, p, ...newObj} = obj;
+console.log(newObj); // {y: 72, z: 68}
 ~~~
 
 
