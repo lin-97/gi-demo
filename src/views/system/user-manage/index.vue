@@ -1,7 +1,7 @@
 <template>
   <div class="user-manage">
     <section class="left">
-      <GiTitle title="部门列表"></GiTitle>
+      <GiHead title="部门列表"></GiHead>
 
       <div class="content">
         <a-input v-model="treeInputValue" placeholder="请输入搜索关键词" allow-clear style="margin-bottom: 10px">
@@ -35,7 +35,7 @@
       </div>
     </section>
     <section class="right">
-      <GiTitle title="用户列表"></GiTitle>
+      <GiHead title="用户列表"></GiHead>
 
       <a-row justify="space-between" class="head">
         <a-space>

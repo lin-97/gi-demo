@@ -1,6 +1,6 @@
 <template>
   <div class="file-aside" v-if="windowWidth > 715">
-    <GiTitle title="文件管理"></GiTitle>
+    <GiHead title="文件管理"></GiHead>
     <a-menu
       :style="{ width: '220px', height: '100%', 'border-radius': '2px' }"
       :default-open-keys="['0']"

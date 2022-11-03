@@ -183,7 +183,7 @@ const tableData = []
 保存 save
 ```
 
-页面模板类名使用中划线
+页面模板类名采用半角连接符(-)
 
 ```vue
 <template>
@@ -547,16 +547,8 @@ type Options = {
   defaultPageSize: number
 }
 
-interface APaginationProps extends PaginationProps {
-  current: number
-  pageSize: number
-  total: number
-  onChange: (size: number) => void
-  onPageSizeChange: (size: number) => void
-}
-
 export default function usePagination(callback: Callback, options: Options = { defaultPageSize: 10 }) {
-  const pagination: APaginationProps = reactive({
+  const pagination = reactive({
     showPageSize: true,
     current: 1,
     pageSize: options.defaultPageSize,
@@ -616,6 +608,9 @@ import { usePagination } from '@/hooks'
 const { current, pageSize, total, changeCurrent, changePageSize, setTotal } = usePagination(() => {
   getTableData()
 })
+
+// 从第一页开始查询
+changeCurrent(1)
 </script>
 ```
 
@@ -641,8 +636,66 @@ import { usePagination } from '@/hooks'
 const { pagination, setTotal } = usePagination(() => {
   getTableData()
 })
+
+// 从第一页开始查询
+pagination.onChange(1)
 </script>
 ```
+
+#### 组件使用建议
+
+能使用组件尽量使用组件实现页面布局
+
+flex布局尽量使用 Row 组件
+
+~~~vue
+<template>
+	<a-row  justify="space-between" align="center"> 
+    </a-row>
+</template>
+~~~
+
+按钮间间隔尽量使用 Space 组件
+
+~~~vue
+<template>
+	<a-space :size="10">
+        <a-button >返回</a-button>
+		<a-button type="primary">提交</a-button>
+	</a-space>
+</template>
+~~~
+
+状态色文本，尽量使用
+
+~~~vue
+<template>
+	<a-typography-text>主要文本</a-typography-text>
+    <a-typography-text type="secondary">二级文本</a-typography-text>
+    <a-typography-text type="primary">主题色文本</a-typography-text>
+
+	<a-typography-text type="primary">已提交</a-typography-text>
+	<a-typography-text type="success">审核通过</a-typography-text>
+	<a-typography-text type="warning">未提交</a-typography-text>
+	<a-typography-text type="danger">不通过</a-typography-text>
+</template>
+~~~
+
+~~~vue
+<template>
+  <a-table>
+	<a-table-column title="操作" :width="150" fixed="right">
+      <template #cell="{ record }">
+		<a-space>
+        	<a-link :hoverable="false">编辑</a-link>
+        	<a-link :hoverable="详情">编辑</a-link>
+        	<a-link :hoverable="false">删除</a-link>
+    	</a-space>
+      </template>
+    </a-table-column>
+  </a-table>
+</template>
+~~~
 
 
 

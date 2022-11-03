@@ -1,7 +1,7 @@
 <template>
   <div class="test">
     <section class="left">
-      <GiTitle title="组件示例" style="padding: 0"></GiTitle>
+      <GiHead title="组件示例" style="padding: 0"></GiHead>
       <div class="tab-box">
         <a-tabs position="left" hide-content v-model:active-key="selectedKey">
           <a-tab-pane :title="item.name" v-for="(item, index) in menuList" :key="index"></a-tab-pane>
@@ -20,7 +20,7 @@
 <script lang="ts" setup name="Test">
 import { ref } from 'vue'
 import Button from './components/Button.vue'
-import GiTitle from '@/components/GiTitle.vue'
+import GiHead from '@/components/GiHead.vue'
 import Tag from './components/Tag.vue'
 import Title from './components/Title.vue'
 import IconSelector from './components/IconSelector.vue'
@@ -34,6 +34,7 @@ import Loading from './components/Loading.vue'
 import ImagePreview from './components/ImagePreview.vue'
 import Lottie from './components/Lottie.vue'
 import RowTreeTable from './components/RowTreeTable/index.vue'
+import Map from './components/Map.vue'
 
 const selectedKey = ref(0)
 
@@ -41,7 +42,7 @@ const menuList = [
   { name: '单选框/复选框', value: Option },
   { name: '按钮', value: Button },
   { name: 'GiTag', value: Tag },
-  { name: 'GiTitle', value: Title },
+  { name: 'GiHead', value: Title },
   { name: 'GiIconSelector', value: IconSelector },
   { name: 'GiDot', value: Dot },
   { name: 'GiFlexibleBox', value: FlexibleBox },
@@ -50,6 +51,7 @@ const menuList = [
   { name: '省市区', value: Area },
   { name: 'JSON查看', value: Json },
   { name: '富文本', value: Editor },
+  { name: '地图', value: Map },
   { name: '美化图片预览', value: ImagePreview },
   { name: 'Lottie动画', value: Lottie }
 ]

@@ -10,8 +10,9 @@
     "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs,.ts,.tsx,.cts,.mts --fix --ignore-path .gitignore"
   },
   "dependencies": {
+    "@amap/amap-jsapi-loader": "^1.0.1",
     "@arco-design/color": "^0.4.0",
-    "@arco-themes/vue-gi-demo": "0.0.24",
+    "@arco-themes/vue-gi-demo": "0.0.25",
     "@vueuse/components": "^8.9.1",
     "@vueuse/core": "^8.9.1",
     "@wangeditor/editor": "^5.1.1",
@@ -37,7 +38,7 @@
     "xgplayer-music": "^2.3.2"
   },
   "devDependencies": {
-    "@arco-design/web-vue": "^2.38.0-beta.1",
+    "@arco-design/web-vue": "^2.38.0",
     "@rushstack/eslint-patch": "^1.1.0",
     "@types/node": "^16.11.45",
     "@vitejs/plugin-vue": "^3.0.1",

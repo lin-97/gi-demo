@@ -2,10 +2,10 @@
   <div class="shrink-box">
     <section class="left">
       <a-button type="outline" @click="visible = !visible">点击</a-button>
-      <GiTitle title="标题" style="padding: 0">
+      <GiHead title="标题" style="padding: 0">
         <a-button>取消</a-button>
         <a-button type="primary">保存</a-button>
-      </GiTitle>
+      </GiHead>
       <a-typography :style="{ marginTop: '20px' }">
         <a-typography-title> Design system </a-typography-title>
         <a-typography-paragraph>
@@ -29,10 +29,10 @@
     </section>
     <GiFlexibleBox v-model="visible">
       <div class="right">
-        <GiTitle title="用户认证信息">
+        <GiHead title="用户认证信息">
           <a-button type="outline" @click="relieve">解除认证</a-button>
           <a-button type="primary">编辑</a-button>
-        </GiTitle>
+        </GiHead>
         <div class="content">
           <a-descriptions :column="1" size="medium">
             <a-descriptions-item label="工号">RY68709</a-descriptions-item>

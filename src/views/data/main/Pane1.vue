@@ -1,11 +1,11 @@
 <template>
   <div class="data-pane">
     <section class="gi_box pane-left">
-      <GiTitle title="数据分类"></GiTitle>
+      <GiHead title="数据分类"></GiHead>
       <TheCateTree placeholder="请输入搜索关键词" @node-click="pagination.onChange(1)"></TheCateTree>
     </section>
     <section class="gi_box pane-right">
-      <GiTitle title="数据列表"></GiTitle>
+      <GiHead title="数据列表"></GiHead>
 
       <div class="content">
         <a-row justify="space-between" style="margin-bottom: 12px">

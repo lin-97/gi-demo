@@ -1,29 +1,29 @@
 <template>
   <a-space direction="vertical" fill class="title-box">
-    <GiTitle title="基础详情"> </GiTitle>
+    <GiHead title="基础详情"> </GiHead>
 
-    <GiTitle title="基础详情">
+    <GiHead title="基础详情">
       <a-button type="primary">确认</a-button>
       <a-button>返回</a-button>
-    </GiTitle>
+    </GiHead>
 
-    <GiTitle title="基础详情" border-type="solid">
+    <GiHead title="基础详情" border-type="solid">
       <a-input :style="{ width: '250px' }" placeholder="请输入关键词搜索" allow-clear>
         <template #prefix>
           <icon-search />
         </template>
       </a-input>
-    </GiTitle>
+    </GiHead>
 
-    <GiTitle title="标题" fill>
+    <GiHead title="标题" fill>
       <a-button type="primary">确认</a-button>
       <a-button>返回</a-button>
-    </GiTitle>
+    </GiHead>
 
-    <GiTitle title="标题" fill shadow>
+    <GiHead title="标题" fill shadow>
       <a-button type="primary">确认</a-button>
       <a-button>返回</a-button>
-    </GiTitle>
+    </GiHead>
   </a-space>
 </template>
 
