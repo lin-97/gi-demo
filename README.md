@@ -284,6 +284,14 @@ home/index.vue   quota-first/index.vue      quota-detail/index.vue
   -webkit-box-orient: vertical; // 设置伸缩盒子元素排列方式
 }
 
+.gi_padding {
+  padding: $padding;
+}
+
+.gi_margin {
+  margin: $margin;
+}
+
 .gi_relative {
   position: relative;
 }
@@ -306,6 +314,23 @@ home/index.vue   quota-first/index.vue      quota-detail/index.vue
 
 .gi_rotate_-180deg {
   transform: rotate(-180deg);
+}
+
+.gi_page {
+  width: 100%;
+  height: 100%;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.gi_box {
+  margin: $margin;
+  border-radius: $radius-box;
+  background-color: var(--color-bg-1);
+  box-sizing: border-box;
+  overflow: hidden;
 }
 ~~~
 
@@ -614,7 +639,7 @@ changeCurrent(1)
 </script>
 ```
 
-使用方法 2
+使用方法 2 (改良版，更少代码)
 
 ```vue
 <template>
@@ -690,7 +715,7 @@ Link组件使用场景
       <template #cell="{ record }">
 		<a-space>
         	<a-link :hoverable="false">编辑</a-link>
-        	<a-link :hoverable="详情">编辑</a-link>
+        	<a-link :hoverable="false">编辑</a-link>
         	<a-link :hoverable="false">删除</a-link>
     	</a-space>
       </template>
