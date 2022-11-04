@@ -35,6 +35,7 @@ import ImagePreview from './components/ImagePreview.vue'
 import Lottie from './components/Lottie.vue'
 import RowTreeTable from './components/RowTreeTable/index.vue'
 import Map from './components/Map.vue'
+import Logo from './components/Logo.vue'
 
 const selectedKey = ref(0)
 
@@ -53,7 +54,8 @@ const menuList = [
   { name: '富文本', value: Editor },
   { name: '地图', value: Map },
   { name: '美化图片预览', value: ImagePreview },
-  { name: 'Lottie动画', value: Lottie }
+  { name: 'Lottie动画', value: Lottie },
+  { name: '渐变色Logo', value: Logo }
 ]
 </script>
 
