@@ -7,7 +7,7 @@
     <a-space class="system-head" size="medium">
       <!-- 项目配置 -->
       <a-tooltip content="项目配置" position="bl">
-        <a-button size="mini" class="gi_hover_btn" @click="showSettingDrawer = !showSettingDrawer">
+        <a-button size="mini" class="gi_hover_btn" @click="SettingDrawerRef?.open">
           <template #icon>
             <icon-settings :size="18" />
           </template>
@@ -77,7 +77,7 @@
       </a-dropdown>
     </a-space>
 
-    <SettingDrawer v-model="showSettingDrawer"></SettingDrawer>
+    <SettingDrawer ref="SettingDrawerRef"></SettingDrawer>
   </a-layout-header>
 </template>
 
@@ -85,18 +85,15 @@
 import { ref } from 'vue'
 import { Modal } from '@arco-design/web-vue'
 import { useRouter } from 'vue-router'
-import { useAppStore, useUserStore } from '@/store'
+import { useUserStore } from '@/store'
 import { useFullScreen } from '@/hooks'
 import SettingDrawer from './SettingDrawer.vue'
 import Message from './Message.vue'
 
 const router = useRouter()
-const appStore = useAppStore()
 const userStore = useUserStore()
-
 const { isFullScreen, onToggleFullScreen } = useFullScreen()
-
-const showSettingDrawer = ref(false)
+const SettingDrawerRef = ref<InstanceType<typeof SettingDrawer>>()
 
 // 跳转首页
 const toHome = () => {
@@ -114,6 +111,7 @@ const logout = () => {
     title: '提示',
     content: '确认退出登录？',
     hideCancel: false,
+    closable: true,
     onOk: () => {
       userStore.logout()
       router.replace('/login')

@@ -24,6 +24,7 @@ declare module '@vue/runtime-core' {
     GiTable: typeof import('./components/GiTable.vue')['default']
     GiTag: typeof import('./components/GiTag.vue')['default']
     GiThemeBtn: typeof import('./components/GiThemeBtn.vue')['default']
+    GiTitle: typeof import('./components/GiTitle.vue')['default']
     LoadingIcon1: typeof import('./components/GiLodingIcon/LoadingIcon1.vue')['default']
     LoadingIcon2: typeof import('./components/GiLodingIcon/LoadingIcon2.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']

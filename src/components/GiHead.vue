@@ -1,7 +1,9 @@
 <template>
-  <div class="gi-title" :class="{ 'is-fill': fill, shadow: shadow }">
+  <div class="gi-head" :class="{ 'is-fill': fill, shadow: shadow }">
     <a-row justify="space-between" align="center" class="wrapper" :style="{ 'border-bottom-style': borderType }">
-      <h3 class="title">{{ props.title }}</h3>
+      <slot name="title">
+        <GiTitle>{{ props.title }}</GiTitle>
+      </slot>
       <a-space>
         <slot></slot>
       </a-space>
@@ -10,34 +12,22 @@
 </template>
 
 <script setup lang="ts" name="GiHead">
-import type { PropType } from 'vue'
+interface Props {
+  title?: string
+  borderType: 'dashed' | 'solid' | 'dotted' | 'double'
+  fill: boolean
+  shadow: boolean
+}
 
-const props = defineProps({
-  // 标题
-  title: {
-    type: String as PropType<string>,
-    default: ''
-  },
-  // 边框样式
-  borderType: {
-    type: String as PropType<string>,
-    default: 'dashed'
-  },
-  // 是否撑满
-  fill: {
-    type: Boolean,
-    default: false
-  },
-  // 是否显示阴影
-  shadow: {
-    type: Boolean,
-    default: false
-  }
+const props = withDefaults(defineProps<Props>(), {
+  borderType: 'dashed',
+  fill: false, // 是否撑满
+  shadow: false // 是否显示阴影
 })
 </script>
 
 <style lang="scss" scoped>
-.gi-title {
+.gi-head {
   height: 44px;
   padding: 0 $padding;
   box-sizing: border-box;
@@ -50,7 +40,7 @@ const props = defineProps({
     }
   }
   &.shadow {
-    box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.08);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.08);
     > .wrapper {
       border: 0;
     }
@@ -60,13 +50,6 @@ const props = defineProps({
     border-bottom-width: 1px;
     border-bottom-color: var(--color-neutral-3);
     box-sizing: border-box;
-  }
-  .title {
-    font-size: 16px;
-    font-weight: normal;
-    color: $color-text-1;
-    margin-block-start: 0;
-    margin-block-end: 0;
   }
 }
 </style>

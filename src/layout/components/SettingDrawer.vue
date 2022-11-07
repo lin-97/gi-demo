@@ -1,8 +1,7 @@
 <template>
-  <a-drawer v-model:visible="visible" width="300px" unmount-on-close :footer="false">
-    <template #title>项目配置</template>
+  <a-drawer v-model:visible="visible" title="项目配置" width="300px" unmount-on-close :footer="false">
     <a-space :size="15" direction="vertical" fill>
-      <a-divider orientation="center"><span class="title">系统主题</span></a-divider>
+      <a-divider orientation="center"><GiTitle>系统主题</GiTitle></a-divider>
       <a-row justify="center">
         <ColorPicker
           theme="dark"
@@ -13,15 +12,15 @@
         ></ColorPicker>
       </a-row>
 
-      <a-divider orientation="center"><span class="title">界面显示</span></a-divider>
+      <a-divider orientation="center"><GiTitle>界面显示</GiTitle></a-divider>
 
       <a-row justify="space-between" align="center">
-        <span class="label">页签显示</span>
+        <a-typography-text>页签显示</a-typography-text>
         <a-switch size="medium" :model-value="appStore.tab" @change="appStore.setTabVisible(Boolean($event))" />
       </a-row>
 
       <a-row justify="space-between" align="center">
-        <span class="label">页签风格</span>
+        <a-typography-text>页签风格</a-typography-text>
         <a-select
           placeholder="请选择"
           :model-value="appStore.tabMode"
@@ -40,12 +39,12 @@
       </a-row>
 
       <a-row justify="space-between" align="center">
-        <span class="label">动画显示</span>
+        <a-typography-text>动画显示</a-typography-text>
         <a-switch size="medium" :model-value="appStore.animate" @change="appStore.setAnimateVisible(Boolean($event))" />
       </a-row>
 
       <a-row justify="space-between" align="center">
-        <span class="label">动画切换类型</span>
+        <a-typography-text>动画切换类型</a-typography-text>
         <a-select
           placeholder="请选择"
           :model-value="appStore.animateMode"
@@ -66,27 +65,24 @@
 </template>
 
 <script setup lang="ts" name="SettingDrawer">
-import { computed } from 'vue'
+import { ref } from 'vue'
 import { useAppStore } from '@/store'
 import { ColorPicker } from 'vue-color-kit'
 import 'vue-color-kit/dist/vue-color-kit.css'
 import { tabModeList, animateModeList } from '@/config/option'
 
 const appStore = useAppStore()
+const visible = ref(false)
 
-const props = defineProps({
-  modelValue: {
-    type: Boolean,
-    default: false
-  }
-})
+if (appStore.themeColor) {
+  appStore.setThemeColor(appStore.themeColor)
+}
 
-const emit = defineEmits(['update:modelValue'])
+const open = () => {
+  visible.value = true
+}
 
-const visible = computed<boolean>({
-  get: () => props.modelValue,
-  set: (v) => emit('update:modelValue', v)
-})
+defineExpose({ open })
 
 // 默认显示的主题色列表
 const defaultColorList = [
@@ -116,10 +112,6 @@ const defaultColorList = [
   '#546e7a'
 ]
 
-if (appStore.themeColor) {
-  appStore.setThemeColor(appStore.themeColor)
-}
-
 type ColorObj = {
   hex: string
   hsv: { h: number; s: number; v: number }
@@ -133,11 +125,4 @@ const changeColor = (colorObj: ColorObj) => {
 }
 </script>
 
-<style lang="scss" scoped>
-.title {
-  font-size: 16px;
-}
-.label {
-  font-size: 14px;
-}
-</style>
+<style lang="scss" scoped></style>
