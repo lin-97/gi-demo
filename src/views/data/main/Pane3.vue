@@ -61,7 +61,7 @@
 </template>
 
 <script lang="ts" setup>
-import { ref } from 'vue'
+import { ref, onActivated } from 'vue'
 import { useRouter } from 'vue-router'
 import type { TableColumnData } from '@arco-design/web-vue'
 import { usePagination } from '@/hooks'
@@ -131,7 +131,9 @@ const getTableData = async () => {
   }
 }
 
-getTableData()
+onActivated(() => {
+  getTableData()
+})
 
 // 比例进度条颜色
 const getProportionColor = (proportion: number) => {

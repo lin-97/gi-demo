@@ -3,20 +3,16 @@
 </template>
 
 <script setup lang="ts" name="GiDot">
-import type { PropType } from 'vue'
 type Type = 'primary' | 'success' | 'warning' | 'danger' | 'info'
 
-defineProps({
-  // 类型
-  type: {
-    type: String as PropType<Type>,
-    default: 'primary'
-  },
-  // 是否开启动画
-  animation: {
-    type: Boolean,
-    default: true
-  }
+interface Props {
+  type: Type
+  animation: boolean
+}
+
+withDefaults(defineProps<Props>(), {
+  type: 'primary',
+  animation: true
 })
 </script>
 

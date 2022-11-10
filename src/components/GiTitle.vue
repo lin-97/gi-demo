@@ -8,8 +8,8 @@
 import { computed } from 'vue'
 
 interface Props {
-  size: 'small' | 'normal' | 'large'
-  bold: boolean
+  size?: 'small' | 'normal' | 'large'
+  bold?: boolean
 }
 
 const props = withDefaults(defineProps<Props>(), {

@@ -15,25 +15,18 @@
 </template>
 
 <script setup lang="ts" name="GiOptionItem">
-const props = defineProps({
-  icon: {
-    type: String,
-    default: ''
-  },
-  label: {
-    type: String,
-    default: ''
-  },
-  // more
-  more: {
-    type: Boolean,
-    default: false
-  },
-  // 选中高亮
-  active: {
-    type: Boolean,
-    default: false
-  }
+interface Props {
+  icon: string
+  label: string
+  more: boolean
+  active: boolean
+}
+
+withDefaults(defineProps<Props>(), {
+  icon: '',
+  label: '',
+  more: false,
+  active: false
 })
 
 const emit = defineEmits(['click'])

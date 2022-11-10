@@ -14,9 +14,9 @@
 <script setup lang="ts" name="GiHead">
 interface Props {
   title?: string
-  borderType: 'dashed' | 'solid' | 'dotted' | 'double'
-  fill: boolean
-  shadow: boolean
+  borderType?: 'dashed' | 'solid' | 'dotted' | 'double'
+  fill?: boolean
+  shadow?: boolean
 }
 
 const props = withDefaults(defineProps<Props>(), {

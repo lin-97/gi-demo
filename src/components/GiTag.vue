@@ -12,23 +12,18 @@ type GiTagType = 'dark' | 'light' | 'outline' | 'light-outline'
 type GiTagStatus = 'primary' | 'success' | 'warning' | 'danger' | 'info'
 type GiTagSize = 'mini' | 'small' | 'large'
 
-const props = defineProps({
-  type: {
-    type: String as PropType<GiTagType>,
-    default: 'light'
-  },
-  status: {
-    type: String as PropType<GiTagStatus>,
-    default: 'primary'
-  },
-  size: {
-    type: String as PropType<GiTagSize>,
-    default: 'small'
-  },
-  closable: {
-    type: Boolean,
-    default: false
-  }
+interface Props {
+  type: GiTagType
+  status: GiTagStatus
+  size: GiTagSize
+  closable: boolean
+}
+
+const props = withDefaults(defineProps<Props>(), {
+  type: 'light',
+  status: 'primary',
+  size: 'small',
+  closable: false
 })
 
 const getClassName = computed<string>(() => {

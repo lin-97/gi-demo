@@ -82,7 +82,7 @@
 </template>
 
 <script setup lang="ts" name="DataManage">
-import { reactive, ref } from 'vue'
+import { reactive, ref, onActivated } from 'vue'
 import { useRouter } from 'vue-router'
 import { Modal, Message } from '@arco-design/web-vue'
 import type { TableColumnData } from '@arco-design/web-vue'
@@ -131,7 +131,8 @@ const columns: TableColumnData[] = [
     title: '操作',
     slotName: 'operation',
     width: 200,
-    align: 'center'
+    align: 'center',
+    fixed: 'right'
   }
 ]
 
@@ -169,7 +170,9 @@ const getTableData = async () => {
   }
 }
 
-getTableData()
+onActivated(() => {
+  getTableData()
+})
 
 // 批量删除
 const onMulDelete = () => {

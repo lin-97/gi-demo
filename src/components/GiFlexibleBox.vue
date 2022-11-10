@@ -1,5 +1,5 @@
 <template>
-  <div ref="boxRef" class="gi-flexible-box" :style="style">
+  <div ref="BoxRef" class="gi-flexible-box" :style="style">
     <slot></slot>
   </div>
 </template>
@@ -7,27 +7,26 @@
 <script setup lang="ts">
 import { computed, ref } from 'vue'
 
-const props = defineProps({
-  modelValue: {
-    type: Boolean,
-    default: false
-  },
-  direction: {
-    type: String,
-    default: 'right'
-  }
+interface Props {
+  modelValue: boolean
+  direction: 'left' | 'right'
+}
+
+const props = withDefaults(defineProps<Props>(), {
+  modelValue: false,
+  direction: 'right'
 })
 
-const boxRef = ref()
+defineEmits(['update:modelValue'])
+
+const BoxRef = ref<HTMLElement | null>()
 
 const style = computed(() => {
   const obj: any = {}
   obj[`margin-${props.direction}`] =
-    !props.modelValue && boxRef.value && boxRef.value.clientWidth ? `-${boxRef.value.clientWidth}px` : 0
+    !props.modelValue && BoxRef.value && BoxRef.value.clientWidth ? `-${BoxRef.value.clientWidth}px` : 0
   return obj
 })
-
-defineEmits(['update:modelValue'])
 </script>
 
 <style lang="scss" scoped>

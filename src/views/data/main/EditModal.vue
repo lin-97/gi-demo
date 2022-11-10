@@ -1,5 +1,5 @@
 <template>
-  <a-modal v-model:visible="visible" :title="title" @ok="confirm">
+  <a-modal v-model:visible="visible" :title="title" :on-before-ok="confirm">
     <a-row justify="center">
       <a-form ref="formRef" :model="form" size="medium" auto-label-width :style="{ width: 'auto' }">
         <a-form-item field="name" label="姓名" :rules="rules.name">
@@ -8,8 +8,8 @@
             <div>仅支持中文姓名</div>
           </template>
         </a-form-item>
-        <a-form-item field="address" label="地址">
-          <a-input v-model="form.address" placeholder="请输入地址" style="width: 300px" />
+        <a-form-item field="phone" label="手机号">
+          <a-input v-model="form.phone" placeholder="请输入手机号" style="width: 300px" />
         </a-form-item>
         <a-form-item field="status" label="状态" :rules="rules.status">
           <a-radio-group v-model="form.status">
@@ -50,26 +50,25 @@
 
 <script setup lang="ts">
 import { computed, reactive, ref } from 'vue'
+import { Phone, OnlyCh } from '@/utils/regexp'
+import { Message, type FormInstance } from '@arco-design/web-vue'
 
 const list = [{ name: '新增' }, { name: '编辑' }, { name: '重命名' }, { name: '分享' }, { name: '删除' }]
 
-type Form = {
-  name: string
-  address: string
-  status: boolean
-}
-
+type Form = { name: string; phone: string; status: boolean }
 const form: Form = reactive({
   name: '',
-  address: '',
+  phone: '',
   status: false
 })
 
 const rules = {
   name: [
     { required: true, message: '请输入姓名' },
+    { match: OnlyCh, message: '只能是中文姓名' },
     { minLength: 1, maxLength: 4, message: '名字最长不超过4个字符' }
   ],
+  phone: [{ match: Phone, message: '手机号格式不正确' }],
   status: [{ required: true }]
 }
 
@@ -77,9 +76,18 @@ const visible = ref(false)
 const detailId = ref('')
 const isEditMode = computed(() => !!detailId.value) // 判断是新增还是编辑模式
 const title = computed(() => (isEditMode.value ? '编辑' : '新增'))
+const formRef = ref<FormInstance>()
 
-const confirm = () => {
-  visible.value = false
+const confirm: AModalOnBeforeOk = async (done) => {
+  const flag = await formRef.value?.validate()
+  if (flag) {
+    done(false)
+  } else {
+    setTimeout(() => {
+      done(true)
+      Message.success(!isEditMode.value ? '新增成功' : '编辑成功')
+    }, 1500)
+  }
 }
 
 const add = () => {

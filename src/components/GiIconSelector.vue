@@ -53,17 +53,14 @@ import { Message } from '@arco-design/web-vue'
 
 const emit = defineEmits(['select', 'update:modelValue'])
 
-const props = defineProps({
-  // 当前选择的icon
-  modelValue: {
-    type: String,
-    default: ''
-  },
-  // 是否能够复制
-  enableCopy: {
-    type: Boolean,
-    default: false
-  }
+interface Props {
+  modelValue: string
+  enableCopy: boolean
+}
+
+const props = withDefaults(defineProps<Props>(), {
+  modelValue: '',
+  enableCopy: false
 })
 
 const searchValue = ref('') // 搜索词

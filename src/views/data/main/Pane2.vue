@@ -70,7 +70,7 @@
                 </template>
               </a-table-column>
               <a-table-column title="创建时间" data-index="createTime" :width="180"></a-table-column>
-              <a-table-column title="操作" :width="200" align="center">
+              <a-table-column title="操作" :width="200" align="center" fixed="right">
                 <template #cell="{ record }">
                   <a-space>
                     <a-button type="primary" size="mini" @click="onEdit(record)">修改</a-button>
@@ -92,7 +92,7 @@
 </template>
 
 <script setup lang="ts" name="DataManage">
-import { reactive, ref } from 'vue'
+import { reactive, ref, onActivated } from 'vue'
 import { useRouter } from 'vue-router'
 import { Modal, Message } from '@arco-design/web-vue'
 import { usePagination } from '@/hooks'
@@ -138,7 +138,9 @@ const getTableData = async () => {
   }
 }
 
-getTableData()
+onActivated(() => {
+  getTableData()
+})
 
 // 批量删除
 const onMulDelete = () => {
