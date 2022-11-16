@@ -63,7 +63,7 @@
 <script lang="ts" setup>
 import { ref, onActivated } from 'vue'
 import { useRouter } from 'vue-router'
-import type { TableColumnData } from '@arco-design/web-vue'
+import type { TableColumnData, TableInstance } from '@arco-design/web-vue'
 import { usePagination } from '@/hooks'
 import { getPersonList } from '@/apis'
 import type { PersonItem } from '@/apis'
@@ -143,8 +143,8 @@ const getProportionColor = (proportion: number) => {
 }
 
 // 勾选
-const selectRowKeys = ref<string[]>([])
-const select: ATableSelect = (rowKeys, rowKey, record) => {
+const selectRowKeys = ref<(string | number)[]>([])
+const select = (rowKeys: string[]) => {
   selectRowKeys.value = rowKeys
 }
 

@@ -1,14 +1,10 @@
-import { ref, onMounted, nextTick } from 'vue'
+import { ref, onMounted, nextTick, type Ref } from 'vue'
 
 interface Options {
-  alignPoint: boolean // 对齐鼠标
+  alignPoint?: boolean // 对齐鼠标
 }
 
-export default function useContextMenu(
-  event: PointerEvent,
-  elRef: HTMLElement | null,
-  options: Options = { alignPoint: false }
-) {
+export default function useContextMenu(event: PointerEvent, elRef: Ref, options: Options = { alignPoint: false }) {
   const visible = ref(false)
   const elWidth = ref(0)
   const elHeight = ref(0)

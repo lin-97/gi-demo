@@ -51,9 +51,7 @@
 <script setup lang="ts">
 import { computed, reactive, ref } from 'vue'
 import { Phone, OnlyCh } from '@/utils/regexp'
-import { Message, type FormInstance } from '@arco-design/web-vue'
-
-const list = [{ name: '新增' }, { name: '编辑' }, { name: '重命名' }, { name: '分享' }, { name: '删除' }]
+import { Message, Modal, type FormInstance } from '@arco-design/web-vue'
 
 type Form = { name: string; phone: string; status: boolean }
 const form: Form = reactive({
@@ -72,21 +70,22 @@ const rules = {
   status: [{ required: true }]
 }
 
+const list = [{ name: '新增' }, { name: '编辑' }, { name: '重命名' }, { name: '分享' }, { name: '删除' }]
+
 const visible = ref(false)
 const detailId = ref('')
 const isEditMode = computed(() => !!detailId.value) // 判断是新增还是编辑模式
 const title = computed(() => (isEditMode.value ? '编辑' : '新增'))
 const formRef = ref<FormInstance>()
 
-const confirm: AModalOnBeforeOk = async (done) => {
+const confirm = async () => {
   const flag = await formRef.value?.validate()
   if (flag) {
-    done(false)
+    return false
   } else {
-    setTimeout(() => {
-      done(true)
-      Message.success(!isEditMode.value ? '新增成功' : '编辑成功')
-    }, 1500)
+    await new Promise((resolve) => setTimeout(resolve, 1500))
+    Message.success(!isEditMode.value ? '新增成功' : '编辑成功')
+    return true
   }
 }
 

@@ -94,7 +94,7 @@
 <script setup lang="ts" name="DataManage">
 import { reactive, ref, onActivated } from 'vue'
 import { useRouter } from 'vue-router'
-import { Modal, Message } from '@arco-design/web-vue'
+import { Modal, Message, type TableInstance } from '@arco-design/web-vue'
 import { usePagination } from '@/hooks'
 import TheLeftTree from '@/views/components/TheLeftTree/index.vue'
 import EditModal from './EditModal.vue'
@@ -105,6 +105,13 @@ import { StatusList } from '@/libs/status/person'
 const router = useRouter()
 
 const { pagination, setTotal } = usePagination(() => getTableData())
+
+// const form = reactive({
+//   name: '',
+//   status: '',
+//   current: pagination.current, // 此方式不会响应
+//   pageSize: pagination.pageSize // 此方式不会响应
+// })
 
 const form = reactive({
   name: '',
@@ -124,11 +131,7 @@ const getProportionColor = (proportion: number) => {
 const getTableData = async () => {
   try {
     loading.value = true
-    const res = await getPersonList({
-      current: pagination.current,
-      pageSize: pagination.pageSize,
-      ...form
-    })
+    const res = await getPersonList({ ...form, ...{ current: pagination.current, pageSize: pagination.pageSize } })
     tableData.value = res.data.list
     setTotal(res.data.total)
   } catch (error) {
@@ -181,8 +184,9 @@ const onExport = () => {
 }
 
 // 勾选
-const selectRowKeys = ref<string[]>([])
-const select: ATableSelect = (rowKeys, rowKey, record) => {
+const selectRowKeys = ref<(string | number)[]>([])
+
+const select = (rowKeys: string[]) => {
   selectRowKeys.value = rowKeys
 }
 

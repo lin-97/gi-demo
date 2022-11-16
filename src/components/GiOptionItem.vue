@@ -16,10 +16,10 @@
 
 <script setup lang="ts" name="GiOptionItem">
 interface Props {
-  icon: string
-  label: string
-  more: boolean
-  active: boolean
+  icon?: string
+  label?: string
+  more?: boolean
+  active?: boolean
 }
 
 withDefaults(defineProps<Props>(), {

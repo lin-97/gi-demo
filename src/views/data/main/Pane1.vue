@@ -1,7 +1,7 @@
 <template>
   <div class="data-pane">
     <section class="gi_box pane-left">
-      <GiHead title="数据分类"></GiHead>
+      <GiHead title="数据分类(ZTree)"></GiHead>
       <TheCateTree placeholder="请输入搜索关键词" @node-click="pagination.onChange(1)"></TheCateTree>
     </section>
     <section class="gi_box pane-right">
@@ -85,7 +85,7 @@
 import { reactive, ref, onActivated } from 'vue'
 import { useRouter } from 'vue-router'
 import { Modal, Message } from '@arco-design/web-vue'
-import type { TableColumnData } from '@arco-design/web-vue'
+import type { TableColumnData, TableInstance } from '@arco-design/web-vue'
 import { usePagination } from '@/hooks'
 import TheCateTree from '@/views/components/TheCateTree/index.vue'
 import EditModal from './EditModal.vue'
@@ -211,8 +211,9 @@ const onExport = () => {
 }
 
 // 勾选
-const selectRowKeys = ref<string[]>([])
-const select: ATableSelect = (rowKeys, rowKey, record) => {
+const selectRowKeys = ref<(string | number)[]>([])
+
+const select = (rowKeys: string[]) => {
   selectRowKeys.value = rowKeys
 }
 

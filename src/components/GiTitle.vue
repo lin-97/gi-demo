@@ -17,8 +17,6 @@ const props = withDefaults(defineProps<Props>(), {
   bold: false
 })
 
-// const { size = 'normal', bold = false } = defineProps<Props>()
-
 const getClassName = computed(() => {
   return props.bold ? `gi-title-${props.size} gi-title-${String(props.bold)}` : `gi-title-${props.size}`
 })

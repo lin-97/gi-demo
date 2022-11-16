@@ -15,7 +15,7 @@
 
 <script lang="ts" setup>
 import { ref } from 'vue'
-import type { TableColumnData } from '@arco-design/web-vue'
+import type { TableColumnData, TableInstance } from '@arco-design/web-vue'
 import XEUtils from 'xe-utils'
 import soureData from './data'
 
@@ -79,7 +79,7 @@ const toColTreeData = (treeData: any[]) => {
   return list
 }
 
-const spanMethod: ATableSpanMethod = ({ record, rowIndex, column, columnIndex }) => {
+const spanMethod: TableInstance['$props']['spanMethod'] = ({ record, rowIndex, column, columnIndex }) => {
   // console.log(record, rowIndex, column, columnIndex)
   const fields = ['name1', 'name2', 'name3']
   const cellValue = record[column.dataIndex]

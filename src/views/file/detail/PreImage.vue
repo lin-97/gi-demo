@@ -1,9 +1,9 @@
 <template>
   <div class="pre-image">
     <section class="viewer-box">
-      <Viewer class="viewer" ref="viewerRef" :options="options" @inited="inited">
+      <VueViewer class="viewer" ref="viewer" :options="options" @inited="inited">
         <img :src="src" class="image" />
-      </Viewer>
+      </VueViewer>
     </section>
 
     <a-row justify="space-between">
@@ -38,13 +38,13 @@
 <script setup lang="ts">
 import { ref, reactive } from 'vue'
 import 'viewerjs/dist/viewer.css'
-import { component as Viewer } from 'v-viewer'
+import { component as VueViewer } from 'v-viewer'
 
 const src = ref(
   'https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fi0.hdslb.com%2Fbfs%2Farticle%2F09fc753c76d4a8575c105452c81b76ba563c0d8d.jpg&refer=http%3A%2F%2Fi0.hdslb.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=auto?sec=1652531003&t=100230590302237a20f8e136de146f6b'
 )
 // 实例
-const viewer = ref(null)
+const viewer = ref<InstanceType<typeof VueViewer>>()
 // 缩放比例
 const zoomProportion = ref('')
 
@@ -58,14 +58,14 @@ const options = reactive({
   button: true, // 是否显示右上角全屏按钮
   title: false, // 是否显示标题
   zoom: (e) => {
-    zoomProportion.value = parseInt(e.detail.ratio * 100) + '%'
+    zoomProportion.value = parseInt(String(e.detail.ratio * 100)) + '%'
   }
 })
 
 const inited = (e: any) => {
   viewer.value = e
   setTimeout(() => {
-    zoomProportion.value = parseInt(viewer.value.initialImageData.ratio * 100) + '%'
+    zoomProportion.value = parseInt(String(viewer.value.initialImageData.ratio * 100)) + '%'
   }, 100)
 }
 

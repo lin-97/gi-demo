@@ -23,6 +23,7 @@ const isDark = useDark({
     appStore.toggleTheme(dark)
   }
 })
+
 const toggleTheme = useToggle(isDark)
 
 const handleToggleTheme = () => {

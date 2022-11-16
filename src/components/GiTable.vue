@@ -57,6 +57,7 @@ export default {
 <script setup lang="ts">
 import { useAttrs, useSlots, ref } from 'vue'
 import { useFullscreen } from '@vueuse/core'
+import type { Table } from '@arco-design/web-vue'
 const emit = defineEmits(['refresh'])
 
 const attrs = useAttrs()
@@ -65,7 +66,7 @@ const slots = useSlots()
 const tableRef = ref(null)
 
 const stripe = ref(false)
-const size = ref<ATableSize>('small')
+const size = ref<InstanceType<typeof Table>['$props']['size']>('small')
 const isBordered = ref(true)
 // console.log('attrs', attrs)
 
