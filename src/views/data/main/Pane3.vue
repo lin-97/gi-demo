@@ -63,7 +63,7 @@
 <script lang="ts" setup>
 import { ref, onActivated } from 'vue'
 import { useRouter } from 'vue-router'
-import type { TableColumnData, TableInstance } from '@arco-design/web-vue'
+import type { TableColumnData } from '@arco-design/web-vue'
 import { usePagination } from '@/hooks'
 import { getPersonList } from '@/apis'
 import type { PersonItem } from '@/apis'

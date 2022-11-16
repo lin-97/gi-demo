@@ -85,7 +85,7 @@
 import { reactive, ref, onActivated } from 'vue'
 import { useRouter } from 'vue-router'
 import { Modal, Message } from '@arco-design/web-vue'
-import type { TableColumnData, TableInstance } from '@arco-design/web-vue'
+import type { TableColumnData } from '@arco-design/web-vue'
 import { usePagination } from '@/hooks'
 import TheCateTree from '@/views/components/TheCateTree/index.vue'
 import EditModal from './EditModal.vue'

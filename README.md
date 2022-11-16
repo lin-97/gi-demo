@@ -9,7 +9,7 @@
 
 Gi Admin Pro 是一个基于 Vue3、Vite、TypeScript、Arco Design UI、Pinia、VueUse 的免费中后台模版，它使用了最新的前端技术栈，内置丰富的主题配置，有着极高的代码规范，基于 mock 实现的动态数据展示，开箱即用的模板，也可用于学习参考。
 
-> **Gi 前缀含义：** G：代表 全局 i：代表 我的
+> **Gi 前缀含义：** G：代表 全局   i：代表 我的
 >
 > Gi 用来定义全局组件前缀，如 GiNavBar、GiTitle、GiLoading
 
@@ -181,7 +181,7 @@ const getData = () => {
 ```vue
 <template>
   <div class="detail">
-    <h3 class="title"></h3>
+    <h3 class="title">标题</h3>
     <section class="table-box">
       <table></table>
     </section>
@@ -611,8 +611,89 @@ const { pagination, setTotal } = usePagination(() => {
 
 // 从第一页开始查询
 pagination.onChange(1)
+    
+// 搜索
+const search = () => {
+   pagination.onChange(1)
+}
+
+const search2 = () => {
+   pagination.current = 1
+   getTableData()
+}
 </script>
 ```
+
+注意：
+
+~~~vue
+<script setup lang="ts">
+import { usePagination } from '@/hooks'
+
+const { pagination, setTotal } = usePagination(() => {
+  getTableData()
+})
+
+const form = reactive({
+  name: '',
+  status: '',
+  current: pagination.current, // 此种方式不会响应
+  pageSize: pagination.pageSize, // 此种方式不会响应
+})
+
+const getTableData = async () => {
+  const res = await getData(form)
+}
+</script>
+~~~
+
+改为
+
+~~~vue
+<script setup lang="ts">
+import { usePagination } from '@/hooks'
+
+const { pagination, setTotal } = usePagination(() => {
+  getTableData()
+})
+
+const form = reactive({
+  name: '',
+  status: ''
+})
+
+const getTableData = async () => {
+  const res = await getData({ ...form, current: pagination.current, pageSize: pagination.pageSize})
+}
+</script>
+~~~
+
+或者
+
+~~~vue
+<script setup lang="ts">
+import { usePagination } from '@/hooks'
+
+const { pagination, setTotal } = usePagination(() => {
+  form.current = pagination.current
+  form.pageSize = pagination.pageSize
+  getTableData()
+})
+
+const form = reactive({
+  name: '',
+  status: '',
+  current: pagination.current,
+  pageSize: pagination.pageSize,
+})
+
+const getTableData = async () => {
+  const res = await getData(form)
+}
+</script>
+~~~
+
+
 
 #### 组件使用建议
 
@@ -693,8 +774,9 @@ let result = marks >= 30 ? 'Pass' : 'Fail'
 ```js
 // 优化前
 if (type === 1 || type === 2 || type === 3)
-  // 优化后, 此种方式在vue模板也可使用
-  [1, 2, 3].includes(type)
+    
+// 优化后, 此种方式在vue模板也可使用
+[1, 2, 3].includes(type)
 ```
 
 使用箭头函数简化函数

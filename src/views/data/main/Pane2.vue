@@ -94,7 +94,7 @@
 <script setup lang="ts" name="DataManage">
 import { reactive, ref, onActivated } from 'vue'
 import { useRouter } from 'vue-router'
-import { Modal, Message, type TableInstance } from '@arco-design/web-vue'
+import { Modal, Message } from '@arco-design/web-vue'
 import { usePagination } from '@/hooks'
 import TheLeftTree from '@/views/components/TheLeftTree/index.vue'
 import EditModal from './EditModal.vue'
