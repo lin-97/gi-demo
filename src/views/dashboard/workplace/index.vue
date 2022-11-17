@@ -31,8 +31,6 @@ import ImageCard from './ImageCard.vue'
 .home {
   width: 100%;
   height: 100%;
-  overflow-x: hidden;
-  overflow-y: scroll;
   .wrap {
     display: flex;
     flex-wrap: wrap;

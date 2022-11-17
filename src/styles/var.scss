@@ -1,3 +1,8 @@
+body {
+  --margin: 14px;
+  --padding: 16px;
+}
+
 // 颜色变量
 $color-theme: rgb(var(--primary-6));
 $color-primary: rgb(var(--primary-6));
@@ -15,7 +20,7 @@ $color-border: var(--color-border); // 边框颜色、分割线颜色
 $color-bg: #f5f7fd; // 背景颜色
 $color-bg-box: var(--color-bg-1);
 
-$margin: 14px;
-$padding: 16px;
+$margin: var(--margin);
+$padding: var(--padding);
 
 $radius-box: 4px;
