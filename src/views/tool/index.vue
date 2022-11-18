@@ -36,6 +36,7 @@ import Lottie from './components/Lottie.vue'
 import RowTreeTable from './components/RowTreeTable/index.vue'
 import Map from './components/Map.vue'
 import Logo from './components/Logo.vue'
+import JSDialog from './components/JSDialog/index.vue'
 
 const selectedKey = ref(0)
 
@@ -55,7 +56,8 @@ const menuList = [
   { name: '地图', value: Map },
   { name: '美化图片预览', value: ImagePreview },
   { name: 'Lottie动画', value: Lottie },
-  { name: '渐变色Logo', value: Logo }
+  { name: '渐变色Logo', value: Logo },
+  { name: '原生模态框', value: JSDialog }
 ]
 </script>
 
