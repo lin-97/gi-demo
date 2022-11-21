@@ -86,17 +86,12 @@
 .gi_hover_btn {
   border: 0 !important;
   background-color: transparent !important;
+
   &:hover {
     background: var(--color-secondary-hover) !important;
   }
+
   &:active {
     background: var(--color-secondary-active) !important;
   }
-}
-
-// 文本标签 作用于<a-tag class="gi_text_tag"></a-tag>
-.gi_text_tag {
-  font-size: 14px;
-  padding: 0;
-  background-color: transparent !important;
 }
