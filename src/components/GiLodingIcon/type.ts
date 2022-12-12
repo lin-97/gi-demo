@@ -1,1 +1,1 @@
-export type LoadingIconType = 'dot' | 'circle'
+export type LoadingIconType = 'dot' | 'circle' | 'round'

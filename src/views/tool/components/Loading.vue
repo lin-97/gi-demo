@@ -27,6 +27,7 @@
       <a-radio-group type="button" v-model="loadingType">
         <a-radio value="circle">circle</a-radio>
         <a-radio value="dot">dot</a-radio>
+        <a-radio value="round">round</a-radio>
       </a-radio-group>
 
       <a-radio-group type="button" v-model="loadingText">

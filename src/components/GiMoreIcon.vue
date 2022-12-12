@@ -16,6 +16,17 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  position: relative;
+
+  &::before {
+    content: '';
+    width: 26px;
+    height: 26px;
+    position: absolute;
+    left: -6px;
+    top: -6px;
+    cursor: pointer;
+  }
 
   .gi-more-icon {
     display: inline-block;
