@@ -37,6 +37,7 @@ import RowTreeTable from './components/RowTreeTable/index.vue'
 import Map from './components/Map.vue'
 import Logo from './components/Logo.vue'
 import JSDialog from './components/JSDialog/index.vue'
+import ScrollReveal from './components/ScrollReveal.vue'
 
 const selectedKey = ref(0)
 
@@ -57,7 +58,8 @@ const menuList = [
   { name: '美化图片预览', value: ImagePreview },
   { name: 'Lottie动画', value: Lottie },
   { name: '渐变色Logo', value: Logo },
-  { name: '原生模态框', value: JSDialog }
+  { name: '原生模态框', value: JSDialog },
+  { name: '滚动触发动画', value: ScrollReveal }
 ]
 </script>
 
@@ -66,35 +68,43 @@ const menuList = [
   padding: 0;
   margin: 0;
   padding: 8px 16px;
+
   &:hover {
     background: var(--color-fill-1);
+
     .arco-tabs-tab-title {
       &::before {
         display: none !important;
       }
     }
   }
+
   &.arco-tabs-tab-active {
     background: rgba(var(--primary-6), 0.08);
   }
 }
+
 :deep(.arco-tabs-nav-vertical::before) {
   left: 0;
   display: none;
 }
+
 :deep(.arco-tabs-nav-vertical .arco-tabs-nav-ink) {
   left: 0;
 }
+
 :deep(.arco-tabs-nav-vertical) {
   float: none;
   flex-direction: row;
 }
+
 .test {
   flex: 1;
   padding: $margin;
   box-sizing: border-box;
   overflow: hidden;
   display: flex;
+
   .left {
     width: 180px;
     padding: $padding;
@@ -104,12 +114,14 @@ const menuList = [
     border-radius: 2px;
     display: flex;
     flex-direction: column;
+
     .tab-box {
       flex: 1;
       overflow-y: auto;
       padding-top: 12px;
     }
   }
+
   .content {
     flex: 1;
     height: 100%;
