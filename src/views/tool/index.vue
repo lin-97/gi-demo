@@ -37,6 +37,7 @@ import RowTreeTable from './components/RowTreeTable/index.vue'
 import Map from './components/Map.vue'
 import Logo from './components/Logo.vue'
 import JSDialog from './components/JSDialog/index.vue'
+import ImageView from './components/ImageView.vue'
 import ScrollReveal from './components/ScrollReveal.vue'
 
 const selectedKey = ref(0)
@@ -59,7 +60,8 @@ const menuList = [
   { name: 'Lottie动画', value: Lottie },
   { name: '渐变色Logo', value: Logo },
   { name: '原生模态框', value: JSDialog },
-  { name: '滚动触发动画', value: ScrollReveal }
+  { name: '图片放大镜', value: ImageView },
+  { name: '滚动触发动画(实验中)', value: ScrollReveal }
 ]
 </script>
 
