@@ -153,12 +153,9 @@ const { top, left, width, height } = useElementBounding(ImageViewRef)
 const ZoomRef = ref<HTMLElement | null>(null)
 const { width: zoomWidth, height: zoomHeight } = useElementBounding(ZoomRef)
 
-const ZoomBoxRef = ref<HTMLElement | null>(null)
-const { width: zoomBoxWidth, height: zoomBoxHeight } = useElementBounding(ZoomBoxRef)
-
 // 在大图区域移动
 const move = (e: MouseEvent) => {
-  console.log('width', width.value)
+  console.log('width', width.value, zoomWidth.value)
   const minX = zoomWidth.value / 2
   const minY = zoomHeight.value / 2
   const maxX = width.value - minX
