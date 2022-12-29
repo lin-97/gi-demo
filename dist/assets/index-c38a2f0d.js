@@ -1,0 +1,1 @@
+import{_ as s,o as c,b as o,p as t,d as _,e as a}from"./_plugin-vue_export-helper-916c4ad5.js";const d={},n=e=>(t("data-v-4fc4288b"),e=e(),_(),e),r={class:"link-page"},p=n(()=>a("iframe",{src:"https://go.itab.link/",frameborder:"0"},null,-1)),i=[p];function f(e,l){return c(),o("div",r,i)}const u=s(d,[["render",f],["__scopeId","data-v-4fc4288b"]]);export{u as default};

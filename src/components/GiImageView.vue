@@ -10,7 +10,13 @@
     >
       <img class="animated fadeIn" :src="list[currentIndex].src" :key="currentIndex" />
 
-      <div v-show="props.zoom && showZoom" ref="ZoomRef" class="zoom" :style="{ left: zoom.left, top: zoom.top }"></div>
+      <!-- 变焦盒子 -->
+      <div
+        v-show="props.zoom && showZoom"
+        ref="ZoomARef"
+        class="zoom-a"
+        :style="{ left: zoomA.left, top: zoomA.top }"
+      ></div>
 
       <div v-show="!props.zoom" class="prev" @click="prevImage">
         <icon-left :size="20" />
@@ -46,14 +52,17 @@
       </div>
     </section>
 
-    <!-- 放大镜 -->
+    <!-- 放大镜盒子 -->
     <div
       v-show="props.zoom && showZoom"
-      ref="ZoomBoxRef"
-      class="zoom-box animated fadeIn"
+      ref="ZoomBRef"
+      class="zoom-b animated fadeIn"
       :style="{ left: width + 10 + 'px' }"
     >
-      <img :src="list[currentIndex].src" :style="{ left: zoomBox.left, top: zoomBox.top, width: 2 * width + 'px' }" />
+      <img
+        :src="list[currentIndex].src"
+        :style="{ left: zoomB.left, top: zoomB.top, width: width * proportion + 'px' }"
+      />
     </div>
   </div>
 </template>
@@ -67,6 +76,7 @@ import 'viewerjs/dist/viewer.css'
 interface Props {
   list?: { src: string }[]
   zoom?: boolean
+  autoplay?: boolean
 }
 
 const props = withDefaults(defineProps<Props>(), {
@@ -86,7 +96,8 @@ const props = withDefaults(defineProps<Props>(), {
       { src: 'https://gw.alicdn.com/imgextra/i1/2679012998/O1CN017617nr1Y189xDIqY1_!!2679012998.jpg_Q75.jpg_.webp' }
     ]
   },
-  zoom: false // 放大镜模式
+  zoom: false, // 放大镜模式
+  autoplay: false // 自动轮播
 })
 
 const currentIndex = ref(0) // 当前一页图片的索引
@@ -95,6 +106,7 @@ const pageCount = ref(4)
 const pageMax = computed(() => Math.floor((props.list.length - 1) / pageCount.value)) // 一页4张图片，最大页数
 const showZoom = ref(false)
 
+// 自动滚动底部图片
 const autoScroll = () => {
   if (page.value !== Math.floor(currentIndex.value / pageCount.value)) {
     page.value = Math.floor(currentIndex.value / pageCount.value)
@@ -102,6 +114,23 @@ const autoScroll = () => {
   }
 }
 
+// 自动轮播
+const onAutoPlay = () => {
+  if (props.autoplay && !props.zoom) {
+    setInterval(() => {
+      if (currentIndex.value < props.list.length - 1) {
+        currentIndex.value++
+      } else if (currentIndex.value == props.list.length - 1) {
+        currentIndex.value = 0
+      }
+      autoScroll()
+    }, 2000)
+  }
+}
+
+onAutoPlay()
+
+// 点击一张图片
 const onClick = (index: number) => {
   currentIndex.value = index
   autoScroll()
@@ -144,20 +173,26 @@ const preview = () => {
   }
 }
 
-const zoom = reactive({ left: '0', top: '0' })
-const zoomBox = reactive({ left: '0', top: '0' })
+const zoomA = reactive({ left: '0', top: '0' }) // 网格聚焦盒子
+const zoomB = reactive({ left: '0', top: '0' }) // 放大视图盒子
 
 const ImageViewRef = ref<HTMLElement | null>(null)
 const { top, left, width, height } = useElementBounding(ImageViewRef)
 
-const ZoomRef = ref<HTMLElement | null>(null)
-const { width: zoomWidth, height: zoomHeight } = useElementBounding(ZoomRef)
+const ZoomARef = ref<HTMLElement | null>(null)
+const { width: zoomAWidth, height: zoomAHeight } = useElementBounding(ZoomARef)
+
+const ZoomBRef = ref<HTMLElement | null>(null)
+const { width: zoomBWidth, height: zoomBHeight } = useElementBounding(ZoomBRef)
+
+// 放大比例
+const proportion = computed(() => zoomBWidth.value / zoomAWidth.value)
 
 // 在大图区域移动
 const move = (e: MouseEvent) => {
-  console.log('width', width.value, zoomWidth.value)
-  const minX = zoomWidth.value / 2
-  const minY = zoomHeight.value / 2
+  // console.log('width', width.value, zoomAWidth.value)
+  const minX = zoomAWidth.value / 2
+  const minY = zoomAHeight.value / 2
   const maxX = width.value - minX
   const maxY = height.value - minY
   // console.log('e.pageXY', e.pageX, e.pageY)
@@ -169,11 +204,11 @@ const move = (e: MouseEvent) => {
   ey < minY && (ey = minY)
   ey > maxY && (ey = maxY)
 
-  zoom.left = ex - minX + 'px'
-  zoom.top = ey - minY + 'px'
+  zoomA.left = ex - minX + 'px'
+  zoomA.top = ey - minY + 'px'
 
-  zoomBox.left = -(ex - minX) * 2 + 'px'
-  zoomBox.top = -(ey - minY) * 2 + 'px'
+  zoomB.left = -(ex - minX) * proportion.value + 'px'
+  zoomB.top = -(ey - minY) * proportion.value + 'px'
 }
 </script>
 
@@ -209,7 +244,7 @@ const move = (e: MouseEvent) => {
       width: 100%;
     }
 
-    .zoom {
+    .zoom-a {
       position: absolute;
       border: 1px solid #ccc;
       box-sizing: border-box;
@@ -320,11 +355,11 @@ const move = (e: MouseEvent) => {
     }
   }
 
-  .zoom-box {
+  .zoom-b {
     position: absolute;
     top: 0;
-    width: 400px;
-    height: 400px;
+    width: 300px;
+    height: 300px;
     z-index: 10;
     overflow: hidden;
     border: 1px solid #e8e8e8;
