@@ -100,9 +100,12 @@ const props = withDefaults(defineProps<Props>(), {
   autoplay: false // 自动轮播
 })
 
+const ScrollBoxRef = ref<HTMLElement | null>(null)
+const { width: scrollBoxWidth } = useElementBounding(ScrollBoxRef)
+const pageCount = computed(() => Math.floor(scrollBoxWidth.value / 110))
+
 const currentIndex = ref(0) // 当前一页图片的索引
 const page = ref(0) // 当前页
-const pageCount = ref(4)
 const pageMax = computed(() => Math.floor((props.list.length - 1) / pageCount.value)) // 一页4张图片，最大页数
 const showZoom = ref(false)
 
