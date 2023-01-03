@@ -3,7 +3,8 @@ const prefix = '/mock'
 import type { LoginRes } from './type'
 
 /** @desc 登录 */
-export function login(data: { username: string; password: string }) {
+export type LoginParams = { username: string; password: string }
+export function login(data: LoginParams) {
   return axios.post<ApiRes<LoginRes>>(`${prefix}/user/login`, data)
 }
 

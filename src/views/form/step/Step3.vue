@@ -26,21 +26,21 @@
 </template>
 
 <script setup lang="ts" name="Step3">
-import type { PropType } from 'vue'
 import type { StepForm } from './type'
 const emit = defineEmits(['again'])
 
-defineProps({
-  form: {
-    type: Object as PropType<StepForm>,
-    default: () => ({
-      payAccount: '',
-      recAccount: '',
-      payType: 1,
-      recName: '',
-      amount: 0
-    })
-  }
+interface Props {
+  form: Readonly<StepForm>
+}
+
+withDefaults(defineProps<Props>(), {
+  form: () => ({
+    payAccount: '',
+    recAccount: '',
+    payType: 1,
+    recName: '',
+    amount: '0'
+  })
 })
 
 // 再转一笔

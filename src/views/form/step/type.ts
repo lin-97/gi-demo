@@ -3,5 +3,5 @@ export interface StepForm {
   recAccount: string
   payType: 1 | 2 // 1:微信 2: 支付宝
   recName: string
-  amount: number | string
+  amount: string
 }

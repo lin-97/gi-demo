@@ -1,6 +1,6 @@
 <template>
   <div class="detail" ref="containerRef">
-    <a-affix :target="containerRef">
+    <a-affix :target="(containerRef as HTMLElement)">
       <a-page-header title="详情" subtitle="Base Detail Page" @back="back" class="head">
         <template #breadcrumb>
           <a-breadcrumb>
@@ -85,7 +85,7 @@ import { useRoute, useRouter } from 'vue-router'
 const route = useRoute()
 const router = useRouter()
 
-const containerRef = ref()
+const containerRef = ref<HTMLElement | null>()
 
 const back = () => {
   router.back()

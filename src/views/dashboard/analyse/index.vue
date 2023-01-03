@@ -48,7 +48,7 @@
         <a-col :xs="12" :md="12" :lg="6" :xl="6" :xxl="6">
           <a-card title="订单量" :bordered="false" class="card-item">
             <template #extra>
-              <a-tag color="orange" bordered>周</a-tag>
+              <a-tag color="orange" bordered>季</a-tag>
             </template>
             <a-statistic :value="1680" :value-from="0" :start="true" animation show-group-separator></a-statistic>
             <section class="card-content">
@@ -64,7 +64,7 @@
         <a-col :xs="12" :md="12" :lg="6" :xl="6" :xxl="6">
           <a-card title="新增用户" :bordered="false" class="card-item">
             <template #extra>
-              <a-tag color="purple" bordered>日</a-tag>
+              <a-tag color="purple" bordered>周</a-tag>
             </template>
             <a-statistic :value="128" :value-from="0" :start="true" animation>
               <template #suffix>位</template>

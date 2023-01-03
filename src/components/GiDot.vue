@@ -6,8 +6,8 @@
 type Type = 'primary' | 'success' | 'warning' | 'danger' | 'info'
 
 interface Props {
-  type: Type
-  animation: boolean
+  type?: Type
+  animation?: boolean
 }
 
 withDefaults(defineProps<Props>(), {

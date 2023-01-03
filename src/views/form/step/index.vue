@@ -9,7 +9,7 @@
 
       <transition name="fade-slide" mode="out-in" appear>
         <keep-alive>
-          <component :is="ComMap[current]" :form="form" @next="next" @prev="prev" @again="current = 1" />
+          <component :is="ComponentMap[current]" :form="form" @next="next" @prev="prev" @again="current = 1" />
         </keep-alive>
       </transition>
     </section>
@@ -23,7 +23,8 @@ import Step2 from './Step2.vue'
 import Step3 from './Step3.vue'
 import type { StepForm } from './type'
 
-const ComMap: any = {
+type T_ComponentMap = { [key: string]: typeof Step1 | typeof Step2 | typeof Step3 }
+const ComponentMap: T_ComponentMap = {
   1: Step1,
   2: Step2,
   3: Step3
@@ -35,7 +36,7 @@ const form = ref<StepForm>({
   recAccount: '',
   payType: 1,
   recName: '',
-  amount: 0
+  amount: ''
 })
 
 const next = (formData: StepForm) => {

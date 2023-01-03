@@ -24,22 +24,23 @@
 </template>
 
 <script setup lang="ts" name="Step2">
-import { nextTick, reactive, ref, type PropType } from 'vue'
+import { nextTick, reactive, ref } from 'vue'
 import type { Form } from '@arco-design/web-vue'
 import type { StepForm } from './type'
 const emit = defineEmits(['next', 'prev'])
 
-defineProps({
-  form: {
-    type: Object as PropType<StepForm>,
-    default: () => ({
-      payAccount: '',
-      recAccount: '',
-      payType: 1,
-      recName: '',
-      amount: 0
-    })
-  }
+interface Props {
+  form: Readonly<StepForm>
+}
+
+withDefaults(defineProps<Props>(), {
+  form: () => ({
+    payAccount: '',
+    recAccount: '',
+    payType: 1,
+    recName: '',
+    amount: '0'
+  })
 })
 
 const step2Form = reactive({

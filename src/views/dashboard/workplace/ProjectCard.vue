@@ -71,6 +71,7 @@ const list = [
 }
 .text {
   margin-top: 10px;
+  line-height: 1.4;
   height: 50px;
   color: var(--color-text-3);
 }

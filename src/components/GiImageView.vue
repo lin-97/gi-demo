@@ -29,7 +29,7 @@
       <div class="left" :class="{ disabled: page === 0 }" @click="prev">
         <icon-left />
       </div>
-      <div class="scroll-box">
+      <div class="scroll-box" ref="ScrollBoxRef">
         <ul
           class="list"
           :style="{

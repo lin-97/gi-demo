@@ -1,6 +1,6 @@
 <template>
   <div class="detail" ref="containerRef">
-    <a-affix :target="containerRef">
+    <a-affix :target="(containerRef as HTMLElement)">
       <a-page-header title="详情" subtitle="Detail Page" class="head">
         <template #extra>
           <a-button>返回</a-button>
@@ -125,7 +125,7 @@
 <script setup lang="ts" name="SeniorDetail">
 import { ref } from 'vue'
 
-const containerRef = ref()
+const containerRef = ref<HTMLElement | null>()
 </script>
 
 <style lang="scss" scoped>

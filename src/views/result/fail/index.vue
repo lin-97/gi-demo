@@ -16,12 +16,12 @@
           <li>
             <icon-exclamation-circle-fill :size="20" style="color: rgb(var(--warning-5))" />
             <span class="tip">认证照片不够清晰</span>
-            <a-button type="text">立即修改</a-button>
+            <a-link>立即修改</a-link>
           </li>
           <li>
             <icon-exclamation-circle-fill :size="20" style="color: rgb(var(--warning-5))" />
             <span class="tip">你的用户不具有此操作权限</span>
-            <a-button type="text">立即修改</a-button>
+            <a-link>立即修改</a-link>
           </li>
         </ul>
       </div>
@@ -56,6 +56,7 @@
       display: flex;
       align-items: center;
       padding-left: 40px;
+      margin-bottom: 8px;
       .tip {
         margin: 0 10px;
       }
