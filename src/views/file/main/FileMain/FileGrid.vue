@@ -38,27 +38,20 @@
 </template>
 
 <script setup lang="ts">
-import type { PropType } from 'vue'
 import FileImg from './FileImg.vue'
 import FileRightMenu from './FileRightMenu.vue'
 import type { FileItem } from '@/apis'
 
-const props = defineProps({
-  // 文件数据
-  data: {
-    type: Array as PropType<FileItem[]>,
-    default: () => []
-  },
-  // 批量模式下选中的文件id数组
-  selectedFileIdList: {
-    type: Array as PropType<string[]>,
-    default: () => []
-  },
-  // 是否是批量模式
-  isBatchMode: {
-    type: Boolean as PropType<boolean>,
-    default: false
-  }
+interface Props {
+  data?: FileItem[]
+  selectedFileIdList?: string[]
+  isBatchMode?: boolean
+}
+
+const props = withDefaults(defineProps<Props>(), {
+  data: () => [], // 文件数据
+  selectedFileIdList: () => [], // 批量模式下选中的文件id数组
+  isBatchMode: false // 是否是批量模式
 })
 
 const emit = defineEmits(['click', 'check', 'right-menu-click'])

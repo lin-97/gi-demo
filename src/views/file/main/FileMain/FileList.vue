@@ -58,23 +58,19 @@
 </template>
 
 <script setup lang="ts">
-import type { PropType } from 'vue'
 import { reactive } from 'vue'
 import FileImg from './FileImg.vue'
 import FileRightMenu from './FileRightMenu.vue'
 import type { FileItem } from '@/apis'
 
-const props = defineProps({
-  // 文件数据
-  data: {
-    type: Array as PropType<FileItem[]>,
-    default: () => []
-  },
-  // 是否是批量模式
-  isBatchMode: {
-    type: Boolean as PropType<boolean>,
-    default: false
-  }
+interface Props {
+  data?: FileItem[]
+  isBatchMode?: boolean
+}
+
+const props = withDefaults(defineProps<Props>(), {
+  data: () => [], // 文件数据
+  isBatchMode: false // 是否是批量模式
 })
 
 const rowSelection = reactive({

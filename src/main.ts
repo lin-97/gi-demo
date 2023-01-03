@@ -13,6 +13,7 @@ import '@/styles/arco-ui/index.less'
 // 额外引入 Arco Design Icon图标库
 import ArcoVueIcon from '@arco-design/web-vue/es/icon'
 
+// 自定义过渡动画
 import '@/styles/css/transition.css'
 // 导入全局scss主文件
 import '@/styles/index.scss'

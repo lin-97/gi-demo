@@ -67,7 +67,7 @@ import type { TableColumnData } from '@arco-design/web-vue'
 import { usePagination } from '@/hooks'
 import { getPersonList } from '@/apis'
 import type { PersonItem } from '@/apis'
-import { StatusList } from '@/libs/status/person'
+import { StatusList } from '@/constant/person'
 
 const router = useRouter()
 

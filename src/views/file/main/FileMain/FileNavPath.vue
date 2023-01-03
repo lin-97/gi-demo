@@ -1,8 +1,8 @@
 <template>
   <div class="file-nav-path">
-    <a-input ref="inputRef" v-show="isShowInput" size="medium" placeholder="请输入路径" allow-clear @blur="onBlur" />
+    <a-input ref="InputRef" v-show="showInput" size="medium" placeholder="请输入路径" allow-clear @blur="onBlur" />
 
-    <section class="path" @click.self="onNavBar" v-show="!isShowInput">
+    <section class="path" @click.self="onNavBar" v-show="!showInput">
       <a-breadcrumb>
         <a-breadcrumb-item><span class="path-item">全部</span></a-breadcrumb-item>
         <a-breadcrumb-item><span class="path-item">文件夹1</span></a-breadcrumb-item>
@@ -15,18 +15,18 @@
 <script setup lang="ts">
 import { nextTick, ref } from 'vue'
 
-const isShowInput = ref(false)
-const inputRef = ref<HTMLInputElement | null>(null)
+const showInput = ref(false)
+const InputRef = ref<HTMLInputElement | null>(null)
 
 const onNavBar = () => {
-  isShowInput.value = true
+  showInput.value = true
   nextTick(() => {
-    inputRef.value?.focus()
+    InputRef.value?.focus()
   })
 }
 
 const onBlur = () => {
-  isShowInput.value = false
+  showInput.value = false
 }
 </script>
 

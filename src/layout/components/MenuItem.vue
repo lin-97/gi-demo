@@ -7,7 +7,7 @@
     <MenuItem v-for="item in data.children" :key="item.id" :data="item" @click="onClickMenuItem"></MenuItem>
   </a-sub-menu>
 
-  <a-menu-item v-else :key="data.path" @click="onClickMenuItem(data)" v-if="!data.hidden">
+  <a-menu-item v-else :key="data.path" @click="onClickMenuItem(data)">
     <template #icon>
       <GiSvgIcon v-if="data.icon" :size="24" :name="data.icon"></GiSvgIcon>
       <icon-unordered-list v-else :size="20" />
@@ -17,14 +17,12 @@
 </template>
 
 <script setup lang="ts" name="MenuItem">
-import type { PropType } from 'vue'
+export interface Props {
+  data: MenuItem
+}
 
-defineProps({
-  data: {
-    type: Object as PropType<MenuItem>,
-    // eslint-disable-next-line @typescript-eslint/no-empty-function
-    default: () => {}
-  }
+withDefaults(defineProps<Props>(), {
+  data: () => ({ id: '', name: '' })
 })
 
 const emit = defineEmits(['click'])

@@ -48,7 +48,7 @@ const viewer = ref<InstanceType<typeof VueViewer>>()
 // 缩放比例
 const zoomProportion = ref('')
 
-const options = reactive({
+const options: Viewer.Options = reactive({
   fullscreen: false, // 是否全屏模式
   inline: true, // 是否行内
   toolbar: false, // 是否显示工具栏

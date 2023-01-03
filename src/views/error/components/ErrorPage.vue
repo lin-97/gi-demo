@@ -20,10 +20,10 @@ import { onBeforeUnmount, onMounted, ref } from 'vue'
 import { useRouter } from 'vue-router'
 
 interface Props {
-  src: any
+  src: string
 }
 const props = withDefaults(defineProps<Props>(), {
-  src: null
+  src: ''
 })
 
 const router = useRouter()

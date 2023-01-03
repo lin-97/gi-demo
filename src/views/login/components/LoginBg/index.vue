@@ -17,13 +17,6 @@
 <script setup lang="ts">
 import CornerTop from './CornerTop.vue'
 import CornerBottom from './CornerBottom.vue'
-
-interface Props {
-  /** 主题颜色 */
-  themeColor?: string
-}
-
-const props = defineProps<Props>()
 </script>
 
 <style lang="scss" scoped>

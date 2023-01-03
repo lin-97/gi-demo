@@ -4,16 +4,25 @@
 </template>
 
 <script setup lang="ts">
-import { computed, type PropType } from 'vue'
+import { computed } from 'vue'
 import { fileExtendNameIconMap, imageTypeList } from '@/libs/file/file-map'
 import type { FileItem } from '@/apis'
 
-const props = defineProps({
-  // 文件数据
-  data: {
-    type: Object as PropType<FileItem>,
-    default: () => {}
-  }
+interface Props {
+  data?: FileItem
+}
+
+const props = withDefaults(defineProps<Props>(), {
+  data: () => ({
+    id: '',
+    type: '',
+    name: '',
+    extendName: '',
+    src: '',
+    updateTime: '',
+    isDir: false,
+    filePath: ''
+  }) // 文件数据
 })
 
 // 是否是图片类型文件

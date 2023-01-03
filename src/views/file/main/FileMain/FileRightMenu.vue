@@ -49,19 +49,25 @@
 <script setup lang="ts">
 import GiOption from '@/components/GiOption.vue'
 import GiOptionItem from '@/components/GiOptionItem.vue'
-import type { PropType } from 'vue'
 import type { FileItem } from '@/apis'
 
-const props = defineProps({
-  // 文件数据
-  fileInfo: {
-    type: Object as PropType<FileItem>,
-    default: () => {}
-  },
-  showClassStyle: {
-    type: Boolean,
-    default: true
-  }
+interface Props {
+  fileInfo?: FileItem
+  showClassStyle?: boolean
+}
+
+const props = withDefaults(defineProps<Props>(), {
+  fileInfo: () => ({
+    id: '',
+    type: '',
+    name: '',
+    extendName: '',
+    src: '',
+    updateTime: '',
+    isDir: false,
+    filePath: ''
+  }), // 文件数据
+  showClassStyle: true
 })
 
 const emit = defineEmits(['click'])

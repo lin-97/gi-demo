@@ -100,7 +100,7 @@ import TheLeftTree from '@/views/components/TheLeftTree/index.vue'
 import EditModal from './EditModal.vue'
 import { getPersonList } from '@/apis'
 import type { PersonItem } from '@/apis'
-import { StatusList } from '@/libs/status/person'
+import { StatusList } from '@/constant/person'
 
 const router = useRouter()
 

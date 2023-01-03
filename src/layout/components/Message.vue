@@ -52,7 +52,4 @@ const list = [
 ]
 </script>
 
-<style lang="scss" scoped>
-.message {
-}
-</style>
+<style lang="scss" scoped></style>

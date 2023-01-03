@@ -19,17 +19,14 @@
 </template>
 
 <script setup lang="ts">
-import type { PropType } from 'vue'
+interface Props {
+  startColor?: string
+  endColor?: string
+}
 
-defineProps({
-  startColor: {
-    type: String as PropType<string>,
-    default: '#28aff0'
-  },
-  endColor: {
-    type: String as PropType<string>,
-    default: '#120fc4'
-  }
+withDefaults(defineProps<Props>(), {
+  startColor: '#28aff0',
+  endColor: '#120fc4'
 })
 </script>
 
