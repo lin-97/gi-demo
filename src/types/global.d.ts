@@ -1,9 +1,3 @@
-// 分页
-type Pagination = {
-  current: number
-  pageSize: number
-}
-
 // 菜单项
 interface MenuItem {
   id: string
@@ -14,7 +8,6 @@ interface MenuItem {
   keepAlive?: boolean
   hidden?: boolean
 }
-
 
 // 导航标签项
 interface NavTabItem {
@@ -49,18 +42,6 @@ interface Options {
 
 interface NodeOptions extends Options {
   children?: NodeOptions[]
-}
-
-interface GetParams {
-  body: null
-  type: string
-  url: string
-}
-
-interface PostData {
-  body: string
-  type: string
-  url: string
 }
 
 type TimeRanger = [string, string]
