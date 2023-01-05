@@ -29,6 +29,7 @@ declare module '@vue/runtime-core' {
     LoadingIcon1: typeof import('./components/GiLodingIcon/LoadingIcon1.vue')['default']
     LoadingIcon2: typeof import('./components/GiLodingIcon/LoadingIcon2.vue')['default']
     LoadingIcon3: typeof import('./components/GiLodingIcon/LoadingIcon3.vue')['default']
+    Message: typeof import('./components/CustomMessage/Message.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
   }
