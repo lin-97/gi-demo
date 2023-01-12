@@ -41,7 +41,7 @@ export default [
   {
     url: '/mock/person/list',
     method: 'get',
-    timeout: 0,
+    timeout: 350,
     response: ({ query }) => {
       const { current = 1, pageSize = 10, status = 0, name = '' } = query
       const list = getTableListData({ current, pageSize, status, name })

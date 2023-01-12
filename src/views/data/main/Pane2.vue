@@ -42,7 +42,7 @@
           <a-table
             row-key="id"
             size="small"
-            v-loading="loading"
+            :loading="loading"
             :bordered="{ cell: true }"
             :data="tableData"
             :scroll="{ x: '100%', y: '100%', minWidth: 1000 }"
@@ -95,6 +95,7 @@
 import { reactive, ref, onActivated } from 'vue'
 import { useRouter } from 'vue-router'
 import { Modal, Message } from '@arco-design/web-vue'
+import type { TableInstance } from '@arco-design/web-vue'
 import { usePagination } from '@/hooks'
 import TheLeftTree from '@/views/components/TheLeftTree/index.vue'
 import EditModal from './EditModal.vue'
@@ -186,12 +187,12 @@ const onExport = () => {
 // 勾选
 const selectRowKeys = ref<(string | number)[]>([])
 
-const select = (rowKeys: string[]) => {
+const select: TableInstance['onSelect'] = (rowKeys) => {
   selectRowKeys.value = rowKeys
 }
 
 // 全选
-const selectAll = (checked: boolean) => {
+const selectAll: TableInstance['onSelectAll'] = (checked) => {
   selectRowKeys.value = checked ? tableData.value.map((i) => i.id) : []
 }
 </script>

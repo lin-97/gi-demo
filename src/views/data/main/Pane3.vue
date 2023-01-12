@@ -18,7 +18,7 @@
         <a-table
           row-key="id"
           size="small"
-          v-loading="loading"
+          :loading="loading"
           :bordered="{ cell: true }"
           :columns="columns"
           :data="tableData"
@@ -63,7 +63,7 @@
 <script lang="ts" setup>
 import { ref, onActivated } from 'vue'
 import { useRouter } from 'vue-router'
-import type { TableColumnData } from '@arco-design/web-vue'
+import type { TableColumnData, TableInstance } from '@arco-design/web-vue'
 import { usePagination } from '@/hooks'
 import { getPersonList } from '@/apis'
 import type { PersonItem } from '@/apis'
@@ -144,12 +144,12 @@ const getProportionColor = (proportion: number) => {
 
 // 勾选
 const selectRowKeys = ref<(string | number)[]>([])
-const select = (rowKeys: string[]) => {
+const select: TableInstance['onSelect'] = (rowKeys) => {
   selectRowKeys.value = rowKeys
 }
 
 // 全选
-const selectAll = (checked: boolean) => {
+const selectAll: TableInstance['onSelectAll'] = (checked) => {
   selectRowKeys.value = checked ? tableData.value.map((i) => i.id) : []
 }
 </script>
