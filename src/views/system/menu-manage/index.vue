@@ -10,7 +10,7 @@
       <a-table
         :data="treeData"
         row-key="name"
-        v-loading="loading"
+        :loading="loading"
         :scroll="{ x: '100%', y: '100%', minWidth: 900 }"
         :pagination="false"
         :expandable="{ width: 80 }"

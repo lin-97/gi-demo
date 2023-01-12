@@ -31,7 +31,7 @@
     </a-row>
     <section class="table-box">
       <a-table
-        v-loading="loading"
+        :loading="loading"
         ref="tableRef"
         row-key="id"
         :data="deptList"
@@ -59,7 +59,7 @@
                 <a-button type="primary" size="mini" @click="onEdit(record)">
                   <template #icon><icon-edit /></template>
                 </a-button>
-                <a-button v-if="record.parentId" type="primary" status="success" size="mini" @click="onAdd(record)">
+                <a-button v-if="record.parentId" type="primary" status="success" size="mini" @click="onAdd()">
                   <template #icon><icon-plus /></template>
                 </a-button>
                 <a-popconfirm type="warning" content="您确定要删除该项吗?">
@@ -87,6 +87,7 @@ import { useApiDept } from '@/hooks'
 const { deptList, getDeptList } = useApiDept()
 const EditDeptModalRef = ref<InstanceType<typeof EditDeptModal>>()
 
+const loading = ref(false)
 const form = reactive({
   name: '',
   status: ''

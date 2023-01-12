@@ -62,6 +62,7 @@ import { reactive } from 'vue'
 import FileImg from './FileImg.vue'
 import FileRightMenu from './FileRightMenu.vue'
 import type { FileItem } from '@/apis'
+import type { TableInstance, TableRowSelection } from '@arco-design/web-vue'
 
 interface Props {
   data?: FileItem[]
@@ -73,7 +74,7 @@ const props = withDefaults(defineProps<Props>(), {
   isBatchMode: false // 是否是批量模式
 })
 
-const rowSelection = reactive({
+const rowSelection: TableRowSelection = reactive({
   type: 'checkbox',
   showCheckedAll: true
 })

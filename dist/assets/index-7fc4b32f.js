@@ -1,0 +1,1 @@
+import{_ as o,o as s,d as t,p as _,e as a,b as c}from"./_plugin-vue_export-helper-e17621df.js";const d={},n=e=>(_("data-v-317d8a46"),e=e(),a(),e),r={class:"navigation"},p=n(()=>c("iframe",{src:"https://www.5cv.top/",frameborder:"0"},null,-1)),i=[p];function l(e,f){return s(),t("div",r,i)}const u=o(d,[["render",l],["__scopeId","data-v-317d8a46"]]);export{u as default};

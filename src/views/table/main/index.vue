@@ -71,7 +71,7 @@
         size="small"
         page-position="bottom"
         :bordered="{ cell: true }"
-        v-loading="loading"
+        :loading="loading"
         :data="tableData"
         :scroll="{ x: '100%', y: '100%', minWidth: 1000 }"
         :pagination="{ showPageSize: true, total: total, current: current, pageSize: pageSize }"

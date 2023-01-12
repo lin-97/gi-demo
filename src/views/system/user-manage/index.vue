@@ -64,7 +64,7 @@
       <section class="table-box">
         <a-table
           row-key="id"
-          v-loading="loading"
+          :loading="loading"
           :data="tableData"
           :scroll="{ x: '100%', y: '100%', minWidth: 900 }"
           :pagination="{ showPageSize: true, total: total, current: current, pageSize: pageSize }"

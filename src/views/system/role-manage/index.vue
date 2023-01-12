@@ -10,7 +10,7 @@
       <a-table
         :data="roleList"
         row-key="id"
-        v-loading="loading"
+        :loading="loading"
         :scroll="{ x: '100%', y: '100%', minWidth: 900 }"
         :pagination="false"
       >

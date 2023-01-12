@@ -2,7 +2,7 @@
   <div class="table-page">
     <GiTable
       row-key="id"
-      v-loading="loading"
+      :loading="loading"
       :data="tableData"
       :scroll="{ x: '100%', y: '100%', minWidth: 1000 }"
       :row-selection="{ type: 'checkbox', showCheckedAll: true }"
