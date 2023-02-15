@@ -82,9 +82,10 @@
 import { ref, reactive } from 'vue'
 import EditDeptModal from './EditDeptModal.vue'
 import type { DeptItem } from '@/apis'
-import { useApiDept } from '@/hooks'
+import { useDept } from '@/hooks/app'
 
-const { deptList, getDeptList } = useApiDept()
+const { deptList, getDeptList } = useDept()
+getDeptList()
 const EditDeptModalRef = ref<InstanceType<typeof EditDeptModal>>()
 
 const loading = ref(false)

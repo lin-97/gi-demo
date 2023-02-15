@@ -58,12 +58,12 @@
 import { ref } from 'vue'
 import { Message } from '@arco-design/web-vue'
 import EditRoleModal from './EditRoleModal.vue'
-import { useApiRole } from '@/hooks'
+import { useRole } from '@/hooks/app'
 import type { RoleItem } from '@/apis'
 
 const loading = ref(false)
 const EditRoleModalRef = ref<InstanceType<typeof EditRoleModal>>()
-const { roleList } = useApiRole()
+const { roleList } = useRole()
 
 const onAdd = () => {
   EditRoleModalRef.value?.add()

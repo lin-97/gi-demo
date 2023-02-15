@@ -40,12 +40,13 @@
 
 <script setup lang="ts">
 import { reactive, computed, ref } from 'vue'
-import { useApiDept } from '@/hooks'
+import { useDept } from '@/hooks/app'
 
 const deptId = ref('')
 const visible = ref(false)
 const title = computed(() => (!!deptId.value ? '编辑部门' : '新增部门'))
-const { deptList, getDeptList } = useApiDept()
+const { deptList, getDeptList } = useDept()
+getDeptList()
 
 const form = reactive({
   id: '',

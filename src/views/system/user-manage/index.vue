@@ -120,7 +120,8 @@
 
 <script setup lang="ts" name="UserManage">
 import { ref, nextTick } from 'vue'
-import { usePagination, useApiDept } from '@/hooks'
+import { usePagination } from '@/hooks'
+import { useDept } from '@/hooks/app'
 import { getSystemUserList } from '@/apis'
 import type { UserItem } from '@/apis'
 import EditUserModal from './EditUserModal.vue'
@@ -138,7 +139,8 @@ const { current, pageSize, total, changeCurrent, changePageSize, setTotal } = us
   getTableData()
 })
 
-const { deptList, getDeptList } = useApiDept()
+const { deptList, getDeptList } = useDept()
+getDeptList()
 
 nextTick(() => {
   treeRef.value?.expandAll()
