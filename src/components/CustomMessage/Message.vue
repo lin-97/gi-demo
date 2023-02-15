@@ -43,7 +43,7 @@ const TypeMap = {
 const props = withDefaults(defineProps<Props>(), {
   type: 'success',
   content: '',
-  duration: 600,
+  duration: 2000,
   destroy: () => {}
 })
 

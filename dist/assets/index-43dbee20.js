@@ -1,0 +1,1 @@
+import{E as r}from"./ErrorPage-16b2e1c6.js";import{f as e,o,c as s,u as a}from"./_plugin-vue_export-helper-a686c450.js";import"./vue-router-dc831d57.js";const t="/gi-demo/assets/404-ca8b86de.svg",c=e({name:"ErrorPage"}),i=e({...c,setup(n){return(_,m)=>(o(),s(r,{src:a(t)},null,8,["src"]))}});export{i as default};

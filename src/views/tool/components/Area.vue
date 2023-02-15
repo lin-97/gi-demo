@@ -24,7 +24,6 @@
           :field-names="{ value: 'code', label: 'label' }"
           :style="{ width: '320px' }"
           placeholder="请选择省市区"
-          @change="change"
         />
       </section>
     </div>
@@ -33,15 +32,11 @@
 
 <script setup lang="ts" name="Area">
 import { ref } from 'vue'
-import { useArea } from '@/hooks'
+import { useArea } from '@/hooks/app'
 const { getAreaTreeData } = useArea()
 
 const treeData = ref([])
 treeData.value = getAreaTreeData()
-
-const change = (e) => {
-  console.log(e)
-}
 </script>
 
 <style lang="scss" scoped>

@@ -40,7 +40,7 @@
 
 <script setup lang="ts">
 import { ref, reactive, computed } from 'vue'
-import { useArea } from '@/hooks'
+import { useArea } from '@/hooks/app'
 
 const { getAreaTreeData } = useArea()
 

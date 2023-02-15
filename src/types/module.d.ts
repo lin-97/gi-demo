@@ -4,3 +4,4 @@ declare module 'json-editor-vue3'
 declare module 'qs'
 declare var $: any
 declare module 'scrollreveal';
+declare module 'vue-fullpage.js';

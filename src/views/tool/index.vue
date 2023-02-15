@@ -32,14 +32,14 @@ import Json from './components/Json.vue'
 import Editor from './components/Editor.vue'
 import Loading from './components/Loading.vue'
 import ImagePreview from './components/ImagePreview.vue'
-import Lottie from './components/Lottie.vue'
+import Lottie from './components/Lottie/indiex.vue'
 import RowTreeTable from './components/RowTreeTable/index.vue'
 import Map from './components/Map.vue'
 import Logo from './components/Logo.vue'
 import JSDialog from './components/JSDialog/index.vue'
 import ImageView from './components/ImageView.vue'
-import ScrollReveal from './components/ScrollReveal.vue'
 import FnComponent from './components/FnComponent.vue'
+import Mitt from './components/Mitt/index.vue'
 
 const selectedKey = ref(0)
 
@@ -57,13 +57,13 @@ const menuList = [
   { name: 'JSON查看', value: Json },
   { name: '富文本', value: Editor },
   { name: '地图', value: Map },
+  { name: 'Mitt中央通信', value: Mitt },
   { name: '美化图片预览', value: ImagePreview },
   { name: 'Lottie动画', value: Lottie },
   { name: '渐变色Logo', value: Logo },
   { name: '原生模态框', value: JSDialog },
   { name: '图片放大镜', value: ImageView },
-  { name: '函数式组件', value: FnComponent },
-  { name: '滚动触发动画(实验中)', value: ScrollReveal }
+  { name: '函数式组件', value: FnComponent }
 ]
 </script>
 
