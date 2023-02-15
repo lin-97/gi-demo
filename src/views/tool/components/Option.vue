@@ -42,13 +42,14 @@
 
 <script setup lang="ts">
 import { ref } from 'vue'
-const flag = ref(false)
+import type { CheckboxGroupInstance, CheckboxInstance } from '@arco-design/web-vue'
 
+const flag = ref(false)
 const indeterminate = ref(false)
 const checkedAll = ref(false)
 const data = ref<string[]>([])
 
-const handleChangeAll = (value: string[]) => {
+const handleChangeAll: CheckboxInstance['onChange'] = (value) => {
   indeterminate.value = false
   if (value) {
     checkedAll.value = true
@@ -59,7 +60,7 @@ const handleChangeAll = (value: string[]) => {
   }
 }
 
-const handleChange = (values: string[]) => {
+const handleChange: CheckboxGroupInstance['onChange'] = (values) => {
   if (values.length === 3) {
     checkedAll.value = true
     indeterminate.value = false

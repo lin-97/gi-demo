@@ -366,11 +366,11 @@ export const SubmitStatusList: SubmitStatusItem[] = [
   { name: '已提交', value: 1, color: 'green' }
 ]
 
-type StatusItem = { name: string, value: number, color: string }
+type StatusItem = { name: string, value: number, type: string }
 /** @desc 指标启用状态 */
 export const StatusList: StatusItem[] = [
-  { name: '禁用', value: 0, color: '#f53f3f' },
-  { name: '启用', value: 1, color: '#00b42a' }
+  { name: '禁用', value: 0, type: 'danger' },
+  { name: '启用', value: 1, type: 'success' }
 ]
 ```
 
@@ -451,6 +451,68 @@ const onEdit = (item: PersonItem) => {
 }
 </script>
 ```
+
+
+
+#### Hooks目录结构
+
+~~~js
+hooks
+  >app
+    -useDeptList.ts
+	-useCompanyList.ts
+    -index.ts
+  >modules
+    -useLoading.ts
+	-usePagination.ts
+   index.ts
+~~~
+
+1. hooks 下默认存放公共的，非接口请求的hooks
+
+~~~vue
+<script setup lang="ts">
+import { useLoading } from '@/hooks'
+
+const { loading, setLoading } = useLoading()
+</script>
+~~~
+
+
+
+2. hooks/app下主要存放通用接口的hooks
+
+/hooks/app/useCompanyList.ts
+
+~~~typescript
+import { ref } from 'vue'
+import { getCompanyListApi, type CompanyItem } from '@/apis'
+
+// 获取企业列表
+export function useCompanyList() {
+   const companyList = ref<CompanyItem[]>()
+   const getCompanyList = async () => {
+       const res = await getCompanyListApi()
+       if(res.success) {
+           companyList.value = res.data
+       }
+   }
+   return { companyList, getCompanyList }
+}
+~~~
+
+使用
+
+~~~vue
+<script setup lang="ts">
+import { useCompanyList } from '@/hooks/app'
+
+const { companyList, getCompanyList } = useCompanyList()
+getCompanyList() // 建议在页面调用hooks的方法（不在hooks里面调用）
+</script>
+~~~
+
+
 
 #### 分页 Hooks 的使用
 
