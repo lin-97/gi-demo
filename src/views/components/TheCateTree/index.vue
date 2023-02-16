@@ -300,8 +300,6 @@ const handleInput = () => {
 <style lang="scss" scoped>
 .cate-tree {
   flex: 1;
-  padding: $padding;
-  padding-top: 12px;
   overflow: hidden;
   position: relative;
   display: flex;

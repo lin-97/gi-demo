@@ -1,13 +1,12 @@
 <template>
   <div class="test">
-    <section class="left">
-      <GiHead title="组件示例" style="padding: 0"></GiHead>
+    <a-card title="组件示例" :bordered="false" class="gi_card left">
       <div class="tab-box">
         <a-tabs position="left" hide-content v-model:active-key="selectedKey">
           <a-tab-pane :title="item.name" v-for="(item, index) in menuList" :key="index"></a-tab-pane>
         </a-tabs>
       </div>
-    </section>
+    </a-card>
 
     <section class="content">
       <transition name="fade-slide" mode="out-in" appear>
@@ -20,9 +19,7 @@
 <script lang="ts" setup name="Test">
 import { ref } from 'vue'
 import Button from './components/Button.vue'
-import GiHead from '@/components/GiHead.vue'
 import Tag from './components/Tag.vue'
-import Title from './components/Title.vue'
 import IconSelector from './components/IconSelector.vue'
 import Option from './components/Option.vue'
 import Dot from './components/Dot.vue'
@@ -47,7 +44,6 @@ const menuList = [
   { name: '单选框/复选框', value: Option },
   { name: '按钮', value: Button },
   { name: 'GiTag', value: Tag },
-  { name: 'GiHead', value: Title },
   { name: 'GiIconSelector', value: IconSelector },
   { name: 'GiDot', value: Dot },
   { name: 'GiFlexibleBox', value: FlexibleBox },
@@ -110,19 +106,10 @@ const menuList = [
   display: flex;
 
   .left {
-    width: 180px;
-    padding: $padding;
-    padding-top: 0;
-    background: var(--color-bg-1);
-    box-sizing: border-box;
-    border-radius: 2px;
-    display: flex;
-    flex-direction: column;
-
+    width: 200px;
     .tab-box {
       flex: 1;
       overflow-y: auto;
-      padding-top: 12px;
     }
   }
 

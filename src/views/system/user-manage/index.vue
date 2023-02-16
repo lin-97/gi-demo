@@ -1,8 +1,6 @@
 <template>
   <div class="user-manage">
-    <section class="left">
-      <GiHead title="部门列表"></GiHead>
-
+    <a-card title="部门列表" :bordered="false" class="gi_card left">
       <div class="content">
         <a-input v-model="treeInputValue" placeholder="请输入搜索关键词" allow-clear style="margin-bottom: 10px">
           <template #prefix>
@@ -33,11 +31,10 @@
           </a-tree>
         </div>
       </div>
-    </section>
-    <section class="right">
-      <GiHead title="用户列表"></GiHead>
+    </a-card>
 
-      <a-row justify="space-between" class="head">
+    <a-card title="用户列表" :bordered="false" class="gi_card right">
+      <a-row justify="space-between">
         <a-space>
           <a-button type="primary" @click="onAdd">
             <template #icon><icon-plus /></template>
@@ -112,7 +109,7 @@
           </template>
         </a-table>
       </section>
-    </section>
+    </a-card>
 
     <EditUserModal ref="EditUserModalRef"></EditUserModal>
   </div>
@@ -183,14 +180,8 @@ getTableData()
     height: 100%;
     flex-shrink: 0;
     border-right: 1px dashed $color-border;
-    box-sizing: border-box;
-    overflow: hidden;
-    display: flex;
-    flex-direction: column;
     .content {
       flex: 1;
-      padding: $padding;
-      padding-top: 12px;
       overflow: hidden;
       display: flex;
       flex-direction: column;
@@ -204,17 +195,9 @@ getTableData()
   > .right {
     flex: 4;
     height: 100%;
-    display: flex;
-    flex-direction: column;
-    overflow: hidden;
-    .head {
-      padding: $margin $padding 0;
-    }
     .table-box {
       flex: 1;
       margin-top: $margin;
-      margin-bottom: $padding;
-      padding: 0 $padding;
       overflow: hidden;
     }
   }

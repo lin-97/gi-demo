@@ -1,12 +1,10 @@
 <template>
   <div class="data-pane">
-    <section class="gi_box pane-left">
-      <GiHead title="数据分类(ZTree)"></GiHead>
+    <a-card title="数据分类(ZTree)" :bordered="false" class="gi_card pane-left">
       <TheCateTree placeholder="请输入搜索关键词" @node-click="pagination.onChange(1)"></TheCateTree>
-    </section>
-    <section class="gi_box pane-right">
-      <GiHead title="数据列表"></GiHead>
+    </a-card>
 
+    <a-card title="数据列表" :bordered="false" class="gi_card pane-right">
       <div class="content">
         <a-row justify="space-between" style="margin-bottom: 12px">
           <a-space>
@@ -75,7 +73,7 @@
           </a-table>
         </section>
       </div>
-    </section>
+    </a-card>
 
     <EditModal ref="EditModalRef"></EditModal>
   </div>

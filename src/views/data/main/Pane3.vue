@@ -1,5 +1,5 @@
 <template>
-  <div class="data-pane3">
+  <a-card :bordered="false" class="gi_card pane3">
     <a-row justify="space-between" align="center" class="head">
       <a-breadcrumb>
         <a-breadcrumb-item>首页</a-breadcrumb-item>
@@ -57,7 +57,7 @@
         </a-table>
       </section>
     </section>
-  </div>
+  </a-card>
 </template>
 
 <script lang="ts" setup>
@@ -155,24 +155,15 @@ const selectAll: TableInstance['onSelectAll'] = (checked) => {
 </script>
 
 <style lang="scss" scoped>
-.data-pane3 {
+.pane3 {
   flex: 1;
-  box-sizing: border-box;
-  overflow: hidden;
-  display: flex;
-  flex-direction: column;
+  margin: $margin;
   .head {
-    width: 100%;
-    padding: 0 $padding;
-    height: 50px;
-    box-sizing: border-box;
+    margin-bottom: 16px;
   }
 }
 .content {
   flex: 1;
-  margin: $margin;
-  margin-top: 0;
-  padding: $padding;
   overflow: hidden;
   display: flex;
   flex-direction: column;

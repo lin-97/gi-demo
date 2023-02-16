@@ -95,3 +95,18 @@
     background: var(--color-secondary-active) !important;
   }
 }
+
+.gi_card {
+  box-sizing: border-box;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+
+  .arco-card-body {
+    flex: 1;
+    box-sizing: border-box;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+  }
+}

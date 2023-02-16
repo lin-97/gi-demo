@@ -2,10 +2,6 @@
   <div class="shrink-box">
     <section class="left">
       <a-button type="outline" @click="visible = !visible">点击</a-button>
-      <GiHead title="标题" style="padding: 0">
-        <a-button>取消</a-button>
-        <a-button type="primary">保存</a-button>
-      </GiHead>
       <a-typography :style="{ marginTop: '20px' }">
         <a-typography-title> Design system </a-typography-title>
         <a-typography-paragraph>
@@ -28,11 +24,13 @@
       </a-typography>
     </section>
     <GiFlexibleBox v-model="visible">
-      <div class="right">
-        <GiHead title="用户认证信息">
-          <a-button type="outline" @click="relieve">解除认证</a-button>
-          <a-button type="primary">编辑</a-button>
-        </GiHead>
+      <a-card title="用户认证信息" :bordered="false" class="right">
+        <template #extra>
+          <a-space>
+            <a-button type="outline" @click="relieve">解除认证</a-button>
+            <a-button type="primary">编辑</a-button>
+          </a-space>
+        </template>
         <div class="content">
           <a-descriptions :column="1" size="medium">
             <a-descriptions-item label="工号">RY68709</a-descriptions-item>
@@ -49,7 +47,7 @@
             <a-descriptions-item label="持卡人姓名">张三</a-descriptions-item>
           </a-descriptions>
         </div>
-      </div>
+      </a-card>
     </GiFlexibleBox>
   </div>
 </template>

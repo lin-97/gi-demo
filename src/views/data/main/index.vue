@@ -31,7 +31,15 @@ const PaneMap: any = {
 const activeKey = ref(2)
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
+:deep(.arco-card) {
+  .arco-card-header {
+    border-bottom-style: dashed;
+    margin: 0 16px;
+    padding-left: 0;
+    padding-right: 0;
+  }
+}
 .manage {
   width: 100%;
   flex: 1;
@@ -43,7 +51,7 @@ const activeKey = ref(2)
   }
 }
 
-.data-pane {
+:deep(.data-pane) {
   flex: 1;
   padding: $margin;
   box-sizing: border-box;
@@ -51,25 +59,15 @@ const activeKey = ref(2)
   height: 100%;
   overflow: hidden;
   display: flex;
+  align-items: stretch;
   .pane-left {
-    flex: 1;
-    min-width: 260px;
-    box-sizing: border-box;
-    overflow: hidden;
-    display: flex;
-    flex-direction: column;
+    width: 260px;
   }
   .pane-right {
     flex: 5;
     margin-left: $margin;
-    box-sizing: border-box;
-    overflow: hidden;
-    display: flex;
-    flex-direction: column;
     .content {
       flex: 1;
-      padding: $padding;
-      padding-top: 12px;
       overflow: hidden;
       display: flex;
       flex-direction: column;

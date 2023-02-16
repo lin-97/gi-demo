@@ -1,7 +1,7 @@
 <template>
   <a-drawer v-model:visible="visible" title="项目配置" width="300px" unmount-on-close :footer="false">
     <a-space :size="15" direction="vertical" fill>
-      <a-divider orientation="center"><GiTitle>系统主题</GiTitle></a-divider>
+      <a-divider orientation="center">系统主题</a-divider>
       <a-row justify="center">
         <ColorPicker
           theme="dark"
@@ -12,7 +12,7 @@
         ></ColorPicker>
       </a-row>
 
-      <a-divider orientation="center"><GiTitle>界面显示</GiTitle></a-divider>
+      <a-divider orientation="center">界面显示</a-divider>
 
       <a-row justify="space-between" align="center">
         <a-typography-text>页签显示</a-typography-text>
