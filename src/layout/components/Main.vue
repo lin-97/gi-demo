@@ -1,19 +1,18 @@
 <template>
   <a-layout class="main">
-    <router-view>
-      <template #default="{ Component, route }">
-        <transition :name="appStore.transitionName" mode="out-in" appear>
-          <keep-alive :include="navtabStore.cacheList">
-            <component :is="Component" :key="route.path" />
-          </keep-alive>
-        </transition>
-      </template>
+    <router-view v-slot="{ Component, route }">
+      <transition :name="appStore.transitionName" mode="out-in" appear>
+        <keep-alive :include="navtabStore.cacheList">
+          <component :is="Component" :key="route.path" />
+        </keep-alive>
+      </transition>
     </router-view>
   </a-layout>
 </template>
 
 <script setup lang="ts" name="Main">
 import { useNavTabStore, useAppStore } from '@/store'
+
 const navtabStore = useNavTabStore()
 const appStore = useAppStore()
 </script>

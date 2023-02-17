@@ -166,8 +166,8 @@ const onEdit = (item: PersonItem) => {
   EditModalRef.value?.edit(item.id)
 }
 
-const onDetail = () => {
-  router.push({ path: '/data/detail' })
+const onDetail = (item: PersonItem) => {
+  router.push({ path: '/data/detail', query: { id: item.id } })
 }
 
 const onDelete = (id: string) => {

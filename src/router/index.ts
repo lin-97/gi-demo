@@ -1,7 +1,7 @@
 import { createRouter, createWebHashHistory } from 'vue-router'
 import type { RouteRecordNormalized } from 'vue-router'
 import { getToken } from '@/utils/auth'
-import { DEFAULT_LAYOUT } from './base'
+import { DEFAULT_LAYOUT, StaticRouteList } from './base'
 
 // 路由模块化自动导入
 const modules = import.meta.globEager('./modules/*.ts')
@@ -33,40 +33,11 @@ const routes = [
     }
   },
   {
-    path: '/layout',
-    name: 'Layout',
+    path: '',
+    name: 'Home',
     component: DEFAULT_LAYOUT,
-    children: [
-      {
-        path: 'about',
-        name: 'About',
-        component: () => import('@/views/about/index.vue'),
-        meta: {
-          title: '关于',
-          keepAlive: false
-        }
-      },
-      {
-        path: 'navigation',
-        name: 'Navigation',
-        component: () => import('@/views/navigation/index.vue'),
-        meta: {
-          title: '导航',
-          keepAlive: false
-        }
-      },
-      {
-        path: 'tool',
-        name: 'Tool',
-        component: () => import('@/views/tool/index.vue'),
-        meta: {
-          title: '功能页',
-          keepAlive: true
-        }
-      }
-    ]
-  },
-  ...appRoutes
+    children: [...StaticRouteList, ...appRoutes]
+  }
 ]
 
 const router = createRouter({

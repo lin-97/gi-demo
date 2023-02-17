@@ -1,13 +1,9 @@
 <template>
   <div class="detail" ref="containerRef">
     <a-affix :target="(containerRef as HTMLElement)">
-      <a-page-header title="详情" subtitle="Base Detail Page" @back="back" class="head">
+      <a-page-header title="详情" @back="back" class="head">
         <template #breadcrumb>
-          <a-breadcrumb>
-            <a-breadcrumb-item v-for="(item, index) in route.matched" :key="index">{{
-              item.meta.title
-            }}</a-breadcrumb-item>
-          </a-breadcrumb>
+          <Breadcrumb></Breadcrumb>
         </template>
         <template #extra>
           <a-button @click="back">返回</a-button>
