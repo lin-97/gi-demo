@@ -37,6 +37,7 @@ import JSDialog from './components/JSDialog/index.vue'
 import ImageView from './components/ImageView.vue'
 import FnComponent from './components/FnComponent.vue'
 import Mitt from './components/Mitt/index.vue'
+import CateTree from './ZTree.vue'
 
 const selectedKey = ref(0)
 
@@ -59,7 +60,8 @@ const menuList = [
   { name: '渐变色Logo', value: Logo },
   { name: '原生模态框', value: JSDialog },
   { name: '图片放大镜', value: ImageView },
-  { name: '函数式组件', value: FnComponent }
+  { name: '函数式组件', value: FnComponent },
+  { name: 'ZTree分类树', value: CateTree }
 ]
 </script>
 

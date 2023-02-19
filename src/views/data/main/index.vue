@@ -2,9 +2,8 @@
   <div class="manage">
     <section class="tab">
       <a-tabs hide-content size="medium" v-model:active-key="activeKey">
-        <a-tab-pane :key="1" title="周期管理"> </a-tab-pane>
-        <a-tab-pane :key="2" title="维度管理"> </a-tab-pane>
-        <a-tab-pane :key="3" title="单位管理"> </a-tab-pane>
+        <a-tab-pane :key="1" title="人员管理"> </a-tab-pane>
+        <a-tab-pane :key="2" title="单位管理"> </a-tab-pane>
       </a-tabs>
     </section>
 
@@ -20,15 +19,13 @@
 import { ref } from 'vue'
 import Pane1 from './Pane1.vue'
 import Pane2 from './Pane2.vue'
-import Pane3 from './Pane3.vue'
 
 const PaneMap: any = {
   1: Pane1,
-  2: Pane2,
-  3: Pane3
+  2: Pane2
 }
 
-const activeKey = ref(2)
+const activeKey = ref(1)
 </script>
 
 <style lang="scss" scoped>
