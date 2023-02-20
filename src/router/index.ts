@@ -1,48 +1,32 @@
 import { createRouter, createWebHashHistory } from 'vue-router'
-import type { RouteRecordNormalized } from 'vue-router'
+import type { RouteRecordNormalized, RouteRecordRaw } from 'vue-router'
 import { getToken } from '@/utils/auth'
-import { DEFAULT_LAYOUT, StaticRouteList } from './base'
+import { Layout, constantRoutes } from './base'
 
 // 路由模块化自动导入
-const modules = import.meta.globEager('./modules/*.ts')
+const modules: any = import.meta.globEager('./modules/*.ts')
+const routeModuleList: RouteRecordRaw[] = []
+Object.keys(modules).forEach((key) => {
+  const mod = modules[key].default || {}
+  if (!mod) return
+  const moduleList = Array.isArray(mod) ? [...mod] : [mod]
+  routeModuleList.push(...moduleList)
+})
 
-function formatModules(_modules: any, result: RouteRecordNormalized[]) {
-  Object.keys(_modules).forEach((key) => {
-    const defaultModule = _modules[key].default
-    if (!defaultModule) return
-    const moduleList = Array.isArray(defaultModule) ? [...defaultModule] : [defaultModule]
-    result.push(...moduleList)
-  })
-  return result
-}
-
-export const appRoutes: RouteRecordNormalized[] = formatModules(modules, [])
-
-const routes = [
-  {
-    path: '',
-    redirect: '/dashboard/workplace'
-  },
-  {
-    path: '/login',
-    name: 'Login',
-    component: () => import('@/views/login/index.vue'),
-    meta: {
-      title: '登录',
-      keepAlive: false
-    }
-  },
+const routes: RouteRecordRaw[] = [
+  ...constantRoutes,
   {
     path: '',
     name: 'Home',
-    component: DEFAULT_LAYOUT,
-    children: [...StaticRouteList, ...appRoutes]
+    component: Layout,
+    children: [...routeModuleList]
   }
 ]
 
 const router = createRouter({
   history: createWebHashHistory(import.meta.env.BASE_URL),
   routes,
+  strict: true,
   scrollBehavior: () => ({ left: 0, top: 0 })
 })
 

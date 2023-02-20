@@ -1,5 +1,5 @@
 import axios from '@/utils/http'
-const prefix = '/mock'
+import { prefix } from '../config'
 import type { LoginRes } from './type'
 
 /** @desc 登录 */

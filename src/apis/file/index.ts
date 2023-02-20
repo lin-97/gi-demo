@@ -1,5 +1,5 @@
 import http from '@/utils/http'
-const prefix = '/mock'
+import { prefix } from '../config'
 
 import type { FileItem } from './type'
 
