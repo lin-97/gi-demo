@@ -1,1 +1,0 @@
-import"./utils-176e37a8.js";import{b as e}from"./index-e072260a.js";import{h as i}from"./_plugin-vue_export-helper-9a924bd0.js";function c(){const t=i([]);return{deptList:t,getDeptList:async()=>{const s=await e();s.success&&(t.value=s.data.list)}}}export{c as u};

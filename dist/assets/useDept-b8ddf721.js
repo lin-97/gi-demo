@@ -1,0 +1,1 @@
+import{r as e}from"./index-c333f726.js";import{a}from"./index-b0e12fe5.js";function p(){const t=e([]);return{deptList:t,getDeptList:async()=>{const s=await a();s.success&&(t.value=s.data.list)}}}export{p as u};
