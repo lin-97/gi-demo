@@ -5,7 +5,7 @@ import { Layout, constantRoutes } from './base'
 
 // 路由模块化自动导入
 const modules: any = import.meta.globEager('./modules/*.ts')
-const routeModuleList: RouteRecordRaw[] = []
+export const routeModuleList: RouteRecordRaw[] = []
 Object.keys(modules).forEach((key) => {
   const mod = modules[key].default || {}
   if (!mod) return
