@@ -755,6 +755,35 @@ const getTableData = async () => {
 </script>
 ```
 
+~~~vue
+<template>
+	<div>
+        <a-pagination v-bind="pagination" />
+    </div>
+</template>
+
+<script setup lang="ts">
+import { usePagination } from '@/hooks'
+
+const { pagination, setTotal } = usePagination(() => {
+  getTableData()
+})
+
+const form = reactive({
+  name: '',
+  status: ''
+})
+
+const getTableData = async () => {
+  const res = await getData({ ...form, page: pagination.current, size: pagination.pageSize })
+}
+</script>
+~~~
+
+
+
+
+
 #### 组件使用建议
 
 能使用组件尽量使用组件实现页面布局
