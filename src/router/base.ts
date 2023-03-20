@@ -1,10 +1,10 @@
 import type { RouteRecordRaw } from 'vue-router'
 import { useRouter } from 'vue-router'
 
-/** @desc 默认布局 */
+// 默认布局
 export const Layout = () => import('@/layout/index.vue')
 
-/** @desc 静态路由: 无需验证权限 */
+// 静态路由 无需验证权限
 export const constantRoutes: RouteRecordRaw[] = [
   {
     path: '/redirect',
@@ -43,6 +43,24 @@ export const constantRoutes: RouteRecordRaw[] = [
         name: 'DashboardAnalyse',
         component: () => import('@/views/dashboard/analyse/index.vue'),
         meta: { title: '分析页' }
+      },
+      {
+        path: '/about',
+        name: 'About',
+        component: () => import('@/views/about/index.vue'),
+        meta: {
+          title: '关于',
+          keepAlive: false
+        }
+      },
+      {
+        path: '/tool',
+        name: 'Tool',
+        component: () => import('@/views/tool/index.vue'),
+        meta: {
+          title: '功能页',
+          keepAlive: false
+        }
       }
     ]
   }

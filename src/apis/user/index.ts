@@ -12,8 +12,3 @@ export function login(data: LoginParams) {
 export function logout() {
   return http.post(`${prefix}/user/logout`)
 }
-
-/** @desc 获取动态菜单 */
-export function getMenuList() {
-  return http.get(`${prefix}/user/menu`)
-}

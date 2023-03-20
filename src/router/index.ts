@@ -13,15 +13,7 @@ Object.keys(modules).forEach((key) => {
   routeModuleList.push(...moduleList)
 })
 
-const routes: RouteRecordRaw[] = [
-  ...constantRoutes,
-  {
-    path: '',
-    name: 'Home',
-    component: Layout,
-    children: [...routeModuleList]
-  }
-]
+const routes: RouteRecordRaw[] = [...constantRoutes, ...routeModuleList]
 
 const router = createRouter({
   history: createWebHashHistory(import.meta.env.BASE_URL),

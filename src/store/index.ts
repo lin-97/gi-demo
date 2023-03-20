@@ -1,11 +1,13 @@
 import { createPinia } from 'pinia'
-import { useAppStore } from './modules/app'
-import { useNavTabStore } from './modules/navtab'
-import { useUserStore } from './modules/user'
-import { useMenuStore } from './modules/menu'
-import { useFileStore } from './modules/file'
+import piniaPluginPersistedstate from 'pinia-plugin-persistedstate'
+
+export * from './modules/app'
+export * from './modules/navtab'
+export * from './modules/user'
+export * from './modules/menu'
+export * from './modules/file'
 
 const pinia = createPinia()
+pinia.use(piniaPluginPersistedstate)
 
-export { useAppStore, useNavTabStore, useUserStore, useMenuStore, useFileStore }
 export default pinia

@@ -1,1 +1,0 @@
-import{_ as s,o as a,c as o,p as t,l as c,h as _}from"./index-c333f726.js";const n={},d=e=>(t("data-v-0e8a37a8"),e=e(),c(),e),r={class:"link-page"},p=d(()=>_("iframe",{src:"https://juejin.cn/frontend",frameborder:"0"},null,-1)),i=[p];function l(e,f){return a(),o("div",r,i)}const u=s(n,[["render",l],["__scopeId","data-v-0e8a37a8"]]);export{u as default};

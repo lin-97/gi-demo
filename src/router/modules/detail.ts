@@ -1,20 +1,29 @@
-export default [
-  {
-    path: '/detail/base',
-    name: 'BaseDetail',
-    component: () => import('@/views/detail/base/index.vue'),
-    meta: {
-      title: '基础详情页',
-      keepAlive: false
+import { Layout } from '../base'
+
+export default {
+  path: '/detail',
+  name: 'Detail',
+  component: Layout,
+  redirect: '/detail/base',
+  meta: { title: '详情页', keepAlive: false },
+  children: [
+    {
+      path: '/detail/base',
+      name: 'BaseDetail',
+      component: () => import('@/views/detail/base/index.vue'),
+      meta: {
+        title: '基础详情页',
+        keepAlive: false
+      }
+    },
+    {
+      path: '/detail/senior',
+      name: 'SeniorDetail',
+      component: () => import('@/views/detail/senior/index.vue'),
+      meta: {
+        title: '高级详情页',
+        keepAlive: false
+      }
     }
-  },
-  {
-    path: '/detail/senior',
-    name: 'SeniorDetail',
-    component: () => import('@/views/detail/senior/index.vue'),
-    meta: {
-      title: '高级详情页',
-      keepAlive: false
-    }
-  }
-]
+  ]
+}

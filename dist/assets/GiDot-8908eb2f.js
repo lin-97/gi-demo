@@ -1,0 +1,1 @@
+import{d as t,o,g as a,k as n,_}from"./index-dec34743.js";const s=t({name:"GiDot"}),c=t({...s,props:{type:{default:"primary"},animation:{type:Boolean,default:!0}},setup(e){return(i,p)=>(o(),a("span",{class:n(["gi-dot",[{"gi-dot-processing":e.animation},`gi-dot-${e.type}`]])},null,2))}});const r=_(c,[["__scopeId","data-v-e13a8cb2"]]);export{r as _};

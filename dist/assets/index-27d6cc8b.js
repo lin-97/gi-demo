@@ -1,1 +1,0 @@
-import{E as r}from"./ErrorPage-794b0cf2.js";import{d as e,o,f as s,k as a}from"./index-c333f726.js";const t="/gi-demo/assets/403-231745f4.svg",n=e({name:"ErrorPage"}),u=e({...n,setup(c){return(_,f)=>(o(),s(r,{src:a(t)},null,8,["src"]))}});export{u as default};

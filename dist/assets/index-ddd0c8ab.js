@@ -1,1 +1,0 @@
-import{_ as c,o as s,c as o,p as t,l as _,h as a}from"./index-c333f726.js";const n={},d=e=>(t("data-v-4fc4288b"),e=e(),_(),e),r={class:"link-page"},p=d(()=>a("iframe",{src:"https://go.itab.link/",frameborder:"0"},null,-1)),i=[p];function l(e,f){return s(),o("div",r,i)}const u=c(n,[["render",l],["__scopeId","data-v-4fc4288b"]]);export{u as default};
