@@ -134,15 +134,13 @@ const getCateTree = async () => {
   try {
     loading.value = true
     const res = await getCateTreeData()
-    if (res.success) {
-      const data = res.data
-      formatTree(data)
-      treeData.value = data
-      nextTick(() => {
-        treeObj.value = $.fn.zTree.init($('#treeDemo'), treeSetting, treeData.value)
-        treeObj.value?.expandAll(true)
-      })
-    }
+    const data = res.data
+    formatTree(data)
+    treeData.value = data
+    nextTick(() => {
+      treeObj.value = $.fn.zTree.init($('#treeDemo'), treeSetting, treeData.value)
+      treeObj.value?.expandAll(true)
+    })
   } catch (error) {
     return error
   } finally {

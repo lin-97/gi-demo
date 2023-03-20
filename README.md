@@ -93,9 +93,9 @@ npm run build
 
 ## 交流
 
-QQ：326010228
-
 邮箱：326010228@qq.com
+
+![QQ图片20230320112447.jpg](https://p9-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/f09691574f954d0eb762fa8f6424260a~tplv-k3u1fbpfcp-watermark.image?)
 
 ## 项目规范
 

@@ -3,6 +3,7 @@ export * from './system'
 export * from './file'
 export * from './user'
 export * from './cate'
+export * from './test'
 
 export * from './person/type'
 export * from './system/type'

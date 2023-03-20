@@ -38,10 +38,12 @@ import ImageView from './components/ImageView.vue'
 import FnComponent from './components/FnComponent.vue'
 import Mitt from './components/Mitt/index.vue'
 import CateTree from './ZTree.vue'
+import ApiTest from './components/ApiTest.vue'
 
 const selectedKey = ref(0)
 
 const menuList = [
+  { name: '接口测试', value: ApiTest },
   { name: '单选框/复选框', value: Option },
   { name: '按钮', value: Button },
   { name: 'GiTag', value: Tag },

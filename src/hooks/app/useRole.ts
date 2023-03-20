@@ -7,9 +7,7 @@ export function useRole() {
   const roleList = ref<RoleItem[]>([])
   const getRoleList = async () => {
     const res = await getSystemRoleList()
-    if (res.success) {
-      roleList.value = res.data.list
-    }
+    roleList.value = res.data.list
   }
   return { roleList, getRoleList }
 }

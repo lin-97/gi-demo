@@ -89,12 +89,10 @@ const getCateTree = async () => {
   try {
     loading.value = true
     const res = await getCateTreeData()
-    if (res.success) {
-      treeData.value = res.data
-      nextTick(() => {
-        treeRef.value.expandAll()
-      })
-    }
+    treeData.value = res.data
+    nextTick(() => {
+      treeRef.value.expandAll()
+    })
   } catch (error) {
     return error
   } finally {

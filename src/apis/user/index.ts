@@ -1,19 +1,19 @@
-import axios from '@/utils/http'
+import http from '@/utils/http'
 import { prefix } from '../config'
 import type { LoginRes } from './type'
 
 /** @desc 登录 */
 export type LoginParams = { username: string; password: string }
 export function login(data: LoginParams) {
-  return axios.post<ApiRes<LoginRes>>(`${prefix}/user/login`, data)
+  return http.post<ApiRes<LoginRes>>(`${prefix}/user/login`, data)
 }
 
 /** @desc 退出登录 */
 export function logout() {
-  return axios.post(`${prefix}/user/logout`)
+  return http.post(`${prefix}/user/logout`)
 }
 
 /** @desc 获取动态菜单 */
 export function getMenuList() {
-  return axios.get(`${prefix}/user/menu`)
+  return http.get(`${prefix}/user/menu`)
 }

@@ -7,9 +7,7 @@ export function useDept() {
   const deptList = ref<DeptItem[]>([])
   const getDeptList = async () => {
     const res = await getSystemDeptList()
-    if (res.success) {
-      deptList.value = res.data.list
-    }
+    deptList.value = res.data.list
   }
   return { deptList, getDeptList }
 }
