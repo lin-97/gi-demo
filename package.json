@@ -22,6 +22,7 @@
     "dayjs": "^1.11.4",
     "echarts": "^5.3.3",
     "json-editor-vue3": "^1.0.6",
+    "lodash": "^4.17.21",
     "mitt": "^3.0.0",
     "mockjs": "^1.1.0",
     "nprogress": "^0.2.0",
@@ -40,8 +41,9 @@
     "xgplayer-music": "^2.3.2"
   },
   "devDependencies": {
-    "@arco-design/web-vue": "^2.44.2",
+    "@arco-design/web-vue": "^2.44.6",
     "@rushstack/eslint-patch": "^1.2.0",
+    "@types/lodash": "^4.14.192",
     "@types/node": "^18.11.18",
     "@vitejs/plugin-vue": "^4.0.0",
     "@vitejs/plugin-vue-jsx": "^3.0.0",

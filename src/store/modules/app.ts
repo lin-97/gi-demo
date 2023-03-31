@@ -66,7 +66,7 @@ const storeSetup = () => {
   }
 
   return {
-    ...toRefs(settingConfig),
+    ...toRefs<ThemeState>(settingConfig),
     transitionName,
     toggleTheme,
     setThemeColor,

@@ -38,7 +38,7 @@ import { ref, reactive, onMounted, type PropType } from 'vue'
 import type { FileItem } from '@/apis'
 import type { TreeNodeData } from '@arco-design/web-vue'
 import data from './treedata'
-import GiSvgIcon from '@/components/GiSvgIcon.vue'
+import GiSvgIcon from '@/components/GiSvgIcon/index.vue'
 
 const props = defineProps({
   fileInfo: Object as PropType<FileItem>,

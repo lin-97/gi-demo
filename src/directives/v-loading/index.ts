@@ -1,5 +1,5 @@
 import { createApp, type DirectiveBinding } from 'vue'
-import Loading from '@/components/GiLoading.vue'
+import Loading from '@/components/GiLoading/index.vue'
 
 /**
  * @desc v-loading 指令

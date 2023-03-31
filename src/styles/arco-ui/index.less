@@ -17,16 +17,8 @@
 @import './a-input.less';
 @import './a-card.less';
 
-@transition-duration-1: 0.2s;
-@transition-duration-2: 0.3s;
-@transition-duration-3: 0.35s;
-@transition-duration-4: 0.4s;
-@transition-duration-5: 0.5s;
-
 @color-menu-dark-bg: var(--color-bg-1);
 @card-color-bg: var(--color-bg-1);
-
-// @size-small: 30px;
 
 // 禁止文本复制
 .arco-link,
@@ -36,35 +28,4 @@
 .arco-breadcrumb-item,
 .arco-checkbox-label {
   user-select: none;
-}
-
-.zoom-modal-enter-from,
-.zoom-modal-appear-from {
-  transform: scale(0.5, 0.5);
-  opacity: 0;
-}
-
-.zoom-modal-enter-to,
-.zoom-modal-appear-to {
-  transform: scale(1, 1);
-  opacity: 1;
-}
-
-.zoom-modal-enter-active,
-.zoom-modal-appear-active {
-  transition: all @transition-duration-2;
-}
-
-.zoom-modal-leave-from {
-  transform: scale(1, 1);
-  opacity: 1;
-}
-
-.zoom-modal-leave-to {
-  transform: scale(0.5, 0.5);
-  opacity: 0;
-}
-
-.zoom-modal-leave-active {
-  transition: all @transition-duration-2;
 }

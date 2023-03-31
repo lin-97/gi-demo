@@ -26,9 +26,9 @@
 
 <script setup lang="ts">
 import { ref, nextTick, computed } from 'vue'
-import GiContextMenu from '@/components/GiContextMenu.vue'
-import GiOption from '@/components/GiOption.vue'
-import GiOptionItem from '@/components/GiOptionItem.vue'
+import GiContextMenu from '@/components/GiContextMenu/index.vue'
+import GiOption from '@/components/GiOption/index.vue'
+import GiOptionItem from '@/components/GiOptionItem/index.vue'
 import MoveTree from '../MoveTree.vue'
 import type { FileItem } from '@/apis'
 

@@ -3,9 +3,16 @@
     <router-view></router-view>
 
     <template #loading>
-      <img src="/static/images/loading.gif" style="width: 30px" />
+      <img src="/static/images/loading.gif" class="loading-icon" />
     </template>
   </a-config-provider>
 </template>
 
-<script setup lang="ts" name="App"></script>
+<script setup lang="ts" name="App">
+</script>
+
+<style lang="scss" scoped>
+.loading-icon {
+  width: 30px;
+}
+</style>
