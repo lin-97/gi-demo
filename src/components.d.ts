@@ -9,10 +9,8 @@ declare module '@vue/runtime-core' {
   export interface GlobalComponents {
     Breadcrumb: typeof import('./components/app/Breadcrumb.vue')['default']
     CateTree: typeof import('./components/app/CateTree/index.vue')['default']
-    EmptyIcon: typeof import('./components/EmptyIcon.vue')['default']
     GiChart: typeof import('./components/GiChart/index.vue')['default']
     GiContextMenu: typeof import('./components/GiContextMenu/index.vue')['default']
-    GiDateTime: typeof import('./components/GiDateTime/index.vue')['default']
     GiDot: typeof import('./components/GiDot/index.vue')['default']
     GiFlexibleBox: typeof import('./components/GiFlexibleBox/index.vue')['default']
     GiFooter: typeof import('./components/GiFooter/index.vue')['default']

@@ -1,0 +1,1 @@
+import{B as t,C as e}from"./index-9d7094ab.js";function r(){return t.get(`${e}/system/dept/list`)}function i(){return t.get(`${e}/system/user/list`)}function n(){return t.get(`${e}/system/role/list`)}export{r as a,n as b,i as g};
