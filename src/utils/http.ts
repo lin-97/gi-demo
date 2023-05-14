@@ -78,7 +78,7 @@ http.interceptors.response.use(
   }
 )
 
-const request = <T = unknown>(config: AxiosRequestConfig): Promise<T> => {
+const request = <T = unknown>(config: AxiosRequestConfig): Promise<ApiRes<T>> => {
   return new Promise((resolve, reject) => {
     http
       .request<T>(config)
@@ -87,7 +87,7 @@ const request = <T = unknown>(config: AxiosRequestConfig): Promise<T> => {
   })
 }
 
-request.get = <T = unknown>(url: string, params?: object, headers?: AxiosRequestHeaders): Promise<T> => {
+request.get = <T = any>(url: string, params?: object, headers?: AxiosRequestHeaders): Promise<ApiRes<T>> => {
   return request({
     method: 'get',
     url,
@@ -96,7 +96,7 @@ request.get = <T = unknown>(url: string, params?: object, headers?: AxiosRequest
   })
 }
 
-request.post = <T = unknown>(url: string, params?: object, headers?: AxiosRequestHeaders): Promise<T> => {
+request.post = <T = any>(url: string, params?: object, headers?: AxiosRequestHeaders): Promise<ApiRes<T>> => {
   return request({
     method: 'post',
     url,

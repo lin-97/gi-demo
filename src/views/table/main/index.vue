@@ -146,16 +146,15 @@ const collapsed = ref(false)
 const { current, pageSize, total, changeCurrent, changePageSize, setTotal } = usePagination(() => getTableData())
 
 const getTableData = async () => {
-  loading.value = true
-  const { success, data } = await getPersonList({
-    current: current.value,
-    pageSize: pageSize.value
-  })
-  if (success) {
-    tableData.value = data.list
-    setTotal(data.total)
-    loading.value = false
-  } else {
+  try {
+    loading.value = true
+    const res = await getPersonList({
+      current: current.value,
+      pageSize: pageSize.value
+    })
+    tableData.value = res.data.list
+    setTotal(res.data.total)
+  } catch (error) {
     loading.value = false
   }
 }

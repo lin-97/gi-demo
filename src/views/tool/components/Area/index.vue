@@ -32,7 +32,7 @@
 
 <script setup lang="ts" name="Area">
 import { ref } from 'vue'
-import { useArea } from '@/hooks/app'
+import { useArea } from './useArea.ts'
 const { getAreaTreeData } = useArea()
 
 const treeData = ref([])

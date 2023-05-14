@@ -7,7 +7,7 @@
             <icon-search />
           </template>
         </a-input>
-        <div class="tree-box" v-loading="treeLoading">
+        <a-spin class="tree-box" :loading="treeLoading">
           <a-tree
             ref="treeRef"
             block-node
@@ -29,7 +29,7 @@
               <GiSvgIcon name="com-group" :size="12" v-if="node.level == 3"></GiSvgIcon>
             </template>
           </a-tree>
-        </div>
+        </a-spin>
       </div>
     </a-card>
 

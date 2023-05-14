@@ -40,9 +40,6 @@
 
 <script setup lang="ts">
 import { ref, reactive, computed } from 'vue'
-import { useArea } from '@/hooks/app'
-
-const { getAreaTreeData } = useArea()
 
 const userId = ref('')
 const title = computed(() => (!!userId.value ? '编辑用户' : '新增用户'))
@@ -55,7 +52,6 @@ const form = reactive({
 })
 
 const treeData = ref([])
-treeData.value = getAreaTreeData()
 
 const add = () => {
   userId.value = ''

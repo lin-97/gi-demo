@@ -5,7 +5,7 @@
 function getFileName(url: string) {
   const num = url.lastIndexOf('/') + 1
   let fileName = url.substring(num)
-  //把参数和文件名分割开
+  // 把参数和文件名分割开
   fileName = decodeURI(fileName.split('?')[0])
   return fileName
 }

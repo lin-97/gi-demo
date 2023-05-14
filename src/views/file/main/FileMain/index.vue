@@ -82,7 +82,7 @@
     </a-row>
 
     <!-- 文件列表-宫格模式 -->
-    <section class="file-wrap" v-loading="loading">
+    <a-spin class="file-wrap" :loading="loading">
       <FileGrid
         v-show="fileList.length && fileStore.viewMode == 'grid'"
         :data="fileList"
@@ -103,7 +103,7 @@
       ></FileList>
 
       <a-empty v-show="!fileList.length"></a-empty>
-    </section>
+    </a-spin>
   </div>
 </template>
 

@@ -71,7 +71,7 @@
 import { ref, reactive, computed } from 'vue'
 import { useElementBounding } from '@vueuse/core'
 import { api as viewerApi } from 'v-viewer'
-import 'viewerjs/dist/viewer.css'
+// import 'viewerjs/dist/viewer.css'
 
 interface Props {
   list?: { src: string }[]

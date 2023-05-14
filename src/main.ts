@@ -24,9 +24,6 @@ import 'virtual:svg-icons-register'
 // 自定义指令
 import directives from './directives'
 
-// 解决 json-editor-vue3 报错
-import 'jsoneditor'
-
 const app = createApp(App)
 
 app.use(router)

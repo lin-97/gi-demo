@@ -5,7 +5,7 @@ import type { LoginRes } from './type'
 /** @desc 登录 */
 export type LoginParams = { username: string; password: string }
 export function login(data: LoginParams) {
-  return http.post<ApiRes<LoginRes>>(`${prefix}/user/login`, data)
+  return http.post<LoginRes>(`${prefix}/user/login`, data)
 }
 
 /** @desc 退出登录 */

@@ -4,7 +4,7 @@
       <CateTree placeholder="请输入搜索关键词" @node-click="pagination.onChange(1)"></CateTree>
     </a-card>
 
-    <a-card title="数据列表" :bordered="false" :header-style="{display:'none'}" class="gi_card pane-right">
+    <a-card title="数据列表" :bordered="false" :header-style="{ display: 'none' }" class="gi_card pane-right">
       <div class="content">
         <a-row justify="space-between" style="margin-bottom: 12px">
           <a-space>
@@ -134,7 +134,6 @@ const getTableData = async () => {
     tableData.value = res.data.list
     setTotal(res.data.total)
   } catch (error) {
-    return error
   } finally {
     loading.value = false
   }

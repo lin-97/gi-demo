@@ -5,7 +5,7 @@ import type { PersonItem } from './type'
 
 /** @desc 获取人物列表 */
 export function getPersonList(data: { name?: string; status?: string; current: number; pageSize: number }) {
-  return http.get<ApiRes<ApiListData<PersonItem[]>>>(`${prefix}/person/list`, data)
+  return http.get<ApiListData<PersonItem[]>>(`${prefix}/person/list`, data)
 }
 
 /** @desc 获取人物列表, 如果想要以表单数据格式发请求, 可以用以下方式定义接口 */

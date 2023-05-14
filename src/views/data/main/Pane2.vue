@@ -116,16 +116,16 @@ const tableData = ref<PersonItem[]>([])
 const loading = ref(false)
 
 const getTableData = async () => {
-  loading.value = true
-  const res = await getPersonList({
-    current: pagination.current,
-    pageSize: pagination.pageSize
-  })
-  if (res.success) {
+  try {
+    loading.value = true
+    const res = await getPersonList({
+      current: pagination.current,
+      pageSize: pagination.pageSize
+    })
     tableData.value = res.data.list
     setTotal(res.data.total)
-    loading.value = false
-  } else {
+  } catch (error) {
+  } finally {
     loading.value = false
   }
 }

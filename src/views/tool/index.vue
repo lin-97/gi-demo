@@ -21,49 +21,35 @@ import { ref } from 'vue'
 import Button from './components/Button.vue'
 import Tag from './components/Tag.vue'
 import IconSelector from './components/IconSelector.vue'
-import Option from './components/Option.vue'
 import Dot from './components/Dot.vue'
 import FlexibleBox from './components/FlexibleBox.vue'
-import Area from './components/Area.vue'
-import Json from './components/Json.vue'
+import Area from './components/Area/index.vue'
 import Editor from './components/Editor.vue'
-import Loading from './components/Loading.vue'
-import ImagePreview from './components/ImagePreview.vue'
-import Lottie from './components/Lottie/indiex.vue'
 import RowTreeTable from './components/RowTreeTable/index.vue'
 import Map from './components/Map.vue'
-import Logo from './components/Logo.vue'
 import JSDialog from './components/JSDialog/index.vue'
 import ImageView from './components/ImageView.vue'
 import FnComponent from './components/FnComponent.vue'
 import Mitt from './components/Mitt/index.vue'
-import CateTree from './ZTree.vue'
 import ApiTest from './components/ApiTest.vue'
 
 const selectedKey = ref(0)
 
 const menuList = [
   { name: '接口测试', value: ApiTest },
-  { name: '单选框/复选框', value: Option },
   { name: '按钮', value: Button },
   { name: 'GiTag', value: Tag },
   { name: 'GiIconSelector', value: IconSelector },
   { name: 'GiDot', value: Dot },
   { name: 'GiFlexibleBox', value: FlexibleBox },
   { name: '横向树表格', value: RowTreeTable },
-  { name: '自定义加载指令', value: Loading },
   { name: '省市区', value: Area },
-  { name: 'JSON查看', value: Json },
   { name: '富文本', value: Editor },
   { name: '地图', value: Map },
   { name: 'Mitt中央通信', value: Mitt },
-  { name: '美化图片预览', value: ImagePreview },
-  { name: 'Lottie动画', value: Lottie },
-  { name: '渐变色Logo', value: Logo },
   { name: '原生模态框', value: JSDialog },
   { name: '图片放大镜', value: ImageView },
-  { name: '函数式组件', value: FnComponent },
-  { name: 'ZTree分类树', value: CateTree }
+  { name: '函数式组件', value: FnComponent }
 ]
 </script>
 
