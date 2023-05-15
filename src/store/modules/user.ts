@@ -1,7 +1,7 @@
 import { defineStore } from 'pinia'
 import { ref, computed } from 'vue'
 import { resetRouter } from '@/router'
-import { login as loginApi, logout as logoutApi } from '@/apis'
+import { login as loginApi, logout as logoutApi, getUserInfo as getUserInfoApi } from '@/apis'
 import type { UserInfo } from '@/apis'
 import { setToken, clearToken, getToken } from '@/utils/auth'
 
@@ -32,9 +32,26 @@ const storeSetup = () => {
   }
 
   // 获取用户信息
-  const getUserInfo = async () => {}
+  const getUserInfo = async () => {
+    const res = await getUserInfoApi()
+    userInfo.value = res.data
+  }
 
-  return { userInfo, userName, avatar, token, roles, login, logout, getUserInfo }
+  // 切换角色
+  const toggleRole = async (role: string) => {
+    const newToken = 'TOKEN-' + role
+    token.value = newToken
+    setToken(newToken)
+    await getUserInfo()
+    // permissionStore.setRoutes(roles.value)
+    resetRouter()
+    // permissionStore.dynamicRoutes.forEach((item: RouteRecordRaw) => {
+    //   router.addRoute(item)
+    // })
+    // _resetTagsView()
+  }
+
+  return { userInfo, userName, avatar, token, roles, login, logout, getUserInfo, toggleRole }
 }
 
 export const useUserStore = defineStore('user', storeSetup, { persist: true })
