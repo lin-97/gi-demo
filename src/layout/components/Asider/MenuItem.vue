@@ -17,13 +17,13 @@
 </template>
 
 <script setup lang="ts" name="MenuItem">
-export interface Props {
-  data: MenuItem
+import type { RouteRecordRaw } from 'vue-router'
+
+interface Props {
+  data: RouteRecordRaw
 }
 
-withDefaults(defineProps<Props>(), {
-  data: () => ({ id: '', name: '' })
-})
+withDefaults(defineProps<Props>(), {})
 
 const emit = defineEmits(['click'])
 

@@ -1,13 +1,13 @@
 <template>
   <a-layout-sider collapsible breakpoint="xl" :width="232" class="asider">
     <a-menu
-      :selected-keys="[activeKey]"
+      :selected-keys="[activeMenu]"
       :default-open-keys="['Workplace']"
       :auto-open-selected="true"
       :style="{ width: '100%', height: '100%' }"
     >
       <LoopMenuItem
-        v-for="item in menuStore.menuTree"
+        v-for="item in permissionStore.routes"
         :key="item.name"
         :data="item"
         @click="handleClickItem"
@@ -17,44 +17,23 @@
 </template>
 
 <script setup lang="ts" name="Asider">
-import { ref, watch } from 'vue'
+import { computed } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import LoopMenuItem from './MenuItem.vue'
-import { useMenuStore } from '@/store'
+import { usePermissionStore } from '@/store'
 
 const route = useRoute()
 const router = useRouter()
 
-const menuStore = useMenuStore()
+const permissionStore = usePermissionStore()
 
-const getMenuKeys = (params: MenuItem[]) => {
-  const data: string[] = []
-  function forTree(arr: MenuItem[]) {
-    arr.forEach((item: MenuItem) => {
-      if (item.path) {
-        data.push(item.path)
-      }
-      if (item.children?.length) {
-        forTree(item.children)
-      }
-    })
+const activeMenu = computed(() => {
+  const { meta, path } = route
+  if (meta?.activeMenu) {
+    return meta.activeMenu
   }
-  forTree(params)
-  return data
-}
-
-const activeKey = ref('Workplace')
-const menuKeyList = getMenuKeys(menuStore.menuTree)
-
-watch(
-  () => route.path,
-  () => {
-    if (menuKeyList.includes(route.path)) {
-      activeKey.value = route.path
-    }
-  },
-  { immediate: true }
-)
+  return path
+})
 
 const handleClickItem = (item: MenuItem) => {
   if (!item.path) return
@@ -62,9 +41,6 @@ const handleClickItem = (item: MenuItem) => {
     router.push({ path: item.path, query: { fileType: 0 } })
   } else {
     router.push({ path: item.path })
-  }
-  if (menuKeyList.includes(item.path)) {
-    activeKey.value = item.path
   }
 }
 </script>

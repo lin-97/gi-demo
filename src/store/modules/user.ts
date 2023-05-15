@@ -38,7 +38,7 @@ const storeSetup = () => {
   }
 
   // 切换角色
-  const toggleRole = async (role: string) => {
+  const changeRole = async (role: string) => {
     const newToken = 'TOKEN-' + role
     token.value = newToken
     setToken(newToken)
@@ -51,7 +51,7 @@ const storeSetup = () => {
     // _resetTagsView()
   }
 
-  return { userInfo, userName, avatar, token, roles, login, logout, getUserInfo, toggleRole }
+  return { userInfo, userName, avatar, token, roles, login, logout, getUserInfo, changeRole }
 }
 
 export const useUserStore = defineStore('user', storeSetup, { persist: true })
