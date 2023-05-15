@@ -1,8 +1,9 @@
 import { defineStore } from 'pinia'
 import { ref, computed } from 'vue'
-import { login as userLogin, logout as userLogout } from '@/apis'
-import type { LoginParams, UserInfo } from '@/apis'
-import { setToken, clearToken } from '@/utils/auth'
+import { resetRouter } from '@/router'
+import { login as loginApi, logout as logoutApi } from '@/apis'
+import type { UserInfo } from '@/apis'
+import { setToken, clearToken, getToken } from '@/utils/auth'
 
 const storeSetup = () => {
   const userInfo = ref<UserInfo>({
@@ -11,18 +12,29 @@ const storeSetup = () => {
   })
   const userName = computed(() => userInfo.value.name)
   const avatar = computed(() => userInfo.value.avatar)
+
+  const token = ref<string>(getToken() || '')
+  const roles = ref<string[]>([]) // 当前用户角色
+
   // 登录
-  const login = async (params: LoginParams) => {
-    const res = await userLogin(params)
+  const login = async (params: any) => {
+    const res = await loginApi(params)
     setToken(res.data.token)
-    userInfo.value = res.data.userInfo
+    token.value = res.data.token
   }
+
   // 退出
   const logout = async () => {
-    await userLogout()
     clearToken()
+    token.value = ''
+    roles.value = []
+    resetRouter()
   }
-  return { userInfo, userName, avatar, login, logout }
+
+  // 获取用户信息
+  const getUserInfo = async () => {}
+
+  return { userInfo, userName, avatar, token, roles, login, logout, getUserInfo }
 }
 
 export const useUserStore = defineStore('user', storeSetup, { persist: true })

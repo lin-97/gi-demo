@@ -5,5 +5,4 @@ export interface UserInfo {
 
 export interface LoginRes {
   token: string
-  userInfo: UserInfo
 }

@@ -1,27 +1,20 @@
-import type { DirectiveBinding } from 'vue'
-import { useUserStore } from '@/store'
+import type { DirectiveBinding, Directive } from 'vue'
+import { usePermissionStore } from '@/store'
 
 function checkPermission(el: HTMLElement, binding: DirectiveBinding) {
+  const permissionStore = usePermissionStore()
   const { value } = binding
-  // const userStore = useUserStore()
-  // const { role } = userStore
-  const role = 'admin'
-
-  if (Array.isArray(value)) {
-    if (value.length > 0) {
-      const permissionValues = value
-
-      const hasPermission = permissionValues.includes(role)
-      if (!hasPermission && el.parentNode) {
-        el.parentNode.removeChild(el)
-      }
+  if (value && Array.isArray(value) && value.length) {
+    const hasPermission = permissionStore.permissionList.some((item) => value.includes(item))
+    if (!hasPermission && el.parentNode) {
+      el.parentNode.removeChild(el)
     }
   } else {
-    throw new Error(`need roles! Like v-permission="['admin','user']"`)
+    throw new Error(`need permission! Like v-permission="['home:btn:edit','home:btn:delete']"`)
   }
 }
 
-export default {
+const directive: Directive = {
   mounted(el: HTMLElement, binding: DirectiveBinding) {
     checkPermission(el, binding)
   },
@@ -29,3 +22,5 @@ export default {
     checkPermission(el, binding)
   }
 }
+
+export default directive

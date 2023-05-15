@@ -1,38 +1,32 @@
 import { createRouter, createWebHashHistory } from 'vue-router'
-import type { RouteRecordNormalized, RouteRecordRaw } from 'vue-router'
-import { getToken } from '@/utils/auth'
-import { Layout, constantRoutes } from './base'
+import ConstantRoutes from './constant-routes'
+import AsyncRoutes from './async-routes'
 
-// 路由模块化自动导入
-const modules: any = import.meta.globEager('./modules/*.ts')
-export const routeModuleList: RouteRecordRaw[] = []
-Object.keys(modules).forEach((key) => {
-  const mod = modules[key].default || {}
-  if (!mod) return
-  const moduleList = Array.isArray(mod) ? [...mod] : [mod]
-  routeModuleList.push(...moduleList)
-})
+/** 常驻路由 */
+export const constantRoutes = ConstantRoutes
 
-const routes: RouteRecordRaw[] = [...constantRoutes, ...routeModuleList]
+/** 动态路由 */
+export const asyncRoutes = AsyncRoutes
 
 const router = createRouter({
   history: createWebHashHistory(import.meta.env.BASE_URL),
-  routes,
-  strict: true,
-  scrollBehavior: () => ({ left: 0, top: 0 })
+  routes: constantRoutes
 })
 
-router.beforeEach((to, from, next) => {
-  if (to.path === '/login') {
-    next()
-  } else {
-    const token = getToken()
-    if (!token) {
-      next('/login')
-    } else {
-      next()
-    }
+/** 重置路由 */
+export function resetRouter() {
+  // 注意：所有动态路由路由必须带有 Name 属性，否则可能会不能完全重置干净
+  try {
+    router.getRoutes().forEach((route) => {
+      const { name, meta } = route
+      if (name && meta.roles?.length) {
+        router.hasRoute(name) && router.removeRoute(name)
+      }
+    })
+  } catch (error) {
+    // 强制刷新浏览器也行，只是交互体验不是很好
+    window.location.reload()
   }
-})
+}
 
 export default router

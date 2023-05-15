@@ -15,20 +15,12 @@ export default [
       }
       if (username === 'admin' && password === '123456') {
         return successResponseWrap({
-          token: 'TOKEN123456789',
-          userInfo: {
-            name: 'Lin',
-            avatar: 'https://s1.ax1x.com/2022/07/05/jtMjGq.jpg'
-          }
+          token: 'TOKEN-admin'
         })
       }
       if (username === 'user' && password === '123456') {
         return successResponseWrap({
-          token: 'TOKEN123456789',
-          userInfo: {
-            name: '木糖醇',
-            avatar: 'https://portrait.gitee.com/uploads/avatars/user/1671/5013229_lin0716_1587117839.png!avatar60'
-          }
+          token: 'TOKEN-user'
         })
       }
       return failResponseWrap(null, '账号或者密码错误', 50000)
@@ -40,6 +32,21 @@ export default [
     timeout: 300,
     response: () => {
       return successResponseWrap(null)
+    }
+  },
+  {
+    url: '/mock/user/getUserInfo',
+    method: 'get',
+    timeout: 300,
+    response: () => {
+      const token = localStorage.getItem('token')
+      if (token) {
+        return successResponseWrap({
+          name: token === 'TOKEN-admin' ? '管理员' : '木糖醇',
+          avatar: 'https://portrait.gitee.com/uploads/avatars/user/1671/5013229_lin0716_1587117839.png!avatar60'
+        })
+      } else {
+      }
     }
   }
 ]
