@@ -1,4 +1,5 @@
 import { successResponseWrap, failResponseWrap } from '../mock'
+import routesData from './route-data'
 
 export default [
   {
@@ -47,6 +48,18 @@ export default [
           roles: token === 'TOKEN-admin' ? ['admin'] : ['user'],
           permissions: []
         })
+      } else {
+      }
+    }
+  },
+  {
+    url: '/mock/user/getUserRoutes',
+    method: 'get',
+    timeout: 300,
+    response: () => {
+      const token = localStorage.getItem('token')
+      if (token) {
+        return successResponseWrap(routesData)
       } else {
       }
     }

@@ -16,3 +16,8 @@ export function logout() {
 export const getUserInfo = () => {
   return http.get<User.UserInfo>(`${prefix}/user/getUserInfo`)
 }
+
+/** @desc 获取用户路由信息 */
+export const getUserRoutes = () => {
+  return http.get(`${prefix}/user/getUserRoutes`)
+}
