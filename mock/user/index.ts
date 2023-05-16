@@ -43,7 +43,9 @@ export default [
       if (token) {
         return successResponseWrap({
           name: token === 'TOKEN-admin' ? '管理员' : '木糖醇',
-          avatar: 'https://portrait.gitee.com/uploads/avatars/user/1671/5013229_lin0716_1587117839.png!avatar60'
+          avatar: 'https://portrait.gitee.com/uploads/avatars/user/1671/5013229_lin0716_1587117839.png!avatar60',
+          roles: token === 'TOKEN-admin' ? ['admin'] : ['user'],
+          permissions: []
         })
       } else {
       }
