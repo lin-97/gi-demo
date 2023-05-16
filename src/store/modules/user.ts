@@ -15,6 +15,7 @@ const storeSetup = () => {
 
   const token = ref<string>(getToken() || '')
   const roles = ref<string[]>([]) // 当前用户角色
+  const permissions = ref<string[]>([]) // 权限标识符集合
 
   // 登录
   const login = async (params: any) => {
@@ -51,7 +52,7 @@ const storeSetup = () => {
     // _resetTagsView()
   }
 
-  return { userInfo, userName, avatar, token, roles, login, logout, getUserInfo, changeRole }
+  return { userInfo, userName, avatar, token, roles, permissions, login, logout, getUserInfo, changeRole }
 }
 
 export const useUserStore = defineStore('user', storeSetup, { persist: true })
