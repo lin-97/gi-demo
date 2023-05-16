@@ -17,6 +17,12 @@ const storeSetup = () => {
   const roles = ref<string[]>([]) // 当前用户角色
   const permissions = ref<string[]>([]) // 当前角色权限标识集合
 
+  // 重置token
+  const resetToken = () => {
+    token.value = ''
+    clearToken()
+  }
+
   // 登录
   const login = async (params: any) => {
     const res = await loginApi(params)
@@ -34,7 +40,7 @@ const storeSetup = () => {
   }
 
   // 获取用户信息
-  const getUserInfo = async () => {
+  const getInfo = async () => {
     const res = await getUserInfoApi()
     userInfo.name = res.data.name
     userInfo.avatar = res.data.avatar
@@ -46,7 +52,7 @@ const storeSetup = () => {
     }
   }
 
-  return { userInfo, userName, avatar, token, roles, permissions, login, logout, getUserInfo }
+  return { userInfo, userName, avatar, token, roles, permissions, login, logout, getInfo, resetToken }
 }
 
 export const useUserStore = defineStore('user', storeSetup, { persist: true })

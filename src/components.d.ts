@@ -30,6 +30,7 @@ declare module '@vue/runtime-core' {
     LoadingIcon2: typeof import('./components/GiLodingIcon/LoadingIcon2.vue')['default']
     LoadingIcon3: typeof import('./components/GiLodingIcon/LoadingIcon3.vue')['default']
     Message: typeof import('./components/app/Message/Message.vue')['default']
+    ParentView: typeof import('./components/ParentView/index.vue')['default']
     RightMenu: typeof import('./components/app/CateTree/RightMenu.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']

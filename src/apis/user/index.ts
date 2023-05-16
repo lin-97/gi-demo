@@ -18,6 +18,6 @@ export const getUserInfo = () => {
 }
 
 /** @desc 获取用户路由信息 */
-export const getUserRoutes = () => {
+export const getUserRouters = () => {
   return http.get(`${prefix}/user/getUserRoutes`)
 }

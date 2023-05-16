@@ -1,14 +1,18 @@
 import router from '@/router'
 import { useUserStore } from '@/store'
-import { usePermissionStoreHook } from '@/store/modules/permission'
+import { usePermissionStore } from '@/store'
 import { Message } from '@arco-design/web-vue'
-import { whiteList } from '@/config/white-list'
 import { getToken } from '@/utils/auth'
-import asyncRouteSettings from '@/config/async-route'
+import { isHttp } from '@/utils/validate'
 
-router.beforeEach(async (to, _from, next) => {
+/** @desc 免登录白名单 */
+const whiteList = ['/login', '/register']
+
+router.beforeEach(async (to, from, next) => {
   const userStore = useUserStore()
-  const permissionStore = usePermissionStoreHook()
+  const permissionStore = usePermissionStore()
+
+  Message.info('哈哈哈')
   // 判断该用户是否登录
   if (getToken()) {
     if (to.path === '/login') {
@@ -18,21 +22,14 @@ router.beforeEach(async (to, _from, next) => {
       // 检查用户是否已获得其权限角色
       if (userStore.roles.length === 0) {
         try {
-          if (asyncRouteSettings.open) {
-            // 注意：角色必须是一个数组！ 例如: ['admin'] 或 ['developer', 'editor']
-            await userStore.getInfo()
-            const roles = userStore.roles
-            // 根据角色生成可访问的 Routes（可访问路由 = 常驻路由 + 有访问权限的动态路由）
-            permissionStore.setRoutes(roles)
-          } else {
-            // 没有开启动态路由功能，则启用默认角色
-            userStore.setRoles(asyncRouteSettings.defaultRoles)
-            permissionStore.setRoutes(asyncRouteSettings.defaultRoles)
-          }
-          // 将'有访问权限的动态路由' 添加到 Router 中
-          permissionStore.dynamicRoutes.forEach((route) => {
-            router.addRoute(route)
+          await userStore.getInfo()
+          const accessRoutes: any = await permissionStore.generateRoutes()
+          accessRoutes.forEach((route: any) => {
+            if (!isHttp(route.path)) {
+              router.addRoute(route) // 动态添加可访问路由表
+            }
           })
+          console.log('路由表', router.getRoutes())
           // 确保添加路由已完成
           // 设置 replace: true, 因此导航将不会留下历史记录
           next({ ...to, replace: true })

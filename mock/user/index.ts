@@ -40,7 +40,7 @@ export default [
     method: 'get',
     timeout: 300,
     response: () => {
-      const token = localStorage.getItem('token')
+      const token = 'TOKEN-admin'
       if (token) {
         return successResponseWrap({
           name: token === 'TOKEN-admin' ? '管理员' : '木糖醇',
@@ -57,7 +57,7 @@ export default [
     method: 'get',
     timeout: 300,
     response: () => {
-      const token = localStorage.getItem('token')
+      const token = 'TOKEN-admin'
       if (token) {
         return successResponseWrap(routesData)
       } else {

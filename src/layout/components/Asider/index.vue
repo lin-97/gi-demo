@@ -6,27 +6,32 @@
       :auto-open-selected="true"
       :style="{ width: '100%', height: '100%' }"
     >
-      <LoopMenuItem
-        v-for="item in permissionStore.routes"
-        :key="item.name"
-        :data="item"
-        @click="handleClickItem"
-      ></LoopMenuItem>
     </a-menu>
+
+    <SidebarItem
+      v-for="(route, index) in sidebarRouters"
+      :key="route.path + index"
+      :item="route"
+      :base-path="route.path"
+    ></SidebarItem>
   </a-layout-sider>
 </template>
 
 <script setup lang="ts" name="Asider">
 import { computed } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
-import LoopMenuItem from './MenuItem.vue'
 import { usePermissionStore } from '@/store'
+import SidebarItem from './SidebarItem.vue'
 
 const route = useRoute()
 const router = useRouter()
 
 const permissionStore = usePermissionStore()
+const sidebarRouters = computed(() => permissionStore.sidebarRouters)
 
+console.log('sidebarRouters', sidebarRouters.value)
+
+// 当前页面激活菜单路径，先从路由里面找
 const activeMenu = computed(() => {
   const { meta, path } = route
   if (meta?.activeMenu) {
@@ -34,15 +39,6 @@ const activeMenu = computed(() => {
   }
   return path
 })
-
-const handleClickItem = (item: MenuItem) => {
-  if (!item.path) return
-  if (item.path === '/file') {
-    router.push({ path: item.path, query: { fileType: 0 } })
-  } else {
-    router.push({ path: item.path })
-  }
-}
 </script>
 
 <style lang="scss" scoped>

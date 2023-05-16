@@ -2,7 +2,7 @@ import { defineStore } from 'pinia'
 import { ref } from 'vue'
 import router from '@/router'
 
-const defaultTabItem: NavTabItem = { name: '首页', path: '/dashboard/workplace', componentName: 'Home' }
+const defaultTabItem: NavTabItem = { name: '首页', path: '/dashboard', componentName: 'Home' }
 
 const storeSetup = () => {
   const tagList = ref<NavTabItem[]>([defaultTabItem]) // 保存页签tab的数组

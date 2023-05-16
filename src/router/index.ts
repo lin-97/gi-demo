@@ -5,7 +5,7 @@ import AsyncRoutes from './async-routes'
 /** 常驻路由 */
 export const constantRoutes = ConstantRoutes
 
-/** 动态路由 */
+/** 动态路由/异步路由 */
 export const asyncRoutes = AsyncRoutes
 
 const router = createRouter({
