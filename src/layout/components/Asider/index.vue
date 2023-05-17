@@ -1,19 +1,13 @@
 <template>
   <a-layout-sider collapsible breakpoint="xl" :width="232" class="asider">
-    <a-menu
-      :selected-keys="[activeMenu]"
-      :default-open-keys="['Workplace']"
-      :auto-open-selected="true"
-      :style="{ width: '100%', height: '100%' }"
-    >
+    <a-menu :selected-keys="[activeMenu]" :auto-open-selected="true" :style="{ width: '100%', height: '100%' }">
+      <SidebarItem
+        v-for="(route, index) in sidebarRouters"
+        :key="route.path + index"
+        :item="route"
+        :base-path="route.path"
+      ></SidebarItem>
     </a-menu>
-
-    <SidebarItem
-      v-for="(route, index) in sidebarRouters"
-      :key="route.path + index"
-      :item="route"
-      :base-path="route.path"
-    ></SidebarItem>
   </a-layout-sider>
 </template>
 

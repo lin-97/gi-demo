@@ -1,9 +1,7 @@
-import { Layout } from '../base'
-
 export default {
   path: '/data',
   name: 'Data',
-  component: Layout,
+  component: import('@/layout/index.vue'),
   redirect: '/data/main',
   meta: { title: '异常页', keepAlive: false },
   children: [

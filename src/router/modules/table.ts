@@ -1,9 +1,7 @@
-import { Layout } from '../base'
-
 export default {
   path: '/table',
   name: 'Table',
-  component: Layout,
+  component: import('@/layout/index.vue'),
   redirect: '/table/main',
   meta: {
     title: '表格管理',

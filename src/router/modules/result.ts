@@ -1,9 +1,7 @@
-import { Layout } from '../base'
-
 export default {
   path: '/result',
   name: 'Result',
-  component: Layout,
+  component: import('@/layout/index.vue'),
   redirect: '/result/success',
   meta: { title: '结果页', keepAlive: false },
   children: [

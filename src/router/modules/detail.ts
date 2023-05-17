@@ -1,9 +1,7 @@
-import { Layout } from '../base'
-
 export default {
   path: '/detail',
   name: 'Detail',
-  component: Layout,
+  component: import('@/layout/index.vue'),
   redirect: '/detail/base',
   meta: { title: '详情页', keepAlive: false },
   children: [

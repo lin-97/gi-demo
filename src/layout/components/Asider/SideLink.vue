@@ -9,12 +9,18 @@ import { computed } from 'vue'
 import { isExternal } from '@/utils/validate'
 
 interface Props {
-  to: string
+  to: string | AnyObject
 }
 
 const props = withDefaults(defineProps<Props>(), {})
 
-const isExt = computed(() => isExternal(props.to))
+const isExt = computed(() => {
+  if (typeof props.to === 'string') {
+    return isExternal(props.to)
+  } else {
+    return false
+  }
+})
 
 const type = computed(() => {
   if (isExt.value) {

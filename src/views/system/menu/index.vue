@@ -72,7 +72,6 @@
 <script setup lang="ts" name="MenuManage">
 import { ref } from 'vue'
 import EditMenuModal from './EditMenuModal.vue'
-import { routeModuleList } from '@/router'
 
 const EditMenuModalRef = ref<InstanceType<typeof EditMenuModal>>()
 const loading = ref(false)
@@ -81,7 +80,7 @@ const treeData = ref<any[]>([])
 const getTreeData = () => {
   loading.value = true
   setTimeout(() => {
-    treeData.value = routeModuleList
+    treeData.value = []
     loading.value = false
   }, 300)
 }

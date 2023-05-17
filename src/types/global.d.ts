@@ -30,3 +30,26 @@ interface NavTabItem {
   path: string
   componentName: string
 }
+
+interface AppRouteMeta {
+  title?: string
+  icon?: string
+  svgIcon?: string
+  roles?: string[]
+  affix?: boolean
+  activeMenu?: string
+  keepAlive?: boolean
+}
+
+interface AppRouteItem {
+  path: string
+  name?: string
+  component: any
+  redirect?: string
+  meta?: AppRouteMeta
+  children?: AppRouteItem[]
+  hidden?: boolean
+  alwaysShow?: boolean
+  noShowingChildren?: boolean
+  query?: string
+}

@@ -1,9 +1,7 @@
-import { Layout } from '../base'
-
 export default {
   path: '/form',
   name: 'Form',
-  component: Layout,
+  component: import('@/layout/index.vue'),
   redirect: '/form/base',
   meta: { title: '表单管理', keepAlive: false },
   children: [

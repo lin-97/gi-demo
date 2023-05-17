@@ -1,3 +1,5 @@
+import type { RouteMeta } from 'vue-router'
+
 export interface UserInfo {
   name: string
   avatar: string

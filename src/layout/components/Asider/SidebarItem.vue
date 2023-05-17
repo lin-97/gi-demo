@@ -3,24 +3,24 @@
     <template
       v-if="
         hasOneShowingChild(item.children, item) &&
-        (!onlyOneChild.children || onlyOneChild.noShowingChildren) &&
+        (!onlyOneChild?.children || onlyOneChild?.noShowingChildren) &&
         !item.alwaysShow
       "
     >
-      <SideLink v-if="onlyOneChild.meta" :to="resolvePath(onlyOneChild.path, onlyOneChild.query)">
-        <a-menu-item :index="resolvePath(onlyOneChild.path)">
+      <SideLink v-if="onlyOneChild?.meta" :to="resolvePath(onlyOneChild?.path, onlyOneChild?.query || '')">
+        <a-menu-item v-if="onlyOneChild.meta" :key="resolvePath(onlyOneChild.path)">
           <template #icon>
-            <GiSvgIcon :name="onlyOneChild.meta.icon || (item.meta && item.meta.icon)" />
+            <component :is="onlyOneChild.meta.icon || (item?.meta?.icon as any)"></component>
           </template>
-          <span class="menu-title" :title="hasTitle(onlyOneChild.meta.title)">{{ onlyOneChild.meta.title }}</span>
+          <span>{{ onlyOneChild.meta.title }}</span>
         </a-menu-item>
       </SideLink>
     </template>
 
-    <a-sub-menu v-else ref="subMenu" :index="resolvePath(item.path)" popper-append-to-body>
-      <template v-if="item.meta" #title>
-        <GiSvgIcon :icon-class="item.meta && item.meta.icon" />
-        <span class="menu-title" :title="hasTitle(item.meta.title)">{{ item.meta.title }}</span>
+    <a-sub-menu v-else :key="resolvePath(item.path)">
+      <template #title v-if="item.meta">
+        <component :is="(item?.meta?.icon as any)"></component>
+        <span>{{ item.meta.title }}</span>
       </template>
 
       <SidebarItem
@@ -29,41 +29,29 @@
         :is-nest="true"
         :item="child"
         :base-path="resolvePath(child.path)"
-        class="nest-menu"
       ></SidebarItem>
     </a-sub-menu>
   </div>
 </template>
 
-<script lang="ts" setup>
+<script lang="ts" setup name="SidebarItem">
 import { ref } from 'vue'
 import { isExternal } from '@/utils/validate'
 import SideLink from './SideLink.vue'
 
 interface Props {
-  item: any
+  item: AppRouteItem
   basePath: string
   isNest?: boolean
 }
 
-const props = withDefaults(defineProps<Props>(), {})
+const props = withDefaults(defineProps<Props>(), {
+  basePath: ''
+})
 
-// 返回项目路径
-function getNormalPath(p: string) {
-  console.log('p', p)
-  if (p.length === 0 || !p || p == 'undefined') {
-    return p
-  }
-  let res = p.replace('//', '/')
-  if (res[res.length - 1] === '/') {
-    return res.slice(0, res.length - 1)
-  }
-  return res
-}
+const onlyOneChild = ref<AppRouteItem | null>(null)
 
-const onlyOneChild = ref<any>({})
-
-function hasOneShowingChild(children = [], parent: any) {
+function hasOneShowingChild(children: AppRouteItem[] = [], parent: AppRouteItem) {
   if (!children) {
     children = []
   }
@@ -73,6 +61,7 @@ function hasOneShowingChild(children = [], parent: any) {
     } else {
       // Temp set(will be used if only has one showing child)
       onlyOneChild.value = item
+      // console.log('onlyOneChild', onlyOneChild.value)
       return true
     }
   })
@@ -91,7 +80,22 @@ function hasOneShowingChild(children = [], parent: any) {
   return false
 }
 
-function resolvePath(routePath: string, routeQuery?: any) {
+// 返回项目路径
+function getNormalPath(p: string) {
+  // console.log('p', p)
+  if (p.length === 0 || !p || p == 'undefined') {
+    return p
+  }
+  let res = p.replace('//', '/')
+  if (res[res.length - 1] === '/') {
+    return res.slice(0, res.length - 1)
+  }
+  return res
+}
+
+function resolvePath(routePath: string): string
+function resolvePath(routePath: string, routeQuery: string): string | { path: string; query: AnyObject }
+function resolvePath(routePath: string, routeQuery?: string) {
   if (isExternal(routePath)) {
     return routePath
   }
@@ -99,18 +103,9 @@ function resolvePath(routePath: string, routeQuery?: any) {
     return props.basePath
   }
   if (routeQuery) {
-    let query = JSON.parse(routeQuery)
+    const query = JSON.parse(routeQuery)
     return { path: getNormalPath(props.basePath + '/' + routePath), query: query }
   }
   return getNormalPath(props.basePath + '/' + routePath)
-}
-
-function hasTitle(title: string) {
-  console.log('title', title)
-  if (title?.length) {
-    return title
-  } else {
-    return ''
-  }
 }
 </script>

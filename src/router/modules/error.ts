@@ -1,9 +1,7 @@
-import { Layout } from '../base'
-
 export default {
   path: '/error',
   name: 'Error',
-  component: Layout,
+  component: import('@/layout/index.vue'),
   redirect: '/error/403',
   meta: { title: '异常页', keepAlive: false },
   children: [
