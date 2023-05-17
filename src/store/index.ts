@@ -5,7 +5,6 @@ export * from './modules/app'
 export * from './modules/permission'
 export * from './modules/navtab'
 export * from './modules/user'
-export * from './modules/menu'
 export * from './modules/file'
 
 const pinia = createPinia()
