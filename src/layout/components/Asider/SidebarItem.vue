@@ -20,7 +20,7 @@
     <a-sub-menu v-else :key="resolvePath(item.path)">
       <template #title v-if="item.meta">
         <component :is="(item?.meta?.icon as any)"></component>
-        <span>{{ item.meta.title }}</span>
+        <span>{{ item?.meta?.title }}</span>
       </template>
 
       <SidebarItem
@@ -49,8 +49,11 @@ const props = withDefaults(defineProps<Props>(), {
   basePath: ''
 })
 
+// 如果 hidden: false 那么代表这个路由项显示在左侧菜单栏中
+// 如果 props.item 的子项 chidren 只有一个 hidden: false 的子元素，那么 onlyOneChild 就表示这个子元素
 const onlyOneChild = ref<AppRouteItem | null>(null)
 
+// 判断 children 是否只有一个显示的子项
 function hasOneShowingChild(children: AppRouteItem[] = [], parent: AppRouteItem) {
   if (!children) {
     children = []
@@ -59,19 +62,20 @@ function hasOneShowingChild(children: AppRouteItem[] = [], parent: AppRouteItem)
     if (item.hidden) {
       return false
     } else {
-      // Temp set(will be used if only has one showing child)
+      // 保存 children 最后一个 hidden: false 的元素
+      // 并不一定是最后一个元素，最后一个元素的 hidden 不一定为 false
       onlyOneChild.value = item
       // console.log('onlyOneChild', onlyOneChild.value)
       return true
     }
   })
 
-  // When there is only one child router, the child router is displayed by default
+  // 当只有一个子路由时，默认显示该子路由器
   if (showingChildren.length === 1) {
     return true
   }
 
-  // Show parent if there are no child router to display
+  // 如果没有要显示的子路由，则显示父路由
   if (showingChildren.length === 0) {
     onlyOneChild.value = { ...parent, path: '', noShowingChildren: true }
     return true
@@ -93,19 +97,24 @@ function getNormalPath(p: string) {
   return res
 }
 
-function resolvePath(routePath: string): string
-function resolvePath(routePath: string, routeQuery: string): string | { path: string; query: AnyObject }
-function resolvePath(routePath: string, routeQuery?: string) {
-  if (isExternal(routePath)) {
-    return routePath
+function resolvePath(path: string): string
+function resolvePath(path: string, routeQuery: string): string | { path: string; query: AnyObject }
+
+// 如果只有第一个参数，则函数返回字符串，这个返回的字符串就是 key
+// 如果有第二个参数，则函数返回一个 { path: '', query: {}} 路由参数对象，用于路由跳转
+function resolvePath(path: string, routeQuery?: string) {
+
+  if (isExternal(path)) {
+    return path
   }
   if (isExternal(props.basePath)) {
     return props.basePath
   }
   if (routeQuery) {
     const query = JSON.parse(routeQuery)
-    return { path: getNormalPath(props.basePath + '/' + routePath), query: query }
+    return { path: getNormalPath(`${props.basePath}/${path}`), query: query }
   }
-  return getNormalPath(props.basePath + '/' + routePath)
+  console.log(`${props.basePath}/${path}`)
+  return getNormalPath(`${props.basePath}/${path}`)
 }
 </script>

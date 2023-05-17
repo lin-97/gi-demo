@@ -14,6 +14,7 @@ interface Props {
 
 const props = withDefaults(defineProps<Props>(), {})
 
+// 是否是外链
 const isExt = computed(() => {
   if (typeof props.to === 'string') {
     return isExternal(props.to)
@@ -22,14 +23,11 @@ const isExt = computed(() => {
   }
 })
 
-const type = computed(() => {
-  if (isExt.value) {
-    return 'a'
-  }
-  return 'router-link'
-})
+// 如果是外链，渲染为<a>标签，否则渲染为<router-link>组件
+const type = computed(() => isExt.value ? 'a': 'router-link')
 
-function linkProps() {
+// 绑定属性
+const linkProps = () => {
   if (isExt.value) {
     return {
       href: props.to,

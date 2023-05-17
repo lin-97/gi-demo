@@ -55,4 +55,4 @@ const storeSetup = () => {
   return { userInfo, userName, avatar, token, roles, permissions, login, logout, getInfo, resetToken }
 }
 
-export const useUserStore = defineStore('user', storeSetup, { persist: true })
+export const useUserStore = defineStore('user', storeSetup, { persist: { paths: ['token'], storage: localStorage } })
