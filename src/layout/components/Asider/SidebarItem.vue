@@ -70,7 +70,7 @@ function hasOneShowingChild(children: AppRouteItem[] = [], parent: AppRouteItem)
     }
   })
 
-  // 当只有一个子路由时，默认显示该子路由器
+  // 当只有一个要显示子路由时，默认显示该子路由器
   if (showingChildren.length === 1) {
     return true
   }
@@ -103,7 +103,6 @@ function resolvePath(path: string, routeQuery: string): string | { path: string;
 // 如果只有第一个参数，则函数返回字符串，这个返回的字符串就是 key
 // 如果有第二个参数，则函数返回一个 { path: '', query: {}} 路由参数对象，用于路由跳转
 function resolvePath(path: string, routeQuery?: string) {
-
   if (isExternal(path)) {
     return path
   }

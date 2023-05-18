@@ -38,7 +38,7 @@ export const constantRoutes: AppRouteItem[] = [
         path: '/dashboard',
         component: () => import('@/views/dashboard/workplace/index.vue'),
         name: 'Index',
-        meta: { title: '首页', icon: 'icon-dashboard', affix: true }
+        meta: { title: '工作台', icon: 'icon-dashboard', affix: true }
       }
     ]
   }

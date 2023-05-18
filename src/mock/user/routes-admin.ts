@@ -1,5 +1,91 @@
 export default [
   {
+    name: 'Analyse',
+    path: '/analyse',
+    hideen: false,
+    redirect: '/analyse',
+    component: 'Layout',
+    children: [
+      {
+        path: '',
+        component: 'dashboard/analyse/index',
+        meta: {
+          title: '分析页',
+          icon: 'icon-bar-chart',
+          keepAlive: false
+        }
+      }
+    ]
+  },
+  {
+    name: 'Data',
+    path: '/data',
+    hideen: false,
+    component: 'Layout',
+    redirect: '/data/main',
+    meta: {
+      title: '数据页',
+      icon: 'icon-list',
+      keepAlive: true
+    },
+    children: [
+      {
+        path: '',
+        component: 'data/main/index',
+        hidden: true,
+        meta: {
+          title: '数据页',
+          icon: 'icon-list',
+          keepAlive: true
+        }
+      },
+      {
+        name: 'DataDetail',
+        path: 'detail',
+        component: 'data/detail/index',
+        hidden: true,
+        meta: {
+          title: '详情',
+          keepAlive: false
+        }
+      }
+    ]
+  },
+  {
+    name: 'File',
+    path: '/file',
+    hideen: false,
+    component: 'Layout',
+    redirect: '/file/main',
+    meta: {
+      title: '文件管理',
+      icon: 'icon-folder',
+      keepAlive: true
+    },
+    children: [
+      {
+        path: '',
+        component: 'file/main/index',
+        hidden: true,
+        meta: {
+          title: '文件列表',
+          icon: 'icon-folder',
+          keepAlive: true
+        }
+      },
+      {
+        name: 'FileDetail',
+        path: 'detail',
+        component: 'file/detail/index',
+        hidden: true,
+        meta: {
+          title: '详情',
+          keepAlive: false
+        }
+      }
+    ]
+  },
+  {
     name: 'System',
     path: '/system',
     hidden: false,

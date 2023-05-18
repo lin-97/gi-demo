@@ -30,7 +30,7 @@ export default defineConfig(({ command, mode }) => {
         symbolId: 'icon-[dir]-[name]'
       }),
       viteMockServe({
-        mockPath: 'mock',
+        mockPath: './src/mock/', // 目录位置
         localEnabled: command === 'serve',
         prodEnabled: command !== 'serve' && true,
         // 这样可以控制关闭mock的时候不让mock打包到最终代码内

@@ -1,5 +1,6 @@
+import type { MockMethod } from 'vite-plugin-mock'
 import { successResponseWrap, failResponseWrap } from '../mock'
-import routesData from './route-data'
+import RoutesAdmin from './routes-admin'
 
 export default [
   {
@@ -39,13 +40,14 @@ export default [
     url: '/mock/user/getUserInfo',
     method: 'get',
     timeout: 300,
-    response: () => {
-      const token = 'TOKEN-admin'
+    response: ({ headers }) => {
+      const token = headers.token
       if (token) {
+        const isAdmin = token === 'TOKEN-admin'
         return successResponseWrap({
-          name: token === 'TOKEN-admin' ? '管理员' : '木糖醇',
+          name: isAdmin ? '管理员' : '木糖醇',
           avatar: 'https://portrait.gitee.com/uploads/avatars/user/1671/5013229_lin0716_1587117839.png!avatar60',
-          roles: token === 'TOKEN-admin' ? ['admin'] : ['user'],
+          roles: isAdmin ? ['admin'] : ['user'],
           permissions: []
         })
       } else {
@@ -56,12 +58,12 @@ export default [
     url: '/mock/user/getUserRoutes',
     method: 'get',
     timeout: 300,
-    response: () => {
-      const token = 'TOKEN-admin'
+    response: ({ headers }) => {
+      const token = headers.token
       if (token) {
-        return successResponseWrap(routesData)
+        return successResponseWrap(RoutesAdmin)
       } else {
       }
     }
   }
-]
+] as MockMethod[]
