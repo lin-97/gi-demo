@@ -1,3 +1,5 @@
+import type { RouteRecordRaw } from 'vue-router'
+
 interface AnyObject {
   [key: string]: unknown
 }
@@ -41,7 +43,7 @@ interface AppRouteMeta {
   keepAlive?: boolean
 }
 
-interface AppRouteItem {
+interface AppRouteItem extends RouteRecordRaw {
   path: string
   name?: string
   component: any
