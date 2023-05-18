@@ -3,11 +3,11 @@ import type { RouteRecordRaw } from 'vue-router'
 const Layout = () => import('@/layout/index.vue')
 
 /** 常驻路由 */
-export const constantRoutes: AppRouteItem[] = [
+export const constantRoutes: RouteRecordRaw[] = [
   {
     path: '/redirect',
     component: Layout,
-    hidden: true,
+    meta: { hidden: true },
     children: [
       {
         path: '/redirect/:path(.*)',
@@ -18,17 +18,17 @@ export const constantRoutes: AppRouteItem[] = [
   {
     path: '/login',
     component: () => import('@/views/login/index.vue'),
-    hidden: true
+    meta: { hidden: true }
   },
   {
     path: '/:pathMatch(.*)*',
     component: () => import('@/views/error/404/index.vue'),
-    hidden: true
+    meta: { hidden: true }
   },
   {
     path: '/403',
     component: () => import('@/views/error/403/index.vue'),
-    hidden: true
+    meta: { hidden: true }
   },
   {
     path: '',

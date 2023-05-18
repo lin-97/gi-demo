@@ -47,6 +47,10 @@ declare module 'vue-router' {
      * 是否缓存该路由页面
      * 默认为 false，为 true 时代表需要缓存，此时该路由和该页面都需要设置一致的 Name
      */
-    keepAlive?: boolean
+    keepAlive?: boolean,
+    query?: string
+    noShowingChildren?: boolean
+    roles?: string[]
+    permissions?:string[]
   }
 }

@@ -2,7 +2,6 @@ export default [
   {
     name: 'Analyse',
     path: '/analyse',
-    hideen: false,
     redirect: '/analyse',
     component: 'Layout',
     children: [
@@ -10,6 +9,7 @@ export default [
         path: '',
         component: 'dashboard/analyse/index',
         meta: {
+          hideen: false,
           title: '分析页',
           icon: 'icon-bar-chart',
           keepAlive: false
@@ -20,10 +20,10 @@ export default [
   {
     name: 'Data',
     path: '/data',
-    hideen: false,
     component: 'Layout',
     redirect: '/data/main',
     meta: {
+      hideen: false,
       title: '数据页',
       icon: 'icon-list',
       keepAlive: true
@@ -32,8 +32,8 @@ export default [
       {
         path: '',
         component: 'data/main/index',
-        hidden: true,
         meta: {
+          hidden: true,
           title: '数据页',
           icon: 'icon-list',
           keepAlive: true
@@ -42,9 +42,9 @@ export default [
       {
         name: 'DataDetail',
         path: 'detail',
-        component: 'data/detail/index',
-        hidden: true,
+        component: 'data/detail/index',      
         meta: {
+          hidden: true,
           title: '详情',
           keepAlive: false
         }
@@ -54,10 +54,10 @@ export default [
   {
     name: 'File',
     path: '/file',
-    hideen: false,
     component: 'Layout',
     redirect: '/file/main',
     meta: {
+      hideen: false,
       title: '文件管理',
       icon: 'icon-folder',
       keepAlive: true
@@ -66,19 +66,20 @@ export default [
       {
         path: '',
         component: 'file/main/index',
-        hidden: true,
+        
         meta: {
           title: '文件列表',
           icon: 'icon-folder',
-          keepAlive: true
+          keepAlive: true,
+          hidden: true,
         }
       },
       {
         name: 'FileDetail',
         path: 'detail',
         component: 'file/detail/index',
-        hidden: true,
         meta: {
+          hidden: true,
           title: '详情',
           keepAlive: false
         }
@@ -88,11 +89,11 @@ export default [
   {
     name: 'System',
     path: '/system',
-    hidden: false,
     redirect: 'noRedirect',
     component: 'Layout',
-    alwaysShow: true,
     meta: {
+      hidden: false,
+      alwaysShow: true,
       title: '系统管理',
       icon: 'icon-computer',
       keepAlive: false,
@@ -102,9 +103,9 @@ export default [
       {
         name: 'User',
         path: 'user',
-        hidden: false,
         component: 'system/user/index',
         meta: {
+          hidden: false,
           title: '用户管理',
           icon: 'icon-user',
           keepAlive: false,
@@ -114,9 +115,9 @@ export default [
       {
         name: 'Role',
         path: 'role',
-        hidden: false,
         component: 'system/role/index',
         meta: {
+          hidden: false,
           title: '角色管理',
           icon: 'icon-common',
           keepAlive: false,
@@ -126,9 +127,9 @@ export default [
       {
         name: 'Menu',
         path: 'menu',
-        hidden: false,
         component: 'system/menu/index',
         meta: {
+          hidden: false,
           title: '菜单管理',
           icon: 'icon-menu',
           keepAlive: false,
@@ -138,9 +139,9 @@ export default [
       {
         name: 'Dept',
         path: 'dept',
-        hidden: false,
         component: 'system/dept/index',
         meta: {
+          hidden: false,
           title: '部门管理',
           icon: 'icon-mind-mapping',
           keepAlive: false,
@@ -152,9 +153,9 @@ export default [
   {
     name: 'Https://gitee.com/lin0716/gi-demo',
     path: 'https://gitee.com/lin0716/gi-demo',
-    hidden: false,
     component: 'Layout',
     meta: {
+      hidden: false,
       title: '项目地址',
       icon: 'icon-attachment',
       keepAlive: false,

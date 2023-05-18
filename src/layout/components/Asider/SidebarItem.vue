@@ -1,13 +1,13 @@
 <template>
-  <div v-if="!item.hidden">
+  <div v-if="!item.meta?.hidden">
     <template
       v-if="
         hasOneShowingChild(item.children, item) &&
-        (!onlyOneChild?.children || onlyOneChild?.noShowingChildren) &&
-        !item.alwaysShow
+        (!onlyOneChild?.children || onlyOneChild?.meta?.noShowingChildren) &&
+        !item?.meta?.alwaysShow
       "
     >
-      <SideLink v-if="onlyOneChild?.meta" :to="resolvePath(onlyOneChild?.path, onlyOneChild?.query || '')">
+      <SideLink v-if="onlyOneChild?.meta" :to="resolvePath(onlyOneChild?.path, onlyOneChild?.meta?.query || '')">
         <a-menu-item v-if="onlyOneChild.meta" :key="resolvePath(onlyOneChild.path)">
           <template #icon>
             <component :is="onlyOneChild.meta.icon || (item?.meta?.icon as any)"></component>
@@ -38,9 +38,10 @@
 import { ref } from 'vue'
 import { isExternal } from '@/utils/validate'
 import SideLink from './SideLink.vue'
+import type { RouteRecordRaw } from 'vue-router'
 
 interface Props {
-  item: AppRouteItem
+  item: RouteRecordRaw
   basePath: string
   isNest?: boolean
 }
@@ -51,15 +52,15 @@ const props = withDefaults(defineProps<Props>(), {
 
 // 如果 hidden: false 那么代表这个路由项显示在左侧菜单栏中
 // 如果 props.item 的子项 chidren 只有一个 hidden: false 的子元素，那么 onlyOneChild 就表示这个子元素
-const onlyOneChild = ref<AppRouteItem | null>(null)
+const onlyOneChild = ref<RouteRecordRaw | null>(null)
 
 // 判断 children 是否只有一个显示的子项
-function hasOneShowingChild(children: AppRouteItem[] = [], parent: AppRouteItem) {
+function hasOneShowingChild(children: RouteRecordRaw[] = [], parent: RouteRecordRaw) {
   if (!children) {
     children = []
   }
   const showingChildren = children.filter((item) => {
-    if (item.hidden) {
+    if (item.meta?.hidden) {
       return false
     } else {
       // 保存 children 最后一个 hidden: false 的元素
@@ -77,7 +78,7 @@ function hasOneShowingChild(children: AppRouteItem[] = [], parent: AppRouteItem)
 
   // 如果没有要显示的子路由，则显示父路由
   if (showingChildren.length === 0) {
-    onlyOneChild.value = { ...parent, path: '', noShowingChildren: true }
+    onlyOneChild.value = { ...parent, path: '', meta: {...parent.meta, noShowingChildren: true} }
     return true
   }
 
