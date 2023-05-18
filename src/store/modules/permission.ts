@@ -1,7 +1,6 @@
 import { ref } from 'vue'
-import store from '@/store'
 import { defineStore } from 'pinia'
-import { type RouteRecordRaw } from 'vue-router'
+import type { RouteRecordRaw } from 'vue-router'
 import router, { constantRoutes, asyncRoutes as dynamicRoutes } from '@/router'
 import Layout from '@/layout/index.vue'
 import ParentView from '@/components/ParentView/index.vue'
@@ -27,7 +26,7 @@ function filterAsyncRouter(asyncRouterMap: AppRouteItem[], lastRouter: boolean |
         route.component = loadView(route.component)
       }
     }
-    if (route.children != null && route.children && route.children.length) {
+    if (route.children !== null && route.children && route.children.length) {
       route.children = filterAsyncRouter(route.children, route, type)
     } else {
       delete route['children']
@@ -38,7 +37,7 @@ function filterAsyncRouter(asyncRouterMap: AppRouteItem[], lastRouter: boolean |
 }
 
 function filterChildren(childrenMap: AppRouteItem[], lastRouter: boolean | AppRouteItem = false) {
-  var children: AppRouteItem[] = []
+  let children: AppRouteItem[] = []
   childrenMap.forEach((el, index) => {
     if (el.children && el.children.length) {
       if (el.component === 'ParentView' && !lastRouter) {
@@ -63,8 +62,8 @@ function filterChildren(childrenMap: AppRouteItem[], lastRouter: boolean | AppRo
 
 // 动态路由遍历，验证是否具备权限
 export function filterDynamicRoutes(routes: AppRouteItem[]) {
-  const res: any = []
-  routes.forEach((route: any) => {
+  const res: AppRouteItem[] = []
+  routes.forEach((route) => {
     if (route.permissions) {
       if (has.hasPermOr(route.permissions)) {
         res.push(route)
@@ -96,9 +95,9 @@ const storeSetup = () => {
   const topbarRouters = ref<AppRouteItem[]>([])
   const sidebarRouters = ref<AppRouteItem[]>([])
 
-  const setRoutes = (routes: any) => {
-    addRoutes.value = routes
-    routes.value = constantRoutes.concat(routes)
+  const setRoutes = (routesArray: AppRouteItem[]) => {
+    addRoutes.value = routesArray
+    routes.value = constantRoutes.concat(routesArray)
   }
 
   const setDefaultRoutes = (routes: any) => {
@@ -113,7 +112,8 @@ const storeSetup = () => {
     sidebarRouters.value = routes
   }
 
-  const generateRoutes = () => {
+  /** 生成路由 */
+  const generateRoutes = (): Promise<AppRouteItem[]> => {
     return new Promise((resolve) => {
       // 向后端请求路由数据
       getUserRouters().then((res) => {
@@ -125,7 +125,7 @@ const storeSetup = () => {
         const defaultRoutes = filterAsyncRouter(defaultData)
         const asyncRoutes = filterDynamicRoutes(dynamicRoutes)
         asyncRoutes.forEach((route) => {
-          router.addRoute(route)
+          router.addRoute(route as RouteRecordRaw)
         })
         setRoutes(rewriteRoutes)
         console.log('常驻路由constantRoutes', constantRoutes)

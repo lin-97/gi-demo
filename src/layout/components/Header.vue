@@ -3,6 +3,7 @@
     <section class="system-logo" @click="toHome">
       <img src="@/assets/images/logo.gif" />
       <span class="system-name">Admin Pro</span>
+      <Breadcrumb></Breadcrumb>
     </section>
     <a-space class="system-head" size="medium">
       <!-- 项目配置 -->

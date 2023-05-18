@@ -46,10 +46,12 @@ interface AppRouteItem {
   name?: string
   component: any
   redirect?: string
-  meta?: AppRouteMeta
   children?: AppRouteItem[]
+  meta?: AppRouteMeta
   hidden?: boolean
   alwaysShow?: boolean
   noShowingChildren?: boolean
   query?: string
+  roles?: string[]
+  permissions?: string[]
 }

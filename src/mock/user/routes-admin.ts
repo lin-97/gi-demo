@@ -155,7 +155,7 @@ export default [
     hidden: false,
     component: 'Layout',
     meta: {
-      title: 'GiAdminPro地址',
+      title: '项目地址',
       icon: 'icon-attachment',
       keepAlive: false,
       link: 'https://gitee.com/lin0716/gi-demo'
