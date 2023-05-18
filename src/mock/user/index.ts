@@ -39,7 +39,7 @@ export default [
   {
     url: '/mock/user/getUserInfo',
     method: 'get',
-    timeout: 300,
+    timeout: 10,
     response: ({ headers }) => {
       const token = headers.token
       if (token) {
@@ -57,7 +57,7 @@ export default [
   {
     url: '/mock/user/getUserRoutes',
     method: 'get',
-    timeout: 300,
+    timeout: 10,
     response: ({ headers }) => {
       const token = headers.token
       if (token) {
