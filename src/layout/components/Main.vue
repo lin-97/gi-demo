@@ -2,7 +2,7 @@
   <a-layout class="main">
     <router-view v-slot="{ Component, route }">
       <transition :name="appStore.transitionName" mode="out-in" appear>
-        <keep-alive :include="navtabStore.cacheList">
+        <keep-alive :include="(tabsStore.cacheList as string[])">
           <component :is="Component" :key="route.path" />
         </keep-alive>
       </transition>
@@ -11,9 +11,9 @@
 </template>
 
 <script setup lang="ts" name="Main">
-import { useNavTabStore, useAppStore } from '@/store'
+import { useTabsStore, useAppStore } from '@/store'
 
-const navtabStore = useNavTabStore()
+const tabsStore = useTabsStore()
 const appStore = useAppStore()
 </script>
 

@@ -1,18 +1,18 @@
 <template>
-  <div class="nav-tab" v-if="appStore.tab">
+  <div class="tabs" v-if="appStore.tab">
     <a-tabs
       editable
       hide-content
       size="medium"
       :type="appStore.tabMode"
       :active-key="route.path"
-      @tab-click="onClick"
-      @delete="navtabStore.closeCurrent"
+      @tab-click="(key) => onClick(key.toString())"
+      @delete="tabsStore.closeCurrent"
     >
       <a-tab-pane
-        v-for="item of navtabStore.tagList"
+        v-for="item of tabsStore.tagList"
         :key="item.path"
-        :title="item.name"
+        :title="(item.meta?.title as string)"
         :closable="item.path !== '/home'"
       ></a-tab-pane>
       <!-- 右侧按钮 -->
@@ -20,15 +20,15 @@
         <a-dropdown trigger="hover">
           <GiMoreIcon class="mr"></GiMoreIcon>
           <template #content>
-            <a-doption @click="navtabStore.closeCurrent(route.path)">
+            <a-doption @click="tabsStore.closeCurrent(route.path)">
               <template #icon><icon-close /></template>
               <template #default>关闭当前</template>
             </a-doption>
-            <a-doption @click="navtabStore.closeOther(route.path)">
+            <a-doption @click="tabsStore.closeOther(route.path)">
               <template #icon><icon-eraser /></template>
               <template #default>关闭其他</template>
             </a-doption>
-            <a-doption @click="navtabStore.closeAll">
+            <a-doption @click="tabsStore.closeAll">
               <template #icon><icon-minus /></template>
               <template #default>关闭全部</template>
             </a-doption>
@@ -42,11 +42,12 @@
 <script setup lang="ts" name="NavTab">
 import { watch, onMounted } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
-import { useNavTabStore, useAppStore } from '@/store'
+import type { RouteRecordRaw, RouteRecordName } from 'vue-router'
+import { useTabsStore, useAppStore } from '@/store'
 
 const route = useRoute()
 const router = useRouter()
-const navtabStore = useNavTabStore()
+const tabsStore = useTabsStore()
 const appStore = useAppStore()
 
 onMounted(() => {
@@ -63,21 +64,15 @@ watch(
 
 const handleNavTab = () => {
   // console.log('路由变化', newVal)
-  // console.log('路由对象', route)
-  navtabStore.addTagItem({
-    name: route.meta.title || '未命名',
-    path: route.path,
-    componentName: route.name
-  } as NavTabItem)
-  if (route.meta.keepAlive) {
-    navtabStore.addCacheItem(String(route.name))
-  }
+  console.log('路由对象', route)
+  tabsStore.addTagItem(JSON.parse(JSON.stringify(route as unknown as RouteRecordRaw)))
+  tabsStore.addCacheItem(JSON.parse(JSON.stringify(route as unknown as RouteRecordRaw)))
 }
 
 // 点击页签
-const onClick = (key: string | number) => {
+const onClick = (key: string) => {
   // console.log('点击前', navtabStore.cacheList, key)
-  router.push({ path: String(key) })
+  router.push({ path: key })
 }
 </script>
 
@@ -113,7 +108,7 @@ const onClick = (key: string | number) => {
   color: var(--color-text-3);
 }
 
-.nav-tab {
+.tabs {
   padding-top: 5px;
   background: var(--color-bg-1);
 }

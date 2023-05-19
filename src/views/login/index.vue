@@ -49,13 +49,13 @@
 <script setup lang="ts" name="Login">
 import { reactive, ref } from 'vue'
 import { useRouter } from 'vue-router'
-import { useUserStore, useNavTabStore } from '@/store'
+import { useUserStore, useTabsStore } from '@/store'
 import { useLoading } from '@/hooks'
 import { Message } from '@arco-design/web-vue'
 import LoginBg from './components/LoginBg/index.vue'
 const router = useRouter()
 const userStore = useUserStore()
-const navTabStore = useNavTabStore()
+const tabsStore = useTabsStore()
 
 const form = reactive({
   username: 'admin',
@@ -81,7 +81,7 @@ const login = async () => {
     await userStore.login(form)
     router.push('/')
     setLoading(false)
-    navTabStore.init()
+    tabsStore.init()
     Message.success('登录成功')
   } catch (error) {
     errorMessage.value = (error as Error).message

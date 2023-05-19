@@ -23,9 +23,7 @@ const storeSetup = () => {
   // App配置
   const settingConfig: any = reactive({ ...defaultSettings })
   // 页面切换动画类名
-  const transitionName = computed(() => {
-    return settingConfig.animate ? settingConfig.animateMode : ''
-  })
+  const transitionName = computed(() => settingConfig.animate ?? '')
 
   // 切换主题  暗黑模式|简白模式
   const toggleTheme = (dark: boolean) => {

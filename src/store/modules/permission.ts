@@ -1,11 +1,11 @@
 import { ref } from 'vue'
 import { defineStore } from 'pinia'
-import type { RouteRecordRaw  } from 'vue-router'
+import type { RouteRecordRaw } from 'vue-router'
 import router, { constantRoutes, asyncRoutes as dynamicRoutes } from '@/router'
 import Layout from '@/layout/index.vue'
 import ParentView from '@/components/ParentView/index.vue'
 import { getUserRouters } from '@/apis'
-import has from '@/utils/has'
+import Has from '@/utils/has'
 
 // 匹配views里面所有的.vue文件
 const modules = import.meta.glob('./../../views/**/*.vue')
@@ -66,19 +66,19 @@ function filterChildren(childrenMap: RouteRecordRaw[], lastRouter: boolean | Rou
 
 // 动态路由遍历，验证是否具备权限
 export function filterDynamicRoutes(routes: RouteRecordRaw[]) {
-  const res: RouteRecordRaw[] = []
+  const arr: RouteRecordRaw[] = []
   routes.forEach((route) => {
     if (route.meta?.permissions) {
-      if (has.hasPermOr(route.meta?.permissions)) {
-        res.push(route)
+      if (Has.hasPermOr(route.meta?.permissions)) {
+        arr.push(route)
       }
     } else if (route.meta?.roles) {
-      if (has.hasRoleOr(route.meta?.roles)) {
-        res.push(route)
+      if (Has.hasRoleOr(route.meta?.roles)) {
+        arr.push(route)
       }
     }
   })
-  return res
+  return arr
 }
 
 export const loadView = (view: any) => {
@@ -93,14 +93,12 @@ export const loadView = (view: any) => {
 }
 
 const storeSetup = () => {
-  const routes = ref<RouteRecordRaw[]>([])
-  const addRoutes = ref<RouteRecordRaw[]>([])
-  const defaultRoutes = ref<RouteRecordRaw[]>([])
+  const routes = ref<RouteRecordRaw[]>([]) // 常驻路由 + 动态路由（这时候component已经从字符串转为模块）
+  const defaultRoutes = ref<RouteRecordRaw[]>([]) // 动态路由
   const topbarRouters = ref<RouteRecordRaw[]>([])
-  const sidebarRouters = ref<RouteRecordRaw[]>([])
+  const sidebarRouters = ref<RouteRecordRaw[]>([]) // 侧边栏路由
 
   const setRoutes = (routesArray: RouteRecordRaw[]) => {
-    addRoutes.value = routesArray
     routes.value = constantRoutes.concat(routesArray)
   }
 
@@ -143,7 +141,6 @@ const storeSetup = () => {
 
   return {
     routes,
-    addRoutes,
     defaultRoutes,
     topbarRouters,
     sidebarRouters,

@@ -3,7 +3,7 @@
     <Asider></Asider>
     <a-layout>
       <Header></Header>
-      <!-- <NavTab></NavTab> -->
+      <Tabs></Tabs>
       <Main></Main>
     </a-layout>
   </a-layout>
@@ -13,7 +13,7 @@
 import Asider from './components/Asider/index.vue'
 import Header from './components/Header.vue'
 import Main from './components/Main.vue'
-// import NavTab from './components/NavTab.vue'
+import Tabs from './components/Tabs.vue'
 </script>
 
 <style lang="scss" scoped>

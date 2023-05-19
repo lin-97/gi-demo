@@ -1,5 +1,3 @@
-
-
 interface AnyObject {
   [key: string]: unknown
 }
@@ -14,4 +12,3 @@ interface NodeOptions extends Options {
 }
 
 type TimeRanger = [string, string]
-

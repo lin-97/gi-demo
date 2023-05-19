@@ -6,7 +6,7 @@ export default [
     component: 'Layout',
     children: [
       {
-        path: '',
+        path: 'Analyse',
         component: 'dashboard/analyse/index',
         meta: {
           hideen: false,
@@ -30,10 +30,10 @@ export default [
     },
     children: [
       {
-        path: '',
+        path: 'Data',
         component: 'data/main/index',
         meta: {
-          hidden: true,
+          hidden: false,
           title: '数据页',
           icon: 'icon-list',
           keepAlive: true
@@ -42,7 +42,7 @@ export default [
       {
         name: 'DataDetail',
         path: 'detail',
-        component: 'data/detail/index',      
+        component: 'data/detail/index',
         meta: {
           hidden: true,
           title: '详情',
@@ -66,12 +66,12 @@ export default [
       {
         path: '',
         component: 'file/main/index',
-        
+
         meta: {
           title: '文件列表',
           icon: 'icon-folder',
           keepAlive: true,
-          hidden: true,
+          hidden: true
         }
       },
       {
