@@ -78,7 +78,7 @@
   </div>
 </template>
 
-<script setup lang="ts" name="BaseForm">
+<script setup lang="ts" name="FormBase">
 import { reactive, ref } from 'vue'
 import type { Form, RangePickerInstance } from '@arco-design/web-vue'
 import { Message } from '@arco-design/web-vue'

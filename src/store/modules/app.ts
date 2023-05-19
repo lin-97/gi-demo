@@ -21,9 +21,9 @@ interface ThemeState {
 
 const storeSetup = () => {
   // App配置
-  const settingConfig: any = reactive({ ...defaultSettings })
+  const settingConfig: ThemeState = reactive({ ...defaultSettings })
   // 页面切换动画类名
-  const transitionName = computed(() => settingConfig.animate ?? '')
+  const transitionName = computed(() => (settingConfig.animate ? settingConfig.animateMode : ''))
 
   // 切换主题  暗黑模式|简白模式
   const toggleTheme = (dark: boolean) => {
@@ -36,6 +36,7 @@ const storeSetup = () => {
     }
     setThemeColor(settingConfig.themeColor)
   }
+
   // 设置主题色
   const setThemeColor = (color: string) => {
     if (!color) return
@@ -46,18 +47,22 @@ const storeSetup = () => {
       document.body.style.setProperty(`--primary-${index + 1}`, rgbStr)
     })
   }
+
   // 设置页签可见
   const setTabVisible = (visible: boolean) => {
     settingConfig.tab = visible
   }
+
   // 设置页签的样式类型
   const setTabMode = (mode: TabModeType) => {
     settingConfig.tabMode = mode
   }
+
   // 设置是否使用过渡动画
   const setAnimateVisible = (visible: boolean) => {
     settingConfig.animate = visible
   }
+
   // 设置页面过渡动画类型
   const setAnimateMode = (mode: animateModeType) => {
     settingConfig.animateMode = mode

@@ -46,7 +46,7 @@ export default [
         const isAdmin = token === 'TOKEN-admin'
         return successResponseWrap({
           name: isAdmin ? '管理员' : '木糖醇',
-          avatar: 'https://portrait.gitee.com/uploads/avatars/user/1671/5013229_lin0716_1587117839.png!avatar60',
+          avatar: 'https://s1.ax1x.com/2022/07/05/jtMjGq.jpg',
           roles: isAdmin ? ['admin'] : ['user'],
           permissions: []
         })

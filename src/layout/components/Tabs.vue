@@ -6,14 +6,14 @@
       size="medium"
       :type="appStore.tabMode"
       :active-key="route.path"
-      @tab-click="(key) => onClick(key.toString())"
+      @tab-click="(key) => handleTabClick(key.toString())"
       @delete="tabsStore.closeCurrent"
     >
       <a-tab-pane
         v-for="item of tabsStore.tagList"
         :key="item.path"
         :title="(item.meta?.title as string)"
-        :closable="item.path !== '/home'"
+        :closable="item.path !== '/index'"
       ></a-tab-pane>
       <!-- 右侧按钮 -->
       <template #extra>
@@ -40,40 +40,40 @@
 </template>
 
 <script setup lang="ts" name="NavTab">
-import { watch, onMounted } from 'vue'
+import { watch, nextTick } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
-import type { RouteRecordRaw, RouteRecordName } from 'vue-router'
+import type { RouteRecordRaw } from 'vue-router'
 import { useTabsStore, useAppStore } from '@/store'
 
 const route = useRoute()
 const router = useRouter()
-const tabsStore = useTabsStore()
 const appStore = useAppStore()
+const tabsStore = useTabsStore()
 
-onMounted(() => {
-  handleNavTab()
-})
+tabsStore.reset()
 
 // 监听路由变化
 watch(
   () => route.path,
   () => {
-    handleNavTab()
-  }
+    nextTick(() => {
+      handleRouteChange()
+    })
+  },
+  { immediate: true }
 )
 
-const handleNavTab = () => {
-  // console.log('路由变化', newVal)
-  console.log('路由对象', route)
+// 路由发生改变触发
+const handleRouteChange = () => {
   tabsStore.addTagItem(JSON.parse(JSON.stringify(route as unknown as RouteRecordRaw)))
   tabsStore.addCacheItem(JSON.parse(JSON.stringify(route as unknown as RouteRecordRaw)))
+  console.log('路由对象', route)
   console.log('tagList', tabsStore.tagList)
   console.log('cacheList', tabsStore.cacheList)
 }
 
 // 点击页签
-const onClick = (key: string) => {
-  // console.log('点击前', navtabStore.cacheList, key)
+const handleTabClick = (key: string) => {
   router.push({ path: key })
 }
 </script>

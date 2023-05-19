@@ -125,7 +125,7 @@
   </div>
 </template>
 
-<script setup lang="ts" name="MainTable">
+<script setup lang="ts" name="TableMain">
 import { reactive, ref } from 'vue'
 import { usePagination } from '@/hooks'
 import { getPersonList } from '@/apis'

@@ -62,7 +62,7 @@
   </div>
 </template>
 
-<script setup lang="ts" name="CustomTable">
+<script setup lang="ts" name="TableCustom">
 import { ref } from 'vue'
 import { Message } from '@arco-design/web-vue'
 import { usePagination } from '@/hooks'

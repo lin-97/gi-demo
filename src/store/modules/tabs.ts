@@ -8,11 +8,13 @@ const storeSetup = () => {
   const cacheList = ref<RouteRecordName[]>([]) // keep-alive缓存的数组, 元素是组件名
 
   // 添加一个页签, 如果当前路由已经打开, 则不再重复添加
-  const addTagItem = (route: RouteRecordRaw) => {
-    const item = JSON.parse(JSON.stringify(route))
+  const addTagItem = (item: RouteRecordRaw) => {
     if (tagList.value.some((i) => i.path === item.path)) return
-    tagList.value.push(item)
+    if (item.meta?.affix ?? true) {
+      tagList.value.push(item)
+    }
   }
+
   // 删除一个页签
   const removeTagItem = (path: string) => {
     const index = tagList.value.findIndex((item) => item.path === path)
@@ -24,14 +26,15 @@ const storeSetup = () => {
       }
     }
   }
+
   // 清空页签
   const clearTagList = () => {
     tagList.value = []
     router.push('/')
   }
+
   // 添加缓存页
-  const addCacheItem = (route: RouteRecordRaw) => {
-    const item = JSON.parse(JSON.stringify(route))
+  const addCacheItem = (item: RouteRecordRaw) => {
     if (item.name) {
       if (cacheList.value.includes(item.name)) return
       if (item.meta?.keepAlive) {
@@ -39,6 +42,7 @@ const storeSetup = () => {
       }
     }
   }
+
   // 删除一个缓存页
   const removeCacheItem = (name: RouteRecordName) => {
     const index = cacheList.value.findIndex((item) => item === name)
@@ -46,10 +50,12 @@ const storeSetup = () => {
       cacheList.value.splice(index, 1)
     }
   }
+
   // 清空缓存页
   const clearCacheList = () => {
     cacheList.value = []
   }
+
   // 关闭当前
   const closeCurrent = (path: string) => {
     removeTagItem(path)
@@ -58,6 +64,7 @@ const storeSetup = () => {
       removeCacheItem(item.name)
     }
   }
+
   // 关闭其他
   const closeOther = (path: string) => {
     const arr = tagList.value.filter((i) => i.path !== path)
@@ -68,12 +75,14 @@ const storeSetup = () => {
       }
     })
   }
+
   // 关闭全部
   const closeAll = () => {
     clearTagList()
   }
-  // 初始化
-  const init = () => {
+
+  // 重置
+  const reset = () => {
     clearTagList()
     clearCacheList()
   }
@@ -90,7 +99,7 @@ const storeSetup = () => {
     closeCurrent,
     closeOther,
     closeAll,
-    init
+    reset
   }
 }
 

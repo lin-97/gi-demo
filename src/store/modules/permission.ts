@@ -81,6 +81,7 @@ export function filterDynamicRoutes(routes: RouteRecordRaw[]) {
   return arr
 }
 
+// 加载模块
 export const loadView = (view: any) => {
   let res
   for (const path in modules) {

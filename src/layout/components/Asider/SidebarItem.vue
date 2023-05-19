@@ -10,7 +10,11 @@
       <SideLink v-if="onlyOneChild?.meta" :to="resolvePath(onlyOneChild?.path, onlyOneChild?.meta?.query || '')">
         <a-menu-item v-if="onlyOneChild.meta" :key="resolvePath(onlyOneChild.path)">
           <template #icon>
-            <component :is="onlyOneChild.meta.icon || (item?.meta?.icon as any)"></component>
+            <GiSvgIcon
+              v-if="onlyOneChild.meta.svgIcon || (item?.meta?.svgIcon as any)"
+              :name="onlyOneChild.meta.svgIcon || (item?.meta?.svgIcon as any)"
+            ></GiSvgIcon>
+            <component v-else :is="onlyOneChild.meta.icon || (item?.meta?.icon as any)"></component>
           </template>
           <span>{{ onlyOneChild.meta.title }}</span>
         </a-menu-item>
@@ -18,8 +22,11 @@
     </template>
 
     <a-sub-menu v-else :key="resolvePath(item.path)">
+      <template #icon>
+        <GiSvgIcon v-if="(item?.meta?.svgIcon as any)" :name="(item?.meta?.svgIcon as any)"></GiSvgIcon>
+        <component v-else :is="(item?.meta?.icon as any)"></component>
+      </template>
       <template #title v-if="item.meta">
-        <component :is="(item?.meta?.icon as any)"></component>
         <span>{{ item?.meta?.title }}</span>
       </template>
 
@@ -78,7 +85,7 @@ function hasOneShowingChild(children: RouteRecordRaw[] = [], parent: RouteRecord
 
   // 如果没有要显示的子路由，则显示父路由
   if (showingChildren.length === 0) {
-    onlyOneChild.value = { ...parent, path: '', meta: {...parent.meta, noShowingChildren: true} }
+    onlyOneChild.value = { ...parent, path: '', meta: { ...parent.meta, noShowingChildren: true } }
     return true
   }
 

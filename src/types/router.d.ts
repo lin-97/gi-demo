@@ -10,6 +10,8 @@ declare module 'vue-router' {
     icon?: string
     /**  默认 false，设置 true 的时候该路由不会在侧边栏出现 */
     hidden?: boolean
+    // 默认 true，如果设置为 false，则不会在面包屑中显示
+    breadcrumb?: false
     /** 默认 false，如果设置为 true，它则会固定在 tags-view 中 */
     affix?: boolean
     /**

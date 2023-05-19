@@ -33,13 +33,13 @@ export const constantRoutes: RouteRecordRaw[] = [
   {
     path: '',
     component: Layout,
-    redirect: '/dashboard',
+    redirect: '/index',
     children: [
       {
-        path: '/dashboard',
+        path: '/index',
         component: () => import('@/views/dashboard/workplace/index.vue'),
         name: 'Index',
-        meta: { title: '工作台', icon: 'icon-dashboard', affix: true }
+        meta: { title: '首页', icon: 'icon-dashboard', affix: true, svgIcon: 'menu-work' }
       }
     ]
   }

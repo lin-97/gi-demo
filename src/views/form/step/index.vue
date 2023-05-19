@@ -16,7 +16,7 @@
   </div>
 </template>
 
-<script setup lang="ts" name="StepForm">
+<script setup lang="ts" name="FormStep">
 import { ref } from 'vue'
 import Step1 from './Step1.vue'
 import Step2 from './Step2.vue'

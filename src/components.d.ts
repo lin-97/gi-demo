@@ -7,7 +7,7 @@ export {}
 
 declare module '@vue/runtime-core' {
   export interface GlobalComponents {
-    Breadcrumb: typeof import('./components/app/Breadcrumb.vue')['default']
+    Breadcrumb: typeof import('./components/Breadcrumb/index.vue')['default']
     CateTree: typeof import('./components/app/CateTree/index.vue')['default']
     GiChart: typeof import('./components/GiChart/index.vue')['default']
     GiContextMenu: typeof import('./components/GiContextMenu/index.vue')['default']
@@ -34,6 +34,7 @@ declare module '@vue/runtime-core' {
     RightMenu: typeof import('./components/app/CateTree/RightMenu.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
+    SvgIcon: typeof import('./components/SvgIcon/index.vue')['default']
     TreeSwitcherIcon: typeof import('./components/app/CateTree/TreeSwitcherIcon.vue')['default']
   }
 }
