@@ -8,13 +8,10 @@ const storeSetup = () => {
   const cacheList = ref<RouteRecordName[]>([]) // keep-alive缓存的数组, 元素是组件名
 
   // 添加一个页签, 如果当前路由已经打开, 则不再重复添加
-  const addTagItem = (item: RouteRecordRaw) => {
-    const route = JSON.parse(JSON.stringify(item))
-    if (tagList.value.some((i) => i.path === route.path)) return
-    tagList.value.push(route)
-    console.log('item', route)
-    console.log('tagList', tagList.value)
-    console.log('cacheList', cacheList.value)
+  const addTagItem = (route: RouteRecordRaw) => {
+    const item = JSON.parse(JSON.stringify(route))
+    if (tagList.value.some((i) => i.path === item.path)) return
+    tagList.value.push(item)
   }
   // 删除一个页签
   const removeTagItem = (path: string) => {
@@ -33,10 +30,11 @@ const storeSetup = () => {
     router.push('/')
   }
   // 添加缓存页
-  const addCacheItem = (item: RouteRecordRaw) => {
+  const addCacheItem = (route: RouteRecordRaw) => {
+    const item = JSON.parse(JSON.stringify(route))
     if (item.name) {
       if (cacheList.value.includes(item.name)) return
-      if (!item.meta?.keepAlive) {
+      if (item.meta?.keepAlive) {
         cacheList.value.push(item.name)
       }
     }

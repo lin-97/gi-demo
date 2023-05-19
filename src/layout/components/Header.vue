@@ -1,10 +1,10 @@
 <template>
   <a-layout-header>
-    <section class="system-logo" @click="toHome">
+    <!-- <section class="system-logo" @click="toHome">
       <img src="@/assets/images/logo.gif" />
       <span class="system-name">Admin Pro</span>
-      <Breadcrumb></Breadcrumb>
-    </section>
+    </section> -->
+    <Breadcrumb></Breadcrumb>
     <a-space class="system-head" size="medium">
       <!-- 项目配置 -->
       <a-tooltip content="项目配置" position="bl">

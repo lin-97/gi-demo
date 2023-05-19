@@ -1,12 +1,12 @@
 export default [
   {
-    name: 'Analyse',
-    path: '/analyse',
+    path: '',
     redirect: '/analyse',
     component: 'Layout',
     children: [
       {
-        path: 'Analyse',
+        name: 'Analyse',
+        path: 'analyse',
         component: 'dashboard/analyse/index',
         meta: {
           hideen: false,
@@ -18,23 +18,23 @@ export default [
     ]
   },
   {
-    name: 'Data',
     path: '/data',
     component: 'Layout',
     redirect: '/data/main',
     meta: {
       hideen: false,
-      title: '数据页',
+      title: '数据管理',
       icon: 'icon-list',
       keepAlive: true
     },
     children: [
       {
-        path: 'Data',
+        name: 'Data',
+        path: 'main',
         component: 'data/main/index',
         meta: {
           hidden: false,
-          title: '数据页',
+          title: '数据管理',
           icon: 'icon-list',
           keepAlive: true
         }
@@ -52,7 +52,6 @@ export default [
     ]
   },
   {
-    name: 'File',
     path: '/file',
     component: 'Layout',
     redirect: '/file/main',
@@ -64,9 +63,9 @@ export default [
     },
     children: [
       {
-        path: '',
+        name: 'File',
+        path: 'main',
         component: 'file/main/index',
-
         meta: {
           title: '文件列表',
           icon: 'icon-folder',

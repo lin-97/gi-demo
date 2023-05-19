@@ -67,6 +67,8 @@ const handleNavTab = () => {
   console.log('路由对象', route)
   tabsStore.addTagItem(JSON.parse(JSON.stringify(route as unknown as RouteRecordRaw)))
   tabsStore.addCacheItem(JSON.parse(JSON.stringify(route as unknown as RouteRecordRaw)))
+  console.log('tagList', tabsStore.tagList)
+  console.log('cacheList', tabsStore.cacheList)
 }
 
 // 点击页签

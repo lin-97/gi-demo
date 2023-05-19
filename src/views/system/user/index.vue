@@ -115,7 +115,7 @@
   </div>
 </template>
 
-<script setup lang="ts" name="UserManage">
+<script setup lang="ts" name="User">
 import { ref, nextTick } from 'vue'
 import { usePagination } from '@/hooks'
 import { useDept } from '@/hooks/app'
