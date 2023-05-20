@@ -1,9 +1,5 @@
 <template>
   <a-layout-header>
-    <!-- <section class="system-logo" @click="toHome">
-      <img src="@/assets/images/logo.gif" />
-      <span class="system-name">Admin Pro</span>
-    </section> -->
     <Breadcrumb></Breadcrumb>
     <a-space class="system-head" size="medium">
       <!-- 项目配置 -->
@@ -96,11 +92,6 @@ const userStore = useUserStore()
 const { isFullScreen, onToggleFullScreen } = useFullScreen()
 const SettingDrawerRef = ref<InstanceType<typeof SettingDrawer>>()
 
-// 跳转首页
-const toHome = () => {
-  router.push('/')
-}
-
 // 跳转个人中心
 const toUser = () => {
   router.push('/system/account')
@@ -150,29 +141,6 @@ const toGitPath = () => {
   justify-content: space-between;
   align-items: center;
   border-bottom: 1px solid var(--color-neutral-3);
-  .system-logo {
-    font-size: 20px;
-    line-height: 1;
-    color: var(--color-text-1);
-    display: flex;
-    align-items: center;
-    cursor: pointer;
-    user-select: none;
-    img {
-      width: 32px;
-      height: 32px;
-      border-radius: 6px;
-    }
-    .system-name {
-      padding-left: 10px;
-      white-space: nowrap;
-      transition: color 0.3s;
-      &:hover {
-        color: $color-theme !important;
-        cursor: pointer;
-      }
-    }
-  }
   .system-head {
     display: flex;
     align-items: center;

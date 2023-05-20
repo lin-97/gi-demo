@@ -1,27 +1,36 @@
 <template>
-  <a-layout-sider collapsible breakpoint="xl" :width="232" class="asider">
-    <a-menu :selected-keys="[activeMenu]" :auto-open-selected="true" :style="{ width: '100%', height: '100%' }">
-      <SidebarItem
-        v-for="(route, index) in sidebarRouters"
-        :key="route.path + index"
-        :item="route"
-        :base-path="route.path"
-      ></SidebarItem>
-    </a-menu>
-  </a-layout-sider>
+  <div class="asider">
+    <Logo :collapse="collapse"></Logo>
+    <a-layout-sider collapsible breakpoint="xl" :width="232" class="menu" @collapse="handleCollapse">
+      <a-menu :selected-keys="[activeMenu]" :auto-open-selected="true" :style="{ width: '100%', height: '100%' }">
+        <SidebarItem
+          v-for="(route, index) in sidebarRouters"
+          :key="route.path + index"
+          :item="route"
+          :base-path="route.path"
+        ></SidebarItem>
+      </a-menu>
+    </a-layout-sider>
+  </div>
 </template>
 
 <script setup lang="ts" name="Asider">
-import { computed } from 'vue'
+import { ref, computed } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import { usePermissionStore } from '@/store'
 import SidebarItem from './SidebarItem.vue'
+import Logo from './Logo.vue'
 
 const route = useRoute()
 const router = useRouter()
 
 const permissionStore = usePermissionStore()
 const sidebarRouters = computed(() => permissionStore.sidebarRouters)
+
+const collapse = ref(false)
+const handleCollapse = (isCollapse: boolean) => {
+  collapse.value = isCollapse
+}
 
 console.log('sidebarRouters', sidebarRouters.value)
 
@@ -53,5 +62,12 @@ const activeMenu = computed(() => {
 
 .asider {
   z-index: 1000;
+  display: flex;
+  flex-direction: column;
+  border-right: 1px solid var(--color-border-2);
+  .menu {
+    flex: 1;
+    overflow: hidden;
+  }
 }
 </style>
