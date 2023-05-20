@@ -1,6 +1,7 @@
 import type { MockMethod } from 'vite-plugin-mock'
 import { successResponseWrap, failResponseWrap } from '../mock'
 import RoutesAdmin from './routes-admin'
+import RoutesUser from './routes-user'
 
 export default [
   {
@@ -46,7 +47,7 @@ export default [
         const isAdmin = token === 'TOKEN-admin'
         return successResponseWrap({
           name: isAdmin ? '管理员' : '木糖醇',
-          avatar: 'https://s1.ax1x.com/2022/07/05/jtMjGq.jpg',
+          avatar: isAdmin ? 'https://s1.ax1x.com/2022/07/05/jtMjGq.jpg' : 'https://s1.ax1x.com/2022/06/14/XhtSwF.jpg',
           roles: isAdmin ? ['admin'] : ['user'],
           permissions: []
         })
@@ -61,7 +62,8 @@ export default [
     response: ({ headers }) => {
       const token = headers.token
       if (token) {
-        return successResponseWrap(RoutesAdmin)
+        const isAdmin = token === 'TOKEN-admin'
+        return isAdmin ? successResponseWrap(RoutesAdmin) : successResponseWrap(RoutesUser)
       } else {
       }
     }

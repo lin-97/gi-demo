@@ -13,6 +13,7 @@
             <GiSvgIcon
               v-if="onlyOneChild.meta.svgIcon || (item?.meta?.svgIcon as any)"
               :name="onlyOneChild.meta.svgIcon || (item?.meta?.svgIcon as any)"
+              :size="24"
             ></GiSvgIcon>
             <component v-else :is="onlyOneChild.meta.icon || (item?.meta?.icon as any)"></component>
           </template>
@@ -23,7 +24,7 @@
 
     <a-sub-menu v-else :key="resolvePath(item.path)">
       <template #icon>
-        <GiSvgIcon v-if="(item?.meta?.svgIcon as any)" :name="(item?.meta?.svgIcon as any)"></GiSvgIcon>
+        <GiSvgIcon v-if="(item?.meta?.svgIcon as any)" :name="(item?.meta?.svgIcon as any)" :size="24"></GiSvgIcon>
         <component v-else :is="(item?.meta?.icon as any)"></component>
       </template>
       <template #title v-if="item.meta">

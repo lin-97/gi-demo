@@ -16,7 +16,7 @@ const storeSetup = () => {
   }
 
   // 删除一个页签
-  const removeTagItem = (path: string) => {
+  const deleteTagItem = (path: string) => {
     const index = tagList.value.findIndex((item) => item.path === path)
     if (index >= 0) {
       const isActive = router.currentRoute.value.path === tagList.value[index]['path']
@@ -44,7 +44,7 @@ const storeSetup = () => {
   }
 
   // 删除一个缓存页
-  const removeCacheItem = (name: RouteRecordName) => {
+  const deleteCacheItem = (name: RouteRecordName) => {
     const index = cacheList.value.findIndex((item) => item === name)
     if (index >= 0) {
       cacheList.value.splice(index, 1)
@@ -58,10 +58,10 @@ const storeSetup = () => {
 
   // 关闭当前
   const closeCurrent = (path: string) => {
-    removeTagItem(path)
+    deleteTagItem(path)
     const item = tagList.value.find((i) => i.path === path)
     if (item?.name) {
-      removeCacheItem(item.name)
+      deleteCacheItem(item.name)
     }
   }
 
@@ -69,9 +69,9 @@ const storeSetup = () => {
   const closeOther = (path: string) => {
     const arr = tagList.value.filter((i) => i.path !== path)
     arr.forEach((item) => {
-      removeTagItem(item.path)
+      deleteTagItem(item.path)
       if (item?.name) {
-        removeCacheItem(item.name)
+        deleteCacheItem(item.name)
       }
     })
   }
@@ -91,10 +91,10 @@ const storeSetup = () => {
     tagList,
     cacheList,
     addTagItem,
-    removeTagItem,
+    deleteTagItem,
     clearTagList,
     addCacheItem,
-    removeCacheItem,
+    deleteCacheItem,
     clearCacheList,
     closeCurrent,
     closeOther,
