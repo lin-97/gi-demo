@@ -177,7 +177,7 @@ export default [
     },
     children: [
       {
-        name: 'User',
+        name: 'SystemUser',
         path: 'user',
         component: 'system/user/index',
         meta: {
@@ -188,7 +188,7 @@ export default [
         }
       },
       {
-        name: 'Role',
+        name: 'SystemRole',
         path: 'role',
         component: 'system/role/index',
         meta: {
@@ -199,7 +199,7 @@ export default [
         }
       },
       {
-        name: 'Menu',
+        name: 'SystemMenu',
         path: 'menu',
         component: 'system/menu/index',
         meta: {
@@ -210,7 +210,7 @@ export default [
         }
       },
       {
-        name: 'Dept',
+        name: 'SystemDept',
         path: 'dept',
         component: 'system/dept/index',
         meta: {
