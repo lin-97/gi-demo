@@ -356,5 +356,57 @@ export default [
       svgIcon: 'menu-gitee',
       keepAlive: false
     }
+  },
+  {
+    path: '/user',
+    component: 'Layout',
+    redirect: '/user/main/index',
+    meta: {
+      hideen: false,
+      title: '个人中心',
+      icon: 'icon-list',
+      svgIcon: 'menu-data',
+      keepAlive: true
+    },
+    children: [
+      {
+        name: 'User',
+        path: 'main',
+        component: 'user/index',
+        meta: {
+          hidden: true,
+          title: '个人中心',
+          icon: 'icon-list',
+          keepAlive: true
+          // affix: false
+        },
+        children: [
+          {
+            name: 'UserIndex',
+            path: 'index',
+            component: 'user/views/index',
+            meta: {
+              hidden: true,
+              title: '个人中心',
+              icon: 'icon-list',
+              keepAlive: true
+              // affix: false
+            }
+          },
+          {
+            name: 'UserNotice',
+            path: 'notice',
+            component: 'user/views/notice',
+            meta: {
+              hidden: true,
+              title: '消息通知',
+              icon: 'icon-list',
+              keepAlive: true
+              // affix: false
+            }
+          }
+        ]
+      }
+    ]
   }
 ] as MockRouteItem[]

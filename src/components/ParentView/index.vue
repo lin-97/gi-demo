@@ -13,6 +13,8 @@
 <script setup lang="ts">
 import { useTabsStore, useAppStore } from '@/store'
 
+defineOptions({ name: 'ParentView' })
+
 const tabsStore = useTabsStore()
 const appStore = useAppStore()
 </script>
