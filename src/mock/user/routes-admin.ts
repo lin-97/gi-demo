@@ -360,7 +360,7 @@ export default [
   {
     path: '/user',
     component: 'Layout',
-    redirect: '/user/main/index',
+    redirect: '/user/index/index',
     meta: {
       hideen: false,
       title: '个人中心',
@@ -371,20 +371,20 @@ export default [
     children: [
       {
         name: 'User',
-        path: 'main',
+        path: 'index',
         component: 'user/index',
         meta: {
           hidden: true,
           title: '个人中心',
           icon: 'icon-list',
-          keepAlive: true
+          keepAlive: false
           // affix: false
         },
         children: [
           {
             name: 'UserIndex',
             path: 'index',
-            component: 'user/views/index',
+            component: 'user/pages/index',
             meta: {
               hidden: true,
               title: '个人中心',
@@ -396,7 +396,7 @@ export default [
           {
             name: 'UserNotice',
             path: 'notice',
-            component: 'user/views/notice',
+            component: 'user/pages/notice',
             meta: {
               hidden: true,
               title: '消息通知',

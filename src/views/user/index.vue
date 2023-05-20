@@ -9,7 +9,7 @@
       </a-menu-item>
     </a-menu>
     <div class="content">
-      <parent-view></parent-view>
+      <ParentView></ParentView>
     </div>
   </div>
 </template>
@@ -24,8 +24,8 @@ const router = useRouter()
 const selectedKeys = ref('')
 
 const list = [
-  { name: '个人中心', value: 1, path: '/user/main' },
-  { name: '消息通知', value: 2, path: '/user/main/notice' }
+  { name: '个人中心', value: 1, path: '/user/index/index' },
+  { name: '消息通知', value: 2, path: '/user/index/notice' }
 ]
 
 const toPage = (path: string) => {

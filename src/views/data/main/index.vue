@@ -1,5 +1,6 @@
 <template>
   <div class="manage">
+    <parent-view></parent-view>
     <section class="tab">
       <a-tabs hide-content size="medium" v-model:active-key="activeKey">
         <a-tab-pane :key="1" title="人员管理"> </a-tab-pane>
