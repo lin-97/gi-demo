@@ -125,11 +125,13 @@
   </div>
 </template>
 
-<script setup lang="ts" name="TableMain">
+<script setup lang="ts">
 import { reactive, ref } from 'vue'
 import { usePagination } from '@/hooks'
 import { getPersonList } from '@/apis'
 import type { PersonItem } from '@/apis'
+
+defineOptions({ name: 'TableMain' })
 
 const form = reactive({
   value1: '',

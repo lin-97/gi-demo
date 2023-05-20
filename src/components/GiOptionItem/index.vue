@@ -14,7 +14,9 @@
   </li>
 </template>
 
-<script setup lang="ts" name="GiOptionItem">
+<script setup lang="ts">
+defineOptions({ name: 'GiOptionItem' })
+
 interface Props {
   icon?: string
   label?: string

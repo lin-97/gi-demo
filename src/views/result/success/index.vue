@@ -15,7 +15,9 @@
   </div>
 </template>
 
-<script setup lang="ts" name="ResultSuccess"></script>
+<script setup lang="ts">
+defineOptions({ name: 'ResultSuccess' })
+</script>
 
 <style lang="scss" scoped>
 .page {

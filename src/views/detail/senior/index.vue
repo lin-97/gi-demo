@@ -122,9 +122,10 @@
   </div>
 </template>
 
-<script setup lang="ts" name="SeniorDetail">
+<script setup lang="ts">
 import { ref } from 'vue'
 
+defineOptions({ name: 'SeniorDetail' })
 const containerRef = ref<HTMLElement | null>()
 </script>
 

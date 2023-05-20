@@ -78,11 +78,13 @@
   </div>
 </template>
 
-<script setup lang="ts" name="DeptManage">
+<script setup lang="ts">
 import { ref, reactive } from 'vue'
 import EditDeptModal from './EditDeptModal.vue'
 import type { DeptItem } from '@/apis'
 import { useDept } from '@/hooks/app'
+
+defineOptions({ name: 'SystemDept' })
 
 const { deptList, getDeptList } = useDept()
 getDeptList()

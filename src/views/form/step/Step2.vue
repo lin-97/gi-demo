@@ -23,10 +23,12 @@
   </div>
 </template>
 
-<script setup lang="ts" name="Step2">
+<script setup lang="ts">
 import { nextTick, reactive, ref } from 'vue'
 import type { Form } from '@arco-design/web-vue'
 import type { StepForm } from './type'
+
+defineOptions({ name: 'Step2' })
 const emit = defineEmits(['next', 'prev'])
 
 interface Props {

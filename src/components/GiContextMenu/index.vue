@@ -6,10 +6,12 @@
   </transition>
 </template>
 
-<script setup lang="ts" name="GiContextMenu">
+<script setup lang="ts">
 import { ref, watch } from 'vue'
 import { onClickOutside, useWindowSize } from '@vueuse/core'
 import { useContextMenu } from '@/hooks'
+
+defineOptions({ name: 'GiContextMenu' })
 
 const props = defineProps<{
   event: PointerEvent

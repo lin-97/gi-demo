@@ -45,12 +45,13 @@
   </a-popover>
 </template>
 
-<script setup lang="ts" name="GiIconSelector">
+<script setup lang="ts">
 import { ref, watch } from 'vue'
 import * as ArcoIcons from '@arco-design/web-vue/es/icon'
 import { useClipboard } from '@vueuse/core'
 import { Message } from '@arco-design/web-vue'
 
+defineOptions({ name: 'GiIconSelector' })
 const emit = defineEmits(['select', 'update:modelValue'])
 
 interface Props {

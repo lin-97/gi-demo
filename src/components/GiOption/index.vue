@@ -4,7 +4,9 @@
   </ul>
 </template>
 
-<script setup lang="ts" name="GiOption"></script>
+<script setup lang="ts">
+defineOptions({ name: 'GiOption' })
+</script>
 
 <style lang="scss" scoped>
 .gi-option {

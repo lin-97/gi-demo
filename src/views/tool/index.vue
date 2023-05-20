@@ -16,7 +16,7 @@
   </div>
 </template>
 
-<script lang="ts" setup name="Test">
+<script lang="ts" setup>
 import { ref } from 'vue'
 import Button from './components/Button.vue'
 import Tag from './components/Tag.vue'
@@ -32,6 +32,8 @@ import ImageView from './components/ImageView.vue'
 import FnComponent from './components/FnComponent.vue'
 import Mitt from './components/Mitt/index.vue'
 import ApiTest from './components/ApiTest.vue'
+
+defineOptions({ name: 'Tool' })
 
 const selectedKey = ref(0)
 

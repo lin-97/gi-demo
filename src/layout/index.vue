@@ -14,6 +14,8 @@ import Asider from './components/Asider/index.vue'
 import Header from './components/Header/index.vue'
 import Main from './components/Main.vue'
 import Tabs from './components/Tabs.vue'
+
+defineOptions({ name: 'Layout' })
 </script>
 
 <style lang="scss" scoped>

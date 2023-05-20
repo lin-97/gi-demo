@@ -46,7 +46,7 @@
   </div>
 </template>
 
-<script setup lang="ts" name="Login">
+<script setup lang="ts">
 import { reactive, ref } from 'vue'
 import { useRouter } from 'vue-router'
 import { useUserStore } from '@/store'
@@ -54,6 +54,7 @@ import { useLoading } from '@/hooks'
 import { Message } from '@arco-design/web-vue'
 import LoginBg from './components/LoginBg/index.vue'
 
+defineOptions({ name: 'Login' })
 const router = useRouter()
 const userStore = useUserStore()
 

@@ -7,10 +7,11 @@
   </a-button>
 </template>
 
-<script setup lang="ts" name="GiThemeBtn">
+<script setup lang="ts">
 import { useDark, useToggle } from '@vueuse/core'
 import { useAppStore } from '@/store'
 
+defineOptions({ name: 'GiThemeBtn' })
 const appStore = useAppStore()
 
 const isDark = useDark({

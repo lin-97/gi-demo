@@ -8,7 +8,8 @@
   </a-config-provider>
 </template>
 
-<script setup lang="ts" name="App">
+<script setup lang="ts">
+defineOptions({ name: 'App' })
 </script>
 
 <style lang="scss" scoped>

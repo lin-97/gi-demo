@@ -5,9 +5,11 @@
   </div>
 </template>
 
-<script setup lang="ts" name="FileManage">
+<script setup lang="ts">
 import FileAside from './FileAside.vue'
 import FileMain from './FileMain/index.vue'
+
+defineOptions({ name: 'FileManage' })
 </script>
 
 <style lang="scss" scoped>

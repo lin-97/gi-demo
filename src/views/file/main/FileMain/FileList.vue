@@ -18,6 +18,7 @@
               auto-fit-transform-origin
               position="bl"
               update-at-scroll
+              scroll-to-close
             >
               <div class="file-name" @click="handleRowClick(record)">
                 <div class="file-image">

@@ -69,9 +69,11 @@
   </div>
 </template>
 
-<script setup lang="ts" name="MenuManage">
+<script setup lang="ts">
 import { ref } from 'vue'
 import EditMenuModal from './EditMenuModal.vue'
+
+defineOptions({ name: 'SystemMenu' })
 
 const EditMenuModalRef = ref<InstanceType<typeof EditMenuModal>>()
 const loading = ref(false)

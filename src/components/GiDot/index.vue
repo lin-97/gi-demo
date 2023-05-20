@@ -2,7 +2,9 @@
   <span class="gi-dot" :class="[{ 'gi-dot-processing': animation }, `gi-dot-${type}`]"></span>
 </template>
 
-<script setup lang="ts" name="GiDot">
+<script setup lang="ts">
+defineOptions({ name: 'GiDot' })
+
 type Type = 'primary' | 'success' | 'warning' | 'danger' | 'info'
 
 interface Props {

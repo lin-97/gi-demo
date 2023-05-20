@@ -18,10 +18,11 @@
   </div>
 </template>
 
-<script setup lang="ts" name="About">
+<script setup lang="ts">
 import { ref } from 'vue'
 import packageJson from '../../../package.json'
 
+defineOptions({ name: 'About' })
 const data = ref(packageJson)
 </script>
 

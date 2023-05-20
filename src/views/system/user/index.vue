@@ -115,7 +115,7 @@
   </div>
 </template>
 
-<script setup lang="ts" name="User">
+<script setup lang="ts">
 import { ref, nextTick } from 'vue'
 import { usePagination } from '@/hooks'
 import { useDept } from '@/hooks/app'
@@ -123,6 +123,8 @@ import { getSystemUserList } from '@/apis'
 import type { UserItem } from '@/apis'
 import EditUserModal from './EditUserModal.vue'
 import type { Tree } from '@arco-design/web-vue'
+
+defineOptions({ name: 'SystemUser' })
 
 const treeRef = ref<InstanceType<typeof Tree>>()
 const EditUserModalRef = ref<InstanceType<typeof EditUserModal>>()

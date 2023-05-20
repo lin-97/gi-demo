@@ -75,9 +75,11 @@
   </div>
 </template>
 
-<script setup lang="ts" name="DataDetail">
+<script setup lang="ts">
 import { ref } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
+
+defineOptions({ name: 'DataDetail' })
 const route = useRoute()
 const router = useRouter()
 

@@ -5,10 +5,11 @@
   </div>
 </template>
 
-<script setup lang="ts" name="GiNowTime">
+<script setup lang="ts">
 import { ref } from 'vue'
 import dayjs from 'dayjs'
 
+defineOptions({ name: 'GiNowTime' })
 const time = ref('')
 
 // 获取现在时间

@@ -60,10 +60,11 @@
   </div>
 </template>
 
-<script setup lang="ts" name="UserCenter">
+<script setup lang="ts">
 import RightBox from './RightBox.vue'
 import { useUserStore } from '@/store'
 
+defineOptions({ name: 'User' })
 const userStore = useUserStore()
 </script>
 

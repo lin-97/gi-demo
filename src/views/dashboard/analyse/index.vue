@@ -111,11 +111,12 @@
   </div>
 </template>
 
-<script lang="ts" setup name="Analyse">
+<script lang="ts" setup>
 import { ref } from 'vue'
 import DataChart from './DataChart.vue'
 import OrderChart from './OrderChart.vue'
 
+defineOptions({ name: 'Analyse' })
 const list = [
   { icon: 'icon-user', name: '用户' },
   { icon: 'icon-analyse', name: '分析' },

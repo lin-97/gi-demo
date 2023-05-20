@@ -9,8 +9,10 @@
   </svg>
 </template>
 
-<script setup lang="ts" name="GiSvgIcon">
+<script setup lang="ts">
 import { computed } from 'vue'
+
+defineOptions({ name: 'GiSvgIcon' })
 
 interface Props {
   name: string

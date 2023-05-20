@@ -89,7 +89,7 @@
   </div>
 </template>
 
-<script setup lang="ts" name="DataManage">
+<script setup lang="ts">
 import { reactive, ref, onActivated } from 'vue'
 import { useRouter } from 'vue-router'
 import { Modal, Message } from '@arco-design/web-vue'

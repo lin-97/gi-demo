@@ -65,7 +65,7 @@
   </div>
 </template>
 
-<script setup lang="ts" name="UserCenter">
+<script setup lang="ts">
 import { useUserStore } from '@/store'
 const userStore = useUserStore()
 

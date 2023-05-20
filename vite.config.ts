@@ -3,7 +3,6 @@ import { fileURLToPath, URL } from 'url'
 import { defineConfig, loadEnv } from 'vite'
 import vue from '@vitejs/plugin-vue'
 import vueJsx from '@vitejs/plugin-vue-jsx'
-import VueSetupExtend from 'vite-plugin-vue-setup-extend'
 import { viteMockServe } from 'vite-plugin-mock'
 import { createSvgIconsPlugin } from 'vite-plugin-svg-icons'
 import Components from 'unplugin-vue-components/vite'
@@ -15,7 +14,6 @@ export default defineConfig(({ command, mode }) => {
     plugins: [
       vue(),
       vueJsx(),
-      VueSetupExtend(),
       Components({
         // 指定组件位置, 默认是src/components 自动导入自定义组件
         dirs: ['src/components'],

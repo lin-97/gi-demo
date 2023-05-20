@@ -78,11 +78,13 @@
   </div>
 </template>
 
-<script setup lang="ts" name="FormBase">
+<script setup lang="ts">
 import { reactive, ref } from 'vue'
 import type { Form, RangePickerInstance } from '@arco-design/web-vue'
 import { Message } from '@arco-design/web-vue'
 import { Phone, OnlyCh } from '@/utils/regexp'
+
+defineOptions({ name: 'FormBase' })
 
 const treeData = ref([
   {

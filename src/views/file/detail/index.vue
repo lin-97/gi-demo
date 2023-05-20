@@ -49,9 +49,11 @@
   </div>
 </template>
 
-<script setup lang="ts" name="FileDetail">
+<script setup lang="ts">
 import PreImage from './PreImage.vue'
 import { useRouter } from 'vue-router'
+
+defineOptions({ name: 'FileDetail' })
 const router = useRouter()
 
 const back = () => {

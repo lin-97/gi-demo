@@ -9,6 +9,7 @@
       auto-fit-transform-origin
       position="bl"
       update-at-scroll
+      scroll-to-close
     >
       <li class="file-grid-item" @click.stop="handleClickFile(item)">
         <div class="file-image">

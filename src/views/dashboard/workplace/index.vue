@@ -19,12 +19,14 @@
   </div>
 </template>
 
-<script setup lang="ts" name="Home">
+<script setup lang="ts">
 import WorkCard from './WorkCard.vue'
 import ProjectCard from './ProjectCard.vue'
 import MessageCard from './MessageCard.vue'
 import FastCard from './FastCard.vue'
 import ImageCard from './ImageCard.vue'
+
+defineOptions({ name: 'Home' })
 </script>
 
 <style lang="scss" scoped>

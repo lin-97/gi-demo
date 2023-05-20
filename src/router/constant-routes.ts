@@ -22,12 +22,12 @@ export const constantRoutes: RouteRecordRaw[] = [
   },
   {
     path: '/:pathMatch(.*)*',
-    component: () => import('@/views/error/404/index.vue'),
+    component: () => import('@/views/error/404.vue'),
     meta: { hidden: true }
   },
   {
     path: '/403',
-    component: () => import('@/views/error/403/index.vue'),
+    component: () => import('@/views/error/403.vue'),
     meta: { hidden: true }
   },
   {

@@ -62,12 +62,14 @@
   </div>
 </template>
 
-<script setup lang="ts" name="TableCustom">
+<script setup lang="ts">
 import { ref } from 'vue'
 import { Message } from '@arco-design/web-vue'
 import { usePagination } from '@/hooks'
 import { getPersonList } from '@/apis'
 import type { PersonItem } from '@/apis'
+
+defineOptions({ name: 'TableCustom' })
 
 const loading = ref(false)
 const tableData = ref<PersonItem[]>([])

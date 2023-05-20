@@ -47,17 +47,12 @@
   </div>
 </template>
 
-<script lang="ts">
-export default {
-  name: 'GiTable',
-  inheritAttrs: false
-}
-</script>
-
 <script setup lang="ts">
 import { useAttrs, useSlots, ref } from 'vue'
 import { useFullscreen } from '@vueuse/core'
 import type { Table } from '@arco-design/web-vue'
+
+defineOptions({ name: 'GiTable', inheritAttrs: false })
 const emit = defineEmits(['refresh'])
 
 const attrs = useAttrs()

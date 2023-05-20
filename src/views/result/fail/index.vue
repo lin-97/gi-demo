@@ -29,7 +29,9 @@
   </div>
 </template>
 
-<script setup lang="ts" name="ResultFail"></script>
+<script setup lang="ts">
+defineOptions({ name: 'ResultFail' })
+</script>
 
 <style lang="scss" scoped>
 .page {

@@ -37,10 +37,12 @@
   </div>
 </template>
 
-<script setup lang="ts" name="Step1">
+<script setup lang="ts">
 import { reactive, ref, nextTick } from 'vue'
 import type { Form } from '@arco-design/web-vue'
 import type { StepForm } from './type'
+
+defineOptions({ name: 'Step1' })
 const emit = defineEmits(['next'])
 
 const form: StepForm = reactive({
