@@ -49,7 +49,7 @@ export default [
           name: isAdmin ? '管理员' : '木糖醇',
           avatar: isAdmin ? 'https://s1.ax1x.com/2022/07/05/jtMjGq.jpg' : 'https://s1.ax1x.com/2022/06/14/XhtSwF.jpg',
           roles: isAdmin ? ['admin'] : ['user'],
-          permissions: []
+          permissions: isAdmin ? ['table:btn:edit'] : ['']
         })
       } else {
       }

@@ -1,8 +1,5 @@
 <template>
   <div class="table-page">
-    <a-alert type="success"
-      >三级路由【缓存路由、固定表格高度、并根据窗口大小自适应】的示例。详情页请点击操作列按钮，支持tab多开并高亮左侧菜单</a-alert
-    >
     <a-form label-align="right" auto-label-width :model="form" class="form">
       <a-row :gutter="16" wrap>
         <a-col :xs="12" :md="12" :lg="8" :xl="6" :xxl="6">
@@ -97,22 +94,19 @@
               <a-typography-text v-else type="danger">关闭</a-typography-text>
             </template>
           </a-table-column>
-          <a-table-column title="操作" :width="230" align="center">
+          <a-table-column title="操作" :width="230" align="left">
             <template #cell="{ record }">
-              <a-space :size="4">
-                <a-link>
-                  <template #icon><icon-edit :size="15" :stroke-width="3" /></template>
-                  <template #default>编辑</template>
-                </a-link>
-                <a-link>
-                  <template #icon><icon-eye :size="15" :stroke-width="3" /></template>
-                  <template #default>详情</template>
-                </a-link>
+              <a-space>
+                <a-button type="primary" size="mini" v-hasPerm="['table:btn:edit']">
+                  <span>编辑</span>
+                </a-button>
+                <a-button type="primary" size="mini">
+                  <span>详情</span>
+                </a-button>
                 <a-popconfirm type="warning" content="您确定要删除该项吗?">
-                  <a-link status="danger">
-                    <template #icon><icon-delete :size="15" :stroke-width="3" /></template>
-                    <template #default>删除</template>
-                  </a-link>
+                  <a-button type="primary" status="danger" size="mini">
+                    <span>删除</span>
+                  </a-button>
                 </a-popconfirm>
               </a-space>
             </template>
@@ -120,8 +114,6 @@
         </template>
       </a-table>
     </section>
-
-    <GiFooter></GiFooter>
   </div>
 </template>
 
@@ -156,6 +148,7 @@ const getTableData = async () => {
     tableData.value = res.data.list
     setTotal(res.data.total)
   } catch (error) {
+  } finally {
     loading.value = false
   }
 }
