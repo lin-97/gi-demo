@@ -116,13 +116,12 @@ const list = [
 
 .right-box {
   flex: 1;
-  margin: $margin;
-  margin-left: 0;
   background-color: var(--color-bg-1);
   display: flex;
   flex-direction: column;
   border-radius: 2px;
   overflow: hidden;
+  overflow-y: auto;
 }
 
 .head-box {

@@ -24,8 +24,6 @@
 </template>
 
 <script setup lang="ts">
-import { ref, watch } from 'vue'
-import { useRoute, useRouter } from 'vue-router'
 import { useWindowSize } from '@vueuse/core'
 import { fileTypeList, type fileTypeListItem } from '@/libs/file/file-map'
 const route = useRoute()

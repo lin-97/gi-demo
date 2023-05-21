@@ -5,7 +5,6 @@
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted, nextTick, type PropType } from 'vue'
 import Player from 'xgplayer'
 import type { FileItem } from '@/apis'
 

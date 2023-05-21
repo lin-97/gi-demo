@@ -112,7 +112,6 @@
 </template>
 
 <script lang="ts" setup>
-import { ref } from 'vue'
 import DataChart from './DataChart.vue'
 import OrderChart from './OrderChart.vue'
 

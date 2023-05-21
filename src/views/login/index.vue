@@ -47,8 +47,6 @@
 </template>
 
 <script setup lang="ts">
-import { reactive, ref } from 'vue'
-import { useRouter } from 'vue-router'
 import { useUserStore } from '@/store'
 import { useLoading } from '@/hooks'
 import { Message } from '@arco-design/web-vue'

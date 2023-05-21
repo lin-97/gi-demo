@@ -63,7 +63,6 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
 import { Message } from '@arco-design/web-vue'
 import { usePagination } from '@/hooks'
 import { getPersonList } from '@/apis'

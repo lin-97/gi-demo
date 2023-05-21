@@ -322,7 +322,7 @@ export default [
         meta: {
           hideen: false,
           title: '功能页',
-          svgIcon: 'menu-test',
+          svgIcon: 'menu-tool',
           keepAlive: false
         }
       }
@@ -360,43 +360,45 @@ export default [
   {
     path: '/user',
     component: 'Layout',
-    redirect: '/user/index/index',
+    redirect: '/user/index',
     meta: {
       hideen: false,
       title: '个人中心',
       icon: 'icon-list',
-      svgIcon: 'menu-data',
+      svgIcon: 'menu-user',
       keepAlive: true
     },
     children: [
       {
         name: 'User',
-        path: 'index',
+        path: '',
         component: 'user/index',
+        redirect: '/user/index',
         meta: {
           hidden: true,
-          title: '个人中心',
+          title: '',
           icon: 'icon-list',
-          keepAlive: false
+          keepAlive: true
           // affix: false
         },
         children: [
           {
             name: 'UserIndex',
             path: 'index',
-            component: 'user/pages/index',
+            component: 'user/pages/index/index',
             meta: {
               hidden: true,
               title: '个人中心',
               icon: 'icon-list',
-              keepAlive: true
+              keepAlive: false,
+              animation: false
               // affix: false
             }
           },
           {
             name: 'UserNotice',
             path: 'notice',
-            component: 'user/pages/notice',
+            component: 'user/pages/notice/index',
             meta: {
               hidden: true,
               title: '消息通知',

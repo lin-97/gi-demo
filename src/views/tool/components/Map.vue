@@ -5,7 +5,6 @@
 </template>
 
 <script lang="ts" setup>
-import { ref, shallowRef, onMounted } from 'vue'
 import AMapLoader from '@amap/amap-jsapi-loader'
 
 const map = shallowRef(null)

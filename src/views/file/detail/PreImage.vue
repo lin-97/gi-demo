@@ -36,7 +36,6 @@
 </template>
 
 <script setup lang="ts">
-import { ref, reactive } from 'vue'
 import 'viewerjs/dist/viewer.css'
 import { component as VueViewer } from 'v-viewer'
 

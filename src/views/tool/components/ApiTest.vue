@@ -8,7 +8,6 @@
 </template>
 
 <script lang="ts" setup>
-import { ref } from 'vue'
 import { getTestSuccess, getTestFail } from '@/apis'
 import { Message } from '@arco-design/web-vue'
 

@@ -38,7 +38,6 @@
 </template>
 
 <script setup lang="ts">
-import { reactive, ref, nextTick } from 'vue'
 import type { Form } from '@arco-design/web-vue'
 import type { StepForm } from './type'
 

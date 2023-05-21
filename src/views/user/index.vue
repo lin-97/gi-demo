@@ -15,33 +15,44 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
-import { useRouter } from 'vue-router'
-
 defineOptions({ name: 'User' })
+
+const route = useRoute()
 const router = useRouter()
 
 const selectedKeys = ref('')
+selectedKeys.value = route.path
 
 const list = [
-  { name: '个人中心', value: 1, path: '/user/index/index' },
-  { name: '消息通知', value: 2, path: '/user/index/notice' }
+  { name: '个人中心', value: 1, path: '/user/index' },
+  { name: '消息通知', value: 2, path: '/user/notice' }
 ]
 
 const toPage = (path: string) => {
   router.push({ path: path })
+  selectedKeys.value = path
 }
 </script>
 
 <style lang="scss" scoped>
 .user {
+  flex: 1;
   display: flex;
+  padding: $margin;
+  box-sizing: border-box;
+  overflow: hidden;
   .menu {
-    width: 270px;
+    width: 220px;
+    height: fit-content;
   }
   .content {
     flex: 1;
+    margin-left: $margin;
+    padding: $padding;
     overflow: hidden;
+    background-color: var(--color-bg-1);
+    box-sizing: border-box;
+    overflow-y: auto;
   }
 }
 </style>

@@ -8,8 +8,7 @@
 </template>
 
 <script lang="ts" setup>
-import { ref, watchEffect } from 'vue'
-import { useRoute, useRouter, type RouteLocationMatched } from 'vue-router'
+import type { RouteLocationMatched } from 'vue-router'
 
 const route = useRoute()
 const router = useRouter()

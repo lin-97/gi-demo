@@ -3,7 +3,6 @@
 </template>
 
 <script lang="ts" setup>
-import { ref, nextTick } from 'vue'
 import VCharts from 'vue-echarts'
 
 interface Props {

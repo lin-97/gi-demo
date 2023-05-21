@@ -5,8 +5,6 @@
 </template>
 
 <script setup lang="ts">
-import { computed, ref } from 'vue'
-
 defineOptions({ name: 'GiFlexibleBox' })
 
 interface Props {

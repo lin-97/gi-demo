@@ -228,7 +228,7 @@ export default [
         meta: {
           hideen: false,
           title: '功能页',
-          svgIcon: 'menu-test',
+          svgIcon: 'menu-tool',
           keepAlive: false
         }
       }

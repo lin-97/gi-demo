@@ -39,8 +39,6 @@
 </template>
 
 <script setup lang="ts">
-import { ref, reactive, computed } from 'vue'
-
 const userId = ref('')
 const title = computed(() => (!!userId.value ? '编辑用户' : '新增用户'))
 const visible = ref(false)

@@ -3,9 +3,11 @@ import { fileURLToPath, URL } from 'url'
 import { defineConfig, loadEnv } from 'vite'
 import vue from '@vitejs/plugin-vue'
 import vueJsx from '@vitejs/plugin-vue-jsx'
-import { viteMockServe } from 'vite-plugin-mock'
-import { createSvgIconsPlugin } from 'vite-plugin-svg-icons'
+import AutoImport from 'unplugin-auto-import/vite'
 import Components from 'unplugin-vue-components/vite'
+import { createSvgIconsPlugin } from 'vite-plugin-svg-icons'
+import { viteMockServe } from 'vite-plugin-mock'
+
 import path from 'path'
 
 export default defineConfig(({ command, mode }) => {
@@ -14,6 +16,11 @@ export default defineConfig(({ command, mode }) => {
     plugins: [
       vue(),
       vueJsx(),
+      AutoImport({
+        // 自动导入 Vue 相关函数，如：ref, reactive, toRef 等
+        imports: ['vue', 'vue-router'],
+        dts: 'src/auto-import.d.ts'
+      }),
       Components({
         // 指定组件位置, 默认是src/components 自动导入自定义组件
         dirs: ['src/components'],

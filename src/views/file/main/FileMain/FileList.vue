@@ -59,7 +59,6 @@
 </template>
 
 <script setup lang="ts">
-import { reactive } from 'vue'
 import FileImg from './FileImg.vue'
 import FileRightMenu from './FileRightMenu.vue'
 import type { FileItem } from '@/apis'

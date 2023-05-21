@@ -34,7 +34,6 @@
 </template>
 
 <script setup lang="ts">
-import { ref, reactive, onMounted, type PropType } from 'vue'
 import type { FileItem } from '@/apis'
 import type { TreeNodeData } from '@arco-design/web-vue'
 import data from './treedata'

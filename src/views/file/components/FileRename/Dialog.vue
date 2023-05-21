@@ -11,7 +11,6 @@
 </template>
 
 <script setup lang="ts">
-import { ref, reactive, onMounted, type PropType } from 'vue'
 import type { FileItem } from '@/apis'
 
 const props = defineProps({

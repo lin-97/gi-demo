@@ -14,7 +14,6 @@
 </template>
 
 <script lang="ts" setup>
-import { ref } from 'vue'
 import type { TableColumnData, TableInstance } from '@arco-design/web-vue'
 import XEUtils from 'xe-utils'
 import soureData from './data'

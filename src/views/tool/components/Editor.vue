@@ -11,7 +11,6 @@
 </template>
 
 <script setup lang="ts">
-import { onBeforeUnmount, ref, shallowRef, onMounted } from 'vue'
 import { Editor, Toolbar } from '@wangeditor/editor-for-vue'
 import '@wangeditor/editor/dist/css/style.css' // 引入 css
 

@@ -25,8 +25,6 @@
 </template>
 
 <script setup lang="ts">
-import { ref, reactive, computed } from 'vue'
-
 const roleId = ref('')
 const title = computed(() => (!!roleId.value ? '编辑角色' : '新增角色'))
 const visible = ref(false)

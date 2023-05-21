@@ -14,7 +14,6 @@
 </template>
 
 <script lang="ts" setup>
-import { ref, onMounted } from 'vue'
 import { IconCheckCircle, IconExclamationCircle, IconCloseCircle } from '@arco-design/web-vue/es/icon'
 // import type { Props } from './type'
 

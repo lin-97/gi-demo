@@ -5,7 +5,6 @@
 </template>
 
 <script lang="ts" setup>
-import { computed } from 'vue'
 import { isExternal } from '@/utils/validate'
 
 interface Props {

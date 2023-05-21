@@ -52,7 +52,6 @@
 </template>
 
 <script setup lang="ts">
-import { ref, nextTick } from 'vue'
 import TreeSwitcherIcon from './TreeSwitcherIcon.vue'
 import RightMenu from './RightMenu.vue'
 

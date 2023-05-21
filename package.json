@@ -54,6 +54,7 @@
     "sass": "^1.62.1",
     "sass-loader": "^13.2.2",
     "typescript": "~5.0.4",
+    "unplugin-auto-import": "^0.16.0",
     "unplugin-vue-components": "^0.22.12",
     "vite": "^4.3.8",
     "vite-plugin-mock": "^2.9.8",

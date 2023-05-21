@@ -8,7 +8,6 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
 import GiLoadingIcon from '@/components/GiLodingIcon/index.vue'
 import type { LoadingIconType } from '@/components/GiLodingIcon/type'
 import { trim } from '@/utils/common'

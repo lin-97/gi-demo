@@ -65,7 +65,6 @@
 </template>
 
 <script setup lang="ts" name="SettingDrawer">
-import { ref } from 'vue'
 import { useAppStore } from '@/store'
 import { ColorPicker } from 'vue-color-kit'
 import 'vue-color-kit/dist/vue-color-kit.css'

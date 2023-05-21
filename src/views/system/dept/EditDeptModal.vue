@@ -39,7 +39,6 @@
 </template>
 
 <script setup lang="ts">
-import { reactive, computed, ref } from 'vue'
 import { useDept } from '@/hooks/app'
 
 const deptId = ref('')

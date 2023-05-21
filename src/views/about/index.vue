@@ -19,7 +19,6 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
 import packageJson from '../../../package.json'
 
 defineOptions({ name: 'About' })

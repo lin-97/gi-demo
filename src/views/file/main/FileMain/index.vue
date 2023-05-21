@@ -108,7 +108,6 @@
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted } from 'vue'
 import { Message, Modal } from '@arco-design/web-vue'
 import { fileTypeList, imageTypeList } from '@/libs/file/file-map'
 import { useFileStore } from '@/store'
@@ -122,7 +121,6 @@ import PreviewVideo from '@/views/file/components/PreviewVideo/index'
 import PreviewAudio from '@/views/file/components/PreviewAudio/index'
 import FileRename from '@/views/file/components/FileRename/index'
 import FileMove from '@/views/file/components/FileMove/index'
-import { useRoute, useRouter, onBeforeRouteUpdate } from 'vue-router'
 import { getFileList } from '@/apis'
 import type { FileItem } from '@/apis'
 const route = useRoute()

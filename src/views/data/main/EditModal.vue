@@ -49,7 +49,6 @@
 </template>
 
 <script setup lang="ts">
-import { computed, reactive, ref } from 'vue'
 import { Phone, OnlyCh } from '@/utils/regexp'
 import { Message, Modal, type FormInstance } from '@arco-design/web-vue'
 

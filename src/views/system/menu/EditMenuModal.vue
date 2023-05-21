@@ -45,8 +45,6 @@
 </template>
 
 <script setup lang="ts">
-import { reactive, ref, computed } from 'vue'
-
 const menuId = ref('')
 const visible = ref(false)
 const title = computed(() => (!!menuId.value ? '编辑菜单' : '新增菜单'))

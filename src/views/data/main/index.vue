@@ -17,7 +17,6 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
 import Pane1 from './Pane1.vue'
 import Pane2 from './Pane2.vue'
 

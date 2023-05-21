@@ -5,7 +5,6 @@
 </template>
 
 <script lang="ts" setup>
-import { ref } from 'vue'
 import mitter from './mitt'
 
 const text = ref('A')

@@ -6,8 +6,6 @@
 </template>
 
 <script setup lang="ts">
-import { computed, type PropType } from 'vue'
-
 defineOptions({ name: 'GiTag' })
 
 type GiTagType = 'dark' | 'light' | 'outline' | 'light-outline'

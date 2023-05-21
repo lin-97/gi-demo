@@ -4,7 +4,6 @@
 </template>
 
 <script setup lang="ts">
-import { computed } from 'vue'
 import { fileExtendNameIconMap, imageTypeList } from '@/libs/file/file-map'
 import type { FileItem } from '@/apis'
 

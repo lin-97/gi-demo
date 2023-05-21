@@ -16,9 +16,6 @@
 </template>
 
 <script setup lang="ts" name="ErrorPage">
-import { onBeforeUnmount, onMounted, ref } from 'vue'
-import { useRouter } from 'vue-router'
-
 interface Props {
   src: string
 }

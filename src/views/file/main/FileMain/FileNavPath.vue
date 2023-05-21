@@ -13,8 +13,6 @@
 </template>
 
 <script setup lang="ts">
-import { nextTick, ref } from 'vue'
-
 const showInput = ref(false)
 const InputRef = ref<HTMLInputElement | null>(null)
 

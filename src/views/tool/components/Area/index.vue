@@ -31,8 +31,7 @@
 </template>
 
 <script setup lang="ts" name="Area">
-import { ref } from 'vue'
-import { useArea } from './useArea.ts'
+import { useArea } from './useArea'
 const { getAreaTreeData } = useArea()
 
 const treeData = ref([])

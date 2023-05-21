@@ -37,5 +37,6 @@ declare module 'vue-router' {
     /** 设置该路由进入的权限，支持多个权限叠加 */
     roles?: string[]
     permissions?: string[]
+    animation?: boolean
   }
 }

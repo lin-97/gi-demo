@@ -43,7 +43,6 @@
 </template>
 
 <script lang="ts" setup name="SidebarItem">
-import { ref } from 'vue'
 import { isExternal } from '@/utils/validate'
 import SideLink from './SideLink.vue'
 import type { RouteRecordRaw } from 'vue-router'

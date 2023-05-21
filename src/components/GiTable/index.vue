@@ -48,7 +48,6 @@
 </template>
 
 <script setup lang="ts">
-import { useAttrs, useSlots, ref } from 'vue'
 import { useFullscreen } from '@vueuse/core'
 import type { Table } from '@arco-design/web-vue'
 

@@ -68,7 +68,6 @@
 </template>
 
 <script lang="ts" setup>
-import { ref, reactive, computed } from 'vue'
 import { useElementBounding } from '@vueuse/core'
 import { api as viewerApi } from 'v-viewer'
 // import 'viewerjs/dist/viewer.css'

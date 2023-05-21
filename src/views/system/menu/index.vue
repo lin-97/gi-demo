@@ -70,7 +70,6 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
 import EditMenuModal from './EditMenuModal.vue'
 
 defineOptions({ name: 'SystemMenu' })

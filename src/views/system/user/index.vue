@@ -116,7 +116,6 @@
 </template>
 
 <script setup lang="ts">
-import { ref, nextTick } from 'vue'
 import { usePagination } from '@/hooks'
 import { useDept } from '@/hooks/app'
 import { getSystemUserList } from '@/apis'

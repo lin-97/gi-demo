@@ -40,8 +40,6 @@
 </template>
 
 <script setup lang="ts" name="NavTab">
-import { watch, nextTick } from 'vue'
-import { useRoute, useRouter } from 'vue-router'
 import type { RouteRecordRaw } from 'vue-router'
 import { useTabsStore, useAppStore } from '@/store'
 

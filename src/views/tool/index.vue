@@ -17,7 +17,6 @@
 </template>
 
 <script lang="ts" setup>
-import { ref } from 'vue'
 import Button from './components/Button.vue'
 import Tag from './components/Tag.vue'
 import IconSelector from './components/IconSelector.vue'

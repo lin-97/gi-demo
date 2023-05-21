@@ -79,9 +79,7 @@
 </template>
 
 <script setup lang="ts" name="Header">
-import { ref } from 'vue'
 import { Modal } from '@arco-design/web-vue'
-import { useRouter } from 'vue-router'
 import { useUserStore } from '@/store'
 import { useFullScreen } from '@/hooks'
 import SettingDrawer from './SettingDrawer.vue'
