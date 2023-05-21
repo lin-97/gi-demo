@@ -13,7 +13,7 @@
         </div>
 
         <!-- 音频组件 -->
-        <audio class="audio" :src="props.fileInfo?.src" controls autoplay></audio>
+        <audio class="audio" :src="audioSrc" controls autoplay></audio>
       </section>
     </div>
   </transition>
@@ -22,6 +22,7 @@
 <script setup lang="ts">
 import { useDraggable, useWindowSize, useElementSize } from '@vueuse/core'
 import type { FileItem } from '@/apis'
+import zhini from './致你.mp3'
 
 const props = defineProps({
   fileInfo: Object as PropType<FileItem>,
@@ -32,6 +33,13 @@ const visible = ref(false)
 
 const audioRef = ref<HTMLElement | null>(null)
 const audioHeadRef = ref<HTMLElement | null>(null)
+
+const audioSrc = computed(() => {
+  if (props.fileInfo?.id === '004') {
+    return zhini
+  }
+  return props.fileInfo?.src
+})
 
 onMounted(() => {
   visible.value = true

@@ -360,7 +360,7 @@ export default [
   {
     path: '/user',
     component: 'Layout',
-    redirect: '/user/index',
+    // redirect: '/user/index',
     meta: {
       hideen: false,
       title: '个人中心',
