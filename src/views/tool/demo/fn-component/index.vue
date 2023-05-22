@@ -9,7 +9,7 @@
 </template>
 
 <script lang="ts" setup>
-import Message from '@/components/app/Message/index'
+import Message from './Message/index'
 
 const onSuccess = () => {
   Message({ type: 'success' })

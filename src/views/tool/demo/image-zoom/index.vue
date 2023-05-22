@@ -1,18 +1,20 @@
 <template>
-  <div class="image-view">
+  <div class="image-zoom">
     <a-row>
-      <GiImageView :zoom="true"></GiImageView>
+      <ImageView :zoom="true"></ImageView>
       <section class="right"></section>
     </a-row>
 
     <a-row class="bbb">
-      <GiImageView :zoom="false" autoplay></GiImageView>
+      <ImageView :zoom="false" autoplay></ImageView>
       <section class="right"></section>
     </a-row>
   </div>
 </template>
 
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import ImageView from './ImageView/index.vue'
+</script>
 
 <style lang="scss" scoped>
 .bbb {

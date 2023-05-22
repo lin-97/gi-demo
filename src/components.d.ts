@@ -8,7 +8,7 @@ export {}
 declare module '@vue/runtime-core' {
   export interface GlobalComponents {
     Breadcrumb: typeof import('./components/Breadcrumb/index.vue')['default']
-    CateTree: typeof import('./components/app/CateTree/index.vue')['default']
+    CateTree: typeof import('./components/CateTree/index.vue')['default']
     GiChart: typeof import('./components/GiChart/index.vue')['default']
     GiContextMenu: typeof import('./components/GiContextMenu/index.vue')['default']
     GiDot: typeof import('./components/GiDot/index.vue')['default']
@@ -31,9 +31,9 @@ declare module '@vue/runtime-core' {
     LoadingIcon3: typeof import('./components/GiLodingIcon/LoadingIcon3.vue')['default']
     Message: typeof import('./components/app/Message/Message.vue')['default']
     ParentView: typeof import('./components/ParentView/index.vue')['default']
-    RightMenu: typeof import('./components/app/CateTree/RightMenu.vue')['default']
+    RightMenu: typeof import('./components/CateTree/RightMenu.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
-    TreeSwitcherIcon: typeof import('./components/app/CateTree/TreeSwitcherIcon.vue')['default']
+    TreeSwitcherIcon: typeof import('./components/CateTree/TreeSwitcherIcon.vue')['default']
   }
 }

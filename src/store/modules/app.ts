@@ -4,24 +4,19 @@ import { generate, getRgbStr } from '@arco-design/color'
 import defaultSettings from '@/config/setting.json'
 import type { TabModeType, animateModeType } from '@/config/option'
 
-interface ThemeState {
-  theme: 'light' | 'dark'
-  themeColor: string
-  header: boolean
-  footer: boolean
-  menu: boolean
-  hideMenu: boolean
-  menuWidth: number
-  menuCollapse: boolean
-  tab: boolean
-  tabMode: TabModeType
-  animate: boolean
-  animateMode: animateModeType
+interface IAppSetting {
+  theme: 'light' | 'dark' // 主题
+  themeColor: string // 主题色
+  tab: boolean // 是否显示页签
+  tabMode: TabModeType // 页签风格
+  animate: boolean // 是否显示动画
+  animateMode: animateModeType // 动画类名
 }
 
 const storeSetup = () => {
   // App配置
-  const settingConfig: ThemeState = reactive({ ...defaultSettings })
+  const settingConfig = reactive({ ...defaultSettings }) as IAppSetting
+
   // 页面切换动画类名
   const transitionName = computed(() => (settingConfig.animate ? settingConfig.animateMode : ''))
 
@@ -69,7 +64,7 @@ const storeSetup = () => {
   }
 
   return {
-    ...toRefs<ThemeState>(settingConfig),
+    ...toRefs(settingConfig),
     transitionName,
     toggleTheme,
     setThemeColor,

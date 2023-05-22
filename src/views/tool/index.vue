@@ -17,20 +17,20 @@
 </template>
 
 <script lang="ts" setup>
-import Button from './components/Button.vue'
-import Tag from './components/Tag.vue'
-import IconSelector from './components/IconSelector.vue'
-import Dot from './components/Dot.vue'
-import FlexibleBox from './components/FlexibleBox.vue'
-import Area from './components/Area/index.vue'
-import Editor from './components/Editor.vue'
-import RowTreeTable from './components/RowTreeTable/index.vue'
-import Map from './components/Map.vue'
-import JSDialog from './components/JSDialog/index.vue'
-import ImageView from './components/ImageView.vue'
-import FnComponent from './components/FnComponent.vue'
-import Mitt from './components/Mitt/index.vue'
-import ApiTest from './components/ApiTest.vue'
+import Button from './demo/Button.vue'
+import Tag from './demo/Tag.vue'
+import IconSelector from './demo/IconSelector.vue'
+import Dot from './demo/Dot.vue'
+import FlexibleBox from './demo/FlexibleBox.vue'
+import Area from './demo/area-demo/index.vue'
+import Editor from './demo/Editor.vue'
+import RowTreeTable from './demo/row-tree-table/index.vue'
+import Map from './demo/Map.vue'
+import JSDialog from './demo/js-dialog/index.vue'
+import ImageZoom from './demo/image-zoom/index.vue'
+import FnComponent from './demo/fn-component/index.vue'
+import Mitt from './demo/mitt/index.vue'
+import ApiTest from './demo/ApiTest.vue'
 
 defineOptions({ name: 'Tool' })
 
@@ -49,7 +49,7 @@ const menuList = [
   { name: '地图', value: Map },
   { name: 'Mitt中央通信', value: Mitt },
   { name: '原生模态框', value: JSDialog },
-  { name: '图片放大镜', value: ImageView },
+  { name: '图片放大镜', value: ImageZoom },
   { name: '函数式组件', value: FnComponent }
 ]
 </script>

@@ -112,8 +112,8 @@
 </template>
 
 <script lang="ts" setup>
-import DataChart from './DataChart.vue'
-import OrderChart from './OrderChart.vue'
+import DataChart from './components/DataChart.vue'
+import OrderChart from './components/OrderChart.vue'
 
 defineOptions({ name: 'Analyse' })
 const list = [

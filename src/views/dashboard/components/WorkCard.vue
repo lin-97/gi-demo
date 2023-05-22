@@ -1,7 +1,7 @@
 <template>
   <a-card title="工作台" :bordered="false" size="medium" class="card-box">
     <template #extra>
-      <GiNowTime></GiNowTime>
+      <NowTime></NowTime>
     </template>
     <a-row justify="space-between" align="center" class="work-platform">
       <a-space :size="15">
@@ -46,7 +46,9 @@
 </template>
 
 <script setup lang="ts">
+import NowTime from './NowTime/index.vue'
 import { useUserStore } from '@/store'
+
 const userStore = useUserStore()
 </script>
 

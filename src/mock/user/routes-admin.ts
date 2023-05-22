@@ -9,7 +9,7 @@ export default [
       {
         name: 'Analyse',
         path: 'analyse',
-        component: 'dashboard/analyse/index',
+        component: 'analyse/index',
         meta: {
           hideen: false,
           title: '分析页',

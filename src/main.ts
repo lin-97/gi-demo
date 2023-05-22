@@ -17,6 +17,7 @@ import '@/router/permission'
 
 // 自定义过渡动画
 import '@/styles/css/transition.css'
+
 // 导入全局scss主文件
 import '@/styles/index.scss'
 
