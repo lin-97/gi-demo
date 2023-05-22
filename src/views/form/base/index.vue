@@ -81,7 +81,7 @@
 <script setup lang="ts">
 import type { Form, RangePickerInstance } from '@arco-design/web-vue'
 import { Message } from '@arco-design/web-vue'
-import { Phone, OnlyCh } from '@/utils/regexp'
+import * as Regexp from '@/utils/regexp'
 
 defineOptions({ name: 'FormBase' })
 
@@ -147,11 +147,11 @@ const rules = {
   name: [
     { required: true, message: '请输入姓名' },
     { maxLength: 4, message: '姓名不超过4个字符' },
-    { match: OnlyCh, message: '仅支持中文姓名' }
+    { match: Regexp.OnlyCh, message: '仅支持中文姓名' }
   ],
   phone: [
     { required: true, message: '请输入手机号' },
-    { match: Phone, message: '手机号格式不正确' }
+    { match: Regexp.Phone, message: '手机号格式不正确' }
   ],
   sex: [{ required: true, message: '请选择性别' }]
 }

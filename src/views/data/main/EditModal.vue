@@ -49,11 +49,10 @@
 </template>
 
 <script setup lang="ts">
-import { Phone, OnlyCh } from '@/utils/regexp'
-import { Message, Modal, type FormInstance } from '@arco-design/web-vue'
+import { Message, type FormInstance } from '@arco-design/web-vue'
+import * as Regexp from '@/utils/regexp'
 
-type Form = { name: string; phone: string; status: boolean }
-const form: Form = reactive({
+const form = reactive({
   name: '',
   phone: '',
   status: false
@@ -62,10 +61,10 @@ const form: Form = reactive({
 const rules = {
   name: [
     { required: true, message: '请输入姓名' },
-    { match: OnlyCh, message: '只能是中文姓名' },
+    { match: Regexp.OnlyCh, message: '只能是中文姓名' },
     { minLength: 1, maxLength: 4, message: '名字最长不超过4个字符' }
   ],
-  phone: [{ match: Phone, message: '手机号格式不正确' }],
+  phone: [{ match: Regexp.Phone, message: '手机号格式不正确' }],
   status: [{ required: true }]
 }
 

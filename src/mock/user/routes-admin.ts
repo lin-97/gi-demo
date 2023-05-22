@@ -312,17 +312,17 @@ export default [
   },
   {
     path: '',
-    redirect: '/tool',
+    redirect: '/example',
     component: 'Layout',
     children: [
       {
-        name: 'Tool',
-        path: 'tool',
-        component: 'tool/index',
+        name: 'Example',
+        path: 'example',
+        component: 'example/index',
         meta: {
           hideen: false,
           title: '功能页',
-          svgIcon: 'menu-tool',
+          svgIcon: 'menu-example',
           keepAlive: false
         }
       }

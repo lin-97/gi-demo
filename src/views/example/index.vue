@@ -17,22 +17,22 @@
 </template>
 
 <script lang="ts" setup>
-import Button from './demo/Button.vue'
-import Tag from './demo/Tag.vue'
-import IconSelector from './demo/IconSelector.vue'
-import Dot from './demo/Dot.vue'
-import FlexibleBox from './demo/FlexibleBox.vue'
+import Button from './demo/button/index.vue'
+import Tag from './demo/tag/index.vue'
+import IconSelector from './demo/icon-selector/index.vue'
+import Dot from './demo/dot/index.vue'
+import FlexibleBox from './demo/flexible-box/index.vue'
 import Area from './demo/area-demo/index.vue'
-import Editor from './demo/Editor.vue'
+import Editor from './demo/editor/index.vue'
 import RowTreeTable from './demo/row-tree-table/index.vue'
-import Map from './demo/Map.vue'
+import Map from './demo/map/index.vue'
 import JSDialog from './demo/js-dialog/index.vue'
 import ImageZoom from './demo/image-zoom/index.vue'
 import FnComponent from './demo/fn-component/index.vue'
 import Mitt from './demo/mitt/index.vue'
-import ApiTest from './demo/ApiTest.vue'
+import ApiTest from './demo/api-test/index.vue'
 
-defineOptions({ name: 'Tool' })
+defineOptions({ name: 'Example' })
 
 const selectedKey = ref(0)
 

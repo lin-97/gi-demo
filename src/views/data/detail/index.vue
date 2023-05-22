@@ -77,9 +77,8 @@
 
 <script setup lang="ts">
 defineOptions({ name: 'DataDetail' })
-const route = useRoute()
-const router = useRouter()
 
+const router = useRouter()
 const containerRef = ref<HTMLElement | null>()
 
 const back = () => {

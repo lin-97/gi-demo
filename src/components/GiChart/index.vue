@@ -6,10 +6,10 @@
 import VCharts from 'vue-echarts'
 
 interface Props {
-  options: any
-  autoResize: boolean
-  width: string
-  height: string
+  options?: any
+  autoResize?: boolean
+  width?: string
+  height?: string
 }
 
 withDefaults(defineProps<Props>(), {

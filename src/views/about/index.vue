@@ -22,7 +22,7 @@
 import packageJson from '../../../package.json'
 
 defineOptions({ name: 'About' })
-const data = ref(packageJson)
+const data = packageJson
 </script>
 
 <style lang="scss" scoped>

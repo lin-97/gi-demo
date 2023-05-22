@@ -30,7 +30,7 @@ const handleCollapse = (isCollapse: boolean) => {
   collapse.value = isCollapse
 }
 
-console.log('sidebarRouters', sidebarRouters.value)
+console.log('sidebarRouters', JSON.parse(JSON.stringify(sidebarRouters.value)))
 
 // 当前页面激活菜单路径，先从路由里面找
 const activeMenu = computed(() => {

@@ -65,9 +65,9 @@ watch(
 const handleRouteChange = () => {
   tabsStore.addTagItem(JSON.parse(JSON.stringify(route as unknown as RouteRecordRaw)))
   tabsStore.addCacheItem(JSON.parse(JSON.stringify(route as unknown as RouteRecordRaw)))
-  console.log('路由对象', route)
-  console.log('tagList', tabsStore.tagList)
-  console.log('cacheList', tabsStore.cacheList)
+  console.log('路由对象', JSON.parse(JSON.stringify(route)))
+  console.log('tagList', JSON.parse(JSON.stringify(tabsStore.tagList)))
+  console.log('cacheList', JSON.parse(JSON.stringify(tabsStore.cacheList)))
 }
 
 // 点击页签

@@ -121,7 +121,7 @@ function resolvePath(path: string, routeQuery?: string) {
     const query = JSON.parse(routeQuery)
     return { path: getNormalPath(`${props.basePath}/${path}`), query: query }
   }
-  console.log(`${props.basePath}/${path}`)
+  // console.log(`${props.basePath}/${path}`)
   return getNormalPath(`${props.basePath}/${path}`)
 }
 </script>

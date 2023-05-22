@@ -26,15 +26,3 @@ export const OnlyCh = /^[\u4e00-\u9fa5]+$/gi
 
 /** @desc 正则-只能是英文 */
 export const OnlyEn = /^[a-zA-Z]*$/
-
-export default {
-  Phone,
-  Email,
-  Password,
-  Code_6,
-  Code_4,
-  Url,
-  ColorRegex,
-  OnlyCh,
-  OnlyEn
-}

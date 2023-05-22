@@ -93,7 +93,7 @@
 import { Modal, Message } from '@arco-design/web-vue'
 import type { TableInstance } from '@arco-design/web-vue'
 import { usePagination } from '@/hooks'
-import CateTree from '@/components/app/CateTree/index.vue'
+import CateTree from '@/components/CateTree/index.vue'
 import EditModal from './EditModal.vue'
 import { getPersonList } from '@/apis'
 import type { PersonItem } from '@/apis'
