@@ -34,7 +34,6 @@ declare module '@vue/runtime-core' {
     RightMenu: typeof import('./components/app/CateTree/RightMenu.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
-    SvgIcon: typeof import('./components/SvgIcon/index.vue')['default']
     TreeSwitcherIcon: typeof import('./components/app/CateTree/TreeSwitcherIcon.vue')['default']
   }
 }
