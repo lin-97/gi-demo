@@ -2,6 +2,8 @@ import { defineStore } from 'pinia'
 import { ref } from 'vue'
 import router from '@/router'
 import type { RouteRecordRaw, RouteRecordName } from 'vue-router'
+import { usePermissionStore } from '@/store'
+import _XEUtils_ from 'xe-utils'
 
 const storeSetup = () => {
   const tagList = ref<RouteRecordRaw[]>([]) // 保存页签tab的数组
@@ -29,8 +31,9 @@ const storeSetup = () => {
 
   // 清空页签
   const clearTagList = () => {
-    tagList.value = []
-    router.push('/')
+    const permissionStore = usePermissionStore()
+    const arr = _XEUtils_.filterTree(permissionStore.routes, (item) => item.meta?.affix ?? false)
+    tagList.value = [...arr]
   }
 
   // 添加缓存页
