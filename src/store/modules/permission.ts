@@ -18,12 +18,12 @@ function filterAsyncRouter(asyncRoutes: RouteRecordRaw[], lastRouter: boolean | 
     }
     if (route.component && typeof route.component === 'string') {
       // Layout ParentView 组件特殊处理
-      if (route.component === 'Layout') {
-        route.component = Layout
-      } else if (route.component === 'ParentView') {
-        route.component = ParentView
+      if (route['component'] === 'Layout') {
+        route['component'] = Layout as never
+      } else if (route['component'] === 'ParentView') {
+        route['component'] = ParentView as never
       } else {
-        route.component = loadView(route.component)
+        route['component'] = loadView(route['component']) as never
       }
     }
     if (route.children !== null && route.children && route.children.length) {
@@ -40,9 +40,9 @@ function filterChildren(childrenRoutes: RouteRecordRaw[], lastRouter: boolean | 
   let children: RouteRecordRaw[] = []
   childrenRoutes.forEach((el, index) => {
     if (el.children && el.children.length) {
-      if (typeof el.component === 'string' && el.component === 'ParentView' && !lastRouter) {
-        el.children.forEach((c: RouteRecordRaw) => {
-          c.path = el.path + '/' + c.path
+      if (typeof el.component === 'string' && el['component'] === 'ParentView' && !lastRouter) {
+        ;(el['children'] as RouteRecordRaw[]).forEach((c: RouteRecordRaw) => {
+          c.path = el['path'] + '/' + c.path
           if (c.children && c.children.length) {
             children = children.concat(filterChildren(c.children, c))
             return
@@ -78,7 +78,7 @@ export function filterDynamicRoutes(routes: RouteRecordRaw[]) {
 }
 
 // 加载模块
-export const loadView = (view: any) => {
+export const loadView = (view: string) => {
   let res
   for (const path in modules) {
     const dir = path.split('views/')[1].split('.vue')[0]
