@@ -5,6 +5,8 @@
 </template>
 
 <script setup lang="ts">
+import type { CSSProperties } from 'vue'
+
 defineOptions({ name: 'GiFlexibleBox' })
 
 interface Props {
@@ -17,12 +19,10 @@ const props = withDefaults(defineProps<Props>(), {
   direction: 'right'
 })
 
-defineEmits(['update:modelValue'])
-
 const BoxRef = ref<HTMLElement | null>()
 
 const style = computed(() => {
-  const obj: any = {}
+  const obj: CSSProperties = {}
   obj[`margin-${props.direction}`] =
     !props.modelValue && BoxRef.value && BoxRef.value.clientWidth ? `-${BoxRef.value.clientWidth}px` : 0
   return obj

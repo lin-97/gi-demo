@@ -18,7 +18,7 @@
       <!-- 右侧按钮 -->
       <template #extra>
         <a-dropdown trigger="hover">
-          <GiMoreIcon class="mr"></GiMoreIcon>
+          <MagicIcon class="mr"></MagicIcon>
           <template #content>
             <a-doption @click="tabsStore.closeCurrent(route.path)">
               <template #icon><icon-close /></template>
@@ -42,6 +42,7 @@
 <script setup lang="ts" name="NavTab">
 import type { RouteRecordRaw } from 'vue-router'
 import { useTabsStore, useAppStore } from '@/store'
+import MagicIcon from './MagicIcon.vue'
 
 const route = useRoute()
 const router = useRouter()

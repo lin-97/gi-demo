@@ -2,7 +2,7 @@
   <div class="cate-tree">
     <!-- 搜索框 -->
     <div class="search-wrap">
-      <a-input allow-clear :maxlength="20" :placeholder="placeholder" v-model="inputValue">
+      <a-input allow-clear :maxlength="20" :placeholder="props.placeholder" v-model="inputValue">
         <template #prefix><icon-search /></template>
       </a-input>
     </div>
@@ -52,24 +52,19 @@
 </template>
 
 <script setup lang="ts">
+import { Message } from '@arco-design/web-vue'
+import { getCateTreeData, type CateItem } from '@/apis'
 import TreeSwitcherIcon from './TreeSwitcherIcon.vue'
 import RightMenu from './RightMenu.vue'
 
-import { getCateTreeData } from '@/apis'
-import type { CateItem } from '@/apis'
-import { Message } from '@arco-design/web-vue'
+interface Props {
+  type?: number
+  placeholder?: string
+}
 
-const props = defineProps({
-  // 分类
-  type: {
-    type: Number,
-    default: 1
-  },
-  // 占位符
-  placeholder: {
-    type: String,
-    default: '请输入关键词'
-  }
+const props = withDefaults(defineProps<Props>(), {
+  type: 1, // 分类
+  placeholder: '请输入关键词'
 })
 
 const loading = ref(false)
@@ -77,7 +72,9 @@ const treeRef = ref()
 const inputValue = ref('')
 const treeData = ref<CateItem[]>([])
 
-const emit = defineEmits(['node-click'])
+const emit = defineEmits<{
+  (e: 'node-click'): void
+}>()
 
 const select = () => {
   emit('node-click')

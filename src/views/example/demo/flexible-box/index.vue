@@ -54,7 +54,6 @@
 
 <script setup lang="ts">
 import { Modal } from '@arco-design/web-vue'
-import GiFlexibleBox from '@/components/GiFlexibleBox/index.vue'
 
 const visible = ref(true)
 
