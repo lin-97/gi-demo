@@ -4,7 +4,7 @@
     <a-layout-sider collapsible breakpoint="xl" :width="232" class="menu" @collapse="handleCollapse">
       <a-menu :selected-keys="[activeMenu]" :auto-open-selected="true" :style="{ width: '100%', height: '100%' }">
         <SidebarItem
-          v-for="(route, index) in sidebarRouters"
+          v-for="(route, index) in sidebarRoutes"
           :key="route.path + index"
           :item="route"
           :base-path="route.path"
@@ -23,14 +23,14 @@ const route = useRoute()
 const router = useRouter()
 
 const permissionStore = usePermissionStore()
-const sidebarRouters = computed(() => permissionStore.sidebarRouters)
+const sidebarRoutes = computed(() => permissionStore.sidebarRoutes)
 
 const collapse = ref(false)
 const handleCollapse = (isCollapse: boolean) => {
   collapse.value = isCollapse
 }
 
-console.log('sidebarRouters', JSON.parse(JSON.stringify(sidebarRouters.value)))
+console.log('sidebarRoutes', JSON.parse(JSON.stringify(sidebarRoutes.value)))
 
 // 当前页面激活菜单路径，先从路由里面找
 const activeMenu = computed(() => {

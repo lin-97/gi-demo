@@ -4,7 +4,7 @@ import type { RouteRecordRaw } from 'vue-router'
 import router, { constantRoutes, asyncRoutes as dynamicRoutes } from '@/router'
 import Layout from '@/layout/index.vue'
 import ParentView from '@/components/ParentView/index.vue'
-import { getUserRouters } from '@/apis'
+import { getUserRoutes } from '@/apis'
 import Has from '@/utils/has'
 
 // 匹配views里面所有的.vue文件
@@ -96,8 +96,8 @@ export const loadView = (view: any) => {
 const storeSetup = () => {
   const routes = ref<RouteRecordRaw[]>([]) // 常驻路由 + 动态路由（这时候component已经从字符串转为模块）
   const defaultRoutes = ref<RouteRecordRaw[]>([]) // 动态路由
-  const topbarRouters = ref<RouteRecordRaw[]>([])
-  const sidebarRouters = ref<RouteRecordRaw[]>([]) // 侧边栏路由
+  const topbarRoutes = ref<RouteRecordRaw[]>([])
+  const sidebarRoutes = ref<RouteRecordRaw[]>([]) // 侧边栏路由
 
   const setRoutes = (routesArray: RouteRecordRaw[]) => {
     routes.value = constantRoutes.concat(routesArray)
@@ -108,18 +108,18 @@ const storeSetup = () => {
   }
 
   const setTopbarRoutes = (routes: RouteRecordRaw[]) => {
-    topbarRouters.value = routes
+    topbarRoutes.value = routes
   }
 
-  const setSidebarRouters = (routes: RouteRecordRaw[]) => {
-    sidebarRouters.value = routes
+  const setSidebarRoutes = (routes: RouteRecordRaw[]) => {
+    sidebarRoutes.value = routes
   }
 
   /** 生成路由 */
   const generateRoutes = (): Promise<RouteRecordRaw[]> => {
     return new Promise((resolve) => {
       // 向后端请求路由数据
-      getUserRouters().then((res) => {
+      getUserRoutes().then((res) => {
         const sdata = JSON.parse(JSON.stringify(res.data))
         const rdata = JSON.parse(JSON.stringify(res.data))
         const defaultData = JSON.parse(JSON.stringify(res.data))
@@ -132,7 +132,7 @@ const storeSetup = () => {
         })
         setRoutes(rewriteRoutes)
         console.log('常驻路由constantRoutes', constantRoutes)
-        setSidebarRouters(constantRoutes.concat(sidebarRoutes))
+        setSidebarRoutes(constantRoutes.concat(sidebarRoutes))
         setDefaultRoutes(sidebarRoutes)
         setTopbarRoutes(defaultRoutes)
         resolve(rewriteRoutes)
@@ -143,8 +143,8 @@ const storeSetup = () => {
   return {
     routes,
     defaultRoutes,
-    topbarRouters,
-    sidebarRouters,
+    topbarRoutes,
+    sidebarRoutes,
     generateRoutes
   }
 }
