@@ -11,12 +11,8 @@ import Has from '@/utils/has'
 const modules = import.meta.glob('./../../views/**/*.vue')
 
 // 遍历后台传来的路由字符串，转换为组件对象
-function filterAsyncRouter(
-  asyncRouterMap: RouteRecordRaw[],
-  lastRouter: boolean | RouteRecordRaw = false,
-  type = false
-) {
-  return asyncRouterMap.filter((route) => {
+function filterAsyncRouter(asyncRoutes: RouteRecordRaw[], lastRouter: boolean | RouteRecordRaw = false, type = false) {
+  return asyncRoutes.filter((route) => {
     if (type && route.children) {
       route.children = filterChildren(route.children)
     }
@@ -40,9 +36,9 @@ function filterAsyncRouter(
   })
 }
 
-function filterChildren(childrenMap: RouteRecordRaw[], lastRouter: boolean | RouteRecordRaw = false) {
+function filterChildren(childrenRoutes: RouteRecordRaw[], lastRouter: boolean | RouteRecordRaw = false) {
   let children: RouteRecordRaw[] = []
-  childrenMap.forEach((el, index) => {
+  childrenRoutes.forEach((el, index) => {
     if (el.children && el.children.length) {
       if (typeof el.component === 'string' && el.component === 'ParentView' && !lastRouter) {
         el.children.forEach((c: RouteRecordRaw) => {
