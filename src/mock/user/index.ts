@@ -43,7 +43,7 @@ export default [
     timeout: 10,
     response: ({ headers }) => {
       const token = headers.token
-      if (token) {
+      if (token && ['TOKEN-admin', 'TOKEN-user'].includes(token)) {
         const isAdmin = token === 'TOKEN-admin'
         return successResponseWrap({
           name: isAdmin ? '管理员' : '木糖醇',
@@ -52,6 +52,7 @@ export default [
           permissions: isAdmin ? ['table:btn:edit'] : ['']
         })
       } else {
+        return failResponseWrap(null, 'token失效', 401)
       }
     }
   },
@@ -61,10 +62,11 @@ export default [
     timeout: 10,
     response: ({ headers }) => {
       const token = headers.token
-      if (token) {
+      if (token && ['TOKEN-admin', 'TOKEN-user'].includes(token)) {
         const isAdmin = token === 'TOKEN-admin'
         return isAdmin ? successResponseWrap(RoutesAdmin) : successResponseWrap(RoutesUser)
       } else {
+        return failResponseWrap(null, 'token失效', 401)
       }
     }
   }

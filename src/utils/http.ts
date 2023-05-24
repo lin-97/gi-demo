@@ -4,6 +4,7 @@ import { Message, Notification } from '@arco-design/web-vue'
 import { getToken } from '@/utils/auth'
 import NProgress from 'nprogress'
 import 'nprogress/nprogress.css'
+import router from '@/router'
 
 NProgress.configure({ showSpinner: false }) // NProgress Configuration
 
@@ -58,7 +59,15 @@ http.interceptors.request.use(
 http.interceptors.response.use(
   (response: AxiosResponse) => {
     const { data } = response
-    const { message, success } = data
+    const { message, success, code } = data
+
+    // token失效
+    if (code === 401) {
+      NProgress.done()
+      // Message.error('token失效')
+      router.replace('/login')
+      return Promise.reject(new Error('token失效'))
+    }
 
     if (!success) {
       NProgress.done()

@@ -64,8 +64,9 @@ watch(
 
 // 路由发生改变触发
 const handleRouteChange = () => {
-  tabsStore.addTagItem(JSON.parse(JSON.stringify(route as unknown as RouteRecordRaw)))
-  tabsStore.addCacheItem(JSON.parse(JSON.stringify(route as unknown as RouteRecordRaw)))
+  const item = { ...route } as unknown as RouteRecordRaw
+  tabsStore.addTagItem(item)
+  tabsStore.addCacheItem(item)
   console.log('路由对象', JSON.parse(JSON.stringify(route)))
   console.log('tagList', JSON.parse(JSON.stringify(tabsStore.tagList)))
   console.log('cacheList', JSON.parse(JSON.stringify(tabsStore.cacheList)))
