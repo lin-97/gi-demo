@@ -1,1 +1,0 @@
-import{r as t,p as e}from"./index-ad0224cd.js";function r(){return t.get(`${e}/system/dept/list`)}function i(){return t.get(`${e}/system/user/list`)}function n(){return t.get(`${e}/system/role/list`)}export{r as a,n as b,i as g};

@@ -75,7 +75,7 @@ export default [
           title: '文件列表',
           icon: 'icon-folder',
           keepAlive: true,
-          hidden: true
+          hidden: false
         }
       },
       {
