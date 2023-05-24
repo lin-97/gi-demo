@@ -50,7 +50,8 @@ export default [
           hidden: true,
           title: '详情',
           keepAlive: false,
-          affix: false
+          affix: false,
+          activeMenu: '/data/main'
         }
       }
     ]
@@ -86,7 +87,8 @@ export default [
           hidden: true,
           title: '详情',
           keepAlive: false,
-          affix: false
+          affix: false,
+          activeMenu: '/file/main'
         }
       }
     ]
