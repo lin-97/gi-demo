@@ -65,12 +65,12 @@ http.interceptors.response.use(
       Notification.error(message || '服务器端错误')
       return Promise.reject(new Error('Error'))
     }
+
     NProgress.done()
     return response
   },
   (error) => {
     NProgress.done()
-
     Message.clear()
     const response = Object.assign({}, error.response)
     response && Message.error(StatusCodeMessage[response.status] || '系统异常, 请检查网络或联系管理员！')

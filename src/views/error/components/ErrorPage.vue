@@ -26,14 +26,14 @@ const props = withDefaults(defineProps<Props>(), {
 const router = useRouter()
 
 const countDownTime = ref(5)
-const timer = ref(0)
+let timer: NodeJS.Timer
 
 onMounted(() => {
   onCountDownTime()
 })
 
 onBeforeUnmount(() => {
-  clearInterval(timer.value)
+  clearInterval(timer)
 })
 
 // 返回页面
@@ -43,12 +43,12 @@ const back = () => {
 
 // 倒计时
 const onCountDownTime = () => {
-  timer.value = setInterval(() => {
+  timer = setInterval(() => {
     if (countDownTime.value) {
       countDownTime.value--
     } else {
       // back()
-      clearInterval(timer.value)
+      clearInterval(timer)
     }
   }, 1000)
 }

@@ -4,10 +4,17 @@ import type { RoleItem } from '@/apis'
 
 /** 角色模块 */
 export function useRole() {
+  const loading = ref(false)
   const roleList = ref<RoleItem[]>([])
   const getRoleList = async () => {
-    const res = await getSystemRoleList()
-    roleList.value = res.data.list
+    try {
+      loading.value = true
+      const res = await getSystemRoleList()
+      roleList.value = res.data.list
+    } catch (error) {
+    } finally {
+      loading.value = false
+    }
   }
-  return { roleList, getRoleList }
+  return { roleList, getRoleList, loading }
 }

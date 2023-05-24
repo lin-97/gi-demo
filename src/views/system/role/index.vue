@@ -64,7 +64,8 @@ defineOptions({ name: 'SystemRole' })
 
 const loading = ref(false)
 const EditRoleModalRef = ref<InstanceType<typeof EditRoleModal>>()
-const { roleList } = useRole()
+const { roleList, getRoleList } = useRole()
+getRoleList()
 
 const onAdd = () => {
   EditRoleModalRef.value?.add()

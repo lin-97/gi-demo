@@ -91,16 +91,11 @@ export const loadView = (view: string) => {
 
 const storeSetup = () => {
   const routes = ref<RouteRecordRaw[]>([]) // 常驻路由 + 动态路由（这时候component已经从字符串转为模块）
-  const defaultRoutes = ref<RouteRecordRaw[]>([]) // 动态路由
-  const topbarRoutes = ref<RouteRecordRaw[]>([])
+  const topbarRoutes = ref<RouteRecordRaw[]>([]) // 页签路由
   const sidebarRoutes = ref<RouteRecordRaw[]>([]) // 侧边栏路由
 
   const setRoutes = (routesArray: RouteRecordRaw[]) => {
     routes.value = constantRoutes.concat(routesArray)
-  }
-
-  const setDefaultRoutes = (routes: RouteRecordRaw[]) => {
-    defaultRoutes.value = constantRoutes.concat(routes)
   }
 
   const setTopbarRoutes = (routes: RouteRecordRaw[]) => {
@@ -119,17 +114,19 @@ const storeSetup = () => {
         const sdata = JSON.parse(JSON.stringify(res.data))
         const rdata = JSON.parse(JSON.stringify(res.data))
         const defaultData = JSON.parse(JSON.stringify(res.data))
+
         const sidebarRoutes = filterAsyncRouter(sdata)
         const rewriteRoutes = filterAsyncRouter(rdata, false, true)
         const defaultRoutes = filterAsyncRouter(defaultData)
+
         const asyncRoutes = filterDynamicRoutes(dynamicRoutes)
         asyncRoutes.forEach((route) => {
           router.addRoute(route)
         })
+
         setRoutes(rewriteRoutes)
-        console.log('常驻路由constantRoutes', constantRoutes)
+        // console.log('常驻路由constantRoutes', constantRoutes)
         setSidebarRoutes(constantRoutes.concat(sidebarRoutes))
-        setDefaultRoutes(sidebarRoutes)
         setTopbarRoutes(defaultRoutes)
         resolve(rewriteRoutes)
       })
@@ -138,7 +135,6 @@ const storeSetup = () => {
 
   return {
     routes,
-    defaultRoutes,
     topbarRoutes,
     sidebarRoutes,
     generateRoutes

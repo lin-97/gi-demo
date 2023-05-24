@@ -85,7 +85,8 @@ export default [
         meta: {
           hidden: true,
           title: '详情',
-          keepAlive: false
+          keepAlive: false,
+          affix: false
         }
       }
     ]
@@ -359,6 +360,7 @@ export default [
   },
   {
     path: '/user',
+    name: 'User',
     component: 'Layout',
     // redirect: '/user/index',
     meta: {

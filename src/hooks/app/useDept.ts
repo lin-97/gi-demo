@@ -4,10 +4,18 @@ import type { DeptItem } from '@/apis'
 
 /** 部门模块 */
 export function useDept() {
+  const loading = ref(false)
   const deptList = ref<DeptItem[]>([])
+
   const getDeptList = async () => {
-    const res = await getSystemDeptList()
-    deptList.value = res.data.list
+    try {
+      loading.value = true
+      const res = await getSystemDeptList()
+      deptList.value = res.data.list
+    } catch (error) {
+    } finally {
+      loading.value = false
+    }
   }
-  return { deptList, getDeptList }
+  return { deptList, getDeptList, loading }
 }

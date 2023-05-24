@@ -2,7 +2,6 @@ import { createRouter, createWebHashHistory, type RouteRecordNormalized, type Ro
 import _XEUtils_ from 'xe-utils'
 import ConstantRoutes from './constant-routes'
 import AsyncRoutes from './async-routes'
-import type { AppRouteRecordRaw } from '@/router/type'
 
 /** 常驻路由 */
 export const constantRoutes = ConstantRoutes

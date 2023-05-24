@@ -8,18 +8,25 @@
       <!-- 右侧 -->
       <div class="login-right">
         <a-form
+          ref="FormRef"
           :model="form"
           :style="{ width: '84%' }"
           :label-col-style="{ display: 'none' }"
           :wrapper-col-style="{ flex: 1 }"
         >
           <h3 class="login-form-title"><img class="logo" src="@/assets/images/logo.gif" /><span>Admin Pro</span></h3>
-          <a-form-item field="username">
+          <a-form-item field="username" :rules="[{ required: true, message: '请输入账号' }]">
             <a-input v-model="form.username" placeholder="账号 admin/user" size="medium" allow-clear>
               <template #prefix><icon-user :stroke-width="1" :style="{ fontSize: '20px' }" /></template>
             </a-input>
           </a-form-item>
-          <a-form-item field="password">
+          <a-form-item
+            field="password"
+            :rules="[
+              { required: true, message: '请输入密码' },
+              { match: Regexp.Password, message: '输入密码格式不正确' }
+            ]"
+          >
             <a-input-password v-model="form.password" placeholder="密码" size="medium" allow-clear>
               <template #prefix><icon-lock :stroke-width="1" :style="{ fontSize: '20px' }" /></template>
             </a-input-password>
@@ -49,8 +56,9 @@
 <script setup lang="ts">
 import { useUserStore } from '@/store'
 import { useLoading } from '@/hooks'
-import { Message } from '@arco-design/web-vue'
+import { Message, type FormInstance } from '@arco-design/web-vue'
 import LoginBg from './components/LoginBg/index.vue'
+import * as Regexp from '@/utils/regexp'
 
 defineOptions({ name: 'Login' })
 const router = useRouter()
@@ -67,15 +75,12 @@ const checked = ref(false)
 const { loading, setLoading } = useLoading()
 const errorMessage = ref('')
 
+const FormRef = ref<FormInstance>()
 // 点击登录
 const login = async () => {
   try {
-    if (!form.username) {
-      return Message.warning('请输入账户名称')
-    }
-    if (!form.password) {
-      return Message.warning('请输入账户密码')
-    }
+    const flag = await FormRef.value?.validate()
+    if (flag) return
     setLoading(true)
     await userStore.login(form)
     router.push('/')
