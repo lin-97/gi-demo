@@ -1,6 +1,6 @@
 <template>
   <div class="data-pane">
-    <a-card title="数据分类" :bordered="false" class="gi_card pane-left">
+    <a-card v-if="!_XEUtils_.browse().isMobile" title="数据分类" :bordered="false" class="gi_card pane-left">
       <CateTree placeholder="请输入搜索关键词" @node-click="pagination.onChange(1)"></CateTree>
     </a-card>
 
@@ -98,6 +98,7 @@ import EditModal from './EditModal.vue'
 import { getPersonList } from '@/apis'
 import type { PersonItem } from '@/apis'
 import { StatusList } from '@/constant/person'
+import _XEUtils_ from 'xe-utils'
 
 const router = useRouter()
 

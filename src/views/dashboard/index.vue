@@ -2,16 +2,16 @@
   <div class="home" id="home-wrap">
     <WorkCard></WorkCard>
 
-    <div class="wrap">
-      <section class="left">
+    <a-row class="row">
+      <a-col :xs="24" :md="24" :lg="12" :xl="12" :xxl="12">
         <div class="item"><ProjectCard></ProjectCard></div>
         <div class="item"><MessageCard></MessageCard></div>
-      </section>
-      <section class="right">
+      </a-col>
+      <a-col :xs="24" :md="24" :lg="12" :xl="12" :xxl="12">
         <div class="item"><FastCard></FastCard></div>
         <div class="item"><ImageCard></ImageCard></div>
-      </section>
-    </div>
+      </a-col>
+    </a-row>
 
     <a-back-top :visible-height="100" target-container="#home-wrap">
       <GiSvgIcon name="backtop" :size="50" style="cursor: pointer"></GiSvgIcon>
@@ -35,19 +35,11 @@ defineOptions({ name: 'Home' })
   height: 100%;
   overflow: hidden;
   overflow-y: auto;
-  .wrap {
-    display: flex;
-    flex-wrap: wrap;
-    padding: calc($margin / 2);
-    .left,
-    .right {
-      flex: 1;
-      flex-shrink: 0;
-      min-width: 450px;
-      overflow: hidden;
-    }
+  .row {
+    padding: 6px;
     .item {
-      padding: calc($margin / 2);
+      padding: 6px;
+      box-sizing: border-box;
     }
   }
 }

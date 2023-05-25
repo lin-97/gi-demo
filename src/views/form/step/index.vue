@@ -1,7 +1,7 @@
 <template>
   <div class="step-form">
     <section class="form-box">
-      <a-steps :current="current">
+      <a-steps :current="current" :direction="!_XEUtils_.browse().isMobile ? 'horizontal' : 'vertical'">
         <a-step description="确保填写正确">填写转账信息</a-step>
         <a-step description="确认转账信息">确认转账信息</a-step>
         <a-step description="恭喜您，转账成功">完成转账</a-step>
@@ -21,6 +21,7 @@ import Step1 from './Step1.vue'
 import Step2 from './Step2.vue'
 import Step3 from './Step3.vue'
 import type { StepForm } from './type'
+import _XEUtils_ from 'xe-utils'
 
 defineOptions({ name: 'FormStep' })
 
@@ -62,8 +63,8 @@ const prev = () => {
   justify-content: center;
   box-sizing: border-box;
   .form-box {
-    width: 50%;
-    min-width: 500px;
+    width: 100%;
+    max-width: 560px;
     margin-top: 30px;
     flex-shrink: 0;
   }

@@ -60,10 +60,10 @@ const activeKey = ref(1)
   align-items: stretch;
   .pane-left {
     width: 260px;
+    margin-right: $margin;
   }
   .pane-right {
     flex: 5;
-    margin-left: $margin;
     .content {
       flex: 1;
       overflow: hidden;

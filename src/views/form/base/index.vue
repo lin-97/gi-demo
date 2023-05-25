@@ -69,7 +69,7 @@
               </a-space>
             </a-form-item>
           </a-form>
-          <section>
+          <section v-if="!_XEUtils_.browse().isMobile">
             <pre>{{ form }}</pre>
           </section>
         </a-space>
@@ -82,6 +82,7 @@
 import type { Form, RangePickerInstance } from '@arco-design/web-vue'
 import { Message } from '@arco-design/web-vue'
 import * as Regexp from '@/utils/regexp'
+import _XEUtils_ from 'xe-utils'
 
 defineOptions({ name: 'FormBase' })
 
@@ -189,7 +190,7 @@ const submit = async () => {
 }
 
 .form {
-  margin-left: 40px;
+  // margin-left: 40px;
   margin-top: 40px;
 }
 </style>

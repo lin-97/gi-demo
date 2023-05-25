@@ -1,6 +1,8 @@
 <template>
   <a-layout-header>
-    <Breadcrumb></Breadcrumb>
+    <Breadcrumb v-if="!_XEUtils_.browse().isMobile"></Breadcrumb>
+    <section v-else></section>
+
     <a-space class="system-head" size="medium">
       <!-- 项目配置 -->
       <a-tooltip content="项目配置" position="bl">
@@ -26,7 +28,7 @@
       </a-popover>
 
       <!-- 全屏切换组件 -->
-      <a-tooltip content="全屏切换" position="bottom">
+      <a-tooltip v-if="!_XEUtils_.browse().isMobile" content="全屏切换" position="bottom">
         <a-button size="mini" class="gi_hover_btn" @click="onToggleFullScreen">
           <template #icon>
             <icon-fullscreen :size="18" v-if="!isFullScreen" />
@@ -84,6 +86,7 @@ import { useUserStore } from '@/store'
 import { useFullScreen } from '@/hooks'
 import SettingDrawer from './SettingDrawer.vue'
 import Message from './Message.vue'
+import _XEUtils_ from 'xe-utils'
 
 const router = useRouter()
 const userStore = useUserStore()
