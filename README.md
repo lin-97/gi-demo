@@ -1116,6 +1116,18 @@ const add = (num1, num2) => num1 + num2
 清浮动    clear
 ```
 
+
+
+## Vue相关
+
+[Vue3 官网](https://cn.vuejs.org/)
+
+[Vue-Router](https://router.vuejs.org/zh/)
+
+[Vite](https://cn.vitejs.dev/)
+
+[Pinia](https://pinia.web3doc.top/)
+
 ## 插件推荐
 
 [Arco Design 组件库](https://arco.design/vue/component/button)
@@ -1134,6 +1146,16 @@ const add = (num1, num2) => num1 + num2
 
 [Vue-Color-Kit 一个 vue3 颜色选择器组件 ](https://www.npmjs.com/package/vue-color-kit)
 
+[Vxe-Table](https://vxetable.cn/#/table/start/install)
+
+
+
+**其他**
+
+[VCalendar 日历组件](https://vcalendar.io/)
+
+[Vue Cal 日历组件](https://antoniandre.github.io/vue-cal/)
+
 
 
 ## 推荐书籍
@@ -1142,8 +1164,28 @@ const add = (num1, num2) => num1 + num2
 
 [前端宝典](https://vue3js.cn/interview/)
 
+[web开发人员需要知道的CSS技巧](https://lhammer.cn/You-need-to-know-css/#/translucent-borders)
+
+[阮一峰 ES6](https://es6.ruanyifeng.com/#README)
+
+[阮一峰 flex布局](https://www.ruanyifeng.com/blog/2015/07/flex-grammar.html)
+
 ## 开源项目集合
 
 [Vue3 开源项目集合](https://vue-admin.cn/admin)
 
 [React 开源项目集合](https://react-admin.cn/admin/)
+
+
+
+## 工具
+
+[菜鸟工具](https://c.runoob.com/)
+
+[代码生成图片](https://carbon.now.sh/?bg=rgba%28171%2C+184%2C+195%2C+1%29&t=material&wt=none&l=auto&width=680&ds=true&dsyoff=20px&dsblur=68px&wc=true&wa=true&pv=56px&ph=56px&ln=false&fl=1&fm=Hack&fs=14px&lh=133%25&si=false&es=2x&wm=false)
+
+[JSON-TO-ANY 对象转ts类型)](http://xiets.gitee.io/json-to-any-web/)
+
+[在线三角形样式生成器](http://49.234.61.19/tool/cssTriangle)
+
+[iTab](https://go.itab.link/)
