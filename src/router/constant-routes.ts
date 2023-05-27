@@ -33,13 +33,13 @@ export const constantRoutes: RouteRecordRaw[] = [
   {
     path: '',
     component: Layout,
-    redirect: '/index',
+    redirect: '/home',
     children: [
       {
-        path: '/index',
-        component: () => import('@/views/dashboard/index.vue'),
+        path: '/home',
+        component: () => import('@/views/home/index.vue'),
         name: 'Index',
-        meta: { title: '首页', icon: 'icon-dashboard', affix: true, svgIcon: 'menu-index' }
+        meta: { title: '首页', icon: 'icon-dashboard', affix: true, svgIcon: 'menu-home' }
       }
     ]
   }

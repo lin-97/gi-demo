@@ -72,7 +72,11 @@ const onCountDownTime = () => {
     width: 100%;
     position: relative;
     overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     .img-parent {
+      max-width: 90%;
       height: 50vh;
     }
     .img-child {
@@ -107,8 +111,10 @@ const onCountDownTime = () => {
       animation-fill-mode: forwards;
     }
     .info {
+      padding: 0 30px;
       margin-bottom: 20px;
       font-size: 13px;
+      text-align: center;
       line-height: 20px;
       color: var(--color-text-2);
       opacity: 0;

@@ -1,9 +1,13 @@
 <template>
-  <div class="gi-footer">Copyright 2022 Gi Admin Pro</div>
+  <div class="gi-footer">Copyright {{ year }} Gi Admin Pro</div>
 </template>
 
 <script lang="ts" setup>
+import Dayjs from 'dayjs'
+
 defineOptions({ name: 'GiFooter' })
+
+const year = Dayjs(new Date()).format('YYYY')
 </script>
 
 <style lang="scss" scoped>

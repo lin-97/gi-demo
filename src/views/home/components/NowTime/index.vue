@@ -6,7 +6,7 @@
 </template>
 
 <script setup lang="ts">
-import dayjs from 'dayjs'
+import Dayjs from 'dayjs'
 
 defineOptions({ name: 'GiNowTime' })
 const time = ref('')
@@ -14,7 +14,7 @@ const time = ref('')
 // 获取现在时间
 const getFormatNowTime = () => {
   const weekList = ['日', '一', '二', '三', '四', '五', '六']
-  return `${dayjs(new Date()).format('YYYY年MM月DD日 HH:mm:ss')} 星期${weekList[dayjs(new Date()).day()]}`
+  return `${Dayjs(new Date()).format('YYYY年MM月DD日 HH:mm:ss')} 星期${weekList[Dayjs(new Date()).day()]}`
 }
 
 // 初始化时间

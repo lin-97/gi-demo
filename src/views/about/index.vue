@@ -26,13 +26,19 @@ const data = packageJson
 </script>
 
 <style lang="scss" scoped>
+:deep(.arco-descriptions-border .arco-descriptions-body) {
+  overflow-x: auto;
+}
+
 .about {
   padding: $margin;
   box-sizing: border-box;
   overflow-y: auto;
+
   .content {
     background: var(--color-bg-1);
     padding: $padding;
+    padding-bottom: 0;
     box-sizing: border-box;
   }
 }

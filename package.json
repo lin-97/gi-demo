@@ -37,7 +37,7 @@
     "xgplayer": "^2.31.6"
   },
   "devDependencies": {
-    "@arco-design/web-vue": "^2.46.0",
+    "@arco-design/web-vue": "^2.46.1",
     "@rushstack/eslint-patch": "^1.2.0",
     "@types/lodash": "^4.14.194",
     "@types/node": "^18.16.13",

@@ -4,10 +4,10 @@
       <a-card :bordered="false" hoverable :class="'animated-fade-up-' + index">
         <div class="head">
           <GiSvgIcon :size="30" :name="item.icon"></GiSvgIcon>
-          <span>{{ item.name }}</span>
+          <span class="gi_line_1">{{ item.name }}</span>
         </div>
-        <p class="text">{{ item.text }}</p>
-        <p class="desc">{{ item.time }}</p>
+        <p class="text gi_line_2">{{ item.text }}</p>
+        <p class="desc gi_line_1">{{ item.time }}</p>
       </a-card>
     </a-card-grid>
   </a-card>
@@ -59,6 +59,7 @@ const list = [
 :deep(.arco-card-header) {
   border: none;
 }
+
 .head {
   display: flex;
   align-items: center;
@@ -69,14 +70,17 @@ const list = [
     color: var(--color-text-2);
   }
 }
+
 .text {
+  flex: 1;
   margin-top: 10px;
-  line-height: 1.4;
-  height: 50px;
+  line-height: 1.5;
   color: var(--color-text-3);
 }
+
 .desc {
   font-size: 12px;
   color: var(--color-text-3);
+  margin-top: 8px;
 }
 </style>

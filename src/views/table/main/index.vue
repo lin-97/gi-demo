@@ -94,13 +94,13 @@
               <a-typography-text v-else type="danger">关闭</a-typography-text>
             </template>
           </a-table-column>
-          <a-table-column title="操作" :width="230" align="left">
+          <a-table-column title="操作" :width="200" align="left">
             <template #cell="{ record }">
               <a-space>
                 <a-button type="primary" size="mini" v-hasPerm="['table:btn:edit']">
                   <span>编辑</span>
                 </a-button>
-                <a-button type="primary" size="mini">
+                <a-button size="mini">
                   <span>详情</span>
                 </a-button>
                 <a-popconfirm type="warning" content="您确定要删除该项吗?">
@@ -184,7 +184,6 @@ getTableData()
   margin: $margin;
   background: var(--color-bg-1);
   padding: $padding;
-  padding-bottom: 0;
   box-sizing: border-box;
   display: flex;
   flex-direction: column;

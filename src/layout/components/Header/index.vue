@@ -1,80 +1,86 @@
 <template>
   <a-layout-header>
-    <Breadcrumb v-if="!_XEUtils_.browse().isMobile"></Breadcrumb>
-    <section v-else></section>
+    <a-row align="center" class="h-100">
+      <a-col :xs="0" :md="10" :lg="10" :xl="12" :xxl="12">
+        <Breadcrumb></Breadcrumb>
+      </a-col>
+      <a-col :xs="24" :md="14" :lg="14" :xl="12" :xxl="12">
+        <a-row justify="end" align="center">
+          <a-space size="medium">
+            <!-- 项目配置 -->
+            <a-tooltip content="项目配置" position="bl">
+              <a-button size="mini" class="gi_hover_btn" @click="SettingDrawerRef?.open">
+                <template #icon>
+                  <icon-settings :size="18" />
+                </template>
+              </a-button>
+            </a-tooltip>
 
-    <a-space class="system-head" size="medium">
-      <!-- 项目配置 -->
-      <a-tooltip content="项目配置" position="bl">
-        <a-button size="mini" class="gi_hover_btn" @click="SettingDrawerRef?.open">
-          <template #icon>
-            <icon-settings :size="18" />
-          </template>
-        </a-button>
-      </a-tooltip>
+            <!-- 消息通知 -->
+            <a-popover position="br" trigger="click">
+              <a-badge :count="9" dot>
+                <a-button size="mini" class="gi_hover_btn">
+                  <template #icon>
+                    <icon-notification :size="18" />
+                  </template>
+                </a-button>
+              </a-badge>
+              <template #content>
+                <Message></Message>
+              </template>
+            </a-popover>
 
-      <!-- 消息通知 -->
-      <a-popover position="br" trigger="click">
-        <a-badge :count="9" dot>
-          <a-button size="mini" class="gi_hover_btn">
-            <template #icon>
-              <icon-notification :size="18" />
-            </template>
-          </a-button>
-        </a-badge>
-        <template #content>
-          <Message></Message>
-        </template>
-      </a-popover>
+            <!-- 全屏切换组件 -->
+            <a-tooltip v-if="!_XEUtils_.browse().isMobile" content="全屏切换" position="bottom">
+              <a-button size="mini" class="gi_hover_btn" @click="onToggleFullScreen">
+                <template #icon>
+                  <icon-fullscreen :size="18" v-if="!isFullScreen" />
+                  <icon-fullscreen-exit :size="18" v-else />
+                </template>
+              </a-button>
+            </a-tooltip>
 
-      <!-- 全屏切换组件 -->
-      <a-tooltip v-if="!_XEUtils_.browse().isMobile" content="全屏切换" position="bottom">
-        <a-button size="mini" class="gi_hover_btn" @click="onToggleFullScreen">
-          <template #icon>
-            <icon-fullscreen :size="18" v-if="!isFullScreen" />
-            <icon-fullscreen-exit :size="18" v-else />
-          </template>
-        </a-button>
-      </a-tooltip>
+            <!-- 暗黑模式切换 -->
+            <a-tooltip content="主题切换" position="bottom">
+              <GiThemeBtn></GiThemeBtn>
+            </a-tooltip>
 
-      <!-- 暗黑模式切换 -->
-      <a-tooltip content="主题切换" position="bottom">
-        <GiThemeBtn></GiThemeBtn>
-      </a-tooltip>
-
-      <!-- 管理员账户 -->
-      <a-dropdown trigger="hover">
-        <a-row align="center" class="user">
-          <!-- 管理员头像 -->
-          <a-avatar :size="32">
-            <img :src="userStore.userInfo.avatar" />
-          </a-avatar>
-          <span class="username">{{ userStore.userName }}</span>
-          <icon-down />
+            <!-- 管理员账户 -->
+            <a-dropdown trigger="hover">
+              <a-row align="center" :wrap="false" class="user">
+                <!-- 管理员头像 -->
+                <a-avatar :size="32">
+                  <img :src="userStore.userInfo.avatar" />
+                </a-avatar>
+                <span class="username">{{ userStore.userName }}</span>
+                <icon-down />
+              </a-row>
+              <template #content>
+                <a-doption @click="toUser">
+                  <template #icon>
+                    <span class="doption-icon primary"><icon-user /></span>
+                  </template>
+                  <span>个人中心</span>
+                </a-doption>
+                <a-doption @click="toGitPath">
+                  <template #icon>
+                    <span class="doption-icon success"><icon-github /></span>
+                  </template>
+                  <span>项目地址</span>
+                </a-doption>
+                <a-divider style="margin: 0" />
+                <a-doption @click="logout">
+                  <template #icon>
+                    <span class="doption-icon warning"><icon-export /></span>
+                  </template>
+                  <span>退出登录</span>
+                </a-doption>
+              </template>
+            </a-dropdown>
+          </a-space>
         </a-row>
-        <template #content>
-          <a-doption @click="toUser">
-            <template #icon>
-              <span class="doption-icon" style="background: rgba(var(--primary-6))"><icon-user /></span>
-            </template>
-            <template #default>个人中心</template>
-          </a-doption>
-          <a-doption @click="toGitPath">
-            <template #icon
-              ><span class="doption-icon" style="background: rgba(var(--success-6))"><icon-github /></span
-            ></template>
-            <template #default>项目地址</template>
-          </a-doption>
-          <a-divider style="margin: 0" />
-          <a-doption @click="logout">
-            <template #icon>
-              <span class="doption-icon" style="background: rgba(var(--warning-6))"><icon-export /></span>
-            </template>
-            <template #default>退出登录</template>
-          </a-doption>
-        </template>
-      </a-dropdown>
-    </a-space>
+      </a-col>
+    </a-row>
 
     <SettingDrawer ref="SettingDrawerRef"></SettingDrawer>
   </a-layout-header>
@@ -95,7 +101,7 @@ const SettingDrawerRef = ref<InstanceType<typeof SettingDrawer>>()
 
 // 跳转个人中心
 const toUser = () => {
-  router.push('/system/account')
+  router.push('/user')
 }
 
 // 退出登录
@@ -132,25 +138,27 @@ const toGitPath = () => {
   flex-shrink: 0;
   color: #fff;
   border-radius: 4px;
+  &.primary {
+    background-color: rgba(var(--primary-6));
+  }
+  &.success {
+    background-color: rgba(var(--success-6));
+  }
+  &.warning {
+    background-color: rgba(var(--warning-6));
+  }
 }
 
 .arco-layout-header {
   padding: 0 $padding;
   height: 56px;
   background: var(--color-bg-1);
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
   border-bottom: 1px solid var(--color-neutral-3);
-  .system-head {
-    display: flex;
-    align-items: center;
-  }
   .user {
-    color: var(--color-text-2);
     cursor: pointer;
     .username {
       margin-left: 10px;
+      white-space: nowrap;
     }
     .arco-icon-down {
       transition: all 0.3s;

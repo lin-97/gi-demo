@@ -1,7 +1,7 @@
 <template>
   <div class="analyse">
     <section class="head">
-      <a-row :gutter="16">
+      <a-row :gutter="14">
         <a-col :xs="12" :md="12" :lg="6" :xl="6" :xxl="6">
           <a-card title="访问量" :bordered="false" class="card-item">
             <template #extra>
@@ -86,7 +86,7 @@
           </a-card>
         </a-col>
       </a-row>
-      <a-row :gutter="16">
+      <a-row :gutter="14">
         <a-col
           :xs="12"
           :sm="8"
