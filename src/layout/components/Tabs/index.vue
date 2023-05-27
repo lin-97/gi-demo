@@ -13,7 +13,7 @@
         v-for="item of tabsStore.tagList"
         :key="item.path"
         :title="(item.meta?.title as string)"
-        :closable="item.path !== '/index'"
+        :closable="item.path !== '/home'"
       ></a-tab-pane>
       <!-- 右侧按钮 -->
       <template #extra>
