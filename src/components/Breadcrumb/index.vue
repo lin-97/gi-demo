@@ -19,7 +19,7 @@ function getBreadcrumbList() {
   const matched = route.matched.filter((item) => item.meta && item.meta.title)
   const first = matched[0]
   if (!isHome(first)) {
-    matched.unshift({ path: '/index', meta: { title: '首页' } } as RouteLocationMatched)
+    matched.unshift({ path: '/', meta: { title: '首页' } } as RouteLocationMatched)
   }
   breadcrumbList.value = matched.filter((item) => item.meta && item.meta.title && item.meta.breadcrumb !== false)
 }
