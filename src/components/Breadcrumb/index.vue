@@ -34,7 +34,7 @@ watchEffect(() => {
 function isHome(route: RouteLocationMatched) {
   const name = route.name as string
   if (!name) return false
-  return name.trim() === 'Index'
+  return name.trim() === 'Home'
 }
 
 // 路由跳转
