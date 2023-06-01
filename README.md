@@ -152,6 +152,88 @@ import type { DeptItem, UserItem, RoleItem } from './type'
 
 
 
+#### 接口调用书写
+
+**写法一**
+
+不需要 loading，不需要错误打印的 情况
+
+~~~vue
+<script setup lang="ts">
+import { ref } from 'vue'
+import { getUserList as getUserListApi, type UserItem } from '@/apis'  // 同名可以使用别名
+    
+const userList = ref<UserItem[]>([])
+const getUserList = async () => {
+    const res = await getUserListApi()
+    console.log('如果异步成功，则会打印这行文字，否则不会打印这行文字，也不会往下执行')
+    userList.value = res.data
+}
+</script>
+
+// getUserListApi 是一个 Promise 异步函数，Promise 最后只有 成功 / 失败 两种状态
+// getUserListApi 是基于 axios 封装的，在 axios 响应拦截器做了处理
+// 当 res.success === false 的时候 Promise.reject(), 也就异步失败，异步失败不会往下执行
+~~~
+
+**写法二**
+
+需要 loading，需要错误打印的情况
+
+~~~vue
+<script setup lang="ts">
+import { ref } from 'vue'
+import { getUserList as getUserListApi, type UserItem } from '@/apis'  // 同名可以使用别名
+
+const loading = ref(false)
+const userList = ref<UserItem[]>([])
+const getUserList = async () => {
+    try {
+        loading.value = true
+        const res = await getUserListApi()
+        console.log('如果异步成功，则会打印这行文字，否则不会打印这行文字，也不会往下执行')
+        userList.value = res.data
+    } catch(error) {
+        console.log('如果异步失败，会打印这行文字')
+        // 由于 axios 在封装的时候，已经在异步失败给了失败的提示弹窗处理
+        // 所以这里没必要再写 Message.error(error)
+    } finally {
+        console.log('如果异步或者失败，都会打印这行代码')
+        loading.value = false // 可以用来处理 loading
+    }
+}
+</script>
+~~~
+
+**写法三**
+
+需要 loading, 不需要错误打印（不进行错误处理）的情况
+
+~~~vue
+<script setup lang="ts">
+import { ref } from 'vue'
+import { getUserList as getUserListApi, type UserItem } from '@/apis'  // 同名可以使用别名
+
+const loading = ref(false)
+const userList = ref<UserItem[]>([])
+const getUserList = async () => {
+    try {
+        loading.value = true
+        const res = await getUserListApi()
+        console.log('如果异步成功，则会打印这行文字，否则不会打印这行文字，也不会往下执行')
+        userList.value = res.data
+    } finally {
+        console.log('如果异步或者失败，都会打印这行代码')
+        loading.value = false // 可以用来处理 loading
+    }
+}
+</script>
+
+// catch 可以省略
+~~~
+
+
+
 #### 正则导入
 
 文件位置：@/utils/regexp.ts
