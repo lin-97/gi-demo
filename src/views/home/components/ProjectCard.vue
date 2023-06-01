@@ -2,12 +2,16 @@
   <a-card title="项目" :bordered="false" size="medium" style="overflow: hidden">
     <a-card-grid :style="{ width: '33.33%' }" v-for="(item, index) in list" :key="item.name" class="card-grid-item">
       <a-card :bordered="false" hoverable :class="'animated-fade-up-' + index">
-        <div class="head">
-          <GiSvgIcon :size="30" :name="item.icon"></GiSvgIcon>
-          <span class="gi_line_1">{{ item.name }}</span>
-        </div>
-        <p class="text gi_line_2">{{ item.text }}</p>
-        <p class="desc gi_line_1">{{ item.time }}</p>
+        <section class="item">
+          <div class="head">
+            <GiSvgIcon :size="30" :name="item.icon"></GiSvgIcon>
+            <span class="gi_line_1">{{ item.name }}</span>
+          </div>
+          <div class="fill">
+            <p class="text gi_line_2">{{ item.text }}</p>
+          </div>
+          <p class="desc gi_line_1">{{ item.time }}</p>
+        </section>
       </a-card>
     </a-card-grid>
   </a-card>
@@ -56,8 +60,25 @@ const list = [
 </script>
 
 <style lang="scss" scoped>
+:deep(.arco-card) {
+  height: 100%;
+  .arco-card-body {
+    height: 100%;
+    box-sizing: border-box;
+  }
+}
+
 :deep(.arco-card-header) {
   border: none;
+}
+
+.item {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  .fill {
+    flex: 1;
+  }
 }
 
 .head {

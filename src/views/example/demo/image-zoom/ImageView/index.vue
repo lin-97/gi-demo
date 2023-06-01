@@ -8,7 +8,7 @@
       @mousemove="move"
       @click="preview"
     >
-      <img class="animated fadeIn" :src="list[currentIndex].src" :key="currentIndex" />
+      <img class="animate__animated animate__fadeIn" :src="list[currentIndex].src" :key="currentIndex" />
 
       <!-- 变焦盒子 -->
       <div
@@ -56,7 +56,7 @@
     <div
       v-show="props.zoom && showZoom"
       ref="ZoomBRef"
-      class="zoom-b animated fadeIn"
+      class="zoom-b animate__animated animate__fadeIn"
       :style="{ left: width + 10 + 'px' }"
     >
       <img

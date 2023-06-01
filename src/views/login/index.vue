@@ -1,6 +1,6 @@
 <template>
   <div class="login">
-    <section class="login-box animated flipInY">
+    <section class="login-box animate__animated animate__zoomIn">
       <!-- 左侧 -->
       <div class="login-left">
         <img class="login-img" src="@/assets/svgs/login-img.svg" />
