@@ -14,10 +14,10 @@
     },
     "lib": ["es2020", "dom"],
     "skipLibCheck": true,
-    "allowJs": true,
+    "allowJs": true
   },
   "extends": "@vue/tsconfig/tsconfig.web.json",
-  "include": ["env.d.ts", "src/**/*", "src/**/*.vue", "src/types/*.d.ts", "public"],
+  "include": ["src/**/*", "src/**/*.vue", "src/types/*.d.ts", "public", "vite.config.ts"],
   "esModuleInterop": true,
   "references": [
     {
