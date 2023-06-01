@@ -1,0 +1,1 @@
+import s from"./ErrorPage-fca307e9.js";import{d as r,e as a,u as e,o}from"./index-7dfeed55.js";const t=r({name:"Error404",__name:"404",setup:r=>(r,t)=>(o(),a(s,{src:e("/assets/404-ca8b86de.svg")},null,8,["src"]))});export{t as default};

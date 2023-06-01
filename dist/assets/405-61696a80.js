@@ -1,0 +1,1 @@
+import s from"./ErrorPage-fca307e9.js";import{d as r,o as a,e,u as o}from"./index-7dfeed55.js";const t=r({name:"Error405",__name:"405",setup:r=>(r,t)=>(a(),e(s,{src:o("/assets/500-d7d89683.svg")},null,8,["src"]))});export{t as default};
