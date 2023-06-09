@@ -1,0 +1,1 @@
+import s from"./ErrorPage-d308b4fe.js";import{d as r,o as a,e,u as o}from"./index-e0f7d8a5.js";const m=r({name:"Error405",__name:"405",setup:r=>(r,m)=>(a(),e(s,{src:o("/gi-demo/assets/500-d7d89683.svg")},null,8,["src"]))});export{m as default};
