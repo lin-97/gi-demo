@@ -110,3 +110,8 @@
     flex-direction: column;
   }
 }
+
+.gi_table_box {
+  max-height: 100%;
+  overflow: hidden;
+}

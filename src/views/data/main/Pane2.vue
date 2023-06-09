@@ -13,7 +13,7 @@
     </a-row>
 
     <section class="content">
-      <section class="table-box">
+      <section class="gi_table_box">
         <a-table
           row-key="id"
           size="small"
@@ -167,9 +167,5 @@ const selectAll: TableInstance['onSelectAll'] = (checked) => {
   box-sizing: border-box;
   background-color: var(--color-bg-1);
   border-radius: $radius-box;
-  .table-box {
-    flex: 1;
-    overflow: hidden;
-  }
 }
 </style>

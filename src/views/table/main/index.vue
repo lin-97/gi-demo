@@ -62,7 +62,7 @@
       </a-row>
     </a-form>
 
-    <section class="table-box">
+    <div class="gi_table_box">
       <a-table
         row-key="id"
         size="small"
@@ -113,7 +113,7 @@
           </a-table-column>
         </template>
       </a-table>
-    </section>
+    </div>
   </div>
 </template>
 
@@ -192,11 +192,6 @@ getTableData()
     :deep(.arco-form-item) {
       margin-bottom: 10px;
     }
-  }
-  .table-box {
-    flex: 1;
-    overflow: hidden;
-    margin-top: 12px;
   }
 }
 </style>

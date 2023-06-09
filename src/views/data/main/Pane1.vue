@@ -36,7 +36,7 @@
           </a-space>
         </a-row>
 
-        <section class="table-box">
+        <section class="gi_table_box">
           <a-table
             row-key="id"
             size="small"

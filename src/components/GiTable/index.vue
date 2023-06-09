@@ -39,7 +39,7 @@
         </a-radio-group>
       </a-space>
     </a-row>
-    <div class="table-box">
+    <div class="gi_table_box">
       <a-table v-bind="attrs" :stripe="stripe" :size="size" :bordered="{ cell: isBordered }" ref="tableRef">
         <template v-for="k in Object.keys(slots)" #[k] :key="k"> <slot :name="k"></slot> </template
       ></a-table>
