@@ -167,6 +167,34 @@ const handleEdit = () => {}
 </script>
 ~~~
 
+| 前缀         | 前缀 + 命名                  | 大意                        |
+| ------------ | ---------------------------- | --------------------------- |
+| get          | getUserInfo                  | 获取用户信息                |
+| del/delete   | delUserInfo                  | 删除用户信息                |
+| update / add | updateUserInfo / addUserInfo | 修改用户信息 / 增加用户信息 |
+| is           | isTimeout                    | 是否超时                    |
+| has          | hasUserInfo                  | 有没有用户信息              |
+| handle       | handleLogin                  | 处理登录                    |
+| calc         | calcAverageSpeed             | 计算平均速度                |
+
+**一些通用缩写**
+
+| 源单词      | 缩写 |
+| ----------- | ---- |
+| message     | msg  |
+| information | info |
+| button      | btn  |
+| background  | bg   |
+| response    | res  |
+| request     | req  |
+| image       | img  |
+| utility     | util |
+| prroperty   | prop |
+| source      | src  |
+| boolean     | bool |
+| error       | err  |
+| settings    | set  |
+
 
 
 #### 接口 api 的命名
@@ -175,12 +203,26 @@ const handleEdit = () => {}
 
 前缀为（操作名）动词，动词 eg：`add / update / delete / get / save` 等
 
-```
-/quota/getList   =>  getQuotaList
-/quota/getQuotaList  =>  getQuotaList   // 如功能名包含了模块名，可省略
+```js
+// 场景一 如没有操作名，可以自行根据场景补充
+export function getUserList() {
+  return http.get('/user/list')
+}
 
-/user/save  =>  saveUser
-/user/list  =>  getUserList  // 如没有操作名，可以自行根据场景补充
+// 场景二
+export function getUserList() {
+  return http.get('/user/getList')
+}
+
+// 场景三 如功能名包含了模块名，可省略
+export function getUserList() {
+  return http.get('/user/getUserList')
+}
+
+// 其他
+export function saveUser(data) {
+  return http.post('/user/save', data)
+}
 ```
 
 **`以上命名规范可以确保 api 命名不会冲突，加上模块名能快速定位以及更加方便维护`**
