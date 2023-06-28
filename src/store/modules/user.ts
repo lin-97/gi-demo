@@ -13,7 +13,7 @@ const storeSetup = () => {
   const userName = computed(() => userInfo.name)
   const avatar = computed(() => userInfo.avatar)
 
-  const token = ref<string>(getToken() || '')
+  const token = ref(getToken() || '')
   const roles = ref<string[]>([]) // 当前用户角色
   const permissions = ref<string[]>([]) // 当前角色权限标识集合
 

@@ -38,7 +38,7 @@ export const constantRoutes: RouteRecordRaw[] = [
       {
         path: '/home',
         component: () => import('@/views/home/index.vue'),
-        name: 'Index',
+        name: 'Home',
         meta: { title: '首页', icon: 'icon-dashboard', affix: true, svgIcon: 'menu-home' }
       }
     ]

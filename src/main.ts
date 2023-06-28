@@ -10,6 +10,10 @@ import '@/styles/arco-ui/index.less'
 // import '@arco-themes/vue-gi-demo/index.less'
 // import '@arco-design/web-vue/dist/arco.css'
 
+// 对特定组件进行默认配置
+import { Card, Modal } from '@arco-design/web-vue'
+Card.props.bordered = false
+
 // 额外引入 Arco Design Icon图标库
 import ArcoVueIcon from '@arco-design/web-vue/es/icon'
 
@@ -31,6 +35,7 @@ import 'virtual:svg-icons-register'
 import directives from './directives'
 
 const app = createApp(App)
+Modal._context = app._context
 
 app.use(router)
 app.use(pinia)

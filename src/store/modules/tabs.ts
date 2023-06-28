@@ -19,7 +19,7 @@ const storeSetup = () => {
 
   // 删除一个页签
   const deleteTagItem = (path: string) => {
-    const index = tagList.value.findIndex((item) => item.path === path)
+    const index = tagList.value.findIndex((item) => item.path === path && !item.meta?.affix)
     if (index >= 0) {
       const isActive = router.currentRoute.value.path === tagList.value[index]['path']
       tagList.value.splice(index, 1)
@@ -82,6 +82,7 @@ const storeSetup = () => {
   // 关闭全部
   const closeAll = () => {
     clearTagList()
+    router.push({ path: '/' })
   }
 
   // 重置

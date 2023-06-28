@@ -85,11 +85,11 @@ const route = useRoute()
 const userStore = useUserStore()
 
 onMounted(() => {
-  Message.info(`${route.meta.title}-触发了 onMounted`)
+  Message.info(`${route.meta?.title}-触发了 onMounted`)
 })
 
 onActivated(() => {
-  Message.info(`${route.meta.title}-触发了 onActivated`)
+  Message.info(`${route.meta?.title}-触发了 onActivated`)
 })
 </script>
 

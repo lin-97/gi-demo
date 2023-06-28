@@ -30,11 +30,11 @@ const route = useRoute()
 const form = reactive({ name: '' })
 
 onMounted(() => {
-  Message.info(`${route.meta.title}-触发了 onMounted`)
+  Message.info(`${route.meta?.title}-触发了 onMounted`)
 })
 
 onActivated(() => {
-  Message.info(`${route.meta.title}-触发了 onActivated`)
+  Message.info(`${route.meta?.title}-触发了 onActivated`)
 })
 </script>
 

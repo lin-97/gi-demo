@@ -17,22 +17,23 @@
 </template>
 
 <script lang="ts" setup>
-import Button from './demo/button/index.vue'
-import Tag from './demo/tag/index.vue'
-import IconSelector from './demo/icon-selector/index.vue'
-import Dot from './demo/dot/index.vue'
-import FlexibleBox from './demo/flexible-box/index.vue'
-import Area from './demo/area-demo/index.vue'
-import Editor from './demo/editor/index.vue'
-import RowTreeTable from './demo/row-tree-table/index.vue'
-import Map from './demo/map/index.vue'
-import JSDialog from './demo/js-dialog/index.vue'
-import ImageZoom from './demo/image-zoom/index.vue'
-import FnComponent from './demo/fn-component/index.vue'
-import Mitt from './demo/mitt/index.vue'
-import ApiTest from './demo/api-test/index.vue'
+import Button from './examples/button/index.vue'
+import Tag from './examples/tag/index.vue'
+import IconSelector from './examples/icon-selector/index.vue'
+import Dot from './examples/dot/index.vue'
+import FlexibleBox from './examples/flexible-box/index.vue'
+import Area from './examples/area-demo/index.vue'
+import Editor from './examples/editor/index.vue'
+import RowTreeTable from './examples/row-tree-table/index.vue'
+import Map from './examples/map/index.vue'
+import JSDialog from './examples/js-dialog/index.vue'
+import JSModal from './examples/js-modal/index.vue'
+import ImageZoom from './examples/image-zoom/index.vue'
+import FnComponent from './examples/fn-component/index.vue'
+import Mitt from './examples/mitt/index.vue'
+import ApiTest from './examples/api-test/index.vue'
 
-defineOptions({ name: 'Example' })
+defineOptions({ name: 'Demo' })
 
 const selectedKey = ref(0)
 
@@ -43,6 +44,7 @@ const menuList = [
   { name: 'GiIconSelector', value: IconSelector },
   { name: 'GiDot', value: Dot },
   { name: 'GiFlexibleBox', value: FlexibleBox },
+  { name: '函数调用模态框', value: JSModal },
   { name: '横向树表格', value: RowTreeTable },
   { name: '省市区', value: Area },
   { name: '富文本', value: Editor },

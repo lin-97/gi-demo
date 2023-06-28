@@ -1,7 +1,7 @@
 <template>
   <a-breadcrumb>
     <a-breadcrumb-item v-for="(item, index) in breadcrumbList" :key="index">
-      <span v-if="item.redirect === 'noRedirect' || index == breadcrumbList.length - 1">{{ item.meta.title }}</span>
+      <span v-if="item.redirect === 'noRedirect' || index === breadcrumbList.length - 1">{{ item.meta.title }}</span>
       <span v-else @click="handleLink(item)">{{ item.meta.title }}</span>
     </a-breadcrumb-item>
   </a-breadcrumb>
@@ -32,7 +32,7 @@ watchEffect(() => {
 
 // 判断是否为首页
 function isHome(route: RouteLocationMatched) {
-  const name = route.name as string
+  const name = (route?.name as string) || ''
   if (!name) return false
   return name.trim() === 'Home'
 }

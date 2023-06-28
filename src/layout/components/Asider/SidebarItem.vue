@@ -17,7 +17,7 @@
             ></GiSvgIcon>
             <component v-else :is="onlyOneChild.meta.icon || (item?.meta?.icon as any)"></component>
           </template>
-          <span>{{ onlyOneChild.meta.title }}</span>
+          <span>{{ onlyOneChild.meta?.title }}</span>
         </a-menu-item>
       </SideLink>
     </template>

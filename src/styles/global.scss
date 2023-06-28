@@ -83,6 +83,38 @@
   -webkit-box-orient: vertical; // 设置伸缩盒子元素排列方式
 }
 
+.gi_mt {
+  margin-top: $margin;
+}
+
+.gi_mb {
+  margin-bottom: $margin;
+}
+
+.gi_ml {
+  margin-left: $margin;
+}
+
+.gi_mr {
+  margin-right: $margin;
+}
+
+.gi_pt {
+  padding-top: $margin;
+}
+
+.gi_pb {
+  padding-bottom: $margin;
+}
+
+.gi_pl {
+  padding-left: $margin;
+}
+
+.gi_pr {
+  padding-right: $margin;
+}
+
 .gi_hover_btn {
   border: 0 !important;
   background-color: transparent !important;

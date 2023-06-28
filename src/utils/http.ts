@@ -71,7 +71,12 @@ http.interceptors.response.use(
 
     if (!success) {
       NProgress.done()
-      Notification.error(message || '服务器端错误')
+      // 如果错误信息长度过长，使用 Notification 进行提示
+      if (message.length <= 15) {
+        Message.error(message || '服务器端错误')
+      } else {
+        Notification.error(message || '服务器端错误')
+      }
       return Promise.reject(new Error('Error'))
     }
 

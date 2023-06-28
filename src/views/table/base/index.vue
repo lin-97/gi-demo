@@ -62,7 +62,7 @@
       </a-row>
     </a-form>
 
-    <div class="gi_table_box">
+    <div class="gi_table_box gi_mt">
       <a-table
         row-key="id"
         size="small"

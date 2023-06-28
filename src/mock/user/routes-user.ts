@@ -37,7 +37,7 @@ export default [
         component: 'data/main/index',
         meta: {
           hidden: false,
-          title: '数据管理',
+          title: '列表',
           icon: 'icon-list',
           keepAlive: true
         }
@@ -95,7 +95,7 @@ export default [
   {
     name: 'Table',
     path: '/table',
-    redirect: '/table/main',
+    redirect: '/table/base',
     component: 'Layout',
     meta: {
       hidden: false,
@@ -107,8 +107,8 @@ export default [
     children: [
       {
         name: 'TableMain',
-        path: 'main',
-        component: 'table/main/index',
+        path: 'base',
+        component: 'table/base/index',
         meta: {
           hidden: false,
           title: '基础表格',
@@ -219,13 +219,13 @@ export default [
   },
   {
     path: '',
-    redirect: '/example',
+    redirect: '/demo',
     component: 'Layout',
     children: [
       {
-        name: 'Example',
-        path: 'example',
-        component: 'example/index',
+        name: 'Demo',
+        path: 'demo',
+        component: 'demo/index',
         meta: {
           hideen: false,
           title: '功能页',
