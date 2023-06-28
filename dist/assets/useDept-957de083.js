@@ -1,0 +1,1 @@
+import{g as t}from"./index-1c0140d4.js";import{g as a}from"./index-ce6eb5fa.js";function i(){const i=t(!1),s=t([]);return{deptList:s,getDeptList:async()=>{try{i.value=!0;const t=await a();s.value=t.data.list}catch(t){}finally{i.value=!1}},loading:i}}export{i as u};
