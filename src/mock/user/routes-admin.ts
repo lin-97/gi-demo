@@ -324,7 +324,7 @@ export default [
         component: 'demo/index',
         meta: {
           hideen: false,
-          title: '功能页',
+          title: '示例页',
           svgIcon: 'menu-example',
           keepAlive: false
         }
