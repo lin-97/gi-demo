@@ -37,9 +37,10 @@ export default [
         component: 'data/main/index',
         meta: {
           hidden: false,
-          title: '列表',
+          title: '数据管理',
           icon: 'icon-list',
-          keepAlive: true
+          keepAlive: true,
+          breadcrumb: false
         }
       },
       {
