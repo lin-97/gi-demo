@@ -1514,7 +1514,6 @@ $padding: 16px; // 盒子和内容的间距
 
 ```css
 按钮        button(btn)
-字体        icon
 下拉菜单    dropdown
 工具栏      toolbar
 分页        page
