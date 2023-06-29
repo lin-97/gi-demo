@@ -7,9 +7,9 @@
 
 ## 简介
 
-Gi Admin Pro 是一个基于 Vue3、Vite、TypeScript、Arco Design UI、Pinia、VueUse 的免费中后台模版，它使用了最新的前端技术栈，内置丰富的主题配置，有着极高的代码规范，基于 mock 实现的动态数据展示，开箱即用的模板，也可用于学习参考。
+Gi Admin Pro 是一个基于 Vue3、Vite、TypeScript、Arco Design UI、Pinia、VueUse 等的免费中后台模版，它使用了最新的前端技术栈，内置丰富的主题配置，有着极高的代码规范，基于 mock 实现的动态数据展示，开箱即用的模板，也可用于学习参考。
 
-> **Gi 前缀含义：** G：代表 全局 i：代表 我的
+> **Gi 前缀含义：** G：代表全局 i：代表我的
 >
 > Gi 用来定义全局组件前缀，如 GiNavBar、GiTitle、GiLoading
 
@@ -109,9 +109,10 @@ npm run build
 <script setup lang="ts">
 const loading = ref(false) // 加载
 const visible = ref(false) // 显示隐藏
-const showAddModal = ref(false)
-const showAddDrawer = ref(false)
-const isLogin = ref(false)
+const showAddModal = ref(false)  // 新增功能的模态框显示隐藏
+const showAddDrawer = ref(false) // 新增功能的抽屉显示隐藏
+const isLogin = ref(false) // 是否登录
+const isVip = ref(false) // 是否是vip用户
 
 // 表单 不建议 formData, 直接最简
 const form = reactive({
@@ -120,8 +121,9 @@ const form = reactive({
   remark: ''
 })
 
+const userInfo = ref({}) // 用户信息
 const tableData = ref([]) // 表格数据
-const treeData = ref([]) // 树
+const treeData = ref([]) // 树结构数据
 
 // 对象数组 列表数据最好后面加个 List 或者 Data
 const companyList = ref([])
@@ -146,24 +148,61 @@ const getData = () => {
    })
 }
 
-// 方法 ----------------------------------------------------------------------------------------
+// ---------------------------------------- 方法 --------------------------------------------- //
+
 // 编辑
 const edit = () => {}
 const onEdit = () => {}
 const handleEdit = () => {}
 
-// 新增 onAdd      handleAdd      add
-// 删除 onDelete   handleDelete   delete
-// 批量删除 onMulDelete   handleMulDelete  mulDelete
-// 重命名 onRename   handleRename   rename
-// 搜索 search
-// 获取表格列表 getTableData getTableList
-// 返回 back
-// 提交 submit
-// 确认 confirm  ok  submit
-// 取消 cancel
-// 关闭 close
-// 保存 save
+// 新增
+const add = () => {}
+const onAdd = () => {}
+const handleAdd = () => {}
+
+// 删除
+// const delete = () => {} // 不推荐，delete 是JS关键词
+const del = () => {}
+const onDelete = () => {}
+const handleDelete = () => {}
+const remove = () => {}
+
+// 重命名
+const rename = () => {}
+const onRename = () => {}
+const handleRename = () => {}
+
+// 批量删除
+const mulDelete = () => {}
+const onMulDelete = () => {}
+const handleMulDelete = () => {}
+
+// 搜索
+const search = () => {}
+
+// 返回
+const back = () => {}
+
+// 提交
+const submit = () => {}
+
+// 确认
+const confirm = () => {}
+const ok = () => {}
+
+// 取消
+const cancel = () => {}
+
+// 打开 | 关闭
+const open = () => {}
+const close = () => {}
+
+// 保存
+const save = () => {}
+
+// 获取表格列表
+const getTableData = () => {}
+const getTableList = () => {}
 </script>
 ~~~
 
@@ -196,6 +235,122 @@ const handleEdit = () => {}
 | boolean     | bool |
 | error       | err  |
 | settings    | set  |
+
+
+
+#### vue相关的命名
+
+~~~vue
+<script setup lang="ts">
+const isEdit = ref(false)
+
+// 不推荐
+const title = computed(() => {
+  return isEdit.value ? '编辑' : '新增'
+})
+
+// 推荐 能一行就尽量写一行
+const title = computed(() => isEdit.value ? '编辑' : '新增')
+</script>
+~~~
+
+
+
+~~~vue
+<script setup lang="ts">
+// 表单建议使用 form 命名(简洁)，不必要使用 formData, 同时使用 reactive
+const form = reactive({
+  name: '',
+  phone: ''
+})
+
+// 如果属性比较多
+const getInitForm = () => ({
+  name: '',
+  phone: '',
+  email: '',
+  sex: 1,
+  age: ''
+})
+
+const form = reactive(getInitForm())
+
+// 重置form
+const resetForm = () => {
+  Object.assign(state, getInitForm())
+}
+</script>
+~~~
+
+
+
+~~~vue
+<script setup lang="ts">
+import { useAppStore, useUserStore } from '@/store'
+import { useLoading } from '@/hooks'
+
+// stores 或 hooks 的使用命名规则定义
+const appStore = useAppStore()
+const userStore = useUserStore()
+
+const { loading, setLoading } = useLoading()
+</script>
+~~~
+
+
+
+#### 写法技巧
+
+尽量使用三元表达式
+
+```js
+// 优化前
+let marks = 26
+let result
+if (marks >= 30) {
+  result = 'Pass'
+} else {
+  result = 'Fail'
+}
+
+// 优化后
+let result = marks >= 30 ? 'Pass' : 'Fail'
+```
+
+善用 includes 方法
+
+```js
+// 优化前
+if (type === 1 || type === 2 || type === 3)
+    
+// 优化后, 此种方式在vue模板也可使用
+[1, 2, 3].includes(type)
+```
+
+使用箭头函数简化函数
+
+```js
+// 优化前
+function add(num1, num2) {
+  return num1 + num2
+}
+
+// 优化后
+const add = (num1, num2) => num1 + num2
+```
+
+尽量减少 if else if
+
+~~~vue
+<script setup lang="ts">
+// 比例进度条颜色 尽量减少 if else if
+const getProportionColor = (proportion: number) => {
+  if (proportion < 30) return 'danger'
+  if (proportion < 60) return 'warning'
+  return 'success'
+}
+</script>
+~~~
 
 
 
@@ -905,6 +1060,183 @@ const getTableData = async () => {
 
 
 
+#### TSX 方式调起弹窗
+
+##### 方式1
+
+~~~tsx
+// tool.tsx
+import { reactive } from 'vue'
+import { Modal, Form, type FormInstance } from '@arco-design/web-vue'
+import * as Regexp from '@/utils/regexp'
+
+export const openAddUserModal = () => {
+  const form = reactive({
+    name: '',
+    phone: ''
+  })
+
+  const FormRef = ref<FormInstance | null>(null)
+
+  const rules = {
+    name: [
+      { required: true, message: '请输入姓名' },
+      { match: Regexp.OnlyCh, message: '只能是中文姓名' },
+      { minLength: 1, maxLength: 4, message: '名字最长不超过4个字符' }
+    ],
+    phone: [
+      { required: true, message: '请输入手机号' },
+      { match: Regexp.Phone, message: '手机号格式不正确' }
+    ]
+  }
+
+  const saveUserApi = () => {
+    return new Promise((resolve) =>
+      setTimeout(() => {
+        resolve(true)
+      }, 2000)
+    )
+  }
+
+  Modal.open({
+    title: '添加用户',
+    content: () => (
+      <Form model={form} ref={FormRef}>
+        <Form.Item field="name" label="用户名" rules={rules.name}>
+          <a-input v-model={form.name} placeholder="请输入用户名" max-length={8} allow-clear />
+        </Form.Item>
+        <Form.Item field="phone" label="手机号" rules={rules.phone}>
+          <a-input v-model={form.phone} placeholder="请输入手机号" max-length={11} allow-clear />
+        </Form.Item>
+      </Form>
+    ),
+    okText: '添加',
+    onBeforeOk: async () => {
+      const flag = await FormRef.value?.validate()
+      if (flag) return false
+      await saveUserApi()
+      return true
+    }
+  })
+}
+~~~
+
+使用
+
+~~~vue
+<template>
+  <a-space class="aaa">
+    <a-button type="primary" @click="open">打开添加用户弹窗</a-button>
+  </a-space>
+</template>
+
+<script lang="tsx" setup>
+import { openAddUserModal } from './tool'
+
+// 方式1
+const open = () => {
+  openAddUserModal()
+}
+</script>
+
+<style lang="scss" scoped></style>
+~~~
+
+
+
+##### 方式2
+
+AddUserForm.vue
+
+~~~vue
+<template>
+  <a-form :model="form" ref="FormRef">
+    <a-form-item field="name" label="用户名" :rules="rules.name">
+      <a-input v-model="form.name" placeholder="请输入用户名" :max-length="8" allow-clear />
+    </a-form-item>
+    <a-form-item field="phone" label="手机号" :rules="rules.phone">
+      <a-input v-model="form.phone" placeholder="请输入手机号" :max-length="11" allow-clear />
+    </a-form-item>
+  </a-form>
+</template>
+
+<script lang="ts" setup>
+import type { FormInstance } from '@arco-design/web-vue'
+import * as Regexp from '@/utils/regexp'
+
+const form = reactive({
+  name: '',
+  phone: ''
+})
+
+const FormRef = ref<FormInstance | null>(null)
+
+const rules = {
+  name: [
+    { required: true, message: '请输入姓名' },
+    { match: Regexp.OnlyCh, message: '只能是中文姓名' },
+    { minLength: 1, maxLength: 4, message: '名字最长不超过4个字符' }
+  ],
+  phone: [
+    { required: true, message: '请输入手机号' },
+    { match: Regexp.Phone, message: '手机号格式不正确' }
+  ]
+}
+
+const saveUserApi = () => {
+  return new Promise((resolve) =>
+    setTimeout(() => {
+      resolve(true)
+    }, 2000)
+  )
+}
+
+const handleAddUser = async () => {
+  const flag = await FormRef.value?.validate()
+  if (flag) return false
+  await saveUserApi()
+  return true
+}
+
+defineExpose({ handleAddUser })
+</script>
+
+<style lang="scss" scoped></style>
+~~~
+
+使用
+
+~~~vue
+<template>
+  <a-space class="aaa">
+    <a-button type="primary" @click="open">打开添加用户弹窗</a-button>
+  </a-space>
+</template>
+
+<script lang="tsx" setup>
+import AddUserForm from './components/AddUserForm.vue'
+import { Modal } from '@arco-design/web-vue'
+
+const open = () => {
+  const AddUserFormRef = ref<InstanceType<typeof AddUserForm> | null>(null)
+
+  Modal.open({
+    title: '添加用户',
+    content: () => <AddUserForm ref={AddUserFormRef}></AddUserForm>,
+    okText: '添加',
+    onBeforeOk: async () => {
+      return await AddUserFormRef.value?.handleAddUser()
+    }
+  })
+}
+</script>
+
+<style lang="scss" scoped></style>
+
+~~~
+
+
+
 #### 组件使用建议
 
 能使用组件尽量使用组件实现页面布局
@@ -959,48 +1291,6 @@ Link 组件使用场景
     </a-table-column>
   </a-table>
 </template>
-```
-
-
-
-#### 写法技巧
-
-尽量使用三元表达式
-
-```js
-// 优化前
-let marks = 26
-let result
-if (marks >= 30) {
-  result = 'Pass'
-} else {
-  result = 'Fail'
-}
-
-// 优化后
-let result = marks >= 30 ? 'Pass' : 'Fail'
-```
-
-善用 includes 方法
-
-```js
-// 优化前
-if (type === 1 || type === 2 || type === 3)
-    
-// 优化后, 此种方式在vue模板也可使用
-[1, 2, 3].includes(type)
-```
-
-使用箭头函数简化函数
-
-```js
-// 优化前
-function add(num1, num2) {
-  return num1 + num2
-}
-
-// 优化后
-const add = (num1, num2) => num1 + num2
 ```
 
 
