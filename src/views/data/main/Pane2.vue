@@ -1,15 +1,16 @@
 <template>
   <a-card :bordered="false" class="gi_card pane3">
     <a-row justify="space-between" align="center" class="head">
-      <a-breadcrumb>
-        <a-breadcrumb-item>首页</a-breadcrumb-item>
-        <a-breadcrumb-item>数据管理</a-breadcrumb-item>
-        <a-breadcrumb-item>单位管理</a-breadcrumb-item>
-      </a-breadcrumb>
+      <div>
+        <a-alert type="normal">
+          <template #icon>
+            <icon-exclamation-circle-fill />
+          </template>
+          <span>这里采用 tsx 方式使用表格，具体看代码使用</span>
+        </a-alert>
+      </div>
 
-      <a-space>
-        <a-button type="primary">导出</a-button>
-      </a-space>
+      <a-button type="primary">导出</a-button>
     </a-row>
 
     <section class="content">
@@ -27,52 +28,24 @@
           @select="select"
           @select-all="selectAll"
         >
-          <template #index="{ rowIndex }">{{ rowIndex + 1 }}</template>
-          <template #proportion="{ record }">
-            <a-progress
-              size="mini"
-              :status="getProportionColor(record.proportion)"
-              :percent="record.proportion / 100"
-            />
-          </template>
-          <template #status="{ record }">
-            <template v-for="item in StatusList" :key="item.value">
-              <a-tag size="small" v-if="item.value === record.status" :color="item.color">{{ item.name }}</a-tag>
-            </template>
-          </template>
-          <template #operation="{ record }">
-            <a-space>
-              <a-button type="primary" size="mini">
-                <icon-edit></icon-edit>
-              </a-button>
-              <a-button size="mini">详情</a-button>
-              <a-popconfirm type="warning" content="您确定要删除该项吗?">
-                <a-button type="primary" status="danger" size="mini">
-                  <icon-delete />
-                </a-button>
-              </a-popconfirm>
-            </a-space>
-          </template>
         </a-table>
       </section>
     </section>
   </a-card>
 </template>
 
-<script lang="ts" setup>
+<script lang="tsx" setup>
 import type { TableColumnData, TableInstance } from '@arco-design/web-vue'
 import { usePagination } from '@/hooks'
 import { getPersonList } from '@/apis'
 import type { PersonItem } from '@/apis'
 import { StatusList } from '@/constant/person'
 
-const router = useRouter()
-
 const columns: TableColumnData[] = [
   {
     title: '序号',
     width: 68,
-    slotName: 'index'
+    render: ({ record, column, rowIndex }) => <span>{rowIndex + 1}</span>
   },
   {
     title: '姓名',
@@ -91,21 +64,44 @@ const columns: TableColumnData[] = [
   },
   {
     title: '比例',
-    slotName: 'proportion',
     width: 68,
-    align: 'center'
+    align: 'center',
+    render: ({ record }) => (
+      <a-progress size="mini" status={getProportionColor(record.proportion)} percent={record.proportion / 100} />
+    )
   },
   {
     title: '状态',
-    slotName: 'status',
     width: 100,
-    align: 'center'
+    align: 'center',
+    render: (data) => {
+      const index = StatusList.findIndex((i) => i.value === data.record.status)
+      if (index >= 0) {
+        return (
+          <a-tag size="small" color={StatusList[index].color}>
+            {StatusList[index].name}
+          </a-tag>
+        )
+      }
+    }
   },
   {
     title: '操作',
-    slotName: 'operation',
     width: 200,
-    align: 'center'
+    align: 'center',
+    render: ({ record }) => (
+      <a-space>
+        <a-button type="primary" size="mini">
+          <icon-edit></icon-edit>
+        </a-button>
+        <a-button size="mini">详情</a-button>
+        <a-popconfirm type="warning" content="您确定要删除该项吗?">
+          <a-button type="primary" status="danger" size="mini">
+            <icon-delete />
+          </a-button>
+        </a-popconfirm>
+      </a-space>
+    )
   }
 ]
 
