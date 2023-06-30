@@ -1225,62 +1225,9 @@ const getTableData = async () => {
 
 ##### 方式 1
 
-```tsx
-// tool.tsx
-import { reactive } from 'vue'
-import { Modal, Form, type FormInstance } from '@arco-design/web-vue'
-import * as Regexp from '@/utils/regexp'
+tool.tsx
 
-export const openAddUserModal = () => {
-  const form = reactive({
-    name: '',
-    phone: ''
-  })
-
-  const FormRef = ref<FormInstance | null>(null)
-
-  const rules = {
-    name: [
-      { required: true, message: '请输入姓名' },
-      { match: Regexp.OnlyCh, message: '只能是中文姓名' },
-      { minLength: 1, maxLength: 4, message: '名字最长不超过4个字符' }
-    ],
-    phone: [
-      { required: true, message: '请输入手机号' },
-      { match: Regexp.Phone, message: '手机号格式不正确' }
-    ]
-  }
-
-  const saveUserApi = () => {
-    return new Promise((resolve) =>
-      setTimeout(() => {
-        resolve(true)
-      }, 2000)
-    )
-  }
-
-  Modal.open({
-    title: '添加用户',
-    content: () => (
-      <Form model={form} ref={FormRef}>
-        <Form.Item field="name" label="用户名" rules={rules.name}>
-          <a-input v-model={form.name} placeholder="请输入用户名" max-length={8} allow-clear />
-        </Form.Item>
-        <Form.Item field="phone" label="手机号" rules={rules.phone}>
-          <a-input v-model={form.phone} placeholder="请输入手机号" max-length={11} allow-clear />
-        </Form.Item>
-      </Form>
-    ),
-    okText: '添加',
-    onBeforeOk: async () => {
-      const flag = await FormRef.value?.validate()
-      if (flag) return false
-      await saveUserApi()
-      return true
-    }
-  })
-}
-```
+![carbon (2).png](https://p6-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/c693c930f6b6458c96c7500e222b2b5e~tplv-k3u1fbpfcp-watermark.image?)
 
 使用
 
@@ -1307,91 +1254,11 @@ const open = () => {
 
 AddUserForm.vue
 
-```vue
-<template>
-  <a-form :model="form" ref="FormRef">
-    <a-form-item field="name" label="用户名" :rules="rules.name">
-      <a-input v-model="form.name" placeholder="请输入用户名" :max-length="8" allow-clear />
-    </a-form-item>
-    <a-form-item field="phone" label="手机号" :rules="rules.phone">
-      <a-input v-model="form.phone" placeholder="请输入手机号" :max-length="11" allow-clear />
-    </a-form-item>
-  </a-form>
-</template>
-
-<script lang="ts" setup>
-import type { FormInstance } from '@arco-design/web-vue'
-import * as Regexp from '@/utils/regexp'
-
-const form = reactive({
-  name: '',
-  phone: ''
-})
-
-const FormRef = ref<FormInstance | null>(null)
-
-const rules = {
-  name: [
-    { required: true, message: '请输入姓名' },
-    { match: Regexp.OnlyCh, message: '只能是中文姓名' },
-    { minLength: 1, maxLength: 4, message: '名字最长不超过4个字符' }
-  ],
-  phone: [
-    { required: true, message: '请输入手机号' },
-    { match: Regexp.Phone, message: '手机号格式不正确' }
-  ]
-}
-
-const saveUserApi = () => {
-  return new Promise((resolve) =>
-    setTimeout(() => {
-      resolve(true)
-    }, 2000)
-  )
-}
-
-const handleAddUser = async () => {
-  const flag = await FormRef.value?.validate()
-  if (flag) return false
-  await saveUserApi()
-  return true
-}
-
-defineExpose({ handleAddUser })
-</script>
-
-<style lang="scss" scoped></style>
-```
+![carbon (3).png](https://p6-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/906d3d2e9ec14fb182cc993120ef85c1~tplv-k3u1fbpfcp-watermark.image?)
 
 使用
 
-```vue
-<template>
-  <a-space class="aaa">
-    <a-button type="primary" @click="open">打开添加用户弹窗</a-button>
-  </a-space>
-</template>
-
-<script lang="tsx" setup>
-import AddUserForm from './components/AddUserForm.vue'
-import { Modal } from '@arco-design/web-vue'
-
-const open = () => {
-  const AddUserFormRef = ref<InstanceType<typeof AddUserForm> | null>(null)
-
-  Modal.open({
-    title: '添加用户',
-    content: () => <AddUserForm ref={AddUserFormRef}></AddUserForm>,
-    okText: '添加',
-    onBeforeOk: async () => {
-      return await AddUserFormRef.value?.handleAddUser()
-    }
-  })
-}
-</script>
-
-<style lang="scss" scoped></style>
-```
+![carbon (4).png](https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/3f7d17cc39ee44c6a1ca2b2bbc423812~tplv-k3u1fbpfcp-watermark.image?)
 
 
 
@@ -1399,139 +1266,11 @@ const open = () => {
 
 `@/views/file/components/FileRenameModal/index.vue`
 
-~~~vue
-<template>
-  <a-modal
-    title="重命名"
-    width="500px"
-    v-model:visible="visible"
-    modal-animation-name="el-fade"
-    @close="cancel"
-    @before-ok="save"
-  >
-    <a-row justify="center" align="center">
-      <a-form ref="FormRef" :model="form" :style="{ width: '80%' }">
-        <a-form-item field="name" label="文件名称" :rules="[{ required: true, message: '请输入文件名称' }]">
-          <a-input v-model="form.name" placeholder="请输入" allow-clear />
-        </a-form-item>
-      </a-form>
-    </a-row>
-  </a-modal>
-</template>
-
-<script setup lang="ts">
-import type { FileItem } from '@/apis'
-import type { FormInstance, Modal } from '@arco-design/web-vue'
-
-interface Props {
-  fileInfo: FileItem
-  onClose: Function
-}
-const props = withDefaults(defineProps<Props>(), {})
-
-const visible = ref(false)
-type Form = { name: string }
-const form: Form = reactive({
-  name: ''
-})
-
-onMounted(() => {
-  form.name = props.fileInfo?.name || ''
-  visible.value = true
-})
-
-const cancel = () => {
-  visible.value = false
-  props.onClose && props.onClose()
-}
-
-// 模拟接口
-const saveApi = (): Promise<boolean> => {
-  return new Promise((resolve) =>
-    setTimeout(() => {
-      resolve(true)
-    }, 2000)
-  )
-}
-
-const FormRef = ref<FormInstance | null>(null)
-const save: InstanceType<typeof Modal>['onBeforeOk'] = async () => {
-  const flag = await FormRef.value?.validate()
-  if (flag) return false
-  return await saveApi()
-}
-</script>
-
-<style lang="scss" scoped>
-.label {
-  color: $color-text-2;
-}
-:deep(.arco-form-item) {
-  margin-bottom: 0;
-}
-:deep(.arco-form-item-label-col > label) {
-  white-space: nowrap;
-}
-</style>
-~~~
+![carbon.png](https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/66978024606741ebaebd013f30d8d6ee~tplv-k3u1fbpfcp-watermark.image?)
 
 `@/views/file/components/index.ts`
 
-~~~ts
-import type { Component } from 'vue'
-import { createApp } from 'vue'
-import ArcoVueIcon from '@arco-design/web-vue/es/icon'
-import ArcoVue from '@arco-design/web-vue'
-import type { FileItem } from '@/apis'
-
-import FileRenameModal from './FileRenameModal/index.vue'
-// import FileMoveModal from './FileMoveModal/index.vue'
-// import PreviewVideoModal from './PreviewVideoModal/index.vue'
-// import PreviewAudioModal from './PreviewAudioModal/index.vue'
-
-function createModal<T>(component: Component, options?: T) {
-  // 创建一个挂载容器
-  const el: HTMLElement = document.createElement('div')
-  // 挂载组件
-  document.body.appendChild(el)
-
-  // 实例化组件, createApp 第二个参数是 props
-  const instance = createApp(component, {
-    ...options,
-    onClose: () => {
-      setTimeout(() => {
-        instance.unmount()
-        document.body.removeChild(el)
-      }, 350)
-    }
-  })
-
-  instance.use(ArcoVue)
-  instance.use(ArcoVueIcon)
-  instance.mount(el)
-}
-
-/** 打开 文件重命名 弹窗 */
-export function openFileRenameModal(fileItem: FileItem) {
-  return createModal<{ fileInfo: FileItem }>(FileRenameModal, { fileInfo: fileItem })
-}
-
-/** 打开 文件移动 弹窗 */
-//export function openFileMoveModal(fileItem: FileItem) {
-//  return createModal<{ fileInfo: FileItem }>(FileMoveModal, { fileInfo: fileItem })
-//}
-
-/** 预览 视频文件 弹窗 */
-//export function previewFileVideoModal(fileItem: FileItem) {
-//  return createModal<{ fileInfo: FileItem }>(PreviewVideoModal, { fileInfo: fileItem })
-//}
-
-/** 预览 视频文件 弹窗 */
-//export function previewFileAudioModal(fileItem: FileItem) {
-//  return createModal<{ fileInfo: FileItem }>(PreviewAudioModal, { fileInfo: fileItem })
-//}
-
-~~~
+![carbon (1).png](https://p1-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/7fa9aa3da7b14c98838682a43d342514~tplv-k3u1fbpfcp-watermark.image?)
 
 使用
 
