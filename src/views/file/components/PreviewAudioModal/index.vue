@@ -7,7 +7,7 @@
             <icon-music :size="16" spin />
             <span>{{ props.fileInfo?.name }}.{{ props.fileInfo?.extendName }}</span>
           </div>
-          <div class="close-icon" @click="handleClose">
+          <div class="close-icon" @click="close">
             <icon-close :size="12" />
           </div>
         </div>
@@ -24,13 +24,13 @@ import { useDraggable, useWindowSize, useElementSize } from '@vueuse/core'
 import type { FileItem } from '@/apis'
 import zhini from './致你.mp3'
 
-const props = defineProps({
-  fileInfo: Object as PropType<FileItem>,
-  onCancel: Function
-})
+interface Props {
+  fileInfo: FileItem
+  onClose: Function
+}
+const props = withDefaults(defineProps<Props>(), {})
 
 const visible = ref(false)
-
 const audioRef = ref<HTMLElement | null>(null)
 const audioHeadRef = ref<HTMLElement | null>(null)
 
@@ -38,7 +38,7 @@ const audioSrc = computed(() => {
   if (props.fileInfo?.id === '004') {
     return zhini
   }
-  return props.fileInfo?.src
+  return props.fileInfo?.src || ''
 })
 
 onMounted(() => {
@@ -80,15 +80,10 @@ const audioStyle = computed(() => {
   }
 })
 
-const handleClose = () => {
+const close = () => {
   visible.value = false
-  props.onCancel && props.onCancel()
+  props.onClose && props.onClose()
 }
-
-defineExpose({
-  visible,
-  handleClose
-})
 </script>
 
 <style lang="scss" scoped>

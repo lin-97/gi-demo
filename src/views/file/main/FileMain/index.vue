@@ -117,12 +117,14 @@ import 'viewerjs/dist/viewer.css'
 import FileNavPath from './FileNavPath.vue'
 import FileGrid from './FileGrid.vue'
 import FileList from './FileList.vue'
-import PreviewVideo from '@/views/file/components/PreviewVideo/index'
-import PreviewAudio from '@/views/file/components/PreviewAudio/index'
-import FileRename from '@/views/file/components/FileRename/index'
-import FileMove from '@/views/file/components/FileMove/index'
 import { getFileList } from '@/apis'
 import type { FileItem } from '@/apis'
+import {
+  openFileMoveModal,
+  openFileRenameModal,
+  previewFileVideoModal,
+  previewFileAudioModal
+} from '../../components/index'
 const route = useRoute()
 const router = useRouter()
 
@@ -181,10 +183,10 @@ const handleClickFile = (item: FileItem) => {
     }
   }
   if (item.extendName === 'mp4') {
-    PreviewVideo(item)
+    previewFileVideoModal(item)
   }
   if (item.extendName === 'mp3') {
-    PreviewAudio(item)
+    previewFileAudioModal(item)
   }
 }
 
@@ -203,10 +205,10 @@ const handleRightMenuClick = (mode: string, fileInfo: FileItem) => {
     })
   }
   if (mode === 'rename') {
-    FileRename(fileInfo)
+    openFileRenameModal(fileInfo)
   }
   if (mode === 'move') {
-    FileMove(fileInfo)
+    openFileMoveModal(fileInfo)
   }
   if (mode === 'detail') {
     router.push({ path: '/file/detail' })

@@ -1,5 +1,5 @@
 <template>
-  <a-modal title="视频播放" width="auto" draggable v-model:visible="visible" @cancel="handleCancel">
+  <a-modal title="视频播放" width="auto" draggable v-model:visible="visible" @close="close">
     <div id="videoId"></div>
   </a-modal>
 </template>
@@ -8,10 +8,11 @@
 import Player from 'xgplayer'
 import type { FileItem } from '@/apis'
 
-const props = defineProps({
-  fileInfo: Object as PropType<FileItem>,
-  onCancel: Function
-})
+interface Props {
+  fileInfo: FileItem
+  onClose: Function
+}
+const props = withDefaults(defineProps<Props>(), {})
 
 const visible = ref(false)
 
@@ -29,13 +30,8 @@ onMounted(() => {
   })
 })
 
-const handleCancel = () => {
+const close = () => {
   visible.value = false
-  props.onCancel && props.onCancel()
+  props.onClose && props.onClose()
 }
-
-defineExpose({
-  visible,
-  handleCancel
-})
 </script>
