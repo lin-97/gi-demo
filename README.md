@@ -1655,6 +1655,8 @@ $padding: 16px; // 盒子和内容的间距
 
 ## 推荐书籍
 
+[Vue入门指南与实战案例](https://vue3.chengpeiquan.com/)
+
 [深入理解 TypeScript](https://jkchao.github.io/typescript-book-chinese/)
 
 [前端宝典](https://vue3js.cn/interview/)
