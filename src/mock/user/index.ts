@@ -1,7 +1,21 @@
 import type { MockMethod } from 'vite-plugin-mock'
 import { successResponseWrap, failResponseWrap } from '../mock'
-import RoutesAdmin from './routes-admin'
-import RoutesUser from './routes-user'
+
+import Analyse from './route-modules/analyse'
+import Data from './route-modules/data'
+import File from './route-modules/file'
+import Form from './route-modules/form'
+import Table from './route-modules/table'
+import Error from './route-modules/error'
+import Result from './route-modules/result'
+import Demo from './route-modules/demo'
+import About from './route-modules/about'
+import Gitee from './route-modules/gitee'
+import User from './route-modules/user'
+import System from './route-modules/system'
+
+const RoutesAdmin = [Analyse, Data, File, Form, Table, Error, Result, System, Demo, User, About, Gitee]
+const RoutesUser = [Analyse, Data, File, Form, Table, Error, Result, Demo, User, About, Gitee]
 
 export default [
   {
