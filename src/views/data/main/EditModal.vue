@@ -1,17 +1,17 @@
 <template>
-  <a-modal v-model:visible="visible" :title="title" :on-before-ok="confirm">
+  <a-modal v-model:visible="visible" :title="title" :on-before-ok="confirm" @close="formRef?.resetFields">
     <a-row justify="center">
-      <a-form ref="formRef" :model="form" size="medium" auto-label-width :style="{ width: 'auto' }">
-        <a-form-item field="name" label="姓名" :rules="rules.name">
-          <a-input v-model="form.name" placeholder="请输入姓名" style="width: 300px" />
+      <a-form ref="formRef" :model="form" :rules="rules" size="medium" auto-label-width :style="{ width: '380px' }">
+        <a-form-item field="name" label="姓名">
+          <a-input v-model="form.name" placeholder="请输入姓名" allow-clear />
           <template #extra>
             <div>仅支持中文姓名</div>
           </template>
         </a-form-item>
         <a-form-item field="phone" label="手机号">
-          <a-input v-model="form.phone" placeholder="请输入手机号" style="width: 300px" />
+          <a-input v-model="form.phone" placeholder="请输入手机号" allow-clear />
         </a-form-item>
-        <a-form-item field="status" label="状态" :rules="rules.status">
+        <a-form-item field="status" label="状态">
           <a-radio-group v-model="form.status">
             <a-radio :value="false">关闭</a-radio>
             <a-radio :value="true">开启</a-radio>
@@ -19,6 +19,7 @@
         </a-form-item>
       </a-form>
     </a-row>
+
     <a-collapse :bordered="false" :default-active-key="['1']">
       <a-collapse-item :show-expand-icon="true" key="1">
         <template #header>
@@ -53,6 +54,7 @@ import { Message, type FormInstance } from '@arco-design/web-vue'
 import * as Regexp from '@/utils/regexp'
 
 const form = reactive({
+  id: '', // 如果id是空为新增模式，如果有id那么为编辑模式
   name: '',
   phone: '',
   status: false
@@ -71,8 +73,7 @@ const rules = {
 const list = [{ name: '新增' }, { name: '编辑' }, { name: '重命名' }, { name: '分享' }, { name: '删除' }]
 
 const visible = ref(false)
-const detailId = ref('')
-const isEditMode = computed(() => !!detailId.value) // 判断是新增还是编辑模式
+const isEditMode = computed(() => !!form.id) // 判断是新增还是编辑模式
 const title = computed(() => (isEditMode.value ? '编辑' : '新增'))
 const formRef = ref<FormInstance>()
 
@@ -88,12 +89,12 @@ const confirm = async () => {
 }
 
 const add = () => {
-  detailId.value = ''
+  form.id = ''
   visible.value = true
 }
 
 const edit = (id: string) => {
-  detailId.value = id
+  form.id = id
   visible.value = true
 }
 

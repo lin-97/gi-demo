@@ -95,7 +95,6 @@ onActivated(() => {
 
 <style lang="scss" scoped>
 .page {
-  // background-color: PINK;
 }
 
 .user {

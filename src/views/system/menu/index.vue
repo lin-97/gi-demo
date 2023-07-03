@@ -8,8 +8,8 @@
     </a-row>
     <section class="table-box">
       <a-table
-        :data="treeData"
-        row-key="name"
+        :data="menuTreeList"
+        row-key="path"
         :loading="loading"
         :scroll="{ x: '100%', y: '100%', minWidth: 900 }"
         :pagination="false"
@@ -21,7 +21,7 @@
         </template>
         <template #columns>
           <a-table-column title="菜单名称">
-            <template #cell="{ record }">{{ record.name }}</template>
+            <template #cell="{ record }">{{ record.meta?.title || '' }}</template>
           </a-table-column>
           <a-table-column title="菜单地址" data-index="path">
             <template #cell="{ record }">
@@ -31,19 +31,20 @@
           </a-table-column>
           <a-table-column title="菜单图标" data-index="icon" :width="200">
             <template #cell="{ record }">
-              <GiSvgIcon :size="24" :name="record.icon" v-if="record.icon"></GiSvgIcon>
-              <span class="no-text" v-else>无</span>
+              <GiSvgIcon :size="24" :name="record.meta?.svgIcon || record.meta?.icon"></GiSvgIcon>
             </template>
           </a-table-column>
           <a-table-column title="是否缓存" :width="200">
             <template #cell="{ record }">
-              <a-button status="success" size="mini" v-if="record.keepAlive"><template #icon>是</template></a-button>
+              <a-button status="success" size="mini" v-if="record.meta?.keepAlive"
+                ><template #icon>是</template></a-button
+              >
               <a-button status="danger" size="mini" v-else><template #icon>否</template></a-button>
             </template>
           </a-table-column>
           <a-table-column title="是否隐藏" data-index="hidden" :width="200">
             <template #cell="{ record }">
-              <a-button status="success" size="mini" v-if="record.hidden"><template #icon>是</template></a-button>
+              <a-button status="success" size="mini" v-if="record.meta?.hidden"><template #icon>是</template></a-button>
               <a-button status="danger" size="mini" v-else><template #icon>否</template></a-button>
             </template>
           </a-table-column>
@@ -71,22 +72,27 @@
 
 <script setup lang="ts">
 import EditMenuModal from './EditMenuModal.vue'
+import { usePermissionStore } from '@/store'
+import { getUserRoutes } from '@/apis'
+import type { RouteRecordRaw } from 'vue-router'
 
 defineOptions({ name: 'SystemMenu' })
 
 const EditMenuModalRef = ref<InstanceType<typeof EditMenuModal>>()
 const loading = ref(false)
-const treeData = ref<any[]>([])
+const menuTreeList = ref<RouteRecordRaw[]>([])
 
-const getTreeData = () => {
-  loading.value = true
-  setTimeout(() => {
-    treeData.value = []
+const getMenuTreeList = async () => {
+  try {
+    const res = await getUserRoutes()
+    menuTreeList.value = res.data
+  } catch (error) {
+  } finally {
     loading.value = false
-  }, 300)
+  }
 }
 
-getTreeData()
+getMenuTreeList()
 
 const onAdd = () => {
   EditMenuModalRef.value?.add()

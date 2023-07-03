@@ -6,13 +6,13 @@
       </VueViewer>
     </section>
 
-    <a-row justify="space-between">
+    <a-row justify="space-between" align="stretch">
       <a-space>
         <a-button type="primary" @click="handle('rotateLeft')">
-          <template #icon><icon-rotate-left /></template>
+          <template #icon><icon-undo /></template>
         </a-button>
         <a-button type="primary" @click="handle('rotateRight')">
-          <template #icon><icon-rotate-right /></template>
+          <template #icon><icon-redo /></template>
         </a-button>
         <a-button type="primary" @click="handle('scaleMinus')">
           <template #icon><icon-minus /></template>
@@ -89,6 +89,9 @@ const handle = (value: string) => {
 </script>
 
 <style lang="scss" scoped>
+:deep(.arco-space-item) {
+  height: 100%;
+}
 :deep(.viewer) {
   img {
     display: none;
@@ -106,15 +109,17 @@ const handle = (value: string) => {
   .viewer-box {
     flex: 1;
     margin-bottom: 16px;
+    background-color: $color-bg;
   }
   .zoom-proportion {
     padding: 0 12px;
-    height: 28px;
-    background-color: var(--color-fill-3);
+    height: 100%;
+    color: #fff;
+    background-color: #333;
     display: flex;
     justify-content: center;
     align-items: center;
-    color: var(--color-text-2);
+    border-radius: 4px;
   }
 }
 </style>

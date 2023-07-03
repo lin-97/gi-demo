@@ -57,7 +57,6 @@ defineOptions({ name: 'ResultFail' })
     ul > li {
       display: flex;
       align-items: center;
-      padding-left: 40px;
       margin-bottom: 8px;
       .tip {
         margin: 0 10px;

@@ -1,35 +1,38 @@
 <template>
   <div class="file-detail">
     <section class="left">
-      <div>
+      <a-row justify="space-between">
         <a-button @click="back"><icon-left /></a-button>
-      </div>
+      </a-row>
       <div class="view-box">
         <PreImage></PreImage>
       </div>
     </section>
     <section class="right">
-      <a-descriptions title="文件详情" :column="1" layout="inline-vertical">
-        <a-descriptions-item label="名称：">头像01</a-descriptions-item>
-        <a-descriptions-item label="类型：">jpg</a-descriptions-item>
-        <a-descriptions-item label="路径：">/</a-descriptions-item>
-        <a-descriptions-item label="文件大小：">256K</a-descriptions-item>
-        <a-descriptions-item label="创建人：">admin</a-descriptions-item>
-        <a-descriptions-item label="创建时间：">2022-05-18 15:25:08</a-descriptions-item>
-        <a-descriptions-item label="文件ID：">1511952522629615617</a-descriptions-item>
-        <a-descriptions-item label="标签：">
-          <a-space :size="5">
+      <a-descriptions title="文件详情" :column="1" table-layout="fixed" :label-style="{ width: '76px' }">
+        <a-descriptions-item label="名称">头像01</a-descriptions-item>
+        <a-descriptions-item label="类型">jpg</a-descriptions-item>
+        <a-descriptions-item label="路径">/</a-descriptions-item>
+        <a-descriptions-item label="文件大小">256K</a-descriptions-item>
+        <a-descriptions-item label="创建人">admin</a-descriptions-item>
+        <a-descriptions-item label="创建时间">2022-05-18 15:25:08</a-descriptions-item>
+        <a-descriptions-item label="文件ID">1511952522629615617</a-descriptions-item>
+        <a-descriptions-item label="标签">
+          <a-space wrap>
             <a-tag color="red">头像</a-tag>
             <a-tag color="orangered">图片</a-tag>
             <a-tag color="purple">JPG</a-tag>
+            <a-tag color="blue">壁纸</a-tag>
+            <a-tag color="orange">4K</a-tag>
+            <a-tag color="green">风景</a-tag>
           </a-space>
         </a-descriptions-item>
-        <a-descriptions-item label="说明："
+        <a-descriptions-item label="说明"
           >基于 v-viewer vue3 实现自定义按钮的图片预览，其他功能可自行扩展</a-descriptions-item
         >
       </a-descriptions>
 
-      <a-row justify="end" class="foot-btn">
+      <a-row justify="end">
         <a-space>
           <a-button>
             <template #icon><icon-download :size="16" /></template>
@@ -61,6 +64,12 @@ const back = () => {
 </script>
 
 <style lang="scss" scoped>
+:deep(.arco-page-header) {
+  padding: 0;
+  .arco-page-header-wrapper {
+    padding: 0;
+  }
+}
 :deep(.arco-btn) {
   border-radius: 4px;
 }
@@ -69,10 +78,10 @@ const back = () => {
   margin-bottom: 8px;
   .arco-descriptions-item-label-inline {
     white-space: nowrap;
-    font-size: 13px;
+    font-size: 12px;
   }
   .arco-descriptions-item-value-inline {
-    font-size: 13px;
+    font-size: 12px;
   }
 }
 .file-detail {
@@ -96,7 +105,7 @@ const back = () => {
     .view-box {
       flex: 1;
       overflow: hidden;
-      margin-top: 12px;
+      margin-top: $margin;
     }
   }
 
