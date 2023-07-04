@@ -24,6 +24,11 @@ Gi Admin Pro 是一个基于 Vue3、Vite、TypeScript、Arco Design UI、Pinia�
 
 - [Gi Admin Pro](http://lin0716.gitee.io/gi-demo)
 
+
+
+账号：**admin   123456**
+账号：**user      123456**
+
 ## 代码仓库
 
 - [gitee](https://gitee.com/lin0716/gi-demo)
