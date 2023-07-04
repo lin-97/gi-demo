@@ -71,9 +71,9 @@ export default defineConfig(({ command, mode }) => {
     },
     // 构建
     build: {
+      chunkSizeWarningLimit: 2000, // 消除打包大小超过500kb警告
       outDir: 'dist', // 指定打包路径，默认为项目根目录下的 dist 目录
-      // Vite 2.6.x 以上需要配置 minify: "terser", terserOptions 才能生效
-      minify: 'terser',
+      minify: 'terser', // Vite 2.6.x 以上需要配置 minify: "terser", terserOptions 才能生效
       terserOptions: {
         compress: {
           keep_infinity: true, // 防止 Infinity 被压缩成 1/0，这可能会导致 Chrome 上的性能问题
@@ -81,11 +81,17 @@ export default defineConfig(({ command, mode }) => {
           drop_debugger: true // 生产环境去除 debugger
         },
         format: {
-          // 删除注释
-          comments: false
+          comments: false // 删除注释
         }
       },
-      chunkSizeWarningLimit: 1500 // chunk 大小警告的限制（以 kbs 为单位）
+      // 静态资源打包到dist下的不同目录
+      rollupOptions: {
+        output: {
+          chunkFileNames: 'static/js/[name]-[hash].js',
+          entryFileNames: 'static/js/[name]-[hash].js',
+          assetFileNames: 'static/[ext]/[name]-[hash].[ext]'
+        }
+      }
     }
   }
 })
