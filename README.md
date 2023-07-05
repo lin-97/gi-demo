@@ -110,6 +110,25 @@ npm run build
 
 #### 变量命名
 
+~~~vue
+<script setup lang="ts">
+// 引用类型使用 const 定义，基本类型使用 let 定义
+const arr = []
+const obj = {}
+const fn = () => {
+  console.log('123')
+}
+
+let num = 10
+let str = 'abc'
+let flag = false
+
+// vue3 中 ref 返回的是一个引用类型
+const loading = ref(false)
+const name = ref('小明')
+</script>
+~~~
+
 ```vue
 <script setup lang="ts">
 const loading = ref(false) // 加载
@@ -701,6 +720,8 @@ const confirm = () => {
 ```
 
 使用
+
+**`模板里使用自定义组件 大写开头驼峰，对于搜索便利`**
 
 ```vue
 <template>
