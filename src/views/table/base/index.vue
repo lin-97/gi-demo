@@ -86,6 +86,31 @@
             </template>
           </a-table-column>
           <a-table-column title="手机号" data-index="phone" :width="150"></a-table-column>
+          <a-table-column title="爱好" data-index="hobbys">
+            <template #cell="{ record }">
+              <a-overflow-list v-if="record.hobbys.length">
+                <a-tag v-for="item in (record as PersonItem)?.hobbys" :key="item" color="orange" size="small">
+                  <span>{{ item }}</span>
+                </a-tag>
+                <template #overflow="{ number }">
+                  <a-popover :content-style="{ maxWidth: '300px' }">
+                    <a-tag color="green" size="small">+{{ number }}</a-tag>
+                    <template #content>
+                      <a-space wrap>
+                        <a-tag
+                          v-for="tag in (record as PersonItem).hobbys.filter((i, n) => n >= record.hobbys.length - number)"
+                          color="orange"
+                          size="small"
+                        >
+                          <span>{{ tag }}</span>
+                        </a-tag>
+                      </a-space>
+                    </template>
+                  </a-popover>
+                </template>
+              </a-overflow-list>
+            </template>
+          </a-table-column>
           <a-table-column title="创建时间" data-index="createTime" ellipsis tooltip></a-table-column>
           <a-table-column title="地址" data-index="address" ellipsis tooltip></a-table-column>
           <a-table-column title="状态" :width="100" align="center">

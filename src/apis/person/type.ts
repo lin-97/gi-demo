@@ -15,4 +15,5 @@ export interface PersonItem {
   no: number
   status: true | false
   color: string
+  hobbys: string[]
 }
