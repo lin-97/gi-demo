@@ -93,7 +93,7 @@ onMounted(() => {
       }
     }
     .content {
-      color: var(--color-text-1);
+      color: #000;
       font-size: 15px;
       margin-top: 8px;
       line-height: 1.4;
