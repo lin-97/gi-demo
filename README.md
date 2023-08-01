@@ -308,7 +308,7 @@ const form = reactive(getInitForm())
 
 // 重置form
 const resetForm = () => {
-  Object.assign(state, getInitForm())
+  Object.assign(form, getInitForm())
 }
 </script>
 ```
