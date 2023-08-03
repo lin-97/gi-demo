@@ -1,5 +1,5 @@
 <template>
-  <section class="system-logo" :class="{ collapsed: collapsed }" @click="toHome">
+  <section class="system-logo" :class="{ collapsed: props.collapsed }" @click="toHome">
     <img class="logo" src="@/assets/images/logo.gif" />
     <span class="system-name">Admin Pro</span>
   </section>
