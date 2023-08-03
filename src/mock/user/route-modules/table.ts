@@ -28,7 +28,7 @@ export default {
       component: 'table/custom/index',
       meta: {
         hidden: false,
-        title: '自定义表单',
+        title: '自定义表格',
         icon: 'icon-menu',
         keepAlive: false
       }
