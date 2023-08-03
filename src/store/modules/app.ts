@@ -11,6 +11,7 @@ interface IAppSetting {
   tabMode: TabModeType // 页签风格
   animate: boolean // 是否显示动画
   animateMode: animateModeType // 动画类名
+  menuCollapse: boolean // 左侧菜单折叠状态
 }
 
 const storeSetup = () => {
@@ -63,6 +64,11 @@ const storeSetup = () => {
     settingConfig.animateMode = mode
   }
 
+  // 设置左侧菜单折叠状态
+  const setMenuCollapse = (collapsed: boolean) => {
+    settingConfig.menuCollapse = collapsed
+  }
+
   return {
     ...toRefs(settingConfig),
     transitionName,
@@ -71,7 +77,8 @@ const storeSetup = () => {
     setTabVisible,
     setTabMode,
     setAnimateVisible,
-    setAnimateMode
+    setAnimateMode,
+    setMenuCollapse
   }
 }
 

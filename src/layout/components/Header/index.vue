@@ -1,6 +1,14 @@
 <template>
-  <a-layout-header>
-    <a-row align="center" class="h-100">
+  <a-layout-header class="header">
+    <section class="fold-btn-wrapper">
+      <a-button size="mini" class="gi_hover_btn fold-btn" @click="appStore.setMenuCollapse(!appStore.menuCollapse)">
+        <template #icon>
+          <icon-menu-fold v-if="!appStore.menuCollapse" :size="18" :stroke-width="3" />
+          <icon-menu-unfold v-else :size="18" :stroke-width="3" />
+        </template>
+      </a-button>
+    </section>
+    <a-row align="center" class="h-100 header-right">
       <a-col :xs="0" :md="10" :lg="10" :xl="12" :xxl="12">
         <Breadcrumb></Breadcrumb>
       </a-col>
@@ -88,13 +96,14 @@
 
 <script setup lang="ts" name="Header">
 import { Modal } from '@arco-design/web-vue'
-import { useUserStore } from '@/store'
+import { useAppStore, useUserStore } from '@/store'
 import { useFullScreen } from '@/hooks'
 import SettingDrawer from './SettingDrawer.vue'
 import Message from './Message.vue'
 import _XEUtils_ from 'xe-utils'
 
 const router = useRouter()
+const appStore = useAppStore()
 const userStore = useUserStore()
 const { isFullScreen, onToggleFullScreen } = useFullScreen()
 const SettingDrawerRef = ref<InstanceType<typeof SettingDrawer>>()
@@ -125,8 +134,22 @@ const toGitPath = () => {
 </script>
 
 <style lang="scss" scoped>
+:deep(.fold-btn) {
+  background-color: var(--color-secondary-hover) !important;
+}
+
 .arco-dropdown-open .arco-icon-down {
   transform: rotate(180deg);
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  .header-right {
+    flex: 1;
+    overflow: hidden;
+    margin-left: $padding;
+  }
 }
 
 .doption-icon {

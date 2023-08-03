@@ -117,7 +117,7 @@
 
 .gi_hover_btn {
   border: 0 !important;
-  background-color: transparent !important;
+  background-color: transparent;
 
   &:hover {
     background: var(--color-secondary-hover) !important;

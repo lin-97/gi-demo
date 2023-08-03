@@ -1,5 +1,5 @@
 <template>
-  <section class="system-logo" :class="{ collapse: collapse }" @click="toHome">
+  <section class="system-logo" :class="{ collapsed: collapsed }" @click="toHome">
     <img class="logo" src="@/assets/images/logo.gif" />
     <span class="system-name">Admin Pro</span>
   </section>
@@ -7,11 +7,11 @@
 
 <script setup lang="ts">
 interface Props {
-  collapse?: boolean
+  collapsed?: boolean
 }
 
 const props = withDefaults(defineProps<Props>(), {
-  collapse: false
+  collapsed: false
 })
 
 const router = useRouter()
@@ -35,7 +35,7 @@ const toHome = () => {
   cursor: pointer;
   user-select: none;
   background-color: var(--color-bg-1);
-  &.collapse {
+  &.collapsed {
     padding: 0;
     display: flex;
     justify-content: center;

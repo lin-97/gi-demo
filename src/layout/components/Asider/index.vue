@@ -1,7 +1,15 @@
 <template>
   <div class="asider">
-    <Logo :collapse="collapse"></Logo>
-    <a-layout-sider collapsible breakpoint="xl" :width="232" class="menu" @collapse="handleCollapse">
+    <Logo :collapsed="appStore.menuCollapse"></Logo>
+    <a-layout-sider
+      class="menu"
+      collapsible
+      breakpoint="xl"
+      hide-trigger
+      :width="232"
+      :collapsed="appStore.menuCollapse"
+      @collapse="handleCollapse"
+    >
       <a-menu :selected-keys="[activeMenu]" :auto-open-selected="true" :style="{ width: '100%', height: '100%' }">
         <SidebarItem
           v-for="(route, index) in sidebarRoutes"
@@ -15,19 +23,17 @@
 </template>
 
 <script setup lang="ts" name="Asider">
-import { usePermissionStore } from '@/store'
+import { useAppStore, usePermissionStore } from '@/store'
 import SidebarItem from './SidebarItem.vue'
 import Logo from './Logo.vue'
 
 const route = useRoute()
-const router = useRouter()
-
+const appStore = useAppStore()
 const permissionStore = usePermissionStore()
 const sidebarRoutes = computed(() => permissionStore.sidebarRoutes)
 
-const collapse = ref(false)
-const handleCollapse = (isCollapse: boolean) => {
-  collapse.value = isCollapse
+const handleCollapse = (isCollapsed: boolean) => {
+  appStore.menuCollapse = isCollapsed
 }
 
 console.log('sidebarRoutes', JSON.parse(JSON.stringify(sidebarRoutes.value)))
