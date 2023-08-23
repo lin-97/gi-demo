@@ -807,6 +807,8 @@ getDeptList() // 建议在页面调用 hooks 的方法（不在hooks里面调用
 
 #### TSX方式使用表格
 
+[图片看不了，点击这里](https://juejin.cn/post/7250361765052432421)
+
 ![](https://p6-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/e445ddf3af0548e3b8ef655c94c31e68~tplv-k3u1fbpfcp-zoom-in-crop-mark:1512:0:0:0.awebp?)
 
 ![](https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/75ae181b45df470286d67a4f1f86afd1~tplv-k3u1fbpfcp-zoom-in-crop-mark:1512:0:0:0.awebp?)
@@ -1086,6 +1088,8 @@ const getTableData = async () => {
 
 
 #### TSX 方式调起弹窗
+
+[图片看不了，点击这里](https://juejin.cn/post/7250356064988725309)
 
 ##### 方式 1
 
