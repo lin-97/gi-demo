@@ -1,9 +1,9 @@
 <template>
   <a-layout class="main">
     <router-view v-slot="{ Component, route }">
-      <transition :name="appStore.transitionName" mode="out-in" appear>
+      <transition :name="route.matched[1].meta.animation !== false ? appStore.transitionName : ''" mode="out-in" appear>
         <keep-alive :include="(tabsStore.cacheList as string[])">
-          <component :is="Component" :key="route.meta.animation ? route.path : ''" />
+          <component :is="Component" :key="route.matched[1].path" />
         </keep-alive>
       </transition>
     </router-view>
@@ -11,10 +11,10 @@
 </template>
 
 <script setup lang="ts" name="Main">
-import { useTabsStore, useAppStore } from '@/store'
+import { useAppStore, useTabsStore } from '@/store'
 
-const tabsStore = useTabsStore()
 const appStore = useAppStore()
+const tabsStore = useTabsStore()
 </script>
 
 <style lang="scss" scoped>
