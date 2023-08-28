@@ -1489,72 +1489,78 @@ $padding: 16px; // 盒子和内容的间距
 
 可参考 Vue2 官网-风格指南: https://v2.cn.vuejs.org/v2/style-guide/ , 其中一些规范也可借鉴
 
-可参考 gi-demo 源码，如有更好的规范建议，可以联系作者本人
+可参考 **Gi Admin Pro** 源码，如有更好的规范建议，可以联系作者本人
 
 ## Vue 相关
 
-[Vue3 官网](https://cn.vuejs.org/)
+<a href="https://cn.vuejs.org/" target="_blank">Vue3 官网</a>
 
-[Vue-Router](https://router.vuejs.org/zh/)
+<a href="https://router.vuejs.org/zh/" target="_blank">Vue-Router</a>
 
-[Vite](https://cn.vitejs.dev/)
+<a href="https://cn.vitejs.dev/" target="_blank">Vite</a>
 
-[Pinia](https://pinia.web3doc.top/)
+<a href="https://pinia.web3doc.top/" target="_blank">Pinia</a>
 
 ## 插件推荐
 
-[Arco Design 组件库](https://arco.design/vue/component/button)
+<a href="https://arco.design/vue/component/button" target="_blank">Arco Design 组件库</a>
 
-[**Day.js** 一个极简的 JavaScript 库，可以为现代浏览器解析、验证、操作和显示日期和时间 2K 大小](https://dayjs.fenxianglu.cn/)
+<a href="https://dayjs.fenxianglu.cn/" target="_blank">Day.js** 一个极简的 JavaScript 库，可以为现代浏览器解析、验证、操作和显示日期和时间 2K 大小</a>
 
-[Lodash 一个一致性、模块化、高性能的 JavaScript 实用工具库](https://www.lodashjs.com/)
+<a href="https://www.lodashjs.com/" target="_blank">Lodash 一个一致性、模块化、高性能的 JavaScript 实用工具库</a>
 
-[Xe-utils 一个 JavaScript 函数库、工具类](https://vxetable.cn/xe-utils/#/)
+<a href="https://vxetable.cn/xe-utils/#/" target="_blank">Xe-utils 一个 JavaScript 函数库、工具类</a>
 
-[VueUse 一个 Vue3 Hooks 库](https://vueuse.org/)
+<a href="https://vueuse.org/" target="_blank">VueUse 一个 Vue3 Hooks 库</a>
 
-[VueRequest 一个 Vue 请求库](https://next.attojs.com/)
+<a href="https://next.attojs.com/" target="_blank">VueRequest 一个 Vue 请求库</a>
 
-[V-Viewer 基于 viewer.js 的 vue 图像查看器组件，支持旋转、缩放等操作](https://mirari.cc/v-viewer/)
+<a href="https://mirari.cc/v-viewer/" target="_blank">V-Viewer 基于 viewer.js 的 vue 图像查看器组件，支持旋转、缩放等操作</a>
 
-[Vue-Color-Kit 一个 vue3 颜色选择器组件 ](https://www.npmjs.com/package/vue-color-kit)
+<a href="https://www.npmjs.com/package/vue-color-kit" target="_blank">Vue-Color-Kit 一个 vue3 颜色选择器组件</a>
 
-[Vxe-Table](https://vxetable.cn/#/table/start/install)
+<a href="https://vxetable.cn/#/table/start/install" target="_blank">Vxe-Table</a>
+
+
 
 **其他**
 
-[VCalendar 日历组件](https://vcalendar.io/)
+<a href="https://vcalendar.io/" target="_blank">VCalendar 日历组件</a>
 
-[Vue Cal 日历组件](https://antoniandre.github.io/vue-cal/)
+<a href="https://antoniandre.github.io/vue-cal/" target="_blank">Vue Cal 日历组件</a>
+
+
+
+<a href="" target="_blank"></a>
 
 ## 推荐书籍
 
-[Vue入门指南与实战案例](https://vue3.chengpeiquan.com/)
+<a href="https://vue3.chengpeiquan.com/" target="_blank">Vue入门指南与实战案例</a>
 
-[深入理解 TypeScript](https://jkchao.github.io/typescript-book-chinese/)
+<a href="https://jkchao.github.io/typescript-book-chinese/" target="_blank">深入理解 TypeScript</a>
 
-[前端宝典](https://vue3js.cn/interview/)
+<a href="https://vue3js.cn/interview/" target="_blank">前端宝典</a>
 
-[web 开发人员需要知道的 CSS 技巧](https://lhammer.cn/You-need-to-know-css/#/translucent-borders)
+<a href="https://lhammer.cn/You-need-to-know-css/#/translucent-borders" target="_blank">Web 开发人员需要知道的 CSS 技巧</a>
 
-[阮一峰 ES6](https://es6.ruanyifeng.com/#README)
+<a href="https://es6.ruanyifeng.com/#README" target="_blank">阮一峰 ES6</a>
 
-[阮一峰 flex 布局](https://www.ruanyifeng.com/blog/2015/07/flex-grammar.html)
+<a href="https://www.ruanyifeng.com/blog/2015/07/flex-grammar.html" target="_blank">阮一峰 flex 布局</a>
 
 ## 开源项目集合
 
-[Vue3 开源项目集合](https://vue-admin.cn/admin)
+<a href="https://vue-admin.cn/admin" target="_blank">Vue3 开源项目集合</a>
 
-[React 开源项目集合](https://react-admin.cn/admin/)
+<a href="https://react-admin.cn/admin/" target="_blank">React 开源项目集合</a>
 
 ## 工具
 
-[菜鸟工具](https://c.runoob.com/)
+<a href="https://c.runoob.com/" target="_blank">菜鸟工具</a>
 
-[代码生成图片](https://carbon.now.sh/?bg=rgba%28171%2C+184%2C+195%2C+1%29&t=material&wt=none&l=auto&width=680&ds=true&dsyoff=20px&dsblur=68px&wc=true&wa=true&pv=56px&ph=56px&ln=false&fl=1&fm=Hack&fs=14px&lh=133%25&si=false&es=2x&wm=false)
+<a href="https://carbon.now.sh/?bg=rgba%28171%2C+184%2C+195%2C+1%29&t=material&wt=none&l=auto&width=680&ds=true&dsyoff=20px&dsblur=68px&wc=true&wa=true&pv=56px&ph=56px&ln=false&fl=1&fm=Hack&fs=14px&lh=133%25&si=false&es=2x&wm=false" target="_blank">代码生成图片</a>
 
-[JSON-TO-ANY 对象转 ts 类型)](http://xiets.gitee.io/json-to-any-web/)
+<a href="http://xiets.gitee.io/json-to-any-web/" target="_blank">JSON-TO-ANY 对象转 ts 类型</a>
 
-[在线三角形样式生成器](http://49.234.61.19/tool/cssTriangle)
+<a href="http://49.234.61.19/tool/cssTriangle" target="_blank">在线三角形样式生成器</a>
 
-[iTab](https://go.itab.link/)
+<a href="https://go.itab.link/" target="_blank">iTab</a>
