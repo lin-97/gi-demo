@@ -2,7 +2,7 @@
   <div class="user-manage">
     <a-card title="部门列表" :bordered="false" class="gi_card left">
       <div class="content">
-        <a-input v-model="treeInputValue" placeholder="请输入搜索关键词" allow-clear style="margin-bottom: 10px">
+        <a-input v-model="treeInputValue" placeholder="输入部门名称搜索" allow-clear style="margin-bottom: 10px">
           <template #prefix>
             <icon-search />
           </template>
@@ -11,6 +11,7 @@
           <a-tree
             ref="treeRef"
             block-node
+            show-line
             default-expand-all
             :data="deptList"
             :field-names="{
@@ -20,14 +21,6 @@
             }"
             @select="getTableData"
           >
-            <template #switcher-icon>
-              <IconDown />
-            </template>
-            <template #icon="{ node }">
-              <GiSvgIcon name="com-dept" :size="14" v-if="node.level == 1"></GiSvgIcon>
-              <GiSvgIcon name="com-sub-dept" :size="12" v-if="node.level == 2"></GiSvgIcon>
-              <GiSvgIcon name="com-group" :size="12" v-if="node.level == 3"></GiSvgIcon>
-            </template>
           </a-tree>
         </a-spin>
       </div>
@@ -38,26 +31,34 @@
         <a-space>
           <a-button type="primary" @click="onAdd">
             <template #icon><icon-plus /></template>
-            <span>新增用户</span>
+            <span>新增</span>
           </a-button>
 
+          <a-button type="primary" status="danger">
+            <template #icon><icon-delete /></template>
+            <span>删除</span>
+          </a-button>
+        </a-space>
+
+        <a-space>
           <a-input-group>
             <a-select placeholder="部门状态" allow-clear style="width: 120px">
               <a-option :value="1">正常</a-option>
               <a-option :value="0">禁用</a-option>
             </a-select>
-            <a-input placeholder="请输入关键词..." allow-clear style="width: 250px"> </a-input>
-            <a-button type="primary" @click="getTableData">
-              <template #icon><icon-search /></template>
-              <span>搜索</span>
-            </a-button>
+            <a-input placeholder="输入用户名搜索" allow-clear style="width: 250px"> </a-input>
           </a-input-group>
+          <a-button type="primary" @click="getTableData">
+            <template #icon><icon-search /></template>
+            <span>查询</span>
+          </a-button>
+          <a-button>
+            <template #icon><icon-refresh /></template>
+            <span>重置</span>
+          </a-button>
         </a-space>
-
-        <a-button type="primary" status="danger">
-          <template #icon><icon-delete /></template>
-        </a-button>
       </a-row>
+
       <section class="table-box">
         <a-table
           row-key="id"
