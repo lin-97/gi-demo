@@ -130,13 +130,15 @@ const onEdit = (item: DeptItem) => {
 
 <style lang="scss" scoped>
 .dept-manage {
-  margin: $margin;
+  flex: 1;
+  padding: $margin;
   box-sizing: border-box;
+  overflow-y: auto;
   .btns {
     margin: $margin 0;
   }
   .table-box {
-    margin-top: 12px;
+    margin-top: $margin;
   }
 }
 </style>

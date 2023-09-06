@@ -32,7 +32,7 @@
         </a-space>
       </a-row>
 
-      <section class="gi_table_box">
+      <section class="table-box">
         <a-table
           row-key="id"
           :data="roleList"
@@ -141,20 +141,15 @@ const onDelete = () => {
 
 <style lang="scss" scoped>
 .role-manage {
-  margin: $margin;
+  flex: 1;
+  padding: $margin;
   box-sizing: border-box;
-  display: flex;
-  flex-direction: column;
-
-  overflow: hidden;
+  overflow-y: auto;
   .btns {
     margin: $margin 0;
   }
   .table-box {
-    flex: 1;
-    margin-top: 12px;
-    padding: 0 $padding $padding;
-    overflow: hidden;
+    margin-top: $margin;
   }
 }
 </style>
