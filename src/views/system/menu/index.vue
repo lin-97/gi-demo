@@ -1,15 +1,44 @@
 <template>
-  <div class="menu-manage">
+  <div class="gi_page_scroll_y menu-manage">
     <a-card title="菜单管理">
-      <a-row>
-        <a-button type="primary" @click="onAdd">
-          <template #icon><icon-plus /></template>
-          <span>新增</span>
-        </a-button>
+      <a-row justify="space-between">
+        <a-space>
+          <a-button type="primary" @click="onAdd">
+            <template #icon><icon-plus /></template>
+            <span>新增</span>
+          </a-button>
+          <a-tooltip content="展开/折叠">
+            <a-button type="primary" status="success" @click="onExpanded">
+              <template #icon>
+                <icon-list v-if="!isExpanded" />
+                <icon-mind-mapping v-else />
+              </template>
+            </a-button>
+          </a-tooltip>
+        </a-space>
+
+        <a-space>
+          <a-input placeholder="输入菜单名称搜索" allow-clear style="width: 250px">
+            <template #prefix><icon-search /></template>
+          </a-input>
+          <a-select placeholder="菜单状态" style="width: 120px">
+            <a-option :value="1">正常</a-option>
+            <a-option :value="0">禁用</a-option>
+          </a-select>
+          <a-button type="primary">
+            <template #icon><icon-search /></template>
+            <span>搜索</span>
+          </a-button>
+          <a-button>
+            <template #icon><icon-refresh /></template>
+            <span>重置</span>
+          </a-button>
+        </a-space>
       </a-row>
 
-      <section class="table-box">
+      <section class="gi_mt">
         <a-table
+          ref="TableRef"
           :data="menuTreeList"
           row-key="path"
           :loading="loading"
@@ -28,7 +57,7 @@
             <a-table-column title="菜单地址" data-index="path">
               <template #cell="{ record }">
                 <span v-if="record.path">{{ record.path }}</span>
-                <span class="no-text" v-else>无</span>
+                <span v-else>无</span>
               </template>
             </a-table-column>
             <a-table-column title="菜单图标" data-index="icon" :width="200">
@@ -80,12 +109,19 @@ import AddMenuModal from './AddMenuModal.vue'
 import { usePermissionStore } from '@/store'
 import { getUserRoutes } from '@/apis'
 import type { RouteRecordRaw } from 'vue-router'
+import type { TableInstance } from '@arco-design/web-vue'
 
 defineOptions({ name: 'SystemMenu' })
 
 const AddMenuModalRef = ref<InstanceType<typeof AddMenuModal>>()
 const loading = ref(false)
 const menuTreeList = ref<RouteRecordRaw[]>([])
+const TableRef = ref<TableInstance>()
+const isExpanded = ref(false)
+const onExpanded = () => {
+  isExpanded.value = !isExpanded.value
+  TableRef.value?.expandAll(isExpanded.value)
+}
 
 const getMenuTreeList = async () => {
   try {
@@ -110,15 +146,5 @@ const onEdit = (item: any) => {
 
 <style lang="scss" scoped>
 .menu-manage {
-  flex: 1;
-  padding: $margin;
-  box-sizing: border-box;
-  overflow-y: auto;
-  .table-box {
-    margin-top: $margin;
-  }
-  .no-text {
-    color: $color-text-3;
-  }
 }
 </style>

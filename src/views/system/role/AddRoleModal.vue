@@ -13,13 +13,13 @@
       >
         <a-input placeholder="请输入角色名称" v-model="form.name"> </a-input>
       </a-form-item>
-      <a-form-item label="角色编号" name="roleCode">
-        <a-input placeholder="请输入角色编号" v-model="form.roleCode">
+      <a-form-item label="角色编号" name="code">
+        <a-input placeholder="请输入角色编号" v-model="form.code">
           <template #prepend>role_</template>
         </a-input>
       </a-form-item>
-      <a-form-item label="描述" name="remarks">
-        <a-textarea v-model="form.remarks" placeholder="角色描述" :auto-size="{ minRows: 3, maxRows: 5 }" />
+      <a-form-item label="描述" name="description">
+        <a-textarea v-model="form.description" placeholder="角色描述" :auto-size="{ minRows: 3, maxRows: 5 }" />
       </a-form-item> </a-form
   ></a-modal>
 </template>
@@ -31,8 +31,8 @@ const visible = ref(false)
 
 const form = reactive({
   name: '',
-  roleCode: '',
-  remarks: ''
+  code: '',
+  description: ''
 })
 
 const add = () => {

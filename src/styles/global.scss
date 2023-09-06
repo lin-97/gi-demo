@@ -99,6 +99,18 @@
   margin-right: $margin;
 }
 
+.gi_mx {
+  margin: 0 $margin;
+}
+
+.gi_my {
+  margin: $margin 0;
+}
+
+.gi_m0 {
+  margin: 0;
+}
+
 .gi_pt {
   padding-top: $margin;
 }
@@ -113,6 +125,18 @@
 
 .gi_pr {
   padding-right: $margin;
+}
+
+.gi_px {
+  padding: 0 $padding;
+}
+
+.gi_py {
+  padding: $padding 0;
+}
+
+.gi_p0 {
+  padding: 0;
 }
 
 .gi_hover_btn {
@@ -146,4 +170,11 @@
 .gi_table_box {
   max-height: 100%;
   overflow: hidden;
+}
+
+.gi_page_scroll_y {
+  flex: 1;
+  padding: $margin;
+  box-sizing: border-box;
+  overflow-y: auto;
 }

@@ -1,12 +1,12 @@
 <template>
-  <div class="user-manage">
+  <div class="gi_page_scroll_y user-manage">
     <a-card title="用户管理">
       <a-row :gutter="16">
         <a-col :xs="0" :md="10" :lg="6" :xl="6" :xxl="5">
           <a-input v-model="treeInputValue" placeholder="输入部门名称搜索" allow-clear style="margin-bottom: 10px">
             <template #prefix><icon-search /></template>
           </a-input>
-          <a-spin class="tree-box" :loading="treeLoading">
+          <a-spin :loading="treeLoading">
             <a-tree
               ref="TreeRef"
               block-node
@@ -58,7 +58,7 @@
             </a-space>
           </a-row>
 
-          <section class="table-box">
+          <section class="gi_mt">
             <a-table
               row-key="id"
               :loading="loading"
@@ -145,14 +145,14 @@ const { pagination, setTotal } = usePagination(() => {
   getUserList()
 })
 
-const { deptList, getDeptList } = useDept()
-getDeptList()
-
-nextTick(() => {
-  setTimeout(() => {
-    TreeRef.value?.expandAll(true)
-  }, 300)
+const { deptList, getDeptList } = useDept({
+  callback: () => {
+    nextTick(() => {
+      TreeRef.value?.expandAll(true)
+    })
+  }
 })
+getDeptList()
 
 const onAdd = () => {
   AddUserModalRef.value?.add()
@@ -187,14 +187,4 @@ const reset = () => {
 }
 </script>
 
-<style lang="scss" scoped>
-.user-manage {
-  flex: 1;
-  padding: $margin;
-  box-sizing: border-box;
-  overflow-y: auto;
-  .table-box {
-    margin-top: $margin;
-  }
-}
-</style>
+<style lang="scss" scoped></style>

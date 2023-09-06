@@ -10,12 +10,8 @@
       </a-form-item>
 
       <a-form-item v-if="form.type !== 3" label="菜单图标" field="icon">
-        <a-radio-group v-model="form.type" type="button">
-          <a-radio :value="1">目录</a-radio>
-          <a-radio :value="2">菜单</a-radio>
-          <a-radio :value="3">按钮</a-radio>
-        </a-radio-group></a-form-item
-      >
+        <GiIconSelector v-model="form.icon"></GiIconSelector>
+      </a-form-item>
 
       <a-row :gutter="16">
         <a-col :span="12">
@@ -97,6 +93,7 @@ const title = computed(() => (!!menuId.value ? '编辑菜单' : '新增菜单'))
 
 const form = reactive({
   type: 1,
+  icon: '',
   title: '',
   sort: 0,
   permission: '',

@@ -1,25 +1,25 @@
 <template>
-  <div class="dept-manage">
+  <div class="gi_page_scroll_y dept-manage">
     <a-card title="部门管理">
       <a-space>
-        <a-input v-model="form.name" placeholder="输入部门名称搜索" allow-clear style="width: 250px" />
+        <a-input v-model="form.name" placeholder="输入部门名称搜索" allow-clear style="width: 250px">
+          <template #prefix><icon-search /></template>
+        </a-input>
         <a-select v-model="form.status" placeholder="部门状态" style="width: 120px">
           <a-option :value="1">正常</a-option>
           <a-option :value="0">禁用</a-option>
         </a-select>
-        <a-space>
-          <a-button type="primary" @click="search">
-            <template #icon><icon-search /></template>
-            <span>搜索</span>
-          </a-button>
-          <a-button @click="reset">
-            <template #icon><icon-refresh /></template>
-            <span>重置</span>
-          </a-button>
-        </a-space>
+        <a-button type="primary" @click="search">
+          <template #icon><icon-search /></template>
+          <span>搜索</span>
+        </a-button>
+        <a-button @click="reset">
+          <template #icon><icon-refresh /></template>
+          <span>重置</span>
+        </a-button>
       </a-space>
 
-      <a-row class="btns">
+      <a-row class="gi_my">
         <a-space>
           <a-button type="primary" @click="onAdd">
             <template #icon><icon-plus /></template>
@@ -32,7 +32,7 @@
         </a-space>
       </a-row>
 
-      <section class="table-box">
+      <section class="gi_mt">
         <a-table
           :loading="loading"
           ref="TableRef"
@@ -78,8 +78,7 @@
 
 <script setup lang="ts">
 import AddDeptModal from './AddDeptModal.vue'
-import { getSystemDeptList } from '@/apis'
-import type { DeptItem } from '@/apis'
+import { getSystemDeptList, type DeptItem } from '@/apis'
 import type { TableInstance } from '@arco-design/web-vue'
 
 defineOptions({ name: 'SystemDept' })
@@ -128,17 +127,4 @@ const onEdit = (item: DeptItem) => {
 }
 </script>
 
-<style lang="scss" scoped>
-.dept-manage {
-  flex: 1;
-  padding: $margin;
-  box-sizing: border-box;
-  overflow-y: auto;
-  .btns {
-    margin: $margin 0;
-  }
-  .table-box {
-    margin-top: $margin;
-  }
-}
-</style>
+<style lang="scss" scoped></style>

@@ -1,35 +1,54 @@
 <template>
   <a-popover trigger="click">
-    <a-button v-if="!modelValue" type="primary">请选择图标</a-button>
-    <a-button type="primary" status="success" v-else>
-      <component :size="16" :is="modelValue" />
-    </a-button>
+    <a-input
+      placeholder="请选择图标"
+      :model-value="modelValue"
+      allow-clear
+      readonly
+      @clear="emit('update:modelValue', '')"
+    >
+      <template #prefix>
+        <component v-if="modelValue" :size="16" :is="modelValue" />
+        <icon-search v-else />
+      </template>
+    </a-input>
 
     <template #content>
-      <div class="container">
-        <a-input
-          v-model="searchValue"
-          placeholder="搜索图标名称"
-          allow-clear
-          @input="search"
-          @clear="search"
-          style="width: 100%"
-        >
-          <template #prefix>
-            <icon-search />
-          </template>
-        </a-input>
+      <div class="container" :class="{ 'is-list': !isGridView }">
+        <a-row>
+          <section style="flex: 1; margin-right: 8px">
+            <a-input
+              v-model="searchValue"
+              placeholder="搜索图标名称"
+              allow-clear
+              size="small"
+              @input="search"
+              @clear="search"
+            >
+              <template #prefix>
+                <icon-search />
+              </template>
+            </a-input>
+          </section>
 
-        <div class="icon-list">
+          <a-button size="small" @click="isGridView = !isGridView">
+            <template #icon>
+              <icon-apps v-if="isGridView" />
+              <icon-unordered-list v-else />
+            </template>
+          </a-button>
+        </a-row>
+
+        <section class="icon-list">
           <a-row wrap :gutter="4">
-            <a-col :span="4" v-for="item of currentPageIconList" :key="item">
+            <a-col :span="isGridView ? 4 : 8" v-for="item of currentPageIconList" :key="item">
               <div class="icon-item" :class="{ active: modelValue === item }" @click="handleSelectedIcon(item)">
-                <component :is="item" :size="26" />
+                <component :is="item" :size="20" />
                 <div class="gi_line_1 icon-name">{{ item }}</div>
               </div>
             </a-col>
           </a-row>
-        </div>
+        </section>
 
         <a-row justify="center" align="center">
           <a-pagination
@@ -66,9 +85,10 @@ const props = withDefaults(defineProps<Props>(), {
 const searchValue = ref('') // 搜索词
 
 // 图标列表
+const isGridView = ref(true)
 const IconList = Object.keys(ArcoIcons).filter((i) => i !== 'default')
 
-const pageSize = 36
+const pageSize = 42
 const current = ref(1)
 const total = ref(IconList.length) // 图标总数
 
@@ -121,15 +141,13 @@ const handleSelectedIcon = async (icon: string) => {
 
 <style lang="scss" scoped>
 .container {
-  min-width: 360px;
-  max-width: 450px;
+  width: 300px;
   overflow: hidden;
   .icon-list {
-    min-height: 300px;
-    margin-top: 20px;
+    margin-top: 10px;
     margin-bottom: 10px;
     .icon-item {
-      height: 60px;
+      height: 30px;
       margin-bottom: 4px;
       overflow: hidden;
       display: flex;
@@ -138,21 +156,39 @@ const handleSelectedIcon = async (icon: string) => {
       align-items: center;
       cursor: pointer;
       border: 1px dashed var(--color-bg-1);
+      .icon-name {
+        display: none;
+      }
       &.active {
         border: 1px dashed rgb(var(--primary-3));
         background-color: rgba(var(--primary-6), 0.05);
       }
-      .icon-name {
-        width: 70%;
-        margin: 0 auto;
-        font-size: 12px;
-        color: $color-text-3;
-        margin-top: 5px;
-      }
+
       &:not(.active) {
         &:hover {
           border-color: var(--color-border-3);
         }
+      }
+    }
+  }
+}
+
+.is-list {
+  min-width: 400px;
+  .icon-list {
+    height: 300px;
+    overflow: hidden;
+    overflow-y: auto;
+    .icon-item {
+      display: flex;
+      flex-direction: row;
+      justify-content: flex-start;
+      align-items: center;
+      .icon-name {
+        margin-left: 6px;
+        font-size: 12px;
+        color: $color-text-3;
+        display: block;
       }
     }
   }

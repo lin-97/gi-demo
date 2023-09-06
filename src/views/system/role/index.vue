@@ -1,5 +1,5 @@
 <template>
-  <div class="role-manage">
+  <div class="gi_page_scroll_y role-manage">
     <a-card title="角色管理">
       <a-space>
         <a-input v-model="form.name" placeholder="输入角色名搜索" allow-clear style="width: 250px">
@@ -19,7 +19,7 @@
         </a-button>
       </a-space>
 
-      <a-row class="btns">
+      <a-row class="gi_my">
         <a-space>
           <a-button type="primary" @click="onAdd">
             <template #icon><icon-plus /></template>
@@ -32,7 +32,7 @@
         </a-space>
       </a-row>
 
-      <section class="table-box">
+      <section class="gi_mt">
         <a-table
           row-key="id"
           :data="roleList"
@@ -54,7 +54,7 @@
             </a-table-column>
             <a-table-column title="角色描述" data-index="description"></a-table-column>
             <a-table-column title="创建时间" data-index="createTime"></a-table-column>
-            <a-table-column title="操作" :width="220" align="center">
+            <a-table-column title="操作" :width="220" align="center" fixed="right">
               <template #cell="{ record }">
                 <a-space>
                   <a-button type="primary" size="mini" @click="onEdit(record)">
@@ -139,17 +139,4 @@ const onDelete = () => {
 }
 </script>
 
-<style lang="scss" scoped>
-.role-manage {
-  flex: 1;
-  padding: $margin;
-  box-sizing: border-box;
-  overflow-y: auto;
-  .btns {
-    margin: $margin 0;
-  }
-  .table-box {
-    margin-top: $margin;
-  }
-}
-</style>
+<style lang="scss" scoped></style>
