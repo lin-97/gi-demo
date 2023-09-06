@@ -4,7 +4,7 @@
       <a-row>
         <a-button type="primary" @click="onAdd">
           <template #icon><icon-plus /></template>
-          <span>新增菜单</span>
+          <span>新增</span>
         </a-button>
       </a-row>
 
