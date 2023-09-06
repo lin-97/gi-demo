@@ -3,7 +3,6 @@ export interface DeptItem {
   id: string
   name: string
   sort: number
-  status: 0 | 1
   createTime: string
   parentId: string
   children?: DeptItem[]
@@ -12,22 +11,29 @@ export interface DeptItem {
 // 角色
 export interface RoleItem {
   id: string
-  name: string
-  roleCode: string
-  status: 1 | 0
-  description: string
+  createUserString: string
   createTime: string
+  disabled: boolean
+  name: string
+  code: string
+  sort: number
+  status: number
+  type: number
+  description: string
 }
 
 export interface UserItem {
   id: string
-  userNo: string
-  userName: string
-  nickName: string
-  avatar: string
-  sex: 0 | 1 // 1男 0女
-  status: 0 | 1
-  address: string
-  phone: string
+  createUserString: string
   createTime: string
+  disabled: boolean
+  username: string
+  nickname: string
+  sex: number
+  avatar: string
+  email: string
+  phone: string
+  status: 1 | 0
+  type: 1
+  description: string
 }

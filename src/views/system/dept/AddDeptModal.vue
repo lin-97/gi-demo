@@ -1,6 +1,6 @@
 <template>
-  <a-modal v-model:visible="visible" :title="title">
-    <a-form ref="formRef" :model="form" size="medium" auto-label-width>
+  <a-modal v-model:visible="visible" :title="title" :mask-closable="false">
+    <a-form ref="formRef" :model="form" :rules="rules" size="medium" auto-label-width>
       <a-form-item label="上级部门" name="parentId">
         <a-tree-select
           v-model="form.parentId"
@@ -14,25 +14,21 @@
           }"
         ></a-tree-select>
       </a-form-item>
-      <a-form-item
-        label="部门名称"
-        field="name"
-        :rules="[
-          { required: true, message: '请输入部门名称' },
-          { min: 3, max: 10, message: '长度在 3 - 10个字符' }
-        ]"
-        :validate-trigger="['change', 'input']"
-      >
+      <a-form-item label="部门名称" field="name" :validate-trigger="['change', 'input']">
         <a-input v-model="form.name" placeholder="请输入部门名称" allow-clear></a-input>
       </a-form-item>
-      <a-form-item label="排序" name="sort" :rules="[{ required: true, message: '请输入排序序号' }]">
+      <a-form-item label="排序" field="sort">
         <a-input-number v-model="form.sort" style="width: 120px" />
       </a-form-item>
-      <a-form-item label="状态" name="status">
-        <a-radio-group v-model="form.status">
-          <a-radio :value="1">正常</a-radio>
-          <a-radio :value="0">禁用</a-radio>
-        </a-radio-group>
+
+      <a-form-item label="描述" field="description">
+        <a-textarea
+          v-model="form.description"
+          :max-length="200"
+          placeholder="请输入描述"
+          :auto-size="{ minRows: 3 }"
+          show-word-limit
+        />
       </a-form-item>
     </a-form>
   </a-modal>
@@ -52,8 +48,15 @@ const form = reactive({
   parentId: '',
   name: '',
   sort: 0,
-  status: 1
+  description: ''
 })
+
+const rules = {
+  name: [
+    { required: true, message: '请输入部门名称' },
+    { min: 3, max: 10, message: '长度在 3 - 10个字符' }
+  ]
+}
 
 const add = () => {
   deptId.value = ''

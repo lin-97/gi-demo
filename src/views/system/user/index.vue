@@ -3,13 +3,11 @@
     <a-card title="部门列表" :bordered="false" class="gi_card left">
       <div class="content">
         <a-input v-model="treeInputValue" placeholder="输入部门名称搜索" allow-clear style="margin-bottom: 10px">
-          <template #prefix>
-            <icon-search />
-          </template>
+          <template #prefix><icon-search /></template>
         </a-input>
         <a-spin class="tree-box" :loading="treeLoading">
           <a-tree
-            ref="treeRef"
+            ref="TreeRef"
             block-node
             show-line
             default-expand-all
@@ -19,7 +17,7 @@
               title: 'name',
               children: 'children'
             }"
-            @select="getTableData"
+            @select="search"
           >
           </a-tree>
         </a-spin>
@@ -42,65 +40,71 @@
 
         <a-space>
           <a-input-group>
-            <a-select placeholder="部门状态" allow-clear style="width: 120px">
+            <a-select v-model="form.status" placeholder="用户状态" allow-clear style="width: 120px">
               <a-option :value="1">正常</a-option>
               <a-option :value="0">禁用</a-option>
             </a-select>
-            <a-input placeholder="输入用户名搜索" allow-clear style="width: 250px"> </a-input>
+            <a-input v-model="form.username" placeholder="输入用户名搜索" allow-clear style="width: 250px"> </a-input>
           </a-input-group>
-          <a-button type="primary" @click="getTableData">
+          <a-button type="primary" @click="search">
             <template #icon><icon-search /></template>
             <span>查询</span>
           </a-button>
-          <a-button>
+          <a-button @click="reset">
             <template #icon><icon-refresh /></template>
             <span>重置</span>
           </a-button>
         </a-space>
       </a-row>
 
-      <section class="table-box">
+      <section class="gi_table_box table-box">
         <a-table
           row-key="id"
           :loading="loading"
           :data="tableData"
-          :scroll="{ x: '100%', y: '100%', minWidth: 900 }"
-          :pagination="{ showPageSize: true, total: total, current: current, pageSize: pageSize }"
-          @page-change="changeCurrent"
-          @page-size-change="changePageSize"
+          :scroll="{ x: '100%', y: '100%', minWidth: 1200 }"
+          :pagination="pagination"
         >
           <template #columns>
-            <a-table-column title="用户编号" data-index="userNo"></a-table-column>
-            <a-table-column title="用户名" data-index="userName"></a-table-column>
-            <a-table-column title="用户昵称" data-index="nickName"></a-table-column>
-            <a-table-column title="性别" data-index="sex">
+            <a-table-column title="ID" data-index="id"></a-table-column>
+            <a-table-column title="用户名" data-index="username" :width="120">
               <template #cell="{ record }">
-                <span v-if="record.sex === 1">男</span>
-                <span v-else>女</span>
+                <a-link>{{ record.username }}</a-link>
               </template>
             </a-table-column>
-            <a-table-column title="头像" data-index="avatar">
+            <a-table-column title="昵称" data-index="nickname" :width="150"></a-table-column>
+            <a-table-column title="性别" data-index="gender" :width="80">
+              <template #cell="{ record }">{{ record.gender === 1 ? '男' : '女' }}</template>
+            </a-table-column>
+            <a-table-column title="头像" data-index="avatar" :width="100">
               <template #cell="{ record }">
-                <GiSvgIcon name="avatar-man" :size="40" v-if="record.sex === 1"></GiSvgIcon>
-                <GiSvgIcon name="avatar-woman" :size="40" v-else></GiSvgIcon>
+                <a-avatar>
+                  <img alt="avatar" :src="record.avatar" />
+                </a-avatar>
               </template>
             </a-table-column>
-            <a-table-column title="地址" data-index="address"></a-table-column>
+            <a-table-column title="联系方式" data-index="email" :width="180"></a-table-column>
             <a-table-column title="状态" :width="100">
               <template #cell="{ record }">
                 <a-tag v-if="record.status == 1" color="green">正常</a-tag>
                 <a-tag v-else color="red">禁用</a-tag>
               </template>
             </a-table-column>
-            <a-table-column title="创建时间" data-index="createTime"></a-table-column>
-            <a-table-column title="操作" :width="100" align="center">
+            <a-table-column title="类型" :width="100">
+              <template #cell="{ record }">
+                <a-tag v-if="record.type === 1" color="red">系统内置</a-tag>
+                <a-tag v-if="record.type === 2" color="orange">自定义</a-tag>
+              </template>
+            </a-table-column>
+            <a-table-column title="创建时间" data-index="createTime" :width="200"></a-table-column>
+            <a-table-column title="操作" :width="100" align="center" fixed="right">
               <template #cell="{ record }">
                 <a-space>
                   <a-button type="primary" size="mini" @click="onEdit(record)">
                     <template #icon><icon-edit /></template>
                   </a-button>
-                  <a-popconfirm type="warning" content="您确定要删除该项吗?">
-                    <a-button type="primary" status="danger" size="mini">
+                  <a-popconfirm type="warning" content="确定删除该用户吗?">
+                    <a-button type="primary" status="danger" size="mini" :disabled="record.disabled">
                       <template #icon><icon-delete /></template>
                     </a-button>
                   </a-popconfirm>
@@ -112,7 +116,7 @@
       </section>
     </a-card>
 
-    <EditUserModal ref="EditUserModalRef"></EditUserModal>
+    <AddUserModal ref="AddUserModalRef"></AddUserModal>
   </div>
 </template>
 
@@ -121,39 +125,42 @@ import { usePagination } from '@/hooks'
 import { useDept } from '@/hooks/app'
 import { getSystemUserList } from '@/apis'
 import type { UserItem } from '@/apis'
-import EditUserModal from './EditUserModal.vue'
-import type { Tree } from '@arco-design/web-vue'
+import AddUserModal from './AddUserModal.vue'
+import type { TreeInstance } from '@arco-design/web-vue'
 
 defineOptions({ name: 'SystemUser' })
 
-const treeRef = ref<InstanceType<typeof Tree>>()
-const EditUserModalRef = ref<InstanceType<typeof EditUserModal>>()
+const TreeRef = ref<TreeInstance>()
+const AddUserModalRef = ref<InstanceType<typeof AddUserModal>>()
 
 const treeLoading = ref(false)
 const treeInputValue = ref('')
 const loading = ref(false)
 const tableData = ref<UserItem[]>([])
 
-const { current, pageSize, total, changeCurrent, changePageSize, setTotal } = usePagination(() => {
-  getTableData()
+const { pagination, setTotal } = usePagination(() => {
+  getUserList()
 })
 
 const { deptList, getDeptList } = useDept()
 getDeptList()
 
 nextTick(() => {
-  treeRef.value?.expandAll()
+  setTimeout(() => {
+    TreeRef.value?.expandAll(true)
+  }, 300)
 })
 
 const onAdd = () => {
-  EditUserModalRef.value?.add()
+  AddUserModalRef.value?.add()
 }
 
 const onEdit = (item: UserItem) => {
-  EditUserModalRef.value?.edit(item.id)
+  AddUserModalRef.value?.edit(item.id)
 }
 
-const getTableData = async () => {
+const form = reactive({ status: '', username: '' })
+const getUserList = async () => {
   loading.value = true
   const res = await getSystemUserList()
   if (res.success) {
@@ -164,7 +171,17 @@ const getTableData = async () => {
     loading.value = false
   }
 }
-getTableData()
+getUserList()
+
+const search = () => {
+  pagination.onChange(1)
+}
+
+const reset = () => {
+  form.status = ''
+  form.username = ''
+  pagination.onChange(1)
+}
 </script>
 
 <style lang="scss" scoped>
@@ -198,9 +215,7 @@ getTableData()
     flex: 4;
     height: 100%;
     .table-box {
-      flex: 1;
       margin-top: $margin;
-      overflow: hidden;
     }
   }
 }

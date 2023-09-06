@@ -6,15 +6,17 @@ import type { RoleItem } from '@/apis'
 export function useRole() {
   const loading = ref(false)
   const roleList = ref<RoleItem[]>([])
+  const total = ref(0)
   const getRoleList = async () => {
     try {
       loading.value = true
       const res = await getSystemRoleList()
       roleList.value = res.data.list
+      total.value = res.data.total
     } catch (error) {
     } finally {
       loading.value = false
     }
   }
-  return { roleList, getRoleList, loading }
+  return { roleList, getRoleList, loading, total }
 }

@@ -4,12 +4,17 @@ import type * as System from './type'
 
 /** @desc 获取部门数据 */
 export function getSystemDeptList() {
-  return http.get<ApiListData<System.DeptItem[]>>(`${prefix}/system/dept/list`)
+  return http.get<System.DeptItem[]>(`${prefix}/system/dept/list`)
 }
 
 /** @desc 获取用户数据 */
 export function getSystemUserList() {
   return http.get<ApiListData<System.UserItem[]>>(`${prefix}/system/user/list`)
+}
+
+/** @desc 获取用户详情 */
+export function getSystemUserDetail(params: { id: string }) {
+  return http.get<System.UserItem>(`${prefix}/system/user/detail`, params)
 }
 
 /** @desc 获取角色数据 */

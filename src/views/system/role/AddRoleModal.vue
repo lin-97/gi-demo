@@ -1,5 +1,5 @@
 <template>
-  <a-modal v-model:visible="visible" :title="title">
+  <a-modal v-model:visible="visible" :title="title" :mask-closable="false">
     <a-form :model="form" size="medium" auto-label-width>
       <a-form-item
         label="角色名称"

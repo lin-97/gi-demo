@@ -34,17 +34,6 @@ export default {
       }
     },
     {
-      name: 'SystemMenu',
-      path: 'menu',
-      component: 'system/menu/index',
-      meta: {
-        hidden: false,
-        title: '菜单管理',
-        icon: 'icon-menu',
-        keepAlive: false
-      }
-    },
-    {
       name: 'SystemDept',
       path: 'dept',
       component: 'system/dept/index',
@@ -52,6 +41,17 @@ export default {
         hidden: false,
         title: '部门管理',
         icon: 'icon-mind-mapping',
+        keepAlive: false
+      }
+    },
+    {
+      name: 'SystemMenu',
+      path: 'menu',
+      component: 'system/menu/index',
+      meta: {
+        hidden: false,
+        title: '菜单管理',
+        icon: 'icon-menu',
         keepAlive: false
       }
     }
