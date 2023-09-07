@@ -65,7 +65,7 @@
 </template>
 
 <script setup lang="ts" name="SettingDrawer">
-import { useAppStore } from '@/store'
+import { useAppStore } from '@/stores'
 import { ColorPicker } from 'vue-color-kit'
 import 'vue-color-kit/dist/vue-color-kit.css'
 import { tabModeList, animateModeList } from '@/config/option'

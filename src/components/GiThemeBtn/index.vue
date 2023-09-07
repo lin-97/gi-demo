@@ -9,7 +9,7 @@
 
 <script setup lang="ts">
 import { useDark, useToggle } from '@vueuse/core'
-import { useAppStore } from '@/store'
+import { useAppStore } from '@/stores'
 
 defineOptions({ name: 'GiThemeBtn' })
 const appStore = useAppStore()

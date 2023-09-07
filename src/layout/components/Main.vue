@@ -11,7 +11,7 @@
 </template>
 
 <script setup lang="ts" name="Main">
-import { useAppStore, useTabsStore } from '@/store'
+import { useAppStore, useTabsStore } from '@/stores'
 
 const appStore = useAppStore()
 const tabsStore = useTabsStore()

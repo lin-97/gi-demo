@@ -1,5 +1,5 @@
 import type { DirectiveBinding, Directive } from 'vue'
-import { useUserStore } from '@/store'
+import { useUserStore } from '@/stores'
 
 /**
  * @desc v-hasPerm 操作权限处理

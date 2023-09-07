@@ -41,7 +41,7 @@
 
 <script setup lang="ts" name="NavTab">
 import type { RouteRecordRaw } from 'vue-router'
-import { useTabsStore, useAppStore } from '@/store'
+import { useTabsStore, useAppStore } from '@/stores'
 import MagicIcon from './MagicIcon.vue'
 
 const route = useRoute()

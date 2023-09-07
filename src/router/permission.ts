@@ -1,6 +1,6 @@
 import router from '@/router'
-import { useUserStore } from '@/store'
-import { usePermissionStore } from '@/store'
+import { useUserStore } from '@/stores'
+import { usePermissionStore } from '@/stores'
 import { Message } from '@arco-design/web-vue'
 import { getToken } from '@/utils/auth'
 import { isHttp } from '@/utils/validate'

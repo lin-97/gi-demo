@@ -1,6 +1,6 @@
 import { computed } from 'vue'
 import type { EChartsOption } from 'echarts'
-import { useAppStore } from '@/store'
+import { useAppStore } from '@/stores'
 
 // 获取代码提示
 // 从'echarts'中导入{ SeriesOption };

@@ -51,7 +51,7 @@
 
 <script setup lang="ts">
 import NowTime from './NowTime/index.vue'
-import { useUserStore } from '@/store'
+import { useUserStore } from '@/stores'
 
 const userStore = useUserStore()
 </script>

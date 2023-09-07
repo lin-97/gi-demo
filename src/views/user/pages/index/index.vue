@@ -76,7 +76,7 @@
 
 <script setup lang="ts">
 import { Message } from '@arco-design/web-vue'
-import { useUserStore } from '@/store'
+import { useUserStore } from '@/stores'
 import RightBox from './RightBox.vue'
 
 defineOptions({ name: 'UserIndex' })

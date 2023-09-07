@@ -24,14 +24,12 @@ Gi Admin Pro 是一个基于 Vue3、Vite、TypeScript、Arco Design Vue、Pinia�
 
 <a href="http://lin0716.gitee.io/gi-demo" target="_blank">Gi Admin Pro 预览地址</a>
 
-
-
-账号：**admin   123456**
-账号：**user      123456**
+账号：**admin 123456**
+账号：**user 123456**
 
 ## 代码仓库
 
-<a href="https://gitee.com/lin0716/gi-demo" target="_blank">Gitee 仓库地址</a>
+<a href="https://gitee.com/lin0716/gi-demo" target="_blank">Gitee  仓库地址</a>
 
 ## 项目示例图
 
@@ -106,11 +104,9 @@ npm run build
 
 一般来说，一个 .vue 文件行数建议不超过 **`400`** 行，超过建议组件化拆分
 
-
-
 #### 变量命名
 
-~~~vue
+```vue
 <script setup lang="ts">
 // 一般情况下，引用类型使用 const 定义，基本类型使用 let 定义
 const arr = []
@@ -127,7 +123,7 @@ let flag = false
 const loading = ref(false)
 const name = ref('小明')
 </script>
-~~~
+```
 
 ```vue
 <script setup lang="ts">
@@ -269,8 +265,6 @@ const getTableList = () => {}
 | error       | err  |
 | settings    | set  |
 
-
-
 #### vue 相关的命名
 
 ```vue
@@ -287,7 +281,7 @@ const title = computed(() => (isEdit.value ? '编辑' : '新增'))
 </script>
 ```
 
-~~~vue
+```vue
 <script setup lang="ts">
 // 表单建议使用 form 命名(简洁)，不必要使用 formData, 同时使用 reactive
 const form = reactive({
@@ -295,7 +289,7 @@ const form = reactive({
   phone: ''
 })
 </script>
-~~~
+```
 
 ```vue
 <script setup lang="ts">
@@ -319,7 +313,7 @@ const resetForm = () => {
 
 ```vue
 <script setup lang="ts">
-import { useAppStore, useUserStore } from '@/store'
+import { useAppStore, useUserStore } from '@/stores'
 import { useLoading } from '@/hooks'
 
 // stores 或 hooks 的使用命名规则定义
@@ -329,8 +323,6 @@ const userStore = useUserStore()
 const { loading, setLoading } = useLoading()
 </script>
 ```
-
-
 
 #### 写法技巧
 
@@ -355,8 +347,8 @@ let result = marks >= 30 ? 'Pass' : 'Fail'
 ```js
 // 优化前
 if (type === 1 || type === 2 || type === 3)
-// 优化后, 此种方式在vue模板也可使用
-[1, 2, 3].includes(type)
+  // 优化后, 此种方式在vue模板也可使用
+  [1, 2, 3].includes(type)
 ```
 
 使用箭头函数简化函数
@@ -383,8 +375,6 @@ const getProportionColor = (proportion: number) => {
 }
 </script>
 ```
-
-
 
 #### 接口 api 的命名
 
@@ -422,8 +412,6 @@ export function saveUser(data) {
 import { getUserList, saveUser } from '@/apis'
 ```
 
-
-
 #### 接口 api 的 ts 类型导入
 
 ```ts
@@ -452,8 +440,6 @@ export function getSystemRoleList() {
 ```ts
 import type { DeptItem, UserItem, RoleItem } from './type'
 ```
-
-
 
 #### 接口调用书写
 
@@ -535,8 +521,6 @@ const getUserList = async () => {
 // catch 可以省略
 ```
 
-
-
 #### 正则导入
 
 文件位置：@/utils/regexp.ts
@@ -602,8 +586,6 @@ const submit = () => {
 </template>
 ```
 
-
-
 #### 全局组件--命名规范
 
 组件命名：**单文件组件的文件名应该要么始终是单词大写开头 (PascalCase)，要么始终是横线连接 (kebab-case)**
@@ -633,8 +615,6 @@ AddModal.vue
 EditDrawer.vue
 DetailModal.vue
 ```
-
-
 
 #### 文件夹命名--命名规范 (采用中划线-)
 
@@ -685,8 +665,6 @@ import { StatusList } from '@/constant/xxx' // 要具体到模块名，因为不
   </template>
 </a-table-column>
 ```
-
-
 
 #### 弹窗组件 Modal、抽屉组件 Drawer 的一般封装
 
@@ -750,19 +728,10 @@ const onEdit = (item: PersonItem) => {
 </script>
 ```
 
-
-
 #### Hooks 目录结构
 
 ```js
-hooks 
-  > app 
-    - useDept.ts
-    - useCompanyList.ts
-    - index.ts
-  > modules
-    - useLoading.ts
-    - usePagination.ts
+hooks > app - useDept.ts - useCompanyList.ts - index.ts > modules - useLoading.ts - usePagination.ts
 index.ts
 ```
 
@@ -815,17 +784,13 @@ getDeptList() // 建议在页面调用 hooks 的方法，比较直观（不在ho
 </script>
 ```
 
-
-
-#### TSX方式使用表格
+#### TSX 方式使用表格
 
 <img src="./md/table1.png" />
 
 <img src="./md/table2.png" />
 
 <img src="./md/table3.png" />
-
-
 
 #### 分页 Hooks 的使用
 
@@ -1093,8 +1058,6 @@ const getTableData = async () => {
 </script>
 ```
 
-
-
 #### TSX 方式调起弹窗
 
 ##### 方式 1
@@ -1134,9 +1097,7 @@ AddUserForm.vue
 
 <img src="./md/tsx2-2.png" />
 
-
-
-##### 方式3
+##### 方式 3
 
 `@/views/file/components/FileRenameModal/index.vue`
 
@@ -1148,7 +1109,7 @@ AddUserForm.vue
 
 使用
 
-~~~vue
+```vue
 <script setup lang="ts">
 import { openFileRenameModal } from '../../components/index'
 import type { FileItem } from '@/apis'
@@ -1158,9 +1119,7 @@ const rename = (item: FileItem) => {
   openFileRenameModal(item)
 }
 </script>
-~~~
-
-
+```
 
 #### 组件使用建议
 
@@ -1218,8 +1177,6 @@ Link 组件使用场景
 </template>
 ```
 
-
-
 #### CSS 命名规范
 
 建议采用全小写，多单词使用-连接符(参考大部分网站，包括掘金，码云等，都是采用这个规则)
@@ -1244,8 +1201,6 @@ Link 组件使用场景
 .list-Item
 .List-Item;
 ```
-
-
 
 #### CSS 全局类名-命名规范
 
@@ -1340,8 +1295,6 @@ Link 组件使用场景
 }
 ```
 
-
-
 #### 全局 scss 变量-命名规范
 
 ```scss
@@ -1376,10 +1329,6 @@ $padding: 16px; // 盒子和内容的间距
 建议尽量使用全局 scss 变量来开发，可以有效提高效率和团队协作
 
 <img src="./md/gap.png" />
-
-
-
-
 
 #### CSS 的命名词汇
 
@@ -1505,7 +1454,7 @@ $padding: 16px; // 盒子和内容的间距
 
 <a href="https://arco.design/vue/component/button" target="_blank">Arco Design 组件库</a>
 
-<a href="https://dayjs.fenxianglu.cn/" target="_blank">Day.js** 一个极简的 JavaScript 库，可以为现代浏览器解析、验证、操作和显示日期和时间 2K 大小</a>
+<a href="https://dayjs.fenxianglu.cn/" target="_blank">Day.js\*\* 一个极简的 JavaScript 库，可以为现代浏览器解析、验证、操作和显示日期和时间 2K 大小</a>
 
 <a href="https://www.lodashjs.com/" target="_blank">Lodash 一个一致性、模块化、高性能的 JavaScript 实用工具库</a>
 
@@ -1521,21 +1470,17 @@ $padding: 16px; // 盒子和内容的间距
 
 <a href="https://vxetable.cn/#/table/start/install" target="_blank">Vxe-Table</a>
 
-
-
 **其他**
 
 <a href="https://vcalendar.io/" target="_blank">VCalendar 日历组件</a>
 
 <a href="https://antoniandre.github.io/vue-cal/" target="_blank">Vue Cal 日历组件</a>
 
-
-
 <a href="" target="_blank"></a>
 
 ## 推荐书籍
 
-<a href="https://vue3.chengpeiquan.com/" target="_blank">Vue入门指南与实战案例</a>
+<a href="https://vue3.chengpeiquan.com/" target="_blank">Vue 入门指南与实战案例</a>
 
 <a href="https://jkchao.github.io/typescript-book-chinese/" target="_blank">深入理解 TypeScript</a>
 

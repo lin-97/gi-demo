@@ -54,7 +54,7 @@
 </template>
 
 <script setup lang="ts">
-import { useUserStore } from '@/store'
+import { useUserStore } from '@/stores'
 import { useLoading } from '@/hooks'
 import { Message, type FormInstance } from '@arco-design/web-vue'
 import LoginBg from './components/LoginBg/index.vue'

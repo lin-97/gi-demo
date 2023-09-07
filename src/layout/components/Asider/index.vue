@@ -23,7 +23,7 @@
 </template>
 
 <script setup lang="ts" name="Asider">
-import { useAppStore, usePermissionStore } from '@/store'
+import { useAppStore, usePermissionStore } from '@/stores'
 import SidebarItem from './SidebarItem.vue'
 import Logo from './Logo.vue'
 

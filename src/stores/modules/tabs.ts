@@ -2,7 +2,7 @@ import { defineStore } from 'pinia'
 import { ref } from 'vue'
 import router from '@/router'
 import type { RouteRecordRaw, RouteRecordName } from 'vue-router'
-import { usePermissionStore } from '@/store'
+import { usePermissionStore } from '@/stores'
 import _XEUtils_ from 'xe-utils'
 
 const storeSetup = () => {

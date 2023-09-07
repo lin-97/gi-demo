@@ -1,5 +1,5 @@
 import type { DirectiveBinding, Directive } from 'vue'
-import { useUserStore } from '@/store'
+import { useUserStore } from '@/stores'
 
 /**
  * @desc v-hasRole 角色权限处理

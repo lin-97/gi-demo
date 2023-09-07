@@ -96,7 +96,7 @@
 
 <script setup lang="ts" name="Header">
 import { Modal } from '@arco-design/web-vue'
-import { useAppStore, useUserStore } from '@/store'
+import { useAppStore, useUserStore } from '@/stores'
 import { useFullScreen } from '@/hooks'
 import SettingDrawer from './SettingDrawer.vue'
 import Message from './Message.vue'
