@@ -98,7 +98,7 @@ function resolvePath(path: string, routeQuery?: string): string | { path: string
     return path
   }
   if (routeQuery) {
-    const query = JSON.parse(routeQuery)
+    const query = JSON.parse(JSON.stringify(routeQuery))
     return { path: path, query: query }
   }
   return path

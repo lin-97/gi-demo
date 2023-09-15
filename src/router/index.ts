@@ -1,5 +1,4 @@
-import { createRouter, createWebHashHistory, type RouteRecordNormalized, type RouteRecordRaw } from 'vue-router'
-import _XEUtils_ from 'xe-utils'
+import { createRouter, createWebHashHistory } from 'vue-router'
 import constantRoutes from './constant-routes'
 
 const router = createRouter({
@@ -9,7 +8,7 @@ const router = createRouter({
 
 /** 重置路由 */
 export function resetRouter() {
-  // 注意：所有动态路由路由必须带有 Name 属性，否则可能会不能完全重置干净
+  // 注意：所有动态路由路由必须带有 name 属性，否则可能会不能完全重置干净
   try {
     router.getRoutes().forEach((route) => {
       const { name, meta, path } = route

@@ -19,7 +19,8 @@ export default {
         icon: 'icon-folder',
         keepAlive: true,
         hidden: false,
-        breadcrumb: false
+        breadcrumb: false,
+        query: { fileType: 0 }
       }
     },
     {
