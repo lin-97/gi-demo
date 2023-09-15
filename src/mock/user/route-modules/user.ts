@@ -8,7 +8,8 @@ export default {
     title: '个人中心',
     icon: 'icon-list',
     svgIcon: 'menu-user',
-    keepAlive: false
+    keepAlive: false,
+    sort: 11
   },
   children: [
     {

@@ -7,7 +7,8 @@ export default {
     hidden: false,
     title: '错误页',
     svgIcon: 'menu-error',
-    keepAlive: false
+    keepAlive: false,
+    sort: 7
   },
   children: [
     {

@@ -11,7 +11,8 @@ export default {
         hideen: false,
         title: '分析页',
         svgIcon: 'menu-chart',
-        keepAlive: false
+        keepAlive: false,
+        sort: 2
       }
     }
   ]

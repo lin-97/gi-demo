@@ -7,7 +7,8 @@ export default {
     hidden: false,
     title: '表单管理',
     svgIcon: 'menu-form',
-    keepAlive: false
+    keepAlive: false,
+    sort: 5
   },
   children: [
     {

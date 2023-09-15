@@ -7,7 +7,8 @@ export default {
     title: '数据管理',
     icon: 'icon-list',
     svgIcon: 'menu-data',
-    keepAlive: true
+    keepAlive: true,
+    sort: 3
   },
   children: [
     {

@@ -63,7 +63,7 @@
               row-key="id"
               :loading="loading"
               :data="tableData"
-              :scroll="{ x: '100%', y: '100%', minWidth: 1200 }"
+              :scroll="{ x: '100%', y: '100%', minWidth: 1300 }"
               :pagination="pagination"
             >
               <template #columns>
@@ -98,15 +98,17 @@
                   </template>
                 </a-table-column>
                 <a-table-column title="创建时间" data-index="createTime" :width="200"></a-table-column>
-                <a-table-column title="操作" :width="100" align="center" fixed="right">
+                <a-table-column title="操作" :width="180" align="center" fixed="right">
                   <template #cell="{ record }">
                     <a-space>
                       <a-button type="primary" size="mini" @click="onEdit(record)">
                         <template #icon><icon-edit /></template>
+                        <span>编辑</span>
                       </a-button>
                       <a-popconfirm type="warning" content="确定删除该用户吗?">
                         <a-button type="primary" status="danger" size="mini" :disabled="record.disabled">
                           <template #icon><icon-delete /></template>
+                          <span>删除</span>
                         </a-button>
                       </a-popconfirm>
                     </a-space>

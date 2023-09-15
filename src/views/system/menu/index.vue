@@ -54,42 +54,45 @@
             <a-table-column title="菜单名称">
               <template #cell="{ record }">{{ record.meta?.title || '' }}</template>
             </a-table-column>
-            <a-table-column title="菜单地址" data-index="path">
+            <a-table-column title="排序" data-index="meta.sort" :width="80" align="center">
+              <template #cell="{ record }">{{ record.meta?.sort || 0 }}</template>
+            </a-table-column>
+            <a-table-column title="组件路径" data-index="path"> </a-table-column>
+            <a-table-column title="菜单图标" data-index="icon" :width="100" align="center">
               <template #cell="{ record }">
-                <span v-if="record.path">{{ record.path }}</span>
-                <span v-else>无</span>
+                <GiSvgIcon v-if="record.meta?.svgIcon" :size="24" :name="record.meta?.svgIcon"></GiSvgIcon>
+                <component v-else :is="record.meta?.icon" :size="24"></component>
               </template>
             </a-table-column>
-            <a-table-column title="菜单图标" data-index="icon" :width="200">
+            <a-table-column title="是否缓存" :width="100" align="center">
               <template #cell="{ record }">
-                <GiSvgIcon :size="24" :name="record.meta?.svgIcon || record.meta?.icon"></GiSvgIcon>
+                <a-tag v-if="record.meta?.keepAlive" color="green">是</a-tag>
+                <a-tag v-else color="red">否</a-tag>
               </template>
             </a-table-column>
-            <a-table-column title="是否缓存" :width="200">
+            <a-table-column title="是否隐藏" data-index="hidden" :width="100" align="center">
               <template #cell="{ record }">
-                <a-button status="success" size="mini" v-if="record.meta?.keepAlive"
-                  ><template #icon>是</template></a-button
-                >
-                <a-button status="danger" size="mini" v-else><template #icon>否</template></a-button>
+                <a-tag v-if="record.meta?.hidden" color="green">是</a-tag>
+                <a-tag v-else color="red">否</a-tag>
               </template>
             </a-table-column>
-            <a-table-column title="是否隐藏" data-index="hidden" :width="200">
+            <a-table-column title="是否外链" :width="100" align="center">
               <template #cell="{ record }">
-                <a-button status="success" size="mini" v-if="record.meta?.hidden"
-                  ><template #icon>是</template></a-button
-                >
-                <a-button status="danger" size="mini" v-else><template #icon>否</template></a-button>
+                <a-tag v-if="isExternal(record.path)" color="green">是</a-tag>
+                <a-tag v-else color="red">否</a-tag>
               </template>
             </a-table-column>
-            <a-table-column title="操作" :width="100">
+            <a-table-column title="操作" :width="200" align="center" fixed="right">
               <template #cell="{ record }">
                 <a-space>
                   <a-button type="primary" size="mini" @click="onEdit(record)">
                     <template #icon><icon-edit /></template>
+                    <span>编辑</span>
                   </a-button>
                   <a-popconfirm type="warning" content="您确定要删除该项吗?">
                     <a-button type="primary" status="danger" size="mini">
                       <template #icon><icon-delete /></template>
+                      <span>删除</span>
                     </a-button>
                   </a-popconfirm>
                 </a-space>
@@ -109,6 +112,7 @@ import AddMenuModal from './AddMenuModal.vue'
 import { getUserRoutes } from '@/apis'
 import type { RouteRecordRaw } from 'vue-router'
 import type { TableInstance } from '@arco-design/web-vue'
+import { isExternal } from '@/utils/validate'
 
 defineOptions({ name: 'SystemMenu' })
 

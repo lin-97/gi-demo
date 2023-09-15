@@ -42,18 +42,21 @@ export const loadView = (view: string) => {
 
 /** 遍历后台返回的路由，将 component 转成真正的模块 */
 const filterAsyncRouter = (routes: RouteRecordRaw[]) => {
+  routes?.sort((a, b) => (a?.meta?.sort ?? 0) - (b?.meta?.sort ?? 0))
   return mapTree(routes, (item) => {
-    let tempRoute
-    if ((item['component'] as unknown as string) === 'Layout') {
-      tempRoute = Layout as never
-    } else if ((item['component'] as unknown as string) === 'ParentView') {
-      tempRoute = ParentView as never
+    item.children?.sort((a, b) => (a?.meta?.sort ?? 0) - (b?.meta?.sort ?? 0))
+    let componentView
+    const component = item['component'] as unknown as string
+    if (component === 'Layout') {
+      componentView = Layout as never
+    } else if (component === 'ParentView') {
+      componentView = ParentView as never
     } else {
-      tempRoute = loadView(item['component'] as unknown as string) as never
+      componentView = loadView(component) as never
     }
     return {
       ...item,
-      component: tempRoute
+      component: componentView
     }
   })
 }

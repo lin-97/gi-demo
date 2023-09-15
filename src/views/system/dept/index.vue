@@ -50,18 +50,21 @@
             <a-table-column title="部门名称" data-index="name"></a-table-column>
             <a-table-column title="排序" data-index="sort" :width="100"></a-table-column>
             <a-table-column title="创建时间" data-index="createTime" :width="200"></a-table-column>
-            <a-table-column title="操作" :width="150" align="left">
+            <a-table-column title="操作" :width="250" align="center" fixed="right">
               <template #cell="{ record }">
                 <a-space>
                   <a-button type="primary" size="mini" @click="onEdit(record)">
                     <template #icon><icon-edit /></template>
+                    <span>编辑</span>
                   </a-button>
                   <a-button v-if="record.parentId" type="primary" status="success" size="mini" @click="onAdd()">
                     <template #icon><icon-plus /></template>
+                    <span>新增</span>
                   </a-button>
                   <a-popconfirm type="warning" content="您确定要删除该项吗?">
                     <a-button type="primary" status="danger" size="mini">
                       <template #icon><icon-delete /></template>
+                      <span>删除</span>
                     </a-button>
                   </a-popconfirm>
                 </a-space>

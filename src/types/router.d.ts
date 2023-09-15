@@ -38,5 +38,6 @@ declare module 'vue-router' {
     roles?: string[]
     permissions?: string[]
     animation?: boolean
+    sort: number
   }
 }

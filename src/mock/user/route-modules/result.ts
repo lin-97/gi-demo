@@ -7,7 +7,8 @@ export default {
     hidden: false,
     title: '结果页',
     svgIcon: 'menu-result',
-    keepAlive: false
+    keepAlive: false,
+    sort: 8
   },
   children: [
     {

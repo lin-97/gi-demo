@@ -54,11 +54,12 @@
             </a-table-column>
             <a-table-column title="角色描述" data-index="description"></a-table-column>
             <a-table-column title="创建时间" data-index="createTime"></a-table-column>
-            <a-table-column title="操作" :width="220" align="center" fixed="right">
+            <a-table-column title="操作" :width="280" align="center" fixed="right">
               <template #cell="{ record }">
                 <a-space>
                   <a-button type="primary" size="mini" @click="onEdit(record)">
                     <template #icon><icon-edit /></template>
+                    <span>编辑</span>
                   </a-button>
                   <a-button type="primary" status="success" size="mini">
                     <template #icon><icon-safe /></template>
@@ -67,6 +68,7 @@
                   <a-popconfirm type="warning" content="确定删除该角色吗?" @ok="onDelete">
                     <a-button type="primary" status="danger" size="mini">
                       <template #icon><icon-delete /></template>
+                      <span>删除</span>
                     </a-button>
                   </a-popconfirm>
                 </a-space>

@@ -8,7 +8,8 @@ export default {
     alwaysShow: true,
     title: '表格管理',
     svgIcon: 'menu-table',
-    keepAlive: false
+    keepAlive: false,
+    sort: 6
   },
   children: [
     {

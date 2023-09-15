@@ -2,6 +2,7 @@ export default {
   path: '',
   redirect: '/demo',
   component: 'Layout',
+  meta: { sort: 10 },
   children: [
     {
       path: '/demo',

@@ -8,7 +8,8 @@ export default {
     alwaysShow: true,
     title: '系统管理',
     svgIcon: 'menu-system',
-    keepAlive: false
+    keepAlive: false,
+    sort: 9
   },
   children: [
     {
@@ -19,7 +20,8 @@ export default {
         hidden: false,
         title: '用户管理',
         icon: 'icon-user',
-        keepAlive: false
+        keepAlive: false,
+        sort: 1
       }
     },
     {
@@ -30,7 +32,8 @@ export default {
         hidden: false,
         title: '角色管理',
         icon: 'icon-common',
-        keepAlive: false
+        keepAlive: false,
+        sort: 2
       }
     },
     {
@@ -41,7 +44,8 @@ export default {
         hidden: false,
         title: '部门管理',
         icon: 'icon-mind-mapping',
-        keepAlive: false
+        keepAlive: false,
+        sort: 3
       }
     },
     {
@@ -52,7 +56,8 @@ export default {
         hidden: false,
         title: '菜单管理',
         icon: 'icon-menu',
-        keepAlive: false
+        keepAlive: false,
+        sort: 4
       }
     }
   ]

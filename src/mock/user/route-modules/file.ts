@@ -7,7 +7,8 @@ export default {
     title: '文件管理',
     icon: 'icon-folder',
     svgIcon: 'menu-file',
-    keepAlive: true
+    keepAlive: true,
+    sort: 4
   },
   children: [
     {

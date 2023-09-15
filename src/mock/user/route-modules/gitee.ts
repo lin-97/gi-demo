@@ -6,6 +6,7 @@ export default {
     hidden: false,
     title: '项目地址',
     svgIcon: 'menu-gitee',
-    keepAlive: false
+    keepAlive: false,
+    sort: 13
   }
 }
