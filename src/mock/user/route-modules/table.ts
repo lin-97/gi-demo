@@ -1,6 +1,6 @@
 export default {
+  path: '',
   name: 'Table',
-  path: '/table',
   redirect: '/table/base',
   component: 'Layout',
   meta: {
@@ -12,8 +12,8 @@ export default {
   },
   children: [
     {
-      name: 'TableMain',
-      path: 'base',
+      path: '/table/base',
+      name: 'TableBase',
       component: 'table/base/index',
       meta: {
         hidden: false,
@@ -23,8 +23,8 @@ export default {
       }
     },
     {
+      path: '/table/custom',
       name: 'TableCustom',
-      path: 'custom',
       component: 'table/custom/index',
       meta: {
         hidden: false,

@@ -1,45 +1,45 @@
 /** 判断变量类型 */
 
-export function isNumber(data: unknown) {
-  return Object.prototype.toString.call(data) === '[object Number]'
+export function isNumber(value: unknown) {
+  return Object.prototype.toString.call(value) === '[object Number]'
 }
 
-export function isString(data: unknown) {
-  return Object.prototype.toString.call(data) === '[object String]'
+export function isString(value: unknown) {
+  return Object.prototype.toString.call(value) === '[object String]'
 }
 
-export function isBoolean(data: unknown) {
-  return Object.prototype.toString.call(data) === '[object Boolean]'
+export function isBoolean(value: unknown) {
+  return Object.prototype.toString.call(value) === '[object Boolean]'
 }
 
-export function isNull(data: unknown) {
-  return Object.prototype.toString.call(data) === '[object Null]'
+export function isNull(value: unknown) {
+  return Object.prototype.toString.call(value) === '[object Null]'
 }
 
-export function isUndefined(data: unknown) {
-  return Object.prototype.toString.call(data) === '[object Undefined]'
+export function isUndefined(value: unknown) {
+  return Object.prototype.toString.call(value) === '[object Undefined]'
 }
 
-export function isObject(data: unknown) {
-  return Object.prototype.toString.call(data) === '[object Object]'
+export function isObject(value: unknown) {
+  return Object.prototype.toString.call(value) === '[object Object]'
 }
 
-export function isArray(data: unknown) {
-  return Object.prototype.toString.call(data) === '[object Array]'
+export function isArray(value: unknown) {
+  return Object.prototype.toString.call(value) === '[object Array]'
 }
 
 export function isDate(data: unknown) {
   return Object.prototype.toString.call(data) === '[object Date]'
 }
 
-export function isRegExp(data: unknown) {
-  return Object.prototype.toString.call(data) === '[object RegExp]'
+export function isRegExp(value: unknown) {
+  return Object.prototype.toString.call(value) === '[object RegExp]'
 }
 
-export function isSet(data: unknown) {
-  return Object.prototype.toString.call(data) === '[object Set]'
+export function isSet(value: unknown) {
+  return Object.prototype.toString.call(value) === '[object Set]'
 }
 
-export function isMap(data: unknown) {
-  return Object.prototype.toString.call(data) === '[object Map]'
+export function isMap(value: unknown) {
+  return Object.prototype.toString.call(value) === '[object Map]'
 }

@@ -94,7 +94,7 @@
   </a-layout-header>
 </template>
 
-<script setup lang="ts" name="Header">
+<script setup lang="ts">
 import { Modal } from '@arco-design/web-vue'
 import { useAppStore, useUserStore } from '@/stores'
 import { useFullScreen } from '@/hooks'
@@ -102,6 +102,7 @@ import SettingDrawer from './SettingDrawer.vue'
 import Message from './Message.vue'
 import _XEUtils_ from 'xe-utils'
 
+defineOptions({ name: 'Header' })
 const router = useRouter()
 const appStore = useAppStore()
 const userStore = useUserStore()

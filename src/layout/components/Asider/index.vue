@@ -11,26 +11,22 @@
       @collapse="handleCollapse"
     >
       <a-menu :selected-keys="[activeMenu]" :auto-open-selected="true" :style="{ width: '100%', height: '100%' }">
-        <SidebarItem
-          v-for="(route, index) in sidebarRoutes"
-          :key="route.path + index"
-          :item="route"
-          :base-path="route.path"
-        ></SidebarItem>
+        <SidebarItem v-for="(route, index) in sidebarRoutes" :key="route.path + index" :item="route"></SidebarItem>
       </a-menu>
     </a-layout-sider>
   </div>
 </template>
 
-<script setup lang="ts" name="Asider">
-import { useAppStore, usePermissionStore } from '@/stores'
+<script setup lang="ts">
+import { useAppStore, useRouteStore } from '@/stores'
 import SidebarItem from './SidebarItem.vue'
 import Logo from './Logo.vue'
 
+defineOptions({ name: 'Asider' })
 const route = useRoute()
 const appStore = useAppStore()
-const permissionStore = usePermissionStore()
-const sidebarRoutes = computed(() => permissionStore.sidebarRoutes)
+const routeStore = useRouteStore()
+const sidebarRoutes = computed(() => routeStore.routes)
 
 const handleCollapse = (isCollapsed: boolean) => {
   appStore.menuCollapse = isCollapsed

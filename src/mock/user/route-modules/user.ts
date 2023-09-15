@@ -8,11 +8,11 @@ export default {
     title: '个人中心',
     icon: 'icon-list',
     svgIcon: 'menu-user',
-    keepAlive: true
+    keepAlive: false
   },
   children: [
     {
-      name: 'User',
+      name: 'UserUser',
       path: '',
       component: 'user/index',
       redirect: '/user/index',
@@ -26,26 +26,29 @@ export default {
       children: [
         {
           name: 'UserIndex',
-          path: 'index',
+          path: '/user/index',
           component: 'user/pages/index/index',
           meta: {
             hidden: true,
             title: '个人中心',
             icon: 'icon-list',
             keepAlive: false,
-            animation: false
+            animation: false,
+            activeMenu: '/user'
             // affix: false
           }
         },
         {
           name: 'UserNotice',
-          path: 'notice',
+          path: '/user/notice',
           component: 'user/pages/notice/index',
           meta: {
             hidden: true,
             title: '消息通知',
             icon: 'icon-list',
-            keepAlive: true
+            keepAlive: true,
+            animation: false,
+            activeMenu: '/user'
             // affix: false
           }
         }

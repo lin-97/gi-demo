@@ -1,7 +1,7 @@
 export default {
-  path: '/data',
+  path: '',
+  redirect: '/data',
   component: 'Layout',
-  redirect: '/data/main',
   meta: {
     hideen: false,
     title: '数据管理',
@@ -11,8 +11,8 @@ export default {
   },
   children: [
     {
+      path: '/data',
       name: 'Data',
-      path: 'main',
       component: 'data/main/index',
       meta: {
         hidden: false,
@@ -23,15 +23,15 @@ export default {
       }
     },
     {
+      path: '/data/detail',
       name: 'DataDetail',
-      path: 'detail',
       component: 'data/detail/index',
       meta: {
         hidden: true,
         title: '详情',
         keepAlive: false,
         affix: false,
-        activeMenu: '/data/main'
+        activeMenu: '/data'
       }
     }
   ]

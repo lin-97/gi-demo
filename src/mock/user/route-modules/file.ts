@@ -1,7 +1,7 @@
 export default {
-  path: '/file',
+  path: '',
+  redirect: '/file',
   component: 'Layout',
-  redirect: '/file/main',
   meta: {
     hideen: false,
     title: '文件管理',
@@ -11,8 +11,8 @@ export default {
   },
   children: [
     {
+      path: '/file',
       name: 'File',
-      path: 'main',
       component: 'file/main/index',
       meta: {
         title: '文件管理',
@@ -23,15 +23,15 @@ export default {
       }
     },
     {
+      path: '/file/detail',
       name: 'FileDetail',
-      path: 'detail',
       component: 'file/detail/index',
       meta: {
         hidden: true,
         title: '详情',
         keepAlive: false,
         affix: false,
-        activeMenu: '/file/main'
+        activeMenu: '/file'
       }
     }
   ]

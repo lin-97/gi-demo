@@ -2,7 +2,7 @@ import { defineStore } from 'pinia'
 import { ref } from 'vue'
 import router from '@/router'
 import type { RouteRecordRaw, RouteRecordName } from 'vue-router'
-import { usePermissionStore } from '@/stores'
+import { useRouteStore } from '@/stores'
 import _XEUtils_ from 'xe-utils'
 
 const storeSetup = () => {
@@ -31,8 +31,8 @@ const storeSetup = () => {
 
   // 清空页签
   const clearTagList = () => {
-    const permissionStore = usePermissionStore()
-    const arr = _XEUtils_.filterTree(permissionStore.routes, (item) => item.meta?.affix ?? false)
+    const routeStore = useRouteStore()
+    const arr = _XEUtils_.filterTree(routeStore.routes, (item) => item.meta?.affix ?? false)
     tagList.value = [...arr]
   }
 

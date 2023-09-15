@@ -1,6 +1,6 @@
 export default {
-  name: 'Form',
   path: '/form',
+  name: 'Form',
   redirect: '/form/base',
   component: 'Layout',
   meta: {
@@ -11,8 +11,8 @@ export default {
   },
   children: [
     {
+      path: '/form/base',
       name: 'FormBase',
-      path: 'base',
       component: 'form/base/index',
       meta: {
         hidden: false,
@@ -22,8 +22,8 @@ export default {
       }
     },
     {
-      name: 'Form',
-      path: 'step',
+      path: '/form/step',
+      name: 'FormStep',
       component: 'form/step/index',
       meta: {
         hidden: false,

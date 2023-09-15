@@ -106,7 +106,6 @@
 
 <script setup lang="ts">
 import AddMenuModal from './AddMenuModal.vue'
-import { usePermissionStore } from '@/stores'
 import { getUserRoutes } from '@/apis'
 import type { RouteRecordRaw } from 'vue-router'
 import type { TableInstance } from '@arco-design/web-vue'

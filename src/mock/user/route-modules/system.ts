@@ -1,6 +1,6 @@
 export default {
+  path: '',
   name: 'System',
-  path: '/system',
   redirect: 'noRedirect',
   component: 'Layout',
   meta: {
@@ -12,8 +12,8 @@ export default {
   },
   children: [
     {
+      path: '/system/user',
       name: 'SystemUser',
-      path: 'user',
       component: 'system/user/index',
       meta: {
         hidden: false,
@@ -23,8 +23,8 @@ export default {
       }
     },
     {
+      path: '/system/role',
       name: 'SystemRole',
-      path: 'role',
       component: 'system/role/index',
       meta: {
         hidden: false,
@@ -34,8 +34,8 @@ export default {
       }
     },
     {
+      path: '/system/dept',
       name: 'SystemDept',
-      path: 'dept',
       component: 'system/dept/index',
       meta: {
         hidden: false,
@@ -45,8 +45,8 @@ export default {
       }
     },
     {
+      path: '/system/menu',
       name: 'SystemMenu',
-      path: 'menu',
       component: 'system/menu/index',
       meta: {
         hidden: false,

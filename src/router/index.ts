@@ -1,13 +1,6 @@
 import { createRouter, createWebHashHistory, type RouteRecordNormalized, type RouteRecordRaw } from 'vue-router'
 import _XEUtils_ from 'xe-utils'
-import ConstantRoutes from './constant-routes'
-import AsyncRoutes from './async-routes'
-
-/** 常驻路由 */
-export const constantRoutes = ConstantRoutes
-
-/** 动态路由/异步路由 */
-export const asyncRoutes = AsyncRoutes
+import constantRoutes from './constant-routes'
 
 const router = createRouter({
   history: createWebHashHistory(import.meta.env.BASE_URL),

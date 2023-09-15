@@ -4,8 +4,8 @@ export default {
   component: 'Layout',
   children: [
     {
+      path: '/analyse',
       name: 'Analyse',
-      path: 'analyse',
       component: 'analyse/index',
       meta: {
         hideen: false,

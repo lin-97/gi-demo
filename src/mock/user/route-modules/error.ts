@@ -1,7 +1,7 @@
 export default {
-  name: 'Error',
   path: '/error',
-  redirect: '/form/403',
+  name: 'Error',
+  redirect: '/error/403',
   component: 'Layout',
   meta: {
     hidden: false,
@@ -11,8 +11,8 @@ export default {
   },
   children: [
     {
+      path: '/error/403',
       name: 'Error403',
-      path: '403',
       component: 'error/403',
       meta: {
         hidden: false,
@@ -23,8 +23,8 @@ export default {
       }
     },
     {
+      path: '/error/404',
       name: 'Error404',
-      path: '404',
       component: 'error/404',
       meta: {
         hidden: false,
@@ -35,8 +35,8 @@ export default {
       }
     },
     {
+      path: '/error/405',
       name: 'Error405',
-      path: '405',
       component: 'error/405',
       meta: {
         hidden: false,

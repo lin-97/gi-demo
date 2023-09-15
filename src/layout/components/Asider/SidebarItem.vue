@@ -8,54 +8,47 @@
       "
     >
       <SideLink v-if="onlyOneChild?.meta" :to="resolvePath(onlyOneChild?.path, onlyOneChild?.meta?.query || '')">
-        <a-menu-item v-if="onlyOneChild.meta" :key="resolvePath(onlyOneChild.path)">
+        <a-menu-item v-if="onlyOneChild.meta" :key="onlyOneChild.path">
           <template #icon>
             <GiSvgIcon
-              v-if="onlyOneChild.meta.svgIcon || (item?.meta?.svgIcon as any)"
-              :name="onlyOneChild.meta.svgIcon || (item?.meta?.svgIcon as any)"
+              v-if="onlyOneChild.meta.svgIcon || item?.meta?.svgIcon"
+              :name="onlyOneChild.meta.svgIcon || item?.meta?.svgIcon"
               :size="24"
             ></GiSvgIcon>
-            <component v-else :is="onlyOneChild.meta.icon || (item?.meta?.icon as any)"></component>
+            <component v-else :is="onlyOneChild.meta.icon || item?.meta?.icon || ''"></component>
           </template>
           <span>{{ onlyOneChild.meta?.title }}</span>
         </a-menu-item>
       </SideLink>
     </template>
 
-    <a-sub-menu v-else :key="resolvePath(item.path)">
+    <a-sub-menu v-else :key="item.path">
       <template #icon>
-        <GiSvgIcon v-if="(item?.meta?.svgIcon as any)" :name="(item?.meta?.svgIcon as any)" :size="24"></GiSvgIcon>
-        <component v-else :is="(item?.meta?.icon as any)"></component>
+        <GiSvgIcon v-if="item?.meta?.svgIcon" :name="item?.meta?.svgIcon" :size="24"></GiSvgIcon>
+        <component v-else :is="item?.meta?.icon || ''"></component>
       </template>
       <template #title v-if="item.meta">
         <span>{{ item?.meta?.title }}</span>
       </template>
 
-      <SidebarItem
-        v-for="child in item.children"
-        :key="child.path"
-        :is-nest="true"
-        :item="child"
-        :base-path="resolvePath(child.path)"
-      ></SidebarItem>
+      <SidebarItem v-for="child in item.children" :key="child.path" :is-nest="true" :item="child"></SidebarItem>
     </a-sub-menu>
   </div>
 </template>
 
-<script lang="ts" setup name="SidebarItem">
+<script lang="ts" setup>
 import { isExternal } from '@/utils/validate'
 import SideLink from './SideLink.vue'
 import type { RouteRecordRaw } from 'vue-router'
 
+defineOptions({ name: 'SidebarItem' })
+
 interface Props {
   item: RouteRecordRaw
-  basePath: string
   isNest?: boolean
 }
 
-const props = withDefaults(defineProps<Props>(), {
-  basePath: ''
-})
+const props = withDefaults(defineProps<Props>(), {})
 
 // 如果 hidden: false 那么代表这个路由项显示在左侧菜单栏中
 // 如果 props.item 的子项 chidren 只有一个 hidden: false 的子元素，那么 onlyOneChild 就表示这个子元素
@@ -85,43 +78,29 @@ function hasOneShowingChild(children: RouteRecordRaw[] = [], parent: RouteRecord
 
   // 如果没有要显示的子路由，则显示父路由
   if (showingChildren.length === 0) {
-    onlyOneChild.value = { ...parent, path: '', meta: { ...parent.meta, noShowingChildren: true } }
+    onlyOneChild.value = { ...parent, meta: { ...parent.meta, noShowingChildren: true } }
     return true
   }
 
   return false
 }
 
-// 返回项目路径
-function getNormalPath(p: string) {
-  // console.log('p', p)
-  if (p.length === 0 || !p || p == 'undefined') {
-    return p
-  }
-  let res = p.replace('//', '/')
-  if (res[res.length - 1] === '/') {
-    return res.slice(0, res.length - 1)
-  }
-  return res
-}
-
-function resolvePath(path: string): string
-function resolvePath(path: string, routeQuery: string): string | { path: string; query: AnyObject }
-
-// 如果只有第一个参数，则函数返回字符串，这个返回的字符串就是 key
-// 如果有第二个参数，则函数返回一个 { path: '', query: {}} 路由参数对象，用于路由跳转
-function resolvePath(path: string, routeQuery?: string) {
+/**
+ *
+ * @param path 路由
+ * @param routeQuery 路由query参数
+ * @desc 优先级1 如果 path 是外链，返回外链
+ * @desc 优先级2 如果 path 配有路由参数，要带上路由参数
+ * @desc 优先级3 如果不是外链，也没有路由参数，返回原本 path
+ */
+function resolvePath(path: string, routeQuery?: string): string | { path: string; query: AnyObject } {
   if (isExternal(path)) {
     return path
   }
-  if (isExternal(props.basePath)) {
-    return props.basePath
-  }
   if (routeQuery) {
     const query = JSON.parse(routeQuery)
-    return { path: getNormalPath(`${props.basePath}/${path}`), query: query }
+    return { path: path, query: query }
   }
-  // console.log(`${props.basePath}/${path}`)
-  return getNormalPath(`${props.basePath}/${path}`)
+  return path
 }
 </script>

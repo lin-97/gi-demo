@@ -4,8 +4,8 @@ export default {
   component: 'Layout',
   children: [
     {
+      path: '/about',
       name: 'About',
-      path: 'about',
       component: 'about/index',
       meta: {
         hideen: false,

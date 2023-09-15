@@ -11,8 +11,8 @@ export default {
   },
   children: [
     {
+      path: '/result/success',
       name: 'ResultSuccess',
-      path: 'success',
       component: 'result/success/index',
       meta: {
         hidden: false,
@@ -23,8 +23,8 @@ export default {
       }
     },
     {
+      path: '/result/fail',
       name: 'ResultFail',
-      path: 'fail',
       component: 'result/fail/index',
       meta: {
         hidden: false,
