@@ -64,6 +64,9 @@
               <template #cell="{ record }">{{ record.sort || 0 }}</template>
             </a-table-column>
             <a-table-column title="路由路径" data-index="path"> </a-table-column>
+            <a-table-column title="路由名称">
+              <template #cell="{ record }">{{ transformPathToName(record.path) }}</template>
+            </a-table-column>
             <a-table-column title="组件路径" data-index="component"> </a-table-column>
             <a-table-column title="菜单图标" data-index="icon" :width="100" align="center">
               <template #cell="{ record }">
@@ -107,6 +110,9 @@
                     <template #icon><icon-edit /></template>
                     <span>编辑</span>
                   </a-button>
+                  <a-button type="primary" status="success" size="mini">
+                    <template #icon><icon-plus /></template>
+                  </a-button>
                   <a-popconfirm type="warning" content="您确定要删除该项吗?">
                     <a-button type="primary" status="danger" size="mini">
                       <template #icon><icon-delete /></template>
@@ -130,6 +136,7 @@ import AddMenuModal from './AddMenuModal.vue'
 import { getSystemMenuList, type MenuItem } from '@/apis'
 import type { TableInstance } from '@arco-design/web-vue'
 import { isExternal } from '@/utils/validate'
+import { transformPathToName } from '@/utils/common'
 
 defineOptions({ name: 'SystemMenu' })
 

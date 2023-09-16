@@ -1,3 +1,5 @@
+import { isExternal } from '@/utils/validate'
+
 /**
  * @desc 去除空格
  * @param {string} str - 字符串
@@ -191,4 +193,25 @@ export const randomHex = () => {
   return `#${Math.floor(Math.random() * 0xffffff)
     .toString(16)
     .padEnd(6, '0')}`
+}
+
+/**
+ * @description path 转 name
+ * @demo /system => System
+ * @demo /system/menu => SystemMenu
+ */
+export const transformPathToName = (path: string) => {
+  if (!path) return ''
+  if (isExternal(path)) return ''
+  let name = ''
+  if (path) {
+    let arr = path
+      .split('/')
+      .filter((i) => i)
+      .map((i) => i.substring(0, 1).toUpperCase() + i.substring(1))
+    arr.forEach((i) => {
+      name += i
+    })
+  }
+  return name
 }

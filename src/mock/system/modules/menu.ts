@@ -52,6 +52,9 @@ export default [
         if (item.activeMenu) {
           meta.activeMenu = item.activeMenu
         }
+        if (item.breadcrumb === false) {
+          meta.breadcrumb = item.breadcrumb
+        }
         if (item.type === 2) {
           meta.roles = item.roles?.length ? item.roles : []
           meta.permissions = item.permissions?.length ? item.permissions : []
