@@ -94,7 +94,8 @@ const { roleList, getRoleList } = useRole()
 getRoleList()
 const roleOptions = computed(() => roleList.value.map((i) => ({ label: i.name, value: i.code })))
 
-const title = computed(() => (!!form.id ? '编辑用户' : '新增用户'))
+const userId = ref('')
+const title = computed(() => (!!userId.value ? '编辑用户' : '新增用户'))
 const visible = ref(false)
 
 const form = reactive({
@@ -132,14 +133,13 @@ const { deptList, getDeptList } = useDept()
 getDeptList()
 
 const add = () => {
-  form.id = ''
+  userId.value = ''
   visible.value = true
 }
 
 const edit = async (id: string) => {
-  form.id = id
+  userId.value = id
   const res = await getSystemUserDetail({ id })
-  console.log('res', res.data)
   Object.assign(form, res.data)
   visible.value = true
 }
