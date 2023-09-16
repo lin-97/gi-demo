@@ -1509,3 +1509,8 @@ $padding: 16px; // 盒子和内容的间距
 <a href="http://49.234.61.19/tool/cssTriangle" target="_blank">在线三角形样式生成器</a>
 
 <a href="https://go.itab.link/" target="_blank">iTab</a>
+
+## 捐赠
+
+<img style="width: 200px" src="./md/payee1.jpg" />
+<img style="width: 200px" src="./md/payee2.jpg" />
