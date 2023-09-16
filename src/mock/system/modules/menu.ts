@@ -24,22 +24,6 @@ const getPathToName = (path: string) => {
 
 export default [
   {
-    url: '/mock/system/menu',
-    method: 'get',
-    timeout: 10,
-    response: ({ headers }) => {
-      const token = headers.token
-      if (token && ['TOKEN-admin', 'TOKEN-user'].includes(token)) {
-        const isAdmin = token === 'TOKEN-admin'
-        return isAdmin
-          ? successResponseWrap(mapTree(menus, (i) => ({ ...i, affix: true })))
-          : successResponseWrap(filterTree(menus, (i) => i.path !== '/system'))
-      } else {
-        return failResponseWrap(null, 'token失效', 401)
-      }
-    }
-  },
-  {
     url: '/mock/user/routes',
     method: 'get',
     timeout: 10,
@@ -112,6 +96,22 @@ export default [
     timeout: 350,
     response: ({ query }: any) => {
       return successResponseWrap(true)
+    }
+  },
+  {
+    url: '/mock/system/menu', // 这个短的要放在后面，不然会优先匹配
+    method: 'get',
+    timeout: 10,
+    response: ({ headers }) => {
+      const token = headers.token
+      if (token && ['TOKEN-admin', 'TOKEN-user'].includes(token)) {
+        const isAdmin = token === 'TOKEN-admin'
+        return isAdmin
+          ? successResponseWrap(mapTree(menus, (i) => ({ ...i, affix: true })))
+          : successResponseWrap(filterTree(menus, (i) => i.path !== '/system'))
+      } else {
+        return failResponseWrap(null, 'token失效', 401)
+      }
     }
   }
 ] as MockMethod[]

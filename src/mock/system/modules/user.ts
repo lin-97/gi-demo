@@ -39,17 +39,6 @@ const data = [
 
 export default [
   {
-    url: '/mock/system/user',
-    method: 'get',
-    timeout: 100,
-    response: () => {
-      return successResponseWrap({
-        total: 2,
-        list: data
-      })
-    }
-  },
-  {
     url: '/mock/system/user/detail',
     method: 'get',
     timeout: 100,
@@ -74,6 +63,17 @@ export default [
     timeout: 350,
     response: ({ query }: any) => {
       return successResponseWrap(true)
+    }
+  },
+  {
+    url: '/mock/system/user', // 这个短的要放在后面，不然会优先匹配
+    method: 'get',
+    timeout: 100,
+    response: () => {
+      return successResponseWrap({
+        total: 2,
+        list: data
+      })
     }
   }
 ]
