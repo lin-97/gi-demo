@@ -1,42 +1,45 @@
-import { Random } from 'mockjs'
 import { successResponseWrap, failResponseWrap } from '@/mock/mock'
 
 const data = [
   {
-    id: 'U01',
+    id: '01',
     createUserString: '超级管理员',
     createTime: '2023-09-05 23:24:40',
     disabled: true,
     username: 'admin',
     nickname: '超级管理员',
     gender: 1,
-    avatar: 'https://s1.ax1x.com/2022/07/05/jtMjGq.jpg',
+    avatar: 'https://img0.baidu.com/it/u=2746352008,2041591833&fm=253&fmt=auto&app=138&f=JPEG?w=360&h=360',
     email: '326010228@qq.com',
     phone: '199****6962',
     status: 1,
     type: 1,
-    description: '系统初始用户'
+    description: '系统初始用户',
+    roleIds: ['role_admin'],
+    deptId: '01'
   },
   {
-    id: 'U02',
+    id: '02',
     createUserString: '超级管理员',
     createTime: '2023-09-05 23:24:40',
     disabled: false,
     username: 'user',
     nickname: '普通用户',
     gender: 2,
-    avatar: 'https://s1.ax1x.com/2022/06/14/XhtSwF.jpg',
+    avatar: 'https://img1.baidu.com/it/u=1817951587,3188870642&fm=253&fmt=auto&app=138&f=JPEG?w=500&h=500',
     email: '155****8810@qq.com',
     phone: '155****8810',
     status: 1,
     type: 2,
-    description: null
+    description: null,
+    roleIds: ['role_user'],
+    deptId: '01010101'
   }
 ]
 
 export default [
   {
-    url: '/mock/system/user/list',
+    url: '/mock/system/user',
     method: 'get',
     timeout: 100,
     response: () => {
@@ -54,15 +57,23 @@ export default [
       const { id } = query
       const index = data.findIndex((i) => i.id === id)
       if (index >= 0) {
-        if (data[index].id === 'U01') {
-          return successResponseWrap({ ...data[index], deptId: '1' })
+        if (data[index].id === '01') {
+          return successResponseWrap(data[index])
         }
-        if (data[index].id === 'U02') {
-          return successResponseWrap({ ...data[index], deptId: '7' })
+        if (data[index].id === '02') {
+          return successResponseWrap(data[index])
         }
       } else {
         return failResponseWrap(null, '没有该用户', 400)
       }
+    }
+  },
+  {
+    url: '/mock/system/user/save',
+    method: 'post',
+    timeout: 350,
+    response: ({ query }: any) => {
+      return successResponseWrap(true)
     }
   }
 ]

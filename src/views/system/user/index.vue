@@ -63,6 +63,7 @@
               row-key="id"
               :loading="loading"
               :data="tableData"
+              :bordered="{ cell: true }"
               :scroll="{ x: '100%', y: '100%', minWidth: 1300 }"
               :pagination="pagination"
             >
@@ -74,24 +75,24 @@
                   </template>
                 </a-table-column>
                 <a-table-column title="昵称" data-index="nickname" :width="150"></a-table-column>
-                <a-table-column title="性别" data-index="gender" :width="80">
+                <a-table-column title="性别" data-index="gender" :width="80" align="center">
                   <template #cell="{ record }">{{ record.gender === 1 ? '男' : '女' }}</template>
                 </a-table-column>
-                <a-table-column title="头像" data-index="avatar" :width="100">
+                <a-table-column title="头像" data-index="avatar" :width="100" align="center">
                   <template #cell="{ record }">
                     <a-avatar>
                       <img alt="avatar" :src="record.avatar" />
                     </a-avatar>
                   </template>
                 </a-table-column>
-                <a-table-column title="联系方式" data-index="email" :width="180"></a-table-column>
-                <a-table-column title="状态" :width="100">
+                <a-table-column title="联系方式" data-index="phone" :width="180"></a-table-column>
+                <a-table-column title="状态" :width="100" align="center">
                   <template #cell="{ record }">
                     <a-tag v-if="record.status == 1" color="green">正常</a-tag>
-                    <a-tag v-else color="red">禁用</a-tag>
+                    <a-tag v-if="record.status == 0" color="red">禁用</a-tag>
                   </template>
                 </a-table-column>
-                <a-table-column title="类型" :width="100">
+                <a-table-column title="类型" :width="100" align="center">
                   <template #cell="{ record }">
                     <a-tag v-if="record.type === 1" color="red">系统内置</a-tag>
                     <a-tag v-if="record.type === 2" color="orange">自定义</a-tag>

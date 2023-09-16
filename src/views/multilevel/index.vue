@@ -24,8 +24,8 @@ const selectedKeys = ref('')
 selectedKeys.value = route.path
 
 const list = [
-  { name: '个人中心', value: 1, path: '/user/index' },
-  { name: '消息通知', value: 2, path: '/user/notice' }
+  { name: '个人中心', value: 1, path: '/multilevel/index' },
+  { name: '消息通知', value: 2, path: '/multilevel/notice' }
 ]
 
 const toPage = (path: string) => {

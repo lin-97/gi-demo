@@ -1,7 +1,7 @@
 <template>
-  <a-modal v-model:visible="visible" :title="title" :mask-closable="false">
+  <a-modal v-model:visible="visible" :width="600" :title="title" :mask-closable="false" @before-ok="save">
     <a-form ref="formRef" :model="form" :rules="rules" size="medium" auto-label-width>
-      <a-row :gutter="16">
+      <a-row>
         <a-col :span="12">
           <a-form-item label="用户名" field="username" :validate-trigger="['change', 'input']">
             <a-input placeholder="请输入用户名" v-model="form.username"></a-input>
@@ -14,15 +14,15 @@
         </a-col>
       </a-row>
 
-      <a-row :gutter="16">
-        <a-col :span="12">
-          <a-form-item label="邮箱" field="email" :validate-trigger="['change', 'input']">
-            <a-input placeholder="请输入邮箱" v-model="form.email"></a-input>
-          </a-form-item>
-        </a-col>
+      <a-row>
         <a-col :span="12">
           <a-form-item label="手机号码" field="phone" :validate-trigger="['change', 'input']">
             <a-input placeholder="请输入手机号码" v-model="form.phone"></a-input>
+          </a-form-item>
+        </a-col>
+        <a-col :span="12">
+          <a-form-item label="邮箱" field="email" :validate-trigger="['change', 'input']">
+            <a-input placeholder="请输入邮箱" v-model="form.email"></a-input>
           </a-form-item>
         </a-col>
       </a-row>
@@ -49,18 +49,16 @@
         />
       </a-form-item>
 
-      <!-- <a-form-item label="所属角色" field="roleIds" :disabled="form.disabled">
+      <a-form-item label="角色" field="roleIds" :disabled="form.disabled">
         <a-select
           v-model="form.roleIds"
           :options="roleOptions"
           placeholder="请选择所属角色"
-          :loading="roleLoading"
           multiple
           allow-clear
           :allow-search="{ retainInputValue: true }"
-          style="width: 431px"
         />
-      </a-form-item> -->
+      </a-form-item>
 
       <a-form-item label="描述" field="description">
         <a-textarea
@@ -71,14 +69,30 @@
           show-word-limit
         />
       </a-form-item>
+
+      <a-form-item label="状态" field="status">
+        <a-switch
+          type="round"
+          v-model="form.status"
+          :checked-value="1"
+          :unchecked-value="0"
+          checked-text="正常"
+          unchecked-text="禁用"
+        />
+      </a-form-item>
     </a-form>
   </a-modal>
 </template>
 
 <script setup lang="ts">
-import { useDept } from '@/hooks/app'
+import { useDept, useRole } from '@/hooks/app'
 import * as Regexp from '@/utils/regexp'
-import { getSystemUserDetail } from '@/apis'
+import { getSystemUserDetail, saveSystemUser } from '@/apis'
+import { Message } from '@arco-design/web-vue'
+
+const { roleList, getRoleList } = useRole()
+getRoleList()
+const roleOptions = computed(() => roleList.value.map((i) => ({ label: i.name, value: i.code })))
 
 const userId = ref('')
 const title = computed(() => (!!userId.value ? '编辑用户' : '新增用户'))
@@ -94,7 +108,8 @@ const form = reactive({
   roleIds: [],
   address: '',
   disabled: false,
-  description: ''
+  description: '',
+  status: 0
 })
 
 const rules = {
@@ -108,7 +123,9 @@ const rules = {
   ],
   email: [{ match: Regexp.Email, message: '邮箱格式不正确' }],
   phone: [{ match: Regexp.Phone, message: '手机号格式不正确' }],
-  deptId: [{ required: true, message: '请选择所属部门' }]
+  deptId: [{ required: true, message: '请选择所属部门' }],
+  roleIds: [{ required: true, message: '请选择角色' }],
+  status: [{ required: true, message: '请选择状态' }]
 }
 
 const { deptList, getDeptList } = useDept()
@@ -127,4 +144,18 @@ const edit = async (id: string) => {
 }
 
 defineExpose({ add, edit })
+
+const save = async () => {
+  try {
+    const res = await saveSystemUser(form)
+    if (res.data) {
+      Message.success('模拟保存成功')
+      return true
+    } else {
+      return false
+    }
+  } catch (error) {
+    return false
+  }
+}
 </script>

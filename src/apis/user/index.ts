@@ -19,6 +19,6 @@ export const getUserInfo = () => {
 }
 
 /** @desc 获取用户路由信息 */
-export const getUserRoutes = () => {
-  return http.get<RouteRecordRaw[]>(`${prefix}/user/getUserRoutes`)
+export const getUserAsyncRoutes = () => {
+  return http.get<RouteRecordRaw[]>(`${prefix}/user/routes`)
 }

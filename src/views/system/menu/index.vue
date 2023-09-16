@@ -18,18 +18,18 @@
         </a-space>
 
         <a-space>
-          <a-input placeholder="输入菜单名称搜索" allow-clear style="width: 250px">
+          <a-input v-model="form.name" placeholder="输入菜单名称搜索" allow-clear style="width: 250px">
             <template #prefix><icon-search /></template>
           </a-input>
-          <a-select placeholder="菜单状态" style="width: 120px">
+          <a-select v-model="form.status" placeholder="菜单状态" style="width: 120px">
             <a-option :value="1">正常</a-option>
             <a-option :value="0">禁用</a-option>
           </a-select>
-          <a-button type="primary">
+          <a-button type="primary" @click="search">
             <template #icon><icon-search /></template>
             <span>搜索</span>
           </a-button>
-          <a-button>
+          <a-button @click="reset">
             <template #icon><icon-refresh /></template>
             <span>重置</span>
           </a-button>
@@ -39,12 +39,12 @@
       <section class="gi_mt">
         <a-table
           ref="TableRef"
-          :data="menuTreeList"
-          row-key="path"
+          :data="menuList"
+          row-key="id"
           :loading="loading"
-          :scroll="{ x: '100%', y: '100%', minWidth: 900 }"
+          :bordered="{ cell: true }"
+          :scroll="{ x: '100%', y: '100%', minWidth: 1200 }"
           :pagination="false"
-          :expandable="{ width: 80 }"
         >
           <template #expand-icon="{ expanded }">
             <IconDown v-if="expanded" />
@@ -52,27 +52,45 @@
           </template>
           <template #columns>
             <a-table-column title="菜单名称">
-              <template #cell="{ record }">{{ record.meta?.title || '' }}</template>
+              <template #cell="{ record }">{{ record.title || '' }}</template>
             </a-table-column>
-            <a-table-column title="排序" data-index="meta.sort" :width="80" align="center">
-              <template #cell="{ record }">{{ record.meta?.sort || 0 }}</template>
+            <a-table-column title="类型" :width="80" align="center">
+              <template #cell="{ record }">
+                <a-tag v-if="record.type === 1" color="orangered">目录</a-tag>
+                <a-tag v-if="record.type === 2" color="green">菜单</a-tag>
+              </template>
             </a-table-column>
-            <a-table-column title="组件路径" data-index="path"> </a-table-column>
+            <a-table-column title="排序" :width="80" align="center">
+              <template #cell="{ record }">{{ record.sort || 0 }}</template>
+            </a-table-column>
+            <a-table-column title="路由路径" data-index="path"> </a-table-column>
+            <a-table-column title="组件路径" data-index="component"> </a-table-column>
             <a-table-column title="菜单图标" data-index="icon" :width="100" align="center">
               <template #cell="{ record }">
-                <GiSvgIcon v-if="record.meta?.svgIcon" :size="24" :name="record.meta?.svgIcon"></GiSvgIcon>
-                <component v-else :is="record.meta?.icon" :size="24"></component>
+                <GiSvgIcon v-if="record.svgIcon" :size="24" :name="record.svgIcon"></GiSvgIcon>
+                <component v-else :is="record.icon" :size="24"></component>
+              </template>
+            </a-table-column>
+            <a-table-column title="状态" :width="80" align="center">
+              <template #cell="{ record }">
+                <a-switch
+                  type="round"
+                  size="small"
+                  :model-value="record.status"
+                  :checked-value="1"
+                  :unchecked-value="0"
+                />
               </template>
             </a-table-column>
             <a-table-column title="是否缓存" :width="100" align="center">
               <template #cell="{ record }">
-                <a-tag v-if="record.meta?.keepAlive" color="green">是</a-tag>
+                <a-tag v-if="record.keepAlive" color="green">是</a-tag>
                 <a-tag v-else color="red">否</a-tag>
               </template>
             </a-table-column>
-            <a-table-column title="是否隐藏" data-index="hidden" :width="100" align="center">
+            <a-table-column title="是否隐藏" :width="100" align="center">
               <template #cell="{ record }">
-                <a-tag v-if="record.meta?.hidden" color="green">是</a-tag>
+                <a-tag v-if="record.hidden" color="green">是</a-tag>
                 <a-tag v-else color="red">否</a-tag>
               </template>
             </a-table-column>
@@ -109,8 +127,7 @@
 
 <script setup lang="ts">
 import AddMenuModal from './AddMenuModal.vue'
-import { getUserRoutes } from '@/apis'
-import type { RouteRecordRaw } from 'vue-router'
+import { getSystemMenuList, type MenuItem } from '@/apis'
 import type { TableInstance } from '@arco-design/web-vue'
 import { isExternal } from '@/utils/validate'
 
@@ -118,7 +135,7 @@ defineOptions({ name: 'SystemMenu' })
 
 const AddMenuModalRef = ref<InstanceType<typeof AddMenuModal>>()
 const loading = ref(false)
-const menuTreeList = ref<RouteRecordRaw[]>([])
+
 const TableRef = ref<TableInstance>()
 const isExpanded = ref(false)
 const onExpanded = () => {
@@ -126,17 +143,29 @@ const onExpanded = () => {
   TableRef.value?.expandAll(isExpanded.value)
 }
 
-const getMenuTreeList = async () => {
+const form = reactive({ name: '', status: '' })
+const menuList = ref<MenuItem[]>([])
+const getMenuList = async () => {
   try {
-    const res = await getUserRoutes()
-    menuTreeList.value = res.data
+    loading.value = true
+    const res = await getSystemMenuList()
+    menuList.value = res.data
   } catch (error) {
   } finally {
     loading.value = false
   }
 }
+getMenuList()
 
-getMenuTreeList()
+const search = () => {
+  getMenuList()
+}
+
+const reset = () => {
+  form.name = ''
+  form.status = ''
+  getMenuList()
+}
 
 const onAdd = () => {
   AddMenuModalRef.value?.add()

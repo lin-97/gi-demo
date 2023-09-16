@@ -1,9 +1,8 @@
-import { Random } from 'mockjs'
 import { successResponseWrap, failResponseWrap } from '@/mock/mock'
 
 const data = [
   {
-    id: 1,
+    id: '01',
     createUserString: '超级管理员',
     createTime: '2023-09-05 23:24:40',
     disabled: true,
@@ -15,7 +14,7 @@ const data = [
     description: '系统初始角色'
   },
   {
-    id: 2,
+    id: '02',
     createUserString: '超级管理员',
     createTime: '2023-09-05 23:24:40',
     disabled: false,
@@ -24,13 +23,13 @@ const data = [
     sort: 2,
     status: 1,
     type: 2,
-    description: null
+    description: '普通用户，无系统管理权限，系统管理菜单无权访问'
   }
 ]
 
 export default [
   {
-    url: '/mock/system/role/list',
+    url: '/mock/system/role',
     method: 'get',
     timeout: 100,
     response: () => {
@@ -52,6 +51,14 @@ export default [
       } else {
         return failResponseWrap(null, '没有该角色', 400)
       }
+    }
+  },
+  {
+    url: '/mock/system/role/save',
+    method: 'post',
+    timeout: 350,
+    response: ({ query }: any) => {
+      return successResponseWrap(true)
     }
   }
 ]

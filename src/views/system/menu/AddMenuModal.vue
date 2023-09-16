@@ -5,7 +5,6 @@
         <a-radio-group v-model="form.type" type="button">
           <a-radio :value="1">目录</a-radio>
           <a-radio :value="2">菜单</a-radio>
-          <a-radio :value="3">按钮</a-radio>
         </a-radio-group>
       </a-form-item>
 

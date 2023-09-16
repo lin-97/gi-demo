@@ -37,10 +37,10 @@
           :loading="loading"
           ref="TableRef"
           row-key="id"
+          :bordered="{ cell: true }"
           :data="deptList"
           :scroll="{ x: '100%', y: '100%', minWidth: 900 }"
           :pagination="false"
-          :expandable="{ width: 80 }"
         >
           <template #expand-icon="{ expanded }">
             <IconDown v-if="expanded" />
@@ -48,7 +48,13 @@
           </template>
           <template #columns>
             <a-table-column title="部门名称" data-index="name"></a-table-column>
-            <a-table-column title="排序" data-index="sort" :width="100"></a-table-column>
+            <a-table-column title="排序" data-index="sort" :width="100" align="center"></a-table-column>
+            <a-table-column title="状态" :width="100" align="center">
+              <template #cell="{ record }">
+                <a-tag v-if="record.status == 1" color="green">正常</a-tag>
+                <a-tag v-if="record.status == 0" color="red">禁用</a-tag>
+              </template>
+            </a-table-column>
             <a-table-column title="创建时间" data-index="createTime" :width="200"></a-table-column>
             <a-table-column title="操作" :width="250" align="center" fixed="right">
               <template #cell="{ record }">

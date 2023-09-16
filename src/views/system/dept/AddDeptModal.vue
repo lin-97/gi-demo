@@ -20,7 +20,6 @@
       <a-form-item label="排序" field="sort">
         <a-input-number v-model="form.sort" style="width: 120px" />
       </a-form-item>
-
       <a-form-item label="描述" field="description">
         <a-textarea
           v-model="form.description"
@@ -30,12 +29,23 @@
           show-word-limit
         />
       </a-form-item>
+      <a-form-item label="状态" field="status">
+        <a-switch
+          type="round"
+          v-model="form.status"
+          :checked-value="1"
+          :unchecked-value="0"
+          checked-text="正常"
+          unchecked-text="禁用"
+        />
+      </a-form-item>
     </a-form>
   </a-modal>
 </template>
 
 <script setup lang="ts">
 import { useDept } from '@/hooks/app'
+import { getSystemDeptDetil } from '@/apis'
 
 const deptId = ref('')
 const visible = ref(false)
@@ -48,6 +58,7 @@ const form = reactive({
   parentId: '',
   name: '',
   sort: 0,
+  status: 1,
   description: ''
 })
 
@@ -68,6 +79,8 @@ const edit = async (id: string) => {
     await getDeptList()
   }
   deptId.value = id
+  const res = await getSystemDeptDetil({ id })
+  Object.assign(form, res.data)
   visible.value = true
 }
 
