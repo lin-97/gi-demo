@@ -3,9 +3,11 @@ export interface DeptItem {
   id: string
   name: string
   sort: number
+  status: 0 | 1
   createTime: string
   parentId: string
   children?: DeptItem[]
+  description: string
 }
 
 /** 系统角色类型 */
@@ -17,7 +19,7 @@ export interface RoleItem {
   name: string
   code: string
   sort: number
-  status: number
+  status: 0 | 1
   type: number
   description: string
 }
@@ -34,7 +36,7 @@ export interface UserItem {
   avatar: string
   email: string
   phone: string
-  status: 1 | 0
+  status: 0 | 1
   type: 1
   description: string
 }
@@ -55,7 +57,7 @@ export interface MenuItem {
   redirect: string
   roles: string[]
   sort: number
-  status: 1 | 0
+  status: 0 | 1
   svgIcon: string
   title: string
   type: 1 | 2

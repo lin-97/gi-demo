@@ -12,6 +12,11 @@ export function getSystemDeptDetil(params: { id: string }) {
   return http.get<System.DeptItem>(`${prefix}/system/dept/detail`, params)
 }
 
+/** @desc 保存部门 */
+export function saveSystemDept(data: any) {
+  return http.post<boolean>(`${prefix}/system/dept/save`, data)
+}
+
 /** @desc 获取角色数据 */
 export function getSystemRoleList() {
   return http.get<ApiListData<System.RoleItem[]>>(`${prefix}/system/role`)
@@ -45,6 +50,16 @@ export function saveSystemUser(data: any) {
 /** @desc 获取菜单数据 */
 export function getSystemMenuList() {
   return http.get<System.MenuItem[]>(`${prefix}/system/menu`)
+}
+
+/** @desc 获取菜单详情 */
+export function getSystemMenuDetail(params: { id: string }) {
+  return http.get<System.MenuItem>(`${prefix}/system/menu/detail`, params)
+}
+
+/** @desc 保存菜单 */
+export function saveSystemMenu(data: any) {
+  return http.post<boolean>(`${prefix}/system/menu/save`, data)
 }
 
 /** @desc 获取动态路由数据 */

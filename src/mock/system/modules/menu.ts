@@ -1,8 +1,7 @@
 import { successResponseWrap, failResponseWrap } from '@/mock/mock'
 import type { MockMethod } from 'vite-plugin-mock'
 import { menus } from './data/menu'
-import { filterTree, mapTree } from 'xe-utils'
-import { upperCase } from 'lodash'
+import { filterTree, mapTree, findTree } from 'xe-utils'
 
 /**
  * @description path 转 name
@@ -91,6 +90,28 @@ export default [
       } else {
         return failResponseWrap(null, 'token失效', 401)
       }
+    }
+  },
+  {
+    url: '/mock/system/menu/detail',
+    method: 'get',
+    timeout: 100,
+    response: ({ query }: any) => {
+      const { id } = query
+      let obj = findTree(menus, (i) => i.id === id)
+      if (obj.item) {
+        return successResponseWrap(obj.item)
+      } else {
+        return failResponseWrap(null, '没有该部门', 400)
+      }
+    }
+  },
+  {
+    url: '/mock/system/menu/save',
+    method: 'post',
+    timeout: 350,
+    response: ({ query }: any) => {
+      return successResponseWrap(true)
     }
   }
 ] as MockMethod[]

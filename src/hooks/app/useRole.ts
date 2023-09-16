@@ -11,7 +11,7 @@ export function useRole() {
     try {
       loading.value = true
       const res = await getSystemRoleList()
-      roleList.value = res.data.list
+      roleList.value = res.data.list.filter((i) => i.status === 1)
       total.value = res.data.total
     } catch (error) {
     } finally {

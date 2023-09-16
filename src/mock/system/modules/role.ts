@@ -24,6 +24,18 @@ const data = [
     status: 1,
     type: 2,
     description: '普通用户，无系统管理权限，系统管理菜单无权访问'
+  },
+  {
+    id: '03',
+    createUserString: '超级管理员',
+    createTime: '2023-09-05 23:24:40',
+    disabled: false,
+    name: '普通用户2',
+    code: 'role_user2',
+    sort: 3,
+    status: 0,
+    type: 2,
+    description: '禁用状态'
   }
 ]
 

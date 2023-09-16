@@ -121,7 +121,7 @@
       </section>
     </a-card>
 
-    <AddMenuModal ref="AddMenuModalRef"></AddMenuModal>
+    <AddMenuModal ref="AddMenuModalRef" :menus="menuList"></AddMenuModal>
   </div>
 </template>
 
@@ -171,8 +171,8 @@ const onAdd = () => {
   AddMenuModalRef.value?.add()
 }
 
-const onEdit = (item: any) => {
-  AddMenuModalRef.value?.edit(item.path)
+const onEdit = (item: MenuItem) => {
+  AddMenuModalRef.value?.edit(item.id)
 }
 </script>
 

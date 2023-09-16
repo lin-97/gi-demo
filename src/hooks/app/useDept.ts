@@ -1,6 +1,7 @@
 import { ref } from 'vue'
 import { getSystemDeptList } from '@/apis'
 import type { DeptItem } from '@/apis'
+import { mapTree } from 'xe-utils'
 
 /** 部门模块 */
 export function useDept(options?: { callback?: () => void }) {
@@ -11,7 +12,12 @@ export function useDept(options?: { callback?: () => void }) {
     try {
       loading.value = true
       const res = await getSystemDeptList()
-      deptList.value = res.data
+      deptList.value = mapTree(res.data, (i) => {
+        if (i.children?.length) {
+          i.children = i.children.filter((i) => i.status === 1)
+        }
+        return i
+      })
       options?.callback && options.callback()
     } catch (error) {
     } finally {

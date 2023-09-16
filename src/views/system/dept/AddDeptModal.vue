@@ -1,5 +1,5 @@
 <template>
-  <a-modal v-model:visible="visible" :title="title" :mask-closable="false">
+  <a-modal v-model:visible="visible" :title="title" :mask-closable="false" @before-ok="save">
     <a-form ref="formRef" :model="form" :rules="rules" size="medium" auto-label-width>
       <a-form-item label="上级部门" name="parentId">
         <a-tree-select
@@ -45,7 +45,8 @@
 
 <script setup lang="ts">
 import { useDept } from '@/hooks/app'
-import { getSystemDeptDetil } from '@/apis'
+import { getSystemDeptDetil, saveSystemDept } from '@/apis'
+import { Message } from '@arco-design/web-vue'
 
 const deptId = ref('')
 const visible = ref(false)
@@ -85,4 +86,18 @@ const edit = async (id: string) => {
 }
 
 defineExpose({ add, edit })
+
+const save = async () => {
+  try {
+    const res = await saveSystemDept(form)
+    if (res.data) {
+      Message.success('模拟保存成功')
+      return true
+    } else {
+      return false
+    }
+  } catch (error) {
+    return false
+  }
+}
 </script>

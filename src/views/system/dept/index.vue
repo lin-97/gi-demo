@@ -55,6 +55,7 @@
                 <a-tag v-if="record.status == 0" color="red">禁用</a-tag>
               </template>
             </a-table-column>
+            <a-table-column title="描述" data-index="description" :width="250"></a-table-column>
             <a-table-column title="创建时间" data-index="createTime" :width="200"></a-table-column>
             <a-table-column title="操作" :width="250" align="center" fixed="right">
               <template #cell="{ record }">
