@@ -6,7 +6,7 @@
       </a-space>
       <a-space :size="15">
         <a-tooltip content="斑马纹">
-          <a-switch v-model="stripe" size="medium" />
+          <a-switch v-model="stripe" size="small" type="round" />
         </a-tooltip>
         <a-tooltip content="刷新">
           <a-button size="mini" class="gi_hover_btn" @click="refresh">

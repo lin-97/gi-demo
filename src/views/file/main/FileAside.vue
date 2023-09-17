@@ -38,7 +38,7 @@ watch(
   () => route.query,
   () => {
     if (route.query.fileType) {
-      currentKey.value = route.query.fileType.toString()
+      currentKey.value = route.query.fileType as string
     }
   },
   {

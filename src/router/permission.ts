@@ -1,12 +1,10 @@
 import router from '@/router'
-import { useUserStore } from '@/stores'
-import { useRouteStore } from '@/stores'
+import { useUserStore, useRouteStore } from '@/stores'
 import { Message } from '@arco-design/web-vue'
 import { getToken } from '@/utils/auth'
 import { isHttp } from '@/utils/validate'
-import type { RouteRecordRaw } from 'vue-router'
 
-/** @desc 免登录白名单 */
+/** 免登录白名单 */
 const whiteList = ['/login', '/register']
 
 router.beforeEach(async (to, from, next) => {

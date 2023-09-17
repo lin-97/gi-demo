@@ -1,7 +1,7 @@
 import { ref } from 'vue'
 import { defineStore } from 'pinia'
 import type { RouteRecordRaw } from 'vue-router'
-import constantRoutes from '@/router/constant-routes'
+import { constantRoutes } from '@/router'
 import Layout from '@/layout/index.vue'
 import ParentView from '@/components/ParentView/index.vue'
 import { getUserAsyncRoutes } from '@/apis'
@@ -45,7 +45,6 @@ const filterAsyncRouter = (routes: RouteRecordRaw[]) => {
   routes?.sort((a, b) => (a?.meta?.sort ?? 0) - (b?.meta?.sort ?? 0)) // 排序
   return mapTree(routes, (item) => {
     item.children?.sort((a, b) => (a?.meta?.sort ?? 0) - (b?.meta?.sort ?? 0)) // 排序
-
     let componentView
     const component = item['component'] as unknown as string
     if (component === 'Layout') {
