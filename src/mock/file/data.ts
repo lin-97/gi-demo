@@ -10,7 +10,7 @@ export default [
   },
   {
     id: '002',
-    name: '文件夹1',
+    name: '新建文件夹',
     extendName: '',
     src: null,
     updateTime: '2022-01-20 18:30:00',
@@ -19,7 +19,7 @@ export default [
   },
   {
     id: '003',
-    name: '哈哈',
+    name: '文稿',
     extendName: 'doc',
     src: null,
     updateTime: '2022-01-20 18:30:00',
@@ -30,7 +30,7 @@ export default [
     id: '004',
     name: '致你-予星',
     extendName: 'mp3',
-    src: 'https://webfs.ali.kugou.com/202205080014/0b56ab5801cafaaf59d94eb86622e826/part/0/960111/KGTX/CLTX001/2ee15e52cecb80545bcaf91431a73dc8.mp3',
+    src: '/static/images/files/致你.mp3',
     updateTime: '2022-01-20 18:30:00',
     isDir: false,
     filePath: '/'
@@ -109,7 +109,7 @@ export default [
   },
   {
     id: '012',
-    name: '首页',
+    name: 'index',
     extendName: 'html',
     src: null,
     updateTime: '2022-01-20 18:30:00',
@@ -117,7 +117,7 @@ export default [
   },
   {
     id: '013',
-    name: '样式',
+    name: 'style',
     extendName: 'css',
     src: null,
     updateTime: '2022-01-20 18:30:00',
@@ -126,7 +126,7 @@ export default [
   },
   {
     id: '014',
-    name: '代码',
+    name: 'script',
     extendName: 'js',
     src: null,
     updateTime: '2022-01-20 18:30:00',
@@ -136,7 +136,7 @@ export default [
   {
     id: '106',
     name: '图片',
-    extendName: 'png',
+    extendName: 'jpg',
     src: 'https://img0.baidu.com/it/u=2746352008,2041591833&fm=253&fmt=auto&app=138&f=JPEG?w=360&h=360',
     updateTime: '2022-01-20 18:30:00',
     isDir: false,
@@ -145,7 +145,7 @@ export default [
   {
     id: '107',
     name: '头像',
-    extendName: 'png',
+    extendName: 'jpg',
     src: 'https://img2.baidu.com/it/u=304294273,3088990845&fm=253&fmt=auto&app=138&f=JPEG?w=400&h=400',
     updateTime: '2022-01-20 18:30:00',
     isDir: false,
@@ -154,7 +154,7 @@ export default [
   {
     id: '108',
     name: '头像1',
-    extendName: 'png',
+    extendName: 'jpg',
     src: 'https://img0.baidu.com/it/u=3745738950,3664021749&fm=253&fmt=auto&app=138&f=JPEG?w=500&h=500',
     updateTime: '2022-01-20 18:30:00',
     isDir: false,
@@ -163,7 +163,7 @@ export default [
   {
     id: '109',
     name: '头像2',
-    extendName: 'png',
+    extendName: 'jpg',
     src: 'https://img1.baidu.com/it/u=1817951587,3188870642&fm=253&fmt=auto&app=138&f=JPEG?w=500&h=500',
     updateTime: '2022-01-20 18:30:00',
     isDir: false,
@@ -172,8 +172,8 @@ export default [
   {
     id: '110',
     name: '头像3',
-    extendName: 'png',
-    src: 'https://s1.ax1x.com/2022/06/14/XhYkqS.jpg',
+    extendName: 'jpg',
+    src: '/static/images/files/头像3.jpg',
     updateTime: '2022-06-14 10:44:00',
     isDir: false,
     filePath: '/'
@@ -181,8 +181,8 @@ export default [
   {
     id: '111',
     name: '头像4',
-    extendName: 'png',
-    src: 'https://s1.ax1x.com/2022/06/14/XhYJIJ.jpg',
+    extendName: 'jpeg',
+    src: '/static/images/files/头像4.jpeg',
     updateTime: '2022-06-14 10:44:00',
     isDir: false,
     filePath: '/'
@@ -190,8 +190,8 @@ export default [
   {
     id: '112',
     name: '头像5',
-    extendName: 'png',
-    src: 'https://s1.ax1x.com/2022/06/14/XhYyIH.jpg',
+    extendName: 'jpg',
+    src: '/static/images/files/头像5.jpg',
     updateTime: '2022-06-14 10:44:00',
     isDir: false,
     filePath: '/'
@@ -199,8 +199,8 @@ export default [
   {
     id: '113',
     name: '头像6',
-    extendName: 'png',
-    src: 'https://s1.ax1x.com/2022/06/14/XhtSwF.jpg',
+    extendName: 'jpeg',
+    src: '/static/images/files/头像6.jpeg',
     updateTime: '2022-06-14 10:44:00',
     isDir: false,
     filePath: '/'
@@ -208,8 +208,8 @@ export default [
   {
     id: '114',
     name: '头像7',
-    extendName: 'png',
-    src: 'https://s1.ax1x.com/2022/06/14/XhteeO.jpg',
+    extendName: 'jpeg',
+    src: '/static/images/files/头像7.jpeg',
     updateTime: '2022-06-14 10:44:00',
     isDir: false,
     filePath: '/'
@@ -217,17 +217,17 @@ export default [
   {
     id: '115',
     name: '头像8',
-    extendName: 'png',
-    src: 'https://s1.ax1x.com/2022/06/14/XhtakQ.jpg',
+    extendName: 'jpg',
+    src: '/static/images/files/头像8.jpg',
     updateTime: '2022-06-14 10:44:00',
     isDir: false,
     filePath: '/'
   },
   {
-    id: '120',
+    id: '1200',
     name: '头像9',
-    extendName: 'png',
-    src: 'https://s1.ax1x.com/2022/05/07/Ol2fkF.jpg',
+    extendName: 'jpg',
+    src: '/static/images/files/头像9.jpg',
     updateTime: '2022-01-20 18:30:00',
     isDir: false,
     filePath: '/'
@@ -235,8 +235,8 @@ export default [
   {
     id: '120',
     name: '摄影-校园',
-    extendName: 'png',
-    src: 'https://s1.ax1x.com/2022/06/14/Xht7nK.jpg',
+    extendName: 'jpg',
+    src: '/static/images/files/摄影-校园.jpg',
     updateTime: '2022-01-20 18:30:00',
     isDir: false,
     filePath: '/'
@@ -244,8 +244,8 @@ export default [
   {
     id: '121',
     name: '摄影-校园2',
-    extendName: 'png',
-    src: 'https://s1.ax1x.com/2022/06/14/XhNUu6.jpg',
+    extendName: 'jpg',
+    src: '/static/images/files/摄影-校园2.jpg',
     updateTime: '2022-01-20 18:30:00',
     isDir: false,
     filePath: '/'
@@ -253,8 +253,8 @@ export default [
   {
     id: '122',
     name: '摄影-校园3',
-    extendName: 'png',
-    src: 'https://s1.ax1x.com/2022/06/14/XhNRDf.jpg',
+    extendName: 'jpg',
+    src: '/static/images/files/摄影-校园3.jpg',
     updateTime: '2022-01-20 18:30:00',
     isDir: false,
     filePath: '/'
@@ -262,8 +262,8 @@ export default [
   {
     id: '123',
     name: '摄影-花',
-    extendName: 'png',
-    src: 'https://s1.ax1x.com/2022/06/14/XhNlEF.jpg',
+    extendName: 'jpg',
+    src: '/static/images/files/摄影-花.jpg',
     updateTime: '2022-01-20 18:30:00',
     isDir: false,
     filePath: '/'
@@ -271,8 +271,8 @@ export default [
   {
     id: '124',
     name: '摄影-01',
-    extendName: 'png',
-    src: 'https://s1.ax1x.com/2022/06/14/XhUuRA.jpg',
+    extendName: 'jpg',
+    src: '/static/images/files/摄影-01.jpg',
     updateTime: '2022-01-20 18:30:00',
     isDir: false,
     filePath: '/'
@@ -280,8 +280,8 @@ export default [
   {
     id: '125',
     name: '摄影-02',
-    extendName: 'png',
-    src: 'https://s1.ax1x.com/2022/06/14/XhU8Z8.jpg',
+    extendName: 'jpg',
+    src: '/static/images/files/摄影-02.jpg',
     updateTime: '2022-01-20 18:30:00',
     isDir: false,
     filePath: '/'
@@ -289,8 +289,8 @@ export default [
   {
     id: '126',
     name: '图片01',
-    extendName: 'png',
-    src: 'https://s1.ax1x.com/2022/06/15/Xoherq.jpg',
+    extendName: 'jpg',
+    src: '/static/images/files/图片-01.jpg',
     updateTime: '2022-01-20 18:30:00',
     isDir: false,
     filePath: '/'
@@ -298,17 +298,17 @@ export default [
   {
     id: '127',
     name: '图片02',
-    extendName: 'png',
-    src: 'https://s1.ax1x.com/2022/06/15/XohKaT.jpg',
+    extendName: 'jpg',
+    src: '/static/images/files/图片-02.jpg',
     updateTime: '2022-01-20 18:30:00',
     isDir: false,
     filePath: '/'
   },
   {
     id: '128',
-    name: '图片03',
-    extendName: 'png',
-    src: 'https://s1.ax1x.com/2022/06/15/Xoh1G4.jpg',
+    name: '小狗',
+    extendName: 'jpg',
+    src: '/static/images/files/小狗.jpg',
     updateTime: '2022-01-20 18:30:00',
     isDir: false,
     filePath: '/'

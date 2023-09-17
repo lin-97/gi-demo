@@ -22,7 +22,6 @@
 <script setup lang="ts">
 import { useDraggable, useWindowSize, useElementSize } from '@vueuse/core'
 import type { FileItem } from '@/apis'
-import zhini from './致你.mp3'
 
 interface Props {
   fileInfo: FileItem
@@ -35,9 +34,6 @@ const audioRef = ref<HTMLElement | null>(null)
 const audioHeadRef = ref<HTMLElement | null>(null)
 
 const audioSrc = computed(() => {
-  if (props.fileInfo?.id === '004') {
-    return zhini
-  }
   return props.fileInfo?.src || ''
 })
 

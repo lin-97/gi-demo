@@ -1,5 +1,5 @@
 <div align="center">
-	<img style="width: 80px;height: 80px" src="https://s1.ax1x.com/2022/05/12/OBUfSS.gif"/>
+	<img style="width: 80px;height: 80px" src="./md/logo.gif"/>
 	<h1>Gi Admin Pro</h1>
 </div>
 
