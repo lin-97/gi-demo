@@ -1510,7 +1510,3 @@ $padding: 16px; // 盒子和内容的间距
 
 <a href="https://go.itab.link/" target="_blank">iTab</a>
 
-## 捐赠
-
-<img style="width: 200px" src="./md/payee1.jpg" />
-<img style="width: 200px" src="./md/payee2.jpg" />
