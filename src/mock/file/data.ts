@@ -30,7 +30,7 @@ export default [
     id: '004',
     name: '致你-予星',
     extendName: 'mp3',
-    src: '/static/images/files/致你.mp3',
+    src: './static/images/files/致你.mp3',
     updateTime: '2022-01-20 18:30:00',
     isDir: false,
     filePath: '/'
@@ -173,7 +173,7 @@ export default [
     id: '110',
     name: '头像3',
     extendName: 'jpg',
-    src: '/static/images/files/头像3.jpg',
+    src: './static/images/files/头像3.jpg',
     updateTime: '2022-06-14 10:44:00',
     isDir: false,
     filePath: '/'
@@ -182,7 +182,7 @@ export default [
     id: '111',
     name: '头像4',
     extendName: 'jpeg',
-    src: '/static/images/files/头像4.jpeg',
+    src: './static/images/files/头像4.jpeg',
     updateTime: '2022-06-14 10:44:00',
     isDir: false,
     filePath: '/'
@@ -191,7 +191,7 @@ export default [
     id: '112',
     name: '头像5',
     extendName: 'jpg',
-    src: '/static/images/files/头像5.jpg',
+    src: './static/images/files/头像5.jpg',
     updateTime: '2022-06-14 10:44:00',
     isDir: false,
     filePath: '/'
@@ -200,7 +200,7 @@ export default [
     id: '113',
     name: '头像6',
     extendName: 'jpeg',
-    src: '/static/images/files/头像6.jpeg',
+    src: './static/images/files/头像6.jpeg',
     updateTime: '2022-06-14 10:44:00',
     isDir: false,
     filePath: '/'
@@ -209,7 +209,7 @@ export default [
     id: '114',
     name: '头像7',
     extendName: 'jpeg',
-    src: '/static/images/files/头像7.jpeg',
+    src: './static/images/files/头像7.jpeg',
     updateTime: '2022-06-14 10:44:00',
     isDir: false,
     filePath: '/'
@@ -218,7 +218,7 @@ export default [
     id: '115',
     name: '头像8',
     extendName: 'jpg',
-    src: '/static/images/files/头像8.jpg',
+    src: './static/images/files/头像8.jpg',
     updateTime: '2022-06-14 10:44:00',
     isDir: false,
     filePath: '/'
@@ -227,7 +227,7 @@ export default [
     id: '1200',
     name: '头像9',
     extendName: 'jpg',
-    src: '/static/images/files/头像9.jpg',
+    src: './static/images/files/头像9.jpg',
     updateTime: '2022-01-20 18:30:00',
     isDir: false,
     filePath: '/'
@@ -236,7 +236,7 @@ export default [
     id: '120',
     name: '摄影-校园',
     extendName: 'jpg',
-    src: '/static/images/files/摄影-校园.jpg',
+    src: './static/images/files/摄影-校园.jpg',
     updateTime: '2022-01-20 18:30:00',
     isDir: false,
     filePath: '/'
@@ -245,7 +245,7 @@ export default [
     id: '121',
     name: '摄影-校园2',
     extendName: 'jpg',
-    src: '/static/images/files/摄影-校园2.jpg',
+    src: './static/images/files/摄影-校园2.jpg',
     updateTime: '2022-01-20 18:30:00',
     isDir: false,
     filePath: '/'
@@ -254,7 +254,7 @@ export default [
     id: '122',
     name: '摄影-校园3',
     extendName: 'jpg',
-    src: '/static/images/files/摄影-校园3.jpg',
+    src: './static/images/files/摄影-校园3.jpg',
     updateTime: '2022-01-20 18:30:00',
     isDir: false,
     filePath: '/'
@@ -263,7 +263,7 @@ export default [
     id: '123',
     name: '摄影-花',
     extendName: 'jpg',
-    src: '/static/images/files/摄影-花.jpg',
+    src: './static/images/files/摄影-花.jpg',
     updateTime: '2022-01-20 18:30:00',
     isDir: false,
     filePath: '/'
@@ -272,7 +272,7 @@ export default [
     id: '124',
     name: '摄影-01',
     extendName: 'jpg',
-    src: '/static/images/files/摄影-01.jpg',
+    src: './static/images/files/摄影-01.jpg',
     updateTime: '2022-01-20 18:30:00',
     isDir: false,
     filePath: '/'
@@ -281,7 +281,7 @@ export default [
     id: '125',
     name: '摄影-02',
     extendName: 'jpg',
-    src: '/static/images/files/摄影-02.jpg',
+    src: './static/images/files/摄影-02.jpg',
     updateTime: '2022-01-20 18:30:00',
     isDir: false,
     filePath: '/'
@@ -290,7 +290,7 @@ export default [
     id: '126',
     name: '图片01',
     extendName: 'jpg',
-    src: '/static/images/files/图片-01.jpg',
+    src: './static/images/files/图片-01.jpg',
     updateTime: '2022-01-20 18:30:00',
     isDir: false,
     filePath: '/'
@@ -299,7 +299,7 @@ export default [
     id: '127',
     name: '图片02',
     extendName: 'jpg',
-    src: '/static/images/files/图片-02.jpg',
+    src: './static/images/files/图片-02.jpg',
     updateTime: '2022-01-20 18:30:00',
     isDir: false,
     filePath: '/'
@@ -308,7 +308,7 @@ export default [
     id: '128',
     name: '小狗',
     extendName: 'jpg',
-    src: '/static/images/files/小狗.jpg',
+    src: './static/images/files/小狗.jpg',
     updateTime: '2022-01-20 18:30:00',
     isDir: false,
     filePath: '/'
