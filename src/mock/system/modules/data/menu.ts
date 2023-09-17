@@ -436,7 +436,7 @@ export const menus = [
   {
     id: '08',
     parentId: '',
-    path: '',
+    path: '/system',
     component: 'Layout',
     redirect: 'noRedirect',
     type: 1,

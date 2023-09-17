@@ -1,7 +1,7 @@
 import { successResponseWrap, failResponseWrap } from '@/mock/mock'
 import type { MockMethod } from 'vite-plugin-mock'
 import { menus } from './data/menu'
-import { filterTree, mapTree, findTree } from 'xe-utils'
+import { mapTree, findTree } from 'xe-utils'
 
 /**
  * @description path 转 name
@@ -22,16 +22,23 @@ const getPathToName = (path: string) => {
   return name
 }
 
+const filterUserTree = (value: typeof menus) => {
+  const arr = value.filter((i) => i.path !== '/system')
+  const data = mapTree(arr, (i) => {
+    if (i.children && i.children.length) {
+      i.children.filter((i) => i.path !== '/system')
+    }
+    return i
+  })
+  return data
+}
+
 export default [
   {
     url: '/mock/user/routes',
     method: 'get',
     timeout: 10,
     response: ({ headers }) => {
-      // 过滤状态开启的路由
-      const statusRoutes = filterTree(menus, (i) => i.status === 1)
-      // 序列化
-      const orderRoutes = JSON.parse(JSON.stringify(statusRoutes))
       const routes = mapTree(menus, (item) => {
         const meta: any = {
           hidden: item.hidden,
@@ -71,9 +78,7 @@ export default [
       const token = headers.token
       if (token && ['TOKEN-admin', 'TOKEN-user'].includes(token)) {
         const isAdmin = token === 'TOKEN-admin'
-        return isAdmin
-          ? successResponseWrap(routes)
-          : successResponseWrap(filterTree(routes, (i) => i.path !== '/system'))
+        return isAdmin ? successResponseWrap(routes) : successResponseWrap(filterUserTree(routes))
       } else {
         return failResponseWrap(null, 'token失效', 401)
       }
@@ -109,9 +114,7 @@ export default [
       const token = headers.token
       if (token && ['TOKEN-admin', 'TOKEN-user'].includes(token)) {
         const isAdmin = token === 'TOKEN-admin'
-        return isAdmin
-          ? successResponseWrap(mapTree(menus, (i) => ({ ...i, affix: true })))
-          : successResponseWrap(filterTree(menus, (i) => i.path !== '/system'))
+        return isAdmin ? successResponseWrap(menus) : successResponseWrap(filterUserTree(menus))
       } else {
         return failResponseWrap(null, 'token失效', 401)
       }

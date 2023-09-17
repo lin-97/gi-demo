@@ -64,7 +64,7 @@
               :loading="loading"
               :data="tableData"
               :bordered="{ cell: true }"
-              :scroll="{ x: '100%', y: '100%', minWidth: 1300 }"
+              :scroll="{ x: '100%', y: '100%', minWidth: 1500 }"
               :pagination="pagination"
             >
               <template #columns>
@@ -98,6 +98,7 @@
                     <a-tag v-if="record.type === 2" color="orange">自定义</a-tag>
                   </template>
                 </a-table-column>
+                <a-table-column title="描述" :width="200" data-index="description"></a-table-column>
                 <a-table-column title="创建时间" data-index="createTime" :width="200"></a-table-column>
                 <a-table-column title="操作" :width="180" align="center" fixed="right">
                   <template #cell="{ record }">
