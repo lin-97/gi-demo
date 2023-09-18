@@ -4,7 +4,7 @@ const data = [
   {
     id: '01',
     createUserString: '超级管理员',
-    createTime: '2023-09-05 23:24:40',
+    createTime: '2023-09-05 23:00:00',
     disabled: true,
     username: 'admin',
     nickname: '管理员',
@@ -16,12 +16,14 @@ const data = [
     type: 1,
     description: '系统初始用户',
     roleIds: ['role_admin'],
-    deptId: '01'
+    roleNames: '超级管理员',
+    deptId: '01',
+    deptName: 'XXX科技有限公司'
   },
   {
     id: '02',
     createUserString: '超级管理员',
-    createTime: '2023-09-05 23:24:40',
+    createTime: '2023-09-05 23:00:00',
     disabled: false,
     username: 'user',
     nickname: '木糖醇',
@@ -33,7 +35,9 @@ const data = [
     type: 2,
     description: '无法访问系统管理菜单',
     roleIds: ['role_user'],
-    deptId: '01010101'
+    roleNames: '普通用户',
+    deptId: '01010101',
+    deptName: '研发一组'
   }
 ]
 

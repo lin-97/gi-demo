@@ -24,6 +24,5 @@ declare module 'vue' {
     RightMenu: typeof import('./components/CateTree/RightMenu.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
-    TreeSwitcherIcon: typeof import('./components/CateTree/TreeSwitcherIcon.vue')['default']
   }
 }

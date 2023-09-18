@@ -1,14 +1,20 @@
 <template>
-  <a-modal v-model:visible="visible" :title="title" :mask-closable="false" @before-ok="save">
-    <a-form :model="form" :rules="rules" size="medium" auto-label-width>
-      <a-form-item label="角色名称" name="name" field="name" :validate-trigger="['change', 'input']">
+  <a-modal v-model:visible="visible" :title="title" :mask-closable="false" @before-ok="save" @close="close">
+    <a-form ref="FormRef" :model="form" :rules="rules" size="medium" auto-label-width>
+      <a-form-item label="角色名称" field="name">
         <a-input placeholder="请输入角色名称" v-model="form.name"> </a-input>
       </a-form-item>
-      <a-form-item label="角色编号" name="code" field="code">
-        <a-input placeholder="请输入角色编号" v-model="form.code"> </a-input>
+      <a-form-item label="角色编号" field="code">
+        <a-input placeholder="请输入角色编号" v-model="form.code" :disabled="isEdit"> </a-input>
       </a-form-item>
-      <a-form-item label="描述" name="description">
-        <a-textarea v-model="form.description" placeholder="角色描述" :auto-size="{ minRows: 3, maxRows: 5 }" />
+      <a-form-item label="描述" field="description">
+        <a-textarea
+          v-model="form.description"
+          placeholder="角色描述"
+          :max-length="200"
+          show-word-limit
+          :auto-size="{ minRows: 3, maxRows: 5 }"
+        />
       </a-form-item>
       <a-form-item label="状态" field="status">
         <a-switch
@@ -26,10 +32,12 @@
 
 <script setup lang="ts">
 import { getSystemRoleDetail, saveSystemRole } from '@/apis'
-import { Message } from '@arco-design/web-vue'
+import { Message, type FormInstance } from '@arco-design/web-vue'
 
+const FormRef = ref<FormInstance>()
 const roleId = ref('')
-const title = computed(() => (!!roleId.value ? '编辑角色' : '新增角色'))
+const isEdit = computed(() => !!roleId.value)
+const title = computed(() => (isEdit.value ? '编辑角色' : '新增角色'))
 const visible = ref(false)
 
 const form = reactive({
@@ -58,6 +66,10 @@ const edit = async (id: string) => {
   const res = await getSystemRoleDetail({ id })
   Object.assign(form, res.data)
   visible.value = true
+}
+
+const close = () => {
+  FormRef.value?.resetFields()
 }
 
 defineExpose({ add, edit })

@@ -39,7 +39,7 @@ export function getSystemUserList() {
 
 /** @desc 获取用户详情 */
 export function getSystemUserDetail(params: { id: string }) {
-  return http.get<System.UserItem>(`${prefix}/system/user/detail`, params)
+  return http.get<System.UserDetailResult>(`${prefix}/system/user/detail`, params)
 }
 
 /** @desc 保存用户 */

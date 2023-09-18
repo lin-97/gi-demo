@@ -25,7 +25,7 @@
             <template #icon><icon-plus /></template>
             <span>新增</span>
           </a-button>
-          <a-button type="primary" status="danger">
+          <a-button type="primary" status="danger" @click="onMulDelete">
             <template #icon><icon-delete /></template>
             <span>删除</span>
           </a-button>
@@ -40,9 +40,11 @@
           :loading="loading"
           :scroll="{ x: '100%', y: '100%', minWidth: 900 }"
           :pagination="pagination"
+          :row-selection="{ type: 'checkbox', showCheckedAll: false }"
+          @select="select"
         >
           <template #columns>
-            <a-table-column title="序号" :width="80">
+            <a-table-column title="序号" :width="64">
               <template #cell="cell">{{ cell.rowIndex + 1 }}</template>
             </a-table-column>
             <a-table-column title="角色名称" data-index="name"></a-table-column>
@@ -53,7 +55,7 @@
                 <a-tag v-if="record.status == 0" color="red">禁用</a-tag>
               </template>
             </a-table-column>
-            <a-table-column title="角色描述" data-index="description"></a-table-column>
+            <a-table-column title="描述" data-index="description"></a-table-column>
             <a-table-column title="创建时间" data-index="createTime"></a-table-column>
             <a-table-column title="操作" :width="280" align="center" fixed="right">
               <template #cell="{ record }">
@@ -85,7 +87,7 @@
 </template>
 
 <script setup lang="ts">
-import { Message } from '@arco-design/web-vue'
+import { Message, type TableInstance } from '@arco-design/web-vue'
 import AddRoleModal from './AddRoleModal.vue'
 import type { RoleItem } from '@/apis'
 import { usePagination } from '@/hooks'
@@ -139,6 +141,18 @@ const onEdit = (item: RoleItem) => {
 
 const onDelete = () => {
   Message.info('点击了确认按钮')
+}
+
+// 勾选
+const selectRowKeys = ref<(string | number)[]>([])
+const select: TableInstance['onSelect'] = (rowKeys) => {
+  selectRowKeys.value = rowKeys
+}
+const onMulDelete = () => {
+  if (!selectRowKeys.value.length) {
+    return Message.warning('请选择角色')
+  }
+  Message.info('点击了批量删除')
 }
 </script>
 

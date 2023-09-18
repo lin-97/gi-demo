@@ -1,7 +1,7 @@
 <template>
-  <a-modal v-model:visible="visible" :title="title" :mask-closable="false" @before-ok="save">
-    <a-form ref="formRef" :model="form" :rules="rules" size="medium" auto-label-width>
-      <a-form-item label="上级部门" name="parentId">
+  <a-modal v-model:visible="visible" :title="title" :mask-closable="false" @before-ok="save" @close="close">
+    <a-form ref="FormRef" :model="form" :rules="rules" size="medium" auto-label-width>
+      <a-form-item label="上级部门" field="parentId">
         <a-tree-select
           v-model="form.parentId"
           allow-clear
@@ -14,7 +14,7 @@
           }"
         ></a-tree-select>
       </a-form-item>
-      <a-form-item label="部门名称" field="name" :validate-trigger="['change', 'input']">
+      <a-form-item label="部门名称" field="name">
         <a-input v-model="form.name" placeholder="请输入部门名称" allow-clear></a-input>
       </a-form-item>
       <a-form-item label="排序" field="sort">
@@ -46,11 +46,13 @@
 <script setup lang="ts">
 import { useDept } from '@/hooks/app'
 import { getSystemDeptDetil, saveSystemDept } from '@/apis'
-import { Message } from '@arco-design/web-vue'
+import { Message, type FormInstance } from '@arco-design/web-vue'
 
+const FormRef = ref<FormInstance>()
 const deptId = ref('')
 const visible = ref(false)
-const title = computed(() => (!!deptId.value ? '编辑部门' : '新增部门'))
+const isEdit = computed(() => !!deptId.value)
+const title = computed(() => (isEdit.value ? '编辑部门' : '新增部门'))
 const { deptList, getDeptList } = useDept()
 getDeptList()
 
@@ -83,6 +85,10 @@ const edit = async (id: string) => {
   const res = await getSystemDeptDetil({ id })
   Object.assign(form, res.data)
   visible.value = true
+}
+
+const close = () => {
+  FormRef.value?.resetFields()
 }
 
 defineExpose({ add, edit })

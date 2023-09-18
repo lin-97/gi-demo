@@ -2,29 +2,27 @@
   <div class="gi_page user-manage">
     <a-card title="用户管理">
       <a-row :gutter="16">
-        <a-col :xs="0" :md="10" :lg="6" :xl="6" :xxl="5">
+        <a-col :xs="0" :md="10" :lg="6" :xl="6" :xxl="4">
           <a-input v-model="treeInputValue" placeholder="输入部门名称搜索" allow-clear style="margin-bottom: 10px">
             <template #prefix><icon-search /></template>
           </a-input>
-          <a-spin :loading="treeLoading">
-            <a-tree
-              ref="TreeRef"
-              block-node
-              show-line
-              default-expand-all
-              :data="deptList"
-              :field-names="{
-                key: 'id',
-                title: 'name',
-                children: 'children'
-              }"
-              @select="search"
-            >
-            </a-tree>
-          </a-spin>
+          <a-tree
+            ref="TreeRef"
+            block-node
+            show-line
+            default-expand-all
+            :data="deptList"
+            :field-names="{
+              key: 'id',
+              title: 'name',
+              children: 'children'
+            }"
+            @select="search"
+          >
+          </a-tree>
         </a-col>
 
-        <a-col :xs="24" :md="14" :lg="18" :xl="18" :xxl="19">
+        <a-col :xs="24" :md="14" :lg="18" :xl="18" :xxl="20">
           <a-row justify="space-between">
             <a-space>
               <a-button type="primary" @click="onAdd">
@@ -32,7 +30,7 @@
                 <span>新增</span>
               </a-button>
 
-              <a-button type="primary" status="danger">
+              <a-button type="primary" status="danger" @click="onMulDelete">
                 <template #icon><icon-delete /></template>
                 <span>删除</span>
               </a-button>
@@ -62,21 +60,34 @@
             <a-table
               row-key="id"
               :loading="loading"
-              :data="tableData"
+              :data="userList"
               :bordered="{ cell: true }"
-              :scroll="{ x: '100%', y: '100%', minWidth: 1500 }"
+              :scroll="{ x: '100%', y: '100%', minWidth: 1700 }"
               :pagination="pagination"
+              :row-selection="{ type: 'checkbox', showCheckedAll: false }"
+              @select="select"
             >
               <template #columns>
-                <a-table-column title="ID" data-index="id"></a-table-column>
+                <a-table-column title="序号" :width="64">
+                  <template #cell="cell">{{ cell.rowIndex + 1 }}</template>
+                </a-table-column>
                 <a-table-column title="用户名" data-index="username" :width="120">
                   <template #cell="{ record }">
-                    <a-link>{{ record.username }}</a-link>
+                    <a-link @click="openDetail(record)">{{ record.username }}</a-link>
                   </template>
                 </a-table-column>
                 <a-table-column title="昵称" data-index="nickname" :width="150"></a-table-column>
+                <a-table-column title="状态" :width="100" align="center">
+                  <template #cell="{ record }">
+                    <a-tag v-if="record.status === 1" color="green">正常</a-tag>
+                    <a-tag v-if="record.status === 0" color="red">禁用</a-tag>
+                  </template>
+                </a-table-column>
                 <a-table-column title="性别" data-index="gender" :width="80" align="center">
-                  <template #cell="{ record }">{{ record.gender === 1 ? '男' : '女' }}</template>
+                  <template #cell="{ record }">
+                    <span v-if="record.gender === 1">男</span>
+                    <span v-if="record.gender === 2">女</span>
+                  </template>
                 </a-table-column>
                 <a-table-column title="头像" data-index="avatar" :width="100" align="center">
                   <template #cell="{ record }">
@@ -86,12 +97,7 @@
                   </template>
                 </a-table-column>
                 <a-table-column title="联系方式" data-index="phone" :width="180"></a-table-column>
-                <a-table-column title="状态" :width="100" align="center">
-                  <template #cell="{ record }">
-                    <a-tag v-if="record.status == 1" color="green">正常</a-tag>
-                    <a-tag v-if="record.status == 0" color="red">禁用</a-tag>
-                  </template>
-                </a-table-column>
+                <a-table-column title="部门" data-index="deptName" :width="180"></a-table-column>
                 <a-table-column title="类型" :width="100" align="center">
                   <template #cell="{ record }">
                     <a-tag v-if="record.type === 1" color="red">系统内置</a-tag>
@@ -124,6 +130,7 @@
     </a-card>
 
     <AddUserModal ref="AddUserModalRef"></AddUserModal>
+    <UserDetailDrawer ref="UserDetailDrawerRef"></UserDetailDrawer>
   </div>
 </template>
 
@@ -133,21 +140,16 @@ import { useDept } from '@/hooks/app'
 import { getSystemUserList } from '@/apis'
 import type { UserItem } from '@/apis'
 import AddUserModal from './AddUserModal.vue'
-import type { TreeInstance } from '@arco-design/web-vue'
+import UserDetailDrawer from './UserDetailDrawer.vue'
+import type { TreeInstance, TableInstance } from '@arco-design/web-vue'
+import { Message } from '@arco-design/web-vue'
 
 defineOptions({ name: 'SystemUser' })
 
 const TreeRef = ref<TreeInstance>()
 const AddUserModalRef = ref<InstanceType<typeof AddUserModal>>()
-
-const treeLoading = ref(false)
+const UserDetailDrawerRef = ref<InstanceType<typeof UserDetailDrawer>>()
 const treeInputValue = ref('')
-const loading = ref(false)
-const tableData = ref<UserItem[]>([])
-
-const { pagination, setTotal } = usePagination(() => {
-  getUserList()
-})
 
 const { deptList, getDeptList } = useDept({
   callback: () => {
@@ -166,15 +168,32 @@ const onEdit = (item: UserItem) => {
   AddUserModalRef.value?.edit(item.id)
 }
 
+// 勾选
+const selectRowKeys = ref<(string | number)[]>([])
+const select: TableInstance['onSelect'] = (rowKeys) => {
+  selectRowKeys.value = rowKeys
+}
+const onMulDelete = () => {
+  if (!selectRowKeys.value.length) {
+    return Message.warning('请选择用户')
+  }
+  Message.info('点击了批量删除')
+}
+
 const form = reactive({ status: '', username: '' })
+const loading = ref(false)
+const userList = ref<UserItem[]>([])
+const { pagination, setTotal } = usePagination(() => {
+  getUserList()
+})
 const getUserList = async () => {
-  loading.value = true
-  const res = await getSystemUserList()
-  if (res.success) {
-    tableData.value = res.data.list
+  try {
+    loading.value = true
+    const res = await getSystemUserList()
+    userList.value = res.data.list
     setTotal(res.data.total)
-    loading.value = false
-  } else {
+  } catch (error) {
+  } finally {
     loading.value = false
   }
 }
@@ -188,6 +207,10 @@ const reset = () => {
   form.status = ''
   form.username = ''
   pagination.onChange(1)
+}
+
+const openDetail = (item: UserItem) => {
+  UserDetailDrawerRef.value?.open(item.id)
 }
 </script>
 

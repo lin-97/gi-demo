@@ -25,7 +25,7 @@
             <template #icon><icon-plus /></template>
             <span>新增</span>
           </a-button>
-          <a-button type="primary" status="danger">
+          <a-button type="primary" status="danger" @click="onMulDelete">
             <template #icon><icon-delete /></template>
             <span>删除</span>
           </a-button>
@@ -41,6 +41,8 @@
           :data="deptList"
           :scroll="{ x: '100%', y: '100%', minWidth: 900 }"
           :pagination="false"
+          :row-selection="{ type: 'checkbox', showCheckedAll: false }"
+          @select="select"
         >
           <template #expand-icon="{ expanded }">
             <IconDown v-if="expanded" />
@@ -90,6 +92,7 @@
 import AddDeptModal from './AddDeptModal.vue'
 import { getSystemDeptList, type DeptItem } from '@/apis'
 import type { TableInstance } from '@arco-design/web-vue'
+import { Message } from '@arco-design/web-vue'
 
 defineOptions({ name: 'SystemDept' })
 
@@ -134,6 +137,18 @@ const onAdd = () => {
 
 const onEdit = (item: DeptItem) => {
   AddDeptModalRef.value?.edit(item.id)
+}
+
+// 勾选
+const selectRowKeys = ref<(string | number)[]>([])
+const select: TableInstance['onSelect'] = (rowKeys) => {
+  selectRowKeys.value = rowKeys
+}
+const onMulDelete = () => {
+  if (!selectRowKeys.value.length) {
+    return Message.warning('请选择部门')
+  }
+  Message.info('点击了批量删除')
 }
 </script>
 

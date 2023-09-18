@@ -30,16 +30,20 @@ export interface UserItem {
   createUserString: string
   createTime: string
   disabled: boolean
+  deptId: string
+  deptName: string
   username: string
   nickname: string
-  sex: number
+  gender: number
   avatar: string
   email: string
   phone: string
   status: 0 | 1
-  type: 1
+  type: 1 | 2
   description: string
 }
+
+export type UserDetailResult = UserItem & { roleNames: string }
 
 /** 系统菜单类型 */
 export interface MenuItem {

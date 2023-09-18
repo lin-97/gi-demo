@@ -1,28 +1,35 @@
 <template>
-  <a-modal v-model:visible="visible" :width="600" :title="title" :mask-closable="false" @before-ok="save">
-    <a-form ref="formRef" :model="form" :rules="rules" size="medium" auto-label-width>
+  <a-modal
+    v-model:visible="visible"
+    :width="600"
+    :title="title"
+    :mask-closable="false"
+    @before-ok="save"
+    @close="close"
+  >
+    <a-form ref="FormRef" :model="form" :rules="rules" size="medium" auto-label-width>
       <a-row>
         <a-col :span="12">
-          <a-form-item label="用户名" field="username" :validate-trigger="['change', 'input']">
-            <a-input placeholder="请输入用户名" v-model="form.username"></a-input>
+          <a-form-item label="用户名" field="username">
+            <a-input v-model="form.username" placeholder="请输入用户名" :disabled="form.disabled"></a-input>
           </a-form-item>
         </a-col>
         <a-col :span="12">
-          <a-form-item label="昵称" field="nickname" :validate-trigger="['change', 'input']">
-            <a-input placeholder="请输入昵称" v-model="form.nickname"></a-input>
+          <a-form-item label="昵称" field="nickname">
+            <a-input v-model="form.nickname" placeholder="请输入昵称"></a-input>
           </a-form-item>
         </a-col>
       </a-row>
 
       <a-row>
         <a-col :span="12">
-          <a-form-item label="手机号码" field="phone" :validate-trigger="['change', 'input']">
-            <a-input placeholder="请输入手机号码" v-model="form.phone"></a-input>
+          <a-form-item label="手机号码" field="phone">
+            <a-input v-model="form.phone" placeholder="请输入手机号码"></a-input>
           </a-form-item>
         </a-col>
         <a-col :span="12">
-          <a-form-item label="邮箱" field="email" :validate-trigger="['change', 'input']">
-            <a-input placeholder="请输入邮箱" v-model="form.email"></a-input>
+          <a-form-item label="邮箱" field="email">
+            <a-input v-model="form.email" placeholder="请输入邮箱"></a-input>
           </a-form-item>
         </a-col>
       </a-row>
@@ -88,29 +95,31 @@
 import { useDept, useRole } from '@/hooks/app'
 import * as Regexp from '@/utils/regexp'
 import { getSystemUserDetail, saveSystemUser } from '@/apis'
-import { Message } from '@arco-design/web-vue'
+import { Message, type FormInstance } from '@arco-design/web-vue'
 
 const { roleList, getRoleList } = useRole()
 getRoleList()
 const roleOptions = computed(() => roleList.value.map((i) => ({ label: i.name, value: i.code })))
 
+const FormRef = ref<FormInstance>()
 const userId = ref('')
-const title = computed(() => (!!userId.value ? '编辑用户' : '新增用户'))
+const isEdit = computed(() => !!userId.value)
+const title = computed(() => (isEdit.value ? '编辑用户' : '新增用户'))
 const visible = ref(false)
 
 const form = reactive({
   id: '',
-  username: '',
-  nickname: '',
-  email: '',
-  phone: '',
-  gender: 1,
-  deptId: '',
-  roleIds: [],
-  address: '',
-  disabled: false,
-  description: '',
-  status: 0
+  username: '', // 用户名
+  nickname: '', // 昵称
+  gender: 1 as Gender, // 性别 1男 2女
+  phone: '', // 手机号
+  email: '', // 邮箱
+  deptId: '', // 部门
+  roleIds: [], // 角色(可能多个)
+  description: '', // 描述
+  status: 0 as Status, // 状态 0禁用 1启用(正常)
+  type: 2, // 类型 1系统内置(admin是系统内置) 2自定义
+  disabled: false // 如果 type===1 这为 true, 主要作用是列表复选框禁用状态
 })
 
 const rules = {
@@ -138,10 +147,14 @@ const add = () => {
 }
 
 const edit = async (id: string) => {
+  visible.value = true
   userId.value = id
   const res = await getSystemUserDetail({ id })
   Object.assign(form, res.data)
-  visible.value = true
+}
+
+const close = () => {
+  FormRef.value?.resetFields()
 }
 
 defineExpose({ add, edit })
