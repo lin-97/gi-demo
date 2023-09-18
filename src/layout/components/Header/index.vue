@@ -58,9 +58,9 @@
               <a-row align="center" :wrap="false" class="user">
                 <!-- 管理员头像 -->
                 <a-avatar :size="32">
-                  <img :src="userStore.userInfo.avatar" />
+                  <img :src="userStore.avatar" />
                 </a-avatar>
-                <span class="username">{{ userStore.userName }}</span>
+                <span class="username">{{ userStore.name }}</span>
                 <icon-down />
               </a-row>
               <template #content>

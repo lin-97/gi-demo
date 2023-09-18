@@ -38,7 +38,7 @@ onBeforeUnmount(() => {
 
 // 返回页面
 const back = () => {
-  router.back()
+  router.replace({ path: '/' })
 }
 
 // 倒计时

@@ -11,23 +11,6 @@ import { mapTree } from 'xe-utils'
 // 匹配 views 里面所有的.vue文件
 const modules = import.meta.glob('@/views/**/*.vue')
 
-// 动态路由遍历，验证是否具备权限（暂时没用）
-function filterPermRoutes(routes: RouteRecordRaw[]) {
-  const arr: RouteRecordRaw[] = []
-  routes.forEach((route) => {
-    if (route.meta?.permissions) {
-      if (Has.hasPermOr(route.meta?.permissions)) {
-        arr.push(route)
-      }
-    } else if (route.meta?.roles) {
-      if (Has.hasRoleOr(route.meta?.roles)) {
-        arr.push(route)
-      }
-    }
-  })
-  return arr
-}
-
 /** 加载模块 */
 export const loadView = (view: string) => {
   let res
@@ -43,8 +26,10 @@ export const loadView = (view: string) => {
 /** 遍历后台返回的路由，将 component 转成真正的模块 */
 const filterAsyncRouter = (routes: RouteRecordRaw[]) => {
   routes?.sort((a, b) => (a?.meta?.sort ?? 0) - (b?.meta?.sort ?? 0)) // 排序
+  routes = routes.filter((i) => Has.hasRoleOr(i.meta?.roles || []))
   return mapTree(routes, (item) => {
     item.children?.sort((a, b) => (a?.meta?.sort ?? 0) - (b?.meta?.sort ?? 0)) // 排序
+    item.children = item.children?.filter((i) => Has.hasRoleOr(i.meta?.roles || []))
     let componentView
     const component = item['component'] as unknown as string
     if (component === 'Layout') {

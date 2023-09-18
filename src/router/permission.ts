@@ -7,6 +7,12 @@ import { isHttp } from '@/utils/validate'
 /** 免登录白名单 */
 const whiteList = ['/login', '/register']
 
+/** 是否已经生成过路由表 */
+let hasRouteFlag = false
+export const resetHasRouteFlag = () => {
+  hasRouteFlag = false
+}
+
 router.beforeEach(async (to, from, next) => {
   const userStore = useUserStore()
   const routeStore = useRouteStore()
@@ -17,8 +23,7 @@ router.beforeEach(async (to, from, next) => {
       // 如果已经登录，并准备进入 Login 页面，则重定向到主页
       next({ path: '/' })
     } else {
-      // 检查用户是否已获得其权限角色
-      if (userStore.roles.length === 0) {
+      if (!hasRouteFlag) {
         try {
           await userStore.getInfo()
           const accessRoutes = await routeStore.generateRoutes()
@@ -28,6 +33,7 @@ router.beforeEach(async (to, from, next) => {
             }
           })
           console.log('路由表', router.getRoutes())
+          hasRouteFlag = true
           // 确保添加路由已完成
           // 设置 replace: true, 因此导航将不会留下历史记录
           next({ ...to, replace: true })

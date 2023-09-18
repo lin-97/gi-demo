@@ -42,15 +42,22 @@ export default [
     response: ({ headers }) => {
       const token = headers.token
       if (token && ['TOKEN-admin', 'TOKEN-user'].includes(token)) {
+        const admin = {
+          id: '01',
+          nickname: '管理员',
+          avatar: 'https://img0.baidu.com/it/u=2746352008,2041591833&fm=253&fmt=auto&app=138&f=JPEG?w=360&h=360',
+          roles: ['role_admin'],
+          permissions: ['*:*:*']
+        }
+        const user = {
+          id: '02',
+          nickname: '木糖醇',
+          avatar: 'https://img1.baidu.com/it/u=1817951587,3188870642&fm=253&fmt=auto&app=138&f=JPEG?w=500&h=500',
+          roles: ['role_user'],
+          permissions: ['user:btn:add', 'user:btn:edit', 'user:btn:delete']
+        }
         const isAdmin = token === 'TOKEN-admin'
-        return successResponseWrap({
-          name: isAdmin ? '管理员' : '木糖醇',
-          avatar: isAdmin
-            ? 'https://img0.baidu.com/it/u=2746352008,2041591833&fm=253&fmt=auto&app=138&f=JPEG?w=360&h=360'
-            : 'https://img1.baidu.com/it/u=1817951587,3188870642&fm=253&fmt=auto&app=138&f=JPEG?w=500&h=500',
-          roles: isAdmin ? ['admin'] : ['user'],
-          permissions: isAdmin ? ['table:btn:edit'] : ['']
-        })
+        return successResponseWrap(isAdmin ? admin : user)
       } else {
         return failResponseWrap(null, 'token失效', 401)
       }

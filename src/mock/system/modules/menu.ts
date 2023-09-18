@@ -39,7 +39,10 @@ export default [
     method: 'get',
     timeout: 10,
     response: ({ headers }) => {
-      const routes = mapTree(menus, (item) => {
+      const token = headers.token
+      const isAdmin = token === 'TOKEN-admin'
+      const data = isAdmin ? menus : filterUserTree(menus)
+      const routes = mapTree(data, (item) => {
         const meta: any = {
           hidden: item.hidden,
           keepAlive: item.keepAlive
@@ -62,10 +65,12 @@ export default [
         if (item.breadcrumb === false) {
           meta.breadcrumb = item.breadcrumb
         }
-        if (item.type === 2) {
-          meta.roles = item.roles?.length ? item.roles : []
-          meta.permissions = item.permissions?.length ? item.permissions : []
+        if (item.alwaysShow === true) {
+          meta.alwaysShow = item.alwaysShow
         }
+        meta.roles = item.roles?.length ? item.roles : []
+        meta.permissions = item.permissions?.length ? item.permissions : []
+
         return {
           component: item.component,
           path: item.path,
@@ -75,10 +80,8 @@ export default [
         }
       })
 
-      const token = headers.token
       if (token && ['TOKEN-admin', 'TOKEN-user'].includes(token)) {
-        const isAdmin = token === 'TOKEN-admin'
-        return isAdmin ? successResponseWrap(routes) : successResponseWrap(filterUserTree(routes))
+        return successResponseWrap(routes)
       } else {
         return failResponseWrap(null, 'token失效', 401)
       }
@@ -114,7 +117,9 @@ export default [
       const token = headers.token
       if (token && ['TOKEN-admin', 'TOKEN-user'].includes(token)) {
         const isAdmin = token === 'TOKEN-admin'
-        return isAdmin ? successResponseWrap(menus) : successResponseWrap(filterUserTree(menus))
+        return isAdmin
+          ? successResponseWrap(mapTree(menus, (i) => ({ ...i })))
+          : successResponseWrap(filterUserTree(menus))
       } else {
         return failResponseWrap(null, 'token失效', 401)
       }

@@ -8,7 +8,7 @@ import { useUserStore } from '@/stores'
 function checkRole(el: HTMLElement, binding: DirectiveBinding) {
   const userStore = useUserStore()
   const { value } = binding
-  const super_admin = 'admin'
+  const super_admin = 'role_admin'
   if (value && Array.isArray(value) && value.length) {
     const roleValues: string[] = value
     const hasRole = userStore.roles.some((role) => {

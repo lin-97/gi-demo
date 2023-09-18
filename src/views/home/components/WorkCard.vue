@@ -7,10 +7,10 @@
       <a-col :xs="24" :md="14" :lg="16" :xl="16" :xxl="18">
         <a-space :size="15" class="padding-y">
           <a-avatar :size="68">
-            <img :src="userStore.userInfo.avatar" />
+            <img :src="userStore.avatar" />
           </a-avatar>
           <div class="tip">
-            <p>早安，{{ userStore.userName }}，开始您一天的工作吧！</p>
+            <p>早安，{{ userStore.name }}，开始您一天的工作吧！</p>
             <p>今日阴转大雨，15℃ - 25℃，出门记得带伞哦。</p>
           </div>
         </a-space>

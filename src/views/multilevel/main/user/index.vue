@@ -16,12 +16,12 @@
       <section class="user-card">
         <div class="head">
           <a-avatar :size="60" :trigger-icon-style="{ color: '#3491FA' }">
-            <img :src="userStore.userInfo.avatar" />
+            <img :src="userStore.avatar" />
             <template #trigger-icon>
               <IconCamera />
             </template>
           </a-avatar>
-          <div class="name">{{ userStore.userName }}</div>
+          <div class="name">{{ userStore.name }}</div>
           <p class="desc">尘缘已定，不念过往</p>
         </div>
 

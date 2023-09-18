@@ -4,13 +4,14 @@ import { resetRouter } from '@/router'
 import { login as loginApi, logout as logoutApi, getUserInfo as getUserInfoApi } from '@/apis'
 import type { UserInfo } from '@/apis'
 import { setToken, clearToken, getToken } from '@/utils/auth'
+import { resetHasRouteFlag } from '@/router/permission'
 
 const storeSetup = () => {
-  const userInfo = reactive<Pick<UserInfo, 'name' | 'avatar'>>({
-    name: '',
+  const userInfo = reactive<Pick<UserInfo, 'nickname' | 'avatar'>>({
+    nickname: '',
     avatar: ''
   })
-  const userName = computed(() => userInfo.name)
+  const name = computed(() => userInfo.nickname)
   const avatar = computed(() => userInfo.avatar)
 
   const token = ref(getToken() || '')
@@ -21,6 +22,7 @@ const storeSetup = () => {
   const resetToken = () => {
     token.value = ''
     clearToken()
+    resetHasRouteFlag()
   }
 
   // 登录
@@ -35,24 +37,24 @@ const storeSetup = () => {
     token.value = ''
     roles.value = []
     permissions.value = []
-    clearToken()
+    resetToken()
     resetRouter()
   }
 
   // 获取用户信息
   const getInfo = async () => {
     const res = await getUserInfoApi()
-    userInfo.name = res.data.name
+    userInfo.nickname = res.data.nickname
     userInfo.avatar = res.data.avatar
     if (res.data.roles && res.data.roles.length) {
       roles.value = res.data.roles
       permissions.value = res.data.permissions
-    } else {
-      roles.value = ['ROLE_DEFAULT']
     }
   }
 
-  return { userInfo, userName, avatar, token, roles, permissions, login, logout, getInfo, resetToken }
+  return { userInfo, name, avatar, token, roles, permissions, login, logout, getInfo, resetToken }
 }
 
-export const useUserStore = defineStore('user', storeSetup, { persist: { paths: ['token'], storage: localStorage } })
+export const useUserStore = defineStore('user', storeSetup, {
+  persist: { paths: ['token', 'roles', 'permissions'], storage: localStorage }
+})

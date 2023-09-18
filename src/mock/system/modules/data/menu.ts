@@ -31,15 +31,17 @@ export const menus = [
         activeMenu: '',
         breadcrumb: false,
         status: 1,
-        roles: [],
+        roles: ['role_admin', 'role_user'],
         permissions: [],
-        affix: true
+        affix: true,
+        alwaysShow: false
       }
     ],
     status: 1,
-    roles: [],
+    roles: ['role_admin', 'role_user'],
     permissions: [],
-    affix: true
+    affix: true,
+    alwaysShow: false
   },
   {
     id: '02',
@@ -73,9 +75,10 @@ export const menus = [
         activeMenu: '',
         breadcrumb: false,
         status: 1,
-        roles: [],
+        roles: ['role_admin', 'role_user'],
         permissions: [],
-        affix: true
+        affix: true,
+        alwaysShow: false
       },
       {
         id: '0202',
@@ -93,15 +96,17 @@ export const menus = [
         activeMenu: '/data',
         breadcrumb: true,
         status: 1,
-        roles: [],
+        roles: ['role_admin', 'role_user'],
         permissions: [],
-        affix: false
+        affix: false,
+        alwaysShow: false
       }
     ],
     status: 1,
-    roles: [],
+    roles: ['role_admin', 'role_user'],
     permissions: [],
-    affix: true
+    affix: true,
+    alwaysShow: false
   },
   {
     id: '03',
@@ -135,9 +140,10 @@ export const menus = [
         activeMenu: '',
         breadcrumb: false,
         status: 1,
-        roles: [],
+        roles: ['role_admin', 'role_user'],
         permissions: [],
-        affix: true
+        affix: true,
+        alwaysShow: false
       },
       {
         id: '0302',
@@ -155,15 +161,17 @@ export const menus = [
         activeMenu: '/file',
         breadcrumb: true,
         status: 1,
-        roles: [],
+        roles: ['role_admin', 'role_user'],
         permissions: [],
-        affix: false
+        affix: false,
+        alwaysShow: false
       }
     ],
     status: 1,
-    roles: [],
+    roles: ['role_admin', 'role_user'],
     permissions: [],
-    affix: true
+    affix: true,
+    alwaysShow: false
   },
   {
     id: '04',
@@ -197,9 +205,10 @@ export const menus = [
         activeMenu: '',
         breadcrumb: true,
         status: 1,
-        roles: [],
+        roles: ['role_admin', 'role_user'],
         permissions: [],
-        affix: true
+        affix: true,
+        alwaysShow: false
       },
       {
         id: '0402',
@@ -217,15 +226,17 @@ export const menus = [
         activeMenu: '',
         breadcrumb: true,
         status: 1,
-        roles: [],
+        roles: ['role_admin', 'role_user'],
         permissions: [],
-        affix: true
+        affix: true,
+        alwaysShow: false
       }
     ],
     status: 1,
-    roles: [],
+    roles: ['role_admin', 'role_user'],
     permissions: [],
-    affix: true
+    affix: true,
+    alwaysShow: false
   },
   {
     id: '05',
@@ -259,9 +270,10 @@ export const menus = [
         activeMenu: '',
         breadcrumb: true,
         status: 1,
-        roles: [],
+        roles: ['role_admin', 'role_user'],
         permissions: [],
-        affix: true
+        affix: true,
+        alwaysShow: false
       },
       {
         id: '0502',
@@ -279,15 +291,17 @@ export const menus = [
         activeMenu: '',
         breadcrumb: true,
         status: 1,
-        roles: [],
+        roles: ['role_admin', 'role_user'],
         permissions: [],
-        affix: true
+        affix: true,
+        alwaysShow: false
       }
     ],
     status: 1,
-    roles: [],
+    roles: ['role_admin', 'role_user'],
     permissions: [],
-    affix: true
+    affix: true,
+    alwaysShow: false
   },
   {
     id: '06',
@@ -321,9 +335,10 @@ export const menus = [
         activeMenu: '',
         breadcrumb: true,
         status: 1,
-        roles: [],
+        roles: ['role_admin', 'role_user'],
         permissions: [],
-        affix: true
+        affix: true,
+        alwaysShow: false
       },
       {
         id: '0602',
@@ -341,9 +356,10 @@ export const menus = [
         activeMenu: '',
         breadcrumb: true,
         status: 1,
-        roles: [],
+        roles: ['role_admin', 'role_user'],
         permissions: [],
-        affix: true
+        affix: true,
+        alwaysShow: false
       },
       {
         id: '0603',
@@ -361,15 +377,17 @@ export const menus = [
         activeMenu: '',
         breadcrumb: true,
         status: 1,
-        roles: [],
+        roles: ['role_admin', 'role_user'],
         permissions: [],
-        affix: true
+        affix: true,
+        alwaysShow: false
       }
     ],
     status: 1,
-    roles: [],
+    roles: ['role_admin', 'role_user'],
     permissions: [],
-    affix: true
+    affix: true,
+    alwaysShow: false
   },
   {
     id: '07',
@@ -403,9 +421,10 @@ export const menus = [
         activeMenu: '',
         breadcrumb: true,
         status: 1,
-        roles: [],
+        roles: ['role_admin', 'role_user'],
         permissions: [],
-        affix: true
+        affix: true,
+        alwaysShow: false
       },
       {
         id: '0702',
@@ -423,15 +442,17 @@ export const menus = [
         activeMenu: '',
         breadcrumb: true,
         status: 1,
-        roles: [],
+        roles: ['role_admin', 'role_user'],
         permissions: [],
-        affix: true
+        affix: true,
+        alwaysShow: false
       }
     ],
     status: 1,
-    roles: [],
+    roles: ['role_admin', 'role_user'],
     permissions: [],
-    affix: true
+    affix: true,
+    alwaysShow: false
   },
   {
     id: '08',
@@ -465,9 +486,10 @@ export const menus = [
         activeMenu: '',
         breadcrumb: true,
         status: 1,
-        roles: [],
+        roles: ['role_admin'],
         permissions: [],
-        affix: true
+        affix: true,
+        alwaysShow: false
       },
       {
         id: '0802',
@@ -485,9 +507,10 @@ export const menus = [
         activeMenu: '',
         breadcrumb: true,
         status: 1,
-        roles: [],
+        roles: ['role_admin'],
         permissions: [],
-        affix: true
+        affix: true,
+        alwaysShow: false
       },
       {
         id: '0803',
@@ -505,9 +528,10 @@ export const menus = [
         activeMenu: '',
         breadcrumb: true,
         status: 1,
-        roles: [],
+        roles: ['role_admin'],
         permissions: [],
-        affix: true
+        affix: true,
+        alwaysShow: false
       },
       {
         id: '0804',
@@ -525,15 +549,82 @@ export const menus = [
         activeMenu: '',
         breadcrumb: true,
         status: 1,
-        roles: [],
+        roles: ['role_admin'],
         permissions: [],
-        affix: true
+        affix: true,
+        alwaysShow: false
       }
     ],
     status: 1,
-    roles: [],
+    roles: ['role_admin'],
     permissions: [],
-    affix: true
+    affix: true,
+    alwaysShow: false
+  },
+  {
+    id: '081',
+    parentId: '',
+    path: '/test',
+    component: 'Layout',
+    redirect: '',
+    type: 1,
+    title: '权限测试',
+    svgIcon: 'menu-test',
+    icon: '',
+    keepAlive: false,
+    hidden: false,
+    sort: 8,
+    activeMenu: '',
+    breadcrumb: true,
+    children: [
+      {
+        id: '08101',
+        parentId: '081',
+        path: '/test/page1',
+        component: 'test/page1/index',
+        redirect: '',
+        type: 2,
+        title: '测试页面1',
+        svgIcon: '',
+        icon: 'icon-menu',
+        keepAlive: false,
+        hidden: false,
+        sort: 0,
+        activeMenu: '',
+        breadcrumb: true,
+        status: 1,
+        roles: ['role_admin'],
+        permissions: [],
+        affix: true,
+        alwaysShow: false
+      },
+      {
+        id: '08102',
+        parentId: '081',
+        path: '/test/page2',
+        component: 'test/page2/index',
+        redirect: '',
+        type: 2,
+        title: '测试页面2',
+        svgIcon: '',
+        icon: 'icon-menu',
+        keepAlive: false,
+        hidden: false,
+        sort: 0,
+        activeMenu: '',
+        breadcrumb: true,
+        status: 1,
+        roles: ['role_admin', 'role_user'],
+        permissions: [],
+        affix: true,
+        alwaysShow: false
+      }
+    ],
+    status: 1,
+    roles: ['role_admin', 'role_user'],
+    permissions: [],
+    affix: true,
+    alwaysShow: true
   },
   {
     id: '09',
@@ -567,15 +658,17 @@ export const menus = [
         activeMenu: '',
         breadcrumb: false,
         status: 1,
-        roles: [],
+        roles: ['role_admin', 'role_user'],
         permissions: [],
-        affix: true
+        affix: true,
+        alwaysShow: false
       }
     ],
     status: 1,
-    roles: [],
+    roles: ['role_admin', 'role_user'],
     permissions: [],
-    affix: true
+    affix: true,
+    alwaysShow: false
   },
   {
     id: '10',
@@ -625,9 +718,10 @@ export const menus = [
             activeMenu: '/multilevel',
             breadcrumb: true,
             status: 1,
-            roles: [],
+            roles: ['role_admin', 'role_user'],
             permissions: [],
-            affix: true
+            affix: true,
+            alwaysShow: false
           },
           {
             id: '100102',
@@ -645,21 +739,24 @@ export const menus = [
             activeMenu: '/multilevel',
             breadcrumb: true,
             status: 1,
-            roles: [],
+            roles: ['role_admin', 'role_user'],
             permissions: [],
-            affix: true
+            affix: true,
+            alwaysShow: false
           }
         ],
         status: 1,
-        roles: [],
+        roles: ['role_admin', 'role_user'],
         permissions: [],
-        affix: true
+        affix: true,
+        alwaysShow: false
       }
     ],
     status: 1,
-    roles: [],
+    roles: ['role_admin', 'role_user'],
     permissions: [],
-    affix: true
+    affix: true,
+    alwaysShow: false
   },
   {
     id: '11',
@@ -693,15 +790,17 @@ export const menus = [
         activeMenu: '',
         breadcrumb: false,
         status: 1,
-        roles: [],
+        roles: ['role_admin', 'role_user'],
         permissions: [],
-        affix: true
+        affix: true,
+        alwaysShow: false
       }
     ],
     status: 1,
-    roles: [],
+    roles: ['role_admin', 'role_user'],
     permissions: [],
-    affix: true
+    affix: true,
+    alwaysShow: false
   },
   {
     id: '12',
@@ -719,8 +818,9 @@ export const menus = [
     activeMenu: '',
     breadcrumb: true,
     status: 1,
-    roles: [],
+    roles: ['role_admin', 'role_user'],
     permissions: [],
-    affix: true
+    affix: true,
+    alwaysShow: false
   }
 ]

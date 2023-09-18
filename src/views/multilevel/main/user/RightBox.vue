@@ -2,12 +2,12 @@
   <div class="right-box">
     <section class="head-box">
       <a-avatar :size="60" :trigger-icon-style="{ color: '#3491FA' }">
-        <img :src="userStore.userInfo.avatar" />
+        <img :src="userStore.avatar" />
         <template #trigger-icon>
           <IconCamera />
         </template>
       </a-avatar>
-      <section class="user-name">{{ userStore.userName }}</section>
+      <section class="user-name">{{ userStore.name }}</section>
       <section class="label-list">
         <div><icon-user /><span>前端开发工程师</span></div>
         <div><icon-safe /><span>前端</span></div>
