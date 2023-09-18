@@ -33,7 +33,7 @@
       <a-row :gutter="16">
         <a-col :span="12">
           <a-form-item label="自定义图标" field="svgIcon">
-            <a-input v-model="form.svgIcon" placeholder="请输入菜单标题" />
+            <a-input v-model="form.svgIcon" placeholder="请输入自定义图标名称" />
             <a-tooltip content="优先显示">
               <icon-question-circle-fill :size="18" style="color: rgba(var(--warning-6)); margin-left: 8px" />
             </a-tooltip>
@@ -51,7 +51,7 @@
       </a-form-item>
 
       <a-form-item label="路由路径" field="path">
-        <a-input v-model="form.path" placeholder="请输入路由地址" />
+        <a-input v-model="form.path" placeholder="请输入路由路径" />
         <template #extra>
           <div>菜单名称由系统自动生成：{{ routeName }}</div>
         </template>
@@ -191,10 +191,8 @@ const routeName = computed(() => transformPathToName(form.path))
 
 const rules = {
   title: [{ required: true, message: '请输入菜单标题' }],
-  path: [{ required: true, message: '请输入路由地址' }],
-  name: [{ required: true, message: '请输入组件名称' }],
-  component: [{ required: true, message: '请输入组件路径' }],
-  sort: [{ required: true, message: '请输入菜单排序' }]
+  path: [{ required: true, message: '请输入路由路径' }],
+  component: [{ required: true, message: '请输入组件路径' }]
 }
 
 const add = () => {

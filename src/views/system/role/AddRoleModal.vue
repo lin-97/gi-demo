@@ -10,7 +10,7 @@
       <a-form-item label="描述" field="description">
         <a-textarea
           v-model="form.description"
-          placeholder="角色描述"
+          placeholder="请填写描述"
           :max-length="200"
           show-word-limit
           :auto-size="{ minRows: 3, maxRows: 5 }"

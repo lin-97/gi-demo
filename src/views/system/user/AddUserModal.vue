@@ -71,7 +71,7 @@
         <a-textarea
           v-model="form.description"
           :max-length="200"
-          placeholder="请输入描述"
+          placeholder="请填写描述"
           :auto-size="{ minRows: 3 }"
           show-word-limit
         />
