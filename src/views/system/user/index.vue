@@ -1,5 +1,5 @@
 <template>
-  <div class="gi_page_scroll_y user-manage">
+  <div class="gi_page user-manage">
     <a-card title="用户管理">
       <a-row :gutter="16">
         <a-col :xs="0" :md="10" :lg="6" :xl="6" :xxl="5">

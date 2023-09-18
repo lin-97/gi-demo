@@ -172,7 +172,8 @@
   overflow: hidden;
 }
 
-.gi_page_scroll_y {
+// 使用场景，页面内容超出高度会自动滚动
+.gi_page {
   flex: 1;
   padding: $margin;
   box-sizing: border-box;

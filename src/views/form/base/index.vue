@@ -1,13 +1,10 @@
 <template>
-  <div class="form-manage">
-    <a-page-header title="基础表单" subtitle="Base Form" :show-back="false" class="head">
-      <template #extra>
-        <a-button>返回</a-button>
-      </template>
-    </a-page-header>
-
-    <section class="content">
-      <a-card title="新增" :bordered="false" size="medium">
+  <div class="gi_page form-base">
+    <section class="gi_box">
+      <a-card title="基础表单" :bordered="false" size="medium">
+        <template #extra>
+          <a-button>返回</a-button>
+        </template>
         <a-space :size="50">
           <a-form ref="formRef" :model="form" size="medium" auto-label-width class="form">
             <a-form-item field="name" label="姓名" :rules="rules.name" :validate-trigger="['change', 'input']">
@@ -79,7 +76,7 @@
 </template>
 
 <script setup lang="ts">
-import type { Form, RangePickerInstance } from '@arco-design/web-vue'
+import type { FormInstance, RangePickerInstance } from '@arco-design/web-vue'
 import { Message } from '@arco-design/web-vue'
 import * as Regexp from '@/utils/regexp'
 import _XEUtils_ from 'xe-utils'
@@ -157,7 +154,7 @@ const rules = {
   sex: [{ required: true, message: '请选择性别' }]
 }
 
-const formRef = ref<InstanceType<typeof Form>>()
+const formRef = ref<FormInstance>()
 
 const onRangerPickerOk: RangePickerInstance['onOk'] = (value) => {}
 
@@ -173,24 +170,9 @@ const submit = async () => {
 </script>
 
 <style lang="scss" scoped>
-.form-manage {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  overflow: hidden;
-  .head {
-    background: var(--color-bg-1);
+.form-base {
+  .form {
+    margin-top: 40px;
   }
-  .content {
-    flex: 1;
-    overflow-y: auto;
-    padding: $margin;
-    box-sizing: border-box;
-  }
-}
-
-.form {
-  // margin-left: 40px;
-  margin-top: 40px;
 }
 </style>

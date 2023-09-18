@@ -1,5 +1,5 @@
 <template>
-  <div class="gi_page_scroll_y role-manage">
+  <div class="gi_page role-manage">
     <a-card title="角色管理">
       <a-space>
         <a-input v-model="form.name" placeholder="输入角色名搜索" allow-clear style="width: 250px">

@@ -33,7 +33,7 @@ import FnComponent from './examples/fn-component/index.vue'
 import Mitt from './examples/mitt/index.vue'
 import ApiTest from './examples/api-test/index.vue'
 
-defineOptions({ name: 'Demo' })
+defineOptions({ name: 'DemoIndex' })
 
 const selectedKey = ref(0)
 

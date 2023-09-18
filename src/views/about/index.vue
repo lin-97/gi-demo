@@ -21,7 +21,7 @@
 <script setup lang="ts">
 import packageJson from '../../../package.json'
 
-defineOptions({ name: 'About' })
+defineOptions({ name: 'AboutIndex' })
 const data = packageJson
 </script>
 

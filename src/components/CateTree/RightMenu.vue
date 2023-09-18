@@ -1,13 +1,15 @@
 <template>
-  <a-menu class="menu">
+  <a-menu class="right-menu">
     <a-menu-item @click="onClick('add')">
       <template #icon><icon-plus-circle :size="16" :stroke-width="3" /></template>
       <span>新增</span>
     </a-menu-item>
+
     <a-menu-item @click="onClick('edit')">
       <template #icon><icon-edit :size="16" :stroke-width="3" /></template>
       <span>编辑</span>
     </a-menu-item>
+
     <a-popover
       position="right"
       trigger="click"
@@ -33,12 +35,6 @@
               title: 'name'
             }"
           >
-            <template #switcher-icon="node, { checked, selected, expanded }">
-              <TreeSwitcherIcon
-                :expanded="expanded"
-                :has-children="Boolean(node.children && node.children.length)"
-              ></TreeSwitcherIcon>
-            </template>
             <template #icon="node">
               <GiSvgIcon name="com-file-close" :size="16" v-if="!node.children"></GiSvgIcon>
               <GiSvgIcon name="com-file-open" :size="16" v-else-if="node.children"></GiSvgIcon>
@@ -57,8 +53,6 @@
 </template>
 
 <script lang="ts" setup>
-import TreeSwitcherIcon from './TreeSwitcherIcon.vue'
-
 interface Props {
   treeData: any
 }
@@ -77,13 +71,16 @@ const onClick = (mode: string) => {
   padding: 4px;
   .arco-menu-item {
     height: 34px;
+    &:not(.arco-menu-selected) {
+      color: $color-text-1;
+    }
     &:last-child {
       margin-bottom: 0;
     }
   }
 }
 
-.menu {
+.right-menu {
   width: 120px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   border-radius: 4px;

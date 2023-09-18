@@ -14,12 +14,12 @@
         <a-typography-paragraph>您提交的内容有如下错误：</a-typography-paragraph>
         <ul>
           <li>
-            <icon-exclamation-circle-fill :size="20" style="color: rgb(var(--warning-5))" />
+            <icon-exclamation-circle-fill :size="16" style="color: rgb(var(--warning-5))" />
             <span class="tip">认证照片不够清晰</span>
             <a-link>立即修改</a-link>
           </li>
           <li>
-            <icon-exclamation-circle-fill :size="20" style="color: rgb(var(--warning-5))" />
+            <icon-exclamation-circle-fill :size="16" style="color: rgb(var(--warning-5))" />
             <span class="tip">你的用户不具有此操作权限</span>
             <a-link>立即修改</a-link>
           </li>
@@ -39,8 +39,10 @@ defineOptions({ name: 'ResultFail' })
   height: 100%;
   padding: $margin;
   box-sizing: border-box;
+  overflow-y: auto;
   .box {
-    height: 100%;
+    padding: 30px;
+    box-sizing: border-box;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -54,6 +56,7 @@ defineOptions({ name: 'ResultFail' })
     padding: 24px;
     margin-top: 20px;
     background: var(--color-fill-2);
+    font-size: 12px;
     ul > li {
       display: flex;
       align-items: center;
@@ -61,10 +64,10 @@ defineOptions({ name: 'ResultFail' })
       .tip {
         margin: 0 10px;
       }
+      :deep(.arco-link) {
+        font-size: inherit;
+      }
     }
-  }
-  .tip {
-    margin-left: 5px;
   }
 }
 </style>

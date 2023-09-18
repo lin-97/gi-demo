@@ -191,7 +191,6 @@ fetchData()
 
 <style lang="scss" scoped>
 .data-chart {
-  padding: $margin;
   box-sizing: border-box;
 }
 </style>

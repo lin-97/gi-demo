@@ -79,7 +79,7 @@ import { Message } from '@arco-design/web-vue'
 import { useUserStore } from '@/stores'
 import RightBox from './RightBox.vue'
 
-defineOptions({ name: 'UserIndex' })
+defineOptions({ name: 'MultilevelIndexUser' })
 
 const route = useRoute()
 const userStore = useUserStore()

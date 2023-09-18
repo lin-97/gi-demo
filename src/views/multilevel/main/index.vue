@@ -15,7 +15,7 @@
 </template>
 
 <script setup lang="ts">
-defineOptions({ name: 'User' })
+defineOptions({ name: 'MultilevelIndex' })
 
 const route = useRoute()
 const router = useRouter()
@@ -24,8 +24,8 @@ const selectedKeys = ref('')
 selectedKeys.value = route.path
 
 const list = [
-  { name: '个人中心', value: 1, path: '/multilevel/index' },
-  { name: '消息通知', value: 2, path: '/multilevel/notice' }
+  { name: '个人中心', value: 1, path: '/multilevel/index/user' },
+  { name: '消息通知', value: 2, path: '/multilevel/index/notice' }
 ]
 
 const toPage = (path: string) => {

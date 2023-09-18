@@ -19,7 +19,7 @@
 import Pane1 from './Pane1.vue'
 import Pane2 from './Pane2.vue'
 
-defineOptions({ name: 'Data' })
+defineOptions({ name: 'DataIndex' })
 
 const PaneMap: any = {
   1: Pane1,

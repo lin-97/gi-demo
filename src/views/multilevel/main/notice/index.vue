@@ -24,7 +24,7 @@
 <script setup lang="ts">
 import { Message } from '@arco-design/web-vue'
 
-defineOptions({ name: 'UserNotice' })
+defineOptions({ name: 'MultilevelIndexNotice' })
 
 const route = useRoute()
 const form = reactive({ name: '' })

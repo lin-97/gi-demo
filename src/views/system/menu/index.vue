@@ -1,5 +1,5 @@
 <template>
-  <div class="gi_page_scroll_y menu-manage">
+  <div class="gi_page menu-manage">
     <a-card title="菜单管理">
       <a-row justify="space-between">
         <a-space>
@@ -43,7 +43,7 @@
           row-key="id"
           :loading="loading"
           :bordered="{ cell: true }"
-          :scroll="{ x: '100%', y: '100%', minWidth: 1200 }"
+          :scroll="{ x: '100%', y: '100%', minWidth: 1400 }"
           :pagination="false"
         >
           <template #expand-icon="{ expanded }">

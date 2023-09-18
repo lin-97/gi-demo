@@ -1,5 +1,5 @@
 <template>
-  <div class="gi_page_scroll_y dept-manage">
+  <div class="gi_page dept-manage">
     <a-card title="部门管理">
       <a-space>
         <a-input v-model="form.name" placeholder="输入部门名称搜索" allow-clear style="width: 250px">

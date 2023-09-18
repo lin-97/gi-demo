@@ -1,9 +1,9 @@
 <template>
-  <div class="analyse">
+  <div class="gi_page analyse">
     <section class="head">
       <a-row :gutter="14">
         <a-col :xs="12" :md="12" :lg="6" :xl="6" :xxl="6">
-          <a-card title="访问量" :bordered="false" class="card-item">
+          <a-card title="访问量" :bordered="false" class="card">
             <template #extra>
               <a-tag color="green" bordered>日</a-tag>
             </template>
@@ -22,7 +22,7 @@
           </a-card>
         </a-col>
         <a-col :xs="12" :md="12" :lg="6" :xl="6" :xxl="6">
-          <a-card title="销售额" :bordered="false" class="card-item">
+          <a-card title="销售额" :bordered="false" class="card">
             <template #extra>
               <a-tag color="arcoblue" bordered>月</a-tag>
             </template>
@@ -46,7 +46,7 @@
           </a-card>
         </a-col>
         <a-col :xs="12" :md="12" :lg="6" :xl="6" :xxl="6">
-          <a-card title="订单量" :bordered="false" class="card-item">
+          <a-card title="订单量" :bordered="false" class="card">
             <template #extra>
               <a-tag color="orange" bordered>季</a-tag>
             </template>
@@ -62,7 +62,7 @@
           </a-card>
         </a-col>
         <a-col :xs="12" :md="12" :lg="6" :xl="6" :xxl="6">
-          <a-card title="新增用户" :bordered="false" class="card-item">
+          <a-card title="新增用户" :bordered="false" class="card">
             <template #extra>
               <a-tag color="purple" bordered>周</a-tag>
             </template>
@@ -98,7 +98,7 @@
           :key="item.name"
           :class="'animated-fade-up-' + index"
         >
-          <a-card hoverable :bordered="false" class="mini-card card-item">
+          <a-card hoverable :bordered="false" class="mini-card">
             <a-row justify="center" align="center" style="flex-direction: column">
               <GiSvgIcon :name="item.icon" :size="30" color="rgb(var(--primary-3))"></GiSvgIcon>
               <span>{{ item.name }}</span>
@@ -115,16 +115,17 @@
 import DataChart from './components/DataChart.vue'
 import OrderChart from './components/OrderChart.vue'
 
-defineOptions({ name: 'Analyse' })
+defineOptions({ name: 'AnalyseIndex' })
+
 const list = [
-  { icon: 'icon-user', name: '用户' },
-  { icon: 'icon-analyse', name: '分析' },
-  { icon: 'icon-goods', name: '商品' },
-  { icon: 'icon-order', name: '订单' },
-  { icon: 'icon-paper', name: '票据' },
-  { icon: 'icon-label', name: '标签' },
-  { icon: 'icon-process', name: '流程' },
-  { icon: 'icon-config', name: '配置' }
+  { name: '用户', icon: 'icon-user' },
+  { name: '分析', icon: 'icon-analyse' },
+  { name: '商品', icon: 'icon-goods' },
+  { name: '订单', icon: 'icon-order' },
+  { name: '票据', icon: 'icon-paper' },
+  { name: '标签', icon: 'icon-label' },
+  { name: '流程', icon: 'icon-process' },
+  { name: '配置', icon: 'icon-config' }
 ]
 
 const percent = ref(0)
@@ -139,39 +140,31 @@ setTimeout(() => {
   margin: 16px 0;
 }
 
-.card-item {
-  margin-top: 16px;
-  :deep(.arco-tag-size-medium) {
-    width: 24px;
-    padding: 0;
-    justify-content: center;
-  }
-}
-
-.card-content {
-  height: 30px;
-  display: flex;
-  align-items: center;
-}
-
 .analyse {
-  flex: 1;
-  overflow-y: auto;
-  .head {
-    padding: 0 $margin;
-    overflow: hidden;
+  .card {
+    margin-bottom: $margin;
+    :deep(.arco-tag-size-medium) {
+      width: 24px;
+      padding: 0;
+      justify-content: center;
+    }
+    .card-content {
+      height: 30px;
+      display: flex;
+      align-items: center;
+    }
   }
-}
-
-.mini-card {
-  transition: transform 0.3s;
-  &:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    cursor: pointer;
-  }
-  span {
-    margin-top: 8px;
+  .mini-card {
+    transition: transform 0.3s;
+    margin-bottom: $margin;
+    &:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      cursor: pointer;
+    }
+    span {
+      margin-top: 8px;
+    }
   }
 }
 </style>

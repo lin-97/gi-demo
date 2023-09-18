@@ -9,7 +9,7 @@
 import FileAside from './FileAside.vue'
 import FileMain from './FileMain/index.vue'
 
-defineOptions({ name: 'File' })
+defineOptions({ name: 'FileIndex' })
 </script>
 
 <style lang="scss" scoped>

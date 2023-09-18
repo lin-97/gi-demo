@@ -19,12 +19,6 @@
           }"
           @select="select"
         >
-          <template #switcher-icon="node, { checked, selected, expanded }">
-            <TreeSwitcherIcon
-              :expanded="expanded"
-              :has-children="Boolean(node.children && node.children.length)"
-            ></TreeSwitcherIcon>
-          </template>
           <template #icon="node">
             <GiSvgIcon name="com-file-close" :size="16" v-if="!node.children"></GiSvgIcon>
             <GiSvgIcon name="com-file-open" :size="16" v-else-if="node.children"></GiSvgIcon>
@@ -54,7 +48,6 @@
 <script setup lang="ts">
 import { Message } from '@arco-design/web-vue'
 import { getCateTreeData, type CateItem } from '@/apis'
-import TreeSwitcherIcon from './TreeSwitcherIcon.vue'
 import RightMenu from './RightMenu.vue'
 
 interface Props {
