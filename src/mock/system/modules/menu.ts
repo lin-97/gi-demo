@@ -1,7 +1,7 @@
 import type { MockMethod } from 'vite-plugin-mock'
 import { successResponseWrap, failResponseWrap } from '@/mock/mock'
 import { menus } from './data/menu'
-import { MockMenuItem } from './data/type'
+import type { MockMenuItem } from './data/type'
 import { mapTree, findTree } from 'xe-utils'
 import { transformPathToName, filterTree } from '@/utils/common'
 
