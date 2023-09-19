@@ -1277,20 +1277,46 @@ Link 组件使用场景
   transform: rotate(-180deg);
 }
 
+.gi_mt { margin-top: $margin; }
+
+.gi_mb { margin-bottom: $margin; }
+
+.gi_ml { margin-left: $margin; }
+
+.gi_mr { margin-right: $margin; }
+
+.gi_mx { margin: 0 $margin; }
+
+.gi_my { margin: $margin 0; }
+
+.gi_m0 { margin: 0; }
+
+.gi_pt { padding-top: $margin; }
+
+.gi_pb { padding-bottom: $margin; }
+
+.gi_pl { padding-left: $margin; }
+
+.gi_pr { padding-right: $margin; }
+
+.gi_px { padding: 0 $padding; }
+
+.gi_py { padding: $padding 0; }
+
+.gi_p0 { padding: 0; }
+
+// 使用场景，页面内容超出高度会自动滚动
 .gi_page {
-  width: 100%;
-  height: 100%;
   flex: 1;
-  display: flex;
-  flex-direction: column;
-  overflow: hidden;
+  padding: $margin;
+  box-sizing: border-box;
+  overflow-y: auto;
 }
 
+// 通用盒子
 .gi_box {
-  margin: $margin;
+  background: var(--color-bg-1);
   border-radius: $radius-box;
-  background-color: var(--color-bg-1);
-  box-sizing: border-box;
   overflow: hidden;
 }
 ```
