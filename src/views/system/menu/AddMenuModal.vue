@@ -129,7 +129,17 @@
           </a-form-item>
         </a-col>
         <a-col :span="8">
-          <a-form-item label="Tab栏" field="affix" v-if="form.type === 2">
+          <a-form-item label="总是显示" field="alwaysShow" v-if="form.type === 1">
+            <a-switch
+              type="round"
+              v-model="form.alwaysShow"
+              :checked-value="true"
+              :unchecked-value="false"
+              checked-text="显示"
+              unchecked-text="隐藏"
+            />
+          </a-form-item>
+          <a-form-item label="页签" field="affix" v-if="form.type === 2">
             <a-switch
               type="round"
               v-model="form.affix"
@@ -171,21 +181,21 @@ const title = computed(() => (isEdit.value ? '编辑菜单' : '新增菜单'))
 
 const isExternalUrl = ref(false)
 const form = reactive({
-  type: 1,
-  icon: '',
-  svgIcon: '',
-  title: '',
-  sort: 0,
-  status: 1,
-  path: '',
-  name: '',
-  component: '',
-  keepAlive: false,
-  hidden: true,
+  type: 1, // 类型 1目录 2菜单
+  icon: '', // arco 图标名称
+  svgIcon: '', // 自定义图标名称
+  title: '', // 菜单或目录的名称
+  sort: 0, // 排序
+  status: 1, // 状态 0禁用 1启用
+  path: '', // 路由路径
+  component: '', // 组件路径
+  keepAlive: false, // 是否缓存
+  hidden: true, // 是否隐藏 比如一些详情页面或不需要展示在左侧菜单的页面设置为true隐藏
   parentId: '',
-  redirect: '',
-  breadcrumb: true,
-  affix: true
+  redirect: '', // 重定向
+  breadcrumb: true, // 显示在面包屑
+  affix: true, // 显示在页签
+  alwaysShow: false // 总是显示
 })
 const routeName = computed(() => transformPathToName(form.path))
 

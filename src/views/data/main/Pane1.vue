@@ -93,7 +93,7 @@
 import { Modal, Message } from '@arco-design/web-vue'
 import type { TableInstance } from '@arco-design/web-vue'
 import { usePagination } from '@/hooks'
-import CateTree from '@/components/CateTree/index.vue'
+import CateTree from './CateTree/index.vue'
 import EditModal from './EditModal.vue'
 import { getPersonList } from '@/apis'
 import type { PersonItem } from '@/apis'
@@ -103,13 +103,6 @@ import _XEUtils_ from 'xe-utils'
 const router = useRouter()
 
 const { pagination, setTotal } = usePagination(() => getTableData())
-
-// const form = reactive({
-//   name: '',
-//   status: '',
-//   current: pagination.current, // 此方式不会响应
-//   pageSize: pagination.pageSize // 此方式不会响应
-// })
 
 const form = reactive({
   name: '',

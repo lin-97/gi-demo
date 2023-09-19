@@ -18,23 +18,14 @@
     >
       <a-menu-item @click="onClick('move')">
         <template #icon><icon-export :size="16" :stroke-width="3" /></template>
-        <a-space :size="18">
+        <a-row justify="space-between" align="center">
           <span>移动</span>
-          <icon-right />
-        </a-space>
+          <icon-right class="arrow" />
+        </a-row>
       </a-menu-item>
       <template #content>
         <a-scrollbar style="height: 100%; overflow: auto" outer-style="width: 260px;height: 500px">
-          <a-tree
-            ref="treeMoveRef"
-            show-line
-            size="mini"
-            :data="treeData[0].children"
-            :fieldNames="{
-              key: 'id',
-              title: 'name'
-            }"
-          >
+          <a-tree show-line size="mini" :data="treeData?.[0]?.children" :fieldNames="{ key: 'id', title: 'name' }">
             <template #icon="node">
               <GiSvgIcon name="com-file-close" :size="16" v-if="!node.children"></GiSvgIcon>
               <GiSvgIcon name="com-file-open" :size="16" v-else-if="node.children"></GiSvgIcon>
@@ -53,8 +44,10 @@
 </template>
 
 <script lang="ts" setup>
+import type { CateItem } from '@/apis'
+
 interface Props {
-  treeData: any
+  treeData: CateItem[]
 }
 
 withDefaults(defineProps<Props>(), {})
@@ -84,5 +77,10 @@ const onClick = (mode: string) => {
   width: 120px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   border-radius: 4px;
+  border: 1px solid var(--color-border-2);
+  box-sizing: border-box;
+  .arrow {
+    margin-right: 0;
+  }
 }
 </style>

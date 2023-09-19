@@ -91,8 +91,6 @@ const back = () => {
 <style lang="scss" scoped>
 :deep(.arco-card) {
   margin: $margin;
-  background: var(--color-bg-1);
-  border-radius: 2px;
 }
 
 .detail {

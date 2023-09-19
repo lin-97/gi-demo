@@ -121,7 +121,7 @@ const onRightMenuItemClick = (mode: string) => {
   > .wrap {
     flex: 1;
     overflow: hidden;
-    background-color: var(--color-bg-2);
+    background-color: var(--color-bg-1);
     position: relative;
   }
 }

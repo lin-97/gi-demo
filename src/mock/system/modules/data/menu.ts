@@ -13,7 +13,7 @@ export const menus: MockMenuItem[] = [
     icon: '',
     keepAlive: false,
     hidden: false,
-    sort: 0,
+    sort: 2,
     activeMenu: '',
     breadcrumb: true,
     children: [
@@ -29,7 +29,7 @@ export const menus: MockMenuItem[] = [
         icon: '',
         keepAlive: false,
         hidden: false,
-        sort: 2,
+        sort: 1,
         activeMenu: '',
         breadcrumb: false,
         status: 1,

@@ -117,7 +117,7 @@ const form = reactive({
   deptId: '', // 部门
   roleIds: [], // 角色(可能多个)
   description: '', // 描述
-  status: 0 as Status, // 状态 0禁用 1启用(正常)
+  status: 1 as Status, // 状态 0禁用 1启用(正常)
   type: 2, // 类型 1系统内置(admin是系统内置) 2自定义
   disabled: false // 如果 type===1 这为 true, 主要作用是列表复选框禁用状态
 })
