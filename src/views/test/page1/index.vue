@@ -15,9 +15,9 @@
       <section class="item">
         <pre class="gi_mt">{{ pre1 }}</pre>
         <a-space class="gi_mt">
-          <a-button v-hasPerm="['admin:btn:add']" type="primary">新增</a-button>
-          <a-button v-hasPerm="['admin:btn:edit']" type="primary" status="success">编辑</a-button>
-          <a-button v-hasPerm="['admin:btn:delete']" type="primary" status="danger">删除</a-button>
+          <a-button v-hasPerm="['test:btn:add']" type="primary">新增</a-button>
+          <a-button v-hasPerm="['test:btn:edit']" type="primary" status="success">编辑</a-button>
+          <a-button v-hasPerm="['test:btn:delete']" type="primary" status="danger">删除</a-button>
         </a-space>
       </section>
 
@@ -40,9 +40,9 @@ defineOptions({ name: 'TestPage1' })
 const userStore = useUserStore()
 
 const pre1 = `<a-space>
-  <a-button v-hasPerm="['admin:btn:add']" type="primary">新增</a-button>
-  <a-button v-hasPerm="['admin:btn:edit']" type="primary" status="success">编辑</a-button>
-  <a-button v-hasPerm="['admin:btn:delete']" type="primary" status="danger">删除</a-button>
+  <a-button v-hasPerm="['test:btn:add']" type="primary">新增</a-button>
+  <a-button v-hasPerm="['test:btn:edit']" type="primary" status="success">编辑</a-button>
+  <a-button v-hasPerm="['test:btn:delete']" type="primary" status="danger">删除</a-button>
 </a-space>`
 
 const pre2 = `<a-space>
