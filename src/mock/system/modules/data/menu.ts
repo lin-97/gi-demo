@@ -1,4 +1,6 @@
-export const menus = [
+import type { MockMenuItem } from './type'
+
+export const menus: MockMenuItem[] = [
   {
     id: '01',
     parentId: '',
@@ -573,7 +575,7 @@ export const menus = [
     icon: '',
     keepAlive: false,
     hidden: false,
-    sort: 8,
+    sort: 9,
     activeMenu: '',
     breadcrumb: true,
     children: [

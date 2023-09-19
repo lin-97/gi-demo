@@ -25,11 +25,7 @@ export const loadView = (view: string) => {
 
 /** 遍历后台返回的路由，将 component 转成真正的模块 */
 const filterAsyncRouter = (routes: RouteRecordRaw[]) => {
-  routes?.sort((a, b) => (a?.meta?.sort ?? 0) - (b?.meta?.sort ?? 0)) // 排序
-  routes = routes.filter((i) => Has.hasRoleOr(i.meta?.roles || []))
   return mapTree(routes, (item) => {
-    item.children?.sort((a, b) => (a?.meta?.sort ?? 0) - (b?.meta?.sort ?? 0)) // 排序
-    item.children = item.children?.filter((i) => Has.hasRoleOr(i.meta?.roles || []))
     let componentView
     const component = item['component'] as unknown as string
     if (component === 'Layout') {
@@ -57,7 +53,10 @@ const storeSetup = () => {
   /** 生成路由 */
   const generateRoutes = (): Promise<RouteRecordRaw[]> => {
     return new Promise((resolve) => {
-      // 向后端请求路由数据
+      /**
+       * @description 向后端请求路由数据 这个接口已经帮把路由排序好了，和根据用户角色过滤了路由
+       * @description 后端根据用户角色过滤路由显得比较安全些
+       *  */
       getUserAsyncRoutes().then((res) => {
         const data = JSON.parse(JSON.stringify(res.data))
         const asyncRoutes = filterAsyncRouter(data)

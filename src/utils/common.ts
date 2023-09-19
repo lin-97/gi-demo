@@ -1,4 +1,5 @@
 import { isExternal } from '@/utils/validate'
+import { mapTree } from 'xe-utils'
 
 /**
  * @desc 去除空格
@@ -196,7 +197,7 @@ export const randomHex = () => {
 }
 
 /**
- * @description path 转 name
+ * @description 动态路由 path 转 name
  * @demo /system => System
  * @demo /system/menu => SystemMenu
  */
@@ -205,7 +206,7 @@ export const transformPathToName = (path: string) => {
   if (isExternal(path)) return ''
   let name = ''
   if (path) {
-    let arr = path
+    const arr = path
       .split('/')
       .filter((i) => i)
       .map((i) => i.substring(0, 1).toUpperCase() + i.substring(1))
@@ -214,4 +215,23 @@ export const transformPathToName = (path: string) => {
     })
   }
   return name
+}
+
+/**
+ * @desc 过滤树
+ * @param { values } 数组
+ */
+type FilterTree = <T extends { children?: T[] }>(
+  array: T[],
+  iterate: (item: T, index?: number, items?: T[]) => boolean
+) => T[]
+export const filterTree: FilterTree = (values, fn) => {
+  const arr = values.filter(fn)
+  const data = mapTree(arr, (item) => {
+    if (item.children && item.children.length) {
+      item.children = item.children.filter(fn)
+    }
+    return item
+  })
+  return data
 }

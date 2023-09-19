@@ -1,36 +1,29 @@
 import type { MockMethod } from 'vite-plugin-mock'
 import { successResponseWrap, failResponseWrap } from '@/mock/mock'
 import { menus } from './data/menu'
+import { MockMenuItem } from './data/type'
 import { mapTree, findTree } from 'xe-utils'
+import { transformPathToName, filterTree } from '@/utils/common'
 
-/**
- * @description path 转 name
- * @demo /system => System
- * @demo /system/menu => SystemMenu
- */
-const getPathToName = (path: string) => {
-  let name = ''
-  if (path) {
-    let arr = path
-      .split('/')
-      .filter((i) => i)
-      .map((i) => i.substring(0, 1).toUpperCase() + i.substring(1))
-    arr.forEach((i) => {
-      name += i
-    })
-  }
-  return name
+const sortTree = (value: typeof menus) => {
+  value?.sort((a, b) => (a?.sort ?? 0) - (b?.sort ?? 0)) // 排序
+  return mapTree(value, (item) => {
+    item.children?.sort((a, b) => (a?.sort ?? 0) - (b?.sort ?? 0)) // 排序
+    return item
+  })
 }
 
-const filterUserTree = (value: typeof menus) => {
-  const arr = value.filter((i) => i.path !== '/system')
-  const data = mapTree(arr, (i) => {
-    if (i.children && i.children.length) {
-      i.children.filter((i) => i.path !== '/system')
-    }
-    return i
-  })
-  return data
+const getRoleMenus = (value: typeof menus, roles: string[]) => {
+  // 排序过后的数据
+  const sortData = sortTree(value)
+  // 如果是超级管理员角色
+  if (roles.includes('role_admin')) return sortData
+  // 如果是普通用户角色
+  const userRoleMenu = filterTree<MockMenuItem>(
+    sortData,
+    (i) => i.path !== '/system' && i.roles.some((i) => roles.includes(i))
+  )
+  return userRoleMenu
 }
 
 export default [
@@ -41,7 +34,8 @@ export default [
     response: ({ headers }) => {
       const token = headers.token
       const isAdmin = token === 'TOKEN-admin'
-      const data = isAdmin ? menus : filterUserTree(menus)
+      const roles = isAdmin ? ['role_admin'] : ['role_user']
+      const data = getRoleMenus(menus, roles)
       const routes = mapTree(data, (item) => {
         const meta: any = {
           hidden: item.hidden,
@@ -74,7 +68,7 @@ export default [
         return {
           component: item.component,
           path: item.path,
-          name: getPathToName(item.path),
+          name: transformPathToName(item.path),
           meta: meta,
           redirect: item.redirect
         }
@@ -113,16 +107,8 @@ export default [
     url: '/mock/system/menu', // 这个短的要放在后面，不然会优先匹配
     method: 'get',
     timeout: 10,
-    response: ({ headers }) => {
-      const token = headers.token
-      if (token && ['TOKEN-admin', 'TOKEN-user'].includes(token)) {
-        const isAdmin = token === 'TOKEN-admin'
-        return isAdmin
-          ? successResponseWrap(mapTree(menus, (i) => ({ ...i })))
-          : successResponseWrap(filterUserTree(menus))
-      } else {
-        return failResponseWrap(null, 'token失效', 401)
-      }
+    response: () => {
+      return successResponseWrap(mapTree(menus, (i) => ({ ...i })))
     }
   }
 ] as MockMethod[]
