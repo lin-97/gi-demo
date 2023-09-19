@@ -1,3 +1,4 @@
+import type { MockMethod } from 'vite-plugin-mock'
 import { successResponseWrap, failResponseWrap } from '../mock'
 
 export default [
@@ -17,4 +18,4 @@ export default [
       return failResponseWrap(null, '请求出错了呦~', 400)
     }
   }
-]
+] as MockMethod[]

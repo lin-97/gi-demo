@@ -1,5 +1,6 @@
 import Mock from 'mockjs'
 
+/** 返回成功数据 */
 export const successResponseWrap = (data: unknown) => {
   return Mock.mock({
     code: 200,
@@ -9,6 +10,7 @@ export const successResponseWrap = (data: unknown) => {
   })
 }
 
+/** 返回失败数据 */
 export const failResponseWrap = (data: unknown, message: string, code = 500) => {
   return Mock.mock({
     code,

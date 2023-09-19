@@ -1,5 +1,6 @@
 import { Random } from 'mockjs'
 import Mock from 'mockjs'
+import type { MockMethod } from 'vite-plugin-mock'
 import { successResponseWrap } from '../mock'
 
 /**
@@ -56,7 +57,7 @@ export default [
     url: '/mock/person/list',
     method: 'get',
     timeout: 350,
-    response: ({ query }: any) => {
+    response: ({ query }) => {
       const { current = 1, pageSize = 10, status = 0, name = '' } = query
       const list = getTableListData({ current, pageSize, status, name })
       return successResponseWrap({
@@ -67,4 +68,4 @@ export default [
       })
     }
   }
-]
+] as MockMethod[]

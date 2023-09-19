@@ -1,4 +1,5 @@
 import { Random } from 'mockjs'
+import type { MockMethod } from 'vite-plugin-mock'
 import { successResponseWrap, failResponseWrap } from '@/mock/mock'
 import { findTree } from 'xe-utils'
 
@@ -97,9 +98,9 @@ export default [
     url: '/mock/system/dept/detail',
     method: 'get',
     timeout: 100,
-    response: ({ query }: any) => {
+    response: ({ query }) => {
       const { id } = query
-      let obj = findTree(data, (i) => i.id === id)
+      const obj = findTree(data, (i) => i.id === id)
       if (obj.item) {
         return successResponseWrap(obj.item)
       } else {
@@ -111,7 +112,7 @@ export default [
     url: '/mock/system/dept/save',
     method: 'post',
     timeout: 350,
-    response: ({ query }: any) => {
+    response: () => {
       return successResponseWrap(true)
     }
   },
@@ -123,4 +124,4 @@ export default [
       return successResponseWrap(data)
     }
   }
-]
+] as MockMethod[]

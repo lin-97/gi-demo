@@ -1,5 +1,5 @@
 <div align="center">
-	<img style="width: 80px;height: 80px" src="./md/logo.gif"/>
+	<img style="width: 80px;height: 80px" src="https://gitee.com/lin0716/gi-image/raw/master/md-logo.gif"/>
 	<h1>Gi Admin Pro</h1>
 </div>
 
@@ -33,27 +33,27 @@ Gi Admin Pro 是一个基于 Vue3、Vite、TypeScript、Arco Design Vue、Pinia�
 
 ## 项目示例图
 
-<img src="./md/demo1.jpg" />
+<img src="https://gitee.com/lin0716/gi-image/raw/master/md-demo1.jpg" />
 
-<img src="./md/demo2.jpg" />
+<img src="https://gitee.com/lin0716/gi-image/raw/master/md-demo2.jpg" />
 
-<img src="./md/demo3.jpg" />
+<img src="https://gitee.com/lin0716/gi-image/raw/master/md-demo3.jpg" />
 
-<img src="./md/demo4.jpg" />
+<img src="https://gitee.com/lin0716/gi-image/raw/master/md-demo4.jpg" />
 
-<img src="./md/demo5.jpg" />
+<img src="https://gitee.com/lin0716/gi-image/raw/master/md-demo5.jpg" />
 
-<img src="./md/demo6.jpg" />
+<img src="https://gitee.com/lin0716/gi-image/raw/master/md-demo6.jpg" />
 
-<img src="./md/demo7.jpg" />
+<img src="https://gitee.com/lin0716/gi-image/raw/master/md-demo7.jpg" />
 
-<img src="./md/demo8.jpg" />
+<img src="https://gitee.com/lin0716/gi-image/raw/master/md-demo8.jpg" />
 
-<img src="./md/demo9.jpg" />
+<img src="https://gitee.com/lin0716/gi-image/raw/master/md-demo9.jpg" />
 
-<img src="./md/demo10.jpg" />
+<img src="https://gitee.com/lin0716/gi-image/raw/master/md-demo10.jpg" />
 
-<img src="./md/demo11.jpg" />
+<img src="https://gitee.com/lin0716/gi-image/raw/master/md-demo11.jpg" />
 
 ## 安装使用
 
@@ -786,11 +786,11 @@ getDeptList() // 建议在页面调用 hooks 的方法，比较直观（不在ho
 
 #### TSX 方式使用表格
 
-<img src="./md/table1.png" />
+<img src="https://gitee.com/lin0716/gi-image/raw/master/md-table1.png" />
 
-<img src="./md/table2.png" />
+<img src="https://gitee.com/lin0716/gi-image/raw/master/md-table2.png" />
 
-<img src="./md/table3.png" />
+<img src="https://gitee.com/lin0716/gi-image/raw/master/md-table3.png" />
 
 #### 分页 Hooks 的使用
 
@@ -1064,7 +1064,7 @@ const getTableData = async () => {
 
 tool.tsx
 
-<img src="./md/tsx1-1.png" />
+<img src="https://gitee.com/lin0716/gi-image/raw/master/md-tsx1-1.png" />
 
 使用
 
@@ -1091,21 +1091,21 @@ const open = () => {
 
 AddUserForm.vue
 
-<img src="./md/tsx2-1.png" />
+<img src="https://gitee.com/lin0716/gi-image/raw/master/md-tsx2-1.png" />
 
 使用
 
-<img src="./md/tsx2-2.png" />
+<img src="https://gitee.com/lin0716/gi-image/raw/master/md-tsx2-2.png" />
 
 ##### 方式 3
 
 `@/views/file/components/FileRenameModal/index.vue`
 
-<img src="./md/tsx3-1.png" />
+<img src="https://gitee.com/lin0716/gi-image/raw/master/md-tsx3-1.png" />
 
 `@/views/file/components/index.ts`
 
-<img src="./md/tsx3-2.png" />
+<img src="https://gitee.com/lin0716/gi-image/raw/master/md-tsx3-2.png" />
 
 使用
 
@@ -1328,7 +1328,7 @@ $padding: 16px; // 盒子和内容的间距
 
 建议尽量使用全局 scss 变量来开发，可以有效提高效率和团队协作
 
-<img src="./md/gap.png" />
+<img src="https://gitee.com/lin0716/gi-image/raw/master/md-gap.png" />
 
 #### CSS 的命名词汇
 
@@ -1509,4 +1509,3 @@ $padding: 16px; // 盒子和内容的间距
 <a href="http://49.234.61.19/tool/cssTriangle" target="_blank">在线三角形样式生成器</a>
 
 <a href="https://go.itab.link/" target="_blank">iTab</a>
-

@@ -1,5 +1,5 @@
-import { successResponseWrap, failResponseWrap } from '@/mock/mock'
 import type { MockMethod } from 'vite-plugin-mock'
+import { successResponseWrap, failResponseWrap } from '@/mock/mock'
 import { menus } from './data/menu'
 import { mapTree, findTree } from 'xe-utils'
 
@@ -91,7 +91,7 @@ export default [
     url: '/mock/system/menu/detail',
     method: 'get',
     timeout: 100,
-    response: ({ query }: any) => {
+    response: ({ query }) => {
       const { id } = query
       let obj = findTree(menus, (i) => i.id === id)
       if (obj.item) {
@@ -105,7 +105,7 @@ export default [
     url: '/mock/system/menu/save',
     method: 'post',
     timeout: 350,
-    response: ({ query }: any) => {
+    response: () => {
       return successResponseWrap(true)
     }
   },

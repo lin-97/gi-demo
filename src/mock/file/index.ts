@@ -1,8 +1,9 @@
+import type { MockMethod } from 'vite-plugin-mock'
 import { successResponseWrap } from '../mock'
 import fileList from './data'
 
 const getList = (type: number | string) => {
-  if (Number(type) == 0) return fileList
+  if (Number(type) === 0) return fileList
   const res: any[] = []
   const FileMap = {
     1: ['jpg', 'png', 'jpeg'],
@@ -11,7 +12,7 @@ const getList = (type: number | string) => {
     4: ['mp3'],
     5: ['zip', 'rar', 'ppt', 'css', 'js', 'html']
   }
-  const arr = FileMap[type] || []
+  const arr = FileMap[type as keyof typeof FileMap] || []
   arr.forEach((item) => {
     const data = fileList.filter((i) => i.extendName === item)
     res.push(...data)
@@ -26,7 +27,6 @@ export default [
     timeout: Math.floor(Math.random() * 3) * 100,
     response: ({ query }) => {
       const { fileType } = query
-
       const list = getList(fileType)
       return successResponseWrap({
         total: list.length,
@@ -34,4 +34,4 @@ export default [
       })
     }
   }
-]
+] as MockMethod[]

@@ -1,3 +1,4 @@
+import type { MockMethod } from 'vite-plugin-mock'
 import { successResponseWrap, failResponseWrap } from '@/mock/mock'
 
 const data = [
@@ -44,7 +45,7 @@ export default [
     url: '/mock/system/role/detail',
     method: 'get',
     timeout: 100,
-    response: ({ query }: any) => {
+    response: ({ query }) => {
       const { id } = query
       const index = data.findIndex((i) => i.id === id)
       if (index >= 0) {
@@ -58,7 +59,7 @@ export default [
     url: '/mock/system/role/save',
     method: 'post',
     timeout: 350,
-    response: ({ query }: any) => {
+    response: () => {
       return successResponseWrap(true)
     }
   },
@@ -73,4 +74,4 @@ export default [
       })
     }
   }
-]
+] as MockMethod[]

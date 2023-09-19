@@ -1,3 +1,4 @@
+import type { MockMethod } from 'vite-plugin-mock'
 import { successResponseWrap } from '../mock'
 import treeData from './tree'
 
@@ -10,4 +11,4 @@ export default [
       return successResponseWrap(treeData)
     }
   }
-]
+] as MockMethod[]
