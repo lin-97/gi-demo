@@ -36,15 +36,15 @@
         <a-table-column title="手机号" data-index="phone" :width="150"></a-table-column>
         <a-table-column title="创建时间" data-index="createTime" ellipsis tooltip></a-table-column>
         <a-table-column title="地址" data-index="address" ellipsis tooltip></a-table-column>
-        <a-table-column title="状态" :width="100">
+        <a-table-column title="状态" :width="100" align="center">
           <template #cell="{ record }">
-            <a-switch v-model="record.status" size="medium">
+            <a-switch v-model="record.status" type="round" size="medium">
               <template #checked>开启</template>
               <template #unchecked>关闭</template>
             </a-switch>
           </template>
         </a-table-column>
-        <a-table-column title="操作" :width="200" align="left">
+        <a-table-column title="操作" :width="200" align="center">
           <template #cell="{ record }">
             <a-space>
               <a-button v-hasPerm="['table:btn:edit']" type="primary" size="mini">修改</a-button>

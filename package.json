@@ -26,6 +26,7 @@
     "dayjs": "^1.11.4",
     "echarts": "^5.4.2",
     "lodash": "^4.17.21",
+    "md-editor-v3": "^4.6.2",
     "mitt": "^3.0.0",
     "mockjs": "^1.1.0",
     "nprogress": "^0.2.0",

@@ -62,15 +62,15 @@ export default [
         if (item.alwaysShow === true) {
           meta.alwaysShow = item.alwaysShow
         }
-        meta.roles = item.roles?.length ? item.roles : []
-        meta.permissions = item.permissions?.length ? item.permissions : []
+        // meta.roles = item.roles?.length ? item.roles : []
+        // meta.permissions = item.permissions?.length ? item.permissions : []
 
         return {
-          component: item.component,
           path: item.path,
           name: transformPathToName(item.path),
-          meta: meta,
-          redirect: item.redirect
+          redirect: item.redirect,
+          component: item.component,
+          meta: meta
         }
       })
 

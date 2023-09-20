@@ -119,7 +119,7 @@
               <a-typography-text v-else type="danger">关闭</a-typography-text>
             </template>
           </a-table-column>
-          <a-table-column title="操作" :width="200" align="left">
+          <a-table-column title="操作" :width="200" align="center">
             <template #cell="{ record }">
               <a-space>
                 <a-button type="primary" size="mini" v-hasPerm="['table:btn:edit']">
