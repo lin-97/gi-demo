@@ -8,7 +8,6 @@ export {}
 declare module 'vue' {
   export interface GlobalComponents {
     Breadcrumb: typeof import('./components/Breadcrumb/index.vue')['default']
-    CateTree: typeof import('./components/CateTree/index.vue')['default']
     GiChart: typeof import('./components/GiChart/index.vue')['default']
     GiDot: typeof import('./components/GiDot/index.tsx')['default']
     GiFlexibleBox: typeof import('./components/GiFlexibleBox/index.vue')['default']
@@ -21,7 +20,6 @@ declare module 'vue' {
     GiTag: typeof import('./components/GiTag/index.tsx')['default']
     GiThemeBtn: typeof import('./components/GiThemeBtn/index.vue')['default']
     ParentView: typeof import('./components/ParentView/index.vue')['default']
-    RightMenu: typeof import('./components/CateTree/RightMenu.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
   }

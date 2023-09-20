@@ -1,4 +1,4 @@
-<template>
+export const Pane2Code = `<template>
   <a-card :bordered="false" class="gi_card pane3">
     <a-row justify="space-between" align="center" class="head">
       <div>
@@ -176,3 +176,4 @@ const selectAll: TableInstance['onSelectAll'] = (checked) => {
   border-radius: $radius-box;
 }
 </style>
+`

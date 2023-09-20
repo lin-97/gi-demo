@@ -15,6 +15,11 @@
               </template>
             </a-button>
           </a-tooltip>
+          <a-tooltip content="查看数据结构">
+            <a-button type="primary" status="warning" @click="DataViewDrawerRef?.open()">
+              <template #icon><icon-eye /></template>
+            </a-button>
+          </a-tooltip>
         </a-space>
 
         <a-space>
@@ -128,11 +133,13 @@
     </a-card>
 
     <AddMenuModal ref="AddMenuModalRef" :menus="menuList"></AddMenuModal>
+    <DataViewDrawer ref="DataViewDrawerRef" :data="menuList"></DataViewDrawer>
   </div>
 </template>
 
 <script setup lang="ts">
 import AddMenuModal from './AddMenuModal.vue'
+import DataViewDrawer from './DataViewDrawer.vue'
 import { getSystemMenuList, type MenuItem } from '@/apis'
 import type { TableInstance } from '@arco-design/web-vue'
 import { isExternal } from '@/utils/validate'
@@ -141,6 +148,7 @@ import { transformPathToName } from '@/utils/common'
 defineOptions({ name: 'SystemMenu' })
 
 const AddMenuModalRef = ref<InstanceType<typeof AddMenuModal>>()
+const DataViewDrawerRef = ref<InstanceType<typeof DataViewDrawer>>()
 const loading = ref(false)
 
 const TableRef = ref<TableInstance>()
