@@ -83,7 +83,13 @@ const login = async () => {
     if (flag) return
     setLoading(true)
     await userStore.login(form)
-    router.push('/')
+    const { redirect, ...othersQuery } = router.currentRoute.value.query
+    router.push({
+      path: (redirect as string) || '/',
+      query: {
+        ...othersQuery
+      }
+    })
     setLoading(false)
     Message.success('登录成功')
   } catch (error) {

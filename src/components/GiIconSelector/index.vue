@@ -8,7 +8,10 @@
       @clear="emit('update:modelValue', '')"
     >
       <template #prefix>
-        <component v-if="modelValue" :size="16" :is="modelValue" />
+        <template v-if="modelValue">
+          <component v-if="props.type === 'arco'" :size="16" :is="modelValue" />
+          <GiSvgIcon v-if="modelValue" :size="16" :name="modelValue" />
+        </template>
         <icon-search v-else />
       </template>
     </a-input>
@@ -43,7 +46,8 @@
           <a-row wrap :gutter="4">
             <a-col :span="isGridView ? 4 : 8" v-for="item of currentPageIconList" :key="item">
               <div class="icon-item" :class="{ active: modelValue === item }" @click="handleSelectedIcon(item)">
-                <component :is="item" :size="20" />
+                <component v-if="props.type === 'arco'" :is="item" :size="20" />
+                <GiSvgIcon v-if="props.type === 'custom'" :name="item" :size="20"></GiSvgIcon>
                 <div class="gi_line_1 icon-name">{{ item }}</div>
               </div>
             </a-col>
@@ -68,16 +72,20 @@
 import * as ArcoIcons from '@arco-design/web-vue/es/icon'
 import { useClipboard } from '@vueuse/core'
 import { Message } from '@arco-design/web-vue'
+// 自定义图标模块
+const SvgIconModules = import.meta.glob('@/icons/*.svg')
 
 defineOptions({ name: 'GiIconSelector' })
 const emit = defineEmits(['select', 'update:modelValue'])
 
 interface Props {
+  type?: 'arco' | 'custom'
   modelValue?: string
   enableCopy?: boolean
 }
 
 const props = withDefaults(defineProps<Props>(), {
+  type: 'arco', // 默认是arco图标类型 custom自定义图标
   modelValue: '',
   enableCopy: false
 })
@@ -86,7 +94,17 @@ const searchValue = ref('') // 搜索词
 
 // 图标列表
 const isGridView = ref(true)
-const IconList = Object.keys(ArcoIcons).filter((i) => i !== 'default')
+
+let IconList: string[] = []
+if (props.type === 'arco') {
+  IconList = Object.keys(ArcoIcons).filter((i) => i !== 'default')
+}
+if (props.type === 'custom') {
+  for (const path in SvgIconModules) {
+    const name = path.replace('/src/icons/', '').replace('.svg', '')
+    IconList.push(name)
+  }
+}
 
 const pageSize = 42
 const current = ref(1)

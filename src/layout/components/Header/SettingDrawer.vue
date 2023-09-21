@@ -14,52 +14,37 @@
 
       <a-divider orientation="center">界面显示</a-divider>
 
-      <a-row justify="space-between" align="center">
-        <a-typography-text>页签显示</a-typography-text>
-        <a-switch size="medium" :model-value="appStore.tab" @change="appStore.setTabVisible(Boolean($event))" />
-      </a-row>
-
-      <a-row justify="space-between" align="center">
-        <a-typography-text>页签风格</a-typography-text>
-        <a-select
-          placeholder="请选择"
-          :model-value="appStore.tabMode"
-          :disabled="!appStore.tab"
-          :style="{ width: '120px' }"
-          :trigger-props="{ autoFitPopupMinWidth: true }"
-        >
-          <a-option
-            v-for="item in tabModeList"
-            :key="item.value"
-            :value="item.value"
-            @click="appStore.setTabMode(item.value)"
-            >{{ item.label }}</a-option
+      <a-descriptions :column="1" :align="{ value: 'right' }">
+        <a-descriptions-item label="页签显示">
+          <a-switch :model-value="appStore.tab" @change="appStore.setTabVisible(Boolean($event))" />
+        </a-descriptions-item>
+        <a-descriptions-item label="页签风格">
+          <a-select
+            placeholder="请选择"
+            :options="tabModeList"
+            :model-value="appStore.tabMode"
+            :disabled="!appStore.tab"
+            :style="{ width: '120px' }"
+            :trigger-props="{ autoFitPopupMinWidth: true }"
+            @change="($event) => appStore.setTabMode($event as App.TabType)"
           >
-        </a-select>
-      </a-row>
-
-      <a-row justify="space-between" align="center">
-        <a-typography-text>动画显示</a-typography-text>
-        <a-switch size="medium" :model-value="appStore.animate" @change="appStore.setAnimateVisible(Boolean($event))" />
-      </a-row>
-
-      <a-row justify="space-between" align="center">
-        <a-typography-text>动画切换类型</a-typography-text>
-        <a-select
-          placeholder="请选择"
-          :model-value="appStore.animateMode"
-          :disabled="!appStore.animate"
-          :style="{ width: '120px' }"
-        >
-          <a-option
-            v-for="item in animateModeList"
-            :key="item.value"
-            :value="item.value"
-            @click="appStore.setAnimateMode(item.value)"
-            >{{ item.label }}</a-option
+          </a-select>
+        </a-descriptions-item>
+        <a-descriptions-item label="动画显示">
+          <a-switch :model-value="appStore.animate" @change="appStore.setAnimateVisible(Boolean($event))" />
+        </a-descriptions-item>
+        <a-descriptions-item label="动画显示">
+          <a-select
+            placeholder="请选择"
+            :options="animateModeList"
+            :model-value="appStore.animateMode"
+            :disabled="!appStore.animate"
+            :style="{ width: '120px' }"
+            @change="($event)=> appStore.setAnimateMode($event as App.AnimateType)"
           >
-        </a-select>
-      </a-row>
+          </a-select>
+        </a-descriptions-item>
+      </a-descriptions>
     </a-space>
   </a-drawer>
 </template>
@@ -68,10 +53,23 @@
 import { useAppStore } from '@/stores'
 import { ColorPicker } from 'vue-color-kit'
 import 'vue-color-kit/dist/vue-color-kit.css'
-import { tabModeList, animateModeList } from '@/config/option'
 
 const appStore = useAppStore()
 const visible = ref(false)
+
+const tabModeList: App.TabItem[] = [
+  { label: '卡片', value: 'card' },
+  { label: '间隔卡片', value: 'card-gutter' },
+  { label: '圆角', value: 'rounded' }
+]
+
+const animateModeList: App.AnimateItem[] = [
+  { label: '默认', value: 'zoom-fade' },
+  { label: '滑动', value: 'fade-slide' },
+  { label: '渐变', value: 'fade' },
+  { label: '底部滑出', value: 'fade-bottom' },
+  { label: '缩放消退', value: 'fade-scale' }
+]
 
 if (appStore.themeColor) {
   appStore.setThemeColor(appStore.themeColor)
@@ -124,4 +122,8 @@ const changeColor = (colorObj: ColorObj) => {
 }
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+:deep(.arco-descriptions-item-label-block) {
+  color: var(--color-text-1);
+}
+</style>

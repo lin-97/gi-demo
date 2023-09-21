@@ -52,7 +52,13 @@ const storeSetup = () => {
     }
   }
 
-  return { userInfo, name, avatar, token, roles, permissions, login, logout, getInfo, resetToken }
+  // 模拟用 临时模拟token过期
+  const editToken = (value: string) => {
+    token.value = value
+    setToken(token.value)
+  }
+
+  return { userInfo, name, avatar, token, roles, permissions, login, logout, getInfo, resetToken, editToken }
 }
 
 export const useUserStore = defineStore('user', storeSetup, {

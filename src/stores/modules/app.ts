@@ -2,26 +2,15 @@ import { defineStore } from 'pinia'
 import { reactive, computed, toRefs } from 'vue'
 import { generate, getRgbStr } from '@arco-design/color'
 import defaultSettings from '@/config/setting.json'
-import type { TabModeType, animateModeType } from '@/config/option'
-
-interface IAppSetting {
-  theme: 'light' | 'dark' // 主题
-  themeColor: string // 主题色
-  tab: boolean // 是否显示页签
-  tabMode: TabModeType // 页签风格
-  animate: boolean // 是否显示动画
-  animateMode: animateModeType // 动画类名
-  menuCollapse: boolean // 左侧菜单折叠状态
-}
 
 const storeSetup = () => {
   // App配置
-  const settingConfig = reactive({ ...defaultSettings }) as IAppSetting
+  const settingConfig = reactive({ ...defaultSettings }) as App.SettingConfig
 
   // 页面切换动画类名
   const transitionName = computed(() => (settingConfig.animate ? settingConfig.animateMode : ''))
 
-  // 切换主题  暗黑模式|简白模式
+  // 切换主题 暗黑模式|简白模式
   const toggleTheme = (dark: boolean) => {
     if (dark) {
       settingConfig.theme = 'dark'
@@ -50,7 +39,7 @@ const storeSetup = () => {
   }
 
   // 设置页签的样式类型
-  const setTabMode = (mode: TabModeType) => {
+  const setTabMode = (mode: App.TabType) => {
     settingConfig.tabMode = mode
   }
 
@@ -60,7 +49,7 @@ const storeSetup = () => {
   }
 
   // 设置页面过渡动画类型
-  const setAnimateMode = (mode: animateModeType) => {
+  const setAnimateMode = (mode: App.AnimateType) => {
     settingConfig.animateMode = mode
   }
 

@@ -2,11 +2,11 @@
   <div class="gi_page">
     <div class="gi_box wrap">
       <a-alert>
-        <span>当前页面</span>
+        <span>当前页面 </span>
         <a-tag color="green">超级管理员角色</a-tag>
-        <span>能看, </span>
+        <span> 能看, </span>
         <a-tag color="red">普通用户角色</a-tag>
-        <span>不能看</span>
+        <span> 不能看</span>
       </a-alert>
 
       <a-typography-title :heading="4">当前用户权限</a-typography-title>

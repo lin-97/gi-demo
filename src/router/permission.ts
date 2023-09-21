@@ -21,7 +21,7 @@ router.beforeEach(async (to, from, next) => {
   if (getToken()) {
     if (to.path === '/login') {
       // 如果已经登录，并准备进入 Login 页面，则重定向到主页
-      next({ path: '/' })
+      next()
     } else {
       if (!hasRouteFlag) {
         try {
@@ -41,7 +41,7 @@ router.beforeEach(async (to, from, next) => {
           // 过程中发生任何错误，都直接重置 Token，并重定向到登录页面
           userStore.resetToken()
           Message.error(error.message || '路由守卫过程发生错误')
-          next('/login')
+          next(`/login?redirect=${to.path}`)
         }
       } else {
         next()

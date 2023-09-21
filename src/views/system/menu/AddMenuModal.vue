@@ -33,7 +33,7 @@
       <a-row :gutter="16">
         <a-col :span="12">
           <a-form-item label="自定义图标" field="svgIcon">
-            <a-input v-model="form.svgIcon" placeholder="请输入自定义图标名称" />
+            <GiIconSelector v-model="form.svgIcon" type="custom"></GiIconSelector>
             <a-tooltip content="优先显示">
               <icon-question-circle-fill :size="18" style="color: rgba(var(--warning-6)); margin-left: 8px" />
             </a-tooltip>
