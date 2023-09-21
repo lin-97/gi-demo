@@ -1,4 +1,4 @@
-export const Pane2Code = `<template>
+export default `<template>
   <a-card :bordered="false" class="gi_card pane3">
     <a-row justify="space-between" align="center" class="head">
       <div>
@@ -6,13 +6,13 @@ export const Pane2Code = `<template>
           <template #icon>
             <icon-exclamation-circle-fill />
           </template>
-          <span>这里采用 tsx 方式使用表格，具体看代码使用</span>
+          <span>这里采用 模板 + tsx 方式使用表格，具体看代码使用</span>
         </a-alert>
       </div>
 
       <a-space>
-        <a-button type="primary" status="success" @click="CodeViewModalRef?.open()">
-          <template #icon><icon-eye /></template>
+        <a-button type="primary" status="success" @click="onViewCode">
+          <template #icon><icon-code /></template>
           <span>查看代码</span>
         </a-button>
         <a-button type="primary">导出</a-button>
@@ -37,20 +37,25 @@ export const Pane2Code = `<template>
         </a-table>
       </section>
     </section>
-
-    <CodeViewModal ref="CodeViewModalRef"></CodeViewModal>
   </a-card>
 </template>
 
 <script lang="tsx" setup>
 import type { TableColumnData, TableInstance } from '@arco-design/web-vue'
+import { Modal } from '@arco-design/web-vue'
 import { usePagination } from '@/hooks'
 import { getPersonList } from '@/apis'
 import type { PersonItem } from '@/apis'
 import { StatusList } from '@/constant/person'
-import CodeViewModal from './CodeViewModal/index.vue'
+import Pane2Code from './Pane2Code'
 
-const CodeViewModalRef = ref<InstanceType<typeof CodeViewModal>>()
+const onViewCode = () => {
+  Modal.open({
+    title: '查看代码',
+    content: () => <gi-code-view type="vue" codeJson={Pane2Code}></gi-code-view>,
+    fullscreen: true
+  })
+}
 
 const columns: TableColumnData[] = [
   {

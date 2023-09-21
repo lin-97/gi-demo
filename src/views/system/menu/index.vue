@@ -16,8 +16,8 @@
             </a-button>
           </a-tooltip>
           <a-tooltip content="查看数据结构">
-            <a-button type="primary" status="warning" @click="DataViewDrawerRef?.open()">
-              <template #icon><icon-eye /></template>
+            <a-button type="primary" status="warning" @click="onViewCode">
+              <template #icon><icon-code /></template>
             </a-button>
           </a-tooltip>
         </a-space>
@@ -133,22 +133,20 @@
     </a-card>
 
     <AddMenuModal ref="AddMenuModalRef" :menus="menuList"></AddMenuModal>
-    <DataViewDrawer ref="DataViewDrawerRef" :data="menuList"></DataViewDrawer>
   </div>
 </template>
 
 <script setup lang="ts">
 import AddMenuModal from './AddMenuModal.vue'
-import DataViewDrawer from './DataViewDrawer.vue'
 import { getSystemMenuList, type MenuItem } from '@/apis'
-import type { TableInstance } from '@arco-design/web-vue'
+import { Drawer, type TableInstance } from '@arco-design/web-vue'
 import { isExternal } from '@/utils/validate'
 import { transformPathToName } from '@/utils/common'
+import GiCodeView from '@/components/GiCodeView/index.vue'
 
 defineOptions({ name: 'SystemMenu' })
 
 const AddMenuModalRef = ref<InstanceType<typeof AddMenuModal>>()
-const DataViewDrawerRef = ref<InstanceType<typeof DataViewDrawer>>()
 const loading = ref(false)
 
 const TableRef = ref<TableInstance>()
@@ -188,6 +186,14 @@ const onAdd = () => {
 
 const onEdit = (item: MenuItem) => {
   AddMenuModalRef.value?.edit(item.id)
+}
+
+const onViewCode = () => {
+  Drawer.open({
+    title: '数据结构',
+    content: () => h(GiCodeView, { codeJson: JSON.stringify(menuList.value, null, '\t') }),
+    width: 560
+  })
 }
 </script>
 

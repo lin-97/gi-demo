@@ -4,7 +4,7 @@
       <section class="view-item">
         <h3>菜单数据</h3>
         <div class="code">
-          <CodeView :codeJson="menuListJson"></CodeView>
+          <GiCodeView :codeJson="menuListJson"></GiCodeView>
         </div>
       </section>
     </a-resize-box>
@@ -13,7 +13,7 @@
       <section class="view-item">
         <h3>动态路由数据</h3>
         <div class="code">
-          <CodeView :codeJson="routeListJson"></CodeView>
+          <GiCodeView :codeJson="routeListJson"></GiCodeView>
         </div>
       </section>
     </a-resize-box>
@@ -27,14 +27,12 @@
 </template>
 
 <script lang="ts" setup>
-import CodeView from './CodeView.vue'
 import { getSystemMenuList, getUserAsyncRoutes, type MenuItem } from '@/apis'
 import { MdPreview } from 'md-editor-v3'
 import 'md-editor-v3/lib/style.css'
 
 const width1 = ref(400)
 const width2 = ref(400)
-const width3 = ref(400)
 
 const menuList = ref<MenuItem[]>([])
 const menuListJson = computed(() => JSON.stringify(menuList.value, null, '\t'))
@@ -72,7 +70,7 @@ type // 1目录  2菜单
 title // 菜单标题
 svgIcon // 自定义图标, 比icon优先级高
 icon // arco组件库内置图标
-keepAlive // 是否缓存 页面的name要跟菜单name保持一致才能缓存
+keepAlive // 是否缓存 页面的name要跟路由的name保持一致才能缓存
 hidden // 是否隐藏 如果为true则不显示在左侧菜单栏中
 sort // 排序
 activeMenu // 激活的菜单路径地址

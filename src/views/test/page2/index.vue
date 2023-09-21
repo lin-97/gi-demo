@@ -8,10 +8,10 @@
       </a-alert>
 
       <a-typography-title :heading="4">当前用户权限</a-typography-title>
-      <pre class="gi_mt"> {{ JSON.stringify(userStore.permissions) }}</pre>
+      <GiCodeView :code-json="JSON.stringify(userStore.permissions)"></GiCodeView>
 
       <section class="item">
-        <pre class="gi_mt">{{ pre1 }}</pre>
+        <GiCodeView type="vue" :code-json="pre1"></GiCodeView>
         <a-space class="gi_mt">
           <a-button v-hasPerm="['test:btn:add']" type="primary">新增</a-button>
           <a-button v-hasPerm="['test:btn:edit']" type="primary" status="success">编辑</a-button>
@@ -20,7 +20,7 @@
       </section>
 
       <section class="item">
-        <pre class="gi_mt">{{ pre2 }}</pre>
+        <GiCodeView type="vue" :code-json="pre2"></GiCodeView>
         <a-space class="gi_mt">
           <a-button v-hasPerm="['user:btn:add']" type="primary">新增</a-button>
           <a-button v-hasPerm="['user:btn:edit']" type="primary" status="success">编辑</a-button>

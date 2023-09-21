@@ -12,10 +12,11 @@
 <script lang="ts" setup>
 import CodeMirror from 'vue-codemirror6'
 import { javascript } from '@codemirror/lang-javascript'
+import { vue } from '@codemirror/lang-vue'
 import { oneDark } from '@codemirror/theme-one-dark'
 
 interface Props {
-  type?: 'javascript' | 'markdown'
+  type?: 'javascript' | 'vue'
   codeJson: string
 }
 
@@ -44,6 +45,9 @@ const extensions = computed(() => {
   if (props.type === 'javascript') {
     arr.push(javascript())
   }
+  if (props.type === 'vue') {
+    arr.push(vue())
+  }
   return arr
 })
 </script>
@@ -51,5 +55,6 @@ const extensions = computed(() => {
 <style lang="scss" scoped>
 :deep(.ͼ1 .cm-scroller) {
   overflow-x: hidden;
+  font-family: source-code-pro, Menlo, Monaco, Consolas, Courier New, monospace;
 }
 </style>
