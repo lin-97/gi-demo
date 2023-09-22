@@ -66,3 +66,9 @@ export interface MenuItem {
   title: string
   type: 1 | 2
 }
+
+export interface MenuOptionsItem {
+  id: string
+  title: string
+  children: MenuOptionsItem[]
+}

@@ -104,11 +104,24 @@ export default [
     }
   },
   {
+    url: '/mock/system/menu/options',
+    method: 'get',
+    timeout: 350,
+    response: () => {
+      const data = mapTree(JSON.parse(JSON.stringify(menus)), (i) => ({
+        id: i.id,
+        title: i.title,
+        children: i.children
+      }))
+      return successResponseWrap(data)
+    }
+  },
+  {
     url: '/mock/system/menu', // 这个短的要放在后面，不然会优先匹配
     method: 'get',
     timeout: 10,
     response: () => {
-      return successResponseWrap(mapTree(menus, (i) => ({ ...i })))
+      return successResponseWrap(menus)
     }
   }
 ] as MockMethod[]

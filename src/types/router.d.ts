@@ -37,7 +37,6 @@ declare module 'vue-router' {
     noShowingChildren?: boolean
     /** 设置该路由进入的权限，支持多个权限叠加 */
     roles?: string[]
-    permissions?: string[]
     /** 路由切换是否使用动画 */
     animation?: boolean
     /** 排序 */

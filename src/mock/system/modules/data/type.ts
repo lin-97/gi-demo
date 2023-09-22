@@ -4,7 +4,7 @@ export interface MockMenuItem {
   path: string
   component: string
   redirect: string
-  type: 1 | 2
+  type: 1 | 2 | 3
   title: string
   svgIcon: string
   icon: string
@@ -15,7 +15,7 @@ export interface MockMenuItem {
   breadcrumb: boolean
   status: 0 | 1
   roles: string[]
-  permissions: string[]
+  permission: string
   affix: boolean
   alwaysShow: boolean
   children?: MockMenuItem[]

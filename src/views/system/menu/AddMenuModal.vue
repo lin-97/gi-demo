@@ -12,6 +12,7 @@
         <a-radio-group v-model="form.type" type="button" :disabled="isEdit">
           <a-radio :value="1">目录</a-radio>
           <a-radio :value="2">菜单</a-radio>
+          <a-radio :value="3">按钮</a-radio>
         </a-radio-group>
       </a-form-item>
 
@@ -22,7 +23,7 @@
           allow-clear
           allow-search
           :disabled="isEdit"
-          :data="props.menus"
+          :data="(menuSelectTree as any)"
           :fieldNames="{
             key: 'id',
             title: 'title',
@@ -31,7 +32,7 @@
         />
       </a-form-item>
 
-      <a-row :gutter="16">
+      <a-row :gutter="16" v-if="[1, 2].includes(form.type)">
         <a-col :span="12">
           <a-form-item label="自定义图标" field="svgIcon">
             <GiIconSelector v-model="form.svgIcon" type="custom"></GiIconSelector>
@@ -51,7 +52,7 @@
         <a-input v-model="form.title" placeholder="请输入菜单标题" />
       </a-form-item>
 
-      <a-form-item label="路由路径" field="path">
+      <a-form-item label="路由路径" field="path" v-if="[1, 2].includes(form.type)">
         <a-input v-model="form.path" placeholder="请输入路由路径" />
         <template #extra>
           <div>菜单名称由系统自动生成：{{ routeName }}</div>
@@ -62,7 +63,7 @@
         <a-input v-model="form.redirect" placeholder="请输入重定向地址" />
       </a-form-item>
 
-      <a-form-item label="是否外链" field="isExternalUrl">
+      <a-form-item label="是否外链" field="isExternalUrl" v-if="[1, 2].includes(form.type)">
         <a-radio-group v-model="isExternalUrl" type="button">
           <a-radio :value="true">是</a-radio>
           <a-radio :value="false">否</a-radio>
@@ -77,7 +78,7 @@
         </a-input>
       </a-form-item>
 
-      <a-row :gutter="16">
+      <a-row :gutter="16" v-if="[1, 2].includes(form.type)">
         <a-col :span="8">
           <a-form-item label="状态" field="status">
             <a-switch
@@ -114,9 +115,6 @@
             />
           </a-form-item>
         </a-col>
-      </a-row>
-
-      <a-row :gutter="16">
         <a-col :span="8">
           <a-form-item label="面包屑" field="breadcrumb">
             <a-switch
@@ -161,17 +159,29 @@
 </template>
 
 <script setup lang="ts">
-import type { FormInstance } from '@arco-design/web-vue'
+import { Message, type FormInstance } from '@arco-design/web-vue'
 import { getSystemMenuDetail, saveSystemMenu, type MenuItem } from '@/apis'
-import { Message } from '@arco-design/web-vue'
 import { isExternal } from '@/utils/validate'
-import { transformPathToName } from '@/utils/common'
+import { transformPathToName, filterTree } from '@/utils/common'
+import { mapTree } from 'xe-utils'
 
 interface Props {
   menus: MenuItem[]
 }
 
-const props = withDefaults(defineProps<Props>(), {})
+const props = withDefaults(defineProps<Props>(), {
+  menus: () => []
+})
+
+const menuSelectTree = computed(() => {
+  const data = filterTree(props.menus, (i) => [1, 2].includes(i.type))
+  const arr = mapTree(data, (i) => ({
+    id: i.id,
+    title: i.title,
+    children: i.children
+  }))
+  return arr
+})
 
 const FormRef = ref<FormInstance>()
 

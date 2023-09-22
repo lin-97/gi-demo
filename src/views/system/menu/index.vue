@@ -48,8 +48,9 @@
           row-key="id"
           :loading="loading"
           :bordered="{ cell: true }"
-          :scroll="{ x: '100%', y: '100%', minWidth: 1400 }"
+          :scroll="{ x: '100%', y: '100%', minWidth: 1700 }"
           :pagination="false"
+          size="mini"
         >
           <template #expand-icon="{ expanded }">
             <IconDown v-if="expanded" />
@@ -63,6 +64,7 @@
               <template #cell="{ record }">
                 <a-tag v-if="record.type === 1" color="orangered">目录</a-tag>
                 <a-tag v-if="record.type === 2" color="green">菜单</a-tag>
+                <a-tag v-if="record.type === 3">按钮</a-tag>
               </template>
             </a-table-column>
             <a-table-column title="排序" :width="80" align="center">
@@ -73,6 +75,7 @@
               <template #cell="{ record }">{{ transformPathToName(record.path) }}</template>
             </a-table-column>
             <a-table-column title="组件路径" data-index="component"> </a-table-column>
+            <a-table-column title="权限标识" data-index="permission"> </a-table-column>
             <a-table-column title="菜单图标" data-index="icon" :width="100" align="center">
               <template #cell="{ record }">
                 <GiSvgIcon v-if="record.svgIcon" :size="24" :name="record.svgIcon"></GiSvgIcon>
@@ -108,14 +111,14 @@
                 <a-tag v-else color="red">否</a-tag>
               </template>
             </a-table-column>
-            <a-table-column title="操作" :width="200" align="center" fixed="right">
+            <a-table-column title="操作" :width="200" align="left" fixed="right">
               <template #cell="{ record }">
                 <a-space>
                   <a-button type="primary" size="mini" @click="onEdit(record)">
                     <template #icon><icon-edit /></template>
                     <span>编辑</span>
                   </a-button>
-                  <a-button type="primary" status="success" size="mini">
+                  <a-button v-if="[1, 2].includes(record.type)" type="primary" status="success" size="mini">
                     <template #icon><icon-plus /></template>
                   </a-button>
                   <a-popconfirm type="warning" content="您确定要删除该项吗?">
@@ -158,6 +161,7 @@ const onExpanded = () => {
 
 const form = reactive({ name: '', status: '' })
 const menuList = ref<MenuItem[]>([])
+
 const getMenuList = async () => {
   try {
     loading.value = true

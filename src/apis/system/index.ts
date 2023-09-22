@@ -32,6 +32,11 @@ export function saveSystemRole(data: any) {
   return http.post<boolean>(`${prefix}/system/role/save`, data)
 }
 
+/** @desc 获取角色权限 */
+export function getSystemRoleMenuIds(params: { role: string }) {
+  return http.get<string[]>(`${prefix}/system/role/menuIds`, params)
+}
+
 /** @desc 获取用户数据 */
 export function getSystemUserList() {
   return http.get<ApiListData<System.UserItem[]>>(`${prefix}/system/user`)
@@ -60,6 +65,11 @@ export function getSystemMenuDetail(params: { id: string }) {
 /** @desc 保存菜单 */
 export function saveSystemMenu(data: any) {
   return http.post<boolean>(`${prefix}/system/menu/save`, data)
+}
+
+/** @desc 获取角色分配权限菜单树 */
+export function getSystemMenuOptions() {
+  return http.get<System.MenuOptionsItem[]>(`${prefix}/system/menu/options`)
 }
 
 /** @desc 获取动态路由数据 */

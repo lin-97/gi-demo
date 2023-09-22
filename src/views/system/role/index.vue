@@ -64,7 +64,13 @@
                     <template #icon><icon-edit /></template>
                     <span>编辑</span>
                   </a-button>
-                  <a-button type="primary" status="success" size="mini" :disabled="record.disabled">
+                  <a-button
+                    type="primary"
+                    status="success"
+                    size="mini"
+                    :disabled="record.disabled"
+                    @click="onPerm(record)"
+                  >
                     <template #icon><icon-safe /></template>
                     <template #default>分配权限</template>
                   </a-button>
@@ -82,6 +88,7 @@
       </section>
 
       <AddRoleModal ref="AddRoleModalRef"></AddRoleModal>
+      <PermModal ref="PermModalRef"></PermModal>
     </a-card>
   </div>
 </template>
@@ -89,6 +96,7 @@
 <script setup lang="ts">
 import { Message, type TableInstance } from '@arco-design/web-vue'
 import AddRoleModal from './AddRoleModal.vue'
+import PermModal from './PermModal.vue'
 import type { RoleItem } from '@/apis'
 import { usePagination } from '@/hooks'
 import { getSystemRoleList } from '@/apis'
@@ -96,6 +104,7 @@ import { getSystemRoleList } from '@/apis'
 defineOptions({ name: 'SystemRole' })
 
 const AddRoleModalRef = ref<InstanceType<typeof AddRoleModal>>()
+const PermModalRef = ref<InstanceType<typeof PermModal>>()
 
 const form = reactive({
   name: '',
@@ -141,6 +150,10 @@ const onEdit = (item: RoleItem) => {
 
 const onDelete = () => {
   Message.info('点击了确认按钮')
+}
+
+const onPerm = (item: RoleItem) => {
+  PermModalRef.value?.open({ code: item.code, title: item.name })
 }
 
 // 勾选

@@ -1,5 +1,7 @@
 import type { MockMethod } from 'vite-plugin-mock'
 import { successResponseWrap, failResponseWrap } from '@/mock/mock'
+import { menus } from './data/menu'
+import { eachTree } from 'xe-utils'
 
 const data = [
   {
@@ -61,6 +63,26 @@ export default [
     timeout: 350,
     response: () => {
       return successResponseWrap(true)
+    }
+  },
+  {
+    url: '/mock/system/role/menuIds',
+    method: 'get',
+    timeout: 350,
+    response: ({ query }) => {
+      const { role } = query
+      if (role === 'role_user') {
+        const arr: string[] = []
+        eachTree(menus, (i) => {
+          if (!['08101', '0810204', '0810205', '0810206'].includes(i.id) && !i.path.startsWith('/system')) {
+            arr.push(i.id)
+          }
+        })
+        return successResponseWrap(arr)
+      }
+      if (role === 'role_user2') {
+        return successResponseWrap([])
+      }
     }
   },
   {
