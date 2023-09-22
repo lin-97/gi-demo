@@ -21,7 +21,7 @@ const getRoleMenus = (value: typeof menus, roles: string[]) => {
   // 如果是普通用户角色
   const userRoleMenu = filterTree<MockMenuItem>(
     sortData,
-    (i) => i.path !== '/system' && i.roles.some((i) => roles.includes(i))
+    (i) => i.path !== '/system' && i.roles.some((i) => roles.includes(i)) && [1, 2].includes(i.type)
   )
   return userRoleMenu
 }

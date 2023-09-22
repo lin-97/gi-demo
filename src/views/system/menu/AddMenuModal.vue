@@ -9,7 +9,7 @@
   >
     <a-form ref="FormRef" :model="form" :rules="rules" auto-label-width>
       <a-form-item label="菜单类型" field="type">
-        <a-radio-group v-model="form.type" type="button">
+        <a-radio-group v-model="form.type" type="button" :disabled="isEdit">
           <a-radio :value="1">目录</a-radio>
           <a-radio :value="2">菜单</a-radio>
         </a-radio-group>
@@ -21,6 +21,7 @@
           placeholder="请选择上级菜单"
           allow-clear
           allow-search
+          :disabled="isEdit"
           :data="props.menus"
           :fieldNames="{
             key: 'id',

@@ -4,7 +4,7 @@
       <template #subtitle>预计两小时内到账</template>
     </a-result>
     <section class="info-box">
-      <a-descriptions size="medium" :column="1">
+      <a-descriptions :column="1">
         <a-descriptions-item label="付款账户：">{{ form.payAccount }}</a-descriptions-item>
         <a-descriptions-item label="收款账户：">{{ form.recAccount }}</a-descriptions-item>
         <a-descriptions-item label="收款人姓名：">{{ form.recName }}</a-descriptions-item>
@@ -18,8 +18,8 @@
     </section>
     <a-row justify="center">
       <a-space>
-        <a-button type="primary" size="medium" @click="again">再转一笔</a-button>
-        <a-button size="medium">查看账单</a-button>
+        <a-button type="primary" @click="again">再转一笔</a-button>
+        <a-button>查看账单</a-button>
       </a-space>
     </a-row>
   </div>

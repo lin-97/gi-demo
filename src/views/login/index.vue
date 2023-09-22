@@ -1,6 +1,6 @@
 <template>
   <div class="login">
-    <section class="login-box animate__animated animate__zoomIn">
+    <section class="login-box">
       <!-- 左侧 -->
       <div class="login-left">
         <img class="login-img" src="@/assets/svgs/login-img.svg" />
@@ -9,36 +9,32 @@
       <div class="login-right">
         <a-form
           ref="FormRef"
+          size="medium"
           :model="form"
+          :rules="rules"
           :style="{ width: '84%' }"
           :label-col-style="{ display: 'none' }"
           :wrapper-col-style="{ flex: 1 }"
         >
           <h3 class="login-form-title"><img class="logo" src="@/assets/images/logo.gif" /><span>Admin Pro</span></h3>
-          <a-form-item field="username" :rules="[{ required: true, message: '请输入账号' }]">
-            <a-input v-model="form.username" placeholder="账号 admin/user" size="medium" allow-clear>
+          <a-form-item field="username">
+            <a-input v-model="form.username" placeholder="账号 admin/user" allow-clear>
               <template #prefix><icon-user :stroke-width="1" :style="{ fontSize: '20px' }" /></template>
             </a-input>
           </a-form-item>
-          <a-form-item
-            field="password"
-            :rules="[
-              { required: true, message: '请输入密码' },
-              { match: Regexp.Password, message: '输入密码格式不正确' }
-            ]"
-          >
-            <a-input-password v-model="form.password" placeholder="密码" size="medium" allow-clear>
+          <a-form-item field="password">
+            <a-input-password v-model="form.password" placeholder="密码" allow-clear>
               <template #prefix><icon-lock :stroke-width="1" :style="{ fontSize: '20px' }" /></template>
             </a-input-password>
           </a-form-item>
           <a-form-item>
-            <a-row justify="space-between" align="center" style="width: 100%">
+            <a-row justify="space-between" align="center" class="w-100">
               <a-checkbox v-model="checked">记住密码</a-checkbox>
               <a-link>忘记密码</a-link>
             </a-row>
           </a-form-item>
           <a-form-item>
-            <a-space direction="vertical" fill style="width: 100%">
+            <a-space direction="vertical" fill class="w-100">
               <a-button type="primary" size="large" long :loading="loading" @click="login">登录</a-button>
               <a-button type="text" size="large" long class="register-btn">注册账号</a-button>
             </a-space>
@@ -69,6 +65,14 @@ const form = reactive({
   password: '123456'
 })
 
+const rules: FormInstance['rules'] = {
+  username: [{ required: true, message: '请输入账号' }],
+  password: [
+    { required: true, message: '请输入密码' },
+    { match: Regexp.Password, message: '输入密码格式不正确' }
+  ]
+}
+
 // 记住密码
 const checked = ref(false)
 // 登录加载
@@ -90,7 +94,6 @@ const login = async () => {
         ...othersQuery
       }
     })
-    setLoading(false)
     Message.success('登录成功')
   } catch (error) {
     errorMessage.value = (error as Error).message

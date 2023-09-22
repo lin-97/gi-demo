@@ -1,6 +1,6 @@
 <template>
   <div class="step-2">
-    <a-descriptions :column="1" size="medium">
+    <a-descriptions :column="1">
       <a-descriptions-item label="付款账户">{{ form.payAccount }}</a-descriptions-item>
       <a-descriptions-item label="收款账户">{{ form.recAccount }}</a-descriptions-item>
       <a-descriptions-item label="收款人姓名">{{ form.recName }}</a-descriptions-item>
@@ -9,8 +9,8 @@
 
     <a-divider style="border-bottom-style: dashed" />
 
-    <a-form ref="formRef" size="medium" :model="step2Form" auto-label-width>
-      <a-form-item field="password" label="支付密码" :rules="rules.password">
+    <a-form ref="formRef" :model="step2Form" :rules="rules" auto-label-width>
+      <a-form-item field="password" label="支付密码">
         <a-input-password v-model="step2Form.password" placeholder="请输入支付密码" />
       </a-form-item>
       <a-form-item>
