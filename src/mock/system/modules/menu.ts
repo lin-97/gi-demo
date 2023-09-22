@@ -62,8 +62,6 @@ export default [
         if (item.alwaysShow === true) {
           meta.alwaysShow = item.alwaysShow
         }
-        // meta.roles = item.roles?.length ? item.roles : []
-        // meta.permissions = item.permissions?.length ? item.permissions : []
 
         return {
           path: item.path,

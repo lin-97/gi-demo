@@ -167,6 +167,10 @@ const getMenuList = async () => {
     loading.value = true
     const res = await getSystemMenuList()
     menuList.value = res.data
+
+    setTimeout(() => {
+      console.log('menuList', toRaw(menuList.value))
+    }, 3000)
   } catch (error) {
   } finally {
     loading.value = false

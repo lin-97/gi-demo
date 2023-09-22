@@ -57,7 +57,7 @@ export interface MenuItem {
   keepAlive: boolean
   parentId: string
   path: string
-  permissions: string[]
+  permission: string
   redirect: string
   roles: string[]
   sort: number

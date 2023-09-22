@@ -174,7 +174,8 @@ const props = withDefaults(defineProps<Props>(), {
 })
 
 const menuSelectTree = computed(() => {
-  const data = filterTree(props.menus, (i) => [1, 2].includes(i.type))
+  const menus = JSON.parse(JSON.stringify(props.menus)) as MenuItem[]
+  const data = filterTree(menus, (i) => [1, 2].includes(i.type))
   const arr = mapTree(data, (i) => ({
     id: i.id,
     title: i.title,
