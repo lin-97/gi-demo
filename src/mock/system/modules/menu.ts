@@ -17,7 +17,9 @@ const getRoleMenus = (value: typeof menus, roles: string[]) => {
   // 排序过后的数据
   const sortData = sortTree(value)
   // 如果是超级管理员角色
-  if (roles.includes('role_admin')) return sortData
+  if (roles.includes('role_admin')) {
+    return filterTree<MockMenuItem>(sortData, (i) => [1, 2].includes(i.type))
+  }
   // 如果是普通用户角色
   const userRoleMenu = filterTree<MockMenuItem>(
     sortData,
@@ -35,7 +37,7 @@ export default [
       const token = headers.token
       const isAdmin = token === 'TOKEN-admin'
       const roles = isAdmin ? ['role_admin'] : ['role_user']
-      const data = getRoleMenus(menus, roles)
+      const data = getRoleMenus(JSON.parse(JSON.stringify(menus)), roles)
       const routes = mapTree(data, (item) => {
         const meta: any = {
           hidden: item.hidden,
@@ -119,7 +121,7 @@ export default [
     method: 'get',
     timeout: 10,
     response: () => {
-      return successResponseWrap(menus)
+      return successResponseWrap(JSON.parse(JSON.stringify(menus)))
     }
   }
 ] as MockMethod[]

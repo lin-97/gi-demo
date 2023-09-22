@@ -73,7 +73,7 @@ export default [
       const { role } = query
       if (role === 'role_user') {
         const arr: string[] = []
-        eachTree(menus, (i) => {
+        eachTree(JSON.parse(JSON.stringify(menus)), (i) => {
           if (!['08101', '0810204', '0810205', '0810206'].includes(i.id) && !i.path.startsWith('/system')) {
             arr.push(i.id)
           }
