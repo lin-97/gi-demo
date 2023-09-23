@@ -1,5 +1,5 @@
 import { isExternal } from '@/utils/validate'
-import { mapTree, searchTree } from 'xe-utils'
+import { mapTree } from 'xe-utils'
 
 /**
  * @desc 去除空格
@@ -221,7 +221,20 @@ export const transformPathToName = (path: string) => {
  * @desc 过滤树
  * @param { values } 数组
  */
-export const filterTree = searchTree
+type FilterTree = <T extends { children?: T[] }>(
+  array: T[],
+  iterate: (item: T, index?: number, items?: T[]) => boolean
+) => T[]
+export const filterTree: FilterTree = (values, fn) => {
+  const arr = values.filter(fn)
+  const data = mapTree(arr, (item) => {
+    if (item.children && item.children.length) {
+      item.children = item.children.filter(fn)
+    }
+    return item
+  })
+  return data
+}
 
 type SortTree = <T extends { sort: number; children?: T[] }>(array: T[]) => T[]
 /**
