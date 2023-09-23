@@ -45,9 +45,9 @@ export const mdText = `
 
 ## 前端处理排序过滤
 ~~~
-// 不想自己写递归的话, 系统内置了两个方法, 基于 xe-utils 的 mapTree、searchTree 封装
+// 不想自己写递归的话, 系统内置了两个方法, 基于 xe-utils 的 mapTree 封装
 // 也可以自己封装, 同时把过滤和排序一起做了, 少一次树遍历, 这里只是提供简单使用参考
-// 另外 xe-utils 还提供其他树操作方法: findTree、eachTree、mapTree、 searchTree(相当于filterTree)
+// 另外 xe-utils 还提供其他树操作方法: findTree、eachTree、mapTree、searchTree(相当于filterTree, 但是不完全一样, 如果子节点没children, searchTree 会自动补 children:[])
 // 系统用了比较多 xe-utils 工具的树方法, 代码也会比较浅显易懂
 import { filterTree, sortTree } from '@/utils/common'
 
