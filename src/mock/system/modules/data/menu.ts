@@ -843,7 +843,7 @@ export const menus: MockMenuItem[] = [
         path: '/multilevel/index',
         component: 'multilevel/main/index',
         redirect: '',
-        type: 1,
+        type: 2,
         title: '页面',
         svgIcon: '',
         icon: 'icon-list',

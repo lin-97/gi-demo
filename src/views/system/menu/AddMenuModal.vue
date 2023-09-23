@@ -59,7 +59,7 @@
         </template>
       </a-form-item>
 
-      <a-form-item v-if="form.type === 1" label="重定向" field="redirect">
+      <a-form-item label="重定向" field="redirect" v-if="[1, 2].includes(form.type)">
         <a-input v-model="form.redirect" placeholder="请输入重定向地址" />
       </a-form-item>
 
@@ -70,7 +70,7 @@
         </a-radio-group>
       </a-form-item>
 
-      <a-form-item v-if="form.type === 2" label="组件路径" field="component">
+      <a-form-item label="组件路径" field="component" v-if="form.type === 2">
         <a-input v-if="isExternalUrl" v-model="form.component" placeholder="请输入组件路径" />
         <a-input v-else v-model="form.component" placeholder="请输入组件路径">
           <template #prepend>@/views/</template>
@@ -151,6 +151,10 @@
         </a-col>
       </a-row>
 
+      <a-form-item label="权限标识" field="permission" v-if="form.type === 3">
+        <a-input v-model="form.permission" placeholder="请输入权限标识" />
+      </a-form-item>
+
       <a-form-item label="菜单排序" field="sort">
         <a-input-number v-model="form.sort" placeholder="请输入菜单排序" :min="1" mode="button" style="width: 120px" />
       </a-form-item>
@@ -207,14 +211,17 @@ const form = reactive({
   redirect: '', // 重定向
   breadcrumb: true, // 显示在面包屑
   affix: true, // 显示在页签
-  alwaysShow: false // 总是显示
+  alwaysShow: false, // 总是显示
+  permission: ''
 })
 const routeName = computed(() => transformPathToName(form.path))
 
 const rules = {
+  parentId: [{ required: true, message: '请选择上级菜单' }],
   title: [{ required: true, message: '请输入菜单标题' }],
   path: [{ required: true, message: '请输入路由路径' }],
-  component: [{ required: true, message: '请输入组件路径' }]
+  component: [{ required: true, message: '请输入组件路径' }],
+  permission: [{ required: true, message: '请输入权限标识' }]
 }
 
 const add = () => {

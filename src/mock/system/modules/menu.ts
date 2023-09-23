@@ -3,15 +3,7 @@ import { successResponseWrap, failResponseWrap } from '@/mock/mock'
 import { menus } from './data/menu'
 import type { MockMenuItem } from './data/type'
 import { mapTree, findTree } from 'xe-utils'
-import { transformPathToName, filterTree } from '@/utils/common'
-
-const sortTree = (value: typeof menus) => {
-  value?.sort((a, b) => (a?.sort ?? 0) - (b?.sort ?? 0)) // 排序
-  return mapTree(value, (item) => {
-    item.children?.sort((a, b) => (a?.sort ?? 0) - (b?.sort ?? 0)) // 排序
-    return item
-  })
-}
+import { transformPathToName, filterTree, sortTree } from '@/utils/common'
 
 const getRoleMenus = (value: typeof menus, roles: string[]) => {
   // 排序过后的数据
