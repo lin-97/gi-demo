@@ -7,9 +7,9 @@
     @before-ok="save"
     @close="close"
   >
-    <a-form ref="FormRef" :model="form" :rules="rules" auto-label-width>
+    <a-form ref="FormRef" :model="form" :rules="formRules" auto-label-width>
       <a-form-item label="菜单类型" field="type">
-        <a-radio-group v-model="form.type" type="button" :disabled="isEdit">
+        <a-radio-group v-model="form.type" type="button" :disabled="isEdit" @change="onChangeType">
           <a-radio :value="1">目录</a-radio>
           <a-radio :value="2">菜单</a-radio>
           <a-radio :value="3">按钮</a-radio>
@@ -49,18 +49,21 @@
       </a-row>
 
       <a-form-item label="菜单标题" field="title">
-        <a-input v-model="form.title" placeholder="请输入菜单标题" />
+        <a-input v-model="form.title" placeholder="请输入菜单标题" allow-clear />
       </a-form-item>
 
       <a-form-item label="路由路径" field="path" v-if="[1, 2].includes(form.type)">
-        <a-input v-model="form.path" placeholder="请输入路由路径" />
+        <a-input v-model="form.path" placeholder="请输入路由路径" allow-clear />
         <template #extra>
-          <div>菜单名称由系统自动生成：{{ routeName }}</div>
+          <div>
+            <span>菜单名称由系统自动生成：</span>
+            <a-tag v-if="routeName">{{ routeName }}</a-tag>
+          </div>
         </template>
       </a-form-item>
 
-      <a-form-item label="重定向" field="redirect" v-if="[1, 2].includes(form.type)">
-        <a-input v-model="form.redirect" placeholder="请输入重定向地址" />
+      <a-form-item label="重定向" field="redirect" v-if="[1, 2].includes(form.type) && !isExternalUrl">
+        <a-input v-model="form.redirect" placeholder="请输入重定向地址" allow-clear />
       </a-form-item>
 
       <a-form-item label="是否外链" field="isExternalUrl" v-if="[1, 2].includes(form.type)">
@@ -98,8 +101,8 @@
               v-model="form.hidden"
               :checked-value="true"
               :unchecked-value="false"
-              checked-text="隐藏"
-              unchecked-text="显示"
+              checked-text="是"
+              unchecked-text="否"
             />
           </a-form-item>
         </a-col>
@@ -138,7 +141,7 @@
               unchecked-text="隐藏"
             />
           </a-form-item>
-          <a-form-item label="页签" field="affix" v-if="form.type === 2">
+          <a-form-item label="页签显示" field="affix" v-if="form.type === 2">
             <a-switch
               type="round"
               v-model="form.affix"
@@ -152,7 +155,7 @@
       </a-row>
 
       <a-form-item label="权限标识" field="permission" v-if="form.type === 3">
-        <a-input v-model="form.permission" placeholder="请输入权限标识" />
+        <a-input v-model="form.permission" placeholder="sys:btn:add" allow-clear />
       </a-form-item>
 
       <a-form-item label="菜单排序" field="sort">
@@ -168,6 +171,7 @@ import { getSystemMenuDetail, saveSystemMenu, type MenuItem } from '@/apis'
 import { isExternal } from '@/utils/validate'
 import { transformPathToName, filterTree } from '@/utils/common'
 import { mapTree } from 'xe-utils'
+import type { MenuForm } from './type'
 
 interface Props {
   menus: MenuItem[]
@@ -196,8 +200,8 @@ const isEdit = computed(() => !!menuId.value)
 const title = computed(() => (isEdit.value ? '编辑菜单' : '新增菜单'))
 
 const isExternalUrl = ref(false)
-const form = reactive({
-  type: 1, // 类型 1目录 2菜单
+const form: MenuForm = reactive({
+  type: 1, // 类型 1目录 2菜单 3按钮
   icon: '', // arco 图标名称
   svgIcon: '', // 自定义图标名称
   title: '', // 菜单或目录的名称
@@ -206,7 +210,7 @@ const form = reactive({
   path: '', // 路由路径
   component: '', // 组件路径
   keepAlive: false, // 是否缓存
-  hidden: true, // 是否隐藏 比如一些详情页面或不需要展示在左侧菜单的页面设置为true隐藏
+  hidden: true, // 设置 true 的时候该路由不会在侧边栏出现
   parentId: '',
   redirect: '', // 重定向
   breadcrumb: true, // 显示在面包屑
@@ -216,12 +220,27 @@ const form = reactive({
 })
 const routeName = computed(() => transformPathToName(form.path))
 
-const rules = {
+const rules: FormInstance['rules'] = {
   parentId: [{ required: true, message: '请选择上级菜单' }],
   title: [{ required: true, message: '请输入菜单标题' }],
   path: [{ required: true, message: '请输入路由路径' }],
   component: [{ required: true, message: '请输入组件路径' }],
   permission: [{ required: true, message: '请输入权限标识' }]
+}
+const formRules = computed(() => {
+  if ([1, 2].includes(form.type)) {
+    const { title, path } = rules
+    return { title, path } as FormInstance['rules']
+  }
+  if (form.type === 3) {
+    const { parentId, title, permission } = rules
+    return { parentId, title, permission } as FormInstance['rules']
+  }
+})
+
+// 切换类型清除校验
+const onChangeType = () => {
+  FormRef.value?.clearValidate()
 }
 
 const add = () => {
@@ -247,6 +266,8 @@ defineExpose({ add, edit })
 
 const save = async () => {
   try {
+    const info = await FormRef.value?.validate()
+    if (info) return false
     const res = await saveSystemMenu(form)
     if (res.data) {
       Message.success('模拟保存成功')
