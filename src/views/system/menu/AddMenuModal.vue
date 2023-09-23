@@ -166,8 +166,8 @@
 import { Message, type FormInstance } from '@arco-design/web-vue'
 import { getSystemMenuDetail, saveSystemMenu, type MenuItem } from '@/apis'
 import { isExternal } from '@/utils/validate'
-import { transformPathToName, filterTree } from '@/utils/common'
-import { mapTree } from 'xe-utils'
+import { transformPathToName } from '@/utils/common'
+import { mapTree, searchTree } from 'xe-utils'
 
 interface Props {
   menus: MenuItem[]
@@ -179,7 +179,7 @@ const props = withDefaults(defineProps<Props>(), {
 
 const menuSelectTree = computed(() => {
   const menus = JSON.parse(JSON.stringify(props.menus)) as MenuItem[]
-  const data = filterTree(menus, (i) => [1, 2].includes(i.type))
+  const data = searchTree(menus, (i) => [1, 2].includes(i.type))
   const arr = mapTree(data, (i) => ({
     id: i.id,
     title: i.title,

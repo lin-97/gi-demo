@@ -32,7 +32,7 @@ const storeSetup = () => {
   // 清空页签
   const clearTagList = () => {
     const routeStore = useRouteStore()
-    const arr = _XEUtils_.filterTree(routeStore.routes, (item) => item.meta?.affix ?? false)
+    const arr = _XEUtils_.searchTree(routeStore.routes, (item) => item.meta?.affix ?? false)
     tagList.value = [...arr]
   }
 

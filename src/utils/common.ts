@@ -217,12 +217,6 @@ export const transformPathToName = (path: string) => {
   return name
 }
 
-/**
- * @desc 过滤树
- * @param { values } 数组
- */
-export const filterTree = searchTree
-
 type SortTree = <T extends { sort: number; children?: T[] }>(array: T[]) => T[]
 /**
  * @desc 排序树

@@ -1,22 +1,20 @@
 import type { MockMethod } from 'vite-plugin-mock'
 import { successResponseWrap, failResponseWrap } from '@/mock/mock'
 import { menus } from './data/menu'
-import type { MockMenuItem } from './data/type'
-import { mapTree, findTree } from 'xe-utils'
-import { transformPathToName, filterTree, sortTree } from '@/utils/common'
+import { mapTree, findTree, searchTree } from 'xe-utils'
+import { transformPathToName, sortTree } from '@/utils/common'
 
 const getRoleMenus = (value: typeof menus, roles: string[]) => {
   // 排序过后的数据
   const sortData = sortTree(value)
   // 如果是超级管理员角色
   if (roles.includes('role_admin')) {
-    return filterTree<MockMenuItem>(sortData, (i) => [1, 2].includes(i.type))
+    return searchTree(sortData, (i) => [1, 2].includes(i.type))
   }
   // 如果是普通用户角色
-  const userRoleMenu = filterTree<MockMenuItem>(
-    sortData,
-    (i) => i.path !== '/system' && i.roles.some((i) => roles.includes(i)) && [1, 2].includes(i.type)
-  )
+  const userRoleMenu = searchTree(sortData, (i) => {
+    return i.path !== '/system' && i.roles.some((i) => roles.includes(i)) && [1, 2].includes(i.type)
+  })
   return userRoleMenu
 }
 
