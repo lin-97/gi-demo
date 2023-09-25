@@ -32,8 +32,13 @@ const storeSetup = () => {
   // 清空页签
   const clearTagList = () => {
     const routeStore = useRouteStore()
-    const arr = _XEUtils_.filterTree(routeStore.routes, (item) => item.meta?.affix ?? false)
-    tagList.value = [...arr]
+    const arr: RouteRecordRaw[] = []
+    _XEUtils_.eachTree(routeStore.routes, (item) => {
+      if (item.meta?.affix ?? false) {
+        arr.push(item)
+      }
+    })
+    tagList.value = arr
   }
 
   // 添加缓存页

@@ -165,7 +165,6 @@ const next = () => {
 // 预览
 const preview = () => {
   if (props.list.length && !props.zoom) {
-    console.log('预览')
     viewerApi({
       options: {
         initialViewIndex: currentIndex.value

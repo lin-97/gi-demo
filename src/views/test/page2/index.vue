@@ -10,6 +10,9 @@
       <a-typography-title :heading="4">当前用户权限</a-typography-title>
       <GiCodeView :code-json="JSON.stringify(userStore.permissions)"></GiCodeView>
 
+      <a-typography-title :heading="4">当前页面角色权限</a-typography-title>
+      <GiCodeView :code-json="JSON.stringify(['role_admin', 'user_user'])"></GiCodeView>
+
       <section class="item">
         <GiCodeView type="vue" :code-json="pre1"></GiCodeView>
         <a-space class="gi_mt">

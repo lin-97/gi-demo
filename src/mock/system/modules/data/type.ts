@@ -17,6 +17,7 @@ export interface MockMenuItem {
   roles: string[]
   permission: string
   showInTabs: boolean
+  affix?: boolean
   alwaysShow: boolean
   children?: MockMenuItem[]
 }

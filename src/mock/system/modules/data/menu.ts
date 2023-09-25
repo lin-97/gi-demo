@@ -36,7 +36,8 @@ export const menus: MockMenuItem[] = [
         roles: ['role_admin', 'role_user'],
         permission: '',
         showInTabs: true,
-        alwaysShow: false
+        alwaysShow: false,
+        affix: true
       }
     ],
     status: 1,

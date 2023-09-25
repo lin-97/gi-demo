@@ -24,7 +24,7 @@ export default [
   {
     url: '/mock/user/routes',
     method: 'get',
-    timeout: 10,
+    timeout: 20,
     response: ({ headers }) => {
       const token = headers.token
       const isAdmin = token === 'TOKEN-admin'
@@ -46,6 +46,9 @@ export default [
         }
         if (item.showInTabs === false) {
           meta.showInTabs = item.showInTabs
+        }
+        if (item.affix === true) {
+          meta.affix = item.affix
         }
         if (item.activeMenu) {
           meta.activeMenu = item.activeMenu

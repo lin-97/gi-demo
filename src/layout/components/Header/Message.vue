@@ -29,7 +29,8 @@
   </div>
 </template>
 
-<script setup lang="ts" name="Message">
+<script setup lang="ts">
+defineOptions({ name: 'Message' })
 const list = [
   {
     name: 'Socrates',

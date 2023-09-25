@@ -49,11 +49,12 @@
   </a-drawer>
 </template>
 
-<script setup lang="ts" name="SettingDrawer">
+<script setup lang="ts">
 import { useAppStore } from '@/stores'
 import { ColorPicker } from 'vue-color-kit'
 import 'vue-color-kit/dist/vue-color-kit.css'
 
+defineOptions({ name: 'SettingDrawer' })
 const appStore = useAppStore()
 const visible = ref(false)
 

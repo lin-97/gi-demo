@@ -65,6 +65,7 @@ export interface MenuItem {
   svgIcon: string
   title: string
   type: 1 | 2
+  affix: boolean
 }
 
 export interface MenuOptionsItem {

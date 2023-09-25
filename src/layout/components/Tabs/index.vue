@@ -13,12 +13,12 @@
         v-for="item of tabsStore.tagList"
         :key="item.path"
         :title="(item.meta?.title as string)"
-        :closable="item.path !== '/home'"
+        :closable="Boolean(!item.meta?.affix)"
       ></a-tab-pane>
-      <!-- 右侧按钮 -->
       <template #extra>
+        <!-- 右侧按钮 -->
         <a-dropdown trigger="hover">
-          <MagicIcon class="mr"></MagicIcon>
+          <MagicIcon class="gi_mr"></MagicIcon>
           <template #content>
             <a-doption @click="tabsStore.closeCurrent(route.path)">
               <template #icon><icon-close /></template>
@@ -39,16 +39,18 @@
   </div>
 </template>
 
-<script setup lang="ts" name="NavTab">
+<script setup lang="ts">
 import type { RouteRecordRaw } from 'vue-router'
 import { useTabsStore, useAppStore } from '@/stores'
 import MagicIcon from './MagicIcon.vue'
 
+defineOptions({ name: 'Tabs' })
 const route = useRoute()
 const router = useRouter()
 const appStore = useAppStore()
 const tabsStore = useTabsStore()
 
+// 重置, 同时把 affix: true 的路由筛选出来
 tabsStore.reset()
 
 // 监听路由变化
@@ -113,9 +115,5 @@ const handleTabClick = (key: string) => {
 .tabs {
   padding-top: 5px;
   background: var(--color-bg-1);
-}
-
-.mr {
-  margin-right: $margin;
 }
 </style>

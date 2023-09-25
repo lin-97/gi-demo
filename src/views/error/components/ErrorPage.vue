@@ -15,7 +15,7 @@
   </div>
 </template>
 
-<script setup lang="ts" name="ErrorPage">
+<script setup lang="ts">
 interface Props {
   src: string
 }
@@ -23,6 +23,7 @@ const props = withDefaults(defineProps<Props>(), {
   src: ''
 })
 
+defineOptions({ name: 'ErrorPage' })
 const router = useRouter()
 
 const countDownTime = ref(5)

@@ -30,10 +30,11 @@
   </div>
 </template>
 
-<script setup lang="ts" name="Area">
+<script setup lang="ts">
 import { useArea } from './useArea'
 const { getAreaTreeData } = useArea()
 
+defineOptions({ name: 'Area' })
 const treeData = ref([])
 treeData.value = getAreaTreeData()
 </script>
