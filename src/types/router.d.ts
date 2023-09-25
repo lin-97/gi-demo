@@ -12,8 +12,10 @@ declare module 'vue-router' {
     hidden?: boolean
     /** 默认 true，如果设置为 false，则不会在面包屑中显示 */
     breadcrumb?: false
-    /** 默认 false，如果设置为 true，它则会固定在 Tab栏 中 */
-    affix?: boolean
+    /** 默认 true，如果设置为 false，它则不会显示在 Tab栏 中 */
+    showInTabs?: boolean
+    /** 默认 false，如果设置为 true，它则会固定在 Tab栏 中，例如首页 */
+    affix: boolean
     /**
      * 当一个路由下面的 children 声明的路由大于1个时，自动会变成嵌套的模式
      * 只有一个时，会将那个子路由当做根路由显示在侧边栏

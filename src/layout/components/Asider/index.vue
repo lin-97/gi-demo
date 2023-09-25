@@ -42,6 +42,13 @@ const activeMenu = computed(() => {
   }
   return path
 })
+
+watch(
+  () => activeMenu.value,
+  () => {
+    console.log('activeMenu', activeMenu.value)
+  }
+)
 </script>
 
 <style lang="scss" scoped>

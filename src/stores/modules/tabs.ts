@@ -2,8 +2,6 @@ import { defineStore } from 'pinia'
 import { ref } from 'vue'
 import router from '@/router'
 import type { RouteRecordRaw, RouteRecordName } from 'vue-router'
-import { useRouteStore } from '@/stores'
-import _XEUtils_ from 'xe-utils'
 
 const storeSetup = () => {
   const tagList = ref<RouteRecordRaw[]>([]) // 保存页签tab的数组
@@ -12,7 +10,7 @@ const storeSetup = () => {
   // 添加一个页签, 如果当前路由已经打开, 则不再重复添加
   const addTagItem = (item: RouteRecordRaw) => {
     if (tagList.value.some((i) => i.path === item.path)) return
-    if (item.meta?.affix ?? true) {
+    if (item.meta?.showInTabs ?? true) {
       tagList.value.push(item)
     }
   }
@@ -31,9 +29,7 @@ const storeSetup = () => {
 
   // 清空页签
   const clearTagList = () => {
-    const routeStore = useRouteStore()
-    const arr = _XEUtils_.filterTree(routeStore.routes, (item) => item.meta?.affix ?? false)
-    tagList.value = [...arr]
+    tagList.value = tagList.value.filter((i) => i.meta?.affix ?? false)
   }
 
   // 添加缓存页

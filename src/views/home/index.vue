@@ -1,5 +1,5 @@
 <template>
-  <div class="home" id="home-wrap">
+  <div class="gi_page home" id="home-wrap">
     <WorkCard></WorkCard>
 
     <a-row class="row">
@@ -31,10 +31,7 @@ defineOptions({ name: 'Home' })
 
 <style lang="scss" scoped>
 .home {
-  width: 100%;
-  height: 100%;
-  overflow: hidden;
-  overflow-y: auto;
+  padding: 0;
   .row {
     padding: 6px;
     .item {

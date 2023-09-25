@@ -44,8 +44,8 @@ export default [
         if (item.icon) {
           meta.icon = item.icon
         }
-        if (item.affix === false) {
-          meta.affix = item.affix
+        if (item.showInTabs === false) {
+          meta.showInTabs = item.showInTabs
         }
         if (item.activeMenu) {
           meta.activeMenu = item.activeMenu

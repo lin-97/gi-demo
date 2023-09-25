@@ -12,7 +12,7 @@ export interface MenuForm {
   parentId: string
   redirect: string
   breadcrumb: boolean
-  affix: boolean
+  showInTabs: boolean
   alwaysShow: boolean
   permission: string
 }

@@ -56,7 +56,7 @@
         <a-input v-model="form.path" placeholder="请输入路由路径" allow-clear />
         <template #extra>
           <div>
-            <span>菜单名称由系统自动生成：</span>
+            <span>路由名称由系统自动生成：</span>
             <a-tag v-if="routeName">{{ routeName }}</a-tag>
           </div>
         </template>
@@ -141,10 +141,10 @@
               unchecked-text="隐藏"
             />
           </a-form-item>
-          <a-form-item label="页签显示" field="affix" v-if="form.type === 2">
+          <a-form-item label="页签显示" field="showInTabs" v-if="form.type === 2">
             <a-switch
               type="round"
-              v-model="form.affix"
+              v-model="form.showInTabs"
               :checked-value="true"
               :unchecked-value="false"
               checked-text="显示"
@@ -214,7 +214,7 @@ const form: MenuForm = reactive({
   parentId: '',
   redirect: '', // 重定向
   breadcrumb: true, // 显示在面包屑
-  affix: true, // 显示在页签
+  showInTabs: true, // 显示在页签
   alwaysShow: false, // 总是显示
   permission: ''
 })

@@ -33,8 +33,9 @@ export const mdText = `
     // 该属性适合使用在有 hidden: true 属性的路由上
     activeMenu: '/data',
     breadcrumb: true, // 默认 true, 如果设置为 false, 则不会在面包屑中显示
-    affix: true, // 默认 true, 如果为 false, 则不会显示在页签中
-    // 当一个路由下面的 children 声明的路由大于1个时，自动会变成嵌套的模式
+    showInTabs: true, // 默认 true, 如果为 false, 则不会显示在页签中
+    affix: boolean, // 默认 false, 如果设置为 true, 它则会固定在 Tab栏 中, 例如首页
+    // 当一个路由下面的 children 声明的路由大于1个时, 自动会变成嵌套的模式
     // 只有一个时, 会将那个子路由当做根路由显示在侧边栏
     // 若想不管路由下面的 children 声明的个数都显示你的根路由
     // 可以设置 alwaysShow: true, 这样就会忽略之前定义的规则, 一直显示根路由

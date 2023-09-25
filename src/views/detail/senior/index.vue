@@ -9,7 +9,7 @@
     </a-affix>
 
     <a-card title="基本信息" :bordered="false" class="item">
-      <a-descriptions>
+      <a-descriptions table-layout="fixed" :label-style="{ width: '60px' }">
         <a-descriptions-item label="姓名:">Lin</a-descriptions-item>
         <a-descriptions-item label="性别:">男</a-descriptions-item>
         <a-descriptions-item label="生日:">07月16日</a-descriptions-item>
@@ -47,7 +47,7 @@
           <a-step description="Echo">财务审批</a-step>
         </a-steps>
 
-        <a-descriptions style="flex: 1; margin-left: 20%">
+        <a-descriptions style="flex: 1; margin-left: 20%" table-layout="fixed" :label-style="{ width: '60px' }">
           <a-descriptions-item label="姓名:">Lin</a-descriptions-item>
           <a-descriptions-item label="性别:">男</a-descriptions-item>
           <a-descriptions-item label="生日:">07月16日</a-descriptions-item>
