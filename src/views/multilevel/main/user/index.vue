@@ -1,16 +1,20 @@
 <template>
   <div class="page">
-    <a-alert type="normal">
-      <template #icon>
-        <icon-exclamation-circle-fill />
-      </template>
-      <span>
-        <span>这里是三级路由页面--当前页面的</span>
-        <a-typography-text type="primary"> keepAlive </a-typography-text>
-        <span>为 </span>
-        <a-typography-text type="primary">{{ String(route.meta.keepAlive) }}</a-typography-text>
-      </span>
-    </a-alert>
+    <div class="alert">
+      <a-alert type="normal">
+        <template #icon>
+          <icon-exclamation-circle-fill />
+        </template>
+        <span>
+          <span>这里是三级路由页面--当前页面的</span>
+          <a-typography-text type="primary"> keepAlive </a-typography-text>
+          <span>为 </span>
+          <a-typography-text type="primary">{{ String(route.meta.keepAlive) }}</a-typography-text>
+        </span>
+      </a-alert>
+    </div>
+
+    <a-divider />
 
     <div class="user">
       <section class="user-card">
@@ -95,6 +99,11 @@ onActivated(() => {
 
 <style lang="scss" scoped>
 .page {
+  background-color: var(--color-bg-1);
+  .alert {
+    padding: $padding;
+    padding-bottom: 0;
+  }
 }
 
 .user {

@@ -38,4 +38,9 @@ onActivated(() => {
 })
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+.page {
+  padding: $padding;
+  background-color: var(--color-bg-1);
+}
+</style>

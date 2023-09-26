@@ -200,20 +200,24 @@ export const randomHex = () => {
  * @description 动态路由 path 转 name
  * @demo /system => System
  * @demo /system/menu => SystemMenu
+ * @demo /page-gg/detail => PageGgDetail
  */
 export const transformPathToName = (path: string) => {
   if (!path) return ''
   if (isExternal(path)) return ''
-  let name = ''
-  if (path) {
-    const arr = path
-      .split('/')
-      .filter((i) => i)
-      .map((i) => i.substring(0, 1).toUpperCase() + i.substring(1))
-    arr.forEach((i) => {
-      name += i
-    })
-  }
+  // 示例: '/page-gg/detail' =>  ['page-gg', 'detail']
+  const pathArray = path.split('/').filter((i) => i)
+  const arr = pathArray.map((i) => {
+    if (i.includes('-')) {
+      // 'page-gg' => 'PageGg'
+      const arr1 = i.split('-')
+      return arr1.map((a) => a.substring(0, 1).toUpperCase() + a.substring(1)).join('')
+    } else {
+      // 'detail' => 'Detail
+      return i.substring(0, 1).toUpperCase() + i.substring(1)
+    }
+  })
+  let name = arr.join('') // ['PageGg', 'Detail'] => PageGgDetail
   return name
 }
 

@@ -38,19 +38,18 @@ const toPage = (path: string) => {
 .user {
   flex: 1;
   display: flex;
-  padding: $margin;
   box-sizing: border-box;
   overflow: hidden;
   .menu {
     width: 220px;
     height: fit-content;
+    margin: $margin;
   }
   .content {
     flex: 1;
-    margin-left: $margin;
     padding: $padding;
+    padding-left: 0;
     overflow: hidden;
-    background-color: var(--color-bg-1);
     box-sizing: border-box;
     overflow-y: auto;
   }

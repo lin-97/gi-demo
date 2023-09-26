@@ -3,20 +3,23 @@ import { successResponseWrap, failResponseWrap } from '@/mock/mock'
 import { menus } from './data/menu'
 import type { MockMenuItem } from './data/type'
 import { mapTree, findTree } from 'xe-utils'
-import { transformPathToName, filterTree, sortTree } from '@/utils/common'
+import { transformPathToName, filterTree } from '@/utils/common'
 
 const getRoleMenus = (value: typeof menus, roles: string[]) => {
   // 排序过后的数据
-  const sortData = sortTree(value)
+  value.sort((a, b) => (a?.sort ?? 0) - (b?.sort ?? 0))
   // 如果是超级管理员角色
   if (roles.includes('role_admin')) {
-    return filterTree<MockMenuItem>(sortData, (i) => [1, 2].includes(i.type))
+    return filterTree<MockMenuItem>(value, (i) => {
+      i.children?.sort((a, b) => (a?.sort ?? 0) - (b?.sort ?? 0))
+      return [1, 2].includes(i.type)
+    })
   }
   // 如果是普通用户角色
-  const userRoleMenu = filterTree<MockMenuItem>(
-    sortData,
-    (i) => i.path !== '/system' && i.roles.some((i) => roles.includes(i)) && [1, 2].includes(i.type)
-  )
+  const userRoleMenu = filterTree<MockMenuItem>(value, (i) => {
+    i.children?.sort((a, b) => (a?.sort ?? 0) - (b?.sort ?? 0))
+    return i.path !== '/system' && i.roles.some((i) => roles.includes(i)) && [1, 2].includes(i.type)
+  })
   return userRoleMenu
 }
 

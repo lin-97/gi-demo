@@ -7,13 +7,14 @@ export const mdText = `
 路由数据由菜单数据转换得来
 // type === 1 为目录
 // type === 2 为菜单
+// type === 3 为按钮
 ~~~
 
 ## 动态路由讲解
 1. 菜单数据由 系统管理->菜单管理 页面配置，数据结构如最左图
-2. 动态路由数据也是从后端接口返回，接口会根据菜单数据进行排序，根据用户或者用户当前角色进行过滤
+2. 动态路由数据也是从后端接口返回, 接口会根据菜单数据进行排序, 根据用户或者用户当前角色进行过滤
 3. 换句话说就是接口帮你排好序了, 过滤好了, 所以不用返回roles这个属性了
-4. 拿到动态路由数据后, 只要把所有component由字符串转为真正的模块，再addRoute就完成了
+4. 拿到动态路由数据后, 只要把所有component由字符串转为真正的模块, 再addRoute就完成了
 5. 其实也可以前端拿到数据进行排序和过滤, 这里看沟通和抉择
 ~~~js
 {
@@ -54,5 +55,19 @@ import { filterTree, sortTree } from '@/utils/common'
 
 const data = filterTree(menus, (i) => i.roles.includes('role_user'))
 const sortData = sortTree(data)
+~~~
+
+~~~
+import { filterTree } from '@/utils/common'
+
+// 过滤和排序(示例)
+const getFilterAndSortData = (value) => {
+  value.sort((a, b) => (a?.sort ?? 0) - (b?.sort ?? 0))
+  const data = filterTree(value, (i) => {
+    i.children?.sort((a, b) => (a?.sort ?? 0) - (b?.sort ?? 0))
+    return i.roles.includes('role_user')
+  })
+  return data
+}
 ~~~
 `
