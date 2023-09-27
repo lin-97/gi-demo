@@ -1,9 +1,9 @@
 <template>
-  <a-form :model="form" ref="FormRef">
-    <a-form-item field="name" label="用户名" :rules="rules.name">
-      <a-input v-model="form.name" placeholder="请输入用户名" :max-length="8" allow-clear />
+  <a-form ref="FormRef" :model="form" :rules="rules">
+    <a-form-item label="用户名" field="name">
+      <a-input v-model="form.name" placeholder="请输入用户名" :max-length="4" allow-clear />
     </a-form-item>
-    <a-form-item field="phone" label="手机号" :rules="rules.phone">
+    <a-form-item label="手机号" field="phone">
       <a-input v-model="form.phone" placeholder="请输入手机号" :max-length="11" allow-clear />
     </a-form-item>
   </a-form>
@@ -12,6 +12,8 @@
 <script lang="ts" setup>
 import type { FormInstance } from '@arco-design/web-vue'
 import * as Regexp from '@/utils/regexp'
+
+defineOptions({ name: 'AddUserForm' })
 
 const form = reactive({
   name: '',
@@ -43,8 +45,12 @@ const saveUserApi = () => {
 const handleAddUser = async () => {
   const flag = await FormRef.value?.validate()
   if (flag) return false
-  await saveUserApi()
-  return true
+  try {
+    await saveUserApi()
+    return true
+  } catch (error) {
+    return true
+  }
 }
 
 defineExpose({ handleAddUser })

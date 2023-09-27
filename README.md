@@ -786,11 +786,9 @@ getDeptList() // 建议在页面调用 hooks 的方法，比较直观（不在ho
 
 #### TSX 方式使用表格
 
-<img src="https://gitee.com/lin0716/gi-image/raw/master/md-table1.png" />
+<img src="https://gitee.com/lin0716/gi-image/raw/master/md-tsx-table.png" />
 
-<img src="https://gitee.com/lin0716/gi-image/raw/master/md-table2.png" />
 
-<img src="https://gitee.com/lin0716/gi-image/raw/master/md-table3.png" />
 
 #### 分页 Hooks 的使用
 
@@ -1064,48 +1062,33 @@ const getTableData = async () => {
 
 tool.tsx
 
-<img src="https://gitee.com/lin0716/gi-image/raw/master/md-tsx1-1.png" />
+<img src="https://gitee.com/lin0716/gi-image/raw/master/md-tsx-modal2.png" />
 
 使用
 
-```vue
-<template>
-  <a-space class="aaa">
-    <a-button type="primary" @click="open">打开添加用户弹窗</a-button>
-  </a-space>
-</template>
+<img src="https://gitee.com/lin0716/gi-image/raw/master/md-tsx-modal-use.png" />
 
-<script lang="tsx" setup>
-import { openAddUserModal } from './tool'
 
-// 方式1
-const open = () => {
-  openAddUserModal()
-}
-</script>
-
-<style lang="scss" scoped></style>
-```
 
 ##### 方式 2
 
 AddUserForm.vue
 
-<img src="https://gitee.com/lin0716/gi-image/raw/master/md-tsx2-1.png" />
+<img src="https://gitee.com/lin0716/gi-image/raw/master/md-tsx-modal1.png" />
 
 使用
 
-<img src="https://gitee.com/lin0716/gi-image/raw/master/md-tsx2-2.png" />
+<img src="https://gitee.com/lin0716/gi-image/raw/master/md-tsx-modal-use.png" />
 
 ##### 方式 3
 
 `@/views/file/components/FileRenameModal/index.vue`
 
-<img src="https://gitee.com/lin0716/gi-image/raw/master/md-tsx3-1.png" />
+<img src="https://gitee.com/lin0716/gi-image/raw/master/md-tsx-modal3-1.png" />
 
 `@/views/file/components/index.ts`
 
-<img src="https://gitee.com/lin0716/gi-image/raw/master/md-tsx3-2.png" />
+<img src="https://gitee.com/lin0716/gi-image/raw/master/md-tsx-modal3-2.png" />
 
 使用
 
@@ -1120,6 +1103,8 @@ const rename = (item: FileItem) => {
 }
 </script>
 ```
+
+
 
 #### 组件使用建议
 

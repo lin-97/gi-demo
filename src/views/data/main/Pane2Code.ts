@@ -1,5 +1,5 @@
 export default `<template>
-  <a-card :bordered="false" class="gi_card pane3">
+  <a-card :bordered="false" class="gi_card pane2">
     <a-row justify="space-between" align="center" class="head">
       <div>
         <a-alert type="normal">
@@ -164,7 +164,7 @@ const selectAll: TableInstance['onSelectAll'] = (checked) => {
 </script>
 
 <style lang="scss" scoped>
-.pane3 {
+.pane2 {
   flex: 1;
   margin: $margin;
   .head {

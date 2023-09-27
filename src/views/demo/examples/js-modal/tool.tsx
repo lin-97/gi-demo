@@ -2,6 +2,7 @@ import { reactive } from 'vue'
 import { Modal, Form, type FormInstance } from '@arco-design/web-vue'
 import * as Regexp from '@/utils/regexp'
 
+// 打开添加用户的弹窗
 export const openAddUserModal = () => {
   const form = reactive({
     name: '',
@@ -33,11 +34,11 @@ export const openAddUserModal = () => {
   Modal.open({
     title: '添加用户',
     content: () => (
-      <Form model={form} ref={FormRef}>
-        <Form.Item field="name" label="用户名" rules={rules.name}>
-          <a-input v-model={form.name} placeholder="请输入用户名" max-length={8} allow-clear />
+      <Form ref={FormRef} model={form} rules={rules}>
+        <Form.Item label="用户名" field="name">
+          <a-input v-model={form.name} placeholder="请输入用户名" max-length={4} allow-clear />
         </Form.Item>
-        <Form.Item field="phone" label="手机号" rules={rules.phone}>
+        <Form.Item label="手机号" field="phone">
           <a-input v-model={form.phone} placeholder="请输入手机号" max-length={11} allow-clear />
         </Form.Item>
       </Form>
@@ -46,8 +47,12 @@ export const openAddUserModal = () => {
     onBeforeOk: async () => {
       const flag = await FormRef.value?.validate()
       if (flag) return false
-      await saveUserApi()
-      return true
+      try {
+        await saveUserApi()
+        return true
+      } catch (error) {
+        return false
+      }
     }
   })
 }
