@@ -3,11 +3,11 @@
     <WorkCard></WorkCard>
 
     <a-row class="row">
-      <a-col :xs="24" :md="24" :lg="12" :xl="12" :xxl="12">
+      <a-col :xs="24" :sm="24" :md="24" :lg="12" :xl="12" :xxl="12">
         <div class="item"><ProjectCard></ProjectCard></div>
         <div class="item"><MessageCard></MessageCard></div>
       </a-col>
-      <a-col :xs="24" :md="24" :lg="12" :xl="12" :xxl="12">
+      <a-col :xs="24" :sm="24" :md="24" :lg="12" :xl="12" :xxl="12">
         <div class="item"><FastCard></FastCard></div>
         <div class="item"><ImageCard></ImageCard></div>
       </a-col>
