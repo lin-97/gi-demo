@@ -1,19 +1,35 @@
 <template>
   <div class="asider">
-    <Logo :collapsed="appStore.menuCollapse"></Logo>
-    <a-layout-sider
-      class="menu"
-      collapsible
-      breakpoint="xl"
-      hide-trigger
-      :width="232"
-      :collapsed="appStore.menuCollapse"
-      @collapse="handleCollapse"
+    <a-drawer
+      v-if="isPhone()"
+      v-model:visible="appStore.menuCollapse"
+      placement="left"
+      :header="false"
+      :footer="false"
+      :render-to-body="false"
     >
+      <Logo :collapsed="false"></Logo>
       <a-menu :selected-keys="[activeMenu]" :auto-open-selected="true" :style="{ width: '100%', height: '100%' }">
         <SidebarItem v-for="(route, index) in sidebarRoutes" :key="route.path + index" :item="route"></SidebarItem>
       </a-menu>
-    </a-layout-sider>
+    </a-drawer>
+
+    <template v-else>
+      <Logo :collapsed="appStore.menuCollapse"></Logo>
+      <a-layout-sider
+        class="menu"
+        collapsible
+        breakpoint="xl"
+        hide-trigger
+        :width="232"
+        :collapsed="appStore.menuCollapse"
+        @collapse="handleCollapse"
+      >
+        <a-menu :selected-keys="[activeMenu]" :auto-open-selected="true" :style="{ width: '100%', height: '100%' }">
+          <SidebarItem v-for="(route, index) in sidebarRoutes" :key="route.path + index" :item="route"></SidebarItem>
+        </a-menu>
+      </a-layout-sider>
+    </template>
   </div>
 </template>
 
@@ -21,6 +37,7 @@
 import { useAppStore, useRouteStore } from '@/stores'
 import SidebarItem from './SidebarItem.vue'
 import Logo from './Logo.vue'
+import { isPhone } from '@/utils/common'
 
 defineOptions({ name: 'Asider' })
 const route = useRoute()
@@ -29,7 +46,9 @@ const routeStore = useRouteStore()
 const sidebarRoutes = computed(() => routeStore.routes)
 
 const handleCollapse = (isCollapsed: boolean) => {
-  appStore.menuCollapse = isCollapsed
+  if (!isPhone()) {
+    appStore.menuCollapse = isCollapsed
+  }
 }
 
 console.log('sidebarRoutes', JSON.parse(JSON.stringify(sidebarRoutes.value)))
@@ -58,6 +77,11 @@ const activeMenu = computed(() => {
   .arco-menu-title {
     display: none;
   }
+}
+
+:deep(.arco-drawer-body) {
+  padding: 0;
+  overflow: hidden;
 }
 
 .asider {

@@ -1,7 +1,7 @@
 <template>
   <a-layout class="layout">
     <Asider></Asider>
-    <a-layout>
+    <a-layout class="layout-right">
       <Header></Header>
       <Tabs></Tabs>
       <Main></Main>
@@ -22,5 +22,8 @@ defineOptions({ name: 'Layout' })
 .layout {
   height: 100%;
   flex-direction: row;
+  &-right {
+    overflow: hidden;
+  }
 }
 </style>

@@ -1,5 +1,5 @@
 import { isExternal } from '@/utils/validate'
-import { mapTree } from 'xe-utils'
+import { mapTree, browse } from 'xe-utils'
 
 /**
  * @desc 去除空格
@@ -251,4 +251,9 @@ export const sortTree: SortTree = (values) => {
     item.children?.sort((a, b) => (a?.sort ?? 0) - (b?.sort ?? 0)) // 排序
     return item
   })
+}
+
+/** @desc 是否是h5环境 */
+export const isPhone = () => {
+  return browse().isMobile
 }

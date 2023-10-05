@@ -1,11 +1,15 @@
 <template>
-  <component :is="type" v-bind="linkProps()">
+  <component :is="type" v-bind="linkProps()" @click="onClick">
     <slot></slot>
   </component>
 </template>
 
 <script lang="ts" setup>
 import { isExternal } from '@/utils/validate'
+import { isPhone } from '@/utils/common'
+import { useAppStore } from '@/stores'
+
+const appStore = useAppStore()
 
 interface Props {
   to: string | AnyObject
@@ -35,5 +39,10 @@ const linkProps = () => {
     }
   }
   return { to: props.to }
+}
+
+const onClick = () => {
+  if (!isPhone()) return
+  appStore.menuCollapse = false
 }
 </script>

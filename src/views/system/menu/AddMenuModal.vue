@@ -2,7 +2,7 @@
   <a-modal
     :title="title"
     v-model:visible="visible"
-    :width="625"
+    :width="isPhone() ? '100%' : 625"
     :mask-closable="false"
     @before-ok="save"
     @close="close"
@@ -33,7 +33,7 @@
       </a-form-item>
 
       <a-row :gutter="16" v-if="[1, 2].includes(form.type)">
-        <a-col :span="12">
+        <a-col :xs="24" :sm="24" :md="12" :lg="12" :xl="12" :xxl="12">
           <a-form-item label="自定义图标" field="svgIcon">
             <GiIconSelector v-model="form.svgIcon" type="custom"></GiIconSelector>
             <a-tooltip content="优先显示">
@@ -41,7 +41,7 @@
             </a-tooltip>
           </a-form-item>
         </a-col>
-        <a-col :span="12">
+        <a-col :xs="24" :sm="24" :md="12" :lg="12" :xl="12" :xxl="12">
           <a-form-item label="菜单图标" field="icon">
             <GiIconSelector v-model="form.icon"></GiIconSelector>
           </a-form-item>
@@ -82,7 +82,7 @@
       </a-form-item>
 
       <a-row :gutter="16" v-if="[1, 2].includes(form.type)">
-        <a-col :span="8">
+        <a-col :xs="12" :sm="12" :md="8" :lg="8" :xl="8" :xxl="8">
           <a-form-item label="状态" field="status">
             <a-switch
               type="round"
@@ -94,7 +94,7 @@
             />
           </a-form-item>
         </a-col>
-        <a-col :span="8">
+        <a-col :xs="12" :sm="12" :md="8" :lg="8" :xl="8" :xxl="8">
           <a-form-item label="是否隐藏" field="hidden">
             <a-switch
               type="round"
@@ -106,7 +106,7 @@
             />
           </a-form-item>
         </a-col>
-        <a-col :span="8">
+        <a-col :xs="12" :sm="12" :md="8" :lg="8" :xl="8" :xxl="8">
           <a-form-item label="是否缓存" field="keepAlive">
             <a-switch
               type="round"
@@ -118,7 +118,7 @@
             />
           </a-form-item>
         </a-col>
-        <a-col :span="8">
+        <a-col :xs="12" :sm="12" :md="8" :lg="8" :xl="8" :xxl="8">
           <a-form-item label="面包屑" field="breadcrumb">
             <a-switch
               type="round"
@@ -130,7 +130,7 @@
             />
           </a-form-item>
         </a-col>
-        <a-col :span="8">
+        <a-col :xs="12" :sm="12" :md="8" :lg="8" :xl="8" :xxl="8">
           <a-form-item label="总是显示" field="alwaysShow" v-if="form.type === 1">
             <a-switch
               type="round"
@@ -169,7 +169,7 @@
 import { Message, type FormInstance } from '@arco-design/web-vue'
 import { getSystemMenuDetail, saveSystemMenu, type MenuItem } from '@/apis'
 import { isExternal } from '@/utils/validate'
-import { transformPathToName, filterTree } from '@/utils/common'
+import { transformPathToName, filterTree, isPhone } from '@/utils/common'
 import { mapTree } from 'xe-utils'
 import type { MenuForm } from './type'
 

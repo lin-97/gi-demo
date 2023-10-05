@@ -1,7 +1,7 @@
 <template>
   <div class="gi_page dept-manage">
     <a-card title="部门管理">
-      <a-space>
+      <a-space wrap>
         <a-input v-model="form.name" placeholder="输入部门名称搜索" allow-clear style="width: 250px">
           <template #prefix><icon-search /></template>
         </a-input>
@@ -39,7 +39,7 @@
           row-key="id"
           :bordered="{ cell: true }"
           :data="deptList"
-          :scroll="{ x: '100%', y: '100%', minWidth: 900 }"
+          :scroll="{ x: '100%', y: '100%', minWidth: 1000 }"
           :pagination="false"
           :row-selection="{ type: 'checkbox', showCheckedAll: false }"
           @select="select"
@@ -49,7 +49,7 @@
             <IconRight v-else />
           </template>
           <template #columns>
-            <a-table-column title="部门名称" data-index="name"></a-table-column>
+            <a-table-column title="部门名称" data-index="name" :width="160"></a-table-column>
             <a-table-column title="排序" data-index="sort" :width="100" align="center"></a-table-column>
             <a-table-column title="状态" :width="100" align="center">
               <template #cell="{ record }">
@@ -59,7 +59,7 @@
             </a-table-column>
             <a-table-column title="描述" data-index="description" :width="250"></a-table-column>
             <a-table-column title="创建时间" data-index="createTime" :width="200"></a-table-column>
-            <a-table-column title="操作" :width="250" align="center" fixed="right">
+            <a-table-column title="操作" :width="250" align="center" :fixed="!isPhone() ? 'right' : undefined">
               <template #cell="{ record }">
                 <a-space>
                   <a-button type="primary" size="mini" @click="onEdit(record)">
@@ -93,6 +93,7 @@ import AddDeptModal from './AddDeptModal.vue'
 import { getSystemDeptList, type DeptItem } from '@/apis'
 import type { TableInstance } from '@arco-design/web-vue'
 import { Message } from '@arco-design/web-vue'
+import { isPhone } from '@/utils/common'
 
 defineOptions({ name: 'SystemDept' })
 

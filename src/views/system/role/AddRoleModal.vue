@@ -1,5 +1,12 @@
 <template>
-  <a-modal v-model:visible="visible" :title="title" :mask-closable="false" @before-ok="save" @close="close">
+  <a-modal
+    v-model:visible="visible"
+    :title="title"
+    :width="isPhone() ? '100%' : 'auto'"
+    :mask-closable="false"
+    @before-ok="save"
+    @close="close"
+  >
     <a-form ref="FormRef" :model="form" :rules="rules" size="medium" auto-label-width>
       <a-form-item label="角色名称" field="name">
         <a-input placeholder="请输入角色名称" v-model="form.name"> </a-input>
@@ -33,6 +40,7 @@
 <script setup lang="ts">
 import { getSystemRoleDetail, saveSystemRole } from '@/apis'
 import { Message, type FormInstance } from '@arco-design/web-vue'
+import { isPhone } from '@/utils/common'
 
 const FormRef = ref<FormInstance>()
 const roleId = ref('')

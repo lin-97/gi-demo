@@ -1,7 +1,7 @@
 <template>
   <div class="gi_page role-manage">
     <a-card title="角色管理">
-      <a-space>
+      <a-space wrap>
         <a-input v-model="form.name" placeholder="输入角色名搜索" allow-clear style="width: 250px">
           <template #prefix><icon-search /></template>
         </a-input>
@@ -57,7 +57,7 @@
             </a-table-column>
             <a-table-column title="描述" data-index="description"></a-table-column>
             <a-table-column title="创建时间" data-index="createTime"></a-table-column>
-            <a-table-column title="操作" :width="280" align="center" fixed="right">
+            <a-table-column title="操作" :width="280" align="center" :fixed="!isPhone() ? 'right' : undefined">
               <template #cell="{ record }">
                 <a-space>
                   <a-button type="primary" size="mini" :disabled="record.disabled" @click="onEdit(record)">
@@ -100,6 +100,7 @@ import PermModal from './PermModal.vue'
 import type { RoleItem } from '@/apis'
 import { usePagination } from '@/hooks'
 import { getSystemRoleList } from '@/apis'
+import { isPhone } from '@/utils/common'
 
 defineOptions({ name: 'SystemRole' })
 

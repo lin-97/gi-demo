@@ -1,5 +1,5 @@
 <template>
-  <a-modal v-model:visible="visible" :title="title" :mask-closable="true" @ok="save">
+  <a-modal v-model:visible="visible" :title="title" :fullscreen="isPhone()" :mask-closable="true" @ok="save">
     <a-tree
       ref="TreeRef"
       size="mini"
@@ -16,6 +16,7 @@
 import { getSystemMenuOptions, getSystemRoleMenuIds, type MenuOptionsItem } from '@/apis'
 import type { TreeInstance } from '@arco-design/web-vue'
 import { Message } from '@arco-design/web-vue'
+import { isPhone } from '@/utils/common'
 
 const TreeRef = ref<TreeInstance>()
 const treeData = ref<MenuOptionsItem[]>([])

@@ -2,7 +2,7 @@
   <div class="gi_page menu-manage">
     <a-card title="菜单管理">
       <a-row justify="space-between">
-        <a-space>
+        <a-space wrap>
           <a-button type="primary" @click="onAdd">
             <template #icon><icon-plus /></template>
             <span>新增</span>
@@ -22,7 +22,7 @@
           </a-tooltip>
         </a-space>
 
-        <a-space>
+        <a-space wrap>
           <a-input v-model="form.name" placeholder="输入菜单名称搜索" allow-clear style="width: 250px">
             <template #prefix><icon-search /></template>
           </a-input>
@@ -111,7 +111,7 @@
                 <a-tag v-else color="red">否</a-tag>
               </template>
             </a-table-column>
-            <a-table-column title="操作" :width="200" align="left" fixed="right">
+            <a-table-column title="操作" :width="200" align="left" :fixed="!isPhone() ? 'right' : undefined">
               <template #cell="{ record }">
                 <a-space>
                   <a-button type="primary" size="mini" @click="onEdit(record)">
@@ -144,7 +144,7 @@ import AddMenuModal from './AddMenuModal.vue'
 import { getSystemMenuList, type MenuItem } from '@/apis'
 import { Drawer, type TableInstance } from '@arco-design/web-vue'
 import { isExternal } from '@/utils/validate'
-import { transformPathToName } from '@/utils/common'
+import { transformPathToName, isPhone } from '@/utils/common'
 import GiCodeView from '@/components/GiCodeView/index.vue'
 
 defineOptions({ name: 'SystemMenu' })

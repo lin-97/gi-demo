@@ -10,6 +10,11 @@
 
 <script setup lang="ts">
 defineOptions({ name: 'App' })
+
+// h5禁止缩放
+document.addEventListener('gesturestart', function (event) {
+  event.preventDefault()
+})
 </script>
 
 <style lang="scss" scoped>

@@ -1,6 +1,6 @@
 <template>
   <a-drawer v-model:visible="visible" title="用户详情" width="auto">
-    <a-descriptions :column="2" bordered size="large">
+    <a-descriptions :column="{ xs: 1, sm: 1, md: 2 }" bordered size="large">
       <a-descriptions-item label="用户名">{{ user?.username }}</a-descriptions-item>
       <a-descriptions-item label="昵称">{{ user?.nickname }}</a-descriptions-item>
       <!-- <a-descriptions-item label="类型">

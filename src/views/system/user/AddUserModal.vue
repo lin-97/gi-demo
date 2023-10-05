@@ -1,7 +1,7 @@
 <template>
   <a-modal
     v-model:visible="visible"
-    :width="600"
+    :width="isPhone() ? '100%' : 600"
     :title="title"
     :mask-closable="false"
     @before-ok="save"
@@ -9,12 +9,12 @@
   >
     <a-form ref="FormRef" :model="form" :rules="rules" size="medium" auto-label-width>
       <a-row>
-        <a-col :span="12">
+        <a-col :xs="24" :sm="24" :md="12" :lg="12" :xl="12" :xxl="12">
           <a-form-item label="用户名" field="username">
             <a-input v-model="form.username" placeholder="请输入用户名" :disabled="form.disabled"></a-input>
           </a-form-item>
         </a-col>
-        <a-col :span="12">
+        <a-col :xs="24" :sm="24" :md="12" :lg="12" :xl="12" :xxl="12">
           <a-form-item label="昵称" field="nickname">
             <a-input v-model="form.nickname" placeholder="请输入昵称"></a-input>
           </a-form-item>
@@ -22,12 +22,12 @@
       </a-row>
 
       <a-row>
-        <a-col :span="12">
+        <a-col :xs="24" :sm="24" :md="12" :lg="12" :xl="12" :xxl="12">
           <a-form-item label="手机号码" field="phone">
             <a-input v-model="form.phone" placeholder="请输入手机号码"></a-input>
           </a-form-item>
         </a-col>
-        <a-col :span="12">
+        <a-col :xs="24" :sm="24" :md="12" :lg="12" :xl="12" :xxl="12">
           <a-form-item label="邮箱" field="email">
             <a-input v-model="form.email" placeholder="请输入邮箱"></a-input>
           </a-form-item>
@@ -94,6 +94,7 @@
 <script setup lang="ts">
 import { useDept, useRole } from '@/hooks/app'
 import * as Regexp from '@/utils/regexp'
+import { isPhone } from '@/utils/common'
 import { getSystemUserDetail, saveSystemUser } from '@/apis'
 import { Message, type FormInstance } from '@arco-design/web-vue'
 
