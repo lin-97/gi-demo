@@ -2,8 +2,9 @@
   <a-modal
     v-model:visible="visible"
     :title="title"
-    :width="isPhone() ? 360 : 'auto'"
+    width="90%"
     :mask-closable="false"
+    :modal-style="{ maxWidth: '520px' }"
     @before-ok="save"
     @close="close"
   >
@@ -40,7 +41,6 @@
 <script setup lang="ts">
 import { getSystemRoleDetail, saveSystemRole } from '@/apis'
 import { Message, type FormInstance } from '@arco-design/web-vue'
-import { isPhone } from '@/utils/common'
 
 const FormRef = ref<FormInstance>()
 const roleId = ref('')

@@ -1,9 +1,10 @@
 <template>
   <a-modal
     v-model:visible="visible"
-    :width="isPhone() ? 360 : 600"
     :title="title"
+    width="90%"
     :mask-closable="false"
+    :modal-style="{ maxWidth: '600px' }"
     @before-ok="save"
     @close="close"
   >
@@ -94,7 +95,6 @@
 <script setup lang="ts">
 import { useDept, useRole } from '@/hooks/app'
 import * as Regexp from '@/utils/regexp'
-import { isPhone } from '@/utils/common'
 import { getSystemUserDetail, saveSystemUser } from '@/apis'
 import { Message, type FormInstance } from '@arco-design/web-vue'
 

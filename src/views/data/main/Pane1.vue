@@ -6,7 +6,7 @@
 
     <a-card title="数据列表" :bordered="false" :header-style="{ display: 'none' }" class="gi_card pane-right">
       <div class="content">
-        <a-row justify="space-between" style="margin-bottom: 12px">
+        <a-row justify="space-between">
           <a-space wrap>
             <a-button type="primary" @click="onAdd">
               <template #icon><icon-plus /></template>
@@ -36,7 +36,7 @@
           </a-space>
         </a-row>
 
-        <section class="gi_table_box">
+        <section class="gi_table_box" style="padding-top: 8px">
           <a-table
             row-key="id"
             size="small"

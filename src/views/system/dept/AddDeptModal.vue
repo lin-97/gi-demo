@@ -2,7 +2,8 @@
   <a-modal
     v-model:visible="visible"
     :title="title"
-    :width="isPhone() ? 360 : 'auto'"
+    width="90%"
+    :modal-style="{ maxWidth: '520px' }"
     :mask-closable="false"
     @before-ok="save"
     @close="close"
@@ -54,7 +55,6 @@
 import { useDept } from '@/hooks/app'
 import { getSystemDeptDetil, saveSystemDept } from '@/apis'
 import { Message, type FormInstance } from '@arco-design/web-vue'
-import { isPhone } from '@/utils/common'
 
 const FormRef = ref<FormInstance>()
 const deptId = ref('')

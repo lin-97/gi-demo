@@ -1,8 +1,9 @@
 <template>
   <a-modal
-    :title="title"
     v-model:visible="visible"
-    :width="isPhone() ? 360 : 625"
+    :title="title"
+    width="90%"
+    :modal-style="{ maxWidth: '625px' }"
     :mask-closable="false"
     @before-ok="save"
     @close="close"
@@ -169,7 +170,7 @@
 import { Message, type FormInstance } from '@arco-design/web-vue'
 import { getSystemMenuDetail, saveSystemMenu, type MenuItem } from '@/apis'
 import { isExternal } from '@/utils/validate'
-import { transformPathToName, filterTree, isPhone } from '@/utils/common'
+import { transformPathToName, filterTree } from '@/utils/common'
 import { mapTree } from 'xe-utils'
 import type { MenuForm } from './type'
 
