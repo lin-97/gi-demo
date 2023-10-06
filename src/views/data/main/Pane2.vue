@@ -1,6 +1,6 @@
 <template>
   <a-card :bordered="false" class="gi_card pane2">
-    <a-row justify="space-between" align="center" class="head">
+    <a-row justify="space-between" align="center" wrap class="head">
       <div>
         <a-alert type="normal">
           <template #icon>

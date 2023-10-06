@@ -19,8 +19,8 @@
         </a-button>
       </a-space>
 
-      <a-row class="gi_my">
-        <a-space>
+      <a-row>
+        <a-space wrap>
           <a-button type="primary" @click="onAdd">
             <template #icon><icon-plus /></template>
             <span>新增</span>
@@ -32,56 +32,55 @@
         </a-space>
       </a-row>
 
-      <section class="gi_mt">
-        <a-table
-          :loading="loading"
-          ref="TableRef"
-          row-key="id"
-          :bordered="{ cell: true }"
-          :data="deptList"
-          :scroll="{ x: '100%', y: '100%', minWidth: 1000 }"
-          :pagination="false"
-          :row-selection="{ type: 'checkbox', showCheckedAll: false }"
-          @select="select"
-        >
-          <template #expand-icon="{ expanded }">
-            <IconDown v-if="expanded" />
-            <IconRight v-else />
-          </template>
-          <template #columns>
-            <a-table-column title="部门名称" data-index="name" :width="160"></a-table-column>
-            <a-table-column title="排序" data-index="sort" :width="100" align="center"></a-table-column>
-            <a-table-column title="状态" :width="100" align="center">
-              <template #cell="{ record }">
-                <a-tag v-if="record.status == 1" color="green">正常</a-tag>
-                <a-tag v-if="record.status == 0" color="red">禁用</a-tag>
-              </template>
-            </a-table-column>
-            <a-table-column title="描述" data-index="description" :width="250"></a-table-column>
-            <a-table-column title="创建时间" data-index="createTime" :width="200"></a-table-column>
-            <a-table-column title="操作" :width="250" align="center" :fixed="!isPhone() ? 'right' : undefined">
-              <template #cell="{ record }">
-                <a-space>
-                  <a-button type="primary" size="mini" @click="onEdit(record)">
-                    <template #icon><icon-edit /></template>
-                    <span>编辑</span>
+      <a-table
+        style="margin-top: 8px"
+        ref="TableRef"
+        row-key="id"
+        :bordered="{ cell: true }"
+        :data="deptList"
+        :loading="loading"
+        :scroll="{ x: '100%', y: '100%', minWidth: 1000 }"
+        :pagination="false"
+        :row-selection="{ type: 'checkbox', showCheckedAll: false }"
+        @select="select"
+      >
+        <template #expand-icon="{ expanded }">
+          <IconDown v-if="expanded" />
+          <IconRight v-else />
+        </template>
+        <template #columns>
+          <a-table-column title="部门名称" data-index="name" :width="160"></a-table-column>
+          <a-table-column title="排序" data-index="sort" :width="100" align="center"></a-table-column>
+          <a-table-column title="状态" :width="100" align="center">
+            <template #cell="{ record }">
+              <a-tag v-if="record.status == 1" color="green">正常</a-tag>
+              <a-tag v-if="record.status == 0" color="red">禁用</a-tag>
+            </template>
+          </a-table-column>
+          <a-table-column title="描述" data-index="description" :width="250"></a-table-column>
+          <a-table-column title="创建时间" data-index="createTime" :width="200"></a-table-column>
+          <a-table-column title="操作" :width="250" align="center" :fixed="!isPhone() ? 'right' : undefined">
+            <template #cell="{ record }">
+              <a-space>
+                <a-button type="primary" size="mini" @click="onEdit(record)">
+                  <template #icon><icon-edit /></template>
+                  <span>编辑</span>
+                </a-button>
+                <a-button v-if="record.parentId" type="primary" status="success" size="mini" @click="onAdd()">
+                  <template #icon><icon-plus /></template>
+                  <span>新增</span>
+                </a-button>
+                <a-popconfirm type="warning" content="您确定要删除该项吗?">
+                  <a-button type="primary" status="danger" size="mini">
+                    <template #icon><icon-delete /></template>
+                    <span>删除</span>
                   </a-button>
-                  <a-button v-if="record.parentId" type="primary" status="success" size="mini" @click="onAdd()">
-                    <template #icon><icon-plus /></template>
-                    <span>新增</span>
-                  </a-button>
-                  <a-popconfirm type="warning" content="您确定要删除该项吗?">
-                    <a-button type="primary" status="danger" size="mini">
-                      <template #icon><icon-delete /></template>
-                      <span>删除</span>
-                    </a-button>
-                  </a-popconfirm>
-                </a-space>
-              </template>
-            </a-table-column>
-          </template>
-        </a-table>
-      </section>
+                </a-popconfirm>
+              </a-space>
+            </template>
+          </a-table-column>
+        </template>
+      </a-table>
     </a-card>
 
     <AddDeptModal ref="AddDeptModalRef"></AddDeptModal>

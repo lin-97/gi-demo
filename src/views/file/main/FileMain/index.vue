@@ -5,7 +5,7 @@
 
     <a-row justify="space-between" class="row-operate">
       <!-- 左侧区域 -->
-      <a-space>
+      <a-space wrap>
         <a-dropdown>
           <a-button type="primary" shape="round">
             <template #icon><icon-upload /></template>
@@ -41,7 +41,7 @@
       </a-space>
 
       <!-- 右侧区域 -->
-      <a-space v-if="windowWidth > 715">
+      <a-space wrap>
         <a-button
           v-if="isBatchMode"
           :disabled="!fileStore.selectedFileIdList.length"
@@ -128,7 +128,6 @@ import {
 const route = useRoute()
 const router = useRouter()
 
-const { width: windowWidth } = useWindowSize()
 const fileStore = useFileStore()
 
 const loading = ref(false)
@@ -237,10 +236,6 @@ const handleMulDelete = () => {
   .row-operate {
     border-bottom: 1px dashed var(--color-border-3);
     margin: 0 $padding;
-    padding-bottom: 12px;
-    > * {
-      margin-top: 12px;
-    }
   }
   .file-wrap {
     flex: 1;

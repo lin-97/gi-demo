@@ -19,8 +19,8 @@
         </a-button>
       </a-space>
 
-      <a-row class="gi_my">
-        <a-space>
+      <a-row>
+        <a-space wrap>
           <a-button type="primary" @click="onAdd">
             <template #icon><icon-plus /></template>
             <span>新增</span>
@@ -32,60 +32,59 @@
         </a-space>
       </a-row>
 
-      <section class="gi_mt">
-        <a-table
-          row-key="id"
-          :data="roleList"
-          :bordered="{ cell: true }"
-          :loading="loading"
-          :scroll="{ x: '100%', y: '100%', minWidth: 900 }"
-          :pagination="pagination"
-          :row-selection="{ type: 'checkbox', showCheckedAll: false }"
-          @select="select"
-        >
-          <template #columns>
-            <a-table-column title="序号" :width="64">
-              <template #cell="cell">{{ cell.rowIndex + 1 }}</template>
-            </a-table-column>
-            <a-table-column title="角色名称" data-index="name"></a-table-column>
-            <a-table-column title="角色编号" data-index="code"></a-table-column>
-            <a-table-column title="状态" :width="100" align="center">
-              <template #cell="{ record }">
-                <a-tag v-if="record.status == 1" color="green">正常</a-tag>
-                <a-tag v-if="record.status == 0" color="red">禁用</a-tag>
-              </template>
-            </a-table-column>
-            <a-table-column title="描述" data-index="description"></a-table-column>
-            <a-table-column title="创建时间" data-index="createTime"></a-table-column>
-            <a-table-column title="操作" :width="280" align="center" :fixed="!isPhone() ? 'right' : undefined">
-              <template #cell="{ record }">
-                <a-space>
-                  <a-button type="primary" size="mini" :disabled="record.disabled" @click="onEdit(record)">
-                    <template #icon><icon-edit /></template>
-                    <span>编辑</span>
+      <a-table
+        style="margin-top: 8px"
+        row-key="id"
+        :data="roleList"
+        :bordered="{ cell: true }"
+        :loading="loading"
+        :scroll="{ x: '100%', y: '100%', minWidth: 900 }"
+        :pagination="pagination"
+        :row-selection="{ type: 'checkbox', showCheckedAll: false }"
+        @select="select"
+      >
+        <template #columns>
+          <a-table-column title="序号" :width="64">
+            <template #cell="cell">{{ cell.rowIndex + 1 }}</template>
+          </a-table-column>
+          <a-table-column title="角色名称" data-index="name"></a-table-column>
+          <a-table-column title="角色编号" data-index="code"></a-table-column>
+          <a-table-column title="状态" :width="100" align="center">
+            <template #cell="{ record }">
+              <a-tag v-if="record.status == 1" color="green">正常</a-tag>
+              <a-tag v-if="record.status == 0" color="red">禁用</a-tag>
+            </template>
+          </a-table-column>
+          <a-table-column title="描述" data-index="description"></a-table-column>
+          <a-table-column title="创建时间" data-index="createTime"></a-table-column>
+          <a-table-column title="操作" :width="280" align="center" :fixed="!isPhone() ? 'right' : undefined">
+            <template #cell="{ record }">
+              <a-space>
+                <a-button type="primary" size="mini" :disabled="record.disabled" @click="onEdit(record)">
+                  <template #icon><icon-edit /></template>
+                  <span>编辑</span>
+                </a-button>
+                <a-button
+                  type="primary"
+                  status="success"
+                  size="mini"
+                  :disabled="record.disabled"
+                  @click="onPerm(record)"
+                >
+                  <template #icon><icon-safe /></template>
+                  <template #default>分配权限</template>
+                </a-button>
+                <a-popconfirm type="warning" content="确定删除该角色吗?" @ok="onDelete">
+                  <a-button type="primary" status="danger" size="mini" :disabled="record.disabled">
+                    <template #icon><icon-delete /></template>
+                    <span>删除</span>
                   </a-button>
-                  <a-button
-                    type="primary"
-                    status="success"
-                    size="mini"
-                    :disabled="record.disabled"
-                    @click="onPerm(record)"
-                  >
-                    <template #icon><icon-safe /></template>
-                    <template #default>分配权限</template>
-                  </a-button>
-                  <a-popconfirm type="warning" content="确定删除该角色吗?" @ok="onDelete">
-                    <a-button type="primary" status="danger" size="mini" :disabled="record.disabled">
-                      <template #icon><icon-delete /></template>
-                      <span>删除</span>
-                    </a-button>
-                  </a-popconfirm>
-                </a-space>
-              </template>
-            </a-table-column>
-          </template>
-        </a-table>
-      </section>
+                </a-popconfirm>
+              </a-space>
+            </template>
+          </a-table-column>
+        </template>
+      </a-table>
 
       <AddRoleModal ref="AddRoleModalRef"></AddRoleModal>
       <PermModal ref="PermModalRef"></PermModal>

@@ -1,18 +1,20 @@
 <template>
-  <div class="step-form">
-    <section class="form-box">
-      <a-steps :current="current" :direction="!_XEUtils_.browse().isMobile ? 'horizontal' : 'vertical'">
-        <a-step description="确保填写正确">填写转账信息</a-step>
-        <a-step description="确认转账信息">确认转账信息</a-step>
-        <a-step description="恭喜您，转账成功">完成转账</a-step>
-      </a-steps>
+  <div class="gi_page step-form">
+    <div class="wrapper">
+      <section class="form-box">
+        <a-steps :current="current" :direction="!_XEUtils_.browse().isMobile ? 'horizontal' : 'vertical'">
+          <a-step description="确保填写正确">填写转账信息</a-step>
+          <a-step description="确认转账信息">确认转账信息</a-step>
+          <a-step description="恭喜您，转账成功">完成转账</a-step>
+        </a-steps>
 
-      <transition name="fade-slide" mode="out-in" appear>
-        <keep-alive>
-          <component :is="ComponentMap[current]" :form="form" @next="next" @prev="prev" @again="current = 1" />
-        </keep-alive>
-      </transition>
-    </section>
+        <transition name="fade-slide" mode="out-in" appear>
+          <keep-alive>
+            <component :is="ComponentMap[current]" :form="form" @next="next" @prev="prev" @again="current = 1" />
+          </keep-alive>
+        </transition>
+      </section>
+    </div>
   </div>
 </template>
 
@@ -55,13 +57,12 @@ const prev = () => {
 
 <style lang="scss" scoped>
 .step-form {
-  flex: 1;
-  margin: $margin;
-  padding: $padding;
-  background: var(--color-bg-1);
-  display: flex;
-  justify-content: center;
-  box-sizing: border-box;
+  .wrapper {
+    padding: $padding;
+    background: var(--color-bg-1);
+    display: flex;
+    justify-content: center;
+  }
   .form-box {
     width: 100%;
     max-width: 560px;

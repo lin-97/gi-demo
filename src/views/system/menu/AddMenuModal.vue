@@ -2,7 +2,7 @@
   <a-modal
     :title="title"
     v-model:visible="visible"
-    :width="isPhone() ? '100%' : 625"
+    :width="isPhone() ? 360 : 625"
     :mask-closable="false"
     @before-ok="save"
     @close="close"

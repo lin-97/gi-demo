@@ -1,7 +1,7 @@
 <template>
   <a-modal
     v-model:visible="visible"
-    :width="isPhone() ? '100%' : 600"
+    :width="isPhone() ? 360 : 600"
     :title="title"
     :mask-closable="false"
     @before-ok="save"

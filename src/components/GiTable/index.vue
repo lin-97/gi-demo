@@ -4,7 +4,7 @@
       <a-space>
         <slot name="custom-extra"></slot>
       </a-space>
-      <a-space :size="15">
+      <a-space :size="15" wrap>
         <a-tooltip content="斑马纹">
           <a-switch v-model="stripe" size="small" type="round" />
         </a-tooltip>

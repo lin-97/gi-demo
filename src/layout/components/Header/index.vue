@@ -25,7 +25,7 @@
             </a-tooltip>
 
             <!-- 消息通知 -->
-            <a-popover position="br" trigger="click">
+            <a-popover position="bottom" trigger="click">
               <a-badge :count="9" dot>
                 <a-button size="mini" class="gi_hover_btn">
                   <template #icon>

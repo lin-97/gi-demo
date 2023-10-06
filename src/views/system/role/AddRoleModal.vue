@@ -2,7 +2,7 @@
   <a-modal
     v-model:visible="visible"
     :title="title"
-    :width="isPhone() ? '100%' : 'auto'"
+    :width="isPhone() ? 360 : 'auto'"
     :mask-closable="false"
     @before-ok="save"
     @close="close"

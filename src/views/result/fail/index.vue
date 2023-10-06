@@ -35,28 +35,23 @@ defineOptions({ name: 'ResultFail' })
 
 <style lang="scss" scoped>
 .page {
-  width: 100%;
-  height: 100%;
   padding: $margin;
   box-sizing: border-box;
   overflow-y: auto;
   .box {
     padding: 30px;
     box-sizing: border-box;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    overflow: hidden;
     background-color: var(--color-bg-1);
   }
   .info {
-    width: 50%;
+    width: 100%;
+    max-width: 500px;
     margin: 0 auto;
     padding: 24px;
     margin-top: 20px;
     background: var(--color-fill-2);
     font-size: 12px;
+    box-sizing: border-box;
     ul > li {
       display: flex;
       align-items: center;

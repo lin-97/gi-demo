@@ -1,13 +1,13 @@
 <template>
   <div class="data-pane">
-    <a-card v-if="!_XEUtils_.browse().isMobile" title="数据分类" :bordered="false" class="gi_card pane-left">
+    <a-card v-if="!isPhone()" title="数据分类" :bordered="false" class="gi_card pane-left">
       <CateTree placeholder="请输入搜索关键词" @node-click="pagination.onChange(1)"></CateTree>
     </a-card>
 
     <a-card title="数据列表" :bordered="false" :header-style="{ display: 'none' }" class="gi_card pane-right">
       <div class="content">
         <a-row justify="space-between" style="margin-bottom: 12px">
-          <a-space>
+          <a-space wrap>
             <a-button type="primary" @click="onAdd">
               <template #icon><icon-plus /></template>
             </a-button>
@@ -98,7 +98,7 @@ import EditModal from './EditModal.vue'
 import { getPersonList } from '@/apis'
 import type { PersonItem } from '@/apis'
 import { StatusList } from '@/constant/person'
-import _XEUtils_ from 'xe-utils'
+import { isPhone } from '@/utils/common'
 
 const router = useRouter()
 

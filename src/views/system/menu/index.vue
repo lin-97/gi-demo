@@ -41,98 +41,97 @@
         </a-space>
       </a-row>
 
-      <section class="gi_mt">
-        <a-table
-          ref="TableRef"
-          :data="menuList"
-          row-key="id"
-          :loading="loading"
-          :bordered="{ cell: true }"
-          :scroll="{ x: '100%', y: '100%', minWidth: 1700 }"
-          :pagination="false"
-          size="mini"
-        >
-          <template #expand-icon="{ expanded }">
-            <IconDown v-if="expanded" />
-            <IconRight v-else />
-          </template>
-          <template #columns>
-            <a-table-column title="菜单名称">
-              <template #cell="{ record }">{{ record.title || '' }}</template>
-            </a-table-column>
-            <a-table-column title="类型" :width="80" align="center">
-              <template #cell="{ record }">
-                <a-tag v-if="record.type === 1" color="orangered">目录</a-tag>
-                <a-tag v-if="record.type === 2" color="green">菜单</a-tag>
-                <a-tag v-if="record.type === 3">按钮</a-tag>
-              </template>
-            </a-table-column>
-            <a-table-column title="排序" :width="80" align="center">
-              <template #cell="{ record }">{{ record.sort || 0 }}</template>
-            </a-table-column>
-            <a-table-column title="路由路径" data-index="path"> </a-table-column>
-            <a-table-column title="路由名称">
-              <template #cell="{ record }">{{ transformPathToName(record.path) }}</template>
-            </a-table-column>
-            <a-table-column title="组件路径" data-index="component"> </a-table-column>
-            <a-table-column title="权限标识" data-index="permission"> </a-table-column>
-            <a-table-column title="菜单图标" data-index="icon" :width="100" align="center">
-              <template #cell="{ record }">
-                <GiSvgIcon v-if="record.svgIcon" :size="24" :name="record.svgIcon"></GiSvgIcon>
-                <component v-else :is="record.icon" :size="24"></component>
-              </template>
-            </a-table-column>
-            <a-table-column title="状态" :width="80" align="center">
-              <template #cell="{ record }">
-                <a-switch
-                  type="round"
-                  size="small"
-                  :model-value="record.status"
-                  :checked-value="1"
-                  :unchecked-value="0"
-                />
-              </template>
-            </a-table-column>
-            <a-table-column title="是否缓存" :width="100" align="center">
-              <template #cell="{ record }">
-                <a-tag v-if="record.keepAlive" color="green">是</a-tag>
-                <a-tag v-else color="red">否</a-tag>
-              </template>
-            </a-table-column>
-            <a-table-column title="是否隐藏" :width="100" align="center">
-              <template #cell="{ record }">
-                <a-tag v-if="record.hidden" color="green">是</a-tag>
-                <a-tag v-else color="red">否</a-tag>
-              </template>
-            </a-table-column>
-            <a-table-column title="是否外链" :width="100" align="center">
-              <template #cell="{ record }">
-                <a-tag v-if="isExternal(record.path)" color="green">是</a-tag>
-                <a-tag v-else color="red">否</a-tag>
-              </template>
-            </a-table-column>
-            <a-table-column title="操作" :width="200" align="left" :fixed="!isPhone() ? 'right' : undefined">
-              <template #cell="{ record }">
-                <a-space>
-                  <a-button type="primary" size="mini" @click="onEdit(record)">
-                    <template #icon><icon-edit /></template>
-                    <span>编辑</span>
+      <a-table
+        style="margin-top: 8px"
+        ref="TableRef"
+        row-key="id"
+        :data="menuList"
+        :loading="loading"
+        :bordered="{ cell: true }"
+        :scroll="{ x: '100%', y: '100%', minWidth: 1700 }"
+        :pagination="false"
+        size="mini"
+      >
+        <template #expand-icon="{ expanded }">
+          <IconDown v-if="expanded" />
+          <IconRight v-else />
+        </template>
+        <template #columns>
+          <a-table-column title="菜单名称">
+            <template #cell="{ record }">{{ record.title || '' }}</template>
+          </a-table-column>
+          <a-table-column title="类型" :width="80" align="center">
+            <template #cell="{ record }">
+              <a-tag v-if="record.type === 1" color="orangered">目录</a-tag>
+              <a-tag v-if="record.type === 2" color="green">菜单</a-tag>
+              <a-tag v-if="record.type === 3">按钮</a-tag>
+            </template>
+          </a-table-column>
+          <a-table-column title="排序" :width="80" align="center">
+            <template #cell="{ record }">{{ record.sort || 0 }}</template>
+          </a-table-column>
+          <a-table-column title="路由路径" data-index="path"> </a-table-column>
+          <a-table-column title="路由名称">
+            <template #cell="{ record }">{{ transformPathToName(record.path) }}</template>
+          </a-table-column>
+          <a-table-column title="组件路径" data-index="component"> </a-table-column>
+          <a-table-column title="权限标识" data-index="permission"> </a-table-column>
+          <a-table-column title="菜单图标" data-index="icon" :width="100" align="center">
+            <template #cell="{ record }">
+              <GiSvgIcon v-if="record.svgIcon" :size="24" :name="record.svgIcon"></GiSvgIcon>
+              <component v-else :is="record.icon" :size="24"></component>
+            </template>
+          </a-table-column>
+          <a-table-column title="状态" :width="80" align="center">
+            <template #cell="{ record }">
+              <a-switch
+                type="round"
+                size="small"
+                :model-value="record.status"
+                :checked-value="1"
+                :unchecked-value="0"
+              />
+            </template>
+          </a-table-column>
+          <a-table-column title="是否缓存" :width="100" align="center">
+            <template #cell="{ record }">
+              <a-tag v-if="record.keepAlive" color="green">是</a-tag>
+              <a-tag v-else color="red">否</a-tag>
+            </template>
+          </a-table-column>
+          <a-table-column title="是否隐藏" :width="100" align="center">
+            <template #cell="{ record }">
+              <a-tag v-if="record.hidden" color="green">是</a-tag>
+              <a-tag v-else color="red">否</a-tag>
+            </template>
+          </a-table-column>
+          <a-table-column title="是否外链" :width="100" align="center">
+            <template #cell="{ record }">
+              <a-tag v-if="isExternal(record.path)" color="green">是</a-tag>
+              <a-tag v-else color="red">否</a-tag>
+            </template>
+          </a-table-column>
+          <a-table-column title="操作" :width="200" align="left" :fixed="!isPhone() ? 'right' : undefined">
+            <template #cell="{ record }">
+              <a-space>
+                <a-button type="primary" size="mini" @click="onEdit(record)">
+                  <template #icon><icon-edit /></template>
+                  <span>编辑</span>
+                </a-button>
+                <a-button v-if="[1, 2].includes(record.type)" type="primary" status="success" size="mini">
+                  <template #icon><icon-plus /></template>
+                </a-button>
+                <a-popconfirm type="warning" content="您确定要删除该项吗?">
+                  <a-button type="primary" status="danger" size="mini">
+                    <template #icon><icon-delete /></template>
+                    <span>删除</span>
                   </a-button>
-                  <a-button v-if="[1, 2].includes(record.type)" type="primary" status="success" size="mini">
-                    <template #icon><icon-plus /></template>
-                  </a-button>
-                  <a-popconfirm type="warning" content="您确定要删除该项吗?">
-                    <a-button type="primary" status="danger" size="mini">
-                      <template #icon><icon-delete /></template>
-                      <span>删除</span>
-                    </a-button>
-                  </a-popconfirm>
-                </a-space>
-              </template>
-            </a-table-column>
-          </template>
-        </a-table>
-      </section>
+                </a-popconfirm>
+              </a-space>
+            </template>
+          </a-table-column>
+        </template>
+      </a-table>
     </a-card>
 
     <AddMenuModal ref="AddMenuModalRef" :menus="menuList"></AddMenuModal>

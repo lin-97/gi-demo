@@ -13,7 +13,7 @@
 <style lang="scss" scoped>
 .file-path {
   padding: 10px $padding;
-  padding-bottom: 0;
+  padding-bottom: 12px;
   display: flex;
   align-items: center;
   cursor: pointer;
