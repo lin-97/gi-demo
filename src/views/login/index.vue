@@ -1,47 +1,49 @@
 <template>
   <div class="login">
-    <section class="login-box">
-      <!-- 左侧 -->
-      <div class="login-left">
-        <img class="login-img" src="@/assets/svgs/login-img.svg" />
-      </div>
-      <!-- 右侧 -->
-      <div class="login-right">
-        <a-form
-          ref="FormRef"
-          size="medium"
-          :model="form"
-          :rules="rules"
-          :style="{ width: '84%' }"
-          :label-col-style="{ display: 'none' }"
-          :wrapper-col-style="{ flex: 1 }"
-        >
-          <h3 class="login-form-title"><img class="logo" src="@/assets/images/logo.gif" /><span>Admin Pro</span></h3>
-          <a-form-item field="username">
-            <a-input v-model="form.username" placeholder="账号 admin/user" allow-clear>
-              <template #prefix><icon-user :stroke-width="1" :style="{ fontSize: '20px' }" /></template>
-            </a-input>
-          </a-form-item>
-          <a-form-item field="password">
-            <a-input-password v-model="form.password" placeholder="密码" allow-clear>
-              <template #prefix><icon-lock :stroke-width="1" :style="{ fontSize: '20px' }" /></template>
-            </a-input-password>
-          </a-form-item>
-          <a-form-item>
-            <a-row justify="space-between" align="center" class="w-100">
-              <a-checkbox v-model="checked">记住密码</a-checkbox>
-              <a-link>忘记密码</a-link>
-            </a-row>
-          </a-form-item>
-          <a-form-item>
-            <a-space direction="vertical" fill class="w-100">
-              <a-button type="primary" size="large" long :loading="loading" @click="login">登录</a-button>
-              <a-button type="text" size="large" long class="register-btn">注册账号</a-button>
-            </a-space>
-          </a-form-item>
-        </a-form>
-      </div>
-    </section>
+    <a-row align="stretch" class="login-box">
+      <a-col :xs="0" :sm="12" :md="15">
+        <div class="login-left">
+          <img class="login-img" src="@/assets/svgs/login-img.svg" />
+        </div>
+      </a-col>
+      <a-col :xs="24" :sm="12" :md="9">
+        <div class="login-right">
+          <a-form
+            ref="FormRef"
+            size="medium"
+            :model="form"
+            :rules="rules"
+            :style="{ width: '84%' }"
+            :label-col-style="{ display: 'none' }"
+            :wrapper-col-style="{ flex: 1 }"
+          >
+            <h3 class="login-form-title"><img class="logo" src="@/assets/images/logo.gif" /><span>Admin Pro</span></h3>
+            <a-form-item field="username">
+              <a-input v-model="form.username" placeholder="账号 admin/user" allow-clear>
+                <template #prefix><icon-user :stroke-width="1" :style="{ fontSize: '20px' }" /></template>
+              </a-input>
+            </a-form-item>
+            <a-form-item field="password">
+              <a-input-password v-model="form.password" placeholder="密码" allow-clear>
+                <template #prefix><icon-lock :stroke-width="1" :style="{ fontSize: '20px' }" /></template>
+              </a-input-password>
+            </a-form-item>
+            <a-form-item>
+              <a-row justify="space-between" align="center" class="w-100">
+                <a-checkbox v-model="checked">记住密码</a-checkbox>
+                <a-link>忘记密码</a-link>
+              </a-row>
+            </a-form-item>
+            <a-form-item>
+              <a-space direction="vertical" fill class="w-100">
+                <a-button type="primary" size="large" long :loading="loading" @click="login">登录</a-button>
+                <a-button type="text" size="large" long class="register-btn">注册账号</a-button>
+              </a-space>
+            </a-form-item>
+          </a-form>
+        </div>
+      </a-col>
+    </a-row>
 
     <GiThemeBtn class="theme-btn"></GiThemeBtn>
 
@@ -140,7 +142,8 @@ const login = async () => {
   align-items: center;
   background-color: var(--color-bg-5);
   &-box {
-    width: 720px;
+    width: 92%;
+    max-width: 720px;
     height: 380px;
     display: flex;
     z-index: 999;
@@ -149,7 +152,7 @@ const login = async () => {
 }
 
 .login-left {
-  flex: 1;
+  width: 100%;
   height: 100%;
   display: flex;
   justify-content: center;
@@ -171,7 +174,7 @@ const login = async () => {
 }
 
 .login-right {
-  width: 270px;
+  width: 100%;
   height: 100%;
   background: var(--color-bg-1);
   display: flex;
