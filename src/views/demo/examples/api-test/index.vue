@@ -1,6 +1,6 @@
 <template>
   <div class="test">
-    <a-space>
+    <a-space wrap>
       <a-button type="primary" @click="success">成功接口请求</a-button>
       <a-button type="primary" status="danger" @click="fail">失败接口请求</a-button>
       <a-button type="primary" status="warning" @click="setTokenExpired">设置token过期</a-button>

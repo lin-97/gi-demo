@@ -1,28 +1,28 @@
 <template>
   <a-space direction="vertical" :size="20">
     <a-space direction="vertical">
-      <a-space>
+      <a-space wrap>
         <a-button type="primary">Primary</a-button>
         <a-button>Default</a-button>
         <a-button type="dashed">Dashed</a-button>
         <a-button type="outline">Outline</a-button>
         <a-button type="text">Text</a-button>
       </a-space>
-      <a-space>
+      <a-space wrap>
         <a-button type="primary" status="success">Primary</a-button>
         <a-button status="success">Default</a-button>
         <a-button type="dashed" status="success">Dashed</a-button>
         <a-button type="outline" status="success">Outline</a-button>
         <a-button type="text" status="success">Text</a-button>
       </a-space>
-      <a-space>
+      <a-space wrap>
         <a-button type="primary" status="warning">Primary</a-button>
         <a-button status="warning">Default</a-button>
         <a-button type="dashed" status="warning">Dashed</a-button>
         <a-button type="outline" status="warning">Outline</a-button>
         <a-button type="text" status="warning">Text</a-button>
       </a-space>
-      <a-space>
+      <a-space wrap>
         <a-button type="primary" status="danger">Primary</a-button>
         <a-button status="danger">Default</a-button>
         <a-button type="dashed" status="danger">Dashed</a-button>
@@ -32,28 +32,28 @@
     </a-space>
 
     <a-space direction="vertical">
-      <a-space>
+      <a-space wrap>
         <a-button type="primary" disabled>Primary</a-button>
         <a-button disabled>Default</a-button>
         <a-button type="dashed" disabled>Dashed</a-button>
         <a-button type="outline" disabled>Outline</a-button>
         <a-button type="text" disabled>Text</a-button>
       </a-space>
-      <a-space>
+      <a-space wrap>
         <a-button type="primary" status="success" disabled>Primary</a-button>
         <a-button status="success" disabled>Default</a-button>
         <a-button type="dashed" status="success" disabled>Dashed</a-button>
         <a-button type="outline" status="success" disabled>Outline</a-button>
         <a-button type="text" status="success" disabled>Text</a-button>
       </a-space>
-      <a-space>
+      <a-space wrap>
         <a-button type="primary" status="warning" disabled>Primary</a-button>
         <a-button status="warning" disabled>Default</a-button>
         <a-button type="dashed" status="warning" disabled>Dashed</a-button>
         <a-button type="outline" status="warning" disabled>Outline</a-button>
         <a-button type="text" status="warning" disabled>Text</a-button>
       </a-space>
-      <a-space>
+      <a-space wrap>
         <a-button type="primary" status="danger" disabled>Primary</a-button>
         <a-button status="danger" disabled>Default</a-button>
         <a-button type="dashed" status="danger" disabled>Dashed</a-button>
@@ -63,7 +63,7 @@
     </a-space>
 
     <a-space direction="vertical">
-      <a-space>
+      <a-space wrap>
         <a-button type="primary">Square</a-button>
         <a-button type="primary" shape="round">Round</a-button>
         <a-button type="primary"><icon-plus /></a-button>
@@ -91,7 +91,7 @@
         <a-button shape="circle"><icon-plus /></a-button>
       </a-space>
 
-      <a-space>
+      <a-space wrap>
         <a-button type="primary" status="success">Square</a-button>
         <a-button type="primary" shape="round" status="success">Round</a-button>
         <a-button type="primary" status="success"><icon-plus /></a-button>
@@ -119,7 +119,7 @@
         <a-button shape="circle" status="success"><icon-plus /></a-button>
       </a-space>
 
-      <a-space>
+      <a-space wrap>
         <a-button type="primary" status="warning">Square</a-button>
         <a-button type="primary" shape="round" status="warning">Round</a-button>
         <a-button type="primary" status="warning"><icon-plus /></a-button>
@@ -147,7 +147,7 @@
         <a-button shape="circle" status="warning"><icon-plus /></a-button>
       </a-space>
 
-      <a-space>
+      <a-space wrap>
         <a-button type="primary" status="danger">Square</a-button>
         <a-button type="primary" shape="round" status="danger">Round</a-button>
         <a-button type="primary" status="danger"><icon-plus /></a-button>

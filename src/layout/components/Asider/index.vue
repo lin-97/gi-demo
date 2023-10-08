@@ -1,19 +1,20 @@
 <template>
   <div class="asider">
-    <a-drawer
-      v-if="isPhone()"
-      v-model:visible="appStore.menuCollapse"
-      placement="left"
-      :header="false"
-      :footer="false"
-      :render-to-body="false"
-      :drawer-style="{ 'border-right': '1px solid var(--color-border-2)' }"
-    >
-      <Logo :collapsed="false"></Logo>
-      <a-menu :selected-keys="[activeMenu]" :auto-open-selected="true" :style="{ width: '100%', height: '100%' }">
-        <SidebarItem v-for="(route, index) in sidebarRoutes" :key="route.path + index" :item="route"></SidebarItem>
-      </a-menu>
-    </a-drawer>
+    <template v-if="isPhone()">
+      <a-drawer
+        v-model:visible="appStore.menuCollapse"
+        placement="left"
+        :header="false"
+        :footer="false"
+        :render-to-body="false"
+        :drawer-style="{ 'border-right': '1px solid var(--color-border-2)' }"
+      >
+        <Logo :collapsed="false"></Logo>
+        <a-menu class="menu-h5" :selected-keys="[activeMenu]" :auto-open-selected="true">
+          <SidebarItem v-for="(route, index) in sidebarRoutes" :key="route.path + index" :item="route"></SidebarItem>
+        </a-menu>
+      </a-drawer>
+    </template>
 
     <template v-else>
       <Logo :collapsed="appStore.menuCollapse"></Logo>
@@ -83,6 +84,8 @@ const activeMenu = computed(() => {
 :deep(.arco-drawer-body) {
   padding: 0;
   overflow: hidden;
+  display: flex;
+  flex-direction: column;
 }
 
 .asider {
@@ -90,6 +93,11 @@ const activeMenu = computed(() => {
   display: flex;
   flex-direction: column;
   border-right: 1px solid var(--color-border-2);
+  .menu-h5 {
+    width: 100%;
+    flex: 1;
+    overflow: hidden;
+  }
   .menu {
     flex: 1;
     overflow: hidden;

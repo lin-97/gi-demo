@@ -1,16 +1,16 @@
 export default `<template>
   <a-card :bordered="false" class="gi_card pane2">
-    <a-row justify="space-between" align="center" class="head">
-      <div>
+    <a-row justify="space-between" align="center" wrap>
+      <a-space wrap>
         <a-alert type="normal">
           <template #icon>
             <icon-exclamation-circle-fill />
           </template>
           <span>这里采用 模板 + tsx 方式使用表格，具体看代码使用</span>
         </a-alert>
-      </div>
+      </a-space>
 
-      <a-space>
+      <a-space wrap>
         <a-button type="primary" status="success" @click="onViewCode">
           <template #icon><icon-code /></template>
           <span>查看代码</span>
@@ -167,9 +167,6 @@ const selectAll: TableInstance['onSelectAll'] = (checked) => {
 .pane2 {
   flex: 1;
   margin: $margin;
-  .head {
-    margin-bottom: 16px;
-  }
 }
 .content {
   flex: 1;

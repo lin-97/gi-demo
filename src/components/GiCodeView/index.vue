@@ -54,7 +54,6 @@ const extensions = computed(() => {
 
 <style lang="scss" scoped>
 :deep(.ͼ1 .cm-scroller) {
-  overflow-x: hidden;
   font-family: source-code-pro, Menlo, Monaco, Consolas, Courier New, monospace;
 }
 </style>

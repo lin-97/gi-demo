@@ -39,9 +39,9 @@ const getUserDetail = async () => {
   } catch (error) {}
 }
 
-const open = (id: string) => {
+const open = async (id: string) => {
   userId.value = id
-  getUserDetail()
+  await getUserDetail()
   visible.value = true
 }
 

@@ -17,63 +17,68 @@
     <a-divider />
 
     <div class="user">
-      <section class="user-card">
-        <div class="head">
-          <a-avatar :size="60" :trigger-icon-style="{ color: '#3491FA' }">
-            <img :src="userStore.avatar" />
-            <template #trigger-icon>
-              <IconCamera />
-            </template>
-          </a-avatar>
-          <div class="name">{{ userStore.name }}</div>
-          <p class="desc">尘缘已定，不念过往</p>
-        </div>
+      <a-row>
+        <a-col :xs="24" :sm="24" :md="24" :lg="10" :xl="8" :xxl="7">
+          <section class="user-card">
+            <div class="head">
+              <a-avatar :size="60" :trigger-icon-style="{ color: '#3491FA' }">
+                <img :src="userStore.avatar" />
+                <template #trigger-icon>
+                  <IconCamera />
+                </template>
+              </a-avatar>
+              <div class="name">{{ userStore.name }}</div>
+              <p class="desc">尘缘已定，不念过往</p>
+            </div>
 
-        <ul class="list">
-          <li class="list-item">
-            <span class="icon"><icon-bookmark :stroke-width="1" :size="16" /></span>
-            <span>前端工程师</span>
-          </li>
-          <li class="list-item">
-            <span class="icon"><icon-branch :stroke-width="1" :size="16" /></span
-            ><span>中台-数据平台团队-前端创新团队-前端架构和平台工具团队</span>
-          </li>
-          <li class="list-item">
-            <span class="icon"><icon-location :stroke-width="1" :size="16" /></span><span>广州市</span>
-          </li>
-        </ul>
+            <ul class="list">
+              <li class="list-item">
+                <span class="icon"><icon-bookmark :stroke-width="1" :size="16" /></span>
+                <span>前端工程师</span>
+              </li>
+              <li class="list-item">
+                <span class="icon"><icon-branch :stroke-width="1" :size="16" /></span
+                ><span>中台-数据平台团队-前端创新团队-前端架构和平台工具团队</span>
+              </li>
+              <li class="list-item">
+                <span class="icon"><icon-location :stroke-width="1" :size="16" /></span><span>广州市</span>
+              </li>
+            </ul>
 
-        <a-row justify="space-around" class="img-list">
-          <img src="https://file.iviewui.com/admin-pro-dist/img/icon-social-weibo.cbf658a0.svg" />
-          <img src="https://file.iviewui.com/admin-pro-dist/img/icon-social-zhihu.1dc5a4ff.svg" />
-          <img src="https://file.iviewui.com/admin-pro-dist/img/icon-social-facebook.e95df60e.svg" />
-          <img src="https://file.iviewui.com/admin-pro-dist/img/icon-social-twitter.5db80e81.svg" />
-        </a-row>
+            <a-row justify="space-around" class="img-list">
+              <img src="https://file.iviewui.com/admin-pro-dist/img/icon-social-weibo.cbf658a0.svg" />
+              <img src="https://file.iviewui.com/admin-pro-dist/img/icon-social-zhihu.1dc5a4ff.svg" />
+              <img src="https://file.iviewui.com/admin-pro-dist/img/icon-social-facebook.e95df60e.svg" />
+              <img src="https://file.iviewui.com/admin-pro-dist/img/icon-social-twitter.5db80e81.svg" />
+            </a-row>
 
-        <a-divider style="border-bottom-style: dashed" />
+            <a-divider style="border-bottom-style: dashed" />
 
-        <a-typography-title :heading="6">标签</a-typography-title>
-        <a-space :size="5">
-          <a-tag>vue3</a-tag>
-          <a-tag>pinia</a-tag>
-          <a-tag>vite</a-tag>
-          <a-tag>ts</a-tag>
-          <a-tag>arco design</a-tag>
-        </a-space>
-
-        <a-descriptions :column="1" style="margin-top: 20px">
-          <a-descriptions-item label="星座">双鱼座</a-descriptions-item>
-          <a-descriptions-item label="生日">07月16日</a-descriptions-item>
-          <a-descriptions-item label="爱好">
-            <a-space :size="5">
-              <a-tag color="purple">王者荣耀</a-tag>
-              <a-tag color="magenta">旅行</a-tag>
+            <a-typography-title :heading="6">标签</a-typography-title>
+            <a-space wrap :size="5">
+              <a-tag>vue3</a-tag>
+              <a-tag>pinia</a-tag>
+              <a-tag>vite</a-tag>
+              <a-tag>ts</a-tag>
+              <a-tag>arco design</a-tag>
             </a-space>
-          </a-descriptions-item>
-        </a-descriptions>
-      </section>
 
-      <RightBox></RightBox>
+            <a-descriptions :column="1" style="margin-top: 20px">
+              <a-descriptions-item label="星座">双鱼座</a-descriptions-item>
+              <a-descriptions-item label="生日">07月16日</a-descriptions-item>
+              <a-descriptions-item label="爱好">
+                <a-space wrap :size="5">
+                  <a-tag color="purple">王者荣耀</a-tag>
+                  <a-tag color="magenta">旅行</a-tag>
+                </a-space>
+              </a-descriptions-item>
+            </a-descriptions>
+          </section>
+        </a-col>
+        <a-col :xs="24" :sm="24" :md="24" :lg="14" :xl="16" :xxl="17">
+          <RightBox></RightBox>
+        </a-col>
+      </a-row>
     </div>
   </div>
 </template>
@@ -114,7 +119,7 @@ onActivated(() => {
   display: flex;
 }
 .user-card {
-  width: 300px;
+  width: 100%;
   height: fit-content;
   padding: $padding;
   box-sizing: border-box;

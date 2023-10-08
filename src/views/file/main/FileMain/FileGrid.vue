@@ -1,41 +1,47 @@
 <template>
-  <ul class="file-grid">
-    <a-trigger
-      v-for="item in data"
-      :key="item.id"
-      trigger="contextMenu"
-      align-point
-      animation-name="slide-dynamic-origin"
-      auto-fit-transform-origin
-      position="bl"
-      update-at-scroll
-      scroll-to-close
-    >
-      <li class="file-grid-item" @click.stop="handleClickFile(item)">
-        <div class="file-image">
-          <FileImg :data="item"></FileImg>
-        </div>
-        <div class="file-name">{{ getFileName(item) }}</div>
+  <div class="file-grid">
+    <a-grid :cols="{ xs: 4, sm: 5, md: 6, lg: 7, xl: 8, xxl: 9 }" :col-gap="12" :row-gap="12">
+      <a-trigger
+        v-for="item in data"
+        :key="item.id"
+        trigger="contextMenu"
+        align-point
+        animation-name="slide-dynamic-origin"
+        auto-fit-transform-origin
+        position="bl"
+        update-at-scroll
+        scroll-to-close
+      >
+        <a-grid-item>
+          <div class="file-grid-item" @click.stop="handleClickFile(item)">
+            <div class="wrapper">
+              <div class="file-icon">
+                <FileImg :data="item"></FileImg>
+              </div>
+              <p class="gi_line_1 file-name">{{ getFileName(item) }}</p>
 
-        <!-- 勾选模式 -->
-        <section
-          class="check-mode"
-          :class="{ checked: props.selectedFileIdList.includes(item.id) }"
-          v-show="props.isBatchMode"
-          @click.stop="handleCheckFile(item)"
-        >
-          <a-checkbox
-            class="checkbox"
-            :model-value="props.selectedFileIdList.includes(item.id)"
-            @change="handleCheckFile(item)"
-          ></a-checkbox>
-        </section>
-      </li>
-      <template #content>
-        <FileRightMenu :file-info="item" @click="handleRightMenuItemClick($event, item)"></FileRightMenu>
-      </template>
-    </a-trigger>
-  </ul>
+              <!-- 勾选模式 -->
+              <section
+                v-show="props.isBatchMode"
+                class="check-mode"
+                :class="{ checked: props.selectedFileIdList.includes(item.id) }"
+                @click.stop="handleCheckFile(item)"
+              >
+                <a-checkbox
+                  class="checkbox"
+                  :model-value="props.selectedFileIdList.includes(item.id)"
+                  @change="handleCheckFile(item)"
+                ></a-checkbox>
+              </section>
+            </div>
+          </div>
+        </a-grid-item>
+        <template #content>
+          <FileRightMenu :file-info="item" @click="handleRightMenuItemClick($event, item)"></FileRightMenu>
+        </template>
+      </a-trigger>
+    </a-grid>
+  </div>
 </template>
 
 <script setup lang="ts">
@@ -84,72 +90,76 @@ const handleRightMenuItemClick = (mode: string, item: FileItem) => {
   margin-top: 12px;
   overflow: scroll;
   background: var(--color-bg-2);
-  display: flex;
-  flex-wrap: wrap;
-  align-content: flex-start;
 }
 
 .file-grid-item {
-  width: 100px;
+  width: 100%;
   height: 100px;
-  // background: pink;
   display: flex;
-  flex-direction: column;
   justify-content: center;
   align-items: center;
-  margin-right: 20px;
-  margin-bottom: 20px;
   cursor: pointer;
-  position: relative;
-  z-index: 1;
-  &:hover {
-    background: var(--color-primary-light-1);
-  }
-  &:active {
-    svg,
-    img {
-      transform: scale(0.9);
-    }
-  }
-  .file-image {
-    width: 100%;
-    height: 60px;
-    display: flex;
-    justify-content: center;
+  .wrapper {
+    width: 76%;
+    max-width: 100px;
+    height: 100%;
+    position: relative;
     overflow: hidden;
-    .img {
-      width: auto;
-      height: 100%;
-      transition: all 0.3s;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    &:hover {
+      background: var(--color-primary-light-1);
     }
-    .svg-img {
-      height: 100%;
-      transition: all 0.3s;
+    &:active {
+      svg,
+      img {
+        transform: scale(0.9);
+      }
     }
-  }
-  .file-name {
-    height: 2em;
-    font-size: 12px;
-    margin-top: 6px;
-    padding: 0 5px;
-    text-align: center;
-  }
-  .check-mode {
-    position: absolute;
-    left: 0;
-    right: 0;
-    top: 0;
-    bottom: 0;
-    background: rgba(0, 0, 0, 0.1);
-    z-index: 9;
-    &.checked {
-      background: none;
+    .file-icon {
+      width: 100%;
+      height: 60px;
+      display: flex;
+      justify-content: center;
+      overflow: hidden;
+      .img {
+        width: auto;
+        height: 100%;
+        transition: all 0.3s;
+      }
+      .svg-img {
+        height: 100%;
+        transition: all 0.3s;
+      }
     }
-    .checkbox {
+    .file-name {
+      width: 100%;
+      font-size: 12px;
+      margin-top: 8px;
+      padding: 0 5px;
+      text-align: center;
+      box-sizing: border-box;
+    }
+    .check-mode {
       position: absolute;
-      top: 5px;
-      left: 5px;
-      padding-left: 0;
+      left: 0;
+      right: 0;
+      top: 0;
+      bottom: 0;
+      background: rgba(0, 0, 0, 0.1);
+      z-index: 9;
+      &.checked {
+        background: none;
+      }
+      .checkbox {
+        position: absolute;
+        top: 5px;
+        left: 5px;
+        padding-left: 0;
+      }
     }
   }
 }
