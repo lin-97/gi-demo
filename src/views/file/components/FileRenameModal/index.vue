@@ -1,14 +1,15 @@
 <template>
   <a-modal
     title="重命名"
-    width="500px"
+    width="96%"
     v-model:visible="visible"
     modal-animation-name="el-fade"
+    :modal-style="{ maxWidth: '500px' }"
     @close="cancel"
     @before-ok="save"
   >
     <a-row justify="center" align="center">
-      <a-form ref="FormRef" :model="form" :style="{ width: '80%' }">
+      <a-form ref="FormRef" :model="form" auto-label-width :style="{ width: '80%' }">
         <a-form-item field="name" label="文件名称" :rules="[{ required: true, message: '请输入文件名称' }]">
           <a-input v-model="form.name" placeholder="请输入" allow-clear />
         </a-form-item>

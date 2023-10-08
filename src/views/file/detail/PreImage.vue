@@ -109,7 +109,7 @@ const handle = (value: string) => {
   .viewer-box {
     flex: 1;
     margin-bottom: 16px;
-    background-color: $color-bg;
+    background-color: var(--color-bg-5);
   }
   .zoom-proportion {
     padding: 0 12px;

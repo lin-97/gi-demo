@@ -99,6 +99,15 @@ const handleRightMenuItemClick = (mode: string, item: FileItem) => {
   justify-content: center;
   align-items: center;
   cursor: pointer;
+  &:hover {
+    background: var(--color-primary-light-1);
+  }
+  &:active {
+    svg,
+    img {
+      transform: scale(0.9);
+    }
+  }
   .wrapper {
     width: 76%;
     max-width: 100px;
@@ -110,15 +119,6 @@ const handleRightMenuItemClick = (mode: string, item: FileItem) => {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    &:hover {
-      background: var(--color-primary-light-1);
-    }
-    &:active {
-      svg,
-      img {
-        transform: scale(0.9);
-      }
-    }
     .file-icon {
       width: 100%;
       height: 60px;

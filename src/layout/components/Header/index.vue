@@ -39,7 +39,7 @@
             </a-popover>
 
             <!-- 全屏切换组件 -->
-            <a-tooltip v-if="!_XEUtils_.browse().isMobile" content="全屏切换" position="bottom">
+            <a-tooltip v-if="!isPhone()" content="全屏切换" position="bottom">
               <a-button size="mini" class="gi_hover_btn" @click="onToggleFullScreen">
                 <template #icon>
                   <icon-fullscreen :size="18" v-if="!isFullScreen" />
@@ -100,7 +100,7 @@ import { useAppStore, useUserStore } from '@/stores'
 import { useFullScreen } from '@/hooks'
 import SettingDrawer from './SettingDrawer.vue'
 import Message from './Message.vue'
-import _XEUtils_ from 'xe-utils'
+import { isPhone } from '@/utils/common'
 
 defineOptions({ name: 'Header' })
 const router = useRouter()

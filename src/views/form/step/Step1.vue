@@ -1,31 +1,27 @@
 <template>
   <div class="step-1">
     <a-form ref="formRef" :model="form" :rules="rules" auto-label-width>
-      <a-form-item field="payAccount" label="付款账户">
+      <a-form-item label="付款账户" field="payAccount">
         <a-select v-model="form.payAccount" placeholder="请选择付款账户">
           <a-option value="326***228@qq.com">326***228@qq.com</a-option>
           <a-option value="768***579@qq.com">768***579@qq.com</a-option>
         </a-select>
       </a-form-item>
-      <a-form-item field="recAccount" label="收款账户">
-        <a-input-group style="width: 100%">
+      <a-form-item label="收款账户" field="recAccount">
+        <a-input-group class="w-full">
           <a-select v-model="form.payType" style="width: 150px">
-            <a-option :value="1">
-              <template #icon><GiSvgIcon name="wechat"></GiSvgIcon></template>
-              <span>微信</span>
-            </a-option>
-            <a-option :value="2">
-              <template #icon><GiSvgIcon name="alipay"></GiSvgIcon></template>
-              <span>支付宝</span>
+            <a-option v-for="item in payMethodList" :key="item.icon" :value="item.value">
+              <template #icon><GiSvgIcon :name="item.icon"></GiSvgIcon></template>
+              <span>{{ item.label }}</span>
             </a-option>
           </a-select>
           <a-input v-model="form.recAccount" placeholder="请输入收款账户" />
         </a-input-group>
       </a-form-item>
-      <a-form-item field="recName" label="收款人姓名">
+      <a-form-item label="收款人姓名" field="recName">
         <a-input v-model="form.recName" placeholder="请输入收款人姓名" />
       </a-form-item>
-      <a-form-item field="amount" label="转账金额">
+      <a-form-item label="转账金额" field="amount">
         <a-input v-model="form.amount" placeholder="请输入转账金额">
           <template #prefix>￥</template>
         </a-input>
@@ -42,7 +38,15 @@ import type { Form } from '@arco-design/web-vue'
 import type { StepForm } from './type'
 
 defineOptions({ name: 'Step1' })
-const emit = defineEmits(['next'])
+
+const emit = defineEmits<{
+  (e: 'next', form?: StepForm): void
+}>()
+
+const payMethodList = [
+  { label: '微信', value: 1, icon: 'wechat' },
+  { label: '支付宝', value: 2, icon: 'alipay' }
+]
 
 const form: StepForm = reactive({
   payAccount: '',
@@ -62,13 +66,11 @@ const rules = {
 const formRef = ref<InstanceType<typeof Form>>()
 
 // 下一步
-const next = () => {
-  nextTick(async () => {
-    const res = await formRef.value?.validate()
-    if (!res) {
-      emit('next', form)
-    }
-  })
+const next = async () => {
+  const res = await formRef.value?.validate()
+  if (!res) {
+    emit('next', form)
+  }
 }
 </script>
 

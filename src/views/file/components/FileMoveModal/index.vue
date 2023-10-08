@@ -1,14 +1,15 @@
 <template>
   <a-modal
     title="移动到"
-    width="500px"
+    width="96%"
     v-model:visible="visible"
     modal-animation-name="el-dialog"
     mask-animation-name="el-mask"
+    :modal-style="{ maxWidth: '500px' }"
     @close="cancel"
     @before-ok="save"
   >
-    <a-form ref="FormRef" :model="form" :style="{ width: '100%' }" label-align="left">
+    <a-form ref="FormRef" :model="form" :style="{ width: '100%' }" auto-label-width>
       <a-form-item field="path" label="目标路径" :rules="[{ required: true, message: '请输入目标路径' }]">
         <a-input v-model="form.path" placeholder="请输入" />
       </a-form-item>

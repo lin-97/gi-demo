@@ -14,7 +14,8 @@
         :key="item.path"
         :title="(item.meta?.title as string)"
         :closable="Boolean(!item.meta?.affix)"
-      ></a-tab-pane>
+      >
+      </a-tab-pane>
       <template #extra>
         <!-- 右侧按钮 -->
         <a-dropdown trigger="hover">

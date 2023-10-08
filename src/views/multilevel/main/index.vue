@@ -21,7 +21,13 @@ const route = useRoute()
 const router = useRouter()
 
 const selectedKeys = ref('')
-selectedKeys.value = route.path
+watch(
+  () => route.path,
+  (newPath) => {
+    selectedKeys.value = newPath
+  },
+  { immediate: true }
+)
 
 const list = [
   { name: '个人中心', value: 1, path: '/multilevel/index/user' },

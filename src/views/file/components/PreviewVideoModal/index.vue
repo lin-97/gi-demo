@@ -1,5 +1,12 @@
 <template>
-  <a-modal title="视频播放" width="auto" draggable v-model:visible="visible" @close="close">
+  <a-modal
+    title="视频播放"
+    width="96%"
+    :modal-style="{ maxWidth: '500px' }"
+    draggable
+    v-model:visible="visible"
+    @close="close"
+  >
     <div id="videoId"></div>
   </a-modal>
 </template>

@@ -74,7 +74,7 @@
               </a-space>
             </a-form-item>
           </a-form>
-          <section v-if="!_XEUtils_.browse().isMobile">
+          <section v-if="!isPhone()">
             <GiCodeView :code-json="JSON.stringify(form, null, '\t')"></GiCodeView>
           </section>
         </a-space>
@@ -87,7 +87,7 @@
 import type { FormInstance, RangePickerInstance } from '@arco-design/web-vue'
 import { Message } from '@arco-design/web-vue'
 import * as Regexp from '@/utils/regexp'
-import _XEUtils_ from 'xe-utils'
+import { isPhone } from '@/utils/common'
 
 defineOptions({ name: 'FormBase' })
 

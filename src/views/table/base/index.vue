@@ -39,7 +39,7 @@
             <a-input v-model="form.value5" placeholder="请输入查询地址" />
           </a-form-item>
         </a-col>
-        <a-col :span="12">
+        <a-col :xs="12" :md="12" :lg="8" :xl="6" :xxl="6">
           <a-space>
             <a-button type="primary" @click="getTableData">
               <template #icon>

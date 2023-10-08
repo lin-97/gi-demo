@@ -29,21 +29,16 @@
 import type { StepForm } from './type'
 
 defineOptions({ name: 'Step3' })
-const emit = defineEmits(['again'])
+
+const emit = defineEmits<{
+  (e: 'again'): void
+}>()
 
 interface Props {
   form: Readonly<StepForm>
 }
 
-withDefaults(defineProps<Props>(), {
-  form: () => ({
-    payAccount: '',
-    recAccount: '',
-    payType: 1,
-    recName: '',
-    amount: '0'
-  })
-})
+withDefaults(defineProps<Props>(), {})
 
 // 再转一笔
 const again = () => {
