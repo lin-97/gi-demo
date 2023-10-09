@@ -112,8 +112,8 @@ onActivated(() => {
 }
 
 .user {
-  flex: 1;
-  height: 100%;
+  // flex: 1;
+  // height: 100%;
   box-sizing: border-box;
   overflow: hidden;
   display: flex;

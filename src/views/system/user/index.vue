@@ -38,7 +38,7 @@
 
             <a-space wrap>
               <a-input-group>
-                <a-select v-model="form.status" placeholder="用户状态" allow-clear style="width: 120px">
+                <a-select v-model="form.status" placeholder="用户状态" allow-clear style="width: 150px">
                   <a-option :value="1">正常</a-option>
                   <a-option :value="0">禁用</a-option>
                 </a-select>

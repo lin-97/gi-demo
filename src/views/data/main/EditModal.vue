@@ -1,5 +1,12 @@
 <template>
-  <a-modal v-model:visible="visible" :title="title" :on-before-ok="confirm" @close="formRef?.resetFields">
+  <a-modal
+    v-model:visible="visible"
+    :title="title"
+    width="90%"
+    :modal-style="{ maxWidth: '520px' }"
+    :on-before-ok="confirm"
+    @close="formRef?.resetFields"
+  >
     <a-row justify="center">
       <a-form ref="formRef" :model="form" :rules="rules" size="medium" auto-label-width :style="{ width: '380px' }">
         <a-form-item field="name" label="姓名">

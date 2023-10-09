@@ -1,7 +1,7 @@
 <template>
   <a-modal
     title="重命名"
-    width="96%"
+    width="90%"
     v-model:visible="visible"
     modal-animation-name="el-fade"
     :modal-style="{ maxWidth: '500px' }"

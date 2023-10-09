@@ -47,6 +47,10 @@ const appStore = useAppStore()
 const routeStore = useRouteStore()
 const sidebarRoutes = computed(() => routeStore.routes)
 
+if (isPhone()) {
+  appStore.menuCollapse = false
+}
+
 const handleCollapse = (isCollapsed: boolean) => {
   if (!isPhone()) {
     appStore.menuCollapse = isCollapsed

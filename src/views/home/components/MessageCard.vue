@@ -7,7 +7,7 @@
       v-for="(item, index) in list"
       :key="item.name"
       :author="item.name"
-      :content="item.text"
+      :content="item.desc"
       align="right"
       :class="'animated-fade-up-' + index"
       style="overflow: hidden"
@@ -22,32 +22,7 @@
 </template>
 
 <script setup lang="ts">
-const list = [
-  {
-    name: 'Github',
-    text: '是一个面向开源及私有软件项目的托管平台'
-  },
-  {
-    name: 'Vue',
-    text: '渐进式 JavaScript 框架'
-  },
-  {
-    name: 'Html5',
-    text: 'HTML5是互联网的下一代标准'
-  },
-  {
-    name: 'Angular',
-    text: '现代 Web 开发平台，百万粉丝热捧'
-  },
-  {
-    name: 'React',
-    text: '用于构建用户界面的 JavaScript 库'
-  },
-  {
-    name: 'Js',
-    text: '路是走出来的，而不是空想出来的'
-  }
-]
+import { list } from './data'
 </script>
 
 <style lang="scss" scoped>

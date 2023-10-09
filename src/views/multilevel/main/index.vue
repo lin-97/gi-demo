@@ -1,20 +1,31 @@
 <template>
-  <div class="user">
-    <a-menu class="menu" :selected-keys="selectedKeys">
-      <a-menu-item v-for="(item, index) in list" :key="item.path" @click="toPage(item.path)">
-        <template #icon>
-          <icon-menu></icon-menu>
-        </template>
-        <span>{{ item.name }}</span>
-      </a-menu-item>
-    </a-menu>
-    <div class="content">
-      <ParentView></ParentView>
+  <div class="multilevel" :class="{ 'multilevel-h5': isPhone() }">
+    <div class="tabs">
+      <a-tabs hide-content size="medium" :active-key="selectedKeys" @change="(key) => toPage(String(key))">
+        <a-tab-pane v-for="(item, index) in list" :key="item.path" :title="item.name"> </a-tab-pane>
+      </a-tabs>
+    </div>
+
+    <div class="main-box">
+      <div class="menu">
+        <a-menu :selected-keys="selectedKeys">
+          <a-menu-item v-for="(item, index) in list" :key="item.path" @click="toPage(item.path)">
+            <template #icon>
+              <icon-menu></icon-menu>
+            </template>
+            <span>{{ item.name }}</span>
+          </a-menu-item>
+        </a-menu>
+      </div>
+      <div class="content">
+        <ParentView></ParentView>
+      </div>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
+import { isPhone } from '@/utils/common'
 defineOptions({ name: 'MultilevelIndex' })
 
 const route = useRoute()
@@ -41,23 +52,44 @@ const toPage = (path: string) => {
 </script>
 
 <style lang="scss" scoped>
-.user {
+.multilevel {
   flex: 1;
-  display: flex;
   box-sizing: border-box;
   overflow: hidden;
-  .menu {
-    width: 220px;
-    height: fit-content;
-    margin: $margin;
+  display: flex;
+  flex-direction: column;
+  .tabs {
+    display: none;
+    background-color: var(--color-bg-1);
   }
-  .content {
+
+  .main-box {
     flex: 1;
-    padding: $padding;
-    padding-left: 0;
     overflow: hidden;
-    box-sizing: border-box;
-    overflow-y: auto;
+    display: flex;
+    .menu {
+      width: 220px;
+      margin-top: $margin;
+      margin-left: $margin;
+    }
+    .content {
+      flex: 1;
+      height: 100%;
+      padding: $margin;
+      box-sizing: border-box;
+      overflow: hidden;
+      overflow-y: auto;
+    }
+  }
+}
+
+.multilevel-h5 {
+  flex-direction: column;
+  .tabs {
+    display: block;
+  }
+  .menu {
+    display: none;
   }
 }
 </style>

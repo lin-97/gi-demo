@@ -3,21 +3,21 @@
     <template #extra>
       <NowTime></NowTime>
     </template>
-    <a-row align="center" :gutter="14" class="content">
-      <a-col :xs="24" :md="14" :lg="16" :xl="16" :xxl="18">
-        <a-space :size="15" class="padding-y">
+    <a-row align="center" wrap :gutter="[{ xs: 0, sm: 14, md: 14, lg: 14, xl: 14, xxl: 14 }, 16]" class="content">
+      <a-col :xs="24" :sm="24" :md="14" :lg="16" :xl="16" :xxl="18">
+        <a-space size="medium">
           <a-avatar :size="68">
             <img :src="userStore.avatar" />
           </a-avatar>
-          <div class="tip">
-            <p>早安，{{ userStore.name }}，开始您一天的工作吧！</p>
+          <div class="welcome">
+            <p class="hello">早安，{{ userStore.name }}，开始您一天的工作吧！</p>
             <p>今日阴转大雨，15℃ - 25℃，出门记得带伞哦。</p>
           </div>
         </a-space>
       </a-col>
 
-      <a-col :xs="24" :md="10" :lg="8" :xl="8" :xxl="6">
-        <a-row justify="space-between" align="center" class="padding-y">
+      <a-col :xs="24" :sm="24" :md="10" :lg="8" :xl="8" :xxl="6">
+        <a-row justify="space-between" align="center">
           <a-statistic :value="16" :value-from="0" :start="true" animation>
             <template #title>
               <a-space>
@@ -64,21 +64,16 @@ const userStore = useUserStore()
 .card {
   margin-top: $margin;
   .content {
-    padding: 0 20px;
-    .tip {
+    padding: 8px 20px;
+    .welcome {
+      margin: 8px 0;
       color: $color-text-3;
-      p {
-        &:first-child {
-          font-size: 1.25rem;
-          color: $color-text-1;
-          margin-bottom: 10px;
-        }
+      .hello {
+        font-size: 1.25rem;
+        color: $color-text-1;
+        margin-bottom: 10px;
       }
     }
   }
-}
-
-.padding-y {
-  padding: 8px 0;
 }
 </style>

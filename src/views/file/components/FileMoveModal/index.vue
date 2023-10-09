@@ -1,7 +1,7 @@
 <template>
   <a-modal
     title="移动到"
-    width="96%"
+    width="90%"
     v-model:visible="visible"
     modal-animation-name="el-dialog"
     mask-animation-name="el-mask"

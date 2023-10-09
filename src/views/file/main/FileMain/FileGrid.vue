@@ -19,21 +19,20 @@
                 <FileImg :data="item"></FileImg>
               </div>
               <p class="gi_line_1 file-name">{{ getFileName(item) }}</p>
-
-              <!-- 勾选模式 -->
-              <section
-                v-show="props.isBatchMode"
-                class="check-mode"
-                :class="{ checked: props.selectedFileIdList.includes(item.id) }"
-                @click.stop="handleCheckFile(item)"
-              >
-                <a-checkbox
-                  class="checkbox"
-                  :model-value="props.selectedFileIdList.includes(item.id)"
-                  @change="handleCheckFile(item)"
-                ></a-checkbox>
-              </section>
             </div>
+            <!-- 勾选模式 -->
+            <section
+              v-show="props.isBatchMode"
+              class="check-mode"
+              :class="{ checked: props.selectedFileIds.includes(item.id) }"
+              @click.stop="handleCheckFile(item)"
+            >
+              <a-checkbox
+                class="checkbox"
+                :model-value="props.selectedFileIds.includes(item.id)"
+                @change="handleCheckFile(item)"
+              ></a-checkbox>
+            </section>
           </div>
         </a-grid-item>
         <template #content>
@@ -51,13 +50,13 @@ import type { FileItem } from '@/apis'
 
 interface Props {
   data?: FileItem[]
-  selectedFileIdList?: string[]
+  selectedFileIds?: string[]
   isBatchMode?: boolean
 }
 
 const props = withDefaults(defineProps<Props>(), {
   data: () => [], // 文件数据
-  selectedFileIdList: () => [], // 批量模式下选中的文件id数组
+  selectedFileIds: () => [], // 批量模式下选中的文件id数组
   isBatchMode: false // 是否是批量模式
 })
 
@@ -98,6 +97,7 @@ const handleRightMenuItemClick = (mode: string, item: FileItem) => {
   display: flex;
   justify-content: center;
   align-items: center;
+  position: relative;
   cursor: pointer;
   &:hover {
     background: var(--color-primary-light-1);
@@ -106,6 +106,24 @@ const handleRightMenuItemClick = (mode: string, item: FileItem) => {
     svg,
     img {
       transform: scale(0.9);
+    }
+  }
+  .check-mode {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.1);
+    z-index: 9;
+    &.checked {
+      background: none;
+    }
+    .checkbox {
+      position: absolute;
+      top: 5px;
+      left: 5px;
+      padding-left: 0;
     }
   }
   .wrapper {
@@ -142,24 +160,6 @@ const handleRightMenuItemClick = (mode: string, item: FileItem) => {
       padding: 0 5px;
       text-align: center;
       box-sizing: border-box;
-    }
-    .check-mode {
-      position: absolute;
-      left: 0;
-      right: 0;
-      top: 0;
-      bottom: 0;
-      background: rgba(0, 0, 0, 0.1);
-      z-index: 9;
-      &.checked {
-        background: none;
-      }
-      .checkbox {
-        position: absolute;
-        top: 5px;
-        left: 5px;
-        padding-left: 0;
-      }
     }
   }
 }

@@ -44,7 +44,7 @@
       <a-space wrap>
         <a-button
           v-if="isBatchMode"
-          :disabled="!fileStore.selectedFileIdList.length"
+          :disabled="!fileStore.selectedFileIds.length"
           type="primary"
           status="danger"
           @click="handleMulDelete"
@@ -87,7 +87,7 @@
         v-show="fileList.length && fileStore.viewMode == 'grid'"
         :data="fileList"
         :isBatchMode="isBatchMode"
-        :selectedFileIdList="fileStore.selectedFileIdList"
+        :selectedFileIds="fileStore.selectedFileIds"
         @click="handleClickFile"
         @check="handleCheckFile"
         @right-menu-click="handleRightMenuClick"
@@ -111,7 +111,6 @@
 import { Message, Modal } from '@arco-design/web-vue'
 import { fileTypeList, imageTypeList } from '@/libs/file/file-map'
 import { useFileStore } from '@/stores'
-import { useWindowSize } from '@vueuse/core'
 import { api as viewerApi } from 'v-viewer'
 import 'viewerjs/dist/viewer.css'
 import FileNavPath from './FileNavPath.vue'

@@ -1,7 +1,7 @@
 <template>
   <div class="gi-now-time" v-if="time">
-    <GiSvgIcon name="time" :size="22"></GiSvgIcon>
-    <p class="time">{{ time }}</p>
+    <GiSvgIcon name="time" :size="20"></GiSvgIcon>
+    <p class="time gi_line_1">{{ time }}</p>
   </div>
 </template>
 

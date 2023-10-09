@@ -10,7 +10,7 @@
         <div class="login-right">
           <a-form
             ref="FormRef"
-            size="medium"
+            :size="isPhone() ? 'large' : 'medium'"
             :model="form"
             :rules="rules"
             :style="{ width: '84%' }"
@@ -57,6 +57,7 @@ import { useLoading } from '@/hooks'
 import { Message, type FormInstance } from '@arco-design/web-vue'
 import LoginBg from './components/LoginBg/index.vue'
 import * as Regexp from '@/utils/regexp'
+import { isPhone } from '@/utils/common'
 
 defineOptions({ name: 'Login' })
 const router = useRouter()
@@ -142,7 +143,7 @@ const login = async () => {
   align-items: center;
   background-color: var(--color-bg-5);
   &-box {
-    width: 92%;
+    width: 86%;
     max-width: 720px;
     height: 380px;
     display: flex;

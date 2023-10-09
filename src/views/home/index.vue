@@ -1,5 +1,5 @@
 <template>
-  <div class="gi_page home" id="home-wrap">
+  <div class="gi_page home" id="home">
     <WorkCard></WorkCard>
 
     <a-row class="row">
@@ -13,8 +13,8 @@
       </a-col>
     </a-row>
 
-    <a-back-top :visible-height="100" target-container="#home-wrap">
-      <GiSvgIcon name="backtop" :size="50" style="cursor: pointer"></GiSvgIcon>
+    <a-back-top :visible-height="100" target-container="#home">
+      <GiSvgIcon name="backtop" :size="50" class="backtop-icon"></GiSvgIcon>
     </a-back-top>
   </div>
 </template>
@@ -38,6 +38,9 @@ defineOptions({ name: 'Home' })
       padding: 6px;
       box-sizing: border-box;
     }
+  }
+  .backtop-icon {
+    cursor: pointer;
   }
 }
 </style>

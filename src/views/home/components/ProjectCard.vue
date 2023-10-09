@@ -5,12 +5,12 @@
         <section class="item">
           <div class="head">
             <GiSvgIcon :size="30" :name="item.icon"></GiSvgIcon>
-            <span class="gi_line_1">{{ item.name }}</span>
+            <span class="name gi_line_1">{{ item.name }}</span>
           </div>
-          <div class="fill">
-            <p class="text gi_line_2">{{ item.text }}</p>
+          <div class="middle">
+            <p class="desc gi_line_2">{{ item.desc }}</p>
           </div>
-          <p class="desc gi_line_1">{{ item.time }}</p>
+          <p class="foot gi_line_1">{{ item.source }} {{ Dayjs(new Date()).format('YYYY-MM-DD') }}</p>
         </section>
       </a-card>
     </a-card-grid>
@@ -18,45 +18,8 @@
 </template>
 
 <script setup lang="ts">
-const list = [
-  {
-    name: 'Github',
-    text: '是一个面向开源及私有软件项目的托管平台',
-    time: '开源君 2021-07-04',
-    icon: 'item-github'
-  },
-  {
-    name: 'Vue',
-    text: '渐进式 JavaScript 框架',
-    time: '学不动也要学 2021-07-04',
-    icon: 'item-vue'
-  },
-  {
-    name: 'Html5',
-    text: 'HTML5是互联网的下一代标准',
-    time: '撸码也是一种艺术 2021-04-01',
-    icon: 'item-html5'
-  },
-  {
-    name: 'Angular',
-    src: '../../assets/images/home/angular.png',
-    text: '现代 Web 开发平台 百万粉丝热捧',
-    time: '铁粉君 2021-07-04',
-    icon: 'item-angular'
-  },
-  {
-    name: 'React',
-    text: '用于构建用户界面的 JavaScript 库',
-    time: '技术牛 2021-07-04',
-    icon: 'item-react'
-  },
-  {
-    name: 'Js',
-    text: '路是走出来的 而不是空想出来的',
-    time: '架构组 2021-07-04',
-    icon: 'item-js'
-  }
-]
+import Dayjs from 'dayjs'
+import { list } from './data'
 </script>
 
 <style lang="scss" scoped>
@@ -76,30 +39,30 @@ const list = [
   height: 100%;
   display: flex;
   flex-direction: column;
-  .fill {
-    flex: 1;
-  }
 }
 
 .head {
   display: flex;
   align-items: center;
-  span {
+  .name {
     margin-left: 10px;
     font-size: 1.125rem;
     line-height: 1.75rem;
+    color: var(--color-text-1);
+  }
+}
+
+.middle {
+  flex: 1;
+  .desc {
+    flex: 1;
+    margin-top: 10px;
+    line-height: 1.5;
     color: var(--color-text-2);
   }
 }
 
-.text {
-  flex: 1;
-  margin-top: 10px;
-  line-height: 1.5;
-  color: var(--color-text-3);
-}
-
-.desc {
+.foot {
   font-size: 12px;
   color: var(--color-text-3);
   margin-top: 8px;
