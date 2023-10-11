@@ -93,19 +93,8 @@ const handleTabClick = (key: string) => {
       width: 1em;
     }
   }
-}
-
-:deep(.arco-tabs-tab-active) {
-  background-color: rgba(var(--primary-6), $alpha: 0.05);
-  &:hover {
-    background-color: rgba(var(--primary-6), $alpha: 0.05);
-  }
-  .arco-tabs-tab-close-btn {
-    &:hover {
-      &::before {
-        background-color: rgba(var(--primary-6), $alpha: 0.1) !important;
-      }
-    }
+  &:first-child {
+    border-left: none;
   }
 }
 
@@ -115,6 +104,6 @@ const handleTabClick = (key: string) => {
 
 .tabs {
   padding-top: 5px;
-  background: var(--color-bg-1);
+  background-color: var(--color-bg-1);
 }
 </style>
