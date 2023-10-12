@@ -33,6 +33,7 @@ export const constantRoutes: RouteRecordRaw[] = [
   },
   {
     path: '',
+    name: 'Home',
     component: Layout,
     redirect: '/home',
     children: [

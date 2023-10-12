@@ -7,7 +7,7 @@
         :header="false"
         :footer="false"
         :render-to-body="false"
-        :drawer-style="{ 'border-right': '1px solid var(--color-border-2)' }"
+        :drawer-style="{ 'border-right': '1px solid var(--color-border-2)', 'box-sizing': 'border-box' }"
       >
         <Logo :collapsed="false"></Logo>
         <a-menu class="menu-h5" :selected-keys="[activeMenu]" :auto-open-selected="true">

@@ -1,10 +1,12 @@
 <template>
   <a-breadcrumb>
     <a-breadcrumb-item v-for="(item, index) in breadcrumbList" :key="index">
-      <span v-if="item.redirect === 'noRedirect' || index === breadcrumbList.length - 1" class="gi_line_1">{{
-        item.meta.title
-      }}</span>
-      <span v-else @click="handleLink(item)" class="gi_line_1 item">{{ item.meta.title }}</span>
+      <span
+        v-if="item.redirect === 'noRedirect' || item.redirect === '' || index === breadcrumbList.length - 1"
+        class="gi_line_1"
+        >{{ item.meta.title }}</span
+      >
+      <span v-else class="gi_line_1 breadcrumb-item-title" @click="handleLink(item)">{{ item.meta.title }}</span>
     </a-breadcrumb-item>
   </a-breadcrumb>
 </template>
@@ -50,7 +52,7 @@ function handleLink(item: RouteLocationMatched) {
 </script>
 
 <style lang="scss" scoped>
-.item {
+.breadcrumb-item-title {
   transition: all 0.3s;
   cursor: pointer;
   &:hover {
