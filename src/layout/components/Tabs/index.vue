@@ -6,7 +6,7 @@
       size="medium"
       :type="appStore.tabMode"
       :active-key="route.path"
-      @tab-click="(key) => handleTabClick(key.toString())"
+      @tab-click="(key) => handleTabClick(key as string)"
       @delete="tabsStore.closeCurrent"
     >
       <a-tab-pane
@@ -17,7 +17,6 @@
       >
       </a-tab-pane>
       <template #extra>
-        <!-- 右侧按钮 -->
         <a-dropdown trigger="hover">
           <MagicIcon class="gi_mr"></MagicIcon>
           <template #content>
@@ -82,15 +81,22 @@ const handleTabClick = (key: string) => {
 </script>
 
 <style lang="scss" scoped>
-:deep(.arco-tabs-tab) {
-  border-bottom-color: transparent !important;
-  svg {
-    width: 0;
-    transition: all 0.15s;
-  }
-  &:hover {
+:deep(.arco-tabs-nav-tab) {
+  .arco-tabs-tab {
+    border-bottom-color: transparent !important;
     svg {
-      width: 1em;
+      width: 0;
+      transition: all 0.15s;
+    }
+    &:hover {
+      svg {
+        width: 1em;
+      }
+    }
+  }
+  &:not(.arco-tabs-nav-tab-scroll) {
+    .arco-tabs-tab:first-child {
+      border-left: 0;
     }
   }
 }
