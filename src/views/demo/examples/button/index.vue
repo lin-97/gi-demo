@@ -1,6 +1,6 @@
 <template>
   <a-space direction="vertical" :size="20">
-    <a-space direction="vertical">
+    <a-space direction="vertical" :size="0">
       <a-space wrap>
         <a-button type="primary">Primary</a-button>
         <a-button>Default</a-button>
@@ -31,7 +31,7 @@
       </a-space>
     </a-space>
 
-    <a-space direction="vertical">
+    <a-space direction="vertical" :size="0">
       <a-space wrap>
         <a-button type="primary" disabled>Primary</a-button>
         <a-button disabled>Default</a-button>
@@ -62,7 +62,7 @@
       </a-space>
     </a-space>
 
-    <a-space direction="vertical">
+    <a-space direction="vertical" :size="0">
       <a-space wrap>
         <a-button type="primary">Square</a-button>
         <a-button type="primary" shape="round">Round</a-button>

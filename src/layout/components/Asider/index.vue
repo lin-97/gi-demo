@@ -97,6 +97,7 @@ const activeMenu = computed(() => {
   display: flex;
   flex-direction: column;
   border-right: 1px solid var(--color-border-2);
+  box-sizing: border-box;
   .menu-h5 {
     width: 100%;
     flex: 1;

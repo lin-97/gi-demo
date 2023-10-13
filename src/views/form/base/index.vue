@@ -21,7 +21,7 @@
             </a-form-item>
 
             <a-row>
-              <a-col :span="12">
+              <a-col :xs="24" :sm="24" :md="12">
                 <a-form-item label="性别" field="sex">
                   <a-radio-group v-model="form.sex" allow-clear>
                     <a-radio :value="1">男</a-radio>
@@ -29,9 +29,9 @@
                   </a-radio-group>
                 </a-form-item>
               </a-col>
-              <a-col :span="12">
-                <a-form-item label="生日" field="birthday" :label-col-style="{ flex: 0 }">
-                  <a-date-picker v-model="form.birthday" placeholder="请选择出生日期" allow-clear />
+              <a-col :xs="24" :sm="24" :md="12">
+                <a-form-item label="生日" field="birthday">
+                  <a-date-picker v-model="form.birthday" placeholder="请选择出生日期" allow-clear class="w-full" />
                 </a-form-item>
               </a-col>
             </a-row>
