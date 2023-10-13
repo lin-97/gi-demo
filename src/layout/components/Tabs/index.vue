@@ -93,9 +93,6 @@ const handleTabClick = (key: string) => {
       width: 1em;
     }
   }
-  &:first-child {
-    border-left: none;
-  }
 }
 
 :deep(.arco-dropdown-option-icon) {
