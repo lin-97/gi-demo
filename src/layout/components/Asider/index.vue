@@ -1,5 +1,5 @@
 <template>
-  <div class="asider">
+  <div class="asider" :class="{ 'asider-h5': isPhone() }">
     <template v-if="isPhone()">
       <a-drawer
         v-model:visible="appStore.menuCollapse"
@@ -10,7 +10,7 @@
         :drawer-style="{ 'border-right': '1px solid var(--color-border-2)', 'box-sizing': 'border-box' }"
       >
         <Logo :collapsed="false"></Logo>
-        <a-menu class="menu-h5" :selected-keys="[activeMenu]" :auto-open-selected="true">
+        <a-menu class="menu w-full" :selected-keys="[activeMenu]" :auto-open-selected="true">
           <SidebarItem v-for="(route, index) in sidebarRoutes" :key="route.path + index" :item="route"></SidebarItem>
         </a-menu>
       </a-drawer>
@@ -98,14 +98,13 @@ const activeMenu = computed(() => {
   flex-direction: column;
   border-right: 1px solid var(--color-border-2);
   box-sizing: border-box;
-  .menu-h5 {
-    width: 100%;
-    flex: 1;
-    overflow: hidden;
-  }
   .menu {
     flex: 1;
     overflow: hidden;
   }
+}
+
+.asider-h5 {
+  border-right: none;
 }
 </style>
