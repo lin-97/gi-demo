@@ -91,8 +91,7 @@
 
 <script setup lang="ts">
 import { Modal, Message } from '@arco-design/web-vue'
-import type { TableInstance } from '@arco-design/web-vue'
-import { usePagination } from '@/hooks'
+import { useTable } from '@/hooks'
 import CateTree from './CateTree/index.vue'
 import EditModal from './EditModal.vue'
 import { getPersonList } from '@/apis'
@@ -102,33 +101,21 @@ import { isPhone } from '@/utils/common'
 
 const router = useRouter()
 
-const { pagination, setTotal } = usePagination(() => getTableData())
-
 const form = reactive({
   name: '',
   status: ''
 })
 
-const tableData = ref<PersonItem[]>([])
-const loading = ref(false)
+const { loading, tableData, getTableData, pagination, selectKeys, select, selectAll } = useTable<PersonItem>(
+  (pagin) => getPersonList({ ...form, current: pagin.page, pageSize: pagin.size }),
+  { immediate: false, formatResult: (data) => data.map((i) => ({ ...i, isEdit: false })) }
+)
 
 // 比例进度条颜色
 const getProportionColor = (proportion: number) => {
   if (proportion < 30) return 'danger'
   if (proportion < 60) return 'warning'
   return 'success'
-}
-
-const getTableData = async () => {
-  try {
-    loading.value = true
-    const res = await getPersonList({ ...form, ...{ current: pagination.current, pageSize: pagination.pageSize } })
-    tableData.value = res.data.list
-    setTotal(res.data.total)
-  } catch (error) {
-  } finally {
-    loading.value = false
-  }
 }
 
 onActivated(() => {
@@ -167,22 +154,10 @@ const onDelete = (id: string) => {
 }
 
 const onExport = () => {
-  if (!selectRowKeys.value.length) {
+  if (!selectKeys.value.length) {
     return Message.warning('请勾选数据')
   }
   Message.success('点击了导出')
-}
-
-// 勾选
-const selectRowKeys = ref<(string | number)[]>([])
-
-const select: TableInstance['onSelect'] = (rowKeys) => {
-  selectRowKeys.value = rowKeys
-}
-
-// 全选
-const selectAll: TableInstance['onSelectAll'] = (checked) => {
-  selectRowKeys.value = checked ? tableData.value.map((i) => i.id) : []
 }
 </script>
 

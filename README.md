@@ -790,7 +790,7 @@ getDeptList() // 建议在页面调用 hooks 的方法，比较直观（不在ho
 
 
 
-#### 分页 Hooks 的使用
+#### usePagination(hooks) 的使用
 
 文件位置：@/hooks/modules/usePagination.ts
 
@@ -1055,6 +1055,16 @@ const getTableData = async () => {
 }
 </script>
 ```
+
+
+
+#### useTable(hooks) 的使用
+
+<img src="https://gitee.com/lin0716/gi-image/raw/master/useTable.png" />
+
+使用
+
+<img src="https://gitee.com/lin0716/gi-image/raw/master/useTableDemo.png" />
 
 #### TSX 方式调起弹窗
 
@@ -1524,5 +1534,7 @@ $padding: 16px; // 盒子和内容的间距
 
 
 ## 捐赠
+
+
 
 <img style="width:300px" src="https://gitee.com/lin0716/gi-image/raw/master/alipay.jpg" />
