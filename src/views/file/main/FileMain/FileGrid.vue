@@ -1,6 +1,6 @@
 <template>
   <div class="file-grid">
-    <a-grid :cols="{ xs: 4, sm: 5, md: 6, lg: 7, xl: 8, xxl: 9 }" :col-gap="12" :row-gap="12">
+    <a-grid :cols="{ xs: 4, sm: 4, md: 5, lg: 7, xl: 8, xxl: 9 }" :col-gap="12" :row-gap="12">
       <a-trigger
         v-for="item in data"
         :key="item.id"

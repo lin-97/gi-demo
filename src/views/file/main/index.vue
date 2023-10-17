@@ -1,8 +1,12 @@
 <template>
-  <div class="file-manage">
-    <FileAside></FileAside>
-    <FileMain></FileMain>
-  </div>
+  <a-row align="stretch" :gutter="14" class="file-manage">
+    <a-col :xs="0" :sm="8" :md="7" :lg="6" :xl="5" :xxl="4" flex="220px" class="col">
+      <FileAside></FileAside>
+    </a-col>
+    <a-col :xs="24" :sm="16" :md="17" :lg="18" :xl="19" :xxl="20" flex="1" class="col">
+      <FileMain></FileMain>
+    </a-col>
+  </a-row>
 </template>
 
 <script setup lang="ts">
@@ -15,7 +19,11 @@ defineOptions({ name: 'FileIndex' })
 <style lang="scss" scoped>
 .file-manage {
   flex: 1;
+  padding: $margin;
   overflow: hidden;
-  display: flex;
+  .col {
+    height: 100%;
+    overflow: hidden;
+  }
 }
 </style>
