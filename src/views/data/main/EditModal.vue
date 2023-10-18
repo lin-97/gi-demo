@@ -59,8 +59,9 @@
 <script setup lang="ts">
 import { Message, type FormInstance } from '@arco-design/web-vue'
 import * as Regexp from '@/utils/regexp'
+import { useForm } from '@/hooks'
 
-const form = reactive({
+const { form, resetForm } = useForm({
   id: '', // 如果id是空为新增模式，如果有id那么为编辑模式
   name: '',
   phone: '',
