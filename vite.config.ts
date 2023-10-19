@@ -16,12 +16,12 @@ export default defineConfig(({ command, mode }) => {
       vue(),
       vueJsx(),
       AutoImport({
-        // 自动导入 Vue 相关函数，如：ref, reactive, toRef 等
+        // 自动导入vue相关函数，如: ref、reactive、toRef等
         imports: ['vue', 'vue-router'],
         dts: 'src/auto-import.d.ts'
       }),
       Components({
-        // 指定组件位置, 默认是src/components 自动导入自定义组件
+        // 指定组件位置，默认是 src/components 自动导入自定义组件
         dirs: ['src/components'],
         extensions: ['vue', 'tsx'],
         // 配置文件生成位置
@@ -35,8 +35,10 @@ export default defineConfig(({ command, mode }) => {
       }),
       viteMockServe({
         mockPath: './src/mock/', // 目录位置
-        localEnabled: command === 'serve',
-        prodEnabled: command !== 'serve' && true,
+        logger: true, //  是否在控制台显示请求日志
+        supportTs: true, // 是否读取ts文件模块
+        localEnabled: command === 'serve', // 设置是否启用本地mock文件
+        prodEnabled: command !== 'serve' && true, // 设置打包是否启用mock功能
         // 这样可以控制关闭mock的时候不让mock打包到最终代码内
         injectCode: `
           import { setupProdMockServer } from '../src/mock/index';
@@ -72,8 +74,8 @@ export default defineConfig(({ command, mode }) => {
     // 构建
     build: {
       chunkSizeWarningLimit: 2000, // 消除打包大小超过500kb警告
-      outDir: 'dist', // 指定打包路径，默认为项目根目录下的 dist 目录
-      minify: 'terser', // Vite 2.6.x 以上需要配置 minify: "terser", terserOptions 才能生效
+      outDir: 'dist', // 指定打包路径，默认为项目根目录下的dist目录
+      minify: 'terser', // Vite 2.6.x 以上需要配置 minify："terser"，terserOptions才能生效
       terserOptions: {
         compress: {
           keep_infinity: true, // 防止 Infinity 被压缩成 1/0，这可能会导致 Chrome 上的性能问题

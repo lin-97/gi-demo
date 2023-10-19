@@ -1,7 +1,7 @@
 import { Random } from 'mockjs'
 import Mock from 'mockjs'
 import type { MockMethod } from 'vite-plugin-mock'
-import { successResponseWrap } from '../mock'
+import { resultSuccess } from '../_utils'
 
 /**
  * @param {Number} times 回调函数需要执行的次数
@@ -60,7 +60,7 @@ export default [
     response: ({ query }) => {
       const { current = 1, pageSize = 10, status = 0, name = '' } = query
       const list = getTableListData({ current, pageSize, status, name })
-      return successResponseWrap({
+      return resultSuccess({
         current: Number(current),
         pageSize: Number(pageSize),
         total: 1000,

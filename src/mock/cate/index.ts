@@ -1,5 +1,5 @@
 import type { MockMethod } from 'vite-plugin-mock'
-import { successResponseWrap } from '../mock'
+import { resultSuccess } from '../_utils'
 import treeData from './tree'
 
 export default [
@@ -8,7 +8,7 @@ export default [
     method: 'get',
     timeout: Math.floor(Math.random() * 1) * 100,
     response: () => {
-      return successResponseWrap(treeData)
+      return resultSuccess(treeData)
     }
   }
 ] as MockMethod[]

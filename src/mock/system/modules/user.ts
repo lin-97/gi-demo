@@ -1,5 +1,5 @@
 import type { MockMethod } from 'vite-plugin-mock'
-import { successResponseWrap, failResponseWrap } from '@/mock/mock'
+import { resultSuccess, resultError } from '@/mock/_utils'
 
 const data = [
   {
@@ -52,13 +52,13 @@ export default [
       const index = data.findIndex((i) => i.id === id)
       if (index >= 0) {
         if (data[index].id === '01') {
-          return successResponseWrap(data[index])
+          return resultSuccess(data[index])
         }
         if (data[index].id === '02') {
-          return successResponseWrap(data[index])
+          return resultSuccess(data[index])
         }
       } else {
-        return failResponseWrap(null, '没有该用户', 400)
+        return resultError(null, '没有该用户', 400)
       }
     }
   },
@@ -67,7 +67,7 @@ export default [
     method: 'post',
     timeout: 350,
     response: () => {
-      return successResponseWrap(true)
+      return resultSuccess(true)
     }
   },
   {
@@ -75,7 +75,7 @@ export default [
     method: 'get',
     timeout: 100,
     response: () => {
-      return successResponseWrap({
+      return resultSuccess({
         total: 2,
         list: data
       })

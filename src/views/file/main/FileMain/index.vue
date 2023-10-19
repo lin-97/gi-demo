@@ -109,7 +109,7 @@
 
 <script setup lang="ts">
 import { Message, Modal } from '@arco-design/web-vue'
-import { fileTypeList, imageTypeList } from '@/libs/file/file-map'
+import { fileTypeList, imageTypeList } from '@/constant/file'
 import { useFileStore } from '@/stores'
 import { api as viewerApi } from 'v-viewer'
 import 'viewerjs/dist/viewer.css'

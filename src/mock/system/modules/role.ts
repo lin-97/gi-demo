@@ -1,5 +1,5 @@
 import type { MockMethod } from 'vite-plugin-mock'
-import { successResponseWrap, failResponseWrap } from '@/mock/mock'
+import { resultSuccess, resultError } from '@/mock/_utils'
 import { menus } from './data/menu'
 import { eachTree } from 'xe-utils'
 
@@ -51,9 +51,9 @@ export default [
       const { id } = query
       const index = data.findIndex((i) => i.id === id)
       if (index >= 0) {
-        return successResponseWrap(data[index])
+        return resultSuccess(data[index])
       } else {
-        return failResponseWrap(null, '没有该角色', 400)
+        return resultError(null, '没有该角色', 400)
       }
     }
   },
@@ -62,7 +62,7 @@ export default [
     method: 'post',
     timeout: 350,
     response: () => {
-      return successResponseWrap(true)
+      return resultSuccess(true)
     }
   },
   {
@@ -78,10 +78,10 @@ export default [
             arr.push(i.id)
           }
         })
-        return successResponseWrap(arr)
+        return resultSuccess(arr)
       }
       if (role === 'role_user2') {
-        return successResponseWrap([])
+        return resultSuccess([])
       }
     }
   },
@@ -90,7 +90,7 @@ export default [
     method: 'get',
     timeout: 100,
     response: () => {
-      return successResponseWrap({
+      return resultSuccess({
         total: 2,
         list: data
       })

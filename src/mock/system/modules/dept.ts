@@ -1,6 +1,6 @@
 import { Random } from 'mockjs'
 import type { MockMethod } from 'vite-plugin-mock'
-import { successResponseWrap, failResponseWrap } from '@/mock/mock'
+import { resultSuccess, resultError } from '@/mock/_utils'
 import { findTree } from 'xe-utils'
 
 const data = [
@@ -102,9 +102,9 @@ export default [
       const { id } = query
       const obj = findTree(data, (i) => i.id === id)
       if (obj.item) {
-        return successResponseWrap(obj.item)
+        return resultSuccess(obj.item)
       } else {
-        return failResponseWrap(null, '没有该部门', 400)
+        return resultError(null, '没有该部门', 400)
       }
     }
   },
@@ -113,7 +113,7 @@ export default [
     method: 'post',
     timeout: 350,
     response: () => {
-      return successResponseWrap(true)
+      return resultSuccess(true)
     }
   },
   {
@@ -121,7 +121,7 @@ export default [
     method: 'get',
     timeout: 100,
     response: () => {
-      return successResponseWrap(data)
+      return resultSuccess(data)
     }
   }
 ] as MockMethod[]

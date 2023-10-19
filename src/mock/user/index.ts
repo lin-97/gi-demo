@@ -1,5 +1,5 @@
 import type { MockMethod } from 'vite-plugin-mock'
-import { successResponseWrap, failResponseWrap } from '../mock'
+import { resultSuccess, resultError } from '../_utils'
 
 export default [
   {
@@ -9,22 +9,22 @@ export default [
     response: ({ body }) => {
       const { username, password } = body
       if (!username) {
-        return failResponseWrap(null, '用户名不能为空', 50000)
+        return resultError(null, '用户名不能为空', 50000)
       }
       if (!password) {
-        return failResponseWrap(null, '密码不能为空', 50000)
+        return resultError(null, '密码不能为空', 50000)
       }
       if (username === 'admin' && password === '123456') {
-        return successResponseWrap({
+        return resultSuccess({
           token: 'TOKEN-admin'
         })
       }
       if (username === 'user' && password === '123456') {
-        return successResponseWrap({
+        return resultSuccess({
           token: 'TOKEN-user'
         })
       }
-      return failResponseWrap(null, '账号或者密码错误', 50000)
+      return resultError(null, '账号或者密码错误', 50000)
     }
   },
   {
@@ -32,7 +32,7 @@ export default [
     method: 'post',
     timeout: 300,
     response: () => {
-      return successResponseWrap(null)
+      return resultSuccess(null)
     }
   },
   {
@@ -57,9 +57,9 @@ export default [
           permissions: ['user:btn:add', 'user:btn:edit', 'user:btn:delete']
         }
         const isAdmin = token === 'TOKEN-admin'
-        return successResponseWrap(isAdmin ? admin : user)
+        return resultSuccess(isAdmin ? admin : user)
       } else {
-        return failResponseWrap(null, 'token失效', 401)
+        return resultError(null, 'token失效', 401)
       }
     }
   }

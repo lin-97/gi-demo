@@ -1,5 +1,5 @@
 import type { MockMethod } from 'vite-plugin-mock'
-import { successResponseWrap, failResponseWrap } from '@/mock/mock'
+import { resultSuccess, resultError } from '@/mock/_utils'
 import { menus } from './data/menu'
 import type { MockMenuItem } from './data/type'
 import { mapTree, findTree } from 'xe-utils'
@@ -73,9 +73,9 @@ export default [
       })
 
       if (token && ['TOKEN-admin', 'TOKEN-user'].includes(token)) {
-        return successResponseWrap(routes)
+        return resultSuccess(routes)
       } else {
-        return failResponseWrap(null, 'token失效', 401)
+        return resultError(null, 'token失效', 401)
       }
     }
   },
@@ -87,9 +87,9 @@ export default [
       const { id } = query
       let obj = findTree(menus, (i) => i.id === id)
       if (obj.item) {
-        return successResponseWrap(obj.item)
+        return resultSuccess(obj.item)
       } else {
-        return failResponseWrap(null, '没有该部门', 400)
+        return resultError(null, '没有该部门', 400)
       }
     }
   },
@@ -98,7 +98,7 @@ export default [
     method: 'post',
     timeout: 350,
     response: () => {
-      return successResponseWrap(true)
+      return resultSuccess(true)
     }
   },
   {
@@ -111,7 +111,7 @@ export default [
         title: i.title,
         children: i.children
       }))
-      return successResponseWrap(data)
+      return resultSuccess(data)
     }
   },
   {
@@ -119,7 +119,7 @@ export default [
     method: 'get',
     timeout: 10,
     response: () => {
-      return successResponseWrap(JSON.parse(JSON.stringify(menus)))
+      return resultSuccess(JSON.parse(JSON.stringify(menus)))
     }
   }
 ] as MockMethod[]

@@ -1,5 +1,5 @@
 import type { MockMethod } from 'vite-plugin-mock'
-import { successResponseWrap } from '../mock'
+import { resultSuccess } from '../_utils'
 import fileList from './data'
 
 const getList = (type: number | string) => {
@@ -28,7 +28,7 @@ export default [
     response: ({ query }) => {
       const { fileType } = query
       const list = getList(fileType)
-      return successResponseWrap({
+      return resultSuccess({
         total: list.length,
         list: list
       })

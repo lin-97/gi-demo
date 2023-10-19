@@ -4,7 +4,7 @@
 </template>
 
 <script setup lang="ts">
-import { fileExtendNameIconMap, imageTypeList } from '@/libs/file/file-map'
+import { fileExtendNameIconMap, imageTypeList } from '@/constant/file'
 import type { FileItem } from '@/apis'
 
 interface Props {

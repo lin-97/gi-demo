@@ -1,5 +1,5 @@
 import type { MockMethod } from 'vite-plugin-mock'
-import { successResponseWrap, failResponseWrap } from '../mock'
+import { resultSuccess, resultError } from '../_utils'
 
 export default [
   {
@@ -7,7 +7,7 @@ export default [
     method: 'get',
     timeout: 350,
     response: () => {
-      return successResponseWrap('哈哈哈')
+      return resultSuccess('哈哈哈')
     }
   },
   {
@@ -15,7 +15,7 @@ export default [
     method: 'get',
     timeout: 350,
     response: () => {
-      return failResponseWrap(null, '请求出错了呦~', 400)
+      return resultError(null, '请求出错了呦~', 400)
     }
   }
 ] as MockMethod[]

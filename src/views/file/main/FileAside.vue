@@ -50,7 +50,7 @@
 </template>
 
 <script setup lang="ts">
-import { fileTypeList, type fileTypeListItem } from '@/libs/file/file-map'
+import { fileTypeList, type fileTypeListItem } from '@/constant/file'
 
 const route = useRoute()
 const router = useRouter()
