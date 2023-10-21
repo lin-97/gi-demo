@@ -63,7 +63,7 @@
                 :allow-clear="true"
                 :placeholder="`请填写${item.label}`"
                 :max-length="200"
-                :auto-size="{ minRows: 4, maxRows: 10 }"
+                :show-word-limit="true"
                 v-bind="(item.props as A.TextareaInstance['$props'])"
                 :model-value="modelValue[item.field as keyof typeof modelValue]"
                 @update:model-value="valueChange($event, item.field)"

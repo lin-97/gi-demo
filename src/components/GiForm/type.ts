@@ -1,5 +1,4 @@
 import type * as A from '@arco-design/web-vue'
-import { Row } from '@arco-design/web-vue'
 
 export type FormType =
   | 'input'
@@ -9,11 +8,6 @@ export type FormType =
   | 'textarea'
   | 'date-picker'
   | 'input-number'
-
-export interface FormOption {
-  label: string
-  value: string | number
-}
 
 type CommonProps = A.InputInstance['$props'] & A.SelectInstance['$props'] & A.TextareaInstance['$props']
 interface ColumnsItem extends Partial<Pick<CommonProps, 'placeholder' | 'disabled' | 'allowClear' | 'error'>> {
@@ -40,7 +34,7 @@ interface ColumnsItem extends Partial<Pick<CommonProps, 'placeholder' | 'disable
 
 export interface Options {
   form: Pick<A.FormInstance['$props'], 'size' | 'layout' | 'disabled' | 'rules' | 'autoLabelWidth'>
-  row?: InstanceType<typeof Row>
+  row?: typeof import('@arco-design/web-vue')['Row']
   columns: ColumnsItem[]
   btns?: { hide?: boolean }
 }
