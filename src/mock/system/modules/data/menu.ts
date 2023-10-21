@@ -233,6 +233,27 @@ export const menus: MockMenuItem[] = [
         permission: '',
         showInTabs: true,
         alwaysShow: false
+      },
+      {
+        id: '0403',
+        parentId: '04',
+        path: '/form/custom',
+        component: 'form/custom/index',
+        redirect: '',
+        type: 2,
+        title: '配置表单',
+        svgIcon: '',
+        icon: 'icon-menu',
+        keepAlive: false,
+        hidden: false,
+        sort: 0,
+        activeMenu: '',
+        breadcrumb: true,
+        status: 1,
+        roles: ['role_admin', 'role_user'],
+        permission: '',
+        showInTabs: true,
+        alwaysShow: false
       }
     ],
     status: 1,
