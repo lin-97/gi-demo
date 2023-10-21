@@ -11,7 +11,8 @@
           <slot :name="item.field">
             <template v-if="item.type === 'input'">
               <a-input
-                v-bind="{...(item.props as A.InputInstance['$props']), allowClear: item.props?.allowClear || true }"
+                :allow-clear="true"
+                v-bind="(item.props as A.InputInstance['$props'])"
                 :model-value="modelValue[item.field as keyof typeof modelValue]"
                 @update:model-value="valueChange($event, item.field)"
               ></a-input>
@@ -19,7 +20,8 @@
 
             <template v-if="item.type === 'select'">
               <a-select
-                v-bind="{...(item.props as A.SelectInstance['$props']), allowClear: item.props?.allowClear || true}"
+                :allow-clear="true"
+                v-bind="(item.props as A.SelectInstance['$props'])"
                 :model-value="modelValue[item.field as keyof typeof modelValue]"
                 @update:model-value="valueChange($event, item.field)"
               ></a-select>
@@ -27,7 +29,7 @@
 
             <template v-if="item.type === 'radio-group'">
               <a-radio-group
-                v-bind="{...(item.props as A.RadioGroupInstance['$props'])}"
+                v-bind="(item.props as A.RadioGroupInstance['$props'])"
                 :model-value="modelValue[item.field as keyof typeof modelValue]"
                 @update:model-value="valueChange($event, item.field)"
               ></a-radio-group>
@@ -35,7 +37,7 @@
 
             <template v-if="item.type === 'checkbox-group'">
               <a-checkbox-group
-                v-bind="{...(item.props as A.CheckboxGroupInstance['$props'])}"
+                v-bind="(item.props as A.CheckboxGroupInstance['$props'])"
                 :model-value="modelValue[item.field as keyof typeof modelValue]"
                 @update:model-value="valueChange($event, item.field)"
               ></a-checkbox-group>
@@ -43,7 +45,7 @@
 
             <template v-if="item.type === 'input-number'">
               <a-input-number
-                v-bind="{...(item.props as A.InputNumberInstance['$props'])}"
+                v-bind="(item.props as A.InputNumberInstance['$props'])"
                 :model-value="modelValue[item.field as keyof typeof modelValue]"
                 @update:model-value="valueChange($event, item.field)"
               ></a-input-number>
@@ -51,7 +53,8 @@
 
             <template v-if="item.type === 'textarea'">
               <a-textarea
-                v-bind="{...(item.props as A.TextareaInstance['$props']), allowClear: item.props?.allowClear || true}"
+                :allow-clear="true"
+                v-bind="(item.props as A.TextareaInstance['$props'])"
                 :model-value="modelValue[item.field as keyof typeof modelValue]"
                 @update:model-value="valueChange($event, item.field)"
               ></a-textarea>
@@ -60,7 +63,8 @@
             <template v-if="item.type === 'date-picker'">
               <a-date-picker
                 class="w-full"
-                v-bind="{...(item.props as A.DatePickerInstance['$props']), allowClear: item.props?.allowClear || true}"
+                :allow-clear="true"
+                v-bind="(item.props as A.DatePickerInstance['$props'])"
                 :model-value="modelValue[item.field as keyof typeof modelValue]"
                 @update:model-value="valueChange($event, item.field)"
               ></a-date-picker>
