@@ -29,9 +29,13 @@ interface ColumnsItem extends Partial<Pick<CommonProps, 'placeholder' | 'disable
     | A.TextareaInstance['$props']
     | A.DatePickerInstance['$props']
     | A.RadioGroupInstance['$props']
+    | A.CheckboxGroupInstance['$props']
     | A.InputNumberInstance['$props']
   rules?: A.FormItemInstance['$props']['rules']
-  // extra?: A.FormItemInstance['$props']['extra']
+  options?:
+    | A.SelectInstance['$props']['options']
+    | A.RadioGroupInstance['$props']['options']
+    | A.CheckboxGroupInstance['$props']['options']
 }
 
 export interface Options {

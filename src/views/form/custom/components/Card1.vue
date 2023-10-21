@@ -36,33 +36,28 @@ const options: Options = {
       type: 'input',
       label: '姓名',
       field: 'name',
-      col: { xs: 24, sm: 12 },
       props: {
-        maxLength: 4,
-        placeholder: '请输入名称'
+        maxLength: 4
       }
     },
     {
       type: 'input',
       label: '手机',
       field: 'phone',
-      col: { xs: 24, sm: 12 },
       props: {
-        maxLength: 11,
-        placeholder: '请输入手机号'
+        maxLength: 11
       }
     },
     {
       type: 'select',
       label: '状态',
       field: 'status',
-      col: { xs: 12, sm: 12 },
+      options: [
+        { label: '启用', value: 1 },
+        { label: '禁用', value: 0 }
+      ],
       props: {
-        placeholder: '状态',
-        options: [
-          { label: '启用', value: 1 },
-          { label: '禁用', value: 0 }
-        ]
+        placeholder: '状态'
       }
     }
   ]

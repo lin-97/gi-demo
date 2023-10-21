@@ -57,9 +57,7 @@ const options: Options = {
       field: 'name',
       col: { xs: 24, sm: 12 },
       props: {
-        maxLength: 4,
-        allowClear: true,
-        placeholder: '请输入名称'
+        maxLength: 4
       },
       rules: [
         { required: true, message: '请输入姓名' },
@@ -73,9 +71,7 @@ const options: Options = {
       field: 'phone',
       col: { xs: 24, sm: 12 },
       props: {
-        maxLength: 11,
-        allowClear: true,
-        placeholder: '请输入手机号'
+        maxLength: 11
       },
       rules: [
         { required: true, message: '请输入手机号' },
@@ -87,36 +83,28 @@ const options: Options = {
       label: '性别',
       field: 'sex',
       col: { xs: 24, sm: 12 },
-      props: {
-        placeholder: '请选择性别',
-        options: [
-          { label: '男', value: 1 },
-          { label: '女', value: 0 }
-        ]
-      }
+      options: [
+        { label: '男', value: 1 },
+        { label: '女', value: 0 }
+      ]
     },
     {
       type: 'date-picker',
       label: '生日',
       field: 'birthday',
-      col: { xs: 24, sm: 12 },
-      props: {
-        placeholder: '请选择生日'
-      }
+      col: { xs: 24, sm: 12 }
     },
     {
       type: 'checkbox-group',
       label: '爱好',
       field: 'hobbys',
       col: { xs: 24 },
-      props: {
-        options: [
-          { label: '电影', value: '01' },
-          { label: '音乐', value: '02' },
-          { label: '旅行', value: '03' },
-          { label: '游戏', value: '04' }
-        ]
-      }
+      options: [
+        { label: '电影', value: '01' },
+        { label: '音乐', value: '02' },
+        { label: '旅行', value: '03' },
+        { label: '游戏', value: '04' }
+      ]
     },
     {
       type: 'input-number',
@@ -132,19 +120,16 @@ const options: Options = {
       label: '状态',
       field: 'status',
       col: { xs: 24, sm: 12 },
-      props: {
-        options: [
-          { label: '启用', value: 1 },
-          { label: '禁用', value: 0 }
-        ]
-      }
+      options: [
+        { label: '启用', value: 1 },
+        { label: '禁用', value: 0 }
+      ]
     },
     {
       type: 'textarea',
       label: '备注',
       field: 'remark',
       span: 24,
-      props: { placeholder: '请填写备注', maxLength: 200, showWordLimit: true },
       item: { extra: '这里是额外信息' }
     },
     {
