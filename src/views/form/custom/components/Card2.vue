@@ -32,6 +32,7 @@ import type { Options } from '@/components/GiForm/type'
 import GiCodeView from '@/components/GiCodeView/index.vue'
 import GiForm from '@/components/GiForm/index.vue'
 import * as Regexp from '@/utils/regexp'
+import { isPhone } from '@/utils/common'
 
 const form = reactive({
   name: '',
@@ -144,7 +145,7 @@ const options: Options = {
       field: 'remark',
       span: 24,
       props: { placeholder: '请填写备注', maxLength: 200, showWordLimit: true },
-      extra: '这里是额外信息'
+      item: { extra: '这里是额外信息' }
     },
     {
       type: 'input',
@@ -159,7 +160,7 @@ const onViewCode = () => {
   Drawer.open({
     title: '数据结构',
     content: () => h(GiCodeView, { codeJson: JSON.stringify(options, null, '\t') }),
-    width: 560
+    width: isPhone() ? '100%' : 560
   })
 }
 

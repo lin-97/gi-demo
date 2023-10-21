@@ -21,6 +21,7 @@
 import { Drawer, Message } from '@arco-design/web-vue'
 import type { Options } from '@/components/GiForm/type'
 import GiCodeView from '@/components/GiCodeView/index.vue'
+import { isPhone } from '@/utils/common'
 
 const form = reactive({
   name: '',
@@ -35,6 +36,7 @@ const options: Options = {
       type: 'input',
       label: '姓名',
       field: 'name',
+      col: { xs: 24, sm: 12 },
       props: {
         maxLength: 4,
         placeholder: '请输入名称'
@@ -44,6 +46,7 @@ const options: Options = {
       type: 'input',
       label: '手机',
       field: 'phone',
+      col: { xs: 24, sm: 12 },
       props: {
         maxLength: 11,
         placeholder: '请输入手机号'
@@ -53,6 +56,7 @@ const options: Options = {
       type: 'select',
       label: '状态',
       field: 'status',
+      col: { xs: 12, sm: 12 },
       props: {
         placeholder: '状态',
         options: [
@@ -68,7 +72,7 @@ const onViewCode = () => {
   Drawer.open({
     title: '数据结构',
     content: () => h(GiCodeView, { codeJson: JSON.stringify(options, null, '\t') }),
-    width: 560
+    width: isPhone() ? '100%' : 560
   })
 }
 

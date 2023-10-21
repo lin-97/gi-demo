@@ -5,9 +5,9 @@
     :auto-label-width="options.form.autoLabelWidth || true"
     :model="modelValue"
   >
-    <a-row :gutter="12">
+    <a-row v-bind="options.row">
       <a-col v-for="item in options.columns" :key="item.field" :span="item.span || 12" v-bind="item.col">
-        <a-form-item :label="item.label" :field="item.field" :rules="item.rules" :extra="item.extra">
+        <a-form-item v-bind="item.item" :label="item.label" :field="item.field" :rules="item.rules">
           <slot :name="item.field">
             <template v-if="item.type === 'input'">
               <a-input
@@ -59,6 +59,7 @@
 
             <template v-if="item.type === 'date-picker'">
               <a-date-picker
+                class="w-full"
                 v-bind="{...(item.props as A.DatePickerInstance['$props']), allowClear: item.props?.allowClear || true}"
                 :model-value="modelValue[item.field as keyof typeof modelValue]"
                 @update:model-value="valueChange($event, item.field)"
