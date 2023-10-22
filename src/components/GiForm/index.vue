@@ -5,7 +5,7 @@
     :auto-label-width="options.form.autoLabelWidth || true"
     :model="modelValue"
   >
-    <a-row v-bind="options.row">
+    <a-row :gutter="14" v-bind="options.row">
       <a-col v-for="item in options.columns" :key="item.field" :span="item.span || 12" v-bind="item.col">
         <a-form-item v-bind="item.item" :label="item.label" :field="item.field" :rules="item.rules">
           <slot :name="item.field">
@@ -18,35 +18,6 @@
                 :model-value="modelValue[item.field as keyof typeof modelValue]"
                 @update:model-value="valueChange($event, item.field)"
               ></a-input>
-            </template>
-
-            <template v-if="item.type === 'select'">
-              <a-select
-                :allow-clear="true"
-                :placeholder="`请输入${item.label}`"
-                v-bind="(item.props as A.SelectInstance['$props'])"
-                :options="(item.options as A.SelectInstance['$props']['options'])"
-                :model-value="modelValue[item.field as keyof typeof modelValue]"
-                @update:model-value="valueChange($event, item.field)"
-              ></a-select>
-            </template>
-
-            <template v-if="item.type === 'radio-group'">
-              <a-radio-group
-                v-bind="(item.props as A.RadioGroupInstance['$props'])"
-                :options="(item.options as A.RadioGroupInstance['$props']['options'])"
-                :model-value="modelValue[item.field as keyof typeof modelValue]"
-                @update:model-value="valueChange($event, item.field)"
-              ></a-radio-group>
-            </template>
-
-            <template v-if="item.type === 'checkbox-group'">
-              <a-checkbox-group
-                v-bind="(item.props as A.CheckboxGroupInstance['$props'])"
-                :options="(item.options as A.CheckboxGroupInstance['$props']['options'])"
-                :model-value="modelValue[item.field as keyof typeof modelValue]"
-                @update:model-value="valueChange($event, item.field)"
-              ></a-checkbox-group>
             </template>
 
             <template v-if="item.type === 'input-number'">
@@ -70,6 +41,58 @@
               ></a-textarea>
             </template>
 
+            <template v-if="item.type === 'select'">
+              <a-select
+                :allow-clear="true"
+                :placeholder="`请输入${item.label}`"
+                v-bind="(item.props as A.SelectInstance['$props'])"
+                :options="(item.options as A.SelectInstance['$props']['options'])"
+                :model-value="modelValue[item.field as keyof typeof modelValue]"
+                @update:model-value="valueChange($event, item.field)"
+              ></a-select>
+            </template>
+
+            <template v-if="item.type === 'cascader'">
+              <a-cascader
+                :allow-clear="true"
+                :placeholder="`请输入${item.label}`"
+                v-bind="(item.props as A.CascaderInstance['$props'])"
+                :options="(item.options as A.CascaderInstance['$props']['options'])"
+                :model-value="modelValue[item.field as keyof typeof modelValue]"
+                @update:model-value="valueChange($event, item.field)"
+              />
+            </template>
+
+            <template v-if="item.type === 'tree-select'">
+              <a-tree-select
+                :allow-clear="true"
+                :placeholder="`请输入${item.label}`"
+                v-bind="(item.props as A.TreeSelectInstance['$props'])"
+                :data="(item.data as A.TreeSelectInstance['$props']['data'])"
+                :model-value="modelValue[item.field as keyof typeof modelValue]"
+                @update:model-value="valueChange($event, item.field)"
+              >
+              </a-tree-select>
+            </template>
+
+            <template v-if="item.type === 'radio-group'">
+              <a-radio-group
+                v-bind="(item.props as A.RadioGroupInstance['$props'])"
+                :options="(item.options as A.RadioGroupInstance['$props']['options'])"
+                :model-value="modelValue[item.field as keyof typeof modelValue]"
+                @update:model-value="valueChange($event, item.field)"
+              ></a-radio-group>
+            </template>
+
+            <template v-if="item.type === 'checkbox-group'">
+              <a-checkbox-group
+                v-bind="(item.props as A.CheckboxGroupInstance['$props'])"
+                :options="(item.options as A.CheckboxGroupInstance['$props']['options'])"
+                :model-value="modelValue[item.field as keyof typeof modelValue]"
+                @update:model-value="valueChange($event, item.field)"
+              ></a-checkbox-group>
+            </template>
+
             <template v-if="item.type === 'date-picker'">
               <a-date-picker
                 class="w-full"
@@ -79,6 +102,42 @@
                 :model-value="modelValue[item.field as keyof typeof modelValue]"
                 @update:model-value="valueChange($event, item.field)"
               ></a-date-picker>
+            </template>
+
+            <template v-if="item.type === 'time-picker'">
+              <a-time-picker
+                :allow-clear="true"
+                :placeholder="`请选择时间`"
+                v-bind="(item.props as A.TimePickerInstance['$props'])"
+                :model-value="modelValue[item.field as keyof typeof modelValue]"
+                @update:model-value="valueChange($event, item.field)"
+              >
+              </a-time-picker>
+            </template>
+
+            <template v-if="item.type === 'rate'">
+              <a-rate
+                :allow-clear="true"
+                v-bind="(item.props as A.RateInstance['$props'])"
+                :model-value="modelValue[item.field as keyof typeof modelValue]"
+                @update:model-value="valueChange($event, item.field)"
+              />
+            </template>
+
+            <template v-if="item.type === 'switch'">
+              <a-switch
+                v-bind="(item.props as A.SwitchInstance['$props'])"
+                :model-value="modelValue[item.field as keyof typeof modelValue]"
+                @update:model-value="valueChange($event, item.field)"
+              />
+            </template>
+
+            <template v-if="item.type === 'slider'">
+              <a-slider
+                v-bind="(item.props as A.SliderInstance['$props'])"
+                :model-value="modelValue[item.field as keyof typeof modelValue]"
+                @update:model-value="valueChange($event, item.field)"
+              />
             </template>
           </slot>
         </a-form-item>

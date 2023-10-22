@@ -33,6 +33,7 @@ import GiCodeView from '@/components/GiCodeView/index.vue'
 import GiForm from '@/components/GiForm/index.vue'
 import * as Regexp from '@/utils/regexp'
 import { isPhone } from '@/utils/common'
+import { cityOptions, deptData } from './data'
 
 const form = reactive({
   name: '',
@@ -42,6 +43,9 @@ const form = reactive({
   birthday: '',
   hobbys: [],
   status: 1,
+  mark: '',
+  hide: false,
+  grade: 0,
   remark: ''
 })
 
@@ -124,6 +128,38 @@ const options: Options = {
         { label: '启用', value: 1 },
         { label: '禁用', value: 0 }
       ]
+    },
+    {
+      type: 'rate',
+      label: '评分',
+      field: 'mark',
+      col: { xs: 24, sm: 12 }
+    },
+    {
+      type: 'switch',
+      label: '是否隐藏',
+      field: 'hide',
+      col: { xs: 24, sm: 12 }
+    },
+    {
+      type: 'slider',
+      label: '成绩',
+      field: 'grade',
+      col: { xs: 24, sm: 24 }
+    },
+    {
+      type: 'cascader',
+      label: '城市',
+      field: 'city',
+      col: { xs: 24, sm: 12 },
+      options: cityOptions
+    },
+    {
+      type: 'tree-select',
+      label: '部门',
+      field: 'dept',
+      col: { xs: 24, sm: 12 },
+      data: deptData
     },
     {
       type: 'textarea',
