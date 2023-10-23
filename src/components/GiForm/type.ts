@@ -43,6 +43,7 @@ interface ColumnsItem extends Partial<Pick<CommonProps, 'placeholder' | 'disable
     | A.RadioGroupInstance['$props']['options']
     | A.CheckboxGroupInstance['$props']['options']
   data?: A.TreeSelectInstance['$props']['data']
+  hide?: boolean
 }
 
 export interface Options {

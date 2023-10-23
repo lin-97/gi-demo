@@ -8,7 +8,7 @@
     </template>
     <a-row :gutter="30">
       <a-col :xs="24" :sm="24" :md="12">
-        <GiForm ref="formRef" :options="options" v-model="form">
+        <GiForm ref="formRef" :options="computedOptions" v-model="form">
           <template #btns>
             <a-row justify="end" class="w-full">
               <a-space>
@@ -43,7 +43,7 @@ const form = reactive({
   birthday: '',
   hobbys: [],
   status: 1,
-  mark: '',
+  mark: 0,
   hide: false,
   grade: 0,
   remark: ''
@@ -51,7 +51,7 @@ const form = reactive({
 
 const formRef = ref<InstanceType<typeof GiForm>>()
 
-const options: Options = {
+const options: Options = reactive({
   form: {},
   btns: { hide: true },
   columns: [
@@ -175,7 +175,16 @@ const options: Options = {
       span: 24
     }
   ]
-}
+})
+
+const computedOptions = computed(() => {
+  const index = options.columns.findIndex((i) => i.field === 'grade')
+  if (index >= 0) {
+    options.columns[index].hide = form.hide
+  }
+  form.grade = 0
+  return options
+})
 
 const onViewCode = () => {
   Drawer.open({
