@@ -1,8 +1,13 @@
 <template>
   <a-form :auto-label-width="true" v-bind="options.form" ref="formRef" :model="modelValue">
-    <a-row :gutter="14" v-bind="options.row">
-      <template v-for="item in options.columns" :key="item.field">
-        <a-col v-if="!item.hide" :span="item.span || 12" v-bind="item.col">
+    <a-row :gutter="14" v-bind="options.row" class="w-full">
+      <template v-for="(item, index) in options.columns" :key="item.field">
+        <a-col
+          v-if="!item.hide"
+          :span="item.span || 12"
+          v-bind="item.col"
+          v-show="index <= (options.fold?.index || 0) || (index >= (options.fold?.index || 0) && !collapsed)"
+        >
           <a-form-item v-bind="item.item" :label="item.label" :field="item.field" :rules="item.rules">
             <slot :name="item.field">
               <template v-if="item.type === 'input'">
@@ -138,7 +143,7 @@
           </a-form-item>
         </a-col>
       </template>
-      <a-col :span="8" v-if="!options.btns?.hide">
+      <a-col :span="options.btns?.span || 12" v-bind="options.btns?.col" v-if="!options.btns?.hide">
         <a-space>
           <slot name="footer">
             <a-button type="primary" @click="emit('search')">
@@ -146,6 +151,13 @@
               <span>搜索</span>
             </a-button>
             <a-button @click="emit('reset')">重置</a-button>
+            <a-button v-if="options.fold?.visible" type="text" size="mini" @click="collapsed = !collapsed">
+              <template #icon>
+                <icon-up v-if="collapsed" />
+                <icon-down v-else />
+              </template>
+              <template #default>{{ !collapsed ? '展开' : '收起' }}</template>
+            </a-button>
           </slot>
         </a-space>
       </a-col>
@@ -174,6 +186,7 @@ const valueChange = (value: any, field: string) => {
   emit('update:modelValue', Object.assign(props.modelValue, { [field]: value }))
 }
 
+const collapsed = ref(false)
 const formRef = ref<A.FormInstance>()
 
 defineExpose({ formRef })

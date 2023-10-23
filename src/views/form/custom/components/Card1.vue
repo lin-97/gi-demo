@@ -31,6 +31,7 @@ const form = reactive({
 
 const options: Options = {
   form: { layout: 'inline' },
+  fold: { visible: true, index: 0 },
   columns: [
     {
       type: 'input',
