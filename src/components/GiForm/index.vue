@@ -56,7 +56,7 @@
               <template v-if="item.type === 'cascader'">
                 <a-cascader
                   :allow-clear="true"
-                  :placeholder="`请输入${item.label}`"
+                  :placeholder="`请选择${item.label}`"
                   v-bind="(item.props as A.CascaderInstance['$props'])"
                   :options="(item.options as A.CascaderInstance['$props']['options'])"
                   :model-value="modelValue[item.field as keyof typeof modelValue]"
@@ -67,7 +67,7 @@
               <template v-if="item.type === 'tree-select'">
                 <a-tree-select
                   :allow-clear="true"
-                  :placeholder="`请输入${item.label}`"
+                  :placeholder="`请选择${item.label}`"
                   v-bind="(item.props as A.TreeSelectInstance['$props'])"
                   :data="(item.data as A.TreeSelectInstance['$props']['data'])"
                   :model-value="modelValue[item.field as keyof typeof modelValue]"
