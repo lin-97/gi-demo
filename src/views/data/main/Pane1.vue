@@ -1,13 +1,13 @@
 <template>
   <div class="page">
     <a-row align="stretch" :gutter="14" class="pane">
-      <a-col :xs="0" :sm="8" :md="7" :lg="6" :xl="5" :xxl="4" flex="260px" class="col">
+      <a-col :xs="0" :sm="8" :md="7" :lg="6" :xl="5" :xxl="4" flex="260px" class="h-full ov-hidden">
         <a-card title="数据分类" :bordered="false" class="gi_card pane-item pane-left">
           <CateTree placeholder="请输入搜索关键词" @node-click="pagination.onChange(1)"></CateTree>
         </a-card>
       </a-col>
 
-      <a-col :xs="24" :sm="16" :md="17" :lg="18" :xl="19" :xxl="20" flex="1" class="col">
+      <a-col :xs="24" :sm="16" :md="17" :lg="18" :xl="19" :xxl="20" flex="1" class="h-full ov-hidden">
         <a-card
           title="数据列表"
           :bordered="false"
@@ -175,10 +175,6 @@ const onExport = () => {
 </script>
 
 <style lang="scss" scoped>
-.col {
-  height: 100%;
-  overflow: hidden;
-}
 .page {
   flex: 1;
   padding: $margin;

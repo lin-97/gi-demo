@@ -31,7 +31,7 @@
               </a-col>
               <a-col :xs="24" :sm="24" :md="12">
                 <a-form-item label="生日" field="birthday">
-                  <a-date-picker v-model="form.birthday" placeholder="请选择出生日期" allow-clear class="w-full" />
+                  <a-date-picker v-model="form.birthday" placeholder="请选择出生日期" allow-clear />
                 </a-form-item>
               </a-col>
             </a-row>

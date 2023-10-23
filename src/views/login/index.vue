@@ -29,13 +29,13 @@
               </a-input-password>
             </a-form-item>
             <a-form-item>
-              <a-row justify="space-between" align="center" class="w-100">
+              <a-row justify="space-between" align="center" class="w-full">
                 <a-checkbox v-model="checked">记住密码</a-checkbox>
                 <a-link>忘记密码</a-link>
               </a-row>
             </a-form-item>
             <a-form-item>
-              <a-space direction="vertical" fill class="w-100">
+              <a-space direction="vertical" fill class="w-full">
                 <a-button type="primary" size="large" long :loading="loading" @click="login">登录</a-button>
                 <a-button type="text" size="large" long class="register-btn">注册账号</a-button>
               </a-space>

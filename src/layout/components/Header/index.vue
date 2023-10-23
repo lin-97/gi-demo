@@ -8,7 +8,7 @@
         </template>
       </a-button>
     </section>
-    <a-row align="center" class="h-100 header-right">
+    <a-row align="center" class="h-full header-right">
       <a-col :xs="0" :md="10" :lg="10" :xl="12" :xxl="12">
         <Breadcrumb></Breadcrumb>
       </a-col>

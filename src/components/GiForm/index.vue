@@ -1,10 +1,5 @@
 <template>
-  <a-form
-    v-bind="options.form"
-    ref="formRef"
-    :auto-label-width="options.form.autoLabelWidth || true"
-    :model="modelValue"
-  >
+  <a-form :auto-label-width="true" v-bind="options.form" ref="formRef" :model="modelValue">
     <a-row :gutter="14" v-bind="options.row">
       <template v-for="item in options.columns" :key="item.field">
         <a-col v-if="!item.hide" :span="item.span || 12" v-bind="item.col">
@@ -96,7 +91,6 @@
 
               <template v-if="item.type === 'date-picker'">
                 <a-date-picker
-                  class="w-full"
                   :allow-clear="true"
                   :placeholder="`请选择日期`"
                   v-bind="(item.props as A.DatePickerInstance['$props'])"

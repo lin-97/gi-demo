@@ -56,12 +56,14 @@ a:hover {
   text-decoration: none;
 }
 
-.w-full,
-.w-100 {
+.w-full {
   width: 100%;
 }
 
-.h-full,
-.h-100 {
+.h-full {
   height: 100%;
+}
+
+.ov-hidden {
+  overflow: hidden;
 }

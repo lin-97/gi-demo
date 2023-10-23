@@ -15,8 +15,7 @@ export type FormType =
   | 'cascader'
   | 'tree-select'
 
-type CommonProps = A.InputInstance['$props'] & A.SelectInstance['$props'] & A.TextareaInstance['$props']
-interface ColumnsItem extends Partial<Pick<CommonProps, 'placeholder' | 'disabled' | 'allowClear' | 'error'>> {
+interface ColumnsItem {
   type: FormType
   label: A.FormItemInstance['label']
   field: A.FormItemInstance['field']
@@ -42,12 +41,13 @@ interface ColumnsItem extends Partial<Pick<CommonProps, 'placeholder' | 'disable
     | A.SelectInstance['$props']['options']
     | A.RadioGroupInstance['$props']['options']
     | A.CheckboxGroupInstance['$props']['options']
+    | A.CascaderInstance['$props']['options']
   data?: A.TreeSelectInstance['$props']['data']
   hide?: boolean
 }
 
 export interface Options {
-  form: Pick<A.FormInstance['$props'], 'size' | 'layout' | 'disabled' | 'rules' | 'autoLabelWidth'>
+  form: Partial<A.FormInstance['$props']>
   row?: Partial<typeof import('@arco-design/web-vue')['Row']['__defaults']>
   columns: ColumnsItem[]
   btns?: { hide?: boolean }
