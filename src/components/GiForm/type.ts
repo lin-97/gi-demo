@@ -51,5 +51,5 @@ export interface Options {
   row?: Partial<typeof import('@arco-design/web-vue')['Row']['__defaults']>
   columns: ColumnsItem[]
   btns?: { hide?: boolean; span?: number; col?: A.ColProps }
-  fold?: { visible?: boolean; index?: number }
+  fold?: { enable?: boolean; index?: number }
 }

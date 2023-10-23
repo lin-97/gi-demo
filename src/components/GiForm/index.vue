@@ -151,12 +151,12 @@
               <span>搜索</span>
             </a-button>
             <a-button @click="emit('reset')">重置</a-button>
-            <a-button v-if="options.fold?.visible" type="text" size="mini" @click="collapsed = !collapsed">
+            <a-button v-if="options.fold?.enable" type="text" size="mini" @click="collapsed = !collapsed">
               <template #icon>
-                <icon-up v-if="collapsed" />
+                <icon-up v-if="!collapsed" />
                 <icon-down v-else />
               </template>
-              <template #default>{{ !collapsed ? '展开' : '收起' }}</template>
+              <template #default>{{ collapsed ? '展开' : '收起' }}</template>
             </a-button>
           </slot>
         </a-space>
