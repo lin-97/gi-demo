@@ -139,7 +139,8 @@ const options: Options = reactive({
       type: 'switch',
       label: '是否隐藏',
       field: 'hide',
-      col: { xs: 24, sm: 12 }
+      col: { xs: 24, sm: 12 },
+      item: { extra: '隐藏成绩项' }
     },
     {
       type: 'slider',

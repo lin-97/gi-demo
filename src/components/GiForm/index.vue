@@ -143,18 +143,18 @@
             </slot>
           </a-form-item>
         </a-col>
-        <a-col :span="8" v-if="!options.btns?.hide">
-          <a-space>
-            <slot name="footer">
-              <a-button type="primary" @click="emit('search')">
-                <template #icon><icon-search /></template>
-                <span>搜索</span>
-              </a-button>
-              <a-button @click="emit('reset')">重置</a-button>
-            </slot>
-          </a-space>
-        </a-col>
       </template>
+      <a-col :span="8" v-if="!options.btns?.hide">
+        <a-space>
+          <slot name="footer">
+            <a-button type="primary" @click="emit('search')">
+              <template #icon><icon-search /></template>
+              <span>搜索</span>
+            </a-button>
+            <a-button @click="emit('reset')">重置</a-button>
+          </slot>
+        </a-space>
+      </a-col>
     </a-row>
   </a-form>
 </template>
