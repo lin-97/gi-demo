@@ -47,7 +47,7 @@
         <a-table-column title="操作" :width="200" align="center">
           <template #cell="{ record }">
             <a-space>
-              <a-button v-hasPerm="['table:btn:edit']" type="primary" size="mini">修改</a-button>
+              <a-button type="primary" size="mini">修改</a-button>
               <a-button size="mini">详情</a-button>
               <a-popconfirm type="warning" content="您确定要删除该项吗?">
                 <a-button type="primary" status="danger" size="mini">删除</a-button>
@@ -65,8 +65,7 @@
 <script setup lang="ts">
 import { Message } from '@arco-design/web-vue'
 import { usePagination } from '@/hooks'
-import { getPersonList } from '@/apis'
-import type { PersonItem } from '@/apis'
+import { getPersonList, type PersonItem } from '@/apis'
 
 defineOptions({ name: 'TableCustom' })
 

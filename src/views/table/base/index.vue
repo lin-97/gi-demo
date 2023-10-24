@@ -1,68 +1,8 @@
 <template>
   <div class="table-page">
-    <a-form label-align="right" auto-label-width :model="form" class="form">
-      <a-row :gutter="16" wrap>
-        <a-col :xs="12" :md="12" :lg="8" :xl="6" :xxl="6">
-          <a-form-item field="value1" label="姓名">
-            <a-input v-model="form.value1" placeholder="请输入姓名" />
-          </a-form-item>
-        </a-col>
-        <a-col :xs="12" :md="12" :lg="8" :xl="6" :xxl="6">
-          <a-form-item field="value2" label="手机">
-            <a-input v-model="form.value2" placeholder="请输入手机号码" />
-          </a-form-item>
-        </a-col>
-        <a-col :xs="12" :md="12" :lg="8" :xl="6" :xxl="6" v-show="collapsed">
-          <a-form-item field="value3" label="类型">
-            <a-select placeholder="请选择">
-              <a-option>北京</a-option>
-              <a-option>上海</a-option>
-              <a-option>广州</a-option>
-            </a-select>
-          </a-form-item>
-        </a-col>
-        <a-col :xs="12" :md="12" :lg="8" :xl="6" :xxl="6" v-show="collapsed">
-          <a-form-item field="value3" label="时间">
-            <a-date-picker show-time v-model="form.value3" placeholder="请选择创建时间" style="width: 100%" />
-          </a-form-item>
-        </a-col>
-        <a-col :xs="12" :md="12" :lg="8" :xl="6" :xxl="6" v-show="collapsed">
-          <a-form-item field="value4" label="状态">
-            <a-select placeholder="请选择">
-              <a-option>开启</a-option>
-              <a-option>关闭</a-option>
-            </a-select>
-          </a-form-item>
-        </a-col>
-        <a-col :xs="12" :md="12" :lg="8" :xl="6" :xxl="6" v-show="collapsed">
-          <a-form-item field="value5" label="地址">
-            <a-input v-model="form.value5" placeholder="请输入查询地址" />
-          </a-form-item>
-        </a-col>
-        <a-col :xs="12" :md="12" :lg="8" :xl="6" :xxl="6">
-          <a-space>
-            <a-button type="primary" @click="getTableData">
-              <template #icon>
-                <icon-search />
-              </template>
-              <template #default>查询</template>
-            </a-button>
-            <a-button>
-              <template #default>重置</template>
-            </a-button>
-            <a-button type="text" class="collapsed-btn" @click="collapsed = !collapsed">
-              <template #icon>
-                <icon-up v-if="collapsed" />
-                <icon-down v-else />
-              </template>
-              <template #default>{{ !collapsed ? '展开' : '收起' }}</template>
-            </a-button>
-          </a-space>
-        </a-col>
-      </a-row>
-    </a-form>
+    <GiForm :options="options" v-model="form" @search="search"></GiForm>
 
-    <div class="gi_table_box gi_mt">
+    <div class="gi_table_box">
       <a-table
         row-key="id"
         size="small"
@@ -71,9 +11,7 @@
         :loading="loading"
         :data="tableData"
         :scroll="{ x: '100%', y: '100%', minWidth: 1000 }"
-        :pagination="{ showPageSize: true, total: total, current: current, pageSize: pageSize }"
-        @page-change="changeCurrent"
-        @page-size-change="changePageSize"
+        :pagination="pagination"
       >
         <template #columns>
           <a-table-column title="序号" :width="66" align="center">
@@ -88,27 +26,7 @@
           <a-table-column title="手机号" data-index="phone" :width="150"></a-table-column>
           <a-table-column title="爱好" data-index="hobbys">
             <template #cell="{ record }">
-              <a-overflow-list v-if="record.hobbys.length">
-                <a-tag v-for="item in (record as PersonItem)?.hobbys" :key="item" color="orange" size="small">
-                  <span>{{ item }}</span>
-                </a-tag>
-                <template #overflow="{ number }">
-                  <a-popover :content-style="{ maxWidth: '300px' }">
-                    <a-tag color="green" size="small">+{{ number }}</a-tag>
-                    <template #content>
-                      <a-space wrap>
-                        <a-tag
-                          v-for="tag in (record as PersonItem).hobbys.filter((i, n) => n >= record.hobbys.length - number)"
-                          color="orange"
-                          size="small"
-                        >
-                          <span>{{ tag }}</span>
-                        </a-tag>
-                      </a-space>
-                    </template>
-                  </a-popover>
-                </template>
-              </a-overflow-list>
+              <GiOverFlowTags :data="record.hobbys"></GiOverFlowTags>
             </template>
           </a-table-column>
           <a-table-column title="创建时间" data-index="createTime" ellipsis tooltip></a-table-column>
@@ -122,7 +40,7 @@
           <a-table-column title="操作" :width="200" align="center">
             <template #cell="{ record }">
               <a-space>
-                <a-button type="primary" size="mini" v-hasPerm="['table:btn:edit']">
+                <a-button type="primary" size="mini">
                   <span>编辑</span>
                 </a-button>
                 <a-button size="mini">
@@ -144,31 +62,70 @@
 
 <script setup lang="ts">
 import { usePagination } from '@/hooks'
-import { getPersonList } from '@/apis'
-import type { PersonItem } from '@/apis'
+import { getPersonList, type PersonItem } from '@/apis'
+import type { Options } from '@/components/GiForm/type'
 
-defineOptions({ name: 'TableMain' })
+defineOptions({ name: 'TableBase' })
 
-const form = reactive({
-  value1: '',
-  value2: '',
-  value3: '',
-  value4: '',
-  value5: ''
+const form = reactive({})
+
+const col = { xs: 24, sm: 12, md: 12, lg: 8, xl: 6, xxl: 6 }
+const options: Options = reactive({
+  form: { layout: 'inline' },
+  btns: { col: col },
+  fold: { enable: true, index: 2 },
+  columns: [
+    {
+      type: 'input',
+      label: '姓名',
+      field: 'name',
+      col: col
+    },
+    {
+      type: 'input',
+      label: '手机',
+      field: 'phone',
+      col: col,
+      props: {
+        maxLength: 11
+      }
+    },
+    {
+      type: 'select',
+      label: '类型',
+      field: 'type',
+      col: col,
+      options: [
+        { label: '党员', value: 1 },
+        { label: '群众', value: 2 }
+      ]
+    },
+    {
+      type: 'date-picker',
+      label: '创建日期',
+      field: 'createTime',
+      col: col
+    },
+    {
+      type: 'input',
+      label: '地址',
+      field: 'address',
+      col: col
+    }
+  ]
 })
 
 const loading = ref(false)
 const tableData = ref<PersonItem[]>([])
-const collapsed = ref(false)
 
-const { current, pageSize, total, changeCurrent, changePageSize, setTotal } = usePagination(() => getTableData())
+const { pagination, setTotal } = usePagination(() => getTableData())
 
 const getTableData = async () => {
   try {
     loading.value = true
     const res = await getPersonList({
-      current: current.value,
-      pageSize: pageSize.value
+      current: pagination.current,
+      pageSize: pagination.pageSize
     })
     tableData.value = res.data.list
     setTotal(res.data.total)
@@ -179,30 +136,14 @@ const getTableData = async () => {
 }
 
 getTableData()
+
+const search = () => {
+  pagination.current = 1
+  getTableData()
+}
 </script>
 
 <style lang="scss" scoped>
-:deep(.arco-grid) {
-  flex-wrap: wrap;
-}
-:deep(.arco-grid-item) {
-  min-width: 250px;
-}
-:deep(.arco-alert-success) {
-  padding: 14px 16px;
-  border-color: rgb(var(--success-6));
-  background-color: rgba(var(--success-6), 0.08);
-  .arco-alert-content {
-    color: rgb(var(--success-6));
-    font-size: 12px;
-  }
-}
-.collapsed-btn {
-  &:hover,
-  &:active {
-    background: none;
-  }
-}
 .table-page {
   height: 100%;
   overflow: hidden;
@@ -212,11 +153,5 @@ getTableData()
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
-  .form {
-    margin-top: 12px;
-    :deep(.arco-form-item) {
-      margin-bottom: 10px;
-    }
-  }
 }
 </style>

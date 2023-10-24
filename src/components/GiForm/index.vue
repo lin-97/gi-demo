@@ -144,7 +144,7 @@
         </a-col>
       </template>
       <a-col :span="options.btns?.span || 12" v-bind="options.btns?.col" v-if="!options.btns?.hide">
-        <a-space>
+        <a-space wrap>
           <slot name="footer">
             <a-button type="primary" @click="emit('search')">
               <template #icon><icon-search /></template>
