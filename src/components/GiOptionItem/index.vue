@@ -54,7 +54,7 @@ const handleClick = () => {
     display: flex;
     align-items: center;
     .icon-wrapper {
-      margin-right: 4px;
+      margin-right: 8px;
       display: flex;
       align-items: center;
     }

@@ -69,7 +69,7 @@ defineOptions({ name: 'TableBase' })
 
 const form = reactive({})
 
-const col = { xs: 24, sm: 12, md: 12, lg: 8, xl: 6, xxl: 6 }
+const col = { xs: 24, sm: 12, md: 12, lg: 8, xl: 8, xxl: 6 }
 const options: Options = reactive({
   form: { layout: 'inline' },
   btns: { col: col },
