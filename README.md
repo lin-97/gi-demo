@@ -728,6 +728,175 @@ const onEdit = (item: PersonItem) => {
 </script>
 ```
 
+
+
+#### GiForm使用文档
+
+GiForm是一个JSON配置表单组件，能够快速通过JSON构建表单布局
+
+| props   | 说明       |
+| ------- | ---------- |
+| options | 表单配置项 |
+
+options结构如下：
+
+~~~js
+import type * as A from '@arco-design/web-vue'
+
+export type FormType =
+  | 'input'
+  | 'select'
+  | 'radio-group'
+  | 'checkbox-group'
+  | 'textarea'
+  | 'date-picker'
+  | 'time-picker'
+  | 'input-number'
+  | 'rate'
+  | 'switch'
+  | 'slider'
+  | 'cascader'
+  | 'tree-select'
+
+interface ColumnsItem {
+  type: FormType // 表单项类型
+  label: A.FormItemInstance['label'] // 表单项label
+  field: A.FormItemInstance['field'] // 表单项field
+  span?: number // 表单项span, 共24
+  col?: A.ColProps // 表单项的col，完全继承<a-col>的props，优先级高于span，可配置响应式布局
+  item?: A.FormItemInstance['$props'] // 表单项的props，完全继承<form-item>的props
+  props?: // 表单项各个类型的props, 完全继承各个类型组件的props
+    | A.InputInstance['$props']
+    | A.SelectInstance['$props']
+    | A.TextareaInstance['$props']
+    | A.DatePickerInstance['$props']
+    | A.TimePickerInstance['$props']
+    | A.RadioGroupInstance['$props']
+    | A.CheckboxGroupInstance['$props']
+    | A.InputNumberInstance['$props']
+    | A.RateInstance['$props']
+    | A.SwitchInstance['$props']
+    | A.SliderInstance['$props']
+    | A.CascaderInstance['$props']
+    | A.TreeSelectInstance['$props']
+  rules?: A.FormItemInstance['$props']['rules'] // 当前表单项的校验规则rules
+  options?: // 选项数据 select、radio-group、checkbox-group、cascader 组件独有的options，格式一般是{label: string, value: string}[]
+    | A.SelectInstance['$props']['options']
+    | A.RadioGroupInstance['$props']['options']
+    | A.CheckboxGroupInstance['$props']['options']
+    | A.CascaderInstance['$props']['options']
+  data?: A.TreeSelectInstance['$props']['data'] // tree-select的树数据
+  hide?: boolean // 是否隐藏改该表单项
+}
+
+export interface Options {
+  form: Partial<A.FormInstance['$props']> // 继承<a-form>的props
+  row?: Partial<typeof import('@arco-design/web-vue')['Row']['__defaults']> // 最外层row，继承<a-row>的props
+  columns: ColumnsItem[]
+  btns?: { hide?: boolean; span?: number; col?: A.ColProps } // 查询和重置按钮的配置
+  fold?: { enable?: boolean; index?: number } // 是否折叠，enable: true开启折叠功能，index表示折叠的位置
+}
+~~~
+
+基本示例
+
+~~~vue
+<template>
+  <a-card title="配置表单-查询">
+    <template #extra>
+      <a-button type="primary" status="warning" @click="onViewCode">
+        <template #icon><icon-code /></template>
+        <span>查看JSON配置</span>
+      </a-button>
+    </template>
+    <a-row :gutter="30">
+      <a-col :xs="24" :sm="24" :md="12">
+        <GiForm class="gi_mb" :options="options" v-model="form" @search="search" @reset="reset"></GiForm>
+      </a-col>
+      <a-col :xs="24" :sm="24" :md="12">
+        <GiCodeView :code-json="JSON.stringify(form, null, '\t')"></GiCodeView>
+      </a-col>
+    </a-row>
+  </a-card>
+</template>
+
+<script setup lang="ts">
+import { Drawer, Message } from '@arco-design/web-vue'
+import type { Options } from '@/components/GiForm/type'
+import GiCodeView from '@/components/GiCodeView/index.vue'
+import { isPhone } from '@/utils/common'
+
+const form = reactive({
+  name: '',
+  phone: '',
+  status: ''
+})
+
+const options: Options = {
+  form: { layout: 'inline' },
+  fold: { enable: true, index: 0 },
+  btns: { col: { xs: 24, sm: 12 } },
+  columns: [
+    {
+      type: 'input',
+      label: '姓名',
+      field: 'name',
+      col: { xs: 24, sm: 12 },
+      props: {
+        maxLength: 4
+      }
+    },
+    {
+      type: 'input',
+      label: '手机',
+      field: 'phone',
+      col: { xs: 24, sm: 12 },
+      props: {
+        maxLength: 11
+      }
+    },
+    {
+      type: 'select',
+      label: '状态',
+      field: 'status',
+      col: { xs: 24, sm: 12 },
+      options: [
+        { label: '启用', value: 1 },
+        { label: '禁用', value: 0 }
+      ],
+      props: {
+        placeholder: '状态'
+      }
+    }
+  ]
+}
+
+const onViewCode = () => {
+  Drawer.open({
+    title: '数据结构',
+    content: () => h(GiCodeView, { codeJson: JSON.stringify(options, null, '\t') }),
+    width: isPhone() ? '100%' : 560
+  })
+}
+
+const search = () => {
+  Message.info('点击了搜索')
+}
+
+const reset = () => {
+  Message.info('点击了重置')
+}
+</script>
+
+<style lang="scss" scoped></style>
+~~~
+
+<img src="https://gitee.com/lin0716/gi-image/raw/master/form1.png" />
+
+<img src="https://gitee.com/lin0716/gi-image/raw/master/form2.png" />
+
+
+
 #### Hooks 目录结构
 
 ```js
