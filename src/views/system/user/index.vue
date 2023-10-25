@@ -152,7 +152,7 @@ const UserDetailDrawerRef = ref<InstanceType<typeof UserDetailDrawer>>()
 const treeInputValue = ref('')
 
 const { deptList, getDeptList } = useDept({
-  callback: () => {
+  onSuccess: () => {
     nextTick(() => {
       TreeRef.value?.expandAll(true)
     })

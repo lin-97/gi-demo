@@ -119,7 +119,7 @@ const form = reactive({
 })
 
 // 这里使用了表格hooks：useTable, 节省了大量代码
-const { loading, tableData, getTableData, pagination, selectKeys, select, selectAll } = useTable<PersonItem>(
+const { loading, tableData, getTableData, pagination, selectKeys, select, selectAll } = useTable(
   (pagin) => getPersonList({ ...form, current: pagin.page, pageSize: pagin.size }),
   { immediate: false, formatResult: (data) => data.map((i) => ({ ...i, isEdit: false })) }
 )

@@ -4,7 +4,7 @@ import type { DeptItem } from '@/apis'
 import { mapTree } from 'xe-utils'
 
 /** 部门模块 */
-export function useDept(options?: { callback?: () => void }) {
+export function useDept(options?: { onSuccess?: () => void }) {
   const loading = ref(false)
   const deptList = ref<DeptItem[]>([])
 
@@ -18,7 +18,7 @@ export function useDept(options?: { callback?: () => void }) {
         }
         return i
       })
-      options?.callback && options.callback()
+      options?.onSuccess && options.onSuccess()
     } catch (error) {
     } finally {
       loading.value = false
