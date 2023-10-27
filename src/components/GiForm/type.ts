@@ -15,7 +15,7 @@ export type FormType =
   | 'cascader'
   | 'tree-select'
 
-interface ColumnsItem {
+export interface ColumnsItem {
   type: FormType
   label: A.FormItemInstance['label']
   field: A.FormItemInstance['field']
