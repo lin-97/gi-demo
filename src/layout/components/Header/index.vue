@@ -40,7 +40,7 @@
 
             <!-- 全屏切换组件 -->
             <a-tooltip v-if="!isPhone()" content="全屏切换" position="bottom">
-              <a-button size="mini" class="gi_hover_btn" @click="onToggleFullScreen">
+              <a-button size="mini" class="gi_hover_btn" @click="toggleFullScreen">
                 <template #icon>
                   <icon-fullscreen :size="18" v-if="!isFullScreen" />
                   <icon-fullscreen-exit :size="18" v-else />
@@ -106,7 +106,7 @@ defineOptions({ name: 'Header' })
 const router = useRouter()
 const appStore = useAppStore()
 const userStore = useUserStore()
-const { isFullScreen, onToggleFullScreen } = useFullScreen()
+const { isFullScreen, toggleFullScreen } = useFullScreen()
 const SettingDrawerRef = ref<InstanceType<typeof SettingDrawer>>()
 
 // 跳转个人中心

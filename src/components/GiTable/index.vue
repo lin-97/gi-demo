@@ -13,9 +13,6 @@
             <template #icon><icon-refresh :size="18" /></template>
           </a-button>
         </a-tooltip>
-        <!-- <a-tooltip content="列设置">
-          <icon-settings :size="18" />
-        </a-tooltip> -->
         <a-tooltip content="全屏">
           <a-button size="mini" class="gi_hover_btn" @click="toggle">
             <template #icon>
@@ -39,8 +36,8 @@
         </a-radio-group>
       </a-space>
     </a-row>
-    <div class="gi_table_box">
-      <a-table v-bind="attrs" :stripe="stripe" :size="size" :bordered="{ cell: isBordered }" ref="tableRef">
+    <div class="">
+      <a-table :stripe="stripe" :size="size" :bordered="{ cell: isBordered }" v-bind="attrs" ref="tableRef">
         <template v-for="k in Object.keys(slots)" #[k] :key="k"> <slot :name="k"></slot> </template
       ></a-table>
     </div>
@@ -49,7 +46,7 @@
 
 <script setup lang="ts">
 import { useFullscreen } from '@vueuse/core'
-import type { Table } from '@arco-design/web-vue'
+import type { TableInstance } from '@arco-design/web-vue'
 
 defineOptions({ name: 'GiTable', inheritAttrs: false })
 const emit = defineEmits(['refresh'])
@@ -57,10 +54,10 @@ const emit = defineEmits(['refresh'])
 const attrs = useAttrs()
 const slots = useSlots()
 
-const tableRef = ref(null)
+const tableRef = ref<TableInstance | null>(null)
 
 const stripe = ref(false)
-const size = ref<InstanceType<typeof Table>['$props']['size']>('small')
+const size = ref<TableInstance['$props']['size']>('small')
 const isBordered = ref(true)
 // console.log('attrs', attrs)
 
@@ -71,9 +68,7 @@ const refresh = () => {
   emit('refresh')
 }
 
-defineExpose({
-  tableRef // <script setup>的组件里的属性默认是关闭的，需通过defineExpose暴露出去才能被调用
-})
+defineExpose({ tableRef })
 </script>
 
 <style lang="scss" scoped>

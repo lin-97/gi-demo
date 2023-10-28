@@ -12,7 +12,7 @@ export default function () {
   }
 
   // 切换事件
-  const onToggleFullScreen = () => {
+  const toggleFullScreen = () => {
     screenfull.toggle()
   }
 
@@ -28,6 +28,6 @@ export default function () {
 
   return {
     isFullScreen,
-    onToggleFullScreen
+    toggleFullScreen
   }
 }
