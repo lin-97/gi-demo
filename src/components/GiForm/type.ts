@@ -15,13 +15,28 @@ export type FormType =
   | 'cascader'
   | 'tree-select'
 
+export type ColumnsItemPropsKey =
+  | keyof A.InputInstance['$props']
+  | keyof A.SelectInstance['$props']
+  | keyof A.TextareaInstance['$props']
+  | keyof A.DatePickerInstance['$props']
+  | keyof A.TimePickerInstance['$props']
+  | keyof A.RadioGroupInstance['$props']
+  | keyof A.CheckboxGroupInstance['$props']
+  | keyof A.InputNumberInstance['$props']
+  | keyof A.RateInstance['$props']
+  | keyof A.SwitchInstance['$props']
+  | keyof A.SliderInstance['$props']
+  | keyof A.CascaderInstance['$props']
+  | keyof A.TreeSelectInstance['$props']
+
 export interface ColumnsItem {
   type: FormType
   label: A.FormItemInstance['label']
   field: A.FormItemInstance['field']
   span?: number
   col?: A.ColProps
-  item?: A.FormItemInstance['$props']
+  item?: Omit<A.FormItemInstance['$props'], 'label' | 'field'>
   props?:
     | A.InputInstance['$props']
     | A.SelectInstance['$props']
@@ -47,9 +62,9 @@ export interface ColumnsItem {
 }
 
 export interface Options {
-  form: Partial<A.FormInstance['$props']>
+  form: Omit<A.FormInstance['$props'], 'model'>
   row?: Partial<typeof import('@arco-design/web-vue')['Row']['__defaults']>
   columns: ColumnsItem[]
-  btns?: { hide?: boolean; span?: number; col?: A.ColProps }
+  btns?: { hide?: boolean; span?: number; col?: A.ColProps; searchBtnText?: string }
   fold?: { enable?: boolean; index?: number }
 }

@@ -1,10 +1,23 @@
 <template>
   <a-card title="配置表单-弹窗">
     <a-alert>此示例编辑模式会禁用状态、是否隐藏</a-alert>
-    <a-space class="gi_mt">
-      <a-button type="primary" @click="onAdd">新增</a-button>
-      <a-button type="primary" status="success" @click="onEdit">编辑</a-button>
-    </a-space>
+    <a-card title="表单-模态框" :bordered="true" class="gi_mt">
+      <a-space>
+        <a-button type="primary" @click="onAdd">新增</a-button>
+        <a-button type="primary" status="success" @click="onEdit">编辑</a-button>
+      </a-space>
+    </a-card>
+
+    <a-card title="表单-抽屉" :bordered="true" class="gi_mt">
+      <a-space>
+        <a-button type="primary" @click="onAddDrawer">新增</a-button>
+        <a-button type="primary" status="success" @click="onEditDrawer">编辑</a-button>
+      </a-space>
+    </a-card>
+
+    <a-drawer :title="isEdit ? '编辑' : '新增'" :width="width >= 600 ? 600 : '100%'" v-model:visible="visible">
+      <GiForm :options="options" v-model="form"></GiForm>
+    </a-drawer>
   </a-card>
 </template>
 
@@ -14,7 +27,10 @@ import * as Regexp from '@/utils/regexp'
 import { cityOptions, deptData } from './data'
 import type { Options } from '@/components/GiForm/type'
 import GiForm from '@/components/GiForm/index.vue'
-import useGiForm from '@/components/GiForm/hooks'
+import { useGiForm } from '@/components/GiForm/hooks'
+import { useWindowSize } from '@vueuse/core'
+
+const { width } = useWindowSize()
 
 const initOptions: Options = {
   form: {},
@@ -140,7 +156,8 @@ const initOptions: Options = {
 const { options, resetOptions, setPropsValue } = useGiForm(initOptions)
 
 const form = reactive({
-  remark: '这是备注这是备注'
+  remark: '这是备注这是备注',
+  status: 1
 })
 
 // watch(
@@ -171,6 +188,21 @@ const onEdit = () => {
     content: () =>
       h(GiForm, { options: options, modelValue: form, 'onUpdate:modelValue': (e) => Object.assign(form, e) })
   })
+}
+
+const visible = ref(false)
+const isEdit = ref(false)
+const onAddDrawer = () => {
+  resetOptions()
+  isEdit.value = false
+  visible.value = true
+}
+
+const onEditDrawer = () => {
+  setPropsValue('status', 'disabled', true) // 禁用 状态
+  setPropsValue('hide', 'disabled', true) // 禁用 是否隐藏
+  isEdit.value = true
+  visible.value = true
 }
 </script>
 

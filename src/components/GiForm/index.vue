@@ -45,7 +45,7 @@
               <template v-if="item.type === 'select'">
                 <a-select
                   :allow-clear="true"
-                  :placeholder="`请输入${item.label}`"
+                  :placeholder="`请选择${item.label}`"
                   v-bind="(item.props as A.SelectInstance['$props'])"
                   :options="(item.options as A.SelectInstance['$props']['options'])"
                   :model-value="modelValue[item.field as keyof typeof modelValue]"
@@ -148,7 +148,7 @@
           <slot name="footer">
             <a-button type="primary" @click="emit('search')">
               <template #icon><icon-search /></template>
-              <span>搜索</span>
+              <template #default>{{ options.btns?.searchBtnText || '搜索' }}</template>
             </a-button>
             <a-button @click="emit('reset')">重置</a-button>
             <a-button v-if="options.fold?.enable" type="text" size="mini" @click="collapsed = !collapsed">

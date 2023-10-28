@@ -8,7 +8,7 @@
     </template>
     <a-row :gutter="30">
       <a-col :xs="24" :sm="24" :md="12">
-        <GiForm ref="formRef" :options="computedOptions" v-model="form">
+        <GiForm ref="formRef" :options="options" v-model="form">
           <template #btns>
             <a-row justify="end" class="w-full">
               <a-space>
@@ -31,6 +31,7 @@ import { Drawer, Message } from '@arco-design/web-vue'
 import type { Options } from '@/components/GiForm/type'
 import GiCodeView from '@/components/GiCodeView/index.vue'
 import GiForm from '@/components/GiForm/index.vue'
+import { useGiForm } from '@/components/GiForm/hooks'
 import * as Regexp from '@/utils/regexp'
 import { isPhone } from '@/utils/common'
 import { cityOptions, deptData } from './data'
@@ -51,7 +52,7 @@ const form = reactive({
 
 const formRef = ref<InstanceType<typeof GiForm>>()
 
-const options: Options = reactive({
+const initOptions: Options = reactive({
   form: {},
   btns: { hide: true },
   columns: [
@@ -178,14 +179,14 @@ const options: Options = reactive({
   ]
 })
 
-const computedOptions = computed(() => {
-  const index = options.columns.findIndex((i) => i.field === 'grade')
-  if (index >= 0) {
-    options.columns[index].hide = form.hide
+const { options, setValue } = useGiForm(initOptions)
+watch(
+  () => form.hide,
+  (newVal) => {
+    setValue('grade', 'hide', newVal)
+    newVal && (form.grade = 0)
   }
-  form.grade = 0
-  return options
-})
+)
 
 const onViewCode = () => {
   Drawer.open({
