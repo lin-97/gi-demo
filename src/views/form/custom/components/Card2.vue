@@ -31,7 +31,6 @@ import { Drawer, Message } from '@arco-design/web-vue'
 import type { Options } from '@/components/GiForm/type'
 import GiCodeView from '@/components/GiCodeView/index.vue'
 import GiForm from '@/components/GiForm/index.vue'
-import { useGiForm } from '@/components/GiForm/hooks'
 import * as Regexp from '@/utils/regexp'
 import { isPhone } from '@/utils/common'
 import { cityOptions, deptData } from './data'
@@ -52,7 +51,7 @@ const form = reactive({
 
 const formRef = ref<InstanceType<typeof GiForm>>()
 
-const initOptions: Options = reactive({
+const options: Options = reactive({
   form: {},
   btns: { hide: true },
   columns: [
@@ -147,7 +146,11 @@ const initOptions: Options = reactive({
       type: 'slider',
       label: '成绩',
       field: 'grade',
-      col: { xs: 24, sm: 24 }
+      col: { xs: 24, sm: 24 },
+      hide: (i: typeof form) => {
+        i.hide && (i.grade = 0)
+        return i.hide === true
+      }
     },
     {
       type: 'cascader',
@@ -178,15 +181,6 @@ const initOptions: Options = reactive({
     }
   ]
 })
-
-const { options, setValue } = useGiForm(initOptions)
-watch(
-  () => form.hide,
-  (newVal) => {
-    setValue('grade', 'hide', newVal)
-    newVal && (form.grade = 0)
-  }
-)
 
 const onViewCode = () => {
   Drawer.open({

@@ -30,6 +30,8 @@ export type ColumnsItemPropsKey =
   | keyof A.CascaderInstance['$props']
   | keyof A.TreeSelectInstance['$props']
 
+export type ColumnsItemHide = boolean | ((form?: any) => boolean)
+
 export interface ColumnsItem {
   type: FormType
   label: A.FormItemInstance['label']
@@ -58,7 +60,7 @@ export interface ColumnsItem {
     | A.CheckboxGroupInstance['$props']['options']
     | A.CascaderInstance['$props']['options']
   data?: A.TreeSelectInstance['$props']['data']
-  hide?: boolean
+  hide?: ColumnsItemHide
 }
 
 export interface Options {

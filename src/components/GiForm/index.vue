@@ -3,7 +3,7 @@
     <a-row :gutter="14" v-bind="options.row" class="w-full">
       <template v-for="(item, index) in options.columns" :key="item.field">
         <a-col
-          v-if="!item.hide"
+          v-if="!isHide(item.hide)"
           :span="item.span || 12"
           v-bind="item.col"
           v-show="index <= (options.fold?.index || 0) || (index >= (options.fold?.index || 0) && !collapsed)"
@@ -166,7 +166,7 @@
 </template>
 
 <script setup lang="ts">
-import type { Options } from './type'
+import type { Options, ColumnsItemHide } from './type'
 import type * as A from '@arco-design/web-vue'
 
 interface Props {
@@ -188,8 +188,15 @@ const valueChange = (value: any, field: string) => {
 
 const collapsed = ref(false)
 const formRef = ref<A.FormInstance>()
-
 defineExpose({ formRef })
+
+const isHide = (hide?: ColumnsItemHide) => {
+  if (hide === undefined) return false
+  if (typeof hide === 'boolean') return hide
+  if (typeof hide === 'function') {
+    return hide(props.modelValue)
+  }
+}
 </script>
 
 <style lang="scss" scoped></style>
