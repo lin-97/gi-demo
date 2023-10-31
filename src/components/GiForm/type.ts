@@ -31,14 +31,23 @@ export type ColumnsItemPropsKey =
   | keyof A.TreeSelectInstance['$props']
 
 export type ColumnsItemHide = boolean | ((form?: any) => boolean)
+export type ColumnsItemRequest<T = any> = (form?: any) => Promise<T>
+export type ColumnsItemFormat<T = any> = (
+  res: T
+) =>
+  | A.SelectInstance['$props']['options']
+  | A.RadioGroupInstance['$props']['options']
+  | A.CheckboxGroupInstance['$props']['options']
+  | A.CascaderInstance['$props']['options']
+  | A.TreeSelectInstance['$props']['data']
 
 export interface ColumnsItem {
-  type: FormType
-  label: A.FormItemInstance['label']
-  field: A.FormItemInstance['field']
-  span?: number
-  col?: A.ColProps
-  item?: Omit<A.FormItemInstance['$props'], 'label' | 'field'>
+  type: FormType // 类型
+  label: A.FormItemInstance['label'] // 标签
+  field: A.FormItemInstance['field'] // 字段(必须唯一)
+  span?: number // 栅格占位格数
+  col?: A.ColProps // a-col的props, 响应式布局, 优先级大于span
+  item?: Omit<A.FormItemInstance['$props'], 'label' | 'field'> // a-form-item的props
   props?:
     | A.InputInstance['$props']
     | A.SelectInstance['$props']
@@ -53,14 +62,20 @@ export interface ColumnsItem {
     | A.SliderInstance['$props']
     | A.CascaderInstance['$props']
     | A.TreeSelectInstance['$props']
-  rules?: A.FormItemInstance['$props']['rules']
+  rules?: A.FormItemInstance['$props']['rules'] // 表单校验规则
+  // 下拉列表|复选框组|单选框组|级联选择组件的options
   options?:
     | A.SelectInstance['$props']['options']
     | A.RadioGroupInstance['$props']['options']
     | A.CheckboxGroupInstance['$props']['options']
     | A.CascaderInstance['$props']['options']
+  // 下拉树组件的data
   data?: A.TreeSelectInstance['$props']['data']
-  hide?: ColumnsItemHide
+  hide?: ColumnsItemHide // 是否隐藏
+  request?: ColumnsItemRequest // 接口请求api
+  resultFormat?: ColumnsItemFormat // 结果集格式化
+  init?: boolean // 初始化请求
+  cascader?: string[] // 级联的field字段列表
 }
 
 export interface Options {
