@@ -41,7 +41,13 @@ const form = reactive({
   phone: '',
   province: '',
   city: '',
-  region: ''
+  area: ''
+})
+
+onMounted(() => {
+  form.province = '440000'
+  form.city = '440300'
+  form.area = '440307'
 })
 
 const formRef = ref<InstanceType<typeof GiForm>>()
@@ -81,7 +87,7 @@ const options: Options = reactive({
       type: 'select',
       label: '省',
       field: 'province',
-      col: { xs: 24, sm: 8 },
+      col: { xs: 24, sm: 12, md: 12, lg: 8 },
       request: () => getAreaList({ type: 'province' }),
       resultFormat: (res) => res.data.map((i: any) => ({ label: i.label, value: i.code })),
       cascader: ['city'],
@@ -91,7 +97,7 @@ const options: Options = reactive({
       type: 'select',
       label: '市',
       field: 'city',
-      col: { xs: 24, sm: 8 },
+      col: { xs: 24, sm: 12, md: 12, lg: 8 },
       request: (form: any) => getAreaList({ type: 'city', code: form.province }),
       resultFormat: (res) => res.data.map((i: any) => ({ label: i.label, value: i.code })),
       cascader: ['area']
@@ -100,7 +106,7 @@ const options: Options = reactive({
       type: 'select',
       label: '区',
       field: 'area',
-      col: { xs: 24, sm: 8 },
+      col: { xs: 24, sm: 12, md: 12, lg: 8 },
       request: (form: any) => getAreaList({ type: 'area', code: form.city }),
       resultFormat: (res) => res.data.map((i: any) => ({ label: i.label, value: i.code }))
     },

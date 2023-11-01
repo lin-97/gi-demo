@@ -58,7 +58,7 @@
                   :allow-clear="true"
                   :placeholder="`请选择${item.label}`"
                   v-bind="(item.props as A.CascaderInstance['$props'])"
-                  :options="(item.options as A.CascaderInstance['$props']['options'])"
+                  :options="dicData[item.field] || (item.options as A.CascaderInstance['$props']['options'])"
                   :model-value="modelValue[item.field as keyof typeof modelValue]"
                   @update:model-value="valueChange($event, item.field)"
                 />
@@ -69,7 +69,7 @@
                   :allow-clear="true"
                   :placeholder="`请选择${item.label}`"
                   v-bind="(item.props as A.TreeSelectInstance['$props'])"
-                  :data="(item.data as A.TreeSelectInstance['$props']['data'])"
+                  :data="dicData[item.field] || (item.data as A.TreeSelectInstance['$props']['data'])"
                   :model-value="modelValue[item.field as keyof typeof modelValue]"
                   @update:model-value="valueChange($event, item.field)"
                 >
@@ -79,7 +79,7 @@
               <template v-if="item.type === 'radio-group'">
                 <a-radio-group
                   v-bind="(item.props as A.RadioGroupInstance['$props'])"
-                  :options="(item.options as A.RadioGroupInstance['$props']['options'])"
+                  :options="dicData[item.field] || (item.options as A.RadioGroupInstance['$props']['options'])"
                   :model-value="modelValue[item.field as keyof typeof modelValue]"
                   @update:model-value="valueChange($event, item.field)"
                 ></a-radio-group>
@@ -88,7 +88,7 @@
               <template v-if="item.type === 'checkbox-group'">
                 <a-checkbox-group
                   v-bind="(item.props as A.CheckboxGroupInstance['$props'])"
-                  :options="(item.options as A.CheckboxGroupInstance['$props']['options'])"
+                  :options="dicData[item.field] || (item.options as A.CheckboxGroupInstance['$props']['options'])"
                   :model-value="modelValue[item.field as keyof typeof modelValue]"
                   @update:model-value="valueChange($event, item.field)"
                 ></a-checkbox-group>
@@ -166,12 +166,12 @@
 </template>
 
 <script setup lang="ts">
-import type { Options, ColumnsItemHide, ColumnsItem } from './type'
+import type { Options, ColumnsItemHide, ColumnsItem, ColumnsItemOptionsOrData } from './type'
 import type * as A from '@arco-design/web-vue'
 import _ from 'lodash'
 
 interface Props {
-  modelValue: object
+  modelValue: any
   options: Options
 }
 
@@ -204,7 +204,7 @@ props.options.columns.forEach((item) => {
   if (item.request && typeof item.request === 'function' && item?.init) {
     item.request(props.modelValue).then((res) => {
       dicData[item.field] = item.resultFormat ? item.resultFormat(res) : res.data
-      console.log('dicData', dicData)
+      // console.log('dicData', dicData)
     })
   }
 })
@@ -229,11 +229,16 @@ watch(cloneForm as any, (newVal, oldVal) => {
         return item?.cascader?.includes(a.field)
       })
       arr.forEach((i) => {
-        emit('update:modelValue', Object.assign(props.modelValue, { [i.field]: '' }))
         if (i.request && Boolean(newVal[item.field])) {
           i.request(props.modelValue).then((res) => {
             dicData[i.field] = i.resultFormat ? i.resultFormat(res) : res.data
+            if (!dicData[i.field].map((i: any) => i.value).includes(props.modelValue[i.field])) {
+              emit('update:modelValue', Object.assign(props.modelValue, { [i.field]: '' }))
+            }
           })
+        } else if (i.request && !Boolean(newVal[item.field])) {
+          dicData[i.field] = []
+          emit('update:modelValue', Object.assign(props.modelValue, { [i.field]: '' }))
         }
       })
     }

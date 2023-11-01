@@ -41,6 +41,13 @@ export type ColumnsItemFormat<T = any> = (
   | A.CascaderInstance['$props']['options']
   | A.TreeSelectInstance['$props']['data']
 
+export type ColumnsItemOptionsOrData =
+  | A.SelectInstance['$props']['options']
+  | A.RadioGroupInstance['$props']['options']
+  | A.CheckboxGroupInstance['$props']['options']
+  | A.CascaderInstance['$props']['options']
+  | A.TreeSelectInstance['$props']['data']
+
 export interface ColumnsItem {
   type: FormType // 类型
   label: A.FormItemInstance['label'] // 标签
