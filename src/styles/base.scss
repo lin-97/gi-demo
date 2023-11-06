@@ -1,5 +1,10 @@
 @import './var.scss';
 
+body {
+  --margin: 14px; // 通用外边距
+  --padding: 16px; // 通用内边距
+}
+
 * {
   margin: 0;
   padding: 0;
@@ -18,29 +23,25 @@ html {
 }
 
 body {
-  // font-family: Avenir, Helvetica, Arial, sans-serif;
-  // font-family: Helvetica Neue, Helvetica, PingFang SC, Hiragino Sans GB, Microsoft YaHei, \5fae\8f6f\96c5\9ed1, Arial,
-  //   sans-serif;
   overflow: hidden;
-  // transition: color 0.6s, background-color 0.6s;
+  color: var(--color-text-2);
+  background-color: #f5f7fd; // body背景颜色
   -moz-osx-font-smoothing: grayscale;
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
+  // font-family: Avenir, Helvetica, Arial, sans-serif;
+  // font-family: Helvetica Neue, Helvetica, PingFang SC, Hiragino Sans GB, Microsoft YaHei, \5fae\8f6f\96c5\9ed1, Arial,
+  //   sans-serif;
+}
+
+body[arco-theme='dark'] {
+  background-color: #373739; // body背景颜色-深色模式
 }
 
 #app {
   width: 100vw;
   height: 100vh;
   overflow: hidden;
-  color: $color-text-2;
-  background: $color-bg;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-
-body[arco-theme='dark'] #app {
-  background-color: var(--color-bg-5);
 }
 
 ul {
