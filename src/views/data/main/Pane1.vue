@@ -151,7 +151,7 @@ const onDetail = (item: PersonItem) => {
 
 // 删除
 const onDelete = (item: PersonItem) => {
-  handleDelete(() => deletePerson({ ids: [item.id] }), { content: `是否删除-${item.name}?`, showModal: false })
+  return handleDelete(() => deletePerson({ ids: [item.id] }), { content: `是否删除-${item.name}?`, showModal: false })
 }
 
 // 批量删除

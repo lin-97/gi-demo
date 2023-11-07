@@ -70,6 +70,7 @@ export default function <T>(api: Api<T>, options?: Options<T>) {
       title: options?.title || '提示',
       content: options?.content || '是否确认删除？',
       hideCancel: false,
+      maskClosable: false,
       onBeforeOk: async () => {
         try {
           const res = await deleteApi()
