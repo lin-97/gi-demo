@@ -84,7 +84,7 @@
                       <a-space>
                         <a-button type="primary" size="mini" @click="onEdit(record)">修改</a-button>
                         <a-button size="mini" @click="onDetail(record)">详情</a-button>
-                        <a-popconfirm type="warning" content="您确定要删除该项吗?" @ok="onDelete(record.id)">
+                        <a-popconfirm type="warning" content="您确定要删除该项吗?" @before-ok="onDelete(record)">
                           <a-button type="primary" status="danger" size="mini">删除</a-button>
                         </a-popconfirm>
                       </a-space>
@@ -103,11 +103,11 @@
 </template>
 
 <script setup lang="ts">
-import { Modal, Message } from '@arco-design/web-vue'
+import { Message } from '@arco-design/web-vue'
 import { useTable } from '@/hooks'
 import CateTree from './CateTree/index.vue'
 import EditModal from './EditModal.vue'
-import { getPersonList, type PersonItem } from '@/apis'
+import { getPersonList, deletePerson, type PersonItem } from '@/apis'
 import { StatusList } from '@/constant/person'
 import { isPhone } from '@/utils/common'
 
@@ -119,7 +119,7 @@ const form = reactive({
 })
 
 // 这里使用了表格hooks：useTable, 节省了大量代码
-const { loading, tableData, getTableData, pagination, selectKeys, select, selectAll } = useTable(
+const { loading, tableData, getTableData, pagination, selectKeys, select, selectAll, handleDelete } = useTable(
   (pagin) => getPersonList({ ...form, current: pagin.page, pageSize: pagin.size }),
   { immediate: false, formatResult: (data) => data.map((i) => ({ ...i, isEdit: false })) }
 )
@@ -135,18 +135,6 @@ onActivated(() => {
   getTableData()
 })
 
-// 批量删除
-const onMulDelete = () => {
-  Modal.warning({
-    title: '提示',
-    content: '是否确认删除？',
-    hideCancel: false,
-    onOk: () => {
-      tableData.value = []
-    }
-  })
-}
-
 const EditModalRef = ref<InstanceType<typeof EditModal>>()
 
 const onAdd = () => {
@@ -161,9 +149,17 @@ const onDetail = (item: PersonItem) => {
   router.push({ path: '/data/detail', query: { id: item.id } })
 }
 
-const onDelete = (id: string) => {
-  Message.success('删除成功')
-  getTableData()
+// 删除
+const onDelete = (item: PersonItem) => {
+  handleDelete(() => deletePerson({ ids: [item.id] }), { content: `是否删除-${item.name}?`, showModal: false })
+}
+
+// 批量删除
+const onMulDelete = () => {
+  if (!selectKeys.value.length) {
+    return Message.warning('请选择删除项！')
+  }
+  handleDelete(() => deletePerson({ ids: selectKeys.value as string[] }), { successTip: '批量删除成功！' })
 }
 
 const onExport = () => {

@@ -67,5 +67,14 @@ export default [
         list: list
       })
     }
+  },
+  {
+    url: '/mock/person/delete',
+    method: 'post',
+    timeout: 350,
+    response: ({ body }) => {
+      const { ids } = body
+      return resultSuccess(ids)
+    }
   }
 ] as MockMethod[]

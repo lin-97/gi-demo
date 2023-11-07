@@ -80,7 +80,7 @@ const getCateTree = async () => {
     const res = await getCateTreeData()
     treeData.value = res.data
     nextTick(() => {
-      treeRef.value.expandAll()
+      treeRef.value?.expandAll()
     })
   } catch (error) {
     return error

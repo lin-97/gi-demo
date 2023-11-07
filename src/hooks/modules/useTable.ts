@@ -1,4 +1,5 @@
 import type { TableInstance } from '@arco-design/web-vue'
+import { Modal, Message } from '@arco-design/web-vue'
 import { usePagination } from '@/hooks'
 
 interface Options<T> {
@@ -30,6 +31,7 @@ export default function <T>(api: Api<T>, options?: Options<T>) {
     }
   }
 
+  // 是否立即出发
   const isImmediate = immediate ?? true
   isImmediate && getTableData()
 
@@ -45,5 +47,44 @@ export default function <T>(api: Api<T>, options?: Options<T>) {
     selectKeys.value = checked ? tableData.value.map((i) => i[key] as string | number) : []
   }
 
-  return { loading, tableData, getTableData, pagination, selectKeys, select, selectAll }
+  // 删除
+  const handleDelete = async <T>(
+    deleteApi: () => Promise<ApiRes<T>>,
+    options?: { title?: string; content?: string; successTip?: string; showModal?: boolean }
+  ): Promise<boolean | undefined> => {
+    const flag = options?.showModal ?? true // 是否显示对话框
+    if (!flag) {
+      try {
+        const res = await deleteApi()
+        if (res.success) {
+          Message.success(options?.successTip || '删除成功！')
+          selectKeys.value = []
+          getTableData()
+        }
+        return res.success
+      } catch (error) {
+        return false
+      }
+    }
+    Modal.warning({
+      title: options?.title || '提示',
+      content: options?.content || '是否确认删除？',
+      hideCancel: false,
+      onBeforeOk: async () => {
+        try {
+          const res = await deleteApi()
+          if (res.success) {
+            Message.success(options?.successTip || '删除成功！')
+            selectKeys.value = []
+            getTableData()
+          }
+          return res.success
+        } catch (error) {
+          return false
+        }
+      }
+    })
+  }
+
+  return { loading, tableData, getTableData, pagination, selectKeys, select, selectAll, handleDelete }
 }
