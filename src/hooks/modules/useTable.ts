@@ -52,8 +52,7 @@ export default function <T>(api: Api<T>, options?: Options<T>) {
     deleteApi: () => Promise<ApiRes<T>>,
     options?: { title?: string; content?: string; successTip?: string; showModal?: boolean }
   ): Promise<boolean | undefined> => {
-    const flag = options?.showModal ?? true // 是否显示对话框
-    if (!flag) {
+    const onDetele = async () => {
       try {
         const res = await deleteApi()
         if (res.success) {
@@ -66,24 +65,16 @@ export default function <T>(api: Api<T>, options?: Options<T>) {
         return false
       }
     }
+    const flag = options?.showModal ?? true // 是否显示对话框
+    if (!flag) {
+      return onDetele()
+    }
     Modal.warning({
       title: options?.title || '提示',
       content: options?.content || '是否确认删除？',
       hideCancel: false,
       maskClosable: false,
-      onBeforeOk: async () => {
-        try {
-          const res = await deleteApi()
-          if (res.success) {
-            Message.success(options?.successTip || '删除成功！')
-            selectKeys.value = []
-            getTableData()
-          }
-          return res.success
-        } catch (error) {
-          return false
-        }
-      }
+      onBeforeOk: onDetele
     })
   }
 
