@@ -33,6 +33,7 @@ defineOptions({ name: 'LayoutTop' })
     box-sizing: border-box;
     border-bottom: 1px solid var(--color-border);
     background-color: var(--color-bg-1);
+    padding-right: 16px;
   }
 }
 </style>
