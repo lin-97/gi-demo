@@ -1,32 +1,31 @@
 <template>
   <template v-if="!item.meta?.hidden">
-    <template
+    <a-menu-item
       v-if="
         hasOneShowingChild(item.children, item) &&
         (!onlyOneChild?.children || onlyOneChild?.meta?.noShowingChildren) &&
         !item?.meta?.alwaysShow
       "
+      :key="onlyOneChild?.path"
+      v-bind="attrs"
     >
-      <a-menu-item v-if="onlyOneChild?.meta" :key="onlyOneChild.path">
-        {{ onlyOneChild.meta?.title }}
-      </a-menu-item>
-    </template>
+      {{ onlyOneChild?.meta?.title }}
+    </a-menu-item>
 
-    <a-sub-menu v-else :key="item.path" :title="item?.meta?.title">
-      <MenuItem v-for="child in item.children" :key="child.path" :is-nest="true" :item="child"></MenuItem>
+    <a-sub-menu v-else :key="item.path" :title="item?.meta?.title" v-bind="attrs">
+      <MenuItem v-for="child in item.children" :key="child.path" :item="child"></MenuItem>
     </a-sub-menu>
   </template>
 </template>
 
 <script lang="ts" setup>
-import { isExternal } from '@/utils/validate'
 import type { RouteRecordRaw } from 'vue-router'
 
 defineOptions({ name: 'MenuItem' })
+const attrs = useAttrs()
 
 interface Props {
   item: RouteRecordRaw
-  isNest?: boolean
 }
 
 const props = withDefaults(defineProps<Props>(), {})
@@ -64,24 +63,5 @@ function hasOneShowingChild(children: RouteRecordRaw[] = [], parent: RouteRecord
   }
 
   return false
-}
-
-/**
- *
- * @param path 路由
- * @param routeQuery 路由query参数
- * @desc 优先级1 如果 path 是外链，返回外链
- * @desc 优先级2 如果 path 配有路由参数，要带上路由参数
- * @desc 优先级3 如果不是外链，也没有路由参数，返回原本 path
- */
-function resolvePath(path: string, routeQuery?: string): string | { path: string; query: AnyObject } {
-  if (isExternal(path)) {
-    return path
-  }
-  if (routeQuery) {
-    const query = JSON.parse(JSON.stringify(routeQuery))
-    return { path: path, query: query }
-  }
-  return path
 }
 </script>
