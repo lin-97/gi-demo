@@ -1,4 +1,4 @@
-import { defineComponent } from 'vue'
+import { defineComponent, toRaw } from 'vue'
 import type { RouteRecordRaw } from 'vue-router'
 
 export default defineComponent({
@@ -45,31 +45,30 @@ export default defineComponent({
       return false
     }
 
-    const MItem = (item: any) => {
+    const MItem = (props: any) => {
+      const item = props.item
+      console.log('item', item)
+      const a = hasOneShowingChild(item.children, item)
       const flag =
-        hasOneShowingChild(item.children, item) &&
-        (!onlyOneChild?.children || onlyOneChild?.meta?.noShowingChildren) &&
-        !item?.meta?.alwaysShow
+        a && (!onlyOneChild?.value?.children || onlyOneChild?.value?.meta?.noShowingChildren) && !item?.meta?.alwaysShow
+      console.log('flag', flag, onlyOneChild.value)
       if (flag) {
-        return (
-          <a-menu-item key={onlyOneChild.path}>
-            <span>{onlyOneChild?.meta?.title}</span>
-          </a-menu-item>
-        )
+        return <a-menu-item key={onlyOneChild.value?.path}>{onlyOneChild?.value?.meta?.title}</a-menu-item>
       } else {
         return (
           <a-sub-menu key={item.path} title={item?.meta?.title}>
-            {item.children.map((i) => {
-              return <MItem key={i.path} item={i}></MItem>
-            })}
+            {item.children.length &&
+              item.children.map((i) => {
+                return <MItem key={i.path} item={i}></MItem>
+              })}
           </a-sub-menu>
         )
       }
     }
 
     if (!props.item?.meta?.hidden) {
-      return <MItem item={props.item}></MItem>
+      return () => <MItem item={props.item}></MItem>
     }
-    return null
+    return () => null
   }
 })

@@ -6,7 +6,7 @@
 
 <script setup lang="tsx">
 import { useAppStore, useRouteStore } from '@/stores'
-import MenuItem from './menu'
+import MenuItem from './MenuItem.vue'
 
 defineOptions({ name: 'Menu' })
 const route = useRoute()

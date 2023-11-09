@@ -7,30 +7,12 @@
         !item?.meta?.alwaysShow
       "
     >
-      <MenuLink v-if="onlyOneChild?.meta" :to="resolvePath(onlyOneChild?.path, onlyOneChild?.meta?.query || '')">
-        <a-menu-item v-if="onlyOneChild.meta" :key="onlyOneChild.path">
-          <template #icon>
-            <GiSvgIcon
-              v-if="onlyOneChild.meta.svgIcon || item?.meta?.svgIcon"
-              :name="onlyOneChild.meta.svgIcon || item?.meta?.svgIcon"
-              :size="24"
-            ></GiSvgIcon>
-            <component v-else :is="onlyOneChild.meta.icon || item?.meta?.icon || ''"></component>
-          </template>
-          <span>{{ onlyOneChild.meta?.title }}</span>
-        </a-menu-item>
-      </MenuLink>
+      <a-menu-item v-if="onlyOneChild?.meta" :key="onlyOneChild.path">
+        {{ onlyOneChild.meta?.title }}
+      </a-menu-item>
     </template>
 
-    <a-sub-menu v-else :key="item.path">
-      <template #icon>
-        <GiSvgIcon v-if="item?.meta?.svgIcon" :name="item?.meta?.svgIcon" :size="24"></GiSvgIcon>
-        <component v-else :is="item?.meta?.icon || ''"></component>
-      </template>
-      <template #title v-if="item.meta">
-        <span>{{ item?.meta?.title }}</span>
-      </template>
-
+    <a-sub-menu v-else :key="item.path" :title="item?.meta?.title">
       <MenuItem v-for="child in item.children" :key="child.path" :is-nest="true" :item="child"></MenuItem>
     </a-sub-menu>
   </template>
@@ -38,7 +20,6 @@
 
 <script lang="ts" setup>
 import { isExternal } from '@/utils/validate'
-import MenuLink from './MenuLink.vue'
 import type { RouteRecordRaw } from 'vue-router'
 
 defineOptions({ name: 'MenuItem' })
