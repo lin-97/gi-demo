@@ -1,8 +1,9 @@
 <template>
   <div class="layout layout-top">
-    <div class="header">
-      <Menu></Menu>
-    </div>
+    <a-row align="center" class="header">
+      <Menu style="flex: 1"></Menu>
+      <HeaderRight></HeaderRight>
+    </a-row>
     <Tabs></Tabs>
     <Main></Main>
   </div>
@@ -12,6 +13,7 @@
 import Main from './components/Main.vue'
 import Tabs from './components/Tabs/index.vue'
 import Menu from './components/Menu/index.vue'
+import HeaderRight from './components/HeaderRight/index.vue'
 
 defineOptions({ name: 'LayoutTop' })
 </script>
@@ -30,6 +32,7 @@ defineOptions({ name: 'LayoutTop' })
     overflow: hidden;
     box-sizing: border-box;
     border-bottom: 1px solid var(--color-border);
+    background-color: var(--color-bg-1);
   }
 }
 </style>
