@@ -1,11 +1,6 @@
 <template>
-  <a-menu
-    :mode="mode"
-    :selected-keys="[activeMenu]"
-    :auto-open-selected="false"
-    :style="{ width: '100%', height: '100%' }"
-  >
-    <MenuItem v-for="(route, index) in sidebarRoutes" :key="route.path + index" :item="route"></MenuItem>
+  <a-menu :mode="mode" :selected-keys="activeMenu" :auto-open-selected="false">
+    <MenuItem v-for="(route, index) in sidebarRoutes" :key="route.path" :item="route"></MenuItem>
   </a-menu>
 </template>
 
@@ -19,6 +14,7 @@ const appStore = useAppStore()
 const routeStore = useRouteStore()
 const sidebarRoutes = computed(() => routeStore.routes)
 
+// 菜单垂直模式/水平模式
 const mode = computed(() => {
   if (appStore.layout === 'left') {
     return 'vertical'
@@ -31,9 +27,9 @@ const mode = computed(() => {
 const activeMenu = computed(() => {
   const { meta, path } = route
   if (meta?.activeMenu) {
-    return meta.activeMenu
+    return [meta.activeMenu]
   }
-  return path
+  return [path]
 })
 </script>
 

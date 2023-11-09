@@ -1,5 +1,5 @@
 <template>
-  <div v-if="!item.meta?.hidden">
+  <template v-if="!item.meta?.hidden">
     <template
       v-if="
         hasOneShowingChild(item.children, item) &&
@@ -33,7 +33,7 @@
 
       <MenuItem v-for="child in item.children" :key="child.path" :is-nest="true" :item="child"></MenuItem>
     </a-sub-menu>
-  </div>
+  </template>
 </template>
 
 <script lang="ts" setup>
