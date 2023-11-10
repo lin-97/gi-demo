@@ -3,7 +3,7 @@ import { resultSuccess, resultError } from '@/mock/_utils'
 import { menus } from './data/menu'
 import type { MockMenuItem } from './data/type'
 import { mapTree, findTree } from 'xe-utils'
-import { transformPathToName, filterTree } from '@/utils/common'
+import { transformPathToName, filterTree } from '@/utils'
 
 const getRoleMenus = (value: typeof menus, roles: string[]) => {
   // 排序过后的数据

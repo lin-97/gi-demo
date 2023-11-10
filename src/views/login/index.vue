@@ -57,7 +57,7 @@ import { useLoading } from '@/hooks'
 import { Message, type FormInstance } from '@arco-design/web-vue'
 import LoginBg from './components/LoginBg/index.vue'
 import * as Regexp from '@/utils/regexp'
-import { isPhone } from '@/utils/common'
+import { isPhone } from '@/utils'
 
 defineOptions({ name: 'Login' })
 const router = useRouter()

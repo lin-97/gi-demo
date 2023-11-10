@@ -6,7 +6,7 @@
 
 <script lang="ts" setup>
 import { isExternal } from '@/utils/validate'
-import { isPhone } from '@/utils/common'
+import { isPhone } from '@/utils'
 import { useAppStore } from '@/stores'
 
 const appStore = useAppStore()

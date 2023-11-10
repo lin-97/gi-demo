@@ -92,7 +92,7 @@ export default [
     response: () => {
       return resultSuccess({
         total: 2,
-        list: data
+        records: data
       })
     }
   }

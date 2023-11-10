@@ -21,7 +21,7 @@
 import { Drawer, Message } from '@arco-design/web-vue'
 import type { Options } from '@/components/GiForm/type'
 import GiCodeView from '@/components/GiCodeView/index.vue'
-import { isPhone } from '@/utils/common'
+import { isPhone } from '@/utils'
 
 const form = reactive({
   name: '',

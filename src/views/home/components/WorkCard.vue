@@ -10,7 +10,7 @@
             <img :src="userStore.avatar" />
           </a-avatar>
           <div class="welcome">
-            <p class="hello">早安，{{ userStore.name }}，开始您一天的工作吧！</p>
+            <p class="hello">{{ goodTimeText() }}！，{{ userStore.name }}，开始您一天的工作吧！</p>
             <p>今日阴转大雨，15℃ - 25℃，出门记得带伞哦。</p>
           </div>
         </a-space>
@@ -52,6 +52,7 @@
 <script setup lang="ts">
 import NowTime from './NowTime/index.vue'
 import { useUserStore } from '@/stores'
+import { goodTimeText } from '@/utils'
 
 const userStore = useUserStore()
 </script>

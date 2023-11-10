@@ -142,7 +142,7 @@ import AddUserModal from './AddUserModal.vue'
 import UserDetailDrawer from './UserDetailDrawer.vue'
 import type { TreeInstance, TableInstance } from '@arco-design/web-vue'
 import { Message } from '@arco-design/web-vue'
-import { isPhone } from '@/utils/common'
+import { isPhone } from '@/utils'
 
 defineOptions({ name: 'SystemUser' })
 
@@ -190,7 +190,7 @@ const getUserList = async () => {
   try {
     loading.value = true
     const res = await getSystemUserList()
-    userList.value = res.data.list
+    userList.value = res.data.records
     setTotal(res.data.total)
   } catch (error) {
   } finally {

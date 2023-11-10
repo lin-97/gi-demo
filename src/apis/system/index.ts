@@ -19,7 +19,7 @@ export function saveSystemDept(data: any) {
 
 /** @desc 获取角色数据 */
 export function getSystemRoleList() {
-  return http.get<ApiListData<System.RoleItem[]>>(`${prefix}/system/role`)
+  return http.get<PageRes<System.RoleItem[]>>(`${prefix}/system/role`)
 }
 
 /** @desc 获取角色详情 */
@@ -39,7 +39,7 @@ export function getSystemRoleMenuIds(params: { role: string }) {
 
 /** @desc 获取用户数据 */
 export function getSystemUserList() {
-  return http.get<ApiListData<System.UserItem[]>>(`${prefix}/system/user`)
+  return http.get<PageRes<System.UserItem[]>>(`${prefix}/system/user`)
 }
 
 /** @desc 获取用户详情 */

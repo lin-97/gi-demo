@@ -25,7 +25,7 @@
 </template>
 
 <script setup lang="ts">
-import { isPhone } from '@/utils/common'
+import { isPhone } from '@/utils'
 defineOptions({ name: 'MultilevelIndex' })
 
 const route = useRoute()

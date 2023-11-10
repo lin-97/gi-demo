@@ -87,7 +87,7 @@
 import type { FormInstance, RangePickerInstance } from '@arco-design/web-vue'
 import { Message } from '@arco-design/web-vue'
 import * as Regexp from '@/utils/regexp'
-import { isPhone } from '@/utils/common'
+import { isPhone } from '@/utils'
 
 defineOptions({ name: 'FormBase' })
 

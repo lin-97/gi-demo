@@ -170,7 +170,7 @@
 import { Message, type FormInstance } from '@arco-design/web-vue'
 import { getSystemMenuDetail, saveSystemMenu, type MenuItem } from '@/apis'
 import { isExternal } from '@/utils/validate'
-import { transformPathToName, filterTree } from '@/utils/common'
+import { transformPathToName, filterTree } from '@/utils'
 import { mapTree } from 'xe-utils'
 import type { MenuForm } from './type'
 

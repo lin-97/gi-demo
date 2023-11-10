@@ -72,10 +72,6 @@ const animateModeList: App.AnimateItem[] = [
   { label: '缩放消退', value: 'fade-scale' }
 ]
 
-if (appStore.themeColor) {
-  appStore.setThemeColor(appStore.themeColor)
-}
-
 const open = () => {
   visible.value = true
 }

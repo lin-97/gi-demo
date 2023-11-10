@@ -5,10 +5,10 @@
 </template>
 
 <script lang="ts" setup>
-import mitter from './mitt'
+import mittBus from '@/utils/mitt'
 
 const click = () => {
-  mitter.emit('changeText', 'B')
+  mittBus.emit('changeText', 'B')
 }
 </script>
 

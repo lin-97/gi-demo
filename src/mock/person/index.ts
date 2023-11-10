@@ -61,10 +61,8 @@ export default [
       const { current = 1, pageSize = 10, status = 0, name = '' } = query
       const list = getTableListData({ current, pageSize, status, name })
       return resultSuccess({
-        current: Number(current),
-        pageSize: Number(pageSize),
         total: 1000,
-        list: list
+        records: list
       })
     }
   },

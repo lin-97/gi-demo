@@ -143,7 +143,7 @@ import AddMenuModal from './AddMenuModal.vue'
 import { getSystemMenuList, type MenuItem } from '@/apis'
 import { Drawer, type TableInstance } from '@arco-design/web-vue'
 import { isExternal } from '@/utils/validate'
-import { transformPathToName, isPhone } from '@/utils/common'
+import { transformPathToName, isPhone } from '@/utils'
 import GiCodeView from '@/components/GiCodeView/index.vue'
 
 defineOptions({ name: 'SystemMenu' })

@@ -10,7 +10,7 @@ interface Options<T> {
 }
 
 type PaginationParams = { page: number; size: number }
-type Api<T> = (params: PaginationParams) => Promise<ApiRes<ApiListData<T[]>>>
+type Api<T> = (params: PaginationParams) => Promise<ApiRes<PageRes<T[]>>>
 
 export default function <T>(api: Api<T>, options?: Options<T>) {
   const { formatResult, onSuccess, immediate, rowKey } = options || {}
@@ -22,7 +22,7 @@ export default function <T>(api: Api<T>, options?: Options<T>) {
     try {
       loading.value = true
       const res = await api({ page: pagination.current, size: pagination.pageSize })
-      tableData.value = formatResult ? formatResult(res.data.list) : res.data.list
+      tableData.value = formatResult ? formatResult(res.data.records) : res.data.records
       setTotal(res.data.total)
       onSuccess && onSuccess()
     } catch (error) {

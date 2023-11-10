@@ -46,7 +46,7 @@ http.interceptors.request.use(
       if (!config.headers) {
         config.headers = {}
       }
-      config.headers['token'] = token
+      config.headers.token = token
     }
     return config
   },
@@ -101,22 +101,22 @@ const request = <T = unknown>(config: AxiosRequestConfig): Promise<ApiRes<T>> =>
   })
 }
 
-request.get = <T = any>(url: string, params?: object, headers?: AxiosRequestHeaders): Promise<ApiRes<T>> => {
+const get = <T = any>(url: string, params?: object, config?: AxiosRequestConfig): Promise<ApiRes<T>> => {
   return request({
     method: 'get',
     url,
     params,
-    headers
+    ...config
   })
 }
 
-request.post = <T = any>(url: string, params?: object, headers?: AxiosRequestHeaders): Promise<ApiRes<T>> => {
+const post = <T = any>(url: string, params?: object, config?: AxiosRequestConfig): Promise<ApiRes<T>> => {
   return request({
     method: 'post',
     url,
     data: params,
-    headers
+    ...config
   })
 }
 
-export default request
+export default { get, post }

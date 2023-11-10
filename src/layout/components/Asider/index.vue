@@ -39,7 +39,7 @@
 import { useAppStore, useRouteStore } from '@/stores'
 import SidebarItem from './SidebarItem.vue'
 import Logo from './Logo.vue'
-import { isPhone } from '@/utils/common'
+import { isPhone } from '@/utils'
 
 defineOptions({ name: 'Asider' })
 const route = useRoute()

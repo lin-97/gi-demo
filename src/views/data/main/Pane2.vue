@@ -132,7 +132,7 @@ const getTableData = async () => {
       current: pagination.current,
       pageSize: pagination.pageSize
     })
-    tableData.value = res.data.list
+    tableData.value = res.data.records
     setTotal(res.data.total)
   } catch (error) {
   } finally {

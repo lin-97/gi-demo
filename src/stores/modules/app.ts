@@ -33,6 +33,12 @@ const storeSetup = () => {
     })
   }
 
+  // 初始化主题
+  const initTheme = () => {
+    if (!settingConfig.themeColor) return
+    setThemeColor(settingConfig.themeColor)
+  }
+
   // 设置页签可见
   const setTabVisible = (visible: boolean) => {
     settingConfig.tab = visible
@@ -63,6 +69,7 @@ const storeSetup = () => {
     transitionName,
     toggleTheme,
     setThemeColor,
+    initTheme,
     setTabVisible,
     setTabMode,
     setAnimateVisible,

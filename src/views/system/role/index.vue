@@ -99,7 +99,7 @@ import PermModal from './PermModal.vue'
 import type { RoleItem } from '@/apis'
 import { usePagination } from '@/hooks'
 import { getSystemRoleList } from '@/apis'
-import { isPhone } from '@/utils/common'
+import { isPhone } from '@/utils'
 
 defineOptions({ name: 'SystemRole' })
 
@@ -121,7 +121,7 @@ const getRoleList = async () => {
   try {
     loading.value = true
     const res = await getSystemRoleList()
-    roleList.value = res.data.list
+    roleList.value = res.data.records
     setTotal(res.data.total)
   } catch (error) {
   } finally {

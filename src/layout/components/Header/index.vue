@@ -100,7 +100,7 @@ import { useAppStore, useUserStore } from '@/stores'
 import { useFullScreen } from '@/hooks'
 import SettingDrawer from './SettingDrawer.vue'
 import Message from './Message.vue'
-import { isPhone } from '@/utils/common'
+import { isPhone } from '@/utils'
 
 defineOptions({ name: 'Header' })
 const router = useRouter()

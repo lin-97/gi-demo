@@ -109,7 +109,7 @@ import CateTree from './CateTree/index.vue'
 import EditModal from './EditModal.vue'
 import { getPersonList, deletePerson, type PersonItem } from '@/apis'
 import { StatusList } from '@/constant/person'
-import { isPhone } from '@/utils/common'
+import { isPhone } from '@/utils'
 
 const router = useRouter()
 

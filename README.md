@@ -421,17 +421,17 @@ import type * as System from './type'
 
 /** @desc 获取部门数据 */
 export function getSystemDeptList() {
-  return http.get<ApiListData<System.DeptItem[]>>(`${prefix}/system/dept/list`)
+  return http.get<PageRes<System.DeptItem[]>>(`${prefix}/system/dept/list`)
 }
 
 /** @desc 获取用户数据 */
 export function getSystemUserList() {
-  return http.get<ApiListData<System.UserItem[]>>(`${prefix}/system/user/list`)
+  return http.get<PageRes<System.UserItem[]>>(`${prefix}/system/user/list`)
 }
 
 /** @desc 获取角色数据 */
 export function getSystemRoleList() {
-  return http.get<ApiListData<System.RoleItem[]>>(`${prefix}/system/role/list`)
+  return http.get<PageRes<System.RoleItem[]>>(`${prefix}/system/role/list`)
 }
 ```
 
@@ -840,7 +840,7 @@ export function useDept() {
     try {
       loading.value = true
       const res = await getSystemDeptList()
-      deptList.value = res.data.list
+      deptList.value = res.data.records
     } catch (error) {
     } finally {
       loading.value = false

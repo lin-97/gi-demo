@@ -16,7 +16,7 @@
 import { getSystemMenuOptions, getSystemRoleMenuIds, type MenuOptionsItem } from '@/apis'
 import type { TreeInstance } from '@arco-design/web-vue'
 import { Message } from '@arco-design/web-vue'
-import { isPhone } from '@/utils/common'
+import { isPhone } from '@/utils'
 
 const TreeRef = ref<TreeInstance>()
 const treeData = ref<MenuOptionsItem[]>([])

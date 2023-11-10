@@ -92,7 +92,7 @@ import AddDeptModal from './AddDeptModal.vue'
 import { getSystemDeptList, type DeptItem } from '@/apis'
 import type { TableInstance } from '@arco-design/web-vue'
 import { Message } from '@arco-design/web-vue'
-import { isPhone } from '@/utils/common'
+import { isPhone } from '@/utils'
 
 defineOptions({ name: 'SystemDept' })
 

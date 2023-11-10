@@ -33,7 +33,7 @@ import type { Options } from '@/components/GiForm/type'
 import GiCodeView from '@/components/GiCodeView/index.vue'
 import GiForm from '@/components/GiForm/index.vue'
 import * as Regexp from '@/utils/regexp'
-import { isPhone } from '@/utils/common'
+import { isPhone } from '@/utils'
 import { getAreaList } from '@/apis'
 
 const form = reactive({
