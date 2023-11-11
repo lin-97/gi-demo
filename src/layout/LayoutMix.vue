@@ -100,6 +100,10 @@ watch(
 </script>
 
 <style lang="scss" scoped>
+:deep(.arco-menu-pop) {
+  white-space: nowrap;
+}
+
 .layout-mix {
   height: 100%;
   display: flex;

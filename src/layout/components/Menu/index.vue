@@ -4,7 +4,7 @@
     :selected-keys="activeMenu"
     :auto-open-selected="autoOpenSelected"
     :show-collapse-button="['mix'].includes(appStore.layout)"
-    breakpoint="xl"
+    :breakpoint="appStore.layout === 'mix' && !isPhone() ? 'lg' : undefined"
     :style="menuStyle"
     @menu-item-click="onMenuItemClick"
   >
@@ -51,7 +51,7 @@ const menuStyle = computed(() => {
   if (appStore.layout === 'left') {
     return { width: '100%', height: '100%' } as CSSProperties
   }
-  if (appStore.layout === 'mix') {
+  if (appStore.layout === 'mix' && !isPhone()) {
     return { width: '200px', height: '100%' } as CSSProperties
   }
 })
@@ -78,8 +78,4 @@ const onMenuItemClick = (key: string) => {
 }
 </script>
 
-<style lang="scss" scoped>
-:deep(.arco-menu-pop) {
-  white-space: nowrap;
-}
-</style>
+<style lang="scss" scoped></style>
