@@ -14,18 +14,25 @@ import { useAppStore, useRouteStore } from '@/stores'
 import MenuItem from './MenuItem.vue'
 import { isExternal } from '@/utils/validate'
 import { isPhone } from '@/utils'
+import type { RouteRecordRaw } from 'vue-router'
+
+interface Props {
+  menus?: RouteRecordRaw[]
+}
+
+const props = withDefaults(defineProps<Props>(), {})
 
 defineOptions({ name: 'Menu' })
 const route = useRoute()
 const router = useRouter()
 const appStore = useAppStore()
 const routeStore = useRouteStore()
-const sidebarRoutes = computed(() => routeStore.routes)
+const sidebarRoutes = computed(() => (props.menus ? props.menus : routeStore.routes))
 console.log('sidebarRoutes', sidebarRoutes.value)
 
 // 菜单垂直模式/水平模式
 const mode = computed(() => {
-  if (appStore.layout === 'left') {
+  if (['left', 'mix'].includes(appStore.layout)) {
     return 'vertical'
   } else {
     return 'horizontal'

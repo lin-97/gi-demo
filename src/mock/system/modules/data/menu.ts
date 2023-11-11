@@ -590,7 +590,7 @@ export const menus: MockMenuItem[] = [
     parentId: '',
     path: '/test',
     component: 'Layout',
-    redirect: '',
+    redirect: 'noRedirect',
     type: 1,
     title: '权限测试',
     svgIcon: 'menu-test',

@@ -1,5 +1,5 @@
 <template>
-  <LayoutMix v-if="appStore.layout === 'mix'"></LayoutMix>
+  <LayoutMix v-if="appStore.layout === 'mix' && !isPhone()"></LayoutMix>
   <LayoutDefault v-else></LayoutDefault>
 </template>
 
@@ -7,6 +7,7 @@
 import LayoutDefault from './LayoutDefault.vue'
 import LayoutMix from './LayoutMix.vue'
 import { useAppStore } from '@/stores'
+import { isPhone } from '@/utils'
 
 defineOptions({ name: 'Layout' })
 const appStore = useAppStore()
