@@ -10,9 +10,7 @@
         :drawer-style="{ 'border-right': '1px solid var(--color-border-2)', 'box-sizing': 'border-box' }"
       >
         <Logo :collapsed="false"></Logo>
-        <a-menu class="menu w-full" :selected-keys="[activeMenu]" :auto-open-selected="true">
-          <SidebarItem v-for="(route, index) in sidebarRoutes" :key="route.path + index" :item="route"></SidebarItem>
-        </a-menu>
+        <Menu class="menu w-full"></Menu>
       </a-drawer>
     </template>
 
@@ -27,9 +25,7 @@
         :collapsed="appStore.menuCollapse"
         @collapse="handleCollapse"
       >
-        <a-menu :selected-keys="[activeMenu]" :auto-open-selected="true" :style="{ width: '100%', height: '100%' }">
-          <SidebarItem v-for="(route, index) in sidebarRoutes" :key="route.path + index" :item="route"></SidebarItem>
-        </a-menu>
+        <Menu></Menu>
       </a-layout-sider>
     </template>
   </div>
@@ -37,12 +33,11 @@
 
 <script setup lang="ts">
 import { useAppStore, useRouteStore } from '@/stores'
-import SidebarItem from './SidebarItem.vue'
-import Logo from './Logo.vue'
+import Menu from '../Menu/index.vue'
+import Logo from '../Logo.vue'
 import { isPhone } from '@/utils'
 
 defineOptions({ name: 'Asider' })
-const route = useRoute()
 const appStore = useAppStore()
 const routeStore = useRouteStore()
 const sidebarRoutes = computed(() => routeStore.routes)
@@ -58,15 +53,6 @@ const handleCollapse = (isCollapsed: boolean) => {
 }
 
 console.log('sidebarRoutes', JSON.parse(JSON.stringify(sidebarRoutes.value)))
-
-// 当前页面激活菜单路径，先从路由里面找
-const activeMenu = computed(() => {
-  const { meta, path } = route
-  if (meta?.activeMenu) {
-    return meta.activeMenu
-  }
-  return path
-})
 </script>
 
 <style lang="scss" scoped>

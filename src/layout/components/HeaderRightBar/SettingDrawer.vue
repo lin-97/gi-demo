@@ -1,6 +1,12 @@
 <template>
   <a-drawer v-model:visible="visible" title="项目配置" width="300px" unmount-on-close :footer="false">
     <a-space :size="15" direction="vertical" fill>
+      <!-- <a-divider orientation="center">系统布局</a-divider>
+      <a-tabs type="rounded" hide-content v-model:active-key="appStore.layout">
+        <a-tab-pane key="left" title="左侧"></a-tab-pane>
+        <a-tab-pane key="mix" title="混合"></a-tab-pane>
+      </a-tabs> -->
+
       <a-divider orientation="center">系统主题</a-divider>
       <a-row justify="center">
         <ColorPicker
