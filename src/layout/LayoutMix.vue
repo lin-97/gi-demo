@@ -8,10 +8,7 @@
         :auto-open-selected="false"
         @menu-item-click="onMenuItemClick"
       >
-        <a-menu-item
-          v-for="item in menuRoutes"
-          :key="item?.redirect && item.redirect !=='noRedirect' ? item.redirect as string:  item.path"
-        >
+        <a-menu-item v-for="item in menuRoutes" :key="item.path">
           <template #icon>
             <GiSvgIcon
               v-if="item?.meta?.svgIcon || item?.meta?.svgIcon || item.children?.[0]?.meta?.svgIcon"
@@ -51,6 +48,7 @@ import Logo from './components/Logo.vue'
 import { useRouteStore } from '@/stores'
 import type { RouteRecordRaw } from 'vue-router'
 import { isExternal } from '@/utils/validate'
+import { searchTree } from 'xe-utils'
 
 defineOptions({ name: 'LayoutMix' })
 const route = useRoute()
@@ -71,14 +69,6 @@ menuRoutes.value.forEach((item) => {
 })
 console.log('menuRoutes', toRaw(menuRoutes.value))
 
-const activeMenu = computed(() => {
-  const { meta, path } = route
-  if (meta?.activeMenu) {
-    return [meta.activeMenu]
-  }
-  return [path]
-})
-
 const onMenuItemClick = (key: string) => {
   if (isExternal(key)) {
     window.open(key)
@@ -90,15 +80,23 @@ const onMenuItemClick = (key: string) => {
   router.push({ path: key })
 }
 
+const activeMenu = ref<string[]>([])
 const childrenMenus = ref<RouteRecordRaw[]>([])
 const getChildrenMenus = (key: string) => {
-  const obj = routeStore.routes.find((i) => i.path === key || (i.redirect === key && i.redirect !== 'noRedirect'))
-  if (obj) {
-    childrenMenus.value = obj.children as RouteRecordRaw[]
-  }
+  const arr = searchTree(routeStore.routes, (i) => i.path === key, { children: 'children' })
+  const rootPath = arr[0].path
+  const obj = routeStore.routes.find((i) => i.path === rootPath)
+  activeMenu.value = obj ? [obj.path] : []
+  childrenMenus.value = obj ? (obj.children as RouteRecordRaw[]) : []
 }
 
-getChildrenMenus(route.path)
+watch(
+  () => route.path,
+  (newPath) => {
+    getChildrenMenus(newPath)
+  },
+  { immediate: true }
+)
 </script>
 
 <style lang="scss" scoped>
@@ -113,7 +111,6 @@ getChildrenMenus(route.path)
     display: flex;
     align-items: stretch;
     .left {
-      width: 200px;
       border-right: 1px solid var(--color-border);
       background-color: var(--color-bg-1);
     }

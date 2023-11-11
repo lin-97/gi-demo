@@ -69,9 +69,9 @@ const handleRouteChange = () => {
   const item = { ...route } as unknown as RouteRecordRaw
   tabsStore.addTagItem(item)
   tabsStore.addCacheItem(item)
-  console.log('路由对象', toRaw(item))
-  console.log('tagList', toRaw(tabsStore.tagList))
-  console.log('cacheList', toRaw(tabsStore.cacheList))
+  // console.log('路由对象', toRaw(item))
+  // console.log('tagList', toRaw(tabsStore.tagList))
+  // console.log('cacheList', toRaw(tabsStore.cacheList))
 }
 
 // 点击页签

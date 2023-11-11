@@ -79,7 +79,7 @@
 
 <script setup lang="ts">
 import { Modal } from '@arco-design/web-vue'
-import { useAppStore, useUserStore } from '@/stores'
+import { useUserStore } from '@/stores'
 import { useFullScreen } from '@/hooks'
 import SettingDrawer from './SettingDrawer.vue'
 import Message from './Message.vue'
@@ -87,7 +87,6 @@ import { isPhone } from '@/utils'
 
 defineOptions({ name: 'HeaderRight' })
 const router = useRouter()
-const appStore = useAppStore()
 const userStore = useUserStore()
 const { isFullScreen, toggleFullScreen } = useFullScreen()
 const SettingDrawerRef = ref<InstanceType<typeof SettingDrawer>>()
