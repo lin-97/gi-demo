@@ -29,7 +29,7 @@
     </header>
     <div class="layout-mix-wrapper">
       <section class="left">
-        <Menu :menus="childrenMenus"></Menu>
+        <Menu :menus="childrenMenus" :menu-style="{ width: '200px', height: '100%' }"></Menu>
       </section>
       <section class="right">
         <Tabs></Tabs>

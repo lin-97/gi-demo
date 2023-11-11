@@ -22,6 +22,7 @@ import type { CSSProperties } from 'vue'
 
 interface Props {
   menus?: RouteRecordRaw[]
+  menuStyle?: CSSProperties
 }
 
 const props = withDefaults(defineProps<Props>(), {})
@@ -45,15 +46,6 @@ const mode = computed(() => {
 
 const autoOpenSelected = computed(() => {
   return appStore.layout === 'left' ? true : false
-})
-
-const menuStyle = computed(() => {
-  if (appStore.layout === 'left') {
-    return { width: '100%', height: '100%' } as CSSProperties
-  }
-  if (appStore.layout === 'mix' && !isPhone()) {
-    return { width: '200px', height: '100%' } as CSSProperties
-  }
 })
 
 // 当前页面激活菜单路径，先从路由里面找
