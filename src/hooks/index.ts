@@ -5,5 +5,6 @@ import useRequest from './modules/useRequest'
 import useChart from './modules/useChart'
 import useTable from './modules/useTable'
 import useForm from './modules/useForm'
+import useDevice from './modules/useDevice'
 
-export { useFullScreen, useLoading, usePagination, useRequest, useChart, useTable, useForm }
+export { useFullScreen, useLoading, usePagination, useRequest, useChart, useTable, useForm, useDevice }
