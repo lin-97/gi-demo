@@ -4,7 +4,7 @@
     :selected-keys="activeMenu"
     :auto-open-selected="autoOpenSelected"
     :show-collapse-button="['mix'].includes(appStore.layout)"
-    :breakpoint="appStore.layout === 'mix' && !isPhone() ? 'lg' : undefined"
+    :breakpoint="appStore.layout === 'mix' && !isPhone() ? 'xl' : undefined"
     :style="menuStyle"
     @menu-item-click="onMenuItemClick"
   >

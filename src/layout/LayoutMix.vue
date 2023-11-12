@@ -65,7 +65,7 @@ const onMenuItemClick = (key: string) => {
     window.open(key)
     return
   }
-  getLeftMenus(key)
+  setTimeout(() => getLeftMenus(key))
   const obj = topMenus.value.find((i) => i.path === key)
   if (obj && obj.redirect === 'noRedirect') return
   router.push({ path: key })
