@@ -21,7 +21,7 @@
         collapsible
         breakpoint="xl"
         hide-trigger
-        :width="232"
+        :width="220"
         :collapsed="appStore.menuCollapse"
         @collapse="handleCollapse"
       >

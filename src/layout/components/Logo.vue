@@ -35,6 +35,7 @@ const toHome = () => {
   cursor: pointer;
   user-select: none;
   background-color: var(--color-bg-1);
+  box-sizing: border-box;
   &.collapsed {
     padding: 0;
     display: flex;

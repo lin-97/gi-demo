@@ -1,11 +1,12 @@
 <template>
   <div class="layout-mix">
     <header class="header">
-      <Logo></Logo>
+      <Logo :style="{ width: '180px' }"></Logo>
       <a-menu
         mode="horizontal"
         :selected-keys="activeMenu"
         :auto-open-selected="false"
+        :trigger-props="{ animationName: 'slide-dynamic-origin' }"
         @menu-item-click="onMenuItemClick"
       >
         <a-menu-item v-for="item in topMenus" :key="item.path">
