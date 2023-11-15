@@ -33,7 +33,6 @@
     "pinia": "^2.0.16",
     "pinia-plugin-persistedstate": "^3.1.0",
     "qs": "^6.11.2",
-    "screenfull": "^6.0.1",
     "v-viewer": "^3.0.10",
     "vue": "^3.3.7",
     "vue-codemirror6": "^1.1.27",
