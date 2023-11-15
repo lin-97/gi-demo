@@ -48,6 +48,7 @@ export type UserDetailResult = UserItem & { roleNames: string }
 /** 系统菜单类型 */
 export interface MenuItem {
   activeMenu: string
+  alwaysShow: boolean
   breadcrumb: boolean
   children: MenuItem[]
   component: string
@@ -60,6 +61,7 @@ export interface MenuItem {
   permission: string
   redirect: string
   roles: string[]
+  showInTabs: boolean
   sort: number
   status: 0 | 1
   svgIcon: string

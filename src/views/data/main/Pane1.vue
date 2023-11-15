@@ -45,7 +45,7 @@
               </a-space>
             </a-row>
 
-            <section class="gi_table_box" style="margin-top: 4px">
+            <section class="gi_table_box">
               <a-table
                 row-key="id"
                 size="small"

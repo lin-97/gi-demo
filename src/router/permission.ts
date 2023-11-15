@@ -32,7 +32,7 @@ router.beforeEach(async (to, from, next) => {
               router.addRoute(route) // 动态添加可访问路由表
             }
           })
-          console.log('路由表', router.getRoutes())
+          // console.log('路由表', router.getRoutes())
           hasRouteFlag = true
           // 确保添加路由已完成
           // 设置 replace: true, 因此导航将不会留下历史记录

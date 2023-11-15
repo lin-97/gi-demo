@@ -52,7 +52,7 @@ const handleCollapse = (isCollapsed: boolean) => {
   }
 }
 
-console.log('sidebarRoutes', JSON.parse(JSON.stringify(sidebarRoutes.value)))
+// console.log('sidebarRoutes', JSON.parse(JSON.stringify(sidebarRoutes.value)))
 </script>
 
 <style lang="scss" scoped>

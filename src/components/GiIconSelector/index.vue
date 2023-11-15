@@ -202,10 +202,12 @@ const handleSelectedIcon = async (icon: string) => {
       flex-direction: row;
       justify-content: flex-start;
       align-items: center;
+      padding-left: 4px;
+      box-sizing: border-box;
       .icon-name {
         margin-left: 6px;
         font-size: 12px;
-        color: $color-text-3;
+        color: var(--color-text-2);
         display: block;
       }
     }
