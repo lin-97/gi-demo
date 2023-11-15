@@ -25,9 +25,7 @@
 import { Modal } from '@arco-design/web-vue'
 import * as Regexp from '@/utils/regexp'
 import { cityOptions, deptData } from './data'
-import type { Options } from '@/components/GiForm/type'
-import GiForm from '@/components/GiForm/index.vue'
-import { useGiForm } from '@/components/GiForm/hooks'
+import { GiForm, useGiForm, type Options } from '@/components/GiForm'
 import { useWindowSize } from '@vueuse/core'
 
 const { width } = useWindowSize()

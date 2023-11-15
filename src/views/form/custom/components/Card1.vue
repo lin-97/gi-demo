@@ -19,7 +19,7 @@
 
 <script setup lang="ts">
 import { Drawer, Message } from '@arco-design/web-vue'
-import type { Options } from '@/components/GiForm/type'
+import type { Options } from '@/components/GiForm'
 import GiCodeView from '@/components/GiCodeView/index.vue'
 import { isPhone } from '@/utils'
 

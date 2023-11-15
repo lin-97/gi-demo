@@ -115,8 +115,5 @@ const onImport = () => {
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
-  .form {
-    margin-top: 12px;
-  }
 }
 </style>

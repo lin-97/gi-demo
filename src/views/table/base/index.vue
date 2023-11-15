@@ -63,7 +63,7 @@
 <script setup lang="ts">
 import { usePagination } from '@/hooks'
 import { getPersonList, type PersonItem } from '@/apis'
-import type { Options } from '@/components/GiForm/type'
+import type { Options } from '@/components/GiForm'
 
 defineOptions({ name: 'TableBase' })
 

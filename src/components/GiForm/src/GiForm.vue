@@ -145,7 +145,7 @@
       </template>
       <a-col :span="options.btns?.span || 12" v-bind="options.btns?.col" v-if="!options.btns?.hide">
         <a-space wrap>
-          <slot name="footer">
+          <slot name="suffix">
             <a-button type="primary" @click="emit('search')">
               <template #icon><icon-search /></template>
               <template #default>{{ options.btns?.searchBtnText || '搜索' }}</template>
@@ -166,7 +166,7 @@
 </template>
 
 <script setup lang="ts">
-import type { Options, ColumnsItemHide, ColumnsItem, ColumnsItemOptionsOrData } from './type'
+import type { Options, ColumnsItemHide, ColumnsItem } from './type'
 import type * as A from '@arco-design/web-vue'
 import _ from 'lodash'
 

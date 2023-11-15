@@ -29,9 +29,8 @@
 
 <script setup lang="ts">
 import { Drawer, Message } from '@arco-design/web-vue'
-import type { Options } from '@/components/GiForm/type'
 import GiCodeView from '@/components/GiCodeView/index.vue'
-import GiForm from '@/components/GiForm/index.vue'
+import { GiForm, type Options } from '@/components/GiForm'
 import * as Regexp from '@/utils/regexp'
 import { isPhone } from '@/utils'
 import { getAreaList } from '@/apis'

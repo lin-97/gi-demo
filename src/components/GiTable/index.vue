@@ -83,7 +83,6 @@ defineExpose({ tableRef })
   }
   .table-box {
     flex: 1;
-    margin-top: 12px;
     overflow: hidden;
   }
 }

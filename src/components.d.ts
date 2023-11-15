@@ -13,7 +13,7 @@ declare module 'vue' {
     GiDot: typeof import('./components/GiDot/index.tsx')['default']
     GiFlexibleBox: typeof import('./components/GiFlexibleBox/index.vue')['default']
     GiFooter: typeof import('./components/GiFooter/index.vue')['default']
-    GiForm: typeof import('./components/GiForm/index.vue')['default']
+    GiForm: typeof import('./components/GiForm/src/GiForm.vue')['default']
     GiIconSelector: typeof import('./components/GiIconSelector/index.vue')['default']
     GiOption: typeof import('./components/GiOption/index.vue')['default']
     GiOptionItem: typeof import('./components/GiOptionItem/index.vue')['default']
