@@ -26,9 +26,9 @@
 
       <!-- 全屏切换组件 -->
       <a-tooltip v-if="!isPhone()" content="全屏切换" position="bottom">
-        <a-button size="mini" class="gi_hover_btn" @click="toggleFullScreen">
+        <a-button size="mini" class="gi_hover_btn" @click="toggle">
           <template #icon>
-            <icon-fullscreen :size="18" v-if="!isFullScreen" />
+            <icon-fullscreen :size="18" v-if="!isFullscreen" />
             <icon-fullscreen-exit :size="18" v-else />
           </template>
         </a-button>
@@ -80,15 +80,16 @@
 <script setup lang="ts">
 import { Modal } from '@arco-design/web-vue'
 import { useUserStore } from '@/stores'
-import { useFullScreen } from '@/hooks'
 import SettingDrawer from './SettingDrawer.vue'
 import Message from './Message.vue'
 import { isPhone } from '@/utils'
+import { useFullscreen } from '@vueuse/core'
+
+const { isFullscreen, toggle } = useFullscreen()
 
 defineOptions({ name: 'HeaderRight' })
 const router = useRouter()
 const userStore = useUserStore()
-const { isFullScreen, toggleFullScreen } = useFullScreen()
 const SettingDrawerRef = ref<InstanceType<typeof SettingDrawer>>()
 
 // 跳转个人中心

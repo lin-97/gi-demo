@@ -14,7 +14,7 @@
           </a-button>
         </a-tooltip>
         <a-tooltip content="全屏">
-          <a-button size="mini" class="gi_hover_btn" @click="toggle">
+          <a-button size="mini" class="gi_hover_btn" @click="isFullscreen = !isFullscreen">
             <template #icon>
               <icon-fullscreen :size="18" v-if="!isFullscreen" />
               <icon-fullscreen-exit :size="18" v-else />
@@ -61,8 +61,7 @@ const size = ref<TableInstance['$props']['size']>('small')
 const isBordered = ref(true)
 // console.log('attrs', attrs)
 
-const giTableRef = ref<HTMLElement | null>(null)
-const { isFullscreen, toggle } = useFullscreen(giTableRef)
+const isFullscreen = ref(false)
 
 const refresh = () => {
   emit('refresh')
@@ -80,6 +79,12 @@ defineExpose({ tableRef })
   background: var(--color-bg-1);
   &.fullscreen {
     padding: $padding;
+    position: fixed;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    z-index: 1001;
   }
   .table-box {
     flex: 1;
