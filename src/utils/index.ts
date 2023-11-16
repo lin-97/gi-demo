@@ -1,5 +1,6 @@
 import { isExternal } from '@/utils/validate'
 import { mapTree, browse } from 'xe-utils'
+import _ from 'lodash'
 
 /**
  * @desc 去除空格
@@ -200,25 +201,12 @@ export const randomHex = () => {
  * @description 动态路由 path 转 name
  * @demo /system => System
  * @demo /system/menu => SystemMenu
- * @demo /page-gg/detail => PageGgDetail
+ * @demo /data-manage/detail => DataManageDetail
  */
 export const transformPathToName = (path: string) => {
   if (!path) return ''
   if (isExternal(path)) return ''
-  // 示例: '/page-gg/detail' =>  ['page-gg', 'detail']
-  const pathArray = path.split('/').filter((i) => i)
-  const arr = pathArray.map((i) => {
-    if (i.includes('-')) {
-      // 'page-gg' => 'PageGg'
-      const arr1 = i.split('-')
-      return arr1.map((a) => a.substring(0, 1).toUpperCase() + a.substring(1)).join('')
-    } else {
-      // 'detail' => 'Detail
-      return i.substring(0, 1).toUpperCase() + i.substring(1)
-    }
-  })
-  let name = arr.join('') // ['PageGg', 'Detail'] => PageGgDetail
-  return name
+  return _.upperFirst(_.camelCase(path))
 }
 
 /**
