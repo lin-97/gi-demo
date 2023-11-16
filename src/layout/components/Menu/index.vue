@@ -4,7 +4,7 @@
     :selected-keys="activeMenu"
     :auto-open-selected="autoOpenSelected"
     :show-collapse-button="['mix'].includes(appStore.layout)"
-    :breakpoint="appStore.layout === 'mix' && !isPhone() ? 'xl' : undefined"
+    :breakpoint="appStore.layout === 'mix' && !isMobile() ? 'xl' : undefined"
     :trigger-props="{ animationName: 'slide-dynamic-origin' }"
     :style="menuStyle"
     @menu-item-click="onMenuItemClick"
@@ -17,7 +17,7 @@
 import { useAppStore, useRouteStore } from '@/stores'
 import MenuItem from './MenuItem.vue'
 import { isExternal } from '@/utils/validate'
-import { isPhone } from '@/utils'
+import { isMobile } from '@/utils'
 import type { RouteRecordRaw } from 'vue-router'
 import type { CSSProperties } from 'vue'
 
@@ -63,7 +63,7 @@ const onMenuItemClick = (key: string) => {
     window.open(key)
     return false
   }
-  if (isPhone()) {
+  if (isMobile()) {
     appStore.menuCollapse = false
   }
 

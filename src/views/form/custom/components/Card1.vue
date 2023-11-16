@@ -21,7 +21,7 @@
 import { Drawer, Message } from '@arco-design/web-vue'
 import type { Options } from '@/components/GiForm'
 import GiCodeView from '@/components/GiCodeView/index.vue'
-import { isPhone } from '@/utils'
+import { isMobile } from '@/utils'
 
 const form = reactive({
   name: '',
@@ -72,7 +72,7 @@ const onViewCode = () => {
   Drawer.open({
     title: '数据结构',
     content: () => h(GiCodeView, { codeJson: JSON.stringify(options, null, '\t') }),
-    width: isPhone() ? '100%' : 560
+    width: isMobile() ? '100%' : 560
   })
 }
 

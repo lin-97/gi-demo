@@ -242,7 +242,7 @@ export const sortTree: SortTree = (values) => {
 }
 
 /** @desc 是否是h5环境 */
-export const isPhone = () => {
+export const isMobile = () => {
   return browse().isMobile
 }
 

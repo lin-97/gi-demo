@@ -106,7 +106,7 @@
               </a-table-column>
               <a-table-column title="描述" :width="200" data-index="description"></a-table-column>
               <a-table-column title="创建时间" data-index="createTime" :width="200"></a-table-column>
-              <a-table-column title="操作" :width="180" align="center" :fixed="!isPhone() ? 'right' : undefined">
+              <a-table-column title="操作" :width="180" align="center" :fixed="!isMobile() ? 'right' : undefined">
                 <template #cell="{ record }">
                   <a-space>
                     <a-button type="primary" size="mini" @click="onEdit(record)">
@@ -142,7 +142,7 @@ import AddUserModal from './AddUserModal.vue'
 import UserDetailDrawer from './UserDetailDrawer.vue'
 import type { TreeInstance, TableInstance } from '@arco-design/web-vue'
 import { Message } from '@arco-design/web-vue'
-import { isPhone } from '@/utils'
+import { isMobile } from '@/utils'
 
 defineOptions({ name: 'SystemUser' })
 

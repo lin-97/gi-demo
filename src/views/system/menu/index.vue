@@ -113,7 +113,7 @@
               <a-tag v-else color="red">否</a-tag>
             </template>
           </a-table-column>
-          <a-table-column title="操作" :width="200" align="left" :fixed="!isPhone() ? 'right' : undefined">
+          <a-table-column title="操作" :width="200" align="left" :fixed="!isMobile() ? 'right' : undefined">
             <template #cell="{ record }">
               <a-space>
                 <a-button type="primary" size="mini" @click="onEdit(record)">
@@ -145,7 +145,7 @@ import AddMenuModal from './AddMenuModal.vue'
 import { getSystemMenuList, type MenuItem } from '@/apis'
 import { Drawer, type TableInstance } from '@arco-design/web-vue'
 import { isExternal } from '@/utils/validate'
-import { transformPathToName, isPhone } from '@/utils'
+import { transformPathToName, isMobile } from '@/utils'
 import GiCodeView from '@/components/GiCodeView/index.vue'
 
 defineOptions({ name: 'SystemMenu' })

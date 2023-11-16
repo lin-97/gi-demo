@@ -25,7 +25,7 @@
       </a-popover>
 
       <!-- 全屏切换组件 -->
-      <a-tooltip v-if="!isPhone()" content="全屏切换" position="bottom">
+      <a-tooltip v-if="!isMobile()" content="全屏切换" position="bottom">
         <a-button size="mini" class="gi_hover_btn" @click="toggle">
           <template #icon>
             <icon-fullscreen :size="18" v-if="!isFullscreen" />
@@ -82,7 +82,7 @@ import { Modal } from '@arco-design/web-vue'
 import { useUserStore } from '@/stores'
 import SettingDrawer from './SettingDrawer.vue'
 import Message from './Message.vue'
-import { isPhone } from '@/utils'
+import { isMobile } from '@/utils'
 import { useFullscreen } from '@vueuse/core'
 
 const { isFullscreen, toggle } = useFullscreen()

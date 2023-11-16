@@ -79,7 +79,7 @@
                     </template>
                   </a-table-column>
                   <a-table-column title="创建时间" data-index="createTime" :width="180"></a-table-column>
-                  <a-table-column title="操作" :width="200" align="center" :fixed="!isPhone() ? 'right' : undefined">
+                  <a-table-column title="操作" :width="200" align="center" :fixed="!isMobile() ? 'right' : undefined">
                     <template #cell="{ record }">
                       <a-space>
                         <a-button type="primary" size="mini" @click="onEdit(record)">修改</a-button>
@@ -109,7 +109,7 @@ import CateTree from './CateTree/index.vue'
 import EditModal from './EditModal.vue'
 import { getPersonList, deletePerson, type PersonItem } from '@/apis'
 import { StatusList } from '@/constant/person'
-import { isPhone } from '@/utils'
+import { isMobile } from '@/utils'
 
 const router = useRouter()
 

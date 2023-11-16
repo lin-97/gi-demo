@@ -32,7 +32,7 @@ import { Drawer, Message } from '@arco-design/web-vue'
 import GiCodeView from '@/components/GiCodeView/index.vue'
 import { GiForm, type Options } from '@/components/GiForm'
 import * as Regexp from '@/utils/regexp'
-import { isPhone } from '@/utils'
+import { isMobile } from '@/utils'
 import { getAreaList } from '@/apis'
 
 const form = reactive({
@@ -122,7 +122,7 @@ const onViewCode = () => {
   Drawer.open({
     title: '数据结构',
     content: () => h(GiCodeView, { codeJson: JSON.stringify(options, null, '\t') }),
-    width: isPhone() ? '100%' : 560
+    width: isMobile() ? '100%' : 560
   })
 }
 

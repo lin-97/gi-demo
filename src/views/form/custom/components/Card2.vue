@@ -32,7 +32,7 @@ import type { Options } from '@/components/GiForm'
 import GiCodeView from '@/components/GiCodeView/index.vue'
 import GiForm from '@/components/GiForm'
 import * as Regexp from '@/utils/regexp'
-import { isPhone } from '@/utils'
+import { isMobile } from '@/utils'
 import { cityOptions, deptData } from './data'
 
 const form = reactive({
@@ -186,7 +186,7 @@ const onViewCode = () => {
   Drawer.open({
     title: '数据结构',
     content: () => h(GiCodeView, { codeJson: JSON.stringify(options, null, '\t') }),
-    width: isPhone() ? '100%' : 560
+    width: isMobile() ? '100%' : 560
   })
 }
 

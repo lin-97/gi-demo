@@ -57,7 +57,7 @@
           </a-table-column>
           <a-table-column title="描述" data-index="description"></a-table-column>
           <a-table-column title="创建时间" data-index="createTime"></a-table-column>
-          <a-table-column title="操作" :width="280" align="center" :fixed="!isPhone() ? 'right' : undefined">
+          <a-table-column title="操作" :width="280" align="center" :fixed="!isMobile() ? 'right' : undefined">
             <template #cell="{ record }">
               <a-space>
                 <a-button type="primary" size="mini" :disabled="record.disabled" @click="onEdit(record)">
@@ -99,7 +99,7 @@ import PermModal from './PermModal.vue'
 import type { RoleItem } from '@/apis'
 import { usePagination } from '@/hooks'
 import { getSystemRoleList } from '@/apis'
-import { isPhone } from '@/utils'
+import { isMobile } from '@/utils'
 
 defineOptions({ name: 'SystemRole' })
 

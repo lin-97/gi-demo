@@ -1,6 +1,6 @@
 <template>
-  <div class="asider" :class="{ 'asider-h5': isPhone() }">
-    <template v-if="isPhone()">
+  <div class="asider" :class="{ 'asider-h5': isMobile() }">
+    <template v-if="isMobile()">
       <a-drawer
         v-model:visible="appStore.menuCollapse"
         placement="left"
@@ -35,19 +35,19 @@
 import { useAppStore, useRouteStore } from '@/stores'
 import Menu from '../Menu/index.vue'
 import Logo from '../Logo.vue'
-import { isPhone } from '@/utils'
+import { isMobile } from '@/utils'
 
 defineOptions({ name: 'Asider' })
 const appStore = useAppStore()
 const routeStore = useRouteStore()
 const sidebarRoutes = computed(() => routeStore.routes)
 
-if (isPhone()) {
+if (isMobile()) {
   appStore.menuCollapse = false
 }
 
 const handleCollapse = (isCollapsed: boolean) => {
-  if (!isPhone()) {
+  if (!isMobile()) {
     appStore.menuCollapse = isCollapsed
   }
 }

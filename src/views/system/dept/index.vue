@@ -59,7 +59,7 @@
           </a-table-column>
           <a-table-column title="描述" data-index="description" :width="250"></a-table-column>
           <a-table-column title="创建时间" data-index="createTime" :width="200"></a-table-column>
-          <a-table-column title="操作" :width="250" align="center" :fixed="!isPhone() ? 'right' : undefined">
+          <a-table-column title="操作" :width="250" align="center" :fixed="!isMobile() ? 'right' : undefined">
             <template #cell="{ record }">
               <a-space>
                 <a-button type="primary" size="mini" @click="onEdit(record)">
@@ -92,7 +92,7 @@ import AddDeptModal from './AddDeptModal.vue'
 import { getSystemDeptList, type DeptItem } from '@/apis'
 import type { TableInstance } from '@arco-design/web-vue'
 import { Message } from '@arco-design/web-vue'
-import { isPhone } from '@/utils'
+import { isMobile } from '@/utils'
 
 defineOptions({ name: 'SystemDept' })
 
