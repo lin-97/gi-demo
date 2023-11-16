@@ -2,7 +2,7 @@
   <div class="error-page">
     <section class="container">
       <div class="img-box">
-        <img class="img-parent" :src="props.src" />
+        <component class="error-icon" :is="IconMap[props.code]"></component>
       </div>
 
       <div class="tip-box">
@@ -16,15 +16,26 @@
 </template>
 
 <script setup lang="ts">
+import Icon403 from '@/components/icons/Icon403.vue'
+import Icon404 from '@/components/icons/Icon404.vue'
+import Icon500 from '@/components/icons/Icon500.vue'
+import type { Component } from 'vue'
+
 interface Props {
-  src: string
+  code: number
 }
 const props = withDefaults(defineProps<Props>(), {
-  src: ''
+  code: 403
 })
 
 defineOptions({ name: 'ErrorPage' })
 const router = useRouter()
+
+const IconMap: Record<number, Component> = {
+  403: Icon403,
+  404: Icon404,
+  500: Icon500
+}
 
 const countDownTime = ref(5)
 let timer: NodeJS.Timer
@@ -76,7 +87,7 @@ const onCountDownTime = () => {
     display: flex;
     justify-content: center;
     align-items: center;
-    .img-parent {
+    .error-icon {
       max-width: 90%;
       height: 50vh;
     }
