@@ -1,11 +1,16 @@
 <template>
-  <section class="system-logo" :class="{ collapsed: props.collapsed }" @click="toHome">
+  <section
+    class="system-logo"
+    :class="{ collapsed: props.collapsed, 'app-menu-dark': appStore.menuDark }"
+    @click="toHome"
+  >
     <img class="logo" src="@/assets/images/logo.gif" />
     <span class="system-name">Admin Pro</span>
   </section>
 </template>
 
 <script setup lang="ts">
+import { useAppStore } from '@/stores'
 interface Props {
   collapsed?: boolean
 }
@@ -15,6 +20,7 @@ const props = withDefaults(defineProps<Props>(), {
 })
 
 const router = useRouter()
+const appStore = useAppStore()
 
 // 跳转首页
 const toHome = () => {
@@ -28,13 +34,13 @@ const toHome = () => {
   padding: 0 12px;
   font-size: 20px;
   line-height: 1;
-  color: var(--color-text-1);
+  color: inherit;
   display: flex;
   align-items: center;
   flex-shrink: 0;
   cursor: pointer;
   user-select: none;
-  background-color: var(--color-bg-1);
+  background-color: transparent;
   box-sizing: border-box;
   &.collapsed {
     padding: 0;

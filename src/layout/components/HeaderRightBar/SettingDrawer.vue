@@ -50,6 +50,9 @@
           >
           </a-select>
         </a-descriptions-item>
+        <a-descriptions-item label="深色菜单">
+          <a-switch v-model="appStore.menuDark" />
+        </a-descriptions-item>
         <a-descriptions-item label="手风琴效果">
           <a-switch v-model="appStore.menuAccordion" />
         </a-descriptions-item>

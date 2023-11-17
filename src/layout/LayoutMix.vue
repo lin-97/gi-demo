@@ -1,9 +1,10 @@
 <template>
   <div class="layout-mix">
-    <header class="header">
+    <header class="header" :class="{ 'app-menu-dark border-bottom': appStore.menuDark }">
       <Logo :style="{ width: '180px' }"></Logo>
       <a-menu
         mode="horizontal"
+        :theme="appStore.menuDark ? 'dark' : 'light'"
         :selected-keys="activeMenu"
         :auto-open-selected="false"
         :trigger-props="{ animationName: 'slide-dynamic-origin' }"
@@ -39,7 +40,7 @@ import Tabs from './components/Tabs/index.vue'
 import Menu from './components/Menu/index.vue'
 import HeaderRightBar from './components/HeaderRightBar/index.vue'
 import Logo from './components/Logo.vue'
-import { useRouteStore } from '@/stores'
+import { useAppStore, useRouteStore } from '@/stores'
 import type { RouteRecordRaw } from 'vue-router'
 import { isExternal } from '@/utils/validate'
 import { searchTree } from 'xe-utils'
@@ -48,6 +49,7 @@ import { filterTree } from '@/utils'
 defineOptions({ name: 'LayoutMix' })
 const route = useRoute()
 const router = useRouter()
+const appStore = useAppStore()
 const routeStore = useRouteStore()
 // 过滤是菜单的路由
 const menuRoutes = filterTree(routeStore.routes, (i) => i.meta?.hidden === false)

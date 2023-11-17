@@ -1,5 +1,5 @@
 <template>
-  <div class="asider" :class="{ 'asider-h5': isMobile() }">
+  <div class="asider" :class="{ 'asider-h5': isMobile(), 'app-menu-dark': appStore.menuDark }">
     <template v-if="isMobile()">
       <a-drawer
         v-model:visible="appStore.menuCollapse"
@@ -21,6 +21,7 @@
         collapsible
         breakpoint="xl"
         hide-trigger
+        :theme="appStore.menuDark ? 'dark' : 'light'"
         :width="220"
         :collapsed="appStore.menuCollapse"
         @collapse="handleCollapse"
@@ -32,15 +33,13 @@
 </template>
 
 <script setup lang="ts">
-import { useAppStore, useRouteStore } from '@/stores'
+import { useAppStore } from '@/stores'
 import Menu from '../Menu/index.vue'
 import Logo from '../Logo.vue'
 import { isMobile } from '@/utils'
 
 defineOptions({ name: 'Asider' })
 const appStore = useAppStore()
-const routeStore = useRouteStore()
-const sidebarRoutes = computed(() => routeStore.routes)
 
 if (isMobile()) {
   appStore.menuCollapse = false
@@ -51,8 +50,6 @@ const handleCollapse = (isCollapsed: boolean) => {
     appStore.menuCollapse = isCollapsed
   }
 }
-
-// console.log('sidebarRoutes', JSON.parse(JSON.stringify(sidebarRoutes.value)))
 </script>
 
 <style lang="scss" scoped>
@@ -84,6 +81,8 @@ const handleCollapse = (isCollapsed: boolean) => {
   flex-direction: column;
   border-right: 1px solid var(--color-border-2);
   box-sizing: border-box;
+  color: var(--color-text-1);
+  background-color: var(--color-bg-1);
   .menu {
     flex: 1;
     overflow: hidden;
@@ -92,5 +91,7 @@ const handleCollapse = (isCollapsed: boolean) => {
 
 .asider-h5 {
   border-right: none;
+  color: inherit;
+  background-color: inherit;
 }
 </style>
