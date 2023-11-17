@@ -144,6 +144,7 @@ const toGitPath = () => {
 
 .user {
   cursor: pointer;
+  color: var(--color-text-1);
   .username {
     margin-left: 10px;
     white-space: nowrap;

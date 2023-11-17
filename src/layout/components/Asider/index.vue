@@ -21,7 +21,6 @@
         collapsible
         breakpoint="xl"
         hide-trigger
-        :theme="appStore.menuDark ? 'dark' : 'light'"
         :width="220"
         :collapsed="appStore.menuCollapse"
         @collapse="handleCollapse"
@@ -86,6 +85,7 @@ const handleCollapse = (isCollapsed: boolean) => {
   .menu {
     flex: 1;
     overflow: hidden;
+    background-color: inherit;
   }
 }
 

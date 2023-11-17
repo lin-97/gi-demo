@@ -1,10 +1,9 @@
 <template>
   <div class="layout-mix">
-    <header class="header" :class="{ 'app-menu-dark border-bottom': appStore.menuDark }">
+    <header class="header" :class="{ 'app-menu-dark': appStore.menuDark }">
       <Logo :style="{ width: '180px' }"></Logo>
       <a-menu
         mode="horizontal"
-        :theme="appStore.menuDark ? 'dark' : 'light'"
         :selected-keys="activeMenu"
         :auto-open-selected="false"
         :trigger-props="{ animationName: 'slide-dynamic-origin' }"
@@ -23,7 +22,7 @@
       <HeaderRightBar></HeaderRightBar>
     </header>
     <div class="layout-mix-wrapper">
-      <section class="left">
+      <section class="left" :class="{ 'app-menu-dark': appStore.menuDark }">
         <Menu :menus="leftMenus" :menu-style="{ width: '180px', height: '100%' }"></Menu>
       </section>
       <section class="right">
@@ -151,8 +150,9 @@ watch(
   padding: 0 $padding;
   padding-left: 0;
   height: 56px;
+  color: var(--color-text-1);
   background: var(--color-bg-1);
-  border-bottom: 1px solid var(--color-neutral-3);
+  border-bottom: 1px solid var(--color-border);
   display: flex;
   justify-content: end;
   align-items: center;

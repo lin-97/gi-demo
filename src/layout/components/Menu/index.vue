@@ -1,7 +1,6 @@
 <template>
   <a-menu
     :mode="mode"
-    :theme="appStore.menuDark ? 'dark' : 'light'"
     :selected-keys="activeMenu"
     :auto-open-selected="autoOpenSelected"
     :accordion="appStore.menuAccordion"
