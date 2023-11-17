@@ -52,7 +52,7 @@ const rules: FormInstance['rules'] = {
   name: [{ required: true, message: '请输入字典名' }],
   value: [
     { required: true, message: '请输入字典值' },
-    { match: /^[a-zA-Z][a-zA-Z0-9_]*$/, message: '格式不对！只能英文开头，包含英文数字下划线' }
+    { match: /^[a-zA-Z0-9_]*$/, message: '格式不对！只能包含英文数字下划线' }
   ],
   status: [{ required: true }]
 }
