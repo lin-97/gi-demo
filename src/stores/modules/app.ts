@@ -39,12 +39,18 @@ const storeSetup = () => {
     setThemeColor(settingConfig.themeColor)
   }
 
+  // 设置左侧菜单折叠状态
+  const setMenuCollapse = (collapsed: boolean) => {
+    settingConfig.menuCollapse = collapsed
+  }
+
   return {
     ...toRefs(settingConfig),
     transitionName,
     toggleTheme,
     setThemeColor,
-    initTheme
+    initTheme,
+    setMenuCollapse
   }
 }
 
