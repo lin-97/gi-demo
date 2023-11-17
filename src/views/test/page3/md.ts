@@ -56,9 +56,10 @@ import { mapTree } from 'xe-utils'
  * 2. 同时将component由字符串转成真正的模块
  */
 const formatAsyncRoutes = (menus: MenuItem[]) => {
+  if (!menus.length) return []
   menus.sort((a, b) => (a?.sort ?? 0) - (b?.sort ?? 0)) // 排序
   const routes = mapTree(menus, (item) => {
-    if (item.children) {
+    if (item.children && item.children.length) {
       item.children?.sort((a, b) => (a?.sort ?? 0) - (b?.sort ?? 0)) // 排序
     }
     return {

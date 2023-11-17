@@ -8,6 +8,7 @@ declare module App {
     animate: boolean // 是否显示动画
     animateMode: AnimateType // 动画类名
     menuCollapse: boolean // 左侧菜单折叠状态
+    menuAccordion: boolean // 左侧菜单手风琴效果
     layout: 'left' | 'mix'
   }
   /** 导航页签的样式类型 */

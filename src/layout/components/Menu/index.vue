@@ -3,6 +3,7 @@
     :mode="mode"
     :selected-keys="activeMenu"
     :auto-open-selected="autoOpenSelected"
+    :accordion="appStore.menuAccordion"
     :show-collapse-button="['mix'].includes(appStore.layout)"
     :breakpoint="appStore.layout === 'mix' && !isMobile() ? 'xl' : undefined"
     :trigger-props="{ animationName: 'slide-dynamic-origin' }"

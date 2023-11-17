@@ -39,42 +39,12 @@ const storeSetup = () => {
     setThemeColor(settingConfig.themeColor)
   }
 
-  // 设置页签可见
-  const setTabVisible = (visible: boolean) => {
-    settingConfig.tab = visible
-  }
-
-  // 设置页签的样式类型
-  const setTabMode = (mode: App.TabType) => {
-    settingConfig.tabMode = mode
-  }
-
-  // 设置是否使用过渡动画
-  const setAnimateVisible = (visible: boolean) => {
-    settingConfig.animate = visible
-  }
-
-  // 设置页面过渡动画类型
-  const setAnimateMode = (mode: App.AnimateType) => {
-    settingConfig.animateMode = mode
-  }
-
-  // 设置左侧菜单折叠状态
-  const setMenuCollapse = (collapsed: boolean) => {
-    settingConfig.menuCollapse = collapsed
-  }
-
   return {
     ...toRefs(settingConfig),
     transitionName,
     toggleTheme,
     setThemeColor,
-    initTheme,
-    setTabVisible,
-    setTabMode,
-    setAnimateVisible,
-    setAnimateMode,
-    setMenuCollapse
+    initTheme
   }
 }
 

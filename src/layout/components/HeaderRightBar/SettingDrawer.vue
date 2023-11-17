@@ -24,33 +24,34 @@
 
       <a-descriptions :column="1" :align="{ value: 'right' }">
         <a-descriptions-item label="页签显示">
-          <a-switch :model-value="appStore.tab" @change="appStore.setTabVisible(Boolean($event))" />
+          <a-switch v-model="appStore.tab" />
         </a-descriptions-item>
         <a-descriptions-item label="页签风格">
           <a-select
+            v-model="appStore.tabMode"
             placeholder="请选择"
             :options="tabModeList"
-            :model-value="appStore.tabMode"
             :disabled="!appStore.tab"
-            :style="{ width: '120px' }"
             :trigger-props="{ autoFitPopupMinWidth: true }"
-            @change="($event) => appStore.setTabMode($event as App.TabType)"
+            :style="{ width: '120px' }"
           >
           </a-select>
         </a-descriptions-item>
         <a-descriptions-item label="动画显示">
-          <a-switch :model-value="appStore.animate" @change="appStore.setAnimateVisible(Boolean($event))" />
+          <a-switch v-model="appStore.animate" />
         </a-descriptions-item>
         <a-descriptions-item label="动画显示">
           <a-select
+            v-model="appStore.animateMode"
             placeholder="请选择"
             :options="animateModeList"
-            :model-value="appStore.animateMode"
             :disabled="!appStore.animate"
             :style="{ width: '120px' }"
-            @change="($event)=> appStore.setAnimateMode($event as App.AnimateType)"
           >
           </a-select>
+        </a-descriptions-item>
+        <a-descriptions-item label="手风琴效果">
+          <a-switch v-model="appStore.menuAccordion" />
         </a-descriptions-item>
       </a-descriptions>
     </a-space>
