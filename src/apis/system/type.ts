@@ -75,3 +75,23 @@ export interface MenuOptionsItem {
   title: string
   children: MenuOptionsItem[]
 }
+
+export interface DictItem {
+  id: string
+  createUserString: string
+  createTime: string
+  name: string
+  code: string
+  sort: number
+  status: 0 | 1
+  description: string
+}
+
+export type DictDetailResult = DictItem
+
+export type DictDataItem = {
+  id: string
+  name: string
+  value: string | number
+  status: 0 | 1
+}

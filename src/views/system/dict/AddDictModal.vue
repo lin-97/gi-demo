@@ -3,38 +3,25 @@
     v-model:visible="visible"
     :title="title"
     width="90%"
-    :modal-style="{ maxWidth: '520px' }"
     :mask-closable="false"
+    :modal-style="{ maxWidth: '520px' }"
     @before-ok="save"
     @close="close"
   >
     <a-form ref="FormRef" :model="form" :rules="rules" size="medium" auto-label-width>
-      <a-form-item label="上级部门" field="parentId">
-        <a-tree-select
-          v-model="form.parentId"
-          allow-clear
-          :data="deptList"
-          placeholder="请选择上级部门"
-          :fieldNames="{
-            key: 'id',
-            title: 'name',
-            children: 'children'
-          }"
-        ></a-tree-select>
+      <a-form-item label="字典名称" field="name">
+        <a-input v-model.trim="form.name" placeholder="请输入字典名称" allow-clear :max-length="10"> </a-input>
       </a-form-item>
-      <a-form-item label="部门名称" field="name">
-        <a-input v-model.trim="form.name" placeholder="请输入部门名称" allow-clear :max-length="10"></a-input>
-      </a-form-item>
-      <a-form-item label="排序" field="sort">
-        <a-input-number v-model="form.sort" style="width: 120px" />
+      <a-form-item label="字典编码" field="code">
+        <a-input v-model.trim="form.code" placeholder="请输入字典编码" allow-clear :max-length="10"> </a-input>
       </a-form-item>
       <a-form-item label="描述" field="description">
         <a-textarea
           v-model.trim="form.description"
-          :max-length="200"
           placeholder="请填写描述"
-          :auto-size="{ minRows: 3 }"
+          :max-length="200"
           show-word-limit
+          :auto-size="{ minRows: 3, maxRows: 5 }"
         />
       </a-form-item>
       <a-form-item label="状态" field="status">
@@ -52,45 +39,40 @@
 </template>
 
 <script setup lang="ts">
-import { useDept } from '@/hooks/app'
-import { getSystemDeptDetil, saveSystemDept } from '@/apis'
+import { getSystemDictDetail, saveSystemDict } from '@/apis'
 import { Message, type FormInstance } from '@arco-design/web-vue'
+import * as Regexp from '@/utils/regexp'
 
 const FormRef = ref<FormInstance>()
-const deptId = ref('')
+const roleId = ref('')
+const isEdit = computed(() => !!roleId.value)
+const title = computed(() => (isEdit.value ? '编辑字典' : '新增字典'))
 const visible = ref(false)
-const isEdit = computed(() => !!deptId.value)
-const title = computed(() => (isEdit.value ? '编辑部门' : '新增部门'))
-const { deptList, getDeptList } = useDept()
-getDeptList()
 
 const form = reactive({
-  id: '',
-  parentId: '',
   name: '',
-  sort: 0,
+  code: '',
   status: 1,
   description: ''
 })
 
 const rules = {
-  name: [
-    { required: true, message: '请输入部门名称' },
-    { min: 3, max: 10, message: '长度在 3 - 10个字符' }
-  ]
+  name: [{ required: true, message: '请输入字典名称' }],
+  code: [
+    { required: true, message: '请输入字典编码' },
+    { match: Regexp.OnlyEn, message: '格式不对！只能是英文' }
+  ],
+  status: [{ required: true }]
 }
 
 const add = () => {
-  deptId.value = ''
+  roleId.value = ''
   visible.value = true
 }
 
 const edit = async (id: string) => {
-  if (!deptList.value.length) {
-    await getDeptList()
-  }
-  deptId.value = id
-  const res = await getSystemDeptDetil({ id })
+  roleId.value = id
+  const res = await getSystemDictDetail({ id })
   Object.assign(form, res.data)
   visible.value = true
 }
@@ -105,7 +87,7 @@ const save = async () => {
   try {
     const obj = await FormRef.value?.validate()
     if (obj) return false
-    const res = await saveSystemDept(form)
+    const res = await saveSystemDict(form)
     if (res.data) {
       Message.success('模拟保存成功')
       return true

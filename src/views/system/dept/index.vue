@@ -59,7 +59,7 @@
           </a-table-column>
           <a-table-column title="描述" data-index="description" :width="250"></a-table-column>
           <a-table-column title="创建时间" data-index="createTime" :width="200"></a-table-column>
-          <a-table-column title="操作" :width="250" align="center" :fixed="!isMobile() ? 'right' : undefined">
+          <a-table-column title="操作" :width="200" align="center" :fixed="!isMobile() ? 'right' : undefined">
             <template #cell="{ record }">
               <a-space>
                 <a-button type="primary" size="mini" @click="onEdit(record)">

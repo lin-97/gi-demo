@@ -50,11 +50,11 @@
       </a-row>
 
       <a-form-item label="菜单标题" field="title">
-        <a-input v-model="form.title" placeholder="请输入菜单标题" allow-clear />
+        <a-input v-model.trim="form.title" placeholder="请输入菜单标题" allow-clear :max-length="10" />
       </a-form-item>
 
       <a-form-item label="路由路径" field="path" v-if="[1, 2].includes(form.type)">
-        <a-input v-model="form.path" placeholder="请输入路由路径" allow-clear />
+        <a-input v-model.trim="form.path" placeholder="请输入路由路径" allow-clear :max-length="50" />
         <template #extra>
           <div>
             <span>路由名称由系统自动生成：</span>
@@ -64,7 +64,7 @@
       </a-form-item>
 
       <a-form-item label="重定向" field="redirect" v-if="[1, 2].includes(form.type) && !isExternalUrl">
-        <a-input v-model="form.redirect" placeholder="请输入重定向地址" allow-clear />
+        <a-input v-model.trim="form.redirect" placeholder="请输入重定向地址" allow-clear :max-length="50" />
       </a-form-item>
 
       <a-form-item label="是否外链" field="isExternalUrl" v-if="[1, 2].includes(form.type)">
@@ -75,8 +75,14 @@
       </a-form-item>
 
       <a-form-item label="组件路径" field="component" v-if="form.type === 2">
-        <a-input v-if="isExternalUrl" v-model="form.component" placeholder="请输入组件路径" />
-        <a-input v-else v-model="form.component" placeholder="请输入组件路径">
+        <a-input
+          v-if="isExternalUrl"
+          v-model.trim="form.component"
+          placeholder="请输入组件路径"
+          allow-clear
+          :max-length="50"
+        />
+        <a-input v-else v-model.trim="form.component" placeholder="请输入组件路径" allow-clear :max-length="50">
           <template #prepend>@/views/</template>
           <template #append>.vue</template>
         </a-input>
@@ -156,7 +162,7 @@
       </a-row>
 
       <a-form-item label="权限标识" field="permission" v-if="form.type === 3">
-        <a-input v-model="form.permission" placeholder="sys:btn:add" allow-clear />
+        <a-input v-model.trim="form.permission" placeholder="sys:btn:add" allow-clear :max-length="20" />
       </a-form-item>
 
       <a-form-item label="菜单排序" field="sort">

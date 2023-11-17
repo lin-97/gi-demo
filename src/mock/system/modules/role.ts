@@ -66,6 +66,15 @@ export default [
     }
   },
   {
+    url: '/mock/system/role/delete',
+    method: 'post',
+    timeout: 350,
+    response: ({ body }) => {
+      const { ids } = body
+      return resultSuccess(ids)
+    }
+  },
+  {
     url: '/mock/system/role/menuIds',
     method: 'get',
     timeout: 350,
@@ -91,7 +100,7 @@ export default [
     timeout: 100,
     response: () => {
       return resultSuccess({
-        total: 2,
+        total: data.length,
         records: data
       })
     }

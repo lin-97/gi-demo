@@ -602,6 +602,28 @@ export const menus: MockMenuItem[] = [
         showInTabs: true,
         alwaysShow: false,
         affix: false
+      },
+      {
+        id: '0805',
+        parentId: '08',
+        path: '/system/dict',
+        component: 'system/dict/index',
+        redirect: '',
+        type: 2,
+        title: '字典管理',
+        svgIcon: '',
+        icon: 'icon-bookmark',
+        keepAlive: false,
+        hidden: false,
+        sort: 5,
+        activeMenu: '',
+        breadcrumb: true,
+        status: 1,
+        roles: ['role_admin'],
+        permission: '',
+        showInTabs: true,
+        alwaysShow: false,
+        affix: false
       }
     ],
     status: 1,

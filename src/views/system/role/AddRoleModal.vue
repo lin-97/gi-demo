@@ -10,14 +10,15 @@
   >
     <a-form ref="FormRef" :model="form" :rules="rules" size="medium" auto-label-width>
       <a-form-item label="角色名称" field="name">
-        <a-input placeholder="请输入角色名称" v-model="form.name"> </a-input>
+        <a-input v-model.trim="form.name" placeholder="请输入角色名称" allow-clear :max-length="10"> </a-input>
       </a-form-item>
-      <a-form-item label="角色编号" field="code">
-        <a-input placeholder="请输入角色编号" v-model="form.code" :disabled="isEdit"> </a-input>
+      <a-form-item label="角色编码" field="code">
+        <a-input v-model.trim="form.code" placeholder="请输入角色编码" allow-clear :disabled="isEdit" :max-length="10">
+        </a-input>
       </a-form-item>
       <a-form-item label="描述" field="description">
         <a-textarea
-          v-model="form.description"
+          v-model.trim="form.description"
           placeholder="请填写描述"
           :max-length="200"
           show-word-limit
@@ -55,12 +56,15 @@ const form = reactive({
   description: ''
 })
 
-const rules = {
+const rules: FormInstance['rules'] = {
   name: [
     { required: true, message: '请输入角色名称' },
     { min: 3, max: 10, message: '长度在 3 - 10个字符' }
   ],
-  code: [{ required: true, message: '请输入角色编号' }],
+  code: [
+    { required: true, message: '请输入角色编码' },
+    { match: /^[a-zA-Z][a-zA-Z0-9_]*$/, message: '格式不对！只能英文开头，包含英文数字下划线' }
+  ],
   status: [{ required: true }]
 }
 
@@ -84,6 +88,8 @@ defineExpose({ add, edit })
 
 const save = async () => {
   try {
+    const obj = await FormRef.value?.validate()
+    if (obj) return false
     const res = await saveSystemRole(form)
     if (res.data) {
       Message.success('模拟保存成功')
