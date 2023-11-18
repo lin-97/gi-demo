@@ -5,7 +5,7 @@
     :auto-open-selected="autoOpenSelected"
     :accordion="appStore.menuAccordion"
     :show-collapse-button="['mix'].includes(appStore.layout)"
-    :breakpoint="appStore.layout === 'mix' && !isMobile() ? 'xl' : undefined"
+    :breakpoint="appStore.layout === 'mix' ? 'xl' : undefined"
     :trigger-props="{ animationName: 'slide-dynamic-origin' }"
     :style="menuStyle"
     @menu-item-click="onMenuItemClick"

@@ -709,7 +709,7 @@ export const menus: MockMenuItem[] = [
             breadcrumb: true,
             status: 1,
             roles: ['role_admin', 'role_user'],
-            permission: 'user:btn.add',
+            permission: 'user:btn:add',
             showInTabs: true,
             alwaysShow: false,
             affix: false
@@ -731,7 +731,7 @@ export const menus: MockMenuItem[] = [
             breadcrumb: true,
             status: 1,
             roles: ['role_admin', 'role_user'],
-            permission: 'user:btn.edit',
+            permission: 'user:btn:edit',
             showInTabs: true,
             alwaysShow: false,
             affix: false
@@ -753,7 +753,7 @@ export const menus: MockMenuItem[] = [
             breadcrumb: true,
             status: 1,
             roles: ['role_admin', 'role_user'],
-            permission: 'user:btn.delete',
+            permission: 'user:btn:delete',
             showInTabs: true,
             alwaysShow: false,
             affix: false
@@ -775,7 +775,7 @@ export const menus: MockMenuItem[] = [
             breadcrumb: true,
             status: 1,
             roles: ['role_admin', 'role_user'],
-            permission: 'test:btn.add',
+            permission: 'test:btn:add',
             showInTabs: true,
             alwaysShow: false,
             affix: false
@@ -797,7 +797,7 @@ export const menus: MockMenuItem[] = [
             breadcrumb: true,
             status: 1,
             roles: ['role_admin', 'role_user'],
-            permission: 'test:btn.edit',
+            permission: 'test:btn:edit',
             showInTabs: true,
             alwaysShow: false,
             affix: false
@@ -819,7 +819,7 @@ export const menus: MockMenuItem[] = [
             breadcrumb: true,
             status: 1,
             roles: ['role_admin', 'role_user'],
-            permission: 'test:btn.delete',
+            permission: 'test:btn:delete',
             showInTabs: true,
             alwaysShow: false,
             affix: false
