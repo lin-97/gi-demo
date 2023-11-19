@@ -25,7 +25,9 @@
         :collapsed="appStore.menuCollapse"
         @collapse="handleCollapse"
       >
-        <Menu></Menu>
+        <a-scrollbar outer-class="h-full" style="height: 100%; overflow: auto">
+          <Menu></Menu>
+        </a-scrollbar>
       </a-layout-sider>
     </template>
   </div>
@@ -72,6 +74,10 @@ const handleCollapse = (isCollapsed: boolean) => {
   overflow: hidden;
   display: flex;
   flex-direction: column;
+}
+
+:deep(.arco-layout-sider-children) {
+  overflow: hidden;
 }
 
 .asider {
