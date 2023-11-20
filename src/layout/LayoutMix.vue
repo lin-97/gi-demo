@@ -1,43 +1,44 @@
 <template>
   <div class="layout-mix">
-    <header
-      class="header"
+    <section
+      class="layout-mix-left"
       :class="{ 'app-menu-dark': appStore.menuDark }"
       :style="appStore.menuDark ? appStore.themeCSSVar : undefined"
     >
-      <Logo :style="{ width: '180px' }"></Logo>
-      <a-menu
-        mode="horizontal"
-        :selected-keys="activeMenu"
-        :auto-open-selected="false"
-        :trigger-props="{ animationName: 'slide-dynamic-origin' }"
-        @menu-item-click="onMenuItemClick"
-      >
-        <a-menu-item v-for="item in topMenus" :key="item.path">
-          <template #icon>
-            <GiSvgIcon v-if="getMenuIcon(item, 'svgIcon')" :name="getMenuIcon(item, 'svgIcon')" :size="24"></GiSvgIcon>
-            <template v-else>
-              <component v-if="getMenuIcon(item, 'svgIcon')" :is="getMenuIcon(item, 'icon')"></component>
+      <Logo :collapsed="appStore.menuCollapse"></Logo>
+      <Menu :menus="leftMenus" :menu-style="{ width: '200px', flex: 1 }"></Menu>
+    </section>
+
+    <section class="layout-mix-right">
+      <header class="header">
+        <MenuFoldBtn></MenuFoldBtn>
+        <a-menu
+          mode="horizontal"
+          :selected-keys="activeMenu"
+          :auto-open-selected="false"
+          :trigger-props="{ animationName: 'slide-dynamic-origin' }"
+          @menu-item-click="onMenuItemClick"
+        >
+          <a-menu-item v-for="item in topMenus" :key="item.path">
+            <template #icon>
+              <GiSvgIcon
+                v-if="getMenuIcon(item, 'svgIcon')"
+                :name="getMenuIcon(item, 'svgIcon')"
+                :size="24"
+              ></GiSvgIcon>
+              <template v-else>
+                <component v-if="getMenuIcon(item, 'svgIcon')" :is="getMenuIcon(item, 'icon')"></component>
+              </template>
             </template>
-          </template>
-          <span>{{ item.meta?.title || item.children?.[0]?.meta?.title || '' }}</span>
-        </a-menu-item>
-      </a-menu>
-      <HeaderRightBar></HeaderRightBar>
-    </header>
-    <div class="layout-mix-wrapper">
-      <section
-        class="left"
-        :class="{ 'app-menu-dark': appStore.menuDark }"
-        :style="appStore.menuDark ? appStore.themeCSSVar : undefined"
-      >
-        <Menu :menus="leftMenus" :menu-style="{ width: '180px', height: '100%' }"></Menu>
-      </section>
-      <section class="right">
-        <Tabs></Tabs>
-        <Main></Main>
-      </section>
-    </div>
+            <span>{{ item.meta?.title || item.children?.[0]?.meta?.title || '' }}</span>
+          </a-menu-item>
+        </a-menu>
+        <HeaderRightBar></HeaderRightBar>
+      </header>
+
+      <Tabs></Tabs>
+      <Main></Main>
+    </section>
   </div>
 </template>
 
@@ -47,6 +48,7 @@ import Tabs from './components/Tabs/index.vue'
 import Menu from './components/Menu/index.vue'
 import HeaderRightBar from './components/HeaderRightBar/index.vue'
 import Logo from './components/Logo.vue'
+import MenuFoldBtn from './components/MenuFoldBtn.vue'
 import { useAppStore, useRouteStore } from '@/stores'
 import type { RouteRecordRaw } from 'vue-router'
 import { isExternal } from '@/utils/validate'
@@ -58,6 +60,7 @@ const route = useRoute()
 const router = useRouter()
 const appStore = useAppStore()
 const routeStore = useRouteStore()
+const menuCollapse = ref(false)
 // 过滤是菜单的路由
 const menuRoutes = filterTree(routeStore.routes, (i) => i.meta?.hidden === false)
 
@@ -134,29 +137,25 @@ watch(
 .layout-mix {
   height: 100%;
   display: flex;
-  flex-direction: column;
+  align-items: stretch;
   overflow: hidden;
-  .layout-mix-wrapper {
-    flex: 1;
-    overflow: hidden;
+  &-left {
+    border-right: 1px solid var(--color-border);
+    background-color: var(--color-bg-1);
     display: flex;
-    align-items: stretch;
-    > .left {
-      border-right: 1px solid var(--color-border);
-      background-color: var(--color-bg-1);
-    }
-    > .right {
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-      overflow: hidden;
-    }
+    flex-direction: column;
+    overflow: hidden;
+  }
+  &-right {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
   }
 }
 
 .header {
   padding: 0 $padding;
-  padding-left: 0;
   height: 56px;
   color: var(--color-text-1);
   background: var(--color-bg-1);

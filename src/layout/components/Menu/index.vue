@@ -4,11 +4,12 @@
     :selected-keys="activeMenu"
     :auto-open-selected="autoOpenSelected"
     :accordion="appStore.menuAccordion"
-    :show-collapse-button="['mix'].includes(appStore.layout)"
     :breakpoint="appStore.layout === 'mix' ? 'xl' : undefined"
     :trigger-props="{ animationName: 'slide-dynamic-origin' }"
-    :style="menuStyle"
+    :collapsed="appStore.menuCollapse"
     @menu-item-click="onMenuItemClick"
+    @collapse="onCollapse"
+    :style="menuStyle"
   >
     <MenuItem v-for="(route, index) in sidebarRoutes" :key="route.path + index" :item="route"></MenuItem>
   </a-menu>
@@ -22,14 +23,16 @@ import { isMobile } from '@/utils'
 import type { RouteRecordRaw } from 'vue-router'
 import type { CSSProperties } from 'vue'
 
+defineOptions({ name: 'Menu' })
+
 interface Props {
   menus?: RouteRecordRaw[]
   menuStyle?: CSSProperties
+  collapsed?: boolean
 }
 
 const props = withDefaults(defineProps<Props>(), {})
 
-defineOptions({ name: 'Menu' })
 const route = useRoute()
 const router = useRouter()
 const appStore = useAppStore()
@@ -69,6 +72,10 @@ const onMenuItemClick = (key: string) => {
   }
 
   router.push({ path: key })
+}
+
+const onCollapse = (e: boolean) => {
+  appStore.menuCollapse = e
 }
 </script>
 

@@ -26,6 +26,7 @@ const toHome = () => {
 .system-logo {
   height: 56px;
   padding: 0 12px;
+  color: var(--color-text-1);
   font-size: 20px;
   line-height: 1;
   display: flex;

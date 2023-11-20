@@ -1,12 +1,7 @@
 <template>
   <a-layout-header class="header">
     <section class="fold-btn-wrapper">
-      <a-button size="mini" class="gi_hover_btn fold-btn" @click="appStore.setMenuCollapse(!appStore.menuCollapse)">
-        <template #icon>
-          <icon-menu-fold v-if="!appStore.menuCollapse" :size="18" :stroke-width="3" />
-          <icon-menu-unfold v-else :size="18" :stroke-width="3" />
-        </template>
-      </a-button>
+      <MenuFoldBtn></MenuFoldBtn>
     </section>
     <a-row align="center" class="h-full header-right">
       <a-col :xs="0" :md="10" :lg="10" :xl="12" :xxl="12">
@@ -22,18 +17,13 @@
 </template>
 
 <script setup lang="ts">
-import { useAppStore } from '@/stores'
 import HeaderRightBar from '../HeaderRightBar/index.vue'
+import MenuFoldBtn from '../MenuFoldBtn.vue'
 
 defineOptions({ name: 'Header' })
-const appStore = useAppStore()
 </script>
 
 <style lang="scss" scoped>
-:deep(.fold-btn) {
-  background-color: var(--color-secondary-hover) !important;
-}
-
 .arco-dropdown-open .arco-icon-down {
   transform: rotate(180deg);
 }
