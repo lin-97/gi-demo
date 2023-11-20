@@ -22,7 +22,7 @@
 
       <a-divider orientation="center">界面显示</a-divider>
 
-      <a-descriptions :column="1" :align="{ value: 'right' }">
+      <a-descriptions :column="1" :align="{ value: 'right' }" :value-style="{ paddingRight: 0 }">
         <a-descriptions-item label="页签显示">
           <a-switch v-model="appStore.tab" />
         </a-descriptions-item>
@@ -95,6 +95,7 @@ defineExpose({ open })
 const defaultColorList = [
   '#165DFF',
   '#409EFF',
+  '#18A058',
   '#2d8cf0',
   '#007AFF',
   '#5ac8fa',
@@ -104,19 +105,10 @@ const defaultColorList = [
   '#AF52DE',
   '#0096c7',
   '#00C1D4',
-  '#34C759',
   '#43a047',
-  '#7cb342',
-  '#c0ca33',
-  '#78DEC7',
   '#e53935',
-  '#d81b60',
   '#f4511e',
-  '#fb8c00',
-  '#ffb300',
-  '#fdd835',
-  '#6d4c41',
-  '#546e7a'
+  '#6d4c41'
 ]
 
 type ColorObj = {

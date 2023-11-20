@@ -69,6 +69,10 @@ const handleCollapse = (isCollapsed: boolean) => {
   }
 }
 
+:deep(.arco-menu-vertical .arco-menu-inline-header .arco-menu-icon-suffix) {
+  transition: all 0.3s;
+}
+
 :deep(.arco-drawer-body) {
   padding: 0;
   overflow: hidden;
