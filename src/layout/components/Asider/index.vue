@@ -1,5 +1,9 @@
 <template>
-  <div class="asider" :class="{ 'asider-h5': isMobile(), 'app-menu-dark': appStore.menuDark }">
+  <div
+    class="asider"
+    :class="{ 'asider-h5': isMobile(), 'app-menu-dark': appStore.menuDark }"
+    :style="appStore.menuDark ? appStore.themeCSSVar : undefined"
+  >
     <template v-if="isMobile()">
       <a-drawer
         v-model:visible="appStore.menuCollapse"

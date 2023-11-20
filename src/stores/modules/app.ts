@@ -10,6 +10,17 @@ const storeSetup = () => {
   // 页面切换动画类名
   const transitionName = computed(() => (settingConfig.animate ? settingConfig.animateMode : ''))
 
+  // 深色菜单主题色变量
+  const themeCSSVar = computed<Record<string, string>>(() => {
+    const obj: Record<string, string> = {}
+    const list = generate(settingConfig.themeColor, { list: true, dark: true })
+    list.forEach((color: string, index: number) => {
+      const rgbStr = getRgbStr(color)
+      obj[`--primary-${index + 1}`] = rgbStr
+    })
+    return obj
+  })
+
   // 切换主题 暗黑模式|简白模式
   const toggleTheme = (dark: boolean) => {
     if (dark) {
@@ -47,6 +58,7 @@ const storeSetup = () => {
   return {
     ...toRefs(settingConfig),
     transitionName,
+    themeCSSVar,
     toggleTheme,
     setThemeColor,
     initTheme,

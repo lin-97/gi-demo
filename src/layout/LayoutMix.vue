@@ -1,6 +1,10 @@
 <template>
   <div class="layout-mix">
-    <header class="header" :class="{ 'app-menu-dark': appStore.menuDark }">
+    <header
+      class="header"
+      :class="{ 'app-menu-dark': appStore.menuDark }"
+      :style="appStore.menuDark ? appStore.themeCSSVar : undefined"
+    >
       <Logo :style="{ width: '180px' }"></Logo>
       <a-menu
         mode="horizontal"
@@ -22,7 +26,11 @@
       <HeaderRightBar></HeaderRightBar>
     </header>
     <div class="layout-mix-wrapper">
-      <section class="left" :class="{ 'app-menu-dark': appStore.menuDark }">
+      <section
+        class="left"
+        :class="{ 'app-menu-dark': appStore.menuDark }"
+        :style="appStore.menuDark ? appStore.themeCSSVar : undefined"
+      >
         <Menu :menus="leftMenus" :menu-style="{ width: '180px', height: '100%' }"></Menu>
       </section>
       <section class="right">
