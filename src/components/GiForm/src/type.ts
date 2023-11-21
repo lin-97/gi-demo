@@ -30,8 +30,8 @@ export type ColumnsItemPropsKey =
   | keyof A.CascaderInstance['$props']
   | keyof A.TreeSelectInstance['$props']
 
-export type ColumnsItemHide = boolean | ((form?: any) => boolean)
-export type ColumnsItemRequest<T = any> = (form?: any) => Promise<T>
+export type ColumnsItemHide<F> = boolean | ((form: F) => boolean)
+export type ColumnsItemRequest<F = any> = (form: F) => Promise<any>
 export type ColumnsItemFormat<T = any> = (
   res: T
 ) =>
@@ -48,7 +48,7 @@ export type ColumnsItemOptionsOrData =
   | A.CascaderInstance['$props']['options']
   | A.TreeSelectInstance['$props']['data']
 
-export interface ColumnsItem {
+export interface ColumnsItem<F = any> {
   type: FormType // 类型
   label: A.FormItemInstance['label'] // 标签
   field: A.FormItemInstance['field'] // 字段(必须唯一)
@@ -78,17 +78,17 @@ export interface ColumnsItem {
     | A.CascaderInstance['$props']['options']
   // 下拉树组件的data
   data?: A.TreeSelectInstance['$props']['data']
-  hide?: ColumnsItemHide // 是否隐藏
-  request?: ColumnsItemRequest // 接口请求api
+  hide?: ColumnsItemHide<F> // 是否隐藏
+  request?: ColumnsItemRequest<F> // 接口请求api
   resultFormat?: ColumnsItemFormat // 结果集格式化
   init?: boolean // 初始化请求
   cascader?: string[] // 级联的field字段列表
 }
 
-export interface Options {
+export interface Options<F = any> {
   form: Omit<A.FormInstance['$props'], 'model'>
   row?: Partial<typeof import('@arco-design/web-vue')['Row']['__defaults']>
-  columns: ColumnsItem[]
+  columns: ColumnsItem<F>[]
   btns?: { hide?: boolean; span?: number; col?: A.ColProps; searchBtnText?: string }
   fold?: { enable?: boolean; index?: number }
 }

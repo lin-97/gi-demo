@@ -51,7 +51,7 @@ const form = reactive({
 
 const formRef = ref<InstanceType<typeof GiForm>>()
 
-const options: Options = reactive({
+const options: Options<typeof form> = reactive({
   form: {},
   btns: { hide: true },
   columns: [
@@ -147,7 +147,7 @@ const options: Options = reactive({
       label: '成绩',
       field: 'grade',
       col: { xs: 24, sm: 24 },
-      hide: (i: typeof form) => {
+      hide: (i) => {
         i.hide && (i.grade = 0)
         return i.hide === true
       }
