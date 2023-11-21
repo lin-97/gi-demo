@@ -61,7 +61,7 @@ const router = createRouter({
 export function resetRouter() {
   try {
     router.getRoutes().forEach((route) => {
-      const { name, meta, path } = route
+      const { name } = route
       // console.log('name', name, path)
       if (name && name !== 'Home') {
         router.hasRoute(name) && router.removeRoute(name)

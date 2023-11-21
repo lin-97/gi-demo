@@ -25,7 +25,6 @@ export default function <T>(api: Api<T>, options?: Options<T>) {
       tableData.value = formatResult ? formatResult(res.data.records) : res.data.records
       setTotal(res.data.total)
       onSuccess && onSuccess()
-    } catch (error) {
     } finally {
       loading.value = false
     }

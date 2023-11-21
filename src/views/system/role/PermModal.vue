@@ -21,14 +21,11 @@ import { isMobile } from '@/utils'
 const TreeRef = ref<TreeInstance>()
 const treeData = ref<MenuOptionsItem[]>([])
 const getTreeData = async () => {
-  try {
-    const res = await getSystemMenuOptions()
-    treeData.value = res.data
-    nextTick(() => {
-      TreeRef.value?.expandAll()
-    })
-  } finally {
-  }
+  const res = await getSystemMenuOptions()
+  treeData.value = res.data
+  nextTick(() => {
+    TreeRef.value?.expandAll()
+  })
 }
 getTreeData()
 

@@ -1,4 +1,4 @@
-declare module App {
+declare namespace App {
   /** 系统配置 */
   interface SettingConfig {
     theme: 'light' | 'dark' // 主题

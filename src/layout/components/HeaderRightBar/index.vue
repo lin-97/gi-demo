@@ -104,9 +104,14 @@ const logout = () => {
     content: '确认退出登录？',
     hideCancel: false,
     closable: true,
-    onOk: () => {
-      userStore.logout()
-      router.replace('/login')
+    onBeforeOk: async () => {
+      try {
+        await userStore.logout()
+        router.replace('/login')
+        return true
+      } catch (error) {
+        return false
+      }
     }
   })
 }

@@ -184,7 +184,7 @@ const ZoomARef = ref<HTMLElement | null>(null)
 const { width: zoomAWidth, height: zoomAHeight } = useElementBounding(ZoomARef)
 
 const ZoomBRef = ref<HTMLElement | null>(null)
-const { width: zoomBWidth, height: zoomBHeight } = useElementBounding(ZoomBRef)
+const { width: zoomBWidth } = useElementBounding(ZoomBRef)
 
 // 放大比例
 const proportion = computed(() => zoomBWidth.value / zoomAWidth.value)

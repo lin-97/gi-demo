@@ -16,7 +16,7 @@ interface Props {
   actived?: boolean
 }
 
-const props = withDefaults(defineProps<Props>(), {
+withDefaults(defineProps<Props>(), {
   actived: false
 })
 

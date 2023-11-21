@@ -39,7 +39,7 @@ export default [
     timeout: 100,
     response: ({ query }) => {
       const { id } = query
-      let obj = findTree(menus, (i) => i.id === id)
+      const obj = findTree(menus, (i) => i.id === id)
       if (obj.item) {
         return resultSuccess(obj.item)
       } else {

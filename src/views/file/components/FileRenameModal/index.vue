@@ -24,7 +24,7 @@ import type { FormInstance, Modal } from '@arco-design/web-vue'
 
 interface Props {
   fileInfo: FileItem
-  onClose: Function
+  onClose: () => void
 }
 const props = withDefaults(defineProps<Props>(), {})
 

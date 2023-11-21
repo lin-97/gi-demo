@@ -53,7 +53,7 @@
               </a-select>
             </a-form-item>
             <a-form-item label="在校日期范围" field="rangDate">
-              <a-range-picker v-model="form.rangDate" allow-clear @ok="onRangerPickerOk" />
+              <a-range-picker v-model="form.rangDate" allow-clear />
             </a-form-item>
             <a-form-item label="爱好" field="hobbys">
               <a-select
@@ -84,7 +84,7 @@
 </template>
 
 <script setup lang="ts">
-import type { FormInstance, RangePickerInstance } from '@arco-design/web-vue'
+import type { FormInstance } from '@arco-design/web-vue'
 import { Message } from '@arco-design/web-vue'
 import * as Regexp from '@/utils/regexp'
 import { isMobile } from '@/utils'
@@ -143,8 +143,6 @@ const rules = {
 }
 
 const formRef = ref<FormInstance>()
-
-const onRangerPickerOk: RangePickerInstance['onOk'] = (value) => {}
 
 const reset = () => {
   formRef.value?.resetFields()

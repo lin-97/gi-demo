@@ -96,17 +96,6 @@ export function toCase(str: string, type: number) {
 }
 
 /**
- * @desc 遍历树节点 */
-export function foreachTree(data: any, callback: Function, childrenName = 'children') {
-  for (let i = 0; i < data.length; i++) {
-    callback(data[i])
-    if (data[i][childrenName] && data[i][childrenName].length > 0) {
-      foreachTree(data[i][childrenName], callback, childrenName)
-    }
-  }
-}
-
-/**
  * @desc 获取随机数
  * @param {number} min 最小值
  * @param {number} max 最大值
@@ -156,7 +145,7 @@ export const formatFileSize = (size: number) => {
 export const deepClone = (data: any) => {
   if (typeof data !== 'object' || data === null) return '不是对象'
   const newData: any = Array.isArray(data) ? [] : {}
-  for (let key in data) {
+  for (const key in data) {
     newData[key] = typeof data[key] === 'object' ? deepClone(data[key]) : data[key]
   }
   return newData

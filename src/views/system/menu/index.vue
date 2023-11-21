@@ -168,7 +168,6 @@ const getMenuList = async () => {
     loading.value = true
     const res = await getSystemMenuList()
     menuList.value = res.data
-  } catch (error) {
   } finally {
     loading.value = false
   }

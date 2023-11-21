@@ -20,7 +20,7 @@ function graphicFactory(side: AnyObject) {
     }
   }
 }
-const { loading, setLoading } = useLoading(true)
+const { setLoading } = useLoading(true)
 const xAxis = ref<string[]>([])
 const chartsData = ref<number[]>([])
 const graphicElements = ref([graphicFactory({ left: '2.6%' }), graphicFactory({ right: 0 })])

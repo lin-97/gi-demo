@@ -61,7 +61,7 @@ const columns: TableColumnData[] = [
   {
     title: '序号',
     width: 68,
-    render: ({ record, column, rowIndex }) => <span>{rowIndex + 1}</span>
+    render: ({ rowIndex }) => <span>{rowIndex + 1}</span>
   },
   {
     title: '姓名',
@@ -105,7 +105,7 @@ const columns: TableColumnData[] = [
     title: '操作',
     width: 200,
     align: 'center',
-    render: ({ record }) => (
+    render: () => (
       <a-space>
         <a-button type="primary" size="mini">
           <icon-edit></icon-edit>
@@ -134,7 +134,6 @@ const getTableData = async () => {
     })
     tableData.value = res.data.records
     setTotal(res.data.total)
-  } catch (error) {
   } finally {
     loading.value = false
   }

@@ -45,7 +45,6 @@
 </template>
 
 <script setup lang="ts">
-import { useFullscreen } from '@vueuse/core'
 import type { TableInstance } from '@arco-design/web-vue'
 
 defineOptions({ name: 'GiTable', inheritAttrs: false })

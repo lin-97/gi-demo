@@ -2,14 +2,14 @@
   <div class="multilevel" :class="{ 'multilevel-h5': isMobile() }">
     <div class="tabs">
       <a-tabs hide-content size="medium" :active-key="selectedKeys" @change="(key) => toPage(String(key))">
-        <a-tab-pane v-for="(item, index) in list" :key="item.path" :title="item.name"> </a-tab-pane>
+        <a-tab-pane v-for="item in list" :key="item.path" :title="item.name"> </a-tab-pane>
       </a-tabs>
     </div>
 
     <div class="main-box">
       <div class="menu">
         <a-menu :selected-keys="selectedKeys">
-          <a-menu-item v-for="(item, index) in list" :key="item.path" @click="toPage(item.path)">
+          <a-menu-item v-for="item in list" :key="item.path" @click="toPage(item.path)">
             <template #icon>
               <icon-menu></icon-menu>
             </template>

@@ -19,7 +19,6 @@ export function useDept(options?: { onSuccess?: () => void }) {
         return i
       })
       options?.onSuccess && options.onSuccess()
-    } catch (error) {
     } finally {
       loading.value = false
     }

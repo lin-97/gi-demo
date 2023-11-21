@@ -114,7 +114,6 @@ const getDeptList = async () => {
     nextTick(() => {
       TableRef.value?.expandAll(true)
     })
-  } catch (error) {
   } finally {
     loading.value = false
   }

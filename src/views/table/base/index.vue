@@ -38,7 +38,7 @@
             </template>
           </a-table-column>
           <a-table-column title="操作" :width="200" align="center">
-            <template #cell="{ record }">
+            <template>
               <a-space>
                 <a-button type="primary" size="mini">
                   <span>编辑</span>
@@ -129,7 +129,6 @@ const getTableData = async () => {
     })
     tableData.value = res.data.records
     setTotal(res.data.total)
-  } catch (error) {
   } finally {
     loading.value = false
   }

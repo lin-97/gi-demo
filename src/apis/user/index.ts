@@ -1,7 +1,6 @@
 import http from '@/utils/http'
 import { prefix } from '../config'
 import type * as User from './type'
-import type { RouteRecordRaw } from 'vue-router'
 import type { MenuItem } from '@/apis/system/type'
 
 /** @desc 登录 */

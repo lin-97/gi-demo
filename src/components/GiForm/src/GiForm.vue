@@ -236,7 +236,7 @@ watch(cloneForm as any, (newVal, oldVal) => {
               emit('update:modelValue', Object.assign(props.modelValue, { [i.field]: '' }))
             }
           })
-        } else if (i.request && !Boolean(newVal[item.field])) {
+        } else if (i.request && !newVal[item.field]) {
           dicData[i.field] = []
           emit('update:modelValue', Object.assign(props.modelValue, { [i.field]: '' }))
         }

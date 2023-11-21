@@ -13,7 +13,6 @@ export function useRole() {
       const res = await getSystemRoleList({ current: 1, pageSize: 99 })
       roleList.value = res.data.records.filter((i) => i.status === 1)
       total.value = res.data.total
-    } catch (error) {
     } finally {
       loading.value = false
     }

@@ -60,7 +60,6 @@ const route = useRoute()
 const router = useRouter()
 const appStore = useAppStore()
 const routeStore = useRouteStore()
-const menuCollapse = ref(false)
 // 过滤是菜单的路由
 const menuRoutes = filterTree(routeStore.routes, (i) => i.meta?.hidden === false)
 
