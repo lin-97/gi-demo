@@ -6,7 +6,7 @@
     :accordion="appStore.menuAccordion"
     :breakpoint="appStore.layout === 'mix' ? 'xl' : undefined"
     :trigger-props="{ animationName: 'slide-dynamic-origin' }"
-    :collapsed="appStore.menuCollapse"
+    :collapsed="collapsed"
     @menu-item-click="onMenuItemClick"
     @collapse="onCollapse"
     :style="menuStyle"
@@ -15,7 +15,7 @@
   </a-menu>
 </template>
 
-<script setup lang="tsx">
+<script setup lang="ts">
 import { useAppStore, useRouteStore } from '@/stores'
 import MenuItem from './MenuItem.vue'
 import { isExternal } from '@/utils/validate'
@@ -28,7 +28,6 @@ defineOptions({ name: 'Menu' })
 interface Props {
   menus?: RouteRecordRaw[]
   menuStyle?: CSSProperties
-  collapsed?: boolean
 }
 
 const props = withDefaults(defineProps<Props>(), {})
@@ -42,15 +41,25 @@ const sidebarRoutes = computed(() => (props.menus ? props.menus : routeStore.rou
 
 // 菜单垂直模式/水平模式
 const mode = computed(() => {
-  if (['left', 'mix'].includes(appStore.layout)) {
-    return 'vertical'
-  } else {
+  if (!['left', 'mix'].includes(appStore.layout)) {
     return 'horizontal'
+  } else {
+    return 'vertical'
   }
 })
 
+// 是否默认展开选中的菜单
 const autoOpenSelected = computed(() => {
-  return appStore.layout === 'left' ? true : false
+  if (!['left', 'mix'].includes(appStore.layout)) {
+    return false
+  } else {
+    return true
+  }
+})
+
+// 是否折叠菜单
+const collapsed = computed(() => {
+  return isMobile() ? false : appStore.menuCollapse
 })
 
 // 当前页面激活菜单路径，先从路由里面找
@@ -62,20 +71,23 @@ const activeMenu = computed(() => {
   return [path]
 })
 
+// 菜单项点击事件
 const onMenuItemClick = (key: string) => {
   if (isExternal(key)) {
     window.open(key)
-    return false
+    return
   }
   if (isMobile()) {
     appStore.menuCollapse = false
   }
-
   router.push({ path: key })
 }
 
-const onCollapse = (e: boolean) => {
-  appStore.menuCollapse = e
+// 折叠状态改变时触发
+const onCollapse = (collapsed: boolean) => {
+  if (!isMobile()) {
+    appStore.menuCollapse = collapsed
+  }
 }
 </script>
 
