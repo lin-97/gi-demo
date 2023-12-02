@@ -6,7 +6,7 @@
     :accordion="appStore.menuAccordion"
     :breakpoint="appStore.layout === 'mix' ? 'xl' : undefined"
     :trigger-props="{ animationName: 'slide-dynamic-origin' }"
-    :collapsed="collapsed"
+    :collapsed="notCollapsed ? false : appStore.menuCollapse"
     @menu-item-click="onMenuItemClick"
     @collapse="onCollapse"
     :style="menuStyle"
@@ -28,9 +28,12 @@ defineOptions({ name: 'Menu' })
 interface Props {
   menus?: RouteRecordRaw[]
   menuStyle?: CSSProperties
+  notCollapsed?: boolean // 强制菜单不折叠
 }
 
-const props = withDefaults(defineProps<Props>(), {})
+const props = withDefaults(defineProps<Props>(), {
+  notCollapsed: false
+})
 
 const route = useRoute()
 const router = useRouter()
@@ -57,11 +60,6 @@ const autoOpenSelected = computed(() => {
   }
 })
 
-// 是否折叠菜单
-const collapsed = computed(() => {
-  return isMobile() ? false : appStore.menuCollapse
-})
-
 // 当前页面激活菜单路径，先从路由里面找
 const activeMenu = computed(() => {
   const { meta, path } = route
@@ -85,7 +83,7 @@ const onMenuItemClick = (key: string) => {
 
 // 折叠状态改变时触发
 const onCollapse = (collapsed: boolean) => {
-  if (!isMobile()) {
+  if (appStore.layout === 'mix') {
     appStore.menuCollapse = collapsed
   }
 }
