@@ -75,7 +75,7 @@ const onMenuItemClick = (key: string) => {
     window.open(key)
     return
   }
-  if (isMobile()) {
+  if (props.notCollapsed) {
     appStore.menuCollapse = false
   }
   router.push({ path: key })
