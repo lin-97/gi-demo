@@ -1,6 +1,7 @@
 <template>
   <div class="layout-mix">
     <section
+      v-if="isDesktop"
       class="layout-mix-left"
       :class="{ 'app-menu-dark': appStore.menuDark }"
       :style="appStore.menuDark ? appStore.themeCSSVar : undefined"
@@ -13,6 +14,7 @@
       <header class="header">
         <MenuFoldBtn></MenuFoldBtn>
         <a-menu
+          v-if="isDesktop"
           mode="horizontal"
           :selected-keys="activeMenu"
           :auto-open-selected="false"
@@ -54,12 +56,14 @@ import type { RouteRecordRaw } from 'vue-router'
 import { isExternal } from '@/utils/validate'
 import { searchTree } from 'xe-utils'
 import { filterTree } from '@/utils'
+import { useDevice } from '@/hooks'
 
 defineOptions({ name: 'LayoutMix' })
 const route = useRoute()
 const router = useRouter()
 const appStore = useAppStore()
 const routeStore = useRouteStore()
+const { isDesktop } = useDevice()
 // 过滤是菜单的路由
 const menuRoutes = filterTree(routeStore.routes, (i) => i.meta?.hidden === false)
 
@@ -160,7 +164,7 @@ watch(
   background: var(--color-bg-1);
   border-bottom: 1px solid var(--color-border);
   display: flex;
-  justify-content: end;
+  justify-content: space-between;
   align-items: center;
   overflow: hidden;
 }
