@@ -42,6 +42,7 @@
 import { getSystemDictDetail, saveSystemDict } from '@/apis'
 import { Message, type FormInstance } from '@arco-design/web-vue'
 import * as Regexp from '@/utils/regexp'
+import { useForm } from '@/hooks'
 
 const FormRef = ref<FormInstance>()
 const roleId = ref('')
@@ -49,14 +50,14 @@ const isEdit = computed(() => !!roleId.value)
 const title = computed(() => (isEdit.value ? '编辑字典' : '新增字典'))
 const visible = ref(false)
 
-const form = reactive({
+const { form, resetForm } = useForm({
   name: '',
   code: '',
   status: 1,
   description: ''
 })
 
-const rules = {
+const rules: FormInstance['rules'] = {
   name: [{ required: true, message: '请输入字典名称' }],
   code: [
     { required: true, message: '请输入字典编码' },
@@ -79,6 +80,7 @@ const edit = async (id: string) => {
 
 const close = () => {
   FormRef.value?.resetFields()
+  resetForm()
 }
 
 defineExpose({ add, edit })

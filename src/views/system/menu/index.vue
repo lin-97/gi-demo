@@ -42,7 +42,7 @@
       </a-row>
 
       <a-table
-        style="margin-top: 8px"
+        style="margin-top: 6px"
         ref="TableRef"
         row-key="id"
         :data="menuList"

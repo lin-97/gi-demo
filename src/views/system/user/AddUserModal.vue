@@ -99,14 +99,18 @@
 </template>
 
 <script setup lang="ts">
-import { useDept, useRole } from '@/hooks/app'
+import { Message, type FormInstance } from '@arco-design/web-vue'
 import * as Regexp from '@/utils/regexp'
 import { getSystemUserDetail, saveSystemUser } from '@/apis'
-import { Message, type FormInstance } from '@arco-design/web-vue'
+import { useDept, useRole } from '@/hooks/app'
+import { useForm } from '@/hooks'
 
 const { roleList, getRoleList } = useRole()
 getRoleList()
 const roleOptions = computed(() => roleList.value.map((i) => ({ label: i.name, value: i.code })))
+
+const { deptList, getDeptList } = useDept()
+getDeptList()
 
 const FormRef = ref<FormInstance>()
 const userId = ref('')
@@ -114,7 +118,7 @@ const isEdit = computed(() => !!userId.value)
 const title = computed(() => (isEdit.value ? '编辑用户' : '新增用户'))
 const visible = ref(false)
 
-const form = reactive({
+const { form, resetForm } = useForm({
   id: '',
   username: '', // 用户名
   nickname: '', // 昵称
@@ -122,14 +126,14 @@ const form = reactive({
   phone: '', // 手机号
   email: '', // 邮箱
   deptId: '', // 部门
-  roleIds: [], // 角色(可能多个)
+  roleIds: [] as string[], // 角色(可能多个)
   description: '', // 描述
   status: 1 as Status, // 状态 0禁用 1启用(正常)
-  type: 2, // 类型 1系统内置(admin是系统内置) 2自定义
+  type: 2 as 1 | 2, // 类型 1系统内置(admin是系统内置) 2自定义
   disabled: false // 如果 type===1 这为 true, 主要作用是列表复选框禁用状态
 })
 
-const rules = {
+const rules: FormInstance['rules'] = {
   username: [
     { required: true, message: '请输入用户名' },
     { min: 2, max: 4, message: '长度在 2 - 4个字符' }
@@ -145,9 +149,6 @@ const rules = {
   status: [{ required: true, message: '请选择状态' }]
 }
 
-const { deptList, getDeptList } = useDept()
-getDeptList()
-
 const add = () => {
   userId.value = ''
   visible.value = true
@@ -162,6 +163,7 @@ const edit = async (id: string) => {
 
 const close = () => {
   FormRef.value?.resetFields()
+  resetForm()
 }
 
 defineExpose({ add, edit })

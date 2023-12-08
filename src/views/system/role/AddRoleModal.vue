@@ -42,6 +42,7 @@
 <script setup lang="ts">
 import { getSystemRoleDetail, saveSystemRole } from '@/apis'
 import { Message, type FormInstance } from '@arco-design/web-vue'
+import { useForm } from '@/hooks'
 
 const FormRef = ref<FormInstance>()
 const roleId = ref('')
@@ -49,7 +50,7 @@ const isEdit = computed(() => !!roleId.value)
 const title = computed(() => (isEdit.value ? '编辑角色' : '新增角色'))
 const visible = ref(false)
 
-const form = reactive({
+const { form, resetForm } = useForm({
   name: '',
   code: '',
   status: 1,
@@ -82,6 +83,7 @@ const edit = async (id: string) => {
 
 const close = () => {
   FormRef.value?.resetFields()
+  resetForm()
 }
 
 defineExpose({ add, edit })

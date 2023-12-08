@@ -55,6 +55,7 @@
 import { useDept } from '@/hooks/app'
 import { getSystemDeptDetil, saveSystemDept } from '@/apis'
 import { Message, type FormInstance } from '@arco-design/web-vue'
+import { useForm } from '@/hooks'
 
 const FormRef = ref<FormInstance>()
 const deptId = ref('')
@@ -64,7 +65,7 @@ const title = computed(() => (isEdit.value ? '编辑部门' : '新增部门'))
 const { deptList, getDeptList } = useDept()
 getDeptList()
 
-const form = reactive({
+const { form, resetForm } = useForm({
   id: '',
   parentId: '',
   name: '',
@@ -73,7 +74,7 @@ const form = reactive({
   description: ''
 })
 
-const rules = {
+const rules: FormInstance['rules'] = {
   name: [
     { required: true, message: '请输入部门名称' },
     { min: 3, max: 10, message: '长度在 3 - 10个字符' }
@@ -97,6 +98,7 @@ const edit = async (id: string) => {
 
 const close = () => {
   FormRef.value?.resetFields()
+  resetForm()
 }
 
 defineExpose({ add, edit })
