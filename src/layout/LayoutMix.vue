@@ -133,8 +133,15 @@ watch(
   }
 }
 
-:deep(.arco-menu-horizontal .arco-menu-inner) {
-  padding-left: 0;
+:deep(.arco-menu-horizontal) {
+  flex: 1;
+  overflow: hidden;
+  .arco-menu-inner {
+    padding-left: 0;
+    .arco-menu-overflow-wrap {
+      white-space: nowrap;
+    }
+  }
 }
 
 .layout-mix {
