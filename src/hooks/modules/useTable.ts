@@ -49,7 +49,8 @@ export default function <T>(api: Api<T>, options?: Options<T>) {
   // 全选
   const selectAll: TableInstance['onSelectAll'] = (checked) => {
     const key = rowKey ?? ('id' as keyof T)
-    selectedKeys.value = checked ? tableData.value.map((i) => i[key] as string | number) : []
+    const arr = tableData.value.filter((i) => !(i['disabled' as keyof T] ?? false))
+    selectedKeys.value = checked ? arr.map((i) => i[key] as string | number) : []
   }
 
   // 删除
