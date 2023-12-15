@@ -55,6 +55,7 @@
                 :scroll="{ x: '100%', y: '100%', minWidth: 1000 }"
                 :row-selection="{ type: 'checkbox', showCheckedAll: true }"
                 :pagination="pagination"
+                :selected-keys="selectedKeys"
                 @select="select"
                 @select-all="selectAll"
               >
