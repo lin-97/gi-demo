@@ -88,7 +88,7 @@
         </template>
       </a-table>
 
-      <AddRoleModal ref="AddRoleModalRef"></AddRoleModal>
+      <AddRoleModal ref="AddRoleModalRef" @save-success="search"></AddRoleModal>
       <PermModal ref="PermModalRef"></PermModal>
     </a-card>
   </div>

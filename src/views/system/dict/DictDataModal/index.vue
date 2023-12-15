@@ -65,7 +65,7 @@
       </template>
     </a-table>
 
-    <AddDictDataModal ref="AddDictDataModalRef"></AddDictDataModal>
+    <AddDictDataModal ref="AddDictDataModalRef" @save-success="search"></AddDictDataModal>
   </a-modal>
 </template>
 

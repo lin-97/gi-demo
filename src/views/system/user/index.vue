@@ -130,7 +130,7 @@
       </a-row>
     </a-card>
 
-    <AddUserModal ref="AddUserModalRef"></AddUserModal>
+    <AddUserModal ref="AddUserModalRef" @save-success="search"></AddUserModal>
     <UserDetailDrawer ref="UserDetailDrawerRef"></UserDetailDrawer>
   </div>
 </template>

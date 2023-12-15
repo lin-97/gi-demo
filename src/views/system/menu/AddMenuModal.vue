@@ -189,6 +189,10 @@ const props = withDefaults(defineProps<Props>(), {
   menus: () => []
 })
 
+const emit = defineEmits<{
+  (e: 'save-success'): void
+}>()
+
 const menuSelectTree = computed(() => {
   const menus = JSON.parse(JSON.stringify(props.menus)) as MenuItem[]
   const data = filterTree(menus, (i) => [1, 2].includes(i.type))
@@ -280,6 +284,7 @@ const save = async () => {
     const res = await saveSystemMenu(form)
     if (res.data) {
       Message.success('模拟保存成功')
+      emit('save-success')
       return true
     } else {
       return false

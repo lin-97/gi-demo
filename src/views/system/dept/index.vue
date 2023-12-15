@@ -83,7 +83,7 @@
       </a-table>
     </a-card>
 
-    <AddDeptModal ref="AddDeptModalRef"></AddDeptModal>
+    <AddDeptModal ref="AddDeptModalRef" @save-success="search"></AddDeptModal>
   </div>
 </template>
 

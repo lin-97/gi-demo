@@ -36,6 +36,10 @@ import { getSystemDictDataDetail, saveSystemDictData } from '@/apis'
 import { Message, type FormInstance } from '@arco-design/web-vue'
 import { useForm } from '@/hooks'
 
+const emit = defineEmits<{
+  (e: 'save-success'): void
+}>()
+
 const formRef = ref<FormInstance>()
 const dictDataId = ref('')
 const isEdit = computed(() => !!dictDataId.value)
@@ -86,6 +90,7 @@ const save = async () => {
     const res = await saveSystemDictData(form)
     if (res.data) {
       Message.success('模拟保存成功')
+      emit('save-success')
       return true
     } else {
       return false

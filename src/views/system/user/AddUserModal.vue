@@ -105,6 +105,10 @@ import { getSystemUserDetail, saveSystemUser } from '@/apis'
 import { useDept, useRole } from '@/hooks/app'
 import { useForm } from '@/hooks'
 
+const emit = defineEmits<{
+  (e: 'save-success'): void
+}>()
+
 const { roleList, getRoleList } = useRole()
 getRoleList()
 const roleOptions = computed(() => roleList.value.map((i) => ({ label: i.name, value: i.code })))
@@ -175,6 +179,7 @@ const save = async () => {
     const res = await saveSystemUser(form)
     if (res.data) {
       Message.success('模拟保存成功')
+      emit('save-success')
       return true
     } else {
       return false

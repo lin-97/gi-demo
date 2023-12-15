@@ -44,6 +44,10 @@ import { Message, type FormInstance } from '@arco-design/web-vue'
 import * as Regexp from '@/utils/regexp'
 import { useForm } from '@/hooks'
 
+const emit = defineEmits<{
+  (e: 'save-success'): void
+}>()
+
 const FormRef = ref<FormInstance>()
 const roleId = ref('')
 const isEdit = computed(() => !!roleId.value)
@@ -92,6 +96,7 @@ const save = async () => {
     const res = await saveSystemDict(form)
     if (res.data) {
       Message.success('模拟保存成功')
+      emit('save-success')
       return true
     } else {
       return false

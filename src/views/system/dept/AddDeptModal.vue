@@ -57,6 +57,10 @@ import { getSystemDeptDetil, saveSystemDept } from '@/apis'
 import { Message, type FormInstance } from '@arco-design/web-vue'
 import { useForm } from '@/hooks'
 
+const emit = defineEmits<{
+  (e: 'save-success'): void
+}>()
+
 const FormRef = ref<FormInstance>()
 const deptId = ref('')
 const visible = ref(false)
@@ -110,6 +114,7 @@ const save = async () => {
     const res = await saveSystemDept(form)
     if (res.data) {
       Message.success('模拟保存成功')
+      emit('save-success')
       return true
     } else {
       return false

@@ -44,6 +44,10 @@ import { getSystemRoleDetail, saveSystemRole } from '@/apis'
 import { Message, type FormInstance } from '@arco-design/web-vue'
 import { useForm } from '@/hooks'
 
+const emit = defineEmits<{
+  (e: 'save-success'): void
+}>()
+
 const FormRef = ref<FormInstance>()
 const roleId = ref('')
 const isEdit = computed(() => !!roleId.value)
@@ -95,6 +99,7 @@ const save = async () => {
     const res = await saveSystemRole(form)
     if (res.data) {
       Message.success('模拟保存成功')
+      emit('save-success')
       return true
     } else {
       return false

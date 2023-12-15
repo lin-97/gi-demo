@@ -83,7 +83,7 @@
       </a-table>
     </a-card>
 
-    <AddDictModal ref="AddDictModalRef"></AddDictModal>
+    <AddDictModal ref="AddDictModalRef" @save-success="search"></AddDictModal>
     <DictDataModal ref="DictDataModalRef"></DictDataModal>
   </div>
 </template>

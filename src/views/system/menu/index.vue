@@ -136,7 +136,7 @@
       </a-table>
     </a-card>
 
-    <AddMenuModal ref="AddMenuModalRef" :menus="menuList"></AddMenuModal>
+    <AddMenuModal ref="AddMenuModalRef" :menus="menuList" @save-success="search"></AddMenuModal>
   </div>
 </template>
 
