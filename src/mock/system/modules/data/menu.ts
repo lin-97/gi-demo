@@ -1018,7 +1018,7 @@ export const menus: MockMenuItem[] = [
         component: 'about/index',
         redirect: '',
         type: 2,
-        title: '关于我们',
+        title: '关于项目',
         svgIcon: 'menu-about',
         icon: '',
         keepAlive: false,

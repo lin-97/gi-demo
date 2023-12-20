@@ -1,5 +1,5 @@
 <template>
-  <div class="multilevel" :class="{ 'multilevel-h5': isMobile() }">
+  <div class="multilevel" :class="{ 'multilevel-h5': !isDesktop }">
     <div class="tabs">
       <a-tabs hide-content size="medium" :active-key="selectedKeys" @change="(key) => toPage(String(key))">
         <a-tab-pane v-for="item in list" :key="item.path" :title="item.name"> </a-tab-pane>
@@ -25,11 +25,13 @@
 </template>
 
 <script setup lang="ts">
-import { isMobile } from '@/utils'
+import { useDevice } from '@/hooks'
+
 defineOptions({ name: 'MultilevelIndex' })
 
 const route = useRoute()
 const router = useRouter()
+const { isDesktop } = useDevice()
 
 const selectedKeys = ref('')
 watch(
