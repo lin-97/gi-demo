@@ -30,7 +30,7 @@ const StatusCodeMessage: ICodeMessage = {
 }
 
 const http: AxiosInstance = axios.create({
-  // baseURL: process.env.VUE_APP_API_PREFIX,
+  baseURL: import.meta.env.VITE_API_PREFIX,
   timeout: 30 * 1000
 })
 
