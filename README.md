@@ -7,16 +7,16 @@
 
 ## 简介
 
-Gi Admin Pro 是一个基于 Vue3、Vite、TypeScript、Arco Design Vue、Pinia、VueUse 等的免费中后台模版，它使用了最新的前端技术栈，内置丰富的主题配置，有着极高的代码规范，基于 mock 实现的动态数据展示，开箱即用的模板，也可用于学习参考。
+**Gi Admin Pro** 是一个基于 Vue3、Vite、TypeScript、Arco Design Vue、Pinia、VueUse 等的免费中后台模版，它使用了最新的前端技术栈，内置丰富的主题配置，有着极高的代码规范，基于 mock 实现的动态数据展示，开箱即用的模板，也可用于学习参考。
 
-> **Gi 前缀含义：** G：代表全局 i：代表我的
+> **Gi 前缀含义：** G：代表全局      i：代表我的
 >
 > Gi 用来定义全局组件前缀，如 GiNavBar、GiTitle、GiLoading
 
 ## 特性
 
 - **最新技术栈**：使用 Vue3 / Vite 等前端前沿技术开发，使用高效率的 npm 包管理器
-- **TypeScript**: 应用程序级 JavaScript 的语言
+- **TypeScript**：应用程序级 JavaScript 的语言
 - **主题**：丰富可配置的主题、暗黑模式
 - **代码规范**：丰富的规范插件及极高的代码规范
 
@@ -25,6 +25,7 @@ Gi Admin Pro 是一个基于 Vue3、Vite、TypeScript、Arco Design Vue、Pinia�
 <a href="http://lin0716.gitee.io/gi-demo" target="_blank">Gi Admin Pro 预览地址</a>
 
 账号1：**admin**   密码：**123456**
+
 账号2：**user**  密码：**123456**
 
 ## 代码仓库
@@ -100,7 +101,7 @@ npm run build
 
 ## 常见问题
 
-**为什么安装依赖不成功**
+**为什么安装依赖不成功？**
 
 检查`node`版本，最好使用原生镜像`npm`
 
@@ -148,12 +149,28 @@ npm config set registry https://registry.npmjs.org/
 
 
 
+**Vue3权限管理对路由进行排序和格式化处理方式**
+
+使用 **xe-utils** 这个 js 库，简化数据处理
+
+[文章地址](https://juejin.cn/post/7301260557222805567)
+
+
+
 **页面无法缓存？**
 
 请检查页面是否配置了`name`，且名称是否与数据一致
 
 ~~~js
 defineOptions({ name: 'AboutIndex' })
+~~~
+
+~~~js
+{
+  path: '/about/index',
+  name: 'AboutIndex', // 检查name是否一致
+  component: () => import('@/views/about/index.vue')
+}
 ~~~
 
 
@@ -235,6 +252,11 @@ const getData = () => {
   nums.forEach((item) => {
     arr.push({ value: item })
   })
+}
+
+const getUserList = async () => {
+  const res = await Api.getUserPage()
+  userList = res.data
 }
 
 // ---------------------------------------- 方法 --------------------------------------------- //
@@ -319,7 +341,7 @@ const getTableList = () => {}
 | request     | req  |
 | image       | img  |
 | utility     | util |
-| prroperty   | prop |
+| property    | prop |
 | source      | src  |
 | boolean     | bool |
 | error       | err  |
@@ -366,6 +388,9 @@ const form = reactive(getInitForm())
 
 // 重置form
 const resetForm = () => {
+  for (const key in form) {
+    delete form[key]
+  }
   Object.assign(form, getInitForm())
 }
 </script>
@@ -634,7 +659,7 @@ const submit = () => {
 </script>
 ```
 
-页面模板类名采用半角连接符(-)
+页面模板CSS类名采用半角连接符(-)
 
 ```vue
 <template>
@@ -1278,7 +1303,7 @@ console.log(form) // { name: '张三', status: 1 }
 
 // 如果直接重置
 Object.assign(form, { name: '' })
-console.log(form) // { name: '', status: 1 } 有额外属性冗余，会不经意的随着保存操作提交到后台
+console.log(form) // { name: '', status: 1 } 有额外属性冗余，status会不经意的随着保存操作提交到后台
 ~~~
 
 
@@ -1751,7 +1776,5 @@ $padding: 16px; // 盒子和内容的间距
 
 
 ## 捐赠
-
-
 
 <img style="width:300px" src="https://gitee.com/lin0716/gi-image/raw/master/alipay.jpg" />
