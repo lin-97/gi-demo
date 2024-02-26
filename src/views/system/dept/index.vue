@@ -33,7 +33,6 @@
       </a-row>
 
       <a-table
-        style="margin-top: 6px"
         ref="TableRef"
         row-key="id"
         :bordered="{ cell: true }"

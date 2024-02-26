@@ -3,7 +3,7 @@
     <a-row align="stretch" class="login-box">
       <a-col :xs="0" :sm="12" :md="15">
         <div class="login-left">
-          <img class="login-img" src="@/assets/svgs/login-img.svg" />
+          <img class="login-left__img" src="@/assets/svgs/login-img.svg" />
         </div>
       </a-col>
       <a-col :xs="24" :sm="12" :md="9">
@@ -17,7 +17,9 @@
             :label-col-style="{ display: 'none' }"
             :wrapper-col-style="{ flex: 1 }"
           >
-            <h3 class="login-form-title"><img class="logo" src="@/assets/images/logo.gif" /><span>Admin Pro</span></h3>
+            <h3 class="login-right__title">
+              <img class="logo" src="@/assets/images/logo.gif" /><span>Admin Pro</span>
+            </h3>
             <a-form-item field="username">
               <a-input v-model="form.username" placeholder="账号 admin/user" allow-clear>
                 <template #prefix><icon-user :stroke-width="1" :style="{ fontSize: '20px' }" /></template>
@@ -107,35 +109,6 @@ const login = async () => {
 </script>
 
 <style lang="scss" scoped>
-.register-btn,
-.register-btn:hover {
-  color: var(--color-text-2);
-}
-
-.login-form-title {
-  color: var(--color-text-1);
-  font-weight: 500;
-  font-size: 20px;
-  line-height: 32px;
-  margin-bottom: 20px;
-  text-align: center;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  .logo {
-    width: 32px;
-    height: 32px;
-    margin-right: 6px;
-  }
-}
-
-.theme-btn {
-  position: fixed;
-  top: 20px;
-  left: 30px;
-  z-index: 9999;
-}
-
 .login {
   height: 100%;
   display: flex;
@@ -161,7 +134,7 @@ const login = async () => {
   position: relative;
   overflow: hidden;
   background: linear-gradient(60deg, rgb(var(--primary-6)), rgb(var(--primary-3)));
-  .login-img {
+  &__img {
     width: 100%;
     height: 100%;
     position: absolute;
@@ -183,5 +156,33 @@ const login = async () => {
   align-items: center;
   padding-top: 30px;
   box-sizing: border-box;
+  &__title {
+    color: var(--color-text-1);
+    font-weight: 500;
+    font-size: 20px;
+    line-height: 32px;
+    margin-bottom: 20px;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    .logo {
+      width: 32px;
+      height: 32px;
+      margin-right: 6px;
+    }
+  }
+}
+
+.register-btn,
+.register-btn:hover {
+  color: var(--color-text-2);
+}
+
+.theme-btn {
+  position: fixed;
+  top: 20px;
+  left: 30px;
+  z-index: 9999;
 }
 </style>

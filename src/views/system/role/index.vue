@@ -33,7 +33,6 @@
       </a-row>
 
       <a-table
-        style="margin-top: 6px"
         row-key="id"
         :data="roleList"
         :bordered="{ cell: true }"

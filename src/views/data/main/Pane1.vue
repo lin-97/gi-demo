@@ -14,7 +14,7 @@
           :header-style="{ display: 'none' }"
           class="gi_card pane-item pane-right"
         >
-          <div class="content">
+          <div class="pane-right__content">
             <a-row justify="space-between">
               <a-space wrap>
                 <a-button type="primary" @click="onAdd">
@@ -190,7 +190,7 @@ const onExport = () => {
   .pane-left {
   }
   .pane-right {
-    .content {
+    &__content {
       flex: 1;
       overflow: hidden;
       display: flex;

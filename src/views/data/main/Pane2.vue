@@ -19,7 +19,7 @@
       </a-space>
     </a-row>
 
-    <section class="content">
+    <section class="pane2__content">
       <section class="gi_table_box">
         <a-table
           row-key="id"
@@ -166,14 +166,14 @@ const selectAll: TableInstance['onSelectAll'] = (checked) => {
 .pane2 {
   flex: 1;
   margin: $margin;
-}
-.content {
-  flex: 1;
-  overflow: hidden;
-  display: flex;
-  flex-direction: column;
-  box-sizing: border-box;
-  background-color: var(--color-bg-1);
-  border-radius: $radius-box;
+  &__content {
+    flex: 1;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
+    background-color: var(--color-bg-1);
+    border-radius: $radius-box;
+  }
 }
 </style>

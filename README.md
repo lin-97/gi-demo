@@ -1418,6 +1418,8 @@ Link 组件使用场景
 
 建议采用全小写，多单词使用-连接符(参考大部分网站，包括掘金，码云等，都是采用这个规则)
 
+或者采用`BEM`命名规范 [BEM命名规范](https://getbem.com/naming/)
+
 ```css
 // 推荐
 .header
@@ -1432,12 +1434,39 @@ Link 组件使用场景
 .list
 .list-item
 
+
 // 不推荐
 .Header
 .listItem
 .list-Item
 .List-Item;
 ```
+
+**BEM命名规范**
+
+~~~html
+<div class="article">
+    <div class="article__body">
+        <div class="tag"></div>
+        <button class="article__button--primary"></button>
+        <button class="article__button--success"></button>
+    </div>
+</div>
+~~~
+
+~~~less
+.article {
+    max-width: 1200px;
+    &__body {
+        padding: 20px;
+    }
+    &__button {
+        padding: 5px 8px;
+        &--primary {background: blue;}
+        &--success {background: green;}
+    }
+}
+~~~
 
 #### CSS 全局类名-命名规范
 

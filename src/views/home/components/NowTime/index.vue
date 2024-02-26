@@ -1,14 +1,14 @@
 <template>
-  <div class="gi-now-time" v-if="time">
+  <div class="now-time" v-if="time">
     <GiSvgIcon name="time" :size="20"></GiSvgIcon>
-    <p class="time gi_line_1">{{ time }}</p>
+    <p class="now-time__time gi_line_1">{{ time }}</p>
   </div>
 </template>
 
 <script setup lang="ts">
 import Dayjs from 'dayjs'
 
-defineOptions({ name: 'GiNowTime' })
+defineOptions({ name: 'NowTime' })
 const time = ref('')
 
 // 获取现在时间
@@ -30,13 +30,13 @@ initTime()
 
 <style lang="scss" scoped>
 @import url('@/assets/fonts/font.css');
-.gi-now-time {
+.now-time {
   display: flex;
   align-items: center;
   font-size: 14px;
   font-family: DINPro-Medium;
   color: var(--color-text-1);
-  .time {
+  &__time {
     margin-left: 6px;
   }
 }

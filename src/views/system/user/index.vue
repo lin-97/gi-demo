@@ -57,7 +57,6 @@
           </a-row>
 
           <a-table
-            style="margin-top: 6px"
             row-key="id"
             :loading="loading"
             :data="userList"

@@ -1,7 +1,7 @@
 <template>
   <div class="detail">
     <a-watermark content="gi.admin.pro">
-      <a-card title="基本信息" :bordered="false" class="item">
+      <a-card title="基本信息" :bordered="false" class="detail__item">
         <template #extra>
           <a-button>返回</a-button>
         </template>
@@ -36,7 +36,7 @@
         </a-descriptions>
       </a-card>
 
-      <a-card title="其他信息" :bordered="false" class="item">
+      <a-card title="其他信息" :bordered="false" class="detail__item">
         <a-descriptions :column="1">
           <a-descriptions-item label="姓名">Lin</a-descriptions-item>
           <a-descriptions-item label="性别">男</a-descriptions-item>
@@ -80,11 +80,7 @@ defineOptions({ name: 'BaseDetail' })
 <style lang="scss" scoped>
 .detail {
   overflow: auto;
-  .head {
-    background: var(--color-bg-1);
-    box-shadow: 0 2px 5px 0 rgb(0 0 0 / 8%);
-  }
-  .item {
+  &__item {
     margin: $margin;
     background: var(--color-bg-1);
     border-radius: 2px;
