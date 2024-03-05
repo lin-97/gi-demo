@@ -1,6 +1,6 @@
 <template>
   <div class="table-page">
-    <GiForm :options="options" v-model="form" @search="search"></GiForm>
+    <GiForm :options="options" :columns="columns" v-model="form" @search="search"></GiForm>
 
     <div class="gi_table_box">
       <a-table
@@ -57,7 +57,7 @@
 <script setup lang="ts">
 import { usePagination } from '@/hooks'
 import { getPersonList, type PersonItem } from '@/apis'
-import type { Options } from '@/components/GiForm'
+import type { Options, Columns } from '@/components/GiForm'
 
 defineOptions({ name: 'TableBase' })
 
@@ -67,47 +67,48 @@ const col = { xs: 24, sm: 12, md: 12, lg: 8, xl: 8, xxl: 6 }
 const options: Options = reactive({
   form: { layout: 'inline' },
   btns: { col: col },
-  fold: { enable: true, index: 2 },
-  columns: [
-    {
-      type: 'input',
-      label: '姓名',
-      field: 'name',
-      col: col
-    },
-    {
-      type: 'input',
-      label: '手机',
-      field: 'phone',
-      col: col,
-      props: {
-        maxLength: 11
-      }
-    },
-    {
-      type: 'select',
-      label: '类型',
-      field: 'type',
-      col: col,
-      options: [
-        { label: '党员', value: 1 },
-        { label: '群众', value: 2 }
-      ]
-    },
-    {
-      type: 'date-picker',
-      label: '创建日期',
-      field: 'createTime',
-      col: col
-    },
-    {
-      type: 'input',
-      label: '地址',
-      field: 'address',
-      col: col
-    }
-  ]
+  fold: { enable: true, index: 2 }
 })
+
+const columns: Columns = reactive([
+  {
+    type: 'input',
+    label: '姓名',
+    field: 'name',
+    col: col
+  },
+  {
+    type: 'input',
+    label: '手机',
+    field: 'phone',
+    col: col,
+    props: {
+      maxLength: 11
+    }
+  },
+  {
+    type: 'select',
+    label: '类型',
+    field: 'type',
+    col: col,
+    options: [
+      { label: '党员', value: 1 },
+      { label: '群众', value: 2 }
+    ]
+  },
+  {
+    type: 'date-picker',
+    label: '创建日期',
+    field: 'createTime',
+    col: col
+  },
+  {
+    type: 'input',
+    label: '地址',
+    field: 'address',
+    col: col
+  }
+])
 
 const loading = ref(false)
 const tableData = ref<PersonItem[]>([])
