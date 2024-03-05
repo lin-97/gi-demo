@@ -8,7 +8,14 @@
     </template>
     <a-row :gutter="30">
       <a-col :xs="24" :sm="24" :md="12">
-        <GiForm class="gi_mb" :options="options" v-model="form" @search="search" @reset="reset"></GiForm>
+        <GiForm
+          class="gi_mb"
+          :options="options"
+          :columns="columns"
+          v-model="form"
+          @search="search"
+          @reset="reset"
+        ></GiForm>
       </a-col>
       <a-col :xs="24" :sm="24" :md="12">
         <GiCodeView :code-json="JSON.stringify(form, null, '\t')"></GiCodeView>
@@ -19,9 +26,11 @@
 
 <script setup lang="ts">
 import { Drawer, Message } from '@arco-design/web-vue'
-import type { Options } from '@/components/GiForm'
+import type { Options, Columns } from '@/components/GiForm'
 import GiCodeView from '@/components/GiCodeView/index.vue'
-import { isMobile } from '@/utils'
+import { useWindowSize } from '@vueuse/core'
+
+const { width } = useWindowSize()
 
 const form = reactive({
   name: '',
@@ -32,47 +41,48 @@ const form = reactive({
 const options: Options = {
   form: { layout: 'inline' },
   fold: { enable: true, index: 0 },
-  btns: { col: { xs: 24, sm: 12 } },
-  columns: [
-    {
-      type: 'input',
-      label: '姓名',
-      field: 'name',
-      col: { xs: 24, sm: 12 },
-      props: {
-        maxLength: 4
-      }
-    },
-    {
-      type: 'input',
-      label: '手机',
-      field: 'phone',
-      col: { xs: 24, sm: 12 },
-      props: {
-        maxLength: 11
-      }
-    },
-    {
-      type: 'select',
-      label: '状态',
-      field: 'status',
-      col: { xs: 24, sm: 12 },
-      options: [
-        { label: '启用', value: 1 },
-        { label: '禁用', value: 0 }
-      ],
-      props: {
-        placeholder: '状态'
-      }
-    }
-  ]
+  btns: { col: { xs: 24, sm: 12 } }
 }
+
+const columns: Columns = reactive([
+  {
+    type: 'input',
+    label: '姓名',
+    field: 'name',
+    col: { xs: 24, sm: 12 },
+    props: {
+      maxLength: 4
+    }
+  },
+  {
+    type: 'input',
+    label: '手机',
+    field: 'phone',
+    col: { xs: 24, sm: 12 },
+    props: {
+      maxLength: 11
+    }
+  },
+  {
+    type: 'select',
+    label: '状态',
+    field: 'status',
+    col: { xs: 24, sm: 12 },
+    options: [
+      { label: '启用', value: 1 },
+      { label: '禁用', value: 0 }
+    ],
+    props: {
+      placeholder: '状态'
+    }
+  }
+])
 
 const onViewCode = () => {
   Drawer.open({
     title: '数据结构',
-    content: () => h(GiCodeView, { codeJson: JSON.stringify(options, null, '\t') }),
-    width: isMobile() ? '100%' : 560
+    content: () => h(GiCodeView, { codeJson: JSON.stringify(toRaw(columns), null, '\t') }),
+    width: width.value < 500 ? '100%' : 560
   })
 }
 

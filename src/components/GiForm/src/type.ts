@@ -85,10 +85,11 @@ export interface ColumnsItem<F = any> {
   cascader?: string[] // 级联的field字段列表
 }
 
-export interface Options<F = any> {
+export interface Options {
   form: Omit<A.FormInstance['$props'], 'model'>
   row?: Partial<typeof import('@arco-design/web-vue')['Row']['__defaults']>
-  columns: ColumnsItem<F>[]
   btns?: { hide?: boolean; span?: number; col?: A.ColProps; searchBtnText?: string }
   fold?: { enable?: boolean; index?: number }
 }
+
+export type Columns<F = any> = ColumnsItem<F>[]

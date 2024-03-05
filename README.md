@@ -892,6 +892,10 @@ export interface Options {
 
 <img src="https://gitee.com/lin0716/gi-image/raw/master/form2.png" />
 
+**`注意：GiForm 组件的最新使用方式如下图`**
+
+<img src="https://gitee.com/lin0716/gi-image/raw/master/GiFormDemoNew.png" />
+
 
 
 #### Hooks 目录结构
