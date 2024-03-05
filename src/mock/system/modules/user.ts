@@ -12,7 +12,7 @@ const data = [
     gender: 1,
     avatar: 'https://img0.baidu.com/it/u=2746352008,2041591833&fm=253&fmt=auto&app=138&f=JPEG?w=360&h=360',
     email: '326010228@qq.com',
-    phone: '199****6962',
+    phone: '19900006962',
     status: 1,
     type: 1,
     description: '系统初始用户',
@@ -30,8 +30,8 @@ const data = [
     nickname: '木糖醇',
     gender: 2,
     avatar: 'https://img1.baidu.com/it/u=1817951587,3188870642&fm=253&fmt=auto&app=138&f=JPEG?w=500&h=500',
-    email: '155****8810@qq.com',
-    phone: '155****8810',
+    email: '15500008810@qq.com',
+    phone: '15500008810',
     status: 1,
     type: 2,
     description: '无法访问系统管理菜单',
@@ -71,13 +71,22 @@ export default [
     }
   },
   {
+    url: '/mock/system/user/delete',
+    method: 'post',
+    timeout: 350,
+    response: ({ body }) => {
+      const { ids } = body
+      return resultSuccess(ids)
+    }
+  },
+  {
     url: '/mock/system/user', // 这个短的要放在后面，不然会优先匹配
     method: 'get',
     timeout: 100,
     response: () => {
       return resultSuccess({
-        total: 2,
-        list: data
+        total: data.length,
+        records: data
       })
     }
   }

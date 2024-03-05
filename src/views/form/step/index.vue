@@ -2,7 +2,7 @@
   <div class="gi_page step-form">
     <div class="wrapper">
       <section class="form-box">
-        <a-steps :current="current" :direction="!isPhone() ? 'horizontal' : 'vertical'">
+        <a-steps :current="current" :direction="!isMobile() ? 'horizontal' : 'vertical'">
           <a-step description="确保填写正确">填写转账信息</a-step>
           <a-step description="确认转账信息">确认转账信息</a-step>
           <a-step description="恭喜您，转账成功">完成转账</a-step>
@@ -29,7 +29,7 @@ import Step1 from './Step1.vue'
 import Step2 from './Step2.vue'
 import Step3 from './Step3.vue'
 import type { StepForm } from './type'
-import { isPhone } from '@/utils/common'
+import { isMobile } from '@/utils'
 
 defineOptions({ name: 'FormStep' })
 

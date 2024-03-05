@@ -1,7 +1,7 @@
 <template>
   <a-layout class="layout layout-default">
     <Asider></Asider>
-    <a-layout class="layout-right">
+    <a-layout class="layout-default-right">
       <Header></Header>
       <Tabs></Tabs>
       <Main></Main>

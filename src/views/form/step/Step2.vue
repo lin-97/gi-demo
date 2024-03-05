@@ -53,17 +53,13 @@ const formRef = ref<InstanceType<typeof Form>>()
 
 // 下一步|提交
 const next = async () => {
-  try {
-    loading.value = true
-    const res = await formRef.value?.validate()
-    if (!res) {
-      setTimeout(() => {
-        emit('next')
-        loading.value = false
-      }, 1000)
-    }
-  } catch (error) {
-  } finally {
+  loading.value = true
+  const res = await formRef.value?.validate()
+  if (!res) {
+    setTimeout(() => {
+      emit('next')
+      loading.value = false
+    }, 1000)
   }
 }
 

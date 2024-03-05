@@ -14,7 +14,7 @@
           v-model="form.parentId"
           allow-clear
           :data="deptList"
-          placeholder="请选择"
+          placeholder="请选择上级部门"
           :fieldNames="{
             key: 'id',
             title: 'name',
@@ -23,14 +23,14 @@
         ></a-tree-select>
       </a-form-item>
       <a-form-item label="部门名称" field="name">
-        <a-input v-model="form.name" placeholder="请输入部门名称" allow-clear></a-input>
+        <a-input v-model.trim="form.name" placeholder="请输入部门名称" allow-clear :max-length="10"></a-input>
       </a-form-item>
       <a-form-item label="排序" field="sort">
         <a-input-number v-model="form.sort" style="width: 120px" />
       </a-form-item>
       <a-form-item label="描述" field="description">
         <a-textarea
-          v-model="form.description"
+          v-model.trim="form.description"
           :max-length="200"
           placeholder="请填写描述"
           :auto-size="{ minRows: 3 }"
@@ -55,6 +55,11 @@
 import { useDept } from '@/hooks/app'
 import { getSystemDeptDetil, saveSystemDept } from '@/apis'
 import { Message, type FormInstance } from '@arco-design/web-vue'
+import { useForm } from '@/hooks'
+
+const emit = defineEmits<{
+  (e: 'save-success'): void
+}>()
 
 const FormRef = ref<FormInstance>()
 const deptId = ref('')
@@ -64,7 +69,7 @@ const title = computed(() => (isEdit.value ? '编辑部门' : '新增部门'))
 const { deptList, getDeptList } = useDept()
 getDeptList()
 
-const form = reactive({
+const { form, resetForm } = useForm({
   id: '',
   parentId: '',
   name: '',
@@ -73,7 +78,7 @@ const form = reactive({
   description: ''
 })
 
-const rules = {
+const rules: FormInstance['rules'] = {
   name: [
     { required: true, message: '请输入部门名称' },
     { min: 3, max: 10, message: '长度在 3 - 10个字符' }
@@ -97,15 +102,19 @@ const edit = async (id: string) => {
 
 const close = () => {
   FormRef.value?.resetFields()
+  resetForm()
 }
 
 defineExpose({ add, edit })
 
 const save = async () => {
   try {
+    const obj = await FormRef.value?.validate()
+    if (obj) return false
     const res = await saveSystemDept(form)
     if (res.data) {
       Message.success('模拟保存成功')
+      emit('save-success')
       return true
     } else {
       return false

@@ -38,18 +38,12 @@
             </template>
           </a-table-column>
           <a-table-column title="操作" :width="200" align="center">
-            <template #cell="{ record }">
+            <template #cell>
               <a-space>
-                <a-button type="primary" size="mini">
-                  <span>编辑</span>
-                </a-button>
-                <a-button size="mini">
-                  <span>详情</span>
-                </a-button>
+                <a-button type="primary" size="mini">编辑</a-button>
+                <a-button size="mini">详情</a-button>
                 <a-popconfirm type="warning" content="您确定要删除该项吗?">
-                  <a-button type="primary" status="danger" size="mini">
-                    <span>删除</span>
-                  </a-button>
+                  <a-button type="primary" status="danger" size="mini">删除</a-button>
                 </a-popconfirm>
               </a-space>
             </template>
@@ -63,7 +57,7 @@
 <script setup lang="ts">
 import { usePagination } from '@/hooks'
 import { getPersonList, type PersonItem } from '@/apis'
-import type { Options } from '@/components/GiForm/type'
+import type { Options } from '@/components/GiForm'
 
 defineOptions({ name: 'TableBase' })
 
@@ -127,9 +121,8 @@ const getTableData = async () => {
       current: pagination.current,
       pageSize: pagination.pageSize
     })
-    tableData.value = res.data.list
+    tableData.value = res.data.records
     setTotal(res.data.total)
-  } catch (error) {
   } finally {
     loading.value = false
   }

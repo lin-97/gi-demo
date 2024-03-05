@@ -44,7 +44,8 @@ export const menus: MockMenuItem[] = [
     roles: ['role_admin', 'role_user'],
     permission: '',
     showInTabs: true,
-    alwaysShow: false
+    alwaysShow: false,
+    affix: false
   },
   {
     id: '02',
@@ -81,7 +82,8 @@ export const menus: MockMenuItem[] = [
         roles: ['role_admin', 'role_user'],
         permission: '',
         showInTabs: true,
-        alwaysShow: false
+        alwaysShow: false,
+        affix: false
       },
       {
         id: '0202',
@@ -102,14 +104,16 @@ export const menus: MockMenuItem[] = [
         roles: ['role_admin', 'role_user'],
         permission: '',
         showInTabs: false,
-        alwaysShow: false
+        alwaysShow: false,
+        affix: false
       }
     ],
     status: 1,
     roles: ['role_admin', 'role_user'],
     permission: '',
     showInTabs: true,
-    alwaysShow: false
+    alwaysShow: false,
+    affix: false
   },
   {
     id: '03',
@@ -146,7 +150,8 @@ export const menus: MockMenuItem[] = [
         roles: ['role_admin', 'role_user'],
         permission: '',
         showInTabs: true,
-        alwaysShow: false
+        alwaysShow: false,
+        affix: false
       },
       {
         id: '0302',
@@ -167,14 +172,16 @@ export const menus: MockMenuItem[] = [
         roles: ['role_admin', 'role_user'],
         permission: '',
         showInTabs: false,
-        alwaysShow: false
+        alwaysShow: false,
+        affix: false
       }
     ],
     status: 1,
     roles: ['role_admin', 'role_user'],
     permission: '',
     showInTabs: true,
-    alwaysShow: false
+    alwaysShow: false,
+    affix: false
   },
   {
     id: '04',
@@ -211,7 +218,8 @@ export const menus: MockMenuItem[] = [
         roles: ['role_admin', 'role_user'],
         permission: '',
         showInTabs: true,
-        alwaysShow: false
+        alwaysShow: false,
+        affix: false
       },
       {
         id: '0402',
@@ -232,7 +240,8 @@ export const menus: MockMenuItem[] = [
         roles: ['role_admin', 'role_user'],
         permission: '',
         showInTabs: true,
-        alwaysShow: false
+        alwaysShow: false,
+        affix: false
       },
       {
         id: '0403',
@@ -253,14 +262,16 @@ export const menus: MockMenuItem[] = [
         roles: ['role_admin', 'role_user'],
         permission: '',
         showInTabs: true,
-        alwaysShow: false
+        alwaysShow: false,
+        affix: false
       }
     ],
     status: 1,
     roles: ['role_admin', 'role_user'],
     permission: '',
     showInTabs: true,
-    alwaysShow: false
+    alwaysShow: false,
+    affix: false
   },
   {
     id: '05',
@@ -297,7 +308,8 @@ export const menus: MockMenuItem[] = [
         roles: ['role_admin', 'role_user'],
         permission: '',
         showInTabs: true,
-        alwaysShow: false
+        alwaysShow: false,
+        affix: false
       },
       {
         id: '0502',
@@ -318,14 +330,16 @@ export const menus: MockMenuItem[] = [
         roles: ['role_admin', 'role_user'],
         permission: '',
         showInTabs: true,
-        alwaysShow: false
+        alwaysShow: false,
+        affix: false
       }
     ],
     status: 1,
     roles: ['role_admin', 'role_user'],
     permission: '',
     showInTabs: true,
-    alwaysShow: false
+    alwaysShow: false,
+    affix: false
   },
   {
     id: '06',
@@ -362,7 +376,8 @@ export const menus: MockMenuItem[] = [
         roles: ['role_admin', 'role_user'],
         permission: '',
         showInTabs: true,
-        alwaysShow: false
+        alwaysShow: false,
+        affix: false
       },
       {
         id: '0602',
@@ -383,16 +398,17 @@ export const menus: MockMenuItem[] = [
         roles: ['role_admin', 'role_user'],
         permission: '',
         showInTabs: true,
-        alwaysShow: false
+        alwaysShow: false,
+        affix: false
       },
       {
         id: '0603',
         parentId: '06',
-        path: '/error/405',
-        component: 'error/405',
+        path: '/error/500',
+        component: 'error/500',
         redirect: '',
         type: 2,
-        title: '405页',
+        title: '500页',
         svgIcon: '',
         icon: 'icon-menu',
         keepAlive: false,
@@ -404,14 +420,16 @@ export const menus: MockMenuItem[] = [
         roles: ['role_admin', 'role_user'],
         permission: '',
         showInTabs: true,
-        alwaysShow: false
+        alwaysShow: false,
+        affix: false
       }
     ],
     status: 1,
     roles: ['role_admin', 'role_user'],
     permission: '',
     showInTabs: true,
-    alwaysShow: false
+    alwaysShow: false,
+    affix: false
   },
   {
     id: '07',
@@ -448,7 +466,8 @@ export const menus: MockMenuItem[] = [
         roles: ['role_admin', 'role_user'],
         permission: '',
         showInTabs: true,
-        alwaysShow: false
+        alwaysShow: false,
+        affix: false
       },
       {
         id: '0702',
@@ -469,14 +488,16 @@ export const menus: MockMenuItem[] = [
         roles: ['role_admin', 'role_user'],
         permission: '',
         showInTabs: true,
-        alwaysShow: false
+        alwaysShow: false,
+        affix: false
       }
     ],
     status: 1,
     roles: ['role_admin', 'role_user'],
     permission: '',
     showInTabs: true,
-    alwaysShow: false
+    alwaysShow: false,
+    affix: false
   },
   {
     id: '08',
@@ -513,7 +534,8 @@ export const menus: MockMenuItem[] = [
         roles: ['role_admin'],
         permission: '',
         showInTabs: true,
-        alwaysShow: false
+        alwaysShow: false,
+        affix: false
       },
       {
         id: '0802',
@@ -534,7 +556,8 @@ export const menus: MockMenuItem[] = [
         roles: ['role_admin'],
         permission: '',
         showInTabs: true,
-        alwaysShow: false
+        alwaysShow: false,
+        affix: false
       },
       {
         id: '0803',
@@ -555,7 +578,8 @@ export const menus: MockMenuItem[] = [
         roles: ['role_admin'],
         permission: '',
         showInTabs: true,
-        alwaysShow: false
+        alwaysShow: false,
+        affix: false
       },
       {
         id: '0804',
@@ -576,21 +600,45 @@ export const menus: MockMenuItem[] = [
         roles: ['role_admin'],
         permission: '',
         showInTabs: true,
-        alwaysShow: false
+        alwaysShow: false,
+        affix: false
+      },
+      {
+        id: '0805',
+        parentId: '08',
+        path: '/system/dict',
+        component: 'system/dict/index',
+        redirect: '',
+        type: 2,
+        title: '字典管理',
+        svgIcon: '',
+        icon: 'icon-bookmark',
+        keepAlive: false,
+        hidden: false,
+        sort: 5,
+        activeMenu: '',
+        breadcrumb: true,
+        status: 1,
+        roles: ['role_admin'],
+        permission: '',
+        showInTabs: true,
+        alwaysShow: false,
+        affix: false
       }
     ],
     status: 1,
     roles: ['role_admin'],
     permission: '',
     showInTabs: true,
-    alwaysShow: false
+    alwaysShow: false,
+    affix: false
   },
   {
     id: '081',
     parentId: '',
     path: '/test',
     component: 'Layout',
-    redirect: '',
+    redirect: 'noRedirect',
     type: 1,
     title: '权限测试',
     svgIcon: 'menu-test',
@@ -620,7 +668,8 @@ export const menus: MockMenuItem[] = [
         roles: ['role_admin'],
         permission: '',
         showInTabs: true,
-        alwaysShow: false
+        alwaysShow: false,
+        affix: false
       },
       {
         id: '08102',
@@ -660,9 +709,10 @@ export const menus: MockMenuItem[] = [
             breadcrumb: true,
             status: 1,
             roles: ['role_admin', 'role_user'],
-            permission: 'user:btn.add',
+            permission: 'user:btn:add',
             showInTabs: true,
-            alwaysShow: false
+            alwaysShow: false,
+            affix: false
           },
           {
             id: '0810202',
@@ -681,9 +731,10 @@ export const menus: MockMenuItem[] = [
             breadcrumb: true,
             status: 1,
             roles: ['role_admin', 'role_user'],
-            permission: 'user:btn.edit',
+            permission: 'user:btn:edit',
             showInTabs: true,
-            alwaysShow: false
+            alwaysShow: false,
+            affix: false
           },
           {
             id: '0810203',
@@ -702,9 +753,10 @@ export const menus: MockMenuItem[] = [
             breadcrumb: true,
             status: 1,
             roles: ['role_admin', 'role_user'],
-            permission: 'user:btn.delete',
+            permission: 'user:btn:delete',
             showInTabs: true,
-            alwaysShow: false
+            alwaysShow: false,
+            affix: false
           },
           {
             id: '0810204',
@@ -723,9 +775,10 @@ export const menus: MockMenuItem[] = [
             breadcrumb: true,
             status: 1,
             roles: ['role_admin', 'role_user'],
-            permission: 'test:btn.add',
+            permission: 'test:btn:add',
             showInTabs: true,
-            alwaysShow: false
+            alwaysShow: false,
+            affix: false
           },
           {
             id: '0810205',
@@ -744,9 +797,10 @@ export const menus: MockMenuItem[] = [
             breadcrumb: true,
             status: 1,
             roles: ['role_admin', 'role_user'],
-            permission: 'test:btn.edit',
+            permission: 'test:btn:edit',
             showInTabs: true,
-            alwaysShow: false
+            alwaysShow: false,
+            affix: false
           },
           {
             id: '0810206',
@@ -765,11 +819,13 @@ export const menus: MockMenuItem[] = [
             breadcrumb: true,
             status: 1,
             roles: ['role_admin', 'role_user'],
-            permission: 'test:btn.delete',
+            permission: 'test:btn:delete',
             showInTabs: true,
-            alwaysShow: false
+            alwaysShow: false,
+            affix: false
           }
-        ]
+        ],
+        affix: false
       },
       {
         id: '08103',
@@ -790,14 +846,16 @@ export const menus: MockMenuItem[] = [
         roles: ['role_admin', 'role_user'],
         permission: '',
         showInTabs: true,
-        alwaysShow: false
+        alwaysShow: false,
+        affix: false
       }
     ],
     status: 1,
     roles: ['role_admin', 'role_user'],
     permission: '',
     showInTabs: true,
-    alwaysShow: true
+    alwaysShow: true,
+    affix: false
   },
   {
     id: '09',
@@ -834,14 +892,16 @@ export const menus: MockMenuItem[] = [
         roles: ['role_admin', 'role_user'],
         permission: '',
         showInTabs: true,
-        alwaysShow: false
+        alwaysShow: false,
+        affix: false
       }
     ],
     status: 1,
     roles: ['role_admin', 'role_user'],
     permission: '',
     showInTabs: true,
-    alwaysShow: false
+    alwaysShow: false,
+    affix: false
   },
   {
     id: '10',
@@ -894,7 +954,8 @@ export const menus: MockMenuItem[] = [
             roles: ['role_admin', 'role_user'],
             permission: '',
             showInTabs: true,
-            alwaysShow: false
+            alwaysShow: false,
+            affix: false
           },
           {
             id: '100102',
@@ -915,21 +976,24 @@ export const menus: MockMenuItem[] = [
             roles: ['role_admin', 'role_user'],
             permission: '',
             showInTabs: true,
-            alwaysShow: false
+            alwaysShow: false,
+            affix: false
           }
         ],
         status: 1,
         roles: ['role_admin', 'role_user'],
         permission: '',
         showInTabs: true,
-        alwaysShow: false
+        alwaysShow: false,
+        affix: false
       }
     ],
     status: 1,
     roles: ['role_admin', 'role_user'],
     permission: '',
     showInTabs: true,
-    alwaysShow: false
+    alwaysShow: false,
+    affix: false
   },
   {
     id: '11',
@@ -954,7 +1018,7 @@ export const menus: MockMenuItem[] = [
         component: 'about/index',
         redirect: '',
         type: 2,
-        title: '关于我们',
+        title: '关于项目',
         svgIcon: 'menu-about',
         icon: '',
         keepAlive: false,
@@ -966,14 +1030,16 @@ export const menus: MockMenuItem[] = [
         roles: ['role_admin', 'role_user'],
         permission: '',
         showInTabs: true,
-        alwaysShow: false
+        alwaysShow: false,
+        affix: false
       }
     ],
     status: 1,
     roles: ['role_admin', 'role_user'],
     permission: '',
     showInTabs: true,
-    alwaysShow: false
+    alwaysShow: false,
+    affix: false
   },
   {
     id: '12',
@@ -994,7 +1060,8 @@ export const menus: MockMenuItem[] = [
     roles: ['role_admin', 'role_user'],
     permission: '',
     showInTabs: true,
-    alwaysShow: false
+    alwaysShow: false,
+    affix: false
   },
   {
     id: '13',
@@ -1031,7 +1098,8 @@ export const menus: MockMenuItem[] = [
         roles: ['role_admin', 'role_user'],
         permission: '',
         showInTabs: true,
-        alwaysShow: false
+        alwaysShow: false,
+        affix: false
       },
       {
         id: '1302',
@@ -1052,13 +1120,15 @@ export const menus: MockMenuItem[] = [
         roles: ['role_admin', 'role_user'],
         permission: '',
         showInTabs: true,
-        alwaysShow: false
+        alwaysShow: false,
+        affix: false
       }
     ],
     status: 1,
     roles: ['role_admin', 'role_user'],
     permission: '',
     showInTabs: true,
-    alwaysShow: false
+    alwaysShow: false,
+    affix: false
   }
 ]

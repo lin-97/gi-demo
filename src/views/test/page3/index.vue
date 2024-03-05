@@ -11,7 +11,7 @@
 
     <a-resize-box :directions="['right']" :style="{ minWidth: '100px', maxWidth: '600px' }" v-model:width="width2">
       <section class="view-item">
-        <h3 class="gi_line_1">动态路由数据</h3>
+        <h3 class="gi_line_1">前端格式化、排序后的路由</h3>
         <div class="code">
           <GiCodeView :codeJson="routeListJson"></GiCodeView>
         </div>
@@ -27,37 +27,25 @@
 </template>
 
 <script lang="ts" setup>
-import { getSystemMenuList, getUserAsyncRoutes, type MenuItem } from '@/apis'
+import { getSystemMenuList, type MenuItem } from '@/apis'
 import { MdPreview } from 'md-editor-v3'
 import 'md-editor-v3/lib/style.css'
 import { mdText } from './md'
+import { useRouteStore } from '@/stores'
 
+const routeStore = useRouteStore()
 const width1 = ref(400)
 const width2 = ref(400)
 
 const menuList = ref<MenuItem[]>([])
 const menuListJson = computed(() => JSON.stringify(menuList.value, null, '\t'))
 const getMenuList = async () => {
-  try {
-    const res = await getSystemMenuList()
-    menuList.value = res.data
-  } catch (error) {
-  } finally {
-  }
+  const res = await getSystemMenuList()
+  menuList.value = res.data
 }
 getMenuList()
 
-const routeList = ref<any>([])
-const routeListJson = computed(() => JSON.stringify(routeList.value, null, '\t'))
-const getRouteList = async () => {
-  try {
-    const res = await getUserAsyncRoutes()
-    routeList.value = res.data
-  } catch (error) {
-  } finally {
-  }
-}
-getRouteList()
+const routeListJson = computed(() => JSON.stringify(toRaw(routeStore.asyncRoutes), null, '\t'))
 </script>
 
 <style lang="scss" scoped>

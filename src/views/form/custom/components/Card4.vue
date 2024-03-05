@@ -8,7 +8,7 @@
     </template>
     <a-row :gutter="30">
       <a-col :xs="24" :sm="24" :md="12">
-        <GiForm ref="formRef" :options="options" v-model="form">
+        <GiForm ref="formRef" :options="options" :columns="columns" v-model="form">
           <template #btns>
             <a-row justify="end" class="w-full">
               <a-space>
@@ -28,12 +28,10 @@
 </template>
 
 <script setup lang="ts">
-import { Drawer, Message } from '@arco-design/web-vue'
-import type { Options } from '@/components/GiForm/type'
+import { Message } from '@arco-design/web-vue'
 import GiCodeView from '@/components/GiCodeView/index.vue'
-import GiForm from '@/components/GiForm/index.vue'
+import { GiForm, type Options, type Columns } from '@/components/GiForm'
 import * as Regexp from '@/utils/regexp'
-import { isPhone } from '@/utils/common'
 import { getAreaList } from '@/apis'
 
 const form = reactive({
@@ -52,80 +50,73 @@ onMounted(() => {
 
 const formRef = ref<InstanceType<typeof GiForm>>()
 
-const options: Options = reactive({
+const options: Options = {
   form: {},
-  btns: { hide: true },
-  columns: [
-    {
-      type: 'input',
-      label: '姓名',
-      field: 'name',
-      col: { xs: 24, sm: 12 },
-      props: {
-        maxLength: 4
-      },
-      rules: [
-        { required: true, message: '请输入姓名' },
-        { maxLength: 4, message: '姓名不超过4个字符' },
-        { match: Regexp.OnlyCh, message: '仅支持中文姓名' }
-      ]
-    },
-    {
-      type: 'input',
-      label: '手机',
-      field: 'phone',
-      col: { xs: 24, sm: 12 },
-      props: {
-        maxLength: 11
-      },
-      rules: [
-        { required: true, message: '请输入手机号' },
-        { match: Regexp.Phone, message: '手机号格式不正确' }
-      ]
-    },
-    {
-      type: 'select',
-      label: '省',
-      field: 'province',
-      col: { xs: 24, sm: 12, md: 12, lg: 8 },
-      request: () => getAreaList({ type: 'province' }),
-      resultFormat: (res) => res.data.map((i: any) => ({ label: i.label, value: i.code })),
-      cascader: ['city'],
-      init: true
-    },
-    {
-      type: 'select',
-      label: '市',
-      field: 'city',
-      col: { xs: 24, sm: 12, md: 12, lg: 8 },
-      request: (form: any) => getAreaList({ type: 'city', code: form.province }),
-      resultFormat: (res) => res.data.map((i: any) => ({ label: i.label, value: i.code })),
-      cascader: ['area']
-    },
-    {
-      type: 'select',
-      label: '区',
-      field: 'area',
-      col: { xs: 24, sm: 12, md: 12, lg: 8 },
-      request: (form: any) => getAreaList({ type: 'area', code: form.city }),
-      resultFormat: (res) => res.data.map((i: any) => ({ label: i.label, value: i.code }))
-    },
-    {
-      type: 'input',
-      label: '',
-      field: 'btns',
-      span: 24
-    }
-  ]
-})
-
-const onViewCode = () => {
-  Drawer.open({
-    title: '数据结构',
-    content: () => h(GiCodeView, { codeJson: JSON.stringify(options, null, '\t') }),
-    width: isPhone() ? '100%' : 560
-  })
+  btns: { hide: true }
 }
+
+const columns: Columns<typeof form> = reactive([
+  {
+    type: 'input',
+    label: '姓名',
+    field: 'name',
+    col: { xs: 24, sm: 12 },
+    props: {
+      maxLength: 4
+    },
+    rules: [
+      { required: true, message: '请输入姓名' },
+      { maxLength: 4, message: '姓名不超过4个字符' },
+      { match: Regexp.OnlyCh, message: '仅支持中文姓名' }
+    ]
+  },
+  {
+    type: 'input',
+    label: '手机',
+    field: 'phone',
+    col: { xs: 24, sm: 12 },
+    props: {
+      maxLength: 11
+    },
+    rules: [
+      { required: true, message: '请输入手机号' },
+      { match: Regexp.Phone, message: '手机号格式不正确' }
+    ]
+  },
+  {
+    type: 'select',
+    label: '省',
+    field: 'province',
+    col: { xs: 24, sm: 12, md: 12, lg: 8 },
+    request: () => getAreaList({ type: 'province' }),
+    resultFormat: (res) => res.data.map((i: any) => ({ label: i.label, value: i.code })),
+    cascader: ['city'],
+    init: true
+  },
+  {
+    type: 'select',
+    label: '市',
+    field: 'city',
+    col: { xs: 24, sm: 12, md: 12, lg: 8 },
+    request: (form) => getAreaList({ type: 'city', code: form.province }),
+    resultFormat: (res) => res.data.map((i: any) => ({ label: i.label, value: i.code })),
+    cascader: ['area']
+  },
+  {
+    type: 'select',
+    label: '区',
+    field: 'area',
+    col: { xs: 24, sm: 12, md: 12, lg: 8 },
+    request: (form) => getAreaList({ type: 'area', code: form.city }),
+    resultFormat: (res) => res.data.map((i: any) => ({ label: i.label, value: i.code }))
+  },
+  {
+    type: 'input',
+    label: '',
+    field: 'btns',
+    span: 24
+  }
+])
 
 const save = async () => {
   const error = await formRef.value?.formRef?.validate()

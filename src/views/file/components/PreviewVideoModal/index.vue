@@ -10,7 +10,7 @@ import type { FileItem } from '@/apis'
 
 interface Props {
   fileInfo: FileItem
-  onClose: Function
+  onClose: () => void
 }
 const props = withDefaults(defineProps<Props>(), {})
 

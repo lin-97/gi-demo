@@ -1,7 +1,7 @@
 <template>
   <a-form :auto-label-width="true" v-bind="options.form" ref="formRef" :model="modelValue">
     <a-row :gutter="14" v-bind="options.row" class="w-full">
-      <template v-for="(item, index) in options.columns" :key="item.field">
+      <template v-for="(item, index) in columns" :key="item.field">
         <a-col
           v-if="!isHide(item.hide)"
           :span="item.span || 12"
@@ -145,7 +145,7 @@
       </template>
       <a-col :span="options.btns?.span || 12" v-bind="options.btns?.col" v-if="!options.btns?.hide">
         <a-space wrap>
-          <slot name="footer">
+          <slot name="suffix">
             <a-button type="primary" @click="emit('search')">
               <template #icon><icon-search /></template>
               <template #default>{{ options.btns?.searchBtnText || '搜索' }}</template>
@@ -166,13 +166,14 @@
 </template>
 
 <script setup lang="ts">
-import type { Options, ColumnsItemHide, ColumnsItem, ColumnsItemOptionsOrData } from './type'
+import type { Options, Columns, ColumnsItemHide, ColumnsItem } from './type'
 import type * as A from '@arco-design/web-vue'
 import _ from 'lodash'
 
 interface Props {
   modelValue: any
   options: Options
+  columns: Columns
 }
 
 const props = withDefaults(defineProps<Props>(), {})
@@ -200,7 +201,7 @@ const isHide = (hide?: ColumnsItemHide) => {
 }
 
 const dicData: Record<string, any> = reactive({})
-props.options.columns.forEach((item) => {
+props.columns.forEach((item) => {
   if (item.request && typeof item.request === 'function' && item?.init) {
     item.request(props.modelValue).then((res) => {
       dicData[item.field] = item.resultFormat ? item.resultFormat(res) : res.data
@@ -212,7 +213,7 @@ props.options.columns.forEach((item) => {
 // 先找出有级联的项
 // 如果这个字段改变了值，那么就找出它的cascader属性对应的字段项，去请求里面的request
 const hasCascaderColumns: ColumnsItem[] = []
-props.options.columns.forEach((item) => {
+props.columns.forEach((item) => {
   const arr = hasCascaderColumns.map((i) => i.field)
   if (item.cascader?.length && !arr.includes(item.field)) {
     hasCascaderColumns.push(item)
@@ -225,7 +226,7 @@ const cloneForm = computed(() => _.cloneDeep(props.modelValue))
 watch(cloneForm as any, (newVal, oldVal) => {
   hasCascaderColumns.forEach((item) => {
     if (newVal[item.field] !== oldVal[item.field]) {
-      const arr = props.options.columns.filter((a) => {
+      const arr = props.columns.filter((a) => {
         return item?.cascader?.includes(a.field)
       })
       arr.forEach((i) => {
@@ -236,7 +237,7 @@ watch(cloneForm as any, (newVal, oldVal) => {
               emit('update:modelValue', Object.assign(props.modelValue, { [i.field]: '' }))
             }
           })
-        } else if (i.request && !Boolean(newVal[item.field])) {
+        } else if (i.request && !newVal[item.field]) {
           dicData[i.field] = []
           emit('update:modelValue', Object.assign(props.modelValue, { [i.field]: '' }))
         }

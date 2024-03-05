@@ -21,7 +21,7 @@ interface Props {
   type?: 'success' | 'warning' | 'error'
   content?: string
   duration?: number
-  destroy: Function
+  destroy?: () => void
 }
 
 const TypeMap = {
@@ -42,8 +42,7 @@ const TypeMap = {
 const props = withDefaults(defineProps<Props>(), {
   type: 'success',
   content: '',
-  duration: 2000,
-  destroy: () => {}
+  duration: 2000
 })
 
 const visible = ref(false)

@@ -1,14 +1,13 @@
 /** 接口返回数据格式 */
 interface ApiRes<T> {
   code: number
-  message: string
   data: T
+  message: string
   success: boolean
 }
 
-/** 接口返回的列表数据 */
-interface ApiListData<T> {
+/** 分页返回的数据格式 */
+interface PageRes<T> {
+  records: T
   total: number
-  list: T
-  [propName: string]: unknown
 }

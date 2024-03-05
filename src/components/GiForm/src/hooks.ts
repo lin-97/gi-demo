@@ -1,20 +1,20 @@
 import { reactive } from 'vue'
 import _ from 'lodash'
-import type { Options, ColumnsItem, ColumnsItemPropsKey } from './type'
+import type { Columns, ColumnsItem, ColumnsItemPropsKey } from './type'
 import { Message } from '@arco-design/web-vue'
 
-export function useGiForm(initValue: Options) {
+export function useGiForm(initValue: Columns) {
   const getInitValue = () => _.cloneDeep(initValue)
 
-  const options = reactive(getInitValue())
+  const columns = reactive(getInitValue())
 
-  const resetOptions = () => {
-    Object.assign(options, getInitValue())
+  const resetColumns = () => {
+    Object.assign(columns, getInitValue())
   }
 
   const setValue = <T>(field: string, key: keyof ColumnsItem, value: T) => {
-    if (!options.columns.length) return
-    const obj = options.columns.find((i) => i.field === field)
+    if (!columns.length) return
+    const obj = columns.find((i) => i.field === field)
     if (obj) {
       obj[key] = value as never
     } else {
@@ -23,8 +23,8 @@ export function useGiForm(initValue: Options) {
   }
 
   const setPropsValue = <T>(field: string, key: ColumnsItemPropsKey, value: T) => {
-    if (!options.columns.length) return
-    const obj = options.columns.find((i) => i.field === field)
+    if (!columns.length) return
+    const obj = columns.find((i) => i.field === field)
     if (obj) {
       if (!obj.props) {
         obj.props = {}
@@ -37,12 +37,12 @@ export function useGiForm(initValue: Options) {
 
   return {
     /** 配置项 */
-    options,
-    /** 重置 options */
-    resetOptions,
-    /** 设置 options.columns 某个对象属性的值 */
+    columns,
+    /** 重置 columns */
+    resetColumns,
+    /** 设置 columns 某个对象属性的值 */
     setValue,
-    /** 设置 options.columns.props 某个属性的值 */
+    /** 设置 columns.props 某个属性的值 */
     setPropsValue
   }
 }

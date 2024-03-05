@@ -10,7 +10,7 @@ interface Options<T> {
 }
 
 type PaginationParams = { page: number; size: number }
-type Api<T> = (params: PaginationParams) => Promise<ApiRes<ApiListData<T[]>>>
+type Api<T> = (params: PaginationParams) => Promise<ApiRes<PageRes<T[]>>>
 
 export default function <T>(api: Api<T>, options?: Options<T>) {
   const { formatResult, onSuccess, immediate, rowKey } = options || {}
@@ -22,10 +22,9 @@ export default function <T>(api: Api<T>, options?: Options<T>) {
     try {
       loading.value = true
       const res = await api({ page: pagination.current, size: pagination.pageSize })
-      tableData.value = formatResult ? formatResult(res.data.list) : res.data.list
+      tableData.value = formatResult ? formatResult(res.data.records) : res.data.records
       setTotal(res.data.total)
       onSuccess && onSuccess()
-    } catch (error) {
     } finally {
       loading.value = false
     }
@@ -35,16 +34,23 @@ export default function <T>(api: Api<T>, options?: Options<T>) {
   const isImmediate = immediate ?? true
   isImmediate && getTableData()
 
+  // 搜索
+  const search = () => {
+    selectedKeys.value = []
+    pagination.onChange(1)
+  }
+
   // 多选
-  const selectKeys = ref<(string | number)[]>([])
+  const selectedKeys = ref<(string | number)[]>([])
   const select: TableInstance['onSelect'] = (rowKeys) => {
-    selectKeys.value = rowKeys
+    selectedKeys.value = rowKeys
   }
 
   // 全选
   const selectAll: TableInstance['onSelectAll'] = (checked) => {
     const key = rowKey ?? ('id' as keyof T)
-    selectKeys.value = checked ? tableData.value.map((i) => i[key] as string | number) : []
+    const arr = tableData.value.filter((i) => !(i['disabled' as keyof T] ?? false))
+    selectedKeys.value = checked ? arr.map((i) => i[key] as string | number) : []
   }
 
   // 删除
@@ -57,7 +63,7 @@ export default function <T>(api: Api<T>, options?: Options<T>) {
         const res = await deleteApi()
         if (res.success) {
           Message.success(options?.successTip || '删除成功！')
-          selectKeys.value = []
+          selectedKeys.value = []
           getTableData()
         }
         return res.success
@@ -78,5 +84,5 @@ export default function <T>(api: Api<T>, options?: Options<T>) {
     })
   }
 
-  return { loading, tableData, getTableData, pagination, selectKeys, select, selectAll, handleDelete }
+  return { loading, tableData, getTableData, search, pagination, selectedKeys, select, selectAll, handleDelete }
 }

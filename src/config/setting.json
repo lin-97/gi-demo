@@ -6,5 +6,7 @@
   "animate": true,
   "animateMode": "zoom-fade",
   "menuCollapse": false,
+  "menuAccordion": false,
+  "menuDark": false,
   "layout": "left"
 }

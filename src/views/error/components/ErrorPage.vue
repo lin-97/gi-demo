@@ -1,14 +1,14 @@
 <template>
   <div class="error-page">
-    <section class="container">
-      <div class="img-box">
-        <img class="img-parent" :src="props.src" />
+    <section class="error__container">
+      <div class="error__img">
+        <component class="error__icon" :is="IconMap[props.code]"></component>
       </div>
 
-      <div class="tip-box">
-        <div class="ops">抱歉!</div>
-        <div class="tip">当前页面不存在...</div>
-        <div class="info">请检查您输入的网址是否正确，或点击下面的按钮返回首页</div>
+      <div class="error__tip">
+        <div class="error__tip--a">抱歉!</div>
+        <div class="error__tip--b">当前页面不存在...</div>
+        <div class="error__tip--c">请检查您输入的网址是否正确，或点击下面的按钮返回首页</div>
         <a-button type="primary" shape="round" size="large" @click="back">{{ countDownTime }} 返回首页</a-button>
       </div>
     </section>
@@ -16,15 +16,26 @@
 </template>
 
 <script setup lang="ts">
+import Icon403 from '@/components/icons/Icon403.vue'
+import Icon404 from '@/components/icons/Icon404.vue'
+import Icon500 from '@/components/icons/Icon500.vue'
+import type { Component } from 'vue'
+
 interface Props {
-  src: string
+  code: number
 }
 const props = withDefaults(defineProps<Props>(), {
-  src: ''
+  code: 403
 })
 
 defineOptions({ name: 'ErrorPage' })
 const router = useRouter()
+
+const IconMap: Record<number, Component> = {
+  403: Icon403,
+  404: Icon404,
+  500: Icon500
+}
 
 const countDownTime = ref(5)
 let timer: NodeJS.Timer
@@ -65,30 +76,29 @@ const onCountDownTime = () => {
   align-items: center;
 }
 
-.container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  .img-box {
+.error {
+  &__container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  &__img {
     width: 100%;
     position: relative;
     overflow: hidden;
     display: flex;
     justify-content: center;
     align-items: center;
-    .img-parent {
-      max-width: 90%;
-      height: 50vh;
-    }
-    .img-child {
-      position: absolute;
-    }
   }
-  .tip-box {
+  &__icon {
+    max-width: 90%;
+    height: 50vh;
+  }
+  &__tip {
     display: flex;
     flex-direction: column;
     align-items: center;
-    .ops {
+    &--a {
       margin-bottom: 20px;
       font-size: 32px;
       font-weight: bold;
@@ -99,7 +109,7 @@ const onCountDownTime = () => {
       animation-duration: 0.5s;
       animation-fill-mode: forwards;
     }
-    .tip {
+    &--b {
       margin-bottom: 10px;
       font-size: 20px;
       font-weight: bold;
@@ -111,7 +121,7 @@ const onCountDownTime = () => {
       animation-delay: 0.1s;
       animation-fill-mode: forwards;
     }
-    .info {
+    &--c {
       padding: 0 30px;
       margin-bottom: 20px;
       font-size: 13px;
@@ -124,16 +134,16 @@ const onCountDownTime = () => {
       animation-delay: 0.2s;
       animation-fill-mode: forwards;
     }
-    @keyframes slideUp {
-      0% {
-        opacity: 0;
-        transform: translateY(60px);
-      }
-      100% {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
+  }
+}
+@keyframes slideUp {
+  0% {
+    opacity: 0;
+    transform: translateY(60px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
   }
 }
 </style>

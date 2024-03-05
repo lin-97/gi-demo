@@ -30,17 +30,6 @@ const columns: TableColumnData[] = [
   { title: '处室评分（百分制）', dataIndex: 'deptScore', fixed: 'right' }
 ]
 
-const transformTableData = (tree: any) => {
-  const list: any = [].concat(tree)
-  const arr = []
-  while (list.length) {
-    const { children, ...item } = list.shift()
-    arr.push({ ...item })
-    list.push(...(children || []))
-  }
-  return arr
-}
-
 // 将普通树结构转换为横向树列表
 const toColTreeData = (treeData: any[]) => {
   console.log('treeData', treeData)
@@ -78,7 +67,7 @@ const toColTreeData = (treeData: any[]) => {
   return list
 }
 
-const spanMethod: TableInstance['$props']['spanMethod'] = ({ record, rowIndex, column, columnIndex }) => {
+const spanMethod: TableInstance['$props']['spanMethod'] = ({ record, rowIndex, column }) => {
   // console.log(record, rowIndex, column, columnIndex)
   const fields = ['name1', 'name2', 'name3']
   const cellValue = record[column.dataIndex]

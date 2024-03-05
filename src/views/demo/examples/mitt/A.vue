@@ -5,10 +5,10 @@
 </template>
 
 <script lang="ts" setup>
-import mitter from './mitt'
+import mittBus from '@/utils/mitt'
 
 const text = ref('A')
-mitter.on('changeText', (e) => {
+mittBus.on('changeText', (e) => {
   text.value = e
 })
 </script>

@@ -33,10 +33,8 @@ const visible = ref(false)
 const userId = ref('')
 const user = ref<UserDetailResult | null>()
 const getUserDetail = async () => {
-  try {
-    const res = await getSystemUserDetail({ id: userId.value })
-    user.value = res.data
-  } catch (error) {}
+  const res = await getSystemUserDetail({ id: userId.value })
+  user.value = res.data
 }
 
 const open = async (id: string) => {

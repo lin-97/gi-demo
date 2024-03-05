@@ -33,22 +33,23 @@
       </a-row>
 
       <a-table
-        style="margin-top: 8px"
         row-key="id"
         :data="roleList"
         :bordered="{ cell: true }"
         :loading="loading"
         :scroll="{ x: '100%', y: '100%', minWidth: 900 }"
         :pagination="pagination"
-        :row-selection="{ type: 'checkbox', showCheckedAll: false }"
+        :row-selection="{ type: 'checkbox', showCheckedAll: true }"
+        :selected-keys="selectedKeys"
         @select="select"
+        @select-all="selectAll"
       >
         <template #columns>
           <a-table-column title="序号" :width="64">
             <template #cell="cell">{{ cell.rowIndex + 1 }}</template>
           </a-table-column>
           <a-table-column title="角色名称" data-index="name"></a-table-column>
-          <a-table-column title="角色编号" data-index="code"></a-table-column>
+          <a-table-column title="角色编码" data-index="code"></a-table-column>
           <a-table-column title="状态" :width="100" align="center">
             <template #cell="{ record }">
               <a-tag v-if="record.status == 1" color="green">正常</a-tag>
@@ -57,7 +58,7 @@
           </a-table-column>
           <a-table-column title="描述" data-index="description"></a-table-column>
           <a-table-column title="创建时间" data-index="createTime"></a-table-column>
-          <a-table-column title="操作" :width="280" align="center" :fixed="!isPhone() ? 'right' : undefined">
+          <a-table-column title="操作" :width="280" align="center" :fixed="!isMobile() ? 'right' : undefined">
             <template #cell="{ record }">
               <a-space>
                 <a-button type="primary" size="mini" :disabled="record.disabled" @click="onEdit(record)">
@@ -74,7 +75,7 @@
                   <template #icon><icon-safe /></template>
                   <template #default>分配权限</template>
                 </a-button>
-                <a-popconfirm type="warning" content="确定删除该角色吗?" @ok="onDelete">
+                <a-popconfirm type="warning" content="确定删除该角色吗?" @before-ok="onDelete(record)">
                   <a-button type="primary" status="danger" size="mini" :disabled="record.disabled">
                     <template #icon><icon-delete /></template>
                     <span>删除</span>
@@ -86,20 +87,19 @@
         </template>
       </a-table>
 
-      <AddRoleModal ref="AddRoleModalRef"></AddRoleModal>
+      <AddRoleModal ref="AddRoleModalRef" @save-success="search"></AddRoleModal>
       <PermModal ref="PermModalRef"></PermModal>
     </a-card>
   </div>
 </template>
 
 <script setup lang="ts">
-import { Message, type TableInstance } from '@arco-design/web-vue'
+import { Message } from '@arco-design/web-vue'
 import AddRoleModal from './AddRoleModal.vue'
 import PermModal from './PermModal.vue'
-import type { RoleItem } from '@/apis'
-import { usePagination } from '@/hooks'
-import { getSystemRoleList } from '@/apis'
-import { isPhone } from '@/utils/common'
+import { useTable } from '@/hooks'
+import { getSystemRoleList, deleteSystemRole, type RoleItem } from '@/apis'
+import { isMobile } from '@/utils'
 
 defineOptions({ name: 'SystemRole' })
 
@@ -111,33 +111,34 @@ const form = reactive({
   status: ''
 })
 
-const { pagination, setTotal } = usePagination(() => {
-  getRoleList()
-})
-
-const loading = ref(false)
-const roleList = ref<RoleItem[]>([])
-const getRoleList = async () => {
-  try {
-    loading.value = true
-    const res = await getSystemRoleList()
-    roleList.value = res.data.list
-    setTotal(res.data.total)
-  } catch (error) {
-  } finally {
-    loading.value = false
-  }
-}
-getRoleList()
-
-const search = () => {
-  pagination.onChange(1)
-}
+const {
+  loading,
+  tableData: roleList,
+  pagination,
+  selectedKeys,
+  search,
+  select,
+  selectAll,
+  handleDelete
+} = useTable((pagin) => getSystemRoleList({ current: pagin.page, pageSize: pagin.size }), { immediate: true })
 
 const reset = () => {
   form.status = ''
   form.status = ''
-  pagination.onChange(1)
+  search()
+}
+
+// 删除
+const onDelete = (item: RoleItem) => {
+  return handleDelete(() => deleteSystemRole({ ids: [item.id] }), { showModal: false })
+}
+
+// 批量删除
+const onMulDelete = () => {
+  if (!selectedKeys.value.length) {
+    return Message.warning('请选择角色！')
+  }
+  handleDelete(() => deleteSystemRole({ ids: selectedKeys.value as string[] }))
 }
 
 const onAdd = () => {
@@ -148,24 +149,8 @@ const onEdit = (item: RoleItem) => {
   AddRoleModalRef.value?.edit(item.id)
 }
 
-const onDelete = () => {
-  Message.info('点击了确认按钮')
-}
-
 const onPerm = (item: RoleItem) => {
   PermModalRef.value?.open({ code: item.code, title: item.name })
-}
-
-// 勾选
-const selectRowKeys = ref<(string | number)[]>([])
-const select: TableInstance['onSelect'] = (rowKeys) => {
-  selectRowKeys.value = rowKeys
-}
-const onMulDelete = () => {
-  if (!selectRowKeys.value.length) {
-    return Message.warning('请选择角色')
-  }
-  Message.info('点击了批量删除')
 }
 </script>
 

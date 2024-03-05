@@ -14,7 +14,7 @@
           :header-style="{ display: 'none' }"
           class="gi_card pane-item pane-right"
         >
-          <div class="content">
+          <div class="pane-right__content">
             <a-row justify="space-between">
               <a-space wrap>
                 <a-button type="primary" @click="onAdd">
@@ -45,7 +45,7 @@
               </a-space>
             </a-row>
 
-            <section class="gi_table_box" style="margin-top: 4px">
+            <section class="gi_table_box">
               <a-table
                 row-key="id"
                 size="small"
@@ -55,6 +55,7 @@
                 :scroll="{ x: '100%', y: '100%', minWidth: 1000 }"
                 :row-selection="{ type: 'checkbox', showCheckedAll: true }"
                 :pagination="pagination"
+                :selected-keys="selectedKeys"
                 @select="select"
                 @select-all="selectAll"
               >
@@ -79,7 +80,7 @@
                     </template>
                   </a-table-column>
                   <a-table-column title="创建时间" data-index="createTime" :width="180"></a-table-column>
-                  <a-table-column title="操作" :width="200" align="center" :fixed="!isPhone() ? 'right' : undefined">
+                  <a-table-column title="操作" :width="200" align="center" :fixed="!isMobile() ? 'right' : undefined">
                     <template #cell="{ record }">
                       <a-space>
                         <a-button type="primary" size="mini" @click="onEdit(record)">修改</a-button>
@@ -109,7 +110,7 @@ import CateTree from './CateTree/index.vue'
 import EditModal from './EditModal.vue'
 import { getPersonList, deletePerson, type PersonItem } from '@/apis'
 import { StatusList } from '@/constant/person'
-import { isPhone } from '@/utils/common'
+import { isMobile } from '@/utils'
 
 const router = useRouter()
 
@@ -119,7 +120,7 @@ const form = reactive({
 })
 
 // 这里使用了表格hooks：useTable, 节省了大量代码
-const { loading, tableData, getTableData, pagination, selectKeys, select, selectAll, handleDelete } = useTable(
+const { loading, tableData, getTableData, pagination, selectedKeys, select, selectAll, handleDelete } = useTable(
   (pagin) => getPersonList({ ...form, current: pagin.page, pageSize: pagin.size }),
   { immediate: false, formatResult: (data) => data.map((i) => ({ ...i, isEdit: false })) }
 )
@@ -156,14 +157,14 @@ const onDelete = (item: PersonItem) => {
 
 // 批量删除
 const onMulDelete = () => {
-  if (!selectKeys.value.length) {
+  if (!selectedKeys.value.length) {
     return Message.warning('请选择删除项！')
   }
-  handleDelete(() => deletePerson({ ids: selectKeys.value as string[] }), { successTip: '批量删除成功！' })
+  handleDelete(() => deletePerson({ ids: selectedKeys.value as string[] }), { successTip: '批量删除成功！' })
 }
 
 const onExport = () => {
-  if (!selectKeys.value.length) {
+  if (!selectedKeys.value.length) {
     return Message.warning('请勾选数据')
   }
   Message.success('点击了导出')
@@ -189,7 +190,7 @@ const onExport = () => {
   .pane-left {
   }
   .pane-right {
-    .content {
+    &__content {
       flex: 1;
       overflow: hidden;
       display: flex;

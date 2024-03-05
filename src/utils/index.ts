@@ -1,5 +1,6 @@
 import { isExternal } from '@/utils/validate'
 import { mapTree, browse } from 'xe-utils'
+import _ from 'lodash'
 
 /**
  * @desc 去除空格
@@ -95,17 +96,6 @@ export function toCase(str: string, type: number) {
 }
 
 /**
- * @desc 遍历树节点 */
-export function foreachTree(data: any, callback: Function, childrenName = 'children') {
-  for (let i = 0; i < data.length; i++) {
-    callback(data[i])
-    if (data[i][childrenName] && data[i][childrenName].length > 0) {
-      foreachTree(data[i][childrenName], callback, childrenName)
-    }
-  }
-}
-
-/**
  * @desc 获取随机数
  * @param {number} min 最小值
  * @param {number} max 最大值
@@ -155,7 +145,7 @@ export const formatFileSize = (size: number) => {
 export const deepClone = (data: any) => {
   if (typeof data !== 'object' || data === null) return '不是对象'
   const newData: any = Array.isArray(data) ? [] : {}
-  for (let key in data) {
+  for (const key in data) {
     newData[key] = typeof data[key] === 'object' ? deepClone(data[key]) : data[key]
   }
   return newData
@@ -200,25 +190,12 @@ export const randomHex = () => {
  * @description 动态路由 path 转 name
  * @demo /system => System
  * @demo /system/menu => SystemMenu
- * @demo /page-gg/detail => PageGgDetail
+ * @demo /data-manage/detail => DataManageDetail
  */
 export const transformPathToName = (path: string) => {
   if (!path) return ''
   if (isExternal(path)) return ''
-  // 示例: '/page-gg/detail' =>  ['page-gg', 'detail']
-  const pathArray = path.split('/').filter((i) => i)
-  const arr = pathArray.map((i) => {
-    if (i.includes('-')) {
-      // 'page-gg' => 'PageGg'
-      const arr1 = i.split('-')
-      return arr1.map((a) => a.substring(0, 1).toUpperCase() + a.substring(1)).join('')
-    } else {
-      // 'detail' => 'Detail
-      return i.substring(0, 1).toUpperCase() + i.substring(1)
-    }
-  })
-  let name = arr.join('') // ['PageGg', 'Detail'] => PageGgDetail
-  return name
+  return _.upperFirst(_.camelCase(path))
 }
 
 /**
@@ -254,6 +231,13 @@ export const sortTree: SortTree = (values) => {
 }
 
 /** @desc 是否是h5环境 */
-export const isPhone = () => {
+export const isMobile = () => {
   return browse().isMobile
+}
+
+/** @desc 问候 */
+export function goodTimeText() {
+  const time = new Date()
+  const hour = time.getHours()
+  return hour < 9 ? '早上好' : hour <= 11 ? '上午好' : hour <= 13 ? '中午好' : hour < 20 ? '下午好' : '晚上好'
 }

@@ -12,12 +12,18 @@
       <a-row>
         <a-col :xs="24" :sm="24" :md="12" :lg="12" :xl="12" :xxl="12">
           <a-form-item label="用户名" field="username">
-            <a-input v-model="form.username" placeholder="请输入用户名" :disabled="form.disabled"></a-input>
+            <a-input
+              v-model.trim="form.username"
+              placeholder="请输入用户名"
+              allow-clear
+              :disabled="form.disabled"
+              :max-length="10"
+            ></a-input>
           </a-form-item>
         </a-col>
         <a-col :xs="24" :sm="24" :md="12" :lg="12" :xl="12" :xxl="12">
           <a-form-item label="昵称" field="nickname">
-            <a-input v-model="form.nickname" placeholder="请输入昵称"></a-input>
+            <a-input v-model.trim="form.nickname" placeholder="请输入昵称" allow-clear :max-length="10"></a-input>
           </a-form-item>
         </a-col>
       </a-row>
@@ -25,12 +31,12 @@
       <a-row>
         <a-col :xs="24" :sm="24" :md="12" :lg="12" :xl="12" :xxl="12">
           <a-form-item label="手机号码" field="phone">
-            <a-input v-model="form.phone" placeholder="请输入手机号码"></a-input>
+            <a-input v-model.trim="form.phone" placeholder="请输入手机号码" allow-clear :max-length="11"></a-input>
           </a-form-item>
         </a-col>
         <a-col :xs="24" :sm="24" :md="12" :lg="12" :xl="12" :xxl="12">
           <a-form-item label="邮箱" field="email">
-            <a-input v-model="form.email" placeholder="请输入邮箱"></a-input>
+            <a-input v-model.trim="form.email" placeholder="请输入邮箱" allow-clear :max-length="30"></a-input>
           </a-form-item>
         </a-col>
       </a-row>
@@ -70,7 +76,7 @@
 
       <a-form-item label="描述" field="description">
         <a-textarea
-          v-model="form.description"
+          v-model.trim="form.description"
           :max-length="200"
           placeholder="请填写描述"
           :auto-size="{ minRows: 3 }"
@@ -93,14 +99,22 @@
 </template>
 
 <script setup lang="ts">
-import { useDept, useRole } from '@/hooks/app'
+import { Message, type FormInstance } from '@arco-design/web-vue'
 import * as Regexp from '@/utils/regexp'
 import { getSystemUserDetail, saveSystemUser } from '@/apis'
-import { Message, type FormInstance } from '@arco-design/web-vue'
+import { useDept, useRole } from '@/hooks/app'
+import { useForm } from '@/hooks'
+
+const emit = defineEmits<{
+  (e: 'save-success'): void
+}>()
 
 const { roleList, getRoleList } = useRole()
 getRoleList()
 const roleOptions = computed(() => roleList.value.map((i) => ({ label: i.name, value: i.code })))
+
+const { deptList, getDeptList } = useDept()
+getDeptList()
 
 const FormRef = ref<FormInstance>()
 const userId = ref('')
@@ -108,7 +122,7 @@ const isEdit = computed(() => !!userId.value)
 const title = computed(() => (isEdit.value ? '编辑用户' : '新增用户'))
 const visible = ref(false)
 
-const form = reactive({
+const { form, resetForm } = useForm({
   id: '',
   username: '', // 用户名
   nickname: '', // 昵称
@@ -116,14 +130,14 @@ const form = reactive({
   phone: '', // 手机号
   email: '', // 邮箱
   deptId: '', // 部门
-  roleIds: [], // 角色(可能多个)
+  roleIds: [] as string[], // 角色(可能多个)
   description: '', // 描述
   status: 1 as Status, // 状态 0禁用 1启用(正常)
-  type: 2, // 类型 1系统内置(admin是系统内置) 2自定义
+  type: 2 as 1 | 2, // 类型 1系统内置(admin是系统内置) 2自定义
   disabled: false // 如果 type===1 这为 true, 主要作用是列表复选框禁用状态
 })
 
-const rules = {
+const rules: FormInstance['rules'] = {
   username: [
     { required: true, message: '请输入用户名' },
     { min: 2, max: 4, message: '长度在 2 - 4个字符' }
@@ -139,9 +153,6 @@ const rules = {
   status: [{ required: true, message: '请选择状态' }]
 }
 
-const { deptList, getDeptList } = useDept()
-getDeptList()
-
 const add = () => {
   userId.value = ''
   visible.value = true
@@ -156,15 +167,19 @@ const edit = async (id: string) => {
 
 const close = () => {
   FormRef.value?.resetFields()
+  resetForm()
 }
 
 defineExpose({ add, edit })
 
 const save = async () => {
   try {
+    const obj = await FormRef.value?.validate()
+    if (obj) return false
     const res = await saveSystemUser(form)
     if (res.data) {
       Message.success('模拟保存成功')
+      emit('save-success')
       return true
     } else {
       return false

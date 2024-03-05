@@ -19,7 +19,7 @@
       </a-space>
     </a-row>
 
-    <section class="content">
+    <section class="pane2__content">
       <section class="gi_table_box">
         <a-table
           row-key="id"
@@ -61,7 +61,7 @@ const columns: TableColumnData[] = [
   {
     title: '序号',
     width: 68,
-    render: ({ record, column, rowIndex }) => <span>{rowIndex + 1}</span>
+    render: ({ rowIndex }) => <span>{rowIndex + 1}</span>
   },
   {
     title: '姓名',
@@ -105,7 +105,7 @@ const columns: TableColumnData[] = [
     title: '操作',
     width: 200,
     align: 'center',
-    render: ({ record }) => (
+    render: () => (
       <a-space>
         <a-button type="primary" size="mini">
           <icon-edit></icon-edit>
@@ -132,9 +132,8 @@ const getTableData = async () => {
       current: pagination.current,
       pageSize: pagination.pageSize
     })
-    tableData.value = res.data.list
+    tableData.value = res.data.records
     setTotal(res.data.total)
-  } catch (error) {
   } finally {
     loading.value = false
   }
@@ -167,14 +166,14 @@ const selectAll: TableInstance['onSelectAll'] = (checked) => {
 .pane2 {
   flex: 1;
   margin: $margin;
-}
-.content {
-  flex: 1;
-  overflow: hidden;
-  display: flex;
-  flex-direction: column;
-  box-sizing: border-box;
-  background-color: var(--color-bg-1);
-  border-radius: $radius-box;
+  &__content {
+    flex: 1;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
+    background-color: var(--color-bg-1);
+    border-radius: $radius-box;
+  }
 }
 </style>

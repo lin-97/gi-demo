@@ -1,5 +1,5 @@
 import axios from 'axios'
-import type { AxiosInstance, AxiosRequestConfig, AxiosResponse, AxiosRequestHeaders } from 'axios'
+import type { AxiosInstance, AxiosRequestConfig, AxiosResponse } from 'axios'
 import { Message, Notification } from '@arco-design/web-vue'
 import { getToken } from '@/utils/auth'
 import NProgress from 'nprogress'
@@ -30,7 +30,7 @@ const StatusCodeMessage: ICodeMessage = {
 }
 
 const http: AxiosInstance = axios.create({
-  // baseURL: process.env.VUE_APP_API_PREFIX,
+  baseURL: import.meta.env.VITE_API_PREFIX,
   timeout: 30 * 1000
 })
 
@@ -38,15 +38,12 @@ const http: AxiosInstance = axios.create({
 http.interceptors.request.use(
   (config: AxiosRequestConfig) => {
     NProgress.start() // 进度条
-    config.headers = {
-      'Content-Type': 'application/json' // 配置请求头
-    }
     const token = getToken()
     if (token) {
       if (!config.headers) {
         config.headers = {}
       }
-      config.headers['token'] = token
+      config.headers.token = token
     }
     return config
   },
@@ -101,22 +98,22 @@ const request = <T = unknown>(config: AxiosRequestConfig): Promise<ApiRes<T>> =>
   })
 }
 
-request.get = <T = any>(url: string, params?: object, headers?: AxiosRequestHeaders): Promise<ApiRes<T>> => {
+const get = <T = any>(url: string, params?: object, config?: AxiosRequestConfig): Promise<ApiRes<T>> => {
   return request({
     method: 'get',
     url,
     params,
-    headers
+    ...config
   })
 }
 
-request.post = <T = any>(url: string, params?: object, headers?: AxiosRequestHeaders): Promise<ApiRes<T>> => {
+const post = <T = any>(url: string, params?: object, config?: AxiosRequestConfig): Promise<ApiRes<T>> => {
   return request({
     method: 'post',
     url,
     data: params,
-    headers
+    ...config
   })
 }
 
-export default request
+export default { get, post }

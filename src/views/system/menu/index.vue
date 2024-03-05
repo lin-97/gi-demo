@@ -42,7 +42,6 @@
       </a-row>
 
       <a-table
-        style="margin-top: 8px"
         ref="TableRef"
         row-key="id"
         :data="menuList"
@@ -79,7 +78,9 @@
           <a-table-column title="菜单图标" data-index="icon" :width="100" align="center">
             <template #cell="{ record }">
               <GiSvgIcon v-if="record.svgIcon" :size="24" :name="record.svgIcon"></GiSvgIcon>
-              <component v-else :is="record.icon" :size="24"></component>
+              <template v-else>
+                <component v-if="record.icon" :is="record.icon" :size="24"></component>
+              </template>
             </template>
           </a-table-column>
           <a-table-column title="状态" :width="80" align="center">
@@ -111,7 +112,7 @@
               <a-tag v-else color="red">否</a-tag>
             </template>
           </a-table-column>
-          <a-table-column title="操作" :width="200" align="left" :fixed="!isPhone() ? 'right' : undefined">
+          <a-table-column title="操作" :width="200" align="left" :fixed="!isMobile() ? 'right' : undefined">
             <template #cell="{ record }">
               <a-space>
                 <a-button type="primary" size="mini" @click="onEdit(record)">
@@ -134,7 +135,7 @@
       </a-table>
     </a-card>
 
-    <AddMenuModal ref="AddMenuModalRef" :menus="menuList"></AddMenuModal>
+    <AddMenuModal ref="AddMenuModalRef" :menus="menuList" @save-success="search"></AddMenuModal>
   </div>
 </template>
 
@@ -143,7 +144,7 @@ import AddMenuModal from './AddMenuModal.vue'
 import { getSystemMenuList, type MenuItem } from '@/apis'
 import { Drawer, type TableInstance } from '@arco-design/web-vue'
 import { isExternal } from '@/utils/validate'
-import { transformPathToName, isPhone } from '@/utils/common'
+import { transformPathToName, isMobile } from '@/utils'
 import GiCodeView from '@/components/GiCodeView/index.vue'
 
 defineOptions({ name: 'SystemMenu' })
@@ -166,7 +167,6 @@ const getMenuList = async () => {
     loading.value = true
     const res = await getSystemMenuList()
     menuList.value = res.data
-  } catch (error) {
   } finally {
     loading.value = false
   }

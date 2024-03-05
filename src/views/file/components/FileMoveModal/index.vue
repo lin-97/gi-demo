@@ -16,7 +16,7 @@
     </a-form>
     <section class="tree-box">
       <a-tree show-line size="mini" blockNode :data="treeData" @select="handleClickNode">
-        <template #switcher-icon="node, { checked, selected, expanded }">
+        <template #switcher-icon="node, { expanded }">
           <GiSvgIcon v-if="node.children && expanded" class="switcher-icon" name="plus-square" :size="16" />
           <GiSvgIcon
             v-else-if="node.children && !expanded"
@@ -42,7 +42,7 @@ import GiSvgIcon from '@/components/GiSvgIcon/index.vue'
 
 interface Props {
   fileInfo: FileItem
-  onClose: Function
+  onClose: () => void
 }
 const props = withDefaults(defineProps<Props>(), {})
 

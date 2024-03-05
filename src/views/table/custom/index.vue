@@ -45,7 +45,7 @@
           </template>
         </a-table-column>
         <a-table-column title="操作" :width="200" align="center">
-          <template #cell="{ record }">
+          <template #cell="{}">
             <a-space>
               <a-button type="primary" size="mini">修改</a-button>
               <a-button size="mini">详情</a-button>
@@ -81,9 +81,8 @@ const getTableData = async () => {
       current: pagination.current,
       pageSize: pagination.pageSize
     })
-    tableData.value = res.data.list
+    tableData.value = res.data.records
     setTotal(res.data.total)
-  } catch (error) {
   } finally {
     loading.value = false
   }
@@ -115,8 +114,5 @@ const onImport = () => {
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
-  .form {
-    margin-top: 12px;
-  }
 }
 </style>

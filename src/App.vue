@@ -1,7 +1,6 @@
 <template>
   <a-config-provider update-at-scroll>
     <router-view></router-view>
-
     <template #loading>
       <img src="/static/images/loading.gif" class="loading-icon" />
     </template>
@@ -9,7 +8,11 @@
 </template>
 
 <script setup lang="ts">
+import { useAppStore } from '@/stores'
+
 defineOptions({ name: 'App' })
+const appStore = useAppStore()
+appStore.initTheme()
 </script>
 
 <style lang="scss" scoped>

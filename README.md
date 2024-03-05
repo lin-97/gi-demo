@@ -7,16 +7,16 @@
 
 ## 简介
 
-Gi Admin Pro 是一个基于 Vue3、Vite、TypeScript、Arco Design Vue、Pinia、VueUse 等的免费中后台模版，它使用了最新的前端技术栈，内置丰富的主题配置，有着极高的代码规范，基于 mock 实现的动态数据展示，开箱即用的模板，也可用于学习参考。
+**Gi Admin Pro** 是一个基于 Vue3、Vite、TypeScript、Arco Design Vue、Pinia、VueUse 等的免费中后台模版，它使用了最新的前端技术栈，内置丰富的主题配置，有着极高的代码规范，基于 mock 实现的动态数据展示，开箱即用的模板，也可用于学习参考。
 
-> **Gi 前缀含义：** G：代表全局 i：代表我的
+> **Gi 前缀含义：** G：代表全局      i：代表我的
 >
 > Gi 用来定义全局组件前缀，如 GiNavBar、GiTitle、GiLoading
 
 ## 特性
 
 - **最新技术栈**：使用 Vue3 / Vite 等前端前沿技术开发，使用高效率的 npm 包管理器
-- **TypeScript**: 应用程序级 JavaScript 的语言
+- **TypeScript**：应用程序级 JavaScript 的语言
 - **主题**：丰富可配置的主题、暗黑模式
 - **代码规范**：丰富的规范插件及极高的代码规范
 
@@ -25,6 +25,7 @@ Gi Admin Pro 是一个基于 Vue3、Vite、TypeScript、Arco Design Vue、Pinia�
 <a href="http://lin0716.gitee.io/gi-demo" target="_blank">Gi Admin Pro 预览地址</a>
 
 账号1：**admin**   密码：**123456**
+
 账号2：**user**  密码：**123456**
 
 ## 代码仓库
@@ -97,6 +98,82 @@ npm run build
 ## 开源作者
 
 **Lin**
+
+## 常见问题
+
+**为什么安装依赖不成功？**
+
+检查`node`版本，最好使用原生镜像`npm`
+
+还原镜像
+
+~~~
+npm config set registry https://registry.npmjs.org/
+~~~
+
+
+
+**为什么选择Arco组件库，而不是Element Plus?**
+
+[Element Plus 对比 Arco design](https://juejin.cn/post/7294219581894705190)
+
+
+
+**为什么全局组件使用前缀Gi?**
+
+全局组件设置了按需引入，使用前缀，方便和局部组件做区分
+
+
+
+**为什么组件使用单词大写开头 (PascalCase)命名写法？**
+
+本项目`.vue`文件名以及在模板使用中，均采用大写`开头 (PascalCase)`命名方式
+
+参考 Vue2 官网-风格指南: https://v2.cn.vuejs.org/v2/style-guide/
+
+组件命名：`单文件组件的文件名应该要么始终是单词大写开头 (PascalCase)，要么始终是横线连接 (kebab-case)`
+
+其他优点：方便搜索（横线连接 (kebab-case)对搜索没那么方便）
+
+
+
+**为什么css类名推荐横线连接 (kebab-case)**
+
+参考大部分大网站，都是这个命名规则，别整： `.myClass`这种
+
+
+
+**页面显示异常？**
+
+**`页面必须要保留一个根元素！！！`**
+
+
+
+**Vue3权限管理对路由进行排序和格式化处理方式**
+
+使用 **xe-utils** 这个 js 库，简化数据处理
+
+[文章地址](https://juejin.cn/post/7301260557222805567)
+
+
+
+**页面无法缓存？**
+
+请检查页面是否配置了`name`，且名称是否与数据一致
+
+~~~js
+defineOptions({ name: 'AboutIndex' })
+~~~
+
+~~~js
+{
+  path: '/about/index',
+  name: 'AboutIndex', // 检查name是否一致
+  component: () => import('@/views/about/index.vue')
+}
+~~~
+
+
 
 ## 项目规范
 
@@ -175,6 +252,11 @@ const getData = () => {
   nums.forEach((item) => {
     arr.push({ value: item })
   })
+}
+
+const getUserList = async () => {
+  const res = await Api.getUserPage()
+  userList = res.data
 }
 
 // ---------------------------------------- 方法 --------------------------------------------- //
@@ -259,7 +341,7 @@ const getTableList = () => {}
 | request     | req  |
 | image       | img  |
 | utility     | util |
-| prroperty   | prop |
+| property    | prop |
 | source      | src  |
 | boolean     | bool |
 | error       | err  |
@@ -306,6 +388,9 @@ const form = reactive(getInitForm())
 
 // 重置form
 const resetForm = () => {
+  for (const key in form) {
+    delete form[key]
+  }
   Object.assign(form, getInitForm())
 }
 </script>
@@ -346,9 +431,10 @@ let result = marks >= 30 ? 'Pass' : 'Fail'
 
 ```js
 // 优化前
-if (type === 1 || type === 2 || type === 3)
-  // 优化后, 此种方式在vue模板也可使用
-  [1, 2, 3].includes(type)
+if (type === 1 || type === 2 || type === 3) {}
+
+// 优化后, 此种方式在vue模板也可使用
+if([1, 2, 3].includes(type)) {}
 ```
 
 使用箭头函数简化函数
@@ -421,17 +507,17 @@ import type * as System from './type'
 
 /** @desc 获取部门数据 */
 export function getSystemDeptList() {
-  return http.get<ApiListData<System.DeptItem[]>>(`${prefix}/system/dept/list`)
+  return http.get<PageRes<System.DeptItem[]>>(`${prefix}/system/dept/list`)
 }
 
 /** @desc 获取用户数据 */
 export function getSystemUserList() {
-  return http.get<ApiListData<System.UserItem[]>>(`${prefix}/system/user/list`)
+  return http.get<PageRes<System.UserItem[]>>(`${prefix}/system/user/list`)
 }
 
 /** @desc 获取角色数据 */
 export function getSystemRoleList() {
-  return http.get<ApiListData<System.RoleItem[]>>(`${prefix}/system/role/list`)
+  return http.get<PageRes<System.RoleItem[]>>(`${prefix}/system/role/list`)
 }
 ```
 
@@ -573,7 +659,7 @@ const submit = () => {
 </script>
 ```
 
-页面模板类名采用半角连接符(-)
+页面模板CSS类名采用半角连接符(-)
 
 ```vue
 <template>
@@ -806,6 +892,10 @@ export interface Options {
 
 <img src="https://gitee.com/lin0716/gi-image/raw/master/form2.png" />
 
+**`注意：GiForm 组件的最新使用方式如下图`**
+
+<img src="https://gitee.com/lin0716/gi-image/raw/master/GiFormDemoNew.png" />
+
 
 
 #### Hooks 目录结构
@@ -840,7 +930,7 @@ export function useDept() {
     try {
       loading.value = true
       const res = await getSystemDeptList()
-      deptList.value = res.data.list
+      deptList.value = res.data.records
     } catch (error) {
     } finally {
       loading.value = false
@@ -1149,6 +1239,77 @@ const getTableData = async () => {
 
 <img src="https://gitee.com/lin0716/gi-image/raw/master/useTableDemo2.png" />
 
+**`最后提示`**
+
+在最新版的`useTable`中， `selectKeys`已经改为`selectedKeys`，同时加了其他新功能，具体查看源码
+
+
+
+#### useForm(hooks) 的使用
+
+作用：有时候需要`重置表单数据`，这个`hooks`提供很大便捷性
+
+代码：`useForm.ts`
+
+~~~js
+import { reactive } from 'vue'
+import _ from 'lodash'
+
+export default function <F extends object>(initValue: F) {
+  const getInitValue = () => _.cloneDeep(initValue)
+
+  const form = reactive(getInitValue())
+
+  const resetForm = () => {
+    for (const key in form) {
+      delete form[key]
+    }
+    Object.assign(form, getInitValue())
+  }
+
+  return { form, resetForm }
+}
+~~~
+
+**使用**
+
+~~~js
+import { useForm } from '@/hooks'
+
+const { form, resetForm } = useForm({
+  id: '',
+  name: '',
+  phone: '',
+  status: false
+})
+
+// 重置表单数据
+resetForm()
+~~~
+
+**注意**
+
+`resetForm`方法为什么要加上以下代码
+
+~~~js
+for (const key in form) {
+  delete form[key]
+}
+~~~
+
+比如一个编辑弹窗，点击编辑，会根据id查详情，有时候为了方便，直接把详情的数据赋值到form里面，这就会导致重置的时候，有详情的属性冗余，以下举个例子
+
+~~~js
+const form = { name: '' };
+const detail = { name: '张三', status: 1 }
+Object.assign(form, detail)
+console.log(form) // { name: '张三', status: 1 }
+
+// 如果直接重置
+Object.assign(form, { name: '' })
+console.log(form) // { name: '', status: 1 } 有额外属性冗余，status会不经意的随着保存操作提交到后台
+~~~
+
 
 
 #### TSX 方式调起弹窗
@@ -1261,6 +1422,8 @@ Link 组件使用场景
 
 建议采用全小写，多单词使用-连接符(参考大部分网站，包括掘金，码云等，都是采用这个规则)
 
+或者采用`BEM`命名规范 [BEM命名规范](https://getbem.com/naming/)
+
 ```css
 // 推荐
 .header
@@ -1275,12 +1438,39 @@ Link 组件使用场景
 .list
 .list-item
 
+
 // 不推荐
 .Header
 .listItem
 .list-Item
 .List-Item;
 ```
+
+**BEM命名规范**
+
+~~~html
+<div class="article">
+    <div class="article__body">
+        <div class="tag"></div>
+        <button class="article__button--primary"></button>
+        <button class="article__button--success"></button>
+    </div>
+</div>
+~~~
+
+~~~less
+.article {
+    max-width: 1200px;
+    &__body {
+        padding: 20px;
+    }
+    &__button {
+        padding: 5px 8px;
+        &--primary {background: blue;}
+        &--success {background: green;}
+    }
+}
+~~~
 
 #### CSS 全局类名-命名规范
 
@@ -1560,7 +1750,7 @@ $padding: 16px; // 盒子和内容的间距
 
 <a href="https://arco.design/vue/component/button" target="_blank">Arco Design 组件库</a>
 
-<a href="https://dayjs.fenxianglu.cn/" target="_blank">Day.js\*\* 一个极简的 JavaScript 库，可以为现代浏览器解析、验证、操作和显示日期和时间 2K 大小</a>
+<a href="https://dayjs.fenxianglu.cn/" target="_blank">Day.js 一个极简的 JavaScript 库，可以为现代浏览器解析、验证、操作和显示日期和时间 2K 大小</a>
 
 <a href="https://www.lodashjs.com/" target="_blank">Lodash 一个一致性、模块化、高性能的 JavaScript 实用工具库</a>
 
@@ -1619,7 +1809,5 @@ $padding: 16px; // 盒子和内容的间距
 
 
 ## 捐赠
-
-
 
 <img style="width:300px" src="https://gitee.com/lin0716/gi-image/raw/master/alipay.jpg" />

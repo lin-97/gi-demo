@@ -57,15 +57,16 @@
           </a-row>
 
           <a-table
-            style="margin-top: 8px"
             row-key="id"
             :loading="loading"
             :data="userList"
             :bordered="{ cell: true }"
             :scroll="{ x: '100%', y: '100%', minWidth: 1700 }"
             :pagination="pagination"
-            :row-selection="{ type: 'checkbox', showCheckedAll: false }"
+            :row-selection="{ type: 'checkbox', showCheckedAll: true }"
+            :selected-keys="selectedKeys"
             @select="select"
+            @select-all="selectAll"
           >
             <template #columns>
               <a-table-column title="序号" :width="64">
@@ -106,14 +107,14 @@
               </a-table-column>
               <a-table-column title="描述" :width="200" data-index="description"></a-table-column>
               <a-table-column title="创建时间" data-index="createTime" :width="200"></a-table-column>
-              <a-table-column title="操作" :width="180" align="center" :fixed="!isPhone() ? 'right' : undefined">
+              <a-table-column title="操作" :width="180" align="center" :fixed="!isMobile() ? 'right' : undefined">
                 <template #cell="{ record }">
                   <a-space>
                     <a-button type="primary" size="mini" @click="onEdit(record)">
                       <template #icon><icon-edit /></template>
                       <span>编辑</span>
                     </a-button>
-                    <a-popconfirm type="warning" content="确定删除该用户吗?">
+                    <a-popconfirm type="warning" content="确定删除该用户吗?" @before-ok="onDelete(record)">
                       <a-button type="primary" status="danger" size="mini" :disabled="record.disabled">
                         <template #icon><icon-delete /></template>
                         <span>删除</span>
@@ -128,21 +129,21 @@
       </a-row>
     </a-card>
 
-    <AddUserModal ref="AddUserModalRef"></AddUserModal>
+    <AddUserModal ref="AddUserModalRef" @save-success="search"></AddUserModal>
     <UserDetailDrawer ref="UserDetailDrawerRef"></UserDetailDrawer>
   </div>
 </template>
 
 <script setup lang="ts">
-import { usePagination } from '@/hooks'
+import { useTable } from '@/hooks'
 import { useDept } from '@/hooks/app'
-import { getSystemUserList } from '@/apis'
+import { getSystemUserList, deleteSystemUser } from '@/apis'
 import type { UserItem } from '@/apis'
 import AddUserModal from './AddUserModal.vue'
 import UserDetailDrawer from './UserDetailDrawer.vue'
-import type { TreeInstance, TableInstance } from '@arco-design/web-vue'
+import type { TreeInstance } from '@arco-design/web-vue'
 import { Message } from '@arco-design/web-vue'
-import { isPhone } from '@/utils/common'
+import { isMobile } from '@/utils'
 
 defineOptions({ name: 'SystemUser' })
 
@@ -160,53 +161,44 @@ const { deptList, getDeptList } = useDept({
 })
 getDeptList()
 
+const form = reactive({ status: '', username: '' })
+
+const {
+  loading,
+  tableData: userList,
+  pagination,
+  selectedKeys,
+  search,
+  select,
+  selectAll,
+  handleDelete
+} = useTable((pagin) => getSystemUserList({ current: pagin.page, pageSize: pagin.size }), { immediate: true })
+
+const reset = () => {
+  form.status = ''
+  form.username = ''
+  search()
+}
+
+// 删除
+const onDelete = (item: UserItem) => {
+  return handleDelete(() => deleteSystemUser({ ids: [item.id] }), { showModal: false })
+}
+
+// 批量删除
+const onMulDelete = () => {
+  if (!selectedKeys.value.length) {
+    return Message.warning('请选择用户！')
+  }
+  handleDelete(() => deleteSystemUser({ ids: selectedKeys.value as string[] }))
+}
+
 const onAdd = () => {
   AddUserModalRef.value?.add()
 }
 
 const onEdit = (item: UserItem) => {
   AddUserModalRef.value?.edit(item.id)
-}
-
-// 勾选
-const selectRowKeys = ref<(string | number)[]>([])
-const select: TableInstance['onSelect'] = (rowKeys) => {
-  selectRowKeys.value = rowKeys
-}
-const onMulDelete = () => {
-  if (!selectRowKeys.value.length) {
-    return Message.warning('请选择用户')
-  }
-  Message.info('点击了批量删除')
-}
-
-const form = reactive({ status: '', username: '' })
-const loading = ref(false)
-const userList = ref<UserItem[]>([])
-const { pagination, setTotal } = usePagination(() => {
-  getUserList()
-})
-const getUserList = async () => {
-  try {
-    loading.value = true
-    const res = await getSystemUserList()
-    userList.value = res.data.list
-    setTotal(res.data.total)
-  } catch (error) {
-  } finally {
-    loading.value = false
-  }
-}
-getUserList()
-
-const search = () => {
-  pagination.onChange(1)
-}
-
-const reset = () => {
-  form.status = ''
-  form.username = ''
-  pagination.onChange(1)
 }
 
 const openDetail = (item: UserItem) => {

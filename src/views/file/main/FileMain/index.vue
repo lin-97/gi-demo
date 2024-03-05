@@ -140,7 +140,7 @@ const getListData = async () => {
     loading.value = true
     isBatchMode.value = false
     const res = await getFileList({ fileType: fileType.value })
-    fileList.value = res.data.list
+    fileList.value = res.data.records
   } catch (error) {
     return error
   } finally {

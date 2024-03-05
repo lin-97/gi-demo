@@ -23,7 +23,7 @@ const success = async () => {
 }
 
 const fail = async () => {
-  const res = await getTestFail()
+  await getTestFail()
   Message.success('请求成功') // 如果await后面的语句时失败的promise，那么这行代码以及往下的代码都不会执行
 }
 

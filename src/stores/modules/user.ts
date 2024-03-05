@@ -34,11 +34,17 @@ const storeSetup = () => {
 
   // 退出
   const logout = async () => {
-    token.value = ''
-    roles.value = []
-    permissions.value = []
-    resetToken()
-    resetRouter()
+    try {
+      await logoutApi()
+      token.value = ''
+      roles.value = []
+      permissions.value = []
+      resetToken()
+      resetRouter()
+      return true
+    } catch (error) {
+      return false
+    }
   }
 
   // 获取用户信息

@@ -26,15 +26,15 @@ const toHome = () => {
 .system-logo {
   height: 56px;
   padding: 0 12px;
+  color: var(--color-text-1);
   font-size: 20px;
   line-height: 1;
-  color: var(--color-text-1);
   display: flex;
   align-items: center;
   flex-shrink: 0;
   cursor: pointer;
   user-select: none;
-  background-color: var(--color-bg-1);
+  box-sizing: border-box;
   &.collapsed {
     padding: 0;
     display: flex;

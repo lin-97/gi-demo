@@ -1,17 +1,17 @@
 <template>
   <div class="detail" ref="containerRef">
     <a-affix :target="(containerRef as HTMLElement)">
-      <a-page-header title="详情" subtitle="Detail Page" class="head">
+      <a-page-header title="详情" subtitle="Detail Page" class="detail__head">
         <template #extra>
           <a-button>返回</a-button>
         </template>
       </a-page-header>
     </a-affix>
 
-    <a-card title="基本信息" :bordered="false" class="item">
+    <a-card title="基本信息" :bordered="false" class="detail__item">
       <a-descriptions
         table-layout="fixed"
-        :label-style="{ width: '60px' }"
+        layout="inline-horizontal"
         :column="{ xs: 1, sm: 2, md: 2, lg: 2, xl: 3, xxl: 3 }"
       >
         <a-descriptions-item label="姓名">Lin</a-descriptions-item>
@@ -40,7 +40,7 @@
       </a-descriptions>
     </a-card>
 
-    <a-card title="基本信息" :bordered="false" class="item">
+    <a-card title="基本信息" :bordered="false" class="detail__item">
       <a-row justify="space-between">
         <a-col :xs="24" :sm="8" :md="8" :lg="6" :xl="6" :xxl="6" style="margin-bottom: 20px">
           <a-steps :current="2" direction="vertical">
@@ -56,24 +56,57 @@
         <a-col :xs="24" :sm="16" :md="16" :lg="18" :xl="18" :xxl="18">
           <a-descriptions
             table-layout="fixed"
-            layout="inline-horizontal"
+            bordered
+            :label-style="{ width: '100px' }"
             :column="{ xs: 1, sm: 2, md: 2, lg: 2, xl: 3, xxl: 3 }"
           >
-            <a-descriptions-item label="姓名：">Lin</a-descriptions-item>
-            <a-descriptions-item label="性别：">男</a-descriptions-item>
-            <a-descriptions-item label="生日：">07月16日</a-descriptions-item>
-            <a-descriptions-item label="城市：">广州市</a-descriptions-item>
-            <a-descriptions-item label="手机号：">155 **** 8810</a-descriptions-item>
-            <a-descriptions-item label="邮箱：">326010228@qq.com</a-descriptions-item>
-            <a-descriptions-item label="星座：">双鱼座</a-descriptions-item>
-            <a-descriptions-item label="爱好：">
+            <a-descriptions-item label="姓名">Lin</a-descriptions-item>
+            <a-descriptions-item label="性别">男</a-descriptions-item>
+            <a-descriptions-item label="生日">07月16日</a-descriptions-item>
+            <a-descriptions-item label="城市">广州市</a-descriptions-item>
+            <a-descriptions-item label="手机号">155 **** 8810</a-descriptions-item>
+            <a-descriptions-item label="邮箱">326010228@qq.com</a-descriptions-item>
+            <a-descriptions-item label="星座">双鱼座</a-descriptions-item>
+            <a-descriptions-item label="爱好">
               <a-space :size="5" wrap>
                 <a-tag color="purple">王者荣耀</a-tag>
                 <a-tag color="magenta">打疫苗</a-tag>
               </a-space>
             </a-descriptions-item>
-            <a-descriptions-item label="座右铭：">哈哈哈</a-descriptions-item>
-            <a-descriptions-item label="标签：">
+            <a-descriptions-item label="座右铭">哈哈哈</a-descriptions-item>
+            <a-descriptions-item label="标签">
+              <a-space :size="5" wrap>
+                <a-tag color="#f53f3f">vue3</a-tag>
+                <a-tag color="#7816ff">pinia</a-tag>
+                <a-tag color="#00b42a">vite</a-tag>
+                <a-tag color="#165dff">ts</a-tag>
+                <a-tag color="#ff7d00">arco design</a-tag>
+              </a-space>
+            </a-descriptions-item>
+          </a-descriptions>
+
+          <a-descriptions
+            class="gi_mt"
+            table-layout="fixed"
+            layout="inline-horizontal"
+            bordered
+            :column="{ xs: 1, sm: 2, md: 2, lg: 2, xl: 3, xxl: 3 }"
+          >
+            <a-descriptions-item label="姓名">Lin</a-descriptions-item>
+            <a-descriptions-item label="性别">男</a-descriptions-item>
+            <a-descriptions-item label="生日">07月16日</a-descriptions-item>
+            <a-descriptions-item label="城市">广州市</a-descriptions-item>
+            <a-descriptions-item label="手机号">155 **** 8810</a-descriptions-item>
+            <a-descriptions-item label="邮箱">326010228@qq.com</a-descriptions-item>
+            <a-descriptions-item label="星座">双鱼座</a-descriptions-item>
+            <a-descriptions-item label="爱好">
+              <a-space :size="5" wrap>
+                <a-tag color="purple">王者荣耀</a-tag>
+                <a-tag color="magenta">打疫苗</a-tag>
+              </a-space>
+            </a-descriptions-item>
+            <a-descriptions-item label="座右铭">哈哈哈</a-descriptions-item>
+            <a-descriptions-item label="标签">
               <a-space :size="5" wrap>
                 <a-tag color="#f53f3f">vue3</a-tag>
                 <a-tag color="#7816ff">pinia</a-tag>
@@ -87,7 +120,7 @@
       </a-row>
     </a-card>
 
-    <a-card title="审批流程" :bordered="false" class="item">
+    <a-card title="审批流程" :bordered="false" class="detail__item">
       <a-steps :current="2" style="margin: 20px 0">
         <a-step description="申请人:Lin">申请</a-step>
         <a-step description="Mark">
@@ -98,7 +131,7 @@
       </a-steps>
     </a-card>
 
-    <a-card title="其他信息" :bordered="false" class="item">
+    <a-card title="其他信息" :bordered="false" class="detail__item">
       <a-descriptions :column="1" :data="data"> </a-descriptions>
     </a-card>
   </div>
@@ -145,13 +178,13 @@ const getTagsElement = (data: { color: string; name: string }[]) => {
 }
 
 const data = [
-  { label: '姓名', value: () => detail['name'] },
-  { label: '性别', value: () => detail['sex'] },
-  { label: '生日', value: () => detail['birthday'] },
-  { label: '城市', value: () => detail['city'] },
-  { label: '手机号', value: () => detail['phone'] },
-  { label: '邮箱', value: () => detail['email'] },
-  { label: '星座', value: () => detail['constellation'] },
+  { label: '姓名', value: detail['name'] },
+  { label: '性别', value: detail['sex'] },
+  { label: '生日', value: detail['birthday'] },
+  { label: '城市', value: detail['city'] },
+  { label: '手机号', value: detail['phone'] },
+  { label: '邮箱', value: detail['email'] },
+  { label: '星座', value: detail['constellation'] },
   {
     label: '爱好',
     value: () => getTagsElement(detail.hobbys)
@@ -174,11 +207,11 @@ const data = [
 }
 .detail {
   overflow: auto;
-  .head {
+  &__head {
     background: var(--color-bg-1);
     box-shadow: 0 2px 5px 0 rgb(0 0 0 / 8%);
   }
-  .item {
+  &__item {
     margin: $margin;
     background: var(--color-bg-1);
     border-radius: 2px;

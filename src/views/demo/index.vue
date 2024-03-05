@@ -26,7 +26,6 @@ import Area from './examples/area-demo/index.vue'
 import Editor from './examples/editor/index.vue'
 import RowTreeTable from './examples/row-tree-table/index.vue'
 import Map from './examples/map/index.vue'
-import JSDialog from './examples/js-dialog/index.vue'
 import JSModal from './examples/js-modal/index.vue'
 import ImageZoom from './examples/image-zoom/index.vue'
 import FnComponent from './examples/fn-component/index.vue'
@@ -50,7 +49,6 @@ const menuList = [
   { name: '富文本', value: Editor },
   { name: '地图', value: Map },
   { name: 'Mitt中央通信', value: Mitt },
-  { name: '原生模态框', value: JSDialog },
   { name: '图片放大镜', value: ImageZoom },
   { name: '函数式组件', value: FnComponent }
 ]

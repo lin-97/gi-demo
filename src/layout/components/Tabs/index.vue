@@ -57,11 +57,8 @@ tabsStore.reset()
 watch(
   () => route.path,
   () => {
-    nextTick(() => {
-      handleRouteChange()
-    })
-  },
-  { immediate: true }
+    handleRouteChange()
+  }
 )
 
 // 路由发生改变触发
@@ -69,10 +66,11 @@ const handleRouteChange = () => {
   const item = { ...route } as unknown as RouteRecordRaw
   tabsStore.addTagItem(item)
   tabsStore.addCacheItem(item)
-  console.log('路由对象', toRaw(item))
-  console.log('tagList', toRaw(tabsStore.tagList))
-  console.log('cacheList', toRaw(tabsStore.cacheList))
+  // console.log('路由对象', toRaw(item))
+  // console.log('tagList', toRaw(tabsStore.tagList))
+  // console.log('cacheList', toRaw(tabsStore.cacheList))
 }
+handleRouteChange()
 
 // 点击页签
 const handleTabClick = (key: string) => {

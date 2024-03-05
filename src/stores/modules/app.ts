@@ -10,6 +10,17 @@ const storeSetup = () => {
   // 页面切换动画类名
   const transitionName = computed(() => (settingConfig.animate ? settingConfig.animateMode : ''))
 
+  // 深色菜单主题色变量
+  const themeCSSVar = computed<Record<string, string>>(() => {
+    const obj: Record<string, string> = {}
+    const list = generate(settingConfig.themeColor, { list: true, dark: true })
+    list.forEach((color: string, index: number) => {
+      const rgbStr = getRgbStr(color)
+      obj[`--primary-${index + 1}`] = rgbStr
+    })
+    return obj
+  })
+
   // 切换主题 暗黑模式|简白模式
   const toggleTheme = (dark: boolean) => {
     if (dark) {
@@ -33,24 +44,10 @@ const storeSetup = () => {
     })
   }
 
-  // 设置页签可见
-  const setTabVisible = (visible: boolean) => {
-    settingConfig.tab = visible
-  }
-
-  // 设置页签的样式类型
-  const setTabMode = (mode: App.TabType) => {
-    settingConfig.tabMode = mode
-  }
-
-  // 设置是否使用过渡动画
-  const setAnimateVisible = (visible: boolean) => {
-    settingConfig.animate = visible
-  }
-
-  // 设置页面过渡动画类型
-  const setAnimateMode = (mode: App.AnimateType) => {
-    settingConfig.animateMode = mode
+  // 初始化主题
+  const initTheme = () => {
+    if (!settingConfig.themeColor) return
+    setThemeColor(settingConfig.themeColor)
   }
 
   // 设置左侧菜单折叠状态
@@ -61,12 +58,10 @@ const storeSetup = () => {
   return {
     ...toRefs(settingConfig),
     transitionName,
+    themeCSSVar,
     toggleTheme,
     setThemeColor,
-    setTabVisible,
-    setTabMode,
-    setAnimateVisible,
-    setAnimateMode,
+    initTheme,
     setMenuCollapse
   }
 }

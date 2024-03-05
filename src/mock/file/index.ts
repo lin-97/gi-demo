@@ -30,7 +30,7 @@ export default [
       const list = getList(fileType)
       return resultSuccess({
         total: list.length,
-        list: list
+        records: list
       })
     }
   }

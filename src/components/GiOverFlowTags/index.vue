@@ -8,7 +8,12 @@
         <a-tag color="green" size="small">+{{ number }}</a-tag>
         <template #content>
           <a-space wrap>
-            <a-tag v-for="tag in data.filter((i, n) => n >= data.length - number)" color="orange" size="small">
+            <a-tag
+              v-for="tag in data.filter((i, n) => n >= data.length - number)"
+              :key="tag"
+              color="orange"
+              size="small"
+            >
               {{ tag }}
             </a-tag>
           </a-space>
@@ -24,7 +29,7 @@ defineOptions({ name: 'GiOverFlowTags' })
 interface Props {
   data: string[]
 }
-const props = withDefaults(defineProps<Props>(), {
+withDefaults(defineProps<Props>(), {
   data: () => []
 })
 </script>

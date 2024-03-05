@@ -32,16 +32,17 @@ export const constantRoutes: RouteRecordRaw[] = [
     meta: { hidden: true }
   },
   {
-    path: '',
+    path: '/',
     name: 'Home',
     component: Layout,
     redirect: '/home',
+    meta: { hidden: false },
     children: [
       {
         path: '/home',
         component: () => import('@/views/home/index.vue'),
         name: 'Home',
-        meta: { title: '首页', icon: 'icon-dashboard', svgIcon: 'menu-home', hidden: false, affix: true }
+        meta: { title: '首页', icon: 'icon-dashboard', svgIcon: 'menu-home', affix: true, hidden: false }
       }
     ]
   }
@@ -60,7 +61,7 @@ const router = createRouter({
 export function resetRouter() {
   try {
     router.getRoutes().forEach((route) => {
-      const { name, meta, path } = route
+      const { name } = route
       // console.log('name', name, path)
       if (name && name !== 'Home') {
         router.hasRoute(name) && router.removeRoute(name)

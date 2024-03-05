@@ -1,28 +1,63 @@
 <template>
-  <a-menu :mode="mode" :selected-keys="activeMenu" :auto-open-selected="false" @menu-item-click="onMenuItemClick">
-    <MenuItem v-for="(route, index) in sidebarRoutes" :key="route.path" :item="route"></MenuItem>
+  <a-menu
+    :mode="mode"
+    :selected-keys="activeMenu"
+    :auto-open-selected="autoOpenSelected"
+    :accordion="appStore.menuAccordion"
+    :breakpoint="appStore.layout === 'mix' ? 'xl' : undefined"
+    :trigger-props="{ animationName: 'slide-dynamic-origin' }"
+    :collapsed="!isDesktop ? false : appStore.menuCollapse"
+    @menu-item-click="onMenuItemClick"
+    @collapse="onCollapse"
+    :style="menuStyle"
+  >
+    <MenuItem v-for="(route, index) in sidebarRoutes" :key="route.path + index" :item="route"></MenuItem>
   </a-menu>
 </template>
 
-<script setup lang="tsx">
+<script setup lang="ts">
 import { useAppStore, useRouteStore } from '@/stores'
 import MenuItem from './MenuItem.vue'
 import { isExternal } from '@/utils/validate'
+import type { RouteRecordRaw } from 'vue-router'
+import type { CSSProperties } from 'vue'
+import { useDevice } from '@/hooks'
 
 defineOptions({ name: 'Menu' })
+const emit = defineEmits<{
+  (e: 'menuItemClickAfter'): void
+}>()
+
+interface Props {
+  menus?: RouteRecordRaw[]
+  menuStyle?: CSSProperties
+}
+
+const props = withDefaults(defineProps<Props>(), {})
+
+const { isDesktop } = useDevice()
 const route = useRoute()
 const router = useRouter()
 const appStore = useAppStore()
 const routeStore = useRouteStore()
-const sidebarRoutes = computed(() => routeStore.routes)
-console.log('sidebarRoutes', sidebarRoutes.value)
+const sidebarRoutes = computed(() => (props.menus ? props.menus : routeStore.routes))
+// console.log('sidebarRoutes', sidebarRoutes.value)
 
 // 菜单垂直模式/水平模式
 const mode = computed(() => {
-  if (appStore.layout === 'left') {
-    return 'vertical'
-  } else {
+  if (!['left', 'mix'].includes(appStore.layout)) {
     return 'horizontal'
+  } else {
+    return 'vertical'
+  }
+})
+
+// 是否默认展开选中的菜单
+const autoOpenSelected = computed(() => {
+  if (!['left', 'mix'].includes(appStore.layout)) {
+    return false
+  } else {
+    return true
   }
 })
 
@@ -35,12 +70,21 @@ const activeMenu = computed(() => {
   return [path]
 })
 
+// 菜单项点击事件
 const onMenuItemClick = (key: string) => {
   if (isExternal(key)) {
     window.open(key)
-    return false
+    return
   }
   router.push({ path: key })
+  emit('menuItemClickAfter')
+}
+
+// 折叠状态改变时触发
+const onCollapse = (collapsed: boolean) => {
+  if (appStore.layout === 'mix') {
+    appStore.menuCollapse = collapsed
+  }
 }
 </script>
 

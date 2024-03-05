@@ -3,77 +3,31 @@ import { resultSuccess, resultError } from '@/mock/_utils'
 import { menus } from './data/menu'
 import type { MockMenuItem } from './data/type'
 import { mapTree, findTree } from 'xe-utils'
-import { transformPathToName, filterTree } from '@/utils/common'
-
-const getRoleMenus = (value: typeof menus, roles: string[]) => {
-  // 排序过后的数据
-  value.sort((a, b) => (a?.sort ?? 0) - (b?.sort ?? 0))
-  // 如果是超级管理员角色
-  if (roles.includes('role_admin')) {
-    return filterTree<MockMenuItem>(value, (i) => {
-      i.children?.sort((a, b) => (a?.sort ?? 0) - (b?.sort ?? 0))
-      return [1, 2].includes(i.type)
-    })
-  }
-  // 如果是普通用户角色
-  const userRoleMenu = filterTree<MockMenuItem>(value, (i) => {
-    i.children?.sort((a, b) => (a?.sort ?? 0) - (b?.sort ?? 0))
-    return i.path !== '/system' && i.roles.some((i) => roles.includes(i)) && [1, 2].includes(i.type)
-  })
-  return userRoleMenu
-}
+import { filterTree } from '@/utils'
 
 export default [
   {
     url: '/mock/user/routes',
     method: 'get',
-    timeout: 20,
+    timeout: 50,
     response: ({ headers }) => {
       const token = headers.token
-      const isAdmin = token === 'TOKEN-admin'
-      const roles = isAdmin ? ['role_admin'] : ['role_user']
-      const data = getRoleMenus(JSON.parse(JSON.stringify(menus)), roles)
-      const routes = mapTree(data, (item) => {
-        const meta: any = {
-          hidden: item.hidden,
-          keepAlive: item.keepAlive
-        }
-        if (item.title) {
-          meta.title = item.title
-        }
-        if (item.svgIcon) {
-          meta.svgIcon = item.svgIcon
-        }
-        if (item.icon) {
-          meta.icon = item.icon
-        }
-        if (item.showInTabs === false) {
-          meta.showInTabs = item.showInTabs
-        }
-        if (item.affix === true) {
-          meta.affix = item.affix
-        }
-        if (item.activeMenu) {
-          meta.activeMenu = item.activeMenu
-        }
-        if (item.breadcrumb === false) {
-          meta.breadcrumb = item.breadcrumb
-        }
-        if (item.alwaysShow === true) {
-          meta.alwaysShow = item.alwaysShow
-        }
-
-        return {
-          path: item.path,
-          name: transformPathToName(item.path),
-          redirect: item.redirect,
-          component: item.component,
-          meta: meta
-        }
-      })
-
       if (token && ['TOKEN-admin', 'TOKEN-user'].includes(token)) {
-        return resultSuccess(routes)
+        const isAdmin = token === 'TOKEN-admin'
+        const roles = isAdmin ? ['role_admin'] : ['role_user']
+        // 如果是超级管理员角色
+        if (roles.includes('role_admin')) {
+          const data = filterTree<MockMenuItem>(JSON.parse(JSON.stringify(menus)), (i) => [1, 2].includes(i.type))
+          return resultSuccess(data)
+        }
+        // 如果是普通用户角色
+        if (roles.includes('role_user')) {
+          const data = filterTree<MockMenuItem>(JSON.parse(JSON.stringify(menus)), (i) => {
+            return i.path !== '/system' && i.roles.some((i) => roles.includes(i)) && [1, 2].includes(i.type)
+          })
+          return resultSuccess(data)
+        }
+        return resultSuccess([])
       } else {
         return resultError(null, 'token失效', 401)
       }
@@ -85,7 +39,7 @@ export default [
     timeout: 100,
     response: ({ query }) => {
       const { id } = query
-      let obj = findTree(menus, (i) => i.id === id)
+      const obj = findTree(menus, (i) => i.id === id)
       if (obj.item) {
         return resultSuccess(obj.item)
       } else {
@@ -119,7 +73,7 @@ export default [
     method: 'get',
     timeout: 10,
     response: () => {
-      return resultSuccess(JSON.parse(JSON.stringify(menus)))
+      return resultSuccess(mapTree(JSON.parse(JSON.stringify(menus)), (i) => ({ ...i })))
     }
   }
 ] as MockMethod[]

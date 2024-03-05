@@ -14,7 +14,7 @@ export default defineComponent({
       default: 'primary'
     }
   },
-  setup(props, ctx) {
+  setup(props) {
     return () => <span class={['gi-dot', { 'gi-dot-processing': props.animation }, `gi-dot-${props.type}`]}></span>
   }
 })
