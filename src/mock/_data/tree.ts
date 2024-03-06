@@ -1,38 +1,35 @@
-export default [
+import type { MockCateTreeItem } from './_type'
+
+const data: MockCateTreeItem[] = [
   {
     id: 'root',
     name: '所有分类',
     pid: null,
     type: 2,
-
     children: [
       {
         id: 'db9cdd0c2efff6b093b08c13893b5e17',
         name: '工业',
         pid: 'root',
         type: 1,
-
         children: [
           {
             id: '0075db9eb1b9fd742a707f159fd5d1e5',
             name: '新建分类1',
             pid: 'db9cdd0c2efff6b093b08c13893b5e17',
             type: 1,
-
             children: [
               {
                 id: '2e37d1fe73c552b993eb13eaef9bf4c8',
                 name: '新建分类1',
                 pid: '0075db9eb1b9fd742a707f159fd5d1e5',
                 type: 1,
-
                 children: [
                   {
                     id: 'd31dabf98566c4682b748a5ac88f02b3',
                     name: '新建分类1',
                     pid: '2e37d1fe73c552b993eb13eaef9bf4c8',
                     type: 1,
-
                     children: [
                       {
                         id: '0431cbf890176024531519ee947a699b',
@@ -51,7 +48,6 @@ export default [
             name: '规模以上企业',
             pid: 'db9cdd0c2efff6b093b08c13893b5e17',
             type: 1,
-
             children: [
               {
                 id: '11c85e6dceee0b2d1b21110f1069c1c9',
@@ -98,7 +94,6 @@ export default [
         name: '统计年鉴',
         pid: 'root',
         type: 1,
-
         children: [
           {
             id: '200000001',
@@ -249,3 +244,5 @@ export default [
     ]
   }
 ]
+
+export default data

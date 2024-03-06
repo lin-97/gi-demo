@@ -1,9 +1,11 @@
-export default [
+import type { MockFileItem } from './_type'
+
+const data: MockFileItem[] = [
   {
     id: '001',
     name: '文件夹',
     extendName: '',
-    src: null,
+    src: '',
     updateTime: '2022-01-20 18:30:00',
     isDir: true,
     filePath: '/'
@@ -12,7 +14,7 @@ export default [
     id: '002',
     name: '新建文件夹',
     extendName: '',
-    src: null,
+    src: '',
     updateTime: '2022-01-20 18:30:00',
     isDir: true,
     filePath: '/'
@@ -21,7 +23,7 @@ export default [
     id: '003',
     name: '文稿',
     extendName: 'doc',
-    src: null,
+    src: '',
     updateTime: '2022-01-20 18:30:00',
     isDir: false,
     filePath: '/'
@@ -57,7 +59,7 @@ export default [
     id: '006',
     name: '压缩包',
     extendName: 'zip',
-    src: null,
+    src: '',
     updateTime: '2022-01-20 18:30:00',
     isDir: false,
     filePath: '/'
@@ -66,7 +68,7 @@ export default [
     id: '007',
     name: '项目',
     extendName: 'rar',
-    src: null,
+    src: '',
     updateTime: '2022-01-20 18:30:00',
     isDir: false,
     filePath: '/'
@@ -75,7 +77,7 @@ export default [
     id: '008',
     name: '数据表格',
     extendName: 'xls',
-    src: null,
+    src: '',
     updateTime: '2022-01-20 18:30:00',
     isDir: false,
     filePath: '/'
@@ -84,7 +86,7 @@ export default [
     id: '009',
     name: 'PPT演示',
     extendName: 'ppt',
-    src: null,
+    src: '',
     updateTime: '2022-01-20 18:30:00',
     isDir: false,
     filePath: '/'
@@ -93,7 +95,7 @@ export default [
     id: '010',
     name: '文本',
     extendName: 'txt',
-    src: null,
+    src: '',
     updateTime: '2022-01-20 18:30:00',
     isDir: false,
     filePath: '/'
@@ -102,7 +104,7 @@ export default [
     id: '011',
     name: '未知文件',
     extendName: '',
-    src: null,
+    src: '',
     updateTime: '2022-01-20 18:30:00',
     isDir: false,
     filePath: '/'
@@ -111,15 +113,16 @@ export default [
     id: '012',
     name: 'index',
     extendName: 'html',
-    src: null,
+    src: '',
     updateTime: '2022-01-20 18:30:00',
+    isDir: false,
     filePath: '/'
   },
   {
     id: '013',
     name: 'style',
     extendName: 'css',
-    src: null,
+    src: '',
     updateTime: '2022-01-20 18:30:00',
     isDir: false,
     filePath: '/'
@@ -128,7 +131,7 @@ export default [
     id: '014',
     name: '代码',
     extendName: 'js',
-    src: null,
+    src: '',
     updateTime: '2022-01-20 18:30:00',
     isDir: false,
     filePath: '/'
@@ -314,3 +317,5 @@ export default [
     filePath: '/'
   }
 ]
+
+export default data

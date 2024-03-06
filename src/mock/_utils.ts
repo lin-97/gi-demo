@@ -19,3 +19,12 @@ export const resultError = (data: unknown, message: string, code = 500) => {
     success: false
   })
 }
+
+export type MockTokenItem = 'token_admin' | 'token_user'
+/** 目前模拟的token主要以下2个 */
+export const USER_TOKENS: MockTokenItem[] = ['token_admin', 'token_user']
+
+/** 判断是否是管理员 */
+export const isAdmin = (token: string) => {
+  return token === 'token_admin'
+}

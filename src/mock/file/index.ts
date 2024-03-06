@@ -1,6 +1,6 @@
 import type { MockMethod } from 'vite-plugin-mock'
 import { resultSuccess } from '../_utils'
-import fileList from './data'
+import fileList from '../_data/file_list'
 
 const getList = (type: number | string) => {
   if (Number(type) === 0) return fileList
@@ -30,7 +30,7 @@ export default [
       const list = getList(fileType)
       return resultSuccess({
         total: list.length,
-        records: list
+        records: JSON.parse(JSON.stringify(list))
       })
     }
   }

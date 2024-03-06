@@ -1,6 +1,6 @@
-export type AreaItem = { label: string; code: string; children?: AreaItem[] }
+import type { MockAreaItem } from './_type'
 
-export const data: AreaItem[] = [
+const data: MockAreaItem[] = [
   {
     label: '北京',
     code: '110000',
@@ -15836,3 +15836,5 @@ export const data: AreaItem[] = [
     ]
   }
 ]
+
+export default data

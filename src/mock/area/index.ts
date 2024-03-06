@@ -1,7 +1,7 @@
 import type { MockMethod } from 'vite-plugin-mock'
 import { resultSuccess } from '@/mock/_utils'
-import { data as areaData } from './data/area'
 import { findTree } from 'xe-utils'
+import areaData from '../_data/area'
 
 export default [
   {

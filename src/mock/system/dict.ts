@@ -1,62 +1,6 @@
 import type { MockMethod } from 'vite-plugin-mock'
 import { resultSuccess, resultError } from '@/mock/_utils'
-
-const data = [
-  {
-    id: '01',
-    createUserString: '超级管理员',
-    createTime: '2023-09-05 23:24:40',
-    name: '性别',
-    code: 'gender',
-    sort: 1,
-    status: 1,
-    description: '性别字典',
-    list: [
-      {
-        id: '011',
-        name: '男',
-        value: '1',
-        status: 1
-      },
-      {
-        id: '012',
-        name: '女',
-        value: '2',
-        status: 1
-      },
-      {
-        id: '013',
-        name: '未知',
-        value: '0',
-        status: 1
-      }
-    ]
-  },
-  {
-    id: '02',
-    createUserString: '超级管理员',
-    createTime: '2023-09-05 23:24:40',
-    name: '状态',
-    code: 'status',
-    sort: 2,
-    status: 1,
-    description: '通用状态字典',
-    list: [
-      {
-        id: '021',
-        name: '启用',
-        value: 1,
-        status: 1
-      },
-      {
-        id: '022',
-        name: '禁用',
-        value: 0,
-        status: 1
-      }
-    ]
-  }
-]
+import dictData from '../_data/system_dict'
 
 export default [
   {
@@ -65,7 +9,7 @@ export default [
     timeout: 100,
     response: ({ query }) => {
       const { id } = query
-      const obj = data.find((i) => i.id === id)
+      const obj = dictData.find((i) => i.id === id)
       if (obj) {
         return resultSuccess(obj)
       } else {
@@ -96,7 +40,7 @@ export default [
     timeout: 350,
     response: ({ query }) => {
       const { code } = query
-      const obj = data.find((i) => i.code === code)
+      const obj = dictData.find((i) => i.code === code)
       if (obj) {
         return resultSuccess({
           total: obj.list.length,
@@ -128,7 +72,7 @@ export default [
     timeout: 350,
     response: ({ query }) => {
       const { id, code } = query
-      const obj = data.find((i) => i.code === code)
+      const obj = dictData.find((i) => i.code === code)
       if (!obj) {
         return resultError(null, '无法查找数据！', 403)
       }
@@ -145,8 +89,8 @@ export default [
     timeout: 100,
     response: () => {
       return resultSuccess({
-        total: data.length,
-        records: data
+        total: dictData.length,
+        records: dictData
       })
     }
   }

@@ -1,6 +1,6 @@
 import type { MockMethod } from 'vite-plugin-mock'
 import { resultSuccess } from '../_utils'
-import treeData from './tree'
+import treeData from '../_data/tree'
 
 export default [
   {

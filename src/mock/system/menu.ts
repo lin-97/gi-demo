@@ -1,9 +1,9 @@
 import type { MockMethod } from 'vite-plugin-mock'
-import { resultSuccess, resultError } from '@/mock/_utils'
-import { menus } from './data/menu'
-import type { MockMenuItem } from './data/type'
+import { resultSuccess, resultError, USER_TOKENS, isAdmin } from '@/mock/_utils'
 import { mapTree, findTree } from 'xe-utils'
 import { filterTree } from '@/utils'
+import menuData from '../_data/system_menu'
+import type { MockSystemMenuItem } from '../_data/_type'
 
 export default [
   {
@@ -12,17 +12,18 @@ export default [
     timeout: 50,
     response: ({ headers }) => {
       const token = headers.token
-      if (token && ['TOKEN-admin', 'TOKEN-user'].includes(token)) {
-        const isAdmin = token === 'TOKEN-admin'
-        const roles = isAdmin ? ['role_admin'] : ['role_user']
+      if (token && USER_TOKENS.includes(token)) {
+        const roles = isAdmin(token) ? ['role_admin'] : ['role_user']
         // 如果是超级管理员角色
         if (roles.includes('role_admin')) {
-          const data = filterTree<MockMenuItem>(JSON.parse(JSON.stringify(menus)), (i) => [1, 2].includes(i.type))
+          const data = filterTree<MockSystemMenuItem>(JSON.parse(JSON.stringify(menuData)), (i) =>
+            [1, 2].includes(i.type)
+          )
           return resultSuccess(data)
         }
         // 如果是普通用户角色
         if (roles.includes('role_user')) {
-          const data = filterTree<MockMenuItem>(JSON.parse(JSON.stringify(menus)), (i) => {
+          const data = filterTree<MockSystemMenuItem>(JSON.parse(JSON.stringify(menuData)), (i) => {
             return i.path !== '/system' && i.roles.some((i) => roles.includes(i)) && [1, 2].includes(i.type)
           })
           return resultSuccess(data)
@@ -39,7 +40,7 @@ export default [
     timeout: 100,
     response: ({ query }) => {
       const { id } = query
-      const obj = findTree(menus, (i) => i.id === id)
+      const obj = findTree(menuData, (i) => i.id === id)
       if (obj.item) {
         return resultSuccess(obj.item)
       } else {
@@ -60,7 +61,7 @@ export default [
     method: 'get',
     timeout: 350,
     response: () => {
-      const data = mapTree(JSON.parse(JSON.stringify(menus)), (i) => ({
+      const data = mapTree(JSON.parse(JSON.stringify(menuData)), (i) => ({
         id: i.id,
         title: i.title,
         children: i.children
@@ -73,7 +74,7 @@ export default [
     method: 'get',
     timeout: 10,
     response: () => {
-      return resultSuccess(mapTree(JSON.parse(JSON.stringify(menus)), (i) => ({ ...i })))
+      return resultSuccess(mapTree(JSON.parse(JSON.stringify(menuData)), (i) => ({ ...i })))
     }
   }
 ] as MockMethod[]

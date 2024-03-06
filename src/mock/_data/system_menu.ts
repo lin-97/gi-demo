@@ -1,6 +1,6 @@
-import type { MockMenuItem } from './type'
+import type { MockSystemMenuItem } from './_type'
 
-export const menus: MockMenuItem[] = [
+const data: MockSystemMenuItem[] = [
   {
     id: '01',
     parentId: '',
@@ -1132,3 +1132,5 @@ export const menus: MockMenuItem[] = [
     affix: false
   }
 ]
+
+export default data
