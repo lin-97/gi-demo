@@ -147,7 +147,7 @@ const list = [
       }
     }
   }
-  &_comment {
+  &__comment {
     flex: 1;
     padding: 20px 30px;
     padding-left: 16px;
