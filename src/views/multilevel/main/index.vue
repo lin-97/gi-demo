@@ -1,13 +1,13 @@
 <template>
-  <div class="multilevel" :class="{ 'multilevel-h5': !isDesktop }">
-    <div class="tabs">
+  <div class="multilevel" :class="{ 'multilevel--h5': !isDesktop }">
+    <div class="multilevel__tabs">
       <a-tabs hide-content size="medium" :active-key="selectedKeys" @change="(key) => toPage(String(key))">
         <a-tab-pane v-for="item in list" :key="item.path" :title="item.name"> </a-tab-pane>
       </a-tabs>
     </div>
 
-    <div class="main-box">
-      <div class="menu">
+    <div class="multilevel__main">
+      <div class="multilevel__main__menu">
         <a-menu :selected-keys="selectedKeys">
           <a-menu-item v-for="item in list" :key="item.path" @click="toPage(item.path)">
             <template #icon>
@@ -17,7 +17,7 @@
           </a-menu-item>
         </a-menu>
       </div>
-      <div class="content">
+      <div class="multilevel__main__content">
         <ParentView></ParentView>
       </div>
     </div>
@@ -60,21 +60,21 @@ const toPage = (path: string) => {
   overflow: hidden;
   display: flex;
   flex-direction: column;
-  .tabs {
+  &__tabs {
     display: none;
     background-color: var(--color-bg-1);
   }
 
-  .main-box {
+  &__main {
     flex: 1;
     overflow: hidden;
     display: flex;
-    .menu {
+    &__menu {
       width: 220px;
       margin-top: $margin;
       margin-left: $margin;
     }
-    .content {
+    &__content {
       flex: 1;
       height: 100%;
       padding: $margin;
@@ -85,12 +85,12 @@ const toPage = (path: string) => {
   }
 }
 
-.multilevel-h5 {
+.multilevel--h5 {
   flex-direction: column;
-  .tabs {
+  .multilevel__tabs {
     display: block;
   }
-  .menu {
+  .multilevel__main__menu {
     display: none;
   }
 }

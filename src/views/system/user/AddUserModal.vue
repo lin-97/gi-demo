@@ -8,7 +8,7 @@
     @before-ok="save"
     @close="close"
   >
-    <a-form ref="FormRef" :model="form" :rules="rules" size="medium" auto-label-width>
+    <a-form ref="formRef" :model="form" :rules="rules" size="medium" auto-label-width>
       <a-row>
         <a-col :xs="24" :sm="24" :md="12" :lg="12" :xl="12" :xxl="12">
           <a-form-item label="用户名" field="username">
@@ -116,7 +116,7 @@ const roleOptions = computed(() => roleList.value.map((i) => ({ label: i.name, v
 const { deptList, getDeptList } = useDept()
 getDeptList()
 
-const FormRef = ref<FormInstance>()
+const formRef = ref<FormInstance>()
 const userId = ref('')
 const isEdit = computed(() => !!userId.value)
 const title = computed(() => (isEdit.value ? '编辑用户' : '新增用户'))
@@ -166,7 +166,7 @@ const edit = async (id: string) => {
 }
 
 const close = () => {
-  FormRef.value?.resetFields()
+  formRef.value?.resetFields()
   resetForm()
 }
 
@@ -174,8 +174,8 @@ defineExpose({ add, edit })
 
 const save = async () => {
   try {
-    const obj = await FormRef.value?.validate()
-    if (obj) return false
+    const valid = await formRef.value?.validate()
+    if (valid) return false
     const res = await saveSystemUser(form)
     if (res.data) {
       Message.success('模拟保存成功')

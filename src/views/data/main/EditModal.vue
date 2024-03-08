@@ -4,21 +4,21 @@
     :title="title"
     width="90%"
     :modal-style="{ maxWidth: '520px' }"
-    :on-before-ok="confirm"
+    @before-ok="confirm"
     @close="formRef?.resetFields"
   >
     <a-row justify="center">
       <a-form ref="formRef" :model="form" :rules="rules" size="medium" auto-label-width :style="{ width: '380px' }">
-        <a-form-item field="name" label="姓名">
+        <a-form-item label="姓名" field="name">
           <a-input v-model="form.name" placeholder="请输入姓名" allow-clear />
           <template #extra>
             <div>仅支持中文姓名</div>
           </template>
         </a-form-item>
-        <a-form-item field="phone" label="手机号">
+        <a-form-item label="手机号" field="phone">
           <a-input v-model="form.phone" placeholder="请输入手机号" allow-clear />
         </a-form-item>
-        <a-form-item field="status" label="状态">
+        <a-form-item label="状态" field="status">
           <a-radio-group v-model="form.status">
             <a-radio :value="false">关闭</a-radio>
             <a-radio :value="true">开启</a-radio>
@@ -44,7 +44,7 @@
         <template #expand-icon="{ active }">
           <icon-right :class="{ gi_rotate_90deg: active }" />
         </template>
-        <a-row justify="space-between" v-for="(item, index) in list" :key="index">
+        <a-row v-for="(item, index) in list" :key="index" justify="space-between">
           <span>{{ item.name }}</span>
           <a-checkbox-group>
             <a-checkbox value="1">管理员</a-checkbox>
@@ -68,7 +68,7 @@ const { form } = useForm({
   status: false
 })
 
-const rules = {
+const rules: FormInstance['rules'] = {
   name: [
     { required: true, message: '请输入姓名' },
     { match: Regexp.OnlyCh, message: '只能是中文姓名' },
@@ -86,8 +86,8 @@ const title = computed(() => (isEditMode.value ? '编辑' : '新增'))
 const formRef = ref<FormInstance>()
 
 const confirm = async () => {
-  const flag = await formRef.value?.validate()
-  if (flag) {
+  const valid = await formRef.value?.validate()
+  if (valid) {
     return false
   } else {
     await new Promise((resolve) => setTimeout(resolve, 1500))

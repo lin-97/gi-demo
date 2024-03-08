@@ -2,13 +2,13 @@
   <div class="about">
     <a-space direction="vertical" :size="20" fill class="about__content">
       <a-descriptions title="生产依赖" bordered table-layout="fixed" :column="{ xs: 1, sm: 1, md: 2, lg: 3 }">
-        <a-descriptions-item v-for="(item, index) of data.dependencies" :label="index" :key="index">
+        <a-descriptions-item v-for="(item, index) of data.dependencies" :key="index" :label="index">
           <a-tag>{{ item }}</a-tag>
         </a-descriptions-item>
       </a-descriptions>
 
       <a-descriptions title="开发依赖" bordered table-layout="fixed" :column="{ xs: 1, sm: 1, md: 2, lg: 3 }">
-        <a-descriptions-item v-for="(item, index) of data.devDependencies" :label="index" :key="index">
+        <a-descriptions-item v-for="(item, index) of data.devDependencies" :key="index" :label="index">
           <a-tag>{{ item }}</a-tag>
         </a-descriptions-item>
       </a-descriptions>

@@ -1,18 +1,18 @@
 <template>
   <div class="right-box">
-    <section class="head-box">
+    <section class="right-box__header">
       <a-avatar :size="60" :trigger-icon-style="{ color: '#3491FA' }">
         <img :src="userStore.avatar" />
         <template #trigger-icon>
           <IconCamera />
         </template>
       </a-avatar>
-      <section class="user-name">{{ userStore.name }}</section>
-      <section class="label-list">
-        <div><icon-user /><span>前端开发工程师</span></div>
-        <div><icon-safe /><span>前端</span></div>
-        <div><icon-location /><span>广州</span></div>
-      </section>
+      <section class="username">{{ userStore.name }}</section>
+      <ul class="list">
+        <li><icon-user /><span>前端开发工程师</span></li>
+        <li><icon-safe /><span>前端</span></li>
+        <li><icon-location /><span>广州</span></li>
+      </ul>
       <a-button type="primary" class="edit-btn"
         ><template #icon> <icon-edit /> </template>编辑信息</a-button
       >
@@ -30,7 +30,7 @@
       </a-tab-pane>
     </a-tabs>
 
-    <section class="comment-box">
+    <section class="right-box__comment">
       <a-comment
         v-for="(item, index) in list"
         :key="index"
@@ -122,43 +122,41 @@ const list = [
   border-radius: 2px;
   overflow: hidden;
   overflow-y: auto;
-}
-
-.head-box {
-  min-height: 204px;
-  height: fit-content;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  color: var(--color-white);
-  background-color: rgb(var(--primary-6));
-  .user-name {
-    font-size: 16px;
-    font-weight: 500;
-    margin: 10px 0;
-  }
-  .label-list {
+  &__header {
+    min-height: 204px;
+    height: fit-content;
     display: flex;
-    margin-bottom: 10px;
-    > div {
-      margin-right: 15px;
-      span {
-        margin-left: 2px;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: var(--color-white);
+    background-color: rgb(var(--primary-6));
+    .username {
+      font-size: 16px;
+      font-weight: 500;
+      margin: 10px 0;
+    }
+    .list {
+      display: flex;
+      margin-bottom: 10px;
+      > li {
+        margin-right: 15px;
+        span {
+          margin-left: 2px;
+        }
       }
     }
   }
-}
-
-.comment-box {
-  flex: 1;
-  padding: 20px 30px;
-  padding-left: 16px;
-  overflow: auto;
-  .comment-item {
-    margin-bottom: 15px;
-    .text {
-      color: $color-text-2;
+  &_comment {
+    flex: 1;
+    padding: 20px 30px;
+    padding-left: 16px;
+    overflow: auto;
+    .comment-item {
+      margin-bottom: 15px;
+      .text {
+        color: $color-text-2;
+      }
     }
   }
 }

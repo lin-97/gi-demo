@@ -8,7 +8,7 @@
     @before-ok="save"
     @close="close"
   >
-    <a-form ref="FormRef" :model="form" :rules="rules" size="medium" auto-label-width>
+    <a-form ref="formRef" :model="form" :rules="rules" size="medium" auto-label-width>
       <a-form-item label="角色名称" field="name">
         <a-input v-model.trim="form.name" placeholder="请输入角色名称" allow-clear :max-length="10"> </a-input>
       </a-form-item>
@@ -48,7 +48,7 @@ const emit = defineEmits<{
   (e: 'save-success'): void
 }>()
 
-const FormRef = ref<FormInstance>()
+const formRef = ref<FormInstance>()
 const roleId = ref('')
 const isEdit = computed(() => !!roleId.value)
 const title = computed(() => (isEdit.value ? '编辑角色' : '新增角色'))
@@ -86,7 +86,7 @@ const edit = async (id: string) => {
 }
 
 const close = () => {
-  FormRef.value?.resetFields()
+  formRef.value?.resetFields()
   resetForm()
 }
 
@@ -94,8 +94,8 @@ defineExpose({ add, edit })
 
 const save = async () => {
   try {
-    const obj = await FormRef.value?.validate()
-    if (obj) return false
+    const valid = await formRef.value?.validate()
+    if (valid) return false
     const res = await saveSystemRole(form)
     if (res.data) {
       Message.success('模拟保存成功')

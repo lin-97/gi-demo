@@ -34,7 +34,7 @@ onMounted(() => {
 })
 
 onActivated(() => {
-  Message.info(`${route.meta?.title}-触发了 onActivated`)
+  Message.success(`${route.meta?.title}-触发了 onActivated`)
 })
 </script>
 

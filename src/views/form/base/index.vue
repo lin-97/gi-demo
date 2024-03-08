@@ -6,7 +6,7 @@
           <a-button>返回</a-button>
         </template>
         <a-space wrap :size="30">
-          <a-form ref="formRef" :model="form" :rules="rules" auto-label-width class="form">
+          <a-form ref="formRef" :model="form" :rules="rules" auto-label-width class="form-base__form">
             <a-form-item label="姓名" field="name">
               <a-input v-model="form.name" placeholder="请输入姓名" allow-clear />
               <template #extra>
@@ -129,7 +129,7 @@ const form = reactive({
   isRead: false
 })
 
-const rules = {
+const rules: FormInstance['rules'] = {
   name: [
     { required: true, message: '请输入姓名' },
     { maxLength: 4, message: '姓名不超过4个字符' },
@@ -149,15 +149,15 @@ const reset = () => {
 }
 
 const submit = async () => {
-  const info = await formRef.value?.validate()
-  if (info) return
+  const valid = await formRef.value?.validate()
+  if (valid) return
   Message.success('提交通过')
 }
 </script>
 
 <style lang="scss" scoped>
 .form-base {
-  .form {
+  &__form {
     margin-top: 40px;
   }
   :deep(.vue-codemirror) {

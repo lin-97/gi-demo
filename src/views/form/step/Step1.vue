@@ -34,7 +34,7 @@
 </template>
 
 <script setup lang="ts">
-import type { Form } from '@arco-design/web-vue'
+import type { FormInstance } from '@arco-design/web-vue'
 import type { StepForm } from './type'
 
 defineOptions({ name: 'Step1' })
@@ -56,19 +56,19 @@ const form: StepForm = reactive({
   amount: '1980'
 })
 
-const rules = {
+const rules: FormInstance['rules'] = {
   payAccount: [{ required: true, message: '请选择付款账户' }],
   recAccount: [{ required: true, message: '请输入收款账户' }],
   recName: [{ required: true, message: '请输入收款人姓名' }],
   amount: [{ required: true, message: '请输入转账金额' }]
 }
 
-const formRef = ref<InstanceType<typeof Form>>()
+const formRef = ref<FormInstance>()
 
 // 下一步
 const next = async () => {
-  const res = await formRef.value?.validate()
-  if (!res) {
+  const valid = await formRef.value?.validate()
+  if (!valid) {
     emit('next', form)
   }
 }

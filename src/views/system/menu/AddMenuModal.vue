@@ -8,7 +8,7 @@
     @before-ok="save"
     @close="close"
   >
-    <a-form ref="FormRef" :model="form" :rules="formRules" auto-label-width>
+    <a-form ref="formRef" :model="form" :rules="formRules" auto-label-width>
       <a-form-item label="菜单类型" field="type">
         <a-radio-group v-model="form.type" type="button" :disabled="isEdit" @change="onChangeType">
           <a-radio :value="1">目录</a-radio>
@@ -204,7 +204,7 @@ const menuSelectTree = computed(() => {
   return arr
 })
 
-const FormRef = ref<FormInstance>()
+const formRef = ref<FormInstance>()
 
 const menuId = ref('')
 const visible = ref(false)
@@ -252,7 +252,7 @@ const formRules = computed(() => {
 
 // 切换类型清除校验
 const onChangeType = () => {
-  FormRef.value?.clearValidate()
+  formRef.value?.clearValidate()
 }
 
 const add = () => {
@@ -271,7 +271,7 @@ const edit = async (id: string) => {
 }
 
 const close = () => {
-  FormRef.value?.resetFields()
+  formRef.value?.resetFields()
   resetForm()
 }
 
@@ -279,8 +279,8 @@ defineExpose({ add, edit })
 
 const save = async () => {
   try {
-    const info = await FormRef.value?.validate()
-    if (info) return false
+    const valid = await formRef.value?.validate()
+    if (valid) return false
     const res = await saveSystemMenu(form)
     if (res.data) {
       Message.success('模拟保存成功')

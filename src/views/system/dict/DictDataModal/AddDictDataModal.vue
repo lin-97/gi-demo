@@ -85,8 +85,8 @@ defineExpose({ add, edit })
 
 const save = async () => {
   try {
-    const obj = await formRef.value?.validate()
-    if (obj) return false
+    const valid = await formRef.value?.validate()
+    if (valid) return false
     const res = await saveSystemDictData(form)
     if (res.data) {
       Message.success('模拟保存成功')

@@ -9,8 +9,8 @@
     @before-ok="save"
   >
     <a-row justify="center" align="center">
-      <a-form ref="FormRef" :model="form" auto-label-width :style="{ width: '80%' }">
-        <a-form-item field="name" label="文件名称" :rules="[{ required: true, message: '请输入文件名称' }]">
+      <a-form ref="formRef" :model="form" auto-label-width :style="{ width: '80%' }">
+        <a-form-item label="文件名称" field="name" :rules="[{ required: true, message: '请输入文件名称' }]">
           <a-input v-model="form.name" placeholder="请输入" allow-clear />
         </a-form-item>
       </a-form>
@@ -53,10 +53,10 @@ const saveApi = (): Promise<boolean> => {
   )
 }
 
-const FormRef = ref<FormInstance | null>(null)
+const formRef = ref<FormInstance | null>(null)
 const save: InstanceType<typeof Modal>['onBeforeOk'] = async () => {
-  const flag = await FormRef.value?.validate()
-  if (flag) return false
+  const valid = await formRef.value?.validate()
+  if (valid) return false
   return await saveApi()
 }
 </script>

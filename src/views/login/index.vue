@@ -9,7 +9,7 @@
       <a-col :xs="24" :sm="12" :md="9">
         <div class="login-right">
           <a-form
-            ref="FormRef"
+            ref="formRef"
             :size="isMobile() ? 'large' : 'medium'"
             :model="form"
             :rules="rules"
@@ -84,12 +84,12 @@ const checked = ref(false)
 const { loading, setLoading } = useLoading()
 const errorMessage = ref('')
 
-const FormRef = ref<FormInstance>()
+const formRef = ref<FormInstance>()
 // 点击登录
 const login = async () => {
   try {
-    const flag = await FormRef.value?.validate()
-    if (flag) return
+    const valid = await formRef.value?.validate()
+    if (valid) return
     setLoading(true)
     await userStore.login(form)
     const { redirect, ...othersQuery } = router.currentRoute.value.query

@@ -8,7 +8,7 @@
     @before-ok="save"
     @close="close"
   >
-    <a-form ref="FormRef" :model="form" :rules="rules" size="medium" auto-label-width>
+    <a-form ref="formRef" :model="form" :rules="rules" size="medium" auto-label-width>
       <a-form-item label="上级部门" field="parentId">
         <a-tree-select
           v-model="form.parentId"
@@ -61,7 +61,7 @@ const emit = defineEmits<{
   (e: 'save-success'): void
 }>()
 
-const FormRef = ref<FormInstance>()
+const formRef = ref<FormInstance>()
 const deptId = ref('')
 const visible = ref(false)
 const isEdit = computed(() => !!deptId.value)
@@ -101,7 +101,7 @@ const edit = async (id: string) => {
 }
 
 const close = () => {
-  FormRef.value?.resetFields()
+  formRef.value?.resetFields()
   resetForm()
 }
 
@@ -109,8 +109,8 @@ defineExpose({ add, edit })
 
 const save = async () => {
   try {
-    const obj = await FormRef.value?.validate()
-    if (obj) return false
+    const valid = await formRef.value?.validate()
+    if (valid) return false
     const res = await saveSystemDept(form)
     if (res.data) {
       Message.success('模拟保存成功')

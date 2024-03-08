@@ -9,7 +9,7 @@
     @close="cancel"
     @before-ok="save"
   >
-    <a-form ref="FormRef" :model="form" :style="{ width: '100%' }" auto-label-width>
+    <a-form ref="formRef" :model="form" :style="{ width: '100%' }" auto-label-width>
       <a-form-item field="path" label="目标路径" :rules="[{ required: true, message: '请输入目标路径' }]">
         <a-input v-model="form.path" placeholder="请输入" />
       </a-form-item>
@@ -121,10 +121,10 @@ const saveApi = (): Promise<boolean> => {
   )
 }
 
-const FormRef = ref<FormInstance | null>(null)
+const formRef = ref<FormInstance | null>(null)
 const save: InstanceType<typeof Modal>['onBeforeOk'] = async () => {
-  const flag = await FormRef.value?.validate()
-  if (flag) return false
+  const valid = await formRef.value?.validate()
+  if (valid) return false
   return await saveApi()
 }
 </script>

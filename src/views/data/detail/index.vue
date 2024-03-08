@@ -1,7 +1,7 @@
 <template>
   <div class="detail" ref="containerRef">
     <a-affix :target="(containerRef as HTMLElement)">
-      <a-page-header title="详情" @back="back" class="head">
+      <a-page-header title="详情" class="detail__header" @back="back">
         <template #extra>
           <a-button @click="back">返回</a-button>
         </template>
@@ -95,7 +95,7 @@ const back = () => {
 
 .detail {
   overflow: auto;
-  .head {
+  &__header {
     background: var(--color-bg-1);
   }
 }

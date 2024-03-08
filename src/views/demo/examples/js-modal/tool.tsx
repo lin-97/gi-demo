@@ -9,9 +9,9 @@ export const openAddUserModal = () => {
     phone: ''
   })
 
-  const FormRef = ref<FormInstance | null>(null)
+  const formRef = ref<FormInstance | null>(null)
 
-  const rules = {
+  const rules: FormInstance['rules'] = {
     name: [
       { required: true, message: '请输入姓名' },
       { match: Regexp.OnlyCh, message: '只能是中文姓名' },
@@ -34,7 +34,7 @@ export const openAddUserModal = () => {
   Modal.open({
     title: '添加用户',
     content: () => (
-      <Form ref={FormRef} model={form} rules={rules}>
+      <Form ref={formRef} model={form} rules={rules}>
         <Form.Item label="用户名" field="name">
           <a-input v-model={form.name} placeholder="请输入用户名" max-length={4} allow-clear />
         </Form.Item>
@@ -45,8 +45,8 @@ export const openAddUserModal = () => {
     ),
     okText: '添加',
     onBeforeOk: async () => {
-      const flag = await FormRef.value?.validate()
-      if (flag) return false
+      const valid = await formRef.value?.validate()
+      if (valid) return false
       try {
         await saveUserApi()
         return true

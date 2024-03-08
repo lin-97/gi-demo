@@ -1,6 +1,6 @@
 <template>
-  <div class="page">
-    <div class="alert">
+  <div class="user">
+    <div class="user__alert">
       <a-alert type="normal">
         <template #icon>
           <icon-exclamation-circle-fill />
@@ -16,11 +16,11 @@
 
     <a-divider />
 
-    <div class="user">
+    <div class="user__info">
       <a-row>
         <a-col :xs="24" :sm="24" :md="24" :lg="10" :xl="8" :xxl="7">
           <section class="user-card">
-            <div class="head">
+            <div class="user-card__header">
               <a-avatar :size="60" :trigger-icon-style="{ color: '#3491FA' }">
                 <img :src="userStore.avatar" />
                 <template #trigger-icon>
@@ -31,7 +31,7 @@
               <p class="desc">尘缘已定，不念过往</p>
             </div>
 
-            <ul class="list">
+            <ul class="user-card__list">
               <li class="list-item">
                 <span class="icon"><icon-bookmark :stroke-width="1" :size="16" /></span>
                 <span>前端工程师</span>
@@ -45,7 +45,7 @@
               </li>
             </ul>
 
-            <a-row justify="space-around" class="img-list">
+            <a-row justify="space-around" class="user-card__images">
               <img src="https://file.iviewui.com/admin-pro-dist/img/icon-social-weibo.cbf658a0.svg" />
               <img src="https://file.iviewui.com/admin-pro-dist/img/icon-social-zhihu.1dc5a4ff.svg" />
               <img src="https://file.iviewui.com/admin-pro-dist/img/icon-social-facebook.e95df60e.svg" />
@@ -103,21 +103,19 @@ onActivated(() => {
 </script>
 
 <style lang="scss" scoped>
-.page {
+.user {
   background-color: var(--color-bg-1);
-  .alert {
+  &__alert {
     padding: $padding;
     padding-bottom: 0;
   }
+  &__info {
+    box-sizing: border-box;
+    overflow: hidden;
+    display: flex;
+  }
 }
 
-.user {
-  // flex: 1;
-  // height: 100%;
-  box-sizing: border-box;
-  overflow: hidden;
-  display: flex;
-}
 .user-card {
   width: 100%;
   height: fit-content;
@@ -125,7 +123,7 @@ onActivated(() => {
   box-sizing: border-box;
   background: var(--color-bg-1);
   border-radius: 2px;
-  .head {
+  &__header {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -142,17 +140,17 @@ onActivated(() => {
       color: $color-text-3;
     }
   }
-  .list {
+  &__list {
     margin-top: 20px;
     .list-item {
       padding-bottom: 16px;
       display: flex;
-      .icon {
+      > .icon {
         margin-right: 8px;
       }
     }
   }
-  .img-list {
+  &__images {
     margin: 10px 0;
     img {
       width: 32px;
