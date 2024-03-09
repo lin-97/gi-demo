@@ -96,7 +96,13 @@ export default defineConfig(({ command, mode }) => {
         output: {
           chunkFileNames: 'static/js/[name]-[hash].js',
           entryFileNames: 'static/js/[name]-[hash].js',
-          assetFileNames: 'static/[ext]/[name]-[hash].[ext]'
+          assetFileNames: 'static/[ext]/[name]-[hash].[ext]',
+          // 自定义chunk 如果chunk超出警告，以下方式也可优化单个chunk文件过大
+          manualChunks: {
+            arco: ['@arco-design/web-vue'],
+            chart: ['echarts', 'vue-echarts'],
+            vue: ['vue', 'vue-router', 'pinia', '@vueuse/core']
+          }
         }
       }
     }
