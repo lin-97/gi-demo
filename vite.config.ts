@@ -12,6 +12,36 @@ export default defineConfig(({ command, mode }) => {
   const env = loadEnv(mode, process.cwd()) as ImportMetaEnv
 
   return {
+    // 开发或生产环境服务的公共基础路径
+    base: env.VITE_BASE,
+    // 路径别名
+    resolve: {
+      alias: {
+        '~': fileURLToPath(new URL('./', import.meta.url)),
+        '@': fileURLToPath(new URL('./src', import.meta.url))
+      }
+    },
+    // 引入sass全局样式变量
+    css: {
+      preprocessorOptions: {
+        scss: {
+          additionalData: `@import "@/styles/var.scss";`
+        }
+      }
+    },
+    server: {
+      // 服务启动时是否自动打开浏览器
+      open: false,
+      // 本地跨域代理 -> 代理到服务器的接口地址
+      proxy: {
+        '/api': {
+          target: env.VITE_API_BASE_URL, // 后台服务器地址
+          changeOrigin: true, // 是否允许不同源
+          secure: false, // 支持https
+          rewrite: (path) => path.replace(/^\/api/, '/api')
+        }
+      }
+    },
     plugins: [
       vue(),
       vueJsx(),
@@ -46,31 +76,6 @@ export default defineConfig(({ command, mode }) => {
         `
       })
     ],
-    resolve: {
-      alias: {
-        '~': fileURLToPath(new URL('./', import.meta.url)),
-        '@': fileURLToPath(new URL('./src', import.meta.url))
-      }
-    },
-    base: env.VITE_PUBLIC_PATH,
-    // 引入sass全局样式变量
-    css: {
-      preprocessorOptions: {
-        scss: {
-          additionalData: `@import "@/styles/var.scss";`
-        }
-      }
-    },
-    server: {
-      proxy: {
-        '/api': {
-          target: env.VITE_API_BASE_URL, // 后台服务器地址
-          changeOrigin: true, // 是否允许不同源
-          secure: false, // 支持https
-          rewrite: (path) => path.replace(/^\/api/, '/api')
-        }
-      }
-    },
     // 构建
     build: {
       chunkSizeWarningLimit: 2000, // 消除打包大小超过500kb警告
