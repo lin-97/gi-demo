@@ -32,6 +32,7 @@ const { width } = useWindowSize()
 
 const options: Options = {
   form: {},
+  col: { xs: 24, sm: 12 },
   btns: { hide: true }
 }
 
@@ -40,7 +41,6 @@ const initColumns: Columns = [
     type: 'input',
     label: '姓名',
     field: 'name',
-    col: { xs: 24, sm: 12 },
     props: {
       maxLength: 4
     },
@@ -54,7 +54,6 @@ const initColumns: Columns = [
     type: 'input',
     label: '手机',
     field: 'phone',
-    col: { xs: 24, sm: 12 },
     props: {
       maxLength: 11
     },
@@ -67,7 +66,6 @@ const initColumns: Columns = [
     type: 'select',
     label: '性别',
     field: 'sex',
-    col: { xs: 24, sm: 12 },
     options: [
       { label: '男', value: 1 },
       { label: '女', value: 0 }
@@ -76,8 +74,7 @@ const initColumns: Columns = [
   {
     type: 'date-picker',
     label: '生日',
-    field: 'birthday',
-    col: { xs: 24, sm: 12 }
+    field: 'birthday'
   },
   {
     type: 'checkbox-group',
@@ -95,7 +92,6 @@ const initColumns: Columns = [
     type: 'input-number',
     label: '排序',
     field: 'sort',
-    col: { xs: 24, sm: 12 },
     props: {
       min: 0
     }
@@ -104,7 +100,6 @@ const initColumns: Columns = [
     type: 'radio-group',
     label: '状态',
     field: 'status',
-    col: { xs: 24, sm: 12 },
     options: [
       { label: '启用', value: 1 },
       { label: '禁用', value: 0 }
@@ -113,34 +108,29 @@ const initColumns: Columns = [
   {
     type: 'rate',
     label: '评分',
-    field: 'mark',
-    col: { xs: 24, sm: 12 }
+    field: 'mark'
   },
   {
     type: 'switch',
     label: '是否隐藏',
     field: 'hide',
-    col: { xs: 24, sm: 12 },
     item: { extra: '隐藏成绩项' }
   },
   {
     type: 'slider',
     label: '成绩',
-    field: 'grade',
-    col: { xs: 24, sm: 24 }
+    field: 'grade'
   },
   {
     type: 'cascader',
     label: '城市',
     field: 'city',
-    col: { xs: 24, sm: 12 },
     options: cityOptions
   },
   {
     type: 'tree-select',
     label: '部门',
     field: 'dept',
-    col: { xs: 24, sm: 12 },
     data: deptData
   },
   {

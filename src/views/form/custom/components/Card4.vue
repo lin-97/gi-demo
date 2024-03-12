@@ -52,6 +52,7 @@ const formRef = ref<InstanceType<typeof GiForm>>()
 
 const options: Options = {
   form: {},
+  col: { xs: 24, sm: 12 },
   btns: { hide: true }
 }
 
@@ -60,7 +61,6 @@ const columns: Columns<typeof form> = reactive([
     type: 'input',
     label: '姓名',
     field: 'name',
-    col: { xs: 24, sm: 12 },
     props: {
       maxLength: 4
     },
@@ -74,7 +74,6 @@ const columns: Columns<typeof form> = reactive([
     type: 'input',
     label: '手机',
     field: 'phone',
-    col: { xs: 24, sm: 12 },
     props: {
       maxLength: 11
     },

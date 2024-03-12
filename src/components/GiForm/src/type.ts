@@ -88,8 +88,9 @@ export interface ColumnsItem<F = any> {
 export interface Options {
   form: Omit<A.FormInstance['$props'], 'model'>
   row?: Partial<typeof import('@arco-design/web-vue')['Row']['__defaults']>
+  col?: A.ColProps
   btns?: { hide?: boolean; span?: number; col?: A.ColProps; searchBtnText?: string }
-  fold?: { enable?: boolean; index?: number }
+  fold?: { enable?: boolean; index?: number; defaultCollapsed?: boolean }
 }
 
 export type Columns<F = any> = ColumnsItem<F>[]

@@ -58,30 +58,34 @@
 import { usePagination } from '@/hooks'
 import { getPersonList, type PersonItem } from '@/apis'
 import type { Options, Columns } from '@/components/GiForm'
+import { useBreakpointIndex } from '@/hooks'
 
 defineOptions({ name: 'TableBase' })
 
 const form = reactive({})
 
-const col = { xs: 24, sm: 12, md: 12, lg: 8, xl: 8, xxl: 6 }
 const options: Options = reactive({
   form: { layout: 'inline' },
-  btns: { col: col },
-  fold: { enable: true, index: 2 }
+  col: { xs: 24, sm: 12, md: 12, lg: 8, xl: 8, xxl: 6 },
+  btns: { col: { xs: 24, sm: 12, md: 12, lg: 8, xl: 8, xxl: 6 } },
+  fold: { enable: true, index: 2, defaultCollapsed: true }
+})
+
+useBreakpointIndex((index) => {
+  // 自适应折叠，让折叠后始终一行显示
+  options.fold && (options.fold.index = index)
 })
 
 const columns: Columns = reactive([
   {
     type: 'input',
     label: '姓名',
-    field: 'name',
-    col: col
+    field: 'name'
   },
   {
     type: 'input',
     label: '手机',
     field: 'phone',
-    col: col,
     props: {
       maxLength: 11
     }
@@ -90,7 +94,6 @@ const columns: Columns = reactive([
     type: 'select',
     label: '类型',
     field: 'type',
-    col: col,
     options: [
       { label: '党员', value: 1 },
       { label: '群众', value: 2 }
@@ -99,14 +102,12 @@ const columns: Columns = reactive([
   {
     type: 'date-picker',
     label: '创建日期',
-    field: 'createTime',
-    col: col
+    field: 'createTime'
   },
   {
     type: 'input',
     label: '地址',
-    field: 'address',
-    col: col
+    field: 'address'
   }
 ])
 

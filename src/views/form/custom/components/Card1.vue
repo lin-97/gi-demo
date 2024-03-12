@@ -40,6 +40,7 @@ const form = reactive({
 
 const options: Options = {
   form: { layout: 'inline' },
+  col: { xs: 24, sm: 12 },
   fold: { enable: true, index: 0 },
   btns: { col: { xs: 24, sm: 12 } }
 }
@@ -49,7 +50,6 @@ const columns: Columns = reactive([
     type: 'input',
     label: '姓名',
     field: 'name',
-    col: { xs: 24, sm: 12 },
     props: {
       maxLength: 4
     }
@@ -58,7 +58,6 @@ const columns: Columns = reactive([
     type: 'input',
     label: '手机',
     field: 'phone',
-    col: { xs: 24, sm: 12 },
     props: {
       maxLength: 11
     }
@@ -67,7 +66,6 @@ const columns: Columns = reactive([
     type: 'select',
     label: '状态',
     field: 'status',
-    col: { xs: 24, sm: 12 },
     options: [
       { label: '启用', value: 1 },
       { label: '禁用', value: 0 }

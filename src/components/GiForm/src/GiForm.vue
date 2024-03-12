@@ -5,7 +5,7 @@
         <a-col
           v-if="!isHide(item.hide)"
           :span="item.span || 12"
-          v-bind="item.col"
+          v-bind="item.col || item.span ? item.col : options.col"
           v-show="index <= (options.fold?.index || 0) || (index >= (options.fold?.index || 0) && !collapsed)"
         >
           <a-form-item v-bind="item.item" :label="item.label" :field="item.field" :rules="item.rules">
@@ -188,11 +188,11 @@ const valueChange = (value: any, field: string) => {
   emit('update:modelValue', Object.assign(props.modelValue, { [field]: value }))
 }
 
-const collapsed = ref(false)
+const collapsed = ref(props.options.fold?.defaultCollapsed ?? false)
 const formRef = ref<A.FormInstance>()
 defineExpose({ formRef })
 
-const isHide = (hide?: ColumnsItemHide) => {
+const isHide = (hide?: ColumnsItemHide<boolean | object>) => {
   if (hide === undefined) return false
   if (typeof hide === 'boolean') return hide
   if (typeof hide === 'function') {

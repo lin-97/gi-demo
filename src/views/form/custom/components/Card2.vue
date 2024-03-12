@@ -55,7 +55,8 @@ const formRef = ref<InstanceType<typeof GiForm>>()
 
 const options: Options = reactive({
   form: {},
-  btns: { hide: true }
+  btns: { hide: true },
+  col: { xs: 24, sm: 12 }
 })
 
 const columns: Columns<typeof form> = reactive([
@@ -63,7 +64,6 @@ const columns: Columns<typeof form> = reactive([
     type: 'input',
     label: '姓名',
     field: 'name',
-    col: { xs: 24, sm: 12 },
     props: {
       maxLength: 4
     },
@@ -77,7 +77,6 @@ const columns: Columns<typeof form> = reactive([
     type: 'input',
     label: '手机',
     field: 'phone',
-    col: { xs: 24, sm: 12 },
     props: {
       maxLength: 11
     },
@@ -90,7 +89,6 @@ const columns: Columns<typeof form> = reactive([
     type: 'select',
     label: '性别',
     field: 'sex',
-    col: { xs: 24, sm: 12 },
     options: [
       { label: '男', value: 1 },
       { label: '女', value: 0 }
@@ -99,14 +97,13 @@ const columns: Columns<typeof form> = reactive([
   {
     type: 'date-picker',
     label: '生日',
-    field: 'birthday',
-    col: { xs: 24, sm: 12 }
+    field: 'birthday'
   },
   {
     type: 'checkbox-group',
     label: '爱好',
     field: 'hobbys',
-    col: { xs: 24 },
+    span: 24,
     options: [
       { label: '电影', value: '01' },
       { label: '音乐', value: '02' },
@@ -118,7 +115,6 @@ const columns: Columns<typeof form> = reactive([
     type: 'input-number',
     label: '排序',
     field: 'sort',
-    col: { xs: 24, sm: 12 },
     props: {
       min: 0
     }
@@ -127,7 +123,6 @@ const columns: Columns<typeof form> = reactive([
     type: 'radio-group',
     label: '状态',
     field: 'status',
-    col: { xs: 24, sm: 12 },
     options: [
       { label: '启用', value: 1 },
       { label: '禁用', value: 0 }
@@ -136,21 +131,19 @@ const columns: Columns<typeof form> = reactive([
   {
     type: 'rate',
     label: '评分',
-    field: 'mark',
-    col: { xs: 24, sm: 12 }
+    field: 'mark'
   },
   {
     type: 'switch',
     label: '是否隐藏',
     field: 'hide',
-    col: { xs: 24, sm: 12 },
     item: { extra: '隐藏成绩项' }
   },
   {
     type: 'slider',
     label: '成绩',
     field: 'grade',
-    col: { xs: 24, sm: 24 },
+    span: 24,
     hide: (i) => {
       i.hide && (i.grade = 0)
       return i.hide === true
@@ -160,14 +153,12 @@ const columns: Columns<typeof form> = reactive([
     type: 'cascader',
     label: '城市',
     field: 'city',
-    col: { xs: 24, sm: 12 },
     options: cityOptions
   },
   {
     type: 'tree-select',
     label: '部门',
     field: 'dept',
-    col: { xs: 24, sm: 12 },
     data: deptData
   },
   {
