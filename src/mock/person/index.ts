@@ -31,7 +31,7 @@ const getTableListData = (params: any) => {
   const data: any[] = []
   for (let i = 0; i < params.pageSize; i++) {
     data.push({
-      id: '@integer(10,999999)',
+      id: Random.guid(),
       index: i,
       name: params.name !== '' ? params.name : '@cname()',
       phone: '15578728810',
@@ -44,7 +44,7 @@ const getTableListData = (params: any) => {
       time: `@time('HH:mm')`,
       'proportion|1-100': 10,
       'no|100000-10000000': 100000,
-      status: params.status != '' ? Number(params.status) : Math.random() > 0.5 ? 1 : 0, // 0或1
+      'status|0-1': 0,
       color: Mock.mock('@hex'),
       hobbys: getHobbysList(Math.floor(Math.random() * 9))
     })

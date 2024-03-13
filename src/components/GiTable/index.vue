@@ -1,5 +1,5 @@
 <template>
-  <div class="gi-table" :class="{ fullscreen: isFullscreen }" ref="giTableRef">
+  <div class="gi-table" :class="{ 'gi-table--fullscreen': isFullscreen }" ref="giTableRef">
     <a-row justify="space-between" align="center">
       <a-space wrap>
         <slot name="custom-extra"></slot>
@@ -36,9 +36,10 @@
         </a-radio-group>
       </a-space>
     </a-row>
-    <div class="table-box">
+    <div class="gi-table__container">
       <a-table :stripe="stripe" :size="size" :bordered="{ cell: isBordered }" v-bind="attrs" ref="tableRef">
-        <template v-for="k in Object.keys(slots)" #[k] :key="k"> <slot :name="k"></slot> </template
+        <template v-for="key in Object.keys(slots)" :key="key" #[key]="scoped">
+          <slot :key="key" :name="key" v-bind="scoped"></slot> </template
       ></a-table>
     </div>
   </div>
@@ -76,7 +77,7 @@ defineExpose({ tableRef })
   flex-direction: column;
   overflow: hidden;
   background: var(--color-bg-1);
-  &.fullscreen {
+  &--fullscreen {
     padding: $padding;
     position: fixed;
     left: 0;
@@ -85,7 +86,7 @@ defineExpose({ tableRef })
     bottom: 0;
     z-index: 1001;
   }
-  .table-box {
+  &__container {
     flex: 1;
     overflow: hidden;
   }
