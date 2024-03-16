@@ -1,16 +1,20 @@
 <template>
-  <li class="gi-option-item" :class="{ more: more, active: active }" @click="handleClick">
-    <section class="wrap">
-      <span class="icon-wrapper">
+  <li
+    class="gi-option-item"
+    :class="{ 'gi-option-item--more': props.more, 'gi-option-item--active': props.active }"
+    @click="handleClick"
+  >
+    <div class="gi-option-item__wrapper">
+      <span class="gi-option-item__icon">
         <slot name="icon">
-          <component :is="icon" :size="16" :stroke-width="2"></component>
+          <GiSvgIcon :name="props.icon"></GiSvgIcon>
         </slot>
       </span>
-      <slot
-        ><span>{{ label }}</span></slot
-      >
-    </section>
-    <IconRight v-if="more" />
+      <slot>
+        <span class="gi-option-item__label">{{ props.label }}</span>
+      </slot>
+    </div>
+    <IconRight v-if="props.more" />
   </li>
 </template>
 
@@ -24,14 +28,16 @@ interface Props {
   active?: boolean
 }
 
-withDefaults(defineProps<Props>(), {
+const props = withDefaults(defineProps<Props>(), {
   icon: '',
   label: '',
   more: false,
   active: false
 })
 
-const emit = defineEmits(['click'])
+const emit = defineEmits<{
+  (e: 'click'): void
+}>()
 
 const handleClick = () => {
   emit('click')
@@ -43,28 +49,28 @@ const handleClick = () => {
   padding: 0 5px 0 10px;
   height: 34px;
   line-height: 34px;
-  cursor: pointer;
   user-select: none;
   position: relative;
   display: flex;
   align-items: center;
   color: var(--color-text-2);
   font-size: 14px;
-  .wrap {
+  cursor: pointer;
+  &__wrapper {
     display: flex;
     align-items: center;
-    .icon-wrapper {
-      margin-right: 8px;
-      display: flex;
-      align-items: center;
-    }
   }
-  &.active,
+  &__icon {
+    margin-right: 8px;
+    display: flex;
+    align-items: center;
+  }
+  &--active,
   &:hover {
     color: rgb(var(--primary-6));
     background: var(--color-primary-light-1);
   }
-  &.more {
+  &--more {
     justify-content: space-between;
   }
 }
