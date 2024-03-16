@@ -9,12 +9,14 @@
     <!-- 分类树 -->
     <div class="cate-tree__tree">
       <a-scrollbar style="height: 100%; overflow: auto" outer-style="height: 100%">
-        <a-tree ref="treeRef" show-line size="mini" :data="treeData" :fieldNames="{ key: 'id' }" @select="select">
-          <template #icon="node">
-            <GiSvgIcon name="com-file-close" :size="16" v-if="!node.children"></GiSvgIcon>
-            <GiSvgIcon name="com-file-open" :size="16" v-else-if="node.children"></GiSvgIcon>
-            <GiSvgIcon name="com-file" :size="16" v-else></GiSvgIcon>
-          </template>
+        <a-tree
+          ref="treeRef"
+          show-line
+          size="mini"
+          :data="(treeData as unknown as TreeNodeData[])"
+          :field-names="{ key: 'id' }"
+          @select="select"
+        >
           <template #title="node">
             <a-trigger
               trigger="contextMenu"
@@ -22,9 +24,18 @@
               animation-name="slide-dynamic-origin"
               auto-fit-transform-origin
               position="bl"
-              update-at-scroll
+              scroll-to-close
+              v-model:popup-visible="node.popupVisible"
             >
-              <div>{{ node.name }}</div>
+              <div v-if="!node.isEdit" @contextmenu="onContextmenu(node)">{{ node.name }}</div>
+              <a-input
+                v-else
+                ref="inputRef"
+                v-model="node.name"
+                size="mini"
+                placeholder="请填写"
+                @blur="onBlur"
+              ></a-input>
               <template #content>
                 <RightMenu
                   :tree-data="treeData"
@@ -40,10 +51,14 @@
   </div>
 </template>
 
-<script setup lang="ts">
-import { Message, type TreeInstance } from '@arco-design/web-vue'
+<script setup lang="tsx">
+import { Message, Modal } from '@arco-design/web-vue'
+import type { TreeInstance, TreeNodeData, InputInstance } from '@arco-design/web-vue'
 import { getCateTreeData, type CateItem } from '@/apis'
+import { mapTree } from 'xe-utils'
 import RightMenu from './RightMenu.vue'
+import GiSvgIcon from '@/components/GiSvgIcon/index.vue'
+import type { VNode } from 'vue'
 
 interface Props {
   type?: number
@@ -55,11 +70,16 @@ const props = withDefaults(defineProps<Props>(), {
   placeholder: '请输入关键词'
 })
 
+interface TreeCateItem extends CateItem {
+  icon: (node: TreeCateItem) => VNode
+  popupVisible: boolean
+  isEdit: boolean
+}
+
 const loading = ref(false)
 const treeRef = ref<TreeInstance>()
 const inputValue = ref('')
-const treeData = ref<CateItem[]>([])
-const popupVisible = ref(false)
+const treeData = ref<TreeCateItem[]>([])
 
 const emit = defineEmits<{
   (e: 'node-click'): void
@@ -74,7 +94,16 @@ const getCateTree = async () => {
   try {
     loading.value = true
     const res = await getCateTreeData()
-    treeData.value = res.data
+    treeData.value = mapTree(res.data, (i) => ({
+      ...i,
+      popupVisible: false,
+      isEdit: false,
+      icon: (node: any) => {
+        if (node.expanded && !node.isLeaf) return <GiSvgIcon name="file-open" size={16}></GiSvgIcon>
+        if (!node.expanded && !node.isLeaf) return <GiSvgIcon name="file-close" size={16}></GiSvgIcon>
+        return <GiSvgIcon name="file" size={16}></GiSvgIcon>
+      }
+    }))
     nextTick(() => {
       treeRef.value?.expandAll()
     })
@@ -84,25 +113,68 @@ const getCateTree = async () => {
 }
 getCateTree()
 
+const inputRef = ref<InputInstance>()
+// 保存当前右键的节点
+const contextmenuNode = ref<TreeCateItem | null>(null)
+const onContextmenu = (node: TreeCateItem) => {
+  if (contextmenuNode.value?.isEdit !== undefined) {
+    contextmenuNode.value.isEdit = false
+  }
+  contextmenuNode.value = node
+}
+
+// 关闭右键菜单弹框
+const closeRightMenuPopup = () => {
+  if (contextmenuNode.value?.popupVisible) {
+    contextmenuNode.value.popupVisible = false
+  }
+}
+
 // 右键菜单项点击
 const onMenuItemClick = (mode: string) => {
-  mode !== 'move' && Message.info(mode)
+  if (mode !== 'move') {
+    Message.info(`${mode}-${contextmenuNode.value?.name ?? ''}`)
+    closeRightMenuPopup()
+  }
+  if (mode === 'edit') {
+    if (contextmenuNode.value?.isEdit !== undefined) {
+      contextmenuNode.value.isEdit = true
+      nextTick(() => {
+        inputRef.value?.focus()
+      })
+    }
+  }
+  if (mode === 'delete') {
+    Modal.warning({
+      title: '提示',
+      content: '是否确认删除？',
+      hideCancel: false,
+      okButtonProps: { status: 'danger' },
+      onBeforeOk: () => {
+        return new Promise((resolve) => setTimeout(() => resolve(true), 300))
+      }
+    })
+  }
 }
 
 // 移动树节点点击
 const onTreeNodeClick = (data: CateItem) => {
   Message.info(data.name)
-  popupVisible.value = false
+  closeRightMenuPopup()
+}
+
+// 输入框脱焦
+const onBlur = () => {
+  if (contextmenuNode.value?.isEdit) {
+    contextmenuNode.value.isEdit = false
+  }
+  getCateTree()
 }
 </script>
 
 <style lang="scss" scoped>
 :deep(.arco-tree-node-title-text) {
   white-space: nowrap;
-}
-
-.switcher-icon {
-  fill: var(--color-text-2);
 }
 
 .cate-tree {

@@ -2,6 +2,10 @@ import { isExternal } from '@/utils/validate'
 import { mapTree, browse } from 'xe-utils'
 import _ from 'lodash'
 
+export function getProperty<T, K extends keyof T>(obj: T, key: K): T[K] {
+  return obj[key]
+}
+
 /**
  * @desc 去除空格
  * @param {string} str - 字符串

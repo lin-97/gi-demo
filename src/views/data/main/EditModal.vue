@@ -81,8 +81,8 @@ const rules: FormInstance['rules'] = {
 const list = [{ name: '新增' }, { name: '编辑' }, { name: '重命名' }, { name: '分享' }, { name: '删除' }]
 
 const visible = ref(false)
-const isEditMode = computed(() => !!form.id) // 判断是新增还是编辑模式
-const title = computed(() => (isEditMode.value ? '编辑' : '新增'))
+const isEdit = computed(() => !!form.id) // 判断是新增还是编辑模式
+const title = computed(() => (isEdit.value ? '编辑' : '新增'))
 const formRef = ref<FormInstance>()
 
 const confirm = async () => {
@@ -91,7 +91,7 @@ const confirm = async () => {
     return false
   } else {
     await new Promise((resolve) => setTimeout(resolve, 1500))
-    Message.success(!isEditMode.value ? '新增成功' : '编辑成功')
+    Message.success(!isEdit.value ? '新增成功' : '编辑成功')
     return true
   }
 }

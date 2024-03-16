@@ -14,7 +14,8 @@
       position="right"
       trigger="click"
       :content-style="{ padding: 0, overflow: 'hidden' }"
-      :unmount-on-close="false"
+      :unmount-on-close="true"
+      v-model:popup-visible="popupVisible"
     >
       <a-menu-item @click="onClick('move')">
         <template #icon><icon-export :size="16" :stroke-width="3" /></template>
@@ -32,11 +33,6 @@
             :fieldNames="{ key: 'id', title: 'name' }"
             @select="onTreeSelect"
           >
-            <template #icon="node">
-              <GiSvgIcon name="com-file-close" :size="16" v-if="!node.children"></GiSvgIcon>
-              <GiSvgIcon name="com-file-open" :size="16" v-else-if="node.children"></GiSvgIcon>
-              <GiSvgIcon name="com-file" :size="16" v-else></GiSvgIcon>
-            </template>
           </a-tree>
         </a-scrollbar>
       </template>
@@ -66,11 +62,14 @@ const emit = defineEmits<{
   (e: 'on-tree-node-click', nodeData: CateItem): void
 }>()
 
+const popupVisible = ref(false)
+
 const onClick = (mode: string) => {
   emit('on-menu-item-click', mode)
 }
 
 const onTreeSelect: TreeInstance['onSelect'] = (selectedKeys, data) => {
+  popupVisible.value = false
   emit('on-tree-node-click', data.node as CateItem)
 }
 </script>

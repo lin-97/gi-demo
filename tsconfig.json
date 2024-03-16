@@ -29,5 +29,5 @@
   },
   "extends": "@vue/tsconfig/tsconfig.web.json", // 指定要继承的配置文件
   "include": ["src/**/*", "src/**/*.vue", "vite.config.ts"], // 指定被编译文件所在的目录
-  "exclude": ["node_modules", "dist", "**/*.js"], // 指定不需要被编译的目录
+  "exclude": ["node_modules", "dist", "**/*.js"] // 指定不需要被编译的目录
 }
