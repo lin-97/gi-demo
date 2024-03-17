@@ -135,6 +135,8 @@ npm config set registry https://registry.npmjs.org/
 
 其他优点：方便搜索（横线连接 (kebab-case)对搜索没那么方便）
 
+<img src="https://gitee.com/lin0716/gi-image/raw/master/comp-name.png" />
+
 
 
 **为什么css类名推荐横线连接 (kebab-case)**
