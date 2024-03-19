@@ -872,7 +872,7 @@ export interface Options {
 
 基本示例
 
-<img src="https://gitee.com/lin0716/gi-image/raw/master/form/GiFormDemo.png" />
+<img src="https://gitee.com/lin0716/gi-image/raw/master/form/GiForm-code.png" />
 
 <img src="https://gitee.com/lin0716/gi-image/raw/master/form/form1.png" />
 
@@ -880,7 +880,7 @@ export interface Options {
 
 **`注意：GiForm 组件的最新使用方式如下图`**
 
-<img src="https://gitee.com/lin0716/gi-image/raw/master/form/GiFormDemoNew.png" />
+<img src="https://gitee.com/lin0716/gi-image/raw/master/form/GiForm-code-new.png" />
 
 #### Hooks 目录结构
 
@@ -1211,13 +1211,13 @@ const getTableData = async () => {
 
 使用
 
-<img src="https://gitee.com/lin0716/gi-image/raw/master/table/useTableDemo.png" />
+<img src="https://gitee.com/lin0716/gi-image/raw/master/table/useTable-code.png" />
 
 **提示**
 
 使用 useTable 的时候不传入类型，tableData 也会根据入参自动推导出类型
 
-<img src="https://gitee.com/lin0716/gi-image/raw/master/table/useTableDemo2.png" />
+<img src="https://gitee.com/lin0716/gi-image/raw/master/table/useTable-code2.png" />
 
 **`最后提示`**
 
