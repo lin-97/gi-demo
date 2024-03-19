@@ -1,5 +1,5 @@
 <div align="center">
-	<img style="width: 80px;height: 80px" src="https://gitee.com/lin0716/gi-image/raw/master/md-logo.gif"/>
+	<img style="width: 80px;height: 80px" src="https://gitee.com/lin0716/gi-image/raw/master/gi-logo.gif"/>
 	<h1>Gi Admin Pro</h1>
 </div>
 
@@ -9,7 +9,7 @@
 
 **Gi Admin Pro** 是一个基于 Vue3、Vite、TypeScript、Arco Design Vue、Pinia、VueUse 等的免费中后台模版，它使用了最新的前端技术栈，内置丰富的主题配置，有着极高的代码规范，基于 mock 实现的动态数据展示，开箱即用的模板，也可用于学习参考。
 
-> **Gi 前缀含义：** G：代表全局      i：代表我的
+> **Gi 前缀含义：** G：代表全局 i：代表我的
 >
 > Gi 用来定义全局组件前缀，如 GiNavBar、GiTitle、GiLoading
 
@@ -24,9 +24,9 @@
 
 <a href="http://lin0716.gitee.io/gi-demo" target="_blank">Gi Admin Pro 预览地址</a>
 
-账号1：**admin**   密码：**123456**
+账号 1：**admin** 密码：**123456**
 
-账号2：**user**  密码：**123456**
+账号 2：**user** 密码：**123456**
 
 ## 代码仓库
 
@@ -34,27 +34,27 @@
 
 ## 项目示例图
 
-<img src="https://gitee.com/lin0716/gi-image/raw/master/md-demo1.jpg" />
+<img src="https://gitee.com/lin0716/gi-image/raw/master/demo/01.jpg" />
 
-<img src="https://gitee.com/lin0716/gi-image/raw/master/md-demo2.jpg" />
+<img src="https://gitee.com/lin0716/gi-image/raw/master/demo/02.jpg" />
 
-<img src="https://gitee.com/lin0716/gi-image/raw/master/md-demo3.jpg" />
+<img src="https://gitee.com/lin0716/gi-image/raw/master/demo/03.jpg" />
 
-<img src="https://gitee.com/lin0716/gi-image/raw/master/md-demo4.jpg" />
+<img src="https://gitee.com/lin0716/gi-image/raw/master/demo/04.jpg" />
 
-<img src="https://gitee.com/lin0716/gi-image/raw/master/md-demo5.jpg" />
+<img src="https://gitee.com/lin0716/gi-image/raw/master/demo/05.jpg" />
 
-<img src="https://gitee.com/lin0716/gi-image/raw/master/md-demo6.jpg" />
+<img src="https://gitee.com/lin0716/gi-image/raw/master/demo/06.jpg" />
 
-<img src="https://gitee.com/lin0716/gi-image/raw/master/md-demo7.jpg" />
+<img src="https://gitee.com/lin0716/gi-image/raw/master/demo/07.jpg" />
 
-<img src="https://gitee.com/lin0716/gi-image/raw/master/md-demo8.jpg" />
+<img src="https://gitee.com/lin0716/gi-image/raw/master/demo/08.jpg" />
 
-<img src="https://gitee.com/lin0716/gi-image/raw/master/md-demo9.jpg" />
+<img src="https://gitee.com/lin0716/gi-image/raw/master/demo/09.jpg" />
 
-<img src="https://gitee.com/lin0716/gi-image/raw/master/md-demo10.jpg" />
+<img src="https://gitee.com/lin0716/gi-image/raw/master/demo/10.jpg" />
 
-<img src="https://gitee.com/lin0716/gi-image/raw/master/md-demo11.jpg" />
+<img src="https://gitee.com/lin0716/gi-image/raw/master/demo/11.jpg" />
 
 ## 安装使用
 
@@ -107,23 +107,17 @@ npm run build
 
 还原镜像
 
-~~~
+```
 npm config set registry https://registry.npmjs.org/
-~~~
+```
 
-
-
-**为什么选择Arco组件库，而不是Element Plus?**
+**为什么选择 Arco 组件库，而不是 Element Plus?**
 
 [Element Plus 对比 Arco design](https://juejin.cn/post/7294219581894705190)
 
-
-
-**为什么全局组件使用前缀Gi?**
+**为什么全局组件使用前缀 Gi?**
 
 全局组件设置了按需引入，使用前缀，方便和局部组件做区分
-
-
 
 **为什么组件使用单词大写开头 (PascalCase)命名写法？**
 
@@ -137,45 +131,35 @@ npm config set registry https://registry.npmjs.org/
 
 <img src="https://gitee.com/lin0716/gi-image/raw/master/comp-name.png" />
 
-
-
-**为什么css类名推荐横线连接 (kebab-case)**
+**为什么 css 类名推荐横线连接 (kebab-case)**
 
 参考大部分大网站，都是这个命名规则，别整： `.myClass`这种
-
-
 
 **页面显示异常？**
 
 **`页面必须要保留一个根元素！！！`**
 
-
-
-**Vue3权限管理对路由进行排序和格式化处理方式**
+**Vue3 权限管理对路由进行排序和格式化处理方式**
 
 使用 **xe-utils** 这个 js 库，简化数据处理
 
 [文章地址](https://juejin.cn/post/7301260557222805567)
 
-
-
 **页面无法缓存？**
 
 请检查页面是否配置了`name`，且名称是否与数据一致
 
-~~~js
+```js
 defineOptions({ name: 'AboutIndex' })
-~~~
+```
 
-~~~js
+```js
 {
   path: '/about/index',
   name: 'AboutIndex', // 检查name是否一致
   component: () => import('@/views/about/index.vue')
 }
-~~~
-
-
+```
 
 ## 项目规范
 
@@ -433,10 +417,12 @@ let result = marks >= 30 ? 'Pass' : 'Fail'
 
 ```js
 // 优化前
-if (type === 1 || type === 2 || type === 3) {}
+if (type === 1 || type === 2 || type === 3) {
+}
 
 // 优化后, 此种方式在vue模板也可使用
-if([1, 2, 3].includes(type)) {}
+if ([1, 2, 3].includes(type)) {
+}
 ```
 
 使用箭头函数简化函数
@@ -661,7 +647,7 @@ const submit = () => {
 </script>
 ```
 
-页面模板CSS类名采用半角连接符(-)
+页面模板 CSS 类名采用半角连接符(-)
 
 ```vue
 <template>
@@ -816,19 +802,17 @@ const onEdit = (item: PersonItem) => {
 </script>
 ```
 
+#### GiForm 使用文档
 
-
-#### GiForm使用文档
-
-GiForm是一个JSON配置表单组件，能够快速通过JSON构建表单布局
+GiForm 是一个 JSON 配置表单组件，能够快速通过 JSON 构建表单布局
 
 | props   | 说明       |
 | ------- | ---------- |
 | options | 表单配置项 |
 
-options结构如下：
+options 结构如下：
 
-~~~js
+```js
 import type * as A from '@arco-design/web-vue'
 
 export type FormType =
@@ -884,21 +868,19 @@ export interface Options {
   btns?: { hide?: boolean; span?: number; col?: A.ColProps } // 查询和重置按钮的配置
   fold?: { enable?: boolean; index?: number } // 是否折叠，enable: true开启折叠功能，index表示折叠的位置
 }
-~~~
+```
 
 基本示例
 
-<img src="https://gitee.com/lin0716/gi-image/raw/master/GiFormDemo.png" />
+<img src="https://gitee.com/lin0716/gi-image/raw/master/form/GiFormDemo.png" />
 
-<img src="https://gitee.com/lin0716/gi-image/raw/master/form1.png" />
+<img src="https://gitee.com/lin0716/gi-image/raw/master/form/form1.png" />
 
-<img src="https://gitee.com/lin0716/gi-image/raw/master/form2.png" />
+<img src="https://gitee.com/lin0716/gi-image/raw/master/form/form2.png" />
 
 **`注意：GiForm 组件的最新使用方式如下图`**
 
-<img src="https://gitee.com/lin0716/gi-image/raw/master/GiFormDemoNew.png" />
-
-
+<img src="https://gitee.com/lin0716/gi-image/raw/master/form/GiFormDemoNew.png" />
 
 #### Hooks 目录结构
 
@@ -955,9 +937,7 @@ getDeptList() // 建议在页面调用 hooks 的方法，比较直观（不在ho
 
 #### TSX 方式使用表格
 
-<img src="https://gitee.com/lin0716/gi-image/raw/master/md-tsx-table.png" />
-
-
+<img src="https://gitee.com/lin0716/gi-image/raw/master/table/tsx-table.png" />
 
 #### usePagination(hooks) 的使用
 
@@ -1225,27 +1205,23 @@ const getTableData = async () => {
 </script>
 ```
 
-
-
 #### useTable(hooks) 的使用
 
-<img src="https://gitee.com/lin0716/gi-image/raw/master/useTable.png" />
+<img src="https://gitee.com/lin0716/gi-image/raw/master/table/useTable.png" />
 
 使用
 
-<img src="https://gitee.com/lin0716/gi-image/raw/master/useTableDemo.png" />
+<img src="https://gitee.com/lin0716/gi-image/raw/master/table/useTableDemo.png" />
 
 **提示**
 
-使用useTable的时候不传入类型，tableData也会根据入参自动推导出类型
+使用 useTable 的时候不传入类型，tableData 也会根据入参自动推导出类型
 
-<img src="https://gitee.com/lin0716/gi-image/raw/master/useTableDemo2.png" />
+<img src="https://gitee.com/lin0716/gi-image/raw/master/table/useTableDemo2.png" />
 
 **`最后提示`**
 
 在最新版的`useTable`中， `selectKeys`已经改为`selectedKeys`，同时加了其他新功能，具体查看源码
-
-
 
 #### useForm(hooks) 的使用
 
@@ -1253,7 +1229,7 @@ const getTableData = async () => {
 
 代码：`useForm.ts`
 
-~~~js
+```js
 import { reactive } from 'vue'
 import _ from 'lodash'
 
@@ -1271,11 +1247,11 @@ export default function <F extends object>(initValue: F) {
 
   return { form, resetForm }
 }
-~~~
+```
 
 **使用**
 
-~~~js
+```js
 import { useForm } from '@/hooks'
 
 const { form, resetForm } = useForm({
@@ -1287,22 +1263,22 @@ const { form, resetForm } = useForm({
 
 // 重置表单数据
 resetForm()
-~~~
+```
 
 **注意**
 
 `resetForm`方法为什么要加上以下代码
 
-~~~js
+```js
 for (const key in form) {
   delete form[key]
 }
-~~~
+```
 
-比如一个编辑弹窗，点击编辑，会根据id查详情，有时候为了方便，直接把详情的数据赋值到form里面，这就会导致重置的时候，有详情的属性冗余，以下举个例子
+比如一个编辑弹窗，点击编辑，会根据 id 查详情，有时候为了方便，直接把详情的数据赋值到 form 里面，这就会导致重置的时候，有详情的属性冗余，以下举个例子
 
-~~~js
-const form = { name: '' };
+```js
+const form = { name: '' }
 const detail = { name: '张三', status: 1 }
 Object.assign(form, detail)
 console.log(form) // { name: '张三', status: 1 }
@@ -1310,9 +1286,7 @@ console.log(form) // { name: '张三', status: 1 }
 // 如果直接重置
 Object.assign(form, { name: '' })
 console.log(form) // { name: '', status: 1 } 有额外属性冗余，status会不经意的随着保存操作提交到后台
-~~~
-
-
+```
 
 #### TSX 方式调起弹窗
 
@@ -1320,33 +1294,31 @@ console.log(form) // { name: '', status: 1 } 有额外属性冗余，status会�
 
 tool.tsx
 
-<img src="https://gitee.com/lin0716/gi-image/raw/master/md-tsx-modal2.png" />
+<img src="https://gitee.com/lin0716/gi-image/raw/master/modal/tsx-modal2.png" />
 
 使用
 
-<img src="https://gitee.com/lin0716/gi-image/raw/master/md-tsx-modal-use.png" />
-
-
+<img src="https://gitee.com/lin0716/gi-image/raw/master/modal/tsx-modal-use.png" />
 
 ##### 方式 2
 
 AddUserForm.vue
 
-<img src="https://gitee.com/lin0716/gi-image/raw/master/md-tsx-modal1.png" />
+<img src="https://gitee.com/lin0716/gi-image/raw/master/modal/tsx-modal1.png" />
 
 使用
 
-<img src="https://gitee.com/lin0716/gi-image/raw/master/md-tsx-modal-use.png" />
+<img src="https://gitee.com/lin0716/gi-image/raw/master/modal/tsx-modal-use.png" />
 
 ##### 方式 3
 
 `@/views/file/components/FileRenameModal/index.vue`
 
-<img src="https://gitee.com/lin0716/gi-image/raw/master/md-tsx-modal3-1.png" />
+<img src="https://gitee.com/lin0716/gi-image/raw/master/modal/tsx-modal3-1.png" />
 
 `@/views/file/components/index.ts`
 
-<img src="https://gitee.com/lin0716/gi-image/raw/master/md-tsx-modal3-2.png" />
+<img src="https://gitee.com/lin0716/gi-image/raw/master/modal/tsx-modal3-2.png" />
 
 使用
 
@@ -1361,8 +1333,6 @@ const rename = (item: FileItem) => {
 }
 </script>
 ```
-
-
 
 #### 组件使用建议
 
@@ -1424,7 +1394,7 @@ Link 组件使用场景
 
 建议采用全小写，多单词使用-连接符(参考大部分网站，包括掘金，码云等，都是采用这个规则)
 
-或者采用`BEM`命名规范 [BEM命名规范](https://getbem.com/naming/)
+或者采用`BEM`命名规范 [BEM 命名规范](https://getbem.com/naming/)
 
 ```css
 // 推荐
@@ -1448,31 +1418,35 @@ Link 组件使用场景
 .List-Item;
 ```
 
-**BEM命名规范**
+**BEM 命名规范**
 
-~~~html
+```html
 <div class="article">
-    <div class="article__body">
-        <div class="tag"></div>
-        <button class="article__button--primary"></button>
-        <button class="article__button--success"></button>
-    </div>
+  <div class="article__body">
+    <div class="tag"></div>
+    <button class="article__button--primary"></button>
+    <button class="article__button--success"></button>
+  </div>
 </div>
-~~~
+```
 
-~~~less
+```less
 .article {
-    max-width: 1200px;
-    &__body {
-        padding: 20px;
+  max-width: 1200px;
+  &__body {
+    padding: 20px;
+  }
+  &__button {
+    padding: 5px 8px;
+    &--primary {
+      background: blue;
     }
-    &__button {
-        padding: 5px 8px;
-        &--primary {background: blue;}
-        &--success {background: green;}
+    &--success {
+      background: green;
     }
+  }
 }
-~~~
+```
 
 #### CSS 全局类名-命名规范
 
@@ -1549,33 +1523,61 @@ Link 组件使用场景
   transform: rotate(-180deg);
 }
 
-.gi_mt { margin-top: $margin; }
+.gi_mt {
+  margin-top: $margin;
+}
 
-.gi_mb { margin-bottom: $margin; }
+.gi_mb {
+  margin-bottom: $margin;
+}
 
-.gi_ml { margin-left: $margin; }
+.gi_ml {
+  margin-left: $margin;
+}
 
-.gi_mr { margin-right: $margin; }
+.gi_mr {
+  margin-right: $margin;
+}
 
-.gi_mx { margin: 0 $margin; }
+.gi_mx {
+  margin: 0 $margin;
+}
 
-.gi_my { margin: $margin 0; }
+.gi_my {
+  margin: $margin 0;
+}
 
-.gi_m0 { margin: 0; }
+.gi_m0 {
+  margin: 0;
+}
 
-.gi_pt { padding-top: $margin; }
+.gi_pt {
+  padding-top: $margin;
+}
 
-.gi_pb { padding-bottom: $margin; }
+.gi_pb {
+  padding-bottom: $margin;
+}
 
-.gi_pl { padding-left: $margin; }
+.gi_pl {
+  padding-left: $margin;
+}
 
-.gi_pr { padding-right: $margin; }
+.gi_pr {
+  padding-right: $margin;
+}
 
-.gi_px { padding: 0 $padding; }
+.gi_px {
+  padding: 0 $padding;
+}
 
-.gi_py { padding: $padding 0; }
+.gi_py {
+  padding: $padding 0;
+}
 
-.gi_p0 { padding: 0; }
+.gi_p0 {
+  padding: 0;
+}
 
 // 使用场景，页面内容超出高度会自动滚动
 .gi_page {
@@ -1626,7 +1628,7 @@ $padding: 16px; // 盒子和内容的间距
 
 建议尽量使用全局 scss 变量来开发，可以有效提高效率和团队协作
 
-<img src="https://gitee.com/lin0716/gi-image/raw/master/md-gap.png" />
+<img src="https://gitee.com/lin0716/gi-image/raw/master/gap.png" />
 
 #### CSS 的命名词汇
 
@@ -1807,8 +1809,6 @@ $padding: 16px; // 盒子和内容的间距
 <a href="http://49.234.61.19/tool/cssTriangle" target="_blank">在线三角形样式生成器</a>
 
 <a href="https://go.itab.link/" target="_blank">iTab</a>
-
-
 
 ## 捐赠
 
