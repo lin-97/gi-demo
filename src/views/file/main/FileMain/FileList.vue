@@ -22,12 +22,12 @@
             >
               <div class="file-name" @click="handleRowClick(record)">
                 <div class="file-image">
-                  <FileImg :data="record"></FileImg>
+                  <FileImage :data="record"></FileImage>
                 </div>
                 <span>{{ record.name }}</span>
               </div>
               <template #content>
-                <FileRightMenu :file-info="record" @click="handleRightMenuItemClick($event, record)"></FileRightMenu>
+                <FileRightMenu :data="record" @click="handleRightMenuItemClick($event, record)"></FileRightMenu>
               </template>
             </a-trigger>
           </template>
@@ -59,7 +59,7 @@
 </template>
 
 <script setup lang="ts">
-import FileImg from './FileImg.vue'
+import FileImage from './FileImage.vue'
 import FileRightMenu from './FileRightMenu.vue'
 import type { FileItem } from '@/apis'
 import type { TableRowSelection } from '@arco-design/web-vue'

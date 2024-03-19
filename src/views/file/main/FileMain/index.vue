@@ -1,7 +1,7 @@
 <template>
   <div class="file-main">
-    <!-- 面包屑导航 -->
-    <FileNavPath></FileNavPath>
+    <!-- 文件路径 -->
+    <FilePath></FilePath>
 
     <a-row justify="space-between" class="row-operate">
       <!-- 左侧区域 -->
@@ -44,7 +44,7 @@
       <a-space wrap>
         <a-button
           v-if="isBatchMode"
-          :disabled="!fileStore.selectedFileIds.length"
+          :disabled="!selectedFileIds.length"
           type="primary"
           status="danger"
           @click="handleMulDelete"
@@ -70,9 +70,9 @@
             </a-button>
           </a-tooltip>
           <a-tooltip content="视图" position="bottom">
-            <a-button @click="fileStore.changeViewMode">
+            <a-button @click="toggleMode">
               <template #icon>
-                <icon-apps v-if="fileStore.viewMode === 'grid'" />
+                <icon-apps v-if="mode === 'grid'" />
                 <icon-list v-else />
               </template>
             </a-button>
@@ -84,10 +84,10 @@
     <!-- 文件列表-宫格模式 -->
     <a-spin class="file-wrap" :loading="loading">
       <FileGrid
-        v-show="fileList.length && fileStore.viewMode == 'grid'"
+        v-show="fileList.length && mode == 'grid'"
         :data="fileList"
         :isBatchMode="isBatchMode"
-        :selectedFileIds="fileStore.selectedFileIds"
+        :selectedFileIds="selectedFileIds"
         @click="handleClickFile"
         @check="handleCheckFile"
         @right-menu-click="handleRightMenuClick"
@@ -95,7 +95,7 @@
 
       <!-- 文件列表-列表模式 -->
       <FileList
-        v-show="fileList.length && fileStore.viewMode == 'list'"
+        v-show="fileList.length && mode == 'list'"
         :data="fileList"
         :isBatchMode="isBatchMode"
         @click="handleClickFile"
@@ -110,24 +110,24 @@
 <script setup lang="ts">
 import { Message, Modal } from '@arco-design/web-vue'
 import { fileTypeList, imageTypeList } from '@/constant/file'
-import { useFileStore } from '@/stores'
 import { api as viewerApi } from 'v-viewer'
 import 'viewerjs/dist/viewer.css'
-import FileNavPath from './FileNavPath.vue'
-import FileGrid from './FileGrid.vue'
-import FileList from './FileList.vue'
 import { getFileList } from '@/apis'
 import type { FileItem } from '@/apis'
+import useFileManage from './useFileManage'
 import {
   openFileMoveModal,
   openFileRenameModal,
   previewFileVideoModal,
   previewFileAudioModal
 } from '../../components/index'
+import FilePath from './FilePath.vue'
+import FileGrid from './FileGrid.vue'
+const FileList = defineAsyncComponent(() => import('./FileList.vue'))
+
 const route = useRoute()
 const router = useRouter()
-
-const fileStore = useFileStore()
+const { mode, selectedFileIds, toggleMode, addSelectedFileItem } = useFileManage()
 
 const loading = ref(false)
 // 文件列表数据
@@ -190,7 +190,7 @@ const handleClickFile = (item: FileItem) => {
 
 // 勾选文件
 const handleCheckFile = (item: FileItem) => {
-  fileStore.addSelectedFileItem(item)
+  addSelectedFileItem(item)
 }
 // 鼠标右键
 const handleRightMenuClick = (mode: string, fileInfo: FileItem) => {
@@ -199,7 +199,11 @@ const handleRightMenuClick = (mode: string, fileInfo: FileItem) => {
     Modal.warning({
       title: '提示',
       content: '是否删除该文件？',
-      hideCancel: false
+      hideCancel: false,
+      okButtonProps: { status: 'danger' },
+      onBeforeOk: async () => {
+        return await new Promise((reslove) => setTimeout(() => reslove(true), 300))
+      }
     })
   }
   if (mode === 'rename') {

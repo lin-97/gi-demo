@@ -1,11 +1,11 @@
 <template>
   <transition name="slide-dynamic-origin">
-    <div class="audio-preview-wrapper" ref="audioRef" :style="audioStyle" v-show="visible">
+    <div class="audio-box" ref="audioRef" :style="audioStyle" v-show="visible">
       <section style="padding: 10px 14px 14px 14px">
-        <div class="head" ref="audioHeadRef">
-          <div class="name">
+        <div class="audio-box__header" ref="audioHeadRef">
+          <div class="audio-name">
             <icon-music :size="16" spin />
-            <span>{{ props.fileInfo?.name }}.{{ props.fileInfo?.extendName }}</span>
+            <span>{{ props.data?.name }}.{{ props.data?.extendName }}</span>
           </div>
           <div class="close-icon" @click="close">
             <icon-close :size="12" />
@@ -24,7 +24,7 @@ import { useDraggable, useWindowSize, useElementSize } from '@vueuse/core'
 import type { FileItem } from '@/apis'
 
 interface Props {
-  fileInfo: FileItem
+  data: FileItem
   onClose: () => void
 }
 const props = withDefaults(defineProps<Props>(), {})
@@ -34,7 +34,7 @@ const audioRef = ref<HTMLElement | null>(null)
 const audioHeadRef = ref<HTMLElement | null>(null)
 
 const audioSrc = computed(() => {
-  return props.fileInfo?.src || ''
+  return props.data?.src || ''
 })
 
 onMounted(() => {
@@ -83,14 +83,14 @@ const close = () => {
 </script>
 
 <style lang="scss" scoped>
-.audio-preview-wrapper {
+.audio-box {
   width: 300px;
   position: fixed;
   border-radius: 8px;
   box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
   background: linear-gradient(to right, $color-theme, rgb(var(--primary-2)));
   z-index: 9999;
-  .head {
+  &__header {
     color: #fff;
     font-size: 16px;
     margin-bottom: 10px;
@@ -102,7 +102,7 @@ const close = () => {
     &:active {
       cursor: move;
     }
-    .name {
+    .audio-name {
       display: flex;
       align-items: center;
       > span {

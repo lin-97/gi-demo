@@ -7,7 +7,7 @@
       position="right"
       :content-style="{ padding: 0, overflow: 'hidden', width: '150px' }"
       :arrow-style="{ display: 'none' }"
-      v-if="props.fileInfo.extendName === 'zip'"
+      v-if="props.data.extendName === 'zip'"
     >
       <GiOptionItem label="解压" icon="menu-zip" more></GiOptionItem>
       <template #content>
@@ -28,12 +28,12 @@ import GiOptionItem from '@/components/GiOptionItem/index.vue'
 import type { FileItem } from '@/apis'
 
 interface Props {
-  fileInfo?: FileItem
+  data?: FileItem
   showClassStyle?: boolean
 }
 
 const props = withDefaults(defineProps<Props>(), {
-  fileInfo: () => ({
+  data: () => ({
     id: '',
     type: '',
     name: '',

@@ -14,9 +14,9 @@
       >
         <a-grid-item>
           <div class="file-grid-item" @click.stop="handleClickFile(item)">
-            <div class="wrapper">
+            <div class="file-grid-item__wrapper">
               <div class="file-icon">
-                <FileImg :data="item"></FileImg>
+                <FileImage :data="item"></FileImage>
               </div>
               <p class="gi_line_1 file-name">{{ getFileName(item) }}</p>
             </div>
@@ -36,7 +36,7 @@
           </div>
         </a-grid-item>
         <template #content>
-          <FileRightMenu :file-info="item" @click="handleRightMenuItemClick($event, item)"></FileRightMenu>
+          <FileRightMenu :data="item" @click="handleRightMenuItemClick($event, item)"></FileRightMenu>
         </template>
       </a-trigger>
     </a-grid>
@@ -44,7 +44,7 @@
 </template>
 
 <script setup lang="ts">
-import FileImg from './FileImg.vue'
+import FileImage from './FileImage.vue'
 import FileRightMenu from './FileRightMenu.vue'
 import type { FileItem } from '@/apis'
 
@@ -126,7 +126,7 @@ const handleRightMenuItemClick = (mode: string, item: FileItem) => {
       padding-left: 0;
     }
   }
-  .wrapper {
+  &__wrapper {
     width: 76%;
     max-width: 100px;
     height: 100%;
