@@ -6,7 +6,7 @@
           <div class="gi-table__title">{{ props.title }}</div>
         </slot>
       </a-space>
-      <a-space wrap :size="[14, 8]">
+      <a-space wrap>
         <slot name="custom-extra"></slot>
 
         <a-space wrap :size="[14, 0]">
