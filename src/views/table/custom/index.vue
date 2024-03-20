@@ -2,6 +2,7 @@
   <div class="table-page">
     <GiTable
       row-key="id"
+      title="会员列表"
       :loading="loading"
       :data="tableData"
       :scroll="{ x: '100%', y: '100%', minWidth: 1000 }"

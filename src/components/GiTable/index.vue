@@ -2,69 +2,74 @@
   <div class="gi-table" :class="{ 'gi-table--fullscreen': isFullscreen }" ref="giTableRef">
     <a-row justify="space-between" align="center">
       <a-space wrap>
-        <slot name="custom-extra"></slot>
+        <slot name="custom-title">
+          <div class="gi-table__title">{{ props.title }}</div>
+        </slot>
       </a-space>
-      <a-space :size="[15, 8]" wrap>
-        <a-tooltip content="斑马纹">
-          <a-switch v-model="stripe" size="small" type="round" />
-        </a-tooltip>
-        <a-tooltip content="刷新">
-          <a-button size="mini" class="gi_hover_btn" @click="refresh">
-            <template #icon><icon-refresh :size="18" /></template>
-          </a-button>
-        </a-tooltip>
-        <a-tooltip content="全屏">
-          <a-button size="mini" class="gi_hover_btn" @click="isFullscreen = !isFullscreen">
-            <template #icon>
-              <icon-fullscreen :size="18" v-if="!isFullscreen" />
-              <icon-fullscreen-exit :size="18" v-else />
-            </template>
-          </a-button>
-        </a-tooltip>
-        <a-tooltip content="显示边框">
-          <a-button size="mini" class="gi_hover_btn" @click="isBordered = !isBordered">
-            <template #icon>
-              <icon-apps :size="18" />
-            </template>
-          </a-button>
-        </a-tooltip>
-        <a-space :size="[8, 0]" wrap>
-          <a-radio-group type="button" size="mini" v-model="size">
-            <a-radio value="mini">小</a-radio>
-            <a-radio value="small">默认</a-radio>
-            <a-radio value="medium">中</a-radio>
-            <a-radio value="large">大</a-radio>
-          </a-radio-group>
-          <a-popover
-            v-if="showSettingColumnBtn"
-            trigger="click"
-            position="br"
-            :content-style="{ minWidth: '120px', padding: '6px 8px 10px' }"
-          >
-            <a-button type="primary" size="mini">
+      <a-space wrap :size="[14, 8]">
+        <slot name="custom-extra"></slot>
+
+        <a-space wrap :size="[14, 0]">
+          <a-tooltip content="斑马纹">
+            <a-switch v-model="stripe" size="small" type="round" />
+          </a-tooltip>
+          <a-tooltip content="刷新">
+            <a-button size="mini" class="gi_hover_btn" @click="refresh">
+              <template #icon><icon-refresh :size="18" /></template>
+            </a-button>
+          </a-tooltip>
+          <a-tooltip content="全屏">
+            <a-button size="mini" class="gi_hover_btn" @click="isFullscreen = !isFullscreen">
               <template #icon>
-                <icon-settings />
+                <icon-fullscreen :size="18" v-if="!isFullscreen" />
+                <icon-fullscreen-exit :size="18" v-else />
               </template>
             </a-button>
-            <template #content>
-              <div class="draggable">
-                <VueDraggable ref="el" v-model="settingColumnList">
-                  <div v-for="item in settingColumnList" :key="item.title" class="drag-item">
-                    <div class="drag-item__move"><icon-drag-dot-vertical /></div>
-                    <a-checkbox v-model:model-value="item.show">{{ item.title }}</a-checkbox>
-                  </div>
-                </VueDraggable>
-              </div>
-              <a-divider :margin="6" />
-              <a-row justify="center">
-                <a-button type="primary" size="mini" long @click="resetSettingColumns">
-                  <template #icon><icon-refresh /></template>
-                  <template #default>重置</template>
-                </a-button>
-              </a-row>
-            </template>
-          </a-popover>
+          </a-tooltip>
+          <a-tooltip content="显示边框">
+            <a-button size="mini" class="gi_hover_btn" @click="isBordered = !isBordered">
+              <template #icon>
+                <icon-apps :size="18" />
+              </template>
+            </a-button>
+          </a-tooltip>
         </a-space>
+
+        <a-radio-group type="button" size="mini" v-model="size">
+          <a-radio value="mini">小</a-radio>
+          <a-radio value="small">默认</a-radio>
+          <a-radio value="medium">中</a-radio>
+          <a-radio value="large">大</a-radio>
+        </a-radio-group>
+        <a-popover
+          v-if="showSettingColumnBtn"
+          trigger="click"
+          position="br"
+          :content-style="{ minWidth: '120px', padding: '6px 8px 10px' }"
+        >
+          <a-button type="primary" size="mini">
+            <template #icon>
+              <icon-settings />
+            </template>
+          </a-button>
+          <template #content>
+            <div class="gi-table__draggable">
+              <VueDraggable ref="el" v-model="settingColumnList">
+                <div v-for="item in settingColumnList" :key="item.title" class="drag-item">
+                  <div class="drag-item__move"><icon-drag-dot-vertical /></div>
+                  <a-checkbox v-model:model-value="item.show" :disabled="item.disabled">{{ item.title }}</a-checkbox>
+                </div>
+              </VueDraggable>
+            </div>
+            <a-divider :margin="6" />
+            <a-row justify="center">
+              <a-button type="primary" size="mini" long @click="resetSettingColumns">
+                <template #icon><icon-refresh /></template>
+                <template #default>重置</template>
+              </a-button>
+            </a-row>
+          </template>
+        </a-popover>
       </a-space>
     </a-row>
     <div class="gi-table__container">
@@ -87,28 +92,35 @@ import type { TableInstance, TableColumnData } from '@arco-design/web-vue'
 import { VueDraggable } from 'vue-draggable-plus'
 
 defineOptions({ name: 'GiTable', inheritAttrs: false })
-const emit = defineEmits(['refresh'])
+const emit = defineEmits<{
+  (e: 'refresh'): void
+}>()
 
 const attrs = useAttrs()
 const slots = useSlots()
 
+interface Props {
+  title?: string
+  disabledColumnKeys?: string[]
+}
+
+const props = withDefaults(defineProps<Props>(), {
+  title: '',
+  disabledColumnKeys: () => [] // 禁止控制显示隐藏的列
+})
+
 const tableRef = ref<TableInstance | null>(null)
-
 const stripe = ref(false)
-const size = ref<TableInstance['$props']['size']>('small')
+const size = ref<TableInstance['size']>('small')
 const isBordered = ref(true)
-// console.log('attrs', attrs)
-
 const isFullscreen = ref(false)
 
 const refresh = () => {
   emit('refresh')
 }
 
-defineExpose({ tableRef })
-
 const showSettingColumnBtn = computed(() => attrs?.columns && (attrs?.columns as TableColumnData[])?.length)
-type SettingColumnItem = { title: string; show: boolean }
+type SettingColumnItem = { title: string; key: string; show: boolean; disabled: boolean }
 const settingColumnList = ref<SettingColumnItem[]>([])
 
 // 重置配置列
@@ -116,10 +128,14 @@ const resetSettingColumns = () => {
   settingColumnList.value = []
   if (attrs.columns) {
     const arr = attrs.columns as TableColumnData[]
-    arr.forEach((i) => {
+    arr.forEach((item) => {
       settingColumnList.value.push({
-        title: typeof i.title === 'string' ? i.title : '',
-        show: true
+        key: item.dataIndex || (typeof item.title === 'string' ? item.title : ''),
+        title: typeof item.title === 'string' ? item.title : '',
+        show: true,
+        disabled: props.disabledColumnKeys.includes(
+          item.dataIndex || (typeof item.title === 'string' ? item.title : '')
+        )
       })
     })
   }
@@ -137,18 +153,26 @@ watch(
 const _columns = computed(() => {
   if (!attrs.columns) return []
   const arr = attrs.columns as TableColumnData[]
-  const titleArr = settingColumnList.value.filter((i) => i.show).map((i) => i.title)
-  const filterArr = arr.filter((i) => typeof i.title === 'string' && titleArr.includes(i.title))
-  const sortedArr: TableColumnData[] = []
+  // 显示的dataIndex
+  const showDataIndexs = settingColumnList.value
+    .filter((i) => i.show)
+    .map((i) => i.key || (typeof i.title === 'string' ? i.title : ''))
+  // 显示的columns数据
+  const filterColumns = arr.filter((i) =>
+    showDataIndexs.includes(i.dataIndex || (typeof i.title === 'string' ? i.title : ''))
+  )
+  const sortedColumns: TableColumnData[] = []
   settingColumnList.value.forEach((i) => {
-    filterArr.forEach((j) => {
-      if (i.title === j.title) {
-        sortedArr.push(j)
+    filterColumns.forEach((j) => {
+      if (i.key === (j.dataIndex || j.title)) {
+        sortedColumns.push(j)
       }
     })
   })
-  return sortedArr
+  return sortedColumns
 })
+
+defineExpose({ tableRef })
 </script>
 
 <style lang="scss" scoped>
@@ -171,13 +195,19 @@ const _columns = computed(() => {
     flex: 1;
     overflow: hidden;
   }
-}
-
-.draggable {
-  padding: 1px 0; // 解决 max-height 和 overflow:auto 始终显示垂直滚动条问题
-  max-height: 250px;
-  overflow: hidden;
-  overflow-y: scroll;
+  &__title {
+    color: var(--color-text-1);
+    font-size: 18px;
+    font-weight: 500;
+    margin-bottom: 2px;
+  }
+  &__draggable {
+    padding: 1px 0; // 解决 max-height 和 overflow:auto 始终显示垂直滚动条问题
+    max-height: 250px;
+    box-sizing: border-box;
+    overflow: hidden;
+    overflow-y: scroll;
+  }
 }
 
 .drag-item {

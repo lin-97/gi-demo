@@ -10,9 +10,10 @@
       :scroll="{ x: '100%', y: '100%', minWidth: 1000 }"
       :row-selection="{ type: 'checkbox', showCheckedAll: true }"
       :pagination="pagination"
+      :disabled-column-keys="['序号', 'name']"
       @refresh="getTableData"
     >
-      <template #custom-extra>
+      <template #custom-title>
         <a-button type="primary" @click="onAdd">
           <template #icon><icon-plus /></template>
           <span>新增</span>
