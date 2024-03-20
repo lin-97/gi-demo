@@ -3,7 +3,7 @@
     <!-- 文件路径 -->
     <FilePath></FilePath>
 
-    <a-row justify="space-between" class="row-operate">
+    <a-row justify="space-between" class="file-main__search">
       <!-- 左侧区域 -->
       <a-space wrap>
         <a-dropdown>
@@ -24,8 +24,8 @@
         </a-dropdown>
 
         <a-input-group>
-          <a-select style="width: 150px" placeholder="请选择">
-            <a-option v-for="item in fileTypeList" :key="item.value">
+          <a-select placeholder="请选择" :trigger-props="{ autoFitPopupMinWidth: true }" style="width: 150px">
+            <a-option v-for="item in FileTypeList" :key="item.value">
               <template #icon>
                 <component :is="item.icon" size="18" color="#999"></component>
               </template>
@@ -33,7 +33,7 @@
             </a-option>
           </a-select>
           <a-input placeholder="请输入关键词..." allow-clear> </a-input>
-          <a-button type="primary">
+          <a-button type="primary" @click="search">
             <template #icon><icon-search /></template>
             <template #default>搜索</template>
           </a-button>
@@ -56,7 +56,7 @@
         </a-button>
         <a-button-group>
           <a-tooltip content="传输列表" position="bottom">
-            <a-button @click="loading = !loading">
+            <a-button>
               <template #icon>
                 <icon-swap />
               </template>
@@ -82,14 +82,14 @@
     </a-row>
 
     <!-- 文件列表-宫格模式 -->
-    <a-spin class="file-wrap" :loading="loading">
+    <a-spin class="file-main__list" :loading="loading">
       <FileGrid
         v-show="fileList.length && mode == 'grid'"
         :data="fileList"
-        :isBatchMode="isBatchMode"
-        :selectedFileIds="selectedFileIds"
+        :is-batch-mode="isBatchMode"
+        :selected-file-ids="selectedFileIds"
         @click="handleClickFile"
-        @check="handleCheckFile"
+        @select="handleSelectFile"
         @right-menu-click="handleRightMenuClick"
       ></FileGrid>
 
@@ -97,8 +97,10 @@
       <FileList
         v-show="fileList.length && mode == 'list'"
         :data="fileList"
-        :isBatchMode="isBatchMode"
+        :is-batch-mode="isBatchMode"
+        :selected-file-ids="selectedFileIds"
         @click="handleClickFile"
+        @select="handleSelectFile"
         @right-menu-click="handleRightMenuClick"
       ></FileList>
 
@@ -109,7 +111,7 @@
 
 <script setup lang="ts">
 import { Message, Modal } from '@arco-design/web-vue'
-import { fileTypeList, imageTypeList } from '@/constant/file'
+import { FileTypeList, ImageTypes } from '@/constant/file'
 import { api as viewerApi } from 'v-viewer'
 import 'viewerjs/dist/viewer.css'
 import { getFileList } from '@/apis'
@@ -133,7 +135,7 @@ const loading = ref(false)
 // 文件列表数据
 const fileList = ref<FileItem[]>([])
 const fileType = ref('0')
-fileType.value = route.query.fileType?.toString() || '0'
+fileType.value = (route.query.fileType as string) || '0'
 
 const getListData = async () => {
   try {
@@ -148,36 +150,39 @@ const getListData = async () => {
   }
 }
 
+const search = () => {
+  getListData()
+}
+
 onMounted(() => {
   getListData()
 })
 
 onBeforeRouteUpdate((to) => {
   if (!to.query.fileType) return
-  fileType.value = to.query.fileType?.toString()
+  fileType.value = to.query.fileType as string
   getListData()
 })
 
 // 批量操作
 const isBatchMode = ref(false)
+// 列表图片集合
+const imageList = computed(() => {
+  return fileList.value.filter((i) => ImageTypes.includes(i.extendName)).map((a) => a.src ?? '')
+})
 
 // 点击文件
 const handleClickFile = (item: FileItem) => {
   Message.success(`点击了文件-${item.name}`)
-  if (imageTypeList.includes(item.extendName)) {
-    if (item.src) {
-      const imgList: string[] = fileList.value
-        .filter((i) => imageTypeList.includes(i.extendName))
-        .map((a) => a.src || '')
-      const index = imgList.findIndex((i) => i === item.src)
-      if (imgList.length) {
-        viewerApi({
-          options: {
-            initialViewIndex: index
-          },
-          images: imgList
-        })
-      }
+  if (ImageTypes.includes(item.extendName)) {
+    if (item.src && imageList.value.length) {
+      const index = imageList.value.findIndex((i) => i === item.src)
+      viewerApi({
+        images: imageList.value,
+        options: {
+          initialViewIndex: index
+        }
+      })
     }
   }
   if (item.extendName === 'mp4') {
@@ -189,9 +194,10 @@ const handleClickFile = (item: FileItem) => {
 }
 
 // 勾选文件
-const handleCheckFile = (item: FileItem) => {
+const handleSelectFile = (item: FileItem) => {
   addSelectedFileItem(item)
 }
+
 // 鼠标右键
 const handleRightMenuClick = (mode: string, fileInfo: FileItem) => {
   Message.success('点击了' + mode)
@@ -235,11 +241,11 @@ const handleMulDelete = () => {
   display: flex;
   flex-direction: column;
   overflow: hidden;
-  .row-operate {
+  &__search {
     border-bottom: 1px dashed var(--color-border-3);
     margin: 0 $padding;
   }
-  .file-wrap {
+  &__list {
     flex: 1;
     padding: 0 $padding $padding;
     box-sizing: border-box;

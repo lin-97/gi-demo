@@ -12,7 +12,7 @@
             <icon-apps></icon-apps>
           </template>
           <template #title>文件类型</template>
-          <a-menu-item v-for="item in fileTypeList" :key="item.value.toString()" @click="onClickItem(item)">
+          <a-menu-item v-for="item in FileTypeList" :key="item.value.toString()" @click="onClickItem(item)">
             <template #icon>
               <GiSvgIcon :size="28" :name="item.menuIcon"></GiSvgIcon>
             </template>
@@ -50,7 +50,7 @@
 </template>
 
 <script setup lang="ts">
-import { fileTypeList, type fileTypeListItem } from '@/constant/file'
+import { FileTypeList, type FileTypeListItem } from '@/constant/file'
 
 const route = useRoute()
 const router = useRouter()
@@ -79,7 +79,7 @@ watch(
 )
 
 // 点击事件
-const onClickItem = (item: fileTypeListItem) => {
+const onClickItem = (item: FileTypeListItem) => {
   router.push({ path: '/file', query: { fileType: item.value } })
 }
 </script>

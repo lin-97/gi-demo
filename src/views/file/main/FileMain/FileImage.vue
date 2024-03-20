@@ -1,10 +1,10 @@
 <template>
-  <img v-if="isImage" class="img" :src="props.data.src || ''" />
+  <img v-if="isImage" class="file-image" :src="props.data.src" />
   <GiSvgIcon v-else size="100%" :name="getFileImg"></GiSvgIcon>
 </template>
 
 <script setup lang="ts">
-import { fileExtendNameIconMap, imageTypeList } from '@/constant/file'
+import { FileIcon, ImageTypes } from '@/constant/file'
 import type { FileItem } from '@/apis'
 
 interface Props {
@@ -15,25 +15,28 @@ const props = withDefaults(defineProps<Props>(), {})
 
 // 是否是图片类型文件
 const isImage = computed(() => {
-  return imageTypeList.includes(props.data.extendName.toLowerCase())
+  const extendName = props.data.extendName.toLowerCase()
+  return ImageTypes.includes(extendName)
 })
 
-// 获取文件图标，如果是图片这显示图片
+// 获取文件图标，如果是图片就显示图片
 const getFileImg = computed<string>(() => {
+  const extendName = props.data.extendName.toLowerCase()
   if (props.data?.isDir) {
-    return fileExtendNameIconMap['dir'] || ''
-  } else if (imageTypeList.includes(props.data.extendName.toLowerCase())) {
-    return props.data.src || ''
-  } else if (!Object.keys(fileExtendNameIconMap).includes(props.data.extendName.toLowerCase())) {
-    return fileExtendNameIconMap['other'] || ''
-  } else {
-    return fileExtendNameIconMap[props.data.extendName.toLowerCase()] || ''
+    return FileIcon['dir']
   }
+  if (ImageTypes.includes(extendName)) {
+    return props.data.src
+  }
+  if (!Object.keys(FileIcon).includes(extendName)) {
+    return FileIcon['other']
+  }
+  return FileIcon[extendName]
 })
 </script>
 
 <style lang="scss" scoped>
-img {
+.file-image {
   width: 100%;
   height: 100%;
   object-fit: cover;

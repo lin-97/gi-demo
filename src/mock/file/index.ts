@@ -6,8 +6,8 @@ const getList = (type: number | string) => {
   if (Number(type) === 0) return fileList
   const res: any[] = []
   const FileMap = {
-    1: ['jpg', 'png', 'jpeg'],
-    2: ['text', 'doc', 'xls'],
+    1: ['jpg', 'png', 'jpeg', 'gif'],
+    2: ['txt', 'doc', 'xls'],
     3: ['mp4'],
     4: ['mp3'],
     5: ['zip', 'rar', 'ppt', 'css', 'js', 'html']

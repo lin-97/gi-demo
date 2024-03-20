@@ -4,7 +4,7 @@ export interface FileItem {
   type: string
   name: string
   extendName: string
-  src: string | null
+  src: string
   updateTime: string
   isDir: boolean
   filePath: string

@@ -1,13 +1,13 @@
 <template>
-  <GiOption :class="{ option: showClassStyle }">
+  <GiOption :class="{ shadow: props.shadow }">
     <GiOptionItem label="重命名" icon="menu-edit" @click="onClickItem('rename')"> </GiOptionItem>
     <GiOptionItem label="移动到" icon="menu-move" @click="onClickItem('move')"></GiOptionItem>
     <GiOptionItem label="下载" icon="menu-download" @click="onClickItem('download')"></GiOptionItem>
     <a-popover
+      v-if="props.data?.extendName === 'zip'"
       position="right"
       :content-style="{ padding: 0, overflow: 'hidden', width: '150px' }"
       :arrow-style="{ display: 'none' }"
-      v-if="props.data.extendName === 'zip'"
     >
       <GiOptionItem label="解压" icon="menu-zip" more></GiOptionItem>
       <template #content>
@@ -29,21 +29,11 @@ import type { FileItem } from '@/apis'
 
 interface Props {
   data?: FileItem
-  showClassStyle?: boolean
+  shadow?: boolean
 }
 
 const props = withDefaults(defineProps<Props>(), {
-  data: () => ({
-    id: '',
-    type: '',
-    name: '',
-    extendName: '',
-    src: '',
-    updateTime: '',
-    isDir: false,
-    filePath: ''
-  }), // 文件数据
-  showClassStyle: true
+  shadow: true
 })
 
 const emit = defineEmits<{
@@ -56,7 +46,7 @@ const onClickItem = (mode: string) => {
 </script>
 
 <style lang="scss" scoped>
-.option {
+.shadow {
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.12), 0 0 6px rgba(0, 0, 0, 0.04);
   border-radius: 4px;
   overflow: hidden;

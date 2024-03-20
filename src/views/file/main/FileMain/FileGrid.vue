@@ -14,12 +14,12 @@
       >
         <a-grid-item>
           <div class="file-grid-item" @click.stop="handleClickFile(item)">
-            <div class="file-grid-item__wrapper">
+            <section class="file-grid-item__wrapper">
               <div class="file-icon">
                 <FileImage :data="item"></FileImage>
               </div>
               <p class="gi_line_1 file-name">{{ getFileName(item) }}</p>
-            </div>
+            </section>
             <!-- 勾选模式 -->
             <section
               v-show="props.isBatchMode"
@@ -36,7 +36,7 @@
           </div>
         </a-grid-item>
         <template #content>
-          <FileRightMenu :data="item" @click="handleRightMenuItemClick($event, item)"></FileRightMenu>
+          <FileRightMenu :data="item" @click="handleRightMenuClick($event, item)"></FileRightMenu>
         </template>
       </a-trigger>
     </a-grid>
@@ -60,7 +60,11 @@ const props = withDefaults(defineProps<Props>(), {
   isBatchMode: false // 是否是批量模式
 })
 
-const emit = defineEmits(['click', 'check', 'right-menu-click'])
+const emit = defineEmits<{
+  (e: 'click', record: FileItem): void
+  (e: 'select', record: FileItem): void
+  (e: 'right-menu-click', mode: string, item: FileItem): void
+}>()
 
 // 文件名称带后缀
 const getFileName = (item: FileItem) => {
@@ -74,11 +78,11 @@ const handleClickFile = (item: FileItem) => {
 
 // 选中事件
 const handleCheckFile = (item: FileItem) => {
-  emit('check', item)
+  emit('select', item)
 }
 
 // 右键菜单点击事件
-const handleRightMenuItemClick = (mode: string, item: FileItem) => {
+const handleRightMenuClick = (mode: string, item: FileItem) => {
   emit('right-menu-click', mode, item)
 }
 </script>
