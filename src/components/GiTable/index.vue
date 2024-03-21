@@ -192,21 +192,21 @@ defineExpose({ tableRef })
     z-index: 1001;
   }
   &__container {
-    flex: 1;
+    max-height: 100%;
     overflow: hidden;
   }
   &__title {
     color: var(--color-text-1);
     font-size: 18px;
     font-weight: 500;
-    margin-bottom: 2px;
+    line-height: 1.5;
   }
   &__draggable {
     padding: 1px 0; // 解决 max-height 和 overflow:auto 始终显示垂直滚动条问题
     max-height: 250px;
     box-sizing: border-box;
     overflow: hidden;
-    overflow-y: scroll;
+    overflow-y: auto;
   }
 }
 

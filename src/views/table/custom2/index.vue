@@ -31,10 +31,14 @@
         <a-avatar :size="30" :style="{ backgroundColor: record.color }">{{ record.name[0] }}</a-avatar>
       </template>
       <template #status="{ record }">
-        <a-switch v-model="record.status" :checked-value="1" :unchecked-value="0">
-          <template #checked>开启</template>
-          <template #unchecked>关闭</template>
-        </a-switch>
+        <a-tag v-if="record.status === 1" color="arcoblue" size="small">
+          <template #icon><icon-check-circle-fill /></template>
+          <template #default>开启</template>
+        </a-tag>
+        <a-tag v-if="record.status === 0" color="orangered" size="small">
+          <template #icon><icon-minus-circle-fill /></template>
+          <template #default>禁用</template>
+        </a-tag>
       </template>
       <template #action>
         <a-space>
