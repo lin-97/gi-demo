@@ -29,47 +29,56 @@
           <a-tooltip content="显示边框">
             <a-button size="mini" class="gi_hover_btn" @click="isBordered = !isBordered">
               <template #icon>
-                <icon-apps :size="18" />
+                <icon-borders />
               </template>
             </a-button>
           </a-tooltip>
-        </a-space>
 
-        <a-radio-group type="button" size="mini" v-model="size">
-          <a-radio value="mini">小</a-radio>
-          <a-radio value="small">默认</a-radio>
-          <a-radio value="medium">中</a-radio>
-          <a-radio value="large">大</a-radio>
-        </a-radio-group>
-        <a-popover
-          v-if="showSettingColumnBtn"
-          trigger="click"
-          position="br"
-          :content-style="{ minWidth: '120px', padding: '6px 8px 10px' }"
-        >
-          <a-button type="primary" size="mini">
-            <template #icon>
-              <icon-settings />
-            </template>
-          </a-button>
-          <template #content>
-            <div class="gi-table__draggable">
-              <VueDraggable ref="el" v-model="settingColumnList">
-                <div v-for="item in settingColumnList" :key="item.title" class="drag-item">
-                  <div class="drag-item__move"><icon-drag-dot-vertical /></div>
-                  <a-checkbox v-model:model-value="item.show" :disabled="item.disabled">{{ item.title }}</a-checkbox>
-                </div>
-              </VueDraggable>
-            </div>
-            <a-divider :margin="6" />
-            <a-row justify="center">
-              <a-button type="primary" size="mini" long @click="resetSettingColumns">
-                <template #icon><icon-refresh /></template>
-                <template #default>重置</template>
+          <a-dropdown @select="handleSelect">
+            <a-tooltip content="表格尺寸">
+              <a-button size="mini" class="gi_hover_btn">
+                <template #icon>
+                  <icon-line-height :size="18" />
+                </template>
               </a-button>
-            </a-row>
-          </template>
-        </a-popover>
+            </a-tooltip>
+            <template #content>
+              <a-doption v-for="item in sizeList" :key="item.value" :value="item.value" :active="item.value === size">{{
+                item.label
+              }}</a-doption>
+            </template>
+          </a-dropdown>
+
+          <a-popover
+            v-if="showSettingColumnBtn"
+            trigger="click"
+            position="br"
+            :content-style="{ minWidth: '120px', padding: '6px 8px 10px' }"
+          >
+            <a-button type="primary" size="mini">
+              <template #icon>
+                <icon-settings />
+              </template>
+            </a-button>
+            <template #content>
+              <div class="gi-table__draggable">
+                <VueDraggable ref="el" v-model="settingColumnList">
+                  <div v-for="item in settingColumnList" :key="item.title" class="drag-item">
+                    <div class="drag-item__move"><icon-drag-dot-vertical /></div>
+                    <a-checkbox v-model:model-value="item.show" :disabled="item.disabled">{{ item.title }}</a-checkbox>
+                  </div>
+                </VueDraggable>
+              </div>
+              <a-divider :margin="6" />
+              <a-row justify="center">
+                <a-button type="primary" size="mini" long @click="resetSettingColumns">
+                  <template #icon><icon-refresh /></template>
+                  <template #default>重置</template>
+                </a-button>
+              </a-row>
+            </template>
+          </a-popover>
+        </a-space>
       </a-space>
     </a-row>
     <div class="gi-table__container">
@@ -88,7 +97,7 @@
 </template>
 
 <script setup lang="ts">
-import type { TableInstance, TableColumnData } from '@arco-design/web-vue'
+import type { TableInstance, TableColumnData, DropdownInstance } from '@arco-design/web-vue'
 import { VueDraggable } from 'vue-draggable-plus'
 
 defineOptions({ name: 'GiTable', inheritAttrs: false })
@@ -115,8 +124,20 @@ const size = ref<TableInstance['size']>('small')
 const isBordered = ref(true)
 const isFullscreen = ref(false)
 
+type SizeItem = { label: string; value: TableInstance['size'] }
+const sizeList: SizeItem[] = [
+  { label: '小', value: 'mini' },
+  { label: '默认', value: 'small' },
+  { label: '中', value: 'medium' },
+  { label: '大', value: 'large' }
+]
+
 const refresh = () => {
   emit('refresh')
+}
+
+const handleSelect: DropdownInstance['onSelect'] = (value) => {
+  size.value = value as TableInstance['size']
 }
 
 const showSettingColumnBtn = computed(() => attrs?.columns && (attrs?.columns as TableColumnData[])?.length)

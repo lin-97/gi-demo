@@ -25,7 +25,8 @@
     "resolveJsonModule": true, // 是否解析 JSON 模块
     "esModuleInterop": true, // 是否通过为所有导入模块创建命名空间对象，允许CommonJS和ES模块之间的互操作性，开启改选项时，也自动开启allowSyntheticDefaultImports选项，默认：false
     "skipLibCheck": true, // 是否跳过声明文件的类型检查，这可以在编译期间以牺牲类型系统准确性为代价来节省时间，默认：false
-    "ignoreDeprecations": "5.0" // 选项 importsNotUsedAsValues 已弃用，并将在 TypeScript 5.5 中停止工作。指定 compilerOption 的 "ignoreprecations ": "5.0" 来消除这个错误，使用 verbatimModuleSyntax 代替
+    "ignoreDeprecations": "5.0", // 选项 importsNotUsedAsValues 已弃用，并将在 TypeScript 5.5 中停止工作。指定 compilerOption 的 "ignoreprecations ": "5.0" 来消除这个错误，使用 verbatimModuleSyntax 代替
+    "noImplicitAny": false
   },
   "extends": "@vue/tsconfig/tsconfig.web.json", // 指定要继承的配置文件
   "include": ["src/**/*", "src/**/*.vue", "vite.config.ts"], // 指定被编译文件所在的目录
