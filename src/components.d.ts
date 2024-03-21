@@ -25,7 +25,6 @@ declare module 'vue' {
     Icon404: typeof import('./components/icons/Icon404.vue')['default']
     Icon500: typeof import('./components/icons/Icon500.vue')['default']
     IconBorders: typeof import('./components/icons/IconBorders.vue')['default']
-    IconSize: typeof import('./components/icons/IconSize.vue')['default']
     ParentView: typeof import('./components/ParentView/index.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
