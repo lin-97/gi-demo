@@ -5,6 +5,7 @@
     width="90%"
     :mask-closable="false"
     :modal-style="{ maxWidth: '600px' }"
+    :body-style="{ maxHeight: '70vh' }"
     @before-ok="save"
     @close="close"
   >

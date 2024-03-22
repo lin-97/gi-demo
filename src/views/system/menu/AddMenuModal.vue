@@ -4,6 +4,7 @@
     :title="title"
     width="90%"
     :modal-style="{ maxWidth: '625px' }"
+    :body-style="{ maxHeight: '70vh' }"
     :mask-closable="false"
     @before-ok="save"
     @close="close"

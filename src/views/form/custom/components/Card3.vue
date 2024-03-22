@@ -155,6 +155,7 @@ const onAdd = () => {
     title: '新增',
     width: '90%',
     modalStyle: { maxWidth: '600px' },
+    fullscreen: width.value < 600,
     content: () =>
       h(GiForm, {
         options: options,
@@ -172,6 +173,7 @@ const onEdit = () => {
     title: '编辑',
     width: '90%',
     modalStyle: { maxWidth: '600px' },
+    fullscreen: width.value < 600,
     content: () =>
       h(GiForm, {
         options: options,

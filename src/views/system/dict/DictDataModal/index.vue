@@ -27,7 +27,7 @@
       :data="tableData"
       :bordered="{ cell: true }"
       :loading="loading"
-      :scroll="{ x: '100%', y: '100%', minWidth: 400 }"
+      :scroll="{ x: '100%', y: '100%', minWidth: 600 }"
       :pagination="{ ...pagination, size: 'small' }"
       :row-selection="{ type: 'checkbox', showCheckedAll: true }"
       :selected-keys="selectedKeys"
