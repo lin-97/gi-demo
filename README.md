@@ -24,9 +24,10 @@
 
 <a href="http://lin0716.gitee.io/gi-demo" target="_blank">Gi Admin Pro 预览地址</a>
 
-账号 1：**admin** 密码：**123456**
-
-账号 2：**user** 密码：**123456**
+|        | 账号  | 密码   |
+| ------ | ----- | ------ |
+| 管理员 | admin | 123456 |
+| 用户   | user  | 123456 |
 
 ## 代码仓库
 
@@ -80,9 +81,8 @@ npm run build
 
 ```bash
 1. Prettier - Code formatter
-2. Vue Language Features (Volar)
+2. Vue - Official
 3. Vue 3 Snippets
-4. TypeScript Vue Plugin (Volar)
 ```
 
 ## 注意
@@ -91,7 +91,7 @@ npm run build
 由于升级了vite3，根据官方规定，node版本必须是14.18.0以上
 ```
 
-**`注：现在已更新到了 Vite4.x，node的版本要求请参考官网要求`**
+**`注：现在已更新到了 Vite5.x，node的版本要求请参考官网要求`**
 
 **vite 官网地址：** https://cn.vitejs.dev/
 
@@ -182,9 +182,9 @@ let num = 10
 let str = 'abc'
 let flag = false
 
-// vue3 中 ref 返回的是一个引用类型
+// vue3 中 ref、reactive 返回的是一个引用类型
 const loading = ref(false)
-const name = ref('小明')
+const person = reactive({ name: '张三', age: 20 })
 </script>
 ```
 
@@ -198,9 +198,9 @@ const showAddDrawer = ref(false) // 新增功能的抽屉显示隐藏
 // 或者 是否显示弹窗
 const isShowDialog = ref<boolean>(false)
 const isLogin = ref(false) // 是否登录
-const isVIP = ref(false) // 是否是vip用户
+const isVIP = ref(false) // 是否是VIP用户
 
-// 表单 不建议 formData, 直接最简
+// 表单不建议 formData，直接最简（懒得写这么长）
 const form = reactive({
   name: '',
   phone: '',
@@ -229,7 +229,7 @@ const optionsList = [
 // 非对象数组 在字母后面加s
 const ids = []
 const selectedIds = []
-const activeKeys = []
+const activedKeys = []
 const nums = [3, 5, 6]
 const strs = ['aaa', 'bbb', 'ccc']
 
@@ -305,15 +305,15 @@ const getTableList = () => {}
 
 **常用前缀**
 
-| 前缀         | 前缀 + 命名                  | 大意                        |
-| ------------ | ---------------------------- | --------------------------- |
-| get          | getUserInfo                  | 获取用户信息                |
-| del/delete   | delUserInfo                  | 删除用户信息                |
-| update / add | updateUserInfo / addUserInfo | 修改用户信息 / 增加用户信息 |
-| is           | isTimeout                    | 是否超时                    |
-| has          | hasUserInfo                  | 有没有用户信息              |
-| handle       | handleLogin                  | 处理登录                    |
-| calc         | calcAverageSpeed             | 计算平均速度                |
+| 前缀       | 前缀 + 命名                  | 大意                        |
+| ---------- | ---------------------------- | --------------------------- |
+| get        | getUserInfo                  | 获取用户信息                |
+| del/delete | delUserInfo                  | 删除用户信息                |
+| update/add | updateUserInfo / addUserInfo | 修改用户信息 / 增加用户信息 |
+| is         | isTimeout                    | 是否超时                    |
+| has        | hasUserInfo                  | 有没有用户信息              |
+| handle     | handleLogin                  | 处理登录                    |
+| calc       | calcAverageSpeed             | 计算平均速度                |
 
 **一些通用缩写**
 
@@ -401,16 +401,16 @@ const { loading, setLoading } = useLoading()
 
 ```js
 // 优化前
-let marks = 26
-let result
-if (marks >= 30) {
-  result = 'Pass'
+let isEdit = true
+let title = ''
+if (isEdit) {
+  title = '编辑'
 } else {
-  result = 'Fail'
+  title = '新增'
 }
 
 // 优化后
-let result = marks >= 30 ? 'Pass' : 'Fail'
+let title = isEdit ? '编辑' : '新增'
 ```
 
 善用 includes 方法
@@ -420,7 +420,7 @@ let result = marks >= 30 ? 'Pass' : 'Fail'
 if (type === 1 || type === 2 || type === 3) {
 }
 
-// 优化后, 此种方式在vue模板也可使用
+// 优化后，此种方式在vue模板也可使用
 if ([1, 2, 3].includes(type)) {
 }
 ```
@@ -447,6 +447,52 @@ const getProportionColor = (proportion: number) => {
   if (proportion < 60) return 'warning'
   return 'success'
 }
+</script>
+```
+
+```js
+// 优化前
+const status = 200
+const message = ''
+if (status === 200) {
+  message = '请求成功'
+} else if (status === 404) {
+  message = '请求出错'
+} else if (status === 500) {
+  message = '服务器错误'
+}
+
+// 优化后
+const status = 200
+const messageMap = {
+  200: '请求成功',
+  404: '请求出错',
+  500: '服务器错误'
+}
+const message = messageMap[status]
+```
+
+如果函数参数超过两个，建议优化
+
+```vue
+<script setup lang="ts">
+function createUser(name, phone, age) {
+  console.log('姓名', name)
+  console.log('手机', phone)
+  console.log('年龄', age)
+}
+
+// 这种方式在使用的时候可读性很差，扩展性差，而且不易于维护
+createUser('张三', '178****2828', 20)
+
+function createUser2({ name, phone, age }) {
+  console.log('姓名', name)
+  console.log('手机', phone)
+  console.log('年龄', age)
+}
+
+// 以对象传参更直观，更好扩展和维护
+createUser2({ name: '张三', phone: '178****2828', age: 20 })
 </script>
 ```
 
@@ -595,7 +641,7 @@ const getUserList = async () => {
 // catch 可以省略
 ```
 
-#### 正则导入
+#### 正则使用示例
 
 文件位置：@/utils/regexp.ts
 
@@ -698,8 +744,8 @@ DetailModal.vue
 
 ```
 home/index.vue
-news/index.vue
-news-detail/index.vue
+user/index.vue
+user-detail/index.vue
 ```
 
 #### 业务状态
@@ -762,10 +808,15 @@ const add = () => {
   visible.value = true
 }
 
+// 如果这里的参数超过两个，建议优化成对象形式
+// const edit = ({ id, taskId }) = {
+//   console.log(id, taskId)
+// }
+
 const edit = (id: string) => {
   detailId.value = id
-  // getDetail() 回显操作
   visible.value = true
+  // getDetail() 回显操作
 }
 
 defineExpose({ add, edit })
@@ -778,7 +829,7 @@ const confirm = () => {
 
 使用
 
-**`模板里使用自定义组件 大写开头驼峰，对于搜索便利`**
+**`模板里使用自定义组件：使用大写开头驼峰，双击好复制，对于搜索便利`**
 
 ```vue
 <template>
@@ -802,73 +853,9 @@ const onEdit = (item: PersonItem) => {
 </script>
 ```
 
-#### GiForm 使用文档
+#### GiForm 使用示例
 
 GiForm 是一个 JSON 配置表单组件，能够快速通过 JSON 构建表单布局
-
-| props   | 说明       |
-| ------- | ---------- |
-| options | 表单配置项 |
-
-options 结构如下：
-
-```js
-import type * as A from '@arco-design/web-vue'
-
-export type FormType =
-  | 'input'
-  | 'select'
-  | 'radio-group'
-  | 'checkbox-group'
-  | 'textarea'
-  | 'date-picker'
-  | 'time-picker'
-  | 'input-number'
-  | 'rate'
-  | 'switch'
-  | 'slider'
-  | 'cascader'
-  | 'tree-select'
-
-interface ColumnsItem {
-  type: FormType // 表单项类型
-  label: A.FormItemInstance['label'] // 表单项label
-  field: A.FormItemInstance['field'] // 表单项field
-  span?: number // 表单项span, 共24
-  col?: A.ColProps // 表单项的col，完全继承<a-col>的props，优先级高于span，可配置响应式布局
-  item?: A.FormItemInstance['$props'] // 表单项的props，完全继承<form-item>的props
-  props?: // 表单项各个类型的props, 完全继承各个类型组件的props
-    | A.InputInstance['$props']
-    | A.SelectInstance['$props']
-    | A.TextareaInstance['$props']
-    | A.DatePickerInstance['$props']
-    | A.TimePickerInstance['$props']
-    | A.RadioGroupInstance['$props']
-    | A.CheckboxGroupInstance['$props']
-    | A.InputNumberInstance['$props']
-    | A.RateInstance['$props']
-    | A.SwitchInstance['$props']
-    | A.SliderInstance['$props']
-    | A.CascaderInstance['$props']
-    | A.TreeSelectInstance['$props']
-  rules?: A.FormItemInstance['$props']['rules'] // 当前表单项的校验规则rules
-  options?: // 选项数据 select、radio-group、checkbox-group、cascader 组件独有的options，格式一般是{label: string, value: string}[]
-    | A.SelectInstance['$props']['options']
-    | A.RadioGroupInstance['$props']['options']
-    | A.CheckboxGroupInstance['$props']['options']
-    | A.CascaderInstance['$props']['options']
-  data?: A.TreeSelectInstance['$props']['data'] // tree-select的树数据
-  hide?: boolean // 是否隐藏改该表单项
-}
-
-export interface Options {
-  form: Partial<A.FormInstance['$props']> // 继承<a-form>的props
-  row?: Partial<typeof import('@arco-design/web-vue')['Row']['__defaults']> // 最外层row，继承<a-row>的props
-  columns: ColumnsItem[]
-  btns?: { hide?: boolean; span?: number; col?: A.ColProps } // 查询和重置按钮的配置
-  fold?: { enable?: boolean; index?: number } // 是否折叠，enable: true开启折叠功能，index表示折叠的位置
-}
-```
 
 基本示例
 
@@ -881,6 +868,12 @@ export interface Options {
 **`注意：GiForm 组件的最新使用方式如下图`**
 
 <img src="https://gitee.com/lin0716/gi-image/raw/master/form/GiForm-code-new.png" />
+
+#### GiTable 使用示例
+
+<img src="https://gitee.com/lin0716/gi-image/raw/master/form/GiTable-code.png" />
+
+<img src="https://gitee.com/lin0716/gi-image/raw/master/form/GiTable-demo.gif" />
 
 #### Hooks 目录结构
 
@@ -1312,27 +1305,9 @@ AddUserForm.vue
 
 ##### 方式 3
 
-`@/views/file/components/FileRenameModal/index.vue`
-
 <img src="https://gitee.com/lin0716/gi-image/raw/master/modal/tsx-modal3-1.png" />
 
-`@/views/file/components/index.ts`
 
-<img src="https://gitee.com/lin0716/gi-image/raw/master/modal/tsx-modal3-2.png" />
-
-使用
-
-```vue
-<script setup lang="ts">
-import { openFileRenameModal } from '../../components/index'
-import type { FileItem } from '@/apis'
-
-// 重命名 函数调用表单弹窗组件
-const rename = (item: FileItem) => {
-  openFileRenameModal(item)
-}
-</script>
-```
 
 #### 组件使用建议
 
@@ -1423,7 +1398,6 @@ Link 组件使用场景
 ```html
 <div class="article">
   <div class="article__body">
-    <div class="tag"></div>
     <button class="article__button--primary"></button>
     <button class="article__button--success"></button>
   </div>
@@ -1776,7 +1750,7 @@ $padding: 16px; // 盒子和内容的间距
 
 <a href="https://antoniandre.github.io/vue-cal/" target="_blank">Vue Cal 日历组件</a>
 
-<a href="" target="_blank"></a>
+<a href="https://alfred-skyblue.github.io/vue-draggable-plus/" target="_blank">VueDraggablePlus 支持 Vue2 和 Vue3 的拖拽组件</a>
 
 ## 推荐书籍
 
