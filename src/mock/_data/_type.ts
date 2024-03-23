@@ -10,6 +10,7 @@ export interface MockFileItem {
   updateTime: string
   isDir: boolean
   filePath: string
+  size: number
 }
 
 /** 树分类数据类型 */

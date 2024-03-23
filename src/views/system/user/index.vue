@@ -92,7 +92,7 @@
               </a-table-column>
               <a-table-column title="头像" data-index="avatar" :width="100" align="center">
                 <template #cell="{ record }">
-                  <a-avatar>
+                  <a-avatar :size="24">
                     <img alt="avatar" :src="record.avatar" />
                   </a-avatar>
                 </template>

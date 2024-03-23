@@ -5,7 +5,7 @@
       title="会员列表"
       :loading="loading"
       :data="tableData"
-      :scroll="{ x: '100%', y: '100%', minWidth: 1000 }"
+      :scroll="{ x: '100%', y: '100%', minWidth: 1200 }"
       :row-selection="{ type: 'checkbox', showCheckedAll: true }"
       :pagination="pagination"
       @refresh="getTableData"
@@ -15,7 +15,7 @@
           <template #icon><icon-plus /></template>
           <span>新增</span>
         </a-button>
-        <a-button type="primary" status="danger" @click="onDelete">
+        <a-button type="primary" status="danger" @click="onMulDelete">
           <template #icon><icon-delete /></template>
           <span>删除</span>
         </a-button>
@@ -28,30 +28,73 @@
         <a-table-column title="序号" :width="66" align="center">
           <template #cell="cell">{{ cell.rowIndex + 1 }}</template>
         </a-table-column>
-        <a-table-column title="姓名" data-index="name" :width="120"></a-table-column>
-        <a-table-column title="头像" :width="80">
+        <a-table-column title="姓名" data-index="name" :width="120">
           <template #cell="{ record }">
-            <a-avatar :size="30" :style="{ backgroundColor: record.color }">{{ record.name[0] }}</a-avatar>
+            <a-space wrap>
+              <a-avatar :size="24" shape="circle">
+                <img :src="record.avatar" />
+              </a-avatar>
+              <span>{{ record.name }}</span>
+            </a-space>
           </template>
         </a-table-column>
         <a-table-column title="手机号" data-index="phone" :width="150"></a-table-column>
-        <a-table-column title="创建时间" data-index="createTime" ellipsis tooltip></a-table-column>
-        <a-table-column title="地址" data-index="address" ellipsis tooltip></a-table-column>
-        <a-table-column title="状态" :width="100" align="center">
+        <a-table-column title="性别" data-index="gender" :width="100" align="center">
           <template #cell="{ record }">
-            <a-switch v-model="record.status" type="round" size="medium">
-              <template #checked>开启</template>
-              <template #unchecked>关闭</template>
-            </a-switch>
+            <a-tag v-if="record.gender === 1" color="arcoblue" size="small" class="gi_round">
+              <template #icon><icon-man /></template>
+              <template #default>男</template>
+            </a-tag>
+            <a-tag v-if="record.gender === 2" color="purple" size="small" class="gi_round">
+              <template #icon><icon-woman /></template>
+              <template #default>女</template>
+            </a-tag>
+            <a-tag v-if="record.gender === 3" color="gray" size="small" class="gi_round">
+              <template #icon><icon-lock /></template>
+              <template #default>保密</template>
+            </a-tag>
           </template>
         </a-table-column>
-        <a-table-column title="操作" :width="200" align="center">
-          <template #cell="{}">
+        <a-table-column title="角色" :width="100" align="center">
+          <template #cell>
+            <a-tag size="small" color="#7816ff">普通用户</a-tag>
+          </template>
+        </a-table-column>
+        <a-table-column title="状态" :width="100" align="center">
+          <template #cell="{ record }">
+            <a-tag v-if="record.status === 1" color="arcoblue" size="small">
+              <template #icon><icon-check-circle-fill /></template>
+              <template #default>开启</template>
+            </a-tag>
+            <a-tag v-if="record.status === 0" color="orangered" size="small">
+              <template #icon><icon-minus-circle-fill /></template>
+              <template #default>禁用</template>
+            </a-tag>
+          </template>
+        </a-table-column>
+        <a-table-column
+          title="创建时间"
+          data-index="createTime"
+          ellipsis
+          tooltip
+          :sortable="{ sortDirections: ['ascend', 'descend'] }"
+        ></a-table-column>
+        <a-table-column title="地址" data-index="address" ellipsis tooltip></a-table-column>
+        <a-table-column title="操作" :width="180" align="center">
+          <template #cell>
             <a-space>
-              <a-button type="primary" size="mini">修改</a-button>
-              <a-button size="mini">详情</a-button>
-              <a-popconfirm type="warning" content="您确定要删除该项吗?">
-                <a-button type="primary" status="danger" size="mini">删除</a-button>
+              <template #split>
+                <a-divider direction="vertical" :margin="0" />
+              </template>
+              <a-link>编辑</a-link>
+              <a-link>详情</a-link>
+              <a-popconfirm
+                type="warning"
+                content="您确定要删除该项吗?"
+                :ok-button-props="{ status: 'danger' }"
+                @before-ok="onDelete"
+              >
+                <a-link status="danger">删除</a-link>
               </a-popconfirm>
             </a-space>
           </template>
@@ -65,6 +108,7 @@
 
 <script setup lang="ts">
 import { Message } from '@arco-design/web-vue'
+import type { PopconfirmInstance } from '@arco-design/web-vue'
 import { usePagination } from '@/hooks'
 import { getPersonList, type PersonItem } from '@/apis'
 
@@ -95,12 +139,16 @@ const onAdd = () => {
   Message.info('点击了新增')
 }
 
-const onDelete = () => {
-  Message.info('点击了删除')
+const onMulDelete = () => {
+  Message.info('点击了批量删除')
 }
 
 const onImport = () => {
   Message.info('点击了导入')
+}
+
+const onDelete: PopconfirmInstance['onBeforeOk'] = () => {
+  return new Promise((resolve) => setTimeout(() => resolve(true), 300))
 }
 </script>
 

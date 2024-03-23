@@ -1,19 +1,15 @@
 // 表格项目
 export interface PersonItem {
   id: string
-  index: number
   name: string
+  account: string
+  avatar: string
+  gender: 1 | 2 | 3
   phone: string
-  startTime: string
-  endTime: string
+  email: string
   createTime: string
   address: string
-  avatar: string
-  date: string
-  time: string
   proportion: number
-  no: number
-  status: true | false
-  color: string
+  status: 0 | 1
   hobbys: string[]
 }

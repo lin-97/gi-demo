@@ -8,7 +8,7 @@ export function openFileRenameModal(data: FileItem) {
   return Modal.open({
     title: '重命名',
     width: '90%',
-    modalStyle: { maxWidth: '500px' },
+    modalStyle: { maxWidth: '450px' },
     modalAnimationName: 'el-fade',
     content: () =>
       h(ModalContent, {

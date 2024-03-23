@@ -58,7 +58,6 @@ import { getCateTreeData, type CateItem } from '@/apis'
 import { mapTree } from 'xe-utils'
 import RightMenu from './RightMenu.vue'
 import GiSvgIcon from '@/components/GiSvgIcon/index.vue'
-import type { VNode } from 'vue'
 
 interface Props {
   type?: number
@@ -98,6 +97,11 @@ const getCateTree = async () => {
       ...i,
       popupVisible: false,
       isEdit: false,
+      // switcherIcon: (node: any) => {
+      //   if (node.expanded && !node.isLeaf) return <icon-tree-add />
+      //   if (!node.expanded && !node.isLeaf) return <icon-tree-reduce style={{ transform: 'none' }} />
+      //   return null
+      // },
       icon: (node: any) => {
         if (node.expanded && !node.isLeaf) return <GiSvgIcon name="file-open" size={16}></GiSvgIcon>
         if (!node.expanded && !node.isLeaf) return <GiSvgIcon name="file-close" size={16}></GiSvgIcon>

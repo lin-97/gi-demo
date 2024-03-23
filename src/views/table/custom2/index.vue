@@ -7,7 +7,7 @@
       :loading="loading"
       :columns="columns"
       :data="tableData"
-      :scroll="{ x: '100%', y: '100%', minWidth: 1000 }"
+      :scroll="{ x: '100%', y: '100%', minWidth: 1300 }"
       :row-selection="{ type: 'checkbox', showCheckedAll: true }"
       :pagination="pagination"
       :disabled-column-keys="['序号', 'name']"
@@ -18,7 +18,7 @@
           <template #icon><icon-plus /></template>
           <span>新增</span>
         </a-button>
-        <a-button type="primary" status="danger" @click="onDelete">
+        <a-button type="primary" status="danger" @click="onMulDelete">
           <template #icon><icon-delete /></template>
           <span>删除</span>
         </a-button>
@@ -28,7 +28,23 @@
         </a-button>
       </template>
       <template #avatar="{ record }">
-        <a-avatar :size="30" :style="{ backgroundColor: record.color }">{{ record.name[0] }}</a-avatar>
+        <a-avatar :size="28" shape="circle">
+          <img :src="record.avatar" />
+        </a-avatar>
+      </template>
+      <template #gender="{ record }">
+        <a-tag v-if="record.gender === 1" color="arcoblue" size="small" class="gi_round">
+          <template #icon><icon-man /></template>
+          <template #default>男</template>
+        </a-tag>
+        <a-tag v-if="record.gender === 2" color="purple" size="small" class="gi_round">
+          <template #icon><icon-woman /></template>
+          <template #default>女</template>
+        </a-tag>
+        <a-tag v-if="record.gender === 3" color="gray" size="small" class="gi_round">
+          <template #icon><icon-lock /></template>
+          <template #default>保密</template>
+        </a-tag>
       </template>
       <template #status="{ record }">
         <a-tag v-if="record.status === 1" color="arcoblue" size="small">
@@ -44,7 +60,7 @@
         <a-space>
           <a-button type="primary" size="mini">修改</a-button>
           <a-button size="mini">详情</a-button>
-          <a-popconfirm type="warning" content="您确定要删除该项吗?">
+          <a-popconfirm type="warning" content="您确定要删除该项吗?" @before-ok="onDelete">
             <a-button type="primary" status="danger" size="mini">删除</a-button>
           </a-popconfirm>
         </a-space>
@@ -56,7 +72,7 @@
 </template>
 
 <script setup lang="ts">
-import { Message, Link, type TableInstance } from '@arco-design/web-vue'
+import { Message, Link, type TableInstance, type PopconfirmInstance } from '@arco-design/web-vue'
 import { usePagination } from '@/hooks'
 import { getPersonList, type PersonItem } from '@/apis'
 import type { Options, Columns } from '@/components/GiForm'
@@ -94,10 +110,10 @@ const QueryFormColumns: Columns = reactive([
   {
     type: 'select',
     label: '类型',
-    field: 'type',
+    field: 'status',
     options: [
-      { label: '党员', value: 1 },
-      { label: '群众', value: 2 }
+      { label: '正常', value: 1 },
+      { label: '禁用', value: 0 }
     ]
   },
   {
@@ -123,11 +139,21 @@ const columns: TableInstance['columns'] = [
     render: ({ record }) =>
       h(Link, { onClick: () => onClickName(record as PersonItem) }, { default: () => record.name })
   },
-  { title: '头像', width: 80, slotName: 'avatar' },
+  { title: '头像', width: 80, align: 'center', slotName: 'avatar' },
   { title: '手机号', dataIndex: 'phone', width: 150 },
-  { title: '创建时间', dataIndex: 'createTime', ellipsis: true, tooltip: true },
-  { title: '地址', dataIndex: 'address', ellipsis: true, tooltip: true },
+  { title: '性别', dataIndex: 'gender', width: 100, align: 'center', slotName: 'gender' },
+  { title: '账户', dataIndex: 'account', width: 120 },
   { title: '状态', width: 100, slotName: 'status', align: 'center' },
+  {
+    title: '创建时间',
+    dataIndex: 'createTime',
+    ellipsis: true,
+    tooltip: true,
+    sortable: {
+      sortDirections: ['ascend', 'descend']
+    }
+  },
+  { title: '地址', dataIndex: 'address', ellipsis: true, tooltip: true },
   { title: '操作', width: 200, slotName: 'action', align: 'center' }
 ]
 
@@ -161,12 +187,16 @@ const onAdd = () => {
   Message.info('点击了新增')
 }
 
-const onDelete = () => {
-  Message.error('点击了删除')
+const onMulDelete = () => {
+  Message.error('点击了批量删除')
 }
 
 const onImport = () => {
   Message.warning('点击了导入')
+}
+
+const onDelete: PopconfirmInstance['onBeforeOk'] = () => {
+  return new Promise((resolve) => setTimeout(() => resolve(true), 300))
 }
 </script>
 

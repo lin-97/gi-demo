@@ -27,25 +27,38 @@ const getHobbysList = (num: number) => {
   return arr
 }
 
+const getRandomAvatar = () => {
+  const list = [
+    'https://img0.baidu.com/it/u=2746352008,2041591833&fm=253&fmt=auto&app=138&f=JPEG?w=360&h=360',
+    'https://img2.baidu.com/it/u=304294273,3088990845&fm=253&fmt=auto&app=138&f=JPEG?w=400&h=400',
+    'https://img0.baidu.com/it/u=3745738950,3664021749&fm=253&fmt=auto&app=138&f=JPEG?w=500&h=500',
+    'https://img1.baidu.com/it/u=1817951587,3188870642&fm=253&fmt=auto&app=138&f=JPEG?w=500&h=500',
+    'https://s1.ax1x.com/2022/06/14/XhYkqS.jpg',
+    'https://s1.ax1x.com/2022/06/14/XhYJIJ.jpg',
+    'https://s1.ax1x.com/2022/06/14/XhYyIH.jpg',
+    'https://s1.ax1x.com/2022/06/14/XhtSwF.jpg',
+    'https://s1.ax1x.com/2022/06/14/XhteeO.jpg',
+    'https://s1.ax1x.com/2022/06/14/XhtakQ.jpg'
+  ]
+  const index = Math.floor(Math.random() * list.length)
+  return list[index]
+}
+
 const getTableListData = (params: any) => {
   const data: any[] = []
   for (let i = 0; i < params.pageSize; i++) {
     data.push({
       id: Random.guid(),
-      index: i,
       name: params.name !== '' ? params.name : '@cname()',
+      account: Mock.mock('@string("lower", 5)'),
       phone: '15578728810',
-      startTime: '@datetime',
-      endTime: '@datetime',
+      'gender|1-3': 1,
+      email: '155****8810@qq.com',
       createTime: '@datetime',
       address: '@county(true)',
-      avatar: Random.image('400x400', Random.color(), Random.color(), Random.first()),
-      date: `@date('yyyy-MM-dd')`,
-      time: `@time('HH:mm')`,
+      avatar: getRandomAvatar(),
       'proportion|1-100': 10,
-      'no|100000-10000000': 100000,
       'status|0-1': 0,
-      color: Mock.mock('@hex'),
       hobbys: getHobbysList(Math.floor(Math.random() * 9))
     })
   }

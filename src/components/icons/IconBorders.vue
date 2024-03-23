@@ -1,11 +1,12 @@
 <template>
-  <svg width="18" height="18" viewBox="0 0 48 48" fill="currentColor">
+  <svg width="18" height="18" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
     <path
-      fill-rule="evenodd"
-      clip-rule="evenodd"
-      d="M41.778 4C43.005 4 44 4.995 44 6.222v35.556A2.222 2.222 0 0141.778 44H6.222A2.222 2.222 0 014 41.778V6.222C4 4.995 4.995 4 6.222 4h35.556zM8 40h13.999V26H8v14zm32-14H25.999v14H40V26zm0-4V8H26v14h14zM22 8H8v14h14V8z"
-      fill="currentColor"
+      d="M39.3 6H8.7C7.20883 6 6 7.20883 6 8.7V39.3C6 40.7912 7.20883 42 8.7 42H39.3C40.7912 42 42 40.7912 42 39.3V8.7C42 7.20883 40.7912 6 39.3 6Z"
+      stroke="currentColor"
+      stroke-width="4"
     />
+    <path d="M24 6L24 42" stroke="currentColor" stroke-width="4" stroke-linecap="round" />
+    <path d="M6 24H42" stroke="currentColor" stroke-width="4" stroke-linecap="round" />
   </svg>
 </template>
 

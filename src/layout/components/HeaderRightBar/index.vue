@@ -62,7 +62,13 @@
             </template>
             <span>项目地址</span>
           </a-doption>
-          <a-divider style="margin: 0" />
+          <a-doption>
+            <template #icon>
+              <span class="doption-icon primary"><icon-unlock /></span>
+            </template>
+            <span>修改密码</span>
+          </a-doption>
+          <a-divider :margin="0" />
           <a-doption @click="logout">
             <template #icon>
               <span class="doption-icon warning"><icon-export /></span>

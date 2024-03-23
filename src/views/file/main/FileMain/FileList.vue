@@ -2,7 +2,7 @@
   <div class="file-list">
     <a-table
       row-key="id"
-      :scroll="{ x: '100%', y: '100%', minWidth: 600 }"
+      :scroll="{ x: '100%', y: '100%', minWidth: 800 }"
       :data="props.data"
       :bordered="false"
       :pagination="false"
@@ -35,12 +35,19 @@
             </a-trigger>
           </template>
         </a-table-column>
-        <a-table-column title="扩展名" data-index="extendName" :width="100"></a-table-column>
+        <a-table-column title="文件大小（kb）" data-index="size" :width="150">
+          <template #cell="{ record }">{{ record.size }}</template>
+        </a-table-column>
+        <a-table-column title="扩展名" data-index="extendName" :width="100">
+          <template #cell="{ record }">
+            <a-tag v-if="record.extendName" size="small" color="purple">{{ record.extendName }}</a-tag>
+          </template>
+        </a-table-column>
         <a-table-column title="更改时间" data-index="updateTime" :width="200"></a-table-column>
         <a-table-column title="操作" :width="120" align="center">
           <template #cell="{ record }">
             <a-popover trigger="click" position="bottom" :content-style="{ padding: 0, 'margin-top': 0 }">
-              <a-button type="text"><icon-more :size="16" /></a-button>
+              <a-button type="text" @click.stop><icon-more :size="16" /></a-button>
               <template #content>
                 <FileRightMenu
                   :file-info="record"

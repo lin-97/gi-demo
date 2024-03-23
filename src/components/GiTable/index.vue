@@ -38,7 +38,7 @@
             <a-tooltip content="表格尺寸">
               <a-button size="mini" class="gi_hover_btn">
                 <template #icon>
-                  <icon-line-height :size="18" />
+                  <icon-table-size />
                 </template>
               </a-button>
             </a-tooltip>
