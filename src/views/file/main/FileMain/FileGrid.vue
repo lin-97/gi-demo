@@ -147,12 +147,12 @@ const handleRightMenuClick = (mode: string, item: FileItem) => {
       display: flex;
       justify-content: center;
       overflow: hidden;
-      .img {
+      > img {
         width: auto;
         height: 100%;
         transition: all 0.3s;
       }
-      .svg-img {
+      > svg {
         height: 100%;
         transition: all 0.3s;
       }
