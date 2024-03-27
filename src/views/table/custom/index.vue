@@ -30,7 +30,7 @@
         </a-table-column>
         <a-table-column title="姓名" data-index="name" :width="120">
           <template #cell="{ record }">
-            <a-space wrap>
+            <a-space>
               <a-avatar :size="24" shape="circle">
                 <img :src="record.avatar" />
               </a-avatar>

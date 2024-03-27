@@ -48,7 +48,6 @@
             <section class="gi_table_box">
               <a-table
                 row-key="id"
-                size="small"
                 :loading="loading"
                 :bordered="{ cell: true }"
                 :data="tableData"

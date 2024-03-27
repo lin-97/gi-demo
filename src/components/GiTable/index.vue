@@ -120,16 +120,16 @@ const props = withDefaults(defineProps<Props>(), {
 
 const tableRef = ref<TableInstance | null>(null)
 const stripe = ref(false)
-const size = ref<TableInstance['size']>('small')
+const size = ref<TableInstance['size']>('medium')
 const isBordered = ref(true)
 const isFullscreen = ref(false)
 
 type SizeItem = { label: string; value: TableInstance['size'] }
 const sizeList: SizeItem[] = [
-  { label: '小', value: 'mini' },
-  { label: '默认', value: 'small' },
-  { label: '中', value: 'medium' },
-  { label: '大', value: 'large' }
+  { label: '迷你', value: 'mini' },
+  { label: '小型', value: 'small' },
+  { label: '中等', value: 'medium' },
+  { label: '大型', value: 'large' }
 ]
 
 const refresh = () => {

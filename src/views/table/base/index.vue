@@ -5,7 +5,6 @@
     <div class="gi_table_box">
       <a-table
         row-key="id"
-        size="small"
         page-position="bottom"
         :bordered="{ cell: true }"
         :loading="loading"
@@ -19,7 +18,7 @@
           </a-table-column>
           <a-table-column title="姓名" data-index="name" :width="120">
             <template #cell="{ record }">
-              <a-space wrap>
+              <a-space>
                 <a-avatar :size="24" shape="circle">
                   <img :src="record.avatar" />
                 </a-avatar>
