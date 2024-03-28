@@ -1,7 +1,7 @@
 import { computed } from 'vue'
 import { useBreakpoints } from '@vueuse/core'
 
-export default function useBreakpoint() {
+export function useBreakpoint() {
   const breakpoints = useBreakpoints({
     xs: 576, // <576
     sm: 576, // >= 576

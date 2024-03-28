@@ -1,8 +1,8 @@
 import { ref, type UnwrapRef } from 'vue'
 import type { AxiosResponse } from 'axios'
-import useLoading from './useLoading'
+import { useLoading } from '@/hooks'
 
-export default function useRequest<T>(
+export function useRequest<T>(
   api: () => Promise<AxiosResponse<ApiRes<T>>>,
   defaultValue = [] as unknown as T,
   isLoading = true

@@ -11,7 +11,7 @@ interface optionsFn {
   (isDark: boolean): EChartsOption
 }
 
-export default function useChartOption(sourceOption: optionsFn) {
+export function useChart(sourceOption: optionsFn) {
   const appStore = useAppStore()
   const isDark = computed(() => appStore.theme === 'dark')
 

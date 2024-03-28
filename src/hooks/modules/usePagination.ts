@@ -6,7 +6,7 @@ type Options = {
   defaultPageSize: number
 }
 
-export default function usePagination(callback: Callback, options: Options = { defaultPageSize: 10 }) {
+export function usePagination(callback: Callback, options: Options = { defaultPageSize: 10 }) {
   const pagination = reactive({
     showPageSize: true,
     showTotal: true,

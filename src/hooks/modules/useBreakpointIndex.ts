@@ -9,7 +9,7 @@ type BreakpointMap = {
   xxl: number
 }
 
-export default function useBreakpointIndex(callback: (v: number) => void, breakpointObj?: BreakpointMap) {
+export function useBreakpointIndex(callback: (v: number) => void, breakpointObj?: BreakpointMap) {
   const { breakpoint } = useBreakpoint()
 
   watch(

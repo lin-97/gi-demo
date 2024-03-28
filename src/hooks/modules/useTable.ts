@@ -1,4 +1,4 @@
-import type { TableInstance } from '@arco-design/web-vue'
+import type { TableInstance, TableData } from '@arco-design/web-vue'
 import { Modal, Message } from '@arco-design/web-vue'
 import { usePagination } from '@/hooks'
 
@@ -12,7 +12,7 @@ interface Options<T> {
 type PaginationParams = { page: number; size: number }
 type Api<T> = (params: PaginationParams) => Promise<ApiRes<PageRes<T[]>>>
 
-export default function <T>(api: Api<T>, options?: Options<T>) {
+export function useTable<T>(api: Api<T>, options?: Options<T>) {
   const { formatResult, onSuccess, immediate, rowKey } = options || {}
   const { pagination, setTotal } = usePagination(() => getTableData())
   const loading = ref(false)
@@ -48,9 +48,9 @@ export default function <T>(api: Api<T>, options?: Options<T>) {
 
   // 全选
   const selectAll: TableInstance['onSelectAll'] = (checked) => {
-    const key = rowKey ?? ('id' as keyof T)
-    const arr = tableData.value.filter((i) => !(i['disabled' as keyof T] ?? false))
-    selectedKeys.value = checked ? arr.map((i) => i[key] as string | number) : []
+    const key = rowKey ?? 'id'
+    const arr = (tableData.value as TableData[]).filter((i) => !(i?.disabled ?? false))
+    selectedKeys.value = checked ? arr.map((i) => i[key as string]) : []
   }
 
   // 删除
@@ -58,7 +58,7 @@ export default function <T>(api: Api<T>, options?: Options<T>) {
     deleteApi: () => Promise<ApiRes<T>>,
     options?: { title?: string; content?: string; successTip?: string; showModal?: boolean }
   ): Promise<boolean | undefined> => {
-    const onDetele = async () => {
+    const onDelete = async () => {
       try {
         const res = await deleteApi()
         if (res.success) {
@@ -73,14 +73,14 @@ export default function <T>(api: Api<T>, options?: Options<T>) {
     }
     const flag = options?.showModal ?? true // 是否显示对话框
     if (!flag) {
-      return onDetele()
+      return onDelete()
     }
     Modal.warning({
       title: options?.title || '提示',
       content: options?.content || '是否确认删除？',
       hideCancel: false,
       maskClosable: false,
-      onBeforeOk: onDetele
+      onBeforeOk: onDelete
     })
   }
 
