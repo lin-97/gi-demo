@@ -33,7 +33,7 @@
       </a-row>
 
       <a-table
-        ref="TableRef"
+        ref="tableRef"
         row-key="id"
         :bordered="{ cell: true }"
         :data="deptList"
@@ -87,16 +87,15 @@
 </template>
 
 <script setup lang="ts">
-import AddDeptModal from './AddDeptModal.vue'
-import { getSystemDeptList, type DeptItem } from '@/apis'
-import type { TableInstance } from '@arco-design/web-vue'
-import { Message } from '@arco-design/web-vue'
+import { Message, type TableInstance } from '@arco-design/web-vue'
 import { isMobile } from '@/utils'
+import { getSystemDeptList, type DeptItem } from '@/apis'
+import AddDeptModal from './AddDeptModal.vue'
 
 defineOptions({ name: 'SystemDept' })
 
 const AddDeptModalRef = ref<InstanceType<typeof AddDeptModal>>()
-const TableRef = ref<TableInstance>()
+const tableRef = ref<TableInstance>()
 
 const form = reactive({
   name: '',
@@ -111,7 +110,7 @@ const getDeptList = async () => {
     const res = await getSystemDeptList()
     deptList.value = res.data
     nextTick(() => {
-      TableRef.value?.expandAll(true)
+      tableRef.value?.expandAll(true)
     })
   } finally {
     loading.value = false

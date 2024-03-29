@@ -39,8 +39,8 @@ const getUserDetail = async () => {
 
 const open = async (id: string) => {
   userId.value = id
-  await getUserDetail()
   visible.value = true
+  await getUserDetail()
 }
 
 defineExpose({ open })

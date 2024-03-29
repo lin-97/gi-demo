@@ -42,7 +42,7 @@
       </a-row>
 
       <a-table
-        ref="TableRef"
+        ref="tableRef"
         row-key="id"
         :data="menuList"
         :loading="loading"
@@ -140,23 +140,23 @@
 </template>
 
 <script setup lang="ts">
-import AddMenuModal from './AddMenuModal.vue'
-import { getSystemMenuList, type MenuItem } from '@/apis'
 import { Drawer, type TableInstance } from '@arco-design/web-vue'
+import { getSystemMenuList, type MenuItem } from '@/apis'
 import { isExternal } from '@/utils/validate'
 import { transformPathToName, isMobile } from '@/utils'
 import GiCodeView from '@/components/GiCodeView/index.vue'
+import AddMenuModal from './AddMenuModal.vue'
 
 defineOptions({ name: 'SystemMenu' })
 
 const AddMenuModalRef = ref<InstanceType<typeof AddMenuModal>>()
 const loading = ref(false)
 
-const TableRef = ref<TableInstance>()
+const tableRef = ref<TableInstance>()
 const isExpanded = ref(false)
 const onExpanded = () => {
   isExpanded.value = !isExpanded.value
-  TableRef.value?.expandAll(isExpanded.value)
+  tableRef.value?.expandAll(isExpanded.value)
 }
 
 const form = reactive({ name: '', status: '' })

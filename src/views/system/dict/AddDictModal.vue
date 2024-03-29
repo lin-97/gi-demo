@@ -39,10 +39,10 @@
 </template>
 
 <script setup lang="ts">
-import { getSystemDictDetail, saveSystemDict } from '@/apis'
 import { Message, type FormInstance } from '@arco-design/web-vue'
 import * as Regexp from '@/utils/regexp'
 import { useForm } from '@/hooks'
+import { getSystemDictDetail, saveSystemDict } from '@/apis'
 
 const emit = defineEmits<{
   (e: 'save-success'): void
@@ -77,9 +77,9 @@ const add = () => {
 
 const edit = async (id: string) => {
   roleId.value = id
+  visible.value = true
   const res = await getSystemDictDetail({ id })
   Object.assign(form, res.data)
-  visible.value = true
 }
 
 const close = () => {

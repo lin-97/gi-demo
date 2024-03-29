@@ -35,7 +35,7 @@
       </a-form-item>
 
       <a-row :gutter="16" v-if="[1, 2].includes(form.type)">
-        <a-col :xs="24" :sm="24" :md="12" :lg="12" :xl="12" :xxl="12">
+        <a-col v-bind="col2Props">
           <a-form-item label="自定义图标" field="svgIcon">
             <GiIconSelector v-model="form.svgIcon" type="custom"></GiIconSelector>
             <a-tooltip content="优先显示">
@@ -43,7 +43,7 @@
             </a-tooltip>
           </a-form-item>
         </a-col>
-        <a-col :xs="24" :sm="24" :md="12" :lg="12" :xl="12" :xxl="12">
+        <a-col v-bind="col2Props">
           <a-form-item label="菜单图标" field="icon">
             <GiIconSelector v-model="form.icon"></GiIconSelector>
           </a-form-item>
@@ -90,7 +90,7 @@
       </a-form-item>
 
       <a-row :gutter="16" v-if="[1, 2].includes(form.type)">
-        <a-col :xs="12" :sm="12" :md="8" :lg="8" :xl="8" :xxl="8">
+        <a-col v-bind="col3Props">
           <a-form-item label="状态" field="status">
             <a-switch
               type="round"
@@ -102,7 +102,7 @@
             />
           </a-form-item>
         </a-col>
-        <a-col :xs="12" :sm="12" :md="8" :lg="8" :xl="8" :xxl="8">
+        <a-col v-bind="col3Props">
           <a-form-item label="是否隐藏" field="hidden">
             <a-switch
               type="round"
@@ -114,7 +114,7 @@
             />
           </a-form-item>
         </a-col>
-        <a-col :xs="12" :sm="12" :md="8" :lg="8" :xl="8" :xxl="8">
+        <a-col v-bind="col3Props">
           <a-form-item label="是否缓存" field="keepAlive">
             <a-switch
               type="round"
@@ -126,7 +126,7 @@
             />
           </a-form-item>
         </a-col>
-        <a-col :xs="12" :sm="12" :md="8" :lg="8" :xl="8" :xxl="8">
+        <a-col v-bind="col3Props">
           <a-form-item label="面包屑" field="breadcrumb">
             <a-switch
               type="round"
@@ -138,7 +138,7 @@
             />
           </a-form-item>
         </a-col>
-        <a-col :xs="12" :sm="12" :md="8" :lg="8" :xl="8" :xxl="8">
+        <a-col v-bind="col3Props">
           <a-form-item label="总是显示" field="alwaysShow" v-if="form.type === 1">
             <a-switch
               type="round"
@@ -174,7 +174,7 @@
 </template>
 
 <script setup lang="ts">
-import { Message, type FormInstance } from '@arco-design/web-vue'
+import { Message, type FormInstance, type ColProps } from '@arco-design/web-vue'
 import { getSystemMenuDetail, saveSystemMenu, type MenuItem } from '@/apis'
 import { isExternal } from '@/utils/validate'
 import { transformPathToName, filterTree } from '@/utils'
@@ -205,8 +205,10 @@ const menuSelectTree = computed(() => {
   return arr
 })
 
-const formRef = ref<FormInstance>()
+const col2Props: ColProps = { xs: 24, sm: 24, md: 12, lg: 12, xl: 12, xxl: 12 }
+const col3Props: ColProps = { xs: 12, sm: 12, md: 8, lg: 8, xl: 8, xxl: 8 }
 
+const formRef = ref<FormInstance>()
 const menuId = ref('')
 const visible = ref(false)
 const isEdit = computed(() => !!menuId.value)
@@ -262,13 +264,13 @@ const add = () => {
 }
 
 const edit = async (id: string) => {
+  visible.value = true
   menuId.value = id
   const res = await getSystemMenuDetail({ id })
   Object.assign(form, res.data)
   if (isExternal(form.path)) {
     isExternalUrl.value = true
   }
-  visible.value = true
 }
 
 const close = () => {

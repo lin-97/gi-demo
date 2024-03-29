@@ -40,8 +40,8 @@
 </template>
 
 <script setup lang="ts">
-import { getSystemRoleDetail, saveSystemRole } from '@/apis'
 import { Message, type FormInstance } from '@arco-design/web-vue'
+import { getSystemRoleDetail, saveSystemRole } from '@/apis'
 import { useForm } from '@/hooks'
 
 const emit = defineEmits<{
@@ -79,10 +79,10 @@ const add = () => {
 }
 
 const edit = async (id: string) => {
+  visible.value = true
   roleId.value = id
   const res = await getSystemRoleDetail({ id })
   Object.assign(form, res.data)
-  visible.value = true
 }
 
 const close = () => {

@@ -116,7 +116,7 @@ const {
 } = useTable((pagin) => getSystemDictList({ current: pagin.page, pageSize: pagin.size }), { immediate: true })
 
 const reset = () => {
-  form.status = ''
+  form.name = ''
   form.status = ''
   search()
 }

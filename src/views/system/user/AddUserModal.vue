@@ -11,7 +11,7 @@
   >
     <a-form ref="formRef" :model="form" :rules="rules" size="medium" auto-label-width>
       <a-row>
-        <a-col :xs="24" :sm="24" :md="12" :lg="12" :xl="12" :xxl="12">
+        <a-col v-bind="col2Props">
           <a-form-item label="用户名" field="username">
             <a-input
               v-model.trim="form.username"
@@ -22,20 +22,17 @@
             ></a-input>
           </a-form-item>
         </a-col>
-        <a-col :xs="24" :sm="24" :md="12" :lg="12" :xl="12" :xxl="12">
+        <a-col v-bind="col2Props">
           <a-form-item label="昵称" field="nickname">
             <a-input v-model.trim="form.nickname" placeholder="请输入昵称" allow-clear :max-length="10"></a-input>
           </a-form-item>
         </a-col>
-      </a-row>
-
-      <a-row>
-        <a-col :xs="24" :sm="24" :md="12" :lg="12" :xl="12" :xxl="12">
+        <a-col v-bind="col2Props">
           <a-form-item label="手机号码" field="phone">
             <a-input v-model.trim="form.phone" placeholder="请输入手机号码" allow-clear :max-length="11"></a-input>
           </a-form-item>
         </a-col>
-        <a-col :xs="24" :sm="24" :md="12" :lg="12" :xl="12" :xxl="12">
+        <a-col v-bind="col2Props">
           <a-form-item label="邮箱" field="email">
             <a-input v-model.trim="form.email" placeholder="请输入邮箱" allow-clear :max-length="30"></a-input>
           </a-form-item>
@@ -100,7 +97,7 @@
 </template>
 
 <script setup lang="ts">
-import { Message, type FormInstance } from '@arco-design/web-vue'
+import { Message, type FormInstance, type ColProps } from '@arco-design/web-vue'
 import * as Regexp from '@/utils/regexp'
 import { getSystemUserDetail, saveSystemUser } from '@/apis'
 import { useDept, useRole } from '@/hooks/app'
@@ -117,6 +114,7 @@ const roleOptions = computed(() => roleList.value.map((i) => ({ label: i.name, v
 const { deptList, getDeptList } = useDept()
 getDeptList()
 
+const col2Props: ColProps = { xs: 24, sm: 24, md: 12, lg: 12, xl: 12, xxl: 12 }
 const formRef = ref<FormInstance>()
 const userId = ref('')
 const isEdit = computed(() => !!userId.value)

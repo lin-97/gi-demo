@@ -32,8 +32,8 @@
 </template>
 
 <script setup lang="ts">
-import { getSystemDictDataDetail, saveSystemDictData } from '@/apis'
 import { Message, type FormInstance } from '@arco-design/web-vue'
+import { getSystemDictDataDetail, saveSystemDictData } from '@/apis'
 import { useForm } from '@/hooks'
 
 const emit = defineEmits<{
@@ -68,8 +68,8 @@ const add = () => {
 }
 
 const edit = async (data: { id: string; code: string }) => {
-  dictDataId.value = data.id
   visible.value = true
+  dictDataId.value = data.id
   loading.value = true
   const res = await getSystemDictDataDetail(data)
   Object.assign(form, res.data)

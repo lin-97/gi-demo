@@ -7,7 +7,7 @@ export function getSystemDeptList() {
 }
 
 /** @desc 获取部门详情 */
-export function getSystemDeptDetil(params: { id: string }) {
+export function getSystemDeptDetail(params: { id: string }) {
   return http.get<System.DeptItem>('/system/dept/detail', params)
 }
 

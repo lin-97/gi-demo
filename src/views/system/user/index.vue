@@ -7,7 +7,7 @@
             <template #prefix><icon-search /></template>
           </a-input>
           <a-tree
-            ref="TreeRef"
+            ref="treeRef"
             block-node
             show-line
             default-expand-all
@@ -135,19 +135,19 @@
 </template>
 
 <script setup lang="ts">
+import { Message, type TreeInstance } from '@arco-design/web-vue'
 import { useTable } from '@/hooks'
 import { useDept } from '@/hooks/app'
 import { getSystemUserList, deleteSystemUser } from '@/apis'
 import type { UserItem } from '@/apis'
 import AddUserModal from './AddUserModal.vue'
 import UserDetailDrawer from './UserDetailDrawer.vue'
-import type { TreeInstance } from '@arco-design/web-vue'
-import { Message } from '@arco-design/web-vue'
+
 import { isMobile } from '@/utils'
 
 defineOptions({ name: 'SystemUser' })
 
-const TreeRef = ref<TreeInstance>()
+const treeRef = ref<TreeInstance>()
 const AddUserModalRef = ref<InstanceType<typeof AddUserModal>>()
 const UserDetailDrawerRef = ref<InstanceType<typeof UserDetailDrawer>>()
 const treeInputValue = ref('')
@@ -155,7 +155,7 @@ const treeInputValue = ref('')
 const { deptList, getDeptList } = useDept({
   onSuccess: () => {
     nextTick(() => {
-      TreeRef.value?.expandAll(true)
+      treeRef.value?.expandAll(true)
     })
   }
 })

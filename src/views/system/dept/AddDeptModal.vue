@@ -52,10 +52,10 @@
 </template>
 
 <script setup lang="ts">
-import { useDept } from '@/hooks/app'
-import { getSystemDeptDetil, saveSystemDept } from '@/apis'
 import { Message, type FormInstance } from '@arco-design/web-vue'
 import { useForm } from '@/hooks'
+import { useDept } from '@/hooks/app'
+import { getSystemDeptDetail, saveSystemDept } from '@/apis'
 
 const emit = defineEmits<{
   (e: 'save-success'): void
@@ -95,9 +95,9 @@ const edit = async (id: string) => {
     await getDeptList()
   }
   deptId.value = id
-  const res = await getSystemDeptDetil({ id })
-  Object.assign(form, res.data)
   visible.value = true
+  const res = await getSystemDeptDetail({ id })
+  Object.assign(form, res.data)
 }
 
 const close = () => {
