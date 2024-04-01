@@ -145,6 +145,7 @@ const initColumns: Columns = [
 const { columns, resetColumns, setPropsValue } = useGiForm(initColumns)
 
 const form = reactive({
+  name: '',
   remark: '这是备注这是备注',
   status: 1
 })
@@ -169,7 +170,7 @@ const onAdd = () => {
 const onEdit = () => {
   setPropsValue('status', 'disabled', true) // 禁用 状态
   setPropsValue('hide', 'disabled', true) // 禁用 是否隐藏
-  Modal.open({
+  const option = {
     title: '编辑',
     width: '90%',
     modalStyle: { maxWidth: '600px' },
@@ -181,7 +182,13 @@ const onEdit = () => {
         modelValue: form,
         'onUpdate:modelValue': (e) => Object.assign(form, e)
       })
-  })
+  }
+  const instance = Modal.open(option)
+  // 模拟异步更新
+  setTimeout(() => {
+    form.name = '张三'
+    instance.update(option)
+  }, 300)
 }
 
 const visible = ref(false)
