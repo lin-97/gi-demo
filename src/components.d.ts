@@ -8,6 +8,10 @@ export {}
 declare module 'vue' {
   export interface GlobalComponents {
     Breadcrumb: typeof import('./components/Breadcrumb/index.vue')['default']
+    GiCellAvatar: typeof import('./components/GiCell/GiCellAvatar.vue')['default']
+    GiCellGender: typeof import('./components/GiCell/GiCellGender.vue')['default']
+    GiCellStatus: typeof import('./components/GiCell/GiCellStatus.vue')['default']
+    GiCellTags: typeof import('./components/GiCell/GiCellTags.vue')['default']
     GiCodeView: typeof import('./components/GiCodeView/index.vue')['default']
     GiDot: typeof import('./components/GiDot/index.tsx')['default']
     GiFlexibleBox: typeof import('./components/GiFlexibleBox/index.vue')['default']
@@ -16,7 +20,6 @@ declare module 'vue' {
     GiIconSelector: typeof import('./components/GiIconSelector/index.vue')['default']
     GiOption: typeof import('./components/GiOption/index.vue')['default']
     GiOptionItem: typeof import('./components/GiOptionItem/index.vue')['default']
-    GiOverFlowTags: typeof import('./components/GiOverFlowTags/index.vue')['default']
     GiSvgIcon: typeof import('./components/GiSvgIcon/index.vue')['default']
     GiTable: typeof import('./components/GiTable/index.vue')['default']
     GiTag: typeof import('./components/GiTag/index.tsx')['default']

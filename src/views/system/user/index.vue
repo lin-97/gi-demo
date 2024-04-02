@@ -77,32 +77,27 @@
                   <a-link @click="openDetail(record)">{{ record.username }}</a-link>
                 </template>
               </a-table-column>
-              <a-table-column title="昵称" data-index="nickname" :width="150"></a-table-column>
+              <a-table-column title="昵称" data-index="nickname" :width="150">
+                <template #cell="{ record }">
+                  <GiCellAvatar :avatar="record.avatar" :name="record.nickname"></GiCellAvatar>
+                </template>
+              </a-table-column>
               <a-table-column title="状态" :width="100" align="center">
                 <template #cell="{ record }">
-                  <a-tag v-if="record.status === 1" color="green">正常</a-tag>
-                  <a-tag v-if="record.status === 0" color="red">禁用</a-tag>
+                  <GiCellStatus :status="record.status"></GiCellStatus>
                 </template>
               </a-table-column>
               <a-table-column title="性别" data-index="gender" :width="80" align="center">
                 <template #cell="{ record }">
-                  <span v-if="record.gender === 1">男</span>
-                  <span v-if="record.gender === 2">女</span>
-                </template>
-              </a-table-column>
-              <a-table-column title="头像" data-index="avatar" :width="100" align="center">
-                <template #cell="{ record }">
-                  <a-avatar :size="24">
-                    <img alt="avatar" :src="record.avatar" />
-                  </a-avatar>
+                  <GiCellGender :gender="record.gender"></GiCellGender>
                 </template>
               </a-table-column>
               <a-table-column title="联系方式" data-index="phone" :width="180"></a-table-column>
               <a-table-column title="部门" data-index="deptName" :width="180"></a-table-column>
               <a-table-column title="类型" :width="100" align="center">
                 <template #cell="{ record }">
-                  <a-tag v-if="record.type === 1" color="red">系统内置</a-tag>
-                  <a-tag v-if="record.type === 2" color="orange">自定义</a-tag>
+                  <a-tag v-if="record.type === 1" color="red" size="small">系统内置</a-tag>
+                  <a-tag v-if="record.type === 2" color="orange" size="small">自定义</a-tag>
                 </template>
               </a-table-column>
               <a-table-column title="描述" :width="200" data-index="description"></a-table-column>

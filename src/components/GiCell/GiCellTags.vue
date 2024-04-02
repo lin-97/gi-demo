@@ -19,11 +19,12 @@
 </template>
 
 <script lang="ts" setup>
-defineOptions({ name: 'GiOverFlowTags' })
+defineOptions({ name: 'GiCellTags' })
 
 interface Props {
   data: string[]
 }
+
 withDefaults(defineProps<Props>(), {
   data: () => []
 })

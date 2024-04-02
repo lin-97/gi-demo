@@ -52,8 +52,7 @@
           <a-table-column title="角色编码" data-index="code"></a-table-column>
           <a-table-column title="状态" :width="100" align="center">
             <template #cell="{ record }">
-              <a-tag v-if="record.status == 1" color="green">正常</a-tag>
-              <a-tag v-if="record.status == 0" color="red">禁用</a-tag>
+              <GiCellStatus :status="record.status"></GiCellStatus>
             </template>
           </a-table-column>
           <a-table-column title="描述" data-index="description"></a-table-column>

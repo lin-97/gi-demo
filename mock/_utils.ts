@@ -21,7 +21,7 @@ export const resultError = (data: unknown, message: string, code = 500) => {
   })
 }
 
-/** 获取 50-300ms的随机延时 */
+/** 获取 50-300ms 的随机延时 */
 export const getDelayTime = () => {
   return random(50, 300)
 }

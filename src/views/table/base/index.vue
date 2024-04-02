@@ -18,47 +18,24 @@
           </a-table-column>
           <a-table-column title="姓名" data-index="name" :width="120">
             <template #cell="{ record }">
-              <a-space>
-                <a-avatar :size="24" shape="circle">
-                  <img :src="record.avatar" />
-                </a-avatar>
-                <span>{{ record.name }}</span>
-              </a-space>
+              <GiCellAvatar :avatar="record.avatar" :name="record.name"></GiCellAvatar>
             </template>
           </a-table-column>
           <a-table-column title="账户" data-index="account" :width="120"></a-table-column>
           <a-table-column title="状态" :width="100" align="center">
             <template #cell="{ record }">
-              <a-tag v-if="record.status === 1" color="arcoblue" size="small">
-                <template #icon><icon-check-circle-fill /></template>
-                <template #default>开启</template>
-              </a-tag>
-              <a-tag v-if="record.status === 0" color="orangered" size="small">
-                <template #icon><icon-minus-circle-fill /></template>
-                <template #default>禁用</template>
-              </a-tag>
+              <GiCellStatus :status="record.status"></GiCellStatus>
             </template>
           </a-table-column>
           <a-table-column title="手机号" data-index="phone" :width="150"></a-table-column>
           <a-table-column title="性别" data-index="gender" :width="100" align="center">
             <template #cell="{ record }">
-              <a-tag v-if="record.gender === 1" color="arcoblue" size="small" class="gi_round">
-                <template #icon><icon-man /></template>
-                <template #default>男</template>
-              </a-tag>
-              <a-tag v-if="record.gender === 2" color="purple" size="small" class="gi_round">
-                <template #icon><icon-woman /></template>
-                <template #default>女</template>
-              </a-tag>
-              <a-tag v-if="record.gender === 3" color="gray" size="small" class="gi_round">
-                <template #icon><icon-lock /></template>
-                <template #default>保密</template>
-              </a-tag>
+              <GiCellGender :gender="record.gender"></GiCellGender>
             </template>
           </a-table-column>
           <a-table-column title="爱好" data-index="hobbys">
             <template #cell="{ record }">
-              <GiOverFlowTags :data="record.hobbys"></GiOverFlowTags>
+              <GiCellTags :data="record.hobbys"></GiCellTags>
             </template>
           </a-table-column>
           <a-table-column

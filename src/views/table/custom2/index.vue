@@ -33,28 +33,10 @@
         </a-avatar>
       </template>
       <template #gender="{ record }">
-        <a-tag v-if="record.gender === 1" color="arcoblue" size="small" class="gi_round">
-          <template #icon><icon-man /></template>
-          <template #default>男</template>
-        </a-tag>
-        <a-tag v-if="record.gender === 2" color="purple" size="small" class="gi_round">
-          <template #icon><icon-woman /></template>
-          <template #default>女</template>
-        </a-tag>
-        <a-tag v-if="record.gender === 3" color="gray" size="small" class="gi_round">
-          <template #icon><icon-lock /></template>
-          <template #default>保密</template>
-        </a-tag>
+        <GiCellGender :gender="record.gender"></GiCellGender>
       </template>
       <template #status="{ record }">
-        <a-tag v-if="record.status === 1" color="arcoblue" size="small">
-          <template #icon><icon-check-circle-fill /></template>
-          <template #default>开启</template>
-        </a-tag>
-        <a-tag v-if="record.status === 0" color="orangered" size="small">
-          <template #icon><icon-minus-circle-fill /></template>
-          <template #default>禁用</template>
-        </a-tag>
+        <GiCellStatus :status="record.status"></GiCellStatus>
       </template>
       <template #action>
         <a-space>

@@ -72,7 +72,7 @@
                   <a-table-column title="状态" :width="100" align="center">
                     <template #cell="{ record }">
                       <template v-for="item in StatusList" :key="item.value">
-                        <a-tag size="small" v-if="item.value === record.status" :color="item.color">{{
+                        <a-tag v-if="item.value === record.status" size="small" :color="item.color">{{
                           item.name
                         }}</a-tag>
                       </template>

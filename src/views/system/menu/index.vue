@@ -61,9 +61,9 @@
           </a-table-column>
           <a-table-column title="类型" :width="80" align="center">
             <template #cell="{ record }">
-              <a-tag v-if="record.type === 1" color="orangered">目录</a-tag>
-              <a-tag v-if="record.type === 2" color="green">菜单</a-tag>
-              <a-tag v-if="record.type === 3">按钮</a-tag>
+              <a-tag v-if="record.type === 1" size="small" color="orangered">目录</a-tag>
+              <a-tag v-if="record.type === 2" size="small" color="green">菜单</a-tag>
+              <a-tag v-if="record.type === 3" size="small">按钮</a-tag>
             </template>
           </a-table-column>
           <a-table-column title="排序" :width="80" align="center">
@@ -96,20 +96,20 @@
           </a-table-column>
           <a-table-column title="是否缓存" :width="100" align="center">
             <template #cell="{ record }">
-              <a-tag v-if="record.keepAlive" color="green">是</a-tag>
-              <a-tag v-else color="red">否</a-tag>
+              <a-tag v-if="record.keepAlive" size="small" color="green">是</a-tag>
+              <a-tag v-else size="small" color="red">否</a-tag>
             </template>
           </a-table-column>
           <a-table-column title="是否隐藏" :width="100" align="center">
             <template #cell="{ record }">
-              <a-tag v-if="record.hidden" color="green">是</a-tag>
-              <a-tag v-else color="red">否</a-tag>
+              <a-tag v-if="record.hidden" size="small" color="green">是</a-tag>
+              <a-tag v-else size="small" color="red">否</a-tag>
             </template>
           </a-table-column>
           <a-table-column title="是否外链" :width="100" align="center">
             <template #cell="{ record }">
-              <a-tag v-if="isExternal(record.path)" color="green">是</a-tag>
-              <a-tag v-else color="red">否</a-tag>
+              <a-tag v-if="isExternal(record.path)" size="small" color="green">是</a-tag>
+              <a-tag v-else size="small" color="red">否</a-tag>
             </template>
           </a-table-column>
           <a-table-column title="操作" :width="200" align="left" :fixed="!isMobile() ? 'right' : undefined">
@@ -209,7 +209,4 @@ const onViewCode = () => {
 }
 </script>
 
-<style lang="scss" scoped>
-.menu-manage {
-}
-</style>
+<style lang="scss" scoped></style>

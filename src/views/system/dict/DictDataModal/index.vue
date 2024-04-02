@@ -42,8 +42,7 @@
         <a-table-column title="字典值" data-index="value"></a-table-column>
         <a-table-column title="状态" :width="100" align="center">
           <template #cell="{ record }">
-            <a-tag v-if="record.status == 1" color="green">启用</a-tag>
-            <a-tag v-if="record.status == 0" color="red">禁用</a-tag>
+            <GiCellStatus :status="record.status"></GiCellStatus>
           </template>
         </a-table-column>
         <a-table-column title="操作" :width="180" align="center">
