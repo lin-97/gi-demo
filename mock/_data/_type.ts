@@ -47,8 +47,9 @@ export interface MockSystemDictItem {
   list: {
     id: string
     name: string
-    value: string
+    value: string | number
     status: number
+    color?: string
   }[]
 }
 

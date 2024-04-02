@@ -1,6 +1,7 @@
 import { defineMock } from '../_base'
 import { resultSuccess, resultError, getDelayTime } from '../_utils'
 import dictData from '../_data/system_dict'
+import type { SelectOptionData } from '@arco-design/web-vue'
 
 export default defineMock([
   {
@@ -47,6 +48,24 @@ export default defineMock([
         return resultError(null, '无法查找数据！', 403)
       }
       return resultSuccess(item)
+    }
+  },
+  {
+    url: '/system/dictData',
+    method: 'get',
+    timeout: getDelayTime(),
+    response: () => {
+      const obj: Record<string, SelectOptionData[]> = {}
+      dictData.forEach((i) => {
+        obj[i.code] = i.list.map((i) => {
+          const obj: SelectOptionData = { label: i.name, value: i.value }
+          if (i.color) {
+            obj.tagProps = { color: i.color }
+          }
+          return obj
+        })
+      })
+      return resultSuccess(obj)
     }
   },
   {

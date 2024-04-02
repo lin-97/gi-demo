@@ -3,7 +3,7 @@ export interface DeptItem {
   id: string
   name: string
   sort: number
-  status: 0 | 1
+  status: Status
   createTime: string
   parentId: string
   children?: DeptItem[]
@@ -19,7 +19,7 @@ export interface RoleItem {
   name: string
   code: string
   sort: number
-  status: 0 | 1
+  status: Status
   type: number
   description: string
 }
@@ -34,11 +34,11 @@ export interface UserItem {
   deptName: string
   username: string
   nickname: string
-  gender: number
+  gender: Gender
   avatar: string
   email: string
   phone: string
-  status: 0 | 1
+  status: Status
   type: 1 | 2
   description: string
 }
@@ -63,7 +63,7 @@ export interface MenuItem {
   roles: string[]
   showInTabs: boolean
   sort: number
-  status: 0 | 1
+  status: Status
   svgIcon: string
   title: string
   type: 1 | 2
@@ -83,7 +83,7 @@ export interface DictItem {
   name: string
   code: string
   sort: number
-  status: 0 | 1
+  status: Status
   description: string
 }
 
@@ -93,5 +93,5 @@ export type DictDataItem = {
   id: string
   name: string
   value: string | number
-  status: 0 | 1
+  status: Status
 }

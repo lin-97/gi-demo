@@ -748,44 +748,6 @@ user/index.vue
 user-detail/index.vue
 ```
 
-#### 业务状态
-
-gi-demo 的业务状态放在@/constant/xxx.ts xxx 为接口模块名
-
-```js
-type SubmitStatusItem = { name: string, value: number, color: string }
-/** @desc 指标提交状态 */
-export const SubmitStatusList: SubmitStatusItem[] = [
-  { name: '待提交', value: 0, color: 'orange' },
-  { name: '已提交', value: 1, color: 'green' }
-]
-
-type StatusItem = { name: string, value: number, type: string }
-/** @desc 指标启用状态 */
-export const StatusList: StatusItem[] = [
-  { name: '禁用', value: 0, type: 'danger' },
-  { name: '启用', value: 1, type: 'success' }
-]
-```
-
-使用的时候:
-
-引入模块
-
-```js
-import { StatusList } from '@/constant/xxx' // 要具体到模块名，因为不同模块可能会有StatusList一样的名称
-```
-
-```vue
-<a-table-column title="状态" :width="100" align="center">
-  <template #cell="{ record }">
-    <template v-for="item in StatusList" :key="item.value">
-      <a-tag v-if="item.value === record.status" :color="item.color">{{ item.name }}</a-tag>
-	</template>
-  </template>
-</a-table-column>
-```
-
 #### 弹窗组件 Modal、抽屉组件 Drawer 的一般封装
 
 ```vue
@@ -1306,8 +1268,6 @@ AddUserForm.vue
 ##### 方式 3
 
 <img src="https://gitee.com/lin0716/gi-image/raw/master/modal/tsx-modal3-1.png" />
-
-
 
 #### 组件使用建议
 

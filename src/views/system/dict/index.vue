@@ -5,10 +5,13 @@
         <a-input v-model="form.name" placeholder="字典类型名称/编码" allow-clear style="width: 250px">
           <template #prefix><icon-search /></template>
         </a-input>
-        <a-select v-model="form.status" placeholder="状态" allow-clear style="width: 120px">
-          <a-option :value="1">正常</a-option>
-          <a-option :value="0">禁用</a-option>
-        </a-select>
+        <a-select
+          v-model="form.status"
+          :options="options"
+          placeholder="状态"
+          allow-clear
+          style="width: 120px"
+        ></a-select>
         <a-button type="primary" @click="search">
           <template #icon><icon-search /></template>
           <span>查询</span>
@@ -89,12 +92,15 @@
 <script setup lang="ts">
 import { Message } from '@arco-design/web-vue'
 import { useTable } from '@/hooks'
+import { useDict } from '@/hooks/app'
 import { getSystemDictList, deleteBaseApi, type DictItem } from '@/apis'
 import { isMobile } from '@/utils'
 import AddDictModal from './AddDictModal.vue'
 import DictDataModal from './DictDataModal/index.vue'
 
 defineOptions({ name: 'SystemRole' })
+
+const { data: options } = useDict({ code: 'status' })
 const AddDictModalRef = ref<InstanceType<typeof AddDictModal>>()
 const DictDataModalRef = ref<InstanceType<typeof DictDataModal>>()
 

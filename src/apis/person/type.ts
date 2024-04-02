@@ -4,12 +4,12 @@ export interface PersonItem {
   name: string
   account: string
   avatar: string
-  gender: 1 | 2 | 3
+  gender: Gender
   phone: string
   email: string
   createTime: string
   address: string
   proportion: number
-  status: 0 | 1
+  status: Status
   hobbys: string[]
 }

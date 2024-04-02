@@ -5,10 +5,13 @@
         <a-input v-model="form.name" placeholder="输入角色名搜索" allow-clear style="width: 250px">
           <template #prefix><icon-search /></template>
         </a-input>
-        <a-select v-model="form.status" placeholder="角色状态" allow-clear style="width: 120px">
-          <a-option :value="1">正常</a-option>
-          <a-option :value="0">禁用</a-option>
-        </a-select>
+        <a-select
+          v-model="form.status"
+          :options="options"
+          placeholder="角色状态"
+          allow-clear
+          style="width: 120px"
+        ></a-select>
         <a-button type="primary" @click="search">
           <template #icon><icon-search /></template>
           <span>查询</span>
@@ -97,11 +100,13 @@ import { Message } from '@arco-design/web-vue'
 import AddRoleModal from './AddRoleModal.vue'
 import PermModal from './PermModal.vue'
 import { useTable } from '@/hooks'
+import { useDict } from '@/hooks/app'
 import { getSystemRoleList, deleteBaseApi, type RoleItem } from '@/apis'
 import { isMobile } from '@/utils'
 
 defineOptions({ name: 'SystemRole' })
 
+const { data: options } = useDict({ code: 'status' })
 const AddRoleModalRef = ref<InstanceType<typeof AddRoleModal>>()
 const PermModalRef = ref<InstanceType<typeof PermModal>>()
 

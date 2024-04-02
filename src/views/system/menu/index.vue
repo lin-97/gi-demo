@@ -26,10 +26,7 @@
           <a-input v-model="form.name" placeholder="输入菜单名称搜索" allow-clear style="width: 250px">
             <template #prefix><icon-search /></template>
           </a-input>
-          <a-select v-model="form.status" placeholder="菜单状态" style="width: 120px">
-            <a-option :value="1">正常</a-option>
-            <a-option :value="0">禁用</a-option>
-          </a-select>
+          <a-select v-model="form.status" :options="options" placeholder="菜单状态" style="width: 120px"></a-select>
           <a-button type="primary" @click="search">
             <template #icon><icon-search /></template>
             <span>搜索</span>
@@ -144,11 +141,13 @@ import { Drawer, type TableInstance } from '@arco-design/web-vue'
 import { getSystemMenuList, deleteBaseApi, type MenuItem } from '@/apis'
 import { isExternal } from '@/utils/validate'
 import { transformPathToName, isMobile } from '@/utils'
+import { useDict } from '@/hooks/app'
 import GiCodeView from '@/components/GiCodeView/index.vue'
 import AddMenuModal from './AddMenuModal.vue'
 
 defineOptions({ name: 'SystemMenu' })
 
+const { data: options } = useDict({ code: 'status' })
 const AddMenuModalRef = ref<InstanceType<typeof AddMenuModal>>()
 const loading = ref(false)
 

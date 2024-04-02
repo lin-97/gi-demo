@@ -1,4 +1,5 @@
-export default `<template>
+export default `
+<template>
   <a-card :bordered="false" class="gi_card pane2">
     <a-row justify="space-between" align="center" wrap>
       <a-space wrap>
@@ -19,11 +20,10 @@ export default `<template>
       </a-space>
     </a-row>
 
-    <section class="content">
+    <section class="pane2__content">
       <section class="gi_table_box">
         <a-table
           row-key="id"
-          size="small"
           :loading="loading"
           :bordered="{ cell: true }"
           :columns="columns"
@@ -46,8 +46,8 @@ import { Modal } from '@arco-design/web-vue'
 import { usePagination } from '@/hooks'
 import { getPersonList } from '@/apis'
 import type { PersonItem } from '@/apis'
-import { StatusList } from '@/constant/person'
 import Pane2Code from './Pane2Code'
+import GiCellStatus from '@/components/GiCell/GiCellStatus.vue'
 
 const onViewCode = () => {
   Modal.open({
@@ -61,7 +61,7 @@ const columns: TableColumnData[] = [
   {
     title: '序号',
     width: 68,
-    render: ({ record, column, rowIndex }) => <span>{rowIndex + 1}</span>
+    render: ({ rowIndex }) => <span>{rowIndex + 1}</span>
   },
   {
     title: '姓名',
@@ -90,22 +90,15 @@ const columns: TableColumnData[] = [
     title: '状态',
     width: 100,
     align: 'center',
-    render: (data) => {
-      const index = StatusList.findIndex((i) => i.value === data.record.status)
-      if (index >= 0) {
-        return (
-          <a-tag size="small" color={StatusList[index].color}>
-            {StatusList[index].name}
-          </a-tag>
-        )
-      }
+    render: ({ record }) => {
+      return <GiCellStatus status={record.status} />
     }
   },
   {
     title: '操作',
     width: 200,
     align: 'center',
-    render: ({ record }) => (
+    render: () => (
       <a-space>
         <a-button type="primary" size="mini">
           <icon-edit></icon-edit>
@@ -134,7 +127,6 @@ const getTableData = async () => {
     })
     tableData.value = res.data.records
     setTotal(res.data.total)
-  } catch (error) {
   } finally {
     loading.value = false
   }
@@ -167,15 +159,15 @@ const selectAll: TableInstance['onSelectAll'] = (checked) => {
 .pane2 {
   flex: 1;
   margin: $margin;
-}
-.content {
-  flex: 1;
-  overflow: hidden;
-  display: flex;
-  flex-direction: column;
-  box-sizing: border-box;
-  background-color: var(--color-bg-1);
-  border-radius: $radius-box;
+  &__content {
+    flex: 1;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
+    background-color: var(--color-bg-1);
+    border-radius: $radius-box;
+  }
 }
 </style>
 `

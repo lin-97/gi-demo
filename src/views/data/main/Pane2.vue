@@ -45,8 +45,8 @@ import { Modal } from '@arco-design/web-vue'
 import { usePagination } from '@/hooks'
 import { getPersonList } from '@/apis'
 import type { PersonItem } from '@/apis'
-import { StatusList } from '@/constant/person'
 import Pane2Code from './Pane2Code'
+import GiCellStatus from '@/components/GiCell/GiCellStatus.vue'
 
 const onViewCode = () => {
   Modal.open({
@@ -89,15 +89,8 @@ const columns: TableColumnData[] = [
     title: '状态',
     width: 100,
     align: 'center',
-    render: (data) => {
-      const index = StatusList.findIndex((i) => i.value === data.record.status)
-      if (index >= 0) {
-        return (
-          <a-tag size="small" color={StatusList[index].color}>
-            {StatusList[index].name}
-          </a-tag>
-        )
-      }
+    render: ({ record }) => {
+      return <GiCellStatus status={record.status} />
     }
   },
   {

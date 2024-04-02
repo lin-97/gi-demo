@@ -30,9 +30,13 @@
               </a-space>
 
               <a-space wrap>
-                <a-select v-model="form.status" class="gi_select_input" placeholder="请选择" allow-clear>
-                  <a-option v-for="item in StatusList" :key="item.value" :value="item.value">{{ item.name }}</a-option>
-                </a-select>
+                <a-select
+                  class="gi_select_input"
+                  v-model="form.status"
+                  :options="options"
+                  placeholder="请选择"
+                  allow-clear
+                ></a-select>
                 <a-input-group>
                   <a-input v-model="form.name" placeholder="请输入搜索关键词" allow-clear> </a-input>
                   <a-button type="primary" @click="getTableData">
@@ -71,11 +75,7 @@
                   </a-table-column>
                   <a-table-column title="状态" :width="100" align="center">
                     <template #cell="{ record }">
-                      <template v-for="item in StatusList" :key="item.value">
-                        <a-tag v-if="item.value === record.status" size="small" :color="item.color">{{
-                          item.name
-                        }}</a-tag>
-                      </template>
+                      <GiCellStatus :status="record.status"></GiCellStatus>
                     </template>
                   </a-table-column>
                   <a-table-column title="创建时间" data-index="createTime" :width="180"></a-table-column>
@@ -105,14 +105,15 @@
 <script setup lang="ts">
 import { Message } from '@arco-design/web-vue'
 import { useTable } from '@/hooks'
+import { getPersonList, deleteBaseApi, type PersonItem } from '@/apis'
+import { isMobile } from '@/utils'
+import { useDict } from '@/hooks/app'
 import CateTree from './CateTree/index.vue'
 import EditModal from './EditModal.vue'
-import { getPersonList, deleteBaseApi, type PersonItem } from '@/apis'
-import { StatusList } from '@/constant/person'
-import { isMobile } from '@/utils'
 
 const router = useRouter()
 
+const { data: options } = useDict({ code: 'status' })
 const form = reactive({
   name: '',
   status: ''

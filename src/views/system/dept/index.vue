@@ -5,10 +5,7 @@
         <a-input v-model="form.name" placeholder="输入部门名称搜索" allow-clear style="width: 250px">
           <template #prefix><icon-search /></template>
         </a-input>
-        <a-select v-model="form.status" placeholder="部门状态" style="width: 120px">
-          <a-option :value="1">正常</a-option>
-          <a-option :value="0">禁用</a-option>
-        </a-select>
+        <a-select v-model="form.status" :options="options" placeholder="部门状态" style="width: 120px"></a-select>
         <a-button type="primary" @click="search">
           <template #icon><icon-search /></template>
           <span>搜索</span>
@@ -89,10 +86,12 @@
 import { Message, type TableInstance } from '@arco-design/web-vue'
 import { isMobile } from '@/utils'
 import { getSystemDeptList, deleteBaseApi, type DeptItem } from '@/apis'
+import { useDict } from '@/hooks/app'
 import AddDeptModal from './AddDeptModal.vue'
 
 defineOptions({ name: 'SystemDept' })
 
+const { data: options } = useDict({ code: 'status' })
 const AddDeptModalRef = ref<InstanceType<typeof AddDeptModal>>()
 const tableRef = ref<TableInstance>()
 

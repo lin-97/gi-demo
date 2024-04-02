@@ -55,9 +55,9 @@
             <a-form-item label="在校日期范围" field="rangDate">
               <a-range-picker v-model="form.rangDate" allow-clear />
             </a-form-item>
-            <a-form-item label="爱好" field="hobbys">
+            <a-form-item label="爱好" field="hobbys" extra="这里的数据采用了数据字典">
               <a-select
-                :options="hobbySelectList"
+                :options="options"
                 v-model="form.hobbys"
                 placeholder="请选择爱好"
                 multiple
@@ -88,8 +88,10 @@ import type { FormInstance } from '@arco-design/web-vue'
 import { Message } from '@arco-design/web-vue'
 import * as Regexp from '@/utils/regexp'
 import { isMobile } from '@/utils'
+import { useDict } from '@/hooks/app'
 
 defineOptions({ name: 'FormBase' })
+const { data: options } = useDict({ code: 'hobbys' })
 
 const treeData = ref([
   {
@@ -107,14 +109,6 @@ const treeData = ref([
     ]
   }
 ])
-
-const hobbySelectList = [
-  { label: '运动', value: '运动', tagProps: { color: 'red' } },
-  { label: '音乐', value: '音乐', tagProps: { color: 'green' } },
-  { label: '电影', value: '电影', tagProps: { color: 'cyan' } },
-  { label: '旅行', value: '旅行', tagProps: { color: 'arcoblue' } },
-  { label: '美食', value: '美食', tagProps: { color: 'purple' } }
-]
 
 const form = reactive({
   name: '',

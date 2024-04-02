@@ -64,13 +64,14 @@
 
 <script setup lang="ts">
 import type { PopconfirmInstance } from '@arco-design/web-vue'
-import { usePagination } from '@/hooks'
+import { usePagination, useBreakpointIndex } from '@/hooks'
 import { getPersonList, type PersonItem } from '@/apis'
+import { useDict } from '@/hooks/app'
 import type { Options, Columns } from '@/components/GiForm'
-import { useBreakpointIndex } from '@/hooks'
 
 defineOptions({ name: 'TableBase' })
 
+const { data: statusOptions } = useDict({ code: 'status' })
 const form = reactive({})
 
 const options: Options = reactive({
@@ -103,10 +104,7 @@ const columns: Columns = reactive([
     type: 'select',
     label: '状态',
     field: 'status',
-    options: [
-      { label: '正常', value: 1 },
-      { label: '禁用', value: 0 }
-    ]
+    options: statusOptions
   },
   {
     type: 'date-picker',

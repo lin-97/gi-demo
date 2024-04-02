@@ -38,10 +38,13 @@
 
             <a-space wrap>
               <a-input-group>
-                <a-select v-model="form.status" placeholder="用户状态" allow-clear style="width: 150px">
-                  <a-option :value="1">正常</a-option>
-                  <a-option :value="0">禁用</a-option>
-                </a-select>
+                <a-select
+                  v-model="form.status"
+                  :options="options"
+                  placeholder="用户状态"
+                  allow-clear
+                  style="width: 150px"
+                ></a-select>
                 <a-input v-model="form.username" placeholder="输入用户名搜索" allow-clear style="max-width: 250px">
                 </a-input>
               </a-input-group>
@@ -132,16 +135,16 @@
 <script setup lang="ts">
 import { Message, type TreeInstance } from '@arco-design/web-vue'
 import { useTable } from '@/hooks'
-import { useDept } from '@/hooks/app'
+import { useDept, useDict } from '@/hooks/app'
 import { getSystemUserList, deleteBaseApi } from '@/apis'
 import type { UserItem } from '@/apis'
 import AddUserModal from './AddUserModal.vue'
 import UserDetailDrawer from './UserDetailDrawer.vue'
-
 import { isMobile } from '@/utils'
 
 defineOptions({ name: 'SystemUser' })
 
+const { data: options } = useDict({ code: 'status' })
 const treeRef = ref<TreeInstance>()
 const AddUserModalRef = ref<InstanceType<typeof AddUserModal>>()
 const UserDetailDrawerRef = ref<InstanceType<typeof UserDetailDrawer>>()

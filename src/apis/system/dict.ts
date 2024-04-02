@@ -1,5 +1,6 @@
 import http from '@/utils/http'
 import type * as System from './type'
+import type { SelectOptionData } from '@arco-design/web-vue'
 
 /** @desc 获取字典数据 */
 export function getSystemDictList(params: { current: number; pageSize: number }) {
@@ -19,4 +20,9 @@ export function getSystemDictDataList(params: { current: number; pageSize: numbe
 /** @desc 字典数据详情 */
 export function getSystemDictDataDetail(params: { id: string; code: string }) {
   return http.get<System.DictDataItem>('/system/dict/dataDetail', params)
+}
+
+/** @desc 获取字典数据映射 */
+export function getSystemDictData() {
+  return http.get<Record<string, SelectOptionData[]>>('/system/dictData')
 }
