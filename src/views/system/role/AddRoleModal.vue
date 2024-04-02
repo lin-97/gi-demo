@@ -41,7 +41,7 @@
 
 <script setup lang="ts">
 import { Message, type FormInstance } from '@arco-design/web-vue'
-import { getSystemRoleDetail, saveSystemRole } from '@/apis'
+import { getSystemRoleDetail, saveBaseApi } from '@/apis'
 import { useForm } from '@/hooks'
 
 const emit = defineEmits<{
@@ -96,7 +96,7 @@ const save = async () => {
   try {
     const valid = await formRef.value?.validate()
     if (valid) return false
-    const res = await saveSystemRole(form)
+    const res = await saveBaseApi(form)
     if (res.data) {
       Message.success('模拟保存成功')
       emit('save-success')

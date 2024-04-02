@@ -1,13 +1,13 @@
-import type { MockMethod } from 'vite-plugin-mock'
-import { resultSuccess, resultError } from '@/mock/_utils'
+import { defineMock } from '../_base'
+import { resultSuccess, resultError, getDelayTime } from '../_utils'
 import { findTree } from 'xe-utils'
 import deptData from '../_data/system_dept'
 
-export default [
+export default defineMock([
   {
-    url: '/mock/system/dept/detail',
+    url: '/system/dept/detail',
     method: 'get',
-    timeout: 100,
+    timeout: getDelayTime(),
     response: ({ query }) => {
       const { id } = query
       const obj = findTree(deptData, (i) => i.id === id)
@@ -19,19 +19,11 @@ export default [
     }
   },
   {
-    url: '/mock/system/dept/save',
-    method: 'post',
-    timeout: 350,
-    response: () => {
-      return resultSuccess(true)
-    }
-  },
-  {
-    url: '/mock/system/dept', // 这个短的要放在后面，不然会优先匹配
+    url: '/system/dept', // 这个短的要放在后面，不然会优先匹配
     method: 'get',
-    timeout: 100,
+    timeout: getDelayTime(),
     response: () => {
       return resultSuccess(deptData)
     }
   }
-] as MockMethod[]
+])

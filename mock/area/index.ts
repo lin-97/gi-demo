@@ -1,13 +1,13 @@
-import type { MockMethod } from 'vite-plugin-mock'
-import { resultSuccess } from '@/mock/_utils'
+import { defineMock } from '../_base'
+import { resultSuccess, getDelayTime } from '../_utils'
 import { findTree } from 'xe-utils'
 import areaData from '../_data/area'
 
-export default [
+export default defineMock([
   {
-    url: '/mock/area/list',
+    url: '/area/list',
     method: 'get',
-    timeout: 300,
+    timeout: getDelayTime(),
     response: ({ query }) => {
       const { type, code } = query
       if (type === 'province') {
@@ -21,4 +21,4 @@ export default [
       }
     }
   }
-] as MockMethod[]
+])

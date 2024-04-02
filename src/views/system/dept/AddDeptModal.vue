@@ -55,7 +55,7 @@
 import { Message, type FormInstance } from '@arco-design/web-vue'
 import { useForm } from '@/hooks'
 import { useDept } from '@/hooks/app'
-import { getSystemDeptDetail, saveSystemDept } from '@/apis'
+import { getSystemDeptDetail, saveBaseApi } from '@/apis'
 
 const emit = defineEmits<{
   (e: 'save-success'): void
@@ -111,7 +111,7 @@ const save = async () => {
   try {
     const valid = await formRef.value?.validate()
     if (valid) return false
-    const res = await saveSystemDept(form)
+    const res = await saveBaseApi(form)
     if (res.data) {
       Message.success('模拟保存成功')
       emit('save-success')

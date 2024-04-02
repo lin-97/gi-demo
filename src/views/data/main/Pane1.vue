@@ -107,7 +107,7 @@ import { Message } from '@arco-design/web-vue'
 import { useTable } from '@/hooks'
 import CateTree from './CateTree/index.vue'
 import EditModal from './EditModal.vue'
-import { getPersonList, deletePerson, type PersonItem } from '@/apis'
+import { getPersonList, deleteBaseApi, type PersonItem } from '@/apis'
 import { StatusList } from '@/constant/person'
 import { isMobile } from '@/utils'
 
@@ -151,7 +151,7 @@ const onDetail = (item: PersonItem) => {
 
 // 删除
 const onDelete = (item: PersonItem) => {
-  return handleDelete(() => deletePerson({ ids: [item.id] }), { content: `是否删除-${item.name}?`, showModal: false })
+  return handleDelete(() => deleteBaseApi({ ids: [item.id] }), { content: `是否删除-${item.name}?`, showModal: false })
 }
 
 // 批量删除
@@ -159,7 +159,7 @@ const onMulDelete = () => {
   if (!selectedKeys.value.length) {
     return Message.warning('请选择删除项！')
   }
-  handleDelete(() => deletePerson({ ids: selectedKeys.value as string[] }), { successTip: '批量删除成功！' })
+  handleDelete(() => deleteBaseApi({ ids: selectedKeys.value as string[] }), { successTip: '批量删除成功！' })
 }
 
 const onExport = () => {

@@ -5,6 +5,7 @@ export * from './user'
 export * from './cate'
 export * from './test'
 export * from './area'
+export * from './base'
 
 export * from './person/type'
 export * from './system/type'

@@ -1,12 +1,12 @@
-import type { MockMethod } from 'vite-plugin-mock'
-import { resultSuccess, resultError } from '@/mock/_utils'
+import { defineMock } from '../_base'
+import { resultSuccess, resultError, getDelayTime } from '../_utils'
 import dictData from '../_data/system_dict'
 
-export default [
+export default defineMock([
   {
-    url: '/mock/system/dict/detail',
+    url: '/system/dict/detail',
     method: 'get',
-    timeout: 100,
+    timeout: getDelayTime(),
     response: ({ query }) => {
       const { id } = query
       const obj = dictData.find((i) => i.id === id)
@@ -18,26 +18,9 @@ export default [
     }
   },
   {
-    url: '/mock/system/dict/save',
-    method: 'post',
-    timeout: 350,
-    response: () => {
-      return resultSuccess(true)
-    }
-  },
-  {
-    url: '/mock/system/dict/delete',
-    method: 'post',
-    timeout: 350,
-    response: ({ body }) => {
-      const { ids } = body
-      return resultSuccess(ids)
-    }
-  },
-  {
-    url: '/mock/system/dict/dataList',
+    url: '/system/dict/dataList',
     method: 'get',
-    timeout: 350,
+    timeout: getDelayTime(),
     response: ({ query }) => {
       const { code } = query
       const obj = dictData.find((i) => i.code === code)
@@ -50,26 +33,9 @@ export default [
     }
   },
   {
-    url: '/mock/system/dict/dataDelete',
-    method: 'post',
-    timeout: 350,
-    response: ({ body }) => {
-      const { ids } = body
-      return resultSuccess(ids)
-    }
-  },
-  {
-    url: '/mock/system/dict/dataSave',
-    method: 'post',
-    timeout: 350,
-    response: () => {
-      return resultSuccess(true)
-    }
-  },
-  {
-    url: '/mock/system/dict/dataDetail',
+    url: '/system/dict/dataDetail',
     method: 'get',
-    timeout: 350,
+    timeout: getDelayTime(),
     response: ({ query }) => {
       const { id, code } = query
       const obj = dictData.find((i) => i.code === code)
@@ -84,9 +50,9 @@ export default [
     }
   },
   {
-    url: '/mock/system/dict', // 这个短的要放在后面，不然会优先匹配
+    url: '/system/dict', // 这个短的要放在后面，不然会优先匹配
     method: 'get',
-    timeout: 100,
+    timeout: getDelayTime(),
     response: () => {
       return resultSuccess({
         total: dictData.length,
@@ -94,4 +60,4 @@ export default [
       })
     }
   }
-] as MockMethod[]
+])

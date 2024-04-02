@@ -10,8 +10,3 @@ export function getSystemDeptList() {
 export function getSystemDeptDetail(params: { id: string }) {
   return http.get<System.DeptItem>('/system/dept/detail', params)
 }
-
-/** @desc 保存部门 */
-export function saveSystemDept(data: any) {
-  return http.post<boolean>('/system/dept/save', data)
-}

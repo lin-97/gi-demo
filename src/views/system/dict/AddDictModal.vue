@@ -42,7 +42,7 @@
 import { Message, type FormInstance } from '@arco-design/web-vue'
 import * as Regexp from '@/utils/regexp'
 import { useForm } from '@/hooks'
-import { getSystemDictDetail, saveSystemDict } from '@/apis'
+import { getSystemDictDetail, saveBaseApi } from '@/apis'
 
 const emit = defineEmits<{
   (e: 'save-success'): void
@@ -93,7 +93,7 @@ const save = async () => {
   try {
     const valid = await formRef.value?.validate()
     if (valid) return false
-    const res = await saveSystemDict(form)
+    const res = await saveBaseApi(form)
     if (res.data) {
       Message.success('模拟保存成功')
       emit('save-success')

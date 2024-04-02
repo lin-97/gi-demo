@@ -7,11 +7,6 @@ export function getPersonList(data: { name?: string; status?: string; current: n
   return http.get<PageRes<Person.PersonItem[]>>('/person/list', data)
 }
 
-/** @desc 删除人物 返回删除的ids */
-export function deletePerson(data: { ids: string[] }) {
-  return http.post<string[]>('/person/delete', data)
-}
-
 /** @desc 获取人物列表, 如果想要以表单数据格式发请求, 可以用以下方式定义接口 */
 // export function getPersonListByFormData(data: { current: number; pageSize: number }) {
 //   return http.get<ApiRes<PageRes<Person.PersonItem[]>>>('/person/list', qs.stringify(data), {

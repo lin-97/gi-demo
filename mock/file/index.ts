@@ -1,5 +1,5 @@
-import type { MockMethod } from 'vite-plugin-mock'
-import { resultSuccess } from '../_utils'
+import { defineMock } from '../_base'
+import { resultSuccess, getDelayTime } from '../_utils'
 import fileList from '../_data/file_list'
 
 const getList = (type: number | string) => {
@@ -20,11 +20,11 @@ const getList = (type: number | string) => {
   return res
 }
 
-export default [
+export default defineMock([
   {
-    url: '/mock/file/list',
+    url: '/file/list',
     method: 'get',
-    timeout: Math.floor(Math.random() * 3) * 100,
+    timeout: getDelayTime(),
     response: ({ query }) => {
       const { fileType } = query
       const list = getList(fileType)
@@ -34,4 +34,4 @@ export default [
       })
     }
   }
-] as MockMethod[]
+])

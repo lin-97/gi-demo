@@ -1,7 +1,7 @@
 import { Random } from 'mockjs'
 import Mock from 'mockjs'
-import type { MockMethod } from 'vite-plugin-mock'
-import { resultSuccess } from '../_utils'
+import { defineMock } from '../_base'
+import { resultSuccess, getDelayTime } from '../_utils'
 
 /**
  * @param {Number} times 回调函数需要执行的次数
@@ -65,11 +65,11 @@ const getTableListData = (params: any) => {
   return data
 }
 
-export default [
+export default defineMock([
   {
-    url: '/mock/person/list',
+    url: '/person/list',
     method: 'get',
-    timeout: 350,
+    timeout: getDelayTime(),
     response: ({ query }) => {
       const { current = 1, pageSize = 10, status = 0, name = '' } = query
       const list = getTableListData({ current, pageSize, status, name })
@@ -78,14 +78,5 @@ export default [
         records: list
       })
     }
-  },
-  {
-    url: '/mock/person/delete',
-    method: 'post',
-    timeout: 350,
-    response: ({ body }) => {
-      const { ids } = body
-      return resultSuccess(ids)
-    }
   }
-] as MockMethod[]
+])

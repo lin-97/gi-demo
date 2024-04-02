@@ -138,7 +138,7 @@
 import { Message, type TreeInstance } from '@arco-design/web-vue'
 import { useTable } from '@/hooks'
 import { useDept } from '@/hooks/app'
-import { getSystemUserList, deleteSystemUser } from '@/apis'
+import { getSystemUserList, deleteBaseApi } from '@/apis'
 import type { UserItem } from '@/apis'
 import AddUserModal from './AddUserModal.vue'
 import UserDetailDrawer from './UserDetailDrawer.vue'
@@ -182,7 +182,7 @@ const reset = () => {
 
 // 删除
 const onDelete = (item: UserItem) => {
-  return handleDelete(() => deleteSystemUser({ ids: [item.id] }), { showModal: false })
+  return handleDelete(() => deleteBaseApi({ ids: [item.id] }), { showModal: false })
 }
 
 // 批量删除
@@ -190,7 +190,7 @@ const onMulDelete = () => {
   if (!selectedKeys.value.length) {
     return Message.warning('请选择用户！')
   }
-  handleDelete(() => deleteSystemUser({ ids: selectedKeys.value as string[] }))
+  handleDelete(() => deleteBaseApi({ ids: selectedKeys.value as string[] }))
 }
 
 const onAdd = () => {

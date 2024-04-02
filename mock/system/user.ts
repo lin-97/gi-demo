@@ -1,12 +1,12 @@
-import type { MockMethod } from 'vite-plugin-mock'
-import { resultSuccess, resultError } from '@/mock/_utils'
+import { defineMock } from '../_base'
+import { resultSuccess, resultError, getDelayTime } from '../_utils'
 import userData from '../_data/system_user'
 
-export default [
+export default defineMock([
   {
-    url: '/mock/system/user/detail',
+    url: '/system/user/detail',
     method: 'get',
-    timeout: 100,
+    timeout: getDelayTime(),
     response: ({ query }) => {
       const { id } = query
       const index = userData.findIndex((i) => i.id === id)
@@ -23,26 +23,9 @@ export default [
     }
   },
   {
-    url: '/mock/system/user/save',
-    method: 'post',
-    timeout: 350,
-    response: () => {
-      return resultSuccess(true)
-    }
-  },
-  {
-    url: '/mock/system/user/delete',
-    method: 'post',
-    timeout: 350,
-    response: ({ body }) => {
-      const { ids } = body
-      return resultSuccess(ids)
-    }
-  },
-  {
-    url: '/mock/system/user', // 这个短的要放在后面，不然会优先匹配
+    url: '/system/user', // 这个短的要放在后面，不然会优先匹配
     method: 'get',
-    timeout: 100,
+    timeout: getDelayTime(),
     response: () => {
       return resultSuccess({
         total: userData.length,
@@ -50,4 +33,4 @@ export default [
       })
     }
   }
-] as MockMethod[]
+])

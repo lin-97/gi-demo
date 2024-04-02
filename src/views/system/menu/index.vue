@@ -122,7 +122,7 @@
                 <a-button v-if="[1, 2].includes(record.type)" type="primary" status="success" size="mini">
                   <template #icon><icon-plus /></template>
                 </a-button>
-                <a-popconfirm type="warning" content="您确定要删除该项吗?">
+                <a-popconfirm type="warning" content="您确定要删除该项吗?" @before-ok="onDelete(record)">
                   <a-button type="primary" status="danger" size="mini">
                     <template #icon><icon-delete /></template>
                     <span>删除</span>
@@ -141,7 +141,7 @@
 
 <script setup lang="ts">
 import { Drawer, type TableInstance } from '@arco-design/web-vue'
-import { getSystemMenuList, type MenuItem } from '@/apis'
+import { getSystemMenuList, deleteBaseApi, type MenuItem } from '@/apis'
 import { isExternal } from '@/utils/validate'
 import { transformPathToName, isMobile } from '@/utils'
 import GiCodeView from '@/components/GiCodeView/index.vue'
@@ -189,6 +189,15 @@ const onAdd = () => {
 
 const onEdit = (item: MenuItem) => {
   AddMenuModalRef.value?.edit(item.id)
+}
+
+const onDelete = async (item: MenuItem) => {
+  try {
+    const res = await deleteBaseApi({ ids: [item.id] })
+    return res.success
+  } catch (error) {
+    return false
+  }
 }
 
 const onViewCode = () => {

@@ -175,7 +175,7 @@
 
 <script setup lang="ts">
 import { Message, type FormInstance, type ColProps } from '@arco-design/web-vue'
-import { getSystemMenuDetail, saveSystemMenu, type MenuItem } from '@/apis'
+import { getSystemMenuDetail, saveBaseApi, type MenuItem } from '@/apis'
 import { isExternal } from '@/utils/validate'
 import { transformPathToName, filterTree } from '@/utils'
 import { mapTree } from 'xe-utils'
@@ -284,7 +284,7 @@ const save = async () => {
   try {
     const valid = await formRef.value?.validate()
     if (valid) return false
-    const res = await saveSystemMenu(form)
+    const res = await saveBaseApi(form)
     if (res.data) {
       Message.success('模拟保存成功')
       emit('save-success')

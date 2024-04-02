@@ -99,7 +99,7 @@
 <script setup lang="ts">
 import { Message, type FormInstance, type ColProps } from '@arco-design/web-vue'
 import * as Regexp from '@/utils/regexp'
-import { getSystemUserDetail, saveSystemUser } from '@/apis'
+import { getSystemUserDetail, saveBaseApi } from '@/apis'
 import { useDept, useRole } from '@/hooks/app'
 import { useForm } from '@/hooks'
 
@@ -175,7 +175,7 @@ const save = async () => {
   try {
     const valid = await formRef.value?.validate()
     if (valid) return false
-    const res = await saveSystemUser(form)
+    const res = await saveBaseApi(form)
     if (res.data) {
       Message.success('模拟保存成功')
       emit('save-success')

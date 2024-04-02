@@ -69,7 +69,7 @@
                   <template #icon><icon-plus /></template>
                   <span>新增</span>
                 </a-button>
-                <a-popconfirm type="warning" content="您确定要删除该项吗?">
+                <a-popconfirm type="warning" content="您确定要删除该项吗?" @before-ok="onDelete(record)">
                   <a-button type="primary" status="danger" size="mini">
                     <template #icon><icon-delete /></template>
                     <span>删除</span>
@@ -89,7 +89,7 @@
 <script setup lang="ts">
 import { Message, type TableInstance } from '@arco-design/web-vue'
 import { isMobile } from '@/utils'
-import { getSystemDeptList, type DeptItem } from '@/apis'
+import { getSystemDeptList, deleteBaseApi, type DeptItem } from '@/apis'
 import AddDeptModal from './AddDeptModal.vue'
 
 defineOptions({ name: 'SystemDept' })
@@ -136,10 +136,19 @@ const onEdit = (item: DeptItem) => {
   AddDeptModalRef.value?.edit(item.id)
 }
 
+const onDelete = async (item: DeptItem) => {
+  try {
+    const res = await deleteBaseApi({ ids: [item.id] })
+    return res.success
+  } catch (error) {
+    return false
+  }
+}
+
 // 勾选
-const selectRowKeys = ref<(string | number)[]>([])
+const selectRowKeys = ref<string[]>([])
 const select: TableInstance['onSelect'] = (rowKeys) => {
-  selectRowKeys.value = rowKeys
+  selectRowKeys.value = rowKeys as string[]
 }
 const onMulDelete = () => {
   if (!selectRowKeys.value.length) {

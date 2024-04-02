@@ -98,7 +98,7 @@ import { Message } from '@arco-design/web-vue'
 import AddRoleModal from './AddRoleModal.vue'
 import PermModal from './PermModal.vue'
 import { useTable } from '@/hooks'
-import { getSystemRoleList, deleteSystemRole, type RoleItem } from '@/apis'
+import { getSystemRoleList, deleteBaseApi, type RoleItem } from '@/apis'
 import { isMobile } from '@/utils'
 
 defineOptions({ name: 'SystemRole' })
@@ -130,7 +130,7 @@ const reset = () => {
 
 // 删除
 const onDelete = (item: RoleItem) => {
-  return handleDelete(() => deleteSystemRole({ ids: [item.id] }), { showModal: false })
+  return handleDelete(() => deleteBaseApi({ ids: [item.id] }), { showModal: false })
 }
 
 // 批量删除
@@ -138,7 +138,7 @@ const onMulDelete = () => {
   if (!selectedKeys.value.length) {
     return Message.warning('请选择角色！')
   }
-  handleDelete(() => deleteSystemRole({ ids: selectedKeys.value as string[] }))
+  handleDelete(() => deleteBaseApi({ ids: selectedKeys.value as string[] }))
 }
 
 const onAdd = () => {

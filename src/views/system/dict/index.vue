@@ -90,7 +90,7 @@
 <script setup lang="ts">
 import { Message } from '@arco-design/web-vue'
 import { useTable } from '@/hooks'
-import { getSystemDictList, deleteSystemDict, type DictItem } from '@/apis'
+import { getSystemDictList, deleteBaseApi, type DictItem } from '@/apis'
 import { isMobile } from '@/utils'
 import AddDictModal from './AddDictModal.vue'
 import DictDataModal from './DictDataModal/index.vue'
@@ -123,7 +123,7 @@ const reset = () => {
 
 // 删除
 const onDelete = (item: DictItem) => {
-  return handleDelete(() => deleteSystemDict({ ids: [item.id] }), { showModal: false })
+  return handleDelete(() => deleteBaseApi({ ids: [item.id] }), { showModal: false })
 }
 
 // 批量删除
@@ -131,7 +131,7 @@ const onMulDelete = () => {
   if (!selectedKeys.value.length) {
     return Message.warning('请选择字典！')
   }
-  handleDelete(() => deleteSystemDict({ ids: selectedKeys.value as string[] }))
+  handleDelete(() => deleteBaseApi({ ids: selectedKeys.value as string[] }))
 }
 
 const onAdd = () => {

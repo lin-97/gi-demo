@@ -71,7 +71,7 @@
 
 <script lang="ts" setup>
 import { Message } from '@arco-design/web-vue'
-import { getSystemDictDataList, deleteSystemDictData, type DictDataItem } from '@/apis'
+import { getSystemDictDataList, deleteBaseApi, type DictDataItem } from '@/apis'
 import { useTable } from '@/hooks'
 import AddDictDataModal from './AddDictDataModal.vue'
 
@@ -94,7 +94,7 @@ const { loading, tableData, pagination, selectedKeys, search, select, selectAll,
 
 // 删除
 const onDelete = (item: DictDataItem) => {
-  return handleDelete(() => deleteSystemDictData({ ids: [item.id], code: dictCode.value }), { showModal: false })
+  return handleDelete(() => deleteBaseApi({ ids: [item.id] }), { showModal: false })
 }
 
 // 批量删除
@@ -102,7 +102,7 @@ const onMulDelete = () => {
   if (!selectedKeys.value.length) {
     return Message.warning('请选择字典数据！')
   }
-  handleDelete(() => deleteSystemDictData({ ids: selectedKeys.value as string[], code: dictCode.value }))
+  handleDelete(() => deleteBaseApi({ ids: selectedKeys.value as string[] }))
 }
 
 const onAdd = () => {

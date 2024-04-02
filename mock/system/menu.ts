@@ -1,15 +1,14 @@
-import type { MockMethod } from 'vite-plugin-mock'
-import { resultSuccess, resultError, USER_TOKENS, isAdmin } from '@/mock/_utils'
+import { defineMock } from '../_base'
+import { resultSuccess, resultError, USER_TOKENS, isAdmin, filterTree, getDelayTime } from '../_utils'
 import { mapTree, findTree } from 'xe-utils'
-import { filterTree } from '@/utils'
 import menuData from '../_data/system_menu'
 import type { MockSystemMenuItem } from '../_data/_type'
 
-export default [
+export default defineMock([
   {
-    url: '/mock/user/routes',
+    url: '/user/routes',
     method: 'get',
-    timeout: 50,
+    timeout: getDelayTime(),
     response: ({ headers }) => {
       const token = headers.token
       if (token && USER_TOKENS.includes(token)) {
@@ -35,9 +34,9 @@ export default [
     }
   },
   {
-    url: '/mock/system/menu/detail',
+    url: '/system/menu/detail',
     method: 'get',
-    timeout: 100,
+    timeout: getDelayTime(),
     response: ({ query }) => {
       const { id } = query
       const obj = findTree(menuData, (i) => i.id === id)
@@ -49,17 +48,9 @@ export default [
     }
   },
   {
-    url: '/mock/system/menu/save',
-    method: 'post',
-    timeout: 350,
-    response: () => {
-      return resultSuccess(true)
-    }
-  },
-  {
-    url: '/mock/system/menu/options',
+    url: '/system/menu/options',
     method: 'get',
-    timeout: 350,
+    timeout: getDelayTime(),
     response: () => {
       const data = mapTree(JSON.parse(JSON.stringify(menuData)), (i) => ({
         id: i.id,
@@ -70,11 +61,11 @@ export default [
     }
   },
   {
-    url: '/mock/system/menu', // 这个短的要放在后面，不然会优先匹配
+    url: '/system/menu', // 这个短的要放在后面，不然会优先匹配
     method: 'get',
-    timeout: 10,
+    timeout: getDelayTime(),
     response: () => {
       return resultSuccess(mapTree(JSON.parse(JSON.stringify(menuData)), (i) => ({ ...i })))
     }
   }
-] as MockMethod[]
+])

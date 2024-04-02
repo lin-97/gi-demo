@@ -1,12 +1,12 @@
-import type { MockMethod } from 'vite-plugin-mock'
-import { resultSuccess, resultError, USER_TOKENS, isAdmin, type MockTokenItem } from '../_utils'
+import { defineMock } from '../_base'
+import { resultSuccess, resultError, USER_TOKENS, isAdmin, getDelayTime, type MockTokenItem } from '../_utils'
 import userData from '../_data/system_user'
 
-export default [
+export default defineMock([
   {
-    url: '/mock/user/login',
+    url: '/user/login',
     method: 'post',
-    timeout: 300,
+    timeout: getDelayTime(),
     response: ({ body }) => {
       const { username, password } = body
       if (!username) return resultError(null, '用户名不能为空', 50000)
@@ -23,17 +23,17 @@ export default [
     }
   },
   {
-    url: '/mock/user/logout',
+    url: '/user/logout',
     method: 'post',
-    timeout: 300,
+    timeout: getDelayTime(),
     response: () => {
       return resultSuccess(null)
     }
   },
   {
-    url: '/mock/user/getUserInfo',
+    url: '/user/getUserInfo',
     method: 'get',
-    timeout: 10,
+    timeout: getDelayTime(),
     response: ({ headers }) => {
       const token = headers.token
       if (token && USER_TOKENS.includes(token)) {
@@ -50,4 +50,4 @@ export default [
       }
     }
   }
-] as MockMethod[]
+])

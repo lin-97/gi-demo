@@ -1,14 +1,14 @@
-import type { MockMethod } from 'vite-plugin-mock'
-import { resultSuccess, resultError } from '@/mock/_utils'
+import { defineMock } from '../_base'
+import { resultSuccess, resultError, getDelayTime } from '../_utils'
 import { eachTree } from 'xe-utils'
 import menuData from '../_data/system_menu'
 import roleData from '../_data/system_role'
 
-export default [
+export default defineMock([
   {
-    url: '/mock/system/role/detail',
+    url: '/system/role/detail',
     method: 'get',
-    timeout: 100,
+    timeout: getDelayTime(),
     response: ({ query }) => {
       const { id } = query
       const index = roleData.findIndex((i) => i.id === id)
@@ -20,26 +20,9 @@ export default [
     }
   },
   {
-    url: '/mock/system/role/save',
-    method: 'post',
-    timeout: 350,
-    response: () => {
-      return resultSuccess(true)
-    }
-  },
-  {
-    url: '/mock/system/role/delete',
-    method: 'post',
-    timeout: 350,
-    response: ({ body }) => {
-      const { ids } = body
-      return resultSuccess(ids)
-    }
-  },
-  {
-    url: '/mock/system/role/menuIds',
+    url: '/system/role/menuIds',
     method: 'get',
-    timeout: 350,
+    timeout: getDelayTime(),
     response: ({ query }) => {
       const { role } = query
       if (role === 'role_user') {
@@ -57,9 +40,9 @@ export default [
     }
   },
   {
-    url: '/mock/system/role', // 这个短的要放在后面，不然会优先匹配
+    url: '/system/role', // 这个短的要放在后面，不然会优先匹配
     method: 'get',
-    timeout: 100,
+    timeout: getDelayTime(),
     response: () => {
       return resultSuccess({
         total: roleData.length,
@@ -67,4 +50,4 @@ export default [
       })
     }
   }
-] as MockMethod[]
+])

@@ -6,12 +6,13 @@ import system_menu from './system/menu'
 import system_role from './system/role'
 import system_user from './system/user'
 
-import user from './user/index'
-import person from './person/index'
-import file from './file/index'
-import test from './test/index'
-import cate from './cate/index'
-import area from './area/index'
+import user from './user'
+import person from './person'
+import file from './file'
+import test from './test'
+import cate from './cate'
+import area from './area'
+import base from './base'
 
 export function setupProdMockServer() {
   createProdMockServer([
@@ -25,6 +26,7 @@ export function setupProdMockServer() {
     ...file,
     ...test,
     ...cate,
-    ...area
+    ...area,
+    ...base
   ])
 }
