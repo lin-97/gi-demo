@@ -1,5 +1,9 @@
-import { computed } from 'vue'
+import { computed, type ComputedRef } from 'vue'
 import { useBreakpoints } from '@vueuse/core'
+import type { ColProps } from '@arco-design/web-vue'
+
+type ColBreakpoint = Pick<ColProps, 'xs' | 'sm' | 'md' | 'lg' | 'xl' | 'xxl'>
+type Breakpoint = keyof ColBreakpoint
 
 export function useBreakpoint() {
   const breakpoints = useBreakpoints({
@@ -11,7 +15,7 @@ export function useBreakpoint() {
     xxl: 1600 // >=1600
   })
 
-  const arr = breakpoints.current()
+  const arr = breakpoints.current() as ComputedRef<Breakpoint[]>
   const breakpoint = computed(() => {
     return arr.value[arr.value.length - 1] || 'xs'
   })

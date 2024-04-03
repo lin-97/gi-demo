@@ -1,5 +1,5 @@
 <template>
-  <a-space>
+  <a-space fill>
     <a-avatar :size="24" shape="circle">
       <img :src="props.avatar" />
     </a-avatar>
