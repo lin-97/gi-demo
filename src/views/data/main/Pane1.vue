@@ -138,11 +138,11 @@ const onAdd = () => {
 }
 
 const onEdit = (item: PersonItem) => {
-  router.push({ path: '/data/form', query: { id: item.id } })
+  router.push({ path: '/data/form', query: { id: 'ID123456' } })
 }
 
 const onDetail = (item: PersonItem) => {
-  router.push({ path: '/data/detail', query: { id: 'ID123456' } })
+  router.push({ path: '/data/detail', query: { id: item.id } })
 }
 
 // 删除

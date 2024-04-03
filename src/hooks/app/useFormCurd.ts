@@ -1,11 +1,11 @@
-import { reactive, computed, ref } from 'vue'
+import { reactive, computed, ref, type Ref } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import { Modal, Message, type FormInstance } from '@arco-design/web-vue'
 import { isEqual } from 'lodash'
 
 type Option<T> = {
   key?: string
-  formRef?: FormInstance
+  formRef?: Ref<FormInstance>
   initApi: () => Promise<ApiRes<T>>
   detailApi: (form: T) => Promise<ApiRes<T>>
   addApi: (form: T) => Promise<ApiRes<T>>
@@ -66,7 +66,7 @@ export function useFormCurd<T = any>(option: Option<T>) {
 
   const save = async () => {
     try {
-      const valid = await option?.formRef?.validate()
+      const valid = await option?.formRef?.value?.validate()
       if (valid) return
       saveLoading.value = true
       const res = isEdit.value ? await option.editApi(form as T) : await option.addApi(form as T)
@@ -100,7 +100,7 @@ export function useFormCurd<T = any>(option: Option<T>) {
   }
 
   const reset = () => {
-    option?.formRef?.resetFields()
+    option?.formRef?.value?.resetFields()
   }
 
   return { form: form as T, title, loading, isEdit, back, save, saveLoading, reset }
