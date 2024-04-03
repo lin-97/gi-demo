@@ -97,8 +97,6 @@
         </a-card>
       </a-col>
     </a-row>
-
-    <EditModal ref="EditModalRef"></EditModal>
   </div>
 </template>
 
@@ -109,7 +107,6 @@ import { getPersonList, deleteBaseApi, type PersonItem } from '@/apis'
 import { isMobile } from '@/utils'
 import { useDict } from '@/hooks/app'
 import CateTree from './CateTree/index.vue'
-import EditModal from './EditModal.vue'
 
 const router = useRouter()
 
@@ -136,18 +133,16 @@ onActivated(() => {
   getTableData()
 })
 
-const EditModalRef = ref<InstanceType<typeof EditModal>>()
-
 const onAdd = () => {
-  EditModalRef.value?.add()
+  router.push({ path: '/data/form' })
 }
 
 const onEdit = (item: PersonItem) => {
-  EditModalRef.value?.edit(item.id)
+  router.push({ path: '/data/form', query: { id: item.id } })
 }
 
 const onDetail = (item: PersonItem) => {
-  router.push({ path: '/data/detail', query: { id: item.id } })
+  router.push({ path: '/data/detail', query: { id: 'ID123456' } })
 }
 
 // 删除

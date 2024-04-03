@@ -78,5 +78,53 @@ export default defineMock([
         records: list
       })
     }
+  },
+  {
+    url: '/person/init',
+    method: 'get',
+    timeout: getDelayTime(),
+    response: ({ query }) => {
+      return resultSuccess({
+        id: '',
+        name: '张三新增',
+        phone: '15578728810'
+      })
+    }
+  },
+  {
+    url: '/person/detail',
+    method: 'get',
+    timeout: getDelayTime(),
+    response: ({ query }) => {
+      return resultSuccess({
+        id: 'ID123456',
+        name: '张三编辑',
+        phone: '15578728810'
+      })
+    }
+  },
+  {
+    url: '/person/add',
+    method: 'post',
+    timeout: 1000,
+    response: ({ query }) => {
+      return resultSuccess({
+        id: 'ID123456',
+        name: '张三编辑',
+        phone: '15578728810'
+      })
+    }
+  },
+  {
+    url: '/person/update',
+    method: 'post',
+    timeout: 1000,
+    response: ({ query }) => {
+      return resultSuccess({
+        id: 'ID123456',
+        name: '张三编辑',
+        phone: '15578728810'
+      })
+    }
   }
 ])
