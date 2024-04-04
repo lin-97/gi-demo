@@ -97,7 +97,7 @@ const rules: FormInstance['rules'] = {
 type Form = { id: string; name: string; phone: string }
 const { form, title, loading, save, saveLoading, back, reset } = useFormCurd<Form>({
   key: 'id', // 主键
-  formRef: formRef.value, // 表单的实例对象
+  formRef: formRef, // 表单的实例对象
   initApi: initPerson, // 初始化表单字段接口
   detailApi: () => getPersonById({ id: route.query.id as string }), // 编辑模式下查询详情接口
   addApi: (form) => addPerson({ ...form, extra: '额外参数-新增' }), // 新增接口
