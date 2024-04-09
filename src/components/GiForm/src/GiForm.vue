@@ -8,8 +8,14 @@
           v-bind="item.col || item.span ? item.col : options.col"
           v-show="index <= (options.fold?.index || 0) || (index >= (options.fold?.index || 0) && !collapsed)"
         >
-          <a-form-item v-bind="item.item" :label="item.label" :field="item.field" :rules="item.rules">
-            <slot :name="item.field">
+          <a-form-item
+            v-bind="item.item"
+            :label="item.label"
+            :field="item.field"
+            :rules="item.rules"
+            :disabled="isDisabled(item.disabled)"
+          >
+            <slot :name="item.field" v-bind="{ disabled: isDisabled(item.disabled) }">
               <template v-if="item.type === 'input'">
                 <a-input
                   :allow-clear="true"
@@ -166,7 +172,7 @@
 </template>
 
 <script setup lang="ts">
-import type { Options, Columns, ColumnsItemHide, ColumnsItem } from './type'
+import type { Options, Columns, ColumnsItemHide, ColumnsItemDisabled, ColumnsItem } from './type'
 import type * as A from '@arco-design/web-vue'
 import _ from 'lodash'
 
@@ -197,6 +203,14 @@ const isHide = (hide?: ColumnsItemHide<boolean | object>) => {
   if (typeof hide === 'boolean') return hide
   if (typeof hide === 'function') {
     return hide(props.modelValue)
+  }
+}
+
+const isDisabled = (disabled?: ColumnsItemDisabled<boolean | object>) => {
+  if (disabled === undefined) return false
+  if (typeof disabled === 'boolean') return disabled
+  if (typeof disabled === 'function') {
+    return disabled(props.modelValue)
   }
 }
 

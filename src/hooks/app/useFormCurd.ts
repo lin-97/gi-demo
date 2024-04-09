@@ -1,7 +1,7 @@
 import { reactive, computed, ref, type Ref } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import { Modal, Message, type FormInstance } from '@arco-design/web-vue'
-import { isEqual } from 'lodash'
+import { isEqual, cloneDeep } from 'lodash'
 
 type Option<T> = {
   key?: string
@@ -19,11 +19,11 @@ export function useFormCurd<T = any>(option: Option<T>) {
   const route = useRoute()
   const router = useRouter()
 
-  const form = reactive({})
+  const form = reactive({}) // 表单数据
   const originForm = reactive({}) // 原始表单数据
   const isEdit = computed(() => !!route.query[option?.key || 'id'])
   const isChanged = ref(false) // 表单的数据是否改变过
-  const loading = ref(false)
+  const loading = ref(false) // 表单加载装填
   const saveLoading = ref(false) // 保存按钮的加载状态
   const title = computed(() => (isEdit.value ? '编辑' : '新增'))
 
@@ -57,9 +57,7 @@ export function useFormCurd<T = any>(option: Option<T>) {
     (newVal) => {
       // console.log('newVal', toRaw(newVal))
       // console.log('originForm', toRaw(originForm))
-      if (!isEqual(newVal, originForm)) {
-        isChanged.value = true
-      }
+      isChanged.value = !isEqual(newVal, originForm) ? true : false
     },
     { immediate: true, deep: true }
   )
@@ -100,7 +98,14 @@ export function useFormCurd<T = any>(option: Option<T>) {
   }
 
   const reset = () => {
-    option?.formRef?.value?.resetFields()
+    if (!isEdit.value) {
+      option?.formRef?.value?.resetFields()
+    } else {
+      for (const key in form) {
+        delete form[key]
+      }
+      Object.assign(form, cloneDeep(originForm))
+    }
   }
 
   return { form: form as T, title, loading, isEdit, back, save, saveLoading, reset }

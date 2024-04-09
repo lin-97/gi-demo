@@ -9,6 +9,7 @@
     <a-row :gutter="30">
       <a-col :xs="24" :sm="24" :md="12">
         <GiForm ref="formRef" :options="options" :columns="columns" v-model="form">
+          <template #test="{ disabled }"> 自定义插槽-禁用状态：{{ disabled }} </template>
           <template #btns>
             <a-row justify="end" class="w-full">
               <a-space>
@@ -48,6 +49,7 @@ const form = reactive({
   mark: 0,
   hide: false,
   grade: 0,
+  test: '',
   remark: ''
 })
 
@@ -129,6 +131,12 @@ const columns: Columns<typeof form> = reactive([
     ]
   },
   {
+    label: '测试',
+    field: 'test',
+    disabled: (form) => form.status === 0,
+    item: { extra: '查看这里效果请切换状态' }
+  },
+  {
     type: 'rate',
     label: '评分',
     field: 'mark'
@@ -153,13 +161,15 @@ const columns: Columns<typeof form> = reactive([
     type: 'cascader',
     label: '城市',
     field: 'city',
-    options: cityOptions
+    options: cityOptions,
+    disabled: (form) => form.status === 0
   },
   {
     type: 'tree-select',
     label: '部门',
     field: 'dept',
-    data: deptData
+    data: deptData,
+    disabled: (form) => form.status === 0
   },
   {
     type: 'textarea',
@@ -169,8 +179,6 @@ const columns: Columns<typeof form> = reactive([
     item: { extra: '这里是额外信息' }
   },
   {
-    type: 'input',
-    label: '',
     field: 'btns',
     span: 24
   }
