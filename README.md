@@ -833,9 +833,9 @@ GiForm 是一个 JSON 配置表单组件，能够快速通过 JSON 构建表单�
 
 #### GiTable 使用示例
 
-<img src="https://gitee.com/lin0716/gi-image/raw/master/form/GiTable-code.png" />
+<img src="https://gitee.com/lin0716/gi-image/raw/master/table/GiTable-code.png" />
 
-<img src="https://gitee.com/lin0716/gi-image/raw/master/form/GiTable-demo.gif" />
+<img src="https://gitee.com/lin0716/gi-image/raw/master/table/GiTable-demo.gif" />
 
 #### Hooks 目录结构
 
