@@ -1,6 +1,6 @@
 import { isExternal } from '@/utils/validate'
 import { mapTree, browse } from 'xe-utils'
-import _ from 'lodash'
+import { upperFirst, camelCase } from 'lodash-es'
 
 export function getProperty<T, K extends keyof T>(obj: T, key: K): T[K] {
   return obj[key]
@@ -199,7 +199,7 @@ export const randomHex = () => {
 export const transformPathToName = (path: string) => {
   if (!path) return ''
   if (isExternal(path)) return ''
-  return _.upperFirst(_.camelCase(path))
+  return upperFirst(camelCase(path))
 }
 
 /**

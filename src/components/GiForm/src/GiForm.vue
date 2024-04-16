@@ -174,7 +174,7 @@
 <script setup lang="ts">
 import type { Options, Columns, ColumnsItemHide, ColumnsItemDisabled, ColumnsItem } from './type'
 import type * as A from '@arco-design/web-vue'
-import _ from 'lodash'
+import { cloneDeep } from 'lodash-es'
 
 interface Props {
   modelValue: any
@@ -235,7 +235,7 @@ props.columns.forEach((item) => {
 })
 
 // 要深克隆，否则无法监听新旧值变化
-const cloneForm = computed(() => _.cloneDeep(props.modelValue))
+const cloneForm = computed(() => cloneDeep(props.modelValue))
 
 watch(cloneForm as any, (newVal, oldVal) => {
   hasCascaderColumns.forEach((item) => {

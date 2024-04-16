@@ -21,13 +21,11 @@ import Button from './examples/button/index.vue'
 import Tag from './examples/tag/index.vue'
 import IconSelector from './examples/icon-selector/index.vue'
 import Dot from './examples/dot/index.vue'
-import FlexibleBox from './examples/flexible-box/index.vue'
 import Area from './examples/area-demo/index.vue'
 import Editor from './examples/editor/index.vue'
 import RowTreeTable from './examples/row-tree-table/index.vue'
 import Map from './examples/map/index.vue'
 import JSModal from './examples/js-modal/index.vue'
-import ImageZoom from './examples/image-zoom/index.vue'
 import FnComponent from './examples/fn-component/index.vue'
 import Mitt from './examples/mitt/index.vue'
 import ApiTest from './examples/api-test/index.vue'
@@ -42,14 +40,12 @@ const menuList = [
   { name: 'GiTag', value: Tag },
   { name: 'GiIconSelector', value: IconSelector },
   { name: 'GiDot', value: Dot },
-  { name: 'GiFlexibleBox', value: FlexibleBox },
   { name: '函数调用模态框', value: JSModal },
   { name: '横向树表格', value: RowTreeTable },
   { name: '省市区', value: Area },
   { name: '富文本', value: Editor },
   { name: '地图', value: Map },
   { name: 'Mitt中央通信', value: Mitt },
-  { name: '图片放大镜', value: ImageZoom },
   { name: '函数式组件', value: FnComponent }
 ]
 </script>
