@@ -100,7 +100,7 @@ const SettingDrawerRef = ref<InstanceType<typeof SettingDrawer>>()
 
 // 跳转个人中心
 const toUser = () => {
-  router.push('/multilevel/index/user')
+  router.push('/system/account')
 }
 
 // 退出登录
