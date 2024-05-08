@@ -1,5 +1,5 @@
 import { defineStore } from 'pinia'
-import { reactive, computed, toRefs } from 'vue'
+import { reactive, computed, toRefs, nextTick } from 'vue'
 import { generate, getRgbStr } from '@arco-design/color'
 import defaultSettings from '@/config/setting.json'
 
@@ -55,6 +55,15 @@ const storeSetup = () => {
     settingConfig.menuCollapse = collapsed
   }
 
+  // 页面重新加载
+  const reloadFlag = ref(true)
+  const reloadPage = () => {
+    reloadFlag.value = false
+    nextTick(() => {
+      reloadFlag.value = true
+    })
+  }
+
   return {
     ...toRefs(settingConfig),
     transitionName,
@@ -62,7 +71,9 @@ const storeSetup = () => {
     toggleTheme,
     setThemeColor,
     initTheme,
-    setMenuCollapse
+    setMenuCollapse,
+    reloadFlag,
+    reloadPage
   }
 }
 

@@ -17,23 +17,27 @@
       >
       </a-tab-pane>
       <template #extra>
-        <a-dropdown trigger="hover">
-          <MagicIcon class="gi_mr"></MagicIcon>
-          <template #content>
-            <a-doption @click="tabsStore.closeCurrent(route.path)">
-              <template #icon><icon-close /></template>
-              <template #default>关闭当前</template>
-            </a-doption>
-            <a-doption @click="tabsStore.closeOther(route.path)">
-              <template #icon><icon-eraser /></template>
-              <template #default>关闭其他</template>
-            </a-doption>
-            <a-doption @click="tabsStore.closeAll">
-              <template #icon><icon-minus /></template>
-              <template #default>关闭全部</template>
-            </a-doption>
-          </template>
-        </a-dropdown>
+        <a-space size="medium">
+          <ReloadIcon></ReloadIcon>
+
+          <a-dropdown trigger="hover">
+            <MagicIcon class="gi_mr"></MagicIcon>
+            <template #content>
+              <a-doption @click="tabsStore.closeCurrent(route.path)">
+                <template #icon><icon-close /></template>
+                <template #default>关闭当前</template>
+              </a-doption>
+              <a-doption @click="tabsStore.closeOther(route.path)">
+                <template #icon><icon-eraser /></template>
+                <template #default>关闭其他</template>
+              </a-doption>
+              <a-doption @click="tabsStore.closeAll">
+                <template #icon><icon-minus /></template>
+                <template #default>关闭全部</template>
+              </a-doption>
+            </template>
+          </a-dropdown>
+        </a-space>
       </template>
     </a-tabs>
   </div>
@@ -43,6 +47,7 @@
 import type { RouteRecordRaw } from 'vue-router'
 import { useTabsStore, useAppStore } from '@/stores'
 import MagicIcon from './MagicIcon.vue'
+import ReloadIcon from './ReloadIcon.vue'
 
 defineOptions({ name: 'Tabs' })
 const route = useRoute()
