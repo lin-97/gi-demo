@@ -34,7 +34,7 @@
         />
       </a-form-item>
 
-      <a-row :gutter="16" v-if="[1, 2].includes(form.type)">
+      <a-row v-if="[1, 2].includes(form.type)" :gutter="16">
         <a-col v-bind="col2Props">
           <a-form-item label="自定义图标" field="svgIcon">
             <GiIconSelector v-model="form.svgIcon" type="custom"></GiIconSelector>
@@ -54,7 +54,7 @@
         <a-input v-model.trim="form.title" placeholder="请输入菜单标题" allow-clear :max-length="10" />
       </a-form-item>
 
-      <a-form-item label="路由路径" field="path" v-if="[1, 2].includes(form.type)">
+      <a-form-item v-if="[1, 2].includes(form.type)" label="路由路径" field="path">
         <a-input v-model.trim="form.path" placeholder="请输入路由路径" allow-clear :max-length="50" />
         <template #extra>
           <div>
@@ -64,18 +64,18 @@
         </template>
       </a-form-item>
 
-      <a-form-item label="重定向" field="redirect" v-if="[1, 2].includes(form.type) && !isExternalUrl">
+      <a-form-item v-if="[1, 2].includes(form.type) && !isExternalUrl" label="重定向" field="redirect">
         <a-input v-model.trim="form.redirect" placeholder="请输入重定向地址" allow-clear :max-length="50" />
       </a-form-item>
 
-      <a-form-item label="是否外链" field="isExternalUrl" v-if="[1, 2].includes(form.type)">
+      <a-form-item v-if="[1, 2].includes(form.type)" label="是否外链" field="isExternalUrl">
         <a-radio-group v-model="isExternalUrl" type="button">
           <a-radio :value="true">是</a-radio>
           <a-radio :value="false">否</a-radio>
         </a-radio-group>
       </a-form-item>
 
-      <a-form-item label="组件路径" field="component" v-if="form.type === 2">
+      <a-form-item v-if="form.type === 2" label="组件路径" field="component">
         <a-input
           v-if="isExternalUrl"
           v-model.trim="form.component"
@@ -89,12 +89,12 @@
         </a-input>
       </a-form-item>
 
-      <a-row :gutter="16" v-if="[1, 2].includes(form.type)">
+      <a-row v-if="[1, 2].includes(form.type)" :gutter="16">
         <a-col v-bind="col3Props">
           <a-form-item label="状态" field="status">
             <a-switch
-              type="round"
               v-model="form.status"
+              type="round"
               :checked-value="1"
               :unchecked-value="0"
               checked-text="启用"
@@ -105,8 +105,8 @@
         <a-col v-bind="col3Props">
           <a-form-item label="是否隐藏" field="hidden">
             <a-switch
-              type="round"
               v-model="form.hidden"
+              type="round"
               :checked-value="true"
               :unchecked-value="false"
               checked-text="是"
@@ -117,8 +117,8 @@
         <a-col v-bind="col3Props">
           <a-form-item label="是否缓存" field="keepAlive">
             <a-switch
-              type="round"
               v-model="form.keepAlive"
+              type="round"
               :checked-value="true"
               :unchecked-value="false"
               checked-text="是"
@@ -129,8 +129,8 @@
         <a-col v-bind="col3Props">
           <a-form-item label="面包屑" field="breadcrumb">
             <a-switch
-              type="round"
               v-model="form.breadcrumb"
+              type="round"
               :checked-value="true"
               :unchecked-value="false"
               checked-text="显示"
@@ -139,20 +139,20 @@
           </a-form-item>
         </a-col>
         <a-col v-bind="col3Props">
-          <a-form-item label="总是显示" field="alwaysShow" v-if="form.type === 1">
+          <a-form-item v-if="form.type === 1" label="总是显示" field="alwaysShow">
             <a-switch
-              type="round"
               v-model="form.alwaysShow"
+              type="round"
               :checked-value="true"
               :unchecked-value="false"
               checked-text="显示"
               unchecked-text="隐藏"
             />
           </a-form-item>
-          <a-form-item label="页签显示" field="showInTabs" v-if="form.type === 2">
+          <a-form-item v-if="form.type === 2" label="页签显示" field="showInTabs">
             <a-switch
-              type="round"
               v-model="form.showInTabs"
+              type="round"
               :checked-value="true"
               :unchecked-value="false"
               checked-text="显示"
@@ -162,7 +162,7 @@
         </a-col>
       </a-row>
 
-      <a-form-item label="权限标识" field="permission" v-if="form.type === 3">
+      <a-form-item v-if="form.type === 3" label="权限标识" field="permission">
         <a-input v-model.trim="form.permission" placeholder="sys:btn:add" allow-clear :max-length="20" />
       </a-form-item>
 

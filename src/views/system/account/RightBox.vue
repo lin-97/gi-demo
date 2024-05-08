@@ -41,15 +41,15 @@
       >
         <template #actions>
           <a-space :size="20">
-            <span class="action" key="heart">
+            <span key="heart" class="action">
               <span><IconHeart /></span>
               <span>83</span>
             </span>
-            <span class="action" key="star">
+            <span key="star" class="action">
               <span><IconStar /></span>
               <span>3</span>
             </span>
-            <span class="action" key="reply"> <IconMessage /><span>回复</span></span>
+            <span key="reply" class="action"> <IconMessage /><span>回复</span></span>
           </a-space>
         </template>
         <template #avatar>

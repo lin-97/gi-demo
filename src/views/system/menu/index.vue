@@ -76,7 +76,7 @@
             <template #cell="{ record }">
               <GiSvgIcon v-if="record.svgIcon" :size="24" :name="record.svgIcon"></GiSvgIcon>
               <template v-else>
-                <component v-if="record.icon" :is="record.icon" :size="24"></component>
+                <component :is="record.icon" v-if="record.icon" :size="24"></component>
               </template>
             </template>
           </a-table-column>

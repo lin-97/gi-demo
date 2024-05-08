@@ -3,7 +3,7 @@
     <a-card title="文件管理" :bordered="false" :body-style="{ padding: 0 }">
       <template #extra>
         <a-tooltip content="显示容量">
-          <a-switch type="round" size="small" v-model="showPercent" />
+          <a-switch v-model="showPercent" type="round" size="small" />
         </a-tooltip>
       </template>
       <a-menu :default-open-keys="['0']" :selected-keys="[selectedKey]">
@@ -22,7 +22,7 @@
       </a-menu>
     </a-card>
 
-    <section class="percent" v-show="showPercent">
+    <section v-show="showPercent" class="percent">
       <a-row justify="space-between">
         <a-progress type="circle" color="#00B42A" :percent="0.3" :stroke-width="5" />
         <a-statistic title="剩余容量" :value="512" :value-style="{ color: '#5856D6' }">
@@ -33,7 +33,7 @@
         </a-statistic>
       </a-row>
 
-      <a-space size="mini" fill direction="vertical" :key="selectedKey" class="gi_mt">
+      <a-space :key="selectedKey" size="mini" fill direction="vertical" class="gi_mt">
         <a-progress
           v-for="i in filePercentList"
           :key="i.label"

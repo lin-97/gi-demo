@@ -2,8 +2,8 @@
   <div class="test">
     <a-card title="组件示例" :bordered="false" class="gi_card left">
       <div class="tab-box">
-        <a-tabs position="left" hide-content v-model:active-key="selectedKey">
-          <a-tab-pane :title="item.name" v-for="(item, index) in menuList" :key="index"></a-tab-pane>
+        <a-tabs v-model:active-key="selectedKey" position="left" hide-content>
+          <a-tab-pane v-for="(item, index) in menuList" :key="index" :title="item.name"></a-tab-pane>
         </a-tabs>
       </div>
     </a-card>

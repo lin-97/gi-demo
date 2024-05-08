@@ -84,8 +84,8 @@
 
       <a-form-item label="状态" field="status">
         <a-switch
-          type="round"
           v-model="form.status"
+          type="round"
           :checked-value="1"
           :unchecked-value="0"
           checked-text="正常"

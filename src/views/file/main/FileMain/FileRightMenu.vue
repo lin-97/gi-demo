@@ -33,6 +33,7 @@ interface Props {
 }
 
 const props = withDefaults(defineProps<Props>(), {
+  data: undefined,
   shadow: true
 })
 

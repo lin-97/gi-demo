@@ -3,7 +3,7 @@
     <router-view v-slot="{ Component, route }">
       <transition :name="appStore.transitionName" mode="out-in" appear>
         <keep-alive :include="(tabsStore.cacheList as string[])">
-          <component v-if="appStore.reloadFlag" :is="Component" :key="route.path" />
+          <component :is="Component" v-if="appStore.reloadFlag" :key="route.path" />
         </keep-alive>
       </transition>
     </router-view>

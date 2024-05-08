@@ -1,6 +1,6 @@
 <template>
   <div class="table-page">
-    <GiForm :options="options" :columns="QueryFormColumns" v-model="form" @search="search" @reset="search"></GiForm>
+    <GiForm v-model="form" :options="options" :columns="QueryFormColumns" @search="search" @reset="search"></GiForm>
 
     <GiTable
       row-key="id"

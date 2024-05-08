@@ -11,11 +11,11 @@
     </a-menu-item>
 
     <a-popover
+      v-model:popup-visible="popupVisible"
       position="right"
       trigger="click"
       :content-style="{ padding: 0, overflow: 'hidden' }"
       :unmount-on-close="true"
-      v-model:popup-visible="popupVisible"
     >
       <a-menu-item @click="onClick('move')">
         <template #icon><icon-export :size="16" :stroke-width="3" /></template>

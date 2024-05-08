@@ -1,12 +1,12 @@
 <template>
-  <a-form :auto-label-width="true" v-bind="options.form" ref="formRef" :model="modelValue">
+  <a-form ref="formRef" :auto-label-width="true" v-bind="options.form" :model="modelValue">
     <a-row :gutter="14" v-bind="options.row" class="w-full">
       <template v-for="(item, index) in columns" :key="item.field">
         <a-col
           v-if="!isHide(item.hide)"
+          v-show="index <= (options.fold?.index || 0) || (index >= (options.fold?.index || 0) && !collapsed)"
           :span="item.span || 12"
           v-bind="item.col || item.span ? item.col : options.col"
-          v-show="index <= (options.fold?.index || 0) || (index >= (options.fold?.index || 0) && !collapsed)"
         >
           <a-form-item
             v-bind="item.item"
@@ -149,7 +149,7 @@
           </a-form-item>
         </a-col>
       </template>
-      <a-col :span="options.btns?.span || 12" v-bind="options.btns?.col" v-if="!options.btns?.hide">
+      <a-col v-if="!options.btns?.hide" :span="options.btns?.span || 12" v-bind="options.btns?.col">
         <a-space wrap>
           <slot name="suffix">
             <a-button type="primary" @click="emit('search')">

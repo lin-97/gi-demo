@@ -1,6 +1,6 @@
 <template>
   <div class="page">
-    <a-resize-box :directions="['right']" :style="{ minWidth: '100px', maxWidth: '600px' }" v-model:width="width1">
+    <a-resize-box v-model:width="width1" :directions="['right']" :style="{ minWidth: '100px', maxWidth: '600px' }">
       <section class="pane">
         <h3 class="gi_line_1">菜单数据</h3>
         <div class="pane__code">
@@ -9,7 +9,7 @@
       </section>
     </a-resize-box>
 
-    <a-resize-box :directions="['right']" :style="{ minWidth: '100px', maxWidth: '600px' }" v-model:width="width2">
+    <a-resize-box v-model:width="width2" :directions="['right']" :style="{ minWidth: '100px', maxWidth: '600px' }">
       <section class="pane">
         <h3 class="gi_line_1">前端格式化、排序后的路由</h3>
         <div class="pane__code">

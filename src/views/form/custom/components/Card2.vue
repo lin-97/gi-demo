@@ -8,7 +8,7 @@
     </template>
     <a-row :gutter="30">
       <a-col :xs="24" :sm="24" :md="12">
-        <GiForm ref="formRef" :options="options" :columns="columns" v-model="form">
+        <GiForm ref="formRef" v-model="form" :options="options" :columns="columns">
           <template #test="{ disabled }"> 自定义插槽-禁用状态：{{ disabled }} </template>
           <template #btns>
             <a-row justify="end" class="w-full">

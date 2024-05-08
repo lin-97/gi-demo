@@ -7,11 +7,11 @@
     :breakpoint="appStore.layout === 'mix' ? 'xl' : undefined"
     :trigger-props="{ animationName: 'slide-dynamic-origin' }"
     :collapsed="!isDesktop ? false : appStore.menuCollapse"
+    :style="menuStyle"
     @menu-item-click="onMenuItemClick"
     @collapse="onCollapse"
-    :style="menuStyle"
   >
-    <MenuItem v-for="(route, index) in sidebarRoutes" :key="route.path + index" :item="route"></MenuItem>
+    <MenuItem v-for="(item, index) in sidebarRoutes" :key="item.path + index" :item="item"></MenuItem>
   </a-menu>
 </template>
 
@@ -25,7 +25,7 @@ import { useDevice } from '@/hooks'
 
 defineOptions({ name: 'Menu' })
 const emit = defineEmits<{
-  (e: 'menuItemClickAfter'): void
+  (e: 'menu-item-click-after'): void
 }>()
 
 interface Props {
@@ -33,7 +33,7 @@ interface Props {
   menuStyle?: CSSProperties
 }
 
-const props = withDefaults(defineProps<Props>(), {})
+const props = defineProps<Props>()
 
 const { isDesktop } = useDevice()
 const route = useRoute()
@@ -77,7 +77,7 @@ const onMenuItemClick = (key: string) => {
     return
   }
   router.push({ path: key })
-  emit('menuItemClickAfter')
+  emit('menu-item-click-after')
 }
 
 // 折叠状态改变时触发

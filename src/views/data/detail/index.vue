@@ -1,5 +1,5 @@
 <template>
-  <div class="detail" ref="containerRef">
+  <div ref="containerRef" class="detail">
     <a-affix :target="(containerRef as HTMLElement)">
       <a-page-header title="详情" class="detail__header" @back="back">
         <template #extra>

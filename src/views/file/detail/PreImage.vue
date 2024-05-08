@@ -1,7 +1,7 @@
 <template>
   <div class="pre-image">
     <section class="viewer-box">
-      <VueViewer class="viewer" ref="viewer" :options="options" @inited="inited">
+      <VueViewer ref="viewer" class="viewer" :options="options" @inited="inited">
         <img :src="src" class="image" />
       </VueViewer>
     </section>

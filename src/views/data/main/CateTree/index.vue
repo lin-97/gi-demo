@@ -2,7 +2,7 @@
   <div class="cate-tree">
     <!-- 搜索框 -->
     <div class="cate-tree__search">
-      <a-input allow-clear :maxlength="20" :placeholder="props.placeholder" v-model="inputValue">
+      <a-input v-model="inputValue" allow-clear :maxlength="20" :placeholder="props.placeholder">
         <template #prefix><icon-search /></template>
       </a-input>
     </div>
@@ -19,13 +19,13 @@
         >
           <template #title="node">
             <a-trigger
+              v-model:popup-visible="node.popupVisible"
               trigger="contextMenu"
               align-point
               animation-name="slide-dynamic-origin"
               auto-fit-transform-origin
               position="bl"
               scroll-to-close
-              v-model:popup-visible="node.popupVisible"
             >
               <div v-if="!node.isEdit" @contextmenu="onContextmenu(node)">{{ node.name }}</div>
               <a-input

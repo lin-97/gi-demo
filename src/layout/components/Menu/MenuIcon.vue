@@ -1,6 +1,6 @@
 <template>
   <GiSvgIcon v-if="props.svgIcon" :name="props.svgIcon" :size="24"></GiSvgIcon>
-  <component v-else-if="props.icon" :is="props.icon"></component>
+  <component :is="props.icon" v-else-if="props.icon"></component>
 </template>
 
 <script lang="ts" setup>
@@ -9,7 +9,7 @@ interface Props {
   icon?: string
 }
 
-const props = withDefaults(defineProps<Props>(), {})
+const props = defineProps<Props>()
 </script>
 
 <style lang="scss" scoped></style>

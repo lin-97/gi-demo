@@ -1,6 +1,6 @@
 <template>
   <div class="table-page">
-    <GiForm :options="options" :columns="columns" v-model="form" @search="search" @reset="reset"></GiForm>
+    <GiForm v-model="form" :options="options" :columns="columns" @search="search" @reset="reset"></GiForm>
 
     <div class="gi_table_box">
       <a-table

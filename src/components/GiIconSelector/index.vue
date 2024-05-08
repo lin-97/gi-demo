@@ -9,7 +9,7 @@
     >
       <template #prefix>
         <template v-if="modelValue">
-          <component v-if="props.type === 'arco'" :size="16" :is="modelValue" />
+          <component :is="modelValue" v-if="props.type === 'arco'" :size="16" />
           <GiSvgIcon v-if="modelValue" :size="16" :name="modelValue" />
         </template>
         <icon-search v-else />
@@ -44,9 +44,9 @@
 
         <section class="icon-list">
           <a-row wrap :gutter="4">
-            <a-col :span="isGridView ? 4 : 8" v-for="item of currentPageIconList" :key="item">
+            <a-col v-for="item of currentPageIconList" :key="item" :span="isGridView ? 4 : 8">
               <div class="icon-item" :class="{ active: modelValue === item }" @click="handleSelectedIcon(item)">
-                <component v-if="props.type === 'arco'" :is="item" :size="20" />
+                <component :is="item" v-if="props.type === 'arco'" :size="20" />
                 <GiSvgIcon v-if="props.type === 'custom'" :name="item" :size="20"></GiSvgIcon>
                 <div class="gi_line_1 icon-name">{{ item }}</div>
               </div>

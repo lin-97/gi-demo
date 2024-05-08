@@ -38,8 +38,8 @@
 
             <a-form-item label="部门" field="dept">
               <a-tree-select
-                :data="treeData"
                 v-model="form.dept"
+                :data="treeData"
                 multiple
                 placeholder="请选择部门"
                 allow-clear
@@ -57,8 +57,8 @@
             </a-form-item>
             <a-form-item label="爱好" field="hobbys" extra="这里的数据采用了数据字典">
               <a-select
-                :options="options"
                 v-model="form.hobbys"
+                :options="options"
                 placeholder="请选择爱好"
                 multiple
                 allow-clear

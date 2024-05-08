@@ -29,7 +29,7 @@
                 :size="24"
               ></GiSvgIcon>
               <template v-else>
-                <component v-if="getMenuIcon(item, 'svgIcon')" :is="getMenuIcon(item, 'icon')"></component>
+                <component :is="getMenuIcon(item, 'icon')" v-if="getMenuIcon(item, 'svgIcon')"></component>
               </template>
             </template>
             <span>{{ item.meta?.title || item.children?.[0]?.meta?.title || '' }}</span>

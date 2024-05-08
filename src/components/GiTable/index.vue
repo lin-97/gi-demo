@@ -1,5 +1,5 @@
 <template>
-  <div class="gi-table" :class="{ 'gi-table--fullscreen': isFullscreen }" ref="giTableRef">
+  <div ref="giTableRef" class="gi-table" :class="{ 'gi-table--fullscreen': isFullscreen }">
     <a-row justify="space-between" align="center">
       <a-space wrap>
         <slot name="custom-title">
@@ -21,8 +21,8 @@
           <a-tooltip content="全屏">
             <a-button size="mini" class="gi_hover_btn" @click="isFullscreen = !isFullscreen">
               <template #icon>
-                <icon-fullscreen :size="18" v-if="!isFullscreen" />
-                <icon-fullscreen-exit :size="18" v-else />
+                <icon-fullscreen v-if="!isFullscreen" :size="18" />
+                <icon-fullscreen-exit v-else :size="18" />
               </template>
             </a-button>
           </a-tooltip>

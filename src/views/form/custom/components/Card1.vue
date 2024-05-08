@@ -9,10 +9,10 @@
     <a-row :gutter="30">
       <a-col :xs="24" :sm="24" :md="12">
         <GiForm
+          v-model="form"
           class="gi_mb"
           :options="options"
           :columns="columns"
-          v-model="form"
           @search="search"
           @reset="reset"
         ></GiForm>

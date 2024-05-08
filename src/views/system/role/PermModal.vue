@@ -2,10 +2,10 @@
   <a-modal v-model:visible="visible" :title="title" :fullscreen="isMobile()" :mask-closable="true" @ok="save">
     <a-tree
       ref="treeRef"
+      v-model:checked-keys="menuIds"
       size="mini"
       checkable
       :check-strictly="true"
-      v-model:checked-keys="menuIds"
       :data="treeData"
       :fieldNames="{ key: 'id' }"
     ></a-tree>

@@ -5,25 +5,27 @@
         <template #extra>
           <a-button @click="back">返回</a-button>
         </template>
-        <a-form ref="formRef" :model="form" :rules="rules" auto-label-width class="form-base__form">
-          <a-form-item label="ID" field="id">{{ form.id || '暂无' }}</a-form-item>
-          <a-form-item label="姓名" field="name">
-            <a-input v-model="form.name" placeholder="请输入姓名" allow-clear />
-            <template #extra>
-              <a-typography-text type="secondary">请输入中文姓名</a-typography-text>
-            </template>
-          </a-form-item>
-          <a-form-item label="手机号" field="phone">
-            <a-input v-model="form.phone" placeholder="请输入手机号" allow-clear />
-          </a-form-item>
-          <a-form-item>
-            <a-space>
-              <a-button @click="reset">重置</a-button>
-              <a-button type="primary" :loading="saveLoading" @click="save">提交</a-button>
-            </a-space>
-          </a-form-item>
-        </a-form>
-        <GiCodeView :code-json="codeJson"></GiCodeView>
+        <a-spin :loading="loading">
+          <a-form ref="formRef" :model="form" :rules="rules" auto-label-width class="form-base__form">
+            <a-form-item label="ID" field="id">{{ form.id || '暂无' }}</a-form-item>
+            <a-form-item label="姓名" field="name">
+              <a-input v-model="form.name" placeholder="请输入姓名" allow-clear />
+              <template #extra>
+                <a-typography-text type="secondary">请输入中文姓名</a-typography-text>
+              </template>
+            </a-form-item>
+            <a-form-item label="手机号" field="phone">
+              <a-input v-model="form.phone" placeholder="请输入手机号" allow-clear />
+            </a-form-item>
+            <a-form-item>
+              <a-space>
+                <a-button @click="reset">重置</a-button>
+                <a-button type="primary" :loading="saveLoading" @click="save">提交</a-button>
+              </a-space>
+            </a-form-item>
+          </a-form>
+          <GiCodeView :code-json="codeJson"></GiCodeView>
+        </a-spin>
       </a-card>
     </section>
   </div>

@@ -31,8 +31,8 @@
 
               <a-space wrap>
                 <a-select
-                  class="gi_select_input"
                   v-model="form.status"
+                  class="gi_select_input"
                   :options="options"
                   placeholder="请选择"
                   allow-clear
@@ -82,7 +82,7 @@
                   <a-table-column title="操作" :width="200" align="center" :fixed="!isMobile() ? 'right' : undefined">
                     <template #cell="{ record }">
                       <a-space>
-                        <a-button type="primary" size="mini" @click="onEdit(record)">修改</a-button>
+                        <a-button type="primary" size="mini" @click="onEdit">修改</a-button>
                         <a-button size="mini" @click="onDetail(record)">详情</a-button>
                         <a-popconfirm type="warning" content="您确定要删除该项吗?" @before-ok="onDelete(record)">
                           <a-button type="primary" status="danger" size="mini">删除</a-button>
@@ -137,7 +137,7 @@ const onAdd = () => {
   router.push({ path: '/data/form' })
 }
 
-const onEdit = (item: PersonItem) => {
+const onEdit = () => {
   router.push({ path: '/data/form', query: { id: 'ID123456' } })
 }
 

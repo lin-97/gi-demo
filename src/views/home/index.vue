@@ -1,5 +1,5 @@
 <template>
-  <div class="gi_page home" id="home">
+  <div id="home" class="gi_page home">
     <WorkCard></WorkCard>
 
     <a-row class="home__content">

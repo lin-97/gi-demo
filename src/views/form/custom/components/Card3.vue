@@ -15,8 +15,8 @@
       </a-space>
     </a-card>
 
-    <a-drawer :title="isEdit ? '编辑' : '新增'" :width="width >= 600 ? 600 : '100%'" v-model:visible="visible">
-      <GiForm :options="options" :columns="columns" v-model="form"></GiForm>
+    <a-drawer v-model:visible="visible" :title="isEdit ? '编辑' : '新增'" :width="width >= 600 ? 600 : '100%'">
+      <GiForm v-model="form" :options="options" :columns="columns"></GiForm>
     </a-drawer>
   </a-card>
 </template>
