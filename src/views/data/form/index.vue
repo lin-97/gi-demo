@@ -70,7 +70,7 @@ const { form, title, loading, save, saveLoading, back, reset } = useFormCurd<For
   editApi: (form) => updatePerson({ ...form, extra: '额外参数-编辑' }), // 编辑接口
   addToEdit: true, // 新增成功跳到编辑模式
   onSuccess: (form) => {
-    console.log('保存成功后的回调函数', form.id)
+    console.log('保存成功后的回调函数')
   }
 })
 
