@@ -3,28 +3,19 @@
     <a-alert>采用了vant UI的省市区的数据源</a-alert>
     <div class="wrap">
       <section class="tree-box">
-        <a-tree
-          block-node
-          :data="treeData"
-          :fieldNames="{
-            key: 'code',
-            title: 'label',
-            children: 'children'
-          }"
-          :virtualListProps="{
-            height: 500,
-            isStaticItemHeight: true
-          }"
-        ></a-tree>
+        <a-tree block-node :data="treeData" :field-names="{
+          key: 'code',
+          title: 'label',
+          children: 'children',
+        }" :virtual-list-props="{
+          height: 500,
+          isStaticItemHeight: true,
+        }"></a-tree>
       </section>
 
       <section>
-        <a-cascader
-          :options="treeData"
-          :field-names="{ value: 'code', label: 'label' }"
-          :style="{ width: '320px' }"
-          placeholder="请选择省市区"
-        />
+        <a-cascader :options="treeData" :field-names="{ value: 'code', label: 'label' }" :style="{ width: '320px' }"
+          placeholder="请选择省市区" />
       </section>
     </div>
   </div>
@@ -32,9 +23,11 @@
 
 <script setup lang="ts">
 import { useArea } from './useArea'
+
+defineOptions({ name: 'TheArea' })
+
 const { getAreaTreeData } = useArea()
 
-defineOptions({ name: 'Area' })
 const treeData = ref([])
 treeData.value = getAreaTreeData()
 </script>
@@ -45,6 +38,7 @@ treeData.value = getAreaTreeData()
     display: flex;
     margin-top: 12px;
   }
+
   .tree-box {
     width: 270px;
     padding-left: 12px;

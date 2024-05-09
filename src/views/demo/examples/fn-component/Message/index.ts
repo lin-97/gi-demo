@@ -1,4 +1,4 @@
-import { render, h } from 'vue'
+import { h, render } from 'vue'
 import Message from './Message.vue'
 import type { Props } from './type'
 

@@ -1,11 +1,8 @@
 <template>
   <a-breadcrumb>
     <a-breadcrumb-item v-for="(item, index) in breadcrumbList" :key="index">
-      <span
-        v-if="item.redirect === 'noRedirect' || item.redirect === '' || index === breadcrumbList.length - 1"
-        class="gi_line_1"
-        >{{ item.meta.title }}</span
-      >
+      <span v-if="item.redirect === 'noRedirect' || item.redirect === '' || index === breadcrumbList.length - 1"
+        class="gi_line_1">{{ item.meta.title }}</span>
       <span v-else class="gi_line_1 breadcrumb-item-title" @click="handleLink(item)">{{ item.meta.title }}</span>
     </a-breadcrumb-item>
   </a-breadcrumb>
@@ -13,8 +10,8 @@
 
 <script lang="ts" setup>
 import type { RouteLocationMatched } from 'vue-router'
-import { useRouteStore } from '@/stores'
 import { findTree } from 'xe-utils'
+import { useRouteStore } from '@/stores'
 
 const route = useRoute()
 const router = useRouter()
@@ -61,6 +58,7 @@ function handleLink(item: RouteLocationMatched) {
 .breadcrumb-item-title {
   transition: all 0.3s;
   cursor: pointer;
+
   &:hover {
     color: $color-theme;
     font-weight: 600;

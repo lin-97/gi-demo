@@ -29,12 +29,12 @@
 
 <script setup lang="ts">
 import { Drawer, Message } from '@arco-design/web-vue'
+import { useWindowSize } from '@vueuse/core'
+import { cityOptions, deptData } from './data'
 import GiCodeView from '@/components/GiCodeView/index.vue'
 import GiForm from '@/components/GiForm'
-import type { Options, Columns } from '@/components/GiForm'
+import type { Columns, Options } from '@/components/GiForm'
 import * as Regexp from '@/utils/regexp'
-import { cityOptions, deptData } from './data'
-import { useWindowSize } from '@vueuse/core'
 
 const { width } = useWindowSize()
 

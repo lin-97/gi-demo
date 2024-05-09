@@ -14,7 +14,7 @@
 </template>
 
 <script lang="ts" setup>
-import { IconCheckCircle, IconExclamationCircle, IconCloseCircle } from '@arco-design/web-vue/es/icon'
+import { IconCheckCircle, IconCloseCircle, IconExclamationCircle } from '@arco-design/web-vue/es/icon'
 
 interface Props {
   type?: 'success' | 'warning' | 'error'

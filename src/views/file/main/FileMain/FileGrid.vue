@@ -1,17 +1,8 @@
 <template>
   <div class="file-grid">
     <a-grid :cols="{ xs: 4, sm: 4, md: 5, lg: 7, xl: 8, xxl: 9 }" :col-gap="12" :row-gap="12">
-      <a-trigger
-        v-for="item in data"
-        :key="item.id"
-        trigger="contextMenu"
-        align-point
-        animation-name="slide-dynamic-origin"
-        auto-fit-transform-origin
-        position="bl"
-        update-at-scroll
-        scroll-to-close
-      >
+      <a-trigger v-for="item in data" :key="item.id" trigger="contextMenu" align-point
+        animation-name="slide-dynamic-origin" auto-fit-transform-origin position="bl" update-at-scroll scroll-to-close>
         <a-grid-item>
           <div class="file-grid-item" @click.stop="handleClickFile(item)">
             <section class="file-grid-item__wrapper">
@@ -21,17 +12,10 @@
               <p class="gi_line_1 file-name">{{ getFileName(item) }}</p>
             </section>
             <!-- 勾选模式 -->
-            <section
-              v-show="props.isBatchMode"
-              class="check-mode"
-              :class="{ checked: props.selectedFileIds.includes(item.id) }"
-              @click.stop="handleCheckFile(item)"
-            >
-              <a-checkbox
-                class="checkbox"
-                :model-value="props.selectedFileIds.includes(item.id)"
-                @change="handleCheckFile(item)"
-              ></a-checkbox>
+            <section v-show="props.isBatchMode" class="check-mode"
+              :class="{ checked: props.selectedFileIds.includes(item.id) }" @click.stop="handleCheckFile(item)">
+              <a-checkbox class="checkbox" :model-value="props.selectedFileIds.includes(item.id)"
+                @change="handleCheckFile(item)"></a-checkbox>
             </section>
           </div>
         </a-grid-item>
@@ -103,15 +87,19 @@ const handleRightMenuClick = (mode: string, item: FileItem) => {
   align-items: center;
   position: relative;
   cursor: pointer;
+
   &:hover {
     background: var(--color-primary-light-1);
   }
+
   &:active {
+
     svg,
     img {
       transform: scale(0.9);
     }
   }
+
   .check-mode {
     position: absolute;
     left: 0;
@@ -120,9 +108,11 @@ const handleRightMenuClick = (mode: string, item: FileItem) => {
     bottom: 0;
     background: rgba(0, 0, 0, 0.1);
     z-index: 9;
+
     &.checked {
       background: none;
     }
+
     .checkbox {
       position: absolute;
       top: 5px;
@@ -130,6 +120,7 @@ const handleRightMenuClick = (mode: string, item: FileItem) => {
       padding-left: 0;
     }
   }
+
   &__wrapper {
     width: 76%;
     max-width: 100px;
@@ -141,22 +132,26 @@ const handleRightMenuClick = (mode: string, item: FileItem) => {
     flex-direction: column;
     justify-content: center;
     align-items: center;
+
     .file-icon {
       width: 100%;
       height: 60px;
       display: flex;
       justify-content: center;
       overflow: hidden;
-      > img {
+
+      >img {
         width: auto;
         height: 100%;
         transition: all 0.3s;
       }
-      > svg {
+
+      >svg {
         height: 100%;
         transition: all 0.3s;
       }
     }
+
     .file-name {
       width: 100%;
       font-size: 12px;

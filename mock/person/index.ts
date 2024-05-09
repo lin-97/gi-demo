@@ -1,10 +1,9 @@
-import { Random } from 'mockjs'
-import Mock from 'mockjs'
+import Mock, { Random } from 'mockjs'
 import { defineMock } from '../_base'
-import { resultSuccess, getDelayTime } from '../_utils'
+import { getDelayTime, resultSuccess } from '../_utils'
 
 /**
- * @param {Number} times 回调函数需要执行的次数
+ * @param {number} times 回调函数需要执行的次数
  * @param {Function} callback 回调函数
  */
 export function doCustomTimes(times: number, callback: any) {
@@ -48,18 +47,18 @@ const getTableListData = (params: any) => {
   const data: any[] = []
   for (let i = 0; i < params.pageSize; i++) {
     data.push({
-      id: Random.guid(),
-      name: params.name !== '' ? params.name : '@cname()',
-      account: Mock.mock('@string("lower", 5)'),
-      phone: '15578728810',
+      'id': Random.guid(),
+      'name': params.name !== '' ? params.name : '@cname()',
+      'account': Mock.mock('@string("lower", 5)'),
+      'phone': '15578728810',
       'gender|1-3': 1,
-      email: '155****8810@qq.com',
-      createTime: '@datetime',
-      address: '@county(true)',
-      avatar: getRandomAvatar(),
+      'email': '155****8810@qq.com',
+      'createTime': '@datetime',
+      'address': '@county(true)',
+      'avatar': getRandomAvatar(),
       'proportion|1-100': 10,
       'status|0-1': 0,
-      hobbys: getHobbysList(Math.floor(Math.random() * 9))
+      'hobbys': getHobbysList(Math.floor(Math.random() * 9))
     })
   }
   return data
@@ -83,7 +82,7 @@ export default defineMock([
     url: '/person/init',
     method: 'get',
     timeout: getDelayTime(),
-    response: ({ query }) => {
+    response: () => {
       return resultSuccess({
         id: '',
         name: '张三新增',
@@ -95,7 +94,7 @@ export default defineMock([
     url: '/person/detail',
     method: 'get',
     timeout: getDelayTime(),
-    response: ({ query }) => {
+    response: () => {
       return resultSuccess({
         id: 'ID123456',
         name: '张三编辑',
@@ -107,7 +106,7 @@ export default defineMock([
     url: '/person/add',
     method: 'post',
     timeout: 1000,
-    response: ({ query }) => {
+    response: () => {
       return resultSuccess({
         id: 'ID123456',
         name: '张三编辑',
@@ -119,7 +118,7 @@ export default defineMock([
     url: '/person/update',
     method: 'post',
     timeout: 1000,
-    response: ({ query }) => {
+    response: () => {
       return resultSuccess({
         id: 'ID123456',
         name: '张三编辑',

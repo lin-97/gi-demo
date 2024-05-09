@@ -1,15 +1,8 @@
 <template>
   <div class="table-page">
-    <GiTable
-      row-key="id"
-      title="会员列表"
-      :loading="loading"
-      :data="tableData"
-      :scroll="{ x: '100%', y: '100%', minWidth: 1200 }"
-      :row-selection="{ type: 'checkbox', showCheckedAll: true }"
-      :pagination="pagination"
-      @refresh="getTableData"
-    >
+    <GiTable row-key="id" title="会员列表" :loading="loading" :data="tableData"
+      :scroll="{ x: '100%', y: '100%', minWidth: 1200 }" :row-selection="{ type: 'checkbox', showCheckedAll: true }"
+      :pagination="pagination" @refresh="getTableData">
       <template #custom-extra>
         <a-button type="primary" @click="onAdd">
           <template #icon><icon-plus /></template>
@@ -30,12 +23,8 @@
         </a-table-column>
         <a-table-column title="姓名" data-index="name" :width="120">
           <template #cell="{ record }">
-            <GiCellAvatar
-              is-link
-              :avatar="record.avatar"
-              :name="record.name"
-              @click="onClickName(record)"
-            ></GiCellAvatar>
+            <GiCellAvatar is-link :avatar="record.avatar" :name="record.name" @click="onClickName(record)">
+            </GiCellAvatar>
           </template>
         </a-table-column>
         <a-table-column title="手机号" data-index="phone" :width="150"></a-table-column>
@@ -54,13 +43,8 @@
             <GiCellStatus :status="record.status"></GiCellStatus>
           </template>
         </a-table-column>
-        <a-table-column
-          title="创建时间"
-          data-index="createTime"
-          ellipsis
-          tooltip
-          :sortable="{ sortDirections: ['ascend', 'descend'] }"
-        ></a-table-column>
+        <a-table-column title="创建时间" data-index="createTime" ellipsis tooltip
+          :sortable="{ sortDirections: ['ascend', 'descend'] }"></a-table-column>
         <a-table-column title="地址" data-index="address" ellipsis tooltip></a-table-column>
         <a-table-column title="操作" :width="180" align="center">
           <template #cell>
@@ -70,12 +54,8 @@
               </template>
               <a-link>编辑</a-link>
               <a-link>详情</a-link>
-              <a-popconfirm
-                type="warning"
-                content="您确定要删除该项吗?"
-                :ok-button-props="{ status: 'danger' }"
-                @before-ok="onDelete"
-              >
+              <a-popconfirm type="warning" content="您确定要删除该项吗?" :ok-button-props="{ status: 'danger' }"
+                @before-ok="onDelete">
                 <a-link status="danger">删除</a-link>
               </a-popconfirm>
             </a-space>
@@ -92,7 +72,7 @@
 import { Message } from '@arco-design/web-vue'
 import type { PopconfirmInstance } from '@arco-design/web-vue'
 import { usePagination } from '@/hooks'
-import { getPersonList, type PersonItem } from '@/apis'
+import { type PersonItem, getPersonList } from '@/apis'
 
 defineOptions({ name: 'TableCustom' })
 
@@ -101,7 +81,7 @@ const tableData = ref<PersonItem[]>([])
 
 const { pagination, setTotal } = usePagination(() => getTableData())
 
-const getTableData = async () => {
+async function getTableData() {
   try {
     loading.value = true
     const res = await getPersonList({
@@ -118,7 +98,7 @@ const getTableData = async () => {
 getTableData()
 
 const onClickName = (record: PersonItem) => {
-  Message.success('点击了' + record.name)
+  Message.success(`点击了${record.name}`)
 }
 
 const onAdd = () => {

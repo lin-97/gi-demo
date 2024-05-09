@@ -20,7 +20,7 @@
 </template>
 
 <script setup lang="ts">
-import { useDraggable, useWindowSize, useElementSize } from '@vueuse/core'
+import { useDraggable, useElementSize, useWindowSize } from '@vueuse/core'
 import type { FileItem } from '@/apis'
 
 interface Props {
@@ -71,8 +71,8 @@ const audioStyle = computed(() => {
   }
   sessionStorage.setItem('AudioDialogXY', JSON.stringify({ top, left }))
   return {
-    left: left + 'px',
-    top: top + 'px'
+    left: `${left}px`,
+    top: `${top}px`
   }
 })
 
@@ -90,6 +90,7 @@ const close = () => {
   box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
   background: linear-gradient(to right, $color-theme, rgb(var(--primary-2)));
   z-index: 9999;
+
   &__header {
     color: #fff;
     font-size: 16px;
@@ -99,16 +100,20 @@ const close = () => {
     align-items: center;
     cursor: move;
     user-select: none;
+
     &:active {
       cursor: move;
     }
+
     .audio-name {
       display: flex;
       align-items: center;
-      > span {
+
+      >span {
         margin-left: 8px;
       }
     }
+
     .close-icon {
       width: 24px;
       height: 24px;
@@ -119,19 +124,24 @@ const close = () => {
       background: rgba(0, 0, 0, 0);
       transition: all 0.2s;
       cursor: pointer;
+
       svg {
         transition: all 0.2s;
       }
+
       &:hover {
         background: rgba(0, 0, 0, 0.1);
+
         svg {
           transform: scale(1.3);
         }
       }
     }
   }
+
   .audio {
     width: 100%;
+
     &::-webkit-media-controls-enclosure {
       background: #fff;
     }

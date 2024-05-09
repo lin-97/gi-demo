@@ -30,6 +30,7 @@ const data = packageJson
   white-space: normal;
   word-break: break-all;
 }
+
 .about {
   padding: $margin;
   box-sizing: border-box;

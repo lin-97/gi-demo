@@ -30,6 +30,8 @@ import type { StepForm } from './type'
 
 defineOptions({ name: 'Step3' })
 
+withDefaults(defineProps<Props>(), {})
+
 const emit = defineEmits<{
   (e: 'again'): void
 }>()
@@ -37,8 +39,6 @@ const emit = defineEmits<{
 interface Props {
   form: Readonly<StepForm>
 }
-
-withDefaults(defineProps<Props>(), {})
 
 // 再转一笔
 const again = () => {
@@ -51,6 +51,7 @@ const again = () => {
   margin-top: 50px;
   display: flex;
   flex-direction: column;
+
   .info-box {
     padding: 20px 50px;
     margin-bottom: 30px;

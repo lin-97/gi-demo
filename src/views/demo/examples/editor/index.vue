@@ -1,12 +1,8 @@
 <template>
   <div class="editor">
-    <Toolbar style="border-bottom: 1px solid #ccc" :editor="editorRef" :defaultConfig="toolbarConfig" />
-    <Editor
-      v-model="valueHtml"
-      style="height: 500px; overflow-y: hidden"
-      :defaultConfig="editorConfig"
-      @on-created="handleCreated"
-    />
+    <Toolbar style="border-bottom: 1px solid #ccc" :editor="editorRef" :default-config="toolbarConfig" />
+    <Editor v-model="valueHtml" style="height: 500px; overflow-y: hidden" :default-config="editorConfig"
+      @on-created="handleCreated" />
   </div>
 </template>
 
@@ -45,6 +41,7 @@ const handleCreated = (editor: any) => {
 <style lang="less" scoped>
 .editor {
   border: 1px solid var(--color-border-3);
+
   &.w-e-full-screen-container {
     z-index: 9999;
   }

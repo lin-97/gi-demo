@@ -3,7 +3,7 @@
     <a-row align="stretch">
       <a-col v-for="(item, index) in list" :key="item.name" :xs="12" :sm="8" :md="8">
         <a-card-grid class="w-full h-full">
-          <a-card :bordered="false" hoverable :class="'animated-fade-up-' + index">
+          <a-card :bordered="false" hoverable :class="`animated-fade-up-${index}`">
             <section class="item">
               <div class="item__header">
                 <GiSvgIcon :size="30" :name="item.icon"></GiSvgIcon>
@@ -67,6 +67,7 @@ const list = [
 <style lang="scss" scoped>
 :deep(.arco-card) {
   height: 100%;
+
   .arco-card-body {
     height: 100%;
     box-sizing: border-box;
@@ -81,25 +82,30 @@ const list = [
   height: 100%;
   display: flex;
   flex-direction: column;
+
   &__header {
     display: flex;
     align-items: center;
   }
+
   &__name {
     margin-left: 10px;
     font-size: 1.125rem;
     line-height: 1.75rem;
     color: var(--color-text-1);
   }
+
   &__middle {
     flex: 1;
   }
+
   &__desc {
     flex: 1;
     margin-top: 10px;
     line-height: 1.5;
     color: var(--color-text-2);
   }
+
   &__footer {
     font-size: 12px;
     color: var(--color-text-3);

@@ -4,7 +4,7 @@
       <section class="pane">
         <h3 class="gi_line_1">菜单数据</h3>
         <div class="pane__code">
-          <GiCodeView :codeJson="menuListJson"></GiCodeView>
+          <GiCodeView :code-json="menuListJson"></GiCodeView>
         </div>
       </section>
     </a-resize-box>
@@ -13,24 +13,24 @@
       <section class="pane">
         <h3 class="gi_line_1">前端格式化、排序后的路由</h3>
         <div class="pane__code">
-          <GiCodeView :codeJson="routeListJson"></GiCodeView>
+          <GiCodeView :code-json="routeListJson"></GiCodeView>
         </div>
       </section>
     </a-resize-box>
 
     <section class="pane-md">
       <div class="pane-md__wrap">
-        <MdPreview :modelValue="mdText"></MdPreview>
+        <MdPreview :model-value="mdText"></MdPreview>
       </div>
     </section>
   </div>
 </template>
 
 <script lang="ts" setup>
-import { getSystemMenuList, type MenuItem } from '@/apis'
 import { MdPreview } from 'md-editor-v3'
 import 'md-editor-v3/lib/style.css'
 import { mdText } from './md'
+import { type MenuItem, getSystemMenuList } from '@/apis'
 import { useRouteStore } from '@/stores'
 
 const routeStore = useRouteStore()
@@ -64,10 +64,12 @@ const routeListJson = computed(() => JSON.stringify(toRaw(routeStore.asyncRoutes
   display: flex;
   flex-direction: column;
   overflow: hidden;
+
   h3 {
     margin-bottom: 10px;
     padding-left: 10px;
   }
+
   &__code {
     width: 100%;
     flex: 1;
@@ -80,10 +82,12 @@ const routeListJson = computed(() => JSON.stringify(toRaw(routeStore.asyncRoutes
   overflow: hidden;
   overflow-y: auto;
   margin-left: 14px;
+
   &__wrap {
     border: 1px solid var(--color-border-2);
     border-radius: 6px;
     overflow: hidden;
+
     :deep(.md-editor-preview-wrapper) {
       overflow: hidden;
     }

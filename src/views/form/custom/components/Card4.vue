@@ -30,7 +30,7 @@
 <script setup lang="ts">
 import { Message } from '@arco-design/web-vue'
 import GiCodeView from '@/components/GiCodeView/index.vue'
-import { GiForm, type Options, type Columns } from '@/components/GiForm'
+import { type Columns, GiForm, type Options } from '@/components/GiForm'
 import * as Regexp from '@/utils/regexp'
 import { getAreaList } from '@/apis'
 

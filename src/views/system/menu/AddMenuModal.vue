@@ -1,14 +1,6 @@
 <template>
-  <a-modal
-    v-model:visible="visible"
-    :title="title"
-    width="90%"
-    :modal-style="{ maxWidth: '625px' }"
-    :body-style="{ maxHeight: '70vh' }"
-    :mask-closable="false"
-    @before-ok="save"
-    @close="close"
-  >
+  <a-modal v-model:visible="visible" :title="title" width="90%" :modal-style="{ maxWidth: '625px' }"
+    :body-style="{ maxHeight: '70vh' }" :mask-closable="false" @before-ok="save" @close="close">
     <a-form ref="formRef" :model="form" :rules="formRules" auto-label-width>
       <a-form-item label="菜单类型" field="type">
         <a-radio-group v-model="form.type" type="button" :disabled="isEdit" @change="onChangeType">
@@ -19,19 +11,12 @@
       </a-form-item>
 
       <a-form-item label="上级菜单" field="parentId">
-        <a-tree-select
-          v-model="form.parentId"
-          placeholder="请选择上级菜单"
-          allow-clear
-          allow-search
-          :disabled="isEdit"
-          :data="(menuSelectTree as any)"
-          :fieldNames="{
-            key: 'id',
-            title: 'title',
-            children: 'children'
-          }"
-        />
+        <a-tree-select v-model="form.parentId" placeholder="请选择上级菜单" allow-clear allow-search :disabled="isEdit"
+          :data="(menuSelectTree as any)" :field-names="{
+    key: 'id',
+    title: 'title',
+    children: 'children',
+  }" />
       </a-form-item>
 
       <a-row v-if="[1, 2].includes(form.type)" :gutter="16">
@@ -76,13 +61,8 @@
       </a-form-item>
 
       <a-form-item v-if="form.type === 2" label="组件路径" field="component">
-        <a-input
-          v-if="isExternalUrl"
-          v-model.trim="form.component"
-          placeholder="请输入组件路径"
-          allow-clear
-          :max-length="50"
-        />
+        <a-input v-if="isExternalUrl" v-model.trim="form.component" placeholder="请输入组件路径" allow-clear
+          :max-length="50" />
         <a-input v-else v-model.trim="form.component" placeholder="请输入组件路径" allow-clear :max-length="50">
           <template #prepend>@/views/</template>
           <template #append>.vue</template>
@@ -92,72 +72,36 @@
       <a-row v-if="[1, 2].includes(form.type)" :gutter="16">
         <a-col v-bind="col3Props">
           <a-form-item label="状态" field="status">
-            <a-switch
-              v-model="form.status"
-              type="round"
-              :checked-value="1"
-              :unchecked-value="0"
-              checked-text="启用"
-              unchecked-text="禁用"
-            />
+            <a-switch v-model="form.status" type="round" :checked-value="1" :unchecked-value="0" checked-text="启用"
+              unchecked-text="禁用" />
           </a-form-item>
         </a-col>
         <a-col v-bind="col3Props">
           <a-form-item label="是否隐藏" field="hidden">
-            <a-switch
-              v-model="form.hidden"
-              type="round"
-              :checked-value="true"
-              :unchecked-value="false"
-              checked-text="是"
-              unchecked-text="否"
-            />
+            <a-switch v-model="form.hidden" type="round" :checked-value="true" :unchecked-value="false" checked-text="是"
+              unchecked-text="否" />
           </a-form-item>
         </a-col>
         <a-col v-bind="col3Props">
           <a-form-item label="是否缓存" field="keepAlive">
-            <a-switch
-              v-model="form.keepAlive"
-              type="round"
-              :checked-value="true"
-              :unchecked-value="false"
-              checked-text="是"
-              unchecked-text="否"
-            />
+            <a-switch v-model="form.keepAlive" type="round" :checked-value="true" :unchecked-value="false"
+              checked-text="是" unchecked-text="否" />
           </a-form-item>
         </a-col>
         <a-col v-bind="col3Props">
           <a-form-item label="面包屑" field="breadcrumb">
-            <a-switch
-              v-model="form.breadcrumb"
-              type="round"
-              :checked-value="true"
-              :unchecked-value="false"
-              checked-text="显示"
-              unchecked-text="隐藏"
-            />
+            <a-switch v-model="form.breadcrumb" type="round" :checked-value="true" :unchecked-value="false"
+              checked-text="显示" unchecked-text="隐藏" />
           </a-form-item>
         </a-col>
         <a-col v-bind="col3Props">
           <a-form-item v-if="form.type === 1" label="总是显示" field="alwaysShow">
-            <a-switch
-              v-model="form.alwaysShow"
-              type="round"
-              :checked-value="true"
-              :unchecked-value="false"
-              checked-text="显示"
-              unchecked-text="隐藏"
-            />
+            <a-switch v-model="form.alwaysShow" type="round" :checked-value="true" :unchecked-value="false"
+              checked-text="显示" unchecked-text="隐藏" />
           </a-form-item>
           <a-form-item v-if="form.type === 2" label="页签显示" field="showInTabs">
-            <a-switch
-              v-model="form.showInTabs"
-              type="round"
-              :checked-value="true"
-              :unchecked-value="false"
-              checked-text="显示"
-              unchecked-text="隐藏"
-            />
+            <a-switch v-model="form.showInTabs" type="round" :checked-value="true" :unchecked-value="false"
+              checked-text="显示" unchecked-text="隐藏" />
           </a-form-item>
         </a-col>
       </a-row>
@@ -174,12 +118,12 @@
 </template>
 
 <script setup lang="ts">
-import { Message, type FormInstance, type ColProps } from '@arco-design/web-vue'
-import { getSystemMenuDetail, saveBaseApi, type MenuItem } from '@/apis'
-import { isExternal } from '@/utils/validate'
-import { transformPathToName, filterTree } from '@/utils'
+import { type ColProps, type FormInstance, Message } from '@arco-design/web-vue'
 import { mapTree } from 'xe-utils'
 import type { MenuForm } from './type'
+import { type MenuItem, getSystemMenuDetail, saveBaseApi } from '@/apis'
+import { isExternal } from '@/utils/validate'
+import { filterTree, transformPathToName } from '@/utils'
 import { useForm } from '@/hooks'
 
 interface Props {
@@ -251,6 +195,7 @@ const formRules = computed(() => {
     const { parentId, title, permission } = rules
     return { parentId, title, permission } as FormInstance['rules']
   }
+  return {}
 })
 
 // 切换类型清除校验

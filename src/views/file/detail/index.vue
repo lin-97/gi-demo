@@ -31,9 +31,9 @@
                 <a-tag size="small" color="green">风景</a-tag>
               </a-space>
             </a-descriptions-item>
-            <a-descriptions-item label="说明："
-              >基于 v-viewer vue3 实现自定义按钮的图片预览，其他功能可自行扩展</a-descriptions-item
-            >
+            <a-descriptions-item label="说明：">
+              基于 v-viewer vue3 实现自定义按钮的图片预览，其他功能可自行扩展
+            </a-descriptions-item>
           </a-descriptions>
 
           <a-row justify="end" style="margin-top: 30px">
@@ -74,18 +74,22 @@ const back = () => {
   .arco-descriptions-title {
     margin-bottom: 12px;
   }
+
   .arco-descriptions-item {
     display: flex;
     margin-bottom: 8px;
+
     .arco-descriptions-item-label-inline {
       white-space: nowrap;
       font-size: 12px;
     }
+
     .arco-descriptions-item-value-inline {
       font-size: 12px;
     }
   }
 }
+
 .file-detail {
   flex: 1;
   padding: $padding;
@@ -93,9 +97,11 @@ const back = () => {
   box-sizing: border-box;
   overflow: hidden;
   overflow-y: auto;
+
   &__wrap {
     height: 100%;
   }
+
   &__left,
   &__right {
     background-color: var(--color-bg-1);
@@ -104,10 +110,12 @@ const back = () => {
     overflow: hidden;
     box-sizing: border-box;
   }
+
   &__left {
     height: 100%;
     display: flex;
     flex-direction: column;
+
     .view-box {
       min-height: 400px;
       flex: 1;

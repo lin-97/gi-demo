@@ -1,5 +1,5 @@
 <template>
-  <div ref="giTableRef" class="gi-table" :class="{ 'gi-table--fullscreen': isFullscreen }">
+  <div class="gi-table" :class="{ 'gi-table--fullscreen': isFullscreen }">
     <a-row justify="space-between" align="center">
       <a-space wrap>
         <slot name="custom-title">
@@ -43,18 +43,16 @@
               </a-button>
             </a-tooltip>
             <template #content>
-              <a-doption v-for="item in sizeList" :key="item.value" :value="item.value" :active="item.value === size">{{
-                item.label
-              }}</a-doption>
+              <a-doption v-for="item in sizeList" :key="item.value" :value="item.value" :active="item.value === size">
+                {{
+    item.label
+  }}
+              </a-doption>
             </template>
           </a-dropdown>
 
-          <a-popover
-            v-if="showSettingColumnBtn"
-            trigger="click"
-            position="br"
-            :content-style="{ minWidth: '120px', padding: '6px 8px 10px' }"
-          >
+          <a-popover v-if="showSettingColumnBtn" trigger="click" position="br"
+            :content-style="{ minWidth: '120px', padding: '6px 8px 10px' }">
             <a-button type="primary" size="mini">
               <template #icon>
                 <icon-settings />
@@ -62,7 +60,7 @@
             </a-button>
             <template #content>
               <div class="gi-table__draggable">
-                <VueDraggable ref="el" v-model="settingColumnList">
+                <VueDraggable v-model="settingColumnList">
                   <div v-for="item in settingColumnList" :key="item.title" class="drag-item">
                     <div class="drag-item__move"><icon-drag-dot-vertical /></div>
                     <a-checkbox v-model:model-value="item.show" :disabled="item.disabled">{{ item.title }}</a-checkbox>
@@ -82,25 +80,26 @@
       </a-space>
     </a-row>
     <div class="gi-table__container">
-      <a-table
-        ref="tableRef"
-        :stripe="stripe"
-        :size="size"
-        :bordered="{ cell: isBordered }"
-        v-bind="{ ...attrs, columns: _columns }"
-      >
+      <a-table ref="tableRef" :stripe="stripe" :size="size" :bordered="{ cell: isBordered }"
+        v-bind="{ ...attrs, columns: _columns }">
         <template v-for="key in Object.keys(slots)" :key="key" #[key]="scoped">
-          <slot :key="key" :name="key" v-bind="scoped"></slot> </template
-      ></a-table>
+          <slot :key="key" :name="key" v-bind="scoped"></slot>
+        </template>
+      </a-table>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
-import type { TableInstance, TableColumnData, DropdownInstance } from '@arco-design/web-vue'
+import type { DropdownInstance, TableColumnData, TableInstance } from '@arco-design/web-vue'
 import { VueDraggable } from 'vue-draggable-plus'
 
 defineOptions({ name: 'GiTable', inheritAttrs: false })
+const props = withDefaults(defineProps<Props>(), {
+  title: '',
+  disabledColumnKeys: () => [] // 禁止控制显示隐藏的列
+})
+
 const emit = defineEmits<{
   (e: 'refresh'): void
 }>()
@@ -113,18 +112,13 @@ interface Props {
   disabledColumnKeys?: string[]
 }
 
-const props = withDefaults(defineProps<Props>(), {
-  title: '',
-  disabledColumnKeys: () => [] // 禁止控制显示隐藏的列
-})
-
 const tableRef = ref<TableInstance | null>(null)
 const stripe = ref(false)
 const size = ref<TableInstance['size']>('medium')
 const isBordered = ref(true)
 const isFullscreen = ref(false)
 
-type SizeItem = { label: string; value: TableInstance['size'] }
+type SizeItem = { label: string, value: TableInstance['size'] }
 const sizeList: SizeItem[] = [
   { label: '迷你', value: 'mini' },
   { label: '小型', value: 'small' },
@@ -141,7 +135,7 @@ const handleSelect: DropdownInstance['onSelect'] = (value) => {
 }
 
 const showSettingColumnBtn = computed(() => attrs?.columns && (attrs?.columns as TableColumnData[])?.length)
-type SettingColumnItem = { title: string; key: string; show: boolean; disabled: boolean }
+type SettingColumnItem = { title: string, key: string, show: boolean, disabled: boolean }
 const settingColumnList = ref<SettingColumnItem[]>([])
 
 // 重置配置列
@@ -203,6 +197,7 @@ defineExpose({ tableRef })
   flex-direction: column;
   overflow: hidden;
   background: var(--color-bg-1);
+
   &--fullscreen {
     padding: $padding;
     position: fixed;
@@ -212,16 +207,19 @@ defineExpose({ tableRef })
     bottom: 0;
     z-index: 1001;
   }
+
   &__container {
     max-height: 100%;
     overflow: hidden;
   }
+
   &__title {
     color: var(--color-text-1);
     font-size: 18px;
     font-weight: 500;
     line-height: 1.5;
   }
+
   &__draggable {
     padding: 1px 0; // 解决 max-height 和 overflow:auto 始终显示垂直滚动条问题
     max-height: 250px;
@@ -236,17 +234,21 @@ defineExpose({ tableRef })
   align-items: center;
 
   cursor: pointer;
+
   &:hover {
     background-color: var(--color-fill-2);
   }
+
   &__move {
     padding-left: 2px;
     padding-right: 2px;
     cursor: move;
   }
+
   :deep(.arco-checkbox) {
     width: 100%;
     font-size: 12px;
+
     .arco-checkbox-icon {
       width: 14px;
       height: 14px;

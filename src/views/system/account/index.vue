@@ -20,8 +20,8 @@
               <span>前端工程师</span>
             </li>
             <li class="list-item">
-              <span class="icon"><icon-branch :stroke-width="1" :size="16" /></span
-              ><span>中台-数据平台团队-前端创新团队-前端架构和平台工具团队</span>
+              <span class="icon"><icon-branch :stroke-width="1"
+                  :size="16" /></span><span>中台-数据平台团队-前端创新团队-前端架构和平台工具团队</span>
             </li>
             <li class="list-item">
               <span class="icon"><icon-location :stroke-width="1" :size="16" /></span><span>广州市</span>
@@ -66,8 +66,8 @@
 </template>
 
 <script lang="ts" setup>
-import { useUserStore } from '@/stores'
 import RightBox from './RightBox.vue'
+import { useUserStore } from '@/stores'
 
 const userStore = useUserStore()
 </script>
@@ -80,11 +80,13 @@ const userStore = useUserStore()
   box-sizing: border-box;
   background: var(--color-bg-1);
   border-radius: 2px;
+
   &__header {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+
     .name {
       font-size: 20px;
       font-weight: bolder;
@@ -92,23 +94,29 @@ const userStore = useUserStore()
       margin: 8px;
       color: $color-text-1;
     }
+
     .desc {
       font-size: 12px;
       color: $color-text-3;
     }
   }
+
   &__list {
     margin-top: 20px;
+
     .list-item {
       padding-bottom: 16px;
       display: flex;
-      > .icon {
+
+      >.icon {
         margin-right: 8px;
       }
     }
   }
+
   &__images {
     margin: 10px 0;
+
     img {
       width: 32px;
       height: 32px;

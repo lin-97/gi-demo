@@ -1,5 +1,5 @@
 import { defineMock } from '../_base'
-import { resultSuccess, resultError, getDelayTime } from '../_utils'
+import { getDelayTime, resultError, resultSuccess } from '../_utils'
 import userData from '../_data/system_user'
 
 export default defineMock([

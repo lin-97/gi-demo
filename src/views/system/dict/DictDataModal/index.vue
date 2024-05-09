@@ -1,13 +1,6 @@
 <template>
-  <a-modal
-    v-model:visible="visible"
-    title="字典数据"
-    width="90%"
-    hide-cancel
-    ok-text="关闭"
-    :mask-closable="false"
-    :modal-style="{ maxWidth: '680px' }"
-  >
+  <a-modal v-model:visible="visible" title="字典数据" width="90%" hide-cancel ok-text="关闭" :mask-closable="false"
+    :modal-style="{ maxWidth: '680px' }">
     <a-row>
       <a-space wrap>
         <a-button type="primary" @click="onAdd">
@@ -21,19 +14,10 @@
       </a-space>
     </a-row>
 
-    <a-table
-      row-key="id"
-      size="small"
-      :data="tableData"
-      :bordered="{ cell: true }"
-      :loading="loading"
-      :scroll="{ x: '100%', y: '100%', minWidth: 600 }"
-      :pagination="{ ...pagination, size: 'small' }"
-      :row-selection="{ type: 'checkbox', showCheckedAll: true }"
-      :selected-keys="selectedKeys"
-      @select="select"
-      @select-all="selectAll"
-    >
+    <a-table row-key="id" size="small" :data="tableData" :bordered="{ cell: true }" :loading="loading"
+      :scroll="{ x: '100%', y: '100%', minWidth: 600 }" :pagination="{ ...pagination, size: 'small' }"
+      :row-selection="{ type: 'checkbox', showCheckedAll: true }" :selected-keys="selectedKeys" @select="select"
+      @select-all="selectAll">
       <template #columns>
         <a-table-column title="序号" :width="64">
           <template #cell="cell">{{ cell.rowIndex + 1 }}</template>
@@ -70,14 +54,20 @@
 
 <script lang="ts" setup>
 import { Message } from '@arco-design/web-vue'
-import { getSystemDictDataList, deleteBaseApi, type DictDataItem } from '@/apis'
-import { useTable } from '@/hooks'
 import AddDictDataModal from './AddDictDataModal.vue'
+import { type DictDataItem, deleteBaseApi, getSystemDictDataList } from '@/apis'
+import { useTable } from '@/hooks'
 
 const visible = ref(false)
 const AddDictDataModalRef = ref<InstanceType<typeof AddDictDataModal>>()
 
 const dictCode = ref('')
+
+const { loading, tableData, pagination, selectedKeys, search, select, selectAll, handleDelete } = useTable(
+  (pagin) => getSystemDictDataList({ current: pagin.page, pageSize: pagin.size, code: dictCode.value }),
+  { immediate: false }
+)
+
 const open = (data: { code: string }) => {
   tableData.value = []
   dictCode.value = data.code
@@ -85,11 +75,6 @@ const open = (data: { code: string }) => {
   search()
 }
 defineExpose({ open })
-
-const { loading, tableData, pagination, selectedKeys, search, select, selectAll, handleDelete } = useTable(
-  (pagin) => getSystemDictDataList({ current: pagin.page, pageSize: pagin.size, code: dictCode.value }),
-  { immediate: false }
-)
 
 // 删除
 const onDelete = (item: DictDataItem) => {

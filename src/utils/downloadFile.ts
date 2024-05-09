@@ -24,7 +24,7 @@ export function downloadByUrl({
   fileName?: string
 }): Promise<boolean> {
   // 是否同源
-  const isSameHost = new URL(url).host == location.host
+  const isSameHost = new URL(url).host === location.host
   return new Promise<boolean>((resolve, reject) => {
     if (isSameHost) {
       const link = document.createElement('a')
@@ -42,7 +42,7 @@ export function downloadByUrl({
         return resolve(true)
       }
 
-      if (url.indexOf('?') === -1) {
+      if (!url.includes('?')) {
         url += '?download'
       }
 

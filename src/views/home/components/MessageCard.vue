@@ -3,19 +3,12 @@
     <template #extra>
       <a-link>更多</a-link>
     </template>
-    <a-comment
-      v-for="(item, index) in list"
-      :key="index"
-      :author="item.name"
-      :datetime="item.datetime"
-      align="right"
-      :class="'animated-fade-up-' + index"
-      style="overflow: hidden"
-    >
+    <a-comment v-for="(item, index) in list" :key="index" :author="item.name" :datetime="item.datetime" align="right"
+      :class="`animated-fade-up-${index}`" style="overflow: hidden">
       <template #avatar>
-        <a-avatar
-          ><img src="https://img0.baidu.com/it/u=2746352008,2041591833&fm=253&fmt=auto&app=138&f=JPEG?w=360&h=360"
-        /></a-avatar>
+        <a-avatar>
+          <img src="https://img0.baidu.com/it/u=2746352008,2041591833&fm=253&fmt=auto&app=138&f=JPEG?w=360&h=360" />
+        </a-avatar>
       </template>
       <template #content>
         <div class="content">
@@ -43,14 +36,17 @@ const list = [
 :deep(.arco-comment:not(:first-of-type), .arco-comment-inner-comment) {
   margin-top: 10px;
 }
+
 :deep(.arco-comment) {
   border-bottom: 1px solid var(--color-border-1);
   padding-bottom: 10px;
 }
+
 :deep(.arco-comment-content) {
   font-size: 12px;
   color: var(--color-text-1);
 }
+
 :deep(.arco-comment-datetime) {
   color: var(--color-text-4);
 }
@@ -59,7 +55,8 @@ const list = [
   display: flex;
   align-items: center;
   margin-top: 4px;
-  > p {
+
+  >p {
     margin-left: 6px;
   }
 }

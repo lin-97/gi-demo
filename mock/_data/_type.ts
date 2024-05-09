@@ -1,5 +1,5 @@
 /** 省市区数据类型 */
-export type MockAreaItem = { label: string; code: string; children?: MockAreaItem[] }
+export type MockAreaItem = { label: string, code: string, children?: MockAreaItem[] }
 
 /** 文件数据类型 */
 export interface MockFileItem {

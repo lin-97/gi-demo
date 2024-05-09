@@ -13,11 +13,15 @@
           </a-button>
           <template #content>
             <a-doption>
-              <template #icon><GiSvgIcon name="upload-file" /></template>
+              <template #icon>
+                <GiSvgIcon name="upload-file" />
+              </template>
               <span>上传文件</span>
             </a-doption>
             <a-doption>
-              <template #icon><GiSvgIcon name="upload-folder" /></template>
+              <template #icon>
+                <GiSvgIcon name="upload-folder" />
+              </template>
               <span>上传文件夹</span>
             </a-doption>
           </template>
@@ -42,14 +46,10 @@
 
       <!-- 右侧区域 -->
       <a-space wrap>
-        <a-button
-          v-if="isBatchMode"
-          :disabled="!selectedFileIds.length"
-          type="primary"
-          status="danger"
-          @click="handleMulDelete"
-          ><template #icon><icon-delete /></template
-        ></a-button>
+        <a-button v-if="isBatchMode" :disabled="!selectedFileIds.length" type="primary" status="danger"
+          @click="handleMulDelete">
+          <template #icon><icon-delete /></template>
+        </a-button>
         <a-button type="primary" @click="isBatchMode = !isBatchMode">
           <template #icon><icon-select-all /></template>
           <template #default>{{ isBatchMode ? '取消批量' : '批量操作' }}</template>
@@ -83,26 +83,14 @@
 
     <!-- 文件列表-宫格模式 -->
     <a-spin class="file-main__list" :loading="loading">
-      <FileGrid
-        v-show="fileList.length && mode == 'grid'"
-        :data="fileList"
-        :is-batch-mode="isBatchMode"
-        :selected-file-ids="selectedFileIds"
-        @click="handleClickFile"
-        @select="handleSelectFile"
-        @right-menu-click="handleRightMenuClick"
-      ></FileGrid>
+      <FileGrid v-show="fileList.length && mode === 'grid'" :data="fileList" :is-batch-mode="isBatchMode"
+        :selected-file-ids="selectedFileIds" @click="handleClickFile" @select="handleSelectFile"
+        @right-menu-click="handleRightMenuClick"></FileGrid>
 
       <!-- 文件列表-列表模式 -->
-      <FileList
-        v-show="fileList.length && mode == 'list'"
-        :data="fileList"
-        :is-batch-mode="isBatchMode"
-        :selected-file-ids="selectedFileIds"
-        @click="handleClickFile"
-        @select="handleSelectFile"
-        @right-menu-click="handleRightMenuClick"
-      ></FileList>
+      <FileList v-show="fileList.length && mode === 'list'" :data="fileList" :is-batch-mode="isBatchMode"
+        :selected-file-ids="selectedFileIds" @click="handleClickFile" @select="handleSelectFile"
+        @right-menu-click="handleRightMenuClick"></FileList>
 
       <a-empty v-show="!fileList.length"></a-empty>
     </a-spin>
@@ -111,20 +99,22 @@
 
 <script setup lang="ts">
 import { Message, Modal } from '@arco-design/web-vue'
-import { FileTypeList, ImageTypes } from '@/constant/file'
+
 import { api as viewerApi } from 'v-viewer'
 import 'viewerjs/dist/viewer.css'
-import { getFileList } from '@/apis'
-import type { FileItem } from '@/apis'
-import useFileManage from './useFileManage'
 import {
   openFileMoveModal,
   openFileRenameModal,
-  previewFileVideoModal,
-  previewFileAudioModal
+  previewFileAudioModal,
+  previewFileVideoModal
 } from '../../components/index'
+import useFileManage from './useFileManage'
 import FilePath from './FilePath.vue'
 import FileGrid from './FileGrid.vue'
+import { FileTypeList, ImageTypes } from '@/constant/file'
+import type { FileItem } from '@/apis'
+import { getFileList } from '@/apis'
+
 const FileList = defineAsyncComponent(() => import('./FileList.vue'))
 
 const route = useRoute()
@@ -132,6 +122,8 @@ const router = useRouter()
 const { mode, selectedFileIds, toggleMode, addSelectedFileItem } = useFileManage()
 
 const loading = ref(false)
+// 批量操作
+const isBatchMode = ref(false)
 // 文件列表数据
 const fileList = ref<FileItem[]>([])
 const fileType = ref('0')
@@ -164,8 +156,6 @@ onBeforeRouteUpdate((to) => {
   getListData()
 })
 
-// 批量操作
-const isBatchMode = ref(false)
 // 列表图片集合
 const imageList = computed(() => {
   return fileList.value.filter((i) => ImageTypes.includes(i.extendName)).map((a) => a.src ?? '')
@@ -200,7 +190,7 @@ const handleSelectFile = (item: FileItem) => {
 
 // 鼠标右键
 const handleRightMenuClick = (mode: string, fileInfo: FileItem) => {
-  Message.success('点击了' + mode)
+  Message.success(`点击了${mode}`)
   if (mode === 'delete') {
     Modal.warning({
       title: '提示',
@@ -241,10 +231,12 @@ const handleMulDelete = () => {
   display: flex;
   flex-direction: column;
   overflow: hidden;
+
   &__search {
     border-bottom: 1px dashed var(--color-border-3);
     margin: 0 $padding;
   }
+
   &__list {
     flex: 1;
     padding: 0 $padding $padding;

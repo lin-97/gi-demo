@@ -1,7 +1,7 @@
-import { defineMock } from '../_base'
-import { resultSuccess, resultError, getDelayTime } from '../_utils'
-import dictData from '../_data/system_dict'
 import type { SelectOptionData } from '@arco-design/web-vue'
+import { defineMock } from '../_base'
+import { getDelayTime, resultError, resultSuccess } from '../_utils'
+import dictData from '../_data/system_dict'
 
 export default defineMock([
   {

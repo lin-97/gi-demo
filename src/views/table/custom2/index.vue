@@ -2,17 +2,9 @@
   <div class="table-page">
     <GiForm v-model="form" :options="options" :columns="QueryFormColumns" @search="search" @reset="search"></GiForm>
 
-    <GiTable
-      row-key="id"
-      :loading="loading"
-      :columns="columns"
-      :data="tableData"
-      :scroll="{ x: '100%', y: '100%', minWidth: 1300 }"
-      :row-selection="{ type: 'checkbox', showCheckedAll: true }"
-      :pagination="pagination"
-      :disabled-column-keys="['序号', 'name']"
-      @refresh="getTableData"
-    >
+    <GiTable row-key="id" :loading="loading" :columns="columns" :data="tableData"
+      :scroll="{ x: '100%', y: '100%', minWidth: 1300 }" :row-selection="{ type: 'checkbox', showCheckedAll: true }"
+      :pagination="pagination" :disabled-column-keys="['序号', 'name']" @refresh="getTableData">
       <template #custom-title>
         <a-button type="primary" @click="onAdd">
           <template #icon><icon-plus /></template>
@@ -54,11 +46,11 @@
 </template>
 
 <script setup lang="ts">
-import { Message, Link, type TableInstance, type PopconfirmInstance } from '@arco-design/web-vue'
-import { usePagination, useBreakpointIndex } from '@/hooks'
-import { getPersonList, type PersonItem } from '@/apis'
+import { Link, Message, type PopconfirmInstance, type TableInstance } from '@arco-design/web-vue'
+import { useBreakpointIndex, usePagination } from '@/hooks'
+import { type PersonItem, getPersonList } from '@/apis'
 import { useDict } from '@/hooks/app'
-import type { Options, Columns } from '@/components/GiForm'
+import type { Columns, Options } from '@/components/GiForm'
 
 defineOptions({ name: 'TableCustom2' })
 const { data: statusOptions } = useDict({ code: 'status' })
@@ -139,7 +131,7 @@ const columns: TableInstance['columns'] = [
 
 const { pagination, setTotal } = usePagination(() => getTableData())
 
-const getTableData = async () => {
+async function getTableData() {
   try {
     loading.value = true
     const res = await getPersonList({
@@ -160,7 +152,7 @@ const search = () => {
 }
 
 function onClickName(record: PersonItem) {
-  Message.success('点击了' + record.name)
+  Message.success(`点击了${record.name}`)
 }
 
 const onAdd = () => {

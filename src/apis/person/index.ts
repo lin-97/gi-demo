@@ -1,9 +1,9 @@
-import http from '@/utils/http'
 import type * as Person from './type'
+import http from '@/utils/http'
 // import qs from 'qs'
 
 /** @desc 获取人物列表 */
-export function getPersonList(data: { name?: string; status?: string; current: number; pageSize: number }) {
+export function getPersonList(data: { name?: string, status?: string, current: number, pageSize: number }) {
   return http.get<PageRes<Person.PersonItem[]>>('/person/list', data)
 }
 

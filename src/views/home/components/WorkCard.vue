@@ -64,11 +64,14 @@ const userStore = useUserStore()
 
 .card {
   margin-top: $margin;
+
   .content {
     padding: 8px 20px;
+
     .welcome {
       margin: 8px 0;
       color: $color-text-3;
+
       .hello {
         font-size: 1.25rem;
         color: $color-text-1;

@@ -1,6 +1,6 @@
-import { defineMock } from '../_base'
-import { resultSuccess, resultError, getDelayTime } from '../_utils'
 import { findTree } from 'xe-utils'
+import { defineMock } from '../_base'
+import { getDelayTime, resultError, resultSuccess } from '../_utils'
 import deptData from '../_data/system_dept'
 
 export default defineMock([

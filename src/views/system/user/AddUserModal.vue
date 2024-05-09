@@ -1,25 +1,12 @@
 <template>
-  <a-modal
-    v-model:visible="visible"
-    :title="title"
-    width="90%"
-    :mask-closable="false"
-    :modal-style="{ maxWidth: '600px' }"
-    :body-style="{ maxHeight: '70vh' }"
-    @before-ok="save"
-    @close="close"
-  >
+  <a-modal v-model:visible="visible" :title="title" width="90%" :mask-closable="false"
+    :modal-style="{ maxWidth: '600px' }" :body-style="{ maxHeight: '70vh' }" @before-ok="save" @close="close">
     <a-form ref="formRef" :model="form" :rules="rules" size="medium" auto-label-width>
       <a-row>
         <a-col v-bind="col2Props">
           <a-form-item label="用户名" field="username">
-            <a-input
-              v-model.trim="form.username"
-              placeholder="请输入用户名"
-              allow-clear
-              :disabled="form.disabled"
-              :max-length="10"
-            ></a-input>
+            <a-input v-model.trim="form.username" placeholder="请输入用户名" allow-clear :disabled="form.disabled"
+              :max-length="10"></a-input>
           </a-form-item>
         </a-col>
         <a-col v-bind="col2Props">
@@ -47,57 +34,32 @@
       </a-form-item>
 
       <a-form-item label="所属部门" field="deptId">
-        <a-tree-select
-          v-model="form.deptId"
-          :data="deptList"
-          :fieldNames="{
-            key: 'id',
-            title: 'name'
-          }"
-          placeholder="请选择所属部门"
-          allow-clear
-          allow-search
-          :disabled="form.disabled"
-        />
+        <a-tree-select v-model="form.deptId" :data="deptList" :field-names="{
+    key: 'id',
+    title: 'name',
+  }" placeholder="请选择所属部门" allow-clear allow-search :disabled="form.disabled" />
       </a-form-item>
 
       <a-form-item label="角色" field="roleIds" :disabled="form.disabled">
-        <a-select
-          v-model="form.roleIds"
-          :options="roleOptions"
-          placeholder="请选择所属角色"
-          multiple
-          allow-clear
-          :allow-search="{ retainInputValue: true }"
-        />
+        <a-select v-model="form.roleIds" :options="roleOptions" placeholder="请选择所属角色" multiple allow-clear
+          :allow-search="{ retainInputValue: true }" />
       </a-form-item>
 
       <a-form-item label="描述" field="description">
-        <a-textarea
-          v-model.trim="form.description"
-          :max-length="200"
-          placeholder="请填写描述"
-          :auto-size="{ minRows: 3 }"
-          show-word-limit
-        />
+        <a-textarea v-model.trim="form.description" :max-length="200" placeholder="请填写描述" :auto-size="{ minRows: 3 }"
+          show-word-limit />
       </a-form-item>
 
       <a-form-item label="状态" field="status">
-        <a-switch
-          v-model="form.status"
-          type="round"
-          :checked-value="1"
-          :unchecked-value="0"
-          checked-text="正常"
-          unchecked-text="禁用"
-        />
+        <a-switch v-model="form.status" type="round" :checked-value="1" :unchecked-value="0" checked-text="正常"
+          unchecked-text="禁用" />
       </a-form-item>
     </a-form>
   </a-modal>
 </template>
 
 <script setup lang="ts">
-import { Message, type FormInstance, type ColProps } from '@arco-design/web-vue'
+import { type ColProps, type FormInstance, Message } from '@arco-design/web-vue'
 import * as Regexp from '@/utils/regexp'
 import { getSystemUserDetail, saveBaseApi } from '@/apis'
 import { useDept, useRole } from '@/hooks/app'

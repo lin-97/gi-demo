@@ -32,7 +32,7 @@
 </template>
 
 <script setup lang="ts">
-import { Message, type FormInstance } from '@arco-design/web-vue'
+import { type FormInstance, Message } from '@arco-design/web-vue'
 import { getSystemDictDataDetail, saveBaseApi } from '@/apis'
 import { useForm } from '@/hooks'
 
@@ -67,7 +67,7 @@ const add = () => {
   visible.value = true
 }
 
-const edit = async (data: { id: string; code: string }) => {
+const edit = async (data: { id: string, code: string }) => {
   visible.value = true
   dictDataId.value = data.id
   loading.value = true

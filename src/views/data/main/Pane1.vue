@@ -8,12 +8,7 @@
       </a-col>
 
       <a-col :xs="24" :sm="16" :md="17" :lg="18" :xl="19" :xxl="20" flex="1" class="h-full ov-hidden">
-        <a-card
-          title="数据列表"
-          :bordered="false"
-          :header-style="{ display: 'none' }"
-          class="gi_card pane-item pane-right"
-        >
+        <a-card title="数据列表" :bordered="false" :header-style="{ display: 'none' }" class="gi_card pane-item pane-right">
           <div class="pane-right__content">
             <a-row justify="space-between">
               <a-space wrap>
@@ -30,13 +25,8 @@
               </a-space>
 
               <a-space wrap>
-                <a-select
-                  v-model="form.status"
-                  class="gi_select_input"
-                  :options="options"
-                  placeholder="请选择"
-                  allow-clear
-                ></a-select>
+                <a-select v-model="form.status" class="gi_select_input" :options="options" placeholder="请选择"
+                  allow-clear></a-select>
                 <a-input-group>
                   <a-input v-model="form.name" placeholder="请输入搜索关键词" allow-clear> </a-input>
                   <a-button type="primary" @click="getTableData">
@@ -50,18 +40,10 @@
             </a-row>
 
             <section class="gi_table_box">
-              <a-table
-                row-key="id"
-                :loading="loading"
-                :bordered="{ cell: true }"
-                :data="tableData"
+              <a-table row-key="id" :loading="loading" :bordered="{ cell: true }" :data="tableData"
                 :scroll="{ x: '100%', y: '100%', minWidth: 1000 }"
-                :row-selection="{ type: 'checkbox', showCheckedAll: true }"
-                :pagination="pagination"
-                :selected-keys="selectedKeys"
-                @select="select"
-                @select-all="selectAll"
-              >
+                :row-selection="{ type: 'checkbox', showCheckedAll: true }" :pagination="pagination"
+                :selected-keys="selectedKeys" @select="select" @select-all="selectAll">
                 <template #columns>
                   <a-table-column title="序号" :width="68">
                     <template #cell="cell">{{ cell.rowIndex + 1 }}</template>
@@ -102,11 +84,11 @@
 
 <script setup lang="ts">
 import { Message } from '@arco-design/web-vue'
+import CateTree from './CateTree/index.vue'
 import { useTable } from '@/hooks'
-import { getPersonList, deleteBaseApi, type PersonItem } from '@/apis'
+import { type PersonItem, deleteBaseApi, getPersonList } from '@/apis'
 import { isMobile } from '@/utils'
 import { useDict } from '@/hooks/app'
-import CateTree from './CateTree/index.vue'
 
 const router = useRouter()
 
@@ -174,16 +156,19 @@ const onExport = () => {
   width: 100%;
   height: 100%;
   overflow: hidden;
+
   .pane {
     height: 100%;
     overflow: hidden;
   }
+
   .pane-item {
     height: 100%;
     overflow: hidden;
   }
-  .pane-left {
-  }
+
+  .pane-left {}
+
   .pane-right {
     &__content {
       flex: 1;

@@ -13,9 +13,9 @@
         <li><icon-safe /><span>前端</span></li>
         <li><icon-location /><span>广州</span></li>
       </ul>
-      <a-button type="primary" class="edit-btn"
-        ><template #icon> <icon-edit /> </template>编辑信息</a-button
-      >
+      <a-button type="primary" class="edit-btn">
+        <template #icon> <icon-edit /> </template>编辑信息
+      </a-button>
     </section>
 
     <a-tabs hide-content default-active-key="2">
@@ -31,25 +31,25 @@
     </a-tabs>
 
     <section class="right-box__comment">
-      <a-comment
-        v-for="(item, index) in list"
-        :key="index"
-        :author="item.name"
-        datetime="1个小时之前"
-        align="right"
-        class="comment-item"
-      >
+      <a-comment v-for="(item, index) in list" :key="index" :author="item.name" datetime="1个小时之前" align="right"
+        class="comment-item">
         <template #actions>
           <a-space :size="20">
             <span key="heart" class="action">
-              <span><IconHeart /></span>
+              <span>
+                <IconHeart />
+              </span>
               <span>83</span>
             </span>
             <span key="star" class="action">
-              <span><IconStar /></span>
+              <span>
+                <IconStar />
+              </span>
               <span>3</span>
             </span>
-            <span key="reply" class="action"> <IconMessage /><span>回复</span></span>
+            <span key="reply" class="action">
+              <IconMessage /><span>回复</span>
+            </span>
           </a-space>
         </template>
         <template #avatar>
@@ -67,6 +67,7 @@
 
 <script setup lang="ts">
 import { useUserStore } from '@/stores'
+
 const userStore = useUserStore()
 
 const list = [
@@ -108,6 +109,7 @@ const list = [
   color: #fff;
   border-color: #fff;
   background: transparent;
+
   &:hover {
     background: rgb(var(--primary-5));
     border-color: rgb(var(--primary-5));
@@ -122,6 +124,7 @@ const list = [
   border-radius: 2px;
   overflow: hidden;
   overflow-y: auto;
+
   &__header {
     min-height: 204px;
     height: fit-content;
@@ -131,29 +134,36 @@ const list = [
     align-items: center;
     color: var(--color-white);
     background-color: rgb(var(--primary-6));
+
     .username {
       font-size: 16px;
       font-weight: 500;
       margin: 10px 0;
     }
+
     .list {
       display: flex;
       margin-bottom: 10px;
-      > li {
+
+      >li {
         margin-right: 15px;
+
         span {
           margin-left: 2px;
         }
       }
     }
   }
+
   &__comment {
     flex: 1;
     padding: 20px 30px;
     padding-left: 16px;
     overflow: auto;
+
     .comment-item {
       margin-bottom: 15px;
+
       .text {
         color: $color-text-2;
       }

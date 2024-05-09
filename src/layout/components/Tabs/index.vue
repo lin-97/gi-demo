@@ -1,20 +1,9 @@
 <template>
   <div v-if="appStore.tab" class="tabs">
-    <a-tabs
-      editable
-      hide-content
-      size="medium"
-      :type="appStore.tabMode"
-      :active-key="route.path"
-      @tab-click="(key) => handleTabClick(key as string)"
-      @delete="tabsStore.closeCurrent"
-    >
-      <a-tab-pane
-        v-for="item of tabsStore.tagList"
-        :key="item.path"
-        :title="(item.meta?.title as string)"
-        :closable="Boolean(!item.meta?.affix)"
-      >
+    <a-tabs editable hide-content size="medium" :type="appStore.tabMode" :active-key="route.path"
+      @tab-click="(key) => handleTabClick(key as string)" @delete="tabsStore.closeCurrent">
+      <a-tab-pane v-for="item of tabsStore.tagList" :key="item.path" :title="(item.meta?.title as string)"
+        :closable="Boolean(!item.meta?.affix)">
       </a-tab-pane>
       <template #extra>
         <a-space size="medium">
@@ -45,9 +34,9 @@
 
 <script setup lang="ts">
 import type { RouteRecordRaw } from 'vue-router'
-import { useTabsStore, useAppStore } from '@/stores'
 import MagicIcon from './MagicIcon.vue'
 import ReloadIcon from './ReloadIcon.vue'
+import { useAppStore, useTabsStore } from '@/stores'
 
 defineOptions({ name: 'Tabs' })
 const route = useRoute()
@@ -67,7 +56,7 @@ watch(
 )
 
 // 路由发生改变触发
-const handleRouteChange = () => {
+function handleRouteChange() {
   const item = { ...route } as unknown as RouteRecordRaw
   tabsStore.addTagItem(item)
   tabsStore.addCacheItem(item)
@@ -87,16 +76,19 @@ const handleTabClick = (key: string) => {
 :deep(.arco-tabs-nav-tab) {
   .arco-tabs-tab {
     border-bottom-color: transparent !important;
+
     svg {
       width: 0;
       transition: all 0.15s;
     }
+
     &:hover {
       svg {
         width: 1em;
       }
     }
   }
+
   &:not(.arco-tabs-nav-tab-scroll) {
     .arco-tabs-tab:first-child {
       border-left: 0;

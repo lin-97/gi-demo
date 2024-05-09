@@ -1,5 +1,5 @@
 import { defineStore } from 'pinia'
-import { reactive, computed, toRefs, nextTick } from 'vue'
+import { computed, nextTick, reactive, toRefs } from 'vue'
 import { generate, getRgbStr } from '@arco-design/color'
 import defaultSettings from '@/config/setting.json'
 
@@ -34,7 +34,7 @@ const storeSetup = () => {
   }
 
   // 设置主题色
-  const setThemeColor = (color: string) => {
+  function setThemeColor(color: string) {
     if (!color) return
     settingConfig.themeColor = color
     const list = generate(settingConfig.themeColor, { list: true, dark: settingConfig.theme === 'dark' })

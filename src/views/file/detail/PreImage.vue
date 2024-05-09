@@ -57,14 +57,14 @@ const options: Viewer.Options = reactive({
   button: true, // 是否显示右上角全屏按钮
   title: false, // 是否显示标题
   zoom: (e) => {
-    zoomProportion.value = parseInt(String(e.detail.ratio * 100)) + '%'
+    zoomProportion.value = `${Number.parseInt(String(e.detail.ratio * 100))}%`
   }
 })
 
 const inited = (e: any) => {
   viewer.value = e
   setTimeout(() => {
-    zoomProportion.value = parseInt(String(viewer.value.initialImageData.ratio * 100)) + '%'
+    zoomProportion.value = `${Number.parseInt(String(viewer.value.initialImageData.ratio * 100))}%`
   }, 100)
 }
 
@@ -92,25 +92,30 @@ const handle = (value: string) => {
 :deep(.arco-space-item) {
   height: 100%;
 }
+
 :deep(.viewer) {
   img {
     display: none;
   }
 }
+
 :deep(.viewer-container:not(.viewer-fixed)) {
   background: none;
 }
+
 .pre-image {
   width: 100%;
   height: 100%;
   overflow: hidden;
   display: flex;
   flex-direction: column;
+
   .viewer-box {
     flex: 1;
     margin-bottom: 16px;
     background-color: var(--color-bg-5);
   }
+
   .zoom-proportion {
     padding: 0 12px;
     height: 100%;

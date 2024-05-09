@@ -10,13 +10,8 @@
       <span>编辑</span>
     </a-menu-item>
 
-    <a-popover
-      v-model:popup-visible="popupVisible"
-      position="right"
-      trigger="click"
-      :content-style="{ padding: 0, overflow: 'hidden' }"
-      :unmount-on-close="true"
-    >
+    <a-popover v-model:popup-visible="popupVisible" position="right" trigger="click"
+      :content-style="{ padding: 0, overflow: 'hidden' }" :unmount-on-close="true">
       <a-menu-item @click="onClick('move')">
         <template #icon><icon-export :size="16" :stroke-width="3" /></template>
         <a-row justify="space-between" align="center">
@@ -26,13 +21,8 @@
       </a-menu-item>
       <template #content>
         <a-scrollbar style="height: 100%; overflow: auto" outer-style="width: 260px;height: 500px">
-          <a-tree
-            show-line
-            size="mini"
-            :data="props.treeData?.[0]?.children"
-            :fieldNames="{ key: 'id', title: 'name' }"
-            @select="onTreeSelect"
-          >
+          <a-tree show-line size="mini" :data="props.treeData?.[0]?.children"
+            :field-names="{ key: 'id', title: 'name' }" @select="onTreeSelect">
           </a-tree>
         </a-scrollbar>
       </template>
@@ -77,11 +67,14 @@ const onTreeSelect: TreeInstance['onSelect'] = (selectedKeys, data) => {
 <style lang="scss" scoped>
 :deep(.arco-menu-inner) {
   padding: 4px;
+
   .arco-menu-item {
     height: 34px;
+
     &:not(.arco-menu-selected) {
       color: $color-text-1;
     }
+
     &:last-child {
       margin-bottom: 0;
     }
@@ -94,6 +87,7 @@ const onTreeSelect: TreeInstance['onSelect'] = (selectedKeys, data) => {
   border-radius: 4px;
   border: 1px solid var(--color-border-2);
   box-sizing: border-box;
+
   .arrow-icon {
     margin-right: 0;
   }

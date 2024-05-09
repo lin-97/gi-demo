@@ -3,15 +3,8 @@
     <GiForm v-model="form" :options="options" :columns="columns" @search="search" @reset="reset"></GiForm>
 
     <div class="gi_table_box">
-      <a-table
-        row-key="id"
-        page-position="bottom"
-        :bordered="{ cell: true }"
-        :loading="loading"
-        :data="tableData"
-        :scroll="{ x: '100%', y: '100%', minWidth: 1400 }"
-        :pagination="pagination"
-      >
+      <a-table row-key="id" page-position="bottom" :bordered="{ cell: true }" :loading="loading" :data="tableData"
+        :scroll="{ x: '100%', y: '100%', minWidth: 1400 }" :pagination="pagination">
         <template #columns>
           <a-table-column title="序号" :width="66" align="center">
             <template #cell="cell">{{ cell.rowIndex + 1 }}</template>
@@ -38,12 +31,8 @@
               <GiCellTags :data="record.hobbys"></GiCellTags>
             </template>
           </a-table-column>
-          <a-table-column
-            title="创建时间"
-            data-index="createTime"
-            :width="180"
-            :sortable="{ sortDirections: ['ascend', 'descend'] }"
-          ></a-table-column>
+          <a-table-column title="创建时间" data-index="createTime" :width="180"
+            :sortable="{ sortDirections: ['ascend', 'descend'] }"></a-table-column>
           <a-table-column title="地址" data-index="address" ellipsis tooltip></a-table-column>
           <a-table-column title="操作" :width="200" align="center" fixed="right">
             <template #cell>
@@ -64,10 +53,10 @@
 
 <script setup lang="ts">
 import type { PopconfirmInstance } from '@arco-design/web-vue'
-import { usePagination, useBreakpointIndex } from '@/hooks'
-import { getPersonList, type PersonItem } from '@/apis'
+import { useBreakpointIndex, usePagination } from '@/hooks'
+import { type PersonItem, getPersonList } from '@/apis'
 import { useDict } from '@/hooks/app'
-import type { Options, Columns } from '@/components/GiForm'
+import type { Columns, Options } from '@/components/GiForm'
 
 defineOptions({ name: 'TableBase' })
 
@@ -123,7 +112,7 @@ const tableData = ref<PersonItem[]>([])
 
 const { pagination, setTotal } = usePagination(() => getTableData())
 
-const getTableData = async () => {
+async function getTableData() {
   try {
     loading.value = true
     const res = await getPersonList({

@@ -1,11 +1,11 @@
 import { ref } from 'vue'
 import { defineStore } from 'pinia'
 import type { RouteRecordRaw } from 'vue-router'
-import { constantRoutes } from '@/router'
 import { mapTree, toTreeArray } from 'xe-utils'
 import { cloneDeep, omit } from 'lodash-es'
+import { constantRoutes } from '@/router'
 import { transformPathToName } from '@/utils'
-import { getUserAsyncRoutes as getAsyncRoutes, type MenuItem } from '@/apis'
+import { type MenuItem, getUserAsyncRoutes as getAsyncRoutes } from '@/apis'
 import ParentView from '@/components/ParentView/index.vue'
 
 const Layout = () => import('@/layout/index.vue')

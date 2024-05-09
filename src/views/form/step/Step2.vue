@@ -29,6 +29,8 @@ import type { StepForm } from './type'
 
 defineOptions({ name: 'Step2' })
 
+withDefaults(defineProps<Props>(), {})
+
 const emit = defineEmits<{
   (e: 'next', form?: StepForm): void
   (e: 'prev'): void
@@ -37,8 +39,6 @@ const emit = defineEmits<{
 interface Props {
   form: Readonly<StepForm>
 }
-
-withDefaults(defineProps<Props>(), {})
 
 const step2Form = reactive({
   password: '123456'

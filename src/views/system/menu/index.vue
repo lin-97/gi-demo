@@ -38,16 +38,8 @@
         </a-space>
       </a-row>
 
-      <a-table
-        ref="tableRef"
-        row-key="id"
-        :data="menuList"
-        :loading="loading"
-        :bordered="{ cell: true }"
-        :scroll="{ x: '100%', y: '100%', minWidth: 1700 }"
-        :pagination="false"
-        size="mini"
-      >
+      <a-table ref="tableRef" row-key="id" :data="menuList" :loading="loading" :bordered="{ cell: true }"
+        :scroll="{ x: '100%', y: '100%', minWidth: 1700 }" :pagination="false" size="mini">
         <template #expand-icon="{ expanded }">
           <IconDown v-if="expanded" />
           <IconRight v-else />
@@ -82,13 +74,8 @@
           </a-table-column>
           <a-table-column title="状态" :width="80" align="center">
             <template #cell="{ record }">
-              <a-switch
-                type="round"
-                size="small"
-                :model-value="record.status"
-                :checked-value="1"
-                :unchecked-value="0"
-              />
+              <a-switch type="round" size="small" :model-value="record.status" :checked-value="1"
+                :unchecked-value="0" />
             </template>
           </a-table-column>
           <a-table-column title="是否缓存" :width="100" align="center">
@@ -138,12 +125,12 @@
 
 <script setup lang="ts">
 import { Drawer, type TableInstance } from '@arco-design/web-vue'
-import { getSystemMenuList, deleteBaseApi, type MenuItem } from '@/apis'
+import AddMenuModal from './AddMenuModal.vue'
+import { type MenuItem, deleteBaseApi, getSystemMenuList } from '@/apis'
 import { isExternal } from '@/utils/validate'
-import { transformPathToName, isMobile } from '@/utils'
+import { isMobile, transformPathToName } from '@/utils'
 import { useDict } from '@/hooks/app'
 import GiCodeView from '@/components/GiCodeView/index.vue'
-import AddMenuModal from './AddMenuModal.vue'
 
 defineOptions({ name: 'SystemMenu' })
 

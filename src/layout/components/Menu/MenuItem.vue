@@ -1,19 +1,12 @@
 <template>
   <template v-if="!item.meta?.hidden">
-    <a-menu-item
-      v-if="
-        isOneShowingChild &&
-        (!onlyOneChild?.children || onlyOneChild?.meta?.noShowingChildren) &&
-        !item?.meta?.alwaysShow
-      "
-      v-bind="attrs"
-      :key="onlyOneChild?.path"
-    >
+    <a-menu-item v-if="isOneShowingChild
+    && (!onlyOneChild?.children || onlyOneChild?.meta?.noShowingChildren)
+    && !item?.meta?.alwaysShow
+    " v-bind="attrs" :key="onlyOneChild?.path">
       <template #icon>
-        <MenuIcon
-          :svg-icon="onlyOneChild?.meta?.svgIcon || item?.meta?.svgIcon"
-          :icon="onlyOneChild?.meta?.icon || item?.meta?.icon"
-        ></MenuIcon>
+        <MenuIcon :svg-icon="onlyOneChild?.meta?.svgIcon || item?.meta?.svgIcon"
+          :icon="onlyOneChild?.meta?.icon || item?.meta?.icon"></MenuIcon>
       </template>
       <span>{{ onlyOneChild?.meta?.title }}</span>
     </a-menu-item>
@@ -22,7 +15,8 @@
       <template #icon>
         <MenuIcon :svg-icon="item?.meta?.svgIcon" :icon="item?.meta?.icon"></MenuIcon>
       </template>
-      <MenuItem v-for="child in item.children" :key="child.path" :item="child"></MenuItem>
+      <MenuItem v-for="child in item.children" :key="child.path" :item="child">
+      </MenuItem>
     </a-sub-menu>
   </template>
 </template>
@@ -32,13 +26,13 @@ import type { RouteRecordRaw } from 'vue-router'
 import MenuIcon from './MenuIcon.vue'
 
 defineOptions({ name: 'MenuItem' })
+const props = withDefaults(defineProps<Props>(), {})
+
 const attrs = useAttrs()
 
 interface Props {
   item: RouteRecordRaw
 }
-
-const props = withDefaults(defineProps<Props>(), {})
 
 // 如果hidden: false那么代表这个路由项显示在左侧菜单栏中
 // 如果props.item的子项chidren只有一个hidden: false的子元素, 那么onlyOneChild就表示这个子元素

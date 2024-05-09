@@ -23,10 +23,10 @@
 
 <script setup lang="ts">
 import { Modal } from '@arco-design/web-vue'
-import * as Regexp from '@/utils/regexp'
-import { cityOptions, deptData } from './data'
-import { GiForm, useGiForm, type Options, type Columns } from '@/components/GiForm'
 import { useWindowSize } from '@vueuse/core'
+import { cityOptions, deptData } from './data'
+import * as Regexp from '@/utils/regexp'
+import { type Columns, GiForm, type Options, useGiForm } from '@/components/GiForm'
 
 const { width } = useWindowSize()
 
@@ -159,9 +159,9 @@ const onAdd = () => {
     fullscreen: width.value < 600,
     content: () =>
       h(GiForm, {
-        options: options,
-        columns: columns,
-        modelValue: form,
+        'options': options,
+        'columns': columns,
+        'modelValue': form,
         'onUpdate:modelValue': (e) => Object.assign(form, e)
       })
   })
@@ -177,9 +177,9 @@ const onEdit = () => {
     fullscreen: width.value < 600,
     content: () =>
       h(GiForm, {
-        options: options,
-        columns: columns,
-        modelValue: form,
+        'options': options,
+        'columns': columns,
+        'modelValue': form,
         'onUpdate:modelValue': (e) => Object.assign(form, e)
       })
   }

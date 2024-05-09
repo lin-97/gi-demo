@@ -35,7 +35,7 @@
 import type { FormInstance } from '@arco-design/web-vue'
 import * as Regexp from '@/utils/regexp'
 import { useFormCurd } from '@/hooks/app'
-import { addPerson, updatePerson, getPersonById, initPerson } from '@/apis'
+import { addPerson, getPersonById, initPerson, updatePerson } from '@/apis'
 
 defineOptions({ name: 'DataForm' })
 
@@ -60,7 +60,7 @@ const rules: FormInstance['rules'] = {
  * 2. 能够监视表单的更改，在你点击返回按钮的时候提示：'您确定丢弃更改的内容吗？'
  * 3. 封装思路可作为参考
  */
-type Form = { id: string; name: string; phone: string }
+type Form = { id: string, name: string, phone: string }
 const { form, title, loading, save, saveLoading, back, reset } = useFormCurd<Form>({
   key: 'id', // 主键
   formRef: formRef as Ref<FormInstance>, // 表单的实例对象
@@ -117,6 +117,7 @@ const { form, title, loading, save, saveLoading, back, reset } = useFormCurd<For
   &__form {
     max-width: 450px;
   }
+
   :deep(.vue-codemirror) {
     min-width: 300px;
   }

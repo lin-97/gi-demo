@@ -1,5 +1,5 @@
 import { defineMock } from '../_base'
-import { resultSuccess, getDelayTime } from '../_utils'
+import { getDelayTime, resultSuccess } from '../_utils'
 import fileList from '../_data/file_list'
 
 const getList = (type: number | string) => {

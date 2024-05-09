@@ -58,6 +58,7 @@ const pre2 = `<a-space>
 <style lang="scss" scoped>
 .wrap {
   padding: 20px;
+
   &__item {
     margin-top: 40px;
   }

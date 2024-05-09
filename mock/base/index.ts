@@ -1,5 +1,5 @@
 import { defineMock } from '../_base'
-import { resultSuccess, getDelayTime } from '../_utils'
+import { getDelayTime, resultSuccess } from '../_utils'
 
 /** 这里模拟基本的保存、删除接口 */
 export default defineMock([

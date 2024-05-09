@@ -1,5 +1,5 @@
-import type { TableInstance, TableData } from '@arco-design/web-vue'
-import { Modal, Message } from '@arco-design/web-vue'
+import type { TableData, TableInstance } from '@arco-design/web-vue'
+import { Message, Modal } from '@arco-design/web-vue'
 import { usePagination } from '@/hooks'
 
 interface Options<T> {
@@ -9,7 +9,7 @@ interface Options<T> {
   rowKey?: keyof T
 }
 
-type PaginationParams = { page: number; size: number }
+type PaginationParams = { page: number, size: number }
 type Api<T> = (params: PaginationParams) => Promise<ApiRes<PageRes<T[]>>>
 
 export function useTable<T>(api: Api<T>, options?: Options<T>) {
@@ -18,7 +18,7 @@ export function useTable<T>(api: Api<T>, options?: Options<T>) {
   const loading = ref(false)
   const tableData = ref<T[]>([])
 
-  const getTableData = async () => {
+  async function getTableData() {
     try {
       loading.value = true
       const res = await api({ page: pagination.current, size: pagination.pageSize })
@@ -34,12 +34,6 @@ export function useTable<T>(api: Api<T>, options?: Options<T>) {
   const isImmediate = immediate ?? true
   isImmediate && getTableData()
 
-  // 搜索
-  const search = () => {
-    selectedKeys.value = []
-    pagination.onChange(1)
-  }
-
   // 多选
   const selectedKeys = ref<(string | number)[]>([])
   const select: TableInstance['onSelect'] = (rowKeys) => {
@@ -53,10 +47,16 @@ export function useTable<T>(api: Api<T>, options?: Options<T>) {
     selectedKeys.value = checked ? arr.map((i) => i[key as string]) : []
   }
 
+  // 搜索
+  const search = () => {
+    selectedKeys.value = []
+    pagination.onChange(1)
+  }
+
   // 删除
   const handleDelete = async <T>(
     deleteApi: () => Promise<ApiRes<T>>,
-    options?: { title?: string; content?: string; successTip?: string; showModal?: boolean }
+    options?: { title?: string, content?: string, successTip?: string, showModal?: boolean }
   ): Promise<boolean | undefined> => {
     const onDelete = async () => {
       try {

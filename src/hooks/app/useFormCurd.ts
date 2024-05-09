@@ -1,7 +1,7 @@
-import { reactive, computed, ref, type Ref } from 'vue'
+import { type Ref, computed, reactive, ref } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
-import { Modal, Message, type FormInstance } from '@arco-design/web-vue'
-import { isEqual, cloneDeep } from 'lodash-es'
+import { type FormInstance, Message, Modal } from '@arco-design/web-vue'
+import { cloneDeep, isEqual } from 'lodash-es'
 
 type Option<T> = {
   key?: string
@@ -57,7 +57,7 @@ export function useFormCurd<T = any>(option: Option<T>) {
     (newVal) => {
       // console.log('newVal', toRaw(newVal))
       // console.log('originForm', toRaw(originForm))
-      isChanged.value = !isEqual(newVal, originForm) ? true : false
+      isChanged.value = !isEqual(newVal, originForm)
     },
     { immediate: true, deep: true }
   )

@@ -2,7 +2,7 @@
   <a-card title="快捷操作" :bordered="false" size="medium" class="card gi_card_title">
     <a-card-grid v-for="(item, index) in list" :key="item.name" class="card-grid-item" :style="{ width: '33.33%' }">
       <a-card :bordered="false" hoverable>
-        <a-row justify="center" align="center" :class="'animated-fade-up-' + (index + 1)">
+        <a-row justify="center" align="center" :class="`animated-fade-up-${index + 1}`">
           <a-space direction="vertical" align="center">
             <component :is="item.icon" :size="30" :style="{ color: item.color }"></component>
             <a-typography-text>{{ item.name }}</a-typography-text>
@@ -27,9 +27,11 @@ const list = [
 <style lang="scss" scoped>
 .card {
   overflow: hidden;
+
   :deep(.arco-card-header) {
     border: none;
   }
+
   .card-grid-item {
     cursor: pointer;
   }

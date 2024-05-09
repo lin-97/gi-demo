@@ -9,11 +9,8 @@
     </a-affix>
 
     <a-card title="基本信息" :bordered="false" class="detail__item">
-      <a-descriptions
-        table-layout="fixed"
-        layout="inline-horizontal"
-        :column="{ xs: 1, sm: 2, md: 2, lg: 2, xl: 3, xxl: 3 }"
-      >
+      <a-descriptions table-layout="fixed" layout="inline-horizontal"
+        :column="{ xs: 1, sm: 2, md: 2, lg: 2, xl: 3, xxl: 3 }">
         <a-descriptions-item label="姓名">Lin</a-descriptions-item>
         <a-descriptions-item label="性别">男</a-descriptions-item>
         <a-descriptions-item label="生日">07月16日</a-descriptions-item>
@@ -47,19 +44,17 @@
             <a-step description="申请人:Lin">申请</a-step>
             <a-step description="审批人:尤大大">
               <span>领导审批</span>
-              <template #icon><GiDot></GiDot></template>
+              <template #icon>
+                <GiDot></GiDot>
+              </template>
             </a-step>
             <a-step description="Echo">财务审批</a-step>
           </a-steps>
         </a-col>
 
         <a-col :xs="24" :sm="16" :md="16" :lg="18" :xl="18" :xxl="18">
-          <a-descriptions
-            table-layout="fixed"
-            bordered
-            :label-style="{ width: '100px' }"
-            :column="{ xs: 1, sm: 2, md: 2, lg: 2, xl: 3, xxl: 3 }"
-          >
+          <a-descriptions table-layout="fixed" bordered :label-style="{ width: '100px' }"
+            :column="{ xs: 1, sm: 2, md: 2, lg: 2, xl: 3, xxl: 3 }">
             <a-descriptions-item label="姓名">Lin</a-descriptions-item>
             <a-descriptions-item label="性别">男</a-descriptions-item>
             <a-descriptions-item label="生日">07月16日</a-descriptions-item>
@@ -85,13 +80,8 @@
             </a-descriptions-item>
           </a-descriptions>
 
-          <a-descriptions
-            class="gi_mt"
-            table-layout="fixed"
-            layout="inline-horizontal"
-            bordered
-            :column="{ xs: 1, sm: 2, md: 2, lg: 2, xl: 3, xxl: 3 }"
-          >
+          <a-descriptions class="gi_mt" table-layout="fixed" layout="inline-horizontal" bordered
+            :column="{ xs: 1, sm: 2, md: 2, lg: 2, xl: 3, xxl: 3 }">
             <a-descriptions-item label="姓名">Lin</a-descriptions-item>
             <a-descriptions-item label="性别">男</a-descriptions-item>
             <a-descriptions-item label="生日">07月16日</a-descriptions-item>
@@ -125,7 +115,9 @@
         <a-step description="申请人:Lin">申请</a-step>
         <a-step description="Mark">
           <span>领导审批</span>
-          <template #icon><GiDot></GiDot> </template>
+          <template #icon>
+            <GiDot></GiDot>
+          </template>
         </a-step>
         <a-step description="Echo">财务审批</a-step>
       </a-steps>
@@ -167,7 +159,7 @@ const detail = {
   ]
 }
 
-const getTagsElement = (data: { color: string; name: string }[]) => {
+const getTagsElement = (data: { color: string, name: string }[]) => {
   return (
     <a-space size={5} wrap>
       {data.map((i) => (
@@ -205,12 +197,15 @@ const data = [
   justify-content: center;
   align-items: center;
 }
+
 .detail {
   overflow: auto;
+
   &__head {
     background: var(--color-bg-1);
     box-shadow: 0 2px 5px 0 rgb(0 0 0 / 8%);
   }
+
   &__item {
     margin: $margin;
     background: var(--color-bg-1);

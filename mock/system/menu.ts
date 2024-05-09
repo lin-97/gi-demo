@@ -1,6 +1,6 @@
+import { findTree, mapTree } from 'xe-utils'
 import { defineMock } from '../_base'
-import { resultSuccess, resultError, USER_TOKENS, isAdmin, filterTree, getDelayTime } from '../_utils'
-import { mapTree, findTree } from 'xe-utils'
+import { USER_TOKENS, filterTree, getDelayTime, isAdmin, resultError, resultSuccess } from '../_utils'
 import menuData from '../_data/system_menu'
 import type { MockSystemMenuItem } from '../_data/_type'
 
@@ -16,8 +16,7 @@ export default defineMock([
         // 如果是超级管理员角色
         if (roles.includes('role_admin')) {
           const data = filterTree<MockSystemMenuItem>(JSON.parse(JSON.stringify(menuData)), (i) =>
-            [1, 2].includes(i.type)
-          )
+            [1, 2].includes(i.type))
           return resultSuccess(data)
         }
         // 如果是普通用户角色

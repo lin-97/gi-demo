@@ -6,19 +6,11 @@
           <a-input v-model="treeInputValue" placeholder="输入部门名称搜索" allow-clear style="margin-bottom: 10px">
             <template #prefix><icon-search /></template>
           </a-input>
-          <a-tree
-            ref="treeRef"
-            block-node
-            show-line
-            default-expand-all
-            :data="deptList"
-            :field-names="{
-              key: 'id',
-              title: 'name',
-              children: 'children'
-            }"
-            @select="search"
-          >
+          <a-tree ref="treeRef" block-node show-line default-expand-all :data="deptList" :field-names="{
+        key: 'id',
+        title: 'name',
+        children: 'children',
+      }" @select="search">
           </a-tree>
         </a-col>
 
@@ -38,13 +30,8 @@
 
             <a-space wrap>
               <a-input-group>
-                <a-select
-                  v-model="form.status"
-                  :options="options"
-                  placeholder="用户状态"
-                  allow-clear
-                  style="width: 150px"
-                ></a-select>
+                <a-select v-model="form.status" :options="options" placeholder="用户状态" allow-clear
+                  style="width: 150px"></a-select>
                 <a-input v-model="form.username" placeholder="输入用户名搜索" allow-clear style="max-width: 250px">
                 </a-input>
               </a-input-group>
@@ -59,18 +46,10 @@
             </a-space>
           </a-row>
 
-          <a-table
-            row-key="id"
-            :loading="loading"
-            :data="userList"
-            :bordered="{ cell: true }"
-            :scroll="{ x: '100%', y: '100%', minWidth: 1700 }"
-            :pagination="pagination"
-            :row-selection="{ type: 'checkbox', showCheckedAll: true }"
-            :selected-keys="selectedKeys"
-            @select="select"
-            @select-all="selectAll"
-          >
+          <a-table row-key="id" :loading="loading" :data="userList" :bordered="{ cell: true }"
+            :scroll="{ x: '100%', y: '100%', minWidth: 1700 }" :pagination="pagination"
+            :row-selection="{ type: 'checkbox', showCheckedAll: true }" :selected-keys="selectedKeys" @select="select"
+            @select-all="selectAll">
             <template #columns>
               <a-table-column title="序号" :width="64">
                 <template #cell="cell">{{ cell.rowIndex + 1 }}</template>
@@ -134,12 +113,12 @@
 
 <script setup lang="ts">
 import { Message, type TreeInstance } from '@arco-design/web-vue'
-import { useTable } from '@/hooks'
-import { useDept, useDict } from '@/hooks/app'
-import { getSystemUserList, deleteBaseApi } from '@/apis'
-import type { UserItem } from '@/apis'
 import AddUserModal from './AddUserModal.vue'
 import UserDetailDrawer from './UserDetailDrawer.vue'
+import { useTable } from '@/hooks'
+import { useDept, useDict } from '@/hooks/app'
+import { deleteBaseApi, getSystemUserList } from '@/apis'
+import type { UserItem } from '@/apis'
 import { isMobile } from '@/utils'
 
 defineOptions({ name: 'SystemUser' })

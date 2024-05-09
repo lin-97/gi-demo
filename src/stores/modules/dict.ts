@@ -1,7 +1,7 @@
 import { defineStore } from 'pinia'
 import { ref } from 'vue'
-import { getSystemDictData } from '@/apis'
 import type { SelectOptionData } from '@arco-design/web-vue'
+import { getSystemDictData } from '@/apis'
 
 const storeSetup = () => {
   const dictData = ref<Record<string, SelectOptionData[]>>({})

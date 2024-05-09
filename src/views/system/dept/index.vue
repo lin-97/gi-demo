@@ -29,17 +29,9 @@
         </a-space>
       </a-row>
 
-      <a-table
-        ref="tableRef"
-        row-key="id"
-        :bordered="{ cell: true }"
-        :data="deptList"
-        :loading="loading"
-        :scroll="{ x: '100%', y: '100%', minWidth: 1000 }"
-        :pagination="false"
-        :row-selection="{ type: 'checkbox', showCheckedAll: false }"
-        @select="select"
-      >
+      <a-table ref="tableRef" row-key="id" :bordered="{ cell: true }" :data="deptList" :loading="loading"
+        :scroll="{ x: '100%', y: '100%', minWidth: 1000 }" :pagination="false"
+        :row-selection="{ type: 'checkbox', showCheckedAll: false }" @select="select">
         <template #expand-icon="{ expanded }">
           <IconDown v-if="expanded" />
           <IconRight v-else />
@@ -84,10 +76,10 @@
 
 <script setup lang="ts">
 import { Message, type TableInstance } from '@arco-design/web-vue'
-import { isMobile } from '@/utils'
-import { getSystemDeptList, deleteBaseApi, type DeptItem } from '@/apis'
-import { useDict } from '@/hooks/app'
 import AddDeptModal from './AddDeptModal.vue'
+import { isMobile } from '@/utils'
+import { type DeptItem, deleteBaseApi, getSystemDeptList } from '@/apis'
+import { useDict } from '@/hooks/app'
 
 defineOptions({ name: 'SystemDept' })
 

@@ -9,8 +9,8 @@
 </template>
 
 <script lang="ts" setup>
-import { getTestSuccess, getTestFail } from '@/apis'
 import { Message } from '@arco-design/web-vue'
+import { getTestFail, getTestSuccess } from '@/apis'
 import { useUserStore } from '@/stores'
 
 const userStore = useUserStore()

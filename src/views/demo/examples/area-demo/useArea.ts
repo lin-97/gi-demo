@@ -13,9 +13,9 @@ export function useArea() {
     const obj: AnyObject = {}
     let reg: any = null
     if (name === 'city_list') {
-      reg = new RegExp('^' + code.toString().replace(/0000$/, ''))
+      reg = new RegExp(`^${code.toString().replace(/0000$/, '')}`)
     } else if (name === 'county_list') {
-      reg = new RegExp('^' + code.toString().replace(/00$/, ''))
+      reg = new RegExp(`^${code.toString().replace(/00$/, '')}`)
     }
 
     for (const key in area[name]) {

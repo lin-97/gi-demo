@@ -8,14 +8,8 @@
     </template>
     <a-row :gutter="30">
       <a-col :xs="24" :sm="24" :md="12">
-        <GiForm
-          v-model="form"
-          class="gi_mb"
-          :options="options"
-          :columns="columns"
-          @search="search"
-          @reset="reset"
-        ></GiForm>
+        <GiForm v-model="form" class="gi_mb" :options="options" :columns="columns" @search="search" @reset="reset">
+        </GiForm>
       </a-col>
       <a-col :xs="24" :sm="24" :md="12">
         <GiCodeView :code-json="JSON.stringify(form, null, '\t')"></GiCodeView>
@@ -26,9 +20,9 @@
 
 <script setup lang="ts">
 import { Drawer, Message } from '@arco-design/web-vue'
-import type { Options, Columns } from '@/components/GiForm'
-import GiCodeView from '@/components/GiCodeView/index.vue'
 import { useWindowSize } from '@vueuse/core'
+import type { Columns, Options } from '@/components/GiForm'
+import GiCodeView from '@/components/GiCodeView/index.vue'
 
 const { width } = useWindowSize()
 

@@ -13,7 +13,7 @@
 <script setup lang="ts">
 import { useAppStore, useTabsStore } from '@/stores'
 
-defineOptions({ name: 'Main' })
+defineOptions({ name: 'AppMain' })
 const appStore = useAppStore()
 const tabsStore = useTabsStore()
 </script>

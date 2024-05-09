@@ -16,19 +16,20 @@
 </template>
 
 <script setup lang="ts">
+import type { Component } from 'vue'
 import Icon403 from '@/components/icons/Icon403.vue'
 import Icon404 from '@/components/icons/Icon404.vue'
 import Icon500 from '@/components/icons/Icon500.vue'
-import type { Component } from 'vue'
 
 interface Props {
   code: number
 }
+defineOptions({ name: 'ErrorPage' })
+
 const props = withDefaults(defineProps<Props>(), {
   code: 403
 })
 
-defineOptions({ name: 'ErrorPage' })
 const router = useRouter()
 
 const IconMap: Record<number, Component> = {
@@ -54,7 +55,7 @@ const back = () => {
 }
 
 // 倒计时
-const onCountDownTime = () => {
+function onCountDownTime() {
   timer = setInterval(() => {
     if (countDownTime.value) {
       countDownTime.value--
@@ -82,6 +83,7 @@ const onCountDownTime = () => {
     flex-direction: column;
     align-items: center;
   }
+
   &__img {
     width: 100%;
     position: relative;
@@ -90,14 +92,17 @@ const onCountDownTime = () => {
     justify-content: center;
     align-items: center;
   }
+
   &__icon {
     max-width: 90%;
     height: 50vh;
   }
+
   &__tip {
     display: flex;
     flex-direction: column;
     align-items: center;
+
     &--a {
       margin-bottom: 20px;
       font-size: 32px;
@@ -109,6 +114,7 @@ const onCountDownTime = () => {
       animation-duration: 0.5s;
       animation-fill-mode: forwards;
     }
+
     &--b {
       margin-bottom: 10px;
       font-size: 20px;
@@ -121,6 +127,7 @@ const onCountDownTime = () => {
       animation-delay: 0.1s;
       animation-fill-mode: forwards;
     }
+
     &--c {
       padding: 0 30px;
       margin-bottom: 20px;
@@ -136,11 +143,13 @@ const onCountDownTime = () => {
     }
   }
 }
+
 @keyframes slideUp {
   0% {
     opacity: 0;
     transform: translateY(60px);
   }
+
   100% {
     opacity: 1;
     transform: translateY(0);

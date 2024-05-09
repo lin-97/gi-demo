@@ -1,5 +1,5 @@
-import http from '@/utils/http'
 import type * as System from './type'
+import http from '@/utils/http'
 
 /** @desc 获取部门数据 */
 export function getSystemDeptList() {

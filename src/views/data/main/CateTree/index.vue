@@ -9,39 +9,16 @@
     <!-- 分类树 -->
     <div class="cate-tree__tree">
       <a-scrollbar style="height: 100%; overflow: auto" outer-style="height: 100%">
-        <a-tree
-          ref="treeRef"
-          show-line
-          size="mini"
-          :data="(treeData as unknown as TreeNodeData[])"
-          :field-names="{ key: 'id' }"
-          @select="select"
-        >
+        <a-tree ref="treeRef" show-line size="mini" :data="(treeData as unknown as TreeNodeData[])"
+          :field-names="{ key: 'id' }" @select="select">
           <template #title="node">
-            <a-trigger
-              v-model:popup-visible="node.popupVisible"
-              trigger="contextMenu"
-              align-point
-              animation-name="slide-dynamic-origin"
-              auto-fit-transform-origin
-              position="bl"
-              scroll-to-close
-            >
+            <a-trigger v-model:popup-visible="node.popupVisible" trigger="contextMenu" align-point
+              animation-name="slide-dynamic-origin" auto-fit-transform-origin position="bl" scroll-to-close>
               <div v-if="!node.isEdit" @contextmenu="onContextmenu(node)">{{ node.name }}</div>
-              <a-input
-                v-else
-                ref="inputRef"
-                v-model="node.name"
-                size="mini"
-                placeholder="请填写"
-                @blur="onBlur"
-              ></a-input>
+              <a-input v-else ref="inputRef" v-model="node.name" size="mini" placeholder="请填写" @blur="onBlur"></a-input>
               <template #content>
-                <RightMenu
-                  :tree-data="treeData"
-                  @on-menu-item-click="onMenuItemClick"
-                  @on-tree-node-click="onTreeNodeClick"
-                ></RightMenu>
+                <RightMenu :tree-data="treeData" @on-menu-item-click="onMenuItemClick"
+                  @on-tree-node-click="onTreeNodeClick"></RightMenu>
               </template>
             </a-trigger>
           </template>
@@ -53,10 +30,10 @@
 
 <script setup lang="tsx">
 import { Message, Modal } from '@arco-design/web-vue'
-import type { TreeInstance, TreeNodeData, InputInstance } from '@arco-design/web-vue'
-import { getCateTreeData, type CateItem } from '@/apis'
+import type { InputInstance, TreeInstance, TreeNodeData } from '@arco-design/web-vue'
 import { mapTree } from 'xe-utils'
 import RightMenu from './RightMenu.vue'
+import { type CateItem, getCateTreeData } from '@/apis'
 import GiSvgIcon from '@/components/GiSvgIcon/index.vue'
 
 interface Props {
@@ -69,6 +46,10 @@ const props = withDefaults(defineProps<Props>(), {
   placeholder: '请输入关键词'
 })
 
+const emit = defineEmits<{
+  (e: 'node-click'): void
+}>()
+
 interface TreeCateItem extends CateItem {
   icon: (node: TreeCateItem) => VNode
   popupVisible: boolean
@@ -79,10 +60,6 @@ const loading = ref(false)
 const treeRef = ref<TreeInstance>()
 const inputValue = ref('')
 const treeData = ref<TreeCateItem[]>([])
-
-const emit = defineEmits<{
-  (e: 'node-click'): void
-}>()
 
 const select = () => {
   emit('node-click')
@@ -188,9 +165,11 @@ const onBlur = () => {
   display: flex;
   flex-direction: column;
   box-sizing: border-box;
+
   &__search {
     margin-bottom: 10px;
   }
+
   &__tree {
     flex: 1;
     overflow: hidden;

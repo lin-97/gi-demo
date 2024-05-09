@@ -16,9 +16,9 @@
 </template>
 
 <script setup lang="ts">
+import type { Component } from 'vue'
 import Pane1 from './Pane1.vue'
 import Pane2 from './Pane2.vue'
-import type { Component } from 'vue'
 
 defineOptions({ name: 'DataIndex' })
 const route = useRoute()
@@ -54,6 +54,7 @@ const change = (key: number | string) => {
   display: flex;
   flex-direction: column;
   overflow: hidden;
+
   .tab {
     background: var(--color-bg-1);
   }

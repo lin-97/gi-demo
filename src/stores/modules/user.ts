@@ -1,9 +1,9 @@
 import { defineStore } from 'pinia'
-import { ref, reactive, computed } from 'vue'
+import { computed, reactive, ref } from 'vue'
 import { resetRouter } from '@/router'
-import { login as loginApi, logout as logoutApi, getUserInfo as getUserInfoApi } from '@/apis'
+import { getUserInfo as getUserInfoApi, login as loginApi, logout as logoutApi } from '@/apis'
 import type { UserInfo } from '@/apis'
-import { setToken, clearToken, getToken } from '@/utils/auth'
+import { clearToken, getToken, setToken } from '@/utils/auth'
 import { resetHasRouteFlag } from '@/router/permission'
 
 const storeSetup = () => {

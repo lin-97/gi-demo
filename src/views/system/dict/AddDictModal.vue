@@ -1,13 +1,6 @@
 <template>
-  <a-modal
-    v-model:visible="visible"
-    :title="title"
-    width="90%"
-    :mask-closable="false"
-    :modal-style="{ maxWidth: '520px' }"
-    @before-ok="save"
-    @close="close"
-  >
+  <a-modal v-model:visible="visible" :title="title" width="90%" :mask-closable="false"
+    :modal-style="{ maxWidth: '520px' }" @before-ok="save" @close="close">
     <a-form ref="formRef" :model="form" :rules="rules" size="medium" auto-label-width>
       <a-form-item label="字典名称" field="name">
         <a-input v-model.trim="form.name" placeholder="请输入字典名称" allow-clear :max-length="10"> </a-input>
@@ -16,30 +9,19 @@
         <a-input v-model.trim="form.code" placeholder="请输入字典编码" allow-clear :max-length="10"> </a-input>
       </a-form-item>
       <a-form-item label="描述" field="description">
-        <a-textarea
-          v-model.trim="form.description"
-          placeholder="请填写描述"
-          :max-length="200"
-          show-word-limit
-          :auto-size="{ minRows: 3, maxRows: 5 }"
-        />
+        <a-textarea v-model.trim="form.description" placeholder="请填写描述" :max-length="200" show-word-limit
+          :auto-size="{ minRows: 3, maxRows: 5 }" />
       </a-form-item>
       <a-form-item label="状态" field="status">
-        <a-switch
-          v-model="form.status"
-          type="round"
-          :checked-value="1"
-          :unchecked-value="0"
-          checked-text="正常"
-          unchecked-text="禁用"
-        />
+        <a-switch v-model="form.status" type="round" :checked-value="1" :unchecked-value="0" checked-text="正常"
+          unchecked-text="禁用" />
       </a-form-item>
     </a-form>
   </a-modal>
 </template>
 
 <script setup lang="ts">
-import { Message, type FormInstance } from '@arco-design/web-vue'
+import { type FormInstance, Message } from '@arco-design/web-vue'
 import * as Regexp from '@/utils/regexp'
 import { useForm } from '@/hooks'
 import { getSystemDictDetail, saveBaseApi } from '@/apis'
