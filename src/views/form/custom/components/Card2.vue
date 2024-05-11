@@ -133,7 +133,7 @@ const columns: Columns<typeof form> = reactive([
   {
     label: '测试',
     field: 'test',
-    disabled: (form) => form.status === 0,
+    disabled: (i) => i.status === 0,
     item: { extra: '查看这里效果请切换状态' }
   },
   {
@@ -162,14 +162,14 @@ const columns: Columns<typeof form> = reactive([
     label: '城市',
     field: 'city',
     options: cityOptions,
-    disabled: (form) => form.status === 0
+    disabled: (i) => i.status === 0
   },
   {
     type: 'tree-select',
     label: '部门',
     field: 'dept',
     data: deptData,
-    disabled: (form) => form.status === 0
+    disabled: (i) => i.status === 0
   },
   {
     type: 'textarea',
@@ -185,9 +185,15 @@ const columns: Columns<typeof form> = reactive([
 ])
 
 const onViewCode = () => {
+  const codeStr = JSON.stringify(toRaw(columns), (key, value) => {
+    if (typeof value === 'function') {
+      return value.toString().replace(/\n/g, '').replace(/\s{2,}/g, ' ')
+    }
+    return value
+  }, '\t')
   Drawer.open({
     title: '数据结构',
-    content: () => h(GiCodeView, { codeJson: JSON.stringify(toRaw(columns), null, '\t') }),
+    content: () => h(GiCodeView, { codeJson: codeStr }),
     width: width.value < 560 ? '100%' : 560
   })
 }
