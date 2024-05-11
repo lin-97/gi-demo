@@ -130,13 +130,13 @@ import { type MenuItem, deleteBaseApi, getSystemMenuList } from '@/apis'
 import { isExternal } from '@/utils/validate'
 import { isMobile, transformPathToName } from '@/utils'
 import { useDict } from '@/hooks/app'
+import { useTable } from '@/hooks'
 import GiCodeView from '@/components/GiCodeView/index.vue'
 
 defineOptions({ name: 'SystemMenu' })
 
 const { data: options } = useDict({ code: 'status' })
 const AddMenuModalRef = ref<InstanceType<typeof AddMenuModal>>()
-const loading = ref(false)
 
 const tableRef = ref<TableInstance>()
 const isExpanded = ref(false)
@@ -146,27 +146,18 @@ const onExpanded = () => {
 }
 
 const form = reactive({ name: '', status: '' })
-const menuList = ref<MenuItem[]>([])
 
-const getMenuList = async () => {
-  try {
-    loading.value = true
-    const res = await getSystemMenuList()
-    menuList.value = res.data
-  } finally {
-    loading.value = false
-  }
-}
-getMenuList()
-
-const search = () => {
-  getMenuList()
-}
+const {
+  loading,
+  tableData: menuList,
+  search,
+  handleDelete
+} = useTable(() => getSystemMenuList(), { immediate: true })
 
 const reset = () => {
   form.name = ''
   form.status = ''
-  getMenuList()
+  search()
 }
 
 const onAdd = () => {
@@ -178,12 +169,7 @@ const onEdit = (item: MenuItem) => {
 }
 
 const onDelete = async (item: MenuItem) => {
-  try {
-    const res = await deleteBaseApi({ ids: [item.id] })
-    return res.success
-  } catch (error) {
-    return false
-  }
+  return handleDelete(() => deleteBaseApi({ ids: [item.id] }), { showModal: false })
 }
 
 const onViewCode = () => {

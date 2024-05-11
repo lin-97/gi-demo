@@ -31,7 +31,8 @@
 
       <a-table ref="tableRef" row-key="id" :bordered="{ cell: true }" :data="deptList" :loading="loading"
         :scroll="{ x: '100%', y: '100%', minWidth: 1000 }" :pagination="false"
-        :row-selection="{ type: 'checkbox', showCheckedAll: false }" @select="select">
+        :row-selection="{ type: 'checkbox', showCheckedAll: false }" :selected-keys="selectedKeys" @select="select"
+        @select-all="selectAll">
         <template #expand-icon="{ expanded }">
           <IconDown v-if="expanded" />
           <IconRight v-else />
@@ -78,6 +79,7 @@
 import { Message, type TableInstance } from '@arco-design/web-vue'
 import AddDeptModal from './AddDeptModal.vue'
 import { isMobile } from '@/utils'
+import { useTable } from '@/hooks'
 import { type DeptItem, deleteBaseApi, getSystemDeptList } from '@/apis'
 import { useDict } from '@/hooks/app'
 
@@ -92,30 +94,27 @@ const form = reactive({
   status: ''
 })
 
-const loading = ref(false)
-const deptList = ref<DeptItem[]>([])
-const getDeptList = async () => {
-  try {
-    loading.value = true
-    const res = await getSystemDeptList()
-    deptList.value = res.data
+const {
+  loading,
+  tableData: deptList,
+  selectedKeys,
+  search,
+  select,
+  selectAll,
+  handleDelete
+} = useTable(() => getSystemDeptList(), {
+  immediate: true,
+  onSuccess: () => {
     nextTick(() => {
       tableRef.value?.expandAll(true)
     })
-  } finally {
-    loading.value = false
   }
-}
-getDeptList()
-
-const search = () => {
-  getDeptList()
-}
+})
 
 const reset = () => {
   form.name = ''
   form.status = ''
-  getDeptList()
+  search()
 }
 
 const onAdd = () => {
@@ -127,24 +126,14 @@ const onEdit = (item: DeptItem) => {
 }
 
 const onDelete = async (item: DeptItem) => {
-  try {
-    const res = await deleteBaseApi({ ids: [item.id] })
-    return res.success
-  } catch (error) {
-    return false
-  }
+  return handleDelete(() => deleteBaseApi({ ids: [item.id] }), { showModal: false })
 }
 
-// 勾选
-const selectRowKeys = ref<string[]>([])
-const select: TableInstance['onSelect'] = (rowKeys) => {
-  selectRowKeys.value = rowKeys as string[]
-}
 const onMulDelete = () => {
-  if (!selectRowKeys.value.length) {
+  if (!selectedKeys.value.length) {
     return Message.warning('请选择部门')
   }
-  Message.info('点击了批量删除')
+  handleDelete(() => deleteBaseApi({ ids: selectedKeys.value as string[] }))
 }
 </script>
 
