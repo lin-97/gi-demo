@@ -5,13 +5,8 @@
         <a-input v-model="form.name" placeholder="输入角色名搜索" allow-clear style="width: 250px">
           <template #prefix><icon-search /></template>
         </a-input>
-        <a-select
-          v-model="form.status"
-          :options="options"
-          placeholder="角色状态"
-          allow-clear
-          style="width: 120px"
-        ></a-select>
+        <a-select v-model="form.status" :options="options" placeholder="角色状态" allow-clear
+          style="width: 120px"></a-select>
         <a-button type="primary" @click="search">
           <template #icon><icon-search /></template>
           <span>查询</span>
@@ -35,18 +30,10 @@
         </a-space>
       </a-row>
 
-      <a-table
-        row-key="id"
-        :data="roleList"
-        :bordered="{ cell: true }"
-        :loading="loading"
-        :scroll="{ x: '100%', y: '100%', minWidth: 900 }"
-        :pagination="pagination"
-        :row-selection="{ type: 'checkbox', showCheckedAll: true }"
-        :selected-keys="selectedKeys"
-        @select="select"
-        @select-all="selectAll"
-      >
+      <a-table row-key="id" :data="roleList" :bordered="{ cell: true }" :loading="loading"
+        :scroll="{ x: '100%', y: '100%', minWidth: 900 }" :pagination="pagination"
+        :row-selection="{ type: 'checkbox', showCheckedAll: true }" :selected-keys="selectedKeys" @select="select"
+        @select-all="selectAll">
         <template #columns>
           <a-table-column title="序号" :width="64">
             <template #cell="cell">{{ cell.rowIndex + 1 }}</template>
@@ -67,13 +54,8 @@
                   <template #icon><icon-edit /></template>
                   <span>编辑</span>
                 </a-button>
-                <a-button
-                  type="primary"
-                  status="success"
-                  size="mini"
-                  :disabled="record.disabled"
-                  @click="onPerm(record)"
-                >
+                <a-button type="primary" status="success" size="mini" :disabled="record.disabled"
+                  @click="onPerm(record)">
                   <template #icon><icon-safe /></template>
                   <template #default>分配权限</template>
                 </a-button>
@@ -124,7 +106,7 @@ const {
   select,
   selectAll,
   handleDelete
-} = useTable((pagin) => getSystemRoleList({ current: pagin.page, pageSize: pagin.size }), { immediate: true })
+} = useTable((page) => getSystemRoleList(page), { immediate: true })
 
 const reset = () => {
   form.name = ''

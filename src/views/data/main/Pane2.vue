@@ -112,8 +112,8 @@ async function getTableData() {
   try {
     loading.value = true
     const res = await getPersonList({
-      current: pagination.current,
-      pageSize: pagination.pageSize
+      page: pagination.current,
+      size: pagination.pageSize
     })
     tableData.value = res.data.records
     setTotal(res.data.total)

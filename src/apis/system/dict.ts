@@ -3,7 +3,7 @@ import type * as System from './type'
 import http from '@/utils/http'
 
 /** @desc 获取字典数据 */
-export function getSystemDictList(params: { current: number, pageSize: number }) {
+export function getSystemDictList(params: Pagination) {
   return http.get<PageRes<System.DictItem[]>>('/system/dict', params)
 }
 
@@ -13,7 +13,7 @@ export function getSystemDictDetail(params: { id: string }) {
 }
 
 /** @desc 字典数据列表 */
-export function getSystemDictDataList(params: { current: number, pageSize: number, code: string }) {
+export function getSystemDictDataList(params: { code: string } & Pagination) {
   return http.get<PageRes<System.DictDataItem[]>>('/system/dict/dataList', params)
 }
 

@@ -2,7 +2,7 @@ import type * as System from './type'
 import http from '@/utils/http'
 
 /** @desc 获取角色数据 */
-export function getSystemRoleList(params: { current: number, pageSize: number }) {
+export function getSystemRoleList(params: Pagination) {
   return http.get<PageRes<System.RoleItem[]>>('/system/role', params)
 }
 

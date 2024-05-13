@@ -1079,8 +1079,8 @@ const { pagination, setTotal } = usePagination(() => {
 const form = reactive({
   name: '',
   status: '',
-  current: pagination.current, // 此种方式不会响应
-  pageSize: pagination.pageSize // 此种方式不会响应
+  page: pagination.current, // 此种方式不会响应
+  size: pagination.pageSize // 此种方式不会响应
 })
 
 const getTableData = async () => {
@@ -1105,7 +1105,7 @@ const form = reactive({
 })
 
 const getTableData = async () => {
-  const res = await getData({ ...form, current: pagination.current, pageSize: pagination.pageSize })
+  const res = await getData({ ...form, page: pagination.current, size: pagination.pageSize })
 }
 </script>
 ```
@@ -1117,16 +1117,16 @@ const getTableData = async () => {
 import { usePagination } from '@/hooks'
 
 const { pagination, setTotal } = usePagination(() => {
-  form.current = pagination.current
-  form.pageSize = pagination.pageSize
+  form.page = pagination.current
+  form.size = pagination.pageSize
   getTableData()
 })
 
 const form = reactive({
   name: '',
   status: '',
-  current: pagination.current,
-  pageSize: pagination.pageSize
+  page: pagination.current,
+  size: pagination.pageSize
 })
 
 const getTableData = async () => {

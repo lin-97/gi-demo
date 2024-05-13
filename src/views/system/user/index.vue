@@ -149,7 +149,7 @@ const {
   select,
   selectAll,
   handleDelete
-} = useTable((pagin) => getSystemUserList({ current: pagin.page, pageSize: pagin.size }), { immediate: true })
+} = useTable((page) => getSystemUserList(page), { immediate: true })
 
 const reset = () => {
   form.status = ''

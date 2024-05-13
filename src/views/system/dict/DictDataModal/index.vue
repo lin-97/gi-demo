@@ -64,7 +64,7 @@ const AddDictDataModalRef = ref<InstanceType<typeof AddDictDataModal>>()
 const dictCode = ref('')
 
 const { loading, tableData, pagination, selectedKeys, search, select, selectAll, handleDelete } = useTable(
-  (pagin) => getSystemDictDataList({ current: pagin.page, pageSize: pagin.size, code: dictCode.value }),
+  (page) => getSystemDictDataList({ ...page, code: dictCode.value }),
   { immediate: false }
 )
 

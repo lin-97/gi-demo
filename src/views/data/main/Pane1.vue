@@ -100,7 +100,7 @@ const form = reactive({
 
 // 这里使用了表格hooks：useTable, 节省了大量代码
 const { loading, tableData, getTableData, pagination, selectedKeys, select, selectAll, handleDelete } = useTable(
-  (pagin) => getPersonList({ ...form, current: pagin.page, pageSize: pagin.size }),
+  (page) => getPersonList({ ...form, ...page }),
   { immediate: false, formatResult: (data) => data.map((i) => ({ ...i, isEdit: false })) }
 )
 

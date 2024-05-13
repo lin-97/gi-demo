@@ -104,7 +104,7 @@ const {
   select,
   selectAll,
   handleDelete
-} = useTable((pagin) => getSystemDictList({ current: pagin.page, pageSize: pagin.size }), { immediate: true })
+} = useTable((page) => getSystemDictList(page), { immediate: true })
 
 const reset = () => {
   form.name = ''

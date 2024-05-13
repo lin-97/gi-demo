@@ -45,7 +45,7 @@ const getRandomAvatar = () => {
 
 const getTableListData = (params: any) => {
   const data: any[] = []
-  for (let i = 0; i < params.pageSize; i++) {
+  for (let i = 0; i < params.size; i++) {
     data.push({
       'id': Random.guid(),
       'name': params.name !== '' ? params.name : '@cname()',
@@ -70,8 +70,8 @@ export default defineMock([
     method: 'get',
     timeout: getDelayTime(),
     response: ({ query }) => {
-      const { current = 1, pageSize = 10, status = 0, name = '' } = query
-      const list = getTableListData({ current, pageSize, status, name })
+      const { page = 1, size = 10, status = 0, name = '' } = query
+      const list = getTableListData({ page, size, status, name })
       return resultSuccess({
         total: 1000,
         records: list
