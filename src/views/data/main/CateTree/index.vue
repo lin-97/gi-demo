@@ -1,41 +1,24 @@
 <template>
   <div class="cate-tree">
     <!-- 搜索框 -->
-    <div class="search-wrap">
-      <a-input allow-clear :maxlength="20" :placeholder="props.placeholder" v-model="inputValue">
+    <div class="cate-tree__search">
+      <a-input v-model="inputValue" allow-clear :maxlength="20" :placeholder="props.placeholder">
         <template #prefix><icon-search /></template>
       </a-input>
     </div>
     <!-- 分类树 -->
-    <div class="wrap">
+    <div class="cate-tree__tree">
       <a-scrollbar style="height: 100%; overflow: auto" outer-style="height: 100%">
-        <a-tree
-          ref="treeRef"
-          show-line
-          size="mini"
-          :data="treeData"
-          :fieldNames="{
-            key: 'id'
-          }"
-          @select="select"
-        >
-          <template #icon="node">
-            <GiSvgIcon name="com-file-close" :size="16" v-if="!node.children"></GiSvgIcon>
-            <GiSvgIcon name="com-file-open" :size="16" v-else-if="node.children"></GiSvgIcon>
-            <GiSvgIcon name="com-file" :size="16" v-else></GiSvgIcon>
-          </template>
+        <a-tree ref="treeRef" show-line size="mini" :data="(treeData as unknown as TreeNodeData[])"
+          :field-names="{ key: 'id' }" @select="select">
           <template #title="node">
-            <a-trigger
-              trigger="contextMenu"
-              align-point
-              animation-name="slide-dynamic-origin"
-              auto-fit-transform-origin
-              position="bl"
-              update-at-scroll
-            >
-              <div>{{ node.name }}</div>
+            <a-trigger v-model:popup-visible="node.popupVisible" trigger="contextMenu" align-point
+              animation-name="slide-dynamic-origin" auto-fit-transform-origin position="bl" scroll-to-close>
+              <div v-if="!node.isEdit" @contextmenu="onContextmenu(node)">{{ node.name }}</div>
+              <a-input v-else ref="inputRef" v-model="node.name" size="mini" placeholder="请填写" @blur="onBlur"></a-input>
               <template #content>
-                <RightMenu :tree-data="treeData" @click="onRightMenuItemClick"></RightMenu>
+                <RightMenu :tree-data="treeData" @on-menu-item-click="onMenuItemClick"
+                  @on-tree-node-click="onTreeNodeClick"></RightMenu>
               </template>
             </a-trigger>
           </template>
@@ -45,10 +28,13 @@
   </div>
 </template>
 
-<script setup lang="ts">
-import { Message } from '@arco-design/web-vue'
-import { getCateTreeData, type CateItem } from '@/apis'
+<script setup lang="tsx">
+import { Message, Modal } from '@arco-design/web-vue'
+import type { InputInstance, TreeInstance, TreeNodeData } from '@arco-design/web-vue'
+import { mapTree } from 'xe-utils'
 import RightMenu from './RightMenu.vue'
+import { type CateItem, getCateTreeData } from '@/apis'
+import GiSvgIcon from '@/components/GiSvgIcon/index.vue'
 
 interface Props {
   type?: number
@@ -60,14 +46,20 @@ const props = withDefaults(defineProps<Props>(), {
   placeholder: '请输入关键词'
 })
 
-const loading = ref(false)
-const treeRef = ref()
-const inputValue = ref('')
-const treeData = ref<CateItem[]>([])
-
 const emit = defineEmits<{
   (e: 'node-click'): void
 }>()
+
+interface TreeCateItem extends CateItem {
+  icon: (node: TreeCateItem) => VNode
+  popupVisible: boolean
+  isEdit: boolean
+}
+
+const loading = ref(false)
+const treeRef = ref<TreeInstance>()
+const inputValue = ref('')
+const treeData = ref<TreeCateItem[]>([])
 
 const select = () => {
   emit('node-click')
@@ -78,21 +70,86 @@ const getCateTree = async () => {
   try {
     loading.value = true
     const res = await getCateTreeData()
-    treeData.value = res.data
+    treeData.value = mapTree(res.data, (i) => ({
+      ...i,
+      popupVisible: false,
+      isEdit: false,
+      // switcherIcon: (node: any) => {
+      //   if (node.expanded && !node.isLeaf) return <icon-tree-add />
+      //   if (!node.expanded && !node.isLeaf) return <icon-tree-reduce style={{ transform: 'none' }} />
+      //   return null
+      // },
+      icon: (node: any) => {
+        if (node.expanded && !node.isLeaf) return <GiSvgIcon name="file-open" size={16}></GiSvgIcon>
+        if (!node.expanded && !node.isLeaf) return <GiSvgIcon name="file-close" size={16}></GiSvgIcon>
+        return <GiSvgIcon name="file" size={16}></GiSvgIcon>
+      }
+    }))
     nextTick(() => {
       treeRef.value?.expandAll()
     })
-  } catch (error) {
-    return error
   } finally {
     loading.value = false
   }
 }
-
 getCateTree()
 
-const onRightMenuItemClick = (mode: string) => {
-  mode !== 'move' && Message.info(mode)
+const inputRef = ref<InputInstance>()
+// 保存当前右键的节点
+const contextmenuNode = ref<TreeCateItem | null>(null)
+const onContextmenu = (node: TreeCateItem) => {
+  if (contextmenuNode.value?.isEdit !== undefined) {
+    contextmenuNode.value.isEdit = false
+  }
+  contextmenuNode.value = node
+}
+
+// 关闭右键菜单弹框
+const closeRightMenuPopup = () => {
+  if (contextmenuNode.value?.popupVisible) {
+    contextmenuNode.value.popupVisible = false
+  }
+}
+
+// 右键菜单项点击
+const onMenuItemClick = (mode: string) => {
+  if (mode !== 'move') {
+    Message.info(`${mode}-${contextmenuNode.value?.name ?? ''}`)
+    closeRightMenuPopup()
+  }
+  if (mode === 'edit') {
+    if (contextmenuNode.value?.isEdit !== undefined) {
+      contextmenuNode.value.isEdit = true
+      nextTick(() => {
+        inputRef.value?.focus()
+      })
+    }
+  }
+  if (mode === 'delete') {
+    Modal.warning({
+      title: '提示',
+      content: '是否确认删除？',
+      hideCancel: false,
+      okButtonProps: { status: 'danger' },
+      onBeforeOk: () => {
+        return new Promise((resolve) => setTimeout(() => resolve(true), 300))
+      }
+    })
+  }
+}
+
+// 移动树节点点击
+const onTreeNodeClick = (data: CateItem) => {
+  Message.info(data.name)
+  closeRightMenuPopup()
+}
+
+// 输入框脱焦
+const onBlur = () => {
+  if (contextmenuNode.value?.isEdit) {
+    contextmenuNode.value.isEdit = false
+  }
+  getCateTree()
 }
 </script>
 
@@ -100,12 +157,7 @@ const onRightMenuItemClick = (mode: string) => {
 :deep(.arco-tree-node-title-text) {
   white-space: nowrap;
 }
-// :deep(.arco-scrollbar) {
-//   height: 100%;
-// }
-.switcher-icon {
-  fill: var(--color-text-2);
-}
+
 .cate-tree {
   flex: 1;
   overflow: hidden;
@@ -113,12 +165,12 @@ const onRightMenuItemClick = (mode: string) => {
   display: flex;
   flex-direction: column;
   box-sizing: border-box;
-  .search-wrap {
-    display: flex;
-    align-items: center;
+
+  &__search {
     margin-bottom: 10px;
   }
-  > .wrap {
+
+  &__tree {
     flex: 1;
     overflow: hidden;
     background-color: var(--color-bg-1);

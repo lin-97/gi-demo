@@ -5,10 +5,7 @@
         <a-input v-model="form.name" placeholder="字典类型名称/编码" allow-clear style="width: 250px">
           <template #prefix><icon-search /></template>
         </a-input>
-        <a-select v-model="form.status" placeholder="状态" allow-clear style="width: 120px">
-          <a-option :value="1">正常</a-option>
-          <a-option :value="0">禁用</a-option>
-        </a-select>
+        <a-select v-model="form.status" :options="options" placeholder="状态" allow-clear style="width: 120px"></a-select>
         <a-button type="primary" @click="search">
           <template #icon><icon-search /></template>
           <span>查询</span>
@@ -32,18 +29,10 @@
         </a-space>
       </a-row>
 
-      <a-table
-        row-key="id"
-        :data="dictList"
-        :bordered="{ cell: true }"
-        :loading="loading"
-        :scroll="{ x: '100%', y: '100%', minWidth: 1000 }"
-        :pagination="pagination"
-        :row-selection="{ type: 'checkbox', showCheckedAll: true }"
-        :selected-keys="selectedKeys"
-        @select="select"
-        @select-all="selectAll"
-      >
+      <a-table row-key="id" :data="dictList" :bordered="{ cell: true }" :loading="loading"
+        :scroll="{ x: '100%', y: '100%', minWidth: 1000 }" :pagination="pagination"
+        :row-selection="{ type: 'checkbox', showCheckedAll: true }" :selected-keys="selectedKeys" @select="select"
+        @select-all="selectAll">
         <template #columns>
           <a-table-column title="序号" :width="64">
             <template #cell="cell">{{ cell.rowIndex + 1 }}</template>
@@ -52,8 +41,7 @@
           <a-table-column title="字典编码" data-index="code"></a-table-column>
           <a-table-column title="状态" :width="100" align="center">
             <template #cell="{ record }">
-              <a-tag v-if="record.status == 1" color="green">正常</a-tag>
-              <a-tag v-if="record.status == 0" color="red">禁用</a-tag>
+              <GiCellStatus :status="record.status"></GiCellStatus>
             </template>
           </a-table-column>
           <a-table-column title="描述" data-index="description"></a-table-column>
@@ -89,13 +77,16 @@
 
 <script setup lang="ts">
 import { Message } from '@arco-design/web-vue'
-import { useTable } from '@/hooks'
-import { getSystemDictList, deleteSystemDict, type DictItem } from '@/apis'
-import { isMobile } from '@/utils'
 import AddDictModal from './AddDictModal.vue'
 import DictDataModal from './DictDataModal/index.vue'
+import { useTable } from '@/hooks'
+import { useDict } from '@/hooks/app'
+import { type DictItem, deleteBaseApi, getSystemDictList } from '@/apis'
+import { isMobile } from '@/utils'
 
 defineOptions({ name: 'SystemRole' })
+
+const { data: options } = useDict({ code: 'status' })
 const AddDictModalRef = ref<InstanceType<typeof AddDictModal>>()
 const DictDataModalRef = ref<InstanceType<typeof DictDataModal>>()
 
@@ -113,17 +104,17 @@ const {
   select,
   selectAll,
   handleDelete
-} = useTable((pagin) => getSystemDictList({ current: pagin.page, pageSize: pagin.size }), { immediate: true })
+} = useTable((page) => getSystemDictList(page), { immediate: true })
 
 const reset = () => {
-  form.status = ''
+  form.name = ''
   form.status = ''
   search()
 }
 
 // 删除
 const onDelete = (item: DictItem) => {
-  return handleDelete(() => deleteSystemDict({ ids: [item.id] }), { showModal: false })
+  return handleDelete(() => deleteBaseApi({ ids: [item.id] }), { showModal: false })
 }
 
 // 批量删除
@@ -131,7 +122,7 @@ const onMulDelete = () => {
   if (!selectedKeys.value.length) {
     return Message.warning('请选择字典！')
   }
-  handleDelete(() => deleteSystemDict({ ids: selectedKeys.value as string[] }))
+  handleDelete(() => deleteBaseApi({ ids: selectedKeys.value as string[] }))
 }
 
 const onAdd = () => {

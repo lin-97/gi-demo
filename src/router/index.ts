@@ -1,4 +1,4 @@
-import { createRouter, createWebHashHistory, type RouteRecordRaw } from 'vue-router'
+import { type RouteRecordRaw, createRouter, createWebHashHistory } from 'vue-router'
 
 /** 默认布局 */
 const Layout = () => import('@/layout/index.vue')
@@ -42,7 +42,14 @@ export const constantRoutes: RouteRecordRaw[] = [
         path: '/home',
         component: () => import('@/views/home/index.vue'),
         name: 'Home',
-        meta: { title: '首页', icon: 'icon-dashboard', svgIcon: 'menu-home', affix: true, hidden: false }
+        meta: {
+          title: '首页',
+          icon: 'icon-dashboard',
+          svgIcon: 'menu-home',
+          affix: true,
+          hidden: false,
+          breadcrumb: false
+        }
       }
     ]
   }
@@ -60,10 +67,10 @@ const router = createRouter({
  */
 export function resetRouter() {
   try {
+    const staticRouteNames = constantRoutes.filter((i) => i.name).map((j) => j.name)
     router.getRoutes().forEach((route) => {
       const { name } = route
-      // console.log('name', name, path)
-      if (name && name !== 'Home') {
+      if (name && !staticRouteNames.includes(name)) {
         router.hasRoute(name) && router.removeRoute(name)
       }
     })

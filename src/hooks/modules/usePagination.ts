@@ -1,4 +1,5 @@
-import { reactive, toRefs } from 'vue'
+import { reactive, toRefs, watch } from 'vue'
+import { useBreakpoint } from '@/hooks'
 
 type Callback = () => void
 
@@ -6,13 +7,16 @@ type Options = {
   defaultPageSize: number
 }
 
-export default function usePagination(callback: Callback, options: Options = { defaultPageSize: 10 }) {
+export function usePagination(callback: Callback, options: Options = { defaultPageSize: 10 }) {
+  const { breakpoint } = useBreakpoint()
+
   const pagination = reactive({
     showPageSize: true,
     showTotal: true,
     current: 1,
     pageSize: options.defaultPageSize,
     total: 0,
+    simple: false,
     onChange: (size: number) => {
       pagination.current = size
       callback && callback()
@@ -23,6 +27,15 @@ export default function usePagination(callback: Callback, options: Options = { d
       callback && callback()
     }
   })
+
+  watch(
+    () => breakpoint.value,
+    () => {
+      pagination.simple = ['xs'].includes(breakpoint.value)
+      pagination.showTotal = !['xs'].includes(breakpoint.value)
+    },
+    { immediate: true }
+  )
 
   const changeCurrent = pagination.onChange
   const changePageSize = pagination.onPageSizeChange

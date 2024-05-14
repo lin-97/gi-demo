@@ -8,7 +8,7 @@
     </template>
     <a-row :gutter="30">
       <a-col :xs="24" :sm="24" :md="12">
-        <GiForm ref="formRef" :options="options" :columns="columns" v-model="form">
+        <GiForm ref="formRef" v-model="form" :options="options" :columns="columns">
           <template #btns>
             <a-row justify="end" class="w-full">
               <a-space>
@@ -30,7 +30,7 @@
 <script setup lang="ts">
 import { Message } from '@arco-design/web-vue'
 import GiCodeView from '@/components/GiCodeView/index.vue'
-import { GiForm, type Options, type Columns } from '@/components/GiForm'
+import { type Columns, GiForm, type Options } from '@/components/GiForm'
 import * as Regexp from '@/utils/regexp'
 import { getAreaList } from '@/apis'
 
@@ -52,6 +52,7 @@ const formRef = ref<InstanceType<typeof GiForm>>()
 
 const options: Options = {
   form: {},
+  col: { xs: 24, sm: 12 },
   btns: { hide: true }
 }
 
@@ -60,7 +61,6 @@ const columns: Columns<typeof form> = reactive([
     type: 'input',
     label: '姓名',
     field: 'name',
-    col: { xs: 24, sm: 12 },
     props: {
       maxLength: 4
     },
@@ -74,7 +74,6 @@ const columns: Columns<typeof form> = reactive([
     type: 'input',
     label: '手机',
     field: 'phone',
-    col: { xs: 24, sm: 12 },
     props: {
       maxLength: 11
     },

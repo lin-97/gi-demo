@@ -26,10 +26,7 @@
           <a-input v-model="form.name" placeholder="输入菜单名称搜索" allow-clear style="width: 250px">
             <template #prefix><icon-search /></template>
           </a-input>
-          <a-select v-model="form.status" placeholder="菜单状态" style="width: 120px">
-            <a-option :value="1">正常</a-option>
-            <a-option :value="0">禁用</a-option>
-          </a-select>
+          <a-select v-model="form.status" :options="options" placeholder="菜单状态" style="width: 120px"></a-select>
           <a-button type="primary" @click="search">
             <template #icon><icon-search /></template>
             <span>搜索</span>
@@ -41,16 +38,8 @@
         </a-space>
       </a-row>
 
-      <a-table
-        ref="TableRef"
-        row-key="id"
-        :data="menuList"
-        :loading="loading"
-        :bordered="{ cell: true }"
-        :scroll="{ x: '100%', y: '100%', minWidth: 1700 }"
-        :pagination="false"
-        size="mini"
-      >
+      <a-table ref="tableRef" row-key="id" :data="menuList" :loading="loading" :bordered="{ cell: true }"
+        :scroll="{ x: '100%', y: '100%', minWidth: 1700 }" :pagination="false" size="mini">
         <template #expand-icon="{ expanded }">
           <IconDown v-if="expanded" />
           <IconRight v-else />
@@ -61,9 +50,9 @@
           </a-table-column>
           <a-table-column title="类型" :width="80" align="center">
             <template #cell="{ record }">
-              <a-tag v-if="record.type === 1" color="orangered">目录</a-tag>
-              <a-tag v-if="record.type === 2" color="green">菜单</a-tag>
-              <a-tag v-if="record.type === 3">按钮</a-tag>
+              <a-tag v-if="record.type === 1" size="small" color="orangered">目录</a-tag>
+              <a-tag v-if="record.type === 2" size="small" color="green">菜单</a-tag>
+              <a-tag v-if="record.type === 3" size="small">按钮</a-tag>
             </template>
           </a-table-column>
           <a-table-column title="排序" :width="80" align="center">
@@ -79,37 +68,32 @@
             <template #cell="{ record }">
               <GiSvgIcon v-if="record.svgIcon" :size="24" :name="record.svgIcon"></GiSvgIcon>
               <template v-else>
-                <component v-if="record.icon" :is="record.icon" :size="24"></component>
+                <component :is="record.icon" v-if="record.icon" :size="24"></component>
               </template>
             </template>
           </a-table-column>
           <a-table-column title="状态" :width="80" align="center">
             <template #cell="{ record }">
-              <a-switch
-                type="round"
-                size="small"
-                :model-value="record.status"
-                :checked-value="1"
-                :unchecked-value="0"
-              />
+              <a-switch type="round" size="small" :model-value="record.status" :checked-value="1"
+                :unchecked-value="0" />
             </template>
           </a-table-column>
           <a-table-column title="是否缓存" :width="100" align="center">
             <template #cell="{ record }">
-              <a-tag v-if="record.keepAlive" color="green">是</a-tag>
-              <a-tag v-else color="red">否</a-tag>
+              <a-tag v-if="record.keepAlive" size="small" color="green">是</a-tag>
+              <a-tag v-else size="small" color="red">否</a-tag>
             </template>
           </a-table-column>
           <a-table-column title="是否隐藏" :width="100" align="center">
             <template #cell="{ record }">
-              <a-tag v-if="record.hidden" color="green">是</a-tag>
-              <a-tag v-else color="red">否</a-tag>
+              <a-tag v-if="record.hidden" size="small" color="green">是</a-tag>
+              <a-tag v-else size="small" color="red">否</a-tag>
             </template>
           </a-table-column>
           <a-table-column title="是否外链" :width="100" align="center">
             <template #cell="{ record }">
-              <a-tag v-if="isExternal(record.path)" color="green">是</a-tag>
-              <a-tag v-else color="red">否</a-tag>
+              <a-tag v-if="isExternal(record.path)" size="small" color="green">是</a-tag>
+              <a-tag v-else size="small" color="red">否</a-tag>
             </template>
           </a-table-column>
           <a-table-column title="操作" :width="200" align="left" :fixed="!isMobile() ? 'right' : undefined">
@@ -122,7 +106,7 @@
                 <a-button v-if="[1, 2].includes(record.type)" type="primary" status="success" size="mini">
                   <template #icon><icon-plus /></template>
                 </a-button>
-                <a-popconfirm type="warning" content="您确定要删除该项吗?">
+                <a-popconfirm type="warning" content="您确定要删除该项吗?" @before-ok="onDelete(record)">
                   <a-button type="primary" status="danger" size="mini">
                     <template #icon><icon-delete /></template>
                     <span>删除</span>
@@ -140,47 +124,40 @@
 </template>
 
 <script setup lang="ts">
-import AddMenuModal from './AddMenuModal.vue'
-import { getSystemMenuList, type MenuItem } from '@/apis'
 import { Drawer, type TableInstance } from '@arco-design/web-vue'
+import AddMenuModal from './AddMenuModal.vue'
+import { type MenuItem, deleteBaseApi, getSystemMenuList } from '@/apis'
 import { isExternal } from '@/utils/validate'
-import { transformPathToName, isMobile } from '@/utils'
+import { isMobile, transformPathToName } from '@/utils'
+import { useDict } from '@/hooks/app'
+import { useTable } from '@/hooks'
 import GiCodeView from '@/components/GiCodeView/index.vue'
 
 defineOptions({ name: 'SystemMenu' })
 
+const { data: options } = useDict({ code: 'status' })
 const AddMenuModalRef = ref<InstanceType<typeof AddMenuModal>>()
-const loading = ref(false)
 
-const TableRef = ref<TableInstance>()
+const tableRef = ref<TableInstance>()
 const isExpanded = ref(false)
 const onExpanded = () => {
   isExpanded.value = !isExpanded.value
-  TableRef.value?.expandAll(isExpanded.value)
+  tableRef.value?.expandAll(isExpanded.value)
 }
 
 const form = reactive({ name: '', status: '' })
-const menuList = ref<MenuItem[]>([])
 
-const getMenuList = async () => {
-  try {
-    loading.value = true
-    const res = await getSystemMenuList()
-    menuList.value = res.data
-  } finally {
-    loading.value = false
-  }
-}
-getMenuList()
-
-const search = () => {
-  getMenuList()
-}
+const {
+  loading,
+  tableData: menuList,
+  search,
+  handleDelete
+} = useTable(() => getSystemMenuList(), { immediate: true })
 
 const reset = () => {
   form.name = ''
   form.status = ''
-  getMenuList()
+  search()
 }
 
 const onAdd = () => {
@@ -189,6 +166,10 @@ const onAdd = () => {
 
 const onEdit = (item: MenuItem) => {
   AddMenuModalRef.value?.edit(item.id)
+}
+
+const onDelete = async (item: MenuItem) => {
+  return handleDelete(() => deleteBaseApi({ ids: [item.id] }), { showModal: false })
 }
 
 const onViewCode = () => {
@@ -200,7 +181,4 @@ const onViewCode = () => {
 }
 </script>
 
-<style lang="scss" scoped>
-.menu-manage {
-}
-</style>
+<style lang="scss" scoped></style>

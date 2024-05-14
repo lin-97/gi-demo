@@ -1,5 +1,5 @@
-import http from '@/utils/http'
 import type * as System from './type'
+import http from '@/utils/http'
 
 /** @desc 获取部门数据 */
 export function getSystemDeptList() {
@@ -7,11 +7,6 @@ export function getSystemDeptList() {
 }
 
 /** @desc 获取部门详情 */
-export function getSystemDeptDetil(params: { id: string }) {
+export function getSystemDeptDetail(params: { id: string }) {
   return http.get<System.DeptItem>('/system/dept/detail', params)
-}
-
-/** @desc 保存部门 */
-export function saveSystemDept(data: any) {
-  return http.post<boolean>('/system/dept/save', data)
 }

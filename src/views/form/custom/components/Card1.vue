@@ -8,14 +8,8 @@
     </template>
     <a-row :gutter="30">
       <a-col :xs="24" :sm="24" :md="12">
-        <GiForm
-          class="gi_mb"
-          :options="options"
-          :columns="columns"
-          v-model="form"
-          @search="search"
-          @reset="reset"
-        ></GiForm>
+        <GiForm v-model="form" class="gi_mb" :options="options" :columns="columns" @search="search" @reset="reset">
+        </GiForm>
       </a-col>
       <a-col :xs="24" :sm="24" :md="12">
         <GiCodeView :code-json="JSON.stringify(form, null, '\t')"></GiCodeView>
@@ -26,9 +20,9 @@
 
 <script setup lang="ts">
 import { Drawer, Message } from '@arco-design/web-vue'
-import type { Options, Columns } from '@/components/GiForm'
-import GiCodeView from '@/components/GiCodeView/index.vue'
 import { useWindowSize } from '@vueuse/core'
+import type { Columns, Options } from '@/components/GiForm'
+import GiCodeView from '@/components/GiCodeView/index.vue'
 
 const { width } = useWindowSize()
 
@@ -40,6 +34,7 @@ const form = reactive({
 
 const options: Options = {
   form: { layout: 'inline' },
+  col: { xs: 24, sm: 12 },
   fold: { enable: true, index: 0 },
   btns: { col: { xs: 24, sm: 12 } }
 }
@@ -49,7 +44,6 @@ const columns: Columns = reactive([
     type: 'input',
     label: '姓名',
     field: 'name',
-    col: { xs: 24, sm: 12 },
     props: {
       maxLength: 4
     }
@@ -58,7 +52,6 @@ const columns: Columns = reactive([
     type: 'input',
     label: '手机',
     field: 'phone',
-    col: { xs: 24, sm: 12 },
     props: {
       maxLength: 11
     }
@@ -67,7 +60,6 @@ const columns: Columns = reactive([
     type: 'select',
     label: '状态',
     field: 'status',
-    col: { xs: 24, sm: 12 },
     options: [
       { label: '启用', value: 1 },
       { label: '禁用', value: 0 }

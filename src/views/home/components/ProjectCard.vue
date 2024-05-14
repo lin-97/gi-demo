@@ -1,18 +1,18 @@
 <template>
   <a-card title="项目" :bordered="false" size="medium" class="gi_card_title" style="overflow: hidden">
     <a-row align="stretch">
-      <a-col :xs="12" :sm="8" :md="8" v-for="(item, index) in list" :key="item.name">
+      <a-col v-for="(item, index) in list" :key="item.name" :xs="12" :sm="8" :md="8">
         <a-card-grid class="w-full h-full">
-          <a-card :bordered="false" hoverable :class="'animated-fade-up-' + index">
+          <a-card :bordered="false" hoverable :class="`animated-fade-up-${index}`">
             <section class="item">
-              <div class="head">
+              <div class="item__header">
                 <GiSvgIcon :size="30" :name="item.icon"></GiSvgIcon>
-                <span class="name gi_line_1">{{ item.name }}</span>
+                <span class="item__name gi_line_1">{{ item.name }}</span>
               </div>
-              <div class="middle">
-                <p class="desc gi_line_2">{{ item.desc }}</p>
+              <div class="item__middle">
+                <p class="item__desc gi_line_2">{{ item.desc }}</p>
               </div>
-              <p class="foot gi_line_1">{{ item.source }} {{ Dayjs(new Date()).format('YYYY-MM-DD') }}</p>
+              <p class="item__footer gi_line_1">{{ item.source }} {{ Dayjs(new Date()).format('YYYY-MM-DD') }}</p>
             </section>
           </a-card>
         </a-card-grid>
@@ -67,6 +67,7 @@ const list = [
 <style lang="scss" scoped>
 :deep(.arco-card) {
   height: 100%;
+
   .arco-card-body {
     height: 100%;
     box-sizing: border-box;
@@ -81,32 +82,34 @@ const list = [
   height: 100%;
   display: flex;
   flex-direction: column;
-}
 
-.head {
-  display: flex;
-  align-items: center;
-  .name {
+  &__header {
+    display: flex;
+    align-items: center;
+  }
+
+  &__name {
     margin-left: 10px;
     font-size: 1.125rem;
     line-height: 1.75rem;
     color: var(--color-text-1);
   }
-}
 
-.middle {
-  flex: 1;
-  .desc {
+  &__middle {
+    flex: 1;
+  }
+
+  &__desc {
     flex: 1;
     margin-top: 10px;
     line-height: 1.5;
     color: var(--color-text-2);
   }
-}
 
-.foot {
-  font-size: 12px;
-  color: var(--color-text-3);
-  margin-top: 8px;
+  &__footer {
+    font-size: 12px;
+    color: var(--color-text-3);
+    margin-top: 8px;
+  }
 }
 </style>

@@ -1,42 +1,26 @@
 <template>
   <div class="file-grid">
     <a-grid :cols="{ xs: 4, sm: 4, md: 5, lg: 7, xl: 8, xxl: 9 }" :col-gap="12" :row-gap="12">
-      <a-trigger
-        v-for="item in data"
-        :key="item.id"
-        trigger="contextMenu"
-        align-point
-        animation-name="slide-dynamic-origin"
-        auto-fit-transform-origin
-        position="bl"
-        update-at-scroll
-        scroll-to-close
-      >
+      <a-trigger v-for="item in data" :key="item.id" trigger="contextMenu" align-point
+        animation-name="slide-dynamic-origin" auto-fit-transform-origin position="bl" update-at-scroll scroll-to-close>
         <a-grid-item>
           <div class="file-grid-item" @click.stop="handleClickFile(item)">
-            <div class="wrapper">
+            <section class="file-grid-item__wrapper">
               <div class="file-icon">
-                <FileImg :data="item"></FileImg>
+                <FileImage :data="item"></FileImage>
               </div>
               <p class="gi_line_1 file-name">{{ getFileName(item) }}</p>
-            </div>
+            </section>
             <!-- 勾选模式 -->
-            <section
-              v-show="props.isBatchMode"
-              class="check-mode"
-              :class="{ checked: props.selectedFileIds.includes(item.id) }"
-              @click.stop="handleCheckFile(item)"
-            >
-              <a-checkbox
-                class="checkbox"
-                :model-value="props.selectedFileIds.includes(item.id)"
-                @change="handleCheckFile(item)"
-              ></a-checkbox>
+            <section v-show="props.isBatchMode" class="check-mode"
+              :class="{ checked: props.selectedFileIds.includes(item.id) }" @click.stop="handleCheckFile(item)">
+              <a-checkbox class="checkbox" :model-value="props.selectedFileIds.includes(item.id)"
+                @change="handleCheckFile(item)"></a-checkbox>
             </section>
           </div>
         </a-grid-item>
         <template #content>
-          <FileRightMenu :file-info="item" @click="handleRightMenuItemClick($event, item)"></FileRightMenu>
+          <FileRightMenu :data="item" @click="handleRightMenuClick($event, item)"></FileRightMenu>
         </template>
       </a-trigger>
     </a-grid>
@@ -44,7 +28,7 @@
 </template>
 
 <script setup lang="ts">
-import FileImg from './FileImg.vue'
+import FileImage from './FileImage.vue'
 import FileRightMenu from './FileRightMenu.vue'
 import type { FileItem } from '@/apis'
 
@@ -60,7 +44,11 @@ const props = withDefaults(defineProps<Props>(), {
   isBatchMode: false // 是否是批量模式
 })
 
-const emit = defineEmits(['click', 'check', 'right-menu-click'])
+const emit = defineEmits<{
+  (e: 'click', record: FileItem): void
+  (e: 'select', record: FileItem): void
+  (e: 'right-menu-click', mode: string, item: FileItem): void
+}>()
 
 // 文件名称带后缀
 const getFileName = (item: FileItem) => {
@@ -74,11 +62,11 @@ const handleClickFile = (item: FileItem) => {
 
 // 选中事件
 const handleCheckFile = (item: FileItem) => {
-  emit('check', item)
+  emit('select', item)
 }
 
 // 右键菜单点击事件
-const handleRightMenuItemClick = (mode: string, item: FileItem) => {
+const handleRightMenuClick = (mode: string, item: FileItem) => {
   emit('right-menu-click', mode, item)
 }
 </script>
@@ -99,15 +87,19 @@ const handleRightMenuItemClick = (mode: string, item: FileItem) => {
   align-items: center;
   position: relative;
   cursor: pointer;
+
   &:hover {
     background: var(--color-primary-light-1);
   }
+
   &:active {
+
     svg,
     img {
       transform: scale(0.9);
     }
   }
+
   .check-mode {
     position: absolute;
     left: 0;
@@ -116,9 +108,11 @@ const handleRightMenuItemClick = (mode: string, item: FileItem) => {
     bottom: 0;
     background: rgba(0, 0, 0, 0.1);
     z-index: 9;
+
     &.checked {
       background: none;
     }
+
     .checkbox {
       position: absolute;
       top: 5px;
@@ -126,7 +120,8 @@ const handleRightMenuItemClick = (mode: string, item: FileItem) => {
       padding-left: 0;
     }
   }
-  .wrapper {
+
+  &__wrapper {
     width: 76%;
     max-width: 100px;
     height: 100%;
@@ -137,22 +132,26 @@ const handleRightMenuItemClick = (mode: string, item: FileItem) => {
     flex-direction: column;
     justify-content: center;
     align-items: center;
+
     .file-icon {
       width: 100%;
       height: 60px;
       display: flex;
       justify-content: center;
       overflow: hidden;
-      .img {
+
+      >img {
         width: auto;
         height: 100%;
         transition: all 0.3s;
       }
-      .svg-img {
+
+      >svg {
         height: 100%;
         transition: all 0.3s;
       }
     }
+
     .file-name {
       width: 100%;
       font-size: 12px;

@@ -1,6 +1,6 @@
 <template>
   <transition name="fade-mask" mode="out-in" appear @after-leave="destroy">
-    <div class="message-mask" v-show="visible">
+    <div v-show="visible" class="message-mask">
       <transition name="zoom-message" mode="out-in" appear>
         <section class="message">
           <div class="icon" :class="props.type">
@@ -14,8 +14,7 @@
 </template>
 
 <script lang="ts" setup>
-import { IconCheckCircle, IconExclamationCircle, IconCloseCircle } from '@arco-design/web-vue/es/icon'
-// import type { Props } from './type'
+import { IconCheckCircle, IconCloseCircle, IconExclamationCircle } from '@arco-design/web-vue/es/icon'
 
 interface Props {
   type?: 'success' | 'warning' | 'error'
@@ -23,6 +22,13 @@ interface Props {
   duration?: number
   destroy?: () => void
 }
+
+const props = withDefaults(defineProps<Props>(), {
+  type: 'success',
+  content: '',
+  duration: 2000,
+  destroy: undefined
+})
 
 const TypeMap = {
   success: {
@@ -38,12 +44,6 @@ const TypeMap = {
     icon: IconCloseCircle
   }
 }
-
-const props = withDefaults(defineProps<Props>(), {
-  type: 'success',
-  content: '',
-  duration: 2000
-})
 
 const visible = ref(false)
 

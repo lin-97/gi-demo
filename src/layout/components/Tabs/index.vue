@@ -1,39 +1,32 @@
 <template>
-  <div class="tabs" v-if="appStore.tab">
-    <a-tabs
-      editable
-      hide-content
-      size="medium"
-      :type="appStore.tabMode"
-      :active-key="route.path"
-      @tab-click="(key) => handleTabClick(key as string)"
-      @delete="tabsStore.closeCurrent"
-    >
-      <a-tab-pane
-        v-for="item of tabsStore.tagList"
-        :key="item.path"
-        :title="(item.meta?.title as string)"
-        :closable="Boolean(!item.meta?.affix)"
-      >
+  <div v-if="appStore.tab" class="tabs">
+    <a-tabs editable hide-content size="medium" :type="appStore.tabMode" :active-key="route.path"
+      @tab-click="(key) => handleTabClick(key as string)" @delete="tabsStore.closeCurrent">
+      <a-tab-pane v-for="item of tabsStore.tagList" :key="item.path" :title="(item.meta?.title as string)"
+        :closable="Boolean(!item.meta?.affix)">
       </a-tab-pane>
       <template #extra>
-        <a-dropdown trigger="hover">
-          <MagicIcon class="gi_mr"></MagicIcon>
-          <template #content>
-            <a-doption @click="tabsStore.closeCurrent(route.path)">
-              <template #icon><icon-close /></template>
-              <template #default>关闭当前</template>
-            </a-doption>
-            <a-doption @click="tabsStore.closeOther(route.path)">
-              <template #icon><icon-eraser /></template>
-              <template #default>关闭其他</template>
-            </a-doption>
-            <a-doption @click="tabsStore.closeAll">
-              <template #icon><icon-minus /></template>
-              <template #default>关闭全部</template>
-            </a-doption>
-          </template>
-        </a-dropdown>
+        <a-space size="medium">
+          <ReloadIcon></ReloadIcon>
+
+          <a-dropdown trigger="hover">
+            <MagicIcon class="gi_mr"></MagicIcon>
+            <template #content>
+              <a-doption @click="tabsStore.closeCurrent(route.path)">
+                <template #icon><icon-close /></template>
+                <template #default>关闭当前</template>
+              </a-doption>
+              <a-doption @click="tabsStore.closeOther(route.path)">
+                <template #icon><icon-eraser /></template>
+                <template #default>关闭其他</template>
+              </a-doption>
+              <a-doption @click="tabsStore.closeAll">
+                <template #icon><icon-minus /></template>
+                <template #default>关闭全部</template>
+              </a-doption>
+            </template>
+          </a-dropdown>
+        </a-space>
       </template>
     </a-tabs>
   </div>
@@ -41,8 +34,9 @@
 
 <script setup lang="ts">
 import type { RouteRecordRaw } from 'vue-router'
-import { useTabsStore, useAppStore } from '@/stores'
 import MagicIcon from './MagicIcon.vue'
+import ReloadIcon from './ReloadIcon.vue'
+import { useAppStore, useTabsStore } from '@/stores'
 
 defineOptions({ name: 'Tabs' })
 const route = useRoute()
@@ -62,10 +56,10 @@ watch(
 )
 
 // 路由发生改变触发
-const handleRouteChange = () => {
+function handleRouteChange() {
   const item = { ...route } as unknown as RouteRecordRaw
-  tabsStore.addTagItem(item)
-  tabsStore.addCacheItem(item)
+  tabsStore.addTagItem(toRaw(item))
+  tabsStore.addCacheItem(toRaw(item))
   // console.log('路由对象', toRaw(item))
   // console.log('tagList', toRaw(tabsStore.tagList))
   // console.log('cacheList', toRaw(tabsStore.cacheList))
@@ -82,16 +76,19 @@ const handleTabClick = (key: string) => {
 :deep(.arco-tabs-nav-tab) {
   .arco-tabs-tab {
     border-bottom-color: transparent !important;
+
     svg {
       width: 0;
       transition: all 0.15s;
     }
+
     &:hover {
       svg {
         width: 1em;
       }
     }
   }
+
   &:not(.arco-tabs-nav-tab-scroll) {
     .arco-tabs-tab:first-child {
       border-left: 0;

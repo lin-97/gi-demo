@@ -1,17 +1,47 @@
+import { URL, fileURLToPath } from 'node:url'
+import path from 'node:path'
 import { defineConfig, loadEnv } from 'vite'
 import vue from '@vitejs/plugin-vue'
 import vueJsx from '@vitejs/plugin-vue-jsx'
 import AutoImport from 'unplugin-auto-import/vite'
 import Components from 'unplugin-vue-components/vite'
-import { fileURLToPath, URL } from 'url'
 import { createSvgIconsPlugin } from 'vite-plugin-svg-icons'
 import { viteMockServe } from 'vite-plugin-mock'
-import path from 'path'
 
-export default defineConfig(({ command, mode }) => {
+export default defineConfig(({ mode }) => {
   const env = loadEnv(mode, process.cwd()) as ImportMetaEnv
 
   return {
+    // 开发或生产环境服务的公共基础路径
+    base: env.VITE_BASE,
+    // 路径别名
+    resolve: {
+      alias: {
+        '~': fileURLToPath(new URL('./', import.meta.url)),
+        '@': fileURLToPath(new URL('./src', import.meta.url))
+      }
+    },
+    // 引入sass全局样式变量
+    css: {
+      preprocessorOptions: {
+        scss: {
+          additionalData: `@import "@/styles/var.scss";`
+        }
+      }
+    },
+    server: {
+      // 服务启动时是否自动打开浏览器
+      open: false,
+      // 本地跨域代理 -> 代理到服务器的接口地址
+      proxy: {
+        '/api': {
+          target: env.VITE_API_BASE_URL, // 后台服务器地址
+          changeOrigin: true, // 是否允许不同源
+          secure: false, // 支持https
+          rewrite: (path) => path.replace(/^\/api/, '/api')
+        }
+      }
+    },
     plugins: [
       vue(),
       vueJsx(),
@@ -34,43 +64,18 @@ export default defineConfig(({ command, mode }) => {
         symbolId: 'icon-[dir]-[name]'
       }),
       viteMockServe({
-        mockPath: './src/mock/', // 目录位置
+        mockPath: 'mock', // 目录位置
         logger: true, //  是否在控制台显示请求日志
         supportTs: true, // 是否读取ts文件模块
-        localEnabled: command === 'serve', // 设置是否启用本地mock文件
-        prodEnabled: command !== 'serve' && true, // 设置打包是否启用mock功能
+        localEnabled: true, // 设置是否启用本地mock文件
+        prodEnabled: true, // 设置打包是否启用mock功能
         // 这样可以控制关闭mock的时候不让mock打包到最终代码内
         injectCode: `
-          import { setupProdMockServer } from '../src/mock/index';
+          import { setupProdMockServer } from '../mock/index';
           setupProdMockServer();
         `
       })
     ],
-    resolve: {
-      alias: {
-        '~': fileURLToPath(new URL('./', import.meta.url)),
-        '@': fileURLToPath(new URL('./src', import.meta.url))
-      }
-    },
-    base: env.VITE_PUBLIC_PATH,
-    // 引入sass全局样式变量
-    css: {
-      preprocessorOptions: {
-        scss: {
-          additionalData: `@import "@/styles/var.scss";`
-        }
-      }
-    },
-    server: {
-      proxy: {
-        '/api': {
-          target: env.VITE_API_BASE_URL, // 后台服务器地址
-          changeOrigin: true, // 是否允许不同源
-          secure: false, // 支持https
-          rewrite: (path) => path.replace(/^\/api/, '/api')
-        }
-      }
-    },
     // 构建
     build: {
       chunkSizeWarningLimit: 2000, // 消除打包大小超过500kb警告

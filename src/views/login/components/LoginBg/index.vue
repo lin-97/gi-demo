@@ -26,11 +26,13 @@ import CornerBottom from './CornerBottom.vue'
   position: fixed;
   overflow: hidden;
   z-index: 1;
+
   .corner-top-box {
     position: absolute;
     top: -1000px;
     right: -700px;
   }
+
   .corner-bottom-box {
     position: absolute;
     bottom: -600px;
@@ -43,6 +45,7 @@ import CornerBottom from './CornerBottom.vue'
   position: fixed;
   z-index: 9999;
 }
+
 .bg-fly-circle1 {
   left: 40px;
   top: 100px;

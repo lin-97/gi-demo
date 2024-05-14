@@ -15,7 +15,7 @@
       <a-typography-title :heading="4">当前页面角色权限</a-typography-title>
       <GiCodeView :code-json="JSON.stringify(['role_admin'])"></GiCodeView>
 
-      <section class="item">
+      <section class="wrap__item">
         <GiCodeView type="vue" :code-json="pre1"></GiCodeView>
         <a-space class="gi_mt">
           <a-button v-hasPerm="['test:btn:add']" type="primary">新增</a-button>
@@ -24,7 +24,7 @@
         </a-space>
       </section>
 
-      <section class="item">
+      <section class="wrap__item">
         <GiCodeView type="vue" :code-json="pre2"></GiCodeView>
         <a-space class="gi_mt">
           <a-button v-hasPerm="['user:btn:add']" type="primary">新增</a-button>
@@ -58,7 +58,8 @@ const pre2 = `<a-space>
 <style lang="scss" scoped>
 .wrap {
   padding: 20px;
-  .item {
+
+  &__item {
     margin-top: 40px;
   }
 }

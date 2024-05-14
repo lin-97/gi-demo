@@ -1,5 +1,5 @@
 <template>
-  <a-form ref="FormRef" :model="form" :rules="rules">
+  <a-form ref="formRef" :model="form" :rules="rules">
     <a-form-item label="用户名" field="name">
       <a-input v-model="form.name" placeholder="请输入用户名" :max-length="4" allow-clear />
     </a-form-item>
@@ -20,9 +20,9 @@ const form = reactive({
   phone: ''
 })
 
-const FormRef = ref<FormInstance | null>(null)
+const formRef = ref<FormInstance | null>(null)
 
-const rules = {
+const rules: FormInstance['rules'] = {
   name: [
     { required: true, message: '请输入姓名' },
     { match: Regexp.OnlyCh, message: '只能是中文姓名' },
@@ -43,8 +43,8 @@ const saveUserApi = () => {
 }
 
 const handleAddUser = async () => {
-  const flag = await FormRef.value?.validate()
-  if (flag) return false
+  const valid = await formRef.value?.validate()
+  if (valid) return false
   try {
     await saveUserApi()
     return true

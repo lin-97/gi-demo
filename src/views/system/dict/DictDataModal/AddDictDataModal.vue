@@ -18,8 +18,8 @@
         </a-form-item>
         <a-form-item label="状态" field="status">
           <a-switch
-            type="round"
             v-model="form.status"
+            type="round"
             :checked-value="1"
             :unchecked-value="0"
             checked-text="正常"
@@ -32,8 +32,8 @@
 </template>
 
 <script setup lang="ts">
-import { getSystemDictDataDetail, saveSystemDictData } from '@/apis'
-import { Message, type FormInstance } from '@arco-design/web-vue'
+import { type FormInstance, Message } from '@arco-design/web-vue'
+import { getSystemDictDataDetail, saveBaseApi } from '@/apis'
 import { useForm } from '@/hooks'
 
 const emit = defineEmits<{
@@ -67,9 +67,9 @@ const add = () => {
   visible.value = true
 }
 
-const edit = async (data: { id: string; code: string }) => {
-  dictDataId.value = data.id
+const edit = async (data: { id: string, code: string }) => {
   visible.value = true
+  dictDataId.value = data.id
   loading.value = true
   const res = await getSystemDictDataDetail(data)
   Object.assign(form, res.data)
@@ -85,9 +85,9 @@ defineExpose({ add, edit })
 
 const save = async () => {
   try {
-    const obj = await formRef.value?.validate()
-    if (obj) return false
-    const res = await saveSystemDictData(form)
+    const valid = await formRef.value?.validate()
+    if (valid) return false
+    const res = await saveBaseApi(form)
     if (res.data) {
       Message.success('模拟保存成功')
       emit('save-success')

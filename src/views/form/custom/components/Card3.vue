@@ -15,23 +15,24 @@
       </a-space>
     </a-card>
 
-    <a-drawer :title="isEdit ? '编辑' : '新增'" :width="width >= 600 ? 600 : '100%'" v-model:visible="visible">
-      <GiForm :options="options" :columns="columns" v-model="form"></GiForm>
+    <a-drawer v-model:visible="visible" :title="isEdit ? '编辑' : '新增'" :width="width >= 600 ? 600 : '100%'">
+      <GiForm v-model="form" :options="options" :columns="columns"></GiForm>
     </a-drawer>
   </a-card>
 </template>
 
 <script setup lang="ts">
 import { Modal } from '@arco-design/web-vue'
-import * as Regexp from '@/utils/regexp'
-import { cityOptions, deptData } from './data'
-import { GiForm, useGiForm, type Options, type Columns } from '@/components/GiForm'
 import { useWindowSize } from '@vueuse/core'
+import { cityOptions, deptData } from './data'
+import * as Regexp from '@/utils/regexp'
+import { type Columns, GiForm, type Options, useGiForm } from '@/components/GiForm'
 
 const { width } = useWindowSize()
 
 const options: Options = {
   form: {},
+  col: { xs: 24, sm: 12 },
   btns: { hide: true }
 }
 
@@ -40,7 +41,6 @@ const initColumns: Columns = [
     type: 'input',
     label: '姓名',
     field: 'name',
-    col: { xs: 24, sm: 12 },
     props: {
       maxLength: 4
     },
@@ -54,7 +54,6 @@ const initColumns: Columns = [
     type: 'input',
     label: '手机',
     field: 'phone',
-    col: { xs: 24, sm: 12 },
     props: {
       maxLength: 11
     },
@@ -67,7 +66,6 @@ const initColumns: Columns = [
     type: 'select',
     label: '性别',
     field: 'sex',
-    col: { xs: 24, sm: 12 },
     options: [
       { label: '男', value: 1 },
       { label: '女', value: 0 }
@@ -76,8 +74,7 @@ const initColumns: Columns = [
   {
     type: 'date-picker',
     label: '生日',
-    field: 'birthday',
-    col: { xs: 24, sm: 12 }
+    field: 'birthday'
   },
   {
     type: 'checkbox-group',
@@ -95,7 +92,6 @@ const initColumns: Columns = [
     type: 'input-number',
     label: '排序',
     field: 'sort',
-    col: { xs: 24, sm: 12 },
     props: {
       min: 0
     }
@@ -104,7 +100,6 @@ const initColumns: Columns = [
     type: 'radio-group',
     label: '状态',
     field: 'status',
-    col: { xs: 24, sm: 12 },
     options: [
       { label: '启用', value: 1 },
       { label: '禁用', value: 0 }
@@ -113,34 +108,29 @@ const initColumns: Columns = [
   {
     type: 'rate',
     label: '评分',
-    field: 'mark',
-    col: { xs: 24, sm: 12 }
+    field: 'mark'
   },
   {
     type: 'switch',
     label: '是否隐藏',
     field: 'hide',
-    col: { xs: 24, sm: 12 },
     item: { extra: '隐藏成绩项' }
   },
   {
     type: 'slider',
     label: '成绩',
-    field: 'grade',
-    col: { xs: 24, sm: 24 }
+    field: 'grade'
   },
   {
     type: 'cascader',
     label: '城市',
     field: 'city',
-    col: { xs: 24, sm: 12 },
     options: cityOptions
   },
   {
     type: 'tree-select',
     label: '部门',
     field: 'dept',
-    col: { xs: 24, sm: 12 },
     data: deptData
   },
   {
@@ -155,6 +145,7 @@ const initColumns: Columns = [
 const { columns, resetColumns, setPropsValue } = useGiForm(initColumns)
 
 const form = reactive({
+  name: '',
   remark: '这是备注这是备注',
   status: 1
 })
@@ -165,11 +156,12 @@ const onAdd = () => {
     title: '新增',
     width: '90%',
     modalStyle: { maxWidth: '600px' },
+    fullscreen: width.value < 600,
     content: () =>
       h(GiForm, {
-        options: options,
-        columns: columns,
-        modelValue: form,
+        'options': options,
+        'columns': columns,
+        'modelValue': form,
         'onUpdate:modelValue': (e) => Object.assign(form, e)
       })
   })
@@ -178,18 +170,25 @@ const onAdd = () => {
 const onEdit = () => {
   setPropsValue('status', 'disabled', true) // 禁用 状态
   setPropsValue('hide', 'disabled', true) // 禁用 是否隐藏
-  Modal.open({
+  const option = {
     title: '编辑',
     width: '90%',
     modalStyle: { maxWidth: '600px' },
+    fullscreen: width.value < 600,
     content: () =>
       h(GiForm, {
-        options: options,
-        columns: columns,
-        modelValue: form,
+        'options': options,
+        'columns': columns,
+        'modelValue': form,
         'onUpdate:modelValue': (e) => Object.assign(form, e)
       })
-  })
+  }
+  const instance = Modal.open(option)
+  // 模拟异步更新
+  setTimeout(() => {
+    form.name = '张三'
+    instance.update(option)
+  }, 300)
 }
 
 const visible = ref(false)

@@ -1,6 +1,6 @@
-import router from '@/router'
-import { useUserStore, useRouteStore } from '@/stores'
 import { Message } from '@arco-design/web-vue'
+import router from '@/router'
+import { useRouteStore, useUserStore } from '@/stores'
 import { getToken } from '@/utils/auth'
 import { isHttp } from '@/utils/validate'
 
@@ -49,7 +49,7 @@ router.beforeEach(async (to, from, next) => {
     }
   } else {
     // 如果没有 Token
-    if (whiteList.indexOf(to.path) !== -1) {
+    if (whiteList.includes(to.path)) {
       // 如果在免登录的白名单中，则直接进入
       next()
     } else {

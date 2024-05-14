@@ -1,9 +1,9 @@
 <template>
   <div class="file-main">
-    <!-- 面包屑导航 -->
-    <FileNavPath></FileNavPath>
+    <!-- 文件路径 -->
+    <FilePath></FilePath>
 
-    <a-row justify="space-between" class="row-operate">
+    <a-row justify="space-between" class="file-main__search">
       <!-- 左侧区域 -->
       <a-space wrap>
         <a-dropdown>
@@ -13,19 +13,23 @@
           </a-button>
           <template #content>
             <a-doption>
-              <template #icon><GiSvgIcon name="upload-file" /></template>
+              <template #icon>
+                <GiSvgIcon name="upload-file" />
+              </template>
               <span>上传文件</span>
             </a-doption>
             <a-doption>
-              <template #icon><GiSvgIcon name="upload-folder" /></template>
+              <template #icon>
+                <GiSvgIcon name="upload-folder" />
+              </template>
               <span>上传文件夹</span>
             </a-doption>
           </template>
         </a-dropdown>
 
         <a-input-group>
-          <a-select style="width: 150px" placeholder="请选择">
-            <a-option v-for="item in fileTypeList" :key="item.value">
+          <a-select placeholder="请选择" :trigger-props="{ autoFitPopupMinWidth: true }" style="width: 150px">
+            <a-option v-for="item in FileTypeList" :key="item.value">
               <template #icon>
                 <component :is="item.icon" size="18" color="#999"></component>
               </template>
@@ -33,7 +37,7 @@
             </a-option>
           </a-select>
           <a-input placeholder="请输入关键词..." allow-clear> </a-input>
-          <a-button type="primary">
+          <a-button type="primary" @click="search">
             <template #icon><icon-search /></template>
             <template #default>搜索</template>
           </a-button>
@@ -42,21 +46,17 @@
 
       <!-- 右侧区域 -->
       <a-space wrap>
-        <a-button
-          v-if="isBatchMode"
-          :disabled="!fileStore.selectedFileIds.length"
-          type="primary"
-          status="danger"
-          @click="handleMulDelete"
-          ><template #icon><icon-delete /></template
-        ></a-button>
+        <a-button v-if="isBatchMode" :disabled="!selectedFileIds.length" type="primary" status="danger"
+          @click="handleMulDelete">
+          <template #icon><icon-delete /></template>
+        </a-button>
         <a-button type="primary" @click="isBatchMode = !isBatchMode">
           <template #icon><icon-select-all /></template>
           <template #default>{{ isBatchMode ? '取消批量' : '批量操作' }}</template>
         </a-button>
         <a-button-group>
           <a-tooltip content="传输列表" position="bottom">
-            <a-button @click="loading = !loading">
+            <a-button>
               <template #icon>
                 <icon-swap />
               </template>
@@ -70,9 +70,9 @@
             </a-button>
           </a-tooltip>
           <a-tooltip content="视图" position="bottom">
-            <a-button @click="fileStore.changeViewMode">
+            <a-button @click="toggleMode">
               <template #icon>
-                <icon-apps v-if="fileStore.viewMode === 'grid'" />
+                <icon-apps v-if="mode === 'grid'" />
                 <icon-list v-else />
               </template>
             </a-button>
@@ -82,25 +82,15 @@
     </a-row>
 
     <!-- 文件列表-宫格模式 -->
-    <a-spin class="file-wrap" :loading="loading">
-      <FileGrid
-        v-show="fileList.length && fileStore.viewMode == 'grid'"
-        :data="fileList"
-        :isBatchMode="isBatchMode"
-        :selectedFileIds="fileStore.selectedFileIds"
-        @click="handleClickFile"
-        @check="handleCheckFile"
-        @right-menu-click="handleRightMenuClick"
-      ></FileGrid>
+    <a-spin class="file-main__list" :loading="loading">
+      <FileGrid v-show="fileList.length && mode === 'grid'" :data="fileList" :is-batch-mode="isBatchMode"
+        :selected-file-ids="selectedFileIds" @click="handleClickFile" @select="handleSelectFile"
+        @right-menu-click="handleRightMenuClick"></FileGrid>
 
       <!-- 文件列表-列表模式 -->
-      <FileList
-        v-show="fileList.length && fileStore.viewMode == 'list'"
-        :data="fileList"
-        :isBatchMode="isBatchMode"
-        @click="handleClickFile"
-        @right-menu-click="handleRightMenuClick"
-      ></FileList>
+      <FileList v-show="fileList.length && mode === 'list'" :data="fileList" :is-batch-mode="isBatchMode"
+        :selected-file-ids="selectedFileIds" @click="handleClickFile" @select="handleSelectFile"
+        @right-menu-click="handleRightMenuClick"></FileList>
 
       <a-empty v-show="!fileList.length"></a-empty>
     </a-spin>
@@ -109,31 +99,35 @@
 
 <script setup lang="ts">
 import { Message, Modal } from '@arco-design/web-vue'
-import { fileTypeList, imageTypeList } from '@/constant/file'
-import { useFileStore } from '@/stores'
+
 import { api as viewerApi } from 'v-viewer'
 import 'viewerjs/dist/viewer.css'
-import FileNavPath from './FileNavPath.vue'
-import FileGrid from './FileGrid.vue'
-import FileList from './FileList.vue'
-import { getFileList } from '@/apis'
-import type { FileItem } from '@/apis'
 import {
   openFileMoveModal,
   openFileRenameModal,
-  previewFileVideoModal,
-  previewFileAudioModal
+  previewFileAudioModal,
+  previewFileVideoModal
 } from '../../components/index'
+import useFileManage from './useFileManage'
+import FilePath from './FilePath.vue'
+import FileGrid from './FileGrid.vue'
+import { FileTypeList, ImageTypes } from '@/constant/file'
+import type { FileItem } from '@/apis'
+import { getFileList } from '@/apis'
+
+const FileList = defineAsyncComponent(() => import('./FileList.vue'))
+
 const route = useRoute()
 const router = useRouter()
-
-const fileStore = useFileStore()
+const { mode, selectedFileIds, toggleMode, addSelectedFileItem } = useFileManage()
 
 const loading = ref(false)
+// 批量操作
+const isBatchMode = ref(false)
 // 文件列表数据
 const fileList = ref<FileItem[]>([])
 const fileType = ref('0')
-fileType.value = route.query.fileType?.toString() || '0'
+fileType.value = (route.query.fileType as string) || '0'
 
 const getListData = async () => {
   try {
@@ -148,36 +142,37 @@ const getListData = async () => {
   }
 }
 
+const search = () => {
+  getListData()
+}
+
 onMounted(() => {
   getListData()
 })
 
 onBeforeRouteUpdate((to) => {
   if (!to.query.fileType) return
-  fileType.value = to.query.fileType?.toString()
+  fileType.value = to.query.fileType as string
   getListData()
 })
 
-// 批量操作
-const isBatchMode = ref(false)
+// 列表图片集合
+const imageList = computed(() => {
+  return fileList.value.filter((i) => ImageTypes.includes(i.extendName)).map((a) => a.src ?? '')
+})
 
 // 点击文件
 const handleClickFile = (item: FileItem) => {
   Message.success(`点击了文件-${item.name}`)
-  if (imageTypeList.includes(item.extendName)) {
-    if (item.src) {
-      const imgList: string[] = fileList.value
-        .filter((i) => imageTypeList.includes(i.extendName))
-        .map((a) => a.src || '')
-      const index = imgList.findIndex((i) => i === item.src)
-      if (imgList.length) {
-        viewerApi({
-          options: {
-            initialViewIndex: index
-          },
-          images: imgList
-        })
-      }
+  if (ImageTypes.includes(item.extendName)) {
+    if (item.src && imageList.value.length) {
+      const index = imageList.value.findIndex((i) => i === item.src)
+      viewerApi({
+        images: imageList.value,
+        options: {
+          initialViewIndex: index
+        }
+      })
     }
   }
   if (item.extendName === 'mp4') {
@@ -189,17 +184,22 @@ const handleClickFile = (item: FileItem) => {
 }
 
 // 勾选文件
-const handleCheckFile = (item: FileItem) => {
-  fileStore.addSelectedFileItem(item)
+const handleSelectFile = (item: FileItem) => {
+  addSelectedFileItem(item)
 }
+
 // 鼠标右键
 const handleRightMenuClick = (mode: string, fileInfo: FileItem) => {
-  Message.success('点击了' + mode)
+  Message.success(`点击了${mode}`)
   if (mode === 'delete') {
     Modal.warning({
       title: '提示',
       content: '是否删除该文件？',
-      hideCancel: false
+      hideCancel: false,
+      okButtonProps: { status: 'danger' },
+      onBeforeOk: async () => {
+        return await new Promise((reslove) => setTimeout(() => reslove(true), 300))
+      }
     })
   }
   if (mode === 'rename') {
@@ -231,11 +231,13 @@ const handleMulDelete = () => {
   display: flex;
   flex-direction: column;
   overflow: hidden;
-  .row-operate {
+
+  &__search {
     border-bottom: 1px dashed var(--color-border-3);
     margin: 0 $padding;
   }
-  .file-wrap {
+
+  &__list {
     flex: 1;
     padding: 0 $padding $padding;
     box-sizing: border-box;

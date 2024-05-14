@@ -5,7 +5,7 @@ export * from './modules/app'
 export * from './modules/route'
 export * from './modules/tabs'
 export * from './modules/user'
-export * from './modules/file'
+export * from './modules/dict'
 
 const pinia = createPinia()
 pinia.use(piniaPluginPersistedstate)

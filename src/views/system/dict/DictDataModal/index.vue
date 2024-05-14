@@ -1,13 +1,6 @@
 <template>
-  <a-modal
-    v-model:visible="visible"
-    title="字典数据"
-    width="90%"
-    hide-cancel
-    ok-text="关闭"
-    :mask-closable="false"
-    :modal-style="{ maxWidth: '680px' }"
-  >
+  <a-modal v-model:visible="visible" title="字典数据" width="90%" hide-cancel ok-text="关闭" :mask-closable="false"
+    :modal-style="{ maxWidth: '680px' }">
     <a-row>
       <a-space wrap>
         <a-button type="primary" @click="onAdd">
@@ -21,19 +14,10 @@
       </a-space>
     </a-row>
 
-    <a-table
-      row-key="id"
-      size="small"
-      :data="tableData"
-      :bordered="{ cell: true }"
-      :loading="loading"
-      :scroll="{ x: '100%', y: '100%', minWidth: 400 }"
-      :pagination="{ ...pagination, size: 'small' }"
-      :row-selection="{ type: 'checkbox', showCheckedAll: true }"
-      :selected-keys="selectedKeys"
-      @select="select"
-      @select-all="selectAll"
-    >
+    <a-table row-key="id" size="small" :data="tableData" :bordered="{ cell: true }" :loading="loading"
+      :scroll="{ x: '100%', y: '100%', minWidth: 600 }" :pagination="{ ...pagination, size: 'small' }"
+      :row-selection="{ type: 'checkbox', showCheckedAll: true }" :selected-keys="selectedKeys" @select="select"
+      @select-all="selectAll">
       <template #columns>
         <a-table-column title="序号" :width="64">
           <template #cell="cell">{{ cell.rowIndex + 1 }}</template>
@@ -42,8 +26,7 @@
         <a-table-column title="字典值" data-index="value"></a-table-column>
         <a-table-column title="状态" :width="100" align="center">
           <template #cell="{ record }">
-            <a-tag v-if="record.status == 1" color="green">启用</a-tag>
-            <a-tag v-if="record.status == 0" color="red">禁用</a-tag>
+            <GiCellStatus :status="record.status"></GiCellStatus>
           </template>
         </a-table-column>
         <a-table-column title="操作" :width="180" align="center">
@@ -71,14 +54,20 @@
 
 <script lang="ts" setup>
 import { Message } from '@arco-design/web-vue'
-import { getSystemDictDataList, deleteSystemDictData, type DictDataItem } from '@/apis'
-import { useTable } from '@/hooks'
 import AddDictDataModal from './AddDictDataModal.vue'
+import { type DictDataItem, deleteBaseApi, getSystemDictDataList } from '@/apis'
+import { useTable } from '@/hooks'
 
 const visible = ref(false)
 const AddDictDataModalRef = ref<InstanceType<typeof AddDictDataModal>>()
 
 const dictCode = ref('')
+
+const { loading, tableData, pagination, selectedKeys, search, select, selectAll, handleDelete } = useTable(
+  (page) => getSystemDictDataList({ ...page, code: dictCode.value }),
+  { immediate: false }
+)
+
 const open = (data: { code: string }) => {
   tableData.value = []
   dictCode.value = data.code
@@ -87,14 +76,9 @@ const open = (data: { code: string }) => {
 }
 defineExpose({ open })
 
-const { loading, tableData, pagination, selectedKeys, search, select, selectAll, handleDelete } = useTable(
-  (pagin) => getSystemDictDataList({ current: pagin.page, pageSize: pagin.size, code: dictCode.value }),
-  { immediate: false }
-)
-
 // 删除
 const onDelete = (item: DictDataItem) => {
-  return handleDelete(() => deleteSystemDictData({ ids: [item.id], code: dictCode.value }), { showModal: false })
+  return handleDelete(() => deleteBaseApi({ ids: [item.id] }), { showModal: false })
 }
 
 // 批量删除
@@ -102,7 +86,7 @@ const onMulDelete = () => {
   if (!selectedKeys.value.length) {
     return Message.warning('请选择字典数据！')
   }
-  handleDelete(() => deleteSystemDictData({ ids: selectedKeys.value as string[], code: dictCode.value }))
+  handleDelete(() => deleteBaseApi({ ids: selectedKeys.value as string[] }))
 }
 
 const onAdd = () => {

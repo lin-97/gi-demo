@@ -6,12 +6,12 @@ declare module 'vue-router' {
     title?: string
     /** 设置该路由的图标, 记得将svg导入 @/icons/svg */
     svgIcon?: string
-    /** 设置该路由的图标, 直接使用Arco Design的Icon(与svgIcon同时设置时, svgIcon将优先生效)*/
+    /** 设置该路由的图标, 直接使用Arco Design的Icon(与svgIcon同时设置时, svgIcon将优先生效) */
     icon?: string
     /**  默认false, 设置true的时候该路由不会在侧边栏出现 */
     hidden?: boolean
     /** 默认true, 如果设置为false, 则不会在面包屑中显示 */
-    breadcrumb?: false
+    breadcrumb?: boolean
     /** 默认true, 如果设置为false, 它则不会显示在Tab栏中 */
     showInTabs?: boolean
     /** 默认false, 如果设置为true, 它则会固定在Tab栏中, 例如首页 */
@@ -39,8 +39,6 @@ declare module 'vue-router' {
     noShowingChildren?: boolean
     /** 设置该路由进入的权限, 支持多个权限叠加 */
     roles?: string[]
-    /** 路由切换是否使用动画 */
-    animation?: boolean
     /** 排序 */
     sort?: number
   }

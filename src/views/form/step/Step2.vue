@@ -24,10 +24,12 @@
 </template>
 
 <script setup lang="ts">
-import type { Form } from '@arco-design/web-vue'
+import type { FormInstance } from '@arco-design/web-vue'
 import type { StepForm } from './type'
 
 defineOptions({ name: 'Step2' })
+
+withDefaults(defineProps<Props>(), {})
 
 const emit = defineEmits<{
   (e: 'next', form?: StepForm): void
@@ -38,24 +40,22 @@ interface Props {
   form: Readonly<StepForm>
 }
 
-withDefaults(defineProps<Props>(), {})
-
 const step2Form = reactive({
   password: '123456'
 })
 
-const rules = {
+const rules: FormInstance['rules'] = {
   password: [{ required: true, message: '请输入密码' }]
 }
 
 const loading = ref(false)
-const formRef = ref<InstanceType<typeof Form>>()
+const formRef = ref<FormInstance>()
 
 // 下一步|提交
 const next = async () => {
   loading.value = true
-  const res = await formRef.value?.validate()
-  if (!res) {
+  const valid = await formRef.value?.validate()
+  if (!valid) {
     setTimeout(() => {
       emit('next')
       loading.value = false

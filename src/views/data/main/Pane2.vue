@@ -21,19 +21,9 @@
 
     <section class="pane2__content">
       <section class="gi_table_box">
-        <a-table
-          row-key="id"
-          size="small"
-          :loading="loading"
-          :bordered="{ cell: true }"
-          :columns="columns"
-          :data="tableData"
-          :scroll="{ x: '100%', y: '100%', minWidth: 1000 }"
-          :row-selection="{ type: 'checkbox', showCheckedAll: true }"
-          :pagination="pagination"
-          @select="select"
-          @select-all="selectAll"
-        >
+        <a-table row-key="id" :loading="loading" :bordered="{ cell: true }" :columns="columns" :data="tableData"
+          :scroll="{ x: '100%', y: '100%', minWidth: 1000 }" :row-selection="{ type: 'checkbox', showCheckedAll: true }"
+          :pagination="pagination" @select="select" @select-all="selectAll">
         </a-table>
       </section>
     </section>
@@ -43,11 +33,11 @@
 <script lang="tsx" setup>
 import type { TableColumnData, TableInstance } from '@arco-design/web-vue'
 import { Modal } from '@arco-design/web-vue'
+import Pane2Code from './Pane2Code'
 import { usePagination } from '@/hooks'
 import { getPersonList } from '@/apis'
 import type { PersonItem } from '@/apis'
-import { StatusList } from '@/constant/person'
-import Pane2Code from './Pane2Code'
+import GiCellStatus from '@/components/GiCell/GiCellStatus.vue'
 
 const onViewCode = () => {
   Modal.open({
@@ -90,15 +80,8 @@ const columns: TableColumnData[] = [
     title: '状态',
     width: 100,
     align: 'center',
-    render: (data) => {
-      const index = StatusList.findIndex((i) => i.value === data.record.status)
-      if (index >= 0) {
-        return (
-          <a-tag size="small" color={StatusList[index].color}>
-            {StatusList[index].name}
-          </a-tag>
-        )
-      }
+    render: ({ record }) => {
+      return <GiCellStatus status={record.status} />
     }
   },
   {
@@ -125,12 +108,12 @@ const { pagination, setTotal } = usePagination(() => getTableData())
 const tableData = ref<PersonItem[]>([])
 const loading = ref(false)
 
-const getTableData = async () => {
+async function getTableData() {
   try {
     loading.value = true
     const res = await getPersonList({
-      current: pagination.current,
-      pageSize: pagination.pageSize
+      page: pagination.current,
+      size: pagination.pageSize
     })
     tableData.value = res.data.records
     setTotal(res.data.total)
@@ -144,7 +127,7 @@ onActivated(() => {
 })
 
 // 比例进度条颜色
-const getProportionColor = (proportion: number) => {
+function getProportionColor(proportion: number) {
   if (proportion < 30) return 'danger'
   if (proportion < 60) return 'warning'
   return 'success'
@@ -166,6 +149,7 @@ const selectAll: TableInstance['onSelectAll'] = (checked) => {
 .pane2 {
   flex: 1;
   margin: $margin;
+
   &__content {
     flex: 1;
     overflow: hidden;

@@ -1,5 +1,5 @@
 <template>
-  <div class="now-time" v-if="time">
+  <div v-if="time" class="now-time">
     <GiSvgIcon name="time" :size="20"></GiSvgIcon>
     <p class="now-time__time gi_line_1">{{ time }}</p>
   </div>

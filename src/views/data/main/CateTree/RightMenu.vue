@@ -10,27 +10,19 @@
       <span>编辑</span>
     </a-menu-item>
 
-    <a-popover
-      position="right"
-      trigger="click"
-      :content-style="{ padding: 0, overflow: 'hidden' }"
-      :unmount-on-close="false"
-    >
+    <a-popover v-model:popup-visible="popupVisible" position="right" trigger="click"
+      :content-style="{ padding: 0, overflow: 'hidden' }" :unmount-on-close="true">
       <a-menu-item @click="onClick('move')">
         <template #icon><icon-export :size="16" :stroke-width="3" /></template>
         <a-row justify="space-between" align="center">
           <span>移动</span>
-          <icon-right class="arrow" />
+          <icon-right class="arrow-icon" />
         </a-row>
       </a-menu-item>
       <template #content>
         <a-scrollbar style="height: 100%; overflow: auto" outer-style="width: 260px;height: 500px">
-          <a-tree show-line size="mini" :data="treeData?.[0]?.children" :fieldNames="{ key: 'id', title: 'name' }">
-            <template #icon="node">
-              <GiSvgIcon name="com-file-close" :size="16" v-if="!node.children"></GiSvgIcon>
-              <GiSvgIcon name="com-file-open" :size="16" v-else-if="node.children"></GiSvgIcon>
-              <GiSvgIcon name="com-file" :size="16" v-else></GiSvgIcon>
-            </template>
+          <a-tree show-line size="mini" :data="props.treeData?.[0]?.children"
+            :field-names="{ key: 'id', title: 'name' }" @select="onTreeSelect">
           </a-tree>
         </a-scrollbar>
       </template>
@@ -44,29 +36,45 @@
 </template>
 
 <script lang="ts" setup>
+import type { TreeInstance } from '@arco-design/web-vue'
 import type { CateItem } from '@/apis'
 
 interface Props {
   treeData: CateItem[]
 }
 
-withDefaults(defineProps<Props>(), {})
+const props = withDefaults(defineProps<Props>(), {
+  treeData: () => []
+})
 
-const emit = defineEmits(['click'])
+const emit = defineEmits<{
+  (e: 'on-menu-item-click', mode: string): void
+  (e: 'on-tree-node-click', nodeData: CateItem): void
+}>()
+
+const popupVisible = ref(false)
 
 const onClick = (mode: string) => {
-  emit('click', mode)
+  emit('on-menu-item-click', mode)
+}
+
+const onTreeSelect: TreeInstance['onSelect'] = (selectedKeys, data) => {
+  popupVisible.value = false
+  emit('on-tree-node-click', data.node as CateItem)
 }
 </script>
 
 <style lang="scss" scoped>
 :deep(.arco-menu-inner) {
   padding: 4px;
+
   .arco-menu-item {
     height: 34px;
+
     &:not(.arco-menu-selected) {
       color: $color-text-1;
     }
+
     &:last-child {
       margin-bottom: 0;
     }
@@ -79,7 +87,8 @@ const onClick = (mode: string) => {
   border-radius: 4px;
   border: 1px solid var(--color-border-2);
   box-sizing: border-box;
-  .arrow {
+
+  .arrow-icon {
     margin-right: 0;
   }
 }

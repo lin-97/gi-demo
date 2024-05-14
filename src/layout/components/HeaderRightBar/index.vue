@@ -28,8 +28,8 @@
       <a-tooltip v-if="!isMobile()" content="全屏切换" position="bottom">
         <a-button size="mini" class="gi_hover_btn" @click="toggle">
           <template #icon>
-            <icon-fullscreen :size="18" v-if="!isFullscreen" />
-            <icon-fullscreen-exit :size="18" v-else />
+            <icon-fullscreen v-if="!isFullscreen" :size="18" />
+            <icon-fullscreen-exit v-else :size="18" />
           </template>
         </a-button>
       </a-tooltip>
@@ -62,7 +62,13 @@
             </template>
             <span>项目地址</span>
           </a-doption>
-          <a-divider style="margin: 0" />
+          <a-doption>
+            <template #icon>
+              <span class="doption-icon primary"><icon-unlock /></span>
+            </template>
+            <span>修改密码</span>
+          </a-doption>
+          <a-divider :margin="0" />
           <a-doption @click="logout">
             <template #icon>
               <span class="doption-icon warning"><icon-export /></span>
@@ -79,22 +85,23 @@
 
 <script setup lang="ts">
 import { Modal } from '@arco-design/web-vue'
-import { useUserStore } from '@/stores'
+import { useFullscreen } from '@vueuse/core'
 import SettingDrawer from './SettingDrawer.vue'
 import Message from './Message.vue'
+import { useUserStore } from '@/stores'
 import { isMobile } from '@/utils'
-import { useFullscreen } from '@vueuse/core'
+
+defineOptions({ name: 'HeaderRight' })
 
 const { isFullscreen, toggle } = useFullscreen()
 
-defineOptions({ name: 'HeaderRight' })
 const router = useRouter()
 const userStore = useUserStore()
 const SettingDrawerRef = ref<InstanceType<typeof SettingDrawer>>()
 
 // 跳转个人中心
 const toUser = () => {
-  router.push('/multilevel/index/user')
+  router.push('/system/account')
 }
 
 // 退出登录
@@ -136,12 +143,15 @@ const toGitPath = () => {
   flex-shrink: 0;
   color: #fff;
   border-radius: 4px;
+
   &.primary {
     background-color: rgba(var(--primary-6));
   }
+
   &.success {
     background-color: rgba(var(--success-6));
   }
+
   &.warning {
     background-color: rgba(var(--warning-6));
   }
@@ -150,10 +160,12 @@ const toGitPath = () => {
 .user {
   cursor: pointer;
   color: var(--color-text-1);
+
   .username {
     margin-left: 10px;
     white-space: nowrap;
   }
+
   .arco-icon-down {
     transition: all 0.3s;
     margin-left: 2px;

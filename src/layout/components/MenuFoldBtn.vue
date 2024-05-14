@@ -6,23 +6,14 @@
     </template>
   </a-button>
 
-  <div
-    class="drawer"
-    :class="{ 'app-menu-dark': appStore.menuDark }"
-    :style="appStore.menuDark ? appStore.themeCSSVar : undefined"
-  >
-    <a-drawer
-      v-model:visible="visible"
-      placement="left"
-      :header="false"
-      :footer="false"
-      :render-to-body="false"
+  <div class="drawer" :class="{ 'app-menu-dark': appStore.menuDark }"
+    :style="appStore.menuDark ? appStore.themeCSSVar : undefined">
+    <a-drawer v-model:visible="visible" placement="left" :header="false" :footer="false" :render-to-body="false"
       :drawer-style="{
-        'border-right': '1px solid var(--color-border-2)',
-        'box-sizing': 'border-box',
-        'background-color': 'var(--color-bg-1)'
-      }"
-    >
+    'border-right': '1px solid var(--color-border-2)',
+    'box-sizing': 'border-box',
+    'background-color': 'var(--color-bg-1)',
+  }">
       <Logo :collapsed="false"></Logo>
       <Menu class="menu w-full" @menu-item-click-after="visible = false"></Menu>
     </a-drawer>
@@ -61,6 +52,7 @@ const onClick = () => {
     overflow: hidden;
     background-color: inherit;
   }
+
   :deep(.arco-drawer-body) {
     padding: 0;
     overflow: hidden;

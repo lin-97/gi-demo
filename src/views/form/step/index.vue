@@ -10,13 +10,8 @@
 
         <transition name="fade-slide" mode="out-in" appear>
           <keep-alive>
-            <component
-              :is="ComponentMap[current]"
-              :form="form"
-              @next="($event)=>next($event as StepForm)"
-              @prev="prev"
-              @again="again"
-            />
+            <component :is="ComponentMap[current]" :form="form" @next="($event) => next($event as StepForm)"
+              @prev="prev" @again="again" />
           </keep-alive>
         </transition>
       </section>
@@ -75,6 +70,7 @@ const again = () => {
     display: flex;
     justify-content: center;
   }
+
   .form-box {
     width: 100%;
     max-width: 560px;

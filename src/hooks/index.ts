@@ -1,9 +1,9 @@
-import useLoading from './modules/useLoading'
-import usePagination from './modules/usePagination'
-import useRequest from './modules/useRequest'
-import useChart from './modules/useChart'
-import useTable from './modules/useTable'
-import useForm from './modules/useForm'
-import useDevice from './modules/useDevice'
-
-export { useLoading, usePagination, useRequest, useChart, useTable, useForm, useDevice }
+export * from './modules/useLoading'
+export * from './modules/usePagination'
+export * from './modules/useRequest'
+export * from './modules/useChart'
+export * from './modules/useTable'
+export * from './modules/useForm'
+export * from './modules/useDevice'
+export * from './modules/useBreakpoint'
+export * from './modules/useBreakpointIndex'

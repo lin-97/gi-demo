@@ -1,12 +1,14 @@
-import { ref, toRaw } from 'vue'
+import { ref } from 'vue'
 import { defineStore } from 'pinia'
 import type { RouteRecordRaw } from 'vue-router'
+import { mapTree, toTreeArray } from 'xe-utils'
+import { cloneDeep, omit } from 'lodash-es'
 import { constantRoutes } from '@/router'
-import Layout from '@/layout/index.vue'
-import ParentView from '@/components/ParentView/index.vue'
-import { getUserAsyncRoutes as getAsyncRoutes, type MenuItem } from '@/apis'
-import { mapTree } from 'xe-utils'
 import { transformPathToName } from '@/utils'
+import { type MenuItem, getUserAsyncRoutes as getAsyncRoutes } from '@/apis'
+import ParentView from '@/components/ParentView/index.vue'
+
+const Layout = () => import('@/layout/index.vue')
 
 // 匹配views里面所有的.vue文件
 const modules = import.meta.glob('@/views/**/*.vue')
@@ -69,6 +71,28 @@ const formatAsyncRoutes = (menus: MenuItem[]) => {
   return routes as RouteRecordRaw[]
 }
 
+/** 判断路由层级是否大于 2 */
+export const isMultipleRoute = (route: RouteRecordRaw) => {
+  const children = route.children
+  if (children?.length) {
+    // 只要有一个子路由的 children 长度大于 0，就说明是三级及其以上路由
+    return children.some((child) => child.children?.length)
+  }
+  return false
+}
+
+/** 路由降级（把三级及其以上的路由转化为二级路由） */
+export const flatMultiLevelRoutes = (routes: RouteRecordRaw[]) => {
+  const cloneRoutes = cloneDeep(routes)
+  cloneRoutes.forEach((route) => {
+    if (isMultipleRoute(route)) {
+      const flatRoutes = toTreeArray(route.children)
+      route.children = flatRoutes.map((i) => omit(i, 'children')) as RouteRecordRaw[]
+    }
+  })
+  return cloneRoutes
+}
+
 const storeSetup = () => {
   // 所有路由(常驻路由 + 动态路由)
   const routes = ref<RouteRecordRaw[]>([])
@@ -79,7 +103,6 @@ const storeSetup = () => {
   const setRoutes = (data: RouteRecordRaw[]) => {
     routes.value = constantRoutes.concat(data)
     asyncRoutes.value = data
-    console.log('路由', toRaw(routes.value))
   }
 
   // 生成路由
@@ -89,7 +112,9 @@ const storeSetup = () => {
       getAsyncRoutes().then((res) => {
         const asyncRoutes = formatAsyncRoutes(res.data)
         setRoutes(asyncRoutes)
-        resolve(asyncRoutes)
+        const cloneRoutes = cloneDeep(asyncRoutes)
+        const flatRoutes = flatMultiLevelRoutes(cloneRoutes as RouteRecordRaw[])
+        resolve(flatRoutes)
       })
     })
   }

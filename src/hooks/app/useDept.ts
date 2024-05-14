@@ -1,7 +1,7 @@
 import { ref } from 'vue'
+import { mapTree } from 'xe-utils'
 import { getSystemDeptList } from '@/apis'
 import type { DeptItem } from '@/apis'
-import { mapTree } from 'xe-utils'
 
 /** 部门模块 */
 export function useDept(options?: { onSuccess?: () => void }) {

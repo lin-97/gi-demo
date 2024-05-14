@@ -6,22 +6,16 @@
         <a-space>
           <a-badge>
             <template #content>
-              <icon-check-circle-fill
-                v-if="appStore.layout === 'left'"
-                style="color: rgb(var(--success-6))"
-                :size="16"
-              ></icon-check-circle-fill>
+              <icon-check-circle-fill v-if="appStore.layout === 'left'" style="color: rgb(var(--success-6))"
+                :size="16"></icon-check-circle-fill>
             </template>
             <LayoutItem mode="left" @click="appStore.layout = 'left'"></LayoutItem>
             <p class="layout-text">默认布局</p>
           </a-badge>
           <a-badge>
             <template #content>
-              <icon-check-circle-fill
-                v-if="appStore.layout === 'mix'"
-                :size="16"
-                style="color: rgb(var(--success-6))"
-              ></icon-check-circle-fill>
+              <icon-check-circle-fill v-if="appStore.layout === 'mix'" :size="16"
+                style="color: rgb(var(--success-6))"></icon-check-circle-fill>
             </template>
             <LayoutItem mode="mix" @click="appStore.layout = 'mix'"></LayoutItem>
             <p class="layout-text">混合布局</p>
@@ -31,13 +25,8 @@
 
       <a-divider orientation="center">系统主题</a-divider>
       <a-row justify="center">
-        <ColorPicker
-          theme="dark"
-          :color="appStore.themeColor"
-          :sucker-hide="true"
-          :colors-default="defaultColorList"
-          @changeColor="changeColor"
-        ></ColorPicker>
+        <ColorPicker theme="dark" :color="appStore.themeColor" :sucker-hide="true" :colors-default="defaultColorList"
+          @change-color="changeColor"></ColorPicker>
       </a-row>
 
       <a-divider orientation="center">界面显示</a-divider>
@@ -47,27 +36,16 @@
           <a-switch v-model="appStore.tab" />
         </a-descriptions-item>
         <a-descriptions-item label="页签风格">
-          <a-select
-            v-model="appStore.tabMode"
-            placeholder="请选择"
-            :options="tabModeList"
-            :disabled="!appStore.tab"
-            :trigger-props="{ autoFitPopupMinWidth: true }"
-            :style="{ width: '120px' }"
-          >
+          <a-select v-model="appStore.tabMode" placeholder="请选择" :options="tabModeList" :disabled="!appStore.tab"
+            :trigger-props="{ autoFitPopupMinWidth: true }" :style="{ width: '120px' }">
           </a-select>
         </a-descriptions-item>
         <a-descriptions-item label="动画显示">
           <a-switch v-model="appStore.animate" />
         </a-descriptions-item>
         <a-descriptions-item label="动画显示">
-          <a-select
-            v-model="appStore.animateMode"
-            placeholder="请选择"
-            :options="animateModeList"
-            :disabled="!appStore.animate"
-            :style="{ width: '120px' }"
-          >
+          <a-select v-model="appStore.animateMode" placeholder="请选择" :options="animateModeList"
+            :disabled="!appStore.animate" :style="{ width: '120px' }">
           </a-select>
         </a-descriptions-item>
         <a-descriptions-item label="深色菜单">
@@ -82,10 +60,10 @@
 </template>
 
 <script setup lang="ts">
-import { useAppStore } from '@/stores'
 import { ColorPicker } from 'vue-color-kit'
 import 'vue-color-kit/dist/vue-color-kit.css'
 import LayoutItem from './components/LayoutItem.vue'
+import { useAppStore } from '@/stores'
 
 defineOptions({ name: 'SettingDrawer' })
 const appStore = useAppStore()
@@ -133,8 +111,8 @@ const defaultColorList = [
 
 type ColorObj = {
   hex: string
-  hsv: { h: number; s: number; v: number }
-  rgba: { r: number; g: number; b: number; a: number }
+  hsv: { h: number, s: number, v: number }
+  rgba: { r: number, g: number, b: number, a: number }
 }
 
 // 改变主题色

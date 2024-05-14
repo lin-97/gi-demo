@@ -22,8 +22,8 @@ const initMap = () => {
         center: [105.602725, 37.076636] // 初始化地图中心点位置
       })
     })
-    .catch((e) => {
-      console.log(e)
+    .catch(() => {
+      //
     })
 }
 
@@ -38,6 +38,7 @@ onMounted(() => {
   width: 100%;
   height: 100%;
 }
+
 #container {
   width: 100%;
   height: 100%;

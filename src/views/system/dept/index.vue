@@ -5,10 +5,7 @@
         <a-input v-model="form.name" placeholder="输入部门名称搜索" allow-clear style="width: 250px">
           <template #prefix><icon-search /></template>
         </a-input>
-        <a-select v-model="form.status" placeholder="部门状态" style="width: 120px">
-          <a-option :value="1">正常</a-option>
-          <a-option :value="0">禁用</a-option>
-        </a-select>
+        <a-select v-model="form.status" :options="options" placeholder="部门状态" style="width: 120px"></a-select>
         <a-button type="primary" @click="search">
           <template #icon><icon-search /></template>
           <span>搜索</span>
@@ -32,17 +29,10 @@
         </a-space>
       </a-row>
 
-      <a-table
-        ref="TableRef"
-        row-key="id"
-        :bordered="{ cell: true }"
-        :data="deptList"
-        :loading="loading"
-        :scroll="{ x: '100%', y: '100%', minWidth: 1000 }"
-        :pagination="false"
-        :row-selection="{ type: 'checkbox', showCheckedAll: false }"
-        @select="select"
-      >
+      <a-table ref="tableRef" row-key="id" :bordered="{ cell: true }" :data="deptList" :loading="loading"
+        :scroll="{ x: '100%', y: '100%', minWidth: 1000 }" :pagination="false"
+        :row-selection="{ type: 'checkbox', showCheckedAll: false }" :selected-keys="selectedKeys" @select="select"
+        @select-all="selectAll">
         <template #expand-icon="{ expanded }">
           <IconDown v-if="expanded" />
           <IconRight v-else />
@@ -52,8 +42,7 @@
           <a-table-column title="排序" data-index="sort" :width="100" align="center"></a-table-column>
           <a-table-column title="状态" :width="100" align="center">
             <template #cell="{ record }">
-              <a-tag v-if="record.status == 1" color="green">正常</a-tag>
-              <a-tag v-if="record.status == 0" color="red">禁用</a-tag>
+              <GiCellStatus :status="record.status"></GiCellStatus>
             </template>
           </a-table-column>
           <a-table-column title="描述" data-index="description" :width="250"></a-table-column>
@@ -69,7 +58,7 @@
                   <template #icon><icon-plus /></template>
                   <span>新增</span>
                 </a-button>
-                <a-popconfirm type="warning" content="您确定要删除该项吗?">
+                <a-popconfirm type="warning" content="您确定要删除该项吗?" @before-ok="onDelete(record)">
                   <a-button type="primary" status="danger" size="mini">
                     <template #icon><icon-delete /></template>
                     <span>删除</span>
@@ -87,46 +76,45 @@
 </template>
 
 <script setup lang="ts">
+import { Message, type TableInstance } from '@arco-design/web-vue'
 import AddDeptModal from './AddDeptModal.vue'
-import { getSystemDeptList, type DeptItem } from '@/apis'
-import type { TableInstance } from '@arco-design/web-vue'
-import { Message } from '@arco-design/web-vue'
 import { isMobile } from '@/utils'
+import { useTable } from '@/hooks'
+import { type DeptItem, deleteBaseApi, getSystemDeptList } from '@/apis'
+import { useDict } from '@/hooks/app'
 
 defineOptions({ name: 'SystemDept' })
 
+const { data: options } = useDict({ code: 'status' })
 const AddDeptModalRef = ref<InstanceType<typeof AddDeptModal>>()
-const TableRef = ref<TableInstance>()
+const tableRef = ref<TableInstance>()
 
 const form = reactive({
   name: '',
   status: ''
 })
 
-const loading = ref(false)
-const deptList = ref<DeptItem[]>([])
-const getDeptList = async () => {
-  try {
-    loading.value = true
-    const res = await getSystemDeptList()
-    deptList.value = res.data
+const {
+  loading,
+  tableData: deptList,
+  selectedKeys,
+  search,
+  select,
+  selectAll,
+  handleDelete
+} = useTable(() => getSystemDeptList(), {
+  immediate: true,
+  onSuccess: () => {
     nextTick(() => {
-      TableRef.value?.expandAll(true)
+      tableRef.value?.expandAll(true)
     })
-  } finally {
-    loading.value = false
   }
-}
-getDeptList()
-
-const search = () => {
-  getDeptList()
-}
+})
 
 const reset = () => {
   form.name = ''
   form.status = ''
-  getDeptList()
+  search()
 }
 
 const onAdd = () => {
@@ -137,16 +125,15 @@ const onEdit = (item: DeptItem) => {
   AddDeptModalRef.value?.edit(item.id)
 }
 
-// 勾选
-const selectRowKeys = ref<(string | number)[]>([])
-const select: TableInstance['onSelect'] = (rowKeys) => {
-  selectRowKeys.value = rowKeys
+const onDelete = async (item: DeptItem) => {
+  return handleDelete(() => deleteBaseApi({ ids: [item.id] }), { showModal: false })
 }
+
 const onMulDelete = () => {
-  if (!selectRowKeys.value.length) {
+  if (!selectedKeys.value.length) {
     return Message.warning('请选择部门')
   }
-  Message.info('点击了批量删除')
+  handleDelete(() => deleteBaseApi({ ids: selectedKeys.value as string[] }))
 }
 </script>
 

@@ -1,8 +1,8 @@
 import axios from 'axios'
 import type { AxiosInstance, AxiosRequestConfig, AxiosResponse } from 'axios'
 import { Message, Notification } from '@arco-design/web-vue'
-import { getToken } from '@/utils/auth'
 import NProgress from 'nprogress'
+import { getToken } from '@/utils/auth'
 import 'nprogress/nprogress.css'
 import router from '@/router'
 

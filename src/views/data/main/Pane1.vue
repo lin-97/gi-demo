@@ -8,12 +8,7 @@
       </a-col>
 
       <a-col :xs="24" :sm="16" :md="17" :lg="18" :xl="19" :xxl="20" flex="1" class="h-full ov-hidden">
-        <a-card
-          title="数据列表"
-          :bordered="false"
-          :header-style="{ display: 'none' }"
-          class="gi_card pane-item pane-right"
-        >
+        <a-card title="数据列表" :bordered="false" :header-style="{ display: 'none' }" class="gi_card pane-item pane-right">
           <div class="pane-right__content">
             <a-row justify="space-between">
               <a-space wrap>
@@ -30,9 +25,8 @@
               </a-space>
 
               <a-space wrap>
-                <a-select v-model="form.status" class="gi_select_input" placeholder="请选择" allow-clear>
-                  <a-option v-for="item in StatusList" :key="item.value" :value="item.value">{{ item.name }}</a-option>
-                </a-select>
+                <a-select v-model="form.status" class="gi_select_input" :options="options" placeholder="请选择"
+                  allow-clear></a-select>
                 <a-input-group>
                   <a-input v-model="form.name" placeholder="请输入搜索关键词" allow-clear> </a-input>
                   <a-button type="primary" @click="getTableData">
@@ -46,19 +40,10 @@
             </a-row>
 
             <section class="gi_table_box">
-              <a-table
-                row-key="id"
-                size="small"
-                :loading="loading"
-                :bordered="{ cell: true }"
-                :data="tableData"
+              <a-table row-key="id" :loading="loading" :bordered="{ cell: true }" :data="tableData"
                 :scroll="{ x: '100%', y: '100%', minWidth: 1000 }"
-                :row-selection="{ type: 'checkbox', showCheckedAll: true }"
-                :pagination="pagination"
-                :selected-keys="selectedKeys"
-                @select="select"
-                @select-all="selectAll"
-              >
+                :row-selection="{ type: 'checkbox', showCheckedAll: true }" :pagination="pagination"
+                :selected-keys="selectedKeys" @select="select" @select-all="selectAll">
                 <template #columns>
                   <a-table-column title="序号" :width="68">
                     <template #cell="cell">{{ cell.rowIndex + 1 }}</template>
@@ -72,18 +57,14 @@
                   </a-table-column>
                   <a-table-column title="状态" :width="100" align="center">
                     <template #cell="{ record }">
-                      <template v-for="item in StatusList" :key="item.value">
-                        <a-tag size="small" v-if="item.value === record.status" :color="item.color">{{
-                          item.name
-                        }}</a-tag>
-                      </template>
+                      <GiCellStatus :status="record.status"></GiCellStatus>
                     </template>
                   </a-table-column>
                   <a-table-column title="创建时间" data-index="createTime" :width="180"></a-table-column>
                   <a-table-column title="操作" :width="200" align="center" :fixed="!isMobile() ? 'right' : undefined">
                     <template #cell="{ record }">
                       <a-space>
-                        <a-button type="primary" size="mini" @click="onEdit(record)">修改</a-button>
+                        <a-button type="primary" size="mini" @click="onEdit">修改</a-button>
                         <a-button size="mini" @click="onDetail(record)">详情</a-button>
                         <a-popconfirm type="warning" content="您确定要删除该项吗?" @before-ok="onDelete(record)">
                           <a-button type="primary" status="danger" size="mini">删除</a-button>
@@ -98,22 +79,20 @@
         </a-card>
       </a-col>
     </a-row>
-
-    <EditModal ref="EditModalRef"></EditModal>
   </div>
 </template>
 
 <script setup lang="ts">
 import { Message } from '@arco-design/web-vue'
-import { useTable } from '@/hooks'
 import CateTree from './CateTree/index.vue'
-import EditModal from './EditModal.vue'
-import { getPersonList, deletePerson, type PersonItem } from '@/apis'
-import { StatusList } from '@/constant/person'
+import { useTable } from '@/hooks'
+import { type PersonItem, deleteBaseApi, getPersonList } from '@/apis'
 import { isMobile } from '@/utils'
+import { useDict } from '@/hooks/app'
 
 const router = useRouter()
 
+const { data: options } = useDict({ code: 'status' })
 const form = reactive({
   name: '',
   status: ''
@@ -121,7 +100,7 @@ const form = reactive({
 
 // 这里使用了表格hooks：useTable, 节省了大量代码
 const { loading, tableData, getTableData, pagination, selectedKeys, select, selectAll, handleDelete } = useTable(
-  (pagin) => getPersonList({ ...form, current: pagin.page, pageSize: pagin.size }),
+  (page) => getPersonList({ ...form, ...page }),
   { immediate: false, formatResult: (data) => data.map((i) => ({ ...i, isEdit: false })) }
 )
 
@@ -136,14 +115,12 @@ onActivated(() => {
   getTableData()
 })
 
-const EditModalRef = ref<InstanceType<typeof EditModal>>()
-
 const onAdd = () => {
-  EditModalRef.value?.add()
+  router.push({ path: '/data/form' })
 }
 
-const onEdit = (item: PersonItem) => {
-  EditModalRef.value?.edit(item.id)
+const onEdit = () => {
+  router.push({ path: '/data/form', query: { id: 'ID123456' } })
 }
 
 const onDetail = (item: PersonItem) => {
@@ -152,7 +129,7 @@ const onDetail = (item: PersonItem) => {
 
 // 删除
 const onDelete = (item: PersonItem) => {
-  return handleDelete(() => deletePerson({ ids: [item.id] }), { content: `是否删除-${item.name}?`, showModal: false })
+  return handleDelete(() => deleteBaseApi({ ids: [item.id] }), { content: `是否删除-${item.name}?`, showModal: false })
 }
 
 // 批量删除
@@ -160,7 +137,7 @@ const onMulDelete = () => {
   if (!selectedKeys.value.length) {
     return Message.warning('请选择删除项！')
   }
-  handleDelete(() => deletePerson({ ids: selectedKeys.value as string[] }), { successTip: '批量删除成功！' })
+  handleDelete(() => deleteBaseApi({ ids: selectedKeys.value as string[] }), { successTip: '批量删除成功！' })
 }
 
 const onExport = () => {
@@ -179,16 +156,19 @@ const onExport = () => {
   width: 100%;
   height: 100%;
   overflow: hidden;
+
   .pane {
     height: 100%;
     overflow: hidden;
   }
+
   .pane-item {
     height: 100%;
     overflow: hidden;
   }
-  .pane-left {
-  }
+
+  .pane-left {}
+
   .pane-right {
     &__content {
       flex: 1;

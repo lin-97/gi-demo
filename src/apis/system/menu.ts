@@ -1,5 +1,5 @@
-import http from '@/utils/http'
 import type * as System from './type'
+import http from '@/utils/http'
 
 /** @desc 获取菜单数据 */
 export function getSystemMenuList() {
@@ -9,11 +9,6 @@ export function getSystemMenuList() {
 /** @desc 获取菜单详情 */
 export function getSystemMenuDetail(params: { id: string }) {
   return http.get<System.MenuItem>('/system/menu/detail', params)
-}
-
-/** @desc 保存菜单 */
-export function saveSystemMenu(data: any) {
-  return http.post<boolean>('/system/menu/save', data)
 }
 
 /** @desc 获取角色分配权限菜单树 */

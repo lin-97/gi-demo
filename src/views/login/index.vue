@@ -8,15 +8,8 @@
       </a-col>
       <a-col :xs="24" :sm="12" :md="9">
         <div class="login-right">
-          <a-form
-            ref="FormRef"
-            :size="isMobile() ? 'large' : 'medium'"
-            :model="form"
-            :rules="rules"
-            :style="{ width: '84%' }"
-            :label-col-style="{ display: 'none' }"
-            :wrapper-col-style="{ flex: 1 }"
-          >
+          <a-form ref="formRef" :size="isMobile() ? 'large' : 'medium'" :model="form" :rules="rules"
+            :style="{ width: '84%' }" :label-col-style="{ display: 'none' }" :wrapper-col-style="{ flex: 1 }">
             <h3 class="login-right__title">
               <img class="logo" src="@/assets/images/logo.gif" /><span>Admin Pro</span>
             </h3>
@@ -54,10 +47,10 @@
 </template>
 
 <script setup lang="ts">
+import { type FormInstance, Message } from '@arco-design/web-vue'
+import LoginBg from './components/LoginBg/index.vue'
 import { useUserStore } from '@/stores'
 import { useLoading } from '@/hooks'
-import { Message, type FormInstance } from '@arco-design/web-vue'
-import LoginBg from './components/LoginBg/index.vue'
 import * as Regexp from '@/utils/regexp'
 import { isMobile } from '@/utils'
 
@@ -84,12 +77,12 @@ const checked = ref(false)
 const { loading, setLoading } = useLoading()
 const errorMessage = ref('')
 
-const FormRef = ref<FormInstance>()
+const formRef = ref<FormInstance>()
 // 点击登录
 const login = async () => {
   try {
-    const flag = await FormRef.value?.validate()
-    if (flag) return
+    const valid = await formRef.value?.validate()
+    if (valid) return
     setLoading(true)
     await userStore.login(form)
     const { redirect, ...othersQuery } = router.currentRoute.value.query
@@ -115,6 +108,7 @@ const login = async () => {
   justify-content: center;
   align-items: center;
   background-color: var(--color-bg-5);
+
   &-box {
     width: 86%;
     max-width: 720px;
@@ -134,6 +128,7 @@ const login = async () => {
   position: relative;
   overflow: hidden;
   background: linear-gradient(60deg, rgb(var(--primary-6)), rgb(var(--primary-3)));
+
   &__img {
     width: 100%;
     height: 100%;
@@ -156,6 +151,7 @@ const login = async () => {
   align-items: center;
   padding-top: 30px;
   box-sizing: border-box;
+
   &__title {
     color: var(--color-text-1);
     font-weight: 500;
@@ -166,6 +162,7 @@ const login = async () => {
     display: flex;
     justify-content: center;
     align-items: center;
+
     .logo {
       width: 32px;
       height: 32px;

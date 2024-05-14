@@ -27,7 +27,7 @@
 </template>
 
 <script lang="ts" setup>
-import { getSystemUserDetail, type UserDetailResult } from '@/apis'
+import { type UserDetailResult, getSystemUserDetail } from '@/apis'
 
 const visible = ref(false)
 const userId = ref('')
@@ -39,8 +39,8 @@ const getUserDetail = async () => {
 
 const open = async (id: string) => {
   userId.value = id
-  await getUserDetail()
   visible.value = true
+  await getUserDetail()
 }
 
 defineExpose({ open })

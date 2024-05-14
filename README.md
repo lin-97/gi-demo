@@ -1,5 +1,5 @@
 <div align="center">
-	<img style="width: 80px;height: 80px" src="https://gitee.com/lin0716/gi-image/raw/master/md-logo.gif"/>
+	<img style="width: 80px;height: 80px" src="https://gitee.com/lin0716/gi-image/raw/master/gi-logo.gif"/>
 	<h1>Gi Admin Pro</h1>
 </div>
 
@@ -9,7 +9,7 @@
 
 **Gi Admin Pro** 是一个基于 Vue3、Vite、TypeScript、Arco Design Vue、Pinia、VueUse 等的免费中后台模版，它使用了最新的前端技术栈，内置丰富的主题配置，有着极高的代码规范，基于 mock 实现的动态数据展示，开箱即用的模板，也可用于学习参考。
 
-> **Gi 前缀含义：** G：代表全局      i：代表我的
+> **Gi 前缀含义：** G：代表全局 i：代表我的
 >
 > Gi 用来定义全局组件前缀，如 GiNavBar、GiTitle、GiLoading
 
@@ -24,9 +24,10 @@
 
 <a href="http://lin0716.gitee.io/gi-demo" target="_blank">Gi Admin Pro 预览地址</a>
 
-账号1：**admin**   密码：**123456**
-
-账号2：**user**  密码：**123456**
+|        | 账号  | 密码   |
+| ------ | ----- | ------ |
+| 管理员 | admin | 123456 |
+| 用户   | user  | 123456 |
 
 ## 代码仓库
 
@@ -34,27 +35,27 @@
 
 ## 项目示例图
 
-<img src="https://gitee.com/lin0716/gi-image/raw/master/md-demo1.jpg" />
+<img src="https://gitee.com/lin0716/gi-image/raw/master/demo/01.jpg" />
 
-<img src="https://gitee.com/lin0716/gi-image/raw/master/md-demo2.jpg" />
+<img src="https://gitee.com/lin0716/gi-image/raw/master/demo/02.jpg" />
 
-<img src="https://gitee.com/lin0716/gi-image/raw/master/md-demo3.jpg" />
+<img src="https://gitee.com/lin0716/gi-image/raw/master/demo/03.jpg" />
 
-<img src="https://gitee.com/lin0716/gi-image/raw/master/md-demo4.jpg" />
+<img src="https://gitee.com/lin0716/gi-image/raw/master/demo/04.jpg" />
 
-<img src="https://gitee.com/lin0716/gi-image/raw/master/md-demo5.jpg" />
+<img src="https://gitee.com/lin0716/gi-image/raw/master/demo/05.jpg" />
 
-<img src="https://gitee.com/lin0716/gi-image/raw/master/md-demo6.jpg" />
+<img src="https://gitee.com/lin0716/gi-image/raw/master/demo/06.jpg" />
 
-<img src="https://gitee.com/lin0716/gi-image/raw/master/md-demo7.jpg" />
+<img src="https://gitee.com/lin0716/gi-image/raw/master/demo/07.jpg" />
 
-<img src="https://gitee.com/lin0716/gi-image/raw/master/md-demo8.jpg" />
+<img src="https://gitee.com/lin0716/gi-image/raw/master/demo/08.jpg" />
 
-<img src="https://gitee.com/lin0716/gi-image/raw/master/md-demo9.jpg" />
+<img src="https://gitee.com/lin0716/gi-image/raw/master/demo/09.jpg" />
 
-<img src="https://gitee.com/lin0716/gi-image/raw/master/md-demo10.jpg" />
+<img src="https://gitee.com/lin0716/gi-image/raw/master/demo/10.jpg" />
 
-<img src="https://gitee.com/lin0716/gi-image/raw/master/md-demo11.jpg" />
+<img src="https://gitee.com/lin0716/gi-image/raw/master/demo/11.jpg" />
 
 ## 安装使用
 
@@ -80,9 +81,8 @@ npm run build
 
 ```bash
 1. Prettier - Code formatter
-2. Vue Language Features (Volar)
+2. Vue - Official
 3. Vue 3 Snippets
-4. TypeScript Vue Plugin (Volar)
 ```
 
 ## 注意
@@ -91,7 +91,7 @@ npm run build
 由于升级了vite3，根据官方规定，node版本必须是14.18.0以上
 ```
 
-**`注：现在已更新到了 Vite4.x，node的版本要求请参考官网要求`**
+**`注：现在已更新到了 Vite5.x，node的版本要求请参考官网要求`**
 
 **vite 官网地址：** https://cn.vitejs.dev/
 
@@ -107,23 +107,17 @@ npm run build
 
 还原镜像
 
-~~~
+```
 npm config set registry https://registry.npmjs.org/
-~~~
+```
 
-
-
-**为什么选择Arco组件库，而不是Element Plus?**
+**为什么选择 Arco 组件库，而不是 Element Plus?**
 
 [Element Plus 对比 Arco design](https://juejin.cn/post/7294219581894705190)
 
-
-
-**为什么全局组件使用前缀Gi?**
+**为什么全局组件使用前缀 Gi?**
 
 全局组件设置了按需引入，使用前缀，方便和局部组件做区分
-
-
 
 **为什么组件使用单词大写开头 (PascalCase)命名写法？**
 
@@ -135,45 +129,37 @@ npm config set registry https://registry.npmjs.org/
 
 其他优点：方便搜索（横线连接 (kebab-case)对搜索没那么方便）
 
+<img src="https://gitee.com/lin0716/gi-image/raw/master/comp-name.png" />
 
-
-**为什么css类名推荐横线连接 (kebab-case)**
+**为什么 css 类名推荐横线连接 (kebab-case)**
 
 参考大部分大网站，都是这个命名规则，别整： `.myClass`这种
-
-
 
 **页面显示异常？**
 
 **`页面必须要保留一个根元素！！！`**
 
-
-
-**Vue3权限管理对路由进行排序和格式化处理方式**
+**Vue3 权限管理对路由进行排序和格式化处理方式**
 
 使用 **xe-utils** 这个 js 库，简化数据处理
 
 [文章地址](https://juejin.cn/post/7301260557222805567)
 
-
-
 **页面无法缓存？**
 
 请检查页面是否配置了`name`，且名称是否与数据一致
 
-~~~js
+```js
 defineOptions({ name: 'AboutIndex' })
-~~~
+```
 
-~~~js
+```js
 {
   path: '/about/index',
   name: 'AboutIndex', // 检查name是否一致
   component: () => import('@/views/about/index.vue')
 }
-~~~
-
-
+```
 
 ## 项目规范
 
@@ -196,9 +182,9 @@ let num = 10
 let str = 'abc'
 let flag = false
 
-// vue3 中 ref 返回的是一个引用类型
+// vue3 中 ref、reactive 返回的是一个引用类型
 const loading = ref(false)
-const name = ref('小明')
+const person = reactive({ name: '张三', age: 20 })
 </script>
 ```
 
@@ -212,9 +198,9 @@ const showAddDrawer = ref(false) // 新增功能的抽屉显示隐藏
 // 或者 是否显示弹窗
 const isShowDialog = ref<boolean>(false)
 const isLogin = ref(false) // 是否登录
-const isVIP = ref(false) // 是否是vip用户
+const isVIP = ref(false) // 是否是VIP用户
 
-// 表单 不建议 formData, 直接最简
+// 表单不建议 formData，直接最简（懒得写这么长）
 const form = reactive({
   name: '',
   phone: '',
@@ -243,7 +229,7 @@ const optionsList = [
 // 非对象数组 在字母后面加s
 const ids = []
 const selectedIds = []
-const activeKeys = []
+const activedKeys = []
 const nums = [3, 5, 6]
 const strs = ['aaa', 'bbb', 'ccc']
 
@@ -319,15 +305,15 @@ const getTableList = () => {}
 
 **常用前缀**
 
-| 前缀         | 前缀 + 命名                  | 大意                        |
-| ------------ | ---------------------------- | --------------------------- |
-| get          | getUserInfo                  | 获取用户信息                |
-| del/delete   | delUserInfo                  | 删除用户信息                |
-| update / add | updateUserInfo / addUserInfo | 修改用户信息 / 增加用户信息 |
-| is           | isTimeout                    | 是否超时                    |
-| has          | hasUserInfo                  | 有没有用户信息              |
-| handle       | handleLogin                  | 处理登录                    |
-| calc         | calcAverageSpeed             | 计算平均速度                |
+| 前缀       | 前缀 + 命名                  | 大意                        |
+| ---------- | ---------------------------- | --------------------------- |
+| get        | getUserInfo                  | 获取用户信息                |
+| del/delete | delUserInfo                  | 删除用户信息                |
+| update/add | updateUserInfo / addUserInfo | 修改用户信息 / 增加用户信息 |
+| is         | isTimeout                    | 是否超时                    |
+| has        | hasUserInfo                  | 有没有用户信息              |
+| handle     | handleLogin                  | 处理登录                    |
+| calc       | calcAverageSpeed             | 计算平均速度                |
 
 **一些通用缩写**
 
@@ -415,26 +401,28 @@ const { loading, setLoading } = useLoading()
 
 ```js
 // 优化前
-let marks = 26
-let result
-if (marks >= 30) {
-  result = 'Pass'
+let isEdit = true
+let title = ''
+if (isEdit) {
+  title = '编辑'
 } else {
-  result = 'Fail'
+  title = '新增'
 }
 
 // 优化后
-let result = marks >= 30 ? 'Pass' : 'Fail'
+let title = isEdit ? '编辑' : '新增'
 ```
 
 善用 includes 方法
 
 ```js
 // 优化前
-if (type === 1 || type === 2 || type === 3) {}
+if (type === 1 || type === 2 || type === 3) {
+}
 
-// 优化后, 此种方式在vue模板也可使用
-if([1, 2, 3].includes(type)) {}
+// 优化后，此种方式在vue模板也可使用
+if ([1, 2, 3].includes(type)) {
+}
 ```
 
 使用箭头函数简化函数
@@ -459,6 +447,52 @@ const getProportionColor = (proportion: number) => {
   if (proportion < 60) return 'warning'
   return 'success'
 }
+</script>
+```
+
+```js
+// 优化前
+const status = 200
+const message = ''
+if (status === 200) {
+  message = '请求成功'
+} else if (status === 404) {
+  message = '请求出错'
+} else if (status === 500) {
+  message = '服务器错误'
+}
+
+// 优化后
+const status = 200
+const messageMap = {
+  200: '请求成功',
+  404: '请求出错',
+  500: '服务器错误'
+}
+const message = messageMap[status]
+```
+
+如果函数参数超过两个，建议优化
+
+```vue
+<script setup lang="ts">
+function createUser(name, phone, age) {
+  console.log('姓名', name)
+  console.log('手机', phone)
+  console.log('年龄', age)
+}
+
+// 这种方式在使用的时候可读性很差，扩展性差，而且不易于维护
+createUser('张三', '178****2828', 20)
+
+function createUser2({ name, phone, age }) {
+  console.log('姓名', name)
+  console.log('手机', phone)
+  console.log('年龄', age)
+}
+
+// 以对象传参更直观，更好扩展和维护
+createUser2({ name: '张三', phone: '178****2828', age: 20 })
 </script>
 ```
 
@@ -607,7 +641,7 @@ const getUserList = async () => {
 // catch 可以省略
 ```
 
-#### 正则导入
+#### 正则使用示例
 
 文件位置：@/utils/regexp.ts
 
@@ -659,7 +693,7 @@ const submit = () => {
 </script>
 ```
 
-页面模板CSS类名采用半角连接符(-)
+页面模板 CSS 类名采用半角连接符(-)
 
 ```vue
 <template>
@@ -710,46 +744,8 @@ DetailModal.vue
 
 ```
 home/index.vue
-news/index.vue
-news-detail/index.vue
-```
-
-#### 业务状态
-
-gi-demo 的业务状态放在@/constant/xxx.ts xxx 为接口模块名
-
-```js
-type SubmitStatusItem = { name: string, value: number, color: string }
-/** @desc 指标提交状态 */
-export const SubmitStatusList: SubmitStatusItem[] = [
-  { name: '待提交', value: 0, color: 'orange' },
-  { name: '已提交', value: 1, color: 'green' }
-]
-
-type StatusItem = { name: string, value: number, type: string }
-/** @desc 指标启用状态 */
-export const StatusList: StatusItem[] = [
-  { name: '禁用', value: 0, type: 'danger' },
-  { name: '启用', value: 1, type: 'success' }
-]
-```
-
-使用的时候:
-
-引入模块
-
-```js
-import { StatusList } from '@/constant/xxx' // 要具体到模块名，因为不同模块可能会有StatusList一样的名称
-```
-
-```vue
-<a-table-column title="状态" :width="100" align="center">
-  <template #cell="{ record }">
-    <template v-for="item in StatusList" :key="item.value">
-      <a-tag v-if="item.value === record.status" :color="item.color">{{ item.name }}</a-tag>
-	</template>
-  </template>
-</a-table-column>
+user/index.vue
+user-detail/index.vue
 ```
 
 #### 弹窗组件 Modal、抽屉组件 Drawer 的一般封装
@@ -774,10 +770,15 @@ const add = () => {
   visible.value = true
 }
 
+// 如果这里的参数超过两个，建议优化成对象形式
+// const edit = ({ id, taskId }) = {
+//   console.log(id, taskId)
+// }
+
 const edit = (id: string) => {
   detailId.value = id
-  // getDetail() 回显操作
   visible.value = true
+  // getDetail() 回显操作
 }
 
 defineExpose({ add, edit })
@@ -790,7 +791,7 @@ const confirm = () => {
 
 使用
 
-**`模板里使用自定义组件 大写开头驼峰，对于搜索便利`**
+**`模板里使用自定义组件：使用大写开头驼峰，双击好复制，对于搜索便利`**
 
 ```vue
 <template>
@@ -814,89 +815,27 @@ const onEdit = (item: PersonItem) => {
 </script>
 ```
 
+#### GiForm 使用示例
 
-
-#### GiForm使用文档
-
-GiForm是一个JSON配置表单组件，能够快速通过JSON构建表单布局
-
-| props   | 说明       |
-| ------- | ---------- |
-| options | 表单配置项 |
-
-options结构如下：
-
-~~~js
-import type * as A from '@arco-design/web-vue'
-
-export type FormType =
-  | 'input'
-  | 'select'
-  | 'radio-group'
-  | 'checkbox-group'
-  | 'textarea'
-  | 'date-picker'
-  | 'time-picker'
-  | 'input-number'
-  | 'rate'
-  | 'switch'
-  | 'slider'
-  | 'cascader'
-  | 'tree-select'
-
-interface ColumnsItem {
-  type: FormType // 表单项类型
-  label: A.FormItemInstance['label'] // 表单项label
-  field: A.FormItemInstance['field'] // 表单项field
-  span?: number // 表单项span, 共24
-  col?: A.ColProps // 表单项的col，完全继承<a-col>的props，优先级高于span，可配置响应式布局
-  item?: A.FormItemInstance['$props'] // 表单项的props，完全继承<form-item>的props
-  props?: // 表单项各个类型的props, 完全继承各个类型组件的props
-    | A.InputInstance['$props']
-    | A.SelectInstance['$props']
-    | A.TextareaInstance['$props']
-    | A.DatePickerInstance['$props']
-    | A.TimePickerInstance['$props']
-    | A.RadioGroupInstance['$props']
-    | A.CheckboxGroupInstance['$props']
-    | A.InputNumberInstance['$props']
-    | A.RateInstance['$props']
-    | A.SwitchInstance['$props']
-    | A.SliderInstance['$props']
-    | A.CascaderInstance['$props']
-    | A.TreeSelectInstance['$props']
-  rules?: A.FormItemInstance['$props']['rules'] // 当前表单项的校验规则rules
-  options?: // 选项数据 select、radio-group、checkbox-group、cascader 组件独有的options，格式一般是{label: string, value: string}[]
-    | A.SelectInstance['$props']['options']
-    | A.RadioGroupInstance['$props']['options']
-    | A.CheckboxGroupInstance['$props']['options']
-    | A.CascaderInstance['$props']['options']
-  data?: A.TreeSelectInstance['$props']['data'] // tree-select的树数据
-  hide?: boolean // 是否隐藏改该表单项
-}
-
-export interface Options {
-  form: Partial<A.FormInstance['$props']> // 继承<a-form>的props
-  row?: Partial<typeof import('@arco-design/web-vue')['Row']['__defaults']> // 最外层row，继承<a-row>的props
-  columns: ColumnsItem[]
-  btns?: { hide?: boolean; span?: number; col?: A.ColProps } // 查询和重置按钮的配置
-  fold?: { enable?: boolean; index?: number } // 是否折叠，enable: true开启折叠功能，index表示折叠的位置
-}
-~~~
+GiForm 是一个 JSON 配置表单组件，能够快速通过 JSON 构建表单布局
 
 基本示例
 
-<img src="https://gitee.com/lin0716/gi-image/raw/master/GiFormDemo.png" />
+<img src="https://gitee.com/lin0716/gi-image/raw/master/form/GiForm-code.png" />
 
-<img src="https://gitee.com/lin0716/gi-image/raw/master/form1.png" />
+<img src="https://gitee.com/lin0716/gi-image/raw/master/form/form1.png" />
 
-<img src="https://gitee.com/lin0716/gi-image/raw/master/form2.png" />
+<img src="https://gitee.com/lin0716/gi-image/raw/master/form/form2.png" />
 
 **`注意：GiForm 组件的最新使用方式如下图`**
 
-<img src="https://gitee.com/lin0716/gi-image/raw/master/GiFormDemoNew.png" />
+<img src="https://gitee.com/lin0716/gi-image/raw/master/form/GiForm-code-new.png" />
 
+#### GiTable 使用示例
 
+<img src="https://gitee.com/lin0716/gi-image/raw/master/table/GiTable-code.png" />
+
+<img src="https://gitee.com/lin0716/gi-image/raw/master/table/GiTable-demo.gif" />
 
 #### Hooks 目录结构
 
@@ -953,9 +892,7 @@ getDeptList() // 建议在页面调用 hooks 的方法，比较直观（不在ho
 
 #### TSX 方式使用表格
 
-<img src="https://gitee.com/lin0716/gi-image/raw/master/md-tsx-table.png" />
-
-
+<img src="https://gitee.com/lin0716/gi-image/raw/master/table/tsx-table.png" />
 
 #### usePagination(hooks) 的使用
 
@@ -1142,8 +1079,8 @@ const { pagination, setTotal } = usePagination(() => {
 const form = reactive({
   name: '',
   status: '',
-  current: pagination.current, // 此种方式不会响应
-  pageSize: pagination.pageSize // 此种方式不会响应
+  page: pagination.current, // 此种方式不会响应
+  size: pagination.pageSize // 此种方式不会响应
 })
 
 const getTableData = async () => {
@@ -1168,7 +1105,7 @@ const form = reactive({
 })
 
 const getTableData = async () => {
-  const res = await getData({ ...form, current: pagination.current, pageSize: pagination.pageSize })
+  const res = await getData({ ...form, page: pagination.current, size: pagination.pageSize })
 }
 </script>
 ```
@@ -1180,16 +1117,16 @@ const getTableData = async () => {
 import { usePagination } from '@/hooks'
 
 const { pagination, setTotal } = usePagination(() => {
-  form.current = pagination.current
-  form.pageSize = pagination.pageSize
+  form.page = pagination.current
+  form.size = pagination.pageSize
   getTableData()
 })
 
 const form = reactive({
   name: '',
   status: '',
-  current: pagination.current,
-  pageSize: pagination.pageSize
+  page: pagination.current,
+  size: pagination.pageSize
 })
 
 const getTableData = async () => {
@@ -1223,27 +1160,23 @@ const getTableData = async () => {
 </script>
 ```
 
-
-
 #### useTable(hooks) 的使用
 
-<img src="https://gitee.com/lin0716/gi-image/raw/master/useTable.png" />
+<img src="https://gitee.com/lin0716/gi-image/raw/master/table/useTable.png" />
 
 使用
 
-<img src="https://gitee.com/lin0716/gi-image/raw/master/useTableDemo.png" />
+<img src="https://gitee.com/lin0716/gi-image/raw/master/table/useTable-code.png" />
 
 **提示**
 
-使用useTable的时候不传入类型，tableData也会根据入参自动推导出类型
+使用 useTable 的时候不传入类型，tableData 也会根据入参自动推导出类型
 
-<img src="https://gitee.com/lin0716/gi-image/raw/master/useTableDemo2.png" />
+<img src="https://gitee.com/lin0716/gi-image/raw/master/table/useTable-code2.png" />
 
 **`最后提示`**
 
 在最新版的`useTable`中， `selectKeys`已经改为`selectedKeys`，同时加了其他新功能，具体查看源码
-
-
 
 #### useForm(hooks) 的使用
 
@@ -1251,12 +1184,12 @@ const getTableData = async () => {
 
 代码：`useForm.ts`
 
-~~~js
+```js
 import { reactive } from 'vue'
-import _ from 'lodash'
+import { cloneDeep } from 'lodash-es'
 
 export default function <F extends object>(initValue: F) {
-  const getInitValue = () => _.cloneDeep(initValue)
+  const getInitValue = () => cloneDeep(initValue)
 
   const form = reactive(getInitValue())
 
@@ -1269,11 +1202,11 @@ export default function <F extends object>(initValue: F) {
 
   return { form, resetForm }
 }
-~~~
+```
 
 **使用**
 
-~~~js
+```js
 import { useForm } from '@/hooks'
 
 const { form, resetForm } = useForm({
@@ -1285,22 +1218,22 @@ const { form, resetForm } = useForm({
 
 // 重置表单数据
 resetForm()
-~~~
+```
 
 **注意**
 
 `resetForm`方法为什么要加上以下代码
 
-~~~js
+```js
 for (const key in form) {
   delete form[key]
 }
-~~~
+```
 
-比如一个编辑弹窗，点击编辑，会根据id查详情，有时候为了方便，直接把详情的数据赋值到form里面，这就会导致重置的时候，有详情的属性冗余，以下举个例子
+比如一个编辑弹窗，点击编辑，会根据 id 查详情，有时候为了方便，直接把详情的数据赋值到 form 里面，这就会导致重置的时候，有详情的属性冗余，以下举个例子
 
-~~~js
-const form = { name: '' };
+```js
+const form = { name: '' }
 const detail = { name: '张三', status: 1 }
 Object.assign(form, detail)
 console.log(form) // { name: '张三', status: 1 }
@@ -1308,9 +1241,7 @@ console.log(form) // { name: '张三', status: 1 }
 // 如果直接重置
 Object.assign(form, { name: '' })
 console.log(form) // { name: '', status: 1 } 有额外属性冗余，status会不经意的随着保存操作提交到后台
-~~~
-
-
+```
 
 #### TSX 方式调起弹窗
 
@@ -1318,49 +1249,25 @@ console.log(form) // { name: '', status: 1 } 有额外属性冗余，status会�
 
 tool.tsx
 
-<img src="https://gitee.com/lin0716/gi-image/raw/master/md-tsx-modal2.png" />
+<img src="https://gitee.com/lin0716/gi-image/raw/master/modal/tsx-modal2.png" />
 
 使用
 
-<img src="https://gitee.com/lin0716/gi-image/raw/master/md-tsx-modal-use.png" />
-
-
+<img src="https://gitee.com/lin0716/gi-image/raw/master/modal/tsx-modal-use.png" />
 
 ##### 方式 2
 
 AddUserForm.vue
 
-<img src="https://gitee.com/lin0716/gi-image/raw/master/md-tsx-modal1.png" />
+<img src="https://gitee.com/lin0716/gi-image/raw/master/modal/tsx-modal1.png" />
 
 使用
 
-<img src="https://gitee.com/lin0716/gi-image/raw/master/md-tsx-modal-use.png" />
+<img src="https://gitee.com/lin0716/gi-image/raw/master/modal/tsx-modal-use.png" />
 
 ##### 方式 3
 
-`@/views/file/components/FileRenameModal/index.vue`
-
-<img src="https://gitee.com/lin0716/gi-image/raw/master/md-tsx-modal3-1.png" />
-
-`@/views/file/components/index.ts`
-
-<img src="https://gitee.com/lin0716/gi-image/raw/master/md-tsx-modal3-2.png" />
-
-使用
-
-```vue
-<script setup lang="ts">
-import { openFileRenameModal } from '../../components/index'
-import type { FileItem } from '@/apis'
-
-// 重命名 函数调用表单弹窗组件
-const rename = (item: FileItem) => {
-  openFileRenameModal(item)
-}
-</script>
-```
-
-
+<img src="https://gitee.com/lin0716/gi-image/raw/master/modal/tsx-modal3-1.png" />
 
 #### 组件使用建议
 
@@ -1422,7 +1329,7 @@ Link 组件使用场景
 
 建议采用全小写，多单词使用-连接符(参考大部分网站，包括掘金，码云等，都是采用这个规则)
 
-或者采用`BEM`命名规范 [BEM命名规范](https://getbem.com/naming/)
+或者采用`BEM`命名规范 [BEM 命名规范](https://getbem.com/naming/)
 
 ```css
 // 推荐
@@ -1446,31 +1353,34 @@ Link 组件使用场景
 .List-Item;
 ```
 
-**BEM命名规范**
+**BEM 命名规范**
 
-~~~html
+```html
 <div class="article">
-    <div class="article__body">
-        <div class="tag"></div>
-        <button class="article__button--primary"></button>
-        <button class="article__button--success"></button>
-    </div>
+  <div class="article__body">
+    <button class="article__button--primary"></button>
+    <button class="article__button--success"></button>
+  </div>
 </div>
-~~~
+```
 
-~~~less
+```less
 .article {
-    max-width: 1200px;
-    &__body {
-        padding: 20px;
+  max-width: 1200px;
+  &__body {
+    padding: 20px;
+  }
+  &__button {
+    padding: 5px 8px;
+    &--primary {
+      background: blue;
     }
-    &__button {
-        padding: 5px 8px;
-        &--primary {background: blue;}
-        &--success {background: green;}
+    &--success {
+      background: green;
     }
+  }
 }
-~~~
+```
 
 #### CSS 全局类名-命名规范
 
@@ -1547,33 +1457,61 @@ Link 组件使用场景
   transform: rotate(-180deg);
 }
 
-.gi_mt { margin-top: $margin; }
+.gi_mt {
+  margin-top: $margin;
+}
 
-.gi_mb { margin-bottom: $margin; }
+.gi_mb {
+  margin-bottom: $margin;
+}
 
-.gi_ml { margin-left: $margin; }
+.gi_ml {
+  margin-left: $margin;
+}
 
-.gi_mr { margin-right: $margin; }
+.gi_mr {
+  margin-right: $margin;
+}
 
-.gi_mx { margin: 0 $margin; }
+.gi_mx {
+  margin: 0 $margin;
+}
 
-.gi_my { margin: $margin 0; }
+.gi_my {
+  margin: $margin 0;
+}
 
-.gi_m0 { margin: 0; }
+.gi_m0 {
+  margin: 0;
+}
 
-.gi_pt { padding-top: $margin; }
+.gi_pt {
+  padding-top: $margin;
+}
 
-.gi_pb { padding-bottom: $margin; }
+.gi_pb {
+  padding-bottom: $margin;
+}
 
-.gi_pl { padding-left: $margin; }
+.gi_pl {
+  padding-left: $margin;
+}
 
-.gi_pr { padding-right: $margin; }
+.gi_pr {
+  padding-right: $margin;
+}
 
-.gi_px { padding: 0 $padding; }
+.gi_px {
+  padding: 0 $padding;
+}
 
-.gi_py { padding: $padding 0; }
+.gi_py {
+  padding: $padding 0;
+}
 
-.gi_p0 { padding: 0; }
+.gi_p0 {
+  padding: 0;
+}
 
 // 使用场景，页面内容超出高度会自动滚动
 .gi_page {
@@ -1624,7 +1562,7 @@ $padding: 16px; // 盒子和内容的间距
 
 建议尽量使用全局 scss 变量来开发，可以有效提高效率和团队协作
 
-<img src="https://gitee.com/lin0716/gi-image/raw/master/md-gap.png" />
+<img src="https://gitee.com/lin0716/gi-image/raw/master/gap.png" />
 
 #### CSS 的命名词汇
 
@@ -1772,7 +1710,7 @@ $padding: 16px; // 盒子和内容的间距
 
 <a href="https://antoniandre.github.io/vue-cal/" target="_blank">Vue Cal 日历组件</a>
 
-<a href="" target="_blank"></a>
+<a href="https://alfred-skyblue.github.io/vue-draggable-plus/" target="_blank">VueDraggablePlus 支持 Vue2 和 Vue3 的拖拽组件</a>
 
 ## 推荐书籍
 
@@ -1805,8 +1743,6 @@ $padding: 16px; // 盒子和内容的间距
 <a href="http://49.234.61.19/tool/cssTriangle" target="_blank">在线三角形样式生成器</a>
 
 <a href="https://go.itab.link/" target="_blank">iTab</a>
-
-
 
 ## 捐赠
 

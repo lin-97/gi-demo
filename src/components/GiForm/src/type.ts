@@ -31,15 +31,16 @@ export type ColumnsItemPropsKey =
   | keyof A.TreeSelectInstance['$props']
 
 export type ColumnsItemHide<F> = boolean | ((form: F) => boolean)
+export type ColumnsItemDisabled<F> = boolean | ((form: F) => boolean)
 export type ColumnsItemRequest<F = any> = (form: F) => Promise<any>
 export type ColumnsItemFormat<T = any> = (
   res: T
 ) =>
-  | A.SelectInstance['$props']['options']
-  | A.RadioGroupInstance['$props']['options']
-  | A.CheckboxGroupInstance['$props']['options']
-  | A.CascaderInstance['$props']['options']
-  | A.TreeSelectInstance['$props']['data']
+| A.SelectInstance['$props']['options']
+| A.RadioGroupInstance['$props']['options']
+| A.CheckboxGroupInstance['$props']['options']
+| A.CascaderInstance['$props']['options']
+| A.TreeSelectInstance['$props']['data']
 
 export type ColumnsItemOptionsOrData =
   | A.SelectInstance['$props']['options']
@@ -49,8 +50,8 @@ export type ColumnsItemOptionsOrData =
   | A.TreeSelectInstance['$props']['data']
 
 export interface ColumnsItem<F = any> {
-  type: FormType // 类型
-  label: A.FormItemInstance['label'] // 标签
+  type?: FormType // 类型
+  label?: A.FormItemInstance['label'] // 标签
   field: A.FormItemInstance['field'] // 字段(必须唯一)
   span?: number // 栅格占位格数
   col?: A.ColProps // a-col的props, 响应式布局, 优先级大于span
@@ -79,6 +80,7 @@ export interface ColumnsItem<F = any> {
   // 下拉树组件的data
   data?: A.TreeSelectInstance['$props']['data']
   hide?: ColumnsItemHide<F> // 是否隐藏
+  disabled?: ColumnsItemDisabled<F> // 是否禁用
   request?: ColumnsItemRequest<F> // 接口请求api
   resultFormat?: ColumnsItemFormat // 结果集格式化
   init?: boolean // 初始化请求
@@ -88,8 +90,9 @@ export interface ColumnsItem<F = any> {
 export interface Options {
   form: Omit<A.FormInstance['$props'], 'model'>
   row?: Partial<typeof import('@arco-design/web-vue')['Row']['__defaults']>
-  btns?: { hide?: boolean; span?: number; col?: A.ColProps; searchBtnText?: string }
-  fold?: { enable?: boolean; index?: number }
+  col?: A.ColProps
+  btns?: { hide?: boolean, span?: number, col?: A.ColProps, searchBtnText?: string }
+  fold?: { enable?: boolean, index?: number, defaultCollapsed?: boolean }
 }
 
 export type Columns<F = any> = ColumnsItem<F>[]
