@@ -24,16 +24,6 @@
         </template>
       </a-popover>
 
-      <!-- 全屏切换组件 -->
-      <a-tooltip v-if="!isPhone()" content="全屏切换" position="bottom">
-        <a-button size="mini" class="gi_hover_btn" @click="toggleFullScreen">
-          <template #icon>
-            <icon-fullscreen :size="18" v-if="!isFullScreen" />
-            <icon-fullscreen-exit :size="18" v-else />
-          </template>
-        </a-button>
-      </a-tooltip>
-
       <!-- 暗黑模式切换 -->
       <a-tooltip content="主题切换" position="bottom">
         <GiThemeBtn></GiThemeBtn>
@@ -79,17 +69,14 @@
 
 <script setup lang="ts">
 import { Modal } from '@arco-design/web-vue'
-import { useAppStore, useUserStore } from '@/stores'
-import { useFullScreen } from '@/hooks'
 import SettingDrawer from './SettingDrawer.vue'
 import Message from './Message.vue'
-import { isPhone } from '@/utils/common'
+import { useAppStore, useUserStore } from '@/stores'
 
 defineOptions({ name: 'HeaderRight' })
 const router = useRouter()
 const appStore = useAppStore()
 const userStore = useUserStore()
-const { isFullScreen, toggleFullScreen } = useFullScreen()
 const SettingDrawerRef = ref<InstanceType<typeof SettingDrawer>>()
 
 // 跳转个人中心
@@ -131,12 +118,15 @@ const toGitPath = () => {
   flex-shrink: 0;
   color: #fff;
   border-radius: 4px;
+
   &.primary {
     background-color: rgba(var(--primary-6));
   }
+
   &.success {
     background-color: rgba(var(--success-6));
   }
+
   &.warning {
     background-color: rgba(var(--warning-6));
   }
@@ -144,10 +134,12 @@ const toGitPath = () => {
 
 .user {
   cursor: pointer;
+
   .username {
     margin-left: 10px;
     white-space: nowrap;
   }
+
   .arco-icon-down {
     transition: all 0.3s;
     margin-left: 2px;

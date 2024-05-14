@@ -14,6 +14,14 @@
           </a-badge>
           <a-badge>
             <template #content>
+              <icon-check-circle-fill v-if="appStore.layout === 'top'" :size="16"
+                style="color: rgb(var(--success-6))"></icon-check-circle-fill>
+            </template>
+            <LayoutItem mode="top" @click="appStore.layout = 'top'"></LayoutItem>
+            <p class="layout-text">顶部布局</p>
+          </a-badge>
+          <a-badge>
+            <template #content>
               <icon-check-circle-fill v-if="appStore.layout === 'mix'" :size="16"
                 style="color: rgb(var(--success-6))"></icon-check-circle-fill>
             </template>
