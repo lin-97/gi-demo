@@ -67,10 +67,10 @@ const router = createRouter({
  */
 export function resetRouter() {
   try {
+    const staticRouteNames = constantRoutes.filter((i) => i.name).map((j) => j.name)
     router.getRoutes().forEach((route) => {
       const { name } = route
-      // console.log('name', name, path)
-      if (name && name !== 'Home') {
+      if (name && !staticRouteNames.includes(name)) {
         router.hasRoute(name) && router.removeRoute(name)
       }
     })
