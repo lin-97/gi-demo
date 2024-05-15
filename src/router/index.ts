@@ -1,4 +1,5 @@
 import { type RouteRecordRaw, createRouter, createWebHashHistory } from 'vue-router'
+import { useRouteStore } from '@/stores'
 
 /** 默认布局 */
 const Layout = () => import('@/layout/index.vue')
@@ -63,14 +64,14 @@ const router = createRouter({
 
 /**
  * @description 重置路由
- * @description 注意：所有动态路由路由必须带有 name 属性，否则可能会不能完全重置干净
+ * @description 注意：所有动态路由路由必须带有name属性，否则可能会不能完全重置干净
  */
 export function resetRouter() {
   try {
-    const staticRouteNames = constantRoutes.filter((i) => i.name).map((j) => j.name)
-    router.getRoutes().forEach((route) => {
+    const routeStore = useRouteStore()
+    routeStore.asyncRoutes.forEach((route) => {
       const { name } = route
-      if (name && !staticRouteNames.includes(name)) {
+      if (name) {
         router.hasRoute(name) && router.removeRoute(name)
       }
     })
