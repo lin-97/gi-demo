@@ -13,7 +13,7 @@ declare namespace App {
     layout: 'left' | 'mix'
   }
   /** 导航页签的样式类型 */
-  type TabType = 'card' | 'card-gutter' | 'rounded'
+  type TabType = 'card' | 'card-gutter' | 'rounded' | 'custom'
   interface TabItem {
     label: string
     value: TabType

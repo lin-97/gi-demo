@@ -72,7 +72,8 @@ const visible = ref(false)
 const tabModeList: App.TabItem[] = [
   { label: '卡片', value: 'card' },
   { label: '间隔卡片', value: 'card-gutter' },
-  { label: '圆角', value: 'rounded' }
+  { label: '圆角', value: 'rounded' },
+  { label: '自定义', value: 'custom' }
 ]
 
 const animateModeList: App.AnimateItem[] = [
