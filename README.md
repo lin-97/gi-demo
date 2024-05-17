@@ -1,7 +1,9 @@
 <div align="center">
 	<img style="width: 80px;height: 80px" src="https://gitee.com/lin0716/gi-image/raw/master/gi-logo.gif"/>
 	<h1>Gi Admin Pro</h1>
+    <a href='https://gitee.com/lin0716/gi-demo/stargazers'><img src='https://gitee.com/lin0716/gi-demo/badge/star.svg?theme=dark' alt='star'></img></a>
 </div>
+
 
 [![license](https://img.shields.io/badge/license-MIT-green.svg)](./LICENSE)
 
@@ -22,7 +24,10 @@
 
 ## 预览
 
-<a href="http://lin0716.gitee.io/gi-demo" target="_blank">Gi Admin Pro 预览地址</a>
+| 平台              | 预览地址                                                   |
+| ----------------- | ---------------------------------------------------------- |
+| **gitee**（码云） | [Gi Admin Pro 预览地址](http://lin0716.gitee.io/gi-demo)   |
+| **github**        | [Gi Admin Pro 预览地址](https://lin-97.github.io/gi-demo/) |
 
 |        | 账号  | 密码   |
 | ------ | ----- | ------ |
@@ -31,7 +36,10 @@
 
 ## 代码仓库
 
-<a href="https://gitee.com/lin0716/gi-demo" target="_blank">Gitee  仓库地址</a>
+| 平台              | 预览地址                                                     | 仓库地址                                                     |
+| ----------------- | ------------------------------------------------------------ | ------------------------------------------------------------ |
+| **gitee**（码云） | <a href="http://lin0716.gitee.io/gi-demo" target="_blank">Gi Admin Pro 预览地址</a> | <a href="https://gitee.com/lin0716/gi-demo" target="_blank">Gitee  仓库地址</a> |
+| **github**        | <a href="https://lin-97.github.io/gi-demo/" target="_blank">Gi Admin Pro 预览地址</a> | <a href="https://github.com/lin-97/gi-demo" target="_blank">Github 仓库地址</a> |
 
 ## 项目示例图
 
