@@ -22,11 +22,12 @@
 </template>
 
 <script setup lang="ts">
-import { Modal } from '@arco-design/web-vue'
+import { Message, Modal } from '@arco-design/web-vue'
 import { useWindowSize } from '@vueuse/core'
 import { cityOptions, deptData } from './data'
 import * as Regexp from '@/utils/regexp'
 import { type Columns, GiForm, type Options, useGiForm } from '@/components/GiForm'
+import { useForm } from '@/hooks'
 
 const { width } = useWindowSize()
 
@@ -144,14 +145,16 @@ const initColumns: Columns = [
 
 const { columns, resetColumns, setPropsValue } = useGiForm(initColumns)
 
-const form = reactive({
+const { form, resetForm } = useForm({
   name: '',
   remark: '这是备注这是备注',
   status: 1
 })
 
+const GiFormRef = ref<InstanceType<typeof GiForm>>()
 const onAdd = () => {
   resetColumns()
+  resetForm()
   Modal.open({
     title: '新增',
     width: '90%',
@@ -159,11 +162,23 @@ const onAdd = () => {
     fullscreen: width.value < 600,
     content: () =>
       h(GiForm, {
+        'ref': (e) => GiFormRef.value = e as InstanceType<typeof GiForm>,
         'options': options,
         'columns': columns,
         'modelValue': form,
         'onUpdate:modelValue': (e) => Object.assign(form, e)
-      })
+      }),
+    onBeforeOk: async () => {
+      try {
+        const flag = await GiFormRef.value?.formRef?.validate()
+        if (flag) return false
+        await new Promise((resolve) => setTimeout(() => resolve(true), 300)) as unknown as Promise<boolean>
+        Message.success('新增成功！')
+        return true
+      } catch (error) {
+        return false
+      }
+    }
   })
 }
 
@@ -177,11 +192,23 @@ const onEdit = () => {
     fullscreen: width.value < 600,
     content: () =>
       h(GiForm, {
+        'ref': (e) => GiFormRef.value = e as InstanceType<typeof GiForm>,
         'options': options,
         'columns': columns,
         'modelValue': form,
         'onUpdate:modelValue': (e) => Object.assign(form, e)
-      })
+      }),
+    onBeforeOk: async () => {
+      try {
+        const flag = await GiFormRef.value?.formRef?.validate()
+        if (flag) return false
+        await new Promise((resolve) => setTimeout(() => resolve(true), 300)) as unknown as Promise<boolean>
+        Message.success('编辑成功！')
+        return true
+      } catch (error) {
+        return false
+      }
+    }
   }
   const instance = Modal.open(option)
   // 模拟异步更新
