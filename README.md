@@ -1,7 +1,9 @@
 <div align="center">
 	<img style="width: 80px;height: 80px" src="https://gitee.com/lin0716/gi-image/raw/master/gi-logo.gif"/>
 	<h1>Gi Admin Pro</h1>
+    <a href='https://gitee.com/lin0716/gi-demo/stargazers'><img src='https://gitee.com/lin0716/gi-demo/badge/star.svg?theme=dark' alt='star'></img></a>
 </div>
+
 
 [![license](https://img.shields.io/badge/license-MIT-green.svg)](./LICENSE)
 
@@ -22,7 +24,10 @@
 
 ## 预览
 
-<a href="http://lin0716.gitee.io/gi-demo" target="_blank">Gi Admin Pro 预览地址</a>
+| 平台              | 预览地址                                                   |
+| ----------------- | ---------------------------------------------------------- |
+| **gitee**（码云） | [Gi Admin Pro 预览地址](http://lin0716.gitee.io/gi-demo)   |
+| **github**        | [Gi Admin Pro 预览地址](https://lin-97.github.io/gi-demo/) |
 
 |        | 账号  | 密码   |
 | ------ | ----- | ------ |
@@ -31,7 +36,10 @@
 
 ## 代码仓库
 
-<a href="https://gitee.com/lin0716/gi-demo" target="_blank">Gitee  仓库地址</a>
+| 平台              | 预览地址                                                     | 仓库地址                                                     |
+| ----------------- | ------------------------------------------------------------ | ------------------------------------------------------------ |
+| **gitee**（码云） | <a href="http://lin0716.gitee.io/gi-demo" target="_blank">Gi Admin Pro 预览地址</a> | <a href="https://gitee.com/lin0716/gi-demo" target="_blank">Gitee  仓库地址</a> |
+| **github**        | <a href="https://lin-97.github.io/gi-demo/" target="_blank">Gi Admin Pro 预览地址</a> | <a href="https://github.com/lin-97/gi-demo" target="_blank">Github 仓库地址</a> |
 
 ## 项目示例图
 
@@ -831,7 +839,44 @@ GiForm 是一个 JSON 配置表单组件，能够快速通过 JSON 构建表单�
 
 <img src="https://gitee.com/lin0716/gi-image/raw/master/form/GiForm-code-new.png" />
 
+**新版文档**
+
+**options配置**
+
+| 属性 | 说明                                                         |
+| ---- | ------------------------------------------------------------ |
+| form | 直接继承a-form的所有props                                    |
+| row  | row包裹层，直接继承a-row的所有props                          |
+| col  | 每个表单项的包裹层，直接继承a-col的所有props                 |
+| btns | 尾部按钮的配置<br />hide：按钮的显示隐藏<br />span：按钮的span（a-col的span）<br />col：按钮包裹层的col（直接继承a-col的所有props，需要响应式直接用col，不用span）<br />searchBtnText：搜索按钮的文本（默认为："搜索"） |
+| fold | 折叠配置<br />enable：是否折叠<br />index：折叠的位置索引<br />defaultCollapsed：初始折叠状态 |
+
+**columns配置**
+
+| 属性     | 说明                                                         |
+| -------- | ------------------------------------------------------------ |
+| type     | 表单项类型，如input、select、date-picker                     |
+| label    | 表单项标签（a-form-item的label）                             |
+| field    | 表单项的field（a-form-item的field）                          |
+| span     | 表单项外层包裹的a-col的span                                  |
+| col      | 表单项外层包裹的a-col的所有属性props，优先级比span高，比options.col高，如果不匹配此项，会默认继承options.col，就不需要每项单独配了，响应式布局更方便 |
+| item     | 继承a-form-item的所有props                                   |
+| props    | 继承a-input、a-select等组件的所有props，根据你所填的type的表单项类型配置对应的props |
+| rules    | 表单项校验规则                                               |
+| options  | a-selec、a-cascader、a-radio-group、a-checkbox-group的options（只有这几个类型有options） |
+| data     | a-tree-select的data属性（只有此类型有data）                  |
+| hide     | 动态隐藏 （form）=> boolean 返回一个布尔值， form为v-model绑定的表单 |
+| disabled | 动态禁用 （form）=> boolean 返回一个布尔值， form为v-model绑定的表单 |
+
+**结合Modal函数实现更高效的表单对话框**
+
+<img src="https://gitee.com/lin0716/gi-image/raw/master/form/GiForm-modal.png" />
+
+
+
 #### GiTable 使用示例
+
+**GiTable继承了a-table的所有属性和配置，只是多了一些插槽，以及prop属性，具体看源码**
 
 <img src="https://gitee.com/lin0716/gi-image/raw/master/table/GiTable-code.png" />
 
