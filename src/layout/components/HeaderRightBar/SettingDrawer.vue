@@ -4,22 +4,8 @@
       <a-divider orientation="center">系统布局</a-divider>
       <a-row justify="center">
         <a-space>
-          <a-badge>
-            <template #content>
-              <icon-check-circle-fill v-if="appStore.layout === 'left'" style="color: rgb(var(--success-6))"
-                :size="16"></icon-check-circle-fill>
-            </template>
-            <LayoutItem mode="left" @click="appStore.layout = 'left'"></LayoutItem>
-            <p class="layout-text">默认布局</p>
-          </a-badge>
-          <a-badge>
-            <template #content>
-              <icon-check-circle-fill v-if="appStore.layout === 'mix'" :size="16"
-                style="color: rgb(var(--success-6))"></icon-check-circle-fill>
-            </template>
-            <LayoutItem mode="mix" @click="appStore.layout = 'mix'"></LayoutItem>
-            <p class="layout-text">混合布局</p>
-          </a-badge>
+          <LayoutItem mode="left" name="默认布局" @click="appStore.layout = 'left'"></LayoutItem>
+          <LayoutItem mode="mix" name="混合布局" @click="appStore.layout = 'mix'"></LayoutItem>
         </a-space>
       </a-row>
 
@@ -126,12 +112,5 @@ const changeColor = (colorObj: ColorObj) => {
 <style lang="scss" scoped>
 :deep(.arco-descriptions-item-label-block) {
   color: var(--color-text-1);
-}
-
-.layout-text {
-  font-size: 12px;
-  text-align: center;
-  color: var(--color-text-2);
-  margin-top: 4px;
 }
 </style>
