@@ -75,12 +75,48 @@
                   @update:model-value="valueChange($event, item.field)"></a-date-picker>
               </template>
 
+              <template v-if="item.type === 'year-picker'">
+                <a-year-picker v-bind="(item.props as A.YearPickerInstance['$props'])"
+                  :model-value="modelValue[item.field as keyof typeof modelValue]"
+                  @update:model-value="valueChange($event, item.field)"></a-year-picker>
+              </template>
+
+              <template v-if="item.type === 'month-picker'">
+                <a-month-picker v-bind="(item.props as A.MonthPickerInstance['$props'])"
+                  :model-value="modelValue[item.field as keyof typeof modelValue]"
+                  @update:model-value="valueChange($event, item.field)"></a-month-picker>
+              </template>
+
+              <template v-if="item.type === 'quarter-picker'">
+                <a-quarter-picker v-bind="(item.props as A.QuarterPickerInstance['$props'])"
+                  :model-value="modelValue[item.field as keyof typeof modelValue]"
+                  @update:model-value="valueChange($event, item.field)"></a-quarter-picker>
+              </template>
+
+              <template v-if="item.type === 'week-picker'">
+                <a-week-picker v-bind="(item.props as A.WeekPickerInstance['$props'])"
+                  :model-value="modelValue[item.field as keyof typeof modelValue]"
+                  @update:model-value="valueChange($event, item.field)"></a-week-picker>
+              </template>
+
+              <template v-if="item.type === 'range-picker'">
+                <a-range-picker v-bind="(item.props as A.RangePickerInstance['$props'])"
+                  :model-value="modelValue[item.field as keyof typeof modelValue]"
+                  @update:model-value="valueChange($event, item.field)"></a-range-picker>
+              </template>
+
               <template v-if="item.type === 'time-picker'">
                 <a-time-picker :allow-clear="true" placeholder="请选择时间"
                   v-bind="(item.props as A.TimePickerInstance['$props'])"
                   :model-value="modelValue[item.field as keyof typeof modelValue]"
                   @update:model-value="valueChange($event, item.field)">
                 </a-time-picker>
+              </template>
+
+              <template v-if="item.type === 'color-picker'">
+                <a-color-picker v-bind="(item.props as A.ColorPickerInstance['$props'])"
+                  :model-value="modelValue[item.field as keyof typeof modelValue]"
+                  @update:model-value="valueChange($event, item.field)"></a-color-picker>
               </template>
 
               <template v-if="item.type === 'rate'">
