@@ -10,6 +10,15 @@
       <a-col :xs="24" :sm="24" :md="12">
         <GiForm ref="formRef" v-model="form" :options="options" :columns="columns">
           <template #test="{ disabled }"> 自定义插槽-禁用状态：{{ disabled }} </template>
+          <template #base-title>
+            <a-alert>基本信息</a-alert>
+          </template>
+          <template #group-title1>
+            <a-alert>分组标题1</a-alert>
+          </template>
+          <template #group-title2>
+            <a-alert>分组标题2</a-alert>
+          </template>
           <template #btns>
             <a-row justify="end" class="w-full">
               <a-space>
@@ -62,6 +71,13 @@ const options: Options = reactive({
 })
 
 const columns: Columns<typeof form> = reactive([
+  {
+    field: 'base-title',
+    span: 24,
+    item: {
+      labelColStyle: { display: 'none' }
+    }
+  },
   {
     type: 'input',
     label: '姓名',
@@ -158,6 +174,13 @@ const columns: Columns<typeof form> = reactive([
     }
   },
   {
+    field: 'group-title1',
+    span: 24,
+    item: {
+      labelColStyle: { display: 'none' }
+    }
+  },
+  {
     type: 'cascader',
     label: '城市',
     field: 'city',
@@ -170,6 +193,13 @@ const columns: Columns<typeof form> = reactive([
     field: 'dept',
     data: deptData,
     disabled: (i) => i.status === 0
+  },
+  {
+    field: 'group-title2',
+    span: 24,
+    item: {
+      labelColStyle: { display: 'none' }
+    }
   },
   {
     type: 'textarea',

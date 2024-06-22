@@ -7,7 +7,13 @@ export type FormType =
   | 'checkbox-group'
   | 'textarea'
   | 'date-picker'
+  | 'year-picker'
+  | 'quarter-picker'
+  | 'week-picker'
+  | 'range-picker'
+  | 'month-picker'
   | 'time-picker'
+  | 'color-picker'
   | 'input-number'
   | 'rate'
   | 'switch'
@@ -20,7 +26,13 @@ export type ColumnsItemPropsKey =
   | keyof A.SelectInstance['$props']
   | keyof A.TextareaInstance['$props']
   | keyof A.DatePickerInstance['$props']
+  | keyof A.YearPickerInstance['$props']
+  | keyof A.MonthPickerInstance['$props']
+  | keyof A.QuarterPickerInstance['$props']
+  | keyof A.WeekPickerInstance['$props']
+  | keyof A.RangePickerInstance['$props']
   | keyof A.TimePickerInstance['$props']
+  | keyof A.ColorPickerInstance['$props']
   | keyof A.RadioGroupInstance['$props']
   | keyof A.CheckboxGroupInstance['$props']
   | keyof A.InputNumberInstance['$props']
