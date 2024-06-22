@@ -1,0 +1,1 @@
+import{af as t}from"./index-DyiAUk2E.js";function e(){return t.get("/system/menu")}function n(e){return t.get("/system/menu/detail",e)}function s(){return t.get("/system/menu/options")}export{e as a,s as b,n as g};
