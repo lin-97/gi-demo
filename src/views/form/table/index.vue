@@ -8,21 +8,23 @@
       </a-row>
 
       <a-form ref="formRef" :model="form">
-        <a-table :columns="columns" :data="form.tableData" :bordered="{ cell: true }" :pagination="false">
+        <a-table :columns="columns" :data="form.tableData" :bordered="{ cell: true }" :scroll="{ minWidth: 680 }"
+          :pagination="false">
           <template #name="{ record, rowIndex }">
             <a-form-item :field="`tableData[${rowIndex}].name`" :label-col-style="{ display: 'none' }"
-              :rules="[{ required: true, message: '请输入姓名' }]">
+              :wrapper-col-props="{ span: 24 }" :rules="[{ required: true, message: '请输入姓名' }]">
               <a-input v-model="record.name" placeholder="请输入姓名" allow-clear />
             </a-form-item>
           </template>
           <template #phone="{ record, rowIndex }">
             <a-form-item :field="`tableData[${rowIndex}].phone`" :label-col-style="{ display: 'none' }"
-              :rules="[{ required: true, message: '请输入手机号' }]">
+              :wrapper-col-props="{ span: 24 }" :rules="[{ required: true, message: '请输入手机号' }]">
               <a-input v-model="record.phone" placeholder="请输入手机号" allow-clear />
             </a-form-item>
           </template>
           <template #address="{ record, rowIndex }">
-            <a-form-item :field="`tableData[${rowIndex}].address`" :label-col-style="{ display: 'none' }">
+            <a-form-item :field="`tableData[${rowIndex}].address`" :label-col-style="{ display: 'none' }"
+              :wrapper-col-props="{ span: 24 }">
               <a-input v-model="record.address" placeholder="请输入地址" allow-clear />
             </a-form-item>
           </template>
@@ -64,13 +66,13 @@ const columns: TableColumnData[] = [
     title: '姓名',
     dataIndex: 'name',
     slotName: 'name',
-    headerCellClass: 'column-require'
+    headerCellClass: 'gi_column_require'
   },
   {
     title: '手机',
     dataIndex: 'phone',
     slotName: 'phone',
-    headerCellClass: 'column-require'
+    headerCellClass: 'gi_column_require'
   },
   {
     title: '地址',
@@ -79,8 +81,10 @@ const columns: TableColumnData[] = [
   },
   {
     title: '操作',
-    width: 60,
-    slotName: 'action'
+    width: 80,
+    slotName: 'action',
+    fixed: 'right',
+    align: 'center'
   }
 ]
 
@@ -104,7 +108,11 @@ const onDelete = (index: number) => {
 
 const submit = async () => {
   const valid = await formRef.value?.validate()
-  if (valid) return
+  if (valid) {
+    const arr = Object.values(valid)
+    Message.warning(arr[0].message)
+    return
+  }
   Message.success('提交通过')
 }
 
@@ -115,18 +123,11 @@ const reset = () => {
 </script>
 
 <style lang='scss' scoped>
-// :deep(.arco-form-item-message),
-// :deep(.arco-form-item) {
-//   display: none;
-// }
+:deep(.arco-form-item) {
+  margin-bottom: 0;
 
-:deep(.column-require) {
-  .arco-table-th-title {
-    &::before {
-      content: '*';
-      color: red;
-      padding-right: 2px;
-    }
+  .arco-form-item-message {
+    display: none;
   }
 }
 
