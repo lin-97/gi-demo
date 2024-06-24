@@ -197,3 +197,13 @@
     border-radius: 0 4px 4px 0;
   }
 }
+
+.gi_column_require {
+  .arco-table-th-title {
+    &::before {
+      content: '*';
+      color: red;
+      padding-right: 2px;
+    }
+  }
+}
