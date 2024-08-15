@@ -129,7 +129,6 @@ const columns: TableInstance['columns'] = [
 ]
 
 const { tableData, getTableData, pagination, search } = useTable((p) => getPersonList(p))
-search()
 
 function onClickName(record: PersonItem) {
   Message.success(`点击了${record.name}`)

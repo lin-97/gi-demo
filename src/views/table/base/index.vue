@@ -108,7 +108,6 @@ const columns: Columns = reactive([
 ])
 
 const { tableData, pagination, search, loading } = useTable((p) => getPersonList(p))
-search()
 
 const onDelete: PopconfirmInstance['onBeforeOk'] = () => {
   return new Promise((resolve) => setTimeout(() => resolve(true), 300))

@@ -75,8 +75,7 @@ import { type PersonItem, getPersonList } from '@/apis'
 
 defineOptions({ name: 'TableCustom' })
 
-const { tableData, getTableData, pagination, search, loading } = useTable((p) => getPersonList(p))
-search()
+const { tableData, getTableData, pagination, loading } = useTable((p) => getPersonList(p))
 
 const onClickName = (record: PersonItem) => {
   Message.success(`点击了${record.name}`)
