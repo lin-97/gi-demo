@@ -8,11 +8,11 @@
 <script lang="ts" setup>
 import { Message } from '@arco-design/web-vue'
 import type { TreeInstance } from '@arco-design/web-vue'
-import { type MenuOptionsItem, getSystemMenuOptions, getSystemRoleMenuIds } from '@/apis'
+import { type SystemMenuOptionsItem, getSystemMenuOptions, getSystemRoleMenuIds } from '@/apis'
 import { isMobile } from '@/utils'
 
 const treeRef = ref<TreeInstance>()
-const treeData = ref<MenuOptionsItem[]>([])
+const treeData = ref<SystemMenuOptionsItem[]>([])
 const getTreeData = async () => {
   const res = await getSystemMenuOptions()
   treeData.value = res.data

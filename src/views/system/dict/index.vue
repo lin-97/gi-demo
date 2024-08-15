@@ -81,7 +81,7 @@ import AddDictModal from './AddDictModal.vue'
 import DictDataModal from './DictDataModal/index.vue'
 import { useTable } from '@/hooks'
 import { useDict } from '@/hooks/app'
-import { type DictItem, deleteBaseApi, getSystemDictList } from '@/apis'
+import { type SystemDictItem, deleteBaseApi, getSystemDictList } from '@/apis'
 import { isMobile } from '@/utils'
 
 defineOptions({ name: 'SystemRole' })
@@ -113,7 +113,7 @@ const reset = () => {
 }
 
 // 删除
-const onDelete = (item: DictItem) => {
+const onDelete = (item: SystemDictItem) => {
   return handleDelete(() => deleteBaseApi({ ids: [item.id] }), { showModal: false })
 }
 
@@ -129,11 +129,11 @@ const onAdd = () => {
   AddDictModalRef.value?.add()
 }
 
-const onEdit = (item: DictItem) => {
+const onEdit = (item: SystemDictItem) => {
   AddDictModalRef.value?.edit(item.id)
 }
 
-const onViewDictData = (item: DictItem) => {
+const onViewDictData = (item: SystemDictItem) => {
   DictDataModalRef.value?.open({ code: item.code })
 }
 </script>

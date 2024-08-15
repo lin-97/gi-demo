@@ -1,12 +1,12 @@
-import type * as System from './type'
+import type * as T from './type'
 import http from '@/utils/http'
 
-/** @desc 获取部门数据 */
+/** 获取部门数据 */
 export function getSystemDeptList() {
-  return http.get<System.DeptItem[]>('/system/dept')
+  return http.get<T.SystemDeptItem[]>('/system/dept')
 }
 
-/** @desc 获取部门详情 */
+/** 获取部门详情 */
 export function getSystemDeptDetail(params: { id: string }) {
-  return http.get<System.DeptItem>('/system/dept/detail', params)
+  return http.get<T.SystemDeptItem>('/system/dept/detail', params)
 }

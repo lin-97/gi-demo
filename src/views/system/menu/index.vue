@@ -126,7 +126,7 @@
 <script setup lang="ts">
 import { Drawer, type TableInstance } from '@arco-design/web-vue'
 import AddMenuModal from './AddMenuModal.vue'
-import { type MenuItem, deleteBaseApi, getSystemMenuList } from '@/apis'
+import { type SystemMenuItem, deleteBaseApi, getSystemMenuList } from '@/apis'
 import { isExternal } from '@/utils/validate'
 import { isMobile, transformPathToName } from '@/utils'
 import { useDict } from '@/hooks/app'
@@ -164,11 +164,11 @@ const onAdd = () => {
   AddMenuModalRef.value?.add()
 }
 
-const onEdit = (item: MenuItem) => {
+const onEdit = (item: SystemMenuItem) => {
   AddMenuModalRef.value?.edit(item.id)
 }
 
-const onDelete = async (item: MenuItem) => {
+const onDelete = async (item: SystemMenuItem) => {
   return handleDelete(() => deleteBaseApi({ ids: [item.id] }), { showModal: false })
 }
 

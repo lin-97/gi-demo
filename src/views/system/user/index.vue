@@ -7,10 +7,10 @@
             <template #prefix><icon-search /></template>
           </a-input>
           <a-tree ref="treeRef" block-node show-line default-expand-all :data="deptList" :field-names="{
-        key: 'id',
-        title: 'name',
-        children: 'children',
-      }" @select="search">
+            key: 'id',
+            title: 'name',
+            children: 'children',
+          }" @select="search">
           </a-tree>
         </a-col>
 
@@ -118,7 +118,7 @@ import UserDetailDrawer from './UserDetailDrawer.vue'
 import { useTable } from '@/hooks'
 import { useDept, useDict } from '@/hooks/app'
 import { deleteBaseApi, getSystemUserList } from '@/apis'
-import type { UserItem } from '@/apis'
+import type { SystemUserItem } from '@/apis'
 import { isMobile } from '@/utils'
 
 defineOptions({ name: 'SystemUser' })
@@ -158,7 +158,7 @@ const reset = () => {
 }
 
 // 删除
-const onDelete = (item: UserItem) => {
+const onDelete = (item: SystemUserItem) => {
   return handleDelete(() => deleteBaseApi({ ids: [item.id] }), { showModal: false })
 }
 
@@ -174,11 +174,11 @@ const onAdd = () => {
   AddUserModalRef.value?.add()
 }
 
-const onEdit = (item: UserItem) => {
+const onEdit = (item: SystemUserItem) => {
   AddUserModalRef.value?.edit(item.id)
 }
 
-const openDetail = (item: UserItem) => {
+const openDetail = (item: SystemUserItem) => {
   UserDetailDrawerRef.value?.open(item.id)
 }
 </script>

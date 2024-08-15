@@ -13,10 +13,10 @@
       <a-form-item label="上级菜单" field="parentId">
         <a-tree-select v-model="form.parentId" placeholder="请选择上级菜单" allow-clear allow-search :disabled="isEdit"
           :data="(menuSelectTree as any)" :field-names="{
-    key: 'id',
-    title: 'title',
-    children: 'children',
-  }" />
+            key: 'id',
+            title: 'title',
+            children: 'children',
+          }" />
       </a-form-item>
 
       <a-row v-if="[1, 2].includes(form.type)" :gutter="16">
@@ -121,13 +121,13 @@
 import { type ColProps, type FormInstance, Message } from '@arco-design/web-vue'
 import { mapTree } from 'xe-utils'
 import type { MenuForm } from './type'
-import { type MenuItem, getSystemMenuDetail, saveBaseApi } from '@/apis'
+import { type SystemMenuItem, getSystemMenuDetail, saveBaseApi } from '@/apis'
 import { isExternal } from '@/utils/validate'
 import { filterTree, transformPathToName } from '@/utils'
 import { useForm } from '@/hooks'
 
 interface Props {
-  menus: MenuItem[]
+  menus: SystemMenuItem[]
 }
 
 const props = withDefaults(defineProps<Props>(), {
@@ -139,7 +139,7 @@ const emit = defineEmits<{
 }>()
 
 const menuSelectTree = computed(() => {
-  const menus = JSON.parse(JSON.stringify(props.menus)) as MenuItem[]
+  const menus = JSON.parse(JSON.stringify(props.menus)) as SystemMenuItem[]
   const data = filterTree(menus, (i) => [1, 2].includes(i.type))
   const arr = mapTree(data, (i) => ({
     id: i.id,

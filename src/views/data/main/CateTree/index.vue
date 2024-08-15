@@ -33,7 +33,7 @@ import { Message, Modal } from '@arco-design/web-vue'
 import type { InputInstance, TreeInstance, TreeNodeData } from '@arco-design/web-vue'
 import { mapTree } from 'xe-utils'
 import RightMenu from './RightMenu.vue'
-import { type CateItem, getCateTreeData } from '@/apis'
+import { type CateTreeItem, getCateTreeData } from '@/apis'
 import GiSvgIcon from '@/components/GiSvgIcon/index.vue'
 
 interface Props {
@@ -50,7 +50,7 @@ const emit = defineEmits<{
   (e: 'node-click'): void
 }>()
 
-interface TreeCateItem extends CateItem {
+interface TreeCateItem extends CateTreeItem {
   icon: (node: TreeCateItem) => VNode
   popupVisible: boolean
   isEdit: boolean
@@ -139,7 +139,7 @@ const onMenuItemClick = (mode: string) => {
 }
 
 // 移动树节点点击
-const onTreeNodeClick = (data: CateItem) => {
+const onTreeNodeClick = (data: CateTreeItem) => {
   Message.info(data.name)
   closeRightMenuPopup()
 }

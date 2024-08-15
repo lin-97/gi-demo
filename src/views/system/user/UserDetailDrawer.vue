@@ -27,11 +27,11 @@
 </template>
 
 <script lang="ts" setup>
-import { type UserDetailResult, getSystemUserDetail } from '@/apis'
+import { type SystemUserDetail, getSystemUserDetail } from '@/apis'
 
 const visible = ref(false)
 const userId = ref('')
-const user = ref<UserDetailResult | null>()
+const user = ref<SystemUserDetail | null>()
 const getUserDetail = async () => {
   const res = await getSystemUserDetail({ id: userId.value })
   user.value = res.data

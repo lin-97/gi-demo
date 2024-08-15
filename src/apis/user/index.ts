@@ -1,23 +1,23 @@
-import type * as User from './type'
+import type * as T from './type'
 import http from '@/utils/http'
-import type { MenuItem } from '@/apis/system/type'
+import type { SystemMenuItem } from '@/apis/system/type'
 
-/** @desc 登录 */
+/** 登录 */
 export function login(data: { username: string, password: string }) {
-  return http.post<User.LoginRes>('/user/login', data)
+  return http.post<T.UserLoginResult>('/user/login', data)
 }
 
-/** @desc 退出登录 */
+/** 退出登录 */
 export function logout() {
   return http.post('/user/logout')
 }
 
-/** @desc 获取用户信息 */
+/** 获取用户信息 */
 export const getUserInfo = () => {
-  return http.get<User.UserInfo>('/user/getUserInfo')
+  return http.get<T.UserInfoResult>('/user/getUserInfo')
 }
 
-/** @desc 获取用户路由信息 */
+/** 获取用户路由信息 */
 export const getUserAsyncRoutes = () => {
-  return http.get<MenuItem[]>('/user/routes')
+  return http.get<SystemMenuItem[]>('/user/routes')
 }
