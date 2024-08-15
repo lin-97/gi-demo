@@ -47,9 +47,9 @@
 
 <script setup lang="ts">
 import { Link, Message, type PopconfirmInstance, type TableInstance } from '@arco-design/web-vue'
-import { useBreakpointIndex, usePagination } from '@/hooks'
-import { type PersonItem, getPersonList } from '@/apis'
+import { useBreakpointIndex, useTable } from '@/hooks'
 import { useDict } from '@/hooks/app'
+import { type PersonItem, getPersonList } from '@/apis'
 import type { Columns, Options } from '@/components/GiForm'
 
 defineOptions({ name: 'TableCustom2' })
@@ -101,7 +101,6 @@ const QueryFormColumns: Columns = reactive([
 ])
 
 const loading = ref(false)
-const tableData = ref<PersonItem[]>([])
 const columns: TableInstance['columns'] = [
   { title: '序号', width: 66, align: 'center', render: ({ rowIndex }) => h('span', {}, rowIndex + 1) },
   {
@@ -129,27 +128,8 @@ const columns: TableInstance['columns'] = [
   { title: '操作', width: 200, slotName: 'action', align: 'center' }
 ]
 
-const { pagination, setTotal } = usePagination(() => getTableData())
-
-async function getTableData() {
-  try {
-    loading.value = true
-    const res = await getPersonList({
-      page: pagination.current,
-      size: pagination.pageSize
-    })
-    tableData.value = res.data.records
-    setTotal(res.data.total)
-  } finally {
-    loading.value = false
-  }
-}
-
-getTableData()
-
-const search = () => {
-  pagination.onChange(1)
-}
+const { tableData, getTableData, pagination, search } = useTable((p) => getPersonList(p))
+search()
 
 function onClickName(record: PersonItem) {
   Message.success(`点击了${record.name}`)

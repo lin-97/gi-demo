@@ -19,33 +19,22 @@
       </a-space>
     </a-row>
 
-    <section class="pane2__content">
-      <section class="gi_table_box">
-        <a-table row-key="id" :loading="loading" :bordered="{ cell: true }" :columns="columns" :data="tableData"
-          :scroll="{ x: '100%', y: '100%', minWidth: 1000 }" :row-selection="{ type: 'checkbox', showCheckedAll: true }"
-          :pagination="pagination" @select="select" @select-all="selectAll">
-        </a-table>
-      </section>
+    <section class="gi_table_box">
+      <a-table row-key="id" :loading="loading" :bordered="{ cell: true }" :columns="columns" :data="tableData"
+        :scroll="{ x: '100%', y: '100%', minWidth: 1000 }" :row-selection="{ type: 'checkbox', showCheckedAll: true }"
+        :pagination="pagination" @select="select" @select-all="selectAll">
+      </a-table>
     </section>
   </a-card>
 </template>
 
 <script lang="tsx" setup>
-import type { TableColumnData, TableInstance } from '@arco-design/web-vue'
+import type { PopconfirmInstance, TableColumnData, TableInstance } from '@arco-design/web-vue'
 import { Modal } from '@arco-design/web-vue'
 import Pane2Code from './Pane2Code'
-import { usePagination } from '@/hooks'
+import { useTable } from '@/hooks'
 import { getPersonList } from '@/apis'
-import type { PersonItem } from '@/apis'
 import GiCellStatus from '@/components/GiCell/GiCellStatus.vue'
-
-const onViewCode = () => {
-  Modal.open({
-    title: '查看代码',
-    content: () => <gi-code-view type="vue" codeJson={Pane2Code}></gi-code-view>,
-    fullscreen: true
-  })
-}
 
 const columns: TableColumnData[] = [
   {
@@ -94,7 +83,7 @@ const columns: TableColumnData[] = [
           <icon-edit></icon-edit>
         </a-button>
         <a-button size="mini">详情</a-button>
-        <a-popconfirm type="warning" content="您确定要删除该项吗?">
+        <a-popconfirm type="warning" content="您确定要删除该项吗?" onBeforeOk={() => onDelete()}>
           <a-button type="primary" status="danger" size="mini">
             <icon-delete />
           </a-button>
@@ -104,23 +93,7 @@ const columns: TableColumnData[] = [
   }
 ]
 
-const { pagination, setTotal } = usePagination(() => getTableData())
-const tableData = ref<PersonItem[]>([])
-const loading = ref(false)
-
-async function getTableData() {
-  try {
-    loading.value = true
-    const res = await getPersonList({
-      page: pagination.current,
-      size: pagination.pageSize
-    })
-    tableData.value = res.data.records
-    setTotal(res.data.total)
-  } finally {
-    loading.value = false
-  }
-}
+const { tableData, getTableData, pagination, loading } = useTable((p) => getPersonList(p))
 
 onActivated(() => {
   getTableData()
@@ -143,21 +116,25 @@ const select: TableInstance['onSelect'] = (rowKeys) => {
 const selectAll: TableInstance['onSelectAll'] = (checked) => {
   selectRowKeys.value = checked ? tableData.value.map((i) => i.id) : []
 }
+
+// 删除
+function onDelete() {
+  return new Promise((resolve) => setTimeout(() => resolve(true), 300))
+}
+
+// 查看代码
+const onViewCode = () => {
+  Modal.open({
+    title: '查看代码',
+    content: () => <gi-code-view type="vue" codeJson={Pane2Code}></gi-code-view>,
+    fullscreen: true
+  })
+}
 </script>
 
 <style lang="scss" scoped>
 .pane2 {
   flex: 1;
   margin: $margin;
-
-  &__content {
-    flex: 1;
-    overflow: hidden;
-    display: flex;
-    flex-direction: column;
-    box-sizing: border-box;
-    background-color: var(--color-bg-1);
-    border-radius: $radius-box;
-  }
 }
 </style>
