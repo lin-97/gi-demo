@@ -1,21 +1,15 @@
 import type { Directive, DirectiveBinding } from 'vue'
-import { useUserStore } from '@/stores'
+import { hasPermOr } from '@/utils/has'
 
 /**
  * @desc v-hasPerm 操作权限处理
  * @desc 使用 v-hasPerm="['home:btn:add']"
  */
 function checkPermission(el: HTMLElement, binding: DirectiveBinding) {
-  const userStore = useUserStore()
   const { value } = binding
-  const all_permission = '*:*:*'
-
   if (value && Array.isArray(value) && value.length) {
-    const permissionValues: string[] = value
-    const hasPermission = userStore.permissions.some((perm) => {
-      return all_permission === perm || permissionValues.includes(perm)
-    })
-    if (!hasPermission) {
+    const flag = hasPermOr(value)
+    if (!flag) {
       el.parentNode && el.parentNode.removeChild(el)
     }
   } else {

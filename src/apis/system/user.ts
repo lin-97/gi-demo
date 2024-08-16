@@ -1,12 +1,12 @@
-import type * as System from './type'
+import type * as T from './type'
 import http from '@/utils/http'
 
-/** @desc 获取用户数据 */
+/** 获取用户数据 */
 export function getSystemUserList(params: Pagination) {
-  return http.get<PageRes<System.UserItem[]>>('/system/user', params)
+  return http.get<PageRes<T.SystemUserItem[]>>('/system/user', params)
 }
 
-/** @desc 获取用户详情 */
+/** 获取用户详情 */
 export function getSystemUserDetail(params: { id: string }) {
-  return http.get<System.UserDetailResult>('/system/user/detail', params)
+  return http.get<T.SystemUserDetail>('/system/user/detail', params)
 }

@@ -83,7 +83,7 @@ import AddRoleModal from './AddRoleModal.vue'
 import PermModal from './PermModal.vue'
 import { useTable } from '@/hooks'
 import { useDict } from '@/hooks/app'
-import { type RoleItem, deleteBaseApi, getSystemRoleList } from '@/apis'
+import { type SystemRoleItem, deleteBaseApi, getSystemRoleList } from '@/apis'
 import { isMobile } from '@/utils'
 
 defineOptions({ name: 'SystemRole' })
@@ -115,7 +115,7 @@ const reset = () => {
 }
 
 // 删除
-const onDelete = (item: RoleItem) => {
+const onDelete = (item: SystemRoleItem) => {
   return handleDelete(() => deleteBaseApi({ ids: [item.id] }), { showModal: false })
 }
 
@@ -131,11 +131,11 @@ const onAdd = () => {
   AddRoleModalRef.value?.add()
 }
 
-const onEdit = (item: RoleItem) => {
+const onEdit = (item: SystemRoleItem) => {
   AddRoleModalRef.value?.edit(item.id)
 }
 
-const onPerm = (item: RoleItem) => {
+const onPerm = (item: SystemRoleItem) => {
   PermModalRef.value?.open({ code: item.code, title: item.name })
 }
 </script>

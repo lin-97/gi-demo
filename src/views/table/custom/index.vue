@@ -69,33 +69,13 @@
 </template>
 
 <script setup lang="ts">
-import { Message } from '@arco-design/web-vue'
-import type { PopconfirmInstance } from '@arco-design/web-vue'
-import { usePagination } from '@/hooks'
+import { Message, type PopconfirmInstance } from '@arco-design/web-vue'
+import { useTable } from '@/hooks'
 import { type PersonItem, getPersonList } from '@/apis'
 
 defineOptions({ name: 'TableCustom' })
 
-const loading = ref(false)
-const tableData = ref<PersonItem[]>([])
-
-const { pagination, setTotal } = usePagination(() => getTableData())
-
-async function getTableData() {
-  try {
-    loading.value = true
-    const res = await getPersonList({
-      page: pagination.current,
-      size: pagination.pageSize
-    })
-    tableData.value = res.data.records
-    setTotal(res.data.total)
-  } finally {
-    loading.value = false
-  }
-}
-
-getTableData()
+const { tableData, getTableData, pagination, loading } = useTable((p) => getPersonList(p))
 
 const onClickName = (record: PersonItem) => {
   Message.success(`点击了${record.name}`)

@@ -1,22 +1,22 @@
-import type * as System from './type'
+import type * as T from './type'
 import http from '@/utils/http'
 
-/** @desc 获取菜单数据 */
+/** 获取菜单数据 */
 export function getSystemMenuList() {
-  return http.get<System.MenuItem[]>('/system/menu')
+  return http.get<T.SystemMenuItem[]>('/system/menu')
 }
 
-/** @desc 获取菜单详情 */
+/** 获取菜单详情 */
 export function getSystemMenuDetail(params: { id: string }) {
-  return http.get<System.MenuItem>('/system/menu/detail', params)
+  return http.get<T.SystemMenuItem>('/system/menu/detail', params)
 }
 
-/** @desc 获取角色分配权限菜单树 */
+/** 获取角色分配权限菜单树 */
 export function getSystemMenuOptions() {
-  return http.get<System.MenuOptionsItem[]>('/system/menu/options')
+  return http.get<T.SystemMenuOptionsItem[]>('/system/menu/options')
 }
 
-/** @desc 获取动态路由数据 */
+/** 获取动态路由数据 */
 export function getSystemAsyncRoutes() {
   return http.get<any[]>('/system/menu/routes')
 }

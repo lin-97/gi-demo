@@ -1,4 +1,4 @@
-export interface UserInfo {
+export interface UserInfoResult {
   id: string
   nickname: string
   avatar: string
@@ -6,6 +6,6 @@ export interface UserInfo {
   permissions: string[]
 }
 
-export interface LoginRes {
+export interface UserLoginResult {
   token: string
 }

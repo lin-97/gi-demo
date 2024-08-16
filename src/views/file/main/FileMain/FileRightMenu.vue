@@ -3,12 +3,8 @@
     <GiOptionItem label="重命名" icon="menu-edit" @click="onClickItem('rename')"> </GiOptionItem>
     <GiOptionItem label="移动到" icon="menu-move" @click="onClickItem('move')"></GiOptionItem>
     <GiOptionItem label="下载" icon="menu-download" @click="onClickItem('download')"></GiOptionItem>
-    <a-popover
-      v-if="props.data?.extendName === 'zip'"
-      position="right"
-      :content-style="{ padding: 0, overflow: 'hidden', width: '150px' }"
-      :arrow-style="{ display: 'none' }"
-    >
+    <a-popover v-if="props.data?.extendName === 'zip'" position="right"
+      :content-style="{ padding: 0, overflow: 'hidden', width: '150px' }" :arrow-style="{ display: 'none' }">
       <GiOptionItem label="解压" icon="menu-zip" more></GiOptionItem>
       <template #content>
         <GiOption>

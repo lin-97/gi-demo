@@ -1,6 +1,6 @@
 <template>
   <div class="table-page">
-    <GiForm v-model="form" :options="options" :columns="columns" @search="search" @reset="reset"></GiForm>
+    <GiForm v-model="form" :options="options" :columns="columns" @search="search" @reset="search"></GiForm>
 
     <div class="gi_table_box">
       <a-table row-key="id" page-position="bottom" :bordered="{ cell: true }" :loading="loading" :data="tableData"
@@ -53,9 +53,9 @@
 
 <script setup lang="ts">
 import type { PopconfirmInstance } from '@arco-design/web-vue'
-import { useBreakpointIndex, usePagination } from '@/hooks'
-import { type PersonItem, getPersonList } from '@/apis'
+import { useBreakpointIndex, useTable } from '@/hooks'
 import { useDict } from '@/hooks/app'
+import { getPersonList } from '@/apis'
 import type { Columns, Options } from '@/components/GiForm'
 
 defineOptions({ name: 'TableBase' })
@@ -107,35 +107,7 @@ const columns: Columns = reactive([
   }
 ])
 
-const loading = ref(false)
-const tableData = ref<PersonItem[]>([])
-
-const { pagination, setTotal } = usePagination(() => getTableData())
-
-async function getTableData() {
-  try {
-    loading.value = true
-    const res = await getPersonList({
-      page: pagination.current,
-      size: pagination.pageSize
-    })
-    tableData.value = res.data.records
-    setTotal(res.data.total)
-  } finally {
-    loading.value = false
-  }
-}
-
-getTableData()
-
-const search = () => {
-  pagination.current = 1
-  getTableData()
-}
-
-const reset = () => {
-  getTableData()
-}
+const { tableData, pagination, search, loading } = useTable((p) => getPersonList(p))
 
 const onDelete: PopconfirmInstance['onBeforeOk'] = () => {
   return new Promise((resolve) => setTimeout(() => resolve(true), 300))

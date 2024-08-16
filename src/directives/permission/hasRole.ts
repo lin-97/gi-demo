@@ -1,20 +1,15 @@
 import type { Directive, DirectiveBinding } from 'vue'
-import { useUserStore } from '@/stores'
+import { hasRoleOr } from '@/utils/has'
 
 /**
  * @desc v-hasRole 角色权限处理
  * @desc 使用 v-hasRole="['admin', 'user]"
  */
 function checkRole(el: HTMLElement, binding: DirectiveBinding) {
-  const userStore = useUserStore()
   const { value } = binding
-  const super_admin = 'role_admin'
   if (value && Array.isArray(value) && value.length) {
-    const roleValues: string[] = value
-    const hasRole = userStore.roles.some((role) => {
-      return super_admin === role || roleValues.includes(role)
-    })
-    if (!hasRole) {
+    const flag = hasRoleOr(value)
+    if (!flag) {
       el.parentNode && el.parentNode.removeChild(el)
     }
   } else {

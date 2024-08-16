@@ -2,12 +2,12 @@ import { defineStore } from 'pinia'
 import { computed, reactive, ref } from 'vue'
 import { resetRouter } from '@/router'
 import { getUserInfo as getUserInfoApi, login as loginApi, logout as logoutApi } from '@/apis'
-import type { UserInfo } from '@/apis'
+import type { UserInfoResult } from '@/apis'
 import { clearToken, getToken, setToken } from '@/utils/auth'
 import { resetHasRouteFlag } from '@/router/permission'
 
 const storeSetup = () => {
-  const userInfo = reactive<Pick<UserInfo, 'nickname' | 'avatar'>>({
+  const userInfo = reactive<Pick<UserInfoResult, 'nickname' | 'avatar'>>({
     nickname: '',
     avatar: ''
   })

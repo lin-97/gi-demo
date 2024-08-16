@@ -1,52 +1,44 @@
 import { useUserStore } from '@/stores'
 
-function authPermission(permission: string) {
-  const all_permission = '*:*:*'
+/** 判断是否有这个按钮权限 */
+export function hasPerm(value: string) {
+  const all = '*:*:*'
   const permissions = useUserStore().permissions
-  if (permission && permission.length > 0) {
-    return permissions.some((v) => {
-      return all_permission === v || v === permission
-    })
-  } else {
-    return false
-  }
+  return value ? permissions.some((v) => all === v || v === value) : false
 }
 
-function authRole(role: string) {
-  const super_admin = 'role_admin'
+/** 判断是否有这个按钮权限，只需包含其中一个 */
+export function hasPermOr(value: string[]) {
+  return value.some((i) => hasPerm(i))
+}
+
+/** 判断是否有这个按钮权限，必须全部拥有 */
+export function hasPermAnd(value: string[]) {
+  return value.every((i) => hasPerm(i))
+}
+
+/** 判断是否有这个角色权限 */
+export function hasRole(role: string) {
+  const all = 'role_admin'
   const roles = useUserStore().roles
-  if (role && role.length > 0) {
-    return roles.some((v) => {
-      return super_admin === v || v === role
-    })
-  } else {
-    return false
-  }
+  return role ? roles.some((v) => all === v || v === role) : false
+}
+
+/** 判断是否有这个角色权限，只需包含其中一个 */
+export function hasRoleOr(roles: string[]) {
+  return roles.some((i) => hasRole(i))
+}
+
+/** 判断是否有这个角色权限，必须全部拥有 */
+export function hasRoleAnd(roles: string[]) {
+  return roles.every((i) => hasRole(i))
 }
 
 export default {
-  /** 验证用户是否具备某权限 */
-  hasPerm(permission: string) {
-    return authPermission(permission)
-  },
-  /** 验证用户是否含有指定权限，只需包含其中一个 */
-  hasPermOr(permissions: string[]) {
-    return permissions.some((item) => authPermission(item))
-  },
-  /** 验证用户是否含有指定权限，必须全部拥有 */
-  hasPermAnd(permissions: string[]) {
-    return permissions.every((item) => authPermission(item))
-  },
-  /** 验证用户是否具备某角色 */
-  hasRole(role: string) {
-    return authRole(role)
-  },
-  /** 验证用户是否含有指定角色，只需包含其中一个 */
-  hasRoleOr(roles: string[]) {
-    return roles.some((item) => authRole(item))
-  },
-  /** 验证用户是否含有指定角色，必须全部拥有 */
-  hasRoleAnd(roles: string[]) {
-    return roles.every((item) => authRole(item))
-  }
+  hasPerm,
+  hasPermOr,
+  hasPermAnd,
+  hasRole,
+  hasRoleOr,
+  hasRoleAnd
 }

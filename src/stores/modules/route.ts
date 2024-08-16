@@ -5,7 +5,7 @@ import { mapTree, toTreeArray } from 'xe-utils'
 import { cloneDeep, omit } from 'lodash-es'
 import { constantRoutes } from '@/router'
 import { transformPathToName } from '@/utils'
-import { type MenuItem, getUserAsyncRoutes as getAsyncRoutes } from '@/apis'
+import { type SystemMenuItem, getUserAsyncRoutes as getAsyncRoutes } from '@/apis'
 import ParentView from '@/components/ParentView/index.vue'
 
 const Layout = () => import('@/layout/index.vue')
@@ -42,7 +42,7 @@ const transformComponentView = (component: string) => {
  * 1. 对后端返回的路由数据进行排序，格式化
  * 2. 同时将component由字符串转成真正的模块
  */
-const formatAsyncRoutes = (menus: MenuItem[]) => {
+const formatAsyncRoutes = (menus: SystemMenuItem[]) => {
   if (!menus.length) return []
   menus.sort((a, b) => (a?.sort ?? 0) - (b?.sort ?? 0)) // 排序
   const routes = mapTree(menus, (item) => {

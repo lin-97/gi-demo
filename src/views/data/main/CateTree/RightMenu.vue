@@ -37,10 +37,10 @@
 
 <script lang="ts" setup>
 import type { TreeInstance } from '@arco-design/web-vue'
-import type { CateItem } from '@/apis'
+import type { CateTreeItem } from '@/apis'
 
 interface Props {
-  treeData: CateItem[]
+  treeData: CateTreeItem[]
 }
 
 const props = withDefaults(defineProps<Props>(), {
@@ -49,7 +49,7 @@ const props = withDefaults(defineProps<Props>(), {
 
 const emit = defineEmits<{
   (e: 'on-menu-item-click', mode: string): void
-  (e: 'on-tree-node-click', nodeData: CateItem): void
+  (e: 'on-tree-node-click', nodeData: CateTreeItem): void
 }>()
 
 const popupVisible = ref(false)
@@ -60,7 +60,7 @@ const onClick = (mode: string) => {
 
 const onTreeSelect: TreeInstance['onSelect'] = (selectedKeys, data) => {
   popupVisible.value = false
-  emit('on-tree-node-click', data.node as CateItem)
+  emit('on-tree-node-click', data.node as CateTreeItem)
 }
 </script>
 

@@ -510,68 +510,143 @@ createUser2({ name: '张三', phone: '178****2828', age: 20 })
 
 #### 接口 api 的命名
 
+**方案一**
+
+如果你后端的接口命名相对简约，那么可以采用以下命名规则（注意ts类型的命名规则)
+
 命名规范： 操作名 + 后端模块名 + 功能名
 
 前缀为（操作名）动词，动词 eg：`add / update / delete / get / save` 等
 
-```js
-// 场景一 如没有操作名，可以自行根据场景补充
+~~~ts
+import type * as T from './type'
+import http from '@/utils/http'
+
+/** 获取用户列表 */
 export function getUserList() {
-  return http.get('/user/list')
+  return http.get<PageRes<T.UserItem[]>>('/user/list')
 }
 
-// 场景二
-export function getUserList() {
-  return http.get('/user/getList')
+/** 获取用户详情 */
+export function getUserDetail() {
+  return http.get<T.UserDetail>('/user/detail')
 }
 
-// 场景三 如功能名包含了模块名，可省略
-export function getUserList() {
-  return http.get('/user/getUserList')
+/** 新增用户 */
+export function addUser(data: any) {
+  return http.post<T.UserAddResult>('/user/add', data)
 }
 
-// 其他
-export function saveUser(data) {
-  return http.post('/user/save', data)
+/** 编辑用户 */
+export function updateUser(data: any) {
+  return http.post<T.UserUpdateResult>('/user/update', data)
 }
-```
+
+/** 删除用户 */
+export function deleteUser(data: { id: string }) {
+  return http.post<T.UserDeleteResult>('/user/delete', data)
+}
+~~~
 
 **`以上命名规范可以确保 api 命名不会冲突，加上模块名能快速定位以及更加方便维护`**
 
-引入接口：
+~~~ts
+// @/apis/index.ts
+export * from './user'
+export * from './user/type'
+~~~
 
-```js
-import { getUserList, saveUser } from '@/apis'
-```
+方案一的api引入
+
+~~~ts
+import { getUserList, addUser, type UserAddResult } from '@/apis'
+~~~
+
+方案一接口的ts类型命名规则
+
+~~~ts
+const url1 = '/user/list' // UserItem[] 或者 UserListItem[]
+const url2 = '/user/detail' // UserDetail 或者 UserDetailResult
+const url3 = '/role/list' // RoleItem[] 或者 RoleListItem[]
+const url4 = '/role/detail' // RoleDetail 或者 RoleDetailResult
+~~~
+
+
+
+**方案二**
+
+如果你后端的接口命名相对没那么简约，那么可以采用以下命名规则（注意ts类型的命名规则)
+
+~~~ts
+import type * as T from './type'
+import http from '@/utils/http'
+
+/** 获取用户列表 */
+export function getUserList() {
+  return http.get<PageRes<T.UserItem[]>>('/user/getUserList')
+}
+
+/** 获取用户详情 */
+export function getUserDetail() {
+  return http.get<T.UserDetail>('/user/getUserdetail')
+}
+
+/** 新增用户 */
+export function addUser(data: any) {
+  return http.post<T.AddUserResult>('/user/addUser', data)
+}
+
+/** 编辑用户 */
+export function updateUser(data: any) {
+  return http.post<T.UpdateUserResult>('/user/updateUser', data)
+}
+
+/** 删除用户 */
+export function deleteUser(data: { id: string }) {
+  return http.post<T.DeleteUserResult>('/user/deleteUser', data)
+}
+~~~
+
+**`以上命名规范可以确保 api 命名不会冲突，加上模块名能快速定位以及更加方便维护`**
+
+方案二的api引入
+
+~~~ts
+import { getUserList, addUser, type AddUserResult } from '@/apis/user' // 需要具体到模块名
+~~~
+
+
 
 #### 接口 api 的 ts 类型导入
 
 ```ts
 import http from '@/utils/http'
 import { prefix } from '../config'
-import type * as System from './type'
+import type * as T from './type'
 
-/** @desc 获取部门数据 */
+/** 获取部门数据 */
 export function getSystemDeptList() {
-  return http.get<PageRes<System.DeptItem[]>>(`${prefix}/system/dept/list`)
+  return http.get<PageRes<T.SystemDeptItem[]>>(`${prefix}/system/dept/list`)
 }
 
-/** @desc 获取用户数据 */
+/** 获取用户数据 */
 export function getSystemUserList() {
-  return http.get<PageRes<System.UserItem[]>>(`${prefix}/system/user/list`)
+  return http.get<PageRes<T.SystemUserItem[]>>(`${prefix}/system/user/list`)
 }
 
-/** @desc 获取角色数据 */
+/** 获取角色数据 */
 export function getSystemRoleList() {
-  return http.get<PageRes<System.RoleItem[]>>(`${prefix}/system/role/list`)
+  return http.get<PageRes<T.SystemRoleItem[]>>(`${prefix}/system/role/list`)
 }
 ```
 
 不建议以下方式导入 ts 类型，不够方便
 
 ```ts
-import type { DeptItem, UserItem, RoleItem } from './type'
+import type { SystemDeptItem, SystemUserItem, SystemRoleItem } from './type'
 ```
+
+
 
 #### 接口调用书写
 
@@ -582,9 +657,9 @@ import type { DeptItem, UserItem, RoleItem } from './type'
 ```vue
 <script setup lang="ts">
 import { ref } from 'vue'
-import { getUserList as getUserListApi, type UserItem } from '@/apis' // 同名可以使用别名
+import { getUserList as getUserListApi, type SystemUserItem } from '@/apis' // 同名可以使用别名
 
-const userList = ref<UserItem[]>([])
+const userList = ref<SystemUserItem[]>([])
 const getUserList = async () => {
   const res = await getUserListApi()
   console.log('如果异步成功，则会打印这行文字，否则不会打印这行文字，也不会往下执行')
@@ -604,10 +679,10 @@ const getUserList = async () => {
 ```vue
 <script setup lang="ts">
 import { ref } from 'vue'
-import { getUserList as getUserListApi, type UserItem } from '@/apis' // 同名可以使用别名
+import { getUserList as getUserListApi, type SystemUserItem } from '@/apis' // 同名可以使用别名
 
 const loading = ref(false)
-const userList = ref<UserItem[]>([])
+const userList = ref<SystemUserItem[]>([])
 const getUserList = async () => {
   try {
     loading.value = true
@@ -633,10 +708,10 @@ const getUserList = async () => {
 ```vue
 <script setup lang="ts">
 import { ref } from 'vue'
-import { getUserList as getUserListApi, type UserItem } from '@/apis' // 同名可以使用别名
+import { getUserList as getUserListApi, type SystemUserItem } from '@/apis' // 同名可以使用别名
 
 const loading = ref(false)
-const userList = ref<UserItem[]>([])
+const userList = ref<SystemUserItem[]>([])
 const getUserList = async () => {
   try {
     loading.value = true
@@ -907,12 +982,12 @@ const { loading, setLoading } = useLoading()
 ```typescript
 import { ref } from 'vue'
 import { getSystemDeptList } from '@/apis'
-import type { DeptItem } from '@/apis'
+import type { SystemDeptItem } from '@/apis'
 
 /** 部门模块 */
 export function useDept() {
   const loading = ref(false)
-  const deptList = ref<DeptItem[]>([])
+  const deptList = ref<SystemDeptItem[]>([])
 
   const getDeptList = async () => {
     try {

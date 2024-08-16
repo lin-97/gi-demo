@@ -80,7 +80,7 @@ import { Message, type TableInstance } from '@arco-design/web-vue'
 import AddDeptModal from './AddDeptModal.vue'
 import { isMobile } from '@/utils'
 import { useTable } from '@/hooks'
-import { type DeptItem, deleteBaseApi, getSystemDeptList } from '@/apis'
+import { type SystemDeptItem, deleteBaseApi, getSystemDeptList } from '@/apis'
 import { useDict } from '@/hooks/app'
 
 defineOptions({ name: 'SystemDept' })
@@ -121,11 +121,11 @@ const onAdd = () => {
   AddDeptModalRef.value?.add()
 }
 
-const onEdit = (item: DeptItem) => {
+const onEdit = (item: SystemDeptItem) => {
   AddDeptModalRef.value?.edit(item.id)
 }
 
-const onDelete = async (item: DeptItem) => {
+const onDelete = async (item: SystemDeptItem) => {
   return handleDelete(() => deleteBaseApi({ ids: [item.id] }), { showModal: false })
 }
 

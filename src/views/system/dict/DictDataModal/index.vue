@@ -55,7 +55,7 @@
 <script lang="ts" setup>
 import { Message } from '@arco-design/web-vue'
 import AddDictDataModal from './AddDictDataModal.vue'
-import { type DictDataItem, deleteBaseApi, getSystemDictDataList } from '@/apis'
+import { type SystemDictDataItem, deleteBaseApi, getSystemDictDataList } from '@/apis'
 import { useTable } from '@/hooks'
 
 const visible = ref(false)
@@ -77,7 +77,7 @@ const open = (data: { code: string }) => {
 defineExpose({ open })
 
 // 删除
-const onDelete = (item: DictDataItem) => {
+const onDelete = (item: SystemDictDataItem) => {
   return handleDelete(() => deleteBaseApi({ ids: [item.id] }), { showModal: false })
 }
 
@@ -93,7 +93,7 @@ const onAdd = () => {
   AddDictDataModalRef.value?.add()
 }
 
-const onEdit = (item: DictDataItem) => {
+const onEdit = (item: SystemDictDataItem) => {
   AddDictDataModalRef.value?.edit({ id: item.id, code: dictCode.value })
 }
 </script>

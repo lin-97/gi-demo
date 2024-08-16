@@ -1,17 +1,17 @@
 /** 系统部门类型 */
-export interface DeptItem {
+export interface SystemDeptItem {
   id: string
   name: string
   sort: number
   status: Status
   createTime: string
   parentId: string
-  children?: DeptItem[]
+  children?: SystemDeptItem[]
   description: string
 }
 
 /** 系统角色类型 */
-export interface RoleItem {
+export interface SystemRoleItem {
   id: string
   createUserString: string
   createTime: string
@@ -25,7 +25,7 @@ export interface RoleItem {
 }
 
 /** 系统用户类型 */
-export interface UserItem {
+export interface SystemUserItem {
   id: string
   createUserString: string
   createTime: string
@@ -43,14 +43,14 @@ export interface UserItem {
   description: string
 }
 
-export type UserDetailResult = UserItem & { roleNames: string }
+export type SystemUserDetail = SystemUserItem & { roleNames: string }
 
 /** 系统菜单类型 */
-export interface MenuItem {
+export interface SystemMenuItem {
   activeMenu: string
   alwaysShow: boolean
   breadcrumb: boolean
-  children: MenuItem[]
+  children: SystemMenuItem[]
   component: string
   hidden: boolean
   icon: string
@@ -70,13 +70,13 @@ export interface MenuItem {
   affix: boolean
 }
 
-export interface MenuOptionsItem {
+export interface SystemMenuOptionsItem {
   id: string
   title: string
-  children: MenuOptionsItem[]
+  children: SystemMenuOptionsItem[]
 }
 
-export interface DictItem {
+export interface SystemDictItem {
   id: string
   createUserString: string
   createTime: string
@@ -87,9 +87,9 @@ export interface DictItem {
   description: string
 }
 
-export type DictDetailResult = DictItem
+export type SystemDictDetail = SystemDictItem
 
-export type DictDataItem = {
+export type SystemDictDataItem = {
   id: string
   name: string
   value: string | number

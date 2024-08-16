@@ -1,12 +1,12 @@
 import { ref } from 'vue'
 import { mapTree } from 'xe-utils'
 import { getSystemDeptList } from '@/apis'
-import type { DeptItem } from '@/apis'
+import type { SystemDeptItem } from '@/apis'
 
 /** 部门模块 */
 export function useDept(options?: { onSuccess?: () => void }) {
   const loading = ref(false)
-  const deptList = ref<DeptItem[]>([])
+  const deptList = ref<SystemDeptItem[]>([])
 
   const getDeptList = async () => {
     try {
