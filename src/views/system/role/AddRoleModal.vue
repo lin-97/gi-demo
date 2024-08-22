@@ -23,7 +23,8 @@
 
 <script setup lang="ts">
 import { type FormInstance, Message } from '@arco-design/web-vue'
-import { getSystemRoleDetail, saveBaseApi } from '@/apis'
+import { getSystemRoleDetail } from '@/apis/system'
+import { saveBaseApi } from '@/apis/base'
 import { useForm } from '@/hooks'
 
 const emit = defineEmits<{

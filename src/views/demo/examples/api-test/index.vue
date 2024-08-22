@@ -10,7 +10,7 @@
 
 <script lang="ts" setup>
 import { Message } from '@arco-design/web-vue'
-import { getTestFail, getTestSuccess } from '@/apis'
+import { getTestFail, getTestSuccess } from '@/apis/test'
 import { useUserStore } from '@/stores'
 
 const userStore = useUserStore()

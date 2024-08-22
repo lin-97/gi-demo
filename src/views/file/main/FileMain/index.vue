@@ -112,8 +112,7 @@ import useFileManage from './useFileManage'
 import FilePath from './FilePath.vue'
 import FileGrid from './FileGrid.vue'
 import { FileTypeList, ImageTypes } from '@/constant/file'
-import type { FileItem } from '@/apis'
-import { getFileList } from '@/apis'
+import { type FileItem, getFileList } from '@/apis/file'
 
 const FileList = defineAsyncComponent(() => import('./FileList.vue'))
 

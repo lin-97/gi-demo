@@ -24,7 +24,8 @@
 import { type FormInstance, Message } from '@arco-design/web-vue'
 import * as Regexp from '@/utils/regexp'
 import { useForm } from '@/hooks'
-import { getSystemDictDetail, saveBaseApi } from '@/apis'
+import { getSystemDictDetail } from '@/apis/system'
+import { saveBaseApi } from '@/apis/base'
 
 const emit = defineEmits<{
   (e: 'save-success'): void

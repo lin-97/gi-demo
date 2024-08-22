@@ -5,7 +5,8 @@ import { mapTree, toTreeArray } from 'xe-utils'
 import { cloneDeep, omit } from 'lodash-es'
 import { constantRoutes } from '@/router'
 import { transformPathToName } from '@/utils'
-import { type SystemMenuItem, getUserAsyncRoutes as getAsyncRoutes } from '@/apis'
+import type { SystemMenuItem } from '@/apis/system'
+import { getUserAsyncRoutes as getAsyncRoutes } from '@/apis/user'
 import ParentView from '@/components/ParentView/index.vue'
 
 const Layout = () => import('@/layout/index.vue')

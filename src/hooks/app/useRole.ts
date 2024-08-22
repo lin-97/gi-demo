@@ -1,6 +1,5 @@
 import { ref } from 'vue'
-import { getSystemRoleList } from '@/apis'
-import type { SystemRoleItem } from '@/apis'
+import { type SystemRoleItem, getSystemRoleList } from '@/apis/system'
 
 /** 角色模块 */
 export function useRole() {

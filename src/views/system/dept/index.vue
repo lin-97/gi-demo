@@ -80,7 +80,8 @@ import { Message, type TableInstance } from '@arco-design/web-vue'
 import AddDeptModal from './AddDeptModal.vue'
 import { isMobile } from '@/utils'
 import { useTable } from '@/hooks'
-import { type SystemDeptItem, deleteBaseApi, getSystemDeptList } from '@/apis'
+import { type SystemDeptItem, getSystemDeptList } from '@/apis/system'
+import { deleteBaseApi } from '@/apis/base'
 import { useDict } from '@/hooks/app'
 
 defineOptions({ name: 'SystemDept' })

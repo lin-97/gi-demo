@@ -4,7 +4,7 @@
 
 <script lang="ts" setup>
 import Player from 'xgplayer'
-import type { FileItem } from '@/apis'
+import type { FileItem } from '@/apis/file'
 
 interface Props {
   data: FileItem

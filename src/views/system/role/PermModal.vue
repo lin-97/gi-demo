@@ -8,7 +8,7 @@
 <script lang="ts" setup>
 import { Message } from '@arco-design/web-vue'
 import type { TreeInstance } from '@arco-design/web-vue'
-import { type SystemMenuOptionsItem, getSystemMenuOptions, getSystemRoleMenuIds } from '@/apis'
+import { type SystemMenuOptionsItem, getSystemMenuOptions, getSystemRoleMenuIds } from '@/apis/system'
 import { isMobile } from '@/utils'
 
 const treeRef = ref<TreeInstance>()

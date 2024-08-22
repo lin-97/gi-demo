@@ -86,7 +86,8 @@
 import { Message } from '@arco-design/web-vue'
 import CateTree from './CateTree/index.vue'
 import { useTable } from '@/hooks'
-import { type PersonItem, deleteBaseApi, getPersonList } from '@/apis'
+import { type PersonItem, getPersonList } from '@/apis/person'
+import { deleteBaseApi } from '@/apis/base'
 import { isMobile } from '@/utils'
 import { useDict } from '@/hooks/app'
 

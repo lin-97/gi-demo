@@ -117,8 +117,8 @@ import AddUserModal from './AddUserModal.vue'
 import UserDetailDrawer from './UserDetailDrawer.vue'
 import { useTable } from '@/hooks'
 import { useDept, useDict } from '@/hooks/app'
-import { deleteBaseApi, getSystemUserList } from '@/apis'
-import type { SystemUserItem } from '@/apis'
+import { type SystemUserItem, getSystemUserList } from '@/apis/system'
+import { deleteBaseApi } from '@/apis/base'
 import { isMobile } from '@/utils'
 
 defineOptions({ name: 'SystemUser' })

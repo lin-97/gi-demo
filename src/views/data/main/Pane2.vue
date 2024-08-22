@@ -29,11 +29,11 @@
 </template>
 
 <script lang="tsx" setup>
-import type { PopconfirmInstance, TableColumnData, TableInstance } from '@arco-design/web-vue'
+import type { TableColumnData, TableInstance } from '@arco-design/web-vue'
 import { Modal } from '@arco-design/web-vue'
 import Pane2Code from './Pane2Code'
 import { useTable } from '@/hooks'
-import { getPersonList } from '@/apis'
+import { getPersonList } from '@/apis/person'
 import GiCellStatus from '@/components/GiCell/GiCellStatus.vue'
 
 const columns: TableColumnData[] = [

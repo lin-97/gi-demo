@@ -35,9 +35,9 @@
 
       <a-form-item label="所属部门" field="deptId">
         <a-tree-select v-model="form.deptId" :data="deptList" :field-names="{
-    key: 'id',
-    title: 'name',
-  }" placeholder="请选择所属部门" allow-clear allow-search :disabled="form.disabled" />
+          key: 'id',
+          title: 'name',
+        }" placeholder="请选择所属部门" allow-clear allow-search :disabled="form.disabled" />
       </a-form-item>
 
       <a-form-item label="角色" field="roleIds" :disabled="form.disabled">
@@ -61,7 +61,8 @@
 <script setup lang="ts">
 import { type ColProps, type FormInstance, Message } from '@arco-design/web-vue'
 import * as Regexp from '@/utils/regexp'
-import { getSystemUserDetail, saveBaseApi } from '@/apis'
+import { getSystemUserDetail } from '@/apis/system'
+import { saveBaseApi } from '@/apis/base'
 import { useDept, useRole } from '@/hooks/app'
 import { useForm } from '@/hooks'
 

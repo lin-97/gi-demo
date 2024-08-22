@@ -1,6 +1,7 @@
 import type * as T from './type'
 import http from '@/utils/http'
 // import qs from 'qs'
+export type * from './type'
 
 /** 获取人物列表 */
 export function getPersonList(data: { name?: string, status?: string } & Pagination) {
