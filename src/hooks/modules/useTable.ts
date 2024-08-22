@@ -12,18 +12,18 @@ interface Options<T, U> {
 type PaginationParams = { page: number, size: number }
 type Api<T> = (params: PaginationParams) => Promise<ApiRes<PageRes<T[]>>> | Promise<ApiRes<T[]>>
 
-export function useTable<T, U>(api: Api<T>, options?: Options<T, U>) {
+export function useTable<T extends U, U = T>(api: Api<T>, options?: Options<T, U>) {
   const { formatResult, onSuccess, immediate, rowKey } = options || {}
   const { pagination, setTotal } = usePagination(() => getTableData())
   const loading = ref(false)
-  const tableData = ref<U[]>([])
+  const tableData: Ref<U[]> = ref([])
 
   async function getTableData() {
     try {
       loading.value = true
       const res = await api({ page: pagination.current, size: pagination.pageSize })
       const data = !Array.isArray(res.data) ? res.data.records : res.data
-      tableData.value = formatResult ? formatResult(data) : []
+      tableData.value = formatResult ? formatResult(data) : data
       const total = !Array.isArray(res.data) ? res.data.total : data.length
       setTotal(total)
       onSuccess && onSuccess()
