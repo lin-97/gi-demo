@@ -2,8 +2,8 @@ import type { TableData, TableInstance } from '@arco-design/web-vue'
 import { Message, Modal } from '@arco-design/web-vue'
 import { usePagination } from '@/hooks'
 
-interface Options<T> {
-  formatResult?: (data: T[]) => any
+interface Options<T, U> {
+  formatResult?: (data: T[]) => U[]
   onSuccess?: () => void
   immediate?: boolean
   rowKey?: keyof T
@@ -12,18 +12,18 @@ interface Options<T> {
 type PaginationParams = { page: number, size: number }
 type Api<T> = (params: PaginationParams) => Promise<ApiRes<PageRes<T[]>>> | Promise<ApiRes<T[]>>
 
-export function useTable<T>(api: Api<T>, options?: Options<T>) {
+export function useTable<T, U>(api: Api<T>, options?: Options<T, U>) {
   const { formatResult, onSuccess, immediate, rowKey } = options || {}
   const { pagination, setTotal } = usePagination(() => getTableData())
   const loading = ref(false)
-  const tableData = ref<T[]>([])
+  const tableData = ref<U[]>([])
 
   async function getTableData() {
     try {
       loading.value = true
       const res = await api({ page: pagination.current, size: pagination.pageSize })
       const data = !Array.isArray(res.data) ? res.data.records : res.data
-      tableData.value = formatResult ? formatResult(data) : data
+      tableData.value = formatResult ? formatResult(data) : []
       const total = !Array.isArray(res.data) ? res.data.total : data.length
       setTotal(total)
       onSuccess && onSuccess()
