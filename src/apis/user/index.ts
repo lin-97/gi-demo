@@ -1,6 +1,8 @@
 import type * as T from './type'
 import http from '@/utils/http'
-import type { SystemMenuItem } from '@/apis/system/type'
+import type { SystemMenuItem } from '@/apis/system'
+
+export type * from './type'
 
 /** 登录 */
 export function login(data: { username: string, password: string }) {

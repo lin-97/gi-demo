@@ -1,13 +1,6 @@
 <template>
-  <a-modal
-    v-model:visible="visible"
-    :title="title"
-    width="90%"
-    :mask-closable="false"
-    :modal-style="{ maxWidth: '520px' }"
-    @before-ok="save"
-    @close="close"
-  >
+  <a-modal v-model:visible="visible" :title="title" width="90%" :mask-closable="false"
+    :modal-style="{ maxWidth: '520px' }" @before-ok="save" @close="close">
     <a-spin :loading="loading" class="w-full">
       <a-form ref="formRef" :model="form" :rules="rules" size="medium" auto-label-width>
         <a-form-item label="字典名" field="name">
@@ -17,14 +10,8 @@
           <a-input v-model.trim="form.value" placeholder="请输入字典值" allow-clear :max-length="10"></a-input>
         </a-form-item>
         <a-form-item label="状态" field="status">
-          <a-switch
-            v-model="form.status"
-            type="round"
-            :checked-value="1"
-            :unchecked-value="0"
-            checked-text="正常"
-            unchecked-text="禁用"
-          />
+          <a-switch v-model="form.status" type="round" :checked-value="1" :unchecked-value="0" checked-text="正常"
+            unchecked-text="禁用" />
         </a-form-item>
       </a-form>
     </a-spin>
@@ -33,7 +20,8 @@
 
 <script setup lang="ts">
 import { type FormInstance, Message } from '@arco-design/web-vue'
-import { getSystemDictDataDetail, saveBaseApi } from '@/apis'
+import { getSystemDictDataDetail } from '@/apis/system'
+import { saveBaseApi } from '@/apis/base'
 import { useForm } from '@/hooks'
 
 const emit = defineEmits<{

@@ -3,8 +3,8 @@
     <template #extra>
       <!-- <a-button type="primary" status="warning" @click="onViewCode">
         <template #icon><icon-code /></template>
-        <span>查看JSON配置</span>
-      </a-button> -->
+<span>查看JSON配置</span>
+</a-button> -->
     </template>
     <a-row :gutter="30">
       <a-col :xs="24" :sm="24" :md="12">
@@ -32,7 +32,7 @@ import { Message } from '@arco-design/web-vue'
 import GiCodeView from '@/components/GiCodeView/index.vue'
 import { type Columns, GiForm, type Options } from '@/components/GiForm'
 import * as Regexp from '@/utils/regexp'
-import { getAreaList } from '@/apis'
+import { getAreaList } from '@/apis/area'
 
 const form = reactive({
   name: '',

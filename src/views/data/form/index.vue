@@ -35,7 +35,7 @@
 import type { FormInstance } from '@arco-design/web-vue'
 import * as Regexp from '@/utils/regexp'
 import { useFormCurd } from '@/hooks/app'
-import { addPerson, getPersonById, initPerson, updatePerson } from '@/apis'
+import { addPerson, getPersonById, initPerson, updatePerson } from '@/apis/person'
 
 defineOptions({ name: 'DataForm' })
 

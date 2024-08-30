@@ -4,10 +4,10 @@
     <a-form ref="formRef" :model="form" :rules="rules" size="medium" auto-label-width>
       <a-form-item label="上级部门" field="parentId">
         <a-tree-select v-model="form.parentId" allow-clear :data="deptList" placeholder="请选择上级部门" :field-names="{
-    key: 'id',
-    title: 'name',
-    children: 'children',
-  }"></a-tree-select>
+          key: 'id',
+          title: 'name',
+          children: 'children',
+        }"></a-tree-select>
       </a-form-item>
       <a-form-item label="部门名称" field="name">
         <a-input v-model.trim="form.name" placeholder="请输入部门名称" allow-clear :max-length="10"></a-input>
@@ -31,7 +31,8 @@
 import { type FormInstance, Message } from '@arco-design/web-vue'
 import { useForm } from '@/hooks'
 import { useDept } from '@/hooks/app'
-import { getSystemDeptDetail, saveBaseApi } from '@/apis'
+import { getSystemDeptDetail } from '@/apis/system'
+import { saveBaseApi } from '@/apis/base'
 
 const emit = defineEmits<{
   (e: 'save-success'): void

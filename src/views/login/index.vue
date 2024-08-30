@@ -49,7 +49,7 @@
 <script setup lang="ts">
 import { type FormInstance, Message } from '@arco-design/web-vue'
 import LoginBg from './components/LoginBg/index.vue'
-import { useUserStore } from '@/stores'
+import { useTabsStore, useUserStore } from '@/stores'
 import { useLoading } from '@/hooks'
 import * as Regexp from '@/utils/regexp'
 import { isMobile } from '@/utils'
@@ -57,6 +57,7 @@ import { isMobile } from '@/utils'
 defineOptions({ name: 'Login' })
 const router = useRouter()
 const userStore = useUserStore()
+const tabsStore = useTabsStore()
 
 const form = reactive({
   username: 'admin',
@@ -85,6 +86,7 @@ const login = async () => {
     if (valid) return
     setLoading(true)
     await userStore.login(form)
+    tabsStore.reset()
     const { redirect, ...othersQuery } = router.currentRoute.value.query
     router.push({
       path: (redirect as string) || '/',

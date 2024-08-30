@@ -1,12 +1,6 @@
 <template>
-  <CodeMirror
-    :model-value="codeValue"
-    :tab-size="config.tabSize"
-    :basic="config.basic"
-    :dark="config.dark"
-    :readonly="config.readonly"
-    :extensions="extensions"
-  />
+  <CodeMirror :model-value="codeValue" :tab-size="config.tabSize" :basic="config.basic" :dark="config.dark"
+    :readonly="config.readonly" :extensions="extensions" />
 </template>
 
 <script lang="ts" setup>
@@ -24,12 +18,6 @@ const props = withDefaults(defineProps<Props>(), {
   type: 'javascript',
   codeJson: ''
 })
-
-const visible = ref(false)
-const open = () => {
-  visible.value = true
-}
-defineExpose({ open })
 
 const defaultConfig = {
   tabSize: 2,

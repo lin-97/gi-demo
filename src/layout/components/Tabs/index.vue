@@ -1,9 +1,9 @@
 <template>
   <div v-if="appStore.tab" class="tabs">
     <a-tabs :class="{ 'tabs-type-custom': appStore.tabMode === 'custom' }" editable hide-content size="medium"
-      :type="calcTabsType" :active-key="route.path" @tab-click="(key) => handleTabClick(key as string)"
-      @delete="tabsStore.closeCurrent">
-      <a-tab-pane v-for="item of tabsStore.tagList" :key="item.path" :title="(item.meta?.title as string)"
+      :type="tabsType" :active-key="route.fullPath" @tab-click="handleTabClick($event as string)"
+      @delete="tabsStore.closeCurrent($event as string)">
+      <a-tab-pane v-for="item of tabsStore.tabList" :key="item.fullPath" :title="(item.meta?.title as string)"
         :closable="Boolean(!item.meta?.affix)">
       </a-tab-pane>
       <template #extra>
@@ -12,11 +12,15 @@
           <a-dropdown trigger="hover">
             <MagicIcon class="gi_mr"></MagicIcon>
             <template #content>
-              <a-doption @click="tabsStore.closeCurrent(route.path)">
+              <a-doption @click="tabsStore.closeCurrent(route.fullPath)">
                 <template #icon><icon-close /></template>
                 <template #default>关闭当前</template>
               </a-doption>
-              <a-doption @click="tabsStore.closeOther(route.path)">
+              <a-doption @click="tabsStore.closeRight(route.fullPath)">
+                <template #icon><icon-close /></template>
+                <template #default>关闭右侧</template>
+              </a-doption>
+              <a-doption @click="tabsStore.closeOther(route.fullPath)">
                 <template #icon><icon-eraser /></template>
                 <template #default>关闭其他</template>
               </a-doption>
@@ -33,7 +37,7 @@
 </template>
 
 <script setup lang="ts">
-import type { RouteRecordRaw } from 'vue-router'
+import type { RouteLocationNormalized } from 'vue-router'
 import MagicIcon from './MagicIcon.vue'
 import ReloadIcon from './ReloadIcon.vue'
 import { useAppStore, useTabsStore } from '@/stores'
@@ -43,14 +47,13 @@ const route = useRoute()
 const router = useRouter()
 const appStore = useAppStore()
 const tabsStore = useTabsStore()
-const calcTabsType = computed(() => appStore.tabMode === 'custom' ? 'card' : appStore.tabMode)
+const tabsType = computed(() => appStore.tabMode === 'custom' ? 'card' : appStore.tabMode)
 
-// 重置, 同时把 affix: true 的路由筛选出来
-tabsStore.reset()
+tabsStore.init()
 
 // 监听路由变化
 watch(
-  () => route.path,
+  () => route.fullPath,
   () => {
     handleRouteChange()
   }
@@ -58,18 +61,18 @@ watch(
 
 // 路由发生改变触发
 function handleRouteChange() {
-  const item = { ...route } as unknown as RouteRecordRaw
-  tabsStore.addTagItem(toRaw(item))
+  const item = { ...route } as unknown as RouteLocationNormalized
+  tabsStore.addTabItem(toRaw(item))
   tabsStore.addCacheItem(toRaw(item))
   // console.log('路由对象', toRaw(item))
-  // console.log('tagList', toRaw(tabsStore.tagList))
+  // console.log('tagList', toRaw(tabsStore.tabList))
   // console.log('cacheList', toRaw(tabsStore.cacheList))
 }
 handleRouteChange()
 
 // 点击页签
 const handleTabClick = (key: string) => {
-  router.push({ path: key })
+  router.push(key)
 }
 </script>
 

@@ -29,9 +29,9 @@ const iconSize = computed<string | number>(() => {
   return getUnitValue(props.size)
 })
 
-const iconName = computed<string>(() => `#icon-${props.name}`)
+const iconName = computed(() => `#icon-${props.name}`)
 
-const svgClass = computed<string>(() => {
+const svgClass = computed(() => {
   if (props.name) return `svg-icon icon-${props.name}`
   return 'svg-icon'
 })

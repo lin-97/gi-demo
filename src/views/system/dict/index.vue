@@ -81,7 +81,8 @@ import AddDictModal from './AddDictModal.vue'
 import DictDataModal from './DictDataModal/index.vue'
 import { useTable } from '@/hooks'
 import { useDict } from '@/hooks/app'
-import { type SystemDictItem, deleteBaseApi, getSystemDictList } from '@/apis'
+import { type SystemDictItem, getSystemDictList } from '@/apis/system'
+import { deleteBaseApi } from '@/apis/base'
 import { isMobile } from '@/utils'
 
 defineOptions({ name: 'SystemRole' })

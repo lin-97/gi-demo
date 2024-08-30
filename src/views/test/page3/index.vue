@@ -30,7 +30,7 @@
 import { MdPreview } from 'md-editor-v3'
 import 'md-editor-v3/lib/style.css'
 import { mdText } from './md'
-import { type SystemMenuItem, getSystemMenuList } from '@/apis'
+import { type SystemMenuItem, getSystemMenuList } from '@/apis/system'
 import { useRouteStore } from '@/stores'
 
 const routeStore = useRouteStore()

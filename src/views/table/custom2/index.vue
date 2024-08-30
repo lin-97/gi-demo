@@ -49,7 +49,7 @@
 import { Link, Message, type PopconfirmInstance, type TableInstance } from '@arco-design/web-vue'
 import { useBreakpointIndex, useTable } from '@/hooks'
 import { useDict } from '@/hooks/app'
-import { type PersonItem, getPersonList } from '@/apis'
+import { type PersonItem, getPersonList } from '@/apis/person'
 import type { Columns, Options } from '@/components/GiForm'
 
 defineOptions({ name: 'TableCustom2' })

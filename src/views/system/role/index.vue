@@ -83,7 +83,8 @@ import AddRoleModal from './AddRoleModal.vue'
 import PermModal from './PermModal.vue'
 import { useTable } from '@/hooks'
 import { useDict } from '@/hooks/app'
-import { type SystemRoleItem, deleteBaseApi, getSystemRoleList } from '@/apis'
+import { type SystemRoleItem, getSystemRoleList } from '@/apis/system'
+import { deleteBaseApi } from '@/apis/base'
 import { isMobile } from '@/utils'
 
 defineOptions({ name: 'SystemRole' })

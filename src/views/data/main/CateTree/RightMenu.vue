@@ -37,7 +37,7 @@
 
 <script lang="ts" setup>
 import type { TreeInstance } from '@arco-design/web-vue'
-import type { CateTreeItem } from '@/apis'
+import type { CateTreeItem } from '@/apis/cate'
 
 interface Props {
   treeData: CateTreeItem[]

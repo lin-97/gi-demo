@@ -27,7 +27,7 @@
 </template>
 
 <script lang="ts" setup>
-import { type SystemUserDetail, getSystemUserDetail } from '@/apis'
+import { type SystemUserDetail, getSystemUserDetail } from '@/apis/system'
 
 const visible = ref(false)
 const userId = ref('')

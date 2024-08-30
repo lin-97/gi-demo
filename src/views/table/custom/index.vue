@@ -71,7 +71,7 @@
 <script setup lang="ts">
 import { Message, type PopconfirmInstance } from '@arco-design/web-vue'
 import { useTable } from '@/hooks'
-import { type PersonItem, getPersonList } from '@/apis'
+import { type PersonItem, getPersonList } from '@/apis/person'
 
 defineOptions({ name: 'TableCustom' })
 

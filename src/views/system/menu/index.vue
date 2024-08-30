@@ -126,7 +126,8 @@
 <script setup lang="ts">
 import { Drawer, type TableInstance } from '@arco-design/web-vue'
 import AddMenuModal from './AddMenuModal.vue'
-import { type SystemMenuItem, deleteBaseApi, getSystemMenuList } from '@/apis'
+import { type SystemMenuItem, getSystemMenuList } from '@/apis/system'
+import { deleteBaseApi } from '@/apis/base'
 import { isExternal } from '@/utils/validate'
 import { isMobile, transformPathToName } from '@/utils'
 import { useDict } from '@/hooks/app'
