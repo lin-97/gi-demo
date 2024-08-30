@@ -103,7 +103,7 @@ const data: MockSystemMenuItem[] = [
         status: 1,
         roles: ['role_admin', 'role_user'],
         permission: '',
-        showInTabs: false,
+        showInTabs: true,
         alwaysShow: false,
         affix: false
       },

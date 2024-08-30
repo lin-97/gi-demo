@@ -32,7 +32,7 @@ export function useTable<T extends U, U = T>(api: Api<T>, options?: Options<T, U
     }
   }
 
-  // 是否立即出发
+  // 是否立即触发
   const isImmediate = immediate ?? true
   isImmediate && getTableData()
 
