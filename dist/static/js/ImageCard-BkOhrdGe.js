@@ -1,1 +1,0 @@
-import{_ as a,o as s,f as e,y as d,z as t,i}from"./index-JnUDrixV.js";const n={},o={class:"image-card"},c=[(a=>(d("data-v-a2e757f7"),a=a(),t(),a))((()=>i("img",{class:"animated-fade-up-1",src:"/gi-demo/static/svg/home-design-BpgkVAYf.svg"},null,-1)))];const r=a(n,[["render",function(a,d){return s(),e("div",o,c)}],["__scopeId","data-v-a2e757f7"]]);export{r as default};
