@@ -34,14 +34,8 @@
       </a-row>
 
       <a-space :key="selectedKey" size="mini" fill direction="vertical" class="gi_mt">
-        <a-progress
-          v-for="i in filePercentList"
-          :key="i.label"
-          :percent="i.value"
-          :stroke-width="8"
-          :color="i.color"
-          :animation="true"
-        >
+        <a-progress v-for="i in filePercentList" :key="i.label" :percent="i.value" :stroke-width="8" :color="i.color"
+          :animation="true">
           <template #text>{{ i.label }}</template>
         </a-progress>
       </a-space>
@@ -69,9 +63,7 @@ const showPercent = ref(false)
 watch(
   () => route.query,
   () => {
-    if (route.query.fileType) {
-      selectedKey.value = route.query.fileType as string
-    }
+    selectedKey.value = route.query.fileType as string || '0'
   },
   {
     immediate: true
@@ -80,7 +72,7 @@ watch(
 
 // 点击事件
 const onClickItem = (item: FileTypeListItem) => {
-  router.push({ path: '/file', query: { fileType: item.value } })
+  router.replace({ path: '/file', query: { fileType: item.value } })
 }
 </script>
 
@@ -95,6 +87,7 @@ const onClickItem = (item: FileTypeListItem) => {
 }
 
 :deep(.arco-progress) {
+
   .arco-progress-line,
   .arco-progress-line-bar-buffer,
   .arco-progress-line-bar {
