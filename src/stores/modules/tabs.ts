@@ -11,17 +11,21 @@ const storeSetup = () => {
 
   // 添加一个页签，如果当前路由已经打开，则不再重复添加
   const addTabItem = (item: RouteLocationNormalized) => {
-    if (tabList.value.some((i) => i.fullPath === item.fullPath)) return
-    if (item.meta?.showInTabs ?? true) {
-      tabList.value.push(item)
+    const index = tabList.value.findIndex((i) => i.path === item.path)
+    if (index >= 0) {
+      tabList.value[index].fullPath !== item.fullPath && (tabList.value[index] = item)
+    } else {
+      if (item.meta?.showInTabs ?? true) {
+        tabList.value.push(item)
+      }
     }
   }
 
   // 删除一个页签
   const deleteTabItem = (path: string) => {
-    const index = tabList.value.findIndex((item) => item.fullPath === path && !item.meta?.affix)
+    const index = tabList.value.findIndex((item) => item.path === path && !item.meta?.affix)
     if (index < 0) return
-    const isActive = router.currentRoute.value.fullPath === tabList.value[index].fullPath
+    const isActive = router.currentRoute.value.path === tabList.value[index].path
     tabList.value.splice(index, 1)
     if (isActive) {
       router.push(tabList.value[tabList.value.length - 1].fullPath)
@@ -37,7 +41,7 @@ const storeSetup = () => {
         arr.push(item as unknown as RouteLocationNormalized)
       }
     })
-    tabList.value = arr.map((i) => ({ ...i, fullPath: i.path }))
+    tabList.value = arr
   }
 
   // 添加缓存页
@@ -64,27 +68,27 @@ const storeSetup = () => {
 
   // 关闭当前
   const closeCurrent = (path: string) => {
-    const item = tabList.value.find((i) => i.fullPath === path)
+    const item = tabList.value.find((i) => i.path === path)
     item?.name && deleteCacheItem(item.name)
     deleteTabItem(path)
   }
 
   // 关闭其他
   const closeOther = (path: string) => {
-    const arr = tabList.value.filter((i) => i.fullPath !== path)
+    const arr = tabList.value.filter((i) => i.path !== path)
     arr.forEach((item) => {
-      deleteTabItem(item.fullPath)
+      deleteTabItem(item.path)
       item?.name && deleteCacheItem(item.name)
     })
   }
 
   // 关闭右侧
   const closeRight = (path: string) => {
-    const index = tabList.value.findIndex((i) => i.fullPath === path)
+    const index = tabList.value.findIndex((i) => i.path === path)
     if (index < 0) return
     const arr = tabList.value.filter((i, n) => n > index)
     arr.forEach((item) => {
-      deleteTabItem(item.fullPath)
+      deleteTabItem(item.path)
       item?.name && deleteCacheItem(item.name)
     })
   }

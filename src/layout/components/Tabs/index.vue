@@ -1,9 +1,9 @@
 <template>
   <div v-if="appStore.tab" class="tabs">
     <a-tabs :class="{ 'tabs-type-custom': appStore.tabMode === 'custom' }" editable hide-content size="medium"
-      :type="tabsType" :active-key="route.fullPath" @tab-click="handleTabClick($event as string)"
+      :type="tabsType" :active-key="route.path" @tab-click="handleTabClick($event as string)"
       @delete="tabsStore.closeCurrent($event as string)">
-      <a-tab-pane v-for="item of tabsStore.tabList" :key="item.fullPath" :title="(item.meta?.title as string)"
+      <a-tab-pane v-for="item of tabsStore.tabList" :key="item.path" :title="(item.meta?.title as string)"
         :closable="Boolean(!item.meta?.affix)">
       </a-tab-pane>
       <template #extra>
@@ -12,15 +12,15 @@
           <a-dropdown trigger="hover">
             <MagicIcon class="gi_mr"></MagicIcon>
             <template #content>
-              <a-doption @click="tabsStore.closeCurrent(route.fullPath)">
+              <a-doption @click="tabsStore.closeCurrent(route.path)">
                 <template #icon><icon-close /></template>
                 <template #default>关闭当前</template>
               </a-doption>
-              <a-doption @click="tabsStore.closeRight(route.fullPath)">
+              <a-doption @click="tabsStore.closeRight(route.path)">
                 <template #icon><icon-close /></template>
                 <template #default>关闭右侧</template>
               </a-doption>
-              <a-doption @click="tabsStore.closeOther(route.fullPath)">
+              <a-doption @click="tabsStore.closeOther(route.path)">
                 <template #icon><icon-eraser /></template>
                 <template #default>关闭其他</template>
               </a-doption>
@@ -72,7 +72,8 @@ handleRouteChange()
 
 // 点击页签
 const handleTabClick = (key: string) => {
-  router.push(key)
+  const obj = tabsStore.tabList.find((i) => i.path === key)
+  obj ? router.push(obj.fullPath) : router.push(key)
 }
 </script>
 
