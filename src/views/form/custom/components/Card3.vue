@@ -175,7 +175,7 @@ const onAdd = () => {
         await new Promise((resolve) => setTimeout(() => resolve(true), 300)) as unknown as Promise<boolean>
         Message.success('新增成功！')
         return true
-      } catch (error) {
+      } catch {
         return false
       }
     }
@@ -205,7 +205,7 @@ const onEdit = () => {
         await new Promise((resolve) => setTimeout(() => resolve(true), 300)) as unknown as Promise<boolean>
         Message.success('编辑成功！')
         return true
-      } catch (error) {
+      } catch {
         return false
       }
     }

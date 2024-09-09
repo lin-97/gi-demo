@@ -10,15 +10,6 @@
       <a-col :xs="24" :sm="24" :md="12">
         <GiForm ref="formRef" v-model="form" :options="options" :columns="columns">
           <template #test="{ disabled }"> 自定义插槽-禁用状态：{{ disabled }} </template>
-          <template #base-title>
-            <a-alert>基本信息</a-alert>
-          </template>
-          <template #group-title1>
-            <a-alert>分组标题1</a-alert>
-          </template>
-          <template #group-title2>
-            <a-alert>分组标题2</a-alert>
-          </template>
           <template #btns>
             <a-row justify="end" class="w-full">
               <a-space>
@@ -72,6 +63,8 @@ const options: Options = reactive({
 
 const columns: Columns<typeof form> = reactive([
   {
+    type: 'group-title',
+    label: '基本信息',
     field: 'base-title',
     span: 24,
     item: {
@@ -174,6 +167,8 @@ const columns: Columns<typeof form> = reactive([
     }
   },
   {
+    type: 'group-title',
+    label: '分组标题1',
     field: 'group-title1',
     span: 24,
     item: {
@@ -195,6 +190,8 @@ const columns: Columns<typeof form> = reactive([
     disabled: (i) => i.status === 0
   },
   {
+    type: 'group-title',
+    label: '分组标题2',
     field: 'group-title2',
     span: 24,
     item: {
@@ -207,6 +204,19 @@ const columns: Columns<typeof form> = reactive([
     field: 'remark',
     span: 24,
     item: { extra: '这里是额外信息' }
+  },
+  {
+    type: 'upload',
+    label: '附件',
+    field: 'file',
+    span: 24,
+    props: {
+      listType: 'picture-card',
+      action: '/'
+    },
+    item: {
+      extra: '上传文件只支持zip、rar、doc、docx、pdf、jpg、png格式'
+    }
   },
   {
     field: 'btns',

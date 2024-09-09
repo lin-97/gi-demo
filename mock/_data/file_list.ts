@@ -252,7 +252,7 @@ const data: MockFileItem[] = [
     size: 28
   },
   {
-    id: '120',
+    id: '119',
     name: '头像9',
     extendName: 'png',
     src: 'https://s1.ax1x.com/2022/05/07/Ol2fkF.jpg',

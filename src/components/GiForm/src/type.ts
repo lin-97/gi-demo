@@ -20,6 +20,8 @@ export type FormType =
   | 'slider'
   | 'cascader'
   | 'tree-select'
+  | 'upload'
+  | 'group-title'
 
 export type ColumnsItemPropsKey =
   | keyof A.InputInstance['$props']
@@ -41,6 +43,8 @@ export type ColumnsItemPropsKey =
   | keyof A.SliderInstance['$props']
   | keyof A.CascaderInstance['$props']
   | keyof A.TreeSelectInstance['$props']
+  | keyof A.UploadInstance['$props']
+  | keyof A.AlertInstance['$props']
 
 export type ColumnsItemHide<F> = boolean | ((form: F) => boolean)
 export type ColumnsItemDisabled<F> = boolean | ((form: F) => boolean)
@@ -82,6 +86,8 @@ export interface ColumnsItem<F = any> {
     & A.SliderInstance['$props']
     & A.CascaderInstance['$props']
     & A.TreeSelectInstance['$props']
+    & A.UploadInstance['$props']
+    & A.AlertInstance['$props']
   rules?: A.FormItemInstance['$props']['rules'] // 表单校验规则
   // 下拉列表|复选框组|单选框组|级联选择组件的options
   options?:

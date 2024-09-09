@@ -1,9 +1,12 @@
 <template>
-  <div class="gi_page form-table">
+  <div class="gi_page">
     <a-card title="编辑表格">
       <a-row justify="end">
         <a-space wrap>
-          <a-button type="primary" @click="addTableRow">新增</a-button>
+          <a-button type="primary" @click="addTableRow">
+            <template #icon><icon-plus /></template>
+            <span>新增</span>
+          </a-button>
         </a-space>
       </a-row>
 
@@ -48,7 +51,7 @@
       <GiCodeView :code-json="tableDataJson"></GiCodeView>
 
       <a-alert type="warning" style="margin-top: 8px">
-        本示例均采用原生arco组件开发，并不建议过渡封装编辑表格，经历过才知道，过渡封装会限制灵活性，还有可维护性，多点代码也没啥，直接copy就行
+        本示例均采用原生arco组件开发，并不建议过渡封装编辑表格，过渡封装会限制灵活性，还有可维护性，多点代码也没啥，直接copy就行
       </a-alert>
     </a-card>
   </div>
@@ -129,9 +132,5 @@ const reset = () => {
   .arco-form-item-message {
     display: none;
   }
-}
-
-.form-table {
-  padding: $padding;
 }
 </style>
