@@ -115,11 +115,12 @@ const { form, title, loading, save, saveLoading, back, reset } = useFormCurd<For
 <style lang="scss" scoped>
 .form-base {
   &__form {
-    max-width: 450px;
+    width: 450px;
+    max-width: 100%;
   }
 
-  :deep(.vue-codemirror) {
-    min-width: 300px;
+  :deep(.arco-spin) {
+    display: block;
   }
 }
 </style>

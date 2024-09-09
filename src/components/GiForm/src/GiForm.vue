@@ -6,10 +6,14 @@
           v-bind="item.col || item.span ? item.col : options.col">
           <a-form-item v-bind="item.item" :label="item.label" :field="item.field" :rules="item.rules"
             :disabled="isDisabled(item.disabled)">
-            <slot :name="item.field" v-bind="{ disabled: isDisabled(item.disabled) }">
+            <slot v-if="!['group-title'].includes(item.type || '')" :name="item.field"
+              v-bind="{ disabled: isDisabled(item.disabled) }">
               <component :is="`a-${item.type}`" v-bind="getComponentBindProps(item)"
                 :model-value="modelValue[item.field as keyof typeof modelValue]"
                 @update:model-value="valueChange($event, item.field)"></component>
+            </slot>
+            <slot v-else name="group-title">
+              <a-alert v-bind="item.props">{{ item.label }}</a-alert>
             </slot>
           </a-form-item>
         </a-col>
