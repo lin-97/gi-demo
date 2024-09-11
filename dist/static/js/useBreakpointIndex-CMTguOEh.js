@@ -1,1 +1,0 @@
-import{N as o}from"./index-nwng0QS3.js";import{a as s}from"./useBreakpoint-BCl7Sgev.js";function a(a,e){const{breakpoint:i}=s();o((()=>i.value),(o=>{a({xs:0,sm:0,md:0,lg:1,xl:1,xxl:2}[o])}),{immediate:!0})}export{a as u};
