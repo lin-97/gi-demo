@@ -112,7 +112,7 @@
 </template>
 
 <script setup lang="ts">
-import { Message, type TreeInstance } from '@arco-design/web-vue'
+import { Message } from '@arco-design/web-vue'
 import AddUserModal from './AddUserModal.vue'
 import UserDetailDrawer from './UserDetailDrawer.vue'
 import { useTable } from '@/hooks'
@@ -124,9 +124,9 @@ import { isMobile } from '@/utils'
 defineOptions({ name: 'SystemUser' })
 
 const { data: options } = useDict({ code: 'status' })
-const treeRef = ref<TreeInstance>()
-const AddUserModalRef = ref<InstanceType<typeof AddUserModal>>()
-const UserDetailDrawerRef = ref<InstanceType<typeof UserDetailDrawer>>()
+const treeRef = useTemplateRef('treeRef')
+const AddUserModalRef = useTemplateRef('AddUserModalRef')
+const UserDetailDrawerRef = useTemplateRef('UserDetailDrawerRef')
 const treeInputValue = ref('')
 
 const { deptList, getDeptList } = useDept({

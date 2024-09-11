@@ -47,7 +47,10 @@ export default defineConfig(({ mode }) => {
       vueJsx(),
       AutoImport({
         // 自动导入vue相关函数，如: ref、reactive、toRef等
-        imports: ['vue', 'vue-router'],
+        imports: ['vue', 'vue-router', {
+          // vue 3.5.x
+          vue: ['useTemplateRef', 'onWatcherCleanup', 'useId']
+        }],
         dts: 'src/auto-import.d.ts'
       }),
       Components({

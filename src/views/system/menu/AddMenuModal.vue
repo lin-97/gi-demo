@@ -153,7 +153,7 @@ const menuSelectTree = computed(() => {
 const col2Props: ColProps = { xs: 24, sm: 24, md: 12, lg: 12, xl: 12, xxl: 12 }
 const col3Props: ColProps = { xs: 12, sm: 12, md: 8, lg: 8, xl: 8, xxl: 8 }
 
-const formRef = ref<FormInstance>()
+const formRef = useTemplateRef('formRef')
 const menuId = ref('')
 const visible = ref(false)
 const isEdit = computed(() => !!menuId.value)

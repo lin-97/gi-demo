@@ -132,7 +132,7 @@
 <script setup lang="tsx">
 defineOptions({ name: 'SeniorDetail' })
 
-const containerRef = ref<HTMLElement | null>()
+const containerRef = useTemplateRef('containerRef')
 
 // 接口返回的数据
 const detail = {

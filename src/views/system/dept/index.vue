@@ -87,8 +87,8 @@ import { useDict } from '@/hooks/app'
 defineOptions({ name: 'SystemDept' })
 
 const { data: options } = useDict({ code: 'status' })
-const AddDeptModalRef = ref<InstanceType<typeof AddDeptModal>>()
-const tableRef = ref<TableInstance>()
+const AddDeptModalRef = useTemplateRef('AddDeptModalRef')
+const tableRef = useTemplateRef('tableRef')
 
 const form = reactive({
   name: '',

@@ -9,11 +9,8 @@
     </a-affix>
 
     <a-card title="基本信息">
-      <a-descriptions
-        table-layout="fixed"
-        :label-style="{ width: '60px' }"
-        :column="{ xs: 1, sm: 1, md: 2, lg: 2, xl: 3, xxl: 3 }"
-      >
+      <a-descriptions table-layout="fixed" :label-style="{ width: '60px' }"
+        :column="{ xs: 1, sm: 1, md: 2, lg: 2, xl: 3, xxl: 3 }">
         <a-descriptions-item label="姓名">Lin</a-descriptions-item>
         <a-descriptions-item label="性别">男</a-descriptions-item>
         <a-descriptions-item label="生日">07月16日</a-descriptions-item>
@@ -57,11 +54,9 @@
         </a-descriptions-item>
         <a-descriptions-item label="座右铭">优雅永不过时</a-descriptions-item>
         <a-descriptions-item label="图像">
-          <a-image
-            width="100%"
+          <a-image width="100%"
             src="https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fi0.hdslb.com%2Fbfs%2Farticle%2F09fc753c76d4a8575c105452c81b76ba563c0d8d.jpg&refer=http%3A%2F%2Fi0.hdslb.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=auto?sec=1652531003&t=100230590302237a20f8e136de146f6b"
-            style="max-width: 400px"
-          ></a-image>
+            style="max-width: 400px"></a-image>
         </a-descriptions-item>
         <a-descriptions-item label="标签">
           <a-space :size="5" wrap>
@@ -81,7 +76,7 @@
 defineOptions({ name: 'DataDetail' })
 
 const router = useRouter()
-const containerRef = ref<HTMLElement | null>()
+const containerRef = useTemplateRef('containerRef')
 
 const back = () => {
   router.back()
@@ -95,6 +90,7 @@ const back = () => {
 
 .detail {
   overflow: auto;
+
   &__header {
     background: var(--color-bg-1);
   }

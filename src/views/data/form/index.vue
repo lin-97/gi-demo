@@ -40,7 +40,7 @@ import { addPerson, getPersonById, initPerson, updatePerson } from '@/apis/perso
 defineOptions({ name: 'DataForm' })
 
 const route = useRoute()
-const formRef = ref<FormInstance>()
+const formRef = useTemplateRef('formRef')
 
 const rules: FormInstance['rules'] = {
   name: [
@@ -76,7 +76,7 @@ const { form, title, loading, save, saveLoading, back, reset } = useFormCurd<For
 
 const codeJson = `
 const route = useRoute()
-const formRef = ref<FormInstance>()
+const formRef = useTemplateRef('formRef')
 
 const rules: FormInstance['rules'] = {
   name: [

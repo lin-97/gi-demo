@@ -78,7 +78,7 @@ const checked = ref(false)
 const { loading, setLoading } = useLoading()
 const errorMessage = ref('')
 
-const formRef = ref<FormInstance>()
+const formRef = useTemplateRef('formRef')
 // 点击登录
 const login = async () => {
   try {

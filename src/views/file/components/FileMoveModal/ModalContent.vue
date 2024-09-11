@@ -12,11 +12,11 @@
 </template>
 
 <script lang="tsx" setup>
-import type { FormInstance, TreeInstance } from '@arco-design/web-vue'
+import type { TreeInstance } from '@arco-design/web-vue'
 import { mapTree } from 'xe-utils'
 import GiSvgIcon from '@/components/GiSvgIcon/index.vue'
 
-const formRef = ref<FormInstance>()
+const formRef = useTemplateRef('formRef')
 const form = reactive({
   path: ''
 })

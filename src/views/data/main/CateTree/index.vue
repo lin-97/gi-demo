@@ -57,7 +57,7 @@ interface TreeCateItem extends CateTreeItem {
 }
 
 const loading = ref(false)
-const treeRef = ref<TreeInstance>()
+const treeRef = useTemplateRef('treeRef')
 const inputValue = ref('')
 const treeData = ref<TreeCateItem[]>([])
 
@@ -94,7 +94,7 @@ const getCateTree = async () => {
 }
 getCateTree()
 
-const inputRef = ref<InputInstance>()
+const inputRef = useTemplateRef('inputRef')
 // 保存当前右键的节点
 const contextmenuNode = ref<TreeCateItem | null>(null)
 const onContextmenu = (node: TreeCateItem) => {

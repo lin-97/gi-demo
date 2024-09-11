@@ -28,7 +28,7 @@ const emit = defineEmits<{
   (e: 'save-success'): void
 }>()
 
-const formRef = ref<FormInstance>()
+const formRef = useTemplateRef('formRef')
 const dictDataId = ref('')
 const isEdit = computed(() => !!dictDataId.value)
 const title = computed(() => (isEdit.value ? '编辑字典数据' : '新增字典数据'))

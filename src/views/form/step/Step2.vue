@@ -49,7 +49,7 @@ const rules: FormInstance['rules'] = {
 }
 
 const loading = ref(false)
-const formRef = ref<FormInstance>()
+const formRef = useTemplateRef('formRef')
 
 // 下一步|提交
 const next = async () => {

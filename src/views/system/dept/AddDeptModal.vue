@@ -38,7 +38,7 @@ const emit = defineEmits<{
   (e: 'save-success'): void
 }>()
 
-const formRef = ref<FormInstance>()
+const formRef = useTemplateRef('formRef')
 const deptId = ref('')
 const visible = ref(false)
 const isEdit = computed(() => !!deptId.value)
