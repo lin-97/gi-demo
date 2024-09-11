@@ -37,13 +37,8 @@
             </a-row>
 
             <a-form-item label="部门" field="dept">
-              <a-tree-select
-                v-model="form.dept"
-                :data="treeData"
-                multiple
-                placeholder="请选择部门"
-                allow-clear
-              ></a-tree-select>
+              <a-tree-select v-model="form.dept" :data="treeData" multiple placeholder="请选择部门"
+                allow-clear></a-tree-select>
             </a-form-item>
             <a-form-item label="学历" field="education">
               <a-select v-model="form.education" placeholder="请选择学历" allow-clear style="width: 120px">
@@ -56,13 +51,7 @@
               <a-range-picker v-model="form.rangDate" allow-clear />
             </a-form-item>
             <a-form-item label="爱好" field="hobbys" extra="这里的数据采用了数据字典">
-              <a-select
-                v-model="form.hobbys"
-                :options="options"
-                placeholder="请选择爱好"
-                multiple
-                allow-clear
-              ></a-select>
+              <a-select v-model="form.hobbys" :options="options" placeholder="请选择爱好" multiple allow-clear></a-select>
             </a-form-item>
             <a-form-item field="isRead">
               <a-checkbox v-model="form.isRead">我已阅读</a-checkbox>
@@ -136,7 +125,7 @@ const rules: FormInstance['rules'] = {
   sex: [{ required: true, message: '请选择性别' }]
 }
 
-const formRef = ref<FormInstance>()
+const formRef = useTemplateRef('formRef')
 
 const reset = () => {
   formRef.value?.resetFields()
@@ -154,6 +143,7 @@ const submit = async () => {
   &__form {
     margin-top: 40px;
   }
+
   :deep(.vue-codemirror) {
     min-width: 300px;
   }

@@ -97,7 +97,7 @@ const { isFullscreen, toggle } = useFullscreen()
 
 const router = useRouter()
 const userStore = useUserStore()
-const SettingDrawerRef = ref<InstanceType<typeof SettingDrawer>>()
+const SettingDrawerRef = useTemplateRef('SettingDrawerRef')
 
 // 跳转个人中心
 const toUser = () => {

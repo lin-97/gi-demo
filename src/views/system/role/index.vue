@@ -90,8 +90,8 @@ import { isMobile } from '@/utils'
 defineOptions({ name: 'SystemRole' })
 
 const { data: options } = useDict({ code: 'status' })
-const AddRoleModalRef = ref<InstanceType<typeof AddRoleModal>>()
-const PermModalRef = ref<InstanceType<typeof PermModal>>()
+const AddRoleModalRef = useTemplateRef('AddRoleModalRef')
+const PermModalRef = useTemplateRef('PermModalRef')
 
 const form = reactive({
   name: '',

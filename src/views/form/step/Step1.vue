@@ -11,7 +11,9 @@
         <a-input-group class="w-full">
           <a-select v-model="form.payType" style="width: 150px">
             <a-option v-for="item in payMethodList" :key="item.icon" :value="item.value">
-              <template #icon><GiSvgIcon :name="item.icon"></GiSvgIcon></template>
+              <template #icon>
+                <GiSvgIcon :name="item.icon"></GiSvgIcon>
+              </template>
               <span>{{ item.label }}</span>
             </a-option>
           </a-select>
@@ -63,7 +65,7 @@ const rules: FormInstance['rules'] = {
   amount: [{ required: true, message: '请输入转账金额' }]
 }
 
-const formRef = ref<FormInstance>()
+const formRef = useTemplateRef('formRef')
 
 // 下一步
 const next = async () => {

@@ -11,7 +11,7 @@ import type { TreeInstance } from '@arco-design/web-vue'
 import { type SystemMenuOptionsItem, getSystemMenuOptions, getSystemRoleMenuIds } from '@/apis/system'
 import { isMobile } from '@/utils'
 
-const treeRef = ref<TreeInstance>()
+const treeRef = useTemplateRef('treeRef')
 const treeData = ref<SystemMenuOptionsItem[]>([])
 const getTreeData = async () => {
   const res = await getSystemMenuOptions()

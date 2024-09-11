@@ -48,7 +48,7 @@ onMounted(() => {
   form.area = '440307'
 })
 
-const formRef = ref<InstanceType<typeof GiForm>>()
+const formRef = useTemplateRef('formRef')
 
 const options: Options = {
   form: {},

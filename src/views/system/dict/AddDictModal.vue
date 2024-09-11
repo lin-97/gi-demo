@@ -31,7 +31,7 @@ const emit = defineEmits<{
   (e: 'save-success'): void
 }>()
 
-const formRef = ref<FormInstance>()
+const formRef = useTemplateRef('formRef')
 const roleId = ref('')
 const isEdit = computed(() => !!roleId.value)
 const title = computed(() => (isEdit.value ? '编辑字典' : '新增字典'))

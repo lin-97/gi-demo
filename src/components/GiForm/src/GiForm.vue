@@ -41,7 +41,6 @@
 </template>
 
 <script setup lang="ts">
-import type * as A from '@arco-design/web-vue'
 import { cloneDeep } from 'lodash-es'
 import type { Columns, ColumnsItem, ColumnsItemDisabled, ColumnsItemHide, Options } from './type'
 
@@ -59,7 +58,7 @@ const emit = defineEmits<{
   (e: 'reset'): void
 }>()
 
-const formRef = ref<A.FormInstance>()
+const formRef = useTemplateRef('formRef')
 const collapsed = ref(props.options.fold?.defaultCollapsed ?? false)
 const dicData: Record<string, any> = reactive({})
 

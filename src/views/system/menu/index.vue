@@ -124,7 +124,7 @@
 </template>
 
 <script setup lang="ts">
-import { Drawer, type TableInstance } from '@arco-design/web-vue'
+import { Drawer } from '@arco-design/web-vue'
 import AddMenuModal from './AddMenuModal.vue'
 import { type SystemMenuItem, getSystemMenuList } from '@/apis/system'
 import { deleteBaseApi } from '@/apis/base'
@@ -137,9 +137,9 @@ import GiCodeView from '@/components/GiCodeView/index.vue'
 defineOptions({ name: 'SystemMenu' })
 
 const { data: options } = useDict({ code: 'status' })
-const AddMenuModalRef = ref<InstanceType<typeof AddMenuModal>>()
+const AddMenuModalRef = useTemplateRef('AddMenuModalRef')
 
-const tableRef = ref<TableInstance>()
+const tableRef = useTemplateRef('tableRef')
 const isExpanded = ref(false)
 const onExpanded = () => {
   isExpanded.value = !isExpanded.value

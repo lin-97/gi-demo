@@ -63,7 +63,7 @@ import { Message } from '@arco-design/web-vue'
 
 defineOptions({ name: 'FormTable' })
 
-const formRef = ref<FormInstance>()
+const formRef = useTemplateRef('formRef')
 const columns: TableColumnData[] = [
   {
     title: '姓名',

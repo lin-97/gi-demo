@@ -60,7 +60,7 @@ import { deleteBaseApi } from '@/apis/base'
 import { useTable } from '@/hooks'
 
 const visible = ref(false)
-const AddDictDataModalRef = ref<InstanceType<typeof AddDictDataModal>>()
+const AddDictDataModalRef = useTemplateRef('AddDictDataModalRef')
 
 const dictCode = ref('')
 

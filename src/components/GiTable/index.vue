@@ -110,7 +110,7 @@ interface Props {
   disabledColumnKeys?: string[]
 }
 
-const tableRef = ref<TableInstance | null>(null)
+const tableRef = useTemplateRef('tableRef')
 const stripe = ref(false)
 const size = ref<TableInstance['size']>('medium')
 const isBordered = ref(true)

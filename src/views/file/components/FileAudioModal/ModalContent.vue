@@ -30,8 +30,8 @@ interface Props {
 const props = withDefaults(defineProps<Props>(), {})
 
 const visible = ref(false)
-const audioRef = ref<HTMLElement | null>(null)
-const audioHeadRef = ref<HTMLElement | null>(null)
+const audioRef = useTemplateRef('audioRef')
+const audioHeadRef = useTemplateRef('audioHeadRef')
 
 const audioSrc = computed(() => {
   return props.data?.src || ''

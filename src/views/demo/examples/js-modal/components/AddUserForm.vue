@@ -20,7 +20,7 @@ const form = reactive({
   phone: ''
 })
 
-const formRef = ref<FormInstance | null>(null)
+const formRef = useTemplateRef('formRef')
 
 const rules: FormInstance['rules'] = {
   name: [

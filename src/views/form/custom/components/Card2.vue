@@ -53,7 +53,7 @@ const form = reactive({
   remark: ''
 })
 
-const formRef = ref<InstanceType<typeof GiForm>>()
+const formRef = useTemplateRef('formRef')
 
 const options: Options = reactive({
   form: {},

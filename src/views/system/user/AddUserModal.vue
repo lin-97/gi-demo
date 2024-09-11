@@ -78,7 +78,7 @@ const { deptList, getDeptList } = useDept()
 getDeptList()
 
 const col2Props: ColProps = { xs: 24, sm: 24, md: 12, lg: 12, xl: 12, xxl: 12 }
-const formRef = ref<FormInstance>()
+const formRef = useTemplateRef('formRef')
 const userId = ref('')
 const isEdit = computed(() => !!userId.value)
 const title = computed(() => (isEdit.value ? '编辑用户' : '新增用户'))
