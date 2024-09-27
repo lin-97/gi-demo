@@ -1,7 +1,7 @@
 <template>
   <section class="system-logo" :class="{ collapsed: props.collapsed }" @click="toHome">
     <img class="logo" src="@/assets/images/logo.gif" />
-    <span class="system-name">Admin Pro</span>
+    <span class="system-name gi_line_1">Admin Pro</span>
   </section>
 </template>
 
@@ -35,19 +35,23 @@ const toHome = () => {
   cursor: pointer;
   user-select: none;
   box-sizing: border-box;
+
   &.collapsed {
     padding: 0;
     display: flex;
     justify-content: center;
     align-items: center;
+
     // .logo {
     //   width: 24px;
     //   height: 24px;
     // }
+
     .system-name {
       display: none;
     }
   }
+
   .logo {
     width: 32px;
     height: 32px;
@@ -56,10 +60,12 @@ const toHome = () => {
     overflow: hidden;
     flex-shrink: 0;
   }
+
   .system-name {
     padding-left: 10px;
     white-space: nowrap;
     transition: color 0.3s;
+
     &:hover {
       color: $color-theme !important;
       cursor: pointer;
