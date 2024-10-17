@@ -297,7 +297,7 @@ const data: MockSystemMenuItem[] = [
         title: '编辑表格',
         svgIcon: '',
         icon: 'icon-menu',
-        keepAlive: false,
+        keepAlive: true,
         hidden: false,
         sort: 0,
         activeMenu: '',

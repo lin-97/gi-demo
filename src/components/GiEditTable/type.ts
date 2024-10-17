@@ -1,7 +1,7 @@
 import type * as A from '@arco-design/web-vue'
 
 export interface ColumnItem {
-  type:
+  type?:
     | 'input'
     | 'select'
     | 'radio-group'
@@ -44,6 +44,7 @@ export interface ColumnItem {
     & A.AlertInstance['$props']
   columnProps?: A.TableColumnInstance['$props']
   formItemProps?: A.FormItemInstance['$props']
+  slotName?: string
 }
 
 export type Disabled<T> = boolean | ((e: { row: T, rowIndex: number, col: ColumnItem }) => boolean)

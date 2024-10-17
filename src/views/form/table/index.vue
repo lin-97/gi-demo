@@ -13,8 +13,16 @@
         </a-space>
       </a-row>
 
-      <gi-edit-table ref="GiEditTableRef" :scroll="{ minWidth: 900 }" :columns="columns" :data="data"
-        :disabled="disabled"></gi-edit-table>
+      <gi-edit-table ref="GiEditTableRef" :scroll="{ minWidth: 1200 }" :columns="columns" :data="data"
+        :disabled="disabled">
+        <template #action="{ rowIndex }">
+          <a-space>
+            <a-button type="primary" status="danger" size="mini" :disabled="rowIndex === 0" @click="onDelete(rowIndex)">
+              删除
+            </a-button>
+          </a-space>
+        </template>
+      </gi-edit-table>
 
       <a-row justify="end" class="gi_mt">
         <a-space wrap>
@@ -95,11 +103,28 @@ const columns = computed<ColumnItem[]>(() => [
     columnProps: {
       width: 250
     }
+  },
+  {
+    title: '操作',
+    dataIndex: 'action',
+    slotName: 'action',
+    columnProps: {
+      width: 100,
+      align: 'center',
+      fixed: 'right'
+    },
+    formItemProps: {
+      contentClass: 'arco-table-cell-align-center'
+    }
   }
 ])
 
 const addTableRow = () => {
   data.value.push({ name: '', phone: '', address: '', rate: 0, status: 0, num: 0 })
+}
+
+const onDelete = (index: number) => {
+  data.value.splice(index, 1)
 }
 
 const reset = () => {

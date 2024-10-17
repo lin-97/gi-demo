@@ -1,8 +1,9 @@
 import { h, ref } from 'vue'
 import { Message, Modal } from '@arco-design/web-vue'
 import ModalContent from './ModalContent.vue'
+import type { FileItem } from '@/apis/file'
 
-export function openFileMoveModal() {
+export function openFileMoveModal(fileItem: FileItem) {
   const ModalContentRef = ref<InstanceType<typeof ModalContent>>()
   return Modal.open({
     title: '移动到',
@@ -14,6 +15,7 @@ export function openFileMoveModal() {
       h(ModalContent, {
         ref: (e) => {
           ModalContentRef.value = e as any
+          ModalContentRef.value?.setForm({ id: fileItem.id, path: fileItem.filePath })
         }
       }),
     onBeforeOk: async () => {

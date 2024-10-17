@@ -18,8 +18,13 @@ import GiSvgIcon from '@/components/GiSvgIcon/index.vue'
 
 const formRef = useTemplateRef('formRef')
 const form = reactive({
+  id: '',
   path: ''
 })
+
+const setForm = (obj: { id: string, path: string }) => {
+  Object.assign(form, obj)
+}
 
 const treeData = ref([
   {
@@ -65,7 +70,7 @@ const select: TreeInstance['onSelect'] = (selectedKeys, data) => {
   form.path = `/${data.selectedNodes[0].title}`
 }
 
-defineExpose({ formRef })
+defineExpose({ formRef, setForm })
 </script>
 
 <style lang="scss" scoped>

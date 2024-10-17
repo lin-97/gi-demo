@@ -5,12 +5,15 @@
         <template #columns>
           <a-table-column v-for="col in props.columns" :key="col.dataIndex" :title="col.title"
             :data-index="col.dataIndex" :header-cell-class="headerCellClass(col)" v-bind="col.columnProps">
-            <template #cell="{ record, rowIndex }">
+            <template #cell="{ record, rowIndex, column }">
               <a-form-item :field="`tableData[${rowIndex}].${col.dataIndex}`" :label-col-style="{ display: 'none' }"
                 :wrapper-col-props="{ span: 24 }" v-bind="col.formItemProps"
                 :rules="[{ required: col.required || false, message: getRuleMessage(col) }, ...(col.rules || [])]">
-                <component :is="`a-${col.type}`" v-bind="getComponentBindProps(col)" v-model="record[col.dataIndex]"
-                  :disabled="isDisabled({ row: record, rowIndex, col })">
+                <template v-if="col.slotName">
+                  <slot :name="col.dataIndex" v-bind="{ record, rowIndex, column }"></slot>
+                </template>
+                <component :is="`a-${col.type}`" v-else v-bind="getComponentBindProps(col)"
+                  v-model="record[col.dataIndex]" :disabled="isDisabled({ row: record, rowIndex, col })">
                 </component>
               </a-form-item>
             </template>
