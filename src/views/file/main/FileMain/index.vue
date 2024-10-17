@@ -150,8 +150,7 @@ onMounted(() => {
 })
 
 onBeforeRouteUpdate((to) => {
-  if (!to.query.fileType) return
-  fileType.value = to.query.fileType as string
+  fileType.value = to.query.fileType as string || '0'
   getListData()
 })
 

@@ -1,9 +1,11 @@
 import { h, ref } from 'vue'
 import { Message, Modal } from '@arco-design/web-vue'
 import ModalContent from './ModalContent.vue'
+import type { FileItem } from '@/apis/file'
 
-export function openFileRenameModal() {
+export function openFileRenameModal(fileItem: FileItem) {
   const ModalContentRef = ref<InstanceType<typeof ModalContent>>()
+
   return Modal.open({
     title: '重命名',
     width: '90%',
@@ -13,6 +15,7 @@ export function openFileRenameModal() {
       h(ModalContent, {
         ref: (e) => {
           ModalContentRef.value = e as any
+          ModalContentRef.value?.setForm({ id: fileItem.id, name: fileItem.name })
         }
       }),
     onBeforeOk: async () => {

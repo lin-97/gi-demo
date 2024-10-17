@@ -11,10 +11,15 @@
 <script lang="ts" setup>
 const formRef = useTemplateRef('formRef')
 const form = reactive({
+  id: '',
   name: ''
 })
 
-defineExpose({ formRef })
+const setForm = (obj: { id: string, name: string }) => {
+  Object.assign(form, obj)
+}
+
+defineExpose({ formRef, setForm })
 </script>
 
 <style lang="scss" scoped></style>
