@@ -1,0 +1,1 @@
+import{ae as n}from"./index-CIiNXClJ.js";function t(t){return n.get("/person/list",t)}function e(){return n.get("/person/init")}function r(t){return n.get("/person/detail",t)}function o(t){return n.post("/person/add",t)}function s(t){return n.post("/person/update",t)}export{o as a,t as b,r as g,e as i,s as u};
