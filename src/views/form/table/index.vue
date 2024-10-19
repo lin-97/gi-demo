@@ -72,7 +72,7 @@ const columns = computed<ColumnItem[]>(() => [
     title: '状态',
     dataIndex: 'status',
     props: {
-      options: status_options.value as any
+      options: status_options.value
     }
   },
   {
