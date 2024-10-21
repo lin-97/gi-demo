@@ -31,13 +31,13 @@ import type { ColumnItem, Disabled } from './type'
 defineOptions({ name: 'GiEditTable', inheritAttrs: false })
 
 const props = withDefaults(defineProps<Props>(), {
-  disabled: false
+  cellDisabled: false
 })
 
 interface Props {
   columns: ColumnItem[]
   data: T[]
-  disabled?: Disabled<T>
+  cellDisabled?: Disabled<T>
 }
 
 const attrs = useAttrs()
@@ -63,20 +63,20 @@ const getComponentBindProps = (col: ColumnItem) => {
   }
   if (col.type === 'textarea') {
     obj.allowClear = true
-    obj.placeholder = `请输入${col.title}`
+    obj.placeholder = `填写${col.title}`
     obj.maxLength = 200
   }
   if (col.type === 'select') {
     obj.allowClear = true
-    obj.placeholder = `请输入${col.title}`
+    obj.placeholder = `请选择${col.title}`
   }
   if (col.type === 'cascader') {
     obj.allowClear = true
-    obj.placeholder = `请输入${col.title}`
+    obj.placeholder = `请选择${col.title}`
   }
   if (col.type === 'tree-select') {
     obj.allowClear = true
-    obj.placeholder = `请输入${col.title}`
+    obj.placeholder = `请选择${col.title}`
   }
   if (col.type === 'date-picker') {
     obj.placeholder = '请选择日期'
@@ -89,15 +89,27 @@ const getComponentBindProps = (col: ColumnItem) => {
 }
 
 const getRuleMessage = (col: ColumnItem) => {
-  const obj: Record<string, string> = {
-    input: '请输入'
+  if (['input', 'input-number'].includes(col.type ?? '')) {
+    return `请输入${col.title}`
   }
-  return `${obj[col.type]}${col.title}`
+  if (['textarea'].includes(col.type ?? '')) {
+    return `请填写${col.title}`
+  }
+  if (['select', 'cascader', 'tree-select'].includes(col.type ?? '')) {
+    return `请选择${col.title}`
+  }
+  if (['date-picker'].includes(col.type ?? '')) {
+    return `请选择日期`
+  }
+  if (['time-picker'].includes(col.type ?? '')) {
+    return `请选择时间`
+  }
+  return ''
 }
 
-const isDisabled: Props['disabled'] = (p) => {
-  if (typeof props?.disabled === 'boolean') return props.disabled
-  if (typeof props?.disabled === 'function') return props.disabled(p)
+const isDisabled: Props['cellDisabled'] = (p) => {
+  if (typeof props?.cellDisabled === 'boolean') return props.cellDisabled
+  if (typeof props?.cellDisabled === 'function') return props.cellDisabled(p)
   return false
 }
 </script>

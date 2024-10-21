@@ -80,22 +80,22 @@ const getComponentBindProps = (item: ColumnsItem) => {
   }
   if (item.type === 'textarea') {
     obj.allowClear = true
-    obj.placeholder = `请输入${item.label}`
+    obj.placeholder = `请填写${item.label}`
     obj.maxLength = 200
   }
   if (item.type === 'select') {
     obj.allowClear = true
-    obj.placeholder = `请输入${item.label}`
+    obj.placeholder = `请选择${item.label}`
     obj.options = dicData[item.field] || item.options
   }
   if (item.type === 'cascader') {
     obj.allowClear = true
-    obj.placeholder = `请输入${item.label}`
+    obj.placeholder = `请选择${item.label}`
     obj.options = dicData[item.field] || item.options
   }
   if (item.type === 'tree-select') {
     obj.allowClear = true
-    obj.placeholder = `请输入${item.label}`
+    obj.placeholder = `请选择${item.label}`
     obj.data = dicData[item.field] || item.data
   }
   if (item.type === 'radio-group') {
