@@ -34,6 +34,10 @@ const props = withDefaults(defineProps<Props>(), {
   cellDisabled: false
 })
 
+defineSlots<{
+  [propsName: string]: (props: { record: T, rowIndex: number, column: ColumnItem }) => void
+}>()
+
 interface Props {
   columns: ColumnItem[]
   data: T[]
