@@ -22,6 +22,7 @@ export interface ColumnItem {
     | 'cascader'
     | 'tree-select'
     | 'upload'
+    | ''
   title: string
   dataIndex: string
   required?: boolean

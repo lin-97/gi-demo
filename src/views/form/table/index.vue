@@ -14,7 +14,7 @@
       </a-row>
 
       <gi-edit-table ref="GiEditTableRef" :scroll="{ minWidth: 1200 }" :columns="columns" :data="data"
-        :disabled="disabled">
+        :cell-disabled="cellDisabled">
         <template #action="{ rowIndex }">
           <a-space>
             <a-button type="primary" status="danger" size="mini" :disabled="rowIndex === 0" @click="onDelete(rowIndex)">
@@ -72,7 +72,7 @@ const columns = computed<ColumnItem[]>(() => [
     title: '状态',
     dataIndex: 'status',
     props: {
-      options: status_options.value as any
+      options: status_options.value
     }
   },
   {
@@ -105,6 +105,7 @@ const columns = computed<ColumnItem[]>(() => [
     }
   },
   {
+    type: '',
     title: '操作',
     dataIndex: 'action',
     slotName: 'action',
@@ -142,7 +143,7 @@ const submit = async () => {
   Message.success('验证通过~')
 }
 
-const disabled: Disabled<DataItem> = ({ rowIndex, col }) => {
+const cellDisabled: Disabled<DataItem> = ({ rowIndex, col }) => {
   if (isReadOnly.value) return true
   if (col.dataIndex === 'name' && rowIndex === 0) return true
   return false

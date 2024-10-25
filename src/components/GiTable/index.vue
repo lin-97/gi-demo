@@ -79,7 +79,7 @@
     </a-row>
     <div class="gi-table__container">
       <a-table ref="tableRef" :stripe="stripe" :size="size" :bordered="{ cell: isBordered }"
-        v-bind="{ ...attrs, columns: _columns }">
+        v-bind="{ ...attrs, columns: _columns }" :data="data">
         <template v-for="key in Object.keys(slots)" :key="key" #[key]="scoped">
           <slot :key="key" :name="key" v-bind="scoped"></slot>
         </template>
@@ -88,18 +88,37 @@
   </div>
 </template>
 
-<script setup lang="ts">
-import type { DropdownInstance, TableColumnData, TableInstance } from '@arco-design/web-vue'
+<script setup lang="ts" generic="T extends TableData">
+import type { DropdownInstance, TableColumnData, TableData, TableInstance } from '@arco-design/web-vue'
 import { VueDraggable } from 'vue-draggable-plus'
 
 defineOptions({ name: 'GiTable', inheritAttrs: false })
 const props = withDefaults(defineProps<Props>(), {
   title: '',
+  data: () => [],
   disabledColumnKeys: () => [] // 禁止控制显示隐藏的列
 })
 
 const emit = defineEmits<{
   (e: 'refresh'): void
+}>()
+
+defineSlots<{
+  'th': (props: { column: TableColumnData }) => void
+  'thead': () => void
+  'empty': (props: { column: TableColumnData }) => void
+  'summary-cell': (props: { column: TableColumnData, record: T, rowIndex: number }) => void
+  'pagination-right': () => void
+  'pagination-left': () => void
+  'td': (props: { column: TableColumnData, record: T, rowIndex: number }) => void
+  'tr': (props: { record: T, rowIndex: number }) => void
+  'tbody': () => void
+  'drag-handle-icon': () => void
+  'footer': () => void
+  'expand-row': (props: { record: T }) => void
+  'expand-icon': (props: { record: T, expanded?: boolean }) => void
+  'columns': () => void
+  [propsName: string]: (props: { key: string, record: T, column: TableColumnData, rowIndex: number }) => void
 }>()
 
 const attrs = useAttrs()
@@ -108,6 +127,7 @@ const slots = useSlots()
 interface Props {
   title?: string
   disabledColumnKeys?: string[]
+  data: T[]
 }
 
 const tableRef = useTemplateRef('tableRef')

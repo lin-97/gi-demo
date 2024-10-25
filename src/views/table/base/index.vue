@@ -53,26 +53,18 @@
 
 <script setup lang="ts">
 import type { PopconfirmInstance } from '@arco-design/web-vue'
-import { useBreakpointIndex, useTable } from '@/hooks'
+import { useTable } from '@/hooks'
 import { useDict } from '@/hooks/app'
 import { getPersonList } from '@/apis/person'
 import type { Columns, Options } from '@/components/GiForm'
 
 defineOptions({ name: 'TableBase' })
 
-const { data: statusOptions } = useDict({ code: 'status' })
 const form = reactive({})
 
 const options: Options = reactive({
   form: { layout: 'inline' },
-  col: { xs: 24, sm: 12, md: 12, lg: 8, xl: 8, xxl: 6 },
-  btns: { col: { xs: 24, sm: 12, md: 12, lg: 8, xl: 8, xxl: 6 } },
-  fold: { enable: true, index: 2, defaultCollapsed: true }
-})
-
-useBreakpointIndex((index) => {
-  // 自适应折叠，让折叠后始终一行显示
-  options.fold && (options.fold.index = index)
+  grid: { cols: { xs: 1, sm: 2, md: 2, lg: 3, xl: 3, xxl: 4 } }
 })
 
 const columns: Columns = reactive([
@@ -88,22 +80,6 @@ const columns: Columns = reactive([
     props: {
       maxLength: 11
     }
-  },
-  {
-    type: 'select',
-    label: '状态',
-    field: 'status',
-    options: statusOptions
-  },
-  {
-    type: 'date-picker',
-    label: '创建日期',
-    field: 'createTime'
-  },
-  {
-    type: 'input',
-    label: '地址',
-    field: 'address'
   }
 ])
 

@@ -1,6 +1,7 @@
 <template>
   <div class="table-page">
-    <GiForm v-model="form" :options="options" :columns="QueryFormColumns" @search="search" @reset="search"></GiForm>
+    <GiForm v-model="form" :options="options" :columns="QueryFormColumns" @search="search" @reset="search">
+    </GiForm>
 
     <GiTable row-key="id" :loading="loading" :columns="columns" :data="tableData"
       :scroll="{ x: '100%', y: '100%', minWidth: 1300 }" :row-selection="{ type: 'checkbox', showCheckedAll: true }"
@@ -47,7 +48,7 @@
 
 <script setup lang="ts">
 import { Link, Message, type PopconfirmInstance, type TableInstance } from '@arco-design/web-vue'
-import { useBreakpointIndex, useTable } from '@/hooks'
+import { useTable } from '@/hooks'
 import { useDict } from '@/hooks/app'
 import { type PersonItem, getPersonList } from '@/apis/person'
 import type { Columns, Options } from '@/components/GiForm'
@@ -58,14 +59,9 @@ const form = reactive({})
 
 const options: Options = reactive({
   form: { layout: 'inline' },
-  col: { xs: 24, sm: 12, md: 12, lg: 8, xl: 8, xxl: 6 },
-  btns: { col: { xs: 24, sm: 12, md: 12, lg: 8, xl: 8, xxl: 6 } },
+  grid: { cols: { xs: 1, sm: 2, md: 3, lg: 4, xl: 4, xxl: 4 } },
+  btns: {},
   fold: { enable: true, index: 2, defaultCollapsed: true }
-})
-
-useBreakpointIndex((index) => {
-  // 自适应折叠，让折叠后始终一行显示
-  options.fold && (options.fold.index = index)
 })
 
 const QueryFormColumns: Columns = reactive([

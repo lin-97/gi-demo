@@ -51,8 +51,8 @@ onMounted(() => {
 const formRef = useTemplateRef('formRef')
 
 const options: Options = {
-  form: {},
-  col: { xs: 24, sm: 12 },
+  grid: { cols: 6 },
+  gridItem: { span: { xs: 6, sm: 3, md: 3, lg: 2 } },
   btns: { hide: true }
 }
 
@@ -61,6 +61,7 @@ const columns: Columns<typeof form> = reactive([
     type: 'input',
     label: '姓名',
     field: 'name',
+    span: { xs: 6, sm: 3 },
     props: {
       maxLength: 4
     },
@@ -74,6 +75,7 @@ const columns: Columns<typeof form> = reactive([
     type: 'input',
     label: '手机',
     field: 'phone',
+    span: { xs: 6, sm: 3 },
     props: {
       maxLength: 11
     },
@@ -86,7 +88,6 @@ const columns: Columns<typeof form> = reactive([
     type: 'select',
     label: '省',
     field: 'province',
-    col: { xs: 24, sm: 12, md: 12, lg: 8 },
     request: () => getAreaList({ type: 'province' }),
     resultFormat: (res) => res.data.map((i: any) => ({ label: i.label, value: i.code })),
     cascader: ['city'],
@@ -96,7 +97,6 @@ const columns: Columns<typeof form> = reactive([
     type: 'select',
     label: '市',
     field: 'city',
-    col: { xs: 24, sm: 12, md: 12, lg: 8 },
     request: (form) => getAreaList({ type: 'city', code: form.province }),
     resultFormat: (res) => res.data.map((i: any) => ({ label: i.label, value: i.code })),
     cascader: ['area']
@@ -105,7 +105,6 @@ const columns: Columns<typeof form> = reactive([
     type: 'select',
     label: '区',
     field: 'area',
-    col: { xs: 24, sm: 12, md: 12, lg: 8 },
     request: (form) => getAreaList({ type: 'area', code: form.city }),
     resultFormat: (res) => res.data.map((i: any) => ({ label: i.label, value: i.code }))
   },
@@ -113,7 +112,7 @@ const columns: Columns<typeof form> = reactive([
     type: 'input',
     label: '',
     field: 'btns',
-    span: 24
+    span: 6
   }
 ])
 

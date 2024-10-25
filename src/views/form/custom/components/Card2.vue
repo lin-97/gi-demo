@@ -56,9 +56,7 @@ const form = reactive({
 const formRef = useTemplateRef('formRef')
 
 const options: Options = reactive({
-  form: {},
-  btns: { hide: true },
-  col: { xs: 24, sm: 12 }
+  btns: { hide: true }
 })
 
 const columns: Columns<typeof form> = reactive([
@@ -66,8 +64,8 @@ const columns: Columns<typeof form> = reactive([
     type: 'group-title',
     label: '基本信息',
     field: 'base-title',
-    span: 24,
-    item: {
+    span: 2,
+    formItemProps: {
       labelColStyle: { display: 'none' }
     }
   },
@@ -114,7 +112,7 @@ const columns: Columns<typeof form> = reactive([
     type: 'checkbox-group',
     label: '爱好',
     field: 'hobbys',
-    span: 24,
+    span: 2,
     options: [
       { label: '电影', value: '01' },
       { label: '音乐', value: '02' },
@@ -143,7 +141,7 @@ const columns: Columns<typeof form> = reactive([
     label: '测试',
     field: 'test',
     disabled: (i) => i.status === 0,
-    item: { extra: '查看这里效果请切换状态' }
+    formItemProps: { extra: '查看这里效果请切换状态' }
   },
   {
     type: 'rate',
@@ -154,13 +152,13 @@ const columns: Columns<typeof form> = reactive([
     type: 'switch',
     label: '是否隐藏',
     field: 'hide',
-    item: { extra: '隐藏成绩项' }
+    formItemProps: { extra: '隐藏成绩项' }
   },
   {
     type: 'slider',
     label: '成绩',
     field: 'grade',
-    span: 24,
+    span: 2,
     hide: (i) => {
       i.hide && (i.grade = 0)
       return i.hide === true
@@ -170,8 +168,8 @@ const columns: Columns<typeof form> = reactive([
     type: 'group-title',
     label: '分组标题1',
     field: 'group-title1',
-    span: 24,
-    item: {
+    span: 2,
+    formItemProps: {
       labelColStyle: { display: 'none' }
     }
   },
@@ -193,8 +191,8 @@ const columns: Columns<typeof form> = reactive([
     type: 'group-title',
     label: '分组标题2',
     field: 'group-title2',
-    span: 24,
-    item: {
+    span: 2,
+    formItemProps: {
       labelColStyle: { display: 'none' }
     }
   },
@@ -202,25 +200,25 @@ const columns: Columns<typeof form> = reactive([
     type: 'textarea',
     label: '备注',
     field: 'remark',
-    span: 24,
-    item: { extra: '这里是额外信息' }
+    span: 2,
+    formItemProps: { extra: '这里是额外信息' }
   },
   {
     type: 'upload',
     label: '附件',
     field: 'file',
-    span: 24,
+    span: 2,
     props: {
       listType: 'picture-card',
       action: '/'
     },
-    item: {
+    formItemProps: {
       extra: '上传文件只支持zip、rar、doc、docx、pdf、jpg、png格式'
     }
   },
   {
     field: 'btns',
-    span: 24
+    span: 2
   }
 ])
 
