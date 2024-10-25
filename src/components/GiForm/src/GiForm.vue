@@ -1,10 +1,10 @@
 <template>
   <a-form ref="formRef" :auto-label-width="true" v-bind="options.form" :model="modelValue">
-    <a-row :gutter="14" v-bind="options.row" class="w-full">
-      <template v-for="(item, index) in columns" :key="item.field">
-        <a-col v-if="!isHide(item.hide)" v-show="colVShow(index)" :span="item.span || 12"
-          v-bind="item.col || item.span ? item.col : options.col">
-          <a-form-item v-bind="item.item" :label="item.label" :field="item.field" :rules="item.rules"
+    <a-grid class="w-full" :col-gap="8" v-bind="options.grid" :collapsed="collapsed">
+      <template v-for="item in columns" :key="item.field">
+        <a-grid-item v-if="!isHide(item.hide)" v-bind="item.gridItemProps || props.options.gridItem"
+          :span="item.span || options.gridItem?.span">
+          <a-form-item v-bind="item.formItemProps" :label="item.label" :field="item.field" :rules="item.rules"
             :disabled="isDisabled(item.disabled)">
             <slot v-if="!['group-title'].includes(item.type || '')" :name="item.field"
               v-bind="{ disabled: isDisabled(item.disabled) }">
@@ -16,9 +16,9 @@
               <a-alert v-bind="item.props">{{ item.label }}</a-alert>
             </slot>
           </a-form-item>
-        </a-col>
+        </a-grid-item>
       </template>
-      <a-col v-if="!options.btns?.hide" :span="options.btns?.span || 12" v-bind="options.btns?.col">
+      <a-grid-item v-if="!options.btns?.hide" :suffix="options.fold?.enable">
         <a-space wrap>
           <slot name="suffix">
             <a-button type="primary" @click="emit('search')">
@@ -26,7 +26,8 @@
               <template #default>{{ options.btns?.searchBtnText || '搜索' }}</template>
             </a-button>
             <a-button @click="emit('reset')">重置</a-button>
-            <a-button v-if="options.fold?.enable" type="text" size="mini" @click="collapsed = !collapsed">
+            <a-button v-if="options.fold?.enable" class="gi-form__fold-btn" type="text" size="mini"
+              @click="collapsed = !collapsed">
               <template #icon>
                 <icon-up v-if="!collapsed" />
                 <icon-down v-else />
@@ -35,22 +36,24 @@
             </a-button>
           </slot>
         </a-space>
-      </a-col>
-    </a-row>
+      </a-grid-item>
+    </a-grid>
   </a-form>
 </template>
 
 <script setup lang="ts">
 import { cloneDeep } from 'lodash-es'
-import type { Columns, ColumnsItem, ColumnsItemDisabled, ColumnsItemHide, Options } from './type'
+import type { ColumnsItem, ColumnsItemDisabled, ColumnsItemHide, Options } from './type'
 
 interface Props {
   modelValue: any
-  options: Options
-  columns: Columns
+  options?: Options
+  columns: ColumnsItem[]
 }
 
-const props = withDefaults(defineProps<Props>(), {})
+const props = withDefaults(defineProps<Props>(), {
+  options: () => ({})
+})
 
 const emit = defineEmits<{
   (e: 'update:modelValue', value: any): void
@@ -58,14 +61,16 @@ const emit = defineEmits<{
   (e: 'reset'): void
 }>()
 
+const options = computed(() => ({
+  grid: { cols: 2 },
+  gridItem: { span: { xs: 2, sm: 1 } },
+  ...props.options
+}
+))
+
 const formRef = useTemplateRef('formRef')
 const collapsed = ref(props.options.fold?.defaultCollapsed ?? false)
 const dicData: Record<string, any> = reactive({})
-
-// col组件的显示隐藏
-const colVShow = (index: number) => {
-  return index <= (props.options.fold?.index || 0) || (index >= (props.options.fold?.index || 0) && !collapsed.value)
-}
 
 // 组件的默认props配置
 const getComponentBindProps = (item: ColumnsItem) => {
@@ -182,4 +187,8 @@ watch(cloneForm as any, (newVal, oldVal) => {
 })
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+.gi-form__fold-btn {
+  padding: 0 5px;
+}
+</style>

@@ -32,8 +32,6 @@ import { useForm } from '@/hooks'
 const { width } = useWindowSize()
 
 const options: Options = {
-  form: {},
-  col: { xs: 24, sm: 12 },
   btns: { hide: true }
 }
 
@@ -81,7 +79,7 @@ const initColumns: Columns = [
     type: 'checkbox-group',
     label: '爱好',
     field: 'hobbys',
-    col: { xs: 24 },
+    span: 2,
     options: [
       { label: '电影', value: '01' },
       { label: '音乐', value: '02' },
@@ -115,7 +113,7 @@ const initColumns: Columns = [
     type: 'switch',
     label: '是否隐藏',
     field: 'hide',
-    item: { extra: '隐藏成绩项' }
+    formItemProps: { extra: '隐藏成绩项' }
   },
   {
     type: 'slider',
@@ -138,8 +136,8 @@ const initColumns: Columns = [
     type: 'textarea',
     label: '备注',
     field: 'remark',
-    span: 24,
-    item: { extra: '这里是额外信息' }
+    span: 2,
+    formItemProps: { extra: '这里是额外信息' }
   }
 ]
 
