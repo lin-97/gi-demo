@@ -1,0 +1,1 @@
+import{d as a,am as s,o,f as e,t,g as r,_ as i}from"./index-CarvrnfW.js";const n={class:"gi-footer"},d=i(a({name:"GiFooter",__name:"index",setup(a){const i=s(new Date).format("YYYY");return(a,s)=>(o(),e("div",n,"Copyright "+t(r(i))+" Gi Admin Pro",1))}}),[["__scopeId","data-v-4edc619a"]]);export{d as _};
