@@ -35,8 +35,10 @@ import GiCodeView from '@/components/GiCodeView/index.vue'
 import GiForm from '@/components/GiForm'
 import type { Columns, Options } from '@/components/GiForm'
 import * as Regexp from '@/utils/regexp'
+import { useDict } from '@/hooks/app'
 
 const { width } = useWindowSize()
+const { data: status_options } = useDict({ code: 'status' })
 
 const form = reactive({
   name: '',
@@ -89,10 +91,16 @@ const columns: Columns<typeof form> = reactive([
     props: {
       maxLength: 11
     },
-    rules: [
-      { required: true, message: '请输入手机号' },
-      { match: Regexp.Phone, message: '手机号格式不正确' }
-    ]
+    rules: computed(() => {
+      // 如果有name的时候，手机号必填（动态rules示例）
+      if (form.name) {
+        return [
+          { required: true, message: '请输入手机号' },
+          { match: Regexp.Phone, message: '手机号格式不正确' }
+        ]
+      }
+      return []
+    })
   },
   {
     type: 'select',
@@ -132,10 +140,7 @@ const columns: Columns<typeof form> = reactive([
     type: 'radio-group',
     label: '状态',
     field: 'status',
-    options: [
-      { label: '启用', value: 1 },
-      { label: '禁用', value: 0 }
-    ]
+    options: status_options.value // 这里使用了字典
   },
   {
     label: '测试',

@@ -1,4 +1,5 @@
 import type * as A from '@arco-design/web-vue'
+import type { ComputedRef } from 'vue'
 
 export type FormType =
   | 'input'
@@ -87,7 +88,7 @@ export interface ColumnsItem<F = any> {
   & A.TreeSelectInstance['$props']
   & A.UploadInstance['$props']
   & A.AlertInstance['$props']
-  rules?: A.FormItemInstance['$props']['rules'] // 表单校验规则
+  rules?: A.FormItemInstance['$props']['rules'] | ComputedRef<A.FormItemInstance['$props']['rules']> // 表单校验规则
   // 下拉列表|复选框组|单选框组|级联选择组件的options
   options?:
   | A.SelectInstance['$props']['options']
