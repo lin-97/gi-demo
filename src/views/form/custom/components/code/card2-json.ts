@@ -1,3 +1,4 @@
+export default `
 <template>
   <a-card title="配置表单-新增">
     <template #extra>
@@ -5,7 +6,7 @@
         <a-button type="primary" @click="isNameRequired = !isNameRequired">姓名必填动态设置</a-button>
         <a-button type="primary" status="warning" @click="onViewCode">
           <template #icon><icon-code /></template>
-          <span>查看代码</span>
+          <span>查看JSON配置</span>
         </a-button>
       </a-space>
     </template>
@@ -251,3 +252,4 @@ const reset = () => {
 </script>
 
 <style lang="scss" scoped></style>
+`

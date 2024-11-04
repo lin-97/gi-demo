@@ -3,7 +3,7 @@
     <a-grid class="w-full" :col-gap="8" v-bind="options.grid" :collapsed="collapsed">
       <template v-for="item in columns" :key="item.field">
         <a-grid-item v-if="!isHide(item.hide)" v-bind="item.gridItemProps || props.options.gridItem"
-          :span="item.span || options.gridItem?.span">
+          :span="item.span || item.gridItemProps?.span || options.gridItem?.span">
           <a-form-item v-bind="item.formItemProps" :label="item.label" :field="item.field" :rules="item.rules"
             :disabled="isDisabled(item.disabled)">
             <slot v-if="!['group-title'].includes(item.type || '')" :name="item.field"
