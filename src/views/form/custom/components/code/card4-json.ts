@@ -1,9 +1,10 @@
+export default `
 <template>
   <a-card title="配置表单-弹窗">
     <template #extra>
       <a-button type="primary" status="warning" @click="onViewCode">
         <template #icon><icon-code /></template>
-        <span>查看代码</span>
+        <span>查看JSON配置</span>
       </a-button>
     </template>
 
@@ -250,3 +251,4 @@ const onViewCode = () => {
 </script>
 
 <style lang="scss" scoped></style>
+`

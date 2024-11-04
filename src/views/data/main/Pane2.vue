@@ -11,11 +11,10 @@
       </a-space>
 
       <a-space wrap>
-        <a-button type="primary" status="success" @click="onViewCode">
-          <template #icon><icon-code /></template>
-          <span>查看代码</span>
-        </a-button>
         <a-button type="primary">导出</a-button>
+        <a-button type="primary" status="warning" @click="onViewCode">
+          <template #icon><icon-code /></template>
+        </a-button>
       </a-space>
     </a-row>
 
@@ -31,7 +30,7 @@
 <script lang="tsx" setup>
 import type { TableColumnData, TableInstance } from '@arco-design/web-vue'
 import { Modal } from '@arco-design/web-vue'
-import Pane2Code from './Pane2Code'
+import Pane2Json from './code/pane2-json'
 import { useTable } from '@/hooks'
 import { getPersonList } from '@/apis/person'
 import GiCellStatus from '@/components/GiCell/GiCellStatus.vue'
@@ -126,7 +125,7 @@ function onDelete() {
 const onViewCode = () => {
   Modal.open({
     title: '查看代码',
-    content: () => <gi-code-view type="vue" codeJson={Pane2Code}></gi-code-view>,
+    content: () => <gi-code-view type="vue" codeJson={Pane2Json}></gi-code-view>,
     fullscreen: true
   })
 }

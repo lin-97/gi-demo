@@ -1,3 +1,4 @@
+export default `
 <template>
   <div class="table-page">
     <GiForm v-model="form" :options="options" :columns="QueryFormColumns" @search="search" @reset="search">
@@ -132,7 +133,7 @@ const columns: TableInstance['columns'] = [
 const { tableData, getTableData, pagination, search } = useTable((p) => getPersonList(p))
 
 function onClickName(record: PersonItem) {
-  Message.success(`点击了${record.name}`)
+  Message.success(\`点击了\${ record.name } \`)
 }
 
 const onAdd = () => {
@@ -174,3 +175,4 @@ const onViewCode = () => {
   flex-direction: column;
 }
 </style>
+`

@@ -1,3 +1,4 @@
+export default `
 <template>
   <div class="page">
     <a-row align="stretch" :gutter="14" class="pane">
@@ -24,6 +25,7 @@
                 </a-button>
                 <a-button type="primary" status="warning" @click="onViewCode">
                   <template #icon><icon-code /></template>
+                  <span>查看代码</span>
                 </a-button>
               </a-space>
 
@@ -137,7 +139,7 @@ const onDetail = (item: PersonItem) => {
 
 // 删除
 const onDelete = (item: PersonItem) => {
-  return handleDelete(() => deleteBaseApi({ ids: [item.id] }), { content: `是否删除-${item.name}?`, showModal: false })
+  return handleDelete(() => deleteBaseApi({ ids: [item.id] }), { content: \`是否删除 - \${ item.name }?\`, showModal: false })
 }
 
 // 批量删除
@@ -159,7 +161,7 @@ const onViewCode = () => {
   Drawer.open({
     title: '数据结构',
     content: () => h(GiCodeView, { codeJson: Pane1Json, type: 'vue' }),
-    width: width.value < 500 ? '100%' : 800
+    width: width.value < 500 ? '100%' : 560
   })
 }
 </script>
@@ -196,3 +198,4 @@ const onViewCode = () => {
   }
 }
 </style>
+`

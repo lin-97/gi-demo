@@ -30,9 +30,9 @@ export default `
 </template>
 
 <script lang="tsx" setup>
-import type { PopconfirmInstance, TableColumnData, TableInstance } from '@arco-design/web-vue'
+import type { TableColumnData, TableInstance } from '@arco-design/web-vue'
 import { Modal } from '@arco-design/web-vue'
-import Pane2Code from './Pane2Code'
+import Pane2Json from './code/pane2-json'
 import { useTable } from '@/hooks'
 import { getPersonList } from '@/apis/person'
 import GiCellStatus from '@/components/GiCell/GiCellStatus.vue'
@@ -127,7 +127,7 @@ function onDelete() {
 const onViewCode = () => {
   Modal.open({
     title: '查看代码',
-    content: () => <gi-code-view type="vue" codeJson={Pane2Code}></gi-code-view>,
+    content: () => <gi-code-view type="vue" codeJson={Pane2Json}></gi-code-view>,
     fullscreen: true
   })
 }
