@@ -61,7 +61,7 @@ const options: Options = reactive({
   btns: { hide: true }
 })
 
-const columns: Columns<typeof form> = reactive([
+const columns = computed<Columns<typeof form>>(() => [
   {
     type: 'group-title',
     label: '基本信息',
@@ -91,16 +91,10 @@ const columns: Columns<typeof form> = reactive([
     props: {
       maxLength: 11
     },
-    rules: computed(() => {
-      // 如果有name的时候，手机号必填（动态rules示例）
-      if (form.name) {
-        return [
-          { required: true, message: '请输入手机号' },
-          { match: Regexp.Phone, message: '手机号格式不正确' }
-        ]
-      }
-      return []
-    })
+    rules: [
+      { required: !!form.name, message: '请输入手机号' }, // 如果有name的时候，手机号必填（动态rules示例）
+      { match: Regexp.Phone, message: '手机号格式不正确' }
+    ]
   },
   {
     type: 'select',
