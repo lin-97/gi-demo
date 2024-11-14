@@ -113,6 +113,14 @@ const storeSetup = () => {
     reset()
   }
 
+  // 重载当前页面缓存
+  const reloadCurrentCache = async (medium: () => void) => {
+    const route = router.currentRoute.value
+    deleteCacheItem(route.name as RouteRecordName)
+    await medium()
+    addCacheItem(route)
+  }
+
   return {
     tabList,
     cacheList,
@@ -127,7 +135,8 @@ const storeSetup = () => {
     closeRight,
     closeAll,
     reset,
-    init
+    init,
+    reloadCurrentCache
   }
 }
 
