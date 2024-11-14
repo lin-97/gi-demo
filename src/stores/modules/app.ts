@@ -1,6 +1,7 @@
 import { defineStore } from 'pinia'
 import { computed, nextTick, reactive, toRefs } from 'vue'
 import { generate, getRgbStr } from '@arco-design/color'
+import { useTabsStore } from './tabs'
 import defaultSettings from '@/config/setting.json'
 
 const storeSetup = () => {
@@ -57,11 +58,15 @@ const storeSetup = () => {
 
   // 页面重新加载
   const reloadFlag = ref(true)
-  const reloadPage = () => {
+  const reload = async () => {
     reloadFlag.value = false
-    nextTick(() => {
-      reloadFlag.value = true
-    })
+    await nextTick
+    reloadFlag.value = true
+  }
+
+  const reloadPage = () => {
+    const tabsStore = useTabsStore()
+    tabsStore.reloadCurrentCache(reload)
   }
 
   return {
