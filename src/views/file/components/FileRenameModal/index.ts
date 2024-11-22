@@ -3,7 +3,8 @@ import { Message, Modal } from '@arco-design/web-vue'
 import ModalContent from './ModalContent.vue'
 import type { FileItem } from '@/apis/file'
 
-export function openFileRenameModal(fileItem: FileItem) {
+/** 文件重命名-弹窗 */
+export function openFileRenameModal(fileItem: FileItem, callback?: () => void) {
   const ModalContentRef = ref<InstanceType<typeof ModalContent>>()
 
   return Modal.open({
@@ -23,6 +24,8 @@ export function openFileRenameModal(fileItem: FileItem) {
       if (valid) return false
       await new Promise((resolve) => setTimeout(() => resolve(true), 300))
       Message.success('重命名成功')
+      // 文件重命名成功-回调函数
+      callback && callback()
       return true
     }
   })
