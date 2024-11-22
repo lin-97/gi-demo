@@ -4,7 +4,7 @@ export default `
     <template #extra>
       <a-button type="primary" status="warning" @click="onViewCode">
         <template #icon><icon-code /></template>
-        <span>查看JSON配置</span>
+        <span>查看代码</span>
       </a-button>
     </template>
 
@@ -36,7 +36,7 @@ import { cityOptions, deptData } from './data'
 import Card4Json from './code/card4-json'
 import * as Regexp from '@/utils/regexp'
 import { type Columns, GiForm, type Options, useGiForm } from '@/components/GiForm'
-import { useForm } from '@/hooks'
+import { useResetReactive } from '@/hooks'
 import GiCodeView from '@/components/GiCodeView/index.vue'
 
 const { width } = useWindowSize()
@@ -153,7 +153,7 @@ const initColumns: Columns = [
 
 const { columns, resetColumns, setPropsValue } = useGiForm(initColumns)
 
-const { form, resetForm } = useForm({
+const [form, resetForm] = useResetReactive({
   name: '',
   remark: '这是备注这是备注',
   status: 1

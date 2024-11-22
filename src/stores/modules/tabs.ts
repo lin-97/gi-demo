@@ -113,6 +113,18 @@ const storeSetup = () => {
     reset()
   }
 
+  // Tabs页签右侧刷新按钮-页面重新加载
+  const reloadFlag = ref(true)
+  const reloadPage = () => {
+    const route = router.currentRoute.value
+    deleteCacheItem(route.name as string) // 修复点击刷新图标，无法重新触发生命周期钩子函数问题
+    reloadFlag.value = false
+    nextTick(() => {
+      reloadFlag.value = true
+      addCacheItem(route)
+    })
+  }
+
   return {
     tabList,
     cacheList,
@@ -127,7 +139,9 @@ const storeSetup = () => {
     closeRight,
     closeAll,
     reset,
-    init
+    init,
+    reloadFlag,
+    reloadPage
   }
 }
 

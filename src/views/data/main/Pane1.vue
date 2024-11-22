@@ -132,7 +132,7 @@ const onEdit = () => {
 }
 
 const onDetail = (item: PersonItem) => {
-  router.push({ path: '/data/detail', query: { id: item.id } })
+  router.push({ name: 'DataDetailId', params: { id: item.id } })
 }
 
 // 删除

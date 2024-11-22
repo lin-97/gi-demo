@@ -55,15 +55,6 @@ const storeSetup = () => {
     settingConfig.menuCollapse = collapsed
   }
 
-  // 页面重新加载
-  const reloadFlag = ref(true)
-  const reloadPage = () => {
-    reloadFlag.value = false
-    nextTick(() => {
-      reloadFlag.value = true
-    })
-  }
-
   return {
     ...toRefs(settingConfig),
     transitionName,
@@ -71,9 +62,7 @@ const storeSetup = () => {
     toggleTheme,
     setThemeColor,
     initTheme,
-    setMenuCollapse,
-    reloadFlag,
-    reloadPage
+    setMenuCollapse
   }
 }
 

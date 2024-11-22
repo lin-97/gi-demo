@@ -3,15 +3,16 @@
 </template>
 
 <script lang="ts" setup>
-import { useAppStore } from '@/stores'
+import { useTabsStore } from '@/stores'
 
-const appStore = useAppStore()
+const tabsStore = useTabsStore()
 const loading = ref(false)
+
 // 重载页面
 const reload = () => {
   if (loading.value) return
   loading.value = true
-  appStore.reloadPage()
+  tabsStore.reloadPage()
   setTimeout(() => {
     loading.value = false
   }, 600)
@@ -21,6 +22,7 @@ const reload = () => {
 <style lang="scss" scoped>
 .reload-icon {
   cursor: pointer;
+
   &--spin {
     animation-name: arco-loading-circle;
     animation-duration: 0.6s;

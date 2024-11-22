@@ -201,10 +201,14 @@ const handleRightMenuClick = (mode: string, fileInfo: FileItem) => {
     })
   }
   if (mode === 'rename') {
-    openFileRenameModal(fileInfo)
+    openFileRenameModal(fileInfo, () => {
+      // 文件重命名成功回调处理
+    })
   }
   if (mode === 'move') {
-    openFileMoveModal(fileInfo)
+    openFileMoveModal(fileInfo, () => {
+      // 文件移动成功回调处理
+    })
   }
   if (mode === 'detail') {
     router.push({ path: '/file/detail' })
