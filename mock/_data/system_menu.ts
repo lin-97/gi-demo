@@ -88,7 +88,7 @@ const data: MockSystemMenuItem[] = [
       {
         id: '0202',
         parentId: '02',
-        path: '/data/detail',
+        path: '/data/detail/:id',
         component: 'data/detail/index',
         redirect: '',
         type: 2,
