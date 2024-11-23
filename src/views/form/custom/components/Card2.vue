@@ -30,7 +30,7 @@
   </a-card>
 </template>
 
-<script setup lang="ts">
+<script setup lang="tsx">
 import { Drawer, Message } from '@arco-design/web-vue'
 import { useWindowSize } from '@vueuse/core'
 import { cityOptions, deptData } from './data'
@@ -92,7 +92,11 @@ const columns = computed<Columns<typeof form>>(() => [
           { match: Regexp.OnlyCh, message: '仅支持中文姓名' }
         ]
       })()
-    ]
+    ],
+    slots: {
+      prepend: () => <icon-face-smile-fill />,
+      append: () => h('span', { style: { color: 'red', fontSize: '12px' } }, '中文')
+    }
   },
   {
     type: 'input',
@@ -104,7 +108,10 @@ const columns = computed<Columns<typeof form>>(() => [
     rules: [
       { required: !!form.name, message: '请输入手机号' }, // 如果有name的时候，手机号必填（动态rules示例）
       { match: Regexp.Phone, message: '手机号格式不正确' }
-    ]
+    ],
+    slots: {
+      prepend: '+86'
+    }
   },
   {
     type: 'select',
@@ -142,7 +149,14 @@ const columns = computed<Columns<typeof form>>(() => [
   },
   {
     type: 'radio-group',
-    label: '状态',
+    label: () => (
+      <div>
+        <span>状态</span>
+        <a-tooltip content="这里使用了tsx自定义渲染">
+          <icon-info-circle-fill style={{ color: '#52B852' }} />
+        </a-tooltip>
+      </div>
+    ),
     field: 'status',
     options: status_options.value // 这里使用了字典
   },
@@ -155,7 +169,10 @@ const columns = computed<Columns<typeof form>>(() => [
   {
     type: 'rate',
     label: '评分',
-    field: 'mark'
+    field: 'mark',
+    formItemSlots: {
+      extra: () => <a-tag>这里使用了tsx自定义渲染</a-tag>
+    }
   },
   {
     type: 'switch',

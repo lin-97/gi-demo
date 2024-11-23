@@ -1,4 +1,5 @@
 import type * as A from '@arco-design/web-vue'
+import type { VNode } from 'vue'
 
 export type FormType =
   | 'input'
@@ -67,7 +68,7 @@ export type ColumnsItemOptionsOrData =
 
 export interface ColumnsItem<F = any> {
   type?: FormType // 类型
-  label?: A.FormItemInstance['label'] // 标签
+  label?: A.FormItemInstance['label'] | (() => VNode) // 标签
   field: A.FormItemInstance['field'] // 字段(必须唯一)
   gridItemProps?: A.GridItemProps
   formItemProps?: Omit<A.FormItemInstance['$props'], 'label' | 'field'> // a-form-item的props
@@ -103,6 +104,8 @@ export interface ColumnsItem<F = any> {
   resultFormat?: ColumnsItemFormat // 结果集格式化
   init?: boolean // 初始化请求
   cascader?: string[] // 级联的field字段列表
+  slots?: Partial<Record<'prepend' | 'append' | 'suffix' | 'prefix', string | (() => VNode)>>
+  formItemSlots?: Partial<Record<'help' | 'extra', string | (() => VNode)>>
 }
 
 export interface Options {

@@ -6,15 +6,28 @@
           :span="item.span || item.gridItemProps?.span || options.gridItem?.span">
           <a-form-item v-bind="item.formItemProps" :label="item.label" :field="item.field" :rules="item.rules"
             :disabled="isDisabled(item.disabled)">
+            <template #label>
+              <template v-if="typeof item.label === 'string'">{{ item.label }}</template>
+              <component :is="item.label" v-else></component>
+            </template>
             <slot v-if="!['group-title'].includes(item.type || '')" :name="item.field"
               v-bind="{ disabled: isDisabled(item.disabled) }">
               <component :is="`a-${item.type}`" v-bind="getComponentBindProps(item)"
                 :model-value="modelValue[item.field as keyof typeof modelValue]"
-                @update:model-value="valueChange($event, item.field)"></component>
+                @update:model-value="valueChange($event, item.field)">
+                <template v-for="(slotValue, slotKey) in item?.slots" :key="slotKey" #[slotKey]>
+                  <template v-if="typeof slotValue === 'string'">{{ slotValue }}</template>
+                  <component :is="slotValue" v-else></component>
+                </template>
+              </component>
             </slot>
             <slot v-else name="group-title">
               <a-alert v-bind="item.props">{{ item.label }}</a-alert>
             </slot>
+            <template v-for="(slotValue, slotKey) in item?.formItemSlots" :key="slotKey" #[slotKey]>
+              <template v-if="typeof slotValue === 'string'">{{ slotValue }}</template>
+              <component :is="slotValue" v-else></component>
+            </template>
           </a-form-item>
         </a-grid-item>
       </template>
