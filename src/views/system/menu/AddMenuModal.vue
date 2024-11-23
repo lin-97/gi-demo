@@ -125,7 +125,7 @@ import { type SystemMenuItem, getSystemMenuDetail } from '@/apis/system'
 import { saveBaseApi } from '@/apis/base'
 import { isExternal } from '@/utils/validate'
 import { filterTree, transformPathToName } from '@/utils'
-import { useForm } from '@/hooks'
+import { useResetReactive } from '@/hooks'
 
 interface Props {
   menus: SystemMenuItem[]
@@ -160,7 +160,7 @@ const isEdit = computed(() => !!menuId.value)
 const title = computed(() => (isEdit.value ? '编辑菜单' : '新增菜单'))
 
 const isExternalUrl = ref(false)
-const { form, resetForm } = useForm<MenuForm>({
+const [form, resetForm] = useResetReactive<MenuForm>({
   type: 1, // 类型 1目录 2菜单 3按钮
   icon: '', // arco 图标名称
   svgIcon: '', // 自定义图标名称
@@ -178,6 +178,7 @@ const { form, resetForm } = useForm<MenuForm>({
   alwaysShow: false, // 总是显示
   permission: ''
 })
+
 const routeName = computed(() => transformPathToName(form.path))
 
 const rules: FormInstance['rules'] = {
@@ -224,8 +225,6 @@ const close = () => {
   resetForm()
 }
 
-defineExpose({ add, edit })
-
 const save = async () => {
   try {
     const valid = await formRef.value?.validate()
@@ -242,4 +241,6 @@ const save = async () => {
     return false
   }
 }
+
+defineExpose({ add, edit })
 </script>

@@ -1298,38 +1298,37 @@ const getTableData = async () => {
 
 在最新版的`useTable`中， `selectKeys`已经改为`selectedKeys`，同时加了其他新功能，具体查看源码
 
-#### useForm(hooks) 的使用
+#### useResetReactive(hooks) 的使用
 
 作用：有时候需要`重置表单数据`，这个`hooks`提供很大便捷性
 
-代码：`useForm.ts`
+代码：`useResetReactive.ts`
 
 ```js
 import { reactive } from 'vue'
 import { cloneDeep } from 'lodash-es'
 
-export default function <F extends object>(initValue: F) {
-  const getInitValue = () => cloneDeep(initValue)
+export function useResetReactive<T extends object>(value: T) {
+  const getInitValue = () => cloneDeep(value)
 
-  const form = reactive(getInitValue())
+  const state = reactive(getInitValue())
 
-  const resetForm = () => {
-    for (const key in form) {
-      delete form[key]
-    }
-    Object.assign(form, getInitValue())
+  const reset = () => {
+    Object.keys(state).forEach((key) => delete state[key])
+    Object.assign(state, getInitValue())
   }
 
-  return { form, resetForm }
+  return [state, reset] as const
 }
+
 ```
 
 **使用**
 
 ```js
-import { useForm } from '@/hooks'
+import { useResetReactive } from '@/hooks'
 
-const { form, resetForm } = useForm({
+const [form, resetForm] = useResetReactive({
   id: '',
   name: '',
   phone: '',

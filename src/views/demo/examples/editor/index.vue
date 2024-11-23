@@ -1,8 +1,8 @@
 <template>
   <div class="editor">
-    <Toolbar style="border-bottom: 1px solid #ccc" :editor="editorRef" :default-config="toolbarConfig" />
-    <Editor v-model="valueHtml" style="height: 500px; overflow-y: hidden" :default-config="editorConfig"
-      @on-created="handleCreated" />
+    <Toolbar class="editor-toolbar" :editor="editorRef" :default-config="toolbarConfig" />
+    <Editor v-model="valueHtml" class="editor-content" style="height: 500px; overflow-y: hidden"
+      :default-config="editorConfig" @on-created="handleCreated" />
   </div>
 </template>
 
@@ -10,7 +10,7 @@
 import { Editor, Toolbar } from '@wangeditor/editor-for-vue'
 import '@wangeditor/editor/dist/css/style.css' // 引入 css
 
-// 编辑器实例，必须用 shallowRef
+// 编辑器实例，必须用shallowRef
 const editorRef = shallowRef()
 
 // 内容 HTML
@@ -44,6 +44,10 @@ const handleCreated = (editor: any) => {
 
   &.w-e-full-screen-container {
     z-index: 9999;
+  }
+
+  &-toolbar {
+    border-bottom: 1px solid var(--color-border-3);
   }
 }
 </style>

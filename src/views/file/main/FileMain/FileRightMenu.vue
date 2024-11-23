@@ -1,11 +1,27 @@
 <template>
   <GiOption :class="{ shadow: props.shadow }">
-    <GiOptionItem label="重命名" icon="menu-edit" @click="onClickItem('rename')"> </GiOptionItem>
-    <GiOptionItem label="移动到" icon="menu-move" @click="onClickItem('move')"></GiOptionItem>
-    <GiOptionItem label="下载" icon="menu-download" @click="onClickItem('download')"></GiOptionItem>
+    <GiOptionItem label="重命名" @click="onClickItem('rename')">
+      <template #icon>
+        <GiIconBox color="#4F6BF6"><icon-edit /></GiIconBox>
+      </template>
+    </GiOptionItem>
+    <GiOptionItem label="移动到" @click="onClickItem('move')">
+      <template #icon>
+        <GiIconBox color="#62C558"><icon-export /></GiIconBox>
+      </template>
+    </GiOptionItem>
+    <GiOptionItem label="下载" @click="onClickItem('download')">
+      <template #icon>
+        <GiIconBox color="#1677FF"><icon-download /></GiIconBox>
+      </template>
+    </GiOptionItem>
     <a-popover v-if="props.data?.extendName === 'zip'" position="right"
       :content-style="{ padding: 0, overflow: 'hidden', width: '150px' }" :arrow-style="{ display: 'none' }">
-      <GiOptionItem label="解压" icon="menu-zip" more></GiOptionItem>
+      <GiOptionItem label="解压" more>
+        <template #icon>
+          <GiIconBox color="#62C558"><icon-attachment /></GiIconBox>
+        </template>
+      </GiOptionItem>
       <template #content>
         <GiOption>
           <GiOptionItem label="解压到当前目录" icon="file-rar" @click="onClickItem('zip1')"> </GiOptionItem>
@@ -13,8 +29,16 @@
         </GiOption>
       </template>
     </a-popover>
-    <GiOptionItem label="详情" icon="menu-detail" @click="onClickItem('detail')"> </GiOptionItem>
-    <GiOptionItem label="删除" icon="menu-delete" @click="onClickItem('delete')"> </GiOptionItem>
+    <GiOptionItem label="详情" @click="onClickItem('detail')">
+      <template #icon>
+        <GiIconBox color="#A15FDE"><icon-drive-file /></GiIconBox>
+      </template>
+    </GiOptionItem>
+    <GiOptionItem label="删除" @click="onClickItem('delete')">
+      <template #icon>
+        <GiIconBox color="danger"><icon-delete /></GiIconBox>
+      </template>
+    </GiOptionItem>
   </GiOption>
 </template>
 

@@ -30,7 +30,7 @@
 
 <script setup lang="tsx">
 import { Message, Modal } from '@arco-design/web-vue'
-import type { InputInstance, TreeInstance, TreeNodeData } from '@arco-design/web-vue'
+import type { TreeNodeData } from '@arco-design/web-vue'
 import { mapTree } from 'xe-utils'
 import RightMenu from './RightMenu.vue'
 import { type CateTreeItem, getCateTreeData } from '@/apis/cate'

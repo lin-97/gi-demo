@@ -64,7 +64,7 @@ import * as Regexp from '@/utils/regexp'
 import { getSystemUserDetail } from '@/apis/system'
 import { saveBaseApi } from '@/apis/base'
 import { useDept, useRole } from '@/hooks/app'
-import { useForm } from '@/hooks'
+import { useResetReactive } from '@/hooks'
 
 const emit = defineEmits<{
   (e: 'save-success'): void
@@ -84,7 +84,7 @@ const isEdit = computed(() => !!userId.value)
 const title = computed(() => (isEdit.value ? '编辑用户' : '新增用户'))
 const visible = ref(false)
 
-const { form, resetForm } = useForm({
+const [form, resetForm] = useResetReactive({
   id: '',
   username: '', // 用户名
   nickname: '', // 昵称
@@ -132,8 +132,6 @@ const close = () => {
   resetForm()
 }
 
-defineExpose({ add, edit })
-
 const save = async () => {
   try {
     const valid = await formRef.value?.validate()
@@ -150,4 +148,6 @@ const save = async () => {
     return false
   }
 }
+
+defineExpose({ add, edit })
 </script>

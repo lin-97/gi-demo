@@ -54,7 +54,6 @@
 <script setup lang="ts">
 import type { PopconfirmInstance } from '@arco-design/web-vue'
 import { useTable } from '@/hooks'
-import { useDict } from '@/hooks/app'
 import { getPersonList } from '@/apis/person'
 import type { Columns, Options } from '@/components/GiForm'
 

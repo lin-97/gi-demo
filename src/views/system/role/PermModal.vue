@@ -7,7 +7,6 @@
 
 <script lang="ts" setup>
 import { Message } from '@arco-design/web-vue'
-import type { TreeInstance } from '@arco-design/web-vue'
 import { type SystemMenuOptionsItem, getSystemMenuOptions, getSystemRoleMenuIds } from '@/apis/system'
 import { isMobile } from '@/utils'
 
@@ -32,11 +31,12 @@ const open = (data: { code: string, title: string }) => {
     menuIds.value = res.data
   })
 }
-defineExpose({ open })
 
 const save = () => {
   Message.success('模拟保存成功')
 }
+
+defineExpose({ open })
 </script>
 
 <style lang="scss" scoped></style>

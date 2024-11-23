@@ -44,7 +44,7 @@
               <GiCellStatus :status="record.status"></GiCellStatus>
             </template>
           </a-table-column>
-          <a-table-column title="描述" data-index="description"></a-table-column>
+          <a-table-column title="描述" data-index="description" :ellipsis="true" :tooltip="true"></a-table-column>
           <a-table-column title="创建时间" data-index="createTime" :width="180"></a-table-column>
           <a-table-column title="操作" :width="280" align="center" :fixed="!isMobile() ? 'right' : undefined">
             <template #cell="{ record }">

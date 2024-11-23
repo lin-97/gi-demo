@@ -999,7 +999,7 @@ const data: MockSystemMenuItem[] = [
     redirect: '/multi/menu1/menu1-1/menu1-1-1',
     type: 1,
     title: '多级缓存',
-    svgIcon: 'menu-user',
+    svgIcon: 'menu-multi',
     icon: 'icon-list',
     keepAlive: true,
     hidden: false,
