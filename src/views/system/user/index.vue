@@ -82,7 +82,8 @@
                   <a-tag v-if="record.type === 2" color="orange" size="small">自定义</a-tag>
                 </template>
               </a-table-column>
-              <a-table-column title="描述" :width="200" data-index="description"></a-table-column>
+              <a-table-column title="描述" :width="200" data-index="description" :ellipsis="true"
+                :tooltip="true"></a-table-column>
               <a-table-column title="创建时间" data-index="createTime" :width="200"></a-table-column>
               <a-table-column title="操作" :width="180" align="center" :fixed="!isMobile() ? 'right' : undefined">
                 <template #cell="{ record }">

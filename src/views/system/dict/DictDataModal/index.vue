@@ -75,7 +75,6 @@ const open = (data: { code: string }) => {
   visible.value = true
   search()
 }
-defineExpose({ open })
 
 // 删除
 const onDelete = (item: SystemDictDataItem) => {
@@ -97,6 +96,8 @@ const onAdd = () => {
 const onEdit = (item: SystemDictDataItem) => {
   AddDictDataModalRef.value?.edit({ id: item.id, code: dictCode.value })
 }
+
+defineExpose({ open })
 </script>
 
 <style lang="scss" scoped></style>

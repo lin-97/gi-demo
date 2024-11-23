@@ -29,7 +29,7 @@ export default antfu(
       'vue/first-attribute-linebreak': 0, // 强制第一个属性的位置
       'vue/define-macros-order': [2, {
         order: ['defineOptions', 'defineModel', 'defineProps', 'defineEmits', 'defineSlots'],
-        defineExposeLast: false
+        defineExposeLast: true
       }], // 强制执行定义限制和定义弹出编译器宏的顺序
       'vue/html-indent': 0, // 在《模板》中强制一致的缩进
       'vue/html-closing-bracket-newline': 0 // 要求或不允许在标记的右括号前换行

@@ -139,8 +139,6 @@ const isDisabled = (disabled?: ColumnsItemDisabled<boolean | object>) => {
   }
 }
 
-defineExpose({ formRef })
-
 props.columns.forEach((item) => {
   if (item.request && typeof item.request === 'function' && item?.init) {
     item.request(props.modelValue).then((res) => {
@@ -185,6 +183,8 @@ watch(cloneForm as any, (newVal, oldVal) => {
     }
   })
 })
+
+defineExpose({ formRef })
 </script>
 
 <style lang="scss" scoped>

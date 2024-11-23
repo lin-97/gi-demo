@@ -25,7 +25,7 @@
 import { type FormInstance, Message } from '@arco-design/web-vue'
 import { getSystemRoleDetail } from '@/apis/system'
 import { saveBaseApi } from '@/apis/base'
-import { useForm } from '@/hooks'
+import { useResetReactive } from '@/hooks'
 
 const emit = defineEmits<{
   (e: 'save-success'): void
@@ -37,7 +37,7 @@ const isEdit = computed(() => !!roleId.value)
 const title = computed(() => (isEdit.value ? '编辑角色' : '新增角色'))
 const visible = ref(false)
 
-const { form, resetForm } = useForm({
+const [form, resetForm] = useResetReactive({
   name: '',
   code: '',
   status: 1,
@@ -73,8 +73,6 @@ const close = () => {
   resetForm()
 }
 
-defineExpose({ add, edit })
-
 const save = async () => {
   try {
     const valid = await formRef.value?.validate()
@@ -91,4 +89,6 @@ const save = async () => {
     return false
   }
 }
+
+defineExpose({ add, edit })
 </script>

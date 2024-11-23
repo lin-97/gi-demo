@@ -1,5 +1,4 @@
 import type * as A from '@arco-design/web-vue'
-import type { ComputedRef } from 'vue'
 
 export type FormType =
   | 'input'

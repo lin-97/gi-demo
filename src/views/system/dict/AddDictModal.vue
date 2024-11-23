@@ -23,7 +23,7 @@
 <script setup lang="ts">
 import { type FormInstance, Message } from '@arco-design/web-vue'
 import * as Regexp from '@/utils/regexp'
-import { useForm } from '@/hooks'
+import { useResetReactive } from '@/hooks'
 import { getSystemDictDetail } from '@/apis/system'
 import { saveBaseApi } from '@/apis/base'
 
@@ -37,7 +37,7 @@ const isEdit = computed(() => !!roleId.value)
 const title = computed(() => (isEdit.value ? '编辑字典' : '新增字典'))
 const visible = ref(false)
 
-const { form, resetForm } = useForm({
+const [form, resetForm] = useResetReactive({
   name: '',
   code: '',
   status: 1,
@@ -70,8 +70,6 @@ const close = () => {
   resetForm()
 }
 
-defineExpose({ add, edit })
-
 const save = async () => {
   try {
     const valid = await formRef.value?.validate()
@@ -88,4 +86,6 @@ const save = async () => {
     return false
   }
 }
+
+defineExpose({ add, edit })
 </script>

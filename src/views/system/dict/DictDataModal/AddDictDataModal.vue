@@ -22,7 +22,7 @@
 import { type FormInstance, Message } from '@arco-design/web-vue'
 import { getSystemDictDataDetail } from '@/apis/system'
 import { saveBaseApi } from '@/apis/base'
-import { useForm } from '@/hooks'
+import { useResetReactive } from '@/hooks'
 
 const emit = defineEmits<{
   (e: 'save-success'): void
@@ -35,7 +35,7 @@ const title = computed(() => (isEdit.value ? '编辑字典数据' : '新增字�
 const visible = ref(false)
 const loading = ref(false)
 
-const { form, resetForm } = useForm({
+const [form, resetForm] = useResetReactive({
   name: '',
   value: '',
   status: 1
@@ -69,8 +69,6 @@ const close = () => {
   resetForm()
 }
 
-defineExpose({ add, edit })
-
 const save = async () => {
   try {
     const valid = await formRef.value?.validate()
@@ -87,4 +85,6 @@ const save = async () => {
     return false
   }
 }
+
+defineExpose({ add, edit })
 </script>

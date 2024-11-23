@@ -52,26 +52,26 @@
         <template #content>
           <a-doption @click="toUser">
             <template #icon>
-              <span class="doption-icon primary"><icon-user /></span>
+              <GiIconBox color="primary"><icon-user /></GiIconBox>
             </template>
             <span>个人中心</span>
           </a-doption>
           <a-doption @click="toGitPath">
             <template #icon>
-              <span class="doption-icon success"><icon-github /></span>
+              <GiIconBox color="success"><icon-github /></GiIconBox>
             </template>
             <span>项目地址</span>
           </a-doption>
           <a-doption>
             <template #icon>
-              <span class="doption-icon primary"><icon-unlock /></span>
+              <GiIconBox color="primary"><icon-unlock /></GiIconBox>
             </template>
             <span>修改密码</span>
           </a-doption>
           <a-divider :margin="0" />
           <a-doption @click="logout">
             <template #icon>
-              <span class="doption-icon warning"><icon-export /></span>
+              <GiIconBox color="warning"><icon-export /></GiIconBox>
             </template>
             <span>退出登录</span>
           </a-doption>

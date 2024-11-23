@@ -29,7 +29,7 @@
 
 <script setup lang="ts">
 import { type FormInstance, Message } from '@arco-design/web-vue'
-import { useForm } from '@/hooks'
+import { useResetReactive } from '@/hooks'
 import { useDept } from '@/hooks/app'
 import { getSystemDeptDetail } from '@/apis/system'
 import { saveBaseApi } from '@/apis/base'
@@ -43,10 +43,11 @@ const deptId = ref('')
 const visible = ref(false)
 const isEdit = computed(() => !!deptId.value)
 const title = computed(() => (isEdit.value ? '编辑部门' : '新增部门'))
+
 const { deptList, getDeptList } = useDept()
 getDeptList()
 
-const { form, resetForm } = useForm({
+const [form, resetForm] = useResetReactive({
   id: '',
   parentId: '',
   name: '',
@@ -82,8 +83,6 @@ const close = () => {
   resetForm()
 }
 
-defineExpose({ add, edit })
-
 const save = async () => {
   try {
     const valid = await formRef.value?.validate()
@@ -100,4 +99,6 @@ const save = async () => {
     return false
   }
 }
+
+defineExpose({ add, edit })
 </script>
