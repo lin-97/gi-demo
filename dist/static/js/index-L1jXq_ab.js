@@ -1,1 +1,0 @@
-import{d as a,f as e,l as s,n as r,o as t}from"./index-DLVnymOZ.js";const n=a({__name:"index",setup(a){const n=s(),p=r(),{params:o,query:d}=n,{path:u}=o;return p.replace({path:`/${u}`,query:d}),(a,s)=>(t(),e("div"))}});export{n as default};
