@@ -137,7 +137,15 @@ const columns = computed<Columns<typeof form>>(() => [
       { label: '音乐', value: '02' },
       { label: '旅行', value: '03' },
       { label: '游戏', value: '04' }
-    ]
+    ],
+    slots: {
+      label: ({ data }) => (
+        <span style={{ color: 'red' }}>
+          <span>{data.label}</span>
+          <icon-face-smile-fill />
+        </span>
+      )
+    }
   },
   {
     type: 'input-number',

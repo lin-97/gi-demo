@@ -35,7 +35,7 @@ import { useWindowSize } from '@vueuse/core'
 import { cityOptions, deptData } from './data'
 import Card4Json from './code/card4-json'
 import * as Regexp from '@/utils/regexp'
-import { type Columns, GiForm, type Options, useGiForm } from '@/components/GiForm'
+import { type Columns, GiForm, type Options } from '@/components/GiForm'
 import { useResetReactive } from '@/hooks'
 import GiCodeView from '@/components/GiCodeView/index.vue'
 
@@ -45,7 +45,14 @@ const options: Options = {
   btns: { hide: true }
 }
 
-const initColumns: Columns = [
+const isEdit = ref(false)
+const [form, resetForm] = useResetReactive({
+  name: '',
+  remark: '这是备注这是备注',
+  status: 1
+})
+
+const columns = computed<Columns<typeof form>>(() => [
   {
     type: 'input',
     label: '姓名',
@@ -112,7 +119,10 @@ const initColumns: Columns = [
     options: [
       { label: '启用', value: 1 },
       { label: '禁用', value: 0 }
-    ]
+    ],
+    props: {
+      disabled: isEdit.value
+    }
   },
   {
     type: 'rate',
@@ -123,7 +133,10 @@ const initColumns: Columns = [
     type: 'switch',
     label: '是否隐藏',
     field: 'hide',
-    formItemProps: { extra: '隐藏成绩项' }
+    formItemProps: { extra: '隐藏成绩项' },
+    props: {
+      disabled: isEdit.value
+    }
   },
   {
     type: 'slider',
@@ -149,19 +162,10 @@ const initColumns: Columns = [
     span: 2,
     formItemProps: { extra: '这里是额外信息' }
   }
-]
-
-const { columns, resetColumns, setPropsValue } = useGiForm(initColumns)
-
-const [form, resetForm] = useResetReactive({
-  name: '',
-  remark: '这是备注这是备注',
-  status: 1
-})
+])
 
 const GiFormRef = ref<InstanceType<typeof GiForm>>()
 const onAdd = () => {
-  resetColumns()
   resetForm()
   Modal.open({
     title: '新增',
@@ -172,7 +176,7 @@ const onAdd = () => {
       h(GiForm, {
         'ref': (e) => GiFormRef.value = e as InstanceType<typeof GiForm>,
         'options': options,
-        'columns': columns,
+        'columns': columns.value,
         'modelValue': form,
         'onUpdate:modelValue': (e) => Object.assign(form, e)
       }),
@@ -191,8 +195,6 @@ const onAdd = () => {
 }
 
 const onEdit = () => {
-  setPropsValue('status', 'disabled', true) // 禁用 状态
-  setPropsValue('hide', 'disabled', true) // 禁用 是否隐藏
   const option = {
     title: '编辑',
     width: '90%',
@@ -202,7 +204,7 @@ const onEdit = () => {
       h(GiForm, {
         'ref': (e) => GiFormRef.value = e as InstanceType<typeof GiForm>,
         'options': options,
-        'columns': columns,
+        'columns': columns.value,
         'modelValue': form,
         'onUpdate:modelValue': (e) => Object.assign(form, e)
       }),
@@ -227,16 +229,13 @@ const onEdit = () => {
 }
 
 const visible = ref(false)
-const isEdit = ref(false)
+
 const onAddDrawer = () => {
-  resetColumns()
   isEdit.value = false
   visible.value = true
 }
 
 const onEditDrawer = () => {
-  setPropsValue('status', 'disabled', true) // 禁用 状态
-  setPropsValue('hide', 'disabled', true) // 禁用 是否隐藏
   isEdit.value = true
   visible.value = true
 }

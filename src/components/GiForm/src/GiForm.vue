@@ -15,9 +15,11 @@
               <component :is="`a-${item.type}`" v-bind="getComponentBindProps(item)"
                 :model-value="modelValue[item.field as keyof typeof modelValue]"
                 @update:model-value="valueChange($event, item.field)">
-                <template v-for="(slotValue, slotKey) in item?.slots" :key="slotKey" #[slotKey]>
+                <template v-for="(slotValue, slotKey) in item?.slots" :key="slotKey" #[slotKey]="scope">
                   <template v-if="typeof slotValue === 'string'">{{ slotValue }}</template>
-                  <component :is="slotValue" v-else></component>
+                  <template v-else-if="slotValue">
+                    <component :is="slotValue(scope)"></component>
+                  </template>
                 </template>
               </component>
             </slot>
@@ -88,32 +90,33 @@ const dicData: Record<string, any> = reactive({})
 // 组件的默认props配置
 const getComponentBindProps = (item: ColumnsItem) => {
   const obj: Partial<ColumnsItem['props'] & { placeholder: string }> = {}
+  if (item.type && ['input', 'input-number', 'input-tag', 'mention'].includes(item.type)) {
+    obj.placeholder = `请输入${item.label}`
+  }
+  if (item.type && ['textarea'].includes(item.type)) {
+    obj.placeholder = `请填写${item.label}`
+  }
+  if (item.type && ['select', 'tree-select', 'cascader'].includes(item.type)) {
+    obj.placeholder = `请选择${item.label}`
+  }
   if (item.type === 'input') {
     obj.allowClear = true
-    obj.placeholder = `请输入${item.label}`
     obj.maxLength = 20
-  }
-  if (item.type === 'input-number') {
-    obj.placeholder = `请输入${item.label}`
   }
   if (item.type === 'textarea') {
     obj.allowClear = true
-    obj.placeholder = `请填写${item.label}`
     obj.maxLength = 200
   }
   if (item.type === 'select') {
     obj.allowClear = true
-    obj.placeholder = `请选择${item.label}`
     obj.options = dicData[item.field] || item.options
   }
   if (item.type === 'cascader') {
     obj.allowClear = true
-    obj.placeholder = `请选择${item.label}`
     obj.options = dicData[item.field] || item.options
   }
   if (item.type === 'tree-select') {
     obj.allowClear = true
-    obj.placeholder = `请选择${item.label}`
     obj.data = dicData[item.field] || item.data
   }
   if (item.type === 'radio-group') {
