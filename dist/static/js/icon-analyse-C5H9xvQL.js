@@ -1,1 +1,0 @@
-const e="data:image/svg+xml,%3csvg%20width='24'%20height='24'%20viewBox='0%200%2036%2036'%20fill='none'%3e%3crect%20width='36'%20height='36'%20rx='9'%20fill='%23E8F4FF'/%3e%3cpath%20fill='%23FBB02E'%20d='M9%2015h5v11H9z'/%3e%3cpath%20fill='%234086FF'%20d='M16%209h5v17h-5z'/%3e%3cpath%20fill='%2379DD88'%20d='M23%2019h5v7h-5z'/%3e%3c/svg%3e";export{e as default};
