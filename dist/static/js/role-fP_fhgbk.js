@@ -1,0 +1,1 @@
+import{ah as e}from"./index-B_H-0aOB.js";function t(t){return e.get("/system/role",t)}function r(t){return e.get("/system/role/detail",t)}function s(t){return e.get("/system/role/menuIds",t)}export{s as a,t as b,r as g};
