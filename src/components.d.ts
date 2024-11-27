@@ -22,6 +22,7 @@ declare module 'vue' {
     GiIframe: typeof import('./components/GiIframe/index.vue')['default']
     GiOption: typeof import('./components/GiOption/index.vue')['default']
     GiOptionItem: typeof import('./components/GiOptionItem/index.vue')['default']
+    GiSpace: typeof import('./components/GiSpace/index.vue')['default']
     GiSvgIcon: typeof import('./components/GiSvgIcon/index.vue')['default']
     GiTable: typeof import('./components/GiTable/index.vue')['default']
     GiTag: typeof import('./components/GiTag/index.tsx')['default']
