@@ -65,8 +65,7 @@ const form = reactive({})
 const options: Options = reactive({
   form: { layout: 'inline' },
   grid: { cols: { xs: 1, sm: 2, md: 3, lg: 4, xl: 4, xxl: 4 } },
-  btns: {},
-  fold: { enable: true, index: 2, defaultCollapsed: true }
+  fold: { enable: true, defaultCollapsed: true }
 })
 
 const QueryFormColumns = computed<Columns>(() => [
