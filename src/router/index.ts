@@ -1,5 +1,6 @@
 import { type RouteRecordRaw, createRouter, createWebHashHistory } from 'vue-router'
 import { useRouteStore } from '@/stores'
+import { setupRouterGuard } from '@/router/permission'
 
 /** 默认布局 */
 const Layout = () => import('@/layout/index.vue')
@@ -61,6 +62,8 @@ const router = createRouter({
   routes: constantRoutes,
   scrollBehavior: () => ({ left: 0, top: 0 })
 })
+
+setupRouterGuard(router)
 
 /**
  * @description 重置路由

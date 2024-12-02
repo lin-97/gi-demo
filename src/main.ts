@@ -9,8 +9,6 @@ import ArcoVueIcon from '@arco-design/web-vue/es/icon'
 import App from './App.vue'
 import router from './router'
 
-import '@/router/permission'
-
 // 使用动画库
 import 'animate.css/animate.min.css'
 
@@ -25,6 +23,8 @@ import 'virtual:svg-icons-register'
 
 // 自定义指令
 import directives from './directives'
+
+// 状态管理
 import pinia from '@/stores'
 
 // 对特定组件进行默认配置
