@@ -1,0 +1,1 @@
+import{d as a,ap as s,o,f as e,t,g as r,_ as i}from"./index-CpyorRoN.js";const n={class:"gi-footer"},d=i(a({name:"GiFooter",__name:"index",setup(a){const i=s(new Date).format("YYYY");return(a,s)=>(o(),e("div",n,"Copyright "+t(r(i))+" Gi Admin Pro",1))}}),[["__scopeId","data-v-4edc619a"]]);export{d as _};
