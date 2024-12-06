@@ -2,6 +2,9 @@ import { browse, mapTree } from 'xe-utils'
 import { camelCase, upperFirst } from 'lodash-es'
 import { isExternal } from '@/utils/validate'
 
+export * from './modules/getFieldToRangTimeForm'
+export * from './modules/getRangeTimeToFieldForm'
+
 /** 建议：这里我还是推荐优先使用 lodash-es、xe-utils、dayjs 里面的方法 */
 
 /** 获取对象属性值 */
