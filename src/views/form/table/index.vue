@@ -3,7 +3,7 @@
     <a-card title="编辑表格">
       <a-row justify="end">
         <a-space wrap>
-          <a-button type="primary" :status="isReadOnly ? 'success' : 'warning'" @click="isReadOnly = !isReadOnly">
+          <a-button type="primary" :status="isReadOnly ? 'success' : 'warning'" @click="toggleReadOnly">
             {{ isReadOnly ? '编辑' : '只读' }}
           </a-button>
           <a-button type="primary" @click="addTableRow">
@@ -126,6 +126,13 @@ const addTableRow = () => {
 
 const onDelete = (index: number) => {
   data.value.splice(index, 1)
+}
+
+const toggleReadOnly = () => {
+  isReadOnly.value = !isReadOnly.value
+  if (isReadOnly.value) {
+    GiEditTableRef.value?.formRef?.clearValidate()
+  }
 }
 
 const reset = () => {
