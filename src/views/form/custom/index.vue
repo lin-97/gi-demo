@@ -42,6 +42,10 @@ import Card4 from './components/Card4.vue'
       flex: 1;
       padding-top: 15px;
 
+      .arco-tabs-content-list {
+        height: 100%;
+      }
+
       .arco-tabs-pane {
         height: 100%;
         overflow-y: auto;
