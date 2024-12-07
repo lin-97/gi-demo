@@ -64,6 +64,7 @@ const form = reactive({
 const formRef = useTemplateRef('formRef')
 
 const options: Options = reactive({
+  form: { scrollToFirstError: true },
   btns: { hide: true }
 })
 
