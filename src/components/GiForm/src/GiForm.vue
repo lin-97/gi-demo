@@ -89,50 +89,25 @@ const dicData: Record<string, any> = reactive({})
 
 // 组件的默认props配置
 const getComponentBindProps = (item: ColumnsItem) => {
-  const obj: Partial<ColumnsItem['props'] & { placeholder: string }> = {}
-  if (item.type && ['input', 'input-number', 'input-tag', 'mention'].includes(item.type)) {
-    obj.placeholder = `请输入${item.label}`
-  }
-  if (item.type && ['textarea'].includes(item.type)) {
-    obj.placeholder = `请填写${item.label}`
-  }
-  if (item.type && ['select', 'tree-select', 'cascader'].includes(item.type)) {
-    obj.placeholder = `请选择${item.label}`
-  }
-  if (item.type === 'input') {
-    obj.allowClear = true
-    obj.maxLength = 20
-  }
-  if (item.type === 'textarea') {
-    obj.allowClear = true
-    obj.maxLength = 200
-  }
-  if (item.type === 'select') {
-    obj.allowClear = true
-    obj.options = dicData[item.field] || item.options
-  }
-  if (item.type === 'cascader') {
-    obj.allowClear = true
-    obj.options = dicData[item.field] || item.options
-  }
-  if (item.type === 'tree-select') {
-    obj.allowClear = true
-    obj.data = dicData[item.field] || item.data
-  }
-  if (item.type === 'radio-group') {
-    obj.options = dicData[item.field] || item.options
-  }
-  if (item.type === 'checkbox-group') {
-    obj.options = dicData[item.field] || item.options
-  }
-  if (item.type === 'date-picker') {
-    obj.placeholder = '请选择日期'
-  }
-  if (item.type === 'time-picker') {
-    obj.allowClear = true
-    obj.placeholder = `请选择时间`
-  }
-  return { ...obj, ...item.props }
+  // 组件默认配置映射表
+  const ConfigMap = new Map<ColumnsItem['type'], Partial<ColumnsItem['props'] & { placeholder: string }>>([
+    ['input', { allowClear: true, placeholder: `请输入${item.label}`, maxLength: 20 }],
+    ['input-number', { placeholder: `请输入${item.label}` }],
+    ['textarea', { allowClear: false, placeholder: `请填写${item.label}`, maxLength: 200 }],
+    ['input-tag', { allowClear: true, placeholder: `请输入${item.label}` }],
+    ['mention', { allowClear: true, placeholder: `请输入${item.label}` }],
+    ['select', { allowClear: true, placeholder: `请选择${item.label}`, options: dicData[item.field] || item.options }],
+    ['tree-select', { allowClear: true, placeholder: `请选择${item.label}` }],
+    ['cascader', { allowClear: true, placeholder: `请选择${item.label}`, options: dicData[item.field] || item.options }],
+    ['radio-group', { options: dicData[item.field] || item.options }],
+    ['checkbox-group', { options: dicData[item.field] || item.options }],
+    ['date-picker', { allowClear: true, placeholder: '请选择日期' }],
+    ['time-picker', { allowClear: true, placeholder: '请选择时间' }]
+  ])
+  // 获取默认配置
+  const defaultProps = ConfigMap.get(item.type) || {}
+  // 合并默认配置和自定义配置
+  return { ...defaultProps, ...item.props }
 }
 
 const valueChange = (value: any, field: string) => {

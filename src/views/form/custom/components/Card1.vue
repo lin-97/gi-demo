@@ -64,7 +64,7 @@ const columns: Columns = reactive([
       { label: '禁用', value: 0 }
     ],
     props: {
-      placeholder: '状态'
+      placeholder: '自定义placeholder'
     }
   }
 ])

@@ -118,6 +118,8 @@ defineSlots<{
   'expand-row': (props: { record: T }) => void
   'expand-icon': (props: { record: T, expanded?: boolean }) => void
   'columns': () => void
+  'custom-title': () => void
+  'custom-extra': () => void
   [propsName: string]: (props: { key: string, record: T, column: TableColumnData, rowIndex: number }) => void
 }>()
 
