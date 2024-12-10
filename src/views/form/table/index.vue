@@ -35,8 +35,9 @@
   </div>
 </template>
 
-<script lang='ts' setup>
+<script lang='tsx' setup>
 import { Message } from '@arco-design/web-vue'
+import FilterAddress from './components/FilterAddress.vue'
 import type { ColumnItem, Disabled } from '@/components/GiEditTable'
 import * as Regexp from '@/utils/regexp'
 import { useDict } from '@/hooks/app'
@@ -101,7 +102,17 @@ const columns = computed<ColumnItem[]>(() => [
       showWordLimit: true
     },
     columnProps: {
-      width: 250
+      width: 250,
+      title: () => (
+        <a-space>
+          <span>地址</span>
+          <FilterAddress onConfirm={(value: string) => {
+            Message.success(`点击了确认，查询值为: ${value || '空'}`)
+          }}
+          >
+          </FilterAddress>
+        </a-space>
+      )
     }
   },
   {

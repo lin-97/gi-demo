@@ -3,7 +3,7 @@
     <a-form ref="formRef" :model="form">
       <a-table :data="form.tableData" :bordered="{ cell: true }" :pagination="false" v-bind="attrs">
         <template #columns>
-          <a-table-column v-for="col in props.columns" :key="col.dataIndex" :title="col.title"
+          <a-table-column v-for="col in props.columns" :key="col.dataIndex" :title="(col.title as any)"
             :data-index="col.dataIndex" :header-cell-class="headerCellClass(col)" v-bind="col.columnProps">
             <template #cell="{ record, rowIndex, column }">
               <a-form-item :field="`tableData[${rowIndex}].${col.dataIndex}`" :label-col-style="{ display: 'none' }"
@@ -55,59 +55,35 @@ const headerCellClass = (col: ColumnItem) => {
 }
 
 const getComponentBindProps = (col: ColumnItem) => {
-  const obj: Partial<ColumnItem['props'] & { placeholder: string }> = {}
-  if (col.type === 'input') {
-    obj.allowClear = true
-    obj.placeholder = `请输入${col.title}`
-    obj.maxLength = 50
-  }
-  if (col.type === 'input-number') {
-    obj.placeholder = `请输入${col.title}`
-  }
-  if (col.type === 'textarea') {
-    obj.allowClear = true
-    obj.placeholder = `填写${col.title}`
-    obj.maxLength = 200
-  }
-  if (col.type === 'select') {
-    obj.allowClear = true
-    obj.placeholder = `请选择${col.title}`
-  }
-  if (col.type === 'cascader') {
-    obj.allowClear = true
-    obj.placeholder = `请选择${col.title}`
-  }
-  if (col.type === 'tree-select') {
-    obj.allowClear = true
-    obj.placeholder = `请选择${col.title}`
-  }
-  if (col.type === 'date-picker') {
-    obj.placeholder = '请选择日期'
-  }
-  if (col.type === 'time-picker') {
-    obj.allowClear = true
-    obj.placeholder = `请选择时间`
-  }
-  return { ...obj, ...col.props }
+  // 组件默认配置映射表
+  const ConfigMap = new Map<ColumnItem['type'], Partial<Omit<ColumnItem['props'], 'placeholder'> & { placeholder?: string | string[] }>>([
+    ['input', { allowClear: true, placeholder: `请输入${col.title}`, maxLength: 50 }],
+    ['input-number', { placeholder: `请输入${col.title}` }],
+    ['textarea', { allowClear: false, placeholder: `请填写${col.title}`, maxLength: 200 }],
+    ['input-tag', { allowClear: true, placeholder: `请输入${col.title}` }],
+    ['mention', { allowClear: true, placeholder: `请输入${col.title}` }],
+    ['select', { allowClear: true, placeholder: `请选择${col.title}` }],
+    ['tree-select', { allowClear: true, placeholder: `请选择${col.title}` }],
+    ['cascader', { allowClear: true, placeholder: `请选择${col.title}` }],
+    ['radio-group', {}],
+    ['checkbox-group', {}],
+    ['date-picker', { allowClear: true, placeholder: '请选择日期' }],
+    ['time-picker', { allowClear: true, placeholder: '请选择时间' }]
+  ])
+  // 获取默认配置
+  const defaultProps = ConfigMap.get(col.type) || {}
+  // 合并默认配置和自定义配置
+  return { ...defaultProps, ...col.props }
 }
 
 const getRuleMessage = (col: ColumnItem) => {
-  if (['input', 'input-number'].includes(col.type ?? '')) {
+  if (['input', 'input-number', 'input-tag', 'mention'].includes(col.type ?? '')) {
     return `请输入${col.title}`
   }
   if (['textarea'].includes(col.type ?? '')) {
     return `请填写${col.title}`
   }
-  if (['select', 'cascader', 'tree-select'].includes(col.type ?? '')) {
-    return `请选择${col.title}`
-  }
-  if (['date-picker'].includes(col.type ?? '')) {
-    return `请选择日期`
-  }
-  if (['time-picker'].includes(col.type ?? '')) {
-    return `请选择时间`
-  }
-  return ''
+  return `请选择${col.title}`
 }
 
 const isDisabled: Props['cellDisabled'] = (p) => {
