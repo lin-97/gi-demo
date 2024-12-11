@@ -16,7 +16,7 @@
       <template #action="{ rowIndex }">
         <a-space>
           <a-button type="primary" status="success" size="mini"
-            :disabled="!(currentCell.rowIndex > 0 && currentCell.rowIndex === rowIndex)" @click="onSave()">
+            :disabled="!(currentCell.rowIndex >= 0 && currentCell.rowIndex === rowIndex)" @click="onSave()">
             保存
           </a-button>
           <a-button type="primary" status="danger" size="mini" @click="onDelete(rowIndex)">

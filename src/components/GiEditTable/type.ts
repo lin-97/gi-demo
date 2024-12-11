@@ -58,12 +58,12 @@ interface ColumnItemProps extends Partial<Omit<ComponentProps, 'placeholder'>> {
 
 export interface ColumnItem {
   type?: ColumnItemType
-  title: string | (() => VNode)
+  title: string
   dataIndex: string
   required?: boolean
   rules?: A.FormItemInstance['$props']['rules'] // 表单校验规则
   props?: ColumnItemProps
-  columnProps?: Partial<A.TableColumnInstance['$props']>
+  columnProps?: Partial<Omit<A.TableColumnInstance['$props'], 'title'>> & { title?: string | (() => VNode) }
   formItemProps?: A.FormItemInstance['$props']
   slotName?: string
 }

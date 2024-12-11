@@ -4,10 +4,10 @@
       <a-table :data="form.tableData" :bordered="{ cell: true }" :pagination="false" v-bind="attrs">
         <template #columns>
           <a-table-column v-for="col in props.columns" :key="col.dataIndex" :data-index="col.dataIndex"
-            :header-cell-class="headerCellClass(col)" v-bind="col.columnProps">
+            :header-cell-class="headerCellClass(col)" v-bind="col.columnProps" :title="col.title">
             <template #title>
-              <template v-if="typeof col.title === 'string'">{{ col.title }}</template>
-              <component :is="col.title" v-else></component>
+              <component :is="col?.columnProps?.title" v-if="typeof col?.columnProps?.title === 'function'"></component>
+              <template v-else>{{ col?.columnProps?.title || col.title }}</template>
             </template>
             <template #cell="{ record, rowIndex, column }">
               <a-form-item :field="`tableData[${rowIndex}].${col.dataIndex}`" :label-col-style="{ display: 'none' }"
