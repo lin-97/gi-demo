@@ -25,6 +25,7 @@ export type ColumnItemType =
   | 'upload'
   | 'auto-complete'
   | 'mention'
+  | ''
 
 export type ComponentProps =
   & A.InputInstance['$props']
@@ -57,12 +58,12 @@ interface ColumnItemProps extends Partial<Omit<ComponentProps, 'placeholder'>> {
 
 export interface ColumnItem {
   type?: ColumnItemType
-  title: string
+  title: string | (() => VNode)
   dataIndex: string
   required?: boolean
   rules?: A.FormItemInstance['$props']['rules'] // 表单校验规则
   props?: ColumnItemProps
-  columnProps?: Partial<Omit<A.TableColumnInstance['$props'], 'title'>> & { title?: string | (() => VNode) | undefined }
+  columnProps?: Partial<A.TableColumnInstance['$props']>
   formItemProps?: A.FormItemInstance['$props']
   slotName?: string
 }

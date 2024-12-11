@@ -1,10 +1,14 @@
 <template>
   <div class="gi-edit-table">
-    <a-form ref="formRef" :model="form">
+    <a-form ref="formRef" scroll-to-first-error :model="form">
       <a-table :data="form.tableData" :bordered="{ cell: true }" :pagination="false" v-bind="attrs">
         <template #columns>
-          <a-table-column v-for="col in props.columns" :key="col.dataIndex" :title="(col.title as any)"
-            :data-index="col.dataIndex" :header-cell-class="headerCellClass(col)" v-bind="col.columnProps">
+          <a-table-column v-for="col in props.columns" :key="col.dataIndex" :data-index="col.dataIndex"
+            :header-cell-class="headerCellClass(col)" v-bind="col.columnProps">
+            <template #title>
+              <template v-if="typeof col.title === 'string'">{{ col.title }}</template>
+              <component :is="col.title" v-else></component>
+            </template>
             <template #cell="{ record, rowIndex, column }">
               <a-form-item :field="`tableData[${rowIndex}].${col.dataIndex}`" :label-col-style="{ display: 'none' }"
                 :wrapper-col-props="{ span: 24 }" v-bind="col.formItemProps"
@@ -19,20 +23,30 @@
             </template>
           </a-table-column>
         </template>
+        <template #tr="{ record, rowIndex }">
+          <tr class="gi-edit-table-tr" @dblclick="emit('tr-dblclick', { record, rowIndex })"></tr>
+        </template>
+        <template #td="{ record, column, rowIndex }">
+          <td class="gi-edit-table-td" @dblclick="emit('td-dblclick', { record, column, rowIndex })"></td>
+        </template>
       </a-table>
     </a-form>
   </div>
 </template>
 
 <script lang='ts' setup generic="T extends TableData">
-import type { TableData } from '@arco-design/web-vue'
+import type { TableColumnData, TableData } from '@arco-design/web-vue'
 import type { ColumnItem, Disabled } from './type'
 
 defineOptions({ name: 'GiEditTable', inheritAttrs: false })
-
 const props = withDefaults(defineProps<Props>(), {
   cellDisabled: false
 })
+
+const emit = defineEmits<{
+  (e: 'tr-dblclick', value: { record: any, rowIndex: number }): void
+  (e: 'td-dblclick', value: { record: any, rowIndex: number, column: TableColumnData }): void
+}>()
 
 defineSlots<{
   [propsName: string]: (props: { record: T, rowIndex: number, column: ColumnItem }) => void
