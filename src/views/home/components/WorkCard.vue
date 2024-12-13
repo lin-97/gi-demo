@@ -10,7 +10,10 @@
             <img :src="userStore.avatar" />
           </a-avatar>
           <div class="welcome">
-            <p class="hello">{{ goodTimeText() }}！{{ userStore.name }}，开始您一天的工作吧！</p>
+            <p class="hello">
+              <span>{{ goodTimeText() }}！{{ userStore.name }}，开始您一天的工作吧！</span>
+              <img class="gi-demo-star" src="https://gitee.com/lin0716/gi-demo/badge/star.svg?theme=dark">
+            </p>
             <p>今日阴转大雨，15℃ - 25℃，出门记得带伞哦。</p>
           </div>
         </a-space>
@@ -76,6 +79,10 @@ const userStore = useUserStore()
         font-size: 1.25rem;
         color: $color-text-1;
         margin-bottom: 10px;
+      }
+
+      .gi-demo-star {
+        vertical-align: middle;
       }
     }
   }
