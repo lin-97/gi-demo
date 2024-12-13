@@ -2,7 +2,7 @@
   <a-breadcrumb>
     <transition-group name="breadcrumb">
       <div v-for="(item, index) in breadcrumbList" :key="item.meta.title">
-        <a-breadcrumb-item>
+        <a-breadcrumb-item v-bind="attrs">
           <span v-if="item.redirect === 'noRedirect' || item.redirect === '' || index === breadcrumbList.length - 1"
             class="gi_line_1">{{ item.meta.title }}</span>
           <span v-else class="gi_line_1 breadcrumb-item-title" @click="handleLink(item)">{{ item.meta.title }}</span>
@@ -21,6 +21,7 @@ import { useRouteStore } from '@/stores'
 const route = useRoute()
 const router = useRouter()
 const { routes } = useRouteStore()
+const attrs = useAttrs()
 
 let home: RouteLocationMatched | null = null
 const getHome = () => {
