@@ -13,7 +13,7 @@ export default `
           <div class="pane-right__content">
             <a-row justify="space-between">
               <a-space wrap>
-                <a-button type="primary" @click="onAdd">
+                <a-button type="primary">
                   <template #icon><icon-plus /></template>
                 </a-button>
                 <a-button type="primary" status="danger" @click="onMulDelete">
@@ -124,10 +124,6 @@ const getProportionColor = (proportion: number) => {
 onActivated(() => {
   getTableData()
 })
-
-const onAdd = () => {
-  router.push({ path: '/data/form' })
-}
 
 const onEdit = () => {
   router.push({ path: '/data/form', query: { id: 'ID123456' } })

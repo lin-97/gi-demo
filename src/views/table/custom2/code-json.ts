@@ -1,6 +1,6 @@
 export default `
 <template>
-  <div class="table-page">
+  <div class="gi_table_page">
     <GiForm v-model="form" :options="options" :columns="QueryFormColumns" @search="search" @reset="search">
     </GiForm>
 
@@ -161,17 +161,5 @@ const onViewCode = () => {
 }
 </script>
 
-<style lang="scss" scoped>
-.table-page {
-  height: 100%;
-  overflow: hidden;
-  margin: $margin;
-  background: var(--color-bg-1);
-  padding: $padding;
-  padding-bottom: 0;
-  box-sizing: border-box;
-  display: flex;
-  flex-direction: column;
-}
-</style>
+<style lang="scss" scoped></style>
 `
