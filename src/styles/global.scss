@@ -184,6 +184,18 @@
   overflow-y: auto;
 }
 
+// 表格页面
+.gi_table_page {
+  flex: 1;
+  overflow: hidden;
+  margin: $margin;
+  background: var(--color-bg-1);
+  padding: $padding;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+}
+
 .gi_card_title {
   .arco-card-header-title::before {
     content: '';

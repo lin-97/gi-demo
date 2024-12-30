@@ -1,5 +1,5 @@
 <template>
-  <div class="table-page">
+  <div class="gi_table_page">
     <GiTable row-key="id" title="会员列表" :loading="loading" :data="tableData"
       :scroll="{ x: '100%', y: '100%', minWidth: 1200 }" :row-selection="{ type: 'checkbox', showCheckedAll: true }"
       :pagination="pagination" @refresh="getTableData">
@@ -98,16 +98,4 @@ const onDelete: PopconfirmInstance['onBeforeOk'] = () => {
 }
 </script>
 
-<style lang="scss" scoped>
-.table-page {
-  height: 100%;
-  overflow: hidden;
-  margin: $margin;
-  background: var(--color-bg-1);
-  padding: $padding;
-  padding-bottom: 0;
-  box-sizing: border-box;
-  display: flex;
-  flex-direction: column;
-}
-</style>
+<style lang="scss" scoped></style>

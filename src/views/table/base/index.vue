@@ -1,5 +1,5 @@
 <template>
-  <div class="table-page">
+  <div class="gi_table_page">
     <GiForm v-model="form" :options="options" :columns="columns" @search="search" @reset="search"></GiForm>
 
     <div class="gi_table_box">
@@ -89,15 +89,4 @@ const onDelete: PopconfirmInstance['onBeforeOk'] = () => {
 }
 </script>
 
-<style lang="scss" scoped>
-.table-page {
-  height: 100%;
-  overflow: hidden;
-  margin: $margin;
-  background: var(--color-bg-1);
-  padding: $padding;
-  box-sizing: border-box;
-  display: flex;
-  flex-direction: column;
-}
-</style>
+<style lang="scss" scoped></style>
