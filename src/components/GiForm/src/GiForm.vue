@@ -2,16 +2,16 @@
   <a-form ref="formRef" :auto-label-width="true" v-bind="options.form" :model="modelValue">
     <a-grid class="w-full" :col-gap="8" v-bind="options.grid" :collapsed="collapsed">
       <template v-for="item in columns" :key="item.field">
-        <a-grid-item v-if="!isHide(item.hide)" v-bind="item.gridItemProps || props.options.gridItem"
+        <a-grid-item v-if="item.show !== undefined ? isShow(item) : !isHide(item)"
+          v-bind="item.gridItemProps || props.options.gridItem"
           :span="item.span || item.gridItemProps?.span || options.gridItem?.span">
-          <a-form-item v-bind="item.formItemProps" :field="item.field" :rules="item.rules"
-            :disabled="isDisabled(item.disabled)">
+          <a-form-item v-bind="item.formItemProps" :field="item.field" :rules="item.rules" :disabled="isDisabled(item)">
             <template #label>
               <template v-if="typeof item.label === 'string'">{{ item.label }}</template>
               <component :is="item.label" v-else></component>
             </template>
             <slot v-if="!['group-title'].includes(item.type || '')" :name="item.field"
-              v-bind="{ disabled: isDisabled(item.disabled) }">
+              v-bind="{ disabled: isDisabled(item) }">
               <component :is="`a-${item.type}`" v-bind="getComponentBindProps(item)"
                 :model-value="modelValue[item.field as keyof typeof modelValue]"
                 @update:model-value="valueChange($event, item.field)">
@@ -58,7 +58,7 @@
 
 <script setup lang="ts">
 import { cloneDeep } from 'lodash-es'
-import type { ColumnsItem, ColumnsItemDisabled, ColumnsItemHide, Options } from './type'
+import type { ColumnsItem, Options } from './type'
 
 interface Props {
   modelValue: any
@@ -110,23 +110,34 @@ const getComponentBindProps = (item: ColumnsItem) => {
   return { ...defaultProps, ...item.props }
 }
 
+/** 表单数据更新  */
 const valueChange = (value: any, field: string) => {
   emit('update:modelValue', Object.assign(props.modelValue, { [field]: value }))
 }
 
-const isHide = (hide?: ColumnsItemHide<boolean | object>) => {
-  if (hide === undefined) return false
-  if (typeof hide === 'boolean') return hide
-  if (typeof hide === 'function') {
-    return hide(props.modelValue)
+/** 显示表单项 */
+const isShow = (item: ColumnsItem) => {
+  if (typeof item.show === 'boolean') return item.show
+  if (typeof item.show === 'function') {
+    return item.show(props.modelValue)
   }
 }
 
-const isDisabled = (disabled?: ColumnsItemDisabled<boolean | object>) => {
-  if (disabled === undefined) return false
-  if (typeof disabled === 'boolean') return disabled
-  if (typeof disabled === 'function') {
-    return disabled(props.modelValue)
+/** 隐藏表单项 */
+const isHide = (item: ColumnsItem) => {
+  if (item.hide === undefined) return false
+  if (typeof item.hide === 'boolean') return item.hide
+  if (typeof item.hide === 'function') {
+    return item.hide(props.modelValue)
+  }
+}
+
+/** 禁用表单项 */
+const isDisabled = (item: ColumnsItem) => {
+  if (item.disabled === undefined) return false
+  if (typeof item.disabled === 'boolean') return item.disabled
+  if (typeof item.disabled === 'function') {
+    return item.disabled(props.modelValue)
   }
 }
 
