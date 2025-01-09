@@ -201,6 +201,7 @@ export interface ColumnsItem<F = any> {
   props?: ColumnsItemProps
   gridItemProps?: A.GridItemProps
   formItemProps?: Omit<A.FormItemInstance['$props'], 'label' | 'field'> // a-form-item的props
+  required?: boolean // 是否必填
   rules?: A.FormItemInstance['$props']['rules'] // 表单校验规则
   options?: ColumnsItemOptions
   data?: ColumnsItemData

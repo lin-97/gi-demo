@@ -5,7 +5,8 @@
         <a-grid-item v-if="item.show !== undefined ? isShow(item) : !isHide(item)"
           v-bind="item.gridItemProps || props.options.gridItem"
           :span="item.span || item.gridItemProps?.span || options.gridItem?.span">
-          <a-form-item v-bind="item.formItemProps" :field="item.field" :rules="item.rules" :disabled="isDisabled(item)">
+          <a-form-item v-bind="item.formItemProps" :field="item.field" :rules="getFormItemRules(item)"
+            :disabled="isDisabled(item)">
             <template #label>
               <template v-if="typeof item.label === 'string'">{{ item.label }}</template>
               <component :is="item.label" v-else></component>
@@ -113,6 +114,14 @@ const getComponentBindProps = (item: ColumnsItem) => {
 /** 表单数据更新  */
 const valueChange = (value: any, field: string) => {
   emit('update:modelValue', Object.assign(props.modelValue, { [field]: value }))
+}
+
+/** 表单项校验规则 */
+const getFormItemRules = (item: ColumnsItem) => {
+  if (item.required) {
+    return [{ required: true, message: `${item.label}为必填项` }, ...(Array.isArray(item.rules) ? item.rules : [])]
+  }
+  return item.rules
 }
 
 /** 显示表单项 */
