@@ -5,9 +5,11 @@
         <slot name="left"></slot>
       </div>
     </GiSplitPaneFlexibleBox>
+    <div class="gi-split-pane__line">
+      <GiSplitButton :collapsed="!visible" @click="handleClick"></GiSplitButton>
+    </div>
     <div class="gi-split-pane__right">
       <slot></slot>
-      <GiSplitPaneButton :collapsed="!visible" @click="handleClick"></GiSplitPaneButton>
     </div>
   </div>
 </template>
@@ -42,14 +44,19 @@ const handleClick = () => {
   }
 
   &__left {
-    padding-right: 12px;
+    padding-right: $padding;
   }
 
   &__right {
     flex: 1;
-    padding-left: 12px;
-    border-left: 1px solid var(--color-border-2);
+    padding-left: $padding;
+  }
+
+  &__line {
+    width: 1px;
     height: auto;
+    background-color: var(--color-border-2);
+    position: relative;
   }
 }
 </style>
