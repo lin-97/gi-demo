@@ -86,14 +86,9 @@ const columns = computed<Columns<typeof form>>(() => [
       maxLength: 4
     },
     rules: [
-      // 动态rules示例
-      ...(() => {
-        return [
-          { required: isNameRequired.value, message: '请输入姓名' },
-          { maxLength: 4, message: '姓名不超过4个字符' },
-          { match: Regexp.OnlyCh, message: '仅支持中文姓名' }
-        ]
-      })()
+      { required: isNameRequired.value, message: '请输入姓名' },
+      { maxLength: 4, message: '姓名不超过4个字符' },
+      { match: Regexp.OnlyCh, message: '仅支持中文姓名' }
     ],
     slots: {
       prepend: () => <icon-face-smile-fill />,
@@ -119,6 +114,7 @@ const columns = computed<Columns<typeof form>>(() => [
     type: 'select',
     label: '性别',
     field: 'sex',
+    required: true,
     options: [
       { label: '男', value: 1 },
       { label: '女', value: 0 }

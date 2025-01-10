@@ -943,6 +943,7 @@ GiForm 是一个 JSON 配置表单组件，能够快速通过 JSON 构建表单�
 | options       | a-selec、a-cascader、a-radio-group、a-checkbox-group的options（只有这几个类型有options） |
 | data          | a-tree-select的data属性（只有此类型有data）                  |
 | hide          | 动态隐藏 （form）=> boolean 返回一个布尔值， form为v-model绑定的表单 |
+| show          | 动态显示 （form）=> boolean 返回一个布尔值， form为v-model绑定的表单 |
 | disabled      | 动态禁用 （form）=> boolean 返回一个布尔值， form为v-model绑定的表单 |
 
 **结合Modal函数实现更高效的表单对话框**

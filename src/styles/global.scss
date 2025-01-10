@@ -1,6 +1,22 @@
 /* 全局样式 */
 @import './var.scss';
 
+.w-full {
+  width: 100%;
+}
+
+.h-full {
+  height: 100%;
+}
+
+.overflow-hidden {
+  overflow: hidden;
+}
+
+.flex-1 {
+  flex: 1;
+}
+
 // 通用外边距
 .gi_margin {
   margin: $margin;
@@ -171,11 +187,6 @@
   }
 }
 
-.gi_table_box {
-  max-height: 100%;
-  overflow: hidden;
-}
-
 // 使用场景，页面内容超出高度会自动滚动
 .gi_page {
   flex: 1;
@@ -194,6 +205,12 @@
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
+}
+
+// 表格类名 高度自适应
+.gi_table {
+  flex: 1;
+  overflow: hidden;
 }
 
 .gi_card_title {

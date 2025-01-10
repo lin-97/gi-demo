@@ -48,7 +48,7 @@
           <a-table-column title="描述" data-index="description" :width="250" :ellipsis="true"
             :tooltip="true"></a-table-column>
           <a-table-column title="创建时间" data-index="createTime" :width="200"></a-table-column>
-          <a-table-column title="操作" :width="200" align="center" :fixed="!isMobile() ? 'right' : undefined">
+          <a-table-column title="操作" :width="200" align="center" :fixed="fixed">
             <template #cell="{ record }">
               <a-space>
                 <a-button type="primary" size="mini" @click="onEdit(record)">
@@ -79,7 +79,6 @@
 <script setup lang="ts">
 import { Message } from '@arco-design/web-vue'
 import AddDeptModal from './AddDeptModal.vue'
-import { isMobile } from '@/utils'
 import { useTable } from '@/hooks'
 import { type SystemDeptItem, getSystemDeptList } from '@/apis/system'
 import { deleteBaseApi } from '@/apis/base'
@@ -103,7 +102,8 @@ const {
   search,
   select,
   selectAll,
-  handleDelete
+  handleDelete,
+  fixed
 } = useTable(() => getSystemDeptList(), {
   immediate: true,
   onSuccess: () => {

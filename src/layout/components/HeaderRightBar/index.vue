@@ -25,7 +25,7 @@
       </a-popover>
 
       <!-- 全屏切换组件 -->
-      <a-tooltip v-if="!isMobile()" content="全屏切换" position="bottom">
+      <a-tooltip v-if="!['xs', 'sm'].includes(breakpoint)" content="全屏切换" position="bottom">
         <a-button size="mini" class="gi_hover_btn" @click="toggle">
           <template #icon>
             <icon-fullscreen v-if="!isFullscreen" :size="18" />
@@ -89,10 +89,11 @@ import { useFullscreen } from '@vueuse/core'
 import SettingDrawer from './SettingDrawer.vue'
 import Message from './Message.vue'
 import { useUserStore } from '@/stores'
-import { isMobile } from '@/utils'
+import { useBreakpoint } from '@/hooks'
 
 defineOptions({ name: 'HeaderRight' })
 
+const { breakpoint } = useBreakpoint()
 const { isFullscreen, toggle } = useFullscreen()
 
 const router = useRouter()

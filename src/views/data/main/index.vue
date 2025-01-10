@@ -1,11 +1,9 @@
 <template>
   <div class="manage">
-    <section class="tab">
-      <a-tabs hide-content size="medium" :active-key="activeKey" @change="change">
-        <a-tab-pane :key="1" title="人员管理"> </a-tab-pane>
-        <a-tab-pane :key="2" title="单位管理"> </a-tab-pane>
-      </a-tabs>
-    </section>
+    <a-tabs class="manage__tabs" hide-content size="medium" :active-key="activeKey" @change="change">
+      <a-tab-pane :key="1" title="人员管理"> </a-tab-pane>
+      <a-tab-pane :key="2" title="单位管理"> </a-tab-pane>
+    </a-tabs>
 
     <transition name="fade-slide" mode="out-in" appear>
       <keep-alive>
@@ -55,7 +53,7 @@ const change = (key: number | string) => {
   flex-direction: column;
   overflow: hidden;
 
-  .tab {
+  &__tabs {
     background: var(--color-bg-1);
   }
 }

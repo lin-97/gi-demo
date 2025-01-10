@@ -188,6 +188,7 @@ export interface ColumnsItemSlots extends Omit<ComponentSlots, 'label' | 'option
 }
 
 export type ColumnsItemHide<F> = boolean | ((form: F) => boolean)
+export type ColumnsItemShow<F> = boolean | ((form: F) => boolean)
 export type ColumnsItemDisabled<F> = boolean | ((form: F) => boolean)
 export type ColumnsItemRequest<F = any> = (form: F) => Promise<any>
 export type ColumnsItemFormat<T = any> = (res: T) => ColumnsItemOptions | ColumnsItemData
@@ -200,10 +201,12 @@ export interface ColumnsItem<F = any> {
   props?: ColumnsItemProps
   gridItemProps?: A.GridItemProps
   formItemProps?: Omit<A.FormItemInstance['$props'], 'label' | 'field'> // a-form-item的props
+  required?: boolean // 是否必填
   rules?: A.FormItemInstance['$props']['rules'] // 表单校验规则
   options?: ColumnsItemOptions
   data?: ColumnsItemData
   hide?: ColumnsItemHide<F> // 是否隐藏
+  show?: ColumnsItemShow<F> // 是否显示（优先级比hide高）
   disabled?: ColumnsItemDisabled<F> // 是否禁用
   request?: ColumnsItemRequest<F> // 接口请求api
   resultFormat?: ColumnsItemFormat // 结果集格式化

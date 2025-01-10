@@ -1,14 +1,14 @@
 <template>
-  <div class="test">
-    <a-card title="组件示例" :bordered="false" class="gi_card left">
-      <div class="tab-box">
+  <div class="demo">
+    <a-card title="组件示例" :bordered="false" class="demo__left">
+      <div class="demo__left_content">
         <a-tabs v-model:active-key="selectedKey" position="left" hide-content>
           <a-tab-pane v-for="(item, index) in menuList" :key="index" :title="item.name"></a-tab-pane>
         </a-tabs>
       </div>
     </a-card>
 
-    <section class="content">
+    <section class="demo__content">
       <transition name="fade-slide" mode="out-in" appear>
         <component :is="menuList[selectedKey].value"></component>
       </transition>
@@ -85,22 +85,34 @@ const menuList = [
   flex-direction: row;
 }
 
-.test {
+.demo {
   flex: 1;
   padding: $margin;
   box-sizing: border-box;
   overflow: hidden;
   display: flex;
 
-  .left {
+  &__left {
     width: 200px;
-    .tab-box {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+
+    :deep(.arco-card-body) {
       flex: 1;
-      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
     }
   }
 
-  .content {
+  &__left_content {
+    flex: 1;
+    overflow-y: auto;
+  }
+
+  &__content {
     flex: 1;
     height: 100%;
     padding: $padding;
