@@ -96,7 +96,7 @@
               <a-tag v-else size="small" color="red">否</a-tag>
             </template>
           </a-table-column>
-          <a-table-column title="操作" :width="200" align="left" :fixed="!isMobile() ? 'right' : undefined">
+          <a-table-column title="操作" :width="200" align="left" :fixed="fixed">
             <template #cell="{ record }">
               <a-space>
                 <a-button type="primary" size="mini" @click="onEdit(record)">
@@ -129,7 +129,7 @@ import AddMenuModal from './AddMenuModal.vue'
 import { type SystemMenuItem, getSystemMenuList } from '@/apis/system'
 import { deleteBaseApi } from '@/apis/base'
 import { isExternal } from '@/utils/validate'
-import { isMobile, transformPathToName } from '@/utils'
+import { transformPathToName } from '@/utils'
 import { useDict } from '@/hooks/app'
 import { useTable } from '@/hooks'
 import GiCodeView from '@/components/GiCodeView/index.vue'
@@ -152,7 +152,8 @@ const {
   loading,
   tableData: menuList,
   search,
-  handleDelete
+  handleDelete,
+  fixed
 } = useTable(() => getSystemMenuList(), { immediate: true })
 
 const reset = () => {

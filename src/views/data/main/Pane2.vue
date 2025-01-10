@@ -18,12 +18,11 @@
       </a-space>
     </a-row>
 
-    <section class="gi_table_box">
-      <a-table row-key="id" :loading="loading" :bordered="{ cell: true }" :columns="columns" :data="tableData"
-        :scroll="{ x: '100%', y: '100%', minWidth: 1000 }" :row-selection="{ type: 'checkbox', showCheckedAll: true }"
-        :pagination="pagination" @select="select" @select-all="selectAll">
-      </a-table>
-    </section>
+    <a-table class="gi_table" row-key="id" :loading="loading" :bordered="{ cell: true }" :columns="columns"
+      :data="tableData" :scroll="{ x: '100%', y: '100%', minWidth: 1000 }"
+      :row-selection="{ type: 'checkbox', showCheckedAll: true }" :pagination="pagination" @select="select"
+      @select-all="selectAll">
+    </a-table>
   </a-card>
 </template>
 

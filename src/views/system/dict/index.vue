@@ -46,7 +46,7 @@
           </a-table-column>
           <a-table-column title="描述" data-index="description" :ellipsis="true" :tooltip="true"></a-table-column>
           <a-table-column title="创建时间" data-index="createTime" :width="180"></a-table-column>
-          <a-table-column title="操作" :width="280" align="center" :fixed="!isMobile() ? 'right' : undefined">
+          <a-table-column title="操作" :width="280" align="center" :fixed="fixed">
             <template #cell="{ record }">
               <a-space>
                 <a-button type="primary" status="success" size="mini" @click="onViewDictData(record)">
@@ -83,7 +83,6 @@ import { useTable } from '@/hooks'
 import { useDict } from '@/hooks/app'
 import { type SystemDictItem, getSystemDictList } from '@/apis/system'
 import { deleteBaseApi } from '@/apis/base'
-import { isMobile } from '@/utils'
 
 defineOptions({ name: 'SystemRole' })
 
@@ -104,7 +103,8 @@ const {
   search,
   select,
   selectAll,
-  handleDelete
+  handleDelete,
+  fixed
 } = useTable((page) => getSystemDictList(page), { immediate: true })
 
 const reset = () => {
