@@ -1,0 +1,1 @@
+import{_ as e}from"./index-DYMmMYr5.js";import{d as s,o as t,c as n}from"./index-CwouC2jY.js";const o=s({name:"DocumentVite",__name:"index",setup:s=>(s,o)=>{const a=e;return t(),n(a,{src:"https://cn.vitejs.dev/guide/"})}});export{o as default};
