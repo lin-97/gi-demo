@@ -1,1 +1,0 @@
-import{a6 as e}from"./index-CwouC2jY.js";function t(t){return e.get("/system/role",t)}function r(t){return e.get("/system/role/detail",t)}function s(t){return e.get("/system/role/menuIds",t)}export{s as a,t as b,r as g};

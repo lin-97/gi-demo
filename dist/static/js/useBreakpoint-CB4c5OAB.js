@@ -1,0 +1,1 @@
+import{d as e}from"./index-DK0gdrip.js";import{k as n}from"./index-Ns3PKQ29.js";function r(){const r=e({xs:576,sm:576,md:768,lg:992,xl:1200,xxl:1600}).current();return{breakpoint:n((()=>r.value.length?r.value[r.value.length-1]:"xs"))}}export{r as u};
