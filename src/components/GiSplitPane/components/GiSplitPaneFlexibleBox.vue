@@ -30,7 +30,7 @@ watch(() => breakpoint.value, (val) => {
   } else {
     emit('update:visible', true)
   }
-})
+}, { immediate: true })
 
 const getStyle = computed(() => {
   const obj: CSSProperties = {}
