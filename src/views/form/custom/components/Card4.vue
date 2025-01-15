@@ -23,7 +23,7 @@
     </a-card>
 
     <a-drawer v-model:visible="visible" :title="isEdit ? '编辑' : '新增'" :width="width >= 600 ? 600 : '100%'">
-      <GiForm v-model="form" :options="options" :columns="columns"></GiForm>
+      <GiForm v-model="form" :columns="columns"></GiForm>
     </a-drawer>
   </a-card>
 </template>
@@ -34,15 +34,11 @@ import { useWindowSize } from '@vueuse/core'
 import { cityOptions, deptData } from './data'
 import Card4Json from './code/card4-json'
 import * as Regexp from '@/utils/regexp'
-import { type Columns, GiForm, type Options } from '@/components/GiForm'
+import { type ColumnItem, GiForm } from '@/components/GiForm'
 import { useResetReactive } from '@/hooks'
 import GiCodeView from '@/components/GiCodeView/index.vue'
 
 const { width } = useWindowSize()
-
-const options: Options = {
-  btns: { hide: true }
-}
 
 const isEdit = ref(false)
 const [form, resetForm] = useResetReactive({
@@ -51,7 +47,7 @@ const [form, resetForm] = useResetReactive({
   status: 1
 })
 
-const columns = computed<Columns<typeof form>>(() => [
+const columns = computed<ColumnItem<typeof form>[]>(() => [
   {
     type: 'input',
     label: '姓名',
@@ -95,7 +91,7 @@ const columns = computed<Columns<typeof form>>(() => [
     type: 'checkbox-group',
     label: '爱好',
     field: 'hobbys',
-    span: 2,
+    span: 24,
     options: [
       { label: '电影', value: '01' },
       { label: '音乐', value: '02' },
@@ -158,7 +154,7 @@ const columns = computed<Columns<typeof form>>(() => [
     type: 'textarea',
     label: '备注',
     field: 'remark',
-    span: 2,
+    span: 24,
     formItemProps: { extra: '这里是额外信息' }
   }
 ])
@@ -174,7 +170,6 @@ const onAdd = () => {
     content: () =>
       h(GiForm, {
         'ref': (e) => GiFormRef.value = e as InstanceType<typeof GiForm>,
-        'options': options,
         'columns': columns.value,
         'modelValue': form,
         'onUpdate:modelValue': (e) => Object.assign(form, e)
@@ -202,7 +197,6 @@ const onEdit = () => {
     content: () =>
       h(GiForm, {
         'ref': (e) => GiFormRef.value = e as InstanceType<typeof GiForm>,
-        'options': options,
         'columns': columns.value,
         'modelValue': form,
         'onUpdate:modelValue': (e) => Object.assign(form, e)

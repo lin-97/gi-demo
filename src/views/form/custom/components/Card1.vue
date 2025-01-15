@@ -8,7 +8,7 @@
     </template>
     <a-row :gutter="30">
       <a-col :xs="24" :sm="24" :md="12">
-        <GiForm v-model="form" class="gi_mb" :options="options" :columns="columns" @search="search" @reset="reset">
+        <GiForm v-model="form" class="gi_mb" search :columns="columns" @search="search" @reset="reset">
         </GiForm>
       </a-col>
       <a-col :xs="24" :sm="24" :md="12">
@@ -22,7 +22,7 @@
 import { Drawer, Message } from '@arco-design/web-vue'
 import { useWindowSize } from '@vueuse/core'
 import Card1Json from './code/card1-json'
-import type { Columns, Options } from '@/components/GiForm'
+import type { ColumnItem } from '@/components/GiForm'
 import GiCodeView from '@/components/GiCodeView/index.vue'
 
 const { width } = useWindowSize()
@@ -33,12 +33,7 @@ const form = reactive({
   status: ''
 })
 
-const options: Options = {
-  form: { layout: 'inline' },
-  fold: { enable: true }
-}
-
-const columns: Columns = reactive([
+const columns: ColumnItem[] = reactive([
   {
     type: 'input',
     label: '姓名',

@@ -11,7 +11,7 @@
     </template>
     <a-row :gutter="30">
       <a-col :xs="24" :sm="24" :md="12">
-        <GiForm ref="formRef" v-model="form" :options="options" :columns="columns">
+        <GiForm ref="formRef" v-model="form" :columns="columns">
           <template #test="{ disabled }"> 自定义插槽-禁用状态：{{ disabled }} </template>
           <template #btns>
             <a-row justify="end" class="w-full">
@@ -37,7 +37,7 @@ import { cityOptions, deptData } from './data'
 import Card2Json from './code/card2-json'
 import GiCodeView from '@/components/GiCodeView/index.vue'
 import GiForm from '@/components/GiForm'
-import type { Columns, Options } from '@/components/GiForm'
+import type { ColumnItem } from '@/components/GiForm'
 import * as Regexp from '@/utils/regexp'
 import { useDict } from '@/hooks/app'
 
@@ -62,17 +62,12 @@ const form = reactive({
 
 const formRef = useTemplateRef('formRef')
 
-const options: Options = reactive({
-  form: { scrollToFirstError: true },
-  btns: { hide: true }
-})
-
-const columns = computed<Columns<typeof form>>(() => [
+const columns = computed<ColumnItem<typeof form>[]>(() => [
   {
     type: 'group-title',
     label: '基本信息',
     field: 'base-title',
-    span: 2,
+    span: 24,
     formItemProps: {
       labelColStyle: { display: 'none' }
     }
@@ -128,7 +123,7 @@ const columns = computed<Columns<typeof form>>(() => [
     type: 'checkbox-group',
     label: '爱好',
     field: 'hobbys',
-    span: 2,
+    span: 24,
     options: [
       { label: '电影', value: '01' },
       { label: '音乐', value: '02' },
@@ -189,7 +184,7 @@ const columns = computed<Columns<typeof form>>(() => [
     type: 'slider',
     label: '成绩',
     field: 'grade',
-    span: 2,
+    span: 24,
     hide: (i) => {
       i.hide && (i.grade = 0)
       return i.hide === true
@@ -199,7 +194,7 @@ const columns = computed<Columns<typeof form>>(() => [
     type: 'group-title',
     label: '分组标题1',
     field: 'group-title1',
-    span: 2,
+    span: 24,
     formItemProps: {
       labelColStyle: { display: 'none' }
     }
@@ -222,7 +217,7 @@ const columns = computed<Columns<typeof form>>(() => [
     type: 'group-title',
     label: '分组标题2',
     field: 'group-title2',
-    span: 2,
+    span: 24,
     formItemProps: {
       labelColStyle: { display: 'none' }
     }
@@ -231,14 +226,14 @@ const columns = computed<Columns<typeof form>>(() => [
     type: 'textarea',
     label: '备注',
     field: 'remark',
-    span: 2,
+    span: 24,
     formItemProps: { extra: '这里是额外信息' }
   },
   {
     type: 'upload',
     label: '附件',
     field: 'file',
-    span: 2,
+    span: 24,
     props: {
       listType: 'picture-card',
       action: '/'
@@ -249,7 +244,7 @@ const columns = computed<Columns<typeof form>>(() => [
   },
   {
     field: 'btns',
-    span: 2
+    span: 24
   }
 ])
 

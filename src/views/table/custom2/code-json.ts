@@ -1,7 +1,8 @@
 export default `
 <template>
   <div class="gi_table_page">
-    <GiForm v-model="form" :options="options" :columns="QueryFormColumns" @search="search" @reset="search">
+    <GiForm v-model="form" search :columns="searchColumns"
+      :grid-item-props="{ span: { xs: 24, sm: 12, md: 8, lg: 8, xl: 6, xxl: 6 } }" @search="search" @reset="search">
     </GiForm>
 
     <GiTable row-key="id" :loading="loading" :columns="columns" :data="tableData"
@@ -56,21 +57,14 @@ import CodeJson from './code-json'
 import { useTable } from '@/hooks'
 import { useDict } from '@/hooks/app'
 import { type PersonItem, getPersonList } from '@/apis/person'
-import type { Columns, Options } from '@/components/GiForm'
+import type { ColumnItem } from '@/components/GiForm'
 import GiCodeView from '@/components/GiCodeView/index.vue'
 
 defineOptions({ name: 'TableCustom2' })
 const { data: statusOptions } = useDict({ code: 'status' })
 const form = reactive({})
 
-const options: Options = reactive({
-  form: { layout: 'inline' },
-  grid: { cols: { xs: 1, sm: 2, md: 3, lg: 4, xl: 4, xxl: 4 } },
-  btns: {},
-  fold: { enable: true, index: 2, defaultCollapsed: true }
-})
-
-const QueryFormColumns = computed<Columns>(() => [
+const searchColumns = computed<ColumnItem[]>(() => [
   {
     type: 'input',
     label: '姓名',
@@ -132,7 +126,7 @@ const columns: TableInstance['columns'] = [
 const { tableData, getTableData, pagination, search, loading } = useTable((p) => getPersonList(p))
 
 function onClickName(record: PersonItem) {
-  Message.success(\`点击了\${ record.name } \`)
+  Message.success(\`点击了\${record.name}\`)
 }
 
 const onAdd = () => {

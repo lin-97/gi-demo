@@ -1,6 +1,7 @@
 <template>
   <div class="gi_table_page">
-    <GiForm v-model="form" :options="options" :columns="columns" @search="search" @reset="search"></GiForm>
+    <GiForm v-model="form" :columns="columns" search hide-fold-btn :suffix="false" @search="search" @reset="search">
+    </GiForm>
 
     <a-table class="gi_full_table" row-key="id" page-position="bottom" :bordered="{ cell: true }" :loading="loading"
       :data="tableData" :scroll="{ x: '100%', y: '100%', minWidth: 1400 }" :pagination="pagination">
@@ -53,18 +54,13 @@
 import type { PopconfirmInstance } from '@arco-design/web-vue'
 import { useTable } from '@/hooks'
 import { getPersonList } from '@/apis/person'
-import type { Columns, Options } from '@/components/GiForm'
+import type { ColumnItem } from '@/components/GiForm'
 
 defineOptions({ name: 'TableBase' })
 
 const form = reactive({})
 
-const options: Options = reactive({
-  form: { layout: 'inline' },
-  grid: { cols: { xs: 1, sm: 2, md: 2, lg: 3, xl: 3, xxl: 4 } }
-})
-
-const columns: Columns = reactive([
+const columns: ColumnItem[] = reactive([
   {
     type: 'input',
     label: '姓名',

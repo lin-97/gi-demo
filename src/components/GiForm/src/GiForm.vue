@@ -1,10 +1,10 @@
 <template>
-  <a-form ref="formRef" :auto-label-width="true" v-bind="options.form" :model="modelValue">
-    <a-grid class="w-full" :col-gap="8" v-bind="options.grid" :collapsed="collapsed">
+  <a-form ref="formRef" v-bind="formProps" :model="modelValue">
+    <a-grid class="w-full" :col-gap="8" v-bind="props.gridProps" :collapsed="collapsed">
       <template v-for="item in columns" :key="item.field">
         <a-grid-item v-if="item.show !== undefined ? isShow(item) : !isHide(item)"
-          v-bind="item.gridItemProps || props.options.gridItem"
-          :span="item.span || item.gridItemProps?.span || options.gridItem?.span">
+          v-bind="item.gridItemProps || defaultGridItemProps"
+          :span="item.span || item.gridItemProps?.span || defaultGridItemProps?.span">
           <a-form-item v-bind="item.formItemProps" :field="item.field" :rules="getFormItemRules(item)"
             :disabled="isDisabled(item)">
             <template #label>
@@ -34,15 +34,16 @@
           </a-form-item>
         </a-grid-item>
       </template>
-      <a-grid-item v-if="!options.btns?.hide" :suffix="options.fold?.enable">
+      <a-grid-item v-if="props.search" v-bind="defaultGridItemProps" :span="defaultGridItemProps?.span"
+        :suffix="props.search && props.suffix">
         <a-space wrap>
           <slot name="suffix">
             <a-button type="primary" @click="emit('search')">
               <template #icon><icon-search /></template>
-              <template #default>{{ options.btns?.searchBtnText || '搜索' }}</template>
+              <template #default>{{ props.searchBtnText }}</template>
             </a-button>
             <a-button @click="emit('reset')">重置</a-button>
-            <a-button v-if="options.fold?.enable" class="gi-form__fold-btn" type="text" size="mini"
+            <a-button v-if="!props.hideFoldBtn" class="gi-form__fold-btn" type="text" size="mini"
               @click="collapsed = !collapsed">
               <template #icon>
                 <icon-up v-if="!collapsed" />
@@ -58,17 +59,41 @@
 </template>
 
 <script setup lang="ts">
-import { cloneDeep } from 'lodash-es'
-import type { ColumnsItem, Options } from './type'
+import { cloneDeep, omit } from 'lodash-es'
+import type { FormInstance, GridItemProps, GridProps } from '@arco-design/web-vue'
+import type { ColumnItem } from './type'
 
 interface Props {
   modelValue: any
-  options?: Options
-  columns: ColumnsItem[]
+  layout?: FormInstance['layout']
+  size?: FormInstance['size']
+  labelColProps?: FormInstance['labelColProps']
+  wrapperColProps?: FormInstance['wrapperColProps']
+  labelAlign?: FormInstance['labelAlign']
+  disabled?: FormInstance['disabled']
+  rules?: FormInstance['rules']
+  autoLabelWidth?: FormInstance['autoLabelWidth']
+  id?: FormInstance['id']
+  scrollToFirstError?: FormInstance['scrollToFirstError']
+  // 额外自定义属性
+  columns: ColumnItem[]
+  gridProps?: GridProps
+  gridItemProps?: GridItemProps
+  search?: boolean // 搜索模式
+  defaultCollapsed?: boolean // 折叠按钮默认折叠
+  searchBtnText?: string // 搜索按钮文字
+  hideFoldBtn?: boolean // 隐藏展开收起按钮，在表单项少的时候手动隐藏
+  suffix?: boolean
 }
 
 const props = withDefaults(defineProps<Props>(), {
-  options: () => ({})
+  autoLabelWidth: true,
+  defaultCollapsed: false,
+  search: false,
+  gridItemProps: { span: { xs: 24, sm: 12 } },
+  searchBtnText: '搜索',
+  hideFoldBtn: false,
+  suffix: true
 })
 
 const emit = defineEmits<{
@@ -77,21 +102,23 @@ const emit = defineEmits<{
   (e: 'reset'): void
 }>()
 
-const options = computed(() => ({
-  grid: { cols: 2 },
-  gridItem: { span: { xs: 2, sm: 1 } },
-  ...props.options
-}
-))
+const formProps = computed(() => {
+  const baseProps = omit(props, ['columns', 'gridProps', 'gridItemProps', 'search', 'defaultCollapsed', 'searchBtnText', 'hideFoldBtn', 'suffix', 'layout'])
+  return { layout: ((props.search ? 'inline' : 'horizontal') as FormInstance['layout']), ...baseProps }
+})
+
+const defaultGridItemProps = computed(() => {
+  return props.gridItemProps
+})
 
 const formRef = useTemplateRef('formRef')
-const collapsed = ref(props.options.fold?.defaultCollapsed ?? false)
+const collapsed = ref(props.defaultCollapsed)
 const dicData: Record<string, any> = reactive({})
 
 // 组件的默认props配置
-const getComponentBindProps = (item: ColumnsItem) => {
+const getComponentBindProps = (item: ColumnItem) => {
   // 组件默认配置映射表
-  const ConfigMap = new Map<ColumnsItem['type'], Partial<ColumnsItem['props'] & { placeholder: string }>>([
+  const ConfigMap = new Map<ColumnItem['type'], Partial<ColumnItem['props'] & { placeholder: string }>>([
     ['input', { allowClear: true, placeholder: `请输入${item.label}`, maxLength: 20 }],
     ['input-number', { placeholder: `请输入${item.label}` }],
     ['textarea', { allowClear: false, placeholder: `请填写${item.label}`, maxLength: 200 }],
@@ -117,7 +144,7 @@ const valueChange = (value: any, field: string) => {
 }
 
 /** 表单项校验规则 */
-const getFormItemRules = (item: ColumnsItem) => {
+const getFormItemRules = (item: ColumnItem) => {
   if (item.required) {
     return [{ required: true, message: `${item.label}为必填项` }, ...(Array.isArray(item.rules) ? item.rules : [])]
   }
@@ -125,7 +152,7 @@ const getFormItemRules = (item: ColumnsItem) => {
 }
 
 /** 显示表单项 */
-const isShow = (item: ColumnsItem) => {
+const isShow = (item: ColumnItem) => {
   if (typeof item.show === 'boolean') return item.show
   if (typeof item.show === 'function') {
     return item.show(props.modelValue)
@@ -133,7 +160,7 @@ const isShow = (item: ColumnsItem) => {
 }
 
 /** 隐藏表单项 */
-const isHide = (item: ColumnsItem) => {
+const isHide = (item: ColumnItem) => {
   if (item.hide === undefined) return false
   if (typeof item.hide === 'boolean') return item.hide
   if (typeof item.hide === 'function') {
@@ -142,7 +169,7 @@ const isHide = (item: ColumnsItem) => {
 }
 
 /** 禁用表单项 */
-const isDisabled = (item: ColumnsItem) => {
+const isDisabled = (item: ColumnItem) => {
   if (item.disabled === undefined) return false
   if (typeof item.disabled === 'boolean') return item.disabled
   if (typeof item.disabled === 'function') {
@@ -161,7 +188,7 @@ props.columns.forEach((item) => {
 
 // 先找出有级联的项
 // 如果这个字段改变了值，那么就找出它的cascader属性对应的字段项，去请求里面的request
-const hasCascaderColumns: ColumnsItem[] = []
+const hasCascaderColumns: ColumnItem[] = []
 props.columns.forEach((item) => {
   const arr = hasCascaderColumns.map((i) => i.field)
   if (item.cascader?.length && !arr.includes(item.field)) {

@@ -916,17 +916,6 @@ GiForm 是一个 JSON 配置表单组件，能够快速通过 JSON 构建表单�
 
 **新版文档**
 
-**options配置**
-
-
-| 属性     | 说明                                                         |
-| -------- | ------------------------------------------------------------ |
-| form     | 直接继承a-form的所有props                                    |
-| grid     | grid包裹层，直接继承a-grip的所有props                        |
-| gridItem | 默认每个表单项的包裹层，直接继承a-grid-item的所有props       |
-| btns     | 尾部按钮的配置<br />hide：按钮的显示隐藏<br />searchBtnText：搜索按钮的文本（默认为："搜索"） |
-| fold     | 折叠配置<br />enable：是否折叠<br />defaultCollapsed：初始折叠状态 |
-
 **columns配置**
 
 

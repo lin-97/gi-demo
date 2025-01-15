@@ -1,7 +1,7 @@
 import type * as A from '@arco-design/web-vue'
 import type { VNode } from 'vue'
 
-export type ColumnsItemType =
+export type ColumnItemType =
   | 'input'
   | 'input-number'
   | 'input-tag'
@@ -53,17 +53,17 @@ export type ComponentProps =
   & A.MentionInstance['$props']
   & A.AlertInstance['$props']
 
-interface ColumnsItemProps extends Partial<Omit<ComponentProps, 'placeholder'>> {
+interface ColumnItemProps extends Partial<Omit<ComponentProps, 'placeholder'>> {
   placeholder?: string | string[]
 }
 
-export type ColumnsItemOptions =
+export type ColumnItemOptions =
   | A.SelectInstance['$props']['options']
   | A.RadioGroupInstance['$props']['options']
   | A.CheckboxGroupInstance['$props']['options']
   | A.CascaderInstance['$props']['options']
 
-export type ColumnsItemData =
+export type ColumnItemData =
   | A.TreeSelectInstance['$props']['data']
   | A.AutoCompleteInstance['$props']['data']
   | A.MentionInstance['$props']['data']
@@ -182,46 +182,36 @@ export type ComponentSlots =
   & TreeSelectSlots
   & MentionSlots
 
-export interface ColumnsItemSlots extends Omit<ComponentSlots, 'label' | 'option'> {
+export interface ColumnItemSlots extends Omit<ComponentSlots, 'label' | 'option'> {
   label?: (e: { data: A.CheckboxOption | A.SelectOptionData | A.CascaderOption }) => VNode
   option?: (e: { data: (string | number | A.SelectOptionData | A.SelectOptionGroup)[] | A.CascaderOption | A.SelectOptionData }) => VNode
 }
 
-export type ColumnsItemHide<F> = boolean | ((form: F) => boolean)
-export type ColumnsItemShow<F> = boolean | ((form: F) => boolean)
-export type ColumnsItemDisabled<F> = boolean | ((form: F) => boolean)
-export type ColumnsItemRequest<F = any> = (form: F) => Promise<any>
-export type ColumnsItemFormat<T = any> = (res: T) => ColumnsItemOptions | ColumnsItemData
+export type ColumnItemHide<F> = boolean | ((form: F) => boolean)
+export type ColumnItemShow<F> = boolean | ((form: F) => boolean)
+export type ColumnItemDisabled<F> = boolean | ((form: F) => boolean)
+export type ColumnItemRequest<F = any> = (form: F) => Promise<any>
+export type ColumnItemFormat<T = any> = (res: T) => ColumnItemOptions | ColumnItemData
 
-export interface ColumnsItem<F = any> {
-  type?: ColumnsItemType // 类型
+export interface ColumnItem<F = any> {
+  type?: ColumnItemType // 类型
   label?: A.FormItemInstance['label'] | (() => VNode) // 标签
   field: A.FormItemInstance['field'] // 字段(必须唯一)
   span?: A.GridItemProps['span']
-  props?: ColumnsItemProps
+  props?: ColumnItemProps
   gridItemProps?: A.GridItemProps
   formItemProps?: Omit<A.FormItemInstance['$props'], 'label' | 'field'> // a-form-item的props
   required?: boolean // 是否必填
   rules?: A.FormItemInstance['$props']['rules'] // 表单校验规则
-  options?: ColumnsItemOptions
-  data?: ColumnsItemData
-  hide?: ColumnsItemHide<F> // 是否隐藏
-  show?: ColumnsItemShow<F> // 是否显示（优先级比hide高）
-  disabled?: ColumnsItemDisabled<F> // 是否禁用
-  request?: ColumnsItemRequest<F> // 接口请求api
-  resultFormat?: ColumnsItemFormat // 结果集格式化
+  options?: ColumnItemOptions
+  data?: ColumnItemData
+  hide?: ColumnItemHide<F> // 是否隐藏
+  show?: ColumnItemShow<F> // 是否显示（优先级比hide高）
+  disabled?: ColumnItemDisabled<F> // 是否禁用
+  request?: ColumnItemRequest<F> // 接口请求api
+  resultFormat?: ColumnItemFormat // 结果集格式化
   init?: boolean // 初始化请求
   cascader?: string[] // 级联的field字段列表
-  slots?: Partial<ColumnsItemSlots>
+  slots?: Partial<ColumnItemSlots>
   formItemSlots?: Partial<Record<'help' | 'extra', string | (() => VNode)>>
 }
-
-export interface Options {
-  form?: Omit<A.FormInstance['$props'], 'model'>
-  grid?: A.GridProps
-  gridItem?: A.GridItemProps
-  btns?: { hide?: boolean, searchBtnText?: string }
-  fold?: { enable?: boolean, defaultCollapsed?: boolean }
-}
-
-export type Columns<F = any> = ColumnsItem<F>[]
