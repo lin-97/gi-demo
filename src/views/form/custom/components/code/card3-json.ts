@@ -4,12 +4,13 @@ export default `
     <template #extra>
       <a-button type="primary" status="warning" @click="onViewCode">
         <template #icon><icon-code /></template>
-        <span>查看JSON配置</span>
+        <span>查看代码</span>
       </a-button>
     </template>
     <a-row :gutter="30">
       <a-col :xs="24" :sm="24" :md="12">
-        <GiForm ref="formRef" v-model="form" :options="options" :columns="columns">
+        <GiForm ref="formRef" v-model="form" :columns="columns"
+          :grid-item-props="{ span: { xs: 24, sm: 12, md: 12, lg: 8 } }">
           <template #btns>
             <a-row justify="end" class="w-full">
               <a-space>
@@ -33,7 +34,7 @@ import { Drawer, Message } from '@arco-design/web-vue'
 import { useWindowSize } from '@vueuse/core'
 import Card3Json from './code/card3-json'
 import GiCodeView from '@/components/GiCodeView/index.vue'
-import { type Columns, GiForm, type Options } from '@/components/GiForm'
+import { type ColumnItem, GiForm } from '@/components/GiForm'
 import * as Regexp from '@/utils/regexp'
 import { getAreaList } from '@/apis/area'
 
@@ -55,18 +56,12 @@ onMounted(() => {
 
 const formRef = useTemplateRef('formRef')
 
-const options: Options = {
-  grid: { cols: 6 },
-  gridItem: { span: { xs: 6, sm: 3, md: 3, lg: 2 } },
-  btns: { hide: true }
-}
-
-const columns: Columns<typeof form> = reactive([
+const columns: ColumnItem<typeof form>[] = reactive([
   {
     type: 'input',
     label: '姓名',
     field: 'name',
-    span: { xs: 6, sm: 3 },
+    span: { xs: 24, sm: 12 },
     props: {
       maxLength: 4
     },
@@ -80,7 +75,7 @@ const columns: Columns<typeof form> = reactive([
     type: 'input',
     label: '手机',
     field: 'phone',
-    span: { xs: 6, sm: 3 },
+    span: { xs: 24, sm: 12 },
     props: {
       maxLength: 11
     },
@@ -117,7 +112,7 @@ const columns: Columns<typeof form> = reactive([
     type: 'input',
     label: '',
     field: 'btns',
-    span: 6
+    span: 24
   }
 ])
 
