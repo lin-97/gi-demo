@@ -1,6 +1,7 @@
 <template>
   <div class="gi_table_page">
-    <GiForm v-model="form" :columns="columns" search hide-fold-btn :suffix="false" @search="search" @reset="search">
+    <GiForm v-model="form" :columns="columns" search hide-fold-btn :suffix="false"
+      :grid-item-props="{ span: { xs: 24, sm: 12, md: 8, lg: 8, xl: 6, xxl: 6 } }" @search="search" @reset="search">
     </GiForm>
 
     <a-table class="gi_full_table" row-key="id" page-position="bottom" :bordered="{ cell: true }" :loading="loading"
