@@ -88,6 +88,7 @@ interface Props {
 
 const props = withDefaults(defineProps<Props>(), {
   autoLabelWidth: true,
+  scrollToFirstError: true,
   defaultCollapsed: false,
   search: false,
   gridItemProps: { span: { xs: 24, sm: 12 } },
