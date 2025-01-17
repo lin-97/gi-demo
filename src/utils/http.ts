@@ -6,6 +6,9 @@ import { getToken } from '@/utils/auth'
 import 'nprogress/nprogress.css'
 import router from '@/router'
 
+// 节流时间
+const throttleTime = 500;
+
 NProgress.configure({ showSpinner: false }) // NProgress Configuration
 
 interface ICodeMessage {
@@ -52,6 +55,37 @@ http.interceptors.request.use(
   }
 )
 
+// 节流处理
+const abortControllerMap: Map<string, AbortController> = new Map()
+const throttleMap = new Map()
+http.interceptors.request.use((config: AxiosRequestConfig) => {
+  const controller = new AbortController()
+  const url = config.url || ""
+  config.signal = controller.signal
+  abortControllerMap.set(url, controller)
+  const nowTime = new Date().getTime()
+  let dataString = config.data
+    ? Object.entries(config.data)
+      .map(([key, value]) => `${key}=${value}`)
+      .join("&")
+    : ""
+  let paramString = config.params
+    ? Object.entries(config.params)
+      .map(([key, value]) => `${key}=${value}`)
+      .join("&")
+    : ""
+  let uniqueCode = `${config.url};${config.method};${dataString};${paramString};`
+  if (throttleMap.get(uniqueCode)) {
+    if (
+      nowTime - throttleMap.get(uniqueCode) < throttleTime
+    ) {
+      return Promise.reject(new Error("throttle"))
+    }
+  }
+  throttleMap.set(uniqueCode, nowTime)
+  return config
+})
+
 // 响应拦截器
 http.interceptors.response.use(
   (response: AxiosResponse) => {
@@ -81,11 +115,13 @@ http.interceptors.response.use(
     return response
   },
   (error) => {
-    NProgress.done()
-    Message.clear()
-    const response = Object.assign({}, error.response)
-    response && Message.error(StatusCodeMessage[response.status] || '系统异常, 请检查网络或联系管理员！')
-    return Promise.reject(error)
+    if (error.message !== "throttle") {
+      NProgress.done()
+      Message.clear()
+      const response = Object.assign({}, error.response)
+      response && Message.error(StatusCodeMessage[response.status] || '系统异常, 请检查网络或联系管理员！')
+      return Promise.reject(error)
+    }
   }
 )
 
