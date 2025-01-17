@@ -211,12 +211,12 @@ watch(cloneForm as any, (newVal, oldVal) => {
           i.request(props.modelValue).then((res) => {
             dicData[i.field] = i.resultFormat ? i.resultFormat(res) : res.data
             if (!dicData[i.field].map((i: any) => i.value).includes(props.modelValue[i.field])) {
-              emit('update:modelValue', Object.assign(props.modelValue, { [i.field]: '' }))
+              emit('update:modelValue', Object.assign(props.modelValue, { [i.field]: Array.isArray(props.modelValue[i.field]) ? [] : '' }))
             }
           })
         } else if (i.request && !newVal[item.field]) {
           dicData[i.field] = []
-          emit('update:modelValue', Object.assign(props.modelValue, { [i.field]: '' }))
+          emit('update:modelValue', Object.assign(props.modelValue, { [i.field]: Array.isArray(props.modelValue[i.field]) ? [] : '' }))
         }
       })
     }
