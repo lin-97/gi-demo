@@ -1,0 +1,1 @@
+import{a7 as e}from"./index-Do-DxwTW.js";function t(t){return e.get("/system/role",t)}function r(t){return e.get("/system/role/detail",t)}function s(t){return e.get("/system/role/menuIds",t)}export{s as a,t as b,r as g};
