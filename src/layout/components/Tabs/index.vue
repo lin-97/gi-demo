@@ -7,8 +7,8 @@
         :closable="Boolean(!item.meta?.affix)">
         <template v-if="appStore.tabMode === 'custom2'" #title>
           <a-dropdown trigger="contextMenu">
-            <a-tag class="tabs-pane__tag" closable :color="route.path === item.path ? 'arcoblue' : undefined"
-              @close="tabsStore.closeCurrent(item.path)">
+            <a-tag class="tabs-pane__tag" :closable="Boolean(!item.meta?.affix)"
+              :color="route.path === item.path ? 'arcoblue' : undefined" @close="tabsStore.closeCurrent(item.path)">
               {{ item.meta?.title }}
             </a-tag>
             <template #content>
