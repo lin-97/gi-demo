@@ -1,10 +1,32 @@
 <template>
   <div v-if="appStore.tab" class="tabs">
-    <a-tabs :class="{ 'tabs-type-custom': appStore.tabMode === 'custom' }" editable hide-content size="medium"
-      :type="tabsType" :active-key="route.path" @tab-click="handleTabClick($event as string)"
+    <a-tabs :class="`tabs__${appStore.tabMode}`" editable hide-content size="medium" :type="tabsType"
+      :active-key="route.path" @tab-click="handleTabClick($event as string)"
       @delete="tabsStore.closeCurrent($event as string)">
       <a-tab-pane v-for="item of tabsStore.tabList" :key="item.path" :title="(item.meta?.title as string)"
         :closable="Boolean(!item.meta?.affix)">
+        <template v-if="appStore.tabMode === 'custom2'" #title>
+          <a-dropdown trigger="contextMenu">
+            <a-tag class="tabs-pane__tag" closable :color="route.path === item.path ? 'arcoblue' : undefined"
+              @close="tabsStore.closeCurrent(item.path)">
+              {{ item.meta?.title }}
+            </a-tag>
+            <template #content>
+              <a-doption @click="tabsStore.closeCurrent(item.path)">
+                <template #icon><icon-close /></template>
+                <template #default>关闭当前</template>
+              </a-doption>
+              <a-doption @click="tabsStore.closeRight(item.path)">
+                <template #icon><icon-close /></template>
+                <template #default>关闭右侧</template>
+              </a-doption>
+              <a-doption @click="tabsStore.closeOther(item.path)">
+                <template #icon><icon-eraser /></template>
+                <template #default>关闭其他</template>
+              </a-doption>
+            </template>
+          </a-dropdown>
+        </template>
       </a-tab-pane>
       <template #extra>
         <a-space size="medium">
@@ -38,6 +60,7 @@
 
 <script setup lang="ts">
 import type { RouteLocationNormalized } from 'vue-router'
+import type { TabsInstance } from '@arco-design/web-vue'
 import MagicIcon from './MagicIcon.vue'
 import ReloadIcon from './ReloadIcon.vue'
 import { useAppStore, useTabsStore } from '@/stores'
@@ -47,7 +70,9 @@ const route = useRoute()
 const router = useRouter()
 const appStore = useAppStore()
 const tabsStore = useTabsStore()
-const tabsType = computed(() => appStore.tabMode === 'custom' ? 'card' : appStore.tabMode)
+const tabsType = computed(() => {
+  return (['custom1', 'custom2'].includes(appStore.tabMode) ? 'card' : appStore.tabMode) as unknown as TabsInstance['type']
+})
 
 tabsStore.init()
 
@@ -101,8 +126,8 @@ const handleTabClick = (key: string) => {
   }
 }
 
-// 自定义tabs样式
-:deep(.tabs-type-custom) {
+// tabs样式-自定义类型1
+:deep(.tabs__custom1) {
   .arco-tabs-nav-tab {
     .arco-tabs-tab {
       padding: 5px 20px;
@@ -135,6 +160,26 @@ const handleTabClick = (key: string) => {
   }
 }
 
+// tabs样式-自定义类型2
+:deep(.tabs__custom2) {
+  .arco-tabs-nav {
+    padding-bottom: 6px;
+  }
+
+  .arco-tabs-tab {
+    padding: 0;
+    border: 0;
+
+    .arco-tabs-tab-close-btn {
+      display: none;
+    }
+
+    &:hover {
+      background-color: transparent;
+    }
+  }
+}
+
 :deep(.arco-dropdown-option-icon) {
   color: var(--color-text-3);
 }
@@ -142,5 +187,9 @@ const handleTabClick = (key: string) => {
 .tabs {
   padding-top: 5px;
   background-color: var(--color-bg-1);
+
+  .tabs-pane__tag {
+    margin: 0 4px;
+  }
 }
 </style>

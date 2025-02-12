@@ -1,9 +1,13 @@
 <template>
   <div class="test">
-    <a-space wrap>
+    <a-space fill wrap>
       <a-button type="primary" @click="success">成功接口请求</a-button>
       <a-button type="primary" status="danger" @click="fail">失败接口请求</a-button>
       <a-button type="primary" status="warning" @click="setTokenExpired">设置token过期</a-button>
+    </a-space>
+    <a-space fill wrap>
+      <a-input v-model="currentTabTitle" placeholder="输入当前tab页签名称"></a-input>
+      <a-button type="primary" @click="changeTabTitle">修改</a-button>
     </a-space>
   </div>
 </template>
@@ -11,7 +15,7 @@
 <script lang="ts" setup>
 import { Message } from '@arco-design/web-vue'
 import { getTestFail, getTestSuccess } from '@/apis/test'
-import { useUserStore } from '@/stores'
+import { useTabsStore, useUserStore } from '@/stores'
 
 const userStore = useUserStore()
 
@@ -30,6 +34,12 @@ const fail = async () => {
 const setTokenExpired = () => {
   userStore.editToken('token123456')
   Message.info('token已过期, 请刷新页面, 登录成功会返回此页面')
+}
+
+const { setTabTitle } = useTabsStore()
+const currentTabTitle = ref('')
+const changeTabTitle = () => {
+  setTabTitle(currentTabTitle.value)
 }
 </script>
 

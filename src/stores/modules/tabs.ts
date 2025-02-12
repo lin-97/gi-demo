@@ -45,6 +45,17 @@ const storeSetup = () => {
     tabList.value = arr
   }
 
+  // 设置当前tab页签名称
+  const setTabTitle = (title: string) => {
+    if (!title) return false
+    const route = router.currentRoute.value
+    const path = route?.fullPath || route.path
+    const index = tabList.value.findIndex((i) => i.fullPath === path)
+    if (index >= 0) {
+      tabList.value[index].meta.title = title
+    }
+  }
+
   // 添加缓存页
   const addCacheItem = (item: RouteLocationNormalized) => {
     if (!item.name) return
@@ -131,6 +142,7 @@ const storeSetup = () => {
     addTabItem,
     deleteTabItem,
     clearTabList,
+    setTabTitle,
     addCacheItem,
     deleteCacheItem,
     clearCacheList,
