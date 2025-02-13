@@ -4,7 +4,7 @@
       <a-result status="success" title="操作成功">
         <template #subtitle>表单提交成功！</template>
         <template #extra>
-          <a-space wrap>
+          <a-space>
             <a-button size="medium">打印结果</a-button>
             <a-button type="primary" size="medium">返回列表</a-button>
           </a-space>
