@@ -1,0 +1,1 @@
+import{_ as s,o as a,f as e,i as d}from"./index-Crm57DG_.js";const i={class:"image-card"};const t=s({},[["render",function(s,t){return a(),e("div",i,t[0]||(t[0]=[d("img",{class:"animated-fade-up-1",src:"/gi-demo/static/svg/home-design-BpgkVAYf.svg"},null,-1)]))}],["__scopeId","data-v-a2e757f7"]]);export{t as default};
