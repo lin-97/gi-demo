@@ -28,7 +28,7 @@ declare module 'vue' {
     GiSplitPane: typeof import('./components/GiSplitPane/index.vue')['default']
     GiSplitPaneFlexibleBox: typeof import('./components/GiSplitPane/components/GiSplitPaneFlexibleBox.vue')['default']
     GiSvgIcon: typeof import('./components/GiSvgIcon/index.vue')['default']
-    GiTable: typeof import('./components/GiTable/index.vue')['default']
+    GiTable: typeof import('./components/GiTable/src/GiTable.vue')['default']
     GiTag: typeof import('./components/GiTag/index.tsx')['default']
     GiThemeBtn: typeof import('./components/GiThemeBtn/index.vue')['default']
     Icon403: typeof import('./components/icons/Icon403.vue')['default']
