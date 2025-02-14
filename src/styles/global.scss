@@ -1,167 +1,6 @@
 /* 全局样式 */
 @import './var.scss';
 
-.w-full {
-  width: 100%;
-}
-
-.h-full {
-  height: 100%;
-}
-
-.overflow-hidden {
-  overflow: hidden;
-}
-
-.flex-1 {
-  flex: 1;
-}
-
-// 一般结合<a-row class="flex-column"></a-row>使用
-.flex-column {
-  flex-direction: column;
-  overflow: hidden;
-}
-
-// 通用外边距
-.gi_margin {
-  margin: $margin;
-}
-
-// 通用内边距
-.gi_padding {
-  padding: $padding;
-}
-
-.gi_relative {
-  position: relative;
-}
-
-.gi_absolute {
-  position: absolute;
-}
-
-.gi_rotate_90deg {
-  transform: rotate(90deg);
-}
-
-.gi_rotate_-90deg {
-  transform: rotate(-90deg);
-}
-
-.gi_rotate_180deg {
-  transform: rotate(180deg);
-}
-
-.gi_rotate_-180deg {
-  transform: rotate(-180deg);
-}
-
-.gi_select_input {
-  width: 120px !important;
-}
-
-.gi_search_input {
-  width: 250px !important;
-}
-
-.gi_line_1 {
-  overflow: hidden;
-  white-space: nowrap;
-  text-overflow: ellipsis;
-}
-
-.gi_line_2 {
-  line-clamp: 2;
-  -webkit-line-clamp: 2;
-}
-
-.gi_line_3 {
-  line-clamp: 3;
-  -webkit-line-clamp: 3;
-}
-
-.gi_line_4 {
-  line-clamp: 4;
-  -webkit-line-clamp: 4;
-}
-
-.gi_line_5 {
-  line-clamp: 5;
-  -webkit-line-clamp: 5;
-}
-
-.gi_line_2,
-.gi_line_3,
-.gi_line_4,
-.gi_line_5 {
-  overflow: hidden;
-  word-break: break-all;
-  text-overflow: ellipsis;
-  display: -webkit-box; // 弹性伸缩盒
-  -webkit-box-orient: vertical; // 设置伸缩盒子元素排列方式
-}
-
-.gi_mt {
-  margin-top: $margin;
-}
-
-.gi_mb {
-  margin-bottom: $margin;
-}
-
-.gi_ml {
-  margin-left: $margin;
-}
-
-.gi_mr {
-  margin-right: $margin;
-}
-
-.gi_mx {
-  margin: 0 $margin;
-}
-
-.gi_my {
-  margin: $margin 0;
-}
-
-.gi_m0 {
-  margin: 0;
-}
-
-.gi_pt {
-  padding-top: $margin;
-}
-
-.gi_pb {
-  padding-bottom: $margin;
-}
-
-.gi_pl {
-  padding-left: $margin;
-}
-
-.gi_pr {
-  padding-right: $margin;
-}
-
-.gi_px {
-  padding: 0 $padding;
-}
-
-.gi_py {
-  padding: $padding 0;
-}
-
-.gi_p0 {
-  padding: 0;
-}
-
-.gi_round {
-  border-radius: 100px;
-}
-
 // hover按钮
 .gi_hover_btn {
   border: 0 !important;
@@ -287,4 +126,170 @@
       padding-right: 2px;
     }
   }
+}
+
+// 以下这些类名要放到下面，涉及到css权重优先级问题
+.gi_mt {
+  margin-top: $margin;
+}
+
+.gi_mb {
+  margin-bottom: $margin;
+}
+
+.gi_ml {
+  margin-left: $margin;
+}
+
+.gi_mr {
+  margin-right: $margin;
+}
+
+.gi_mx {
+  margin-left: $margin;
+  margin-right: $margin;
+}
+
+.gi_my {
+  margin-top: $margin;
+  margin-bottom: $margin;
+}
+
+.gi_m0 {
+  margin: 0;
+}
+
+.gi_pt {
+  padding-top: $margin;
+}
+
+.gi_pb {
+  padding-bottom: $margin;
+}
+
+.gi_pl {
+  padding-left: $margin;
+}
+
+.gi_pr {
+  padding-right: $margin;
+}
+
+.gi_px {
+  padding-left: $padding;
+  padding-right: $padding;
+}
+
+.gi_py {
+  padding-top: $padding;
+  padding-bottom: $padding;
+}
+
+.gi_p0 {
+  padding: 0;
+}
+
+.gi_round {
+  border-radius: 100px;
+}
+
+.w-full {
+  width: 100%;
+}
+
+.h-full {
+  height: 100%;
+}
+
+.overflow-hidden {
+  overflow: hidden;
+}
+
+.flex-1 {
+  flex: 1;
+}
+
+// 一般结合<a-row class="flex-column"></a-row>使用
+.flex-column {
+  flex-direction: column;
+  overflow: hidden;
+}
+
+// 通用外边距
+.gi_margin {
+  margin: $margin;
+}
+
+// 通用内边距
+.gi_padding {
+  padding: $padding;
+}
+
+.gi_relative {
+  position: relative;
+}
+
+.gi_absolute {
+  position: absolute;
+}
+
+.gi_rotate_90deg {
+  transform: rotate(90deg);
+}
+
+.gi_rotate_-90deg {
+  transform: rotate(-90deg);
+}
+
+.gi_rotate_180deg {
+  transform: rotate(180deg);
+}
+
+.gi_rotate_-180deg {
+  transform: rotate(-180deg);
+}
+
+.gi_select_input {
+  width: 120px !important;
+}
+
+.gi_search_input {
+  width: 250px !important;
+}
+
+.gi_line_1 {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.gi_line_2 {
+  line-clamp: 2;
+  -webkit-line-clamp: 2;
+}
+
+.gi_line_3 {
+  line-clamp: 3;
+  -webkit-line-clamp: 3;
+}
+
+.gi_line_4 {
+  line-clamp: 4;
+  -webkit-line-clamp: 4;
+}
+
+.gi_line_5 {
+  line-clamp: 5;
+  -webkit-line-clamp: 5;
+}
+
+.gi_line_2,
+.gi_line_3,
+.gi_line_4,
+.gi_line_5 {
+  overflow: hidden;
+  word-break: break-all;
+  text-overflow: ellipsis;
+  display: -webkit-box; // 弹性伸缩盒
+  -webkit-box-orient: vertical; // 设置伸缩盒子元素排列方式
 }

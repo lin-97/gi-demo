@@ -43,7 +43,8 @@
               </a-button>
             </a-tooltip>
             <template #content>
-              <a-doption v-for="item in sizeList" :key="item.value" :value="item.value" :active="item.value === size">
+              <a-doption v-for="item in sizeOptions" :key="item.value" :value="item.value"
+                :active="item.value === size">
                 {{ item.label }}
               </a-doption>
             </template>
@@ -59,8 +60,8 @@
             <template #content>
               <div class="gi-table__draggable">
                 <VueDraggable v-model="settingColumnList">
-                  <div v-for="item in settingColumnList" :key="item.title" class="drag-item">
-                    <div class="drag-item__move"><icon-drag-dot-vertical /></div>
+                  <div v-for="item in settingColumnList" :key="item.title" class="gi-table__draggable-item">
+                    <div class="gi-table__draggable-item-move"><icon-drag-dot-vertical /></div>
                     <a-checkbox v-model:model-value="item.show" :disabled="item.disabled">{{ item.title }}</a-checkbox>
                   </div>
                 </VueDraggable>
@@ -78,8 +79,8 @@
       </a-space>
     </a-row>
     <div class="gi-table__container">
-      <a-table ref="tableRef" :stripe="stripe" :size="size" :bordered="{ cell: isBordered }"
-        v-bind="{ ...attrs, columns: _columns }" :data="data">
+      <a-table ref="tableRef" v-bind="tableProps" :stripe="stripe" :size="size" :bordered="{ cell: isBordered }"
+        :columns="_columns" :data="data">
         <template v-for="key in Object.keys(slots)" :key="key" #[key]="scoped">
           <slot :key="key" :name="key" v-bind="scoped"></slot>
         </template>
@@ -91,12 +92,15 @@
 <script setup lang="ts" generic="T extends TableData">
 import type { DropdownInstance, TableColumnData, TableData, TableInstance } from '@arco-design/web-vue'
 import { VueDraggable } from 'vue-draggable-plus'
+import { omit } from 'lodash-es'
+import type { TableProps } from './type'
 
-defineOptions({ name: 'GiTable', inheritAttrs: false })
+defineOptions({ name: 'GiTable' })
+
 const props = withDefaults(defineProps<Props>(), {
   title: '',
-  data: () => [],
-  disabledColumnKeys: () => [] // 禁止控制显示隐藏的列
+  disabledColumnKeys: () => [], // 禁止控制显示隐藏的列
+  data: () => []
 })
 
 const emit = defineEmits<{
@@ -123,14 +127,14 @@ defineSlots<{
   [propsName: string]: (props: { key: string, record: T, column: TableColumnData, rowIndex: number }) => void
 }>()
 
-const attrs = useAttrs()
-const slots = useSlots()
+type Props = TableProps & { title?: string, disabledColumnKeys?: string[], data: T[] }
 
-interface Props {
-  title?: string
-  disabledColumnKeys?: string[]
-  data: T[]
-}
+const slots: any = useSlots()
+
+const tableProps = computed(() => {
+  const obj = omit(props, ['title', 'disabledColumnKeys'])
+  return obj
+})
 
 const tableRef = useTemplateRef('tableRef')
 const stripe = ref(false)
@@ -139,30 +143,31 @@ const isBordered = ref(true)
 const isFullscreen = ref(false)
 
 type SizeItem = { label: string, value: TableInstance['size'] }
-const sizeList: SizeItem[] = [
+const sizeOptions: SizeItem[] = [
   { label: '迷你', value: 'mini' },
   { label: '小型', value: 'small' },
   { label: '中等', value: 'medium' },
   { label: '大型', value: 'large' }
 ]
 
-const refresh = () => {
-  emit('refresh')
-}
-
+// 修改表格尺寸
 const handleSelect: DropdownInstance['onSelect'] = (value) => {
   size.value = value as TableInstance['size']
 }
 
-const showSettingColumnBtn = computed(() => attrs?.columns && (attrs?.columns as TableColumnData[])?.length)
+const refresh = () => {
+  emit('refresh')
+}
+
+const showSettingColumnBtn = computed(() => props?.columns && (props?.columns as TableColumnData[])?.length)
 type SettingColumnItem = { title: string, key: string, show: boolean, disabled: boolean }
 const settingColumnList = ref<SettingColumnItem[]>([])
 
 // 重置配置列
 const resetSettingColumns = () => {
   settingColumnList.value = []
-  if (attrs.columns) {
-    const arr = attrs.columns as TableColumnData[]
+  if (props.columns) {
+    const arr = props.columns as TableColumnData[]
     arr.forEach((item) => {
       settingColumnList.value.push({
         key: item.dataIndex || (typeof item.title === 'string' ? item.title : ''),
@@ -177,7 +182,7 @@ const resetSettingColumns = () => {
 }
 
 watch(
-  () => attrs,
+  () => props,
   () => {
     resetSettingColumns()
   },
@@ -186,8 +191,8 @@ watch(
 
 // 排序和过滤可显示的列数据
 const _columns = computed(() => {
-  if (!attrs.columns) return []
-  const arr = attrs.columns as TableColumnData[]
+  if (!props.columns) return []
+  const arr = props.columns as TableColumnData[]
   // 显示的dataIndex
   const showDataIndexs = settingColumnList.value
     .filter((i) => i.show)
@@ -249,17 +254,16 @@ defineExpose({ tableRef })
   }
 }
 
-.drag-item {
+.gi-table__draggable-item {
   display: flex;
   align-items: center;
-
   cursor: pointer;
 
   &:hover {
     background-color: var(--color-fill-2);
   }
 
-  &__move {
+  &-move {
     padding-left: 2px;
     padding-right: 2px;
     cursor: move;

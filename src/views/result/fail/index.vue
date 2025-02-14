@@ -1,6 +1,6 @@
 <template>
-  <div class="result result--fail">
-    <section class="result__box">
+  <div class="gi_page">
+    <section class="result-box">
       <a-result status="error" title="操作失败">
         <template #subtitle>表单提交失败，请重试</template>
         <template #extra>
@@ -9,22 +9,24 @@
             <a-button type="primary" size="medium">返回修改</a-button>
           </a-space>
         </template>
+        <a-row justify="center">
+          <a-typography class="result-box__info">
+            <a-typography-paragraph>您提交的内容有如下错误：</a-typography-paragraph>
+            <ul>
+              <li>
+                <icon-exclamation-circle-fill :size="16" style="color: rgb(var(--warning-5))" />
+                <span>认证照片不够清晰</span>
+                <a-link>立即修改</a-link>
+              </li>
+              <li>
+                <icon-exclamation-circle-fill :size="16" style="color: rgb(var(--warning-5))" />
+                <span>你的用户不具有此操作权限</span>
+                <a-link>立即修改</a-link>
+              </li>
+            </ul>
+          </a-typography>
+        </a-row>
       </a-result>
-      <div class="result__info">
-        <a-typography-paragraph>您提交的内容有如下错误：</a-typography-paragraph>
-        <ul>
-          <li>
-            <icon-exclamation-circle-fill :size="16" style="color: rgb(var(--warning-5))" />
-            <span class="result__tip">认证照片不够清晰</span>
-            <a-link>立即修改</a-link>
-          </li>
-          <li>
-            <icon-exclamation-circle-fill :size="16" style="color: rgb(var(--warning-5))" />
-            <span class="result__tip">你的用户不具有此操作权限</span>
-            <a-link>立即修改</a-link>
-          </li>
-        </ul>
-      </div>
     </section>
   </div>
 </template>
@@ -34,35 +36,28 @@ defineOptions({ name: 'ResultFail' })
 </script>
 
 <style lang="scss" scoped>
-.result {
-  padding: $margin;
+.result-box {
+  padding: 30px;
   box-sizing: border-box;
-  overflow-y: auto;
-  &__box {
-    padding: 30px;
-    box-sizing: border-box;
-    background-color: var(--color-bg-1);
-  }
+  background-color: var(--color-bg-1);
+
   &__info {
-    width: 100%;
-    max-width: 500px;
-    margin: 0 auto;
-    padding: 24px;
-    margin-top: 20px;
     background: var(--color-fill-2);
     font-size: 12px;
+    padding: 24px;
     box-sizing: border-box;
-    ul > li {
+    width: 100%;
+    max-width: 500px;
+
+    ul>li {
       display: flex;
       align-items: center;
-      margin-bottom: 8px;
+      column-gap: 8px;
+
       :deep(.arco-link) {
         font-size: inherit;
       }
     }
-  }
-  &__tip {
-    margin: 0 10px;
   }
 }
 </style>
