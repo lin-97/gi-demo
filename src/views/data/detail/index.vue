@@ -1,14 +1,14 @@
 <template>
-  <div ref="containerRef" class="detail">
-    <a-affix :target="(containerRef as HTMLElement)">
-      <a-page-header title="详情" class="detail__header" @back="back">
+  <div ref="containerRef" class="gi_page gi_p0">
+    <a-affix :target="containerRef ?? undefined">
+      <a-page-header title="详情" @back="back">
         <template #extra>
           <a-button @click="back">返回</a-button>
         </template>
       </a-page-header>
     </a-affix>
 
-    <a-card title="基本信息">
+    <a-card title="基本信息" class="gi_mx gi_my">
       <a-descriptions table-layout="fixed" :label-style="{ width: '60px' }"
         :column="{ xs: 1, sm: 1, md: 2, lg: 2, xl: 3, xxl: 3 }">
         <a-descriptions-item label="姓名">Lin</a-descriptions-item>
@@ -37,7 +37,7 @@
       </a-descriptions>
     </a-card>
 
-    <a-card title="其他信息">
+    <a-card title="其他信息" class="gi_mx gi_my">
       <a-descriptions :column="1">
         <a-descriptions-item label="姓名">Lin</a-descriptions-item>
         <a-descriptions-item label="性别">男</a-descriptions-item>
@@ -83,16 +83,4 @@ const back = () => {
 }
 </script>
 
-<style lang="scss" scoped>
-:deep(.arco-card) {
-  margin: $margin;
-}
-
-.detail {
-  overflow: auto;
-
-  &__header {
-    background: var(--color-bg-1);
-  }
-}
-</style>
+<style lang="scss" scoped></style>
