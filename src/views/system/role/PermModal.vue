@@ -7,13 +7,13 @@
 
 <script lang="ts" setup>
 import { Message } from '@arco-design/web-vue'
-import { type SystemMenuOptionsItem, getSystemMenuOptions, getSystemRoleMenuIds } from '@/apis/system'
+import { type MenuOptionsItem, getMenuOptions, getRoleMenuIds } from '@/apis/system'
 import { isMobile } from '@/utils'
 
 const treeRef = useTemplateRef('treeRef')
-const treeData = ref<SystemMenuOptionsItem[]>([])
+const treeData = ref<MenuOptionsItem[]>([])
 const getTreeData = async () => {
-  const res = await getSystemMenuOptions()
+  const res = await getMenuOptions()
   treeData.value = res.data
   nextTick(() => {
     treeRef.value?.expandAll()
@@ -27,7 +27,7 @@ const menuIds = ref<string[]>([])
 const open = (data: { code: string, title: string }) => {
   menuIds.value = []
   visible.value = true
-  getSystemRoleMenuIds({ role: data.code }).then((res) => {
+  getRoleMenuIds({ role: data.code }).then((res) => {
     menuIds.value = res.data
   })
 }

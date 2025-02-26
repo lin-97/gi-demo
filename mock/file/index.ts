@@ -22,7 +22,7 @@ const getList = (type: number | string) => {
 
 export default defineMock([
   {
-    url: '/file/list',
+    url: '/file/getFileList',
     method: 'get',
     timeout: getDelayTime(),
     response: ({ query }) => {

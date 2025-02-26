@@ -24,8 +24,7 @@
 import { type FormInstance, Message } from '@arco-design/web-vue'
 import * as Regexp from '@/utils/regexp'
 import { useResetReactive } from '@/hooks'
-import { getSystemDictDetail } from '@/apis/system'
-import { saveBaseApi } from '@/apis/base'
+import { getDictDetail } from '@/apis/system'
 
 const emit = defineEmits<{
   (e: 'save-success'): void
@@ -61,7 +60,7 @@ const add = () => {
 const edit = async (id: string) => {
   roleId.value = id
   visible.value = true
-  const res = await getSystemDictDetail({ id })
+  const res = await getDictDetail({ id })
   Object.assign(form, res.data)
 }
 
@@ -74,8 +73,8 @@ const save = async () => {
   try {
     const valid = await formRef.value?.validate()
     if (valid) return false
-    const res = await saveBaseApi(form)
-    if (res.data) {
+    const res = await new Promise((resolve) => setTimeout(() => resolve(true), 300))
+    if (res) {
       Message.success('模拟保存成功')
       emit('save-success')
       return true

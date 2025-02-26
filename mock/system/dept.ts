@@ -5,7 +5,7 @@ import deptData from '../_data/system_dept'
 
 export default defineMock([
   {
-    url: '/system/dept/detail',
+    url: '/system/dept/getDeptDetail',
     method: 'get',
     timeout: getDelayTime(),
     response: ({ query }) => {
@@ -19,7 +19,7 @@ export default defineMock([
     }
   },
   {
-    url: '/system/dept', // 这个短的要放在后面，不然会优先匹配
+    url: '/system/dept/getDeptList', // 这个短的要放在后面，不然会优先匹配
     method: 'get',
     timeout: getDelayTime(),
     response: () => {

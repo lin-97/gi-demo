@@ -20,8 +20,7 @@
 
 <script setup lang="ts">
 import { type FormInstance, Message } from '@arco-design/web-vue'
-import { getSystemDictDataDetail } from '@/apis/system'
-import { saveBaseApi } from '@/apis/base'
+import { getDictDataDetail } from '@/apis/system'
 import { useResetReactive } from '@/hooks'
 
 const emit = defineEmits<{
@@ -59,7 +58,7 @@ const edit = async (data: { id: string, code: string }) => {
   visible.value = true
   dictDataId.value = data.id
   loading.value = true
-  const res = await getSystemDictDataDetail(data)
+  const res = await getDictDataDetail(data)
   Object.assign(form, res.data)
   loading.value = false
 }
@@ -73,8 +72,8 @@ const save = async () => {
   try {
     const valid = await formRef.value?.validate()
     if (valid) return false
-    const res = await saveBaseApi(form)
-    if (res.data) {
+    const res = await new Promise((resolve) => setTimeout(() => resolve(true), 300))
+    if (res) {
       Message.success('模拟保存成功')
       emit('save-success')
       return true

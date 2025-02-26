@@ -57,7 +57,7 @@
                   <template #icon><icon-edit /></template>
                   <span>编辑</span>
                 </a-button>
-                <a-popconfirm type="warning" content="确定删除该角色吗?" @before-ok="onDelete(record)">
+                <a-popconfirm type="warning" content="确定删除该角色吗?">
                   <a-button type="primary" status="danger" size="mini">
                     <template #icon><icon-delete /></template>
                     <span>删除</span>
@@ -81,8 +81,7 @@ import AddDictModal from './AddDictModal.vue'
 import DictDataModal from './DictDataModal/index.vue'
 import { useTable } from '@/hooks'
 import { useDict } from '@/hooks/app'
-import { type SystemDictItem, getSystemDictList } from '@/apis/system'
-import { deleteBaseApi } from '@/apis/base'
+import { type SystemDictItem, getDictList } from '@/apis/system'
 
 defineOptions({ name: 'SystemRole' })
 
@@ -103,9 +102,8 @@ const {
   search,
   select,
   selectAll,
-  handleDelete,
   fixed
-} = useTable((page) => getSystemDictList(page), { immediate: true })
+} = useTable((page) => getDictList(page), { immediate: true })
 
 const reset = () => {
   form.name = ''
@@ -113,17 +111,11 @@ const reset = () => {
   search()
 }
 
-// 删除
-const onDelete = (item: SystemDictItem) => {
-  return handleDelete(() => deleteBaseApi({ ids: [item.id] }), { showModal: false })
-}
-
 // 批量删除
 const onMulDelete = () => {
   if (!selectedKeys.value.length) {
     return Message.warning('请选择字典！')
   }
-  handleDelete(() => deleteBaseApi({ ids: selectedKeys.value as string[] }))
 }
 
 const onAdd = () => {

@@ -33,7 +33,7 @@ import { Message, Modal } from '@arco-design/web-vue'
 import type { TreeNodeData } from '@arco-design/web-vue'
 import { mapTree } from 'xe-utils'
 import RightMenu from './RightMenu.vue'
-import { type CateTreeItem, getCateTreeData } from '@/apis/cate'
+import { type CateTreeItem, getCateTree } from '@/apis/cate'
 import GiSvgIcon from '@/components/GiSvgIcon/index.vue'
 
 interface Props {
@@ -66,10 +66,10 @@ const select = () => {
 }
 
 // 获取分类树
-const getCateTree = async () => {
+const getTreeData = async () => {
   try {
     loading.value = true
-    const res = await getCateTreeData()
+    const res = await getCateTree()
     treeData.value = mapTree(res.data, (i) => ({
       ...i,
       popupVisible: false,
@@ -92,7 +92,7 @@ const getCateTree = async () => {
     loading.value = false
   }
 }
-getCateTree()
+getTreeData()
 
 const inputRef = useTemplateRef('inputRef')
 // 保存当前右键的节点

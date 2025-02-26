@@ -12,7 +12,6 @@ import file from './file'
 import test from './test'
 import cate from './cate'
 import area from './area'
-import base from './base'
 
 export function setupProdMockServer() {
   createProdMockServer([
@@ -26,7 +25,6 @@ export function setupProdMockServer() {
     ...file,
     ...test,
     ...cate,
-    ...area,
-    ...base
+    ...area
   ])
 }

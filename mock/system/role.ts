@@ -6,7 +6,7 @@ import roleData from '../_data/system_role'
 
 export default defineMock([
   {
-    url: '/system/role/detail',
+    url: '/system/role/getRoleDetail',
     method: 'get',
     timeout: getDelayTime(),
     response: ({ query }) => {
@@ -20,7 +20,7 @@ export default defineMock([
     }
   },
   {
-    url: '/system/role/menuIds',
+    url: '/system/role/getRoleMenuIds',
     method: 'get',
     timeout: getDelayTime(),
     response: ({ query }) => {
@@ -40,7 +40,7 @@ export default defineMock([
     }
   },
   {
-    url: '/system/role', // 这个短的要放在后面，不然会优先匹配
+    url: '/system/role/getRoleList', // 这个短的要放在后面，不然会优先匹配
     method: 'get',
     timeout: getDelayTime(),
     response: () => {

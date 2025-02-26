@@ -4,7 +4,7 @@ import treeData from '../_data/tree'
 
 export default defineMock([
   {
-    url: '/cate/tree',
+    url: '/cate/getCateTree',
     method: 'get',
     timeout: getDelayTime(),
     response: () => {

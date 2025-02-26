@@ -121,14 +121,13 @@
 import { type ColProps, type FormInstance, Message } from '@arco-design/web-vue'
 import { mapTree } from 'xe-utils'
 import type { MenuForm } from './type'
-import { type SystemMenuItem, getSystemMenuDetail } from '@/apis/system'
-import { saveBaseApi } from '@/apis/base'
+import { type MenuItem, getMenuDetail } from '@/apis/system'
 import { isExternal } from '@/utils/validate'
 import { filterTree, transformPathToName } from '@/utils'
 import { useResetReactive } from '@/hooks'
 
 interface Props {
-  menus: SystemMenuItem[]
+  menus: MenuItem[]
 }
 
 const props = withDefaults(defineProps<Props>(), {
@@ -140,7 +139,7 @@ const emit = defineEmits<{
 }>()
 
 const menuSelectTree = computed(() => {
-  const menus = JSON.parse(JSON.stringify(props.menus)) as SystemMenuItem[]
+  const menus = JSON.parse(JSON.stringify(props.menus)) as MenuItem[]
   const data = filterTree(menus, (i) => [1, 2].includes(i.type))
   const arr = mapTree(data, (i) => ({
     id: i.id,
@@ -213,7 +212,7 @@ const add = () => {
 const edit = async (id: string) => {
   visible.value = true
   menuId.value = id
-  const res = await getSystemMenuDetail({ id })
+  const res = await getMenuDetail({ id })
   Object.assign(form, res.data)
   if (isExternal(form.path)) {
     isExternalUrl.value = true
@@ -229,8 +228,8 @@ const save = async () => {
   try {
     const valid = await formRef.value?.validate()
     if (valid) return false
-    const res = await saveBaseApi(form)
-    if (res.data) {
+    const res = await new Promise((resolve) => setTimeout(() => resolve(true), 300))
+    if (res) {
       Message.success('模拟保存成功')
       emit('save-success')
       return true

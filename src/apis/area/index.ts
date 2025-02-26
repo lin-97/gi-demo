@@ -5,5 +5,5 @@ export type * from './type'
 
 /** 获取地区列表 */
 export const getAreaList = (params: { type: 'province' | 'city' | 'area', code?: string }) => {
-  return http.get<T.AreaItem>('/area/list', params)
+  return http.get<T.AreaItem>('/area/getAreaList', params)
 }

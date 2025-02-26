@@ -106,7 +106,7 @@
                 <a-button v-if="[1, 2].includes(record.type)" type="primary" status="success" size="mini">
                   <template #icon><icon-plus /></template>
                 </a-button>
-                <a-popconfirm type="warning" content="您确定要删除该项吗?" @before-ok="onDelete(record)">
+                <a-popconfirm type="warning" content="您确定要删除该项吗?">
                   <a-button type="primary" status="danger" size="mini">
                     <template #icon><icon-delete /></template>
                     <span>删除</span>
@@ -126,8 +126,7 @@
 <script setup lang="ts">
 import { Drawer } from '@arco-design/web-vue'
 import AddMenuModal from './AddMenuModal.vue'
-import { type SystemMenuItem, getSystemMenuList } from '@/apis/system'
-import { deleteBaseApi } from '@/apis/base'
+import { type MenuItem, getMenuList } from '@/apis/system'
 import { isExternal } from '@/utils/validate'
 import { transformPathToName } from '@/utils'
 import { useDict } from '@/hooks/app'
@@ -152,9 +151,8 @@ const {
   loading,
   tableData: menuList,
   search,
-  handleDelete,
   fixed
-} = useTable(() => getSystemMenuList(), { immediate: true })
+} = useTable(() => getMenuList(), { immediate: true })
 
 const reset = () => {
   form.name = ''
@@ -166,12 +164,8 @@ const onAdd = () => {
   AddMenuModalRef.value?.add()
 }
 
-const onEdit = (item: SystemMenuItem) => {
+const onEdit = (item: MenuItem) => {
   AddMenuModalRef.value?.edit(item.id)
-}
-
-const onDelete = async (item: SystemMenuItem) => {
-  return handleDelete(() => deleteBaseApi({ ids: [item.id] }), { showModal: false })
 }
 
 const onViewCode = () => {

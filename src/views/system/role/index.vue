@@ -59,7 +59,7 @@
                   <template #icon><icon-safe /></template>
                   <template #default>分配权限</template>
                 </a-button>
-                <a-popconfirm type="warning" content="确定删除该角色吗?" @before-ok="onDelete(record)">
+                <a-popconfirm type="warning" content="确定删除该角色吗?">
                   <a-button type="primary" status="danger" size="mini" :disabled="record.disabled">
                     <template #icon><icon-delete /></template>
                     <span>删除</span>
@@ -83,8 +83,7 @@ import AddRoleModal from './AddRoleModal.vue'
 import PermModal from './PermModal.vue'
 import { useTable } from '@/hooks'
 import { useDict } from '@/hooks/app'
-import { type SystemRoleItem, getSystemRoleList } from '@/apis/system'
-import { deleteBaseApi } from '@/apis/base'
+import { type RoleItem, getRoleList } from '@/apis/system'
 
 defineOptions({ name: 'SystemRole' })
 
@@ -105,9 +104,8 @@ const {
   search,
   select,
   selectAll,
-  handleDelete,
   fixed
-} = useTable((page) => getSystemRoleList(page), { immediate: true })
+} = useTable((page) => getRoleList(page), { immediate: true })
 
 const reset = () => {
   form.name = ''
@@ -115,28 +113,22 @@ const reset = () => {
   search()
 }
 
-// 删除
-const onDelete = (item: SystemRoleItem) => {
-  return handleDelete(() => deleteBaseApi({ ids: [item.id] }), { showModal: false })
-}
-
 // 批量删除
 const onMulDelete = () => {
   if (!selectedKeys.value.length) {
     return Message.warning('请选择角色！')
   }
-  handleDelete(() => deleteBaseApi({ ids: selectedKeys.value as string[] }))
 }
 
 const onAdd = () => {
   AddRoleModalRef.value?.add()
 }
 
-const onEdit = (item: SystemRoleItem) => {
+const onEdit = (item: RoleItem) => {
   AddRoleModalRef.value?.edit(item.id)
 }
 
-const onPerm = (item: SystemRoleItem) => {
+const onPerm = (item: RoleItem) => {
   PermModalRef.value?.open({ code: item.code, title: item.name })
 }
 </script>

@@ -61,8 +61,7 @@
 <script setup lang="ts">
 import { type ColProps, type FormInstance, Message } from '@arco-design/web-vue'
 import * as Regexp from '@/utils/regexp'
-import { getSystemUserDetail } from '@/apis/system'
-import { saveBaseApi } from '@/apis/base'
+import { getUserDetail } from '@/apis/system'
 import { useDept, useRole } from '@/hooks/app'
 import { useResetReactive } from '@/hooks'
 
@@ -123,7 +122,7 @@ const add = () => {
 const edit = async (id: string) => {
   visible.value = true
   userId.value = id
-  const res = await getSystemUserDetail({ id })
+  const res = await getUserDetail({ id })
   Object.assign(form, res.data)
 }
 
@@ -136,8 +135,8 @@ const save = async () => {
   try {
     const valid = await formRef.value?.validate()
     if (valid) return false
-    const res = await saveBaseApi(form)
-    if (res.data) {
+    const res = await await new Promise((resolve) => setTimeout(() => resolve(true), 300))
+    if (res) {
       Message.success('模拟保存成功')
       emit('save-success')
       return true

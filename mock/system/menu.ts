@@ -6,7 +6,7 @@ import type { MockSystemMenuItem } from '../_data/_type'
 
 export default defineMock([
   {
-    url: '/user/routes',
+    url: '/user/getUserRoutes',
     method: 'get',
     timeout: getDelayTime(),
     response: ({ headers }) => {
@@ -33,7 +33,7 @@ export default defineMock([
     }
   },
   {
-    url: '/system/menu/detail',
+    url: '/system/menu/getMenuDetail',
     method: 'get',
     timeout: getDelayTime(),
     response: ({ query }) => {
@@ -47,7 +47,7 @@ export default defineMock([
     }
   },
   {
-    url: '/system/menu/options',
+    url: '/system/menu/getMenuOptions',
     method: 'get',
     timeout: getDelayTime(),
     response: () => {
@@ -60,7 +60,7 @@ export default defineMock([
     }
   },
   {
-    url: '/system/menu', // 这个短的要放在后面，不然会优先匹配
+    url: '/system/menu/getMenuList', // 这个短的要放在后面，不然会优先匹配
     method: 'get',
     timeout: getDelayTime(),
     response: () => {

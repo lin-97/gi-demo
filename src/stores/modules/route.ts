@@ -5,8 +5,8 @@ import { mapTree } from 'xe-utils'
 import { cloneDeep } from 'lodash-es'
 import { constantRoutes } from '@/router'
 import { transformPathToName } from '@/utils'
-import type { SystemMenuItem } from '@/apis/system'
-import { getUserAsyncRoutes as getAsyncRoutes } from '@/apis/user'
+import type { MenuItem } from '@/apis/system'
+import { getUserRoutes } from '@/apis/user'
 import ParentView from '@/components/ParentView/index.vue'
 
 const Layout = () => import('@/layout/index.vue')
@@ -43,7 +43,7 @@ const transformComponentView = (component: string) => {
  * 1. 对后端返回的路由数据进行排序，格式化
  * 2. 同时将component由字符串转成真正的模块
  */
-const formatAsyncRoutes = (menus: SystemMenuItem[]) => {
+const formatAsyncRoutes = (menus: MenuItem[]) => {
   if (!menus.length) return []
   menus.sort((a, b) => (a?.sort ?? 0) - (b?.sort ?? 0)) // 排序
   const routes = mapTree(menus, (item) => {
@@ -88,7 +88,7 @@ const storeSetup = () => {
   const generateRoutes = async (): Promise<RouteRecordRaw[]> => {
     try {
       // 向后端请求路由数据 这个接口已经根据用户角色过滤了没权限的路由(后端根据用户角色过滤路由显得比较安全些)
-      const res = await getAsyncRoutes()
+      const res = await getUserRoutes()
       const asyncRoutes = formatAsyncRoutes(res.data)
       setRoutes(asyncRoutes)
       const cloneRoutes = cloneDeep(asyncRoutes)
