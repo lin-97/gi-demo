@@ -48,7 +48,7 @@ const [form, resetForm] = useResetReactive({
   status: 1
 })
 
-const columns = computed<ColumnItem<typeof form>[]>(() => [
+const columns = computed(() => [
   {
     type: 'input',
     label: '姓名',
@@ -78,10 +78,12 @@ const columns = computed<ColumnItem<typeof form>[]>(() => [
     type: 'select',
     label: '性别',
     field: 'sex',
-    options: [
-      { label: '男', value: 1 },
-      { label: '女', value: 0 }
-    ]
+    props: {
+      options: [
+        { label: '男', value: 1 },
+        { label: '女', value: 0 }
+      ]
+    }
   },
   {
     type: 'date-picker',
@@ -93,12 +95,14 @@ const columns = computed<ColumnItem<typeof form>[]>(() => [
     label: '爱好',
     field: 'hobbys',
     span: 24,
-    options: [
-      { label: '电影', value: '01' },
-      { label: '音乐', value: '02' },
-      { label: '旅行', value: '03' },
-      { label: '游戏', value: '04' }
-    ]
+    props: {
+      options: [
+        { label: '电影', value: '01' },
+        { label: '音乐', value: '02' },
+        { label: '旅行', value: '03' },
+        { label: '游戏', value: '04' }
+      ]
+    }
   },
   {
     type: 'input-number',
@@ -112,12 +116,12 @@ const columns = computed<ColumnItem<typeof form>[]>(() => [
     type: 'radio-group',
     label: '状态',
     field: 'status',
-    options: [
-      { label: '启用', value: 1 },
-      { label: '禁用', value: 0 }
-    ],
     props: {
-      disabled: isEdit.value
+      disabled: isEdit.value,
+      options: [
+        { label: '启用', value: 1 },
+        { label: '禁用', value: 0 }
+      ]
     }
   },
   {
@@ -143,13 +147,17 @@ const columns = computed<ColumnItem<typeof form>[]>(() => [
     type: 'cascader',
     label: '城市',
     field: 'city',
-    options: cityOptions
+    props: {
+      options: cityOptions
+    }
   },
   {
     type: 'tree-select',
     label: '部门',
     field: 'dept',
-    data: deptData
+    props: {
+      data: deptData
+    }
   },
   {
     type: 'textarea',
@@ -158,7 +166,7 @@ const columns = computed<ColumnItem<typeof form>[]>(() => [
     span: 24,
     formItemProps: { extra: '这里是额外信息' }
   }
-])
+] as ColumnItem<typeof form>[])
 
 const GiFormRef = ref<InstanceType<typeof GiForm>>()
 const onAdd = () => {

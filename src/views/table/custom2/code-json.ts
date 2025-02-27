@@ -64,7 +64,7 @@ defineOptions({ name: 'TableCustom2' })
 const { data: statusOptions } = useDict({ code: 'status' })
 const form = reactive({})
 
-const searchColumns = computed<ColumnItem[]>(() => [
+const searchColumns = computed(() => [
   {
     type: 'input',
     label: '姓名',
@@ -82,7 +82,9 @@ const searchColumns = computed<ColumnItem[]>(() => [
     type: 'select',
     label: '类型',
     field: 'status',
-    options: statusOptions.value
+    props: {
+      options: statusOptions.value
+    }
   },
   {
     type: 'date-picker',
@@ -94,7 +96,7 @@ const searchColumns = computed<ColumnItem[]>(() => [
     label: '地址',
     field: 'address'
   }
-])
+] as ColumnItem[])
 
 const columns: TableInstance['columns'] = [
   { title: '序号', width: 66, align: 'center', render: ({ rowIndex }) => h('span', {}, rowIndex + 1) },

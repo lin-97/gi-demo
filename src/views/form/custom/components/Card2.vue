@@ -36,8 +36,7 @@ import { useWindowSize } from '@vueuse/core'
 import { cityOptions, deptData } from './data'
 import Card2Json from './code/card2-json'
 import GiCodeView from '@/components/GiCodeView/index.vue'
-import GiForm from '@/components/GiForm'
-import type { ColumnItem } from '@/components/GiForm'
+import { type ColumnItem, GiForm } from '@/components/GiForm'
 import * as Regexp from '@/utils/regexp'
 import { useDict } from '@/hooks/app'
 
@@ -62,7 +61,7 @@ const form = reactive({
 
 const formRef = useTemplateRef('formRef')
 
-const columns = computed<ColumnItem<typeof form>[]>(() => [
+const columns = computed(() => [
   {
     type: 'group-title',
     label: '基本信息',
@@ -109,10 +108,12 @@ const columns = computed<ColumnItem<typeof form>[]>(() => [
     label: '性别',
     field: 'sex',
     required: true,
-    options: [
-      { label: '男', value: 1 },
-      { label: '女', value: 0 }
-    ]
+    props: {
+      options: [
+        { label: '男', value: 1 },
+        { label: '女', value: 0 }
+      ]
+    }
   },
   {
     type: 'date-picker',
@@ -124,12 +125,14 @@ const columns = computed<ColumnItem<typeof form>[]>(() => [
     label: '爱好',
     field: 'hobbys',
     span: 24,
-    options: [
-      { label: '电影', value: '01' },
-      { label: '音乐', value: '02' },
-      { label: '旅行', value: '03' },
-      { label: '游戏', value: '04' }
-    ],
+    props: {
+      options: [
+        { label: '电影', value: '01' },
+        { label: '音乐', value: '02' },
+        { label: '旅行', value: '03' },
+        { label: '游戏', value: '04' }
+      ]
+    },
     slots: {
       label: ({ data }) => (
         <span style={{ color: 'red' }}>
@@ -158,7 +161,9 @@ const columns = computed<ColumnItem<typeof form>[]>(() => [
       </div>
     ),
     field: 'status',
-    options: status_options.value // 这里使用了字典
+    props: {
+      options: status_options.value // 这里使用了字典
+    }
   },
   {
     label: '测试',
@@ -203,14 +208,18 @@ const columns = computed<ColumnItem<typeof form>[]>(() => [
     type: 'cascader',
     label: '城市',
     field: 'city',
-    options: cityOptions,
+    props: {
+      options: cityOptions
+    },
     disabled: (i) => i.status === 0
   },
   {
     type: 'tree-select',
     label: '部门',
     field: 'dept',
-    data: deptData,
+    props: {
+      data: deptData
+    },
     disabled: (i) => i.status === 0
   },
   {
@@ -246,7 +255,7 @@ const columns = computed<ColumnItem<typeof form>[]>(() => [
     field: 'btns',
     span: 24
   }
-])
+] as ColumnItem<typeof form>[])
 
 const onViewCode = () => {
   Drawer.open({

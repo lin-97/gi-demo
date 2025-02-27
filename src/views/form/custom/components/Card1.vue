@@ -54,12 +54,12 @@ const columns: ColumnItem[] = reactive([
     type: 'select',
     label: '状态',
     field: 'status',
-    options: [
-      { label: '启用', value: 1 },
-      { label: '禁用', value: 0 }
-    ],
     props: {
-      placeholder: '自定义placeholder'
+      placeholder: '自定义placeholder',
+      options: [
+        { label: '启用', value: 1 },
+        { label: '禁用', value: 0 }
+      ]
     }
   }
 ])
