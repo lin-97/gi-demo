@@ -626,24 +626,24 @@ import type * as T from './type'
 
 /** 获取部门数据 */
 export function getSystemDeptList() {
-  return http.get<PageRes<T.SystemDeptItem[]>>(`${prefix}/system/dept/list`)
+  return http.get<PageRes<T.DeptItem[]>>(`${prefix}/system/dept/list`)
 }
 
 /** 获取用户数据 */
 export function getSystemUserList() {
-  return http.get<PageRes<T.SystemUserItem[]>>(`${prefix}/system/user/list`)
+  return http.get<PageRes<T.UserItem[]>>(`${prefix}/system/user/list`)
 }
 
 /** 获取角色数据 */
 export function getSystemRoleList() {
-  return http.get<PageRes<T.SystemRoleItem[]>>(`${prefix}/system/role/list`)
+  return http.get<PageRes<T.RoleItem[]>>(`${prefix}/system/role/list`)
 }
 ```
 
 不建议以下方式导入 ts 类型，不够方便
 
 ```ts
-import type { SystemDeptItem, SystemUserItem, SystemRoleItem } from './type'
+import type { DeptItem, UserItem, RoleItem } from './type'
 ```
 
 
@@ -657,9 +657,9 @@ import type { SystemDeptItem, SystemUserItem, SystemRoleItem } from './type'
 ```vue
 <script setup lang="ts">
 import { ref } from 'vue'
-import { getUserList as getUserListApi, type SystemUserItem } from '@/apis' // 同名可以使用别名
+import { getUserList as getUserListApi, type UserItem } from '@/apis' // 同名可以使用别名
 
-const userList = ref<SystemUserItem[]>([])
+const userList = ref<UserItem[]>([])
 const getUserList = async () => {
   const res = await getUserListApi()
   console.log('如果异步成功，则会打印这行文字，否则不会打印这行文字，也不会往下执行')
@@ -679,10 +679,10 @@ const getUserList = async () => {
 ```vue
 <script setup lang="ts">
 import { ref } from 'vue'
-import { getUserList as getUserListApi, type SystemUserItem } from '@/apis' // 同名可以使用别名
+import { getUserList as getUserListApi, type UserItem } from '@/apis' // 同名可以使用别名
 
 const loading = ref(false)
-const userList = ref<SystemUserItem[]>([])
+const userList = ref<UserItem[]>([])
 const getUserList = async () => {
   try {
     loading.value = true
@@ -708,10 +708,10 @@ const getUserList = async () => {
 ```vue
 <script setup lang="ts">
 import { ref } from 'vue'
-import { getUserList as getUserListApi, type SystemUserItem } from '@/apis' // 同名可以使用别名
+import { getUserList as getUserListApi, type UserItem } from '@/apis' // 同名可以使用别名
 
 const loading = ref(false)
-const userList = ref<SystemUserItem[]>([])
+const userList = ref<UserItem[]>([])
 const getUserList = async () => {
   try {
     loading.value = true
@@ -929,8 +929,6 @@ GiForm 是一个 JSON 配置表单组件，能够快速通过 JSON 构建表单�
 | formItemProps | 继承a-form-item的所有props                                   |
 | props         | 继承a-input、a-select等组件的所有props，根据你所填的type的表单项类型配置对应的props |
 | rules         | 表单项校验规则                                               |
-| options       | a-selec、a-cascader、a-radio-group、a-checkbox-group的options（只有这几个类型有options） |
-| data          | a-tree-select的data属性（只有此类型有data）                  |
 | hide          | 动态隐藏 （form）=> boolean 返回一个布尔值， form为v-model绑定的表单 |
 | show          | 动态显示 （form）=> boolean 返回一个布尔值， form为v-model绑定的表单 |
 | disabled      | 动态禁用 （form）=> boolean 返回一个布尔值， form为v-model绑定的表单 |
@@ -968,12 +966,12 @@ const { loading, setLoading } = useLoading()
 ```typescript
 import { ref } from 'vue'
 import { getSystemDeptList } from '@/apis'
-import type { SystemDeptItem } from '@/apis'
+import type { DeptItem } from '@/apis'
 
 /** 部门模块 */
 export function useDept() {
   const loading = ref(false)
-  const deptList = ref<SystemDeptItem[]>([])
+  const deptList = ref<DeptItem[]>([])
 
   const getDeptList = async () => {
     try {

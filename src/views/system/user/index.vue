@@ -91,7 +91,7 @@
                     <template #icon><icon-edit /></template>
                     <span>编辑</span>
                   </a-button>
-                  <a-popconfirm type="warning" content="确定删除该用户吗?" @before-ok="onDelete(record)">
+                  <a-popconfirm type="warning" content="确定删除该用户吗?">
                     <a-button type="primary" status="danger" size="mini" :disabled="record.disabled">
                       <template #icon><icon-delete /></template>
                       <span>删除</span>
@@ -116,8 +116,7 @@ import AddUserModal from './AddUserModal.vue'
 import UserDetailDrawer from './UserDetailDrawer.vue'
 import { useTable } from '@/hooks'
 import { useDept, useDict } from '@/hooks/app'
-import { type SystemUserItem, getSystemUserList } from '@/apis/system'
-import { deleteBaseApi } from '@/apis/base'
+import { type UserItem, getUserList } from '@/apis/system'
 
 defineOptions({ name: 'SystemUser' })
 
@@ -146,9 +145,8 @@ const {
   search,
   select,
   selectAll,
-  handleDelete,
   fixed
-} = useTable((page) => getSystemUserList(page), { immediate: true })
+} = useTable((page) => getUserList(page), { immediate: true })
 
 const reset = () => {
   form.status = ''
@@ -156,28 +154,22 @@ const reset = () => {
   search()
 }
 
-// 删除
-const onDelete = (item: SystemUserItem) => {
-  return handleDelete(() => deleteBaseApi({ ids: [item.id] }), { showModal: false })
-}
-
 // 批量删除
 const onMulDelete = () => {
   if (!selectedKeys.value.length) {
     return Message.warning('请选择用户！')
   }
-  handleDelete(() => deleteBaseApi({ ids: selectedKeys.value as string[] }))
 }
 
 const onAdd = () => {
   AddUserModalRef.value?.add()
 }
 
-const onEdit = (item: SystemUserItem) => {
+const onEdit = (item: UserItem) => {
   AddUserModalRef.value?.edit(item.id)
 }
 
-const openDetail = (item: SystemUserItem) => {
+const openDetail = (item: UserItem) => {
   UserDetailDrawerRef.value?.open(item.id)
 }
 </script>

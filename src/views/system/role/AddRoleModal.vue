@@ -23,8 +23,7 @@
 
 <script setup lang="ts">
 import { type FormInstance, Message } from '@arco-design/web-vue'
-import { getSystemRoleDetail } from '@/apis/system'
-import { saveBaseApi } from '@/apis/base'
+import { getRoleDetail } from '@/apis/system'
 import { useResetReactive } from '@/hooks'
 
 const emit = defineEmits<{
@@ -64,7 +63,7 @@ const add = () => {
 const edit = async (id: string) => {
   visible.value = true
   roleId.value = id
-  const res = await getSystemRoleDetail({ id })
+  const res = await getRoleDetail({ id })
   Object.assign(form, res.data)
 }
 
@@ -77,8 +76,8 @@ const save = async () => {
   try {
     const valid = await formRef.value?.validate()
     if (valid) return false
-    const res = await saveBaseApi(form)
-    if (res.data) {
+    const res = await new Promise((resolve) => setTimeout(() => resolve(true), 300))
+    if (res) {
       Message.success('模拟保存成功')
       emit('save-success')
       return true

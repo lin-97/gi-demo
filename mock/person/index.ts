@@ -66,7 +66,7 @@ const getTableListData = (params: any) => {
 
 export default defineMock([
   {
-    url: '/person/list',
+    url: '/person/getPersonList',
     method: 'get',
     timeout: getDelayTime(),
     response: ({ query }) => {
@@ -79,51 +79,12 @@ export default defineMock([
     }
   },
   {
-    url: '/person/init',
-    method: 'get',
-    timeout: getDelayTime(),
-    response: () => {
-      return resultSuccess({
-        id: '',
-        name: '张三新增',
-        phone: '15578728810'
-      })
-    }
-  },
-  {
-    url: '/person/detail',
-    method: 'get',
-    timeout: getDelayTime(),
-    response: () => {
-      return resultSuccess({
-        id: 'ID123456',
-        name: '张三编辑',
-        phone: '15578728810'
-      })
-    }
-  },
-  {
-    url: '/person/add',
+    url: '/person/deletePerson',
     method: 'post',
-    timeout: 1000,
-    response: () => {
-      return resultSuccess({
-        id: 'ID123456',
-        name: '张三编辑',
-        phone: '15578728810'
-      })
-    }
-  },
-  {
-    url: '/person/update',
-    method: 'post',
-    timeout: 1000,
-    response: () => {
-      return resultSuccess({
-        id: 'ID123456',
-        name: '张三编辑',
-        phone: '15578728810'
-      })
+    timeout: getDelayTime(),
+    response: ({ body }) => {
+      const { ids } = body
+      return resultSuccess(ids)
     }
   }
 ])

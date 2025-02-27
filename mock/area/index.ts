@@ -5,7 +5,7 @@ import areaData from '../_data/area'
 
 export default defineMock([
   {
-    url: '/area/list',
+    url: '/area/getAreaList',
     method: 'get',
     timeout: getDelayTime(),
     response: ({ query }) => {

@@ -36,7 +36,7 @@
                 <template #icon><icon-edit /></template>
                 <span>编辑</span>
               </a-button>
-              <a-popconfirm type="warning" content="确定删除该角色吗?" @before-ok="onDelete(record)">
+              <a-popconfirm type="warning" content="确定删除该角色吗?">
                 <a-button type="primary" status="danger" size="mini">
                   <template #icon><icon-delete /></template>
                   <span>删除</span>
@@ -55,8 +55,7 @@
 <script lang="ts" setup>
 import { Message } from '@arco-design/web-vue'
 import AddDictDataModal from './AddDictDataModal.vue'
-import { type SystemDictDataItem, getSystemDictDataList } from '@/apis/system'
-import { deleteBaseApi } from '@/apis/base'
+import { type DictDataItem, getDictDataList } from '@/apis/system'
 import { useTable } from '@/hooks'
 
 const visible = ref(false)
@@ -64,8 +63,8 @@ const AddDictDataModalRef = useTemplateRef('AddDictDataModalRef')
 
 const dictCode = ref('')
 
-const { loading, tableData, pagination, selectedKeys, search, select, selectAll, handleDelete } = useTable(
-  (page) => getSystemDictDataList({ ...page, code: dictCode.value }),
+const { loading, tableData, pagination, selectedKeys, search, select, selectAll } = useTable(
+  (page) => getDictDataList({ ...page, code: dictCode.value }),
   { immediate: false }
 )
 
@@ -76,24 +75,18 @@ const open = (data: { code: string }) => {
   search()
 }
 
-// 删除
-const onDelete = (item: SystemDictDataItem) => {
-  return handleDelete(() => deleteBaseApi({ ids: [item.id] }), { showModal: false })
-}
-
 // 批量删除
 const onMulDelete = () => {
   if (!selectedKeys.value.length) {
     return Message.warning('请选择字典数据！')
   }
-  handleDelete(() => deleteBaseApi({ ids: selectedKeys.value as string[] }))
 }
 
 const onAdd = () => {
   AddDictDataModalRef.value?.add()
 }
 
-const onEdit = (item: SystemDictDataItem) => {
+const onEdit = (item: DictDataItem) => {
   AddDictDataModalRef.value?.edit({ id: item.id, code: dictCode.value })
 }
 

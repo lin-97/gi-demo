@@ -59,7 +59,7 @@
                   <template #icon><icon-plus /></template>
                   <span>新增</span>
                 </a-button>
-                <a-popconfirm type="warning" content="您确定要删除该项吗?" @before-ok="onDelete(record)">
+                <a-popconfirm type="warning" content="您确定要删除该项吗?">
                   <a-button type="primary" status="danger" size="mini">
                     <template #icon><icon-delete /></template>
                     <span>删除</span>
@@ -80,8 +80,7 @@
 import { Message } from '@arco-design/web-vue'
 import AddDeptModal from './AddDeptModal.vue'
 import { useTable } from '@/hooks'
-import { type SystemDeptItem, getSystemDeptList } from '@/apis/system'
-import { deleteBaseApi } from '@/apis/base'
+import { type DeptItem, getDeptList } from '@/apis/system'
 import { useDict } from '@/hooks/app'
 
 defineOptions({ name: 'SystemDept' })
@@ -102,9 +101,8 @@ const {
   search,
   select,
   selectAll,
-  handleDelete,
   fixed
-} = useTable(() => getSystemDeptList(), {
+} = useTable(() => getDeptList(), {
   immediate: true,
   onSuccess: () => {
     nextTick(() => {
@@ -123,19 +121,15 @@ const onAdd = () => {
   AddDeptModalRef.value?.add()
 }
 
-const onEdit = (item: SystemDeptItem) => {
+const onEdit = (item: DeptItem) => {
   AddDeptModalRef.value?.edit(item.id)
-}
-
-const onDelete = async (item: SystemDeptItem) => {
-  return handleDelete(() => deleteBaseApi({ ids: [item.id] }), { showModal: false })
 }
 
 const onMulDelete = () => {
   if (!selectedKeys.value.length) {
     return Message.warning('请选择部门')
   }
-  handleDelete(() => deleteBaseApi({ ids: selectedKeys.value as string[] }))
+  // 批量删除
 }
 </script>
 

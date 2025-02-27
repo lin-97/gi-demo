@@ -4,7 +4,7 @@ import userData from '../_data/system_user'
 
 export default defineMock([
   {
-    url: '/system/user/detail',
+    url: '/system/user/getUserDetail',
     method: 'get',
     timeout: getDelayTime(),
     response: ({ query }) => {
@@ -23,7 +23,7 @@ export default defineMock([
     }
   },
   {
-    url: '/system/user', // 这个短的要放在后面，不然会优先匹配
+    url: '/system/user/getUserList', // 这个短的要放在后面，不然会优先匹配
     method: 'get',
     timeout: getDelayTime(),
     response: () => {

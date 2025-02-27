@@ -5,7 +5,7 @@ import dictData from '../_data/system_dict'
 
 export default defineMock([
   {
-    url: '/system/dict/detail',
+    url: '/system/dict/getDictDetail',
     method: 'get',
     timeout: getDelayTime(),
     response: ({ query }) => {
@@ -19,7 +19,7 @@ export default defineMock([
     }
   },
   {
-    url: '/system/dict/dataList',
+    url: '/system/dict/getDictDataList',
     method: 'get',
     timeout: getDelayTime(),
     response: ({ query }) => {
@@ -34,7 +34,7 @@ export default defineMock([
     }
   },
   {
-    url: '/system/dict/dataDetail',
+    url: '/system/dict/getDictDataDetail',
     method: 'get',
     timeout: getDelayTime(),
     response: ({ query }) => {
@@ -51,7 +51,7 @@ export default defineMock([
     }
   },
   {
-    url: '/system/dictData',
+    url: '/system/dict/getDictData',
     method: 'get',
     timeout: getDelayTime(),
     response: () => {
@@ -69,7 +69,7 @@ export default defineMock([
     }
   },
   {
-    url: '/system/dict', // 这个短的要放在后面，不然会优先匹配
+    url: '/system/dict/getDictList', // 这个短的要放在后面，不然会优先匹配
     method: 'get',
     timeout: getDelayTime(),
     response: () => {

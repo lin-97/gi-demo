@@ -83,8 +83,7 @@ import { useWindowSize } from '@vueuse/core'
 import CateTree from './CateTree/index.vue'
 import Pane1Json from './code/pane1-json'
 import { useTable } from '@/hooks'
-import { type PersonItem, getPersonList } from '@/apis/person'
-import { deleteBaseApi } from '@/apis/base'
+import { type PersonItem, deletePerson, getPersonList } from '@/apis/person'
 import { useDict } from '@/hooks/app'
 import GiCodeView from '@/components/GiCodeView/index.vue'
 
@@ -124,7 +123,7 @@ const onDetail = (item: PersonItem) => {
 
 // 删除
 const onDelete = (item: PersonItem) => {
-  return handleDelete(() => deleteBaseApi({ ids: [item.id] }), { content: \`是否删除-\${item.name}?\`, showModal: false })
+  return handleDelete(() => deletePerson({ ids: [item.id] }), { content: \`是否删除-\${item.name}?\`, showModal: false })
 }
 
 // 批量删除
@@ -132,7 +131,7 @@ const onMulDelete = () => {
   if (!selectedKeys.value.length) {
     return Message.warning('请选择删除项！')
   }
-  handleDelete(() => deleteBaseApi({ ids: selectedKeys.value as string[] }), { successTip: '批量删除成功！' })
+  handleDelete(() => deletePerson({ ids: selectedKeys.value as string[] }), { successTip: '批量删除成功！' })
 }
 
 const onExport = () => {
@@ -152,5 +151,4 @@ const onViewCode = () => {
 </script>
 
 <style lang="scss" scoped></style>
-
 `

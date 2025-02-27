@@ -30,20 +30,20 @@
 import { MdPreview } from 'md-editor-v3'
 import 'md-editor-v3/lib/style.css'
 import { mdText } from './md'
-import { type SystemMenuItem, getSystemMenuList } from '@/apis/system'
+import { type MenuItem, getMenuList } from '@/apis/system'
 import { useRouteStore } from '@/stores'
 
 const routeStore = useRouteStore()
 const width1 = ref(400)
 const width2 = ref(400)
 
-const menuList = ref<SystemMenuItem[]>([])
+const menuList = ref<MenuItem[]>([])
 const menuListJson = computed(() => JSON.stringify(menuList.value, null, '\t'))
-const getMenuList = async () => {
-  const res = await getSystemMenuList()
+const getMenu = async () => {
+  const res = await getMenuList()
   menuList.value = res.data
 }
-getMenuList()
+getMenu()
 
 const routeListJson = computed(() => JSON.stringify(toRaw(routeStore.asyncRoutes), null, '\t'))
 </script>

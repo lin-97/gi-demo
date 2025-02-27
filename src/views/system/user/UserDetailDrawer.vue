@@ -27,20 +27,20 @@
 </template>
 
 <script lang="ts" setup>
-import { type SystemUserDetail, getSystemUserDetail } from '@/apis/system'
+import { type UserDetail, getUserDetail } from '@/apis/system'
 
 const visible = ref(false)
 const userId = ref('')
-const user = ref<SystemUserDetail | null>()
-const getUserDetail = async () => {
-  const res = await getSystemUserDetail({ id: userId.value })
+const user = ref<UserDetail | null>()
+const getDetail = async () => {
+  const res = await getUserDetail({ id: userId.value })
   user.value = res.data
 }
 
 const open = async (id: string) => {
   userId.value = id
   visible.value = true
-  await getUserDetail()
+  await getDetail()
 }
 
 defineExpose({ open })

@@ -203,8 +203,6 @@ export interface ColumnItem<F = any> {
   formItemProps?: Omit<A.FormItemInstance['$props'], 'label' | 'field'> // a-form-item的props
   required?: boolean // 是否必填
   rules?: A.FormItemInstance['$props']['rules'] // 表单校验规则
-  options?: ColumnItemOptions
-  data?: ColumnItemData
   hide?: ColumnItemHide<F> // 是否隐藏
   show?: ColumnItemShow<F> // 是否显示（优先级比hide高）
   disabled?: ColumnItemDisabled<F> // 是否禁用

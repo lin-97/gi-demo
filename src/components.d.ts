@@ -7,7 +7,6 @@ export {}
 
 declare module 'vue' {
   export interface GlobalComponents {
-    Breadcrumb: typeof import('./components/Breadcrumb/index.vue')['default']
     GiCellAvatar: typeof import('./components/GiCell/GiCellAvatar.vue')['default']
     GiCellGender: typeof import('./components/GiCell/GiCellGender.vue')['default']
     GiCellStatus: typeof import('./components/GiCell/GiCellStatus.vue')['default']

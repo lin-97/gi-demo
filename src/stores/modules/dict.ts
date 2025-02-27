@@ -1,13 +1,13 @@
 import { defineStore } from 'pinia'
 import { ref } from 'vue'
 import type { SelectOptionData } from '@arco-design/web-vue'
-import { getSystemDictData } from '@/apis/system'
+import { getDictData as getDictDataApi } from '@/apis/system'
 
 const storeSetup = () => {
   const dictData = ref<Record<string, SelectOptionData[]>>({})
 
   const getDictData = async () => {
-    const res = await getSystemDictData()
+    const res = await getDictDataApi()
     dictData.value = res.data
   }
 

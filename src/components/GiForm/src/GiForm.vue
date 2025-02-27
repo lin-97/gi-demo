@@ -125,11 +125,11 @@ const getComponentBindProps = (item: ColumnItem) => {
     ['textarea', { allowClear: false, placeholder: `请填写${item.label}`, maxLength: 200 }],
     ['input-tag', { allowClear: true, placeholder: `请输入${item.label}` }],
     ['mention', { allowClear: true, placeholder: `请输入${item.label}` }],
-    ['select', { allowClear: true, placeholder: `请选择${item.label}`, options: dicData[item.field] || item.options }],
+    ['select', { allowClear: true, placeholder: `请选择${item.label}`, options: dicData[item.field] || [] }],
     ['tree-select', { allowClear: true, placeholder: `请选择${item.label}` }],
-    ['cascader', { allowClear: true, placeholder: `请选择${item.label}`, options: dicData[item.field] || item.options }],
-    ['radio-group', { options: dicData[item.field] || item.options }],
-    ['checkbox-group', { options: dicData[item.field] || item.options }],
+    ['cascader', { allowClear: true, placeholder: `请选择${item.label}`, options: dicData[item.field] || [] }],
+    ['radio-group', { options: dicData[item.field] || [] }],
+    ['checkbox-group', { options: dicData[item.field] || [] }],
     ['date-picker', { allowClear: true, placeholder: '请选择日期' }],
     ['time-picker', { allowClear: true, placeholder: '请选择时间' }]
   ])

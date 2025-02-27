@@ -19,6 +19,7 @@
 <script setup lang="ts">
 import HeaderRightBar from '../HeaderRightBar/index.vue'
 import MenuFoldBtn from '../MenuFoldBtn.vue'
+import Breadcrumb from '../Breadcrumb/index.vue'
 
 defineOptions({ name: 'AppHeader' })
 </script>
