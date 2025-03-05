@@ -9,61 +9,130 @@ interface Options<T, U> {
   rowKey?: keyof T
 }
 
-type PaginationParams = { page: number, size: number }
+/** 分页参数类型 */
+type PaginationParams = {
+  /** 当前页码 */
+  page: number
+  /** 每页数量 */
+  size: number
+}
+
+/** API 函数类型 */
 type Api<T> = (params: PaginationParams) => Promise<ApiRes<PageRes<T[]>>> | Promise<ApiRes<T[]>>
 
+/** 删除操作的配置选项 */
+interface DeleteOptions {
+  /** 确认框标题 */
+  title?: string
+  /** 确认框内容 */
+  content?: string
+  /** 成功提示信息 */
+  successTip?: string
+  /** 是否显示确认框 */
+  showModal?: boolean
+}
+
+/**
+ * 表格数据管理 Hook
+ * @description 提供表格数据管理的响应式 Hook，支持分页、搜索、刷新、删除等功能
+ * @template T - 原始数据类型
+ * @template U - 格式化后的数据类型
+ * @param api - 获取表格数据的 API 函数
+ * @param options - 表格配置选项
+ * @returns 表格相关的状态和方法
+ * @example
+ * const {
+ *   loading,
+ *   tableData,
+ *   pagination,
+ *   selectedKeys,
+ *   search,
+ *   refresh,
+ *   handleDelete
+ * } = useTable(getTableApi, {
+ *   formatResult: (data) => data.map(formatData),
+ *   immediate: true,
+ *   rowKey: 'id'
+ * })
+ */
 export function useTable<T extends U, U = T>(api: Api<T>, options?: Options<T, U>) {
-  const { formatResult, onSuccess, immediate, rowKey } = options || {}
+  const { formatResult, onSuccess, immediate = true, rowKey = 'id' } = options || {}
+
+  // 分页相关
   const { pagination, setTotal } = usePagination(() => getTableData())
   const loading = ref(false)
   const tableData: Ref<U[]> = ref([])
 
+  /**
+   * 获取表格数据
+   * @description 调用 API 获取数据，处理分页、格式化等逻辑
+   */
   async function getTableData() {
     try {
       loading.value = true
       const res = await api({ page: pagination.current, size: pagination.pageSize })
+      // 处理返回的数据结构可能是分页或数组的情况
       const data = !Array.isArray(res.data) ? res.data.records : res.data
       tableData.value = formatResult ? formatResult(data) : data
+      // 设置总数据量
       const total = !Array.isArray(res.data) ? res.data.total : data.length
       setTotal(total)
-      onSuccess && onSuccess()
+      onSuccess?.()
     } finally {
       loading.value = false
     }
   }
 
-  // 是否立即触发
-  const isImmediate = immediate ?? true
-  isImmediate && getTableData()
+  // 首次加载数据
+  immediate && getTableData()
 
   // 多选
   const selectedKeys = ref<(string | number)[]>([])
+
+  /**
+   * 行选择回调
+   * @param rowKeys - 选中的行 key 数组
+   */
   const select: TableInstance['onSelect'] = (rowKeys) => {
     selectedKeys.value = rowKeys
   }
 
-  // 全选
+  /**
+   * 全选回调
+   * @param checked - 是否全选
+   */
   const selectAll: TableInstance['onSelectAll'] = (checked) => {
-    const key = rowKey ?? 'id'
     const arr = (tableData.value as TableData[]).filter((i) => !(i?.disabled ?? false))
-    selectedKeys.value = checked ? arr.map((i) => i[key as string]) : []
+    selectedKeys.value = checked ? arr.map((i) => i[rowKey as string]) : []
   }
 
-  // 搜索
+  /**
+   * 搜索
+   * @description 重置页码为1并重新获取数据
+   */
   const search = () => {
     selectedKeys.value = []
     pagination.onChange(1)
   }
 
-  // 刷新
+  /**
+   * 刷新表格数据
+   * @description 使用当前的分页参数重新获取数据
+   */
   const refresh = () => {
     getTableData()
   }
 
-  // 删除
+  /**
+   * 处理删除操作
+   * @description 支持删除确认框，自动处理删除后的刷新
+   * @param deleteApi - 删除操作的 API 函数
+   * @param options - 删除操作的配置选项
+   * @returns Promise<boolean | undefined> 删除操作的结果
+   */
   const handleDelete = async <T>(
     deleteApi: () => Promise<ApiRes<T>>,
-    options?: { title?: string, content?: string, successTip?: string, showModal?: boolean }
+    options?: DeleteOptions
   ): Promise<boolean | undefined> => {
     const onDelete = async () => {
       try {
@@ -78,10 +147,11 @@ export function useTable<T extends U, U = T>(api: Api<T>, options?: Options<T, U
         return false
       }
     }
-    const flag = options?.showModal ?? true // 是否显示对话框
-    if (!flag) {
+
+    if (!(options?.showModal ?? true)) {
       return onDelete()
     }
+
     Modal.warning({
       title: options?.title || '提示',
       content: options?.content || '是否确认删除？',
@@ -91,8 +161,8 @@ export function useTable<T extends U, U = T>(api: Api<T>, options?: Options<T, U
     })
   }
 
+  // 响应式处理表格操作列固定状态
   const { breakpoint } = useBreakpoint()
-  // 表格操作列在小屏下不固定在右侧
   const fixed = computed(() => !['xs', 'sm'].includes(breakpoint.value) ? 'right' : undefined)
 
   return {

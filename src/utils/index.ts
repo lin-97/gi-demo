@@ -5,155 +5,47 @@ import { isExternal } from '@/utils/validate'
 export * from './modules/getFieldToRangTimeForm'
 export * from './modules/getRangeTimeToFieldForm'
 
-/** 建议：这里我还是推荐优先使用 lodash-es、xe-utils、dayjs 里面的方法 */
+/**
+ * @description 工具函数库
+ * @recommend 优先使用 lodash-es、xe-utils、dayjs 等成熟库的方法
+ */
 
-/** 获取对象属性值 */
+// =============== 类型定义 ===============
+
+/** 字符串去除空格的位置 */
+type TrimPosition = 'both' | 'left' | 'right' | 'all'
+
+/** 树形结构基础接口 */
+interface TreeNode {
+  children?: TreeNode[]
+  [key: string]: any
+}
+
+/** 可排序的树节点 */
+interface SortableTreeNode extends TreeNode {
+  sort: number
+  children?: SortableTreeNode[]
+}
+
+// =============== 对象操作 ===============
+
+/**
+ * 获取对象属性值（类型安全）
+ * @param obj - 目标对象
+ * @param key - 属性键名
+ * @returns 属性值
+ */
 export function getProperty<T, K extends keyof T>(obj: T, key: K): T[K] {
   return obj[key]
 }
 
 /**
- * @desc 去除空格
- * @param {string} str - 字符串
- * @param {string} pos - 去除空格的位置
- * pos="both": 去除两边空格
- * pos="left": 去除左边空格
- * pos="right": 去除右边空格
- * pos="all": 去除所有空格
+ * 深拷贝
+ * @param data - 要拷贝的数据
+ * @returns 深拷贝后的数据
  */
-type Pos = 'both' | 'left' | 'right' | 'all'
-export function trim(str: string, pos: Pos = 'both'): string {
-  if (pos === 'both') {
-    return str.replace(/^\s+|\s+$/g, '')
-  } else if (pos === 'left') {
-    return str.replace(/^\s*/, '')
-  } else if (pos === 'right') {
-    return str.replace(/(\s*$)/g, '')
-  } else if (pos === 'all') {
-    return str.replace(/\s+/g, '')
-  } else {
-    return str
-  }
-}
-
-/**
- * 根据数字获取对应的汉字
- * @param {number} num - 数字(0-10)
- */
-export function getHanByNumber(num: number): string {
-  const str = '零一二三四五六七八九十'
-  return str.charAt(num)
-}
-
-/**
- * 获取指定整数范围内的随机整数
- * @param {number} start - 开始范围
- * @param {number} end - 结束范围
- */
-export function getRandomInterger(start = 0, end: number): number {
-  const range = end - start
-  const random = Math.floor(Math.random() * range + start)
-  return random
-}
-
-/** @desc 千分位格式化 */
-export function formatMoney(money: string) {
-  return money.replace(new RegExp(`(?!^)(?=(\\d{3})+${money.includes('.') ? '\\.' : '$'})`, 'g'), ',')
-}
-
-/** @desc 数据类型检测方法 */
-export function getTypeOf(value: any) {
-  return Object.prototype.toString.call(value).slice(8, -1).toLowerCase()
-}
-
-/**
- * @desc 格式化电话号码
- * @demo 183-7983-6654
- */
-export function formatPhone(mobile: string, formatStr = '-') {
-  return mobile.replace(/(?=(\d{4})+$)/g, formatStr)
-}
-
-/**
- * @desc 手机号脱敏
- * @demo 155****8810
- */
-export function hidePhone(phone: string) {
-  return phone.replace(/^(\d{3})\d{4}(\d{4})$/, '$1****$2')
-}
-
-/** @desc 检测数据是否为空数据 */
-export function isEmpty(data: unknown) {
-  if (data === '' || data === 'undefined' || data === undefined || data === null || data === 'null') {
-    return true
-  }
-  if (JSON.stringify(data) === '{}' || JSON.stringify(data) === '[]' || JSON.stringify(data) === '[{}]') {
-    return true
-  }
-  return false
-}
-
-/**
- * @desc 大小写转换
- * @param {string} str 待转换的字符串
- * @param {number} type 1:全大写 2:全小写 3:首字母大写
- */
-export function toCase(str: string, type: number) {
-  switch (type) {
-    case 1:
-      return str.toUpperCase()
-    case 2:
-      return str.toLowerCase()
-    case 3:
-      return str[0].toUpperCase() + str.substring(1).toLowerCase()
-    default:
-      return str
-  }
-}
-
-/**
- * @desc 获取随机数
- * @param {number} min 最小值
- * @param {number} max 最大值
- */
-export const randomNum = (min: number, max: number) => {
-  return Math.floor(min + Math.random() * (max + 1 - min))
-}
-
-/** @desc 获取最大值 */
-export const max = (arr: number[]) => {
-  return Math.max.apply(null, arr)
-}
-
-/** @desc 获取最小值 */
-export const min = (arr: number[]) => {
-  return Math.min.apply(null, arr)
-}
-
-/** @desc 求和 */
-export const sum = (arr: number[]) => {
-  return arr.reduce((pre, cur) => pre + cur)
-}
-
-/** @desc 获取平均值 */
-export const average = (arr: number[]) => {
-  return sum(arr) / arr.length
-}
-
-/** @desc 文件大小格式化 */
-export const formatFileSize = (size: number) => {
-  const units = ['B', 'KB', 'MB', 'GB']
-  let index = 0
-  while (size > 1024 && index < units.length) {
-    size /= 1024
-    index++
-  }
-  return Math.round(size * 100) / 100 + units[index]
-}
-
-/** @desc 深拷贝 */
-export const deepClone = (data: any) => {
-  if (typeof data !== 'object' || data === null) return '不是对象'
+export function deepClone<T>(data: T): T {
+  if (typeof data !== 'object' || data === null) return data
   const newData: any = Array.isArray(data) ? [] : {}
   for (const key in data) {
     newData[key] = typeof data[key] === 'object' ? deepClone(data[key]) : data[key]
@@ -161,93 +53,228 @@ export const deepClone = (data: any) => {
   return newData
 }
 
+// =============== 字符串操作 ===============
+
 /**
- * @desc 判断是否是闰年
- * @param {number} year 年份
+ * 去除字符串空格
+ * @param str - 目标字符串
+ * @param pos - 去除位置，默认两端
+ * @returns 处理后的字符串
  */
-export const isLeapYear = (year: number) => {
+export function trim(str: string, pos: TrimPosition = 'both'): string {
+  const trimMap = {
+    both: /^\s+|\s+$/g,
+    left: /^\s*/,
+    right: /(\s*$)/g,
+    all: /\s+/g
+  }
+  return str.replace(trimMap[pos] || trimMap.both, '')
+}
+
+/**
+ * 字符串大小写转换
+ * @param str - 目标字符串
+ * @param type - 转换类型：1-全大写 2-全小写 3-首字母大写
+ * @returns 转换后的字符串
+ */
+export function toCase(str: string, type: 1 | 2 | 3): string {
+  const caseMap = {
+    1: () => str.toUpperCase(),
+    2: () => str.toLowerCase(),
+    3: () => str.charAt(0).toUpperCase() + str.slice(1).toLowerCase()
+  }
+  return caseMap[type]?.() || str
+}
+
+/**
+ * 格式化电话号码
+ * @param mobile - 手机号
+ * @param separator - 分隔符
+ * @returns 格式化后的电话号码，如：183-7983-6654
+ */
+export function formatPhone(mobile: string, separator = '-'): string {
+  return mobile.replace(/(?=(\d{4})+$)/g, separator)
+}
+
+/**
+ * 手机号脱敏处理
+ * @param phone - 手机号
+ * @returns 脱敏后的手机号，如：155****8810
+ */
+export function hidePhone(phone: string): string {
+  return phone.replace(/^(\d{3})\d{4}(\d{4})$/, '$1****$2')
+}
+
+// =============== 数字操作 ===============
+
+/**
+ * 获取指定范围内的随机整数
+ * @param min - 最小值
+ * @param max - 最大值
+ * @returns 随机整数
+ */
+export function getRandomInteger(min = 0, max: number): number {
+  return Math.floor(Math.random() * (max - min + 1)) + min
+}
+
+/**
+ * 数组计算工具
+ */
+export const arrayMath = {
+  /** 获取数组最大值 */
+  max: (arr: number[]): number => Math.max(...arr),
+  /** 获取数组最小值 */
+  min: (arr: number[]): number => Math.min(...arr),
+  /** 计算数组总和 */
+  sum: (arr: number[]): number => arr.reduce((a, b) => a + b, 0),
+  /** 计算数组平均值 */
+  average: (arr: number[]): number => arrayMath.sum(arr) / arr.length
+}
+
+// =============== 数据验证 ===============
+
+/**
+ * 检测数据是否为空
+ * @param data - 要检测的数据
+ * @returns 是否为空
+ */
+export function isEmpty(data: unknown): boolean {
+  if (data === '' || data == null || data === 'undefined' || data === 'null') return true
+  if (typeof data === 'object') {
+    return JSON.stringify(data) === '{}'
+      || JSON.stringify(data) === '[]'
+      || JSON.stringify(data) === '[{}]'
+  }
+  return false
+}
+
+/**
+ * 获取数据类型
+ * @param value - 要检测的值
+ * @returns 数据类型字符串
+ */
+export function getTypeOf(value: unknown): string {
+  return Object.prototype.toString.call(value).slice(8, -1).toLowerCase()
+}
+
+// =============== 日期时间 ===============
+
+/**
+ * 判断是否为闰年
+ * @param year - 年份
+ * @returns 是否闰年
+ */
+export function isLeapYear(year: number): boolean {
   return (year % 4 === 0 && year % 100 !== 0) || year % 400 === 0
 }
 
 /**
- * @desc 判断是否是奇数
- * @param {number} num 数字
+ * 获取问候语
+ * @returns 根据当前时间返回问候语
  */
-export const isOdd = (num: number) => {
-  return num % 2 !== 0
+export function goodTimeText(): string {
+  const hour = new Date().getHours()
+  if (hour < 9) return '早上好'
+  if (hour <= 11) return '上午好'
+  if (hour <= 13) return '中午好'
+  if (hour < 20) return '下午好'
+  return '晚上好'
 }
+
+// =============== 文件处理 ===============
 
 /**
- * @desc 判断是否是偶数
- * @param {number} num 数字
+ * 格式化文件大小
+ * @param size - 文件大小（字节）
+ * @returns 格式化后的文件大小
  */
-export const isEven = (num: number) => {
-  return !isOdd(num)
+export function formatFileSize(size: number): string {
+  const units = ['B', 'KB', 'MB', 'GB']
+  let index = 0
+  while (size > 1024 && index < units.length - 1) {
+    size /= 1024
+    index++
+  }
+  return `${Math.round(size * 100) / 100}${units[index]}`
 }
 
-/** @desc 将RGB转化为十六机制 */
-export const rgbToHex = (r: number, g: number, b: number) => {
+// =============== 颜色处理 ===============
+
+/**
+ * RGB转十六进制
+ * @param r - 红色值(0-255)
+ * @param g - 绿色值(0-255)
+ * @param b - 蓝色值(0-255)
+ * @returns 十六进制颜色值
+ */
+export function rgbToHex(r: number, g: number, b: number): string {
   return `#${((1 << 24) + (r << 16) + (g << 8) + b).toString(16).slice(1)}`
 }
 
-/** @desc 获取随机十六进制颜色 */
-export const randomHex = () => {
-  return `#${Math.floor(Math.random() * 0xFFFFFF)
-    .toString(16)
-    .padEnd(6, '0')}`
+/**
+ * 获取随机十六进制颜色
+ * @returns 随机颜色值
+ */
+export function randomHex(): string {
+  return `#${Math.floor(Math.random() * 0xFFFFFF).toString(16).padEnd(6, '0')}`
 }
 
+// =============== 路由工具 ===============
+
 /**
- * @description 动态路由 path 转 name
- * @demo /system => System
- * @demo /system/menu => SystemMenu
- * @demo /data-manage/detail => DataManageDetail
+ * 转换路由路径为名称
+ * @param path - 路由路径
+ * @returns 转换后的名称
+ * @example
+ * /system => System
+ * /system/menu => SystemMenu
+ * /data-manage/detail => DataManageDetail
  */
-export const transformPathToName = (path: string) => {
-  if (!path) return ''
-  if (isExternal(path)) return ''
+export function transformPathToName(path: string): string {
+  if (!path || isExternal(path)) return ''
   return upperFirst(camelCase(path))
 }
 
+// =============== 树形结构处理 ===============
+
 /**
- * @desc 过滤树
- * @param { values } 数组
+ * 过滤树形结构
+ * @param array - 树形数组
+ * @param predicate - 过滤函数
+ * @returns 过滤后的树形数组
  */
-type FilterTree = <T extends { children?: T[] }>(
-  array: T[],
-  iterate: (item: T, index?: number, items?: T[]) => boolean
-) => T[]
-export const filterTree: FilterTree = (values, fn) => {
-  const arr = values.filter(fn)
-  const data = mapTree(arr, (item) => {
-    if (item.children && item.children.length) {
-      item.children = item.children.filter(fn)
+export function filterTree(array: TreeNode[], predicate: (node: TreeNode) => boolean): TreeNode[] {
+  const filtered = array.filter(predicate)
+  return mapTree(filtered, (item) => {
+    if (item.children?.length) {
+      item.children = item.children.filter(predicate)
     }
     return item
   })
-  return data
 }
 
-type SortTree = <T extends { sort: number, children?: T[] }>(array: T[]) => T[]
 /**
- * @desc 排序树
+ * 排序树形结构
+ * @param array - 可排序的树形数组
+ * @returns 排序后的树形数组
  */
-export const sortTree: SortTree = (values) => {
-  values?.sort((a, b) => (a?.sort ?? 0) - (b?.sort ?? 0)) // 排序
-  return mapTree(values, (item) => {
-    item.children?.sort((a, b) => (a?.sort ?? 0) - (b?.sort ?? 0)) // 排序
+export function sortTree(array: SortableTreeNode[]): SortableTreeNode[] {
+  const sort = (a: SortableTreeNode, b: SortableTreeNode) => (a.sort ?? 0) - (b.sort ?? 0)
+  array.sort(sort)
+  return mapTree(array, (item) => {
+    if (item.children?.length) {
+      item.children.sort(sort)
+    }
     return item
   })
 }
 
-/** @desc 是否是h5环境 */
-export const isMobile = () => {
-  return browse().isMobile
-}
+// =============== 环境检测 ===============
 
-/** @desc 问候 */
-export function goodTimeText() {
-  const time = new Date()
-  const hour = time.getHours()
-  return hour < 9 ? '早上好' : hour <= 11 ? '上午好' : hour <= 13 ? '中午好' : hour < 20 ? '下午好' : '晚上好'
+/**
+ * 检测是否为移动端环境
+ * @returns 是否为移动端
+ */
+export function isMobile(): boolean {
+  return browse().isMobile
 }
