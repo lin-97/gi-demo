@@ -42,13 +42,14 @@ import MenuFoldBtn from './components/MenuFoldBtn.vue'
 import { useAppStore, useRouteStore } from '@/stores'
 import { isExternal } from '@/utils/validate'
 import { filterTree } from '@/utils'
-import { useDevice } from '@/hooks'
+import { useDevice, useRouteListener } from '@/hooks'
 
 defineOptions({ name: 'LayoutMix' })
-const route = useRoute()
+
 const router = useRouter()
 const appStore = useAppStore()
 const routeStore = useRouteStore()
+const { listenerRouteChange } = useRouteListener()
 const { isDesktop } = useDevice()
 // 过滤是菜单的路由
 const cloneRoutes = JSON.parse(JSON.stringify(routeStore.routes)) as RouteRecordRaw[]
@@ -88,15 +89,9 @@ function getLeftMenus(key: string) {
   leftMenus.value = obj ? (obj.children as RouteRecordRaw[]) : []
 }
 
-watch(
-  () => route.path,
-  (newPath) => {
-    nextTick(() => {
-      getLeftMenus(newPath)
-    })
-  },
-  { immediate: true }
-)
+listenerRouteChange(({ to }) => {
+  getLeftMenus(to.path)
+})
 </script>
 
 <style lang="scss" scoped>

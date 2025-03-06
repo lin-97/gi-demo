@@ -64,36 +64,27 @@ import type { TabsInstance } from '@arco-design/web-vue'
 import MagicIcon from './MagicIcon.vue'
 import ReloadIcon from './ReloadIcon.vue'
 import { useAppStore, useTabsStore } from '@/stores'
+import { useRouteListener } from '@/hooks'
 
 defineOptions({ name: 'Tabs' })
 const route = useRoute()
 const router = useRouter()
 const appStore = useAppStore()
 const tabsStore = useTabsStore()
+const { listenerRouteChange } = useRouteListener()
 const tabsType = computed(() => {
   return (['custom1', 'custom2'].includes(appStore.tabMode) ? 'card' : appStore.tabMode) as unknown as TabsInstance['type']
 })
 
 tabsStore.init()
 
-// 监听路由变化
-watch(
-  () => route.fullPath,
-  () => {
-    handleRouteChange()
-  }
-)
-
-// 路由发生改变触发
-function handleRouteChange() {
-  const item = { ...route } as unknown as RouteLocationNormalized
-  tabsStore.addTabItem(toRaw(item))
-  tabsStore.addCacheItem(toRaw(item))
-  // console.log('路由对象', toRaw(item))
+listenerRouteChange(({ to }) => {
+  tabsStore.addTabItem(toRaw(to))
+  tabsStore.addCacheItem(toRaw(to))
+  // console.log('路由对象', toRaw(to))
   // console.log('tagList', toRaw(tabsStore.tabList))
   // console.log('cacheList', toRaw(tabsStore.cacheList))
-}
-handleRouteChange()
+})
 
 // 点击页签
 const handleTabClick = (key: string) => {
