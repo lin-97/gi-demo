@@ -9,14 +9,6 @@ import { isHttp } from '@/utils/validate'
 /** 免登录白名单路径 */
 const whiteList = ['/login', '/register']
 
-/** 路由生成状态标志 */
-let hasRouteFlag = false
-
-/** 重置路由生成状态 */
-export const resetHasRouteFlag = () => {
-  hasRouteFlag = false
-}
-
 /**
  * 处理动态路由加载
  * @param router - 路由实例
@@ -43,8 +35,6 @@ async function handleDynamicRoutes(
       }
     })
 
-    hasRouteFlag = true
-
     // 确保路由添加完成后返回目标路由
     return { ...to, replace: true }
   } catch (error) {
@@ -63,6 +53,7 @@ async function handleDynamicRoutes(
 export const setupPermissionGuard = (router: Router): void => {
   router.beforeEach(async (to, _from, next) => {
     const token = getToken()
+    const userStore = useUserStore()
 
     // 已登录状态
     if (token) {
@@ -73,7 +64,7 @@ export const setupPermissionGuard = (router: Router): void => {
       }
 
       // 判断是否需要生成动态路由
-      if (!hasRouteFlag) {
+      if (!userStore.roles.length) {
         const redirectRoute = await handleDynamicRoutes(router, to)
         next(redirectRoute)
         return
