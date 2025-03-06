@@ -6,15 +6,13 @@ import { getToken } from '@/utils/auth'
 import 'nprogress/nprogress.css'
 import router from '@/router'
 
-NProgress.configure({ showSpinner: false }) // NProgress Configuration
+// 配置 NProgress
+NProgress.configure({ showSpinner: false })
 
-interface ICodeMessage {
-  [propName: number]: string
-}
-
-const StatusCodeMessage: ICodeMessage = {
+/** 状态码消息映射 */
+const StatusCodeMessage: Record<number, string> = {
   200: '服务器成功返回请求的数据',
-  201: '新建或修改数据成功。',
+  201: '新建或修改数据成功',
   202: '一个请求已经进入后台排队（异步任务）',
   204: '删除数据成功',
   400: '请求错误(400)',
@@ -29,6 +27,7 @@ const StatusCodeMessage: ICodeMessage = {
   504: '网络超时(504)'
 }
 
+/** 创建 axios 实例 */
 const http: AxiosInstance = axios.create({
   baseURL: import.meta.env.VITE_API_PREFIX,
   timeout: 30 * 1000
@@ -37,7 +36,7 @@ const http: AxiosInstance = axios.create({
 // 请求拦截器
 http.interceptors.request.use(
   (config: AxiosRequestConfig) => {
-    NProgress.start() // 进度条
+    NProgress.start()
     const token = getToken()
     if (token) {
       if (!config.headers) {
@@ -48,6 +47,7 @@ http.interceptors.request.use(
     return config
   },
   (error) => {
+    NProgress.done()
     return Promise.reject(error)
   }
 )
@@ -89,6 +89,7 @@ http.interceptors.response.use(
   }
 )
 
+/** 封装请求方法 */
 const request = <T = unknown>(config: AxiosRequestConfig): Promise<ApiRes<T>> => {
   return new Promise((resolve, reject) => {
     http
@@ -98,6 +99,7 @@ const request = <T = unknown>(config: AxiosRequestConfig): Promise<ApiRes<T>> =>
   })
 }
 
+/** GET 请求 */
 const get = <T = any>(url: string, params?: object, config?: AxiosRequestConfig): Promise<ApiRes<T>> => {
   return request({
     method: 'get',
@@ -107,6 +109,7 @@ const get = <T = any>(url: string, params?: object, config?: AxiosRequestConfig)
   })
 }
 
+/** POST 请求 */
 const post = <T = any>(url: string, params?: object, config?: AxiosRequestConfig): Promise<ApiRes<T>> => {
   return request({
     method: 'post',
@@ -116,4 +119,4 @@ const post = <T = any>(url: string, params?: object, config?: AxiosRequestConfig
   })
 }
 
-export default { get, post }
+export default { get, post, request }
