@@ -60,7 +60,7 @@ async function handleDynamicRoutes(
  * 初始化路由守卫
  * @param router - 路由实例
  */
-export const setupRouterGuard = (router: Router): void => {
+export const setupPermissionGuard = (router: Router): void => {
   router.beforeEach(async (to, _from, next) => {
     const token = getToken()
 

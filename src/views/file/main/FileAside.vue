@@ -45,9 +45,10 @@
 
 <script setup lang="ts">
 import { FileTypeList, type FileTypeListItem } from '@/constant/file'
+import { useRouteListener } from '@/hooks'
 
-const route = useRoute()
 const router = useRouter()
+const { listenerRouteChange } = useRouteListener()
 
 const selectedKey = ref('0')
 const filePercentList = [
@@ -59,16 +60,9 @@ const filePercentList = [
 ]
 const showPercent = ref(false)
 
-// 监听路由变化
-watch(
-  () => route.query,
-  () => {
-    selectedKey.value = route.query.fileType as string || '0'
-  },
-  {
-    immediate: true
-  }
-)
+listenerRouteChange(({ to }) => {
+  selectedKey.value = to.query.fileType as string || '0'
+})
 
 // 点击事件
 const onClickItem = (item: FileTypeListItem) => {

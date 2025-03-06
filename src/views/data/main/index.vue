@@ -17,11 +17,12 @@
 import type { Component } from 'vue'
 import Pane1 from './Pane1.vue'
 import Pane2 from './Pane2.vue'
+import { useRouteListener } from '@/hooks'
 
 defineOptions({ name: 'DataIndex' })
 const route = useRoute()
 const router = useRouter()
-
+const { listenerRouteChange } = useRouteListener()
 const PaneMap: Record<number, Component> = {
   1: Pane1,
   2: Pane2
@@ -29,15 +30,11 @@ const PaneMap: Record<number, Component> = {
 
 const activeKey = ref(1)
 
-watch(
-  () => route.query,
-  () => {
-    if (route.query.tabKey) {
-      activeKey.value = Number(route.query.tabKey)
-    }
-  },
-  { immediate: true }
-)
+listenerRouteChange(({ to }) => {
+  if (to.query.tabKey) {
+    activeKey.value = Number(to.query.tabKey)
+  }
+})
 
 const change = (key: number | string) => {
   activeKey.value = key as number

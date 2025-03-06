@@ -5,7 +5,7 @@ import { computed, reactive, ref } from 'vue'
 import { resetRouter } from '@/router'
 import { type UserInfo, getUserInfo as getUserInfoApi, login as loginApi, logout as logoutApi } from '@/apis/user'
 import { clearToken, getToken, setToken } from '@/utils/auth'
-import { resetHasRouteFlag } from '@/router/permission'
+import { resetHasRouteFlag } from '@/router/guard/setupPermissionGuard'
 
 /** 登录参数接口 */
 interface LoginParams {

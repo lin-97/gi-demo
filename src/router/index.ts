@@ -2,7 +2,7 @@
 
 import { type RouteRecordRaw, createRouter, createWebHashHistory } from 'vue-router'
 import { useRouteStore } from '@/stores'
-import { setupRouterGuard } from '@/router/permission'
+import createRouteGuard from '@/router/guard'
 
 /** 默认布局组件 */
 const Layout = () => import('@/layout/index.vue')
@@ -75,8 +75,8 @@ const router = createRouter({
   scrollBehavior: () => ({ left: 0, top: 0 })
 })
 
-// 设置路由守卫
-setupRouterGuard(router)
+// 创建路由守卫
+createRouteGuard(router)
 
 /** 重置路由配置 - 清除所有动态添加的路由 */
 export function resetRouter(): void {
