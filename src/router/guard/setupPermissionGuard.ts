@@ -17,7 +17,7 @@ const whiteList = ['/login', '/register']
 async function handleDynamicRoutes(
   router: Router,
   to: RouteLocationNormalized
-): Promise<{ path: string, replace: boolean }> {
+): Promise<{ path: string, query?: any, replace: boolean }> {
   const userStore = useUserStore()
   const routeStore = useRouteStore()
 
@@ -42,7 +42,7 @@ async function handleDynamicRoutes(
     userStore.resetToken()
     const errorMessage = error instanceof Error ? error.message : '路由守卫过程发生错误'
     Message.error(errorMessage)
-    return { path: `/login?redirect=${to.path}`, replace: true }
+    return { path: `/login`, query: { redirect: to.path }, replace: true }
   }
 }
 
