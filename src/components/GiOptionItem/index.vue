@@ -1,10 +1,14 @@
+<!--
+  @file GiOptionItem 组件 - 选项列表项
+  @description 提供统一的选项列表项样式，支持图标和更多操作
+-->
 <template>
   <li class="gi-option-item" :class="{ 'gi-option-item--more': props.more, 'gi-option-item--active': props.active }"
     @click="handleClick">
     <div class="gi-option-item__wrapper">
       <span class="gi-option-item__icon">
         <slot name="icon">
-          <GiSvgIcon :name="props.icon"></GiSvgIcon>
+          <GiSvgIcon :name="props.icon" />
         </slot>
       </span>
       <slot>
@@ -16,6 +20,18 @@
 </template>
 
 <script setup lang="ts">
+/** 组件属性定义 */
+interface Props {
+  /** 图标名称 */
+  icon?: string
+  /** 选项文本 */
+  label?: string
+  /** 是否显示更多图标 */
+  more?: boolean
+  /** 是否激活状态 */
+  active?: boolean
+}
+
 defineOptions({ name: 'GiOptionItem' })
 
 const props = withDefaults(defineProps<Props>(), {
@@ -29,13 +45,7 @@ const emit = defineEmits<{
   (e: 'click'): void
 }>()
 
-interface Props {
-  icon?: string
-  label?: string
-  more?: boolean
-  active?: boolean
-}
-
+/** 处理点击事件 */
 const handleClick = () => {
   emit('click')
 }
@@ -43,16 +53,16 @@ const handleClick = () => {
 
 <style lang="scss" scoped>
 .gi-option-item {
-  padding: 0 5px 0 10px;
-  height: 34px;
-  line-height: 34px;
-  user-select: none;
   position: relative;
   display: flex;
   align-items: center;
+  height: 34px;
+  padding: 0 5px 0 10px;
   color: var(--color-text-2);
   font-size: 14px;
+  line-height: 34px;
   cursor: pointer;
+  user-select: none;
 
   &__wrapper {
     display: flex;
@@ -60,9 +70,9 @@ const handleClick = () => {
   }
 
   &__icon {
-    margin-right: 8px;
     display: flex;
     align-items: center;
+    margin-right: 8px;
   }
 
   &--active,
