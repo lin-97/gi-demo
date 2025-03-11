@@ -9,6 +9,9 @@ import { isHttp } from '@/utils/validate'
 /** 免登录白名单路径 */
 const whiteList = ['/login', '/register']
 
+/** 是否已生成动态路由 */
+let isDynamicRoutesGenerated = false
+
 /**
  * 处理动态路由加载
  * @param router - 路由实例
@@ -34,6 +37,9 @@ async function handleDynamicRoutes(
         router.addRoute(route)
       }
     })
+
+    // 标记动态路由已生成
+    isDynamicRoutesGenerated = true
 
     // 确保路由添加完成后返回目标路由
     return { ...to, replace: true }
@@ -63,10 +69,18 @@ export const setupPermissionGuard = (router: Router): void => {
         return
       }
 
-      // 判断是否需要生成动态路由
-      if (!userStore.roles.length) {
-        const redirectRoute = await handleDynamicRoutes(router, to)
-        next(redirectRoute)
+      // 只在首次访问或路由未生成时处理动态路由
+      if (!isDynamicRoutesGenerated) {
+        try {
+          const redirectRoute = await handleDynamicRoutes(router, to)
+          next(redirectRoute)
+        } catch (error) {
+          // 如果出错，清空角色信息并重定向到登录页
+          userStore.resetToken()
+          // 重置路由生成标志
+          isDynamicRoutesGenerated = false
+          next(`/login?redirect=${to.path}`)
+        }
         return
       }
 
@@ -75,7 +89,9 @@ export const setupPermissionGuard = (router: Router): void => {
       return
     }
 
-    // 未登录状态
+    // 未登录状态时重置路由生成标志
+    isDynamicRoutesGenerated = false
+
     if (whiteList.includes(to.path)) {
       // 白名单路径直接访问
       next()
