@@ -6,6 +6,7 @@
         <a-space>
           <LayoutItem mode="left" name="默认布局" @click="appStore.layout = 'left'"></LayoutItem>
           <LayoutItem mode="mix" name="混合布局" @click="appStore.layout = 'mix'"></LayoutItem>
+          <LayoutItem mode="top" name="顶部布局" @click="appStore.layout = 'top'"></LayoutItem>
         </a-space>
       </a-row>
 
