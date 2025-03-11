@@ -1,1 +1,0 @@
-import{d as t,i as a}from"./index-D2ooPFP7.js";const i=t({name:"GiDot",props:{animation:{type:Boolean,default:!0},type:{type:String,default:"primary"}},setup:t=>()=>a("span",{class:["gi-dot",{"gi-dot-processing":t.animation},`gi-dot-${t.type}`]},null)});export{i as _};
