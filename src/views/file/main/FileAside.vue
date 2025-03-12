@@ -12,7 +12,7 @@
             <icon-apps></icon-apps>
           </template>
           <template #title>文件类型</template>
-          <a-menu-item v-for="item in FileTypeList" :key="item.value.toString()" @click="onClickItem(item)">
+          <a-menu-item v-for="item in FILE_TYPE_LIST" :key="item.value.toString()" @click="onClickItem(item)">
             <template #icon>
               <GiSvgIcon :size="28" :name="item.menuIcon"></GiSvgIcon>
             </template>
@@ -44,7 +44,7 @@
 </template>
 
 <script setup lang="ts">
-import { FileTypeList, type FileTypeListItem } from '@/constant/file'
+import { FILE_TYPE_LIST, type FileTypeListItem } from '@/constant/file'
 import { useRouteListener } from '@/hooks'
 
 const router = useRouter()
