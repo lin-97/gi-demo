@@ -1,21 +1,36 @@
+<!--
+  @file ReloadIcon 组件
+  @description 页面重载图标组件，支持加载动画效果
+-->
 <template>
-  <icon-refresh class="reload-icon" :class="{ 'reload-icon--spin': loading }" :size="18" @click="reload" />
+  <icon-refresh class="reload-icon" :class="{ 'reload-icon--loading': isLoading }" :size="ICON_SIZE"
+    @click="handleReload" />
 </template>
 
-<script lang="ts" setup>
+<script setup lang="ts">
 import { useTabsStore } from '@/stores'
 
-const tabsStore = useTabsStore()
-const loading = ref(false)
+/** 组件名称 */
+defineOptions({ name: 'ReloadIcon' })
 
-// 重载页面
-const reload = () => {
-  if (loading.value) return
-  loading.value = true
+/** 常量定义 */
+const ICON_SIZE = 18
+const RELOAD_DURATION = 600
+
+/** 状态管理 */
+const tabsStore = useTabsStore()
+const isLoading = ref(false)
+
+/** 处理重载操作 */
+const handleReload = () => {
+  if (isLoading.value) return
+
+  isLoading.value = true
   tabsStore.reloadPage()
+
   setTimeout(() => {
-    loading.value = false
-  }, 600)
+    isLoading.value = false
+  }, RELOAD_DURATION)
 }
 </script>
 
@@ -23,7 +38,7 @@ const reload = () => {
 .reload-icon {
   cursor: pointer;
 
-  &--spin {
+  &--loading {
     animation-name: arco-loading-circle;
     animation-duration: 0.6s;
   }

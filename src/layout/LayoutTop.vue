@@ -1,6 +1,7 @@
 <template>
   <div class="layout-top">
     <a-row align="center" class="layout-top__header">
+      <Logo></Logo>
       <Menu class="layout-top__menu"></Menu>
       <HeaderRightBar></HeaderRightBar>
     </a-row>
@@ -14,6 +15,7 @@ import Main from './components/Main.vue'
 import Tabs from './components/Tabs/index.vue'
 import Menu from './components/Menu/index.vue'
 import HeaderRightBar from './components/HeaderRightBar/index.vue'
+import Logo from './components/Logo.vue'
 
 defineOptions({ name: 'LayoutTop' })
 </script>

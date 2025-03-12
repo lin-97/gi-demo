@@ -1,16 +1,20 @@
+<!--
+  @file HeaderRightBar 组件
+  @description 头部右侧工具栏组件，包含项目配置、消息通知、全屏切换、主题切换和用户菜单等功能
+-->
 <template>
   <a-row justify="end" align="center">
     <a-space size="medium">
-      <!-- 项目配置 -->
+      <!-- 项目配置按钮 -->
       <a-tooltip content="项目配置" position="bl">
-        <a-button size="mini" class="gi_hover_btn" @click="SettingDrawerRef?.open">
+        <a-button size="mini" class="gi_hover_btn" @click="handleOpenSettings">
           <template #icon>
             <icon-settings :size="18" />
           </template>
         </a-button>
       </a-tooltip>
 
-      <!-- 消息通知 -->
+      <!-- 消息通知下拉框 -->
       <a-popover position="bottom" trigger="click">
         <a-badge :count="9" dot>
           <a-button size="mini" class="gi_hover_btn">
@@ -20,11 +24,11 @@
           </a-button>
         </a-badge>
         <template #content>
-          <Message></Message>
+          <Notice></Notice>
         </template>
       </a-popover>
 
-      <!-- 全屏切换组件 -->
+      <!-- 全屏切换按钮 -->
       <a-tooltip v-if="!['xs', 'sm'].includes(breakpoint)" content="全屏切换" position="bottom">
         <a-button size="mini" class="gi_hover_btn" @click="toggle">
           <template #icon>
@@ -49,29 +53,22 @@
           <span class="username">{{ userStore.name }}</span>
           <icon-down />
         </a-row>
+
         <template #content>
-          <a-doption @click="toUser">
+          <a-doption v-for="item in userMenuItems" :key="item.key" @click="item.onClick">
             <template #icon>
-              <GiIconBox color="primary"><icon-user /></GiIconBox>
+              <GiIconBox :color="item.iconColor">
+                <component :is="item.icon" />
+              </GiIconBox>
             </template>
-            <span>个人中心</span>
-          </a-doption>
-          <a-doption @click="toGitPath">
-            <template #icon>
-              <GiIconBox color="success"><icon-github /></GiIconBox>
-            </template>
-            <span>项目地址</span>
-          </a-doption>
-          <a-doption>
-            <template #icon>
-              <GiIconBox color="primary"><icon-unlock /></GiIconBox>
-            </template>
-            <span>修改密码</span>
+            <span>{{ item.label }}</span>
           </a-doption>
           <a-divider :margin="0" />
-          <a-doption @click="logout">
+          <a-doption @click="handleLogout">
             <template #icon>
-              <GiIconBox color="warning"><icon-export /></GiIconBox>
+              <GiIconBox color="warning">
+                <icon-export />
+              </GiIconBox>
             </template>
             <span>退出登录</span>
           </a-doption>
@@ -84,29 +81,65 @@
 </template>
 
 <script setup lang="ts">
-import { Modal } from '@arco-design/web-vue'
+import { Message, Modal } from '@arco-design/web-vue'
 import { useFullscreen } from '@vueuse/core'
 import SettingDrawer from './SettingDrawer.vue'
-import Message from './Message.vue'
+import Notice from './Notice.vue'
 import { useUserStore } from '@/stores'
 import { useBreakpoint } from '@/hooks'
 
+/** 组件名称 */
 defineOptions({ name: 'HeaderRight' })
 
+/** 路由实例 */
+const router = useRouter()
+
+/** 状态管理 */
+const userStore = useUserStore()
+
+/** 响应式断点 */
 const { breakpoint } = useBreakpoint()
+
+/** 全屏控制 */
 const { isFullscreen, toggle } = useFullscreen()
 
-const router = useRouter()
-const userStore = useUserStore()
+/** 组件引用 */
 const SettingDrawerRef = useTemplateRef('SettingDrawerRef')
 
-// 跳转个人中心
-const toUser = () => {
-  router.push('/system/account')
+/** 用户菜单配置 */
+const userMenuItems = [
+  {
+    key: 'user',
+    label: '个人中心',
+    icon: 'icon-user',
+    iconColor: 'primary',
+    onClick: () => router.push('/system/account')
+  },
+  {
+    key: 'github',
+    label: '项目地址',
+    icon: 'icon-github',
+    iconColor: 'success',
+    onClick: () => window.open('https://gitee.com/lin0716/gi-demo')
+  },
+  {
+    key: 'password',
+    label: '修改密码',
+    icon: 'icon-unlock',
+    iconColor: 'primary',
+    onClick: () => {
+      Message.info('修改密码')
+    }
+  }
+]
+
+/** 打开设置抽屉 */
+const handleOpenSettings = () => {
+  SettingDrawerRef.value?.open()
 }
 
-// 退出登录
-const logout = () => {
+/** 处理退出登录 */
+const handleLogout = () => {
   Modal.warning({
     title: '提示',
     content: '确认退出登录？',
@@ -122,11 +155,6 @@ const logout = () => {
       }
     }
   })
-}
-
-// 跳转项目地址
-const toGitPath = () => {
-  window.open('https://gitee.com/lin0716/gi-demo')
 }
 </script>
 
