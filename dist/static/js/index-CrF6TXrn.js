@@ -1,1 +1,0 @@
-import{d as i,i as a}from"./index-J7mQeAxE.js";const e=i({name:"GiDot",props:{animation:{type:Boolean,default:!0,required:!1},type:{type:String,default:"primary",required:!1,validator:i=>["primary","success","warning","danger","info"].includes(i)}},setup:i=>()=>a("span",{class:["gi-dot",{"gi-dot-processing":i.animation},`gi-dot-${i.type}`]},null)});export{e as _};
