@@ -1,7 +1,7 @@
 <template>
-  <a-layout class="layout layout-default">
+  <a-layout class="layout-default">
     <Asider></Asider>
-    <a-layout class="layout-default-right">
+    <a-layout class="layout-default__right">
       <Header></Header>
       <Tabs></Tabs>
       <Main></Main>
@@ -19,13 +19,11 @@ defineOptions({ name: 'LayoutDefault' })
 </script>
 
 <style lang="scss" scoped>
-.layout {
-  height: 100%;
-}
-
 .layout-default {
+  height: 100%;
   flex-direction: row;
-  &-right {
+
+  &__right {
     overflow: hidden;
   }
 }

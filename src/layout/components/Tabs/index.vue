@@ -1,13 +1,16 @@
+<!--
+  @file Tabs 组件
+  @description 系统标签页组件，支持多种标签样式、右键菜单和快捷操作
+-->
 <template>
   <div v-if="appStore.tab" class="tabs">
-    <a-tabs :class="`tabs__${appStore.tabMode}`" editable hide-content size="medium" :type="tabsType"
-      :active-key="route.path" @tab-click="handleTabClick($event as string)"
-      @delete="tabsStore.closeCurrent($event as string)">
+    <a-tabs :class="`tabs__${appStore.tabMode}`" :type="tabsType" :active-key="route.path" editable hide-content
+      size="medium" @tab-click="handleTabClick" @delete="tabsStore.closeCurrent">
       <a-tab-pane v-for="item of tabsStore.tabList" :key="item.path" :title="(item.meta?.title as string)"
-        :closable="Boolean(!item.meta?.affix)">
+        :closable="!item.meta?.affix">
         <template v-if="appStore.tabMode === 'custom2'" #title>
           <a-dropdown trigger="contextMenu">
-            <a-tag class="tabs-pane__tag" :closable="Boolean(!item.meta?.affix)"
+            <a-tag class="tabs-pane__tag" :closable="!item.meta?.affix"
               :color="route.path === item.path ? 'arcoblue' : undefined" @close="tabsStore.closeCurrent(item.path)">
               {{ item.meta?.title }}
             </a-tag>
@@ -28,6 +31,7 @@
           </a-dropdown>
         </template>
       </a-tab-pane>
+
       <template #extra>
         <a-space size="medium">
           <ReloadIcon></ReloadIcon>
@@ -59,13 +63,13 @@
 </template>
 
 <script setup lang="ts">
-import type { RouteLocationNormalized } from 'vue-router'
 import type { TabsInstance } from '@arco-design/web-vue'
 import MagicIcon from './MagicIcon.vue'
 import ReloadIcon from './ReloadIcon.vue'
 import { useAppStore, useTabsStore } from '@/stores'
 import { useRouteListener } from '@/hooks'
 
+/** 组件名称 */
 defineOptions({ name: 'Tabs' })
 const route = useRoute()
 const router = useRouter()
@@ -76,24 +80,34 @@ const tabsType = computed(() => {
   return (['custom1', 'custom2'].includes(appStore.tabMode) ? 'card' : appStore.tabMode) as unknown as TabsInstance['type']
 })
 
+/** 初始化标签页 */
 tabsStore.init()
 
+/** 监听路由变化 */
 listenerRouteChange(({ to }) => {
-  tabsStore.addTabItem(toRaw(to))
-  tabsStore.addCacheItem(toRaw(to))
-  // console.log('路由对象', toRaw(to))
-  // console.log('tagList', toRaw(tabsStore.tabList))
-  // console.log('cacheList', toRaw(tabsStore.cacheList))
+  const rawTo = toRaw(to)
+  tabsStore.addTabItem(rawTo)
+  tabsStore.addCacheItem(rawTo)
 })
 
-// 点击页签
+/** 处理标签页点击 */
 const handleTabClick = (key: string) => {
-  const obj = tabsStore.tabList.find((i) => i.path === key)
-  obj ? router.push(obj.fullPath || obj.path) : router.push(key)
+  const targetTab = tabsStore.tabList.find((tab) => tab.path === key)
+  router.push(targetTab?.fullPath || targetTab?.path || key)
 }
 </script>
 
 <style lang="scss" scoped>
+.tabs {
+  padding-top: 5px;
+  background-color: var(--color-bg-1);
+
+  &-pane__tag {
+    margin: 0 4px;
+  }
+}
+
+// 标签页导航样式
 :deep(.arco-tabs-nav-tab) {
   .arco-tabs-tab {
     border-bottom-color: transparent !important;
@@ -103,21 +117,17 @@ const handleTabClick = (key: string) => {
       transition: all 0.15s;
     }
 
-    &:hover {
-      svg {
-        width: 1em;
-      }
+    &:hover svg {
+      width: 1em;
     }
   }
 
-  &:not(.arco-tabs-nav-tab-scroll) {
-    .arco-tabs-tab:first-child {
-      border-left: 0;
-    }
+  &:not(.arco-tabs-nav-tab-scroll) .arco-tabs-tab:first-child {
+    border-left: 0;
   }
 }
 
-// tabs样式-自定义类型1
+// 自定义样式1
 :deep(.tabs__custom1) {
   .arco-tabs-nav-tab {
     .arco-tabs-tab {
@@ -142,16 +152,12 @@ const handleTabClick = (key: string) => {
       &:hover {
         padding: 5px 20px;
         background-color: rgba(var(--primary-6), 0.1);
-        -webkit-mask: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAANoAAAAkBAMAAAAdqzmBAAAAMFBMVEVHcEwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAlTPQ5AAAAD3RSTlMAr3DvEM8wgCBA379gj5//tJBPAAAAnUlEQVRIx2NgAAM27fj/tAO/xBsYkIHyf9qCT8iWMf6nNQhAsk2f5rYheY7Dnua2/U+A28ZEe8v+F9Ax2v7/F4DbxkUH2wzgtvHTwbYPo7aN2jZq26hto7aN2jZq25Cy7Qvctnw62PYNbls9HWz7S8/G6//PsI6H4396gAUQy1je08W2jxDbpv6nD4gB2uWp+J9eYPsEhv/0BPS1DQBvoBLVZ3BppgAAAABJRU5ErkJggg==);
-        mask: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAANoAAAAkBAMAAAAdqzmBAAAAMFBMVEVHcEwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAlTPQ5AAAAD3RSTlMAr3DvEM8wgCBA379gj5//tJBPAAAAnUlEQVRIx2NgAAM27fj/tAO/xBsYkIHyf9qCT8iWMf6nNQhAsk2f5rYheY7Dnua2/U+A28ZEe8v+F9Ax2v7/F4DbxkUH2wzgtvHTwbYPo7aN2jZq26hto7aN2jZq25Cy7Qvctnw62PYNbls9HWz7S8/G6//PsI6H4396gAUQy1je08W2jxDbpv6nD4gB2uWp+J9eYPsEhv/0BPS1DQBvoBLVZ3BppgAAAABJRU5ErkJggg==);
-        -webkit-mask-size: 100% 100%;
-        mask-size: 100% 100%;
       }
     }
   }
 }
 
-// tabs样式-自定义类型2
+// 自定义样式2
 :deep(.tabs__custom2) {
   .arco-tabs-nav {
     padding-bottom: 6px;
@@ -173,14 +179,5 @@ const handleTabClick = (key: string) => {
 
 :deep(.arco-dropdown-option-icon) {
   color: var(--color-text-3);
-}
-
-.tabs {
-  padding-top: 5px;
-  background-color: var(--color-bg-1);
-
-  .tabs-pane__tag {
-    margin: 0 4px;
-  }
 }
 </style>
