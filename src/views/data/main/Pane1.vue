@@ -1,7 +1,7 @@
 <template>
-  <GiPageLayout style="margin: 14px;">
+  <GiPageLayout>
     <template #left>
-      <a-card title="数据分类" :bordered="false" class="gi_card flex-1">
+      <a-card title="数据分类" :bordered="false" :header-style="{ display: 'none' }" class="gi_card flex-1">
         <CateTree placeholder="请输入搜索关键词" @node-click="pagination.onChange(1)"></CateTree>
       </a-card>
     </template>
