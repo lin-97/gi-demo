@@ -1,0 +1,1 @@
+import{_ as s,o as a,g as e,j as d}from"./index-pvGzmBmd.js";const t={class:"image-card"};const i=s({},[["render",function(s,i){return a(),e("div",t,i[0]||(i[0]=[d("img",{class:"animated-fade-up-1",src:"/gi-demo/static/svg/home-design-BpgkVAYf.svg"},null,-1)]))}],["__scopeId","data-v-a2e757f7"]]);export{i as default};
