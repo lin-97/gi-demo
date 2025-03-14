@@ -29,7 +29,7 @@
 
         <a-input-group>
           <a-select placeholder="请选择" :trigger-props="{ autoFitPopupMinWidth: true }" style="width: 150px">
-            <a-option v-for="item in FileTypeList" :key="item.value">
+            <a-option v-for="item in FILE_TYPE_LIST" :key="item.value">
               <template #icon>
                 <component :is="item.icon" size="18" color="#999"></component>
               </template>
@@ -111,7 +111,7 @@ import {
 import useFileManage from './useFileManage'
 import FilePath from './FilePath.vue'
 import FileGrid from './FileGrid.vue'
-import { FileTypeList, ImageTypes } from '@/constant/file'
+import { FILE_TYPE_LIST, IMAGE_TYPES } from '@/constant/file'
 import { type FileItem, getFileList } from '@/apis/file'
 
 const FileList = defineAsyncComponent(() => import('./FileList.vue'))
@@ -156,13 +156,13 @@ onBeforeRouteUpdate((to) => {
 
 // 列表图片集合
 const imageList = computed(() => {
-  return fileList.value.filter((i) => ImageTypes.includes(i.extendName)).map((a) => a.src ?? '')
+  return fileList.value.filter((i) => IMAGE_TYPES.includes(i.extendName)).map((a) => a.src ?? '')
 })
 
 // 点击文件
 const handleClickFile = (item: FileItem) => {
   Message.success(`点击了文件-${item.name}`)
-  if (ImageTypes.includes(item.extendName)) {
+  if (IMAGE_TYPES.includes(item.extendName)) {
     if (item.src && imageList.value.length) {
       const index = imageList.value.findIndex((i) => i === item.src)
       viewerApi({

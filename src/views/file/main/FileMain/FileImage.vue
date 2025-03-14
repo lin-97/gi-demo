@@ -4,7 +4,7 @@
 </template>
 
 <script setup lang="ts">
-import { FileIcon, ImageTypes } from '@/constant/file'
+import { FILE_ICON_MAP, IMAGE_TYPES } from '@/constant/file'
 import type { FileItem } from '@/apis/file'
 
 interface Props {
@@ -16,22 +16,22 @@ const props = withDefaults(defineProps<Props>(), {})
 // 是否是图片类型文件
 const isImage = computed(() => {
   const extendName = props.data.extendName.toLowerCase()
-  return ImageTypes.includes(extendName)
+  return IMAGE_TYPES.includes(extendName)
 })
 
 // 获取文件图标，如果是图片就显示图片
 const getFileImg = computed<string>(() => {
   const extendName = props.data.extendName.toLowerCase()
   if (props.data?.isDir) {
-    return FileIcon['dir']
+    return FILE_ICON_MAP['dir']
   }
-  if (ImageTypes.includes(extendName)) {
+  if (IMAGE_TYPES.includes(extendName)) {
     return props.data.src
   }
-  if (!Object.keys(FileIcon).includes(extendName)) {
-    return FileIcon['other']
+  if (!Object.keys(FILE_ICON_MAP).includes(extendName)) {
+    return FILE_ICON_MAP['other']
   }
-  return FileIcon[extendName]
+  return FILE_ICON_MAP[extendName]
 })
 </script>
 

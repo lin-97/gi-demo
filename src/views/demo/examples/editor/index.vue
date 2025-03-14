@@ -1,9 +1,11 @@
 <template>
-  <div class="editor">
-    <Toolbar class="editor-toolbar" :editor="editorRef" :default-config="toolbarConfig" />
-    <Editor v-model="valueHtml" class="editor-content" style="height: 500px; overflow-y: hidden"
-      :default-config="editorConfig" @on-created="handleCreated" />
-  </div>
+  <a-card title="富文本编辑器" :bordered="false">
+    <div class="editor">
+      <Toolbar class="editor-toolbar" :editor="editorRef" :default-config="toolbarConfig" />
+      <Editor v-model="valueHtml" class="editor-content" style="height: 500px; overflow-y: hidden"
+        :default-config="editorConfig" @on-created="handleCreated" />
+    </div>
+  </a-card>
 </template>
 
 <script setup lang="ts">

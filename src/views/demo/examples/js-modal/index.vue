@@ -1,8 +1,10 @@
 <template>
-  <a-space>
-    <a-button type="primary" @click="open1">打开添加用户弹窗(方式1)</a-button>
-    <a-button type="primary" @click="open2">打开添加用户弹窗(方式2)</a-button>
-  </a-space>
+  <a-card title="函数弹窗" :bordered="false">
+    <a-space>
+      <a-button type="primary" @click="open1">打开添加用户弹窗(方式1)</a-button>
+      <a-button type="primary" @click="open2">打开添加用户弹窗(方式2)</a-button>
+    </a-space>
+  </a-card>
 </template>
 
 <script lang="tsx" setup>

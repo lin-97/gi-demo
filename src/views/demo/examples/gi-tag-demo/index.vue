@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="gi_px gi_py">
     <a-card title="基本使用" :bordered="true">
       <a-space wrap fill>
         <GiTag>light</GiTag>

@@ -1,7 +1,7 @@
 <template>
-  <div class="map">
+  <a-card title="地图" :bordered="false" class="gi_card" style="flex: 1;">
     <div id="container"></div>
-  </div>
+  </a-card>
 </template>
 
 <script lang="ts" setup>
@@ -33,12 +33,6 @@ onMounted(() => {
 </script>
 
 <style lang="scss" scoped>
-.map {
-  flex: 1;
-  width: 100%;
-  height: 100%;
-}
-
 #container {
   width: 100%;
   height: 100%;

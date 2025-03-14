@@ -1,5 +1,5 @@
 <template>
-  <div class="area">
+  <a-card title="省市区域选择" :bordered="false">
     <a-alert>采用了vant UI的省市区的数据源</a-alert>
     <div class="wrap">
       <section class="tree-box">
@@ -18,7 +18,7 @@
           placeholder="请选择省市区" />
       </section>
     </div>
-  </div>
+  </a-card>
 </template>
 
 <script setup lang="ts">
@@ -33,18 +33,16 @@ treeData.value = getAreaTreeData()
 </script>
 
 <style lang="scss" scoped>
-.area {
-  .wrap {
-    display: flex;
-    margin-top: 12px;
-  }
+.wrap {
+  display: flex;
+  margin-top: 12px;
+}
 
-  .tree-box {
-    width: 270px;
-    padding-left: 12px;
-    border: 1px solid var(--color-border-2);
-    background: var(--color-bg-2);
-    margin-right: 50px;
-  }
+.tree-box {
+  width: 270px;
+  padding-left: 12px;
+  border: 1px solid var(--color-border-2);
+  background: var(--color-bg-2);
+  margin-right: 50px;
 }
 </style>

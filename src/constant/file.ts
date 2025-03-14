@@ -14,7 +14,7 @@ export interface FileTypeListItem {
  * 文件类型列表
  * @description 定义系统中支持的文件类型分类
  */
-export const FileTypeList: FileTypeListItem[] = [
+export const FILE_TYPE_LIST: FileTypeListItem[] = [
   { name: '全部', value: '0', menuIcon: 'menu-file', icon: 'icon-stamp' },
   { name: '图片', value: '1', menuIcon: 'file-image', icon: 'icon-file-image' },
   { name: '文档', value: '2', menuIcon: 'file-txt', icon: 'icon-file' },
@@ -32,7 +32,7 @@ export interface FileExtendNameIconMap {
  * 文件类型图标映射
  * @description 定义文件扩展名与对应图标的映射关系
  */
-export const FileIcon: FileExtendNameIconMap = {
+export const FILE_ICON_MAP: FileExtendNameIconMap = {
   // 音频文件
   mp3: 'file-music',
   // 视频文件
@@ -62,14 +62,10 @@ export const FileIcon: FileExtendNameIconMap = {
  * 图片文件类型列表
  * @description 系统支持的图片文件扩展名
  */
-export const ImageTypes = ['jpg', 'png', 'gif', 'jpeg'] as const
+export const IMAGE_TYPES = ['jpg', 'png', 'gif', 'jpeg']
 
 /**
  * Office 文件类型列表
  * @description 系统支持的 Office 文件扩展名
  */
-export const OfficeTypes = ['ppt', 'pptx', 'doc', 'docx', 'xls', 'xlsx'] as const
-
-/** 文件类型 */
-export type ImageType = typeof ImageTypes[number]
-export type OfficeType = typeof OfficeTypes[number]
+export const OFFICE_TYPES = ['ppt', 'pptx', 'doc', 'docx', 'xls', 'xlsx']
