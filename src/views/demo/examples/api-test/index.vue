@@ -1,5 +1,5 @@
 <template>
-  <div class="test">
+  <a-card title="API测试" :bordered="false">
     <a-space fill wrap>
       <a-button type="primary" @click="success">成功接口请求</a-button>
       <a-button type="primary" status="danger" @click="fail">失败接口请求</a-button>
@@ -9,7 +9,7 @@
       <a-input v-model="currentTabTitle" placeholder="输入当前tab页签名称"></a-input>
       <a-button type="primary" @click="changeTabTitle">修改</a-button>
     </a-space>
-  </div>
+  </a-card>
 </template>
 
 <script lang="ts" setup>

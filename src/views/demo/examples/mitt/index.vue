@@ -1,10 +1,10 @@
 <template>
-  <div>
+  <a-card title="mitt" :bordered="false">
     <a-space>
       <A></A>
       <B></B>
     </a-space>
-  </div>
+  </a-card>
 </template>
 
 <script lang="ts" setup>

@@ -1,5 +1,5 @@
 <template>
-  <div class="fn-component">
+  <div class="page fn-component">
     <a-space>
       <a-button type="primary" status="success" @click="onSuccess">成功</a-button>
       <a-button type="primary" status="warning" @click="onWarning">警告</a-button>
