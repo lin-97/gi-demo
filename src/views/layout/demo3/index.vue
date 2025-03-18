@@ -1,28 +1,23 @@
 <template>
-  <GiPageLayout :margin="false">
+  <GiPageLayout :margin="true">
     <template #header>
       <a-card class="gi_card" :header-style="{ display: 'none' }" :body-style="{ paddingBottom: 0 }">
         <GiForm v-model="form" search :columns="searchColumns"
-          :grid-item-props="{ span: { xs: 24, sm: 24, md: 24, lg: 12, xl: 8, xxl: 8 } }">
+          :grid-item-props="{ span: { xs: 24, sm: 24, md: 12, lg: 8, xl: 8, xxl: 6 } }" @search="TableRef?.search"
+          @reset="TableRef?.search">
         </GiForm>
       </a-card>
     </template>
-    <template #left>
-      <a-card class="gi_card" :header-style="{ display: 'none' }">
-        <Tree />
-      </a-card>
-    </template>
-    <a-card class="gi_card" :header-style="{ display: 'none' }">
-      <Table />
-    </a-card>
+
+    <Table ref="TableRef" />
   </GiPageLayout>
 </template>
 
 <script lang="ts" setup>
-import Tree from './components/Tree.vue'
-import Table from './components/Table.vue'
+import Table from '../components/Table.vue'
 import type { ColumnItem } from '@/components/GiForm'
 
+const TableRef = useTemplateRef('TableRef')
 const form = reactive({})
 
 const searchColumns = computed(() => [
@@ -41,8 +36,8 @@ const searchColumns = computed(() => [
   },
   {
     type: 'select',
-    label: '类型',
-    field: 'status',
+    label: '性别',
+    field: 'gender',
     props: {
       options: [
         { label: '男', value: 1 },
