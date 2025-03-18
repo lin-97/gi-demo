@@ -22,10 +22,6 @@ import GiSpaceDemo from './examples/gi-space-demo/index.vue'
 import GiDotDemo from './examples/gi-dot-demo/index.vue'
 import GiIconBoxDemo from './examples/gi-icon-box-demo/index.vue'
 import GiIconSelectorDemo from './examples/gi-icon-selector-demo/index.vue'
-import GiPageLayoutDemo1 from './examples/gi-page-layout-demo/demo1.vue'
-import GiPageLayoutDemo2 from './examples/gi-page-layout-demo/demo2.vue'
-import GiPageLayoutDemo3 from './examples/gi-page-layout-demo/demo3.vue'
-import GiPageLayoutDemo4 from './examples/gi-page-layout-demo/demo4.vue'
 // 其他示例
 import Area from './examples/area-demo/index.vue'
 import Editor from './examples/editor/index.vue'
@@ -47,10 +43,6 @@ const menuList = [
   { name: 'GiIconBox', value: GiIconBoxDemo },
   { name: 'GiDot', value: GiDotDemo },
   { name: 'GiIconSelector', value: GiIconSelectorDemo },
-  { name: 'GiPageLayout示例1', value: GiPageLayoutDemo1 },
-  { name: 'GiPageLayout示例2', value: GiPageLayoutDemo2 },
-  { name: 'GiPageLayout示例3', value: GiPageLayoutDemo3 },
-  { name: 'GiPageLayout示例4', value: GiPageLayoutDemo4 },
   { name: '函数调用模态框', value: JSModal },
   { name: '横向树表格', value: RowTreeTable },
   { name: '省市区', value: Area },

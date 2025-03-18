@@ -1,42 +1,44 @@
 <template>
-  <GiTable row-key="id" :loading="loading" :columns="columns" :data="tableData"
-    :scroll="{ x: '100%', y: '100%', minWidth: 1300 }" :row-selection="{ type: 'checkbox', showCheckedAll: true }"
-    :pagination="pagination" :disabled-column-keys="['序号', 'name']" @refresh="getTableData">
-    <template #custom-title>
-      <a-button type="primary" @click="onAdd">
-        <template #icon><icon-plus /></template>
-        <span>新增</span>
-      </a-button>
-      <a-button type="primary" status="danger" @click="onMulDelete">
-        <template #icon><icon-delete /></template>
-        <span>删除</span>
-      </a-button>
-      <a-button @click="onImport">
-        <template #icon><icon-export /></template>
-        <span>导入</span>
-      </a-button>
-    </template>
-    <template #avatar="{ record }">
-      <a-avatar :size="28" shape="circle">
-        <img :src="record.avatar" />
-      </a-avatar>
-    </template>
-    <template #gender="{ record }">
-      <GiCellGender :gender="record.gender"></GiCellGender>
-    </template>
-    <template #status="{ record }">
-      <GiCellStatus :status="record.status"></GiCellStatus>
-    </template>
-    <template #action>
-      <a-space>
-        <a-button type="primary" size="mini">修改</a-button>
-        <a-button size="mini">详情</a-button>
-        <a-popconfirm type="warning" content="您确定要删除该项吗?" @before-ok="onDelete">
-          <a-button type="primary" status="danger" size="mini">删除</a-button>
-        </a-popconfirm>
-      </a-space>
-    </template>
-  </GiTable>
+  <a-card class="gi_card" :header-style="{ display: 'none' }">
+    <GiTable row-key="id" :loading="loading" :columns="columns" :data="tableData"
+      :scroll="{ x: '100%', y: '100%', minWidth: 1300 }" :row-selection="{ type: 'checkbox', showCheckedAll: true }"
+      :pagination="pagination" :disabled-column-keys="['序号', 'name']" @refresh="getTableData">
+      <template #custom-title>
+        <a-button type="primary" @click="onAdd">
+          <template #icon><icon-plus /></template>
+          <span>新增</span>
+        </a-button>
+        <a-button type="primary" status="danger" @click="onMulDelete">
+          <template #icon><icon-delete /></template>
+          <span>删除</span>
+        </a-button>
+        <a-button @click="onImport">
+          <template #icon><icon-export /></template>
+          <span>导入</span>
+        </a-button>
+      </template>
+      <template #avatar="{ record }">
+        <a-avatar :size="28" shape="circle">
+          <img :src="record.avatar" />
+        </a-avatar>
+      </template>
+      <template #gender="{ record }">
+        <GiCellGender :gender="record.gender"></GiCellGender>
+      </template>
+      <template #status="{ record }">
+        <GiCellStatus :status="record.status"></GiCellStatus>
+      </template>
+      <template #action>
+        <a-space>
+          <a-button type="primary" size="mini">修改</a-button>
+          <a-button size="mini">详情</a-button>
+          <a-popconfirm type="warning" content="您确定要删除该项吗?" @before-ok="onDelete">
+            <a-button type="primary" status="danger" size="mini">删除</a-button>
+          </a-popconfirm>
+        </a-space>
+      </template>
+    </GiTable>
+  </a-card>
 </template>
 
 <script lang="ts" setup>
@@ -92,4 +94,6 @@ const onImport = () => {
 const onDelete: PopconfirmInstance['onBeforeOk'] = () => {
   return new Promise((resolve) => setTimeout(() => resolve(true), 300))
 }
+
+defineExpose({ search })
 </script>
