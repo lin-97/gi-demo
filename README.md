@@ -1851,6 +1851,12 @@ $padding: 16px; // 盒子和内容的间距
 
 <a href="https://go.itab.link/" target="_blank">iTab</a>
 
+
+
+## 赞助
+
+<img style="width:300px" src="https://gitee.com/lin0716/gi-image/raw/master/sponsor.jpg" />
+
 ## 捐赠
 
 <img style="width:300px" src="https://gitee.com/lin0716/gi-image/raw/master/alipay.jpg" />
