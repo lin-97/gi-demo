@@ -3,7 +3,7 @@
     <WorkCard></WorkCard>
 
     <a-row class="home__content">
-      <a-col :xs="24" :sm="24" :md="24" :lg="12" :xl="12" :xxl="12">
+      <a-col :xs="24" :sm="24" :md="24" :lg="14" :xl="14" :xxl="16">
         <div class="home__item">
           <ProjectCard></ProjectCard>
         </div>
@@ -11,9 +11,12 @@
           <MessageCard></MessageCard>
         </div>
       </a-col>
-      <a-col :xs="24" :sm="24" :md="24" :lg="12" :xl="12" :xxl="12">
+      <a-col :xs="24" :sm="24" :md="24" :lg="10" :xl="10" :xxl="8">
         <div class="home__item">
           <FastCard></FastCard>
+        </div>
+        <div class="home__item">
+          <AdvCard></AdvCard>
         </div>
         <div class="home__item">
           <ImageCard></ImageCard>
@@ -33,6 +36,7 @@ import ProjectCard from './components/ProjectCard.vue'
 import MessageCard from './components/MessageCard.vue'
 import FastCard from './components/FastCard.vue'
 import ImageCard from './components/ImageCard.vue'
+import AdvCard from './components/AdvCard.vue'
 
 defineOptions({ name: 'Home' })
 </script>
