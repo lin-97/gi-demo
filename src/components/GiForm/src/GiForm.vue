@@ -49,8 +49,9 @@
       </template>
 
       <!-- 搜索按钮组 -->
-      <a-grid-item v-if="props.search" v-bind="defaultGridItemProps" :span="defaultGridItemProps?.span"
-        :suffix="props.search && props.suffix">
+      <a-grid-item v-if="props.search" :key="!props.suffix ? String(collapsed) : undefined"
+        v-bind="defaultGridItemProps" :span="defaultGridItemProps?.span"
+        :suffix="props.search && (props.suffix || (!props.suffix && collapsed))">
         <a-space wrap>
           <slot name="suffix">
             <a-button type="primary" @click="emit('search')">
