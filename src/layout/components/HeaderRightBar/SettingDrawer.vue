@@ -8,9 +8,8 @@
       <a-divider orientation="center">系统布局</a-divider>
       <a-row justify="center">
         <a-space>
-          <LayoutItem mode="left" name="默认布局" @click="appStore.layout = 'left'"></LayoutItem>
-          <LayoutItem mode="mix" name="混合布局" @click="appStore.layout = 'mix'"></LayoutItem>
-          <LayoutItem mode="top" name="顶部布局" @click="appStore.layout = 'top'"></LayoutItem>
+          <LayoutModeItem v-for="item in LAYOUT_OPTIONS" :key="item.value" :mode="item.value" :name="item.label"
+            @click="toggleLayout(item.value)"></LayoutModeItem>
         </a-space>
       </a-row>
 
@@ -29,21 +28,22 @@
         <a-descriptions :column="1" :align="{ value: 'right' }" :value-style="{ paddingRight: 0 }">
           <!-- 页签设置 -->
           <a-descriptions-item label="页签显示">
-            <a-switch v-model="appStore.tab" />
+            <a-switch v-model="appStore.tabVisible" />
           </a-descriptions-item>
           <a-descriptions-item label="页签风格">
-            <a-select v-model="appStore.tabMode" placeholder="请选择" :options="TAB_MODE_OPTIONS" :disabled="!appStore.tab"
-              :trigger-props="{ autoFitPopupMinWidth: true }" :style="{ width: '120px' }">
+            <a-select v-model="appStore.tab" placeholder="请选择" :options="TAB_MODE_OPTIONS"
+              :disabled="!appStore.tabVisible" :trigger-props="{ autoFitPopupMinWidth: true }"
+              :style="{ width: '120px' }">
             </a-select>
           </a-descriptions-item>
 
           <!-- 动画设置 -->
           <a-descriptions-item label="动画显示">
-            <a-switch v-model="appStore.animate" />
+            <a-switch v-model="appStore.animateVisible" />
           </a-descriptions-item>
           <a-descriptions-item label="动画效果">
-            <a-select v-model="appStore.animateMode" placeholder="请选择" :options="ANIMATE_MODE_OPTIONS"
-              :disabled="!appStore.animate" :style="{ width: '120px' }">
+            <a-select v-model="appStore.animate" placeholder="请选择" :options="ANIMATE_MODE_OPTIONS"
+              :disabled="!appStore.animateVisible" :style="{ width: '120px' }">
             </a-select>
           </a-descriptions-item>
 
@@ -63,8 +63,9 @@
 <script setup lang="ts">
 import { ColorPicker } from 'vue-color-kit'
 import 'vue-color-kit/dist/vue-color-kit.css'
-import LayoutItem from './components/LayoutItem.vue'
+import LayoutModeItem from './components/LayoutModeItem.vue'
 import { useAppStore } from '@/stores'
+import AppSetting from '@/config/setting.json'
 
 /** 组件名称 */
 defineOptions({ name: 'SettingDrawer' })
@@ -73,8 +74,17 @@ defineOptions({ name: 'SettingDrawer' })
 const appStore = useAppStore()
 const visible = ref(false)
 
+type LayoutItem = { label: string, value: App.SettingConfig['layout'] }
+/** 布局选项 */
+const LAYOUT_OPTIONS: LayoutItem[] = [
+  { label: '默认布局', value: 'left' },
+  { label: '混合布局', value: 'mix' },
+  { label: '顶部布局', value: 'top' }
+]
+
+type TabItem = { label: string, value: App.SettingConfig['tab'] }
 /** 页签模式选项 */
-const TAB_MODE_OPTIONS: App.TabItem[] = [
+const TAB_MODE_OPTIONS: TabItem[] = [
   { label: '卡片', value: 'card' },
   { label: '间隔卡片', value: 'card-gutter' },
   { label: '圆角', value: 'rounded' },
@@ -82,14 +92,32 @@ const TAB_MODE_OPTIONS: App.TabItem[] = [
   { label: '自定义2', value: 'custom2' }
 ]
 
+type AnimateItem = { label: string, value: App.SettingConfig['animate'] }
 /** 动画模式选项 */
-const ANIMATE_MODE_OPTIONS: App.AnimateItem[] = [
+const ANIMATE_MODE_OPTIONS: AnimateItem[] = [
   { label: '默认', value: 'zoom-fade' },
   { label: '滑动', value: 'fade-slide' },
   { label: '渐变', value: 'fade' },
   { label: '底部滑出', value: 'fade-bottom' },
   { label: '缩放消退', value: 'fade-scale' }
 ]
+
+/** 初始化设置 */
+const initSetting = () => {
+  const layouts = LAYOUT_OPTIONS.map((i) => i.value)
+  if (!layouts.includes(appStore.layout)) {
+    appStore.layout = AppSetting.layout as App.SettingConfig['layout']
+  }
+  const tabs = TAB_MODE_OPTIONS.map((i) => i.value)
+  if (!tabs.includes(appStore.tab)) {
+    appStore.tab = AppSetting.tab as App.SettingConfig['tab']
+  }
+  const animates = ANIMATE_MODE_OPTIONS.map((i) => i.value)
+  if (!animates.includes(appStore.animate)) {
+    appStore.animate = AppSetting.animate as App.SettingConfig['animate']
+  }
+}
+initSetting()
 
 /** 默认主题色列表 */
 const defaultColorList = [
@@ -127,6 +155,11 @@ const open = () => {
 const changeColor = (colorObj: ColorObj) => {
   if (!/^#[0-9A-Za-z]{6}/.test(colorObj.hex)) return
   appStore.setThemeColor(colorObj.hex)
+}
+
+/** 切换布局 */
+const toggleLayout = (layout: App.SettingConfig['layout']) => {
+  appStore.layout = layout
 }
 
 defineExpose({ open })
