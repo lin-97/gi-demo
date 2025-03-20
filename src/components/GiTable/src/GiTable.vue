@@ -161,9 +161,12 @@ interface Props extends TableProps {
 }
 
 const slots = useSlots()
+const attrs = useAttrs()
 
 /** 表格属性计算 */
-const tableProps = computed(() => omit(props, ['title', 'disabledColumnKeys']))
+const tableProps = computed(() => {
+  return { ...attrs, ...omit(props, ['title', 'disabledColumnKeys']) }
+})
 
 /** 组件状态 */
 const tableRef = useTemplateRef('tableRef')

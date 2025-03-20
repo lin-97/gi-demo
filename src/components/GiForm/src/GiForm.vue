@@ -23,7 +23,7 @@
               v-bind="{ disabled: isDisabled(item) }">
               <component :is="`a-${item.type}`" v-bind="getComponentBindProps(item)"
                 :model-value="modelValue[item.field as keyof typeof modelValue]"
-                @update:model-value="valueChange($event, item.field)">
+                @update:model-value="updateValue($event, item.field)">
                 <!-- 组件插槽 -->
                 <template v-for="(slotValue, slotKey) in item?.slots" :key="slotKey" #[slotKey]="scope">
                   <template v-if="typeof slotValue === 'string'">{{ slotValue }}</template>
@@ -164,31 +164,68 @@ const defaultGridItemProps = computed(() => props.gridItemProps)
 
 /** 组件状态 */
 const formRef = useTemplateRef('formRef')
+/** 是否折叠 */
 const collapsed = ref(props.defaultCollapsed)
+/** 数据字典 */
 const dicData: Record<string, any> = reactive({})
+
+/** 静态配置 */
+const STATIC_PROPS = new Map<ColumnItem['type'], Partial<ColumnItem['props']>>([
+  ['input', { allowClear: true, maxLength: 20 }],
+  ['textarea', { allowClear: false, maxLength: 200 }],
+  ['input-tag', { allowClear: true }],
+  ['mention', { allowClear: true }],
+  ['select', { allowClear: true }],
+  ['tree-select', { allowClear: true }],
+  ['cascader', { allowClear: true }],
+  ['date-picker', { allowClear: true }],
+  ['time-picker', { allowClear: true }]
+])
+
+/** 获取组件默认占位 */
+const getPlaceholder = (item: ColumnItem) => {
+  if (!item.type) return undefined
+  if (['input', 'input-tag', 'mention'].includes(item.type)) {
+    return `请输入${item.label}`
+  }
+  if (['textarea'].includes(item.type)) {
+    return `请填写${item.label}`
+  }
+  if (['select', 'tree-select', 'cascader'].includes(item.type)) {
+    return `请选择${item.label}`
+  }
+  if (['date-picker'].includes(item.type)) {
+    return '请选择日期'
+  }
+  if (['time-picker'].includes(item.type)) {
+    return '请选择时间'
+  }
+  return undefined
+}
+
+/** 获取选项数据 */
+const getOptions = (item: ColumnItem): any[] | undefined => {
+  if (!item.type) return undefined
+  /** 需要选项数据的组件类型 */
+  const arr = ['select', 'tree-select', 'cascader', 'radio-group', 'checkbox-group']
+  if (arr.includes(item.type)) {
+    return dicData[item.field] || []
+  }
+  return undefined
+}
 
 /** 获取组件绑定属性 */
 const getComponentBindProps = (item: ColumnItem) => {
-  // 组件默认配置映射表
-  const ConfigMap = new Map<ColumnItem['type'], Partial<ColumnItem['props'] & { placeholder: string }>>([
-    ['input', { allowClear: true, placeholder: `请输入${item.label}`, maxLength: 20 }],
-    ['input-number', { placeholder: `请输入${item.label}` }],
-    ['textarea', { allowClear: false, placeholder: `请填写${item.label}`, maxLength: 200 }],
-    ['input-tag', { allowClear: true, placeholder: `请输入${item.label}` }],
-    ['mention', { allowClear: true, placeholder: `请输入${item.label}` }],
-    ['select', { allowClear: true, placeholder: `请选择${item.label}`, options: dicData[item.field] || [] }],
-    ['tree-select', { allowClear: true, placeholder: `请选择${item.label}` }],
-    ['cascader', { allowClear: true, placeholder: `请选择${item.label}`, options: dicData[item.field] || [] }],
-    ['radio-group', { options: dicData[item.field] || [] }],
-    ['checkbox-group', { options: dicData[item.field] || [] }],
-    ['date-picker', { allowClear: true, placeholder: '请选择日期' }],
-    ['time-picker', { allowClear: true, placeholder: '请选择时间' }]
-  ])
-  return { ...ConfigMap.get(item.type) || {}, ...item.props }
+  return {
+    ...STATIC_PROPS.get(item.type) || {},
+    placeholder: getPlaceholder(item),
+    options: getOptions(item),
+    ...item.props
+  }
 }
 
 /** 表单数据更新处理 */
-const valueChange = (value: any, field: string) => {
+const updateValue = (value: any, field: string) => {
   emit('update:modelValue', Object.assign(props.modelValue, { [field]: value }))
 }
 
