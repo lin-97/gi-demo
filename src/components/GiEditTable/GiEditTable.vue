@@ -39,15 +39,18 @@ import type { TableColumnData, TableData } from '@arco-design/web-vue'
 import type { ColumnItem, Disabled } from './type'
 
 defineOptions({ name: 'GiEditTable', inheritAttrs: false })
+
 const props = withDefaults(defineProps<Props>(), {
   cellDisabled: false
 })
 
+/** 事件定义 */
 const emit = defineEmits<{
   (e: 'tr-dblclick', value: { record: any, rowIndex: number }): void
   (e: 'td-dblclick', value: { record: any, rowIndex: number, column: TableColumnData }): void
 }>()
 
+/** 插槽定义 */
 defineSlots<{
   [propsName: string]: (props: { record: T, rowIndex: number, column: ColumnItem }) => void
 }>()
@@ -60,36 +63,61 @@ interface Props {
 
 const attrs = useAttrs()
 
+/** 表单数据 */
 const form = computed(() => ({ tableData: props.data }))
 
+/** 表单实例 */
 const formRef = useTemplateRef('formRef')
 
+/** 获取表头必填星号*样式 */
 const headerCellClass = (col: ColumnItem) => {
   return col.required ? 'gi_column_require' : ''
 }
 
-const getComponentBindProps = (col: ColumnItem) => {
-  // 组件默认配置映射表
-  const ConfigMap = new Map<ColumnItem['type'], Partial<Omit<ColumnItem['props'], 'placeholder'> & { placeholder?: string | string[] }>>([
-    ['input', { allowClear: true, placeholder: `请输入${col.title}`, maxLength: 50 }],
-    ['input-number', { placeholder: `请输入${col.title}` }],
-    ['textarea', { allowClear: false, placeholder: `请填写${col.title}`, maxLength: 200 }],
-    ['input-tag', { allowClear: true, placeholder: `请输入${col.title}` }],
-    ['mention', { allowClear: true, placeholder: `请输入${col.title}` }],
-    ['select', { allowClear: true, placeholder: `请选择${col.title}` }],
-    ['tree-select', { allowClear: true, placeholder: `请选择${col.title}` }],
-    ['cascader', { allowClear: true, placeholder: `请选择${col.title}` }],
-    ['radio-group', {}],
-    ['checkbox-group', {}],
-    ['date-picker', { allowClear: true, placeholder: '请选择日期' }],
-    ['time-picker', { allowClear: true, placeholder: '请选择时间' }]
-  ])
-  // 获取默认配置
-  const defaultProps = ConfigMap.get(col.type) || {}
-  // 合并默认配置和自定义配置
-  return { ...defaultProps, ...col.props }
+/** 静态配置 */
+const STATIC_PROPS = new Map<ColumnItem['type'], Partial<ColumnItem['props']>>([
+  ['input', { allowClear: true, maxLength: 20 }],
+  ['textarea', { allowClear: false, maxLength: 200 }],
+  ['input-tag', { allowClear: true }],
+  ['mention', { allowClear: true }],
+  ['select', { allowClear: true }],
+  ['tree-select', { allowClear: true }],
+  ['cascader', { allowClear: true }],
+  ['date-picker', { allowClear: true }],
+  ['time-picker', { allowClear: true }]
+])
+
+/** 获取组件默认占位 */
+const getPlaceholder = (item: ColumnItem) => {
+  if (!item.type) return undefined
+  if (['input', 'input-tag', 'mention'].includes(item.type)) {
+    return `请输入${item.title}`
+  }
+  if (['textarea'].includes(item.type)) {
+    return `请填写${item.title}`
+  }
+  if (['select', 'tree-select', 'cascader'].includes(item.type)) {
+    return `请选择${item.title}`
+  }
+  if (['date-picker'].includes(item.type)) {
+    return '请选择日期'
+  }
+  if (['time-picker'].includes(item.type)) {
+    return '请选择时间'
+  }
+  return undefined
 }
 
+/** 获取组件默认配置 */
+const getComponentBindProps = (col: ColumnItem) => {
+  return {
+    ...STATIC_PROPS.get(col.type) || {},
+    placeholder: getPlaceholder(col),
+    ...col.props
+  }
+}
+
+/** 获取组件默认规则 */
 const getRuleMessage = (col: ColumnItem) => {
   if (['input', 'input-number', 'input-tag', 'mention'].includes(col.type ?? '')) {
     return `请输入${col.title}`
@@ -100,12 +128,14 @@ const getRuleMessage = (col: ColumnItem) => {
   return `请选择${col.title}`
 }
 
+/** 判断是否禁用 */
 const isDisabled: Props['cellDisabled'] = (p) => {
   if (typeof props?.cellDisabled === 'boolean') return props.cellDisabled
   if (typeof props?.cellDisabled === 'function') return props.cellDisabled(p)
   return false
 }
 
+/** 暴露表单实例 */
 defineExpose({ formRef })
 </script>
 

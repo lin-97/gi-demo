@@ -11,7 +11,7 @@
     </template>
 
     <!-- 布局预览 -->
-    <div class="layout-item" :class="`layout-item-${props.mode}`" @click="emit('click')">
+    <div class="layout-mode-item" :class="`layout-mode-item__${props.mode}`" @click="emit('click')">
       <!-- 左侧布局 -->
       <template v-if="props.mode === 'left'">
         <div class="block-left"></div>
@@ -35,12 +35,26 @@
     </div>
 
     <!-- 布局名称 -->
-    <p class="layout-item-text">{{ props.name }}</p>
+    <p class="layout-mode-item__text">{{ props.name }}</p>
   </a-badge>
 </template>
 
 <script setup lang="ts">
 import { useAppStore } from '@/stores'
+
+defineOptions({
+  name: 'LayoutModeItem'
+})
+
+/** Props 默认值 */
+const props = withDefaults(defineProps<Props>(), {
+  mode: 'left'
+})
+
+/** Emits 定义 */
+const emit = defineEmits<{
+  (e: 'click'): void
+}>()
 
 /** 布局模式类型 */
 type LayoutMode = 'left' | 'top' | 'mix'
@@ -53,23 +67,13 @@ interface Props {
   name: string
 }
 
-/** Props 默认值 */
-const props = withDefaults(defineProps<Props>(), {
-  mode: 'left'
-})
-
-/** Emits 定义 */
-const emit = defineEmits<{
-  (e: 'click'): void
-}>()
-
 /** 应用状态 */
 const appStore = useAppStore()
 </script>
 
 <style lang="scss" scoped>
 // 布局项基础样式
-.layout-item {
+.layout-mode-item {
   width: 70px;
   height: 50px;
   padding: 4px;
@@ -85,7 +89,7 @@ const appStore = useAppStore()
     0 3px 6px 0 rgba(0, 0, 0, .06),
     0 5px 12px 4px rgba(0, 0, 0, .04);
 
-  &-text {
+  &__text {
     font-size: 12px;
     margin-top: 5px;
     text-align: center;
@@ -101,7 +105,7 @@ const appStore = useAppStore()
 }
 
 // 左侧布局样式
-.layout-item-left {
+.layout-mode-item__left {
   .block-left {
     width: 10px;
     background-color: $color-theme;
@@ -115,7 +119,7 @@ const appStore = useAppStore()
 }
 
 // 顶部布局样式
-.layout-item-top {
+.layout-mode-item__top {
   flex-direction: column;
 
   .block-top {
@@ -131,7 +135,7 @@ const appStore = useAppStore()
 }
 
 // 混合布局样式
-.layout-item-mix {
+.layout-mode-item__mix {
   flex-direction: column;
 
   .block-top {

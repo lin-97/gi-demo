@@ -72,7 +72,7 @@
             <template #content>
               <!-- 列拖拽排序区域 -->
               <div class="gi-table__draggable">
-                <VueDraggable v-model="settingColumnList">
+                <VueDraggable v-model="settingColumnList" :animation="150">
                   <div v-for="item in settingColumnList" :key="item.title" class="gi-table__draggable-item">
                     <div class="gi-table__draggable-item-move">
                       <icon-drag-dot-vertical />
@@ -161,9 +161,12 @@ interface Props extends TableProps {
 }
 
 const slots = useSlots()
+const attrs = useAttrs()
 
 /** 表格属性计算 */
-const tableProps = computed(() => omit(props, ['title', 'disabledColumnKeys']))
+const tableProps = computed(() => {
+  return { ...attrs, ...omit(props, ['title', 'disabledColumnKeys']) }
+})
 
 /** 组件状态 */
 const tableRef = useTemplateRef('tableRef')

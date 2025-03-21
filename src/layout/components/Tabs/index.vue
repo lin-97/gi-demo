@@ -3,12 +3,12 @@
   @description 系统标签页组件，支持多种标签样式、右键菜单和快捷操作
 -->
 <template>
-  <div v-if="appStore.tab" class="tabs">
-    <a-tabs :class="`tabs__${appStore.tabMode}`" :type="tabsType" :active-key="route.path" editable hide-content
+  <div v-if="appStore.tabVisible" class="tabs">
+    <a-tabs :class="`tabs__${appStore.tab}`" :type="tabsType" :active-key="route.path" editable hide-content
       size="medium" @tab-click="handleTabClick" @delete="tabsStore.closeCurrent">
       <a-tab-pane v-for="item of tabsStore.tabList" :key="item.path" :title="(item.meta?.title as string)"
         :closable="!item.meta?.affix">
-        <template v-if="appStore.tabMode === 'custom2'" #title>
+        <template v-if="appStore.tab === 'custom2'" #title>
           <a-dropdown trigger="contextMenu">
             <a-tag class="tabs-pane__tag" :closable="!item.meta?.affix"
               :color="route.path === item.path ? 'arcoblue' : undefined" @close="tabsStore.closeCurrent(item.path)">
@@ -77,7 +77,7 @@ const appStore = useAppStore()
 const tabsStore = useTabsStore()
 const { listenerRouteChange } = useRouteListener()
 const tabsType = computed(() => {
-  return (['custom1', 'custom2'].includes(appStore.tabMode) ? 'card' : appStore.tabMode) as unknown as TabsInstance['type']
+  return (['custom1', 'custom2'].includes(appStore.tab) ? 'card' : appStore.tab) as unknown as TabsInstance['type']
 })
 
 /** 初始化标签页 */

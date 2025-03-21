@@ -3,25 +3,13 @@ declare namespace App {
   interface SettingConfig {
     theme: 'light' | 'dark' // 主题
     themeColor: string // 主题色
-    tab: boolean // 是否显示页签
-    tabMode: TabType // 页签风格
-    animate: boolean // 是否显示动画
-    animateMode: AnimateType // 动画类名
+    tab: 'card' | 'card-gutter' | 'rounded' | 'custom1' | 'custom2' // 页签风格
+    tabVisible: boolean // 是否显示页签
+    animate: 'zoom-fade' | 'slide-dynamic-origin' | 'fade-slide' | 'fade' | 'fade-bottom' | 'fade-scale' // 动画类名
+    animateVisible: boolean // 是否显示动画
     menuCollapse: boolean // 左侧菜单折叠状态
     menuAccordion: boolean // 左侧菜单手风琴效果
     menuDark: boolean // 菜单深色模式
     layout: 'left' | 'mix' | 'top'
-  }
-  /** 导航页签的样式类型 */
-  type TabType = 'card' | 'card-gutter' | 'rounded' | 'custom1' | 'custom2'
-  interface TabItem {
-    label: string
-    value: TabType
-  }
-  /** 页面切换动画类型 */
-  type AnimateType = 'zoom-fade' | 'slide-dynamic-origin' | 'fade-slide' | 'fade' | 'fade-bottom' | 'fade-scale'
-  interface AnimateItem {
-    label: string
-    value: AnimateType
   }
 }

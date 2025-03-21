@@ -24,7 +24,7 @@ const storeSetup = () => {
    * 根据配置决定是否启用动画以及使用哪种动画模式
    */
   const transitionName = computed(() =>
-    settingConfig.animate ? settingConfig.animateMode : ''
+    settingConfig.animateVisible ? settingConfig.animate : ''
   )
 
   /**
