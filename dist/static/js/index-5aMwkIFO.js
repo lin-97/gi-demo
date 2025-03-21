@@ -1,1 +1,0 @@
-import{d as a,af as s,o,g as t,t as e,h as r,_ as i}from"./index-BSX7bYGM.js";const n={class:"gi-footer"},d=i(a({name:"GiFooter",__name:"index",setup(a){const i=s(new Date).format("YYYY");return(a,s)=>(o(),t("div",n,"Copyright @"+e(r(i))+" Gi Admin Pro",1))}}),[["__scopeId","data-v-65895815"]]);export{d as _};
