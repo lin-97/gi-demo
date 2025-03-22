@@ -1855,7 +1855,9 @@ $padding: 16px; // 盒子和内容的间距
 
 ## 赞助
 
-<img style="width:300px" src="https://gitee.com/lin0716/gi-image/raw/master/sponsor.jpg" />
+<img style="width:360px" src="https://gitee.com/lin0716/gi-image/raw/master/adv1.png" />
+
+<img style="width:360px" src="https://gitee.com/lin0716/gi-image/raw/master/sponsor.jpg" />
 
 ## 捐赠
 
