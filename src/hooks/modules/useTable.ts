@@ -134,12 +134,18 @@ export function useTable<T extends U, U = T>(api: Api<T>, options?: Options<T, U
     deleteApi: () => Promise<ApiRes<T>>,
     options?: DeleteOptions
   ): Promise<boolean | undefined> => {
-    const onDelete = async () => {
+    const onDelete = async (isMultiple: boolean) => {
       try {
         const res = await deleteApi()
         if (res.success) {
           Message.success(options?.successTip || '删除成功！')
-          selectedKeys.value = []
+          // 处理当前页码
+          const deleteNum = isMultiple ? selectedKeys.value.length : 1
+          const totalPage = Math.ceil((pagination.total - deleteNum) / pagination.pageSize)
+          if (pagination.current > totalPage) {
+            pagination.current = totalPage > 0 ? totalPage : 1
+          }
+          isMultiple && (selectedKeys.value = [])
           getTableData()
         }
         return res.success
@@ -149,7 +155,7 @@ export function useTable<T extends U, U = T>(api: Api<T>, options?: Options<T, U
     }
 
     if (!(options?.showModal ?? true)) {
-      return onDelete()
+      return onDelete(false)
     }
 
     Modal.warning({
@@ -157,7 +163,7 @@ export function useTable<T extends U, U = T>(api: Api<T>, options?: Options<T, U
       content: options?.content || '是否确认删除？',
       hideCancel: false,
       maskClosable: false,
-      onBeforeOk: onDelete
+      onBeforeOk: () => onDelete(true)
     })
   }
 
