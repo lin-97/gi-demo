@@ -1,21 +1,19 @@
 <template>
-  <div class="gi-page-layout" :class="{ 'gi-page-layout--margin': margin, 'gi-page-layout--gutter': !!rowGutter }">
-    <a-row class="gi-page-layout__body" align="stretch" :gutter="rowGutter">
-      <a-col v-if="slots.left" v-bind="props.leftColProps" class="gi-page-layout__body-left" :xs="0" :sm="8" :md="7"
-        :lg="6" :xl="5" :xxl="4" flex="260px">
+  <a-row align="stretch" :gutter="rowGutter" class="gi-page-layout" :class="getClass">
+    <a-col v-if="slots.left" v-bind="props.leftColProps" :xs="0" :sm="8" :md="7" :lg="6" :xl="5" :xxl="4" flex="260px">
+      <div class="gi-page-layout__left">
         <slot name="left"></slot>
-      </a-col>
-      <a-col class="gi-page-layout__body-right" :xs="24" :sm="16" :md="17" :lg="18" :xl="19" :xxl="20" flex="1"
-        v-bind="props.rightColProps">
-        <section v-if="slots.header" class="gi-page-layout__header">
-          <slot name="header"></slot>
-        </section>
-        <div class="gi-page-layout__content">
-          <slot></slot>
-        </div>
-      </a-col>
-    </a-row>
-  </div>
+      </div>
+    </a-col>
+    <a-col :xs="24" :sm="16" :md="17" :lg="18" :xl="19" :xxl="20" flex="1" v-bind="props.rightColProps">
+      <div v-if="slots.header" class="gi-page-layout__header">
+        <slot name="header"></slot>
+      </div>
+      <div class="gi-page-layout__body">
+        <slot></slot>
+      </div>
+    </a-col>
+  </a-row>
 </template>
 
 <script setup lang='ts'>
@@ -37,6 +35,13 @@ defineSlots<{
   default: () => void
 }>()
 
+const getClass = computed(() => {
+  return {
+    'gi-page-layout--margin': props.margin,
+    'gi-page-layout--gutter': !!props.gutter
+  }
+})
+
 const rowGutter = computed(() => {
   if (typeof props.gutter === 'boolean') {
     return props.gutter ? 14 : undefined
@@ -57,10 +62,9 @@ const slots = useSlots()
 
 <style lang='scss' scoped>
 .gi-page-layout {
-  height: 100%;
   flex: 1;
+  height: 100%;
   display: flex;
-  flex-direction: column;
   overflow: hidden;
   box-sizing: border-box;
   background-color: var(--color-bg-1);
@@ -74,40 +78,33 @@ const slots = useSlots()
       border-right: none;
     }
   }
+
+  :deep(.arco-col) {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+  }
 }
 
-.gi-page-layout__header {
-  // padding: $padding;
-  // padding-bottom: 0;
-  border-bottom: 1px solid var(--color-border);
-  box-sizing: border-box;
-}
-
-.gi-page-layout__content {
-  // padding: $padding;
-  // padding-top: 0;
-  flex: 1;
+.gi-page-layout__left {
+  height: 100%;
+  border-right: 1px solid var(--color-border);
   display: flex;
   flex-direction: column;
   overflow: hidden;
+}
+
+.gi-page-layout__header {
+  border-bottom: 1px solid var(--color-border);
   box-sizing: border-box;
 }
 
 .gi-page-layout__body {
   flex: 1;
   display: flex;
+  flex-direction: column;
   overflow: hidden;
-
-  &-left,
-  &-right {
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    overflow: hidden;
-  }
-
-  &-left {
-    border-right: 1px solid var(--color-border);
-  }
+  box-sizing: border-box;
 }
 </style>
