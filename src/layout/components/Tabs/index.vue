@@ -64,6 +64,7 @@
 
 <script setup lang="ts">
 import type { TabsInstance } from '@arco-design/web-vue'
+import Sortable from 'sortablejs'
 import MagicIcon from './MagicIcon.vue'
 import ReloadIcon from './ReloadIcon.vue'
 import { useAppStore, useTabsStore } from '@/stores'
@@ -85,9 +86,11 @@ tabsStore.init()
 
 /** 监听路由变化 */
 listenerRouteChange(({ to }) => {
-  const rawTo = toRaw(to)
-  tabsStore.addTabItem(rawTo)
-  tabsStore.addCacheItem(rawTo)
+  if (to.name) {
+    const rawTo = toRaw(to)
+    tabsStore.addTabItem(rawTo)
+    tabsStore.addCacheItem(rawTo)
+  }
 })
 
 /** 处理标签页点击 */
@@ -95,6 +98,19 @@ const handleTabClick = (key: string) => {
   const targetTab = tabsStore.tabList.find((tab) => tab.path === key)
   router.push(targetTab?.fullPath || targetTab?.path || key)
 }
+
+onMounted(() => {
+  Sortable.create(document.querySelector('.arco-tabs-nav-tab-list') as HTMLElement, {
+    draggable: '.arco-tabs-tab-closable',
+    animation: 300,
+    onEnd({ newIndex, oldIndex }) {
+      const tabsList = [...tabsStore.tabList]
+      const currRow = tabsList.splice(oldIndex as number, 1)[0]
+      tabsList.splice(newIndex as number, 0, currRow)
+      tabsStore.tabList = tabsList
+    }
+  })
+})
 </script>
 
 <style lang="scss" scoped>

@@ -1855,6 +1855,8 @@ $padding: 16px; // 盒子和内容的间距
 
 ## 赞助
 
+<a href="https://www.aeoliancloud.com/cart/goods.htm?id=14" target="_blank">风铃云信息科技（T3 + 机房直连全国 平均延迟20ms）-点击查看 </a>
+
 <img style="width:360px" src="https://gitee.com/lin0716/gi-image/raw/master/adv1.png" />
 
 <img style="width:360px" src="https://gitee.com/lin0716/gi-image/raw/master/sponsor.jpg" />

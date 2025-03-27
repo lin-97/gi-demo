@@ -10,7 +10,7 @@ export default `
     <a-card title="数据列表" :bordered="false" :header-style="{ display: 'none' }" class="gi_card flex-1">
       <a-row justify="space-between">
         <a-space wrap>
-          <a-button type="primary">
+          <a-button type="primary" @click="onAdd">
             <template #icon><icon-plus /></template>
           </a-button>
           <a-button type="primary" status="danger" @click="onMulDelete">
@@ -115,6 +115,10 @@ onActivated(() => {
 
 const onEdit = () => {
   router.push({ path: '/data/form', query: { id: 'ID123456' } })
+}
+
+const onAdd = () => {
+  router.push({ path: '/data/form' })
 }
 
 const onDetail = (item: PersonItem) => {
