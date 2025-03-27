@@ -1,1 +1,0 @@
-import s from"./A-aHfqzZn7.js";import t from"./B-DSPWPi1Z.js";import{d as a,f as o,o as r,g as e,i,w as m}from"./index-B-FIAI3U.js";import"./mitt-BXicHm59.js";const n=a({__name:"index",setup:a=>(a,n)=>{const p=o("a-space");return r(),e("div",null,[i(p,null,{default:m((()=>[i(s),i(t)])),_:1})])}});export{n as default};
