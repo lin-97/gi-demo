@@ -85,9 +85,11 @@ tabsStore.init()
 
 /** 监听路由变化 */
 listenerRouteChange(({ to }) => {
-  const rawTo = toRaw(to)
-  tabsStore.addTabItem(rawTo)
-  tabsStore.addCacheItem(rawTo)
+  if (to.name) {
+    const rawTo = toRaw(to)
+    tabsStore.addTabItem(rawTo)
+    tabsStore.addCacheItem(rawTo)
+  }
 })
 
 /** 处理标签页点击 */
