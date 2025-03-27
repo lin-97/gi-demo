@@ -35,6 +35,7 @@
     "pinia": "^2.0.16",
     "pinia-plugin-persistedstate": "^3.1.0",
     "qs": "^6.11.2",
+    "sortablejs": "^1.15.6",
     "v-viewer": "^3.0.10",
     "viewerjs": "^1.11.6",
     "vue": "^3.5.4",
