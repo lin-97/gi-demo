@@ -1,5 +1,8 @@
 <template>
-  <div class="gi_page step-form">
+  <a-card title="分步表单" class="gi_card gi_margin flex-1" :body-style="{ overflowY: 'auto' }">
+    <template #extra>
+      <a-button>返回</a-button>
+    </template>
     <div class="wrapper">
       <section class="form-box">
         <a-steps :current="current" :direction="!isMobile() ? 'horizontal' : 'vertical'">
@@ -16,7 +19,7 @@
         </transition>
       </section>
     </div>
-  </div>
+  </a-card>
 </template>
 
 <script setup lang="ts">
@@ -61,21 +64,19 @@ const again = () => {
 </script>
 
 <style lang="scss" scoped>
-.step-form {
-  .wrapper {
-    min-height: 560px;
-    padding: $padding;
-    box-sizing: border-box;
-    background: var(--color-bg-1);
-    display: flex;
-    justify-content: center;
-  }
+.wrapper {
+  min-height: 560px;
+  padding: $padding;
+  box-sizing: border-box;
+  background: var(--color-bg-1);
+  display: flex;
+  justify-content: center;
+}
 
-  .form-box {
-    width: 100%;
-    max-width: 560px;
-    margin-top: 30px;
-    flex-shrink: 0;
-  }
+.form-box {
+  width: 100%;
+  max-width: 560px;
+  margin-top: 30px;
+  flex-shrink: 0;
 }
 </style>

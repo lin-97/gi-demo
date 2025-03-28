@@ -1,6 +1,9 @@
 <template>
-  <div class="gi_page page">
-    <a-tabs default-active-key="1" size="large">
+  <div class="gi_full_column gi_margin gi_bg_1">
+    <a-tabs class="gi_full_tabs" default-active-key="1" size="large">
+      <template #extra>
+        <a-button>返回</a-button>
+      </template>
       <a-tab-pane key="1" title="基本示例">
         <Pane1></Pane1>
       </a-tab-pane>
@@ -20,33 +23,4 @@ import Pane2 from './components/Pane2.vue'
 import Pane3 from './components/Pane3.vue'
 </script>
 
-<style lang="scss" scoped>
-.page {
-  padding: 0;
-  background-color: var(--color-bg-1);
-  margin: $margin;
-  overflow: hidden;
-  display: flex;
-  flex-direction: column;
-
-  :deep(.arco-tabs) {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-
-    .arco-tabs-content {
-      flex: 1;
-      padding-top: 15px;
-
-      .arco-tabs-content-list {
-        height: 100%;
-      }
-
-      .arco-tabs-pane {
-        height: 100%;
-        overflow-y: auto;
-      }
-    }
-  }
-}
-</style>
+<style lang="scss" scoped></style>

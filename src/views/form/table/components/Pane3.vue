@@ -1,5 +1,5 @@
 <template>
-  <div class="pane">
+  <div class="gi_padding">
     <a-alert>此示例基于GiEditTable实现了双击单元格编辑</a-alert>
 
     <a-row class="gi_mt" justify="end">
@@ -160,19 +160,4 @@ const cellDisabled: Disabled<DataItem> = ({ rowIndex, col }) => {
 }
 </script>
 
-<style lang='scss' scoped>
-:deep(.arco-form-item) {
-  margin-bottom: 0;
-
-  .arco-form-item-message {
-    display: none;
-  }
-}
-
-.pane {
-  padding: $padding;
-  padding-top: 0;
-  box-sizing: border-box;
-  overflow: hidden;
-}
-</style>
+<style lang='scss' scoped></style>

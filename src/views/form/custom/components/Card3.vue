@@ -1,5 +1,5 @@
 <template>
-  <a-card title="配置表单-动态级联">
+  <a-card title="配置表单-动态级联" :bordered="true" class="gi_margin">
     <template #extra>
       <a-button type="primary" status="warning" @click="onViewCode">
         <template #icon><icon-code /></template>

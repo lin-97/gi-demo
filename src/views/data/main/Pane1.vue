@@ -1,78 +1,74 @@
 <template>
   <GiPageLayout>
     <template #left>
-      <a-card title="数据分类" :bordered="false" :header-style="{ display: 'none' }" class="gi_card flex-1">
-        <CateTree placeholder="请输入搜索关键词" @node-click="pagination.onChange(1)"></CateTree>
-      </a-card>
+      <CateTree placeholder="请输入搜索关键词" @node-click="pagination.onChange(1)"></CateTree>
     </template>
 
-    <a-card title="数据列表" :bordered="false" :header-style="{ display: 'none' }" class="gi_card flex-1">
-      <a-row justify="space-between">
-        <a-space wrap>
-          <a-button type="primary" @click="onAdd">
-            <template #icon><icon-plus /></template>
-          </a-button>
-          <a-button type="primary" status="danger" @click="onMulDelete">
-            <template #icon><icon-delete /></template>
-            <template #default>删除</template>
-          </a-button>
-          <a-button type="primary" status="success" @click="onExport">
-            <template #icon><icon-export /></template>
-          </a-button>
-          <a-button type="primary" status="warning" @click="onViewCode">
-            <template #icon><icon-code /></template>
-          </a-button>
-        </a-space>
+    <a-row justify="space-between">
+      <a-space wrap>
+        <a-button type="primary" @click="onAdd">
+          <template #icon><icon-plus /></template>
+        </a-button>
+        <a-button type="primary" status="danger" @click="onMulDelete">
+          <template #icon><icon-delete /></template>
+          <template #default>删除</template>
+        </a-button>
+        <a-button type="primary" status="success" @click="onExport">
+          <template #icon><icon-export /></template>
+        </a-button>
+        <a-button type="primary" status="warning" @click="onViewCode">
+          <template #icon><icon-code /></template>
+        </a-button>
+      </a-space>
 
-        <a-space wrap>
-          <a-select v-model="form.status" class="gi_select_input" :options="options" placeholder="请选择"
-            allow-clear></a-select>
-          <a-input-group>
-            <a-input v-model="form.name" placeholder="请输入搜索关键词" allow-clear> </a-input>
-            <a-button type="primary" @click="getTableData">
-              <icon-search />
-            </a-button>
-          </a-input-group>
+      <a-space wrap>
+        <a-select v-model="form.status" class="gi_select_input" :options="options" placeholder="请选择"
+          allow-clear></a-select>
+        <a-input-group>
+          <a-input v-model="form.name" placeholder="请输入搜索关键词" allow-clear> </a-input>
           <a-button type="primary" @click="getTableData">
-            <template #icon><icon-refresh /></template>
+            <icon-search />
           </a-button>
-        </a-space>
-      </a-row>
+        </a-input-group>
+        <a-button type="primary" @click="getTableData">
+          <template #icon><icon-refresh /></template>
+        </a-button>
+      </a-space>
+    </a-row>
 
-      <a-table class="gi_table" row-key="id" :loading="loading" :bordered="{ cell: true }" :data="tableData"
-        :scroll="{ x: '100%', y: '100%', minWidth: 1000 }" :row-selection="{ type: 'checkbox', showCheckedAll: true }"
-        :pagination="pagination" :selected-keys="selectedKeys" @select="select" @select-all="selectAll">
-        <template #columns>
-          <a-table-column title="序号" :width="68">
-            <template #cell="cell">{{ cell.rowIndex + 1 }}</template>
-          </a-table-column>
-          <a-table-column title="姓名" data-index="name"></a-table-column>
-          <a-table-column title="地址" data-index="address" ellipsis tooltip></a-table-column>
-          <a-table-column title="比例" :width="200">
-            <template #cell="{ record }">
-              <a-progress :status="getProportionColor(record.proportion)" :percent="record.proportion / 100" />
-            </template>
-          </a-table-column>
-          <a-table-column title="状态" :width="100" align="center">
-            <template #cell="{ record }">
-              <GiCellStatus :status="record.status"></GiCellStatus>
-            </template>
-          </a-table-column>
-          <a-table-column title="创建时间" data-index="createTime" :width="180"></a-table-column>
-          <a-table-column title="操作" :width="200" align="center" :fixed="fixed">
-            <template #cell="{ record }">
-              <a-space>
-                <a-button type="primary" size="mini" @click="onEdit">修改</a-button>
-                <a-button size="mini" @click="onDetail(record)">详情</a-button>
-                <a-popconfirm type="warning" content="您确定要删除该项吗?" @before-ok="onDelete(record)">
-                  <a-button type="primary" status="danger" size="mini">删除</a-button>
-                </a-popconfirm>
-              </a-space>
-            </template>
-          </a-table-column>
-        </template>
-      </a-table>
-    </a-card>
+    <a-table class="gi_table" row-key="id" :loading="loading" :bordered="{ cell: true }" :data="tableData"
+      :scroll="{ x: '100%', y: '100%', minWidth: 1000 }" :row-selection="{ type: 'checkbox', showCheckedAll: true }"
+      :pagination="pagination" :selected-keys="selectedKeys" @select="select" @select-all="selectAll">
+      <template #columns>
+        <a-table-column title="序号" :width="68">
+          <template #cell="cell">{{ cell.rowIndex + 1 }}</template>
+        </a-table-column>
+        <a-table-column title="姓名" data-index="name"></a-table-column>
+        <a-table-column title="地址" data-index="address" ellipsis tooltip></a-table-column>
+        <a-table-column title="比例" :width="200">
+          <template #cell="{ record }">
+            <a-progress :status="getProportionColor(record.proportion)" :percent="record.proportion / 100" />
+          </template>
+        </a-table-column>
+        <a-table-column title="状态" :width="100" align="center">
+          <template #cell="{ record }">
+            <GiCellStatus :status="record.status"></GiCellStatus>
+          </template>
+        </a-table-column>
+        <a-table-column title="创建时间" data-index="createTime" :width="180"></a-table-column>
+        <a-table-column title="操作" :width="200" align="center" :fixed="fixed">
+          <template #cell="{ record }">
+            <a-space>
+              <a-button type="primary" size="mini" @click="onEdit">修改</a-button>
+              <a-button size="mini" @click="onDetail(record)">详情</a-button>
+              <a-popconfirm type="warning" content="您确定要删除该项吗?" @before-ok="onDelete(record)">
+                <a-button type="primary" status="danger" size="mini">删除</a-button>
+              </a-popconfirm>
+            </a-space>
+          </template>
+        </a-table-column>
+      </template>
+    </a-table>
   </GiPageLayout>
 </template>
 
@@ -146,7 +142,7 @@ const onExport = () => {
 
 const onViewCode = () => {
   Drawer.open({
-    title: '数据结构',
+    title: '查看代码',
     content: () => h(GiCodeView, { codeJson: Pane1Json, type: 'vue' }),
     width: width.value < 500 ? '100%' : 800
   })

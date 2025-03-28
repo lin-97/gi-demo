@@ -1,5 +1,5 @@
 <template>
-  <div class="pane">
+  <div class="gi_padding">
     <a-row justify="end">
       <a-space wrap>
         <a-button type="primary" :status="isReadOnly ? 'success' : 'warning'" @click="toggleReadOnly">
@@ -166,19 +166,4 @@ const cellDisabled: Disabled<DataItem> = ({ rowIndex, col }) => {
 }
 </script>
 
-<style lang='scss' scoped>
-:deep(.arco-form-item) {
-  margin-bottom: 0;
-
-  .arco-form-item-message {
-    display: none;
-  }
-}
-
-.pane {
-  padding: $padding;
-  padding-top: 0;
-  box-sizing: border-box;
-  overflow: hidden;
-}
-</style>
+<style lang='scss' scoped></style>
