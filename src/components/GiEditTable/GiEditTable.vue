@@ -139,4 +139,12 @@ const isDisabled: Props['cellDisabled'] = (p) => {
 defineExpose({ formRef })
 </script>
 
-<style lang='scss' scoped></style>
+<style lang='scss' scoped>
+:deep(.arco-form-item) {
+  margin-bottom: 0;
+
+  .arco-form-item-message {
+    display: none;
+  }
+}
+</style>

@@ -1,13 +1,13 @@
 <template>
-  <a-card class="gi_card" :header-style="{ display: 'none' }" style="flex: 1;">
-    <a-spin :loading="loading">
-      <a-scrollbar style="height: 100%; overflow: auto" outer-style="height: 100%">
-        <a-tree ref="treeRef" show-line size="mini" :data="(treeData as unknown as TreeNodeData[])"
-          :field-names="{ key: 'id', title: 'name' }" @select="select">
-        </a-tree>
-      </a-scrollbar>
-    </a-spin>
-  </a-card>
+  <a-spin :loading="loading" class="gi_full_column">
+    <a-input-search class="gi_mb" placeholder="请输入关键词" allow-clear />
+
+    <a-scrollbar style="height: 100%; overflow: auto" outer-style="flex: 1;overflow: hidden">
+      <a-tree ref="treeRef" show-line size="mini" :data="(treeData as unknown as TreeNodeData[])"
+        :field-names="{ key: 'id', title: 'name' }" @select="select">
+      </a-tree>
+    </a-scrollbar>
+  </a-spin>
 </template>
 
 <script lang="ts" setup>
@@ -42,8 +42,4 @@ const select = () => {
 }
 </script>
 
-<style lang="scss" scoped>
-:deep(.arco-spin) {
-  height: 100%;
-}
-</style>
+<style lang="scss" scoped></style>

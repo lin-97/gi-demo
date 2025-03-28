@@ -1,6 +1,6 @@
 export default `
 <template>
-  <div class="gi_table_page">
+  <GiPageLayout>
     <GiForm v-model="form" search :columns="searchColumns"
       :grid-item-props="{ span: { xs: 24, sm: 12, md: 8, lg: 8, xl: 6, xxl: 6 } }" @search="search" @reset="search">
     </GiForm>
@@ -48,7 +48,7 @@ export default `
     </GiTable>
 
     <GiFooter></GiFooter>
-  </div>
+  </GiPageLayout>
 </template>
 
 <script setup lang="ts">

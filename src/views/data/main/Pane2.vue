@@ -1,15 +1,6 @@
 <template>
-  <a-card :bordered="false" class="gi_card pane2">
-    <a-row justify="space-between" align="center" wrap>
-      <a-space wrap>
-        <a-alert type="normal">
-          <template #icon>
-            <icon-exclamation-circle-fill />
-          </template>
-          <span>这里采用 模板 + tsx 方式使用表格，具体看代码使用</span>
-        </a-alert>
-      </a-space>
-
+  <GiPageLayout>
+    <a-row justify="end" align="center" wrap>
       <a-space wrap>
         <a-button type="primary">导出</a-button>
         <a-button type="primary" status="warning" @click="onViewCode">
@@ -23,7 +14,7 @@
       :row-selection="{ type: 'checkbox', showCheckedAll: true }" :pagination="pagination" @select="select"
       @select-all="selectAll">
     </a-table>
-  </a-card>
+  </GiPageLayout>
 </template>
 
 <script lang="tsx" setup>
@@ -73,7 +64,7 @@ const columns: TableColumnData[] = [
   },
   {
     title: '操作',
-    width: 200,
+    width: 180,
     align: 'center',
     render: () => (
       <a-space>
@@ -130,9 +121,4 @@ const onViewCode = () => {
 }
 </script>
 
-<style lang="scss" scoped>
-.pane2 {
-  flex: 1;
-  margin: $margin;
-}
-</style>
+<style lang="scss" scoped></style>

@@ -61,7 +61,7 @@
   overflow-y: auto;
 }
 
-// 表格页面
+// 表格页面(未来会废弃，请使用GiPageLayout组件)
 .gi_table_page {
   flex: 1;
   overflow: hidden;
@@ -117,6 +117,30 @@
   }
 }
 
+.gi_full_tabs {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+
+  .arco-tabs-content {
+    flex: 1;
+    padding-top: 0;
+
+    .arco-tabs-content-list {
+      height: 100%;
+    }
+
+    .arco-tabs-pane {
+      height: 100%;
+      overflow-y: auto;
+    }
+  }
+
+  .arco-tabs-nav-extra {
+    padding-right: $padding;
+  }
+}
+
 // 编辑表格，表头的必填红色星号
 .gi_column_require {
   .arco-table-th-title {
@@ -126,6 +150,15 @@
       padding-right: 2px;
     }
   }
+}
+
+//
+.gi_full_column {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  box-sizing: border-box;
 }
 
 // 以下这些类名要放到下面，涉及到css权重优先级问题
@@ -191,6 +224,26 @@
 
 .gi_round {
   border-radius: 100px;
+}
+
+.gi_bg_1 {
+  background-color: var(--color-bg-1);
+}
+
+.gi_bg_2 {
+  background-color: var(--color-bg-2);
+}
+
+.gi_bg_3 {
+  background-color: var(--color-bg-3);
+}
+
+.gi_bg_4 {
+  background-color: var(--color-bg-4);
+}
+
+.gi_bg_5 {
+  background-color: var(--color-bg-5);
 }
 
 .w-full {

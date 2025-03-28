@@ -23,6 +23,7 @@ defineOptions({ name: 'GiPageLayout' })
 
 const props = withDefaults(defineProps<Props>(), {
   margin: true,
+  padding: true,
   gutter: false,
   leftColProps: () => ({}),
   rightColProps: () => ({})
@@ -38,6 +39,7 @@ defineSlots<{
 const getClass = computed(() => {
   return {
     'gi-page-layout--margin': props.margin,
+    'gi-page-layout--padding': props.padding,
     'gi-page-layout--gutter': !!props.gutter
   }
 })
@@ -52,6 +54,7 @@ const rowGutter = computed(() => {
 /** 组件属性定义 */
 interface Props {
   margin?: boolean
+  padding?: boolean
   gutter?: boolean | number
   leftColProps?: ColProps
   rightColProps?: ColProps
@@ -71,6 +74,19 @@ const slots = useSlots()
 
   &--margin {
     margin: $margin;
+  }
+
+  &--padding {
+
+    .gi-page-layout__left,
+    .gi-page-layout__header,
+    .gi-page-layout__body {
+      padding: $padding;
+    }
+
+    .gi-page-layout__header {
+      padding-bottom: 0;
+    }
   }
 
   &--gutter {
@@ -93,6 +109,7 @@ const slots = useSlots()
   display: flex;
   flex-direction: column;
   overflow: hidden;
+  box-sizing: border-box;
 }
 
 .gi-page-layout__header {

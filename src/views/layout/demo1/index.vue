@@ -1,12 +1,10 @@
 <template>
   <GiPageLayout :margin="true">
     <template #header>
-      <a-card class="gi_card" :header-style="{ display: 'none' }" :body-style="{ paddingBottom: 0 }">
-        <GiForm v-model="form" search :columns="searchColumns"
-          :grid-item-props="{ span: { xs: 24, sm: 24, md: 24, lg: 12, xl: 8, xxl: 8 } }" @search="TableRef?.search"
-          @reset="TableRef?.search">
-        </GiForm>
-      </a-card>
+      <GiForm v-model="form" search :columns="searchColumns"
+        :grid-item-props="{ span: { xs: 24, sm: 24, md: 24, lg: 12, xl: 8, xxl: 8 } }" @search="TableRef?.search"
+        @reset="TableRef?.search">
+      </GiForm>
     </template>
     <template #left>
       <Tree @node-click="TableRef?.search" />
