@@ -38,6 +38,24 @@
   }
 }
 
+// 页面卡片，右侧有返回按钮
+.gi_page_card {
+  flex: 1;
+  margin: var(--margin);
+  box-sizing: border-box;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+
+  .arco-card-body {
+    flex: 1;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+  }
+}
+
 // 卡片标题，标题左侧的伪类样式
 .gi_card_title {
   .arco-card-header-title::before {

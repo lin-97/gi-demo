@@ -25,6 +25,8 @@ import Card1 from './components/Card1.vue'
 import Card2 from './components/Card2.vue'
 import Card3 from './components/Card3.vue'
 import Card4 from './components/Card4.vue'
+
+defineOptions({ name: 'FormCustom' })
 </script>
 
 <style lang="scss" scoped></style>

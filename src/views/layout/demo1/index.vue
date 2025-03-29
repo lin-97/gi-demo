@@ -19,6 +19,7 @@ import Tree from '../components/Tree.vue'
 import Table from '../components/Table.vue'
 import type { ColumnItem } from '@/components/GiForm'
 
+defineOptions({ name: 'LayoutDemo1' })
 const TableRef = useTemplateRef('TableRef')
 const form = reactive({})
 

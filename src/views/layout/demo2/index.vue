@@ -12,5 +12,6 @@
 import Tree from '../components/Tree.vue'
 import Table from '../components/Table.vue'
 
+defineOptions({ name: 'LayoutDemo2' })
 const TableRef = useTemplateRef('TableRef')
 </script>

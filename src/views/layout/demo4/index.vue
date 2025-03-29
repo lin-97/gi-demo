@@ -6,4 +6,6 @@
 
 <script lang="ts" setup>
 import Table from '../components/Table.vue'
+
+defineOptions({ name: 'LayoutDemo4' })
 </script>

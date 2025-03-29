@@ -69,7 +69,7 @@
 </template>
 
 <script setup lang="ts">
-defineOptions({ name: 'BaseDetail' })
+defineOptions({ name: 'DetailBase' })
 </script>
 
 <style lang="scss" scoped></style>
