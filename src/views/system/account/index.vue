@@ -69,6 +69,7 @@
 import RightBox from './RightBox.vue'
 import { useUserStore } from '@/stores'
 
+defineOptions({ name: 'SystemAccount' })
 const userStore = useUserStore()
 </script>
 

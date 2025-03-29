@@ -73,7 +73,7 @@
 </template>
 
 <script setup lang="ts">
-defineOptions({ name: 'DataDetail' })
+defineOptions({ name: 'DataDetailId' })
 
 const router = useRouter()
 const containerRef = useTemplateRef('containerRef')

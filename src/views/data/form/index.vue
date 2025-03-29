@@ -10,7 +10,7 @@
 <script setup lang="ts">
 import { useTabsStore } from '@/stores'
 
-defineOptions({ name: 'DataFormIndex' })
+defineOptions({ name: 'DataForm' })
 
 const route = useRoute()
 const router = useRouter()

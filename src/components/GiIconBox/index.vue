@@ -116,9 +116,5 @@ const getStyle = computed((): CSSProperties => {
       border-radius: 50%;
     }
   }
-
-  &:hover {
-    transform: scale(1.05);
-  }
 }
 </style>

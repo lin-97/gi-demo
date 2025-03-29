@@ -130,7 +130,7 @@
 </template>
 
 <script setup lang="tsx">
-defineOptions({ name: 'SeniorDetail' })
+defineOptions({ name: 'DetailSenior' })
 
 const containerRef = useTemplateRef('containerRef')
 

@@ -21,6 +21,8 @@
 import Pane1 from './components/Pane1.vue'
 import Pane2 from './components/Pane2.vue'
 import Pane3 from './components/Pane3.vue'
+
+defineOptions({ name: 'FormTable' })
 </script>
 
 <style lang="scss" scoped></style>

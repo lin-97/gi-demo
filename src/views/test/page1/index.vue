@@ -1,6 +1,6 @@
 <template>
   <div class="gi_page">
-    <div class="gi_box wrap">
+    <a-card>
       <a-alert>
         <span>当前页面 </span>
         <a-tag color="green">超级管理员角色</a-tag>
@@ -9,13 +9,13 @@
         <span> 不能看</span>
       </a-alert>
 
-      <a-typography-title :heading="4">当前用户权限</a-typography-title>
+      <a-typography-title :heading="5">当前用户权限</a-typography-title>
       <GiCodeView :code-json="JSON.stringify(userStore.permissions)"></GiCodeView>
 
-      <a-typography-title :heading="4">当前页面角色权限</a-typography-title>
+      <a-typography-title :heading="5">当前页面角色权限</a-typography-title>
       <GiCodeView :code-json="JSON.stringify(['role_admin'])"></GiCodeView>
 
-      <section class="wrap__item">
+      <section class="gi_mt">
         <GiCodeView type="vue" :code-json="pre1"></GiCodeView>
         <a-space class="gi_mt">
           <a-button v-hasPerm="['test:btn:add']" type="primary">新增</a-button>
@@ -24,7 +24,7 @@
         </a-space>
       </section>
 
-      <section class="wrap__item">
+      <section class="gi_mt">
         <GiCodeView type="vue" :code-json="pre2"></GiCodeView>
         <a-space class="gi_mt">
           <a-button v-hasPerm="['user:btn:add']" type="primary">新增</a-button>
@@ -32,7 +32,7 @@
           <a-button v-hasPerm="['user:btn:delete']" type="primary" status="danger">删除</a-button>
         </a-space>
       </section>
-    </div>
+    </a-card>
   </div>
 </template>
 
@@ -55,12 +55,4 @@ const pre2 = `<a-space>
 </a-space>`
 </script>
 
-<style lang="scss" scoped>
-.wrap {
-  padding: 20px;
-
-  &__item {
-    margin-top: 40px;
-  }
-}
-</style>
+<style lang="scss" scoped></style>

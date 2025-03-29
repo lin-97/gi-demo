@@ -1026,28 +1026,6 @@ const data: MockSystemMenuItem[] = [
           }
         ],
         affix: false
-      },
-      {
-        id: '08103',
-        parentId: '081',
-        path: '/test/page3',
-        component: 'test/page3/index',
-        redirect: '',
-        type: 2,
-        title: '权限讲解',
-        svgIcon: '',
-        icon: 'icon-menu',
-        keepAlive: false,
-        hidden: false,
-        sort: 0,
-        activeMenu: '',
-        breadcrumb: true,
-        status: 1,
-        roles: ['role_admin', 'role_user'],
-        permission: '',
-        showInTabs: true,
-        alwaysShow: false,
-        affix: false
       }
     ],
     status: 1,
