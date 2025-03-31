@@ -1,15 +1,15 @@
 <template>
   <a-row align="stretch" :gutter="rowGutter" class="gi-page-layout" :class="getClass">
     <a-col v-if="slots.left" v-bind="props.leftColProps" :xs="0" :sm="8" :md="7" :lg="6" :xl="5" :xxl="4" flex="260px">
-      <div class="gi-page-layout__left">
+      <div class="gi-page-layout__left" :style="props.leftStyle">
         <slot name="left"></slot>
       </div>
     </a-col>
     <a-col :xs="24" :sm="16" :md="17" :lg="18" :xl="19" :xxl="20" flex="1" v-bind="props.rightColProps">
-      <div v-if="slots.header" class="gi-page-layout__header">
+      <div v-if="slots.header" class="gi-page-layout__header" :style="props.headerStyle">
         <slot name="header"></slot>
       </div>
-      <div class="gi-page-layout__body">
+      <div class="gi-page-layout__body" :style="props.bodyStyle">
         <slot></slot>
       </div>
     </a-col>
@@ -18,6 +18,7 @@
 
 <script setup lang='ts'>
 import type { ColProps } from '@arco-design/web-vue'
+import type { CSSProperties } from 'vue'
 
 defineOptions({ name: 'GiPageLayout' })
 
@@ -26,7 +27,10 @@ const props = withDefaults(defineProps<Props>(), {
   padding: true,
   gutter: false,
   leftColProps: () => ({}),
-  rightColProps: () => ({})
+  rightColProps: () => ({}),
+  leftStyle: () => ({}),
+  headerStyle: () => ({}),
+  bodyStyle: () => ({})
 })
 
 /** 组件插槽定义 */
@@ -58,6 +62,9 @@ interface Props {
   gutter?: boolean | number
   leftColProps?: ColProps
   rightColProps?: ColProps
+  leftStyle?: CSSProperties
+  headerStyle?: CSSProperties
+  bodyStyle?: CSSProperties
 }
 
 const slots = useSlots()

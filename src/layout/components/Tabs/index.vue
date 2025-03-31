@@ -36,7 +36,7 @@
         <a-space size="medium">
           <ReloadIcon></ReloadIcon>
           <a-dropdown trigger="hover">
-            <MagicIcon class="gi_mr"></MagicIcon>
+            <MagicIcon></MagicIcon>
             <template #content>
               <a-doption @click="tabsStore.closeCurrent(route.path)">
                 <template #icon><icon-close /></template>
