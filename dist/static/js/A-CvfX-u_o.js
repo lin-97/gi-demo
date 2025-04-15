@@ -1,1 +1,0 @@
-import{m as a}from"./mitt-C_31pJi1.js";import{d as s,e as t,o as e,g as o,j as n,t as m,h as r,_ as c}from"./index-BmBlMBxW.js";const d={class:"aaa"},i=c(s({__name:"A",setup(s){const c=t("A");return a.on("changeText",(a=>{c.value=a})),(a,s)=>(e(),o("div",d,[n("h3",null,m(r(c)),1)]))}}),[["__scopeId","data-v-6801401c"]]);export{i as default};

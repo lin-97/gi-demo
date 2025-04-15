@@ -1,0 +1,1 @@
+import a from"./A-DEuc3M6D.js";import s from"./B-DLh7YNfW.js";import{d as t,f as e,o as r,a as o,w as d,i}from"./index-DG_MB881.js";const m=t({__name:"index",setup:t=>(t,m)=>{const n=e("a-space"),f=e("a-card");return r(),o(f,{title:"mitt",bordered:!1},{default:d((()=>[i(n,null,{default:d((()=>[i(a),i(s)])),_:1})])),_:1})}});export{m as _};

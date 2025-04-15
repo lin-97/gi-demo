@@ -1,0 +1,1 @@
+import{ah as e}from"./index-DG_MB881.js";function t(t){return e.get("/system/role/getRoleList",t)}function s(t){return e.get("/system/role/getRoleDetail",t)}function o(t){return e.get("/system/role/getRoleMenuIds",t)}export{o as a,t as b,s as g};

@@ -1,0 +1,1 @@
+import{d as a,g as e,n as s,l as r,o as t}from"./index-DG_MB881.js";const n=a({__name:"index",setup(a){const n=r(),p=s(),{params:o,query:d}=n,{path:u}=o;return p.replace({path:`/${u}`,query:d}),(a,s)=>(t(),e("div"))}});export{n as default};
