@@ -1,6 +1,6 @@
 <template>
-  <div class="manage">
-    <a-tabs class="manage__tabs" hide-content size="medium" :active-key="activeKey" @change="change">
+  <div class="gi_full_column">
+    <a-tabs hide-content size="medium" :active-key="activeKey" @change="change">
       <a-tab-pane :key="1" title="人员管理"> </a-tab-pane>
       <a-tab-pane :key="2" title="单位管理"> </a-tab-pane>
     </a-tabs>
@@ -42,16 +42,4 @@ const change = (key: number | string) => {
 }
 </script>
 
-<style lang="scss" scoped>
-.manage {
-  width: 100%;
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  overflow: hidden;
-
-  &__tabs {
-    background: var(--color-bg-1);
-  }
-}
-</style>
+<style lang="scss" scoped></style>
