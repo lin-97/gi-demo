@@ -16,9 +16,6 @@
           <FastCard></FastCard>
         </div>
         <div class="home__item">
-          <AdvCard></AdvCard>
-        </div>
-        <div class="home__item">
           <ImageCard></ImageCard>
         </div>
       </a-col>
@@ -36,7 +33,6 @@ import ProjectCard from './components/ProjectCard.vue'
 import MessageCard from './components/MessageCard.vue'
 import FastCard from './components/FastCard.vue'
 import ImageCard from './components/ImageCard.vue'
-import AdvCard from './components/AdvCard.vue'
 
 defineOptions({ name: 'Home' })
 </script>
