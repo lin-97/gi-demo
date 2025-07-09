@@ -1,14 +1,18 @@
 import type { SelectOptionData } from '@arco-design/web-vue'
 import { defineMock } from '../_base'
-import { getDelayTime, resultError, resultSuccess } from '../_utils'
+import { getBaseApi, getDelayTime, resultError, resultSuccess } from '../_utils'
 import dictData from '../_data/system_dict'
 
 export default defineMock([
-  {
-    url: '/system/dict/getDictDetail',
-    method: 'get',
-    timeout: getDelayTime(),
-    response: ({ query }) => {
+  ...getBaseApi({
+    baseUrl: '/system/dict',
+    getListData: () => {
+      return resultSuccess({
+        total: dictData.length,
+        records: dictData
+      })
+    },
+    getDetailData: (query) => {
       const { id } = query
       const obj = dictData.find((i) => i.id === id)
       if (obj) {
@@ -17,7 +21,7 @@ export default defineMock([
         return resultError(null, '没有该用户', 400)
       }
     }
-  },
+  }),
   {
     url: '/system/dict/getDictDataList',
     method: 'get',
@@ -66,17 +70,6 @@ export default defineMock([
         })
       })
       return resultSuccess(obj)
-    }
-  },
-  {
-    url: '/system/dict/getDictList', // 这个短的要放在后面，不然会优先匹配
-    method: 'get',
-    timeout: getDelayTime(),
-    response: () => {
-      return resultSuccess({
-        total: dictData.length,
-        records: dictData
-      })
     }
   }
 ])

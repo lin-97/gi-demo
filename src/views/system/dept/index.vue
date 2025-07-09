@@ -78,7 +78,8 @@
 import { Message } from '@arco-design/web-vue'
 import AddDeptModal from './AddDeptModal.vue'
 import { useTable } from '@/hooks'
-import { type DeptItem, getDeptList } from '@/apis/system'
+import { baseAPI } from '@/apis/system/dept'
+import type * as T from '@/apis/system/dept'
 import { useDict } from '@/hooks/app'
 
 defineOptions({ name: 'SystemDept' })
@@ -100,7 +101,7 @@ const {
   select,
   selectAll,
   fixed
-} = useTable(() => getDeptList(), {
+} = useTable(() => baseAPI.getList(), {
   immediate: true,
   onSuccess: () => {
     nextTick(() => {
@@ -119,7 +120,7 @@ const onAdd = () => {
   AddDeptModalRef.value?.add()
 }
 
-const onEdit = (item: DeptItem) => {
+const onEdit = (item: T.ListItem) => {
   AddDeptModalRef.value?.edit(item.id)
 }
 

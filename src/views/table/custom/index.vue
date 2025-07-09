@@ -71,13 +71,14 @@
 <script setup lang="ts">
 import { Message, type PopconfirmInstance } from '@arco-design/web-vue'
 import { useTable } from '@/hooks'
-import { type PersonItem, getPersonList } from '@/apis/person'
+import { baseAPI } from '@/apis/person'
+import type * as T from '@/apis/person'
 
 defineOptions({ name: 'TableCustom' })
 
-const { tableData, getTableData, pagination, loading } = useTable((p) => getPersonList(p))
+const { tableData, getTableData, pagination, loading } = useTable((p) => baseAPI.getList(p))
 
-const onClickName = (record: PersonItem) => {
+const onClickName = (record: T.ListItem) => {
   Message.success(`点击了${record.name}`)
 }
 

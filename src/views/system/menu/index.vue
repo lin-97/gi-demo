@@ -123,7 +123,8 @@
 <script setup lang="ts">
 import { Drawer } from '@arco-design/web-vue'
 import AddMenuModal from './AddMenuModal.vue'
-import { type MenuItem, getMenuList } from '@/apis/system'
+import { baseAPI } from '@/apis/system/menu'
+import type * as T from '@/apis/system/menu'
 import { isExternal } from '@/utils/validate'
 import { transformPathToName } from '@/utils'
 import { useDict } from '@/hooks/app'
@@ -149,7 +150,7 @@ const {
   tableData: menuList,
   search,
   fixed
-} = useTable(() => getMenuList(), { immediate: true })
+} = useTable(() => baseAPI.getList(), { immediate: true })
 
 const reset = () => {
   form.name = ''
@@ -161,7 +162,7 @@ const onAdd = () => {
   AddMenuModalRef.value?.add()
 }
 
-const onEdit = (item: MenuItem) => {
+const onEdit = (item: T.ListItem) => {
   AddMenuModalRef.value?.edit(item.id)
 }
 

@@ -1,12 +1,15 @@
-import type * as T from './type'
-import http from '@/utils/http'
+import { getBaseApi } from '../base'
 
-/** 获取部门数据 */
-export function getDeptList() {
-  return http.get<T.DeptItem[]>('/system/dept/getDeptList')
+export interface ListItem {
+  id: string
+  name: string
+  sort: number
+  status: Status
+  createTime: string
+  parentId: string
+  children?: ListItem[]
+  description: string
 }
 
-/** 获取部门详情 */
-export function getDeptDetail(params: { id: string }) {
-  return http.get<T.DeptItem>('/system/dept/getDeptDetail', params)
-}
+/** 部门模块 */
+export const baseAPI = getBaseApi<ListItem>({ baseUrl: '/system/dept' })

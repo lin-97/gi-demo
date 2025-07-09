@@ -1,12 +1,22 @@
-import type * as T from './type'
-import http from '@/utils/http'
+import { getBaseApi } from '../base'
 
-/** 获取用户数据 */
-export function getUserList(params: Pagination) {
-  return http.get<PageRes<T.UserItem[]>>('/system/user/getUserList', params)
+export interface ListItem {
+  id: string
+  createUserString: string
+  createTime: string
+  disabled: boolean
+  deptId: string
+  deptName: string
+  username: string
+  nickname: string
+  gender: Gender
+  avatar: string
+  email: string
+  phone: string
+  status: Status
+  type: 1 | 2
+  description: string
 }
 
-/** 获取用户详情 */
-export function getUserDetail(params: { id: string }) {
-  return http.get<T.UserDetail>('/system/user/getUserDetail', params)
-}
+/** 用户模块 */
+export const baseAPI = getBaseApi<ListItem>({ baseUrl: '/system/user' })

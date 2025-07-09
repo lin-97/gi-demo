@@ -118,7 +118,8 @@ import AddUserModal from './AddUserModal.vue'
 import UserDetailDrawer from './UserDetailDrawer.vue'
 import { useTable } from '@/hooks'
 import { useDept, useDict } from '@/hooks/app'
-import { type UserItem, getUserList } from '@/apis/system'
+import { baseAPI } from '@/apis/system/user'
+import type * as T from '@/apis/system/user'
 
 defineOptions({ name: 'SystemUser' })
 
@@ -148,7 +149,7 @@ const {
   select,
   selectAll,
   fixed
-} = useTable((page) => getUserList(page), { immediate: true })
+} = useTable((page) => baseAPI.getList(page), { immediate: true })
 
 const reset = () => {
   form.status = ''
@@ -167,11 +168,11 @@ const onAdd = () => {
   AddUserModalRef.value?.add()
 }
 
-const onEdit = (item: UserItem) => {
+const onEdit = (item: T.ListItem) => {
   AddUserModalRef.value?.edit(item.id)
 }
 
-const openDetail = (item: UserItem) => {
+const openDetail = (item: T.ListItem) => {
   UserDetailDrawerRef.value?.open(item.id)
 }
 </script>

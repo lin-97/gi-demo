@@ -1,6 +1,6 @@
 import Mock, { Random } from 'mockjs'
 import { defineMock } from '../_base'
-import { getDelayTime, resultSuccess } from '../_utils'
+import { getBaseApi, resultSuccess } from '../_utils'
 
 /**
  * @param {number} times 回调函数需要执行的次数
@@ -48,7 +48,7 @@ const getTableListData = (params: any) => {
   for (let i = 0; i < params.size; i++) {
     data.push({
       'id': Random.guid(),
-      'name': params.name !== '' ? params.name : '@cname()',
+      'name': '@cname()',
       'account': Mock.mock('@string("lower", 5)'),
       'phone': '15578728810',
       'gender|1-3': 1,
@@ -65,26 +65,13 @@ const getTableListData = (params: any) => {
 }
 
 export default defineMock([
-  {
-    url: '/person/getPersonList',
-    method: 'get',
-    timeout: getDelayTime(),
-    response: ({ query }) => {
-      const { page = 1, size = 10, status = 0, name = '' } = query
-      const list = getTableListData({ page, size, status, name })
+  ...getBaseApi({
+    baseUrl: '/person',
+    getListData: (p) => {
       return resultSuccess({
         total: 1000,
-        records: list
+        records: getTableListData(p)
       })
     }
-  },
-  {
-    url: '/person/deletePerson',
-    method: 'post',
-    timeout: getDelayTime(),
-    response: ({ body }) => {
-      const { ids } = body
-      return resultSuccess(ids)
-    }
-  }
+  })
 ])

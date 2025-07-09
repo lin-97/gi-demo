@@ -24,7 +24,7 @@
 import { type FormInstance, Message } from '@arco-design/web-vue'
 import * as Regexp from '@/utils/regexp'
 import { useResetReactive } from '@/hooks'
-import { getDictDetail } from '@/apis/system'
+import { baseAPI } from '@/apis/system/dict'
 
 const emit = defineEmits<{
   (e: 'save-success'): void
@@ -60,7 +60,7 @@ const add = () => {
 const edit = async (id: string) => {
   roleId.value = id
   visible.value = true
-  const res = await getDictDetail({ id })
+  const res = await baseAPI.getDetail({ id })
   Object.assign(form, res.data)
 }
 

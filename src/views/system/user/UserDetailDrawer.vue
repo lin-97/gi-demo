@@ -27,13 +27,14 @@
 </template>
 
 <script lang="ts" setup>
-import { type UserDetail, getUserDetail } from '@/apis/system'
+import { baseAPI } from '@/apis/system/user'
+import type * as T from '@/apis/system/user'
 
 const visible = ref(false)
 const userId = ref('')
-const user = ref<UserDetail | null>()
+const user = ref<T.ListItem | null>()
 const getDetail = async () => {
-  const res = await getUserDetail({ id: userId.value })
+  const res = await baseAPI.getDetail({ id: userId.value })
   user.value = res.data
 }
 

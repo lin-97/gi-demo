@@ -23,7 +23,7 @@
 
 <script setup lang="ts">
 import { type FormInstance, Message } from '@arco-design/web-vue'
-import { getRoleDetail } from '@/apis/system'
+import { baseAPI } from '@/apis/system/role'
 import { useResetReactive } from '@/hooks'
 
 const emit = defineEmits<{
@@ -63,7 +63,7 @@ const add = () => {
 const edit = async (id: string) => {
   visible.value = true
   roleId.value = id
-  const res = await getRoleDetail({ id })
+  const res = await baseAPI.getDetail({ id })
   Object.assign(form, res.data)
 }
 

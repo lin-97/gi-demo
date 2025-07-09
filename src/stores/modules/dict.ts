@@ -1,7 +1,7 @@
 import { defineStore } from 'pinia'
 import { ref } from 'vue'
 import type { SelectOptionData } from '@arco-design/web-vue'
-import { getDictData as getDictDataApi } from '@/apis/system'
+import { getDictData as getDictDataApi } from '@/apis/system/dict'
 
 /**
  * 字典数据类型定义

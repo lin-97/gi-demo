@@ -20,7 +20,7 @@
 
 <script setup lang="ts">
 import { type FormInstance, Message } from '@arco-design/web-vue'
-import { getDictDataDetail } from '@/apis/system'
+import { getDictDataDetail } from '@/apis/system/dict'
 import { useResetReactive } from '@/hooks'
 
 const emit = defineEmits<{

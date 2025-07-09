@@ -1,15 +1,21 @@
-import type * as T from './type'
+import { getBaseApi } from '../base'
 import http from '@/utils/http'
 
-/** 获取角色数据 */
-export function getRoleList(params: Pagination) {
-  return http.get<PageRes<T.RoleItem[]>>('/system/role/getRoleList', params)
+export interface ListItem {
+  id: string
+  createUserString: string
+  createTime: string
+  disabled: boolean
+  name: string
+  code: string
+  sort: number
+  status: Status
+  type: number
+  description: string
 }
 
-/** 获取角色详情 */
-export function getRoleDetail(params: { id: string }) {
-  return http.get<T.RoleItem>('/system/role/getRoleDetail', params)
-}
+/** 角色模块 */
+export const baseAPI = getBaseApi<ListItem>({ baseUrl: '/system/role' })
 
 /** 获取角色权限 */
 export function getRoleMenuIds(params: { role: string }) {

@@ -79,7 +79,8 @@ import AddDictModal from './AddDictModal.vue'
 import DictDataModal from './DictDataModal/index.vue'
 import { useTable } from '@/hooks'
 import { useDict } from '@/hooks/app'
-import { type SystemDictItem, getDictList } from '@/apis/system'
+import { baseAPI } from '@/apis/system/dict'
+import type * as T from '@/apis/system/dict'
 
 defineOptions({ name: 'SystemRole' })
 
@@ -101,7 +102,7 @@ const {
   select,
   selectAll,
   fixed
-} = useTable((page) => getDictList(page), { immediate: true })
+} = useTable((page) => baseAPI.getList(page), { immediate: true })
 
 const reset = () => {
   form.name = ''
@@ -120,11 +121,11 @@ const onAdd = () => {
   AddDictModalRef.value?.add()
 }
 
-const onEdit = (item: SystemDictItem) => {
+const onEdit = (item: T.ListItem) => {
   AddDictModalRef.value?.edit(item.id)
 }
 
-const onViewDictData = (item: SystemDictItem) => {
+const onViewDictData = (item: T.ListItem) => {
   DictDataModalRef.value?.open({ code: item.code })
 }
 </script>

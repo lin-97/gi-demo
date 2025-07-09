@@ -79,7 +79,8 @@ import AddRoleModal from './AddRoleModal.vue'
 import PermModal from './PermModal.vue'
 import { useTable } from '@/hooks'
 import { useDict } from '@/hooks/app'
-import { type RoleItem, getRoleList } from '@/apis/system'
+import { baseAPI } from '@/apis/system/role'
+import type * as T from '@/apis/system/role'
 
 defineOptions({ name: 'SystemRole' })
 
@@ -101,7 +102,7 @@ const {
   select,
   selectAll,
   fixed
-} = useTable((page) => getRoleList(page), { immediate: true })
+} = useTable((page) => baseAPI.getList(page), { immediate: true })
 
 const reset = () => {
   form.name = ''
@@ -120,11 +121,11 @@ const onAdd = () => {
   AddRoleModalRef.value?.add()
 }
 
-const onEdit = (item: RoleItem) => {
+const onEdit = (item: T.ListItem) => {
   AddRoleModalRef.value?.edit(item.id)
 }
 
-const onPerm = (item: RoleItem) => {
+const onPerm = (item: T.ListItem) => {
   PermModalRef.value?.open({ code: item.code, title: item.name })
 }
 </script>
