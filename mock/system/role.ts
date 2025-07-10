@@ -1,15 +1,19 @@
 import { eachTree } from 'xe-utils'
 import { defineMock } from '../_base'
-import { getDelayTime, resultError, resultSuccess } from '../_utils'
+import { getBaseApi, getDelayTime, resultError, resultSuccess } from '../_utils'
 import menuData from '../_data/system_menu'
 import roleData from '../_data/system_role'
 
 export default defineMock([
-  {
-    url: '/system/role/getRoleDetail',
-    method: 'get',
-    timeout: getDelayTime(),
-    response: ({ query }) => {
+  ...getBaseApi({
+    baseUrl: '/system/role',
+    getListData: () => {
+      return resultSuccess({
+        total: roleData.length,
+        records: roleData
+      })
+    },
+    getDetailData: (query) => {
       const { id } = query
       const index = roleData.findIndex((i) => i.id === id)
       if (index >= 0) {
@@ -18,7 +22,7 @@ export default defineMock([
         return resultError(null, '没有该角色', 400)
       }
     }
-  },
+  }),
   {
     url: '/system/role/getRoleMenuIds',
     method: 'get',
@@ -37,17 +41,6 @@ export default defineMock([
       if (role === 'role_user2') {
         return resultSuccess([])
       }
-    }
-  },
-  {
-    url: '/system/role/getRoleList', // 这个短的要放在后面，不然会优先匹配
-    method: 'get',
-    timeout: getDelayTime(),
-    response: () => {
-      return resultSuccess({
-        total: roleData.length,
-        records: roleData
-      })
     }
   }
 ])

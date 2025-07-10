@@ -1,5 +1,5 @@
 // 表格项目
-export interface PersonItem {
+export interface ListItem {
   id: string
   name: string
   account: string

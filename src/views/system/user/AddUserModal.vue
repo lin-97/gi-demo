@@ -61,7 +61,7 @@
 <script setup lang="ts">
 import { type ColProps, type FormInstance, Message } from '@arco-design/web-vue'
 import * as Regexp from '@/utils/regexp'
-import { getUserDetail } from '@/apis/system'
+import { baseAPI } from '@/apis/system/user'
 import { useDept, useRole } from '@/hooks/app'
 import { useResetReactive } from '@/hooks'
 
@@ -122,7 +122,7 @@ const add = () => {
 const edit = async (id: string) => {
   visible.value = true
   userId.value = id
-  const res = await getUserDetail({ id })
+  const res = await baseAPI.getDetail({ id })
   Object.assign(form, res.data)
 }
 
@@ -143,7 +143,7 @@ const save = async () => {
     } else {
       return false
     }
-  } catch (error) {
+  } catch {
     return false
   }
 }

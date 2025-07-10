@@ -56,7 +56,8 @@ import { Drawer, Link, Message, type PopconfirmInstance, type TableInstance } fr
 import CodeJson from './code-json'
 import { useTable } from '@/hooks'
 import { useDict } from '@/hooks/app'
-import { type PersonItem, getPersonList } from '@/apis/person'
+import { baseAPI } from '@/apis/person'
+import type * as T from '@/apis/person'
 import type { ColumnItem } from '@/components/GiForm'
 import GiCodeView from '@/components/GiCodeView/index.vue'
 
@@ -105,7 +106,7 @@ const columns: TableInstance['columns'] = [
     dataIndex: 'name',
     width: 120,
     render: ({ record }) =>
-      h(Link, { onClick: () => onClickName(record as PersonItem) }, { default: () => record.name })
+      h(Link, { onClick: () => onClickName(record as T.ListItem) }, { default: () => record.name })
   },
   { title: '头像', width: 80, align: 'center', slotName: 'avatar' },
   { title: '手机号', dataIndex: 'phone', width: 150 },
@@ -125,10 +126,10 @@ const columns: TableInstance['columns'] = [
   { title: '操作', width: 200, slotName: 'action', align: 'center' }
 ]
 
-const { tableData, getTableData, pagination, search, loading } = useTable((p) => getPersonList(p))
+const { tableData, getTableData, pagination, search, loading } = useTable((p) => baseAPI.getList(p))
 
-function onClickName(record: PersonItem) {
-  Message.success(\`点击了\${record.name}\`)
+function onClickName(record: T.ListItem) {
+  Message.success(\`点击了\${ record.name \} \`)
 }
 
 const onAdd = () => {
@@ -158,4 +159,5 @@ const onViewCode = () => {
 </script>
 
 <style lang="scss" scoped></style>
+
 `

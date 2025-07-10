@@ -120,14 +120,14 @@
 <script setup lang="ts">
 import { type ColProps, type FormInstance, Message } from '@arco-design/web-vue'
 import { mapTree } from 'xe-utils'
-import type { MenuForm } from './type'
-import { type MenuItem, getMenuDetail } from '@/apis/system'
+import { baseAPI } from '@/apis/system/menu'
+import type * as T from '@/apis/system/menu'
 import { isExternal } from '@/utils/validate'
 import { filterTree, transformPathToName } from '@/utils'
 import { useResetReactive } from '@/hooks'
 
 interface Props {
-  menus: MenuItem[]
+  menus: T.ListItem[]
 }
 
 const props = withDefaults(defineProps<Props>(), {
@@ -139,7 +139,7 @@ const emit = defineEmits<{
 }>()
 
 const menuSelectTree = computed(() => {
-  const menus = JSON.parse(JSON.stringify(props.menus)) as MenuItem[]
+  const menus = JSON.parse(JSON.stringify(props.menus)) as T.ListItem[]
   const data = filterTree(menus, (i) => [1, 2].includes(i.type))
   const arr = mapTree(data, (i) => ({
     id: i.id,
@@ -159,7 +159,7 @@ const isEdit = computed(() => !!menuId.value)
 const title = computed(() => (isEdit.value ? '编辑菜单' : '新增菜单'))
 
 const isExternalUrl = ref(false)
-const [form, resetForm] = useResetReactive<MenuForm>({
+const [form, resetForm] = useResetReactive({
   type: 1, // 类型 1目录 2菜单 3按钮
   icon: '', // arco 图标名称
   svgIcon: '', // 自定义图标名称
@@ -176,7 +176,7 @@ const [form, resetForm] = useResetReactive<MenuForm>({
   showInTabs: true, // 显示在页签
   alwaysShow: false, // 总是显示
   permission: ''
-})
+} as T.ListItem)
 
 const routeName = computed(() => transformPathToName(form.path))
 
@@ -212,7 +212,7 @@ const add = () => {
 const edit = async (id: string) => {
   visible.value = true
   menuId.value = id
-  const res = await getMenuDetail({ id })
+  const res = await baseAPI.getDetail({ id })
   Object.assign(form, res.data)
   if (isExternal(form.path)) {
     isExternalUrl.value = true
@@ -236,7 +236,7 @@ const save = async () => {
     } else {
       return false
     }
-  } catch (error) {
+  } catch {
     return false
   }
 }

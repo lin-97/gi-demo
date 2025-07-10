@@ -10,7 +10,7 @@ import { mapTree } from 'xe-utils'
 import { cloneDeep } from 'lodash-es'
 import { constantRoutes } from '@/router'
 import { transformPathToName } from '@/utils'
-import type { MenuItem } from '@/apis/system'
+import type { ListItem } from '@/apis/system/menu'
 import { getUserRoutes } from '@/apis/user'
 import ParentView from '@/components/ParentView/index.vue'
 
@@ -85,7 +85,7 @@ const transformComponentView = (component: string) => {
  *   }
  * ])
  */
-const formatAsyncRoutes = (menus: MenuItem[]) => {
+const formatAsyncRoutes = (menus: ListItem[]) => {
   if (!menus.length) return []
 
   // 对顶层菜单进行排序

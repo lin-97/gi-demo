@@ -1,10 +1,10 @@
 <template>
   <a-card title="部门管理" class="gi_page_card">
     <a-space wrap>
-      <a-input v-model="form.name" placeholder="输入部门名称搜索" allow-clear style="width: 250px">
+      <a-input v-model="queryParams.name" placeholder="输入部门名称搜索" allow-clear style="width: 250px">
         <template #prefix><icon-search /></template>
       </a-input>
-      <a-select v-model="form.status" :options="options" placeholder="部门状态" style="width: 120px"></a-select>
+      <a-select v-model="queryParams.status" :options="options" placeholder="部门状态" style="width: 120px"></a-select>
       <a-button type="primary" @click="search">
         <template #icon><icon-search /></template>
         <span>搜索</span>
@@ -58,7 +58,7 @@
                 <template #icon><icon-plus /></template>
                 <span>新增</span>
               </a-button>
-              <a-popconfirm type="warning" content="您确定要删除该项吗?">
+              <a-popconfirm type="warning" content="您确定要删除该项吗?" @before-ok="onDelete(record)">
                 <a-button type="primary" status="danger" size="mini">
                   <template #icon><icon-delete /></template>
                   <span>删除</span>
@@ -78,7 +78,8 @@
 import { Message } from '@arco-design/web-vue'
 import AddDeptModal from './AddDeptModal.vue'
 import { useTable } from '@/hooks'
-import { type DeptItem, getDeptList } from '@/apis/system'
+import { baseAPI } from '@/apis/system/dept'
+import type * as T from '@/apis/system/dept'
 import { useDict } from '@/hooks/app'
 
 defineOptions({ name: 'SystemDept' })
@@ -87,7 +88,7 @@ const { data: options } = useDict({ code: 'status' })
 const AddDeptModalRef = useTemplateRef('AddDeptModalRef')
 const tableRef = useTemplateRef('tableRef')
 
-const form = reactive({
+const queryParams = reactive({
   name: '',
   status: ''
 })
@@ -99,8 +100,9 @@ const {
   search,
   select,
   selectAll,
-  fixed
-} = useTable(() => getDeptList(), {
+  fixed,
+  handleDelete
+} = useTable(() => baseAPI.getList({ ...queryParams }), {
   immediate: true,
   onSuccess: () => {
     nextTick(() => {
@@ -110,8 +112,8 @@ const {
 })
 
 const reset = () => {
-  form.name = ''
-  form.status = ''
+  queryParams.name = ''
+  queryParams.status = ''
   search()
 }
 
@@ -119,15 +121,19 @@ const onAdd = () => {
   AddDeptModalRef.value?.add()
 }
 
-const onEdit = (item: DeptItem) => {
+const onEdit = (item: T.ListItem) => {
   AddDeptModalRef.value?.edit(item.id)
+}
+
+const onDelete = (item: T.ListItem) => {
+  return handleDelete(() => baseAPI.delete({ ids: [item.id] }), { showModal: false })
 }
 
 const onMulDelete = () => {
   if (!selectedKeys.value.length) {
     return Message.warning('请选择部门')
   }
-  // 批量删除
+  return handleDelete(() => baseAPI.delete({ ids: selectedKeys.value as string[] }))
 }
 </script>
 

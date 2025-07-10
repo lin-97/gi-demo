@@ -1,17 +1,40 @@
-import type * as T from './type'
+import { getBaseApi } from '@/apis/base'
 import http from '@/utils/http'
 
-/** 获取菜单数据 */
-export function getMenuList() {
-  return http.get<T.MenuItem[]>('/system/menu/getMenuList')
+export interface ListItem {
+  activeMenu: string
+  alwaysShow: boolean
+  breadcrumb: boolean
+  children: ListItem[]
+  component: string
+  hidden: boolean
+  icon: string
+  id: string
+  keepAlive: boolean
+  parentId: string
+  path: string
+  permission: string
+  redirect: string
+  roles: string[]
+  showInTabs: boolean
+  sort: number
+  status: Status
+  svgIcon: string
+  title: string
+  type: 1 | 2 | 3
+  affix: boolean
 }
 
-/** 获取菜单详情 */
-export function getMenuDetail(params: { id: string }) {
-  return http.get<T.MenuItem>('/system/menu/getMenuDetail', params)
+export interface MenuOptionsItem {
+  id: string
+  title: string
+  children: MenuOptionsItem[]
 }
+
+/** 菜单模块 */
+export const baseAPI = getBaseApi<ListItem>({ baseUrl: '/system/menu' })
 
 /** 获取角色分配权限菜单树 */
 export function getMenuOptions() {
-  return http.get<T.MenuOptionsItem[]>('/system/menu/getMenuOptions')
+  return http.get<MenuOptionsItem[]>('/system/menu/getMenuOptions')
 }

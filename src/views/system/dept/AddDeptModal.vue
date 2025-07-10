@@ -31,7 +31,7 @@
 import { type FormInstance, Message } from '@arco-design/web-vue'
 import { useResetReactive } from '@/hooks'
 import { useDept } from '@/hooks/app'
-import { getDeptDetail } from '@/apis/system'
+import { baseAPI } from '@/apis/system/dept'
 
 const emit = defineEmits<{
   (e: 'save-success'): void
@@ -73,7 +73,7 @@ const edit = async (id: string) => {
   }
   deptId.value = id
   visible.value = true
-  const res = await getDeptDetail({ id })
+  const res = await baseAPI.getDetail({ id })
   Object.assign(form, res.data)
 }
 
@@ -94,7 +94,7 @@ const save = async () => {
     } else {
       return false
     }
-  } catch (error) {
+  } catch {
     return false
   }
 }

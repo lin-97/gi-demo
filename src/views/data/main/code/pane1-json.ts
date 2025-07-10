@@ -79,7 +79,8 @@ import { useWindowSize } from '@vueuse/core'
 import CateTree from './CateTree/index.vue'
 import Pane1Json from './code/pane1-json'
 import { useTable } from '@/hooks'
-import { type PersonItem, deletePerson, getPersonList } from '@/apis/person'
+import { baseAPI } from '@/apis/person'
+import type * as T from '@/apis/person'
 import { useDict } from '@/hooks/app'
 import GiCodeView from '@/components/GiCodeView/index.vue'
 
@@ -94,7 +95,7 @@ const form = reactive({
 
 // 这里使用了表格hooks：useTable, 节省了大量代码
 const { loading, tableData, getTableData, pagination, selectedKeys, select, selectAll, handleDelete, fixed } = useTable(
-  (page) => getPersonList({ ...form, ...page }),
+  (page) => baseAPI.getList({ ...form, ...page }),
   { immediate: false, formatResult: (data) => data.map((i) => ({ ...i, isEdit: false })) }
 )
 
@@ -117,13 +118,13 @@ const onEdit = () => {
   router.push({ path: '/data/form', query: { id: 'ID123456' } })
 }
 
-const onDetail = (item: PersonItem) => {
+const onDetail = (item: T.ListItem) => {
   router.push({ name: 'DataDetailId', params: { id: item.id } })
 }
 
 // 删除
-const onDelete = (item: PersonItem) => {
-  return handleDelete(() => deletePerson({ ids: [item.id] }), { content: \`是否删除-\${item.name}?\`, showModal: false })
+const onDelete = (item: T.ListItem) => {
+  return handleDelete(() => baseAPI.delete({ ids: [item.id] }), { content: \`是否删除 - \${ item.name }?\`, showModal: false })
 }
 
 // 批量删除
@@ -131,7 +132,7 @@ const onMulDelete = () => {
   if (!selectedKeys.value.length) {
     return Message.warning('请选择删除项！')
   }
-  handleDelete(() => deletePerson({ ids: selectedKeys.value as string[] }), { successTip: '批量删除成功！' })
+  handleDelete(() => baseAPI.delete({ ids: selectedKeys.value as string[] }), { successTip: '批量删除成功！' })
 }
 
 const onExport = () => {

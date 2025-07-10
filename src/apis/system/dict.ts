@@ -1,16 +1,29 @@
 import type { SelectOptionData } from '@arco-design/web-vue'
-import type * as T from './type'
+import { getBaseApi } from '@/apis/base'
 import http from '@/utils/http'
 
-/** 获取字典数据 */
-export function getDictList(params: Pagination) {
-  return http.get<PageRes<T.SystemDictItem[]>>('/system/dict/getDictList', params)
+export interface ListItem {
+  id: string
+  createUserString: string
+  createTime: string
+  name: string
+  code: string
+  sort: number
+  status: Status
+  description: string
 }
 
-/** 获取字典详情 */
-export function getDictDetail(params: { id: string }) {
-  return http.get<T.DictDetail>('/system/dict/getDictDetail', params)
+export type DictDetail = ListItem
+
+export type DictDataItem = {
+  id: string
+  name: string
+  value: string | number
+  status: Status
 }
+
+/** 字典模块 */
+export const baseAPI = getBaseApi<ListItem>({ baseUrl: '/system/dict' })
 
 /** 字典数据列表 */
 export function getDictDataList(params: { code: string } & Pagination) {

@@ -1,10 +1,25 @@
 import { findTree, mapTree } from 'xe-utils'
 import { defineMock } from '../_base'
-import { USER_TOKENS, filterTree, getDelayTime, isAdmin, resultError, resultSuccess } from '../_utils'
+import { USER_TOKENS, filterTree, getBaseApi, getDelayTime, isAdmin, resultError, resultSuccess } from '../_utils'
 import menuData from '../_data/system_menu'
 import type { MockSystemMenuItem } from '../_data/_type'
 
 export default defineMock([
+  ...getBaseApi({
+    baseUrl: '/system/menu',
+    getListData: () => {
+      return resultSuccess(mapTree(JSON.parse(JSON.stringify(menuData)), (i) => ({ ...i })))
+    },
+    getDetailData: (query) => {
+      const { id } = query
+      const obj = findTree(menuData, (i) => i.id === id)
+      if (obj.item) {
+        return resultSuccess(obj.item)
+      } else {
+        return resultError(null, '没有该部门', 400)
+      }
+    }
+  }),
   {
     url: '/user/getUserRoutes',
     method: 'get',
@@ -33,20 +48,6 @@ export default defineMock([
     }
   },
   {
-    url: '/system/menu/getMenuDetail',
-    method: 'get',
-    timeout: getDelayTime(),
-    response: ({ query }) => {
-      const { id } = query
-      const obj = findTree(menuData, (i) => i.id === id)
-      if (obj.item) {
-        return resultSuccess(obj.item)
-      } else {
-        return resultError(null, '没有该部门', 400)
-      }
-    }
-  },
-  {
     url: '/system/menu/getMenuOptions',
     method: 'get',
     timeout: getDelayTime(),
@@ -57,14 +58,6 @@ export default defineMock([
         children: i.children
       }))
       return resultSuccess(data)
-    }
-  },
-  {
-    url: '/system/menu/getMenuList', // 这个短的要放在后面，不然会优先匹配
-    method: 'get',
-    timeout: getDelayTime(),
-    response: () => {
-      return resultSuccess(mapTree(JSON.parse(JSON.stringify(menuData)), (i) => ({ ...i })))
     }
   }
 ])

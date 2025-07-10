@@ -1,5 +1,6 @@
 import Mock from 'mockjs'
 import { mapTree, random } from 'xe-utils'
+import type { MockMethod } from 'vite-plugin-mock'
 
 /** 返回成功数据 */
 export const resultSuccess = (data: unknown) => {
@@ -52,4 +53,51 @@ export const filterTree: FilterTree = (values, fn) => {
     return item
   })
   return data
+}
+
+export const getBaseApi = (params: { baseUrl: string, getListData: any, getDetailData?: any }) => {
+  const { baseUrl, getListData, getDetailData = {} } = params
+  return [
+    {
+      url: `${baseUrl}/getList`,
+      method: 'get',
+      timeout: getDelayTime(),
+      response: ({ query }) => {
+        return getListData(query)
+      }
+    },
+    {
+      url: `${baseUrl}/getDetail`,
+      method: 'get',
+      timeout: getDelayTime(),
+      response: ({ query }) => {
+        return getDetailData(query)
+      }
+    },
+    {
+      url: `${baseUrl}/add`,
+      method: 'post',
+      timeout: getDelayTime(),
+      response: ({ body }) => {
+        return resultSuccess(body)
+      }
+    },
+    {
+      url: `${baseUrl}/update`,
+      method: 'post',
+      timeout: getDelayTime(),
+      response: ({ body }) => {
+        return resultSuccess(body)
+      }
+    },
+    {
+      url: `${baseUrl}/delete`,
+      method: 'post',
+      timeout: getDelayTime(),
+      response: ({ body }) => {
+        const { ids } = body
+        return resultSuccess(ids)
+      }
+    }
+  ] as MockMethod[]
 }

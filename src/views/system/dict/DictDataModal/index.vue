@@ -55,7 +55,7 @@
 <script lang="ts" setup>
 import { Message } from '@arco-design/web-vue'
 import AddDictDataModal from './AddDictDataModal.vue'
-import { type DictDataItem, getDictDataList } from '@/apis/system'
+import { type DictDataItem, getDictDataList } from '@/apis/system/dict'
 import { useTable } from '@/hooks'
 
 const visible = ref(false)

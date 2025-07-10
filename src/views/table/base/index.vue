@@ -54,7 +54,7 @@
 <script setup lang="ts">
 import type { PopconfirmInstance } from '@arco-design/web-vue'
 import { useTable } from '@/hooks'
-import { getPersonList } from '@/apis/person'
+import { baseAPI } from '@/apis/person'
 import type { ColumnItem } from '@/components/GiForm'
 
 defineOptions({ name: 'TableBase' })
@@ -77,7 +77,7 @@ const columns: ColumnItem[] = reactive([
   }
 ])
 
-const { tableData, pagination, search, loading } = useTable((p) => getPersonList(p))
+const { tableData, pagination, search, loading } = useTable((p) => baseAPI.getList(p))
 
 const onDelete: PopconfirmInstance['onBeforeOk'] = () => {
   return new Promise((resolve) => setTimeout(() => resolve(true), 300))
