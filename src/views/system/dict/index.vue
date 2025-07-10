@@ -1,10 +1,11 @@
 <template>
   <a-card title="字典管理" class="gi_page_card">
     <a-space wrap>
-      <a-input v-model="form.name" placeholder="字典类型名称/编码" allow-clear style="width: 250px">
+      <a-input v-model="queryParams.name" placeholder="字典类型名称/编码" allow-clear style="width: 250px">
         <template #prefix><icon-search /></template>
       </a-input>
-      <a-select v-model="form.status" :options="options" placeholder="状态" allow-clear style="width: 120px"></a-select>
+      <a-select v-model="queryParams.status" :options="options" placeholder="状态" allow-clear
+        style="width: 120px"></a-select>
       <a-button type="primary" @click="search">
         <template #icon><icon-search /></template>
         <span>查询</span>
@@ -56,7 +57,7 @@
                 <template #icon><icon-edit /></template>
                 <span>编辑</span>
               </a-button>
-              <a-popconfirm type="warning" content="确定删除该角色吗?">
+              <a-popconfirm type="warning" content="确定删除该角色吗?" @before-ok="onDelete(record)">
                 <a-button type="primary" status="danger" size="mini">
                   <template #icon><icon-delete /></template>
                   <span>删除</span>
@@ -88,7 +89,7 @@ const { data: options } = useDict({ code: 'status' })
 const AddDictModalRef = useTemplateRef('AddDictModalRef')
 const DictDataModalRef = useTemplateRef('DictDataModalRef')
 
-const form = reactive({
+const queryParams = reactive({
   name: '',
   status: ''
 })
@@ -101,20 +102,14 @@ const {
   search,
   select,
   selectAll,
-  fixed
-} = useTable((page) => baseAPI.getList(page), { immediate: true })
+  fixed,
+  handleDelete
+} = useTable((page) => baseAPI.getList({ ...page, ...queryParams }), { immediate: true })
 
 const reset = () => {
-  form.name = ''
-  form.status = ''
+  queryParams.name = ''
+  queryParams.status = ''
   search()
-}
-
-// 批量删除
-const onMulDelete = () => {
-  if (!selectedKeys.value.length) {
-    return Message.warning('请选择字典！')
-  }
 }
 
 const onAdd = () => {
@@ -123,6 +118,18 @@ const onAdd = () => {
 
 const onEdit = (item: T.ListItem) => {
   AddDictModalRef.value?.edit(item.id)
+}
+
+const onDelete = (item: T.ListItem) => {
+  return handleDelete(() => baseAPI.delete({ ids: [item.id] }), { showModal: false })
+}
+
+// 批量删除
+const onMulDelete = () => {
+  if (!selectedKeys.value.length) {
+    return Message.warning('请选择字典！')
+  }
+  return handleDelete(() => baseAPI.delete({ ids: selectedKeys.value as string[] }))
 }
 
 const onViewDictData = (item: T.ListItem) => {

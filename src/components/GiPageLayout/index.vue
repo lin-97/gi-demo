@@ -40,11 +40,14 @@ defineSlots<{
   default: () => void
 }>()
 
+const slots = useSlots()
+
 const getClass = computed(() => {
   return {
     'gi-page-layout--margin': props.margin,
     'gi-page-layout--padding': props.padding,
-    'gi-page-layout--gutter': !!props.gutter
+    'gi-page-layout--gutter': !!props.gutter,
+    'gi-page-layout--has-header': slots.header
   }
 })
 
@@ -66,8 +69,6 @@ interface Props {
   headerStyle?: CSSProperties
   bodyStyle?: CSSProperties
 }
-
-const slots = useSlots()
 </script>
 
 <style lang='scss' scoped>
@@ -130,5 +131,11 @@ const slots = useSlots()
   flex-direction: column;
   overflow: hidden;
   box-sizing: border-box;
+}
+
+.gi-page-layout--has-header.gi-page-layout--padding {
+  .gi-page-layout__body {
+    padding-top: 8px;
+  }
 }
 </style>

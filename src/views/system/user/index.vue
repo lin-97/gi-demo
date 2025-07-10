@@ -32,9 +32,9 @@
 
         <a-space wrap>
           <a-input-group>
-            <a-select v-model="form.status" :options="options" placeholder="用户状态" allow-clear
+            <a-select v-model="queryParams.status" :options="options" placeholder="用户状态" allow-clear
               style="width: 150px"></a-select>
-            <a-input v-model="form.username" placeholder="输入用户名搜索" allow-clear style="max-width: 250px">
+            <a-input v-model="queryParams.username" placeholder="输入用户名搜索" allow-clear style="max-width: 250px">
             </a-input>
           </a-input-group>
           <a-button type="primary" @click="search">
@@ -58,7 +58,7 @@
           </a-table-column>
           <a-table-column title="用户名" data-index="username" :width="120">
             <template #cell="{ record }">
-              <a-link @click="openDetail(record)">{{ record.username }}</a-link>
+              <a-link @click="onDetail(record)">{{ record.username }}</a-link>
             </template>
           </a-table-column>
           <a-table-column title="昵称" data-index="nickname" :width="150">
@@ -94,7 +94,7 @@
                   <template #icon><icon-edit /></template>
                   <span>编辑</span>
                 </a-button>
-                <a-popconfirm type="warning" content="确定删除该用户吗?">
+                <a-popconfirm type="warning" content="确定删除该用户吗?" @before-ok="onDelete(record)">
                   <a-button type="primary" status="danger" size="mini" :disabled="record.disabled">
                     <template #icon><icon-delete /></template>
                     <span>删除</span>
@@ -138,7 +138,7 @@ const { deptList, getDeptList } = useDept({
 })
 getDeptList()
 
-const form = reactive({ status: '', username: '' })
+const queryParams = reactive({ status: '', username: '' })
 
 const {
   loading,
@@ -148,20 +148,14 @@ const {
   search,
   select,
   selectAll,
-  fixed
-} = useTable((page) => baseAPI.getList(page), { immediate: true })
+  fixed,
+  handleDelete
+} = useTable((page) => baseAPI.getList({ ...page, ...queryParams }), { immediate: true })
 
 const reset = () => {
-  form.status = ''
-  form.username = ''
+  queryParams.status = ''
+  queryParams.username = ''
   search()
-}
-
-// 批量删除
-const onMulDelete = () => {
-  if (!selectedKeys.value.length) {
-    return Message.warning('请选择用户！')
-  }
 }
 
 const onAdd = () => {
@@ -172,7 +166,19 @@ const onEdit = (item: T.ListItem) => {
   AddUserModalRef.value?.edit(item.id)
 }
 
-const openDetail = (item: T.ListItem) => {
+const onDelete = (item: T.ListItem) => {
+  return handleDelete(() => baseAPI.delete({ ids: [item.id] }), { showModal: false })
+}
+
+// 批量删除
+const onMulDelete = () => {
+  if (!selectedKeys.value.length) {
+    return Message.warning('请选择用户！')
+  }
+  return handleDelete(() => baseAPI.delete({ ids: selectedKeys.value as string[] }))
+}
+
+const onDetail = (item: T.ListItem) => {
   UserDetailDrawerRef.value?.open(item.id)
 }
 </script>

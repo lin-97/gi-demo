@@ -50,7 +50,7 @@ const rules: FormInstance['rules'] = {
   ],
   code: [
     { required: true, message: '请输入角色编码' },
-    { match: /^[a-zA-Z][a-zA-Z0-9_]*$/, message: '格式不对！只能英文开头，包含英文数字下划线' }
+    { match: /^[a-z]\w*$/i, message: '格式不对！只能英文开头，包含英文数字下划线' }
   ],
   status: [{ required: true }]
 }
@@ -84,7 +84,7 @@ const save = async () => {
     } else {
       return false
     }
-  } catch (error) {
+  } catch {
     return false
   }
 }

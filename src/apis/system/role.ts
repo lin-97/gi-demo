@@ -1,4 +1,4 @@
-import { getBaseApi } from '../base'
+import { getBaseApi } from '@/apis/base'
 import http from '@/utils/http'
 
 export interface ListItem {

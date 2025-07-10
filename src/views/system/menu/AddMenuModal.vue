@@ -236,7 +236,7 @@ const save = async () => {
     } else {
       return false
     }
-  } catch (error) {
+  } catch {
     return false
   }
 }

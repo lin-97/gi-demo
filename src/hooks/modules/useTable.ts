@@ -150,6 +150,8 @@ export function useTable<T extends U, U = T>(api: Api<T>, options?: Options<T, U
         }
         return res.success
       } catch (error) {
+        // eslint-disable-next-line no-console
+        console.log('删除失败', error)
         return false
       }
     }

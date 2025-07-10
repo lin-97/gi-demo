@@ -1,4 +1,4 @@
-import { getBaseApi } from '../base'
+import { getBaseApi } from '@/apis/base'
 
 export interface ListItem {
   id: string

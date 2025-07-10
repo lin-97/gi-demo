@@ -1,4 +1,4 @@
-import { getBaseApi } from '../base'
+import { getBaseApi } from '@/apis/base'
 
 export interface ListItem {
   id: string
@@ -16,6 +16,8 @@ export interface ListItem {
   status: Status
   type: 1 | 2
   description: string
+  roleIds: string[]
+  roleNames: string[]
 }
 
 /** 用户模块 */

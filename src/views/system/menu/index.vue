@@ -22,10 +22,10 @@
       </a-space>
 
       <a-space wrap>
-        <a-input v-model="form.name" placeholder="输入菜单名称搜索" allow-clear style="width: 250px">
+        <a-input v-model="queryParams.name" placeholder="输入菜单名称搜索" allow-clear style="width: 250px">
           <template #prefix><icon-search /></template>
         </a-input>
-        <a-select v-model="form.status" :options="options" placeholder="菜单状态" style="width: 120px"></a-select>
+        <a-select v-model="queryParams.status" :options="options" placeholder="菜单状态" style="width: 120px"></a-select>
         <a-button type="primary" @click="search">
           <template #icon><icon-search /></template>
           <span>搜索</span>
@@ -104,7 +104,7 @@
               <a-button v-if="[1, 2].includes(record.type)" type="primary" status="success" size="mini">
                 <template #icon><icon-plus /></template>
               </a-button>
-              <a-popconfirm type="warning" content="您确定要删除该项吗?">
+              <a-popconfirm type="warning" content="您确定要删除该项吗?" @before-ok="onDelete(record)">
                 <a-button type="primary" status="danger" size="mini">
                   <template #icon><icon-delete /></template>
                   <span>删除</span>
@@ -143,18 +143,19 @@ const onExpanded = () => {
   tableRef.value?.expandAll(isExpanded.value)
 }
 
-const form = reactive({ name: '', status: '' })
+const queryParams = reactive({ name: '', status: '' })
 
 const {
   loading,
   tableData: menuList,
   search,
-  fixed
-} = useTable(() => baseAPI.getList(), { immediate: true })
+  fixed,
+  handleDelete
+} = useTable(() => baseAPI.getList({ ...queryParams }), { immediate: true })
 
 const reset = () => {
-  form.name = ''
-  form.status = ''
+  queryParams.name = ''
+  queryParams.status = ''
   search()
 }
 
@@ -164,6 +165,10 @@ const onAdd = () => {
 
 const onEdit = (item: T.ListItem) => {
   AddMenuModalRef.value?.edit(item.id)
+}
+
+const onDelete = (item: T.ListItem) => {
+  return handleDelete(() => baseAPI.delete({ ids: [item.id] }), { showModal: false })
 }
 
 const onViewCode = () => {
