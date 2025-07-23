@@ -61,11 +61,6 @@ export type ComponentProps =
   & A.MentionInstance['$props']
   & A.AlertInstance['$props']
 
-/** 表单项属性接口 */
-interface ColumnItemProps extends Partial<Omit<ComponentProps, 'placeholder'>> {
-  placeholder?: string | string[]
-}
-
 /** 选项类型定义 */
 export type ColumnItemOptions =
   | A.SelectInstance['$props']['options']
@@ -245,11 +240,11 @@ export interface ColumnItem<F = any> {
   /** 表单项组件插槽 */
   formItemSlots?: Record<string, string | VNode | (() => VNode)>
   /** 是否显示（支持函数） */
-  show?: boolean | ((model: any) => boolean)
+  show?: boolean | ((model: F) => boolean)
   /** 是否隐藏（支持函数） */
-  hide?: boolean | ((model: any) => boolean)
+  hide?: boolean | ((model: F) => boolean)
   /** 是否禁用（支持函数） */
-  disabled?: boolean | ((model: any) => boolean)
+  disabled?: boolean | ((model: F) => boolean)
   /** 栅格跨度 */
   span?: number | Record<string, number>
   /** 数据请求函数 */

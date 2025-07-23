@@ -11,28 +11,33 @@
               </template>
             </a-avatar>
             <div class="name">{{ userStore.name }}</div>
-            <p class="desc">尘缘已定，不念过往</p>
+            <a-typography-paragraph>尘缘已定，不念过往</a-typography-paragraph>
           </div>
 
-          <ul class="user-card__list">
-            <li class="list-item">
-              <span class="icon"><icon-bookmark :stroke-width="1" :size="16" /></span>
+          <a-descriptions :column="1" :label-style="{ marginRight: '0' }">
+            <a-descriptions-item>
+              <template #label><icon-bookmark :stroke-width="1" :size="16" /></template>
               <span>前端工程师</span>
-            </li>
-            <li class="list-item">
-              <span class="icon"><icon-branch :stroke-width="1"
-                  :size="16" /></span><span>中台-数据平台团队-前端创新团队-前端架构和平台工具团队</span>
-            </li>
-            <li class="list-item">
-              <span class="icon"><icon-location :stroke-width="1" :size="16" /></span><span>广州市</span>
-            </li>
-          </ul>
+            </a-descriptions-item>
+            <a-descriptions-item>
+              <template #label><icon-branch :stroke-width="1" :size="16" /></template>
+              <span>中台-数据平台团队-前端创新团队-前端架构和平台工具团队</span>
+            </a-descriptions-item>
+            <a-descriptions-item>
+              <template #label><icon-location :stroke-width="1" :size="16" /></template>
+              <span>广州市</span>
+            </a-descriptions-item>
+          </a-descriptions>
 
-          <a-row justify="space-around" class="user-card__images">
-            <img src="https://file.iviewui.com/admin-pro-dist/img/icon-social-weibo.cbf658a0.svg" />
-            <img src="https://file.iviewui.com/admin-pro-dist/img/icon-social-zhihu.1dc5a4ff.svg" />
-            <img src="https://file.iviewui.com/admin-pro-dist/img/icon-social-facebook.e95df60e.svg" />
-            <img src="https://file.iviewui.com/admin-pro-dist/img/icon-social-twitter.5db80e81.svg" />
+          <a-row justify="space-around">
+            <a-avatar :size="32"
+              image-url="https://file.iviewui.com/admin-pro-dist/img/icon-social-weibo.cbf658a0.svg"></a-avatar>
+            <a-avatar :size="32"
+              image-url="https://file.iviewui.com/admin-pro-dist/img/icon-social-zhihu.1dc5a4ff.svg"></a-avatar>
+            <a-avatar :size="32"
+              image-url="https://file.iviewui.com/admin-pro-dist/img/icon-social-facebook.e95df60e.svg"></a-avatar>
+            <a-avatar :size="32"
+              image-url="https://file.iviewui.com/admin-pro-dist/img/icon-social-twitter.5db80e81.svg"></a-avatar>
           </a-row>
 
           <a-divider type="dashed" />
@@ -99,29 +104,6 @@ const userStore = useUserStore()
     .desc {
       font-size: 12px;
       color: $color-text-3;
-    }
-  }
-
-  &__list {
-    margin-top: 20px;
-
-    .list-item {
-      padding-bottom: 16px;
-      display: flex;
-
-      >.icon {
-        margin-right: 8px;
-      }
-    }
-  }
-
-  &__images {
-    margin: 10px 0;
-
-    img {
-      width: 32px;
-      height: 32px;
-      border-radius: 50%;
     }
   }
 }
