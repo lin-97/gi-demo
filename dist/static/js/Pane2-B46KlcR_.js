@@ -1,0 +1,1 @@
+import{_ as t}from"./Pane2.vue_vue_type_script_setup_true_lang-BhrxyycZ.js";import"./index-DYjg1Rxd.js";import"./index-CaTNYhxh.js";import"./GiEditTable-Bxxu8wp5.js";import"./regexp-CZKnpGWl.js";import"./dept-BtlGnOEc.js";import"./role-BwDBVdZ2.js";import"./useDict-DE_97KF8.js";export{t as default};

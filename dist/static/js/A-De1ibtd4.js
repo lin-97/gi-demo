@@ -1,0 +1,1 @@
+import{e as a}from"./mitt-B_sGL28P.js";import{d as s,e as t,g as e,o,i as n,t as r,h as c,_ as d}from"./index-CaTNYhxh.js";const i={class:"aaa"},m=d(s({__name:"A",setup(s){const d=t("A");return a.on("changeText",a=>{d.value=a}),(a,s)=>(o(),e("div",i,[n("h3",null,r(c(d)),1)]))}}),[["__scopeId","data-v-6801401c"]]);export{m as default};
