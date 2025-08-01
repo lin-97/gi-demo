@@ -12,6 +12,7 @@ export type ColumnItemType =
   | 'input' // 输入框
   | 'input-number' // 数字输入框
   | 'input-tag' // 标签输入框
+  | 'input-search' // 搜索框
   | 'textarea' // 文本域
   | 'select' // 选择器
   | 'tree-select' // 树选择器
@@ -39,6 +40,7 @@ export type ComponentProps =
   & A.InputInstance['$props']
   & A.InputNumberInstance['$props']
   & A.InputTagInstance['$props']
+  & A.InputSearchInstance['$props']
   & A.TextareaInstance['$props']
   & A.SelectInstance['$props']
   & A.TreeSelectInstance['$props']

@@ -191,7 +191,7 @@ const getPlaceholder = (item: ColumnItem) => {
   if (['textarea'].includes(item.type)) {
     return `请填写${item.label}`
   }
-  if (['select', 'tree-select', 'cascader'].includes(item.type)) {
+  if (['select', 'input-search', 'tree-select', 'cascader'].includes(item.type)) {
     return `请选择${item.label}`
   }
   if (['date-picker'].includes(item.type)) {

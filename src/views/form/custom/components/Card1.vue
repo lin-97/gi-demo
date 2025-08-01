@@ -24,22 +24,36 @@ import { useWindowSize } from '@vueuse/core'
 import Card1Json from './code/card1-json'
 import type { ColumnItem } from '@/components/GiForm'
 import GiCodeView from '@/components/GiCodeView/index.vue'
+import { selectUserDialog } from '@/components/dialog'
 
 const { width } = useWindowSize()
 
 const form = reactive({
-  name: '',
+  userId: '',
+  userName: '',
   phone: '',
   status: ''
 })
 
-const columns: ColumnItem[] = reactive([
+const columns = reactive([
   {
-    type: 'input',
-    label: '姓名',
-    field: 'name',
+    type: 'input-search',
+    label: '用户',
+    field: 'userName',
     props: {
-      maxLength: 4
+      allowClear: true,
+      onSearch: () => {
+        selectUserDialog({
+          onOk: (data) => {
+            form.userId = data[0].id
+            form.userName = data[0].name
+          }
+        })
+      },
+      onClear: () => {
+        form.userId = ''
+        form.userName = ''
+      }
     }
   },
   {
@@ -62,7 +76,7 @@ const columns: ColumnItem[] = reactive([
       ]
     }
   }
-])
+] as ColumnItem[])
 
 const onViewCode = () => {
   Drawer.open({
