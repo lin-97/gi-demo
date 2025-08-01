@@ -5,7 +5,7 @@
 
 import { defineStore } from 'pinia'
 import { nextTick, ref } from 'vue'
-import { type RouteLocationNormalized, type RouteRecordName, useRouter } from 'vue-router'
+import { type RouteLocationNormalized, type RouteLocationRaw, type RouteRecordName, useRouter } from 'vue-router'
 import { eachTree } from 'xe-utils'
 import { useRouteStore } from '@/stores'
 
