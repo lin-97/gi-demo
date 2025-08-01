@@ -221,8 +221,10 @@ export type ColumnItemFormat<T = any> = (res: T) => ColumnItemOptions | ColumnIt
 export interface ColumnItem<F = any> {
   /** 字段名 */
   field: string
-  /** 标签名（支持字符串或自定义渲染函数） */
-  label?: string | VNode | (() => VNode)
+  /** 标签名 */
+  label?: string
+  /** 自定义渲染label */
+  labelRender?: (() => VNode)
   /** 表单项类型 */
   type?: string
   /** 表单项属性 */

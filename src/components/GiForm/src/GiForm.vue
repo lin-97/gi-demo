@@ -14,8 +14,8 @@
             :disabled="isDisabled(item)">
             <!-- 表单项标签 -->
             <template #label>
-              <template v-if="typeof item.label === 'string'">{{ item.label }}</template>
-              <component :is="item.label" v-else></component>
+              <component :is="item.labelRender" v-if="item.labelRender"></component>
+              <template v-else>{{ item.label }}</template>
             </template>
 
             <!-- 表单项内容 -->

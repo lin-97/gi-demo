@@ -152,7 +152,8 @@ const columns = computed(() => [
   },
   {
     type: 'radio-group',
-    label: () => (
+    label: '状态',
+    labelRender: () => (
       <div>
         <span>状态</span>
         <a-tooltip content="这里使用了tsx自定义渲染">
