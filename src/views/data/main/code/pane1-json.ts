@@ -83,9 +83,11 @@ import { baseAPI } from '@/apis/person'
 import type * as T from '@/apis/person'
 import { useDict } from '@/hooks/app'
 import GiCodeView from '@/components/GiCodeView/index.vue'
+import { useTabsStore } from '@/stores'
 
 const { width } = useWindowSize()
 const router = useRouter()
+const { setTabTitle } = useTabsStore()
 
 const { data: options } = useDict({ code: 'status' })
 const form = reactive({
@@ -114,8 +116,9 @@ const onAdd = () => {
   router.push({ path: '/data/form' })
 }
 
-const onEdit = () => {
-  router.push({ path: '/data/form', query: { id: 'ID123456' } })
+const onEdit = async () => {
+  await router.push({ path: '/data/form', query: { id: 'ID123456' } })
+  setTabTitle('编辑')
 }
 
 const onDetail = (item: T.ListItem) => {
@@ -124,7 +127,7 @@ const onDetail = (item: T.ListItem) => {
 
 // 删除
 const onDelete = (item: T.ListItem) => {
-  return handleDelete(() => baseAPI.delete({ ids: [item.id] }), { content: \`是否删除 - \${ item.name }?\`, showModal: false })
+  return handleDelete(() => baseAPI.delete({ ids: [item.id] }), { content: \`是否删除-\${item.name}?\`, showModal: false })
 }
 
 // 批量删除
@@ -152,5 +155,4 @@ const onViewCode = () => {
 </script>
 
 <style lang="scss" scoped></style>
-
 `

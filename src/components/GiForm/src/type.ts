@@ -12,6 +12,7 @@ export type ColumnItemType =
   | 'input' // 输入框
   | 'input-number' // 数字输入框
   | 'input-tag' // 标签输入框
+  | 'input-search' // 搜索框
   | 'textarea' // 文本域
   | 'select' // 选择器
   | 'tree-select' // 树选择器
@@ -39,6 +40,7 @@ export type ComponentProps =
   & A.InputInstance['$props']
   & A.InputNumberInstance['$props']
   & A.InputTagInstance['$props']
+  & A.InputSearchInstance['$props']
   & A.TextareaInstance['$props']
   & A.SelectInstance['$props']
   & A.TreeSelectInstance['$props']
@@ -60,11 +62,6 @@ export type ComponentProps =
   & A.AutoCompleteInstance['$props']
   & A.MentionInstance['$props']
   & A.AlertInstance['$props']
-
-/** 表单项属性接口 */
-interface ColumnItemProps extends Partial<Omit<ComponentProps, 'placeholder'>> {
-  placeholder?: string | string[]
-}
 
 /** 选项类型定义 */
 export type ColumnItemOptions =
@@ -226,8 +223,10 @@ export type ColumnItemFormat<T = any> = (res: T) => ColumnItemOptions | ColumnIt
 export interface ColumnItem<F = any> {
   /** 字段名 */
   field: string
-  /** 标签名（支持字符串或自定义渲染函数） */
-  label?: string | VNode | (() => VNode)
+  /** 标签名 */
+  label?: string
+  /** 自定义渲染label */
+  labelRender?: (() => VNode)
   /** 表单项类型 */
   type?: string
   /** 表单项属性 */
@@ -245,11 +244,11 @@ export interface ColumnItem<F = any> {
   /** 表单项组件插槽 */
   formItemSlots?: Record<string, string | VNode | (() => VNode)>
   /** 是否显示（支持函数） */
-  show?: boolean | ((model: any) => boolean)
+  show?: boolean | ((model: F) => boolean)
   /** 是否隐藏（支持函数） */
-  hide?: boolean | ((model: any) => boolean)
+  hide?: boolean | ((model: F) => boolean)
   /** 是否禁用（支持函数） */
-  disabled?: boolean | ((model: any) => boolean)
+  disabled?: boolean | ((model: F) => boolean)
   /** 栅格跨度 */
   span?: number | Record<string, number>
   /** 数据请求函数 */

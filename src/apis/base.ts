@@ -14,7 +14,7 @@ export function getBaseApi<T, P extends DefaultP = DefaultP>(params: { baseUrl: 
 
   const baseApi = {
     // 获取分页列表
-    getList(params?: P['GetListParams']) {
+    getList(params?: P['GetListParams'] & { page?: number, size?: number }) {
       return http.get<PageRes<T[]>>(`${baseUrl}/getList`, params)
     },
     // 获取详情

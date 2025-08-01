@@ -82,9 +82,11 @@ import { baseAPI } from '@/apis/person'
 import type * as T from '@/apis/person'
 import { useDict } from '@/hooks/app'
 import GiCodeView from '@/components/GiCodeView/index.vue'
+import { useTabsStore } from '@/stores'
 
 const { width } = useWindowSize()
 const router = useRouter()
+const { setTabTitle } = useTabsStore()
 
 const { data: options } = useDict({ code: 'status' })
 const form = reactive({
@@ -113,8 +115,9 @@ const onAdd = () => {
   router.push({ path: '/data/form' })
 }
 
-const onEdit = () => {
-  router.push({ path: '/data/form', query: { id: 'ID123456' } })
+const onEdit = async () => {
+  await router.push({ path: '/data/form', query: { id: 'ID123456' } })
+  setTabTitle('编辑')
 }
 
 const onDetail = (item: T.ListItem) => {

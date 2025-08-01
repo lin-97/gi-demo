@@ -1,5 +1,5 @@
 /* 全局样式 */
-@import './var.scss';
+@use './var.scss' as *;
 
 // hover按钮
 .gi_hover_btn {

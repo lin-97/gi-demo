@@ -5,10 +5,10 @@
 <template>
   <a-breadcrumb>
     <transition-group name="breadcrumb">
-      <div v-for="(item, index) in breadcrumbList" :key="item.meta.title">
+      <div v-for="(item, index) in breadcrumbList" :key="item.path + index">
         <a-breadcrumb-item v-bind="attrs">
-          <template v-if="isLastItem(index) || !hasRedirect(item)">
-            <span class="gi-line-1">{{ item.meta.title }}</span>
+          <template v-if="isLastItem(index) && !hasRedirect(item)">
+            <span class="gi-line-1">{{ lastTitle || item.meta.title }}</span>
           </template>
           <template v-else>
             <span class="gi-line-1 breadcrumb-item-title" @click="handleLink(item)">
@@ -25,26 +25,29 @@
 <script setup lang="ts">
 import type { RouteLocationMatched, RouteLocationNormalized } from 'vue-router'
 import { useRouteListener } from '@/hooks'
+import { useTabsStore } from '@/stores'
 
 /** 组件名称 */
 defineOptions({ name: 'Breadcrumb' })
 
 /** 路由相关 */
+const route = useRoute()
 const router = useRouter()
 const attrs = useAttrs()
 
 const { listenerRouteChange } = useRouteListener()
+const tabsStore = useTabsStore()
 
 /** 首页路由缓存 */
-let home: RouteLocationMatched | null = null
+let homeRoute: RouteLocationMatched | null = null
 
 /** 获取首页路由信息 */
 const getHomeRoute = () => {
-  if (home) return
+  if (homeRoute) return
   const allRoutes = router.getRoutes()
-  const route = allRoutes.find((i) => i.path === '/home')
-  if (route) {
-    home = route
+  const obj = allRoutes.find((i) => i.path === '/home')
+  if (obj) {
+    homeRoute = obj
   }
 }
 
@@ -55,8 +58,8 @@ const breadcrumbList = ref<RouteLocationMatched[]>([])
 const getBreadcrumbList = (to: RouteLocationNormalized) => {
   getHomeRoute()
   const arr = to.matched.filter((i) => i.meta.title && i.meta.breadcrumb !== false)
-  if (home) {
-    breadcrumbList.value = [home, ...arr]
+  if (homeRoute) {
+    breadcrumbList.value = [homeRoute, ...arr]
   }
 }
 
@@ -82,6 +85,10 @@ listenerRouteChange(({ to }) => {
   if (to.path.startsWith('/redirect/')) return
   getBreadcrumbList(to)
 }, true)
+
+const lastTitle = computed(() => {
+  return tabsStore.tabList.find((i) => i.path === route.path)?.meta?.title || ''
+})
 </script>
 
 <style lang="scss" scoped>

@@ -14,8 +14,8 @@
             :disabled="isDisabled(item)">
             <!-- 表单项标签 -->
             <template #label>
-              <template v-if="typeof item.label === 'string'">{{ item.label }}</template>
-              <component :is="item.label" v-else></component>
+              <component :is="item.labelRender" v-if="item.labelRender"></component>
+              <template v-else>{{ item.label }}</template>
             </template>
 
             <!-- 表单项内容 -->
@@ -191,7 +191,7 @@ const getPlaceholder = (item: ColumnItem) => {
   if (['textarea'].includes(item.type)) {
     return `请填写${item.label}`
   }
-  if (['select', 'tree-select', 'cascader'].includes(item.type)) {
+  if (['select', 'input-search', 'tree-select', 'cascader'].includes(item.type)) {
     return `请选择${item.label}`
   }
   if (['date-picker'].includes(item.type)) {

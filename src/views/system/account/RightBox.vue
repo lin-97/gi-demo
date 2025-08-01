@@ -19,15 +19,9 @@
     </section>
 
     <a-tabs hide-content default-active-key="2">
-      <a-tab-pane key="1">
-        <template #title>文章</template>
-      </a-tab-pane>
-      <a-tab-pane key="2">
-        <template #title>项目</template>
-      </a-tab-pane>
-      <a-tab-pane key="3">
-        <template #title>应用（3）</template>
-      </a-tab-pane>
+      <a-tab-pane key="1" title="文章"></a-tab-pane>
+      <a-tab-pane key="2" title="项目"></a-tab-pane>
+      <a-tab-pane key="3" title="应用（3）"></a-tab-pane>
     </a-tabs>
 
     <section class="right-box__comment">

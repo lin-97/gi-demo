@@ -27,12 +27,12 @@ export const baseAPI = getBaseApi<ListItem>({ baseUrl: '/system/dict' })
 
 /** 字典数据列表 */
 export function getDictDataList(params: { code: string } & Pagination) {
-  return http.get<PageRes<T.DictDataItem[]>>('/system/dict/getDictDataList', params)
+  return http.get<PageRes<DictDataItem[]>>('/system/dict/getDictDataList', params)
 }
 
 /** 字典数据详情 */
 export function getDictDataDetail(params: { id: string, code: string }) {
-  return http.get<T.DictDataItem>('/system/dict/getDictDataDetail', params)
+  return http.get<DictDataItem>('/system/dict/getDictDataDetail', params)
 }
 
 /** 获取字典数据映射 */
