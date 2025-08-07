@@ -52,9 +52,9 @@
 </template>
 
 <script setup lang="ts">
+import { Message } from '@arco-design/web-vue'
 import * as ArcoIcons from '@arco-design/web-vue/es/icon'
 import { useClipboard } from '@vueuse/core'
-import { Message } from '@arco-design/web-vue'
 
 defineOptions({ name: 'GiIconSelector' })
 

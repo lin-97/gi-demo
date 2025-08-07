@@ -1,10 +1,10 @@
-import axios from 'axios'
 import type { AxiosInstance, AxiosRequestConfig, AxiosResponse } from 'axios'
 import { Message, Notification } from '@arco-design/web-vue'
+import axios from 'axios'
 import NProgress from 'nprogress'
+import router from '@/router'
 import { getToken } from '@/utils/auth'
 import 'nprogress/nprogress.css'
-import router from '@/router'
 
 // 配置 NProgress
 NProgress.configure({ showSpinner: false })

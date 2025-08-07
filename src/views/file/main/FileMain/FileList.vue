@@ -47,9 +47,9 @@
 
 <script setup lang="ts">
 import type { TableInstance, TableRowSelection } from '@arco-design/web-vue'
+import type { FileItem } from '@/apis/file'
 import FileImage from './FileImage.vue'
 import FileRightMenu from './FileRightMenu.vue'
-import type { FileItem } from '@/apis/file'
 
 interface Props {
   data?: FileItem[]

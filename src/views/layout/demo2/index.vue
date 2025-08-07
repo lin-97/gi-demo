@@ -19,8 +19,8 @@
 </template>
 
 <script lang="ts" setup>
-import Tree from '../components/Tree.vue'
 import Table from '../components/Table.vue'
+import Tree from '../components/Tree.vue'
 
 defineOptions({ name: 'LayoutDemo2' })
 const TableRef = useTemplateRef('TableRef')

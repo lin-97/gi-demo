@@ -21,7 +21,7 @@ const props = withDefaults(defineProps<Props>(), {
 })
 
 interface Props {
-  gender: 1 | 2 | 3
+  gender?: 1 | 2 | 3
 }
 </script>
 

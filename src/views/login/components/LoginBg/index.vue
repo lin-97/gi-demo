@@ -15,8 +15,8 @@
 </template>
 
 <script setup lang="ts">
-import CornerTop from './CornerTop.vue'
 import CornerBottom from './CornerBottom.vue'
+import CornerTop from './CornerTop.vue'
 </script>
 
 <style lang="scss" scoped>

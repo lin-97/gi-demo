@@ -34,11 +34,11 @@
 </template>
 
 <script lang='tsx' setup>
-import { Message } from '@arco-design/web-vue'
-import FilterAddress from './FilterAddress.vue'
 import type { ColumnItem, Disabled } from '@/components/GiEditTable'
-import * as Regexp from '@/utils/regexp'
+import { Message } from '@arco-design/web-vue'
 import { useDict } from '@/hooks/app'
+import * as Regexp from '@/utils/regexp'
+import FilterAddress from './FilterAddress.vue'
 
 defineOptions({ name: 'FormTable' })
 

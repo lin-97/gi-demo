@@ -1,6 +1,6 @@
 import { defineMock } from '../_base'
-import { getDelayTime, resultSuccess } from '../_utils'
 import treeData from '../_data/tree'
+import { getDelayTime, resultSuccess } from '../_utils'
 
 export default defineMock([
   {

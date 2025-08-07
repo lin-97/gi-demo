@@ -29,14 +29,15 @@
 </template>
 
 <script setup lang="ts">
+import type { ColumnItem } from '@/components/GiForm'
 import { Drawer, Message, Modal } from '@arco-design/web-vue'
 import { useWindowSize } from '@vueuse/core'
-import { cityOptions, deptData } from './data'
-import Card4Json from './code/card4-json'
-import * as Regexp from '@/utils/regexp'
-import { type ColumnItem, GiForm } from '@/components/GiForm'
-import { useResetReactive } from '@/hooks'
 import GiCodeView from '@/components/GiCodeView/index.vue'
+import { GiForm } from '@/components/GiForm'
+import { useResetReactive } from '@/hooks'
+import * as Regexp from '@/utils/regexp'
+import Card4Json from './code/card4-json'
+import { cityOptions, deptData } from './data'
 
 const { width } = useWindowSize()
 

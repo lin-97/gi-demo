@@ -36,16 +36,16 @@
 <script setup lang="ts">
 import type { RouteRecordRaw } from 'vue-router'
 import { searchTree } from 'xe-utils'
-import Main from './components/Main.vue'
-import Tabs from './components/Tabs/index.vue'
-import Menu from './components/Menu/index.vue'
+import { useDevice, useRouteListener } from '@/hooks'
+import { useAppStore, useRouteStore } from '@/stores'
+import { filterTree } from '@/utils'
+import { isExternal } from '@/utils/validate'
 import HeaderRightBar from './components/HeaderRightBar/index.vue'
 import Logo from './components/Logo.vue'
+import Main from './components/Main.vue'
+import Menu from './components/Menu/index.vue'
 import MenuFoldBtn from './components/MenuFoldBtn.vue'
-import { useAppStore, useRouteStore } from '@/stores'
-import { isExternal } from '@/utils/validate'
-import { filterTree } from '@/utils'
-import { useDevice, useRouteListener } from '@/hooks'
+import Tabs from './components/Tabs/index.vue'
 
 /** 组件名称 */
 defineOptions({ name: 'LayoutMix' })

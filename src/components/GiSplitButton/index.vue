@@ -18,7 +18,7 @@ type ButtonType = 'default' | 'circle'
 /** 组件属性定义 */
 interface Props {
   /** 是否折叠状态 */
-  collapsed: boolean
+  collapsed?: boolean
   /** 按钮类型 */
   type?: ButtonType
   /** 图标大小 */

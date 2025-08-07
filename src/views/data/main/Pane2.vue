@@ -20,10 +20,10 @@
 <script lang="tsx" setup>
 import type { TableColumnData, TableInstance } from '@arco-design/web-vue'
 import { Modal } from '@arco-design/web-vue'
-import Pane2Json from './code/pane2-json'
-import { useTable } from '@/hooks'
 import { baseAPI } from '@/apis/person'
 import GiCellStatus from '@/components/GiCell/GiCellStatus.vue'
+import { useTable } from '@/hooks'
+import Pane2Json from './code/pane2-json'
 
 const columns: TableColumnData[] = [
   {

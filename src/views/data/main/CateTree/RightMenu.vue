@@ -40,7 +40,7 @@ import type { TreeInstance } from '@arco-design/web-vue'
 import type { CateTreeItem } from '@/apis/cate'
 
 interface Props {
-  treeData: CateTreeItem[]
+  treeData?: CateTreeItem[]
 }
 
 const props = withDefaults(defineProps<Props>(), {

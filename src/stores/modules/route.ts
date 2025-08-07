@@ -3,16 +3,17 @@
  * @description 处理动态路由的加载、格式化和状态管理
  */
 
-import { ref } from 'vue'
-import { defineStore } from 'pinia'
 import type { RouteRecordRaw } from 'vue-router'
-import { mapTree } from 'xe-utils'
-import { cloneDeep } from 'lodash-es'
-import { constantRoutes } from '@/router'
-import { transformPathToName } from '@/utils'
 import type { ListItem } from '@/apis/system/menu'
+import { cloneDeep } from 'lodash-es'
+import { defineStore } from 'pinia'
+import { ref } from 'vue'
+import { mapTree } from 'xe-utils'
 import { getUserRoutes } from '@/apis/user'
 import ParentView from '@/components/ParentView/index.vue'
+import { constantRoutes } from '@/router'
+import { transformPathToName } from '@/utils'
+import Message from '@/views/demo/examples/fn-component/Message/Message.vue'
 
 /**
  * 布局组件
@@ -162,6 +163,7 @@ const storeSetup = () => {
       setRoutes(asyncRoutes)
       return cloneDeep(asyncRoutes)
     } catch (error) {
+      Message.error(`路由生成失败-${error}`)
       return []
     }
   }

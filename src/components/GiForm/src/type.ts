@@ -4,77 +4,77 @@
  */
 
 import type * as A from '@arco-design/web-vue'
-import type { VNode } from 'vue'
 import type { FormItemProps, GridItemProps } from '@arco-design/web-vue'
+import type { VNode } from 'vue'
 
 /** 支持的表单项类型 */
-export type ColumnItemType =
-  | 'input' // 输入框
-  | 'input-number' // 数字输入框
-  | 'input-tag' // 标签输入框
-  | 'input-search' // 搜索框
-  | 'textarea' // 文本域
-  | 'select' // 选择器
-  | 'tree-select' // 树选择器
-  | 'radio-group' // 单选框组
-  | 'checkbox-group' // 复选框组
-  | 'date-picker' // 日期选择器
-  | 'year-picker' // 年份选择器
-  | 'quarter-picker' // 季度选择器
-  | 'month-picker' // 月份选择器
-  | 'week-picker' // 周选择器
-  | 'time-picker' // 时间选择器
-  | 'range-picker' // 范围选择器
-  | 'color-picker' // 颜色选择器
-  | 'rate' // 评分
-  | 'switch' // 开关
-  | 'slider' // 滑块
-  | 'cascader' // 级联选择器
-  | 'upload' // 上传
-  | 'auto-complete' // 自动完成
-  | 'mention' // 提及
-  | 'group-title' // 分组标题
+export type ColumnItemType
+  = | 'input' // 输入框
+    | 'input-number' // 数字输入框
+    | 'input-tag' // 标签输入框
+    | 'input-search' // 搜索框
+    | 'textarea' // 文本域
+    | 'select' // 选择器
+    | 'tree-select' // 树选择器
+    | 'radio-group' // 单选框组
+    | 'checkbox-group' // 复选框组
+    | 'date-picker' // 日期选择器
+    | 'year-picker' // 年份选择器
+    | 'quarter-picker' // 季度选择器
+    | 'month-picker' // 月份选择器
+    | 'week-picker' // 周选择器
+    | 'time-picker' // 时间选择器
+    | 'range-picker' // 范围选择器
+    | 'color-picker' // 颜色选择器
+    | 'rate' // 评分
+    | 'switch' // 开关
+    | 'slider' // 滑块
+    | 'cascader' // 级联选择器
+    | 'upload' // 上传
+    | 'auto-complete' // 自动完成
+    | 'mention' // 提及
+    | 'group-title' // 分组标题
 
 /** 组件属性合并类型 */
-export type ComponentProps =
-  & A.InputInstance['$props']
-  & A.InputNumberInstance['$props']
-  & A.InputTagInstance['$props']
-  & A.InputSearchInstance['$props']
-  & A.TextareaInstance['$props']
-  & A.SelectInstance['$props']
-  & A.TreeSelectInstance['$props']
-  & A.RadioGroupInstance['$props']
-  & A.CheckboxGroupInstance['$props']
-  & A.DatePickerInstance['$props']
-  & A.YearPickerInstance['$props']
-  & A.QuarterPickerInstance['$props']
-  & A.MonthPickerInstance['$props']
-  & A.WeekPickerInstance['$props']
-  & A.TimePickerInstance['$props']
-  & A.RangePickerInstance['$props']
-  & A.ColorPickerInstance['$props']
-  & A.RateInstance['$props']
-  & A.SwitchInstance['$props']
-  & A.SliderInstance['$props']
-  & A.CascaderInstance['$props']
-  & A.UploadInstance['$props']
-  & A.AutoCompleteInstance['$props']
-  & A.MentionInstance['$props']
-  & A.AlertInstance['$props']
+export type ComponentProps
+  = & A.InputInstance['$props']
+    & A.InputNumberInstance['$props']
+    & A.InputTagInstance['$props']
+    & A.InputSearchInstance['$props']
+    & A.TextareaInstance['$props']
+    & A.SelectInstance['$props']
+    & A.TreeSelectInstance['$props']
+    & A.RadioGroupInstance['$props']
+    & A.CheckboxGroupInstance['$props']
+    & A.DatePickerInstance['$props']
+    & A.YearPickerInstance['$props']
+    & A.QuarterPickerInstance['$props']
+    & A.MonthPickerInstance['$props']
+    & A.WeekPickerInstance['$props']
+    & A.TimePickerInstance['$props']
+    & A.RangePickerInstance['$props']
+    & A.ColorPickerInstance['$props']
+    & A.RateInstance['$props']
+    & A.SwitchInstance['$props']
+    & A.SliderInstance['$props']
+    & A.CascaderInstance['$props']
+    & A.UploadInstance['$props']
+    & A.AutoCompleteInstance['$props']
+    & A.MentionInstance['$props']
+    & A.AlertInstance['$props']
 
 /** 选项类型定义 */
-export type ColumnItemOptions =
-  | A.SelectInstance['$props']['options']
-  | A.RadioGroupInstance['$props']['options']
-  | A.CheckboxGroupInstance['$props']['options']
-  | A.CascaderInstance['$props']['options']
+export type ColumnItemOptions
+  = | A.SelectInstance['$props']['options']
+    | A.RadioGroupInstance['$props']['options']
+    | A.CheckboxGroupInstance['$props']['options']
+    | A.CascaderInstance['$props']['options']
 
 /** 数据源类型定义 */
-export type ColumnItemData =
-  | A.TreeSelectInstance['$props']['data']
-  | A.AutoCompleteInstance['$props']['data']
-  | A.MentionInstance['$props']['data']
+export type ColumnItemData
+  = | A.TreeSelectInstance['$props']['data']
+    | A.AutoCompleteInstance['$props']['data']
+    | A.MentionInstance['$props']['data']
 
 /** 自动完成组件插槽 */
 type AutoCompleteSlots = {
@@ -189,20 +189,20 @@ type MentionSlots = {
 }
 
 /** 组件插槽合并类型 */
-export type ComponentSlots =
-  & AutoCompleteSlots
-  & CascaderSlots
-  & CheckboxGroupSlots
-  & RadioGroupSlots
-  & DatePickerSlots
-  & InputSlots
-  & InputNumberSlots
-  & InputTagSlots
-  & RateSlots
-  & SelectSlots
-  & SwitchSlots
-  & TreeSelectSlots
-  & MentionSlots
+export type ComponentSlots
+  = & AutoCompleteSlots
+    & CascaderSlots
+    & CheckboxGroupSlots
+    & RadioGroupSlots
+    & DatePickerSlots
+    & InputSlots
+    & InputNumberSlots
+    & InputTagSlots
+    & RateSlots
+    & SelectSlots
+    & SwitchSlots
+    & TreeSelectSlots
+    & MentionSlots
 
 /** 表单项插槽接口 */
 export interface ColumnItemSlots extends Omit<ComponentSlots, 'label' | 'option'> {

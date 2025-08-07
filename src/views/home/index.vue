@@ -28,11 +28,11 @@
 </template>
 
 <script setup lang="ts">
-import WorkCard from './components/WorkCard.vue'
-import ProjectCard from './components/ProjectCard.vue'
-import MessageCard from './components/MessageCard.vue'
 import FastCard from './components/FastCard.vue'
 import ImageCard from './components/ImageCard.vue'
+import MessageCard from './components/MessageCard.vue'
+import ProjectCard from './components/ProjectCard.vue'
+import WorkCard from './components/WorkCard.vue'
 
 defineOptions({ name: 'Home' })
 </script>

@@ -15,9 +15,9 @@
 
 <script setup lang="ts">
 import type { Component } from 'vue'
+import { useRouteListener } from '@/hooks'
 import Pane1 from './Pane1.vue'
 import Pane2 from './Pane2.vue'
-import { useRouteListener } from '@/hooks'
 
 defineOptions({ name: 'DataIndex' })
 const route = useRoute()

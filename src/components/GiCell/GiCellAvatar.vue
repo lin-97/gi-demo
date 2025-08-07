@@ -22,8 +22,8 @@ const emit = defineEmits<{
 }>()
 
 interface Props {
-  avatar: string
-  name: string
+  avatar?: string
+  name?: string
   isLink?: boolean
 }
 </script>

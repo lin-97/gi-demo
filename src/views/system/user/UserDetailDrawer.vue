@@ -27,8 +27,8 @@
 </template>
 
 <script lang="ts" setup>
-import { baseAPI } from '@/apis/system/user'
 import type * as T from '@/apis/system/user'
+import { baseAPI } from '@/apis/system/user'
 
 const visible = ref(false)
 const userId = ref('')

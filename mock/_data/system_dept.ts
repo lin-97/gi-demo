@@ -1,5 +1,5 @@
-import { Random } from 'mockjs'
 import type { MockSystemDeptItem } from './_type'
+import { Random } from 'mockjs'
 
 const data: MockSystemDeptItem[] = [
   {

@@ -31,14 +31,15 @@
 </template>
 
 <script setup lang="tsx">
+import type { ColumnItem } from '@/components/GiForm'
 import { Drawer, Message } from '@arco-design/web-vue'
 import { useWindowSize } from '@vueuse/core'
-import { cityOptions, deptData } from './data'
-import Card2Json from './code/card2-json'
 import GiCodeView from '@/components/GiCodeView/index.vue'
-import { type ColumnItem, GiForm } from '@/components/GiForm'
-import * as Regexp from '@/utils/regexp'
+import { GiForm } from '@/components/GiForm'
 import { useDict } from '@/hooks/app'
+import * as Regexp from '@/utils/regexp'
+import Card2Json from './code/card2-json'
+import { cityOptions, deptData } from './data'
 
 const { width } = useWindowSize()
 const { data: status_options } = useDict({ code: 'status' })

@@ -62,7 +62,7 @@ type LayoutMode = 'left' | 'top' | 'mix'
 /** Props 类型定义 */
 interface Props {
   /** 布局模式 */
-  mode: LayoutMode
+  mode?: LayoutMode
   /** 布局名称 */
   name: string
 }

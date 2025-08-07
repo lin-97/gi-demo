@@ -51,14 +51,15 @@
 </template>
 
 <script setup lang="ts">
-import { Drawer, Link, Message, type PopconfirmInstance, type TableInstance } from '@arco-design/web-vue'
-import CodeJson from './code-json'
-import { useTable } from '@/hooks'
-import { useDict } from '@/hooks/app'
-import { baseAPI } from '@/apis/person'
+import type { PopconfirmInstance, TableInstance } from '@arco-design/web-vue'
 import type * as T from '@/apis/person'
 import type { ColumnItem } from '@/components/GiForm'
+import { Drawer, Link, Message } from '@arco-design/web-vue'
+import { baseAPI } from '@/apis/person'
 import GiCodeView from '@/components/GiCodeView/index.vue'
+import { useTable } from '@/hooks'
+import { useDict } from '@/hooks/app'
+import CodeJson from './code-json'
 
 defineOptions({ name: 'TableCustom2' })
 const { data: statusOptions } = useDict({ code: 'status' })

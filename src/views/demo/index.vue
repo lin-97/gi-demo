@@ -16,20 +16,20 @@
 
 <script lang="ts" setup>
 import ApiTest from './examples/api-test/index.vue'
+// 其他示例
+import Area from './examples/area-demo/index.vue'
 import Button from './examples/button/index.vue'
-import GiTagDemo from './examples/gi-tag-demo/index.vue'
-import GiSpaceDemo from './examples/gi-space-demo/index.vue'
+import Editor from './examples/editor/index.vue'
+import FnComponent from './examples/fn-component/index.vue'
 import GiDotDemo from './examples/gi-dot-demo/index.vue'
 import GiIconBoxDemo from './examples/gi-icon-box-demo/index.vue'
 import GiIconSelectorDemo from './examples/gi-icon-selector-demo/index.vue'
-// 其他示例
-import Area from './examples/area-demo/index.vue'
-import Editor from './examples/editor/index.vue'
-import RowTreeTable from './examples/row-tree-table/index.vue'
-import Map from './examples/map/index.vue'
+import GiSpaceDemo from './examples/gi-space-demo/index.vue'
+import GiTagDemo from './examples/gi-tag-demo/index.vue'
 import JSModal from './examples/js-modal/index.vue'
-import FnComponent from './examples/fn-component/index.vue'
+import Map from './examples/map/index.vue'
 import Mitt from './examples/mitt/index.vue'
+import RowTreeTable from './examples/row-tree-table/index.vue'
 
 defineOptions({ name: 'DemoIndex' })
 

@@ -1,7 +1,7 @@
-import { h, ref } from 'vue'
-import { Message, Modal } from '@arco-design/web-vue'
-import ModalContent from './ModalContent.vue'
 import type { FileItem } from '@/apis/file'
+import { Message, Modal } from '@arco-design/web-vue'
+import { h, ref } from 'vue'
+import ModalContent from './ModalContent.vue'
 
 /** 文件重命名-弹窗 */
 export function openFileRenameModal(fileItem: FileItem, callback?: () => void) {

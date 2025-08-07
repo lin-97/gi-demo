@@ -1,6 +1,7 @@
+import type { MockTokenItem } from '../_utils'
 import { defineMock } from '../_base'
-import { type MockTokenItem, USER_TOKENS, getDelayTime, isAdmin, resultError, resultSuccess } from '../_utils'
 import userData from '../_data/system_user'
+import { getDelayTime, isAdmin, resultError, resultSuccess, USER_TOKENS } from '../_utils'
 
 export default defineMock([
   {

@@ -1,7 +1,7 @@
 import { findTree } from 'xe-utils'
 import { defineMock } from '../_base'
-import { getDelayTime, resultSuccess } from '../_utils'
 import areaData from '../_data/area'
+import { getDelayTime, resultSuccess } from '../_utils'
 
 export default defineMock([
   {

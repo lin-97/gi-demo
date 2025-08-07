@@ -1,6 +1,6 @@
 import { defineMock } from '../_base'
-import { getBaseApi, resultError, resultSuccess } from '../_utils'
 import userData from '../_data/system_user'
+import { getBaseApi, resultError, resultSuccess } from '../_utils'
 
 export default defineMock([
   ...getBaseApi({

@@ -113,11 +113,11 @@
 </template>
 
 <script setup lang="ts" generic="T extends TableData">
-import { computed, ref, watch } from 'vue'
 import type { DropdownInstance, TableColumnData, TableData, TableInstance } from '@arco-design/web-vue'
-import { VueDraggable } from 'vue-draggable-plus'
-import { omit } from 'lodash-es'
 import type { TableProps } from './type'
+import { omit } from 'lodash-es'
+import { computed, ref, watch } from 'vue'
+import { VueDraggable } from 'vue-draggable-plus'
 import IconBorders from '@/components/icons/IconBorders.vue'
 import IconTableSize from '@/components/icons/IconTableSize.vue'
 
@@ -163,7 +163,7 @@ interface Props extends TableProps {
   /** 禁止控制显示隐藏的列 */
   disabledColumnKeys?: string[]
   /** 表格数据 */
-  data: T[]
+  data?: T[]
 }
 
 const slots = useSlots()

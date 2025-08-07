@@ -75,9 +75,9 @@
 </template>
 
 <script setup lang="ts">
-import { cloneDeep, omit } from 'lodash-es'
 import type { FormInstance, GridItemProps, GridProps } from '@arco-design/web-vue'
 import type { ColumnItem } from './type'
+import { cloneDeep, omit } from 'lodash-es'
 
 /** Props 类型定义 */
 interface Props {

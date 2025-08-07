@@ -1,5 +1,6 @@
+import type { FormInstance } from '@arco-design/web-vue'
+import { Form, Modal } from '@arco-design/web-vue'
 import { reactive } from 'vue'
-import { Form, type FormInstance, Modal } from '@arco-design/web-vue'
 import * as Regexp from '@/utils/regexp'
 
 // 打开添加用户的弹窗
@@ -50,7 +51,7 @@ export const openAddUserModal = () => {
       try {
         await saveUserApi()
         return true
-      } catch (error) {
+      } catch {
         return false
       }
     }

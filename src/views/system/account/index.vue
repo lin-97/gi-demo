@@ -71,8 +71,8 @@
 </template>
 
 <script lang="ts" setup>
-import RightBox from './RightBox.vue'
 import { useUserStore } from '@/stores'
+import RightBox from './RightBox.vue'
 
 defineOptions({ name: 'SystemAccount' })
 const userStore = useUserStore()

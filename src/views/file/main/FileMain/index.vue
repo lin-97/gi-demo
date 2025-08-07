@@ -98,21 +98,22 @@
 </template>
 
 <script setup lang="ts">
-import { Message, Modal } from '@arco-design/web-vue'
+import type { FileItem } from '@/apis/file'
 
+import { Message, Modal } from '@arco-design/web-vue'
 import { api as viewerApi } from 'v-viewer'
-import 'viewerjs/dist/viewer.css'
+import { getFileList } from '@/apis/file'
+import { FILE_TYPE_LIST, IMAGE_TYPES } from '@/constant/file'
 import {
   openFileMoveModal,
   openFileRenameModal,
   previewFileAudioModal,
   previewFileVideoModal
 } from '../../components/index'
-import useFileManage from './useFileManage'
-import FilePath from './FilePath.vue'
 import FileGrid from './FileGrid.vue'
-import { FILE_TYPE_LIST, IMAGE_TYPES } from '@/constant/file'
-import { type FileItem, getFileList } from '@/apis/file'
+import FilePath from './FilePath.vue'
+import useFileManage from './useFileManage'
+import 'viewerjs/dist/viewer.css'
 
 const FileList = defineAsyncComponent(() => import('./FileList.vue'))
 

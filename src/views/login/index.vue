@@ -47,12 +47,13 @@
 </template>
 
 <script setup lang="ts">
-import { type FormInstance, Message } from '@arco-design/web-vue'
-import LoginBg from './components/LoginBg/index.vue'
-import { useTabsStore, useUserStore } from '@/stores'
+import type { FormInstance } from '@arco-design/web-vue'
+import { Message } from '@arco-design/web-vue'
 import { useLoading } from '@/hooks'
-import * as Regexp from '@/utils/regexp'
+import { useTabsStore, useUserStore } from '@/stores'
 import { isMobile } from '@/utils'
+import * as Regexp from '@/utils/regexp'
+import LoginBg from './components/LoginBg/index.vue'
 
 defineOptions({ name: 'Login' })
 const router = useRouter()

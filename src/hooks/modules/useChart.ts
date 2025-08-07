@@ -1,5 +1,5 @@
-import { computed } from 'vue'
 import type { EChartsOption } from 'echarts'
+import { computed } from 'vue'
 import { useAppStore } from '@/stores'
 
 // 获取代码提示

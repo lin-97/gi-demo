@@ -1,6 +1,6 @@
+import type { Props } from './type'
 import { h, render } from 'vue'
 import Message from './Message.vue'
-import type { Props } from './type'
 
 const fn = (options: Props) => {
   // 从 body 上移除组件

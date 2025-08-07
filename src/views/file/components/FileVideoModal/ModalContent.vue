@@ -3,8 +3,8 @@
 </template>
 
 <script lang="ts" setup>
-import Player from 'xgplayer'
 import type { FileItem } from '@/apis/file'
+import Player from 'xgplayer'
 
 interface Props {
   data: FileItem

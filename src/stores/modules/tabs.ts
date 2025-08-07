@@ -3,9 +3,10 @@
  * @description 处理标签页（Tabs）的状态管理，包括页签的增删改查和缓存控制
  */
 
+import type { RouteLocationNormalized, RouteRecordName } from 'vue-router'
 import { defineStore } from 'pinia'
 import { nextTick, ref } from 'vue'
-import { type RouteLocationNormalized, type RouteLocationRaw, type RouteRecordName, useRouter } from 'vue-router'
+import { useRouter } from 'vue-router'
 import { eachTree } from 'xe-utils'
 import { useRouteStore } from '@/stores'
 

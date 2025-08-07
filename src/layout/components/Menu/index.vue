@@ -12,12 +12,12 @@
 </template>
 
 <script setup lang="ts">
-import type { RouteRecordRaw } from 'vue-router'
 import type { CSSProperties } from 'vue'
-import MenuItem from './MenuItem.vue'
+import type { RouteRecordRaw } from 'vue-router'
+import { useDevice } from '@/hooks'
 import { useAppStore, useRouteStore } from '@/stores'
 import { isExternal } from '@/utils/validate'
-import { useDevice } from '@/hooks'
+import MenuItem from './MenuItem.vue'
 
 /** 组件名称 */
 defineOptions({ name: 'AppMenu' })

@@ -23,11 +23,11 @@
 </template>
 
 <script setup lang="ts">
+import type { StepForm } from './type'
+import { isMobile } from '@/utils'
 import Step1 from './Step1.vue'
 import Step2 from './Step2.vue'
 import Step3 from './Step3.vue'
-import type { StepForm } from './type'
-import { isMobile } from '@/utils'
 
 defineOptions({ name: 'FormStep' })
 

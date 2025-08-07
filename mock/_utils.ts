@@ -1,6 +1,6 @@
+import type { MockMethod } from 'vite-plugin-mock'
 import Mock from 'mockjs'
 import { mapTree, random } from 'xe-utils'
-import type { MockMethod } from 'vite-plugin-mock'
 
 /** 返回成功数据 */
 export const resultSuccess = (data: unknown) => {

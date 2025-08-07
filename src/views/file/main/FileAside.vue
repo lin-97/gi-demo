@@ -44,7 +44,8 @@
 </template>
 
 <script setup lang="ts">
-import { FILE_TYPE_LIST, type FileTypeListItem } from '@/constant/file'
+import type { FileTypeListItem } from '@/constant/file'
+import { FILE_TYPE_LIST } from '@/constant/file'
 import { useRouteListener } from '@/hooks'
 
 const router = useRouter()

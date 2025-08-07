@@ -150,7 +150,7 @@ export function isPromise(value: unknown): value is Promise<any> {
  * isFunction(class {}) // true
  * isFunction({}) // false
  */
-export function isFunction(value: unknown): value is Function {
+export function isFunction(value: unknown): value is (...args: any[]) => any {
   return typeof value === 'function'
 }
 

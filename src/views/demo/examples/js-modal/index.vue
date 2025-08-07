@@ -9,8 +9,8 @@
 
 <script lang="tsx" setup>
 import { Modal } from '@arco-design/web-vue'
-import { openAddUserModal } from './tool'
 import AddUserForm from './components/AddUserForm.vue'
+import { openAddUserModal } from './tool'
 
 // 方式1
 const open1 = () => {
