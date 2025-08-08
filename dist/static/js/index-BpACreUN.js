@@ -1,1 +1,0 @@
-import{d as a,p as s,s as e,g as r,o as t}from"./index-CaTNYhxh.js";const p=a({__name:"index",setup(a){const p=s(),n=e(),{params:o,query:d}=p,{path:u}=o;return n.replace({path:`/${u}`,query:d}),(a,s)=>(t(),r("div"))}});export{p as default};

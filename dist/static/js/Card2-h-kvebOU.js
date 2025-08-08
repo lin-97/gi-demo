@@ -1,1 +1,0 @@
-import{_ as t}from"./Card2.vue_vue_type_script_setup_true_lang-XpUUkLnp.js";import"./index-CWsJrtG_.js";import"./index-CaTNYhxh.js";import"./data-DMJbYYJT.js";import"./index-DYjg1Rxd.js";import"./GiForm-UGVAUyi2.js";import"./omit-BGEBym14.js";import"./regexp-CZKnpGWl.js";import"./dept-BtlGnOEc.js";import"./role-BwDBVdZ2.js";import"./useDict-DE_97KF8.js";export{t as default};
