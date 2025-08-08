@@ -12,7 +12,8 @@ type Options = {
  * @description 提供分页状态管理的响应式 Hook，支持响应式断点，自动适配移动端显示
  * @param callback - 分页变化时的回调函数
  * @param options - 分页配置选项，默认每页显示 10 条
- * @returns {{
+ * @returns  包含分页状态和操作方法的响应式对象
+ * {{
  *   current: Ref<number>, // 当前页码
  *   pageSize: Ref<number>, // 每页显示数量
  *   total: Ref<number>, // 总数据量

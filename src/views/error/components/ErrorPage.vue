@@ -22,7 +22,7 @@ import Icon404 from '@/components/icons/Icon404.vue'
 import Icon500 from '@/components/icons/Icon500.vue'
 
 interface Props {
-  code: number
+  code?: number
 }
 defineOptions({ name: 'ErrorPage' })
 

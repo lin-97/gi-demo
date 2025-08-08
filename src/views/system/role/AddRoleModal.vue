@@ -22,7 +22,8 @@
 </template>
 
 <script setup lang="ts">
-import { type FormInstance, Message } from '@arco-design/web-vue'
+import type { FormInstance } from '@arco-design/web-vue'
+import { Message } from '@arco-design/web-vue'
 import { baseAPI } from '@/apis/system/role'
 import { useResetReactive } from '@/hooks'
 

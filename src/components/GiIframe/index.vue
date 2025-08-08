@@ -10,8 +10,8 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
 import { Message } from '@arco-design/web-vue'
+import { ref } from 'vue'
 
 /** 组件名称 */
 defineOptions({ name: 'GiIframe' })
@@ -29,7 +29,7 @@ const emit = defineEmits<Emits>()
 /** 组件属性定义 */
 interface Props {
   /** iframe 的源地址 */
-  src: string
+  src?: string
   /** 加载提示文本 */
   loadingTip?: string
   /**

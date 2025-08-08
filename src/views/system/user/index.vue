@@ -113,13 +113,13 @@
 </template>
 
 <script setup lang="ts">
+import type * as T from '@/apis/system/user'
 import { Message } from '@arco-design/web-vue'
-import AddUserModal from './AddUserModal.vue'
-import UserDetailDrawer from './UserDetailDrawer.vue'
+import { baseAPI } from '@/apis/system/user'
 import { useTable } from '@/hooks'
 import { useDept, useDict } from '@/hooks/app'
-import { baseAPI } from '@/apis/system/user'
-import type * as T from '@/apis/system/user'
+import AddUserModal from './AddUserModal.vue'
+import UserDetailDrawer from './UserDetailDrawer.vue'
 
 defineOptions({ name: 'SystemUser' })
 

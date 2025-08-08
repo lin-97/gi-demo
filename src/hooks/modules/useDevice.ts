@@ -1,5 +1,5 @@
-import { computed } from 'vue'
 import { useWindowSize } from '@vueuse/core'
+import { computed } from 'vue'
 
 /**
  * 响应式布局容器固定宽度

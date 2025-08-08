@@ -62,10 +62,10 @@
 
 <script setup lang="ts">
 import { ColorPicker } from 'vue-color-kit'
-import 'vue-color-kit/dist/vue-color-kit.css'
-import LayoutModeItem from './components/LayoutModeItem.vue'
-import { useAppStore } from '@/stores'
 import AppSetting from '@/config/setting.json'
+import { useAppStore } from '@/stores'
+import LayoutModeItem from './components/LayoutModeItem.vue'
+import 'vue-color-kit/dist/vue-color-kit.css'
 
 /** 组件名称 */
 defineOptions({ name: 'SettingDrawer' })
@@ -153,7 +153,7 @@ const open = () => {
 
 /** 更改主题色 */
 const changeColor = (colorObj: ColorObj) => {
-  if (!/^#[0-9A-Za-z]{6}/.test(colorObj.hex)) return
+  if (!/^#[0-9A-Z]{6}/i.test(colorObj.hex)) return
   appStore.setThemeColor(colorObj.hex)
 }
 

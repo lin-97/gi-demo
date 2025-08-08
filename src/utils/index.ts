@@ -1,5 +1,5 @@
-import { browse, mapTree } from 'xe-utils'
 import { camelCase, upperFirst } from 'lodash-es'
+import { browse, mapTree } from 'xe-utils'
 import { isExternal } from '@/utils/validate'
 
 export * from './modules/getFieldToRangTimeForm'

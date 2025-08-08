@@ -1,7 +1,7 @@
 /** @file 路由权限守卫模块 - 处理路由访问权限和动态路由加载 */
 
-import { Message } from '@arco-design/web-vue'
 import type { RouteLocationNormalized, Router } from 'vue-router'
+import { Message } from '@arco-design/web-vue'
 import { useRouteStore, useUserStore } from '@/stores'
 import { getToken } from '@/utils/auth'
 import { isHttp } from '@/utils/validate'
@@ -74,7 +74,7 @@ export const setupPermissionGuard = (router: Router): void => {
         try {
           const redirectRoute = await handleDynamicRoutes(router, to)
           next(redirectRoute)
-        } catch (error) {
+        } catch {
           // 如果出错，清空角色信息并重定向到登录页
           userStore.resetToken()
           // 重置路由生成标志

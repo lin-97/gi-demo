@@ -121,15 +121,15 @@
 </template>
 
 <script setup lang="ts">
-import { Drawer } from '@arco-design/web-vue'
-import AddMenuModal from './AddMenuModal.vue'
-import { baseAPI } from '@/apis/system/menu'
 import type * as T from '@/apis/system/menu'
-import { isExternal } from '@/utils/validate'
-import { transformPathToName } from '@/utils'
-import { useDict } from '@/hooks/app'
-import { useTable } from '@/hooks'
+import { Drawer } from '@arco-design/web-vue'
+import { baseAPI } from '@/apis/system/menu'
 import GiCodeView from '@/components/GiCodeView/index.vue'
+import { useTable } from '@/hooks'
+import { useDict } from '@/hooks/app'
+import { transformPathToName } from '@/utils'
+import { isExternal } from '@/utils/validate'
+import AddMenuModal from './AddMenuModal.vue'
 
 defineOptions({ name: 'SystemMenu' })
 

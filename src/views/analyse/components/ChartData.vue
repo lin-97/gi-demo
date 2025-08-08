@@ -12,8 +12,8 @@
 </template>
 
 <script lang="ts" setup>
-import VCharts from 'vue-echarts'
 import { graphic } from 'echarts'
+import VCharts from 'vue-echarts'
 import { useChart } from '@/hooks'
 // import { ToolTipFormatterParams } from '@/types/echarts';
 
@@ -106,8 +106,8 @@ const { option } = useChart(() => {
         return `<div>
             <p class="tooltip-title">${firstElement.axisValueLabel}</p>
             <div class="content-panel"><span>总内容量</span><span class="tooltip-value">${(
-            Number(firstElement.value) * 10000
-          ).toLocaleString()}</span></div>
+              Number(firstElement.value) * 10000
+            ).toLocaleString()}</span></div>
           </div>`
       },
       className: 'echarts-tooltip-diy'
@@ -165,27 +165,25 @@ const { option } = useChart(() => {
 })
 
 const getChartData = () => {
-  try {
-    const values = [100, 200, 150, 30, 100, 50, 10, 80]
-    const year = new Date().getFullYear()
-    const data = values.map((i, n) => {
-      const m = n + 1
-      const month = m >= 10 ? m : `0${m}`
-      return { y: i, x: `${year}-${month}` }
-    })
-    data.forEach((item: any, index: number) => {
-      xData.value.push(item.x)
-      yData.value.push(item.y)
-      if (index === 0) {
-        graphicElements.value[0].style.text = item.x
-      }
-      if (index === data.length - 1) {
-        graphicElements.value[1].style.text = item.x
-      }
-    })
-  } catch (err) {
-    // you can report use errorHandler or other
-  }
+  const values = [100, 200, 150, 30, 100, 50, 10, 80]
+  const year = new Date().getFullYear()
+  const data = values.map((i, n) => {
+    const m = n + 1
+    const month = m >= 10 ? m : `0${m}`
+    return { y: i, x: `${year}-${month}` }
+  })
+  data.forEach((item: any, index: number) => {
+    xData.value.push(item.x)
+    yData.value.push(item.y)
+    if (index === 0) {
+      graphicElements.value[0].style.text = item.x
+    }
+    if (index === data.length - 1) {
+      graphicElements.value[1].style.text = item.x
+    }
+  })
 }
 getChartData()
 </script>
+
+<style lang="scss" scoped></style>

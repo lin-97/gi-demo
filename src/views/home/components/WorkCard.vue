@@ -53,9 +53,9 @@
 </template>
 
 <script setup lang="ts">
-import NowTime from './NowTime/index.vue'
 import { useUserStore } from '@/stores'
 import { goodTimeText } from '@/utils'
+import NowTime from './NowTime/index.vue'
 
 const userStore = useUserStore()
 </script>

@@ -3,7 +3,8 @@
  * @description 支持多种样式类型、状态、颜色和大小的标签组件
  */
 
-import { type CSSProperties, type PropType, computed, defineComponent } from 'vue'
+import type { CSSProperties, PropType } from 'vue'
+import { computed, defineComponent } from 'vue'
 import './tag.scss'
 
 /** 标签类型 */

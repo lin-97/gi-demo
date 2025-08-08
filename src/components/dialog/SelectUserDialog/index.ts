@@ -1,7 +1,7 @@
-import { Message, Modal } from '@arco-design/web-vue'
 import type { SelectDialogOptions } from '../type'
-import Table from './Table.vue'
 import type * as T from '@/apis/person'
+import { Message, Modal } from '@arco-design/web-vue'
+import Table from './Table.vue'
 
 /** 全局-选择系统用户弹窗 */
 export function selectUserDialog(options: SelectDialogOptions<T.ListItem>) {

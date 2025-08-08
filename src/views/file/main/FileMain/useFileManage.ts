@@ -1,5 +1,5 @@
-import { computed, ref } from 'vue'
 import type { FileItem } from '@/apis/file'
+import { computed, ref } from 'vue'
 
 type Mode = 'grid' | 'list'
 

@@ -75,12 +75,12 @@
 </template>
 
 <script setup lang="ts">
-import { Message } from '@arco-design/web-vue'
-import AddDeptModal from './AddDeptModal.vue'
-import { useTable } from '@/hooks'
-import { baseAPI } from '@/apis/system/dept'
 import type * as T from '@/apis/system/dept'
+import { Message } from '@arco-design/web-vue'
+import { baseAPI } from '@/apis/system/dept'
+import { useTable } from '@/hooks'
 import { useDict } from '@/hooks/app'
+import AddDeptModal from './AddDeptModal.vue'
 
 defineOptions({ name: 'SystemDept' })
 

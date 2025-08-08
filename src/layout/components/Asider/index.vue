@@ -12,10 +12,10 @@
 </template>
 
 <script setup lang="ts">
-import Menu from '../Menu/index.vue'
-import Logo from '../Logo.vue'
-import { useAppStore } from '@/stores'
 import { useDevice } from '@/hooks'
+import { useAppStore } from '@/stores'
+import Logo from '../Logo.vue'
+import Menu from '../Menu/index.vue'
 
 defineOptions({ name: 'AppAsider' })
 const appStore = useAppStore()

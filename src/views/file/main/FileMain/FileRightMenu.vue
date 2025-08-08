@@ -43,9 +43,9 @@
 </template>
 
 <script setup lang="ts">
+import type { FileItem } from '@/apis/file'
 import GiOption from '@/components/GiOption/index.vue'
 import GiOptionItem from '@/components/GiOptionItem/index.vue'
-import type { FileItem } from '@/apis/file'
 
 interface Props {
   data?: FileItem

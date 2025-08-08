@@ -7,10 +7,10 @@
 </template>
 
 <script setup lang="ts">
+import { useAppStore } from '@/stores'
 import LayoutDefault from './LayoutDefault.vue'
 import LayoutMix from './LayoutMix.vue'
 import LayoutTop from './LayoutTop.vue'
-import { useAppStore } from '@/stores'
 
 /** 组件名称 */
 defineOptions({ name: 'Layout' })

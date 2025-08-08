@@ -44,7 +44,9 @@
           <!-- 边框显示按钮 -->
           <a-tooltip content="显示边框">
             <a-button size="mini" class="gi_hover_btn" @click="toggleBorder">
-              <template #icon><icon-borders /></template>
+              <template #icon>
+                <IconBorders />
+              </template>
             </a-button>
           </a-tooltip>
 
@@ -52,7 +54,9 @@
           <a-dropdown @select="handleSizeChange">
             <a-tooltip content="表格尺寸">
               <a-button size="mini" class="gi_hover_btn">
-                <template #icon><icon-table-size /></template>
+                <template #icon>
+                  <IconTableSize />
+                </template>
               </a-button>
             </a-tooltip>
             <template #content>
@@ -109,11 +113,13 @@
 </template>
 
 <script setup lang="ts" generic="T extends TableData">
-import { computed, ref, watch } from 'vue'
 import type { DropdownInstance, TableColumnData, TableData, TableInstance } from '@arco-design/web-vue'
-import { VueDraggable } from 'vue-draggable-plus'
-import { omit } from 'lodash-es'
 import type { TableProps } from './type'
+import { omit } from 'lodash-es'
+import { computed, ref, watch } from 'vue'
+import { VueDraggable } from 'vue-draggable-plus'
+import IconBorders from '@/components/icons/IconBorders.vue'
+import IconTableSize from '@/components/icons/IconTableSize.vue'
 
 defineOptions({ name: 'GiTable' })
 
@@ -157,7 +163,7 @@ interface Props extends TableProps {
   /** 禁止控制显示隐藏的列 */
   disabledColumnKeys?: string[]
   /** 表格数据 */
-  data: T[]
+  data?: T[]
 }
 
 const slots = useSlots()

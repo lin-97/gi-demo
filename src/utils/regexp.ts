@@ -55,7 +55,7 @@ export const Code_4 = /^\d{4}$/
  * Url.test('http://localhost:3000') // true
  * Url.test('invalid-url') // false
  */
-export const Url = /^(https?:\/\/)?([\da-z.-]+)\.([a-z.]{2,6})([/\w .-]*)*\/?$/
+export const Url = /^(https?:\/\/)?([a-z\d]([a-z\d-]*[a-z\d])?\.)*[a-z\d]([a-z\d-]*[a-z\d])?\.[a-z]{2,6}(\/[\w .-]*)?$/i
 
 /**
  * 十六进制颜色值正则
@@ -65,7 +65,7 @@ export const Url = /^(https?:\/\/)?([\da-z.-]+)\.([a-z.]{2,6})([/\w .-]*)*\/?$/
  * ColorRegex.test('#8c8c8c') // true
  * ColorRegex.test('invalid') // false
  */
-export const ColorRegex = /^#?([a-fA-F0-9]{6}|[a-fA-F0-9]{3})$/
+export const ColorRegex = /^#?([a-f0-9]{6}|[a-f0-9]{3})$/i
 
 /**
  * 中文字符正则
@@ -83,7 +83,7 @@ export const OnlyCh = /^[\u4E00-\u9FA5]+$/
  * OnlyEn.test('English') // true
  * OnlyEn.test('英文') // false
  */
-export const OnlyEn = /^[a-zA-Z]+$/
+export const OnlyEn = /^[a-z]+$/i
 
 /**
  * 强密码正则（已注释，供参考）
@@ -106,7 +106,7 @@ export const OnlyEn = /^[a-zA-Z]+$/
  * IdCard.test('110101199003077758') // true
  * IdCard.test('invalid') // false
  */
-export const IdCard = /^[1-9]\d{5}(19|20)\d{2}(0[1-9]|1[0-2])(0[1-9]|[12]\d|3[01])\d{3}[\dXx]$/
+export const IdCard = /^[1-9]\d{5}(19|20)\d{2}(0[1-9]|1[0-2])(0[1-9]|[12]\d|3[01])\d{3}[\dX]$/i
 
 /**
  * 金额正则
@@ -124,4 +124,4 @@ export const Money = /^[1-9]\d*(\.\d{1,2})?$|^0(\.\d{1,2})?$/
  * TelPhone.test('010-12345678') // true
  * TelPhone.test('010-1234-5678') // true
  */
-export const TelPhone = /^(0\d{2,3}[-])?\d{7,8}([-]\d{1,4})?$/
+export const TelPhone = /^(0\d{2,3}-)?\d{7,8}(-\d{1,4})?$/

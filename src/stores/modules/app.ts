@@ -1,6 +1,6 @@
+import { generate, getRgbStr } from '@arco-design/color'
 import { defineStore } from 'pinia'
 import { computed, reactive, toRefs } from 'vue'
-import { generate, getRgbStr } from '@arco-design/color'
 import defaultSettings from '@/config/setting.json'
 
 /**

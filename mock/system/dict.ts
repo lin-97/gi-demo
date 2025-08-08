@@ -1,7 +1,7 @@
 import type { SelectOptionData } from '@arco-design/web-vue'
 import { defineMock } from '../_base'
-import { getBaseApi, getDelayTime, resultError, resultSuccess } from '../_utils'
 import dictData from '../_data/system_dict'
+import { getBaseApi, getDelayTime, resultError, resultSuccess } from '../_utils'
 
 export default defineMock([
   ...getBaseApi({

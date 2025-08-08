@@ -1,8 +1,8 @@
 /** @file 路由守卫配置模块 - 处理路由导航守卫和权限控制 */
 
 import type { Router } from 'vue-router'
-import { setupPermissionGuard } from './setupPermissionGuard'
 import { setRouteEmitter } from '@/hooks'
+import { setupPermissionGuard } from './setupPermissionGuard'
 
 /**
  * 设置页面路由守卫

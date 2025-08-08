@@ -1,5 +1,5 @@
 {
-  "extends": "@vue/tsconfig/tsconfig.web.json",
+  "extends": "@vue/tsconfig/tsconfig.json",
   "compilerOptions": {
     "target": "ES2020", // 指定 ECMAScript 目标版本: 'ES3' (default), 'ES5', 'ES6'/'ES2015', 'ES2016', 'ES2017', or 'ESNEXT'
     "jsx": "preserve", // 指定 jsx 代码的生成: 'preserve', 'react-native', or 'react'
@@ -11,7 +11,7 @@
     ], // 指定要包含在编译中的库文件
     "baseUrl": ".", // 用于解析非相对模块名称的基目录
     "module": "ES2020", //
-    "moduleResolution": "node", // 选择模块解析策略： 'node' (Node.js) or 'classic' (TypeScript pre-1.6)
+    "moduleResolution": "bundler",
     "paths": {
       "@/*": [
         "src/*"

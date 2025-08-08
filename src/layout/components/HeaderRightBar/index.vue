@@ -83,10 +83,10 @@
 <script setup lang="ts">
 import { Message, Modal } from '@arco-design/web-vue'
 import { useFullscreen } from '@vueuse/core'
-import SettingDrawer from './SettingDrawer.vue'
-import Notice from './Notice.vue'
-import { useUserStore } from '@/stores'
 import { useBreakpoint } from '@/hooks'
+import { useUserStore } from '@/stores'
+import Notice from './Notice.vue'
+import SettingDrawer from './SettingDrawer.vue'
 
 /** 组件名称 */
 defineOptions({ name: 'HeaderRight' })
@@ -150,7 +150,8 @@ const handleLogout = () => {
         await userStore.logout()
         router.replace('/login')
         return true
-      } catch (error) {
+      } catch {
+        Message.error('退出登录失败')
         return false
       }
     }

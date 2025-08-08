@@ -1,12 +1,12 @@
-import { URL, fileURLToPath } from 'node:url'
 import path from 'node:path'
-import { defineConfig, loadEnv } from 'vite'
+import { fileURLToPath, URL } from 'node:url'
 import vue from '@vitejs/plugin-vue'
 import vueJsx from '@vitejs/plugin-vue-jsx'
 import AutoImport from 'unplugin-auto-import/vite'
 import Components from 'unplugin-vue-components/vite'
-import { createSvgIconsPlugin } from 'vite-plugin-svg-icons'
+import { defineConfig, loadEnv } from 'vite'
 import { viteMockServe } from 'vite-plugin-mock'
+import { createSvgIconsPlugin } from 'vite-plugin-svg-icons'
 
 export default defineConfig(({ mode }) => {
   const env = loadEnv(mode, process.cwd()) as ImportMetaEnv
@@ -55,7 +55,7 @@ export default defineConfig(({ mode }) => {
       }),
       Components({
         // 指定组件位置，默认是 src/components 自动导入自定义组件
-        dirs: ['src/components'],
+        dirs: ['src/components/Gi*'],
         extensions: ['vue', 'tsx'],
         // 配置文件生成位置
         dts: 'src/components.d.ts'
@@ -82,26 +82,31 @@ export default defineConfig(({ mode }) => {
     // 构建
     build: {
       chunkSizeWarningLimit: 2000, // 消除打包大小超过500kb警告
-      outDir: 'dist', // 指定打包路径，默认为项目根目录下的dist目录
-      minify: 'terser', // Vite 2.6.x 以上需要配置 minify："terser"，terserOptions才能生效
-      terserOptions: {
-        compress: {
-          keep_infinity: true, // 防止 Infinity 被压缩成 1/0，这可能会导致 Chrome 上的性能问题
-          drop_console: true, // 生产环境去除 console
-          drop_debugger: true // 生产环境去除 debugger
-        },
-        format: {
-          comments: false // 删除注释
-        }
-      },
-      // 静态资源打包到dist下的不同目录
       rollupOptions: {
         output: {
-          chunkFileNames: 'static/js/[name]-[hash].js',
-          entryFileNames: 'static/js/[name]-[hash].js',
-          assetFileNames: 'static/[ext]/[name]-[hash].[ext]'
+          /**
+           * @name 分块策略
+           * @description 1. 注意这些包名必须存在，否则打包会报错
+           * @description 2. 如果你不想自定义 chunk 分割策略，可以直接移除这段配置
+           */
+          manualChunks: {
+            vue: ['vue', 'vue-router', 'pinia'],
+            arco: ['@arco-design/web-vue']
+          }
         }
       }
-    }
+    },
+    // 混淆器
+    esbuild:
+      mode === 'development'
+        ? undefined
+        : {
+          // 打包构建时移除 console.log
+            pure: ['console.log'],
+            // 打包构建时移除 debugger
+            drop: ['debugger'],
+            // 打包构建时移除所有注释
+            legalComments: 'none'
+          }
   }
 })

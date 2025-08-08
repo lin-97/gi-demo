@@ -31,16 +31,7 @@ declare module 'vue' {
     GiTable: typeof import('./components/GiTable/src/GiTable.vue')['default']
     GiTag: typeof import('./components/GiTag/index.tsx')['default']
     GiThemeBtn: typeof import('./components/GiThemeBtn/index.vue')['default']
-    Icon403: typeof import('./components/icons/Icon403.vue')['default']
-    Icon404: typeof import('./components/icons/Icon404.vue')['default']
-    Icon500: typeof import('./components/icons/Icon500.vue')['default']
-    IconBorders: typeof import('./components/icons/IconBorders.vue')['default']
-    IconTableSize: typeof import('./components/icons/IconTableSize.vue')['default']
-    IconTreeAdd: typeof import('./components/icons/IconTreeAdd.vue')['default']
-    IconTreeReduce: typeof import('./components/icons/IconTreeReduce.vue')['default']
-    ParentView: typeof import('./components/ParentView/index.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
-    Table: typeof import('./components/dialog/SelectUserDialog/Table.vue')['default']
   }
 }

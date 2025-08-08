@@ -118,16 +118,17 @@
 </template>
 
 <script setup lang="ts">
-import { type ColProps, type FormInstance, Message } from '@arco-design/web-vue'
+import type { ColProps, FormInstance } from '@arco-design/web-vue'
+import type * as T from '@/apis/system/menu'
+import { Message } from '@arco-design/web-vue'
 import { mapTree } from 'xe-utils'
 import { baseAPI } from '@/apis/system/menu'
-import type * as T from '@/apis/system/menu'
-import { isExternal } from '@/utils/validate'
-import { filterTree, transformPathToName } from '@/utils'
 import { useResetReactive } from '@/hooks'
+import { filterTree, transformPathToName } from '@/utils'
+import { isExternal } from '@/utils/validate'
 
 interface Props {
-  menus: T.ListItem[]
+  menus?: T.ListItem[]
 }
 
 const props = withDefaults(defineProps<Props>(), {

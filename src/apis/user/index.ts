@@ -1,6 +1,6 @@
 import type * as T from './type'
-import http from '@/utils/http'
 import type { ListItem } from '@/apis/system/menu'
+import http from '@/utils/http'
 
 export type * from './type'
 

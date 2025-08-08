@@ -20,8 +20,8 @@
 </template>
 
 <script setup lang="ts">
-import { useDraggable, useElementSize, useWindowSize } from '@vueuse/core'
 import type { FileItem } from '@/apis/file'
+import { useDraggable, useElementSize, useWindowSize } from '@vueuse/core'
 
 interface Props {
   data: FileItem

@@ -48,7 +48,7 @@ const handleAddUser = async () => {
   try {
     await saveUserApi()
     return true
-  } catch (error) {
+  } catch {
     return true
   }
 }

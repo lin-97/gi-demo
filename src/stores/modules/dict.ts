@@ -1,6 +1,6 @@
+import type { SelectOptionData } from '@arco-design/web-vue'
 import { defineStore } from 'pinia'
 import { ref } from 'vue'
-import type { SelectOptionData } from '@arco-design/web-vue'
 import { getDictData as getDictDataApi } from '@/apis/system/dict'
 
 /**

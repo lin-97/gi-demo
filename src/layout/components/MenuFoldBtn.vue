@@ -23,10 +23,10 @@
 </template>
 
 <script setup lang="ts">
-import { useAppStore } from '@/stores'
+import { useDevice } from '@/hooks'
 import Logo from '@/layout/components/Logo.vue'
 import Menu from '@/layout/components/Menu/index.vue'
-import { useDevice } from '@/hooks'
+import { useAppStore } from '@/stores'
 
 /** 组件名称 */
 defineOptions({ name: 'MenuFoldBtn' })

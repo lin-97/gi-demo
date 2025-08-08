@@ -1,8 +1,9 @@
 /** @file 路由配置模块 - 处理路由的创建、守卫和重置 */
 
-import { type RouteRecordRaw, createRouter, createWebHashHistory } from 'vue-router'
-import { useRouteStore } from '@/stores'
+import type { RouteRecordRaw } from 'vue-router'
+import { createRouter, createWebHashHistory } from 'vue-router'
 import createRouteGuard from '@/router/guard'
+import { useRouteStore } from '@/stores'
 
 /** 默认布局组件 */
 const Layout = () => import('@/layout/index.vue')

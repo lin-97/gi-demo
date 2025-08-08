@@ -53,10 +53,11 @@
 </template>
 
 <script lang="ts" setup>
+import type { DictDataItem } from '@/apis/system/dict'
 import { Message } from '@arco-design/web-vue'
-import AddDictDataModal from './AddDictDataModal.vue'
-import { type DictDataItem, getDictDataList } from '@/apis/system/dict'
+import { getDictDataList } from '@/apis/system/dict'
 import { useTable } from '@/hooks'
+import AddDictDataModal from './AddDictDataModal.vue'
 
 const visible = ref(false)
 const AddDictDataModalRef = useTemplateRef('AddDictDataModalRef')

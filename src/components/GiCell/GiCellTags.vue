@@ -26,7 +26,7 @@ withDefaults(defineProps<Props>(), {
 })
 
 interface Props {
-  data: string[]
+  data?: string[]
 }
 </script>
 

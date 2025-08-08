@@ -69,10 +69,11 @@
 </template>
 
 <script setup lang="ts">
-import { Message, type PopconfirmInstance } from '@arco-design/web-vue'
-import { useTable } from '@/hooks'
-import { baseAPI } from '@/apis/person'
+import type { PopconfirmInstance } from '@arco-design/web-vue'
 import type * as T from '@/apis/person'
+import { Message } from '@arco-design/web-vue'
+import { baseAPI } from '@/apis/person'
+import { useTable } from '@/hooks'
 
 defineOptions({ name: 'TableCustom' })
 
