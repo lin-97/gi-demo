@@ -47,7 +47,13 @@ const columns = [
   {
     title: '序号',
     width: 68,
-    render: ({ rowIndex }) => <span>{rowIndex + 1}</span>
+    render: ({ rowIndex }) => (
+      <span>
+        {rowIndex + 1}
+        {' '}
+
+      </span>
+    )
   },
   {
     title: '姓名',

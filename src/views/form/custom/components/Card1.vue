@@ -22,7 +22,7 @@
 import type { ColumnItem } from '@/components/GiForm'
 import { Drawer, Message } from '@arco-design/web-vue'
 import { useWindowSize } from '@vueuse/core'
-import { selectUserDialog } from '@/components/dialog'
+import { selectUserListDialog } from '@/components/dialog'
 import GiCodeView from '@/components/GiCodeView/index.vue'
 import Card1Json from './code/card1-json'
 
@@ -43,7 +43,7 @@ const columns = reactive([
     props: {
       allowClear: true,
       onSearch: () => {
-        selectUserDialog({
+        selectUserListDialog({
           onOk: (data) => {
             form.userId = data[0].id
             form.userName = data[0].name

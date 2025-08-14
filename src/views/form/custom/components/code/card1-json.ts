@@ -25,7 +25,7 @@ import { useWindowSize } from '@vueuse/core'
 import Card1Json from './code/card1-json'
 import type { ColumnItem } from '@/components/GiForm'
 import GiCodeView from '@/components/GiCodeView/index.vue'
-import { selectUserDialog } from '@/components/dialog'
+import { selectUserListDialog } from '@/components/dialog'
 
 const { width } = useWindowSize()
 
@@ -44,7 +44,7 @@ const columns = reactive([
     props: {
       allowClear: true,
       onSearch: () => {
-        selectUserDialog({
+        selectUserListDialog({
           onOk: (data) => {
             form.userId = data[0].id
             form.userName = data[0].name
