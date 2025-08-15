@@ -27,6 +27,7 @@
     "codemirror": "^6.0.2",
     "dayjs": "^1.11.4",
     "echarts": "^5.4.2",
+    "element-plus": "^2.10.7",
     "lodash-es": "^4.17.21",
     "md-editor-v3": "^4.6.2",
     "mitt": "^3.0.1",

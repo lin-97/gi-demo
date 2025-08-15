@@ -1,22 +1,6 @@
 <template>
-  <a-card title="字典管理" class="gi_page_card">
-    <a-space wrap>
-      <a-input v-model="queryParams.name" placeholder="字典类型名称/编码" allow-clear style="width: 250px">
-        <template #prefix><icon-search /></template>
-      </a-input>
-      <a-select v-model="queryParams.status" :options="options" placeholder="状态" allow-clear
-        style="width: 120px"></a-select>
-      <a-button type="primary" @click="search">
-        <template #icon><icon-search /></template>
-        <span>查询</span>
-      </a-button>
-      <a-button @click="reset">
-        <template #icon><icon-refresh /></template>
-        <span>重置</span>
-      </a-button>
-    </a-space>
-
-    <a-row>
+  <GiPageLayout margin>
+    <a-row justify="space-between">
       <a-space wrap>
         <a-button type="primary" @click="onAdd">
           <template #icon><icon-plus /></template>
@@ -26,6 +10,19 @@
           <template #icon><icon-delete /></template>
           <span>删除</span>
         </a-button>
+      </a-space>
+
+      <a-space wrap>
+        <a-input-group>
+          <a-select v-model="queryParams.status" :options="options" placeholder="状态" allow-clear
+            style="width: 120px"></a-select>
+          <a-input v-model="queryParams.name" placeholder="字典类型名称/编码" allow-clear style="width: 250px"></a-input>
+        </a-input-group>
+        <a-button type="primary" @click="search">
+          <template #icon><icon-search /></template>
+          <span>查询</span>
+        </a-button>
+        <a-button @click="reset">重置</a-button>
       </a-space>
     </a-row>
 
@@ -71,7 +68,7 @@
 
     <AddDictModal ref="AddDictModalRef" @save-success="search"></AddDictModal>
     <DictDataModal ref="DictDataModalRef"></DictDataModal>
-  </a-card>
+  </GiPageLayout>
 </template>
 
 <script setup lang="ts">

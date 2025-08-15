@@ -1,5 +1,5 @@
 <template>
-  <GiPageLayout>
+  <GiPageLayout margin>
     <GiForm v-model="form" search :columns="searchColumns"
       :grid-item-props="{ span: { xs: 24, sm: 12, md: 8, lg: 8, xl: 6, xxl: 6 } }" @search="search" @reset="search">
     </GiForm>
@@ -19,9 +19,6 @@
         <a-button @click="onImport">
           <template #icon><icon-export /></template>
           <span>导入</span>
-        </a-button>
-        <a-button type="primary" status="warning" @click="onViewCode">
-          <template #icon><icon-code /></template>
         </a-button>
       </template>
       <template #avatar="{ record }">
@@ -59,7 +56,6 @@ import { baseAPI } from '@/apis/person'
 import GiCodeView from '@/components/GiCodeView/index.vue'
 import { useTable } from '@/hooks'
 import { useDict } from '@/hooks/app'
-import CodeJson from './code-json'
 
 defineOptions({ name: 'TableCustom2' })
 const { data: statusOptions } = useDict({ code: 'status' })
@@ -146,15 +142,6 @@ const onImport = () => {
 
 const onDelete: PopconfirmInstance['onBeforeOk'] = () => {
   return new Promise((resolve) => setTimeout(() => resolve(true), 300))
-}
-
-// 查看代码
-const onViewCode = () => {
-  Drawer.open({
-    title: '数据结构',
-    content: () => h(GiCodeView, { codeJson: CodeJson, type: 'vue' }),
-    width: '100%'
-  })
 }
 </script>
 

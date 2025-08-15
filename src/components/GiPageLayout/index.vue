@@ -1,33 +1,34 @@
 <template>
-  <a-row align="stretch" :gutter="rowGutter" class="gi-page-layout" :class="getClass">
-    <a-col v-if="slots.left" v-bind="props.leftColProps" :xs="0" :sm="8" :md="7" :lg="6" :xl="5" :xxl="4" flex="260px">
+  <ElSplitter class="gi-page-layout" :class="getClass">
+    <ElSplitterPanel v-if="slots.left" min="1px" max="600px" :size="props.size">
       <div class="gi-page-layout__left" :style="props.leftStyle">
         <slot name="left"></slot>
       </div>
-    </a-col>
-    <a-col :xs="24" :sm="16" :md="17" :lg="18" :xl="19" :xxl="20" flex="1" v-bind="props.rightColProps">
+    </ElSplitterPanel>
+    <ElSplitterPanel class="gi-page-layout__right-panel">
       <div v-if="slots.header" class="gi-page-layout__header" :style="props.headerStyle">
         <slot name="header"></slot>
       </div>
       <div class="gi-page-layout__body" :style="props.bodyStyle">
         <slot></slot>
       </div>
-    </a-col>
-  </a-row>
+    </ElSplitterPanel>
+  </ElSplitter>
 </template>
 
 <script setup lang='ts'>
-import type { ColProps } from '@arco-design/web-vue'
 import type { CSSProperties } from 'vue'
+import { ElSplitter, ElSplitterPanel } from 'element-plus'
+import 'element-plus/theme-chalk/el-splitter.css'
+import 'element-plus/theme-chalk/el-splitter-panel.css'
 
 defineOptions({ name: 'GiPageLayout' })
 
 const props = withDefaults(defineProps<Props>(), {
-  margin: true,
-  padding: true,
-  gutter: false,
-  leftColProps: () => ({}),
-  rightColProps: () => ({}),
+  size: '270px',
+  margin: false,
+  inner: false,
+  headerBordered: true,
   leftStyle: () => ({}),
   headerStyle: () => ({}),
   bodyStyle: () => ({})
@@ -45,26 +46,18 @@ const slots = useSlots()
 const getClass = computed(() => {
   return {
     'gi-page-layout--margin': props.margin,
-    'gi-page-layout--padding': props.padding,
-    'gi-page-layout--gutter': !!props.gutter,
-    'gi-page-layout--has-header': slots.header
+    'gi-page-layout--inner': props.inner,
+    'gi-page-layout--has-header': slots.header,
+    'gi-page-layout--header-bordered': props.headerBordered
   }
-})
-
-const rowGutter = computed(() => {
-  if (typeof props.gutter === 'boolean') {
-    return props.gutter ? 14 : undefined
-  }
-  return props.gutter
 })
 
 /** 组件属性定义 */
 interface Props {
+  size?: string
   margin?: boolean
-  padding?: boolean
-  gutter?: boolean | number
-  leftColProps?: ColProps
-  rightColProps?: ColProps
+  inner?: boolean
+  headerBordered?: boolean
   leftStyle?: CSSProperties
   headerStyle?: CSSProperties
   bodyStyle?: CSSProperties
@@ -72,70 +65,86 @@ interface Props {
 </script>
 
 <style lang='scss' scoped>
+:deep(.el-splitter-bar__dragger) {
+  &:before {
+    width: 0.5px;
+    background-color: var(--color-border);
+  }
+
+  &:hover,
+  &:active {
+    &:before {
+      width: 2px;
+      background-color: var(--color-primary-light-2);
+    }
+  }
+}
+
 .gi-page-layout {
   flex: 1;
+  width: auto;
   height: 100%;
   display: flex;
   overflow: hidden;
   box-sizing: border-box;
   background-color: var(--color-bg-1);
+}
 
-  &--margin {
-    margin: $margin;
+.gi-page-layout--margin {
+  margin: $margin;
+}
+
+.gi-page-layout--has-header {
+  .gi-page-layout__body {
+    padding-top: 8px;
+  }
+}
+
+.gi-page-layout--inner {
+  .gi-page-layout__header {
+    padding: 0;
   }
 
-  &--padding {
-
-    .gi-page-layout__left,
-    .gi-page-layout__header,
-    .gi-page-layout__body {
-      padding: $padding;
-    }
-
-    .gi-page-layout__header {
-      padding-bottom: 0;
-    }
+  .gi-page-layout__body {
+    padding-left: 0;
+    padding-right: 0;
+    padding-bottom: 0;
   }
+}
 
-  &--gutter {
-    .gi-page-layout__body-left {
-      border-right: none;
-    }
-  }
-
-  :deep(.arco-col) {
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    overflow: hidden;
+.gi-page-layout--header-bordered {
+  .gi-page-layout__header {
+    border-bottom: 1px solid var(--color-border);
   }
 }
 
 .gi-page-layout__left {
   height: 100%;
-  border-right: 1px solid var(--color-border);
+  padding: $padding;
   display: flex;
   flex-direction: column;
   overflow: hidden;
   box-sizing: border-box;
 }
 
+:deep(.gi-page-layout__right-panel) {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
 .gi-page-layout__header {
-  border-bottom: 1px solid var(--color-border);
   box-sizing: border-box;
+  padding: $padding;
+  padding-bottom: 0;
 }
 
 .gi-page-layout__body {
+  padding: $padding;
   flex: 1;
   display: flex;
   flex-direction: column;
   overflow: hidden;
   box-sizing: border-box;
-}
-
-.gi-page-layout--has-header.gi-page-layout--padding {
-  .gi-page-layout__body {
-    padding-top: 8px;
-  }
 }
 </style>
