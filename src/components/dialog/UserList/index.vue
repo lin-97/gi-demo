@@ -85,15 +85,11 @@ const {
   loading,
   tableData,
   pagination,
-  selectedKeys,
   search,
   select,
-  selectAll
+  selectAll,
+  getSelectedData
 } = useTable((page) => baseAPI.getList({ ...page, ...sarchParams, ...props.queryParams }), { immediate: true })
-
-function getSelectedData() {
-  return tableData.value.filter((item) => selectedKeys.value.includes(item.id))
-}
 
 const reset = () => {
   sarchParams.username = ''

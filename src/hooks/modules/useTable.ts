@@ -106,6 +106,11 @@ export function useTable<T extends U, U = T>(api: Api<T>, options?: Options<T, U
     selectedKeys.value = checked ? arr.map((i) => i[rowKey as string]) : []
   }
 
+  /** 获取选中的数据 */
+  const getSelectedData = () => {
+    return tableData.value.filter((i) => selectedKeys.value.includes(i[rowKey as string]))
+  }
+
   /**
    * 搜索
    * @description 重置页码为1并重新获取数据
@@ -190,6 +195,8 @@ export function useTable<T extends U, U = T>(api: Api<T>, options?: Options<T, U
     select,
     /** 全选行 */
     selectAll,
+    /** 获取选择的数据  */
+    getSelectedData,
     /** 处理删除、批量删除 */
     handleDelete,
     /** 刷新表格数据，页码会缓存 */
