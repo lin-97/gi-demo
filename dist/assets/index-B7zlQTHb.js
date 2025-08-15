@@ -1,1 +1,0 @@
-import{af as e}from"./arco-BuJQNAYO.js";import{e as t,n,k as a,z as s,a1 as r}from"./vue-_iYK9Zi6.js";import{_}from"./index-COakebNL.js";const i={class:"gi-footer"},c=t({name:"GiFooter",__name:"index",setup(p){const o=e(new Date).format("YYYY");return(m,f)=>(a(),n("div",i,"Copyright @"+s(r(o))+" Gi Admin Pro",1))}}),g=_(c,[["__scopeId","data-v-65895815"]]);export{g as _};
