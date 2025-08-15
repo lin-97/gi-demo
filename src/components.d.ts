@@ -24,14 +24,14 @@ declare module 'vue' {
     GiOptionItem: typeof import('./components/GiOptionItem/index.vue')['default']
     GiPageLayout: typeof import('./components/GiPageLayout/index.vue')['default']
     GiSpace: typeof import('./components/GiSpace/index.vue')['default']
-    GiSplitButton: typeof import('./components/GiSplitButton/index.vue')['default']
     GiSplitPane: typeof import('./components/GiSplitPane/index.vue')['default']
-    GiSplitPaneFlexibleBox: typeof import('./components/GiSplitPane/components/GiSplitPaneFlexibleBox.vue')['default']
     GiSvgIcon: typeof import('./components/GiSvgIcon/index.vue')['default']
     GiTable: typeof import('./components/GiTable/src/GiTable.vue')['default']
     GiTag: typeof import('./components/GiTag/index.tsx')['default']
     GiThemeBtn: typeof import('./components/GiThemeBtn/index.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
+    SplitButton: typeof import('./components/GiSplitPane/components/SplitButton.vue')['default']
+    SplitPaneFlexibleBox: typeof import('./components/GiSplitPane/components/SplitPaneFlexibleBox.vue')['default']
   }
 }

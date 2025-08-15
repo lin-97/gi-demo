@@ -398,6 +398,28 @@ const data: MockSystemMenuItem[] = [
         showInTabs: true,
         alwaysShow: false,
         affix: false
+      },
+      {
+        id: '0504',
+        parentId: '05',
+        path: '/table/dialog',
+        component: 'table/dialog/index',
+        redirect: '',
+        type: 2,
+        title: '弹窗表格',
+        svgIcon: '',
+        icon: 'icon-menu',
+        keepAlive: false,
+        hidden: false,
+        sort: 0,
+        activeMenu: '',
+        breadcrumb: true,
+        status: 1,
+        roles: ['role_admin', 'role_user'],
+        permission: '',
+        showInTabs: true,
+        alwaysShow: false,
+        affix: false
       }
     ],
     status: 1,

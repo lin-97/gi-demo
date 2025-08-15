@@ -1,5 +1,5 @@
 <template>
-  <a-card title="用户管理" class="gi_page_card">
+  <GiPageLayout margin>
     <GiSplitPane>
       <template #left>
         <a-input v-model="treeInputValue" placeholder="输入部门名称搜索" allow-clear :style="{ marginBottom: '8px' }">
@@ -41,10 +41,7 @@
             <template #icon><icon-search /></template>
             <span>查询</span>
           </a-button>
-          <a-button @click="reset">
-            <template #icon><icon-refresh /></template>
-            <span>重置</span>
-          </a-button>
+          <a-button @click="reset">重置</a-button>
         </a-space>
       </a-row>
 
@@ -109,7 +106,7 @@
 
     <AddUserModal ref="AddUserModalRef" @save-success="search"></AddUserModal>
     <UserDetailDrawer ref="UserDetailDrawerRef"></UserDetailDrawer>
-  </a-card>
+  </GiPageLayout>
 </template>
 
 <script setup lang="ts">

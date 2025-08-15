@@ -102,11 +102,11 @@ export default defineConfig(({ mode }) => {
         ? undefined
         : {
           // 打包构建时移除 console.log
-            pure: ['console.log'],
-            // 打包构建时移除 debugger
-            drop: ['debugger'],
-            // 打包构建时移除所有注释
-            legalComments: 'none'
-          }
+          pure: ['console.log'],
+          // 打包构建时移除 debugger
+          drop: ['debugger'],
+          // 打包构建时移除所有注释
+          legalComments: 'none'
+        }
   }
 })

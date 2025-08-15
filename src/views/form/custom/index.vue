@@ -1,5 +1,5 @@
 <template>
-  <div class="gi_full_column gi_margin gi_bg_1">
+  <GiPageLayout margin :body-style="{ padding: 0 }">
     <a-tabs class="gi_full_tabs" default-active-key="1" size="large">
       <template #extra>
         <a-button>返回</a-button>
@@ -17,7 +17,7 @@
         <Card4></Card4>
       </a-tab-pane>
     </a-tabs>
-  </div>
+  </GiPageLayout>
 </template>
 
 <script setup lang="ts">

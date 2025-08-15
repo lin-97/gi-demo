@@ -1,5 +1,5 @@
 <template>
-  <GiPageLayout>
+  <GiPageLayout margin>
     <GiTable row-key="id" title="会员列表" :loading="loading" :data="tableData"
       :scroll="{ x: '100%', y: '100%', minWidth: 1200 }" :row-selection="{ type: 'checkbox', showCheckedAll: true }"
       :pagination="pagination" @refresh="getTableData">

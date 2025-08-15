@@ -1,5 +1,5 @@
 <template>
-  <GiPageLayout>
+  <GiPageLayout margin>
     <GiForm v-model="form" :columns="columns" search hide-fold-btn :suffix="false"
       :grid-item-props="{ span: { xs: 24, sm: 12, md: 8, lg: 8, xl: 6, xxl: 6 } }" @search="search" @reset="search">
     </GiForm>

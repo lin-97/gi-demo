@@ -1,21 +1,6 @@
 <template>
-  <a-card title="部门管理" class="gi_page_card">
-    <a-space wrap>
-      <a-input v-model="queryParams.name" placeholder="输入部门名称搜索" allow-clear style="width: 250px">
-        <template #prefix><icon-search /></template>
-      </a-input>
-      <a-select v-model="queryParams.status" :options="options" placeholder="部门状态" style="width: 120px"></a-select>
-      <a-button type="primary" @click="search">
-        <template #icon><icon-search /></template>
-        <span>搜索</span>
-      </a-button>
-      <a-button @click="reset">
-        <template #icon><icon-refresh /></template>
-        <span>重置</span>
-      </a-button>
-    </a-space>
-
-    <a-row>
+  <GiPageLayout margin>
+    <a-row justify="space-between">
       <a-space wrap>
         <a-button type="primary" @click="onAdd">
           <template #icon><icon-plus /></template>
@@ -25,6 +10,20 @@
           <template #icon><icon-delete /></template>
           <span>删除</span>
         </a-button>
+      </a-space>
+
+      <a-space wrap>
+        <a-input-group>
+          <a-select v-model="queryParams.status" :options="options" placeholder="部门状态" style="width: 120px"></a-select>
+          <a-input v-model="queryParams.name" placeholder="输入部门名称搜索" allow-clear style="width: 250px">
+            <template #prefix><icon-search /></template>
+          </a-input>
+        </a-input-group>
+        <a-button type="primary" @click="search">
+          <template #icon><icon-search /></template>
+          <span>搜索</span>
+        </a-button>
+        <a-button @click="reset">重置</a-button>
       </a-space>
     </a-row>
 
@@ -71,7 +70,7 @@
     </a-table>
 
     <AddDeptModal ref="AddDeptModalRef" @save-success="search"></AddDeptModal>
-  </a-card>
+  </GiPageLayout>
 </template>
 
 <script setup lang="ts">

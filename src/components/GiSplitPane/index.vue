@@ -5,15 +5,15 @@
 <template>
   <div class="gi-split-pane">
     <!-- 左侧可折叠面板 -->
-    <GiSplitPaneFlexibleBox v-model:visible="visible">
+    <SplitPaneFlexibleBox v-model:visible="visible">
       <div class="gi-split-pane__left">
         <slot name="left"></slot>
       </div>
-    </GiSplitPaneFlexibleBox>
+    </SplitPaneFlexibleBox>
 
     <!-- 分割线及控制按钮 -->
     <div class="gi-split-pane__line">
-      <GiSplitButton :collapsed="!visible" @click="handleClick"></GiSplitButton>
+      <SplitButton :collapsed="!visible" @click="handleClick"></SplitButton>
     </div>
 
     <!-- 右侧内容区域 -->
@@ -25,6 +25,8 @@
 
 <script setup lang='ts'>
 import { ref } from 'vue'
+import SplitButton from './components/SplitButton.vue'
+import SplitPaneFlexibleBox from './components/SplitPaneFlexibleBox.vue'
 
 /** 组件名称 */
 defineOptions({ name: 'GiSplitPane' })

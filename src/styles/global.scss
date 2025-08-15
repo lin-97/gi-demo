@@ -15,13 +15,6 @@
   }
 }
 
-// 通用盒子
-.gi_box {
-  background: var(--color-bg-1);
-  border-radius: $radius-box;
-  overflow: hidden;
-}
-
 // 卡片组件，使body的高度自动撑满
 .gi_card {
   box-sizing: border-box;
@@ -77,18 +70,6 @@
   padding: $margin;
   box-sizing: border-box;
   overflow-y: auto;
-}
-
-// 表格页面(未来会废弃，请使用GiPageLayout组件)
-.gi_table_page {
-  flex: 1;
-  overflow: hidden;
-  margin: $margin;
-  background: var(--color-bg-1);
-  padding: $padding;
-  box-sizing: border-box;
-  display: flex;
-  flex-direction: column;
 }
 
 // 表格类名 高度自适应

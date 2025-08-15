@@ -20,42 +20,25 @@ export default `
 </template>
 
 <script setup lang="ts">
+import type { ColumnItem } from '@/components/GiForm'
 import { Drawer, Message } from '@arco-design/web-vue'
 import { useWindowSize } from '@vueuse/core'
-import Card1Json from './code/card1-json'
-import type { ColumnItem } from '@/components/GiForm'
 import GiCodeView from '@/components/GiCodeView/index.vue'
-import { selectUserListDialog } from '@/components/dialog'
+import Card1Json from './code/card1-json'
 
 const { width } = useWindowSize()
 
 const form = reactive({
-  userId: '',
-  userName: '',
+  name: '',
   phone: '',
   status: ''
 })
 
 const columns = reactive([
   {
-    type: 'input-search',
-    label: '用户',
-    field: 'userName',
-    props: {
-      allowClear: true,
-      onSearch: () => {
-        selectUserListDialog({
-          onOk: (data) => {
-            form.userId = data[0].id
-            form.userName = data[0].name
-          }
-        })
-      },
-      onClear: () => {
-        form.userId = ''
-        form.userName = ''
-      }
-    }
+    type: 'input',
+    label: '姓名',
+    field: 'name'
   },
   {
     type: 'input',

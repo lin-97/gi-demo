@@ -1,5 +1,5 @@
 <template>
-  <a-card title="菜单管理" class="gi_page_card">
+  <GiPageLayout margin>
     <a-row justify="space-between">
       <a-space wrap>
         <a-button type="primary" @click="onAdd">
@@ -22,18 +22,16 @@
       </a-space>
 
       <a-space wrap>
-        <a-input v-model="queryParams.name" placeholder="输入菜单名称搜索" allow-clear style="width: 250px">
-          <template #prefix><icon-search /></template>
-        </a-input>
-        <a-select v-model="queryParams.status" :options="options" placeholder="菜单状态" style="width: 120px"></a-select>
+        <a-input-group>
+          <a-select v-model="queryParams.status" :options="options" placeholder="菜单状态" style="width: 120px"></a-select>
+          <a-input v-model="queryParams.name" placeholder="输入菜单名称搜索" allow-clear style="width: 250px"></a-input>
+        </a-input-group>
+
         <a-button type="primary" @click="search">
           <template #icon><icon-search /></template>
           <span>搜索</span>
         </a-button>
-        <a-button @click="reset">
-          <template #icon><icon-refresh /></template>
-          <span>重置</span>
-        </a-button>
+        <a-button @click="reset">重置</a-button>
       </a-space>
     </a-row>
 
@@ -117,7 +115,7 @@
     </a-table>
 
     <AddMenuModal ref="AddMenuModalRef" :menus="menuList" @save-success="search"></AddMenuModal>
-  </a-card>
+  </GiPageLayout>
 </template>
 
 <script setup lang="ts">
