@@ -2,14 +2,8 @@
   <GiPageLayout margin>
     <a-row justify="space-between">
       <a-space wrap>
-        <a-button type="primary" @click="onAdd">
-          <template #icon><icon-plus /></template>
-          <span>新增</span>
-        </a-button>
-        <a-button type="primary" status="danger" @click="onMulDelete">
-          <template #icon><icon-delete /></template>
-          <span>删除</span>
-        </a-button>
+        <GiButton type="add" @click="onAdd"></GiButton>
+        <GiButton type="delete" @click="onMulDelete"></GiButton>
       </a-space>
 
       <a-space wrap>
@@ -18,11 +12,8 @@
             style="width: 120px"></a-select>
           <a-input v-model="queryParams.name" placeholder="字典类型名称/编码" allow-clear style="width: 250px"></a-input>
         </a-input-group>
-        <a-button type="primary" @click="search">
-          <template #icon><icon-search /></template>
-          <span>查询</span>
-        </a-button>
-        <a-button @click="reset">重置</a-button>
+        <GiButton type="search" @click="search"></GiButton>
+        <GiButton type="reset" @click="reset"></GiButton>
       </a-space>
     </a-row>
 
@@ -50,15 +41,9 @@
                 <template #icon><icon-storage /></template>
                 <span>字典数据</span>
               </a-button>
-              <a-button type="primary" size="mini" @click="onEdit(record)">
-                <template #icon><icon-edit /></template>
-                <span>编辑</span>
-              </a-button>
+              <GiButton type="edit" size="mini" :disabled="record.disabled" @click="onEdit(record)"></GiButton>
               <a-popconfirm type="warning" content="确定删除该角色吗?" @before-ok="onDelete(record)">
-                <a-button type="primary" status="danger" size="mini">
-                  <template #icon><icon-delete /></template>
-                  <span>删除</span>
-                </a-button>
+                <GiButton type="delete" size="mini" :disabled="record.disabled"></GiButton>
               </a-popconfirm>
             </a-space>
           </template>

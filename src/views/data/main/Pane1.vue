@@ -6,16 +6,9 @@
 
     <a-row justify="space-between">
       <a-space wrap>
-        <a-button type="primary" @click="onAdd">
-          <template #icon><icon-plus /></template>
-        </a-button>
-        <a-button type="primary" status="danger" @click="onMulDelete">
-          <template #icon><icon-delete /></template>
-          <template #default>删除</template>
-        </a-button>
-        <a-button type="primary" status="success" @click="onExport">
-          <template #icon><icon-export /></template>
-        </a-button>
+        <GiButton type="add" @click="onAdd"></GiButton>
+        <GiButton type="delete" @click="onMulDelete"></GiButton>
+        <GiButton type="export" @click="onExport"></GiButton>
         <a-button type="primary" status="warning" @click="onViewCode">
           <template #icon><icon-code /></template>
         </a-button>

@@ -3,18 +3,9 @@
     :scroll="{ x: '100%', y: '100%', minWidth: 1300 }" :row-selection="{ type: 'checkbox', showCheckedAll: true }"
     :pagination="pagination" :disabled-column-keys="['序号', 'name']" @refresh="getTableData">
     <template #custom-title>
-      <a-button type="primary" @click="onAdd">
-        <template #icon><icon-plus /></template>
-        <span>新增</span>
-      </a-button>
-      <a-button type="primary" status="danger" @click="onMulDelete">
-        <template #icon><icon-delete /></template>
-        <span>删除</span>
-      </a-button>
-      <a-button @click="onImport">
-        <template #icon><icon-export /></template>
-        <span>导入</span>
-      </a-button>
+      <GiButton type="add" @click="onAdd"></GiButton>
+      <GiButton type="delete" @click="onMulDelete"></GiButton>
+      <GiButton type="import" @click="onImport"></GiButton>
     </template>
     <template #avatar="{ record }">
       <a-avatar :size="28" shape="circle">

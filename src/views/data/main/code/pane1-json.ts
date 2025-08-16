@@ -7,16 +7,9 @@ export default `
 
     <a-row justify="space-between">
       <a-space wrap>
-        <a-button type="primary" @click="onAdd">
-          <template #icon><icon-plus /></template>
-        </a-button>
-        <a-button type="primary" status="danger" @click="onMulDelete">
-          <template #icon><icon-delete /></template>
-          <template #default>删除</template>
-        </a-button>
-        <a-button type="primary" status="success" @click="onExport">
-          <template #icon><icon-export /></template>
-        </a-button>
+        <GiButton type="add" @click="onAdd"></GiButton>
+        <GiButton type="delete" @click="onMulDelete"></GiButton>
+        <GiButton type="export" @click="onExport"></GiButton>
         <a-button type="primary" status="warning" @click="onViewCode">
           <template #icon><icon-code /></template>
         </a-button>
@@ -74,16 +67,16 @@ export default `
 </template>
 
 <script setup lang="ts">
+import type * as T from '@/apis/person'
 import { Drawer, Message } from '@arco-design/web-vue'
 import { useWindowSize } from '@vueuse/core'
+import { baseAPI } from '@/apis/person'
+import GiCodeView from '@/components/GiCodeView/index.vue'
+import { useTable } from '@/hooks'
+import { useDict } from '@/hooks/app'
+import { useTabsStore } from '@/stores'
 import CateTree from './CateTree/index.vue'
 import Pane1Json from './code/pane1-json'
-import { useTable } from '@/hooks'
-import { baseAPI } from '@/apis/person'
-import type * as T from '@/apis/person'
-import { useDict } from '@/hooks/app'
-import GiCodeView from '@/components/GiCodeView/index.vue'
-import { useTabsStore } from '@/stores'
 
 const { width } = useWindowSize()
 const router = useRouter()
@@ -127,7 +120,7 @@ const onDetail = (item: T.ListItem) => {
 
 // 删除
 const onDelete = (item: T.ListItem) => {
-  return handleDelete(() => baseAPI.delete({ ids: [item.id] }), { content: \`是否删除-\${item.name}?\`, showModal: false })
+  return handleDelete(() => baseAPI.delete({ ids: [item.id] }), { content: \`是否删除 - \${ item.name }?\`, showModal: false })
 }
 
 // 批量删除
@@ -155,4 +148,5 @@ const onViewCode = () => {
 </script>
 
 <style lang="scss" scoped></style>
+
 `

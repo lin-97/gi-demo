@@ -8,6 +8,7 @@ export {}
 /* prettier-ignore */
 declare module 'vue' {
   export interface GlobalComponents {
+    GiButton: typeof import('./components/GiButton/index.vue')['default']
     GiCellAvatar: typeof import('./components/GiCell/GiCellAvatar.vue')['default']
     GiCellGender: typeof import('./components/GiCell/GiCellGender.vue')['default']
     GiCellStatus: typeof import('./components/GiCell/GiCellStatus.vue')['default']

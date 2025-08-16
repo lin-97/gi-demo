@@ -19,15 +19,8 @@
 
       <a-row justify="space-between">
         <a-space wrap>
-          <a-button type="primary" @click="onAdd">
-            <template #icon><icon-plus /></template>
-            <span>新增</span>
-          </a-button>
-
-          <a-button type="primary" status="danger" @click="onMulDelete">
-            <template #icon><icon-delete /></template>
-            <span>删除</span>
-          </a-button>
+          <GiButton type="add" @click="onAdd"></GiButton>
+          <GiButton type="delete" @click="onMulDelete"></GiButton>
         </a-space>
 
         <a-space wrap>
@@ -37,11 +30,8 @@
             <a-input v-model="queryParams.username" placeholder="输入用户名搜索" allow-clear style="max-width: 250px">
             </a-input>
           </a-input-group>
-          <a-button type="primary" @click="search">
-            <template #icon><icon-search /></template>
-            <span>查询</span>
-          </a-button>
-          <a-button @click="reset">重置</a-button>
+          <GiButton type="search" @click="search"></GiButton>
+          <GiButton type="reset" @click="reset"></GiButton>
         </a-space>
       </a-row>
 
@@ -87,15 +77,9 @@
           <a-table-column title="操作" :width="180" align="center" :fixed="fixed">
             <template #cell="{ record }">
               <a-space>
-                <a-button type="primary" size="mini" @click="onEdit(record)">
-                  <template #icon><icon-edit /></template>
-                  <span>编辑</span>
-                </a-button>
+                <GiButton type="edit" size="mini" :disabled="record.disabled" @click="onEdit(record)"></GiButton>
                 <a-popconfirm type="warning" content="确定删除该用户吗?" @before-ok="onDelete(record)">
-                  <a-button type="primary" status="danger" size="mini" :disabled="record.disabled">
-                    <template #icon><icon-delete /></template>
-                    <span>删除</span>
-                  </a-button>
+                  <GiButton type="delete" size="mini" :disabled="record.disabled"></GiButton>
                 </a-popconfirm>
               </a-space>
             </template>
