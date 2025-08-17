@@ -6,7 +6,6 @@
         @search="TableRef?.search" @reset="TableRef?.search">
       </GiForm>
     </template>
-
     <Table ref="TableRef" />
   </GiPageLayout>
 </template>

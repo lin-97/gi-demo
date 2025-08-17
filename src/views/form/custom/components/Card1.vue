@@ -1,10 +1,7 @@
 <template>
   <a-card title="配置表单-查询">
     <template #extra>
-      <a-button type="primary" status="warning" @click="onViewCode">
-        <template #icon><icon-code /></template>
-        <span>查看代码</span>
-      </a-button>
+      <GiCodeButton :code="CodeJson"></GiCodeButton>
     </template>
     <a-row :gutter="30">
       <a-col :xs="24" :sm="24" :md="12">
@@ -20,12 +17,9 @@
 
 <script setup lang="ts">
 import type { ColumnItem } from '@/components/GiForm'
-import { Drawer, Message } from '@arco-design/web-vue'
-import { useWindowSize } from '@vueuse/core'
+import { Message } from '@arco-design/web-vue'
 import GiCodeView from '@/components/GiCodeView/index.vue'
-import Card1Json from './code/card1-json'
-
-const { width } = useWindowSize()
+import CodeJson from './Card1.vue?raw'
 
 const form = reactive({
   name: '',
@@ -60,14 +54,6 @@ const columns = reactive([
     }
   }
 ] as ColumnItem[])
-
-const onViewCode = () => {
-  Drawer.open({
-    title: '数据结构',
-    content: () => h(GiCodeView, { codeJson: Card1Json, type: 'vue' }),
-    width: width.value < 500 ? '100%' : 560
-  })
-}
 
 const search = () => {
   Message.info('点击了搜索')

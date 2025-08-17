@@ -21,7 +21,6 @@
 
 <script setup lang='ts'>
 import type { CSSProperties } from 'vue'
-import { set } from 'xe-utils'
 import SplitButton from './SplitButton.vue'
 
 defineOptions({ name: 'GiPageLayout' })

@@ -7,6 +7,7 @@
         <GiButton type="add" @click="onAdd"></GiButton>
         <GiButton type="delete" @click="onMulDelete"></GiButton>
         <GiButton type="import" @click="onImport"></GiButton>
+        <GiCodeButton :code="CodeJson"></GiCodeButton>
       </template>
       <template #columns>
         <a-table-column title="序号" :width="66" align="center">
@@ -65,6 +66,7 @@ import type * as T from '@/apis/person'
 import { Message } from '@arco-design/web-vue'
 import { baseAPI } from '@/apis/person'
 import { useTable } from '@/hooks'
+import CodeJson from './index.vue?raw'
 
 defineOptions({ name: 'TableCustom' })
 

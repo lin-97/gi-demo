@@ -1,6 +1,9 @@
 <template>
   <GiPageLayout margin :body-style="{ overflowY: 'auto' }">
-    <a-alert style="margin-bottom: 20px;">通过函数调用表格弹窗</a-alert>
+    <a-row align="center" class="gi_mb">
+      <a-alert style="margin-right: 8px; flex: 1">通过函数调用表格弹窗</a-alert>
+      <GiCodeButton :code="CodeJson"></GiCodeButton>
+    </a-row>
 
     <GiForm v-model="form" :columns="columns">
     </GiForm>
@@ -10,6 +13,7 @@
 <script setup lang="ts">
 import type { ColumnItem } from '@/components/GiForm'
 import { selectUserListDialog } from '@/components/dialog'
+import CodeJson from './index.vue?raw'
 
 const form = reactive({
   radioId: '',
@@ -24,7 +28,8 @@ const columns = reactive([
   {
     type: 'input-search',
     label: '单选',
-    field: 'radioName',
+    field: 'radioId',
+    fieldName: 'radioName',
     props: {
       allowClear: true,
       onSearch: () => {
@@ -44,7 +49,8 @@ const columns = reactive([
   {
     type: 'input-search',
     label: '多选',
-    field: 'chekboxName',
+    field: 'chekboxId',
+    fieldName: 'chekboxName',
     props: {
       allowClear: true,
       onSearch: () => {
@@ -65,7 +71,8 @@ const columns = reactive([
   {
     type: 'input-search',
     label: '异步',
-    field: 'asyncName',
+    field: 'asyncId',
+    fieldName: 'asyncName',
     props: {
       allowClear: true,
       onSearch: () => {

@@ -6,6 +6,7 @@
       <GiButton type="add" @click="onAdd"></GiButton>
       <GiButton type="delete" @click="onMulDelete"></GiButton>
       <GiButton type="import" @click="onImport"></GiButton>
+      <GiCodeButton :code="CodeJson"></GiCodeButton>
     </template>
     <template #avatar="{ record }">
       <a-avatar :size="28" shape="circle">
@@ -36,6 +37,19 @@ import type * as T from '@/apis/person'
 import { Link, Message } from '@arco-design/web-vue'
 import { baseAPI } from '@/apis/person'
 import { useTable } from '@/hooks'
+import Demo1Code from '../demo1/index.vue?raw'
+import Demo2Code from '../demo2/index.vue?raw'
+import Demo3Code from '../demo3/index.vue?raw'
+import Demo4Code from '../demo4/index.vue?raw'
+
+const route = useRoute()
+const CODE_MAP: Record<string, string> = {
+  '/layout/demo1': Demo1Code,
+  '/layout/demo2': Demo2Code,
+  '/layout/demo3': Demo3Code,
+  '/layout/demo4': Demo4Code
+}
+const CodeJson = CODE_MAP[route.path]
 
 const columns: TableInstance['columns'] = [
   { title: '序号', width: 66, align: 'center', render: ({ rowIndex }) => h('span', {}, rowIndex + 1) },
