@@ -1,1 +1,0 @@
-import r from"./A-BcL221e4.js";import c from"./B-DWIShKDb.js";import{e as s,h as t,j as _,k as p,l as o,t as e}from"./vue-_iYK9Zi6.js";const x=s({__name:"index",setup(m){return(l,d)=>{const a=t("a-space"),n=t("a-card");return p(),_(n,{title:"mitt",bordered:!1},{default:o(()=>[e(a,null,{default:o(()=>[e(r),e(c)]),_:1})]),_:1})}}});export{x as _};

@@ -1,1 +1,0 @@
-import{_ as t}from"./index-BelRBRvB.js";import{e as n,j as o,k as r}from"./vue-_iYK9Zi6.js";import"./arco-CDZlpuCh.js";import"./index-BJpBVVpn.js";const u=n({name:"DocumentVite",__name:"index",setup(_){return(c,m)=>{const e=t;return r(),o(e,{src:"https://cn.vitejs.dev/guide/"})}}});export{u as default};
