@@ -42,8 +42,4 @@ const select = () => {
 }
 </script>
 
-<style lang="scss" scoped>
-:deep(.arco-tree-node-title) {
-  white-space: nowrap;
-}
-</style>
+<style lang="scss" scoped></style>
