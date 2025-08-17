@@ -1,5 +1,5 @@
 <template>
-  <GiPageLayout>
+  <GiPageLayout collapsed>
     <template #left>
       <CateTree placeholder="请输入搜索关键词" @node-click="pagination.onChange(1)"></CateTree>
     </template>
@@ -9,9 +9,7 @@
         <GiButton type="add" @click="onAdd"></GiButton>
         <GiButton type="delete" @click="onMulDelete"></GiButton>
         <GiButton type="export" @click="onExport"></GiButton>
-        <a-button type="primary" status="warning" @click="onViewCode">
-          <template #icon><icon-code /></template>
-        </a-button>
+        <GiCodeButton :code="CodeJson"></GiCodeButton>
       </a-space>
 
       <a-space wrap>
@@ -67,17 +65,14 @@
 
 <script setup lang="ts">
 import type * as T from '@/apis/person'
-import { Drawer, Message } from '@arco-design/web-vue'
-import { useWindowSize } from '@vueuse/core'
+import { Message } from '@arco-design/web-vue'
 import { baseAPI } from '@/apis/person'
-import GiCodeView from '@/components/GiCodeView/index.vue'
 import { useTable } from '@/hooks'
 import { useDict } from '@/hooks/app'
 import { useTabsStore } from '@/stores'
 import CateTree from './CateTree/index.vue'
-import Pane1Json from './code/pane1-json'
+import CodeJson from './Pane1.vue?raw'
 
-const { width } = useWindowSize()
 const router = useRouter()
 const { setTabTitle } = useTabsStore()
 
@@ -135,14 +130,6 @@ const onExport = () => {
     return Message.warning('请勾选数据')
   }
   Message.success('点击了导出')
-}
-
-const onViewCode = () => {
-  Drawer.open({
-    title: '查看代码',
-    content: () => h(GiCodeView, { codeJson: Pane1Json, type: 'vue' }),
-    width: width.value < 500 ? '100%' : 800
-  })
 }
 </script>
 

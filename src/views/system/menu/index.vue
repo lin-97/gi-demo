@@ -12,9 +12,7 @@
           </a-button>
         </a-tooltip>
         <a-tooltip content="查看数据结构">
-          <a-button type="primary" status="warning" @click="onViewCode">
-            <template #icon><icon-code /></template>
-          </a-button>
+          <GiCodeButton :code="JSON.stringify(menuList, null, '\t')"></GiCodeButton>
         </a-tooltip>
       </a-space>
 
@@ -107,9 +105,7 @@
 
 <script setup lang="ts">
 import type * as T from '@/apis/system/menu'
-import { Drawer } from '@arco-design/web-vue'
 import { baseAPI } from '@/apis/system/menu'
-import GiCodeView from '@/components/GiCodeView/index.vue'
 import { useTable } from '@/hooks'
 import { useDict } from '@/hooks/app'
 import { transformPathToName } from '@/utils'
@@ -154,14 +150,6 @@ const onEdit = (item: T.ListItem) => {
 
 const onDelete = (item: T.ListItem) => {
   return handleDelete(() => baseAPI.delete({ ids: [item.id] }), { showModal: false })
-}
-
-const onViewCode = () => {
-  Drawer.open({
-    title: '数据结构',
-    content: () => h(GiCodeView, { codeJson: JSON.stringify(menuList.value, null, '\t') }),
-    width: 560
-  })
 }
 </script>
 

@@ -22,8 +22,8 @@
             <slot v-if="!['group-title'].includes(item.type || '')" :name="item.field"
               v-bind="{ disabled: isDisabled(item) }">
               <component :is="`a-${item.type}`" v-bind="getComponentBindProps(item)"
-                :model-value="modelValue[item.field as keyof typeof modelValue]"
-                @update:model-value="updateValue($event, item.field)">
+                :model-value="modelValue[getModelField(item)]"
+                @update:model-value="updateValue($event, getModelField(item))">
                 <!-- 组件插槽 -->
                 <template v-for="(slotValue, slotKey) in item?.slots" :key="slotKey" #[slotKey]="scope">
                   <template v-if="typeof slotValue === 'string'">{{ slotValue }}</template>
@@ -181,6 +181,8 @@ const STATIC_PROPS = new Map<ColumnItem['type'], Partial<ColumnItem['props']>>([
   ['date-picker', { allowClear: true }],
   ['time-picker', { allowClear: true }]
 ])
+
+const getModelField = (item: ColumnItem) => item?.fieldName || item.field
 
 /** 获取组件默认占位 */
 const getPlaceholder = (item: ColumnItem) => {

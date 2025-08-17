@@ -1,10 +1,7 @@
 <template>
   <a-card title="配置表单-弹窗" :bordered="true" class="gi_margin">
     <template #extra>
-      <a-button type="primary" status="warning" @click="onViewCode">
-        <template #icon><icon-code /></template>
-        <span>查看代码</span>
-      </a-button>
+      <GiCodeButton :code="CodeJson"></GiCodeButton>
     </template>
 
     <a-alert>此示例编辑模式会禁用状态、是否隐藏</a-alert>
@@ -30,13 +27,12 @@
 
 <script setup lang="ts">
 import type { ColumnItem } from '@/components/GiForm'
-import { Drawer, Message, Modal } from '@arco-design/web-vue'
+import { Message, Modal } from '@arco-design/web-vue'
 import { useWindowSize } from '@vueuse/core'
-import GiCodeView from '@/components/GiCodeView/index.vue'
 import { GiForm } from '@/components/GiForm'
 import { useResetReactive } from '@/hooks'
 import * as Regexp from '@/utils/regexp'
-import Card4Json from './code/card4-json'
+import CodeJson from './Card4.vue?raw'
 import { cityOptions, deptData } from './data'
 
 const { width } = useWindowSize()
@@ -240,14 +236,6 @@ const onAddDrawer = () => {
 const onEditDrawer = () => {
   isEdit.value = true
   visible.value = true
-}
-
-const onViewCode = () => {
-  Drawer.open({
-    title: '数据结构',
-    content: () => h(GiCodeView, { codeJson: Card4Json, type: 'vue' }),
-    width: width.value < 500 ? '100%' : 560
-  })
 }
 </script>
 

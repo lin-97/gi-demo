@@ -11,6 +11,7 @@
         <GiButton type="add" @click="onAdd"></GiButton>
         <GiButton type="delete" @click="onMulDelete"></GiButton>
         <GiButton type="import" @click="onImport"></GiButton>
+        <GiCodeButton :code="CodeJson"></GiCodeButton>
       </template>
       <template #avatar="{ record }">
         <a-avatar :size="28" shape="circle">
@@ -42,11 +43,11 @@
 import type { PopconfirmInstance, TableInstance } from '@arco-design/web-vue'
 import type * as T from '@/apis/person'
 import type { ColumnItem } from '@/components/GiForm'
-import { Drawer, Link, Message } from '@arco-design/web-vue'
+import { Link, Message } from '@arco-design/web-vue'
 import { baseAPI } from '@/apis/person'
-import GiCodeView from '@/components/GiCodeView/index.vue'
 import { useTable } from '@/hooks'
 import { useDict } from '@/hooks/app'
+import CodeJson from './index.vue?raw'
 
 defineOptions({ name: 'TableCustom2' })
 const { data: statusOptions } = useDict({ code: 'status' })

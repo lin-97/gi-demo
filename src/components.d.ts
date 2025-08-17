@@ -13,6 +13,7 @@ declare module 'vue' {
     GiCellGender: typeof import('./components/GiCell/GiCellGender.vue')['default']
     GiCellStatus: typeof import('./components/GiCell/GiCellStatus.vue')['default']
     GiCellTags: typeof import('./components/GiCell/GiCellTags.vue')['default']
+    GiCodeButton: typeof import('./components/GiCodeButton/index.vue')['default']
     GiCodeView: typeof import('./components/GiCodeView/index.vue')['default']
     GiDot: typeof import('./components/GiDot/index.tsx')['default']
     GiEditTable: typeof import('./components/GiEditTable/GiEditTable.vue')['default']

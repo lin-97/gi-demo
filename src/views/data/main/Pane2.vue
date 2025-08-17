@@ -2,10 +2,8 @@
   <GiPageLayout>
     <a-row justify="end" align="center" wrap>
       <a-space wrap>
-        <a-button type="primary">导出</a-button>
-        <a-button type="primary" status="warning" @click="onViewCode">
-          <template #icon><icon-code /></template>
-        </a-button>
+        <GiButton type="import"></GiButton>
+        <GiCodeButton :code="CodeJson"></GiCodeButton>
       </a-space>
     </a-row>
 
@@ -19,11 +17,10 @@
 
 <script lang="tsx" setup>
 import type { TableColumnData, TableInstance } from '@arco-design/web-vue'
-import { Modal } from '@arco-design/web-vue'
 import { baseAPI } from '@/apis/person'
 import GiCellStatus from '@/components/GiCell/GiCellStatus.vue'
 import { useTable } from '@/hooks'
-import Pane2Json from './code/pane2-json'
+import CodeJson from './Pane2.vue?raw'
 
 const columns: TableColumnData[] = [
   {
@@ -109,15 +106,6 @@ const selectAll: TableInstance['onSelectAll'] = (checked) => {
 // 删除
 function onDelete() {
   return new Promise((resolve) => setTimeout(() => resolve(true), 300))
-}
-
-// 查看代码
-const onViewCode = () => {
-  Modal.open({
-    title: '查看代码',
-    content: () => <gi-code-view type="vue" codeJson={Pane2Json}></gi-code-view>,
-    fullscreen: true
-  })
 }
 </script>
 

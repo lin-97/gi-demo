@@ -8,7 +8,6 @@
         <a-tab-pane key="1" title="页签1"></a-tab-pane>
         <a-tab-pane key="2" title="页签2"></a-tab-pane>
         <a-tab-pane key="3" title="页签3"></a-tab-pane>
-
         <template #extra>
           <a-button>返回</a-button>
         </template>

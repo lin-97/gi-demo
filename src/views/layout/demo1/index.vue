@@ -9,7 +9,6 @@
     <template #left>
       <Tree @node-click="TableRef?.search" />
     </template>
-
     <Table ref="TableRef" />
   </GiPageLayout>
 </template>

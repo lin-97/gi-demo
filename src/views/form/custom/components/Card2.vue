@@ -3,10 +3,7 @@
     <template #extra>
       <a-space>
         <a-button type="primary" @click="isNameRequired = !isNameRequired">姓名必填动态设置</a-button>
-        <a-button type="primary" status="warning" @click="onViewCode">
-          <template #icon><icon-code /></template>
-          <span>查看代码</span>
-        </a-button>
+        <GiCodeButton :code="CodeJson"></GiCodeButton>
       </a-space>
     </template>
     <a-row :gutter="30">
@@ -32,16 +29,14 @@
 
 <script setup lang="tsx">
 import type { ColumnItem } from '@/components/GiForm'
-import { Drawer, Message } from '@arco-design/web-vue'
-import { useWindowSize } from '@vueuse/core'
+import { Message } from '@arco-design/web-vue'
 import GiCodeView from '@/components/GiCodeView/index.vue'
 import { GiForm } from '@/components/GiForm'
 import { useDict } from '@/hooks/app'
 import * as Regexp from '@/utils/regexp'
-import Card2Json from './code/card2-json'
+import CodeJson from './Card2.vue?raw'
 import { cityOptions, deptData } from './data'
 
-const { width } = useWindowSize()
 const { data: status_options } = useDict({ code: 'status' })
 const isNameRequired = ref(true)
 
@@ -258,14 +253,6 @@ const columns = computed(() => [
     span: 24
   }
 ] as ColumnItem<typeof form>[])
-
-const onViewCode = () => {
-  Drawer.open({
-    title: '数据结构',
-    content: () => h(GiCodeView, { codeJson: Card2Json, type: 'vue' }),
-    width: width.value < 560 ? '100%' : 560
-  })
-}
 
 const save = async () => {
   const error = await formRef.value?.formRef?.validate()
