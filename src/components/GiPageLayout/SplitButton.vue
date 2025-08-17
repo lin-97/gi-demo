@@ -70,6 +70,7 @@ const handleClick = () => {
   z-index: 2;
   border: 1px solid var(--color-border-2);
   background-color: var(--color-bg-1);
+  box-sizing: border-box;
   cursor: pointer;
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   will-change: transform, background-color, border-color;
@@ -91,7 +92,7 @@ const handleClick = () => {
     width: 24px;
     height: 24px;
     border-radius: 50%;
-    left: -12px;
+    left: -4px;
     overflow: hidden;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
   }

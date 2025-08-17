@@ -1,26 +1,28 @@
 <template>
-  <ElSplitter class="gi-page-layout" :class="getClass">
-    <ElSplitterPanel v-if="slots.left" min="1px" max="600px" :size="props.size">
-      <div class="gi-page-layout__left" :style="props.leftStyle">
+  <a-split v-model:size="size" class="gi-page-layout" :class="getClass" min="1px" max="600px" :disabled="!slots.left">
+    <template #first>
+      <div v-if="slots.left" class="gi-page-layout__left" :style="props.leftStyle">
         <slot name="left"></slot>
       </div>
-    </ElSplitterPanel>
-    <ElSplitterPanel class="gi-page-layout__right-panel">
+    </template>
+    <template #second>
       <div v-if="slots.header" class="gi-page-layout__header" :style="props.headerStyle">
         <slot name="header"></slot>
       </div>
       <div class="gi-page-layout__body" :style="props.bodyStyle">
         <slot></slot>
       </div>
-    </ElSplitterPanel>
-  </ElSplitter>
+    </template>
+    <template v-if="props.collapsed" #resize-trigger-icon>
+      <SplitButton :collapsed="parseInt(size) < 20" @click="handleClick"></SplitButton>
+    </template>
+  </a-split>
 </template>
 
 <script setup lang='ts'>
 import type { CSSProperties } from 'vue'
-import { ElSplitter, ElSplitterPanel } from 'element-plus'
-import 'element-plus/theme-chalk/el-splitter.css'
-import 'element-plus/theme-chalk/el-splitter-panel.css'
+import { set } from 'xe-utils'
+import SplitButton from './SplitButton.vue'
 
 defineOptions({ name: 'GiPageLayout' })
 
@@ -31,7 +33,8 @@ const props = withDefaults(defineProps<Props>(), {
   headerBordered: true,
   leftStyle: () => ({}),
   headerStyle: () => ({}),
-  bodyStyle: () => ({})
+  bodyStyle: () => ({}),
+  collapsed: false
 })
 
 /** 组件插槽定义 */
@@ -42,13 +45,17 @@ defineSlots<{
 }>()
 
 const slots = useSlots()
+const size = ref(props.size)
+const collapseing = ref(false)
 
 const getClass = computed(() => {
   return {
+    'gi-page-layout--disabled': !slots.left,
     'gi-page-layout--margin': props.margin,
     'gi-page-layout--inner': props.inner,
     'gi-page-layout--has-header': slots.header,
-    'gi-page-layout--header-bordered': props.headerBordered
+    'gi-page-layout--header-bordered': props.headerBordered,
+    'gi-page-layout--collapseing': collapseing.value
   }
 })
 
@@ -61,22 +68,60 @@ interface Props {
   leftStyle?: CSSProperties
   headerStyle?: CSSProperties
   bodyStyle?: CSSProperties
+  collapsed?: boolean
+}
+
+function handleClick() {
+  collapseing.value = true
+  setTimeout(() => {
+    collapseing.value = false
+  }, 300)
+  size.value = Number.parseInt(size.value) > 20 ? '0px' : props.size
 }
 </script>
 
 <style lang='scss' scoped>
-:deep(.el-splitter-bar__dragger) {
-  &:before {
-    width: 0.5px;
-    background-color: var(--color-border);
+:deep(.arco-split-pane) {
+  height: 100%;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+:deep(.arco-split-trigger) {
+  position: relative;
+}
+
+:deep(.arco-split-trigger-icon-wrapper) {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 16px;
+  height: 100%;
+  background-color: transparent;
+
+  .arco-split-trigger-icon {
+    display: none;
   }
 
   &:hover,
   &:active {
-    &:before {
+    &::before {
       width: 2px;
       background-color: var(--color-primary-light-2);
     }
+  }
+
+  &::before {
+    content: '';
+    width: 0.5px;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: var(--color-border-2);
   }
 }
 
@@ -118,6 +163,18 @@ interface Props {
   }
 }
 
+.gi-page-layout--disabled {
+  :deep(> .arco-split-pane-first) {
+    display: none;
+  }
+}
+
+.gi-page-layout--collapseing {
+  :deep(> .arco-split-pane-first) {
+    transition: flex-basis 0.3s;
+  }
+}
+
 .gi-page-layout__left {
   height: 100%;
   padding: $padding;
@@ -125,12 +182,6 @@ interface Props {
   flex-direction: column;
   overflow: hidden;
   box-sizing: border-box;
-}
-
-:deep(.gi-page-layout__right-panel) {
-  display: flex;
-  flex-direction: column;
-  overflow: hidden;
 }
 
 .gi-page-layout__header {

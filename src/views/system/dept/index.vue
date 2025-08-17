@@ -2,14 +2,8 @@
   <GiPageLayout margin>
     <a-row justify="space-between">
       <a-space wrap>
-        <a-button type="primary" @click="onAdd">
-          <template #icon><icon-plus /></template>
-          <span>新增</span>
-        </a-button>
-        <a-button type="primary" status="danger" @click="onMulDelete">
-          <template #icon><icon-delete /></template>
-          <span>删除</span>
-        </a-button>
+        <GiButton type="add" @click="onAdd"></GiButton>
+        <GiButton type="delete" @click="onMulDelete"></GiButton>
       </a-space>
 
       <a-space wrap>
@@ -19,11 +13,8 @@
             <template #prefix><icon-search /></template>
           </a-input>
         </a-input-group>
-        <a-button type="primary" @click="search">
-          <template #icon><icon-search /></template>
-          <span>搜索</span>
-        </a-button>
-        <a-button @click="reset">重置</a-button>
+        <GiButton type="search" @click="search"></GiButton>
+        <GiButton type="reset" @click="reset"></GiButton>
       </a-space>
     </a-row>
 
@@ -49,19 +40,11 @@
         <a-table-column title="操作" :width="200" align="center" :fixed="fixed">
           <template #cell="{ record }">
             <a-space>
-              <a-button type="primary" size="mini" @click="onEdit(record)">
-                <template #icon><icon-edit /></template>
-                <span>编辑</span>
-              </a-button>
-              <a-button v-if="record.parentId" type="primary" status="success" size="mini" @click="onAdd()">
-                <template #icon><icon-plus /></template>
-                <span>新增</span>
-              </a-button>
+              <GiButton type="edit" size="mini" :disabled="record.disabled" @click="onEdit(record)"></GiButton>
+              <GiButton v-if="record.parentId" type="add" size="mini" status="success" :disabled="record.disabled"
+                @click="onAdd()"></GiButton>
               <a-popconfirm type="warning" content="您确定要删除该项吗?" @before-ok="onDelete(record)">
-                <a-button type="primary" status="danger" size="mini">
-                  <template #icon><icon-delete /></template>
-                  <span>删除</span>
-                </a-button>
+                <GiButton type="delete" size="mini" :disabled="record.disabled"></GiButton>
               </a-popconfirm>
             </a-space>
           </template>
