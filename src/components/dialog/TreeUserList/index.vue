@@ -1,5 +1,8 @@
 <template>
   <GiPageLayout>
+    <template #left>
+      <Tree @node-click="search" />
+    </template>
     <a-row justify="end">
       <a-space wrap>
         <a-input v-model="sarchParams.username" placeholder="输入用户名搜索" allow-clear style="max-width: 250px">
@@ -28,6 +31,7 @@ import type { TableColumnData } from '@arco-design/web-vue'
 import { baseAPI } from '@/apis/person'
 import GiCellStatus from '@/components/GiCell/GiCellStatus.vue'
 import { useTable } from '@/hooks'
+import Tree from './Tree.vue'
 
 interface Props {
   multiple?: boolean
@@ -47,13 +51,7 @@ const columns = [
   {
     title: '序号',
     width: 68,
-    render: ({ rowIndex }) => (
-      <span>
-        {rowIndex + 1}
-        {' '}
-
-      </span>
-    )
+    render: ({ rowIndex }) => (<span>{rowIndex + 1}</span>)
   },
   {
     title: '姓名',

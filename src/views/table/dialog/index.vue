@@ -7,12 +7,16 @@
 
     <GiForm v-model="form" :columns="columns">
     </GiForm>
+
+    <a-alert type="normal" class="gi_mb">通过以下方式可以快速构建表格选择弹窗</a-alert>
+    <GiCodeView :code-json="DialogCodeJson"></GiCodeView>
   </GiPageLayout>
 </template>
 
 <script setup lang="ts">
 import type { ColumnItem } from '@/components/GiForm'
-import { selectUserListDialog } from '@/components/dialog'
+import { selectTreeUserListDialog, selectUserListDialog } from '@/components/dialog'
+import DialogCodeJson from '@/components/dialog/index.ts?raw'
 import CodeJson from './index.vue?raw'
 
 const form = reactive({
@@ -21,7 +25,9 @@ const form = reactive({
   chekboxId: '',
   chekboxName: '',
   asyncId: '',
-  asyncName: ''
+  asyncName: '',
+  demoId: '',
+  demoName: ''
 })
 
 const columns = reactive([
@@ -89,6 +95,28 @@ const columns = reactive([
       onClear: () => {
         form.asyncId = ''
         form.asyncName = ''
+      }
+    }
+  },
+  {
+    type: 'input-search',
+    label: '左树右表',
+    field: 'demoId',
+    fieldName: 'demoName',
+    props: {
+      allowClear: true,
+      onSearch: () => {
+        selectTreeUserListDialog({
+          multiple: true,
+          onOk: (data) => {
+            form.demoId = data.map((i) => i.id).join(',')
+            form.demoName = data.map((i) => i.name).join(',')
+          }
+        })
+      },
+      onClear: () => {
+        form.demoId = ''
+        form.demoName = ''
       }
     }
   }
