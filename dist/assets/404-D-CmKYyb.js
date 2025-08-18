@@ -1,1 +1,0 @@
-import r from"./ErrorPage-BX3n06XB.js";import{e,j as o,k as t}from"./vue-_iYK9Zi6.js";import"./index-C9S3_Aih.js";import"./arco-CDZlpuCh.js";const i=e({name:"Error404",__name:"404",setup(a){return(m,n)=>(t(),o(r,{code:404}))}});export{i as default};
