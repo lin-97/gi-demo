@@ -114,7 +114,7 @@ function handleClick() {
 
   &::before {
     content: '';
-    width: 0.5px;
+    width: 1px;
     height: 100%;
     position: absolute;
     top: 0;

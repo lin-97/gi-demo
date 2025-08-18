@@ -25,6 +25,7 @@ export const createSelectDialog = <T = any>(params: CreateSelectDialogParams) =>
       content: () => h(params.component, { ref: (e: any) => (TableRef.value = e), multiple: options.multiple, queryParams: options.queryParams, ...params.componentProps }),
       width: '90%',
       modalStyle: { maxWidth: '1000px' },
+      bodyStyle: { overflow: 'hidden', height: '500px', padding: 0 },
       onBeforeOk: async () => {
         if (!TableRef.value?.getSelectedData) {
           Message.warning('组件必须暴露getSelectedData方法')
