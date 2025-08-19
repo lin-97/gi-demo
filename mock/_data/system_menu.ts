@@ -532,6 +532,28 @@ const data: MockSystemMenuItem[] = [
         showInTabs: true,
         alwaysShow: false,
         affix: false
+      },
+      {
+        id: '1505',
+        parentId: '15',
+        path: '/layout/demo5',
+        component: 'layout/demo5/index',
+        redirect: '',
+        type: 2,
+        title: '布局5',
+        svgIcon: '',
+        icon: 'icon-menu',
+        keepAlive: false,
+        hidden: false,
+        sort: 0,
+        activeMenu: '',
+        breadcrumb: true,
+        status: 1,
+        roles: ['role_admin', 'role_user'],
+        permission: '',
+        showInTabs: true,
+        alwaysShow: false,
+        affix: false
       }
     ],
     status: 1,

@@ -41,13 +41,15 @@ import Demo1Code from '../demo1/index.vue?raw'
 import Demo2Code from '../demo2/index.vue?raw'
 import Demo3Code from '../demo3/index.vue?raw'
 import Demo4Code from '../demo4/index.vue?raw'
+import Demo5Code from '../demo5/index.vue?raw'
 
 const route = useRoute()
 const CODE_MAP: Record<string, string> = {
   '/layout/demo1': Demo1Code,
   '/layout/demo2': Demo2Code,
   '/layout/demo3': Demo3Code,
-  '/layout/demo4': Demo4Code
+  '/layout/demo4': Demo4Code,
+  '/layout/demo5': Demo5Code
 }
 const CodeJson = CODE_MAP[route.path]
 
