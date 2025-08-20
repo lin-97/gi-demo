@@ -31,7 +31,7 @@
       :scroll="{ x: '100%', y: '100%', minWidth: 1000 }" :row-selection="{ type: 'checkbox', showCheckedAll: true }"
       :pagination="pagination" :selected-keys="selectedKeys" @select="select" @select-all="selectAll">
       <template #columns>
-        <a-table-column title="序号" :width="68">
+        <a-table-column title="序号" :width="68" align="center">
           <template #cell="cell">{{ cell.rowIndex + 1 }}</template>
         </a-table-column>
         <a-table-column title="姓名" data-index="name"></a-table-column>

@@ -1,5 +1,5 @@
 <template>
-  <a-modal v-model:visible="visible" :title="title" width="90%" :mask-closable="false"
+  <a-modal v-model:visible="visible" :title="title" width="calc(100% - 20px)" :mask-closable="false"
     :modal-style="{ maxWidth: '520px' }" @before-ok="save" @close="close">
     <a-spin :loading="loading" class="w-full">
       <a-form ref="formRef" :model="form" :rules="rules" size="medium" auto-label-width>

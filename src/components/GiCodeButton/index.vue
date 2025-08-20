@@ -6,7 +6,6 @@
 
 <script setup lang='ts'>
 import { Drawer } from '@arco-design/web-vue'
-import { useWindowSize } from '@vueuse/core'
 import GiCodeView from '@/components/GiCodeView/index.vue'
 
 interface Props {
@@ -19,12 +18,12 @@ const props = withDefaults(defineProps<Props>(), {
   lang: 'vue'
 })
 
-const { width } = useWindowSize()
 const onViewCode = () => {
   Drawer.open({
     title: '查看代码',
     content: () => h(GiCodeView, { codeJson: props.code, type: props.lang }),
-    width: width.value < 500 ? '100%' : 800
+    width: '100%',
+    drawerStyle: { maxWidth: '800px' }
   })
 }
 </script>

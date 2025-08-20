@@ -1,7 +1,5 @@
 <template>
-  <a-card title="地图" :bordered="false" class="gi_card" style="flex: 1;">
-    <div id="container"></div>
-  </a-card>
+  <div id="container"></div>
 </template>
 
 <script lang="ts" setup>

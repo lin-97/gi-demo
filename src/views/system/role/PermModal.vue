@@ -1,5 +1,5 @@
 <template>
-  <a-modal v-model:visible="visible" :title="title" :fullscreen="isMobile()" :mask-closable="true" @ok="save">
+  <a-modal v-model:visible="visible" :title="title" width="calc(100% - 20px)" :mask-closable="true" @ok="save">
     <a-tree ref="treeRef" v-model:checked-keys="menuIds" size="mini" checkable :check-strictly="true" :data="treeData"
       :field-names="{ key: 'id' }"></a-tree>
   </a-modal>
@@ -10,7 +10,6 @@ import type { MenuOptionsItem } from '@/apis/system/menu'
 import { Message } from '@arco-design/web-vue'
 import { getMenuOptions } from '@/apis/system/menu'
 import { getRoleMenuIds } from '@/apis/system/role'
-import { isMobile } from '@/utils'
 
 const treeRef = useTemplateRef('treeRef')
 const treeData = ref<MenuOptionsItem[]>([])

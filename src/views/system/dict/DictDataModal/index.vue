@@ -1,5 +1,5 @@
 <template>
-  <a-modal v-model:visible="visible" title="字典数据" width="90%" hide-cancel ok-text="关闭" :mask-closable="false"
+  <a-modal v-model:visible="visible" title="字典数据" width="calc(100% - 20px)" :mask-closable="false"
     :modal-style="{ maxWidth: '680px' }">
     <a-row>
       <a-space wrap>
@@ -14,8 +14,8 @@
       </a-space>
     </a-row>
 
-    <a-table row-key="id" size="small" :data="tableData" :bordered="{ cell: true }" :loading="loading"
-      :scroll="{ x: '100%', y: '100%', minWidth: 600 }" :pagination="{ ...pagination, size: 'small' }"
+    <a-table row-key="id" :data="tableData" :bordered="{ cell: true }" :loading="loading"
+      :scroll="{ x: '100%', y: '100%', minWidth: 600 }" :pagination="{ ...pagination }"
       :row-selection="{ type: 'checkbox', showCheckedAll: true }" :selected-keys="selectedKeys" @select="select"
       @select-all="selectAll">
       <template #columns>
@@ -29,18 +29,12 @@
             <GiCellStatus :status="record.status"></GiCellStatus>
           </template>
         </a-table-column>
-        <a-table-column title="操作" :width="180" align="center">
+        <a-table-column title="操作" :width="140" align="center">
           <template #cell="{ record }">
             <a-space>
-              <a-button type="primary" size="mini" @click="onEdit(record)">
-                <template #icon><icon-edit /></template>
-                <span>编辑</span>
-              </a-button>
+              <a-button type="primary" size="mini" @click="onEdit(record)">编辑</a-button>
               <a-popconfirm type="warning" content="确定删除该角色吗?">
-                <a-button type="primary" status="danger" size="mini">
-                  <template #icon><icon-delete /></template>
-                  <span>删除</span>
-                </a-button>
+                <a-button type="primary" status="danger" size="mini">删除</a-button>
               </a-popconfirm>
             </a-space>
           </template>

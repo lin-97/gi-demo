@@ -9,7 +9,7 @@ export function openFileRenameModal(fileItem: FileItem, callback?: () => void) {
 
   return Modal.open({
     title: '重命名',
-    width: '90%',
+    width: 'calc(100% - 20px)',
     modalStyle: { maxWidth: '450px' },
     modalAnimationName: 'el-fade',
     content: () =>

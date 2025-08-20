@@ -1,5 +1,5 @@
 <template>
-  <a-modal v-model:visible="visible" :title="title" width="90%" :modal-style="{ maxWidth: '520px' }"
+  <a-modal v-model:visible="visible" :title="title" width="calc(100% - 20px)" :modal-style="{ maxWidth: '520px' }"
     :mask-closable="false" @before-ok="save" @close="close">
     <a-form ref="formRef" :model="form" :rules="rules" size="medium" auto-label-width>
       <a-form-item label="上级部门" field="parentId">

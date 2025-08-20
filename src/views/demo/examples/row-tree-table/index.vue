@@ -1,9 +1,7 @@
 <template>
-  <a-card title="横向树列表" :bordered="false">
-    <a-table :hoverable="false" :scroll="{ x: '100%', y: '100%', minWidth: 1000 }" :bordered="{ cell: true }"
-      :columns="columns" :data="tableData" :pagination="false" :span-method="spanMethod">
-    </a-table>
-  </a-card>
+  <a-table :hoverable="false" :scroll="{ x: '100%', y: '100%', minWidth: 1000 }" :bordered="{ cell: true }"
+    :columns="columns" :data="tableData" :pagination="false" :span-method="spanMethod">
+  </a-table>
 </template>
 
 <script lang="ts" setup>

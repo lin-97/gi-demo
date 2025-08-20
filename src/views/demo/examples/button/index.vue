@@ -1,5 +1,5 @@
 <template>
-  <a-card title="按钮" :bordered="false">
+  <div>
     <a-space class="page" direction="vertical" :size="20">
       <a-space direction="vertical" :size="0">
         <a-space wrap>
@@ -206,7 +206,7 @@
         </a-button-group>
       </a-space>
     </a-space>
-  </a-card>
+  </div>
 </template>
 
 <script setup lang="ts"></script>

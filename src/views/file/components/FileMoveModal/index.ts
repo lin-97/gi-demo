@@ -8,7 +8,7 @@ export function openFileMoveModal(fileItem: FileItem, callback?: () => void) {
   const ModalContentRef = ref<InstanceType<typeof ModalContent>>()
   return Modal.open({
     title: '移动到',
-    width: '90%',
+    width: 'calc(100% - 20px)',
     modalStyle: { maxWidth: '500px' },
     modalAnimationName: 'el-dialog',
     maskAnimationName: 'el-mask',

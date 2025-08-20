@@ -1,5 +1,5 @@
 <template>
-  <a-card title="点" :bordered="false">
+  <a-card title="点" :bordered="true">
     <a-space direction="vertical" :size="20">
       <a-space :size="20">
         <GiDot></GiDot>

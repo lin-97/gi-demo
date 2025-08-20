@@ -2,7 +2,7 @@
   <GiPageLayout>
     <a-row justify="end">
       <a-space wrap>
-        <a-input v-model="sarchParams.username" placeholder="输入用户名搜索" allow-clear style="max-width: 250px">
+        <a-input v-model="searchParams.username" placeholder="输入用户名搜索" allow-clear style="max-width: 250px">
         </a-input>
         <a-button type="primary" @click="search">
           <template #icon><icon-search /></template>
@@ -39,7 +39,7 @@ const props = withDefaults(defineProps<Props>(), {
   queryParams: () => ({})
 })
 
-const sarchParams = reactive({
+const searchParams = reactive({
   username: ''
 })
 
@@ -47,13 +47,8 @@ const columns = [
   {
     title: '序号',
     width: 68,
-    render: ({ rowIndex }) => (
-      <span>
-        {rowIndex + 1}
-        {' '}
-
-      </span>
-    )
+    align: 'center',
+    render: ({ rowIndex }) => (<span>{rowIndex + 1}</span>)
   },
   {
     title: '姓名',
@@ -89,10 +84,10 @@ const {
   select,
   selectAll,
   getSelectedData
-} = useTable((page) => baseAPI.getList({ ...page, ...sarchParams, ...props.queryParams }), { immediate: true })
+} = useTable((page) => baseAPI.getList({ ...page, ...searchParams, ...props.queryParams }), { immediate: true })
 
 const reset = () => {
-  sarchParams.username = ''
+  searchParams.username = ''
   search()
 }
 
