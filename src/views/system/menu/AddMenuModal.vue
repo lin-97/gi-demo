@@ -1,5 +1,5 @@
 <template>
-  <a-modal v-model:visible="visible" :title="title" width="90%" :modal-style="{ maxWidth: '625px' }"
+  <a-modal v-model:visible="visible" :title="title" width="calc(100% - 20px)" :modal-style="{ maxWidth: '625px' }"
     :body-style="{ maxHeight: '70vh' }" :mask-closable="false" @before-ok="save" @close="close">
     <a-form ref="formRef" :model="form" :rules="formRules" auto-label-width>
       <a-form-item label="菜单类型" field="type">

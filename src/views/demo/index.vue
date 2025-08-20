@@ -1,22 +1,19 @@
 <template>
-  <div class="demo">
-    <div class="demo__left">
+  <GiPageLayout margin :body-style="{ overflowY: 'auto' }">
+    <template #left>
       <a-tabs v-model:active-key="selectedKey" position="left" hide-content>
         <a-tab-pane v-for="(item, index) in menuList" :key="index" :title="item.name"></a-tab-pane>
       </a-tabs>
-    </div>
+    </template>
 
-    <section class="demo__content">
-      <transition name="fade-slide" mode="out-in" appear>
-        <component :is="menuList[selectedKey].value"></component>
-      </transition>
-    </section>
-  </div>
+    <transition name="fade-slide" mode="out-in" appear>
+      <component :is="menuList[selectedKey].value"></component>
+    </transition>
+  </GiPageLayout>
 </template>
 
 <script lang="ts" setup>
 import ApiTest from './examples/api-test/index.vue'
-// 其他示例
 import Area from './examples/area-demo/index.vue'
 import Button from './examples/button/index.vue'
 import Editor from './examples/editor/index.vue'
@@ -50,7 +47,6 @@ const menuList = [
   { name: '地图', value: Map },
   { name: 'Mitt中央通信', value: Mitt },
   { name: '函数式组件', value: FnComponent }
-
 ]
 </script>
 
@@ -87,33 +83,5 @@ const menuList = [
 :deep(.arco-tabs-nav-vertical) {
   float: none;
   flex-direction: row;
-}
-
-.demo {
-  flex: 1;
-  padding: $margin;
-  box-sizing: border-box;
-  overflow: hidden;
-  display: flex;
-
-  &__left {
-    width: 200px;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    overflow: hidden;
-    background-color: var(--color-bg-1);
-  }
-
-  &__content {
-    flex: 1;
-    height: 100%;
-    background: var(--color-bg-1);
-    margin-left: $margin;
-    box-sizing: border-box;
-    overflow: hidden;
-    display: flex;
-    flex-direction: column;
-  }
 }
 </style>

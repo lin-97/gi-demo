@@ -23,7 +23,7 @@ export const createSelectDialog = <T = any>(params: CreateSelectDialogParams) =>
     Modal.open({
       title: options.title || params.title,
       content: () => h(params.component, { ref: (e: any) => (TableRef.value = e), multiple: options.multiple, queryParams: options.queryParams, ...params.componentProps }),
-      width: '90%',
+      width: 'calc(100% - 20px)',
       modalStyle: { maxWidth: '1000px' },
       bodyStyle: { overflow: 'hidden', height: '500px', padding: 0 },
       onBeforeOk: async () => {

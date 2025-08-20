@@ -19,7 +19,8 @@
       </a-space>
     </a-card>
 
-    <a-drawer v-model:visible="visible" :title="isEdit ? '编辑' : '新增'" :width="width >= 600 ? 600 : '100%'">
+    <a-drawer v-model:visible="visible" :title="isEdit ? '编辑' : '新增'" width="100%"
+      :drawer-style="{ maxWidth: '600px' }">
       <GiForm v-model="form" :columns="columns"></GiForm>
     </a-drawer>
   </a-card>
@@ -28,14 +29,11 @@
 <script setup lang="ts">
 import type { ColumnItem } from '@/components/GiForm'
 import { Message, Modal } from '@arco-design/web-vue'
-import { useWindowSize } from '@vueuse/core'
 import { GiForm } from '@/components/GiForm'
 import { useResetReactive } from '@/hooks'
 import * as Regexp from '@/utils/regexp'
 import CodeJson from './Card4.vue?raw'
 import { cityOptions, deptData } from './data'
-
-const { width } = useWindowSize()
 
 const isEdit = ref(false)
 const [form, resetForm] = useResetReactive({
@@ -169,9 +167,9 @@ const onAdd = () => {
   resetForm()
   Modal.open({
     title: '新增',
-    width: '90%',
+    width: 'calc(100% - 20px)',
     modalStyle: { maxWidth: '600px' },
-    fullscreen: width.value < 600,
+    bodyStyle: { maxHeight: '500px' },
     content: () =>
       h(GiForm, {
         'ref': (e) => GiFormRef.value = e as InstanceType<typeof GiForm>,
@@ -196,9 +194,9 @@ const onAdd = () => {
 const onEdit = () => {
   const option = {
     title: '编辑',
-    width: '90%',
+    width: 'calc(100% - 20px)',
     modalStyle: { maxWidth: '600px' },
-    fullscreen: width.value < 600,
+    bodyStyle: { maxHeight: '500px' },
     content: () =>
       h(GiForm, {
         'ref': (e) => GiFormRef.value = e as InstanceType<typeof GiForm>,

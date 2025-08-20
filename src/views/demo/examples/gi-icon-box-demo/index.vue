@@ -1,5 +1,5 @@
 <template>
-  <a-card title="基础用法">
+  <a-card title="基础用法" :bordered="true">
     <a-space>
       <GiIconBox color="#4F6BF6"><icon-edit /></GiIconBox>
       <GiIconBox color="#62C558"><icon-export /></GiIconBox>

@@ -26,11 +26,13 @@ const columns: TableColumnData[] = [
   {
     title: '序号',
     width: 68,
+    align: 'center',
     render: ({ rowIndex }) => <span>{rowIndex + 1}</span>
   },
   {
     title: '姓名',
-    dataIndex: 'name'
+    dataIndex: 'name',
+    width: 150
   },
   {
     title: '创建时间',

@@ -1,10 +1,8 @@
 <template>
-  <a-card title="mitt" :bordered="false">
-    <a-space>
-      <A></A>
-      <B></B>
-    </a-space>
-  </a-card>
+  <a-space>
+    <A></A>
+    <B></B>
+  </a-space>
 </template>
 
 <script lang="ts" setup>

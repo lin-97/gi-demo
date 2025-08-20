@@ -1,5 +1,5 @@
 <template>
-  <a-card title="省市区域选择" :bordered="false">
+  <div>
     <a-alert>采用了vant UI的省市区的数据源</a-alert>
     <div class="wrap">
       <section class="tree-box">
@@ -18,7 +18,7 @@
           placeholder="请选择省市区" />
       </section>
     </div>
-  </a-card>
+  </div>
 </template>
 
 <script setup lang="ts">

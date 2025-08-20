@@ -38,7 +38,7 @@
       :row-selection="{ type: 'checkbox', showCheckedAll: true }" :selected-keys="selectedKeys" @select="select"
       @select-all="selectAll">
       <template #columns>
-        <a-table-column title="序号" :width="64">
+        <a-table-column title="序号" :width="68" align="center">
           <template #cell="cell">{{ cell.rowIndex + 1 }}</template>
         </a-table-column>
         <a-table-column title="用户名" data-index="username" :width="120">

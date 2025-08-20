@@ -13,7 +13,7 @@
         <slot></slot>
       </div>
     </template>
-    <template v-if="props.collapsed" #resize-trigger-icon>
+    <template v-if="props.collapsed || isMobile" #resize-trigger-icon>
       <SplitButton :collapsed="parseInt(size) < 20" @click="handleClick"></SplitButton>
     </template>
   </a-split>
@@ -21,6 +21,7 @@
 
 <script setup lang='ts'>
 import type { CSSProperties } from 'vue'
+import { browse } from 'xe-utils'
 import SplitButton from './SplitButton.vue'
 
 defineOptions({ name: 'GiPageLayout' })
@@ -44,7 +45,8 @@ defineSlots<{
 }>()
 
 const slots = useSlots()
-const size = ref(props.size)
+const isMobile = browse().isMobile ?? false
+const size = ref(isMobile ? '0px' : props.size)
 const collapseing = ref(false)
 
 const getClass = computed(() => {

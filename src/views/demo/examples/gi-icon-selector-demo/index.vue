@@ -1,5 +1,5 @@
 <template>
-  <a-card title="图标选择器" :bordered="false">
+  <a-card title="图标选择器" :bordered="true">
     <a-space fill>
       <GiIconSelector v-model="icon"></GiIconSelector>
       <GiIconSelector v-model="icon2" type="custom"></GiIconSelector>

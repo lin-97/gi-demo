@@ -1,5 +1,5 @@
 <template>
-  <div class="gi_px gi_py">
+  <div>
     <a-card title="水平方向" :bordered="true" class="gi_mb">
       <template #extra>
         <a-button type="primary" @click="onClick">动态增删按钮</a-button>

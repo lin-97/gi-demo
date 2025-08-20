@@ -18,41 +18,27 @@
       </a-button>
     </section>
 
-    <a-tabs hide-content default-active-key="2">
+    <a-tabs hide-content default-active-key="1">
       <a-tab-pane key="1" title="文章"></a-tab-pane>
       <a-tab-pane key="2" title="项目"></a-tab-pane>
       <a-tab-pane key="3" title="应用（3）"></a-tab-pane>
     </a-tabs>
 
     <section class="right-box__comment">
-      <a-comment v-for="(item, index) in list" :key="index" :author="item.name" datetime="1个小时之前" align="right"
-        class="comment-item">
+      <a-comment v-for="(item, index) in list" :key="index" :author="item.name" :avatar="item.avatar"
+        :content="item.content" datetime="1个小时之前" align="right" class="comment-item">
         <template #actions>
           <a-space :size="20">
-            <span key="heart" class="action">
-              <span>
-                <IconHeart />
-              </span>
-              <span>83</span>
+            <span class="action">
+              <IconHeart /><span>83</span>
             </span>
-            <span key="star" class="action">
-              <span>
-                <IconStar />
-              </span>
-              <span>3</span>
+            <span class="action">
+              <IconStar /><span>3</span>
             </span>
-            <span key="reply" class="action">
+            <span class="action">
               <IconMessage /><span>回复</span>
             </span>
           </a-space>
-        </template>
-        <template #avatar>
-          <a-avatar>
-            <img alt="avatar" :src="item.avatar" />
-          </a-avatar>
-        </template>
-        <template #content>
-          <div class="text">{{ item.text }}</div>
         </template>
       </a-comment>
     </section>
@@ -67,33 +53,33 @@ const userStore = useUserStore()
 const list = [
   {
     avatar:
-      'https://p1-arco.byteimg.com/tos-cn-i-uwbnlip3yd/3ee5f13fb09879ecb5185e440cef6eb9.png~tplv-uwbnlip3yd-webp.webp',
+      'https://img0.baidu.com/it/u=2746352008,2041591833&fm=253&fmt=auto&app=138&f=JPEG?w=360&h=360',
     name: 'Lin',
-    text: '生活会让你苦上一阵子，等你适应以后，再让你苦上一辈子'
+    content: '生活会让你苦上一阵子，等你适应以后，再让你苦上一辈子'
   },
   {
     avatar:
-      'https://p1-arco.byteimg.com/tos-cn-i-uwbnlip3yd/3ee5f13fb09879ecb5185e440cef6eb9.png~tplv-uwbnlip3yd-webp.webp',
+      'https://img0.baidu.com/it/u=2746352008,2041591833&fm=253&fmt=auto&app=138&f=JPEG?w=360&h=360',
     name: 'Lin',
-    text: '我从一无所有，到资产过亿，从家徒四壁，到豪车别墅，这些不是靠的别人，完全是靠我自己，一点一滴，想出来的'
+    content: '我从一无所有，到资产过亿，从家徒四壁，到豪车别墅，这些不是靠的别人，完全是靠我自己，一点一滴，想出来的'
   },
   {
     avatar:
-      'https://p1-arco.byteimg.com/tos-cn-i-uwbnlip3yd/3ee5f13fb09879ecb5185e440cef6eb9.png~tplv-uwbnlip3yd-webp.webp',
+      'https://img0.baidu.com/it/u=2746352008,2041591833&fm=253&fmt=auto&app=138&f=JPEG?w=360&h=360',
     name: 'Lin',
-    text: '有很多事情你当时想不通，别着急，过一段时间你再想，就想不起来了'
+    content: '有很多事情你当时想不通，别着急，过一段时间你再想，就想不起来了'
   },
   {
     avatar:
-      'https://p1-arco.byteimg.com/tos-cn-i-uwbnlip3yd/3ee5f13fb09879ecb5185e440cef6eb9.png~tplv-uwbnlip3yd-webp.webp',
+      'https://img0.baidu.com/it/u=2746352008,2041591833&fm=253&fmt=auto&app=138&f=JPEG?w=360&h=360',
     name: 'Lin',
-    text: '⽐你优秀的⼈都⽐你努⼒，你努力还有什么用'
+    content: '⽐你优秀的⼈都⽐你努⼒，你努力还有什么用'
   },
   {
     avatar:
-      'https://p1-arco.byteimg.com/tos-cn-i-uwbnlip3yd/3ee5f13fb09879ecb5185e440cef6eb9.png~tplv-uwbnlip3yd-webp.webp',
+      'https://img0.baidu.com/it/u=2746352008,2041591833&fm=253&fmt=auto&app=138&f=JPEG?w=360&h=360',
     name: '窃·格瓦拉',
-    text: '打工这辈子是不可能打工的，做生意又不会做，就是偷这种东西，才可以维持生活这样子'
+    content: '打工这辈子是不可能打工的，做生意又不会做，就是偷这种东西，才可以维持生活这样子'
   }
 ]
 </script>
