@@ -8,7 +8,7 @@ interface CreateSelectDialogParams {
   tip?: string
 }
 
-interface SelectDiologOptions<T> {
+interface SelectDialogOptions<T> {
   title?: string
   multiple?: boolean
   queryParams?: Record<string, any>
@@ -18,7 +18,7 @@ interface SelectDiologOptions<T> {
 
 /** 创建选择弹窗 */
 export const createSelectDialog = <T = any>(params: CreateSelectDialogParams) => {
-  return (options: SelectDiologOptions<T>) => {
+  return (options: SelectDialogOptions<T>) => {
     const TableRef = ref<any>()
     Modal.open({
       title: options.title || params.title,
