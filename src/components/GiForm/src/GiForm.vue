@@ -21,7 +21,7 @@
             <!-- 表单项内容 -->
             <slot v-if="!['group-title'].includes(item.type || '')" :name="item.field"
               v-bind="{ disabled: isDisabled(item) }">
-              <component :is="`a-${item.type}`" v-bind="getComponentBindProps(item)"
+              <component :is="(COMP_MAP[item.type || ''] || item.type)" v-bind="getComponentBindProps(item)"
                 :model-value="modelValue[getModelField(item)]"
                 @update:model-value="updateValue($event, getModelField(item))">
                 <!-- 组件插槽 -->
@@ -75,51 +75,11 @@
 </template>
 
 <script setup lang="ts">
-import type { FormInstance, GridItemProps, GridProps } from '@arco-design/web-vue'
-import type { ColumnItem } from './type'
+import type { FormInstance } from '@arco-design/web-vue'
+import type { Component } from 'vue'
+import type { ColumnItem, Props } from './type'
+import A from '@arco-design/web-vue'
 import { cloneDeep, omit } from 'lodash-es'
-
-/** Props 类型定义 */
-interface Props {
-  /** 表单数据对象 */
-  modelValue: any
-  /** 表单布局方式 */
-  layout?: FormInstance['layout']
-  /** 表单尺寸 */
-  size?: FormInstance['size']
-  /** 标签布局属性 */
-  labelColProps?: FormInstance['labelColProps']
-  /** 表单项布局属性 */
-  wrapperColProps?: FormInstance['wrapperColProps']
-  /** 标签对齐方式 */
-  labelAlign?: FormInstance['labelAlign']
-  /** 是否禁用表单 */
-  disabled?: FormInstance['disabled']
-  /** 表单校验规则 */
-  rules?: FormInstance['rules']
-  /** 自动标签宽度 */
-  autoLabelWidth?: FormInstance['autoLabelWidth']
-  /** 表单ID */
-  id?: FormInstance['id']
-  /** 是否滚动到第一个错误项 */
-  scrollToFirstError?: FormInstance['scrollToFirstError']
-  /** 表单列配置 */
-  columns: ColumnItem[]
-  /** 栅格布局属性 */
-  gridProps?: GridProps
-  /** 栅格项属性 */
-  gridItemProps?: GridItemProps
-  /** 是否为搜索模式 */
-  search?: boolean
-  /** 默认是否折叠 */
-  defaultCollapsed?: boolean
-  /** 搜索按钮文字 */
-  searchBtnText?: string
-  /** 是否隐藏折叠按钮 */
-  hideFoldBtn?: boolean
-  /** 是否显示后缀 */
-  suffix?: boolean
-}
 
 // Props 默认值
 const props = withDefaults(defineProps<Props>(), {
@@ -139,6 +99,33 @@ const emit = defineEmits<{
   (e: 'search'): void
   (e: 'reset'): void
 }>()
+
+const COMP_MAP: Record<Exclude<ColumnItem['type'], undefined>, Component> = {
+  'input': A.Input,
+  'input-number': A.InputNumber,
+  'input-tag': A.InputTag,
+  'input-search': A.InputSearch,
+  'textarea': A.Textarea,
+  'select': A.Select,
+  'tree-select': A.TreeSelect,
+  'radio-group': A.RadioGroup,
+  'checkbox-group': A.CheckboxGroup,
+  'date-picker': A.DatePicker,
+  'year-picker': A.YearPicker,
+  'quarter-picker': A.QuarterPicker,
+  'month-picker': A.MonthPicker,
+  'week-picker': A.WeekPicker,
+  'time-picker': A.TimePicker,
+  'range-picker': A.RangePicker,
+  'color-picker': A.ColorPicker,
+  'rate': A.Rate,
+  'switch': A.Switch,
+  'slider': A.Slider,
+  'cascader': A.Cascader,
+  'upload': A.Upload,
+  'auto-complete': A.AutoComplete,
+  'mention': A.Mention
+}
 
 /** 表单属性计算 */
 const formProps = computed(() => {

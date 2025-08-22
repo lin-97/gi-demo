@@ -256,6 +256,4 @@ const storeSetup = () => {
  * 标签页状态管理 Store
  * @description 创建标签页相关的状态管理 store，使用 sessionStorage 进行持久化存储
  */
-export const useTabsStore = defineStore('tabs', storeSetup, {
-  persist: { storage: sessionStorage }
-})
+export const useTabsStore = defineStore('tabs', storeSetup, { persist: true })

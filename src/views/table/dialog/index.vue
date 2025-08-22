@@ -17,13 +17,14 @@
 import type { ColumnItem } from '@/components/GiForm'
 import { selectTreeUserListDialog, selectUserListDialog } from '@/components/dialog'
 import DialogCodeJson from '@/components/dialog/index.ts?raw'
+import GiInputSearch from '@/components/GiInputSearch/index.vue'
 import CodeJson from './index.vue?raw'
 
 const form = reactive({
   radioId: '',
   radioName: '',
-  chekboxId: '',
-  chekboxName: '',
+  checkboxId: '',
+  checkboxName: '',
   asyncId: '',
   asyncName: '',
   demoId: '',
@@ -55,27 +56,27 @@ const columns = reactive([
   {
     type: 'input-search',
     label: '多选',
-    field: 'chekboxId',
-    fieldName: 'chekboxName',
+    field: 'checkboxId',
+    fieldName: 'checkboxName',
     props: {
       allowClear: true,
       onSearch: () => {
         selectUserListDialog({
           multiple: true,
           onOk: (data) => {
-            form.chekboxId = data.map((i) => i.id).join(',')
-            form.chekboxName = data.map((i) => i.name).join(',')
+            form.checkboxId = data.map((i) => i.id).join(',')
+            form.checkboxName = data.map((i) => i.name).join(',')
           }
         })
       },
       onClear: () => {
-        form.chekboxId = ''
-        form.chekboxName = ''
+        form.checkboxId = ''
+        form.checkboxName = ''
       }
     }
   },
   {
-    type: 'input-search',
+    type: GiInputSearch,
     label: '异步',
     field: 'asyncId',
     fieldName: 'asyncName',
@@ -99,7 +100,7 @@ const columns = reactive([
     }
   },
   {
-    type: 'input-search',
+    type: GiInputSearch,
     label: '左树右表',
     field: 'demoId',
     fieldName: 'demoName',

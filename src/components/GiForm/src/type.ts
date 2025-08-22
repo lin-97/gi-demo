@@ -261,3 +261,45 @@ export interface ColumnItem<F = any> {
   /** 级联字段 */
   cascader?: string[]
 }
+
+/** Props 类型定义 */
+export interface Props {
+  /** 表单数据对象 */
+  modelValue: any
+  /** 表单布局方式 */
+  layout?: A.FormInstance['layout']
+  /** 表单尺寸 */
+  size?: A.FormInstance['size']
+  /** 标签布局属性 */
+  labelColProps?: A.FormInstance['labelColProps']
+  /** 表单项布局属性 */
+  wrapperColProps?: A.FormInstance['wrapperColProps']
+  /** 标签对齐方式 */
+  labelAlign?: A.FormInstance['labelAlign']
+  /** 是否禁用表单 */
+  disabled?: A.FormInstance['disabled']
+  /** 表单校验规则 */
+  rules?: A.FormInstance['rules']
+  /** 自动标签宽度 */
+  autoLabelWidth?: A.FormInstance['autoLabelWidth']
+  /** 表单ID */
+  id?: A.FormInstance['id']
+  /** 是否滚动到第一个错误项 */
+  scrollToFirstError?: A.FormInstance['scrollToFirstError']
+  /** 表单列配置 */
+  columns: ColumnItem[]
+  /** 栅格布局属性 */
+  gridProps?: A.GridProps
+  /** 栅格项属性 */
+  gridItemProps?: GridItemProps
+  /** 是否为搜索模式 */
+  search?: boolean
+  /** 默认是否折叠 */
+  defaultCollapsed?: boolean
+  /** 搜索按钮文字 */
+  searchBtnText?: string
+  /** 是否隐藏折叠按钮 */
+  hideFoldBtn?: boolean
+  /** 是否显示后缀 */
+  suffix?: boolean
+}

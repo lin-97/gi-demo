@@ -1,5 +1,5 @@
 <template>
-  <div class="gi_padding">
+  <GiPageLayout :body-style="{ overflowY: 'auto' }">
     <a-row justify="end">
       <a-space wrap>
         <a-button type="primary" :status="isReadOnly ? 'success' : 'warning'" @click="toggleReadOnly">
@@ -9,6 +9,7 @@
           <template #icon><icon-plus /></template>
           <span>新增</span>
         </a-button>
+        <GiCodeButton :code="CodeJson"></GiCodeButton>
       </a-space>
     </a-row>
 
@@ -30,7 +31,7 @@
       </a-space>
     </a-row>
     <GiCodeView :code-json="tableDataJson"></GiCodeView>
-  </div>
+  </GiPageLayout>
 </template>
 
 <script lang='tsx' setup>
@@ -39,6 +40,7 @@ import { Message } from '@arco-design/web-vue'
 import { useDict } from '@/hooks/app'
 import * as Regexp from '@/utils/regexp'
 import FilterAddress from './FilterAddress.vue'
+import CodeJson from './Pane1.vue?raw'
 
 defineOptions({ name: 'FormTable' })
 
