@@ -108,9 +108,15 @@
   }
 
   .arco-table-content {
-    .arco-scrollbar:last-child {
-      .arco-table-element {
-        border-bottom: 1px solid var(--color-border-table);
+    .arco-scrollbar {
+      &:last-child {
+        flex: 1;
+
+        &:not(.arco-scrollbar-both) {
+          .arco-table-element {
+            border-bottom: 1px solid var(--color-border-table);
+          }
+        }
       }
     }
   }

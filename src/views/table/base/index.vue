@@ -7,7 +7,7 @@
     <a-table class="gi_full_table" row-key="id" page-position="bottom" :bordered="{ cell: true }" :loading="loading"
       :data="tableData" :scroll="{ x: '100%', y: '100%', minWidth: 1400 }" :pagination="pagination">
       <template #columns>
-        <a-table-column title="序号" :width="66" align="center">
+        <a-table-column title="序号" :width="60" align="center" fixed="left">
           <template #cell="cell">{{ cell.rowIndex + 1 }}</template>
         </a-table-column>
         <a-table-column title="姓名" data-index="name" :width="120">
