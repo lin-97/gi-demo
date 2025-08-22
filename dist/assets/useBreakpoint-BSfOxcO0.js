@@ -1,0 +1,1 @@
+import{d as n}from"./index-B-iw88hz.js";import{c as o}from"./vue-Bh0u9iwh.js";const e={xs:576,sm:576,md:768,lg:992,xl:1200,xxl:1600};function i(){const r=n(e).current();return{breakpoint:o(()=>{const t=r.value;return t.length?t[t.length-1]:"xs"})}}export{i as u};
