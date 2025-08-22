@@ -138,7 +138,7 @@ const storeSetup = () => {
  */
 export const useUserStore = defineStore('user', storeSetup, {
   persist: {
-    paths: ['token'],
+    pick: ['token'],
     storage: localStorage
   }
 })

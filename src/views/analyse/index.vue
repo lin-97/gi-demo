@@ -1,120 +1,72 @@
 <template>
-  <div class="gi_page analyse">
+  <GiPageLayout :style="{ background: 'transparent' }" :body-style="{ overflowY: 'auto' }">
     <a-row :gutter="[14, 14]" align="stretch">
       <a-col v-bind="colProps">
-        <a-card title="访问量" :bordered="false" class="analyse__card h-full">
-          <template #extra>
-            <a-tag color="green" bordered>日</a-tag>
+        <StatisticsCard title="访问量" extra="日" :value="26868" footer-label="总访问量" footer-value="280万">
+          <template #content-tip>
+            <a-space>
+              <span><span>日同比 12.5%</span><icon-caret-up style="color: rgb(var(--success-6))" /></span>
+              <span><span>周同比 5%</span><icon-caret-down style="color: rgb(var(--warning-6))" /></span>
+            </a-space>
           </template>
-          <div class="analyse__content">
-            <a-statistic :value="26868" :value-from="0" :start="true" animation show-group-separator> </a-statistic>
-            <section class="analyse__tip">
-              <a-space>
-                <span><span>日同比 12.5%</span><icon-caret-up style="color: rgb(var(--success-6))" /></span>
-                <span><span>周同比 5%</span><icon-caret-down style="color: rgb(var(--warning-6))" /></span>
-              </a-space>
-            </section>
-          </div>
-          <a-divider :margin="16"></a-divider>
-          <a-row justify="space-between">
-            <a-typography-text type="secondary">总访问量</a-typography-text>
-            <a-typography-text type="secondary">280万</a-typography-text>
-          </a-row>
-        </a-card>
+        </StatisticsCard>
       </a-col>
 
       <a-col v-bind="colProps">
-        <a-card title="销售额" :bordered="false" class="analyse__card h-full">
-          <template #extra>
-            <a-tag color="arcoblue" bordered>月</a-tag>
+        <StatisticsCard title="销售额" extra="月" :value="12000" footer-label="总销售额" footer-value="68万">
+          <template #content-tip>
+            <a-space>
+              <span><span>日同比 15%</span><icon-caret-up style="color: rgb(var(--success-6))" /></span>
+              <span><span>周同比 6%</span><icon-caret-down style="color: rgb(var(--warning-6))" /></span>
+            </a-space>
           </template>
-          <div class="analyse__content">
-            <a-statistic :value="12000" :value-from="0" :start="true" animation show-group-separator></a-statistic>
-            <section class="analyse__tip">
-              <a-space>
-                <span><span>日同比 15%</span><icon-caret-up style="color: rgb(var(--success-6))" /></span>
-                <span><span>周同比 6%</span><icon-caret-down style="color: rgb(var(--warning-6))" /></span>
-              </a-space>
-            </section>
-          </div>
-          <a-divider :margin="16"></a-divider>
-          <a-row justify="space-between">
-            <a-typography-text type="secondary">总销售额</a-typography-text>
-            <a-typography-text type="secondary">68万</a-typography-text>
-          </a-row>
-        </a-card>
+        </StatisticsCard>
       </a-col>
 
       <a-col v-bind="colProps">
-        <a-card title="订单量" :bordered="false" class="analyse__card h-full">
-          <template #extra>
-            <a-tag color="orange" bordered>季</a-tag>
+        <StatisticsCard title="订单量" extra="季" :value="1680" footer-label="转化率" footer-value="60%">
+          <template #content-tip>
+            <span><span>季同比 6.5%</span><icon-caret-up style="color: rgb(var(--success-6))" /></span>
           </template>
-          <a-row justify="space-between" class="analyse__content">
-            <div class="analyse__content">
-              <a-statistic :value="1680" :value-from="0" :start="true" animation show-group-separator></a-statistic>
-              <div class="analyse__tip">
-                <span><span>季同比 6.5%</span><icon-caret-up style="color: rgb(var(--success-6))" /></span>
-              </div>
-            </div>
+          <template #content-right>
             <a-progress type="circle" status="warning" :percent="percent2" animation />
-          </a-row>
-          <a-divider :margin="16"></a-divider>
-          <a-row justify="space-between">
-            <a-typography-text type="secondary">转化率</a-typography-text>
-            <a-typography-text type="secondary">60%</a-typography-text>
-          </a-row>
-        </a-card>
+          </template>
+        </StatisticsCard>
       </a-col>
 
       <a-col v-bind="colProps">
-        <a-card title="新增用户" :bordered="false" class="analyse__card h-full">
-          <template #extra>
-            <a-tag color="purple" bordered>周</a-tag>
+        <StatisticsCard title="新增用户" extra="周" footer-label="总用户" footer-value="10800人">
+          <a-statistic :value="128" :value-from="0" :start="true" animation>
+            <template #suffix>位</template>
+          </a-statistic>
+          <template #content-tip>
+            <a-avatar-group :size="24" :max-count="3">
+              <a-avatar :style="{ backgroundColor: '#7BC616' }">A</a-avatar>
+              <a-avatar :style="{ backgroundColor: '#14C9C9' }">B</a-avatar>
+              <a-avatar :style="{ backgroundColor: '#168CFF' }">C</a-avatar>
+              <a-avatar :style="{ backgroundColor: '#FF7D00' }">Arco</a-avatar>
+              <a-avatar :style="{ backgroundColor: '#FFC72E' }">Design</a-avatar>
+            </a-avatar-group>
           </template>
-          <div class="analyse__content">
-            <a-statistic :value="128" :value-from="0" :start="true" animation>
-              <template #suffix>位</template>
-            </a-statistic>
-            <section class="analyse__tip">
-              <a-avatar-group :size="24" :max-count="3">
-                <a-avatar :style="{ backgroundColor: '#7BC616' }">A</a-avatar>
-                <a-avatar :style="{ backgroundColor: '#14C9C9' }">B</a-avatar>
-                <a-avatar :style="{ backgroundColor: '#168CFF' }">C</a-avatar>
-                <a-avatar :style="{ backgroundColor: '#FF7D00' }">Arco</a-avatar>
-                <a-avatar :style="{ backgroundColor: '#FFC72E' }">Design</a-avatar>
-              </a-avatar-group>
-            </section>
-          </div>
-          <a-divider :margin="16"></a-divider>
-          <a-row justify="space-between">
-            <a-typography-text type="secondary">总用户</a-typography-text>
-            <a-typography-text type="secondary">10800人</a-typography-text>
-          </a-row>
-        </a-card>
+        </StatisticsCard>
       </a-col>
     </a-row>
 
     <a-row :gutter="14" class="gi_mt">
       <a-col v-for="(item, index) in list" :key="item.name" :class="`animated-fade-up-${index}`" :xs="12" :sm="8"
         :md="4" :lg="4" :xl="3" :xxl="3">
-        <a-card hoverable :bordered="false" class="analyse__card--mini">
-          <a-row justify="center" align="center" style="flex-direction: column">
-             <GiIconBox :size="32" :color="item.color" shape="round">
-                <component :is="item.icon" :size="18" />
-             </GiIconBox>
-            <span>{{ item.name }}</span>
-          </a-row>
-        </a-card>
+        <ClassifyCard :name="item.name" :icon="item.icon" :color="item.color"></ClassifyCard>
       </a-col>
     </a-row>
 
-    <ChartData></ChartData>
-</div>
+    <ChartCard></ChartCard>
+  </GiPageLayout>
 </template>
 
 <script lang="ts" setup>
-import ChartData from './components/ChartData.vue'
+import ChartCard from './components/ChartCard.vue'
+import ClassifyCard from './components/ClassifyCard.vue'
+import StatisticsCard from './components/StatisticsCard.vue'
 
 defineOptions({ name: 'AnalyseIndex' })
 
@@ -140,48 +92,4 @@ setTimeout(() => {
 }, 100)
 </script>
 
-<style lang="scss" scoped>
-.analyse {
-  &__card {
-    display: flex;
-    flex-direction: column;
-
-    :deep(.arco-card-body) {
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-    }
-
-    :deep(.arco-tag-size-medium) {
-      width: 24px;
-      padding: 0;
-      justify-content: center;
-    }
-  }
-
-  &__card--mini {
-    transition: transform 0.3s;
-    margin-bottom: $margin;
-
-    &:hover {
-      transform: translateY(-4px);
-      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-      cursor: pointer;
-    }
-
-    span {
-      margin-top: 8px;
-    }
-  }
-
-  &__content {
-    flex: 1;
-  }
-
-  &__tip {
-    height: 30px;
-    display: flex;
-    align-items: center;
-  }
-}
-</style>
+<style lang="scss" scoped></style>

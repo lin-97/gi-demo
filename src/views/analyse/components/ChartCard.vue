@@ -15,7 +15,6 @@
 import { graphic } from 'echarts'
 import VCharts from 'vue-echarts'
 import { useChart } from '@/hooks'
-// import { ToolTipFormatterParams } from '@/types/echarts';
 
 const xData = ref<string[]>([])
 const yData = ref<number[]>([])
@@ -106,8 +105,8 @@ const { option } = useChart(() => {
         return `<div>
             <p class="tooltip-title">${firstElement.axisValueLabel}</p>
             <div class="content-panel"><span>总内容量</span><span class="tooltip-value">${(
-              Number(firstElement.value) * 10000
-            ).toLocaleString()}</span></div>
+            Number(firstElement.value) * 10000
+          ).toLocaleString()}</span></div>
           </div>`
       },
       className: 'echarts-tooltip-diy'

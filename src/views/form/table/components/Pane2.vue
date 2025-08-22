@@ -1,5 +1,5 @@
 <template>
-  <div class="gi_padding">
+  <GiPageLayout :body-style="{ overflowY: 'auto' }">
     <a-alert>此示例基于GiEditTable实现了行编辑，以及行双击编辑</a-alert>
 
     <a-row class="gi_mt" justify="end">
@@ -8,6 +8,7 @@
           <template #icon><icon-plus /></template>
           <span>新增</span>
         </a-button>
+        <GiCodeButton :code="CodeJson"></GiCodeButton>
       </a-space>
     </a-row>
 
@@ -33,7 +34,7 @@
       </a-space>
     </a-row>
     <GiCodeView :code-json="tableDataJson"></GiCodeView>
-  </div>
+  </GiPageLayout>
 </template>
 
 <script lang='tsx' setup>
@@ -41,6 +42,7 @@ import type { ColumnItem, Disabled } from '@/components/GiEditTable'
 import { Message } from '@arco-design/web-vue'
 import { useDict } from '@/hooks/app'
 import * as Regexp from '@/utils/regexp'
+import CodeJson from './Pane2.vue?raw'
 
 defineOptions({ name: 'FormTable' })
 
