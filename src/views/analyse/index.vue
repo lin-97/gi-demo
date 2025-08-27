@@ -1,5 +1,5 @@
 <template>
-  <GiPageLayout :style="{ background: 'transparent' }" :body-style="{ overflowY: 'auto' }">
+  <GiPageLayout :style="{ background: 'transparent' }" :body-style="{ overflowY: 'auto', padding: 'var(--margin)' }">
     <a-row :gutter="[14, 14]" align="stretch">
       <a-col v-bind="colProps">
         <StatisticsCard title="访问量" extra="日" :value="26868" footer-label="总访问量" footer-value="280万">
