@@ -47,7 +47,7 @@ defineSlots<{
 const slots = useSlots()
 const isMobile = browse().isMobile ?? false
 const size = ref(isMobile ? '0px' : props.size)
-const collapseing = ref(false)
+const collapsing = ref(false)
 
 const getClass = computed(() => {
   return {
@@ -56,7 +56,7 @@ const getClass = computed(() => {
     'gi-page-layout--inner': props.inner,
     'gi-page-layout--has-header': slots.header,
     'gi-page-layout--header-bordered': props.headerBordered,
-    'gi-page-layout--collapseing': collapseing.value
+    'gi-page-layout--collapsing': collapsing.value
   }
 })
 
@@ -73,9 +73,9 @@ interface Props {
 }
 
 function handleClick() {
-  collapseing.value = true
+  collapsing.value = true
   setTimeout(() => {
-    collapseing.value = false
+    collapsing.value = false
   }, 300)
   size.value = Number.parseInt(size.value) > 20 ? '0px' : props.size
 }
@@ -170,7 +170,7 @@ function handleClick() {
   }
 }
 
-.gi-page-layout--collapseing {
+.gi-page-layout--collapsing {
   :deep(> .arco-split-pane-first) {
     transition: flex-basis 0.3s;
   }

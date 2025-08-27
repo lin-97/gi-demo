@@ -3,7 +3,6 @@
 	<h1>Gi Admin Pro</h1>
     <a href='https://gitee.com/lin0716/gi-demo/stargazers'><img src='https://gitee.com/lin0716/gi-demo/badge/star.svg?theme=dark' alt='star'></img></a>
 </div>
-
 [![license](https://img.shields.io/badge/license-MIT-green.svg)](./LICENSE)
 
 ## 简介
@@ -1672,6 +1671,8 @@ $padding: 16px; // 盒子和内容的间距
 <a href="https://www.npmjs.com/package/vue-color-kit" target="_blank">Vue-Color-Kit 一个 vue3 颜色选择器组件</a>
 
 <a href="https://vxetable.cn/#/table/start/install" target="_blank">Vxe-Table</a>
+
+<a href="https://github.com/fslflame/vue3-request" target="_blank">vue3-request 一个专为 Vue 3 设计的异步请求处理库，它通过统一的 useRequest Hook 和强大的插件生态，彻底简化了异步操作和 API 调用的复杂性</a>
 
 **其他**
 
