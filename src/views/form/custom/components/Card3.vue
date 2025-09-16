@@ -50,7 +50,7 @@ onMounted(() => {
 
 const formRef = useTemplateRef('formRef')
 
-const columns: ColumnItem<typeof form>[] = reactive([
+const columns = reactive([
   {
     type: 'input',
     label: '姓名',
@@ -108,7 +108,7 @@ const columns: ColumnItem<typeof form>[] = reactive([
     field: 'btns',
     span: 24
   }
-])
+] as ColumnItem<typeof form>[])
 
 const save = async () => {
   const error = await formRef.value?.formRef?.validate()

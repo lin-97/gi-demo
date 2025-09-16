@@ -3,19 +3,22 @@
     <Asider></Asider>
     <a-layout class="layout-default__right">
       <Header></Header>
-      <Tabs></Tabs>
+      <Tabs v-if="appStore.tabVisible"></Tabs>
       <Main></Main>
     </a-layout>
   </a-layout>
 </template>
 
 <script setup lang="ts">
+import { useAppStore } from '@/stores'
 import Asider from './components/Asider/index.vue'
 import Header from './components/Header/index.vue'
 import Main from './components/Main.vue'
 import Tabs from './components/Tabs/index.vue'
 
 defineOptions({ name: 'LayoutDefault' })
+
+const appStore = useAppStore()
 </script>
 
 <style lang="scss" scoped>

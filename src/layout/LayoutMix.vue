@@ -27,7 +27,7 @@
         </a-menu>
         <HeaderRightBar />
       </header>
-      <Tabs />
+      <Tabs v-if="appStore.tabVisible" />
       <Main />
     </section>
   </div>

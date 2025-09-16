@@ -19,10 +19,10 @@
             </template>
 
             <!-- 表单项内容 -->
-            <slot v-if="!['group-title'].includes(item.type || '')" :name="item.field"
+            <slot v-if="!['group-title'].includes((typeof item.type === 'string' ? item.type : ''))" :name="item.field"
               v-bind="{ disabled: isDisabled(item) }">
-              <component :is="(COMP_MAP[item.type || ''] || item.type)" v-bind="getComponentBindProps(item)"
-                :model-value="modelValue[getModelField(item)]"
+              <component :is="(COMP_MAP[(typeof item.type === 'string' ? item.type : '')] || item.type)"
+                v-bind="getComponentBindProps(item)" :model-value="modelValue[getModelField(item)]"
                 @update:model-value="updateValue($event, getModelField(item))">
                 <!-- 组件插槽 -->
                 <template v-for="(slotValue, slotKey) in item?.slots" :key="slotKey" #[slotKey]="scope">
@@ -36,7 +36,7 @@
 
             <!-- 分组标题 -->
             <slot v-else name="group-title">
-              <a-alert v-bind="item.props">{{ item.label }}</a-alert>
+              <a-alert>{{ item.label }}</a-alert>
             </slot>
 
             <!-- 表单项插槽 -->
@@ -78,7 +78,7 @@
 import type { FormInstance } from '@arco-design/web-vue'
 import type { Component } from 'vue'
 import type { ColumnItem, Props } from './type'
-import A from '@arco-design/web-vue'
+import * as A from '@arco-design/web-vue'
 import { cloneDeep, omit } from 'lodash-es'
 
 // Props 默认值
@@ -100,7 +100,7 @@ const emit = defineEmits<{
   (e: 'reset'): void
 }>()
 
-const COMP_MAP: Record<Exclude<ColumnItem['type'], undefined>, Component> = {
+const COMP_MAP: Record<string, Component> = {
   'input': A.Input,
   'input-number': A.InputNumber,
   'input-tag': A.InputTag,
@@ -173,7 +173,7 @@ const getModelField = (item: ColumnItem) => item?.fieldName || item.field
 
 /** 获取组件默认占位 */
 const getPlaceholder = (item: ColumnItem) => {
-  if (!item.type) return undefined
+  if (!item.type || typeof item.type !== 'string') return undefined
   if (['input', 'input-tag', 'mention'].includes(item.type)) {
     return `请输入${item.label}`
   }
@@ -197,7 +197,7 @@ const getOptions = (item: ColumnItem): any[] | undefined => {
   if (!item.type) return undefined
   /** 需要选项数据的组件类型 */
   const arr = ['select', 'tree-select', 'cascader', 'radio-group', 'checkbox-group']
-  if (arr.includes(item.type)) {
+  if (typeof item.type === 'string' && arr.includes(item.type)) {
     return dicData[item.field] || []
   }
   return undefined

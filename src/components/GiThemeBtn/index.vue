@@ -34,6 +34,8 @@ const isDark = useDark({
   valueLight: 'light',
   // 本地存储键名
   storageKey: 'arco-theme',
+  // 初始值
+  initialValue: appStore.theme,
   // 主题变化回调
   onChanged(dark: boolean) {
     // 同步主题状态到 store

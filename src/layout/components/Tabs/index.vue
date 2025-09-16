@@ -3,7 +3,7 @@
   @description 系统标签页组件，支持多种标签样式、右键菜单和快捷操作
 -->
 <template>
-  <div v-if="appStore.tabVisible" class="tabs">
+  <div class="tabs">
     <a-tabs :class="`tabs__${appStore.tab}`" :type="tabsType" :active-key="route.path" editable hide-content
       size="medium" @tab-click="handleTabClick" @delete="tabsStore.closeCurrent">
       <a-tab-pane v-for="item of tabsStore.tabList" :key="item.path" :title="(item.meta?.title as string)"
