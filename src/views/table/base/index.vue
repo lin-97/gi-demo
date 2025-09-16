@@ -61,7 +61,7 @@ defineOptions({ name: 'TableBase' })
 
 const form = reactive({})
 
-const columns: ColumnItem[] = reactive([
+const columns = reactive([
   {
     type: 'input',
     label: '姓名',
@@ -75,7 +75,7 @@ const columns: ColumnItem[] = reactive([
       maxLength: 11
     }
   }
-])
+] as ColumnItem[])
 
 const { tableData, pagination, search, loading } = useTable((p) => baseAPI.getList(p))
 

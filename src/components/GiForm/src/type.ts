@@ -4,8 +4,11 @@
  */
 
 import type * as A from '@arco-design/web-vue'
-import type { FormItemProps, GridItemProps } from '@arco-design/web-vue'
-import type { VNode } from 'vue'
+import type { GridItemProps } from '@arco-design/web-vue'
+import type { Component, VNode } from 'vue'
+import type { MergeMultiple } from '@/types/tool'
+
+type FormItemProps = A.FormItemInstance['$props']
 
 /** 支持的表单项类型 */
 export type ColumnItemType
@@ -34,34 +37,36 @@ export type ColumnItemType
   | 'auto-complete' // 自动完成
   | 'mention' // 提及
   | 'group-title' // 分组标题
+  | Component
 
 /** 组件属性合并类型 */
-export type ComponentProps
-  = & A.InputInstance['$props']
-  & A.InputNumberInstance['$props']
-  & A.InputTagInstance['$props']
-  & A.InputSearchInstance['$props']
-  & A.TextareaInstance['$props']
-  & A.SelectInstance['$props']
-  & A.TreeSelectInstance['$props']
-  & A.RadioGroupInstance['$props']
-  & A.CheckboxGroupInstance['$props']
-  & A.DatePickerInstance['$props']
-  & A.YearPickerInstance['$props']
-  & A.QuarterPickerInstance['$props']
-  & A.MonthPickerInstance['$props']
-  & A.WeekPickerInstance['$props']
-  & A.TimePickerInstance['$props']
-  & A.RangePickerInstance['$props']
-  & A.ColorPickerInstance['$props']
-  & A.RateInstance['$props']
-  & A.SwitchInstance['$props']
-  & A.SliderInstance['$props']
-  & A.CascaderInstance['$props']
-  & A.UploadInstance['$props']
-  & A.AutoCompleteInstance['$props']
-  & A.MentionInstance['$props']
-  & A.AlertInstance['$props']
+export type ComponentProps = MergeMultiple<[
+  Partial<A.InputInstance['$props']>,
+  Partial<A.InputNumberInstance['$props']>,
+  Partial<A.InputTagInstance['$props']>,
+  Partial<A.InputSearchInstance['$props']>,
+  Partial<A.TextareaInstance['$props']>,
+  Partial<A.SelectInstance['$props']>,
+  Partial<A.TreeSelectInstance['$props']>,
+  Partial<A.RadioGroupInstance['$props']>,
+  Partial<A.CheckboxGroupInstance['$props']>,
+  Partial<A.DatePickerInstance['$props']>,
+  Partial<A.YearPickerInstance['$props']>,
+  Partial<A.QuarterPickerInstance['$props']>,
+  Partial<A.MonthPickerInstance['$props']>,
+  Partial<A.WeekPickerInstance['$props']>,
+  Partial<A.TimePickerInstance['$props']>,
+  Partial<A.RangePickerInstance['$props']>,
+  Partial<A.ColorPickerInstance['$props']>,
+  Partial<A.RateInstance['$props']>,
+  Partial<A.SwitchInstance['$props']>,
+  Partial<A.SliderInstance['$props']>,
+  Partial<A.CascaderInstance['$props']>,
+  Partial<A.UploadInstance['$props']>,
+  Partial<A.AutoCompleteInstance['$props']>,
+  Partial<A.MentionInstance['$props']>,
+  Partial<A.AlertInstance['$props']>
+]>
 
 /** 选项类型定义 */
 export type ColumnItemOptions
@@ -189,26 +194,24 @@ type MentionSlots = {
 }
 
 /** 组件插槽合并类型 */
-export type ComponentSlots
-  = & AutoCompleteSlots
-  & CascaderSlots
-  & CheckboxGroupSlots
-  & RadioGroupSlots
-  & DatePickerSlots
-  & InputSlots
-  & InputNumberSlots
-  & InputTagSlots
-  & RateSlots
-  & SelectSlots
-  & SwitchSlots
-  & TreeSelectSlots
-  & MentionSlots
+export type ComponentSlots = MergeMultiple<[
+  AutoCompleteSlots,
+  CascaderSlots,
+  CheckboxGroupSlots,
+  RadioGroupSlots,
+  DatePickerSlots,
+  InputSlots,
+  InputNumberSlots,
+  InputTagSlots,
+  RateSlots,
+  SelectSlots,
+  SwitchSlots,
+  TreeSelectSlots,
+  MentionSlots
+]>
 
 /** 表单项插槽接口 */
-export interface ColumnItemSlots extends Omit<ComponentSlots, 'label' | 'option'> {
-  label?: (e: { data: A.CheckboxOption | A.SelectOptionData | A.CascaderOption }) => VNode
-  option?: (e: { data: (string | number | A.SelectOptionData | A.SelectOptionGroup)[] | A.CascaderOption | A.SelectOptionData }) => VNode
-}
+export type ColumnItemSlots = ComponentSlots
 
 /** 表单项显隐控制类型 */
 export type ColumnItemHide<F> = boolean | ((form: F) => boolean)
@@ -229,9 +232,9 @@ export interface ColumnItem<F = any> {
   /** 自定义渲染label */
   labelRender?: (() => VNode)
   /** 表单项类型 */
-  type?: string
+  type?: ColumnItemType
   /** 表单项属性 */
-  props?: Record<string, any>
+  props?: Partial<ComponentProps>
   /** 表单项校验规则 */
   rules?: FormItemProps['rules']
   /** 是否必填 */
@@ -241,7 +244,7 @@ export interface ColumnItem<F = any> {
   /** 表单项属性 */
   formItemProps?: FormItemProps
   /** 表单项插槽 */
-  slots?: Record<string, string | ((scope: any) => VNode)>
+  slots?: ColumnItemSlots
   /** 表单项组件插槽 */
   formItemSlots?: Record<string, string | VNode | (() => VNode)>
   /** 是否显示（支持函数） */
