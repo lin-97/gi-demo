@@ -1,0 +1,1 @@
+import t from"./A-DOEBx8tW.js";import a from"./B-D_IcQ_Jd.js";import{e as n,h as r,j as s,k as c,l as p,t as e}from"./vue-N_SRJc_9.js";const d=n({__name:"index",setup(_){return(m,i)=>{const o=r("a-space");return c(),s(o,null,{default:p(()=>[e(t),e(a)]),_:1})}}});export{d as _};

@@ -1,0 +1,1 @@
+import r from"./ErrorPage-DkC67Tpm.js";import{e,j as o,k as t}from"./vue-N_SRJc_9.js";import"./index-ClEKbW6k.js";import"./arco-BfMEPP4p.js";const i=e({name:"Error403",__name:"403",setup(a){return(m,n)=>(t(),o(r,{code:403}))}});export{i as default};

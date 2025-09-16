@@ -1,0 +1,1 @@
+import t from"./A-BMY82Dnf.js";import n from"./B-APo4eWWi.js";import{e as a,h as r,n as p,k as m,t as e,l as s}from"./vue-N_SRJc_9.js";import"./mitt-Cjg4XyU-.js";import"./index-ClEKbW6k.js";import"./arco-BfMEPP4p.js";const k=a({__name:"index",setup(c){return(_,i)=>{const o=r("a-space");return m(),p("div",null,[e(o,null,{default:s(()=>[e(t),e(n)]),_:1})])}}});export{k as default};

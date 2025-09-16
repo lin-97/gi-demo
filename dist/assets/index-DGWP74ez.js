@@ -1,0 +1,1 @@
+import{e as n,t}from"./vue-N_SRJc_9.js";const r=n({name:"GiDot",props:{animation:{type:Boolean,default:!0,required:!1},type:{type:String,default:"primary",required:!1,validator:e=>["primary","success","warning","danger","info"].includes(e)}},setup(e){return()=>t("span",{class:["gi-dot",{"gi-dot-processing":e.animation},`gi-dot-${e.type}`]},null)}});export{r as _};

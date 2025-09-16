@@ -1,1 +1,0 @@
-import{_ as o}from"./index-Dh8mSQxm.js";import{e as n,j as t,k as r}from"./vue-Bh0u9iwh.js";import"./arco-B8E_0xxC.js";import"./index-B70cmoY5.js";const u=n({name:"DocumentArcoDesignVue",__name:"index",setup(c){return(m,p)=>{const e=o;return r(),t(e,{src:"https://arco.design/vue/component/button"})}}});export{u as default};
