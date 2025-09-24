@@ -31,3 +31,9 @@ jobs:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           # 部署dist文件夹的内容
           publish_dir: ./dist
+          # 重要：设置强制上传，确保覆盖旧文件
+          force_orphan: true
+          # 配置静态文件处理
+          allow_empty_commit: false
+          # 确保正确处理子路径资源
+          full_commit_message: Deploy to GitHub Pages
