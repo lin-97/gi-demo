@@ -1,9 +1,9 @@
 name: Deploy to GitHub Pages
 
 on:
-  # 每当推送到main分支时触发部署
+  # 每当推送到master分支时触发部署
   push:
-    branches: [main]
+    branches: [master]
   # 允许手动触发部署
   workflow_dispatch:
 
