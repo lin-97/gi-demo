@@ -1,0 +1,1 @@
+import{d2 as o}from"./index-D1V-3yfm.js";import{r as a}from"./vue-CNbhFRxi.js";function u(s){const t=()=>o(s),e=a(t());return[e,()=>{Object.keys(e).forEach(r=>delete e[r]),Object.assign(e,t())}]}export{u};
