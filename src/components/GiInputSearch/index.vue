@@ -3,10 +3,10 @@
     <a-input v-model="model" :placeholder="props.placeholder" readonly></a-input>
     <template v-if="!props.readonly">
       <a-button :disabled="props.disabled" @click="emit('search', model)">
-        <template #icon><icon-search /></template>
+        <icon-search />
       </a-button>
       <a-button :disabled="props.disabled" @click="emit('clear')">
-        <template #icon><icon-close /></template>
+        <icon-close />
       </a-button>
     </template>
   </a-input-group>
