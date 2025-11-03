@@ -3,8 +3,8 @@
     <template #extra>
       <a-button>返回</a-button>
     </template>
-    <div class="wrapper">
-      <section class="form-box">
+    <div class="step-form__wrapper">
+      <section class="step-form__box">
         <a-steps :current="current" :direction="!isMobile() ? 'horizontal' : 'vertical'">
           <a-step description="确保填写正确">填写转账信息</a-step>
           <a-step description="确认转账信息">确认转账信息</a-step>
@@ -13,8 +13,7 @@
 
         <transition name="fade-slide" mode="out-in" appear>
           <keep-alive>
-            <component :is="ComponentMap[current]" :form="form" @next="($event) => next($event as StepForm)"
-              @prev="prev" @again="again" />
+            <component :is="ComponentMap[current]" />
           </keep-alive>
         </transition>
       </section>
@@ -28,6 +27,7 @@ import { isMobile } from '@/utils'
 import Step1 from './Step1.vue'
 import Step2 from './Step2.vue'
 import Step3 from './Step3.vue'
+import { STEP_FORM_KEY } from './util'
 
 defineOptions({ name: 'FormStep' })
 
@@ -39,32 +39,25 @@ const ComponentMap: T_ComponentMap = {
 }
 
 const current = ref(1)
-const form = ref<StepForm>({
+
+const getInitForm = () => ({
   payAccount: '', // 付款账户
-  recAccount: '', // 收款账户
+  recAccount: '1997***6962@qq.com', // 收款账户
   payType: 1, // 支付方式 1微信支付 2支付宝支付
-  recName: '', // 收款人姓名
-  amount: '' // 转账金额
-})
-
-const next = (formData: StepForm) => {
-  current.value++
-  if (formData) {
-    form.value = formData
-  }
+  recName: 'Lin', // 收款人姓名
+  amount: '1980', // 转账金额
+  password: '' // 支付密码
+} as StepForm)
+const form: StepForm = reactive(getInitForm())
+const resetForm = () => {
+  Object.assign(form, getInitForm())
 }
 
-const prev = () => {
-  current.value--
-}
-
-const again = () => {
-  current.value = 1
-}
+provide(STEP_FORM_KEY, { form, resetForm, current })
 </script>
 
 <style lang="scss" scoped>
-.wrapper {
+.step-form__wrapper {
   min-height: 560px;
   padding: $padding;
   box-sizing: border-box;
@@ -73,7 +66,7 @@ const again = () => {
   justify-content: center;
 }
 
-.form-box {
+.step-form__box {
   width: 100%;
   max-width: 560px;
   margin-top: 30px;

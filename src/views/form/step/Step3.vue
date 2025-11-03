@@ -3,7 +3,7 @@
     <a-result status="success" title="操作成功">
       <template #subtitle>预计两小时内到账</template>
     </a-result>
-    <section class="info-box">
+    <section class="step-3__info">
       <a-descriptions :column="1">
         <a-descriptions-item label="付款账户：">{{ form.payAccount }}</a-descriptions-item>
         <a-descriptions-item label="收款账户：">{{ form.recAccount }}</a-descriptions-item>
@@ -26,23 +26,17 @@
 </template>
 
 <script setup lang="ts">
-import type { StepForm } from './type'
+import type { StepState } from './type'
+import { STEP_FORM_KEY } from './util'
 
 defineOptions({ name: 'Step3' })
 
-withDefaults(defineProps<Props>(), {})
-
-const emit = defineEmits<{
-  (e: 'again'): void
-}>()
-
-interface Props {
-  form: Readonly<StepForm>
-}
+const { form, current, resetForm } = inject<StepState>(STEP_FORM_KEY)!
 
 // 再转一笔
 const again = () => {
-  emit('again')
+  current.value = 1
+  resetForm()
 }
 </script>
 
@@ -52,7 +46,7 @@ const again = () => {
   display: flex;
   flex-direction: column;
 
-  .info-box {
+  &__info {
     padding: 20px 50px;
     margin-bottom: 30px;
     background: var(--color-fill-1);

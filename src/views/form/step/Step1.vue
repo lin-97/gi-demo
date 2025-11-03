@@ -10,7 +10,7 @@
       <a-form-item label="收款账户" field="recAccount">
         <a-input-group class="w-full">
           <a-select v-model="form.payType" style="width: 150px">
-            <a-option v-for="item in payMethodList" :key="item.icon" :value="item.value">
+            <a-option v-for="item in PAY_METHODS" :key="item.icon" :value="item.value">
               <template #icon>
                 <GiSvgIcon :name="item.icon"></GiSvgIcon>
               </template>
@@ -37,26 +37,17 @@
 
 <script setup lang="ts">
 import type { FormInstance } from '@arco-design/web-vue'
-import type { StepForm } from './type'
+import type { StepState } from './type'
+import { STEP_FORM_KEY } from './util'
 
 defineOptions({ name: 'Step1' })
 
-const emit = defineEmits<{
-  (e: 'next', form?: StepForm): void
-}>()
+const { form, current } = inject<StepState>(STEP_FORM_KEY)! // 使用!断言非null，或根据需要提供默认值
 
-const payMethodList = [
+const PAY_METHODS = [
   { label: '微信', value: 1, icon: 'wechat' },
   { label: '支付宝', value: 2, icon: 'alipay' }
 ]
-
-const form: StepForm = reactive({
-  payAccount: '',
-  recAccount: '1997***6962@qq.com',
-  payType: 1, // 1:微信 2: 支付宝
-  recName: 'Lin',
-  amount: '1980'
-})
 
 const rules: FormInstance['rules'] = {
   payAccount: [{ required: true, message: '请选择付款账户' }],
@@ -71,7 +62,7 @@ const formRef = useTemplateRef('formRef')
 const next = async () => {
   const valid = await formRef.value?.validate()
   if (!valid) {
-    emit('next', form)
+    current.value++
   }
 }
 </script>
