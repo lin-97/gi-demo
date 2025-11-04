@@ -140,12 +140,6 @@ function handleClick() {
   margin: $margin;
 }
 
-.gi-page-layout--has-header {
-  .gi-page-layout__body {
-    padding-top: 8px;
-  }
-}
-
 .gi-page-layout--inner {
   .gi-page-layout__header {
     padding: 0;
