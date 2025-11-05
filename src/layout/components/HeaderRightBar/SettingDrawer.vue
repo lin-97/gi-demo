@@ -5,13 +5,14 @@
 <template>
   <a-drawer v-model:visible="visible" title="项目配置" width="300px" unmount-on-close :footer="false">
     <a-space :size="15" direction="vertical" fill>
-      <a-divider orientation="center">系统布局</a-divider>
-      <a-row justify="center">
-        <a-space>
-          <LayoutModeItem v-for="item in LAYOUT_OPTIONS" :key="item.value" :mode="item.value" :name="item.label"
-            @click="toggleLayout(item.value)"></LayoutModeItem>
-        </a-space>
-      </a-row>
+      <section>
+        <a-divider orientation="center">系统布局</a-divider>
+        <a-row :gutter="[8, 8]">
+          <a-col v-for="item in LAYOUT_OPTIONS" :key="item.value" :span="8">
+            <LayoutModeItem :mode="item.value" :name="item.label" @click="toggleLayout(item.value)"></LayoutModeItem>
+          </a-col>
+        </a-row>
+      </section>
 
       <!-- 系统主题设置 -->
       <section>
@@ -79,7 +80,8 @@ type LayoutItem = { label: string, value: App.SettingConfig['layout'] }
 const LAYOUT_OPTIONS: LayoutItem[] = [
   { label: '默认布局', value: 'left' },
   { label: '混合布局', value: 'mix' },
-  { label: '顶部布局', value: 'top' }
+  { label: '顶部布局', value: 'top' },
+  { label: '双列布局', value: 'columns' }
 ]
 
 type TabItem = { label: string, value: App.SettingConfig['tab'] }

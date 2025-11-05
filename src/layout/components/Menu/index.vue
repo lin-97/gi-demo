@@ -51,7 +51,7 @@ const sidebarRoutes = computed(() => props.menus ?? routeStore.routes)
 
 // 菜单模式
 const menuMode = computed(() =>
-  ['left', 'mix'].includes(appStore.layout) ? 'vertical' : 'horizontal'
+  ['left', 'mix', 'columns'].includes(appStore.layout) ? 'vertical' : 'horizontal'
 )
 
 // 是否自动展开选中菜单

@@ -3,7 +3,7 @@
   @description 布局切换选项组件，支持左侧布局、顶部布局和混合布局三种模式
 -->
 <template>
-  <a-badge>
+  <a-badge class="w-full">
     <!-- 选中状态标记 -->
     <template #content>
       <icon-check-circle-fill v-if="appStore.layout === props.mode" style="color: rgb(var(--success-6))"
@@ -32,6 +32,13 @@
           <div class="block-right"></div>
         </div>
       </template>
+
+      <!-- 双列布局 -->
+      <template v-if="props.mode === 'columns'">
+        <div class="block-left block-column"></div>
+        <div class="block-left"></div>
+        <div class="block-right"></div>
+      </template>
     </div>
 
     <!-- 布局名称 -->
@@ -57,7 +64,7 @@ const emit = defineEmits<{
 }>()
 
 /** 布局模式类型 */
-type LayoutMode = 'left' | 'top' | 'mix'
+type LayoutMode = 'left' | 'top' | 'mix' | 'columns'
 
 /** Props 类型定义 */
 interface Props {
@@ -74,7 +81,7 @@ const appStore = useAppStore()
 <style lang="scss" scoped>
 // 布局项基础样式
 .layout-mode-item {
-  width: 70px;
+  width: 100%;
   height: 50px;
   padding: 4px;
   display: flex;
@@ -158,6 +165,25 @@ const appStore = useAppStore()
       margin-left: 3px;
       background-color: var(--color-fill-3);
     }
+  }
+}
+
+// 双列布局样式
+.layout-mode-item__columns {
+
+  .block-left {
+    width: 10px;
+    background-color: $color-theme;
+  }
+
+  .block-right {
+    flex: 1;
+    margin-left: 4px;
+    background-color: var(--color-fill-3);
+  }
+
+  .block-column {
+    margin-right: 4px;
   }
 }
 </style>

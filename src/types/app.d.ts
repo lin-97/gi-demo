@@ -10,6 +10,6 @@ declare namespace App {
     menuCollapse: boolean // 左侧菜单折叠状态
     menuAccordion: boolean // 左侧菜单手风琴效果
     menuDark: boolean // 菜单深色模式
-    layout: 'left' | 'mix' | 'top'
+    layout: 'left' | 'mix' | 'top' | 'columns'
   }
 }

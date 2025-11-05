@@ -101,6 +101,7 @@ function handleClick() {
   width: 16px;
   height: 100%;
   background-color: transparent;
+  user-select: none;
 
   .arco-split-trigger-icon {
     display: none;

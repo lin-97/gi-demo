@@ -8,12 +8,13 @@
 
 <script setup lang="ts">
 import { useAppStore } from '@/stores'
-import LayoutDefault from './LayoutDefault.vue'
-import LayoutMix from './LayoutMix.vue'
-import LayoutTop from './LayoutTop.vue'
 
 /** 组件名称 */
 defineOptions({ name: 'Layout' })
+const LayoutDefault = defineAsyncComponent(() => import('./LayoutDefault.vue'))
+const LayoutColumns = defineAsyncComponent(() => import('./LayoutColumns.vue'))
+const LayoutMix = defineAsyncComponent(() => import('./LayoutMix.vue'))
+const LayoutTop = defineAsyncComponent(() => import('./LayoutTop.vue'))
 
 /** 状态管理 */
 const appStore = useAppStore()
@@ -22,7 +23,8 @@ const appStore = useAppStore()
 const layoutMap = {
   mix: LayoutMix,
   top: LayoutTop,
-  default: LayoutDefault
+  default: LayoutDefault,
+  columns: LayoutColumns
 } as const
 
 /** 当前布局组件 */

@@ -5,7 +5,7 @@
 <template>
   <section class="system-logo" :class="{ collapsed: props.collapsed }" @click="handleHomeNavigation">
     <img class="logo" src="@/assets/images/logo.gif" />
-    <span class="system-name gi-line-1">Admin Pro</span>
+    <span v-if="!props.hideName" class="system-name gi-line-1">Admin Pro</span>
   </section>
 </template>
 
@@ -15,13 +15,16 @@ defineOptions({ name: 'Logo' })
 
 /** Props 默认值 */
 const props = withDefaults(defineProps<Props>(), {
-  collapsed: false
+  collapsed: false,
+  hideName: false
 })
 
 /** Props 类型定义 */
 interface Props {
   /** 是否折叠状态 */
   collapsed?: boolean
+  /** 是否隐藏名称 */
+  hideName?: boolean
 }
 
 /** 路由实例 */
