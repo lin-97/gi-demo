@@ -16,7 +16,7 @@ permissions:
 
 # 环境配置
 concurrency:
-  group: "pages"
+  group: pages
   cancel-in-progress: true
 
 jobs:
@@ -28,33 +28,33 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
         with:
-          fetch-depth: 0  # 确保获取完整的历史记录
-      
+          fetch-depth: 0 # 确保获取完整的历史记录
+
       # 设置Node.js环境
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '20.19.4'
-          cache: 'npm'  # 缓存npm依赖
-      
+          node-version: 20.19.4
+          cache: npm # 缓存npm依赖
+
       # 安装依赖
       - name: Install dependencies
-        run: npm ci  # 使用ci命令确保依赖完全匹配package-lock.json
-      
+        run: npm ci # 使用ci命令确保依赖完全匹配package-lock.json
+
       # 构建项目
       - name: Build
         run: npm run build
-      
+
       # 检查构建结果
       - name: Check build output
-        run: ls -la ./dist  # 列出dist目录内容，验证构建是否成功
-      
+        run: ls -la ./dist # 列出dist目录内容，验证构建是否成功
+
       # 上传构建产物作为artifact
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
           path: ./dist
-  
+
   # 部署作业
   deploy:
     # 只有在构建成功且是push或手动触发时才运行
