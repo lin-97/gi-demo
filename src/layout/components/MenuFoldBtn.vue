@@ -24,12 +24,12 @@
 
 <script setup lang="ts">
 import { useDevice } from '@/hooks'
-import Logo from '@/layout/components/Logo.vue'
-import Menu from '@/layout/components/Menu/index.vue'
 import { useAppStore } from '@/stores'
 
 /** 组件名称 */
 defineOptions({ name: 'MenuFoldBtn' })
+const Logo = defineAsyncComponent(() => import('@/layout/components/Logo.vue'))
+const Menu = defineAsyncComponent(() => import('@/layout/components/Menu/index.vue'))
 
 /** 状态管理 */
 const appStore = useAppStore()

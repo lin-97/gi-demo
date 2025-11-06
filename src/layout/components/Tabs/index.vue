@@ -5,7 +5,7 @@
 <template>
   <div class="tabs">
     <a-tabs :class="`tabs__${appStore.tab}`" :type="tabsType" :active-key="route.path" editable hide-content
-      size="medium" @tab-click="handleTabClick" @delete="tabsStore.closeCurrent">
+      size="medium" @tab-click="handleTabClick" @delete="tabsStore.closeCurrent($event as string)">
       <a-tab-pane v-for="item of tabsStore.tabList" :key="item.path" :title="(item.meta?.title as string)"
         :closable="!item.meta?.affix">
         <template v-if="appStore.tab === 'custom2'" #title>
@@ -94,9 +94,9 @@ listenerRouteChange(({ to }) => {
 })
 
 /** 处理标签页点击 */
-const handleTabClick = (key: string) => {
+const handleTabClick: TabsInstance['onTabClick'] = (key) => {
   const targetTab = tabsStore.tabList.find((tab) => tab.path === key)
-  router.push(targetTab?.fullPath || targetTab?.path || key)
+  router.push(targetTab?.fullPath || targetTab?.path || (key as string))
 }
 
 onMounted(() => {

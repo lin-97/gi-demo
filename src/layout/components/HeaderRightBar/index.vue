@@ -3,7 +3,7 @@
   @description 头部右侧工具栏组件，包含项目配置、消息通知、全屏切换、主题切换和用户菜单等功能
 -->
 <template>
-  <a-row justify="end" align="center">
+  <a-row justify="end" align="center" class="header-right-bar">
     <a-space size="medium">
       <!-- 项目配置按钮 -->
       <a-tooltip content="项目配置" position="bl">
@@ -45,17 +45,17 @@
 
       <!-- 管理员账户 -->
       <a-dropdown trigger="hover">
-        <a-row align="center" :wrap="false" class="user">
+        <a-row align="center" :wrap="false" class="header-right-bar__user">
           <!-- 管理员头像 -->
           <a-avatar :size="32">
             <img :src="userStore.avatar" />
           </a-avatar>
-          <span class="username">{{ userStore.name }}</span>
+          <span class="header-right-bar__username">{{ userStore.name }}</span>
           <icon-down />
         </a-row>
 
         <template #content>
-          <a-doption v-for="item in userMenuItems" :key="item.key" @click="item.onClick">
+          <a-doption v-for="item in USER_MENUS" :key="item.key" @click="item.onClick">
             <template #icon>
               <GiIconBox :color="item.iconColor">
                 <component :is="item.icon" />
@@ -85,11 +85,11 @@ import { Message, Modal } from '@arco-design/web-vue'
 import { useFullscreen } from '@vueuse/core'
 import { useBreakpoint } from '@/hooks'
 import { useUserStore } from '@/stores'
-import Notice from './Notice.vue'
-import SettingDrawer from './SettingDrawer.vue'
 
 /** 组件名称 */
 defineOptions({ name: 'HeaderRight' })
+const Notice = defineAsyncComponent(() => import('./Notice.vue'))
+const SettingDrawer = defineAsyncComponent(() => import('./SettingDrawer.vue'))
 
 /** 路由实例 */
 const router = useRouter()
@@ -107,7 +107,7 @@ const { isFullscreen, toggle } = useFullscreen()
 const SettingDrawerRef = useTemplateRef('SettingDrawerRef')
 
 /** 用户菜单配置 */
-const userMenuItems = [
+const USER_MENUS = [
   {
     key: 'user',
     label: '个人中心',
@@ -164,41 +164,20 @@ const handleLogout = () => {
   transform: rotate(180deg);
 }
 
-.doption-icon {
-  width: 20px;
-  height: 20px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-shrink: 0;
-  color: #fff;
-  border-radius: 4px;
-
-  &.primary {
-    background-color: rgba(var(--primary-6));
+.header-right-bar {
+  &__user {
+    cursor: pointer;
+    color: var(--color-text-1);
   }
 
-  &.success {
-    background-color: rgba(var(--success-6));
-  }
-
-  &.warning {
-    background-color: rgba(var(--warning-6));
-  }
-}
-
-.user {
-  cursor: pointer;
-  color: var(--color-text-1);
-
-  .username {
+  &__username {
     margin-left: 10px;
     white-space: nowrap;
-  }
 
-  .arco-icon-down {
-    transition: all 0.3s;
-    margin-left: 2px;
+    .arco-icon-down {
+      transition: all 0.3s;
+      margin-left: 2px;
+    }
   }
 }
 </style>

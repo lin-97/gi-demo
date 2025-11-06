@@ -1,9 +1,9 @@
 <template>
   <a-layout-header class="header">
-    <section class="fold-btn-wrapper">
+    <section class="header__left">
       <MenuFoldBtn></MenuFoldBtn>
     </section>
-    <a-row align="center" class="h-full header-right">
+    <a-row align="center" class="h-full header__right">
       <a-col :xs="0" :md="10" :lg="10" :xl="12" :xxl="12">
         <Breadcrumb></Breadcrumb>
       </a-col>
@@ -32,18 +32,15 @@ defineOptions({ name: 'AppHeader' })
 .header {
   display: flex;
   align-items: center;
-
-  .header-right {
-    flex: 1;
-    overflow: hidden;
-    margin-left: $padding;
-  }
-}
-
-.arco-layout-header {
   padding: 0 $padding;
   height: 56px;
   background: var(--color-bg-1);
   border-bottom: 1px solid var(--color-neutral-3);
+
+  &__right {
+    flex: 1;
+    overflow: hidden;
+    margin-left: $padding;
+  }
 }
 </style>

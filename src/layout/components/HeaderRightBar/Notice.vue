@@ -26,6 +26,8 @@
 </template>
 
 <script setup lang="ts">
+import type { TabsInstance } from '@arco-design/web-vue'
+
 /** 组件名称 */
 defineOptions({ name: 'Message' })
 
@@ -75,8 +77,8 @@ const messageList = ref<MessageItem[]>([
 ])
 
 /** 处理标签页切换 */
-const handleTabChange = (key: string) => {
-  activeTab.value = key
+const handleTabChange: TabsInstance['onChange'] = (key) => {
+  activeTab.value = key as string
 }
 </script>
 

@@ -56,7 +56,7 @@ const menuMode = computed(() =>
 
 // 是否自动展开选中菜单
 const autoOpenSelected = computed(() =>
-  ['left', 'mix'].includes(appStore.layout)
+  ['left', 'mix', 'columns'].includes(appStore.layout)
 )
 
 // 是否启用断点

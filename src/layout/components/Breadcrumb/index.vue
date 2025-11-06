@@ -11,7 +11,7 @@
             <span class="gi-line-1">{{ lastTitle || item.meta.title }}</span>
           </template>
           <template v-else>
-            <span class="gi-line-1 breadcrumb-item-title" @click="handleLink(item)">
+            <span class="gi-line-1 breadcrumb__item-title" @click="handleLink(item)">
               {{ item.meta.title }}
             </span>
           </template>
@@ -113,7 +113,7 @@ const lastTitle = computed(() => {
   }
 }
 
-.breadcrumb-item-title {
+.breadcrumb__item-title {
   transition: all 0.3s;
   cursor: pointer;
 
