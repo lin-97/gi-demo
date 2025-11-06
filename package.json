@@ -9,7 +9,9 @@
     "preview": "vite preview --port 5050",
     "typecheck": "vue-tsc --noEmit",
     "lint": "eslint .",
-    "lint:fix": "eslint . --fix"
+    "lint:fix": "eslint . --fix",
+    "lint:style": "stylelint \"**/*.{vue,scss,css}\" --cache",
+    "lint:style:fix": "stylelint \"**/*.{vue,scss,css}\" --cache --fix"
   },
   "dependencies": {
     "@amap/amap-jsapi-loader": "^1.0.1",
@@ -58,8 +60,16 @@
     "eslint": "^9.0.0",
     "less": "^4.4.0",
     "less-loader": "^12.3.0",
+    "postcss": "^8.5.6",
+    "postcss-html": "^1.8.0",
     "sass": "^1.62.1",
     "sass-loader": "^16.0.5",
+    "stylelint": "^16.25.0",
+    "stylelint-config-recess-order": "^7.4.0",
+    "stylelint-config-recommended-vue": "^1.6.1",
+    "stylelint-config-standard": "^39.0.1",
+    "stylelint-config-standard-scss": "^16.0.0",
+    "stylelint-scss": "^6.12.1",
     "typescript": "^5.9.2",
     "unplugin-auto-import": "^20.0.0",
     "unplugin-vue-components": "^29.0.0",

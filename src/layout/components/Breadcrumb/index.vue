@@ -104,9 +104,9 @@ const lastTitle = computed(() => {
 }
 
 :deep(.arco-breadcrumb-item) {
-  padding: 0;
   display: flex;
   align-items: center;
+  padding: 0;
 
   .arco-icon-right {
     margin: 0 4px;
@@ -114,12 +114,12 @@ const lastTitle = computed(() => {
 }
 
 .breadcrumb__item-title {
-  transition: all 0.3s;
   cursor: pointer;
+  transition: all 0.3s;
 
   &:hover {
-    color: $color-theme;
     font-weight: 600;
+    color: $color-theme;
   }
 }
 </style>

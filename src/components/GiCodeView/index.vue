@@ -42,6 +42,6 @@ const extensions = computed(() => {
 
 <style lang="scss" scoped>
 :deep(.ͼ1 .cm-scroller) {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, Courier New, monospace;
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New", monospace;
 }
 </style>

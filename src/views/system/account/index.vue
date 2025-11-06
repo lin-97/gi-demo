@@ -80,24 +80,24 @@ const userStore = useUserStore()
 
 <style lang="scss" scoped>
 .user-card {
+  box-sizing: border-box;
   width: 100%;
   height: fit-content;
   padding: $padding;
-  box-sizing: border-box;
   background: var(--color-bg-1);
   border-radius: 2px;
 
   &__header {
     display: flex;
     flex-direction: column;
-    justify-content: center;
     align-items: center;
+    justify-content: center;
 
     .name {
+      margin: 8px;
       font-size: 20px;
       font-weight: bolder;
       line-height: 1.5;
-      margin: 8px;
       color: $color-text-1;
     }
 

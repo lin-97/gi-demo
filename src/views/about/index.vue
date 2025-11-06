@@ -29,7 +29,7 @@ const data = packageJson
 
 <style lang="scss" scoped>
 :deep(.arco-descriptions-item-label-block) {
-  white-space: normal;
   word-break: break-all;
+  white-space: normal;
 }
 </style>

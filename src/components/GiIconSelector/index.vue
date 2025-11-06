@@ -152,13 +152,13 @@ const handleSelectedIcon = async (icon: string) => {
     margin-bottom: 10px;
 
     .icon-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
       height: 30px;
       margin-bottom: 4px;
       overflow: hidden;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
       cursor: pointer;
       border: 1px dashed var(--color-bg-1);
 
@@ -167,8 +167,8 @@ const handleSelectedIcon = async (icon: string) => {
       }
 
       &.active {
+        background-color: rgb(var(--primary-6), 0.05);
         border: 1px dashed rgb(var(--primary-3));
-        background-color: rgba(var(--primary-6), 0.05);
       }
 
       &:not(.active) {
@@ -189,18 +189,18 @@ const handleSelectedIcon = async (icon: string) => {
     overflow-y: auto;
 
     .icon-item {
+      box-sizing: border-box;
       display: flex;
       flex-direction: row;
-      justify-content: flex-start;
       align-items: center;
+      justify-content: flex-start;
       padding-left: 4px;
-      box-sizing: border-box;
 
       .icon-name {
+        display: block;
         margin-left: 6px;
         font-size: 12px;
         color: var(--color-text-2);
-        display: block;
       }
     }
   }

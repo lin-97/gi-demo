@@ -69,8 +69,8 @@ const next = async () => {
 
 <style lang="scss" scoped>
 .step-1 {
-  margin-top: 50px;
   display: flex;
   justify-content: center;
+  margin-top: 50px;
 }
 </style>

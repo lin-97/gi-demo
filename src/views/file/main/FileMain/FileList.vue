@@ -102,9 +102,9 @@ const handleRightMenuClick = (mode: string, item: FileItem) => {
   overflow: hidden;
 
   .file-name {
-    height: 100%;
     display: flex;
     align-items: center;
+    height: 100%;
     padding-top: 6px;
     padding-bottom: 6px;
     cursor: pointer;

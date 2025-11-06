@@ -104,12 +104,12 @@ defineExpose({
 
   .iframe {
     flex: 1;
-    border: none;
     width: 100%;
     height: 100%;
     padding: 0;
     margin: 0;
     background-color: transparent;
+    border: none;
   }
 }
 </style>

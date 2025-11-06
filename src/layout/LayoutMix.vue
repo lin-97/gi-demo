@@ -118,13 +118,13 @@ listenerRouteChange(({ to }) => {
 
   // Menu菜单组件修改
   .arco-menu-icon {
-    margin-right: 0;
     padding: 10px 0;
+    margin-right: 0;
   }
 
   .arco-menu-has-icon {
-    padding: 0;
     justify-content: center;
+    padding: 0;
   }
 
   .arco-menu-title {
@@ -146,36 +146,36 @@ listenerRouteChange(({ to }) => {
 }
 
 .layout-mix {
-  height: 100%;
   display: flex;
   align-items: stretch;
+  height: 100%;
   overflow: hidden;
 
   &-left {
-    border-right: 1px solid var(--color-border);
-    background-color: var(--color-bg-1);
     display: flex;
     flex-direction: column;
     overflow: hidden;
+    background-color: var(--color-bg-1);
+    border-right: 1px solid var(--color-border);
   }
 
   &-right {
-    flex: 1;
     display: flex;
+    flex: 1;
     flex-direction: column;
     overflow: hidden;
   }
 }
 
 .header {
-  padding: 0 $padding;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
   height: 56px;
+  padding: 0 $padding;
+  overflow: hidden;
   color: var(--color-text-1);
   background: var(--color-bg-1);
   border-bottom: 1px solid var(--color-border);
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  overflow: hidden;
 }
 </style>

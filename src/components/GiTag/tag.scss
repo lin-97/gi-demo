@@ -9,37 +9,37 @@ $tag-size-small-padding: 0 8px;
 $tag-size-large-padding: 0 10px;
 
 .gi-tag {
+  box-sizing: border-box;
   display: inline-flex;
-  padding: $tag-size-small-padding;
+  align-items: center;
+  justify-content: center;
   height: $tag-size-small-height;
+  padding: $tag-size-small-padding;
   font-size: 12px;
   line-height: 1;
-  border-radius: 3px;
-  justify-content: center;
-  align-items: center;
   white-space: nowrap;
-  box-sizing: border-box;
   cursor: pointer;
+  border-radius: 3px;
 }
 
 .gi-tag-close-btn {
   position: relative;
+  box-sizing: border-box;
   display: flex;
-  justify-content: center;
   align-items: center;
-  cursor: pointer;
-  margin-left: 4px;
+  justify-content: center;
   width: 16px;
   height: 16px;
-  box-sizing: border-box;
+  margin-left: 4px;
+  cursor: pointer;
   background-color: transparent;
   border-radius: var(--border-radius-circle);
   transition: background-color 0.1s cubic-bezier(0, 0, 1, 1);
 
   .close-icon {
+    z-index: 9;
     width: 12px;
     height: 12px;
-    z-index: 9;
   }
 }
 
@@ -74,9 +74,12 @@ $tag-size-large-padding: 0 10px;
   color: #fff;
 
   @each $i in $status {
-    &.gi-tag__status--#{$i} {
+    &.gi-tag__status--#{$i}
+
+ {
       color: rgb(var(--#{$i}-6));
       background-color: rgb(var(--#{$i}-1));
+
       --tag-close-hover-color: #fff;
       --tag-close-hover-bg-color: rgb(var(--#{$i}-6));
 
@@ -94,10 +97,13 @@ $tag-size-large-padding: 0 10px;
   color: #fff;
 
   @each $i in $status {
-    &.gi-tag__status--#{$i} {
+    &.gi-tag__status--#{$i}
+
+ {
       background-color: rgb(var(--#{$i}-6));
+
       --tag-close-hover-color: rgb(var(--#{$i}-6));
-      --tag-close-hover-bg-color: rgba(255, 255, 255, 0.9);
+      --tag-close-hover-bg-color: rgb(255 255 255 / 90%);
 
       .gi-tag-close-btn {
         &:hover {
@@ -111,13 +117,16 @@ $tag-size-large-padding: 0 10px;
 
 .gi-tag__type--outline {
   background: transparent;
-  border-width: 1px;
   border-style: solid;
+  border-width: 1px;
 
   @each $i in $status {
-    &.gi-tag__status--#{$i} {
+    &.gi-tag__status--#{$i}
+
+ {
       color: rgb(var(--#{$i}-6));
       border-color: rgb(var(--#{$i}-6));
+
       --tag-close-hover-color: #fff;
       --tag-close-hover-bg-color: rgb(var(--#{$i}-6));
 
@@ -132,14 +141,17 @@ $tag-size-large-padding: 0 10px;
 }
 
 .gi-tag__type--light-outline {
-  border-width: 1px;
   border-style: solid;
+  border-width: 1px;
 
   @each $i in $status {
-    &.gi-tag__status--#{$i} {
+    &.gi-tag__status--#{$i}
+
+ {
       color: rgb(var(--#{$i}-6));
-      border-color: rgb(var(--#{$i}-2));
       background-color: rgb(var(--#{$i}-1));
+      border-color: rgb(var(--#{$i}-2));
+
       --tag-close-hover-color: #fff;
       --tag-close-hover-bg-color: rgb(var(--#{$i}-6));
 

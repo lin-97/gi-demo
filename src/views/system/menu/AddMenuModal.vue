@@ -24,7 +24,7 @@
           <a-form-item label="自定义图标" field="svgIcon">
             <GiIconSelector v-model="form.svgIcon" type="custom"></GiIconSelector>
             <a-tooltip content="优先显示">
-              <icon-question-circle-fill :size="18" style="color: rgba(var(--warning-6)); margin-left: 8px" />
+              <icon-question-circle-fill :size="18" style=" margin-left: 8px;color: rgb(var(--warning-6))" />
             </a-tooltip>
           </a-form-item>
         </a-col>

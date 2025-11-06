@@ -31,13 +31,13 @@ const handleCollapse = (isCollapsed: boolean) => {
 
   // Menu菜单组件修改
   .arco-menu-icon {
-    margin-right: 0;
     padding: 10px 0;
+    margin-right: 0;
   }
 
   .arco-menu-has-icon {
-    padding: 0;
     justify-content: center;
+    padding: 0;
   }
 
   .arco-menu-title {
@@ -46,19 +46,19 @@ const handleCollapse = (isCollapsed: boolean) => {
 }
 
 :deep(.arco-layout-sider-children) {
-  overflow: hidden;
   display: flex;
   flex-direction: column;
+  overflow: hidden;
 }
 
 .asider {
   z-index: 1000;
+  box-sizing: border-box;
   display: flex;
   flex-direction: column;
-  border-right: 1px solid var(--color-border-2);
-  box-sizing: border-box;
   color: var(--color-text-1);
   background-color: var(--color-bg-1);
+  border-right: 1px solid var(--color-border-2);
 
   &__menu-scroll-view {
     flex: 1;

@@ -69,12 +69,12 @@ function onCountDownTime() {
 
 <style lang="scss" scoped>
 .error-page {
+  display: flex;
+  align-items: center;
+  justify-content: center;
   width: 100%;
   height: 100%;
   background: var(--color-bg-1);
-  display: flex;
-  justify-content: center;
-  align-items: center;
 }
 
 .error {
@@ -85,12 +85,12 @@ function onCountDownTime() {
   }
 
   &__img {
-    width: 100%;
     position: relative;
-    overflow: hidden;
     display: flex;
-    justify-content: center;
     align-items: center;
+    justify-content: center;
+    width: 100%;
+    overflow: hidden;
   }
 
   &__icon {
@@ -132,9 +132,9 @@ function onCountDownTime() {
       padding: 0 30px;
       margin-bottom: 20px;
       font-size: 13px;
-      text-align: center;
       line-height: 20px;
       color: var(--color-text-2);
+      text-align: center;
       opacity: 0;
       animation-name: slideUp;
       animation-duration: 0.5s;

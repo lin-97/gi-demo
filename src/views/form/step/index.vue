@@ -58,18 +58,18 @@ provide(STEP_FORM_KEY, { form, resetForm, current })
 
 <style lang="scss" scoped>
 .step-form__wrapper {
-  min-height: 560px;
-  padding: $padding;
   box-sizing: border-box;
-  background: var(--color-bg-1);
   display: flex;
   justify-content: center;
+  min-height: 560px;
+  padding: $padding;
+  background: var(--color-bg-1);
 }
 
 .step-form__box {
+  flex-shrink: 0;
   width: 100%;
   max-width: 560px;
   margin-top: 30px;
-  flex-shrink: 0;
 }
 </style>

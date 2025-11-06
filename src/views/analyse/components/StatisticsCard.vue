@@ -51,15 +51,15 @@ const TAG_COLOR_MAP: Record<string, string> = {
 
 <style lang="scss" scoped>
 :deep(.arco-card-body) {
-  flex: 1;
   display: flex;
+  flex: 1;
   flex-direction: column;
 }
 
 :deep(.arco-tag-size-medium) {
+  justify-content: center;
   width: 24px;
   padding: 0;
-  justify-content: center;
 }
 
 .statistics-card {
@@ -71,9 +71,9 @@ const TAG_COLOR_MAP: Record<string, string> = {
   }
 
   &__content-tip {
-    height: 30px;
     display: flex;
     align-items: center;
+    height: 30px;
   }
 }
 </style>

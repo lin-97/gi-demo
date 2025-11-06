@@ -1,7 +1,7 @@
 <template>
   <GiPageLayout margin :body-style="{ overflowY: 'auto' }">
     <a-row align="center" class="gi_mb">
-      <a-alert style="margin-right: 8px; flex: 1">通过函数调用表格弹窗</a-alert>
+      <a-alert style=" flex: 1;margin-right: 8px">通过函数调用表格弹窗</a-alert>
       <GiCodeButton :code="CodeJson"></GiCodeButton>
     </a-row>
 

@@ -83,10 +83,10 @@ function handleClick() {
 
 <style lang='scss' scoped>
 :deep(.arco-split-pane) {
-  height: 100%;
-  overflow: hidden;
   display: flex;
   flex-direction: column;
+  height: 100%;
+  overflow: hidden;
 }
 
 :deep(.arco-split-trigger) {
@@ -97,11 +97,11 @@ function handleClick() {
   position: absolute;
   top: 50%;
   left: 50%;
-  transform: translate(-50%, -50%);
   width: 16px;
   height: 100%;
-  background-color: transparent;
   user-select: none;
+  background-color: transparent;
+  transform: translate(-50%, -50%);
 
   .arco-split-trigger-icon {
     display: none;
@@ -116,24 +116,24 @@ function handleClick() {
   }
 
   &::before {
-    content: '';
-    width: 1px;
-    height: 100%;
     position: absolute;
     top: 0;
     left: 50%;
-    transform: translateX(-50%);
+    width: 1px;
+    height: 100%;
+    content: '';
     background-color: var(--color-border-2);
+    transform: translateX(-50%);
   }
 }
 
 .gi-page-layout {
+  box-sizing: border-box;
+  display: flex;
   flex: 1;
   width: auto;
   height: 100%;
-  display: flex;
   overflow: hidden;
-  box-sizing: border-box;
   background-color: var(--color-bg-1);
 }
 
@@ -147,9 +147,9 @@ function handleClick() {
   }
 
   .gi-page-layout__body {
-    padding-left: 0;
     padding-right: 0;
     padding-bottom: 0;
+    padding-left: 0;
   }
 }
 
@@ -172,12 +172,12 @@ function handleClick() {
 }
 
 .gi-page-layout__left {
-  height: 100%;
-  padding: $padding;
+  box-sizing: border-box;
   display: flex;
   flex-direction: column;
+  height: 100%;
+  padding: $padding;
   overflow: hidden;
-  box-sizing: border-box;
 }
 
 .gi-page-layout__header {
@@ -187,11 +187,11 @@ function handleClick() {
 }
 
 .gi-page-layout__body {
-  padding: $padding;
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  overflow: hidden;
   box-sizing: border-box;
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  padding: $padding;
+  overflow: hidden;
 }
 </style>

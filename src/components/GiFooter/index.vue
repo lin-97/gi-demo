@@ -12,14 +12,14 @@ const year = Dayjs(new Date()).format('YYYY')
 
 <style lang="scss" scoped>
 .gi-footer {
-  font-size: 12px;
-  color: var(--color-text-3);
-  margin-top: 12px;
-  padding-top: $padding;
-  border-top: 1px dashed var(--color-neutral-3);
   box-sizing: border-box;
   display: flex;
-  justify-content: center;
   align-items: center;
+  justify-content: center;
+  padding-top: $padding;
+  margin-top: 12px;
+  font-size: 12px;
+  color: var(--color-text-3);
+  border-top: 1px dashed var(--color-neutral-3);
 }
 </style>

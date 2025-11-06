@@ -228,25 +228,25 @@ const handleMulDelete = () => {
 
 <style lang="scss" scoped>
 .file-main {
-  height: 100%;
-  background: var(--color-bg-1);
-  border-radius: $radius-box;
   display: flex;
   flex-direction: column;
+  height: 100%;
   overflow: hidden;
+  background: var(--color-bg-1);
+  border-radius: $radius-box;
 
   &__search {
-    border-bottom: 1px dashed var(--color-border-3);
     margin: 0 $padding;
+    border-bottom: 1px dashed var(--color-border-3);
   }
 
   &__list {
-    flex: 1;
-    padding: 0 $padding $padding;
     box-sizing: border-box;
-    overflow: hidden;
     display: flex;
+    flex: 1;
     flex-direction: column;
+    padding: 0 $padding $padding;
+    overflow: hidden;
   }
 }
 </style>

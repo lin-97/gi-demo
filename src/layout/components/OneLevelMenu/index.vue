@@ -44,14 +44,14 @@ const calcIsActive = (item: RouteRecordRaw) => {
 }
 
 .one-level-menu {
-  width: 68px;
-  height: 100%;
-  background-color: var(--color-bg-1);
-  border-right: 1px solid var(--color-border-2);
   box-sizing: border-box;
-  overflow: hidden;
   display: flex;
   flex-direction: column;
+  width: 68px;
+  height: 100%;
+  overflow: hidden;
+  background-color: var(--color-bg-1);
+  border-right: 1px solid var(--color-border-2);
 
   &__logo {
     justify-content: center;
@@ -64,14 +64,14 @@ const calcIsActive = (item: RouteRecordRaw) => {
   }
 
   &__wrap {
-    flex: 1;
     display: flex;
+    flex: 1;
     overflow: hidden;
   }
 
   &__list {
-    padding: 4px 4px 0;
     box-sizing: border-box;
+    padding: 4px 4px 0;
   }
 
   &__item {
@@ -81,12 +81,12 @@ const calcIsActive = (item: RouteRecordRaw) => {
     justify-content: center;
     padding: 8px 0;
     margin-bottom: 4px;
-    border-radius: 4px;
     cursor: pointer;
+    border-radius: 4px;
 
     &--active {
-      background-color: var(--color-primary-light-2);
-      color: rgb(var(--primary-6))
+      color: rgb(var(--primary-6));
+      background-color: var(--color-primary-light-2)
     }
 
     &:not(.one-level-menu__item--active):hover {
@@ -94,11 +94,11 @@ const calcIsActive = (item: RouteRecordRaw) => {
     }
 
     &__title {
-      font-size: 12px;
-      margin-top: 8px;
-      line-height: 1;
-      padding: 0 8px;
       box-sizing: border-box;
+      padding: 0 8px;
+      margin-top: 8px;
+      font-size: 12px;
+      line-height: 1;
     }
   }
 }

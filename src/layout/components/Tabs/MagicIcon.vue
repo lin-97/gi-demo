@@ -18,20 +18,20 @@ defineOptions({ name: 'MagicIcon' })
 <style lang="scss" scoped>
 .magic-icon-wrapper {
   position: relative;
-  display: flex;
-  justify-content: center;
-  align-items: center;
   box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 
   // 点击区域扩展
   &::before {
-    content: '';
     position: absolute;
+    top: -6px;
+    left: -6px;
     width: 26px;
     height: 26px;
-    left: -6px;
-    top: -6px;
     cursor: pointer;
+    content: '';
   }
 }
 
@@ -83,15 +83,14 @@ defineOptions({ name: 'MagicIcon' })
     transform: rotate(90deg);
 
     .magic-dot {
-
       &::before,
       &::after {
         background: rgb(var(--primary-6));
       }
 
       &-top::before {
-        transform: rotate(45deg);
         background: rgb(var(--primary-3));
+        transform: rotate(45deg);
       }
     }
   }

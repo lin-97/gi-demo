@@ -68,11 +68,11 @@ const onClickItem = (mode: string) => {
 
 <style lang="scss" scoped>
 .shadow {
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.12), 0 0 6px rgba(0, 0, 0, 0.04);
-  border-radius: 4px;
-  overflow: hidden;
-  border: 1px solid var(--color-border-2);
   box-sizing: border-box;
+  overflow: hidden;
   background: var(--color-bg-popup);
+  border: 1px solid var(--color-border-2);
+  border-radius: 4px;
+  box-shadow: 0 2px 4px rgb(0 0 0 / 12%), 0 0 6px rgb(0 0 0 / 4%);
 }
 </style>

@@ -77,10 +77,10 @@ const handleMenuItemClick = () => {
 
   // 抽屉内容样式
   :deep(.arco-drawer-body) {
-    padding: 0;
-    overflow: hidden;
     display: flex;
     flex-direction: column;
+    padding: 0;
+    overflow: hidden;
   }
 }
 </style>

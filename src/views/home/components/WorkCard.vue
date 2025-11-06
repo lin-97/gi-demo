@@ -76,9 +76,9 @@ const userStore = useUserStore()
       color: $color-text-3;
 
       .hello {
+        margin-bottom: 10px;
         font-size: 1.25rem;
         color: $color-text-1;
-        margin-bottom: 10px;
       }
 
       .gi-demo-star {

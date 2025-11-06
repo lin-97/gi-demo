@@ -6,7 +6,7 @@
 
       <!-- 左侧二级菜单区域 -->
       <Menu v-if="twoLevelMenus.length > 1" class="layout-columns__menu" :menus="twoLevelMenus"
-        :menu-style="{ width: '200px' }" />
+        :menu-style="{ width: '180px' }" />
     </div>
 
     <!-- 右侧内容区域 -->
@@ -74,16 +74,16 @@ function handleMenuClick(item: RouteRecordRaw) {
 
 <style lang="scss" scoped>
 .layout-columns {
+  display: flex;
   width: 100%;
   height: 100%;
-  display: flex;
   overflow: hidden;
 
   &__left {
-    height: 100%;
-    background-color: var(--color-bg-1);
-    overflow: hidden;
     display: flex;
+    height: 100%;
+    overflow: hidden;
+    background-color: var(--color-bg-1);
   }
 
   &__menu {
@@ -91,8 +91,8 @@ function handleMenuClick(item: RouteRecordRaw) {
   }
 
   &__content {
-    flex: 1;
     display: flex;
+    flex: 1;
     flex-direction: column;
     overflow: hidden;
   }

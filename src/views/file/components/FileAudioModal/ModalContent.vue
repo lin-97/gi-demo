@@ -1,7 +1,7 @@
 <template>
   <transition name="slide-dynamic-origin">
     <div v-show="visible" ref="audioRef" class="audio-box" :style="audioStyle">
-      <section style="padding: 10px 14px 14px 14px">
+      <section style="padding: 10px 14px 14px">
         <div ref="audioHeadRef" class="audio-box__header">
           <div class="audio-name">
             <icon-music :size="16" spin />
@@ -84,20 +84,20 @@ const close = () => {
 
 <style lang="scss" scoped>
 .audio-box {
-  width: 300px;
   position: fixed;
-  border-radius: 8px;
-  box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
-  background: linear-gradient(to right, $color-theme, rgb(var(--primary-2)));
   z-index: 9999;
+  width: 300px;
+  background: linear-gradient(to right, $color-theme, rgb(var(--primary-2)));
+  border-radius: 8px;
+  box-shadow: 0 2px 12px 0 rgb(0 0 0 / 10%);
 
   &__header {
-    color: #fff;
-    font-size: 16px;
-    margin-bottom: 10px;
     display: flex;
-    justify-content: space-between;
     align-items: center;
+    justify-content: space-between;
+    margin-bottom: 10px;
+    font-size: 16px;
+    color: #fff;
     cursor: move;
     user-select: none;
 
@@ -115,22 +115,22 @@ const close = () => {
     }
 
     .close-icon {
+      display: flex;
+      align-items: center;
+      justify-content: center;
       width: 24px;
       height: 24px;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      border-radius: 50%;
-      background: rgba(0, 0, 0, 0);
-      transition: all 0.2s;
       cursor: pointer;
+      background: rgb(0 0 0 / 0%);
+      border-radius: 50%;
+      transition: all 0.2s;
 
       svg {
         transition: all 0.2s;
       }
 
       &:hover {
-        background: rgba(0, 0, 0, 0.1);
+        background: rgb(0 0 0 / 10%);
 
         svg {
           transform: scale(1.3);

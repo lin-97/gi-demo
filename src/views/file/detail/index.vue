@@ -80,8 +80,8 @@ const back = () => {
     margin-bottom: 8px;
 
     .arco-descriptions-item-label-inline {
-      white-space: nowrap;
       font-size: 12px;
+      white-space: nowrap;
     }
 
     .arco-descriptions-item-value-inline {
@@ -91,10 +91,10 @@ const back = () => {
 }
 
 .file-detail {
+  box-sizing: border-box;
   flex: 1;
   padding: $padding;
   padding-bottom: 0;
-  box-sizing: border-box;
   overflow: hidden;
   overflow-y: auto;
 
@@ -104,23 +104,22 @@ const back = () => {
 
   &__left,
   &__right {
-    background-color: var(--color-bg-1);
+    box-sizing: border-box;
     padding: $padding;
-    box-sizing: border-box;
     overflow: hidden;
-    box-sizing: border-box;
+    background-color: var(--color-bg-1);
   }
 
   &__left {
-    height: 100%;
     display: flex;
     flex-direction: column;
+    height: 100%;
 
     .view-box {
-      min-height: 400px;
       flex: 1;
-      overflow: hidden;
+      min-height: 400px;
       margin-top: $margin;
+      overflow: hidden;
     }
   }
 

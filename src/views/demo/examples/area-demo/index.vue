@@ -41,8 +41,8 @@ treeData.value = getAreaTreeData()
 .tree-box {
   width: 270px;
   padding-left: 12px;
-  border: 1px solid var(--color-border-2);
-  background: var(--color-bg-2);
   margin-right: 50px;
+  background: var(--color-bg-2);
+  border: 1px solid var(--color-border-2);
 }
 </style>

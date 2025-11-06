@@ -58,44 +58,46 @@ onMounted(() => {
 <style lang="scss" scoped>
 .message-mask {
   position: fixed;
-  left: 0;
-  right: 0;
-  top: 0;
-  bottom: 0;
-  background-color: rgba(0, 0, 0, 0.5);
+  inset: 0;
   // backdrop-filter: blur(2px);
   z-index: 9999;
   display: flex;
-  justify-content: center;
   align-items: center;
+  justify-content: center;
+  background-color: rgb(0 0 0 / 50%);
+
   .message {
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
     width: 160px;
     height: 140px;
     padding: 14px;
-    box-sizing: border-box;
-    background-color: rgba(255, 255, 255, 0.9);
+    background-color: rgb(255 255 255 / 90%);
     // backdrop-filter: blur(4px);
     border-radius: 15px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+
     .icon {
       &.success {
         color: rgb(var(--success-6));
       }
+
       &.warning {
         color: rgb(var(--warning-6));
       }
+
       &.error {
         color: rgb(var(--danger-6));
       }
     }
+
     .content {
-      color: #000;
-      font-size: 15px;
       margin-top: 8px;
+      font-size: 15px;
       line-height: 1.4;
+      color: #000;
     }
   }
 }
@@ -119,14 +121,14 @@ onMounted(() => {
 
 .zoom-message-enter-from,
 .zoom-message-appear-from {
-  transform: scale(0.5);
   opacity: 0;
+  transform: scale(0.5);
 }
 
 .zoom-message-enter-to,
 .zoom-message-appear-to {
-  transform: scale(1);
   opacity: 1;
+  transform: scale(1);
 }
 
 .zoom-message-enter-active,
@@ -135,13 +137,13 @@ onMounted(() => {
 }
 
 .zoom-message-leave-from {
-  transform: scale(1);
   opacity: 1;
+  transform: scale(1);
 }
 
 .zoom-message-leave-to {
-  transform: scale(0.5);
   opacity: 0;
+  transform: scale(0.5);
 }
 
 .zoom-message-leave-active {

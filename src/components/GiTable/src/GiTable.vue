@@ -281,8 +281,8 @@ defineExpose({ tableRef })
 
 <style lang="scss" scoped>
 .gi-table {
-  flex: 1;
   display: flex;
+  flex: 1;
   flex-direction: column;
   overflow: hidden;
   background: var(--color-bg-1);
@@ -300,16 +300,16 @@ defineExpose({ tableRef })
   }
 
   &__title {
-    color: var(--color-text-1);
     font-size: 18px;
     font-weight: 500;
     line-height: 1.5;
+    color: var(--color-text-1);
   }
 
   &__draggable {
-    padding: 1px 0;
-    max-height: 250px;
     box-sizing: border-box;
+    max-height: 250px;
+    padding: 1px 0;
     overflow: hidden auto;
   }
 

@@ -28,10 +28,10 @@ const tabsStore = useTabsStore()
 <style lang="scss" scoped>
 .main {
   position: relative;
-  width: 100%;
-  height: 100%;
   display: flex;
   flex-direction: column;
+  width: 100%;
+  height: 100%;
   overflow: hidden;
 }
 </style>

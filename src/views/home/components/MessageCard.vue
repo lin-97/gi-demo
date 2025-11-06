@@ -38,8 +38,8 @@ const list = [
 }
 
 :deep(.arco-comment) {
-  border-bottom: 1px solid var(--color-border-1);
   padding-bottom: 10px;
+  border-bottom: 1px solid var(--color-border-1);
 }
 
 :deep(.arco-comment-content) {

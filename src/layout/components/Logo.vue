@@ -38,23 +38,23 @@ const handleHomeNavigation = () => {
 
 <style lang="scss" scoped>
 .system-logo {
+  box-sizing: border-box;
+  display: flex;
+  flex-shrink: 0;
+  align-items: center;
   height: 56px;
   padding: 0 12px;
-  display: flex;
-  align-items: center;
-  flex-shrink: 0;
-  cursor: pointer;
-  user-select: none;
-  box-sizing: border-box;
-  color: var(--color-text-1);
   font-size: 20px;
   line-height: 1;
+  color: var(--color-text-1);
+  cursor: pointer;
+  user-select: none;
   transition: padding 0.2s;
 
   // 折叠状态样式
   &.collapsed {
-    padding: 0;
     justify-content: center;
+    padding: 0;
 
     .system-name {
       display: none;
@@ -63,12 +63,12 @@ const handleHomeNavigation = () => {
 
   // Logo 图片样式
   .logo {
+    flex-shrink: 0;
     width: 32px;
     height: 32px;
+    overflow: hidden;
     border-radius: 6px;
     transition: all 0.2s;
-    overflow: hidden;
-    flex-shrink: 0;
   }
 
   // 系统名称样式

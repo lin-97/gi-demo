@@ -82,11 +82,11 @@ const onTreeSelect: TreeInstance['onSelect'] = (selectedKeys, data) => {
 }
 
 .right-menu {
-  width: 120px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  border-radius: 4px;
-  border: 1px solid var(--color-border-2);
   box-sizing: border-box;
+  width: 120px;
+  border: 1px solid var(--color-border-2);
+  border-radius: 4px;
+  box-shadow: 0 0 10px rgb(0 0 0 / 10%);
 
   .arrow-icon {
     margin-right: 0;

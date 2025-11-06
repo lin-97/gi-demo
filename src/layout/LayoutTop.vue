@@ -25,18 +25,18 @@ const appStore = useAppStore()
 
 <style lang="scss" scoped>
 .layout-top {
-  height: 100%;
   display: flex;
   flex-direction: column;
+  height: 100%;
   overflow: hidden;
 
   &__header {
-    width: 100%;
-    overflow: hidden;
     box-sizing: border-box;
-    border-bottom: 1px solid var(--color-border);
-    background-color: var(--color-bg-1);
+    width: 100%;
     padding-right: 16px;
+    overflow: hidden;
+    background-color: var(--color-bg-1);
+    border-bottom: 1px solid var(--color-border);
   }
 
   &__menu {

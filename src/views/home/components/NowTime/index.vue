@@ -30,12 +30,14 @@ initTime()
 
 <style lang="scss" scoped>
 @import url('@/assets/fonts/font.css');
+
 .now-time {
   display: flex;
   align-items: center;
-  font-size: 14px;
   font-family: DINPro-Medium;
+  font-size: 14px;
   color: var(--color-text-1);
+
   &__time {
     margin-left: 6px;
   }

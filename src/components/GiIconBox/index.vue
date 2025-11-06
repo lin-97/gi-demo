@@ -82,9 +82,9 @@ const getStyle = computed((): CSSProperties => {
 <style lang="scss" scoped>
 .gi-icon-box {
   display: flex;
-  justify-content: center;
-  align-items: center;
   flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
   width: 20px;
   height: 20px;
   color: #fff;
@@ -92,19 +92,19 @@ const getStyle = computed((): CSSProperties => {
 
   // 状态颜色
   &--primary {
-    background-color: rgba(var(--primary-6));
+    background-color: rgb(var(--primary-6));
   }
 
   &--success {
-    background-color: rgba(var(--success-6));
+    background-color: rgb(var(--success-6));
   }
 
   &--warning {
-    background-color: rgba(var(--warning-6));
+    background-color: rgb(var(--warning-6));
   }
 
   &--danger {
-    background-color: rgba(var(--danger-6));
+    background-color: rgb(var(--danger-6));
   }
 
   // 形状样式

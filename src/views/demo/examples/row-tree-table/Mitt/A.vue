@@ -15,11 +15,12 @@ mitter.on('changeText', (e) => {
 
 <style lang="scss" scoped>
 .aaa {
+  box-sizing: border-box;
   width: 400px;
   height: 400px;
-  border: 1px solid var(--color-border-2);
   padding: 16px;
-  box-sizing: border-box;
+  border: 1px solid var(--color-border-2);
+
   h3 {
     font-size: 28px;
   }

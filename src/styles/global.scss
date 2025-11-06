@@ -3,8 +3,8 @@
 
 // hover按钮
 .gi_hover_btn {
-  border: 0 !important;
   background-color: transparent;
+  border: 0 !important;
 
   &:hover {
     background: var(--color-secondary-hover) !important;
@@ -18,32 +18,32 @@
 // 卡片组件，使body的高度自动撑满
 .gi_card {
   box-sizing: border-box;
-  overflow: hidden;
   display: flex;
   flex-direction: column;
+  overflow: hidden;
 
   .arco-card-body {
-    flex: 1;
     box-sizing: border-box;
-    overflow: hidden;
     display: flex;
+    flex: 1;
     flex-direction: column;
+    overflow: hidden;
   }
 }
 
 // 页面卡片，右侧有返回按钮
 .gi_page_card {
-  flex: 1;
-  margin: var(--margin);
   box-sizing: border-box;
-  overflow: hidden;
   display: flex;
+  flex: 1;
   flex-direction: column;
+  margin: var(--margin);
+  overflow: hidden;
 
   .arco-card-body {
-    flex: 1;
     box-sizing: border-box;
     display: flex;
+    flex: 1;
     flex-direction: column;
     overflow: hidden;
   }
@@ -52,46 +52,46 @@
 // 卡片标题，标题左侧的伪类样式
 .gi_card_title {
   .arco-card-header-title::before {
-    content: '';
+    position: absolute;
+    top: 50%;
+    left: 0;
     width: 4px;
     height: 50%;
-    position: absolute;
-    left: 0;
-    top: 50%;
-    transform: translateY(-50%);
+    content: '';
     background-color: rgb(var(--warning-5));
     border-radius: 0 4px 4px 0;
+    transform: translateY(-50%);
   }
 }
 
 // 使用场景，页面内容超出高度会自动滚动
 .gi_page {
+  box-sizing: border-box;
   flex: 1;
   padding: $margin;
-  box-sizing: border-box;
   overflow-y: auto;
 }
 
 // 表格类名 高度自适应
 .gi_table {
-  flex: 1;
-  overflow: hidden;
   display: flex;
+  flex: 1;
   flex-direction: column;
+  overflow: hidden;
 
   >.arco-spin {
-    max-height: 100%;
     height: auto;
+    max-height: 100%;
     overflow: hidden;
   }
 }
 
 // 表格类名，高度自适应，分页始终固定在最底部
 .gi_full_table {
-  flex: 1;
-  overflow: hidden;
   display: flex;
+  flex: 1;
   flex-direction: column;
+  overflow: hidden;
 
   .arco-table-container {
     flex: 1;
@@ -123,8 +123,8 @@
 }
 
 .gi_full_tabs {
-  flex: 1;
   display: flex;
+  flex: 1;
   flex-direction: column;
 
   .arco-tabs-content {
@@ -146,20 +146,19 @@
 .gi_column_require {
   .arco-table-th-title {
     &::before {
-      content: '*';
-      color: red;
       padding-right: 2px;
+      color: red;
+      content: '*';
     }
   }
 }
 
-//
 .gi_full_column {
-  flex: 1;
+  box-sizing: border-box;
   display: flex;
+  flex: 1;
   flex-direction: column;
   overflow: hidden;
-  box-sizing: border-box;
 }
 
 // 以下这些类名要放到下面，涉及到css权重优先级问题
@@ -180,8 +179,8 @@
 }
 
 .gi_mx {
-  margin-left: $margin;
   margin-right: $margin;
+  margin-left: $margin;
 }
 
 .gi_my {
@@ -210,8 +209,8 @@
 }
 
 .gi_px {
-  padding-left: $padding;
   padding-right: $padding;
+  padding-left: $padding;
 }
 
 .gi_py {
@@ -313,37 +312,37 @@
 
 .gi_line_1 {
   overflow: hidden;
-  white-space: nowrap;
   text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .gi_line_2 {
-  line-clamp: 2;
   -webkit-line-clamp: 2;
+  line-clamp: 2;
 }
 
 .gi_line_3 {
-  line-clamp: 3;
   -webkit-line-clamp: 3;
+  line-clamp: 3;
 }
 
 .gi_line_4 {
-  line-clamp: 4;
   -webkit-line-clamp: 4;
+  line-clamp: 4;
 }
 
 .gi_line_5 {
-  line-clamp: 5;
   -webkit-line-clamp: 5;
+  line-clamp: 5;
 }
 
 .gi_line_2,
 .gi_line_3,
 .gi_line_4,
 .gi_line_5 {
-  overflow: hidden;
-  word-break: break-all;
-  text-overflow: ellipsis;
   display: -webkit-box; // 弹性伸缩盒
+  overflow: hidden;
+  text-overflow: ellipsis;
+  word-break: break-all;
   -webkit-box-orient: vertical; // 设置伸缩盒子元素排列方式
 }

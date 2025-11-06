@@ -46,8 +46,8 @@ defineOptions({ name: 'Home' })
   }
 
   &__item {
-    padding: 6px;
     box-sizing: border-box;
+    padding: 6px;
   }
 
   .backtop-icon {

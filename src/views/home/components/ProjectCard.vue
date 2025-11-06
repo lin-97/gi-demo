@@ -69,8 +69,8 @@ const list = [
   height: 100%;
 
   .arco-card-body {
-    height: 100%;
     box-sizing: border-box;
+    height: 100%;
   }
 }
 
@@ -79,9 +79,9 @@ const list = [
 }
 
 .item {
-  height: 100%;
   display: flex;
   flex-direction: column;
+  height: 100%;
 
   &__header {
     display: flex;
@@ -107,9 +107,9 @@ const list = [
   }
 
   &__footer {
+    margin-top: 8px;
     font-size: 12px;
     color: var(--color-text-3);
-    margin-top: 8px;
   }
 }
 </style>

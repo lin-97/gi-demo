@@ -63,38 +63,38 @@ const handleClick = () => {
 .gi-split-button {
   position: absolute;
   top: 50%;
-  transform: translateY(-50%);
-  display: flex;
-  justify-content: center;
-  align-items: center;
   z-index: 2;
-  border: 1px solid var(--color-border-2);
-  background-color: var(--color-bg-1);
   box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   cursor: pointer;
+  background-color: var(--color-bg-1);
+  border: 1px solid var(--color-border-2);
+  transform: translateY(-50%);
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   will-change: transform, background-color, border-color;
 
   &.is-disabled {
+    pointer-events: none;
     cursor: not-allowed;
     opacity: 0.6;
-    pointer-events: none;
   }
 
   &--default {
+    left: 0;
     width: 18px;
     height: 40px;
-    left: 0;
-    box-shadow: 2px 0 6px rgba(0, 0, 0, 0.1);
+    box-shadow: 2px 0 6px rgb(0 0 0 / 10%);
   }
 
   &--circle {
+    left: -4px;
     width: 24px;
     height: 24px;
-    border-radius: 50%;
-    left: -4px;
     overflow: hidden;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    border-radius: 50%;
+    box-shadow: 0 4px 10px rgb(0 0 0 / 10%);
   }
 }
 </style>

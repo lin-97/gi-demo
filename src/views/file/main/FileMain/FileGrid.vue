@@ -80,12 +80,12 @@ const handleRightMenuClick = (mode: string, item: FileItem) => {
 }
 
 .file-grid-item {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   width: 100%;
   height: 100px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  position: relative;
   cursor: pointer;
 
   &:hover {
@@ -93,7 +93,6 @@ const handleRightMenuClick = (mode: string, item: FileItem) => {
   }
 
   &:active {
-
     svg,
     img {
       transform: scale(0.9);
@@ -102,12 +101,9 @@ const handleRightMenuClick = (mode: string, item: FileItem) => {
 
   .check-mode {
     position: absolute;
-    left: 0;
-    right: 0;
-    top: 0;
-    bottom: 0;
-    background: rgba(0, 0, 0, 0.1);
+    inset: 0;
     z-index: 9;
+    background: rgb(0 0 0 / 10%);
 
     &.checked {
       background: none;
@@ -122,22 +118,22 @@ const handleRightMenuClick = (mode: string, item: FileItem) => {
   }
 
   &__wrapper {
-    width: 76%;
-    max-width: 100px;
-    height: 100%;
     position: relative;
-    overflow: hidden;
     z-index: 1;
     display: flex;
     flex-direction: column;
-    justify-content: center;
     align-items: center;
+    justify-content: center;
+    width: 76%;
+    max-width: 100px;
+    height: 100%;
+    overflow: hidden;
 
     .file-icon {
-      width: 100%;
-      height: 60px;
       display: flex;
       justify-content: center;
+      width: 100%;
+      height: 60px;
       overflow: hidden;
 
       >img {
@@ -153,12 +149,12 @@ const handleRightMenuClick = (mode: string, item: FileItem) => {
     }
 
     .file-name {
-      width: 100%;
-      font-size: 12px;
-      margin-top: 8px;
-      padding: 0 5px;
-      text-align: center;
       box-sizing: border-box;
+      width: 100%;
+      padding: 0 5px;
+      margin-top: 8px;
+      font-size: 12px;
+      text-align: center;
     }
   }
 }

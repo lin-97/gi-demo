@@ -1,20 +1,23 @@
 @keyframes fade-up {
 	0% {
-		transform: translateY(60px);
 		opacity: 0;
+		transform: translateY(60px);
 	}
+
 	100% {
-		transform: translateY(0);
 		opacity: 1;
+		transform: translateY(0);
 	}
 }
 
 @for $i from 0 through 12 {
-  .animated-fade-up-#{$i} {
+  .animated-fade-up-#{$i}
+
+ {
     opacity: 0;
     animation-name: fade-up;
     animation-duration: 0.5s;
-    animation-fill-mode: forwards;
     animation-delay: calc($i/10) + s;
+    animation-fill-mode: forwards;
   }
 }

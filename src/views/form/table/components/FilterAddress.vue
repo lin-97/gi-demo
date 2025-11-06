@@ -31,7 +31,7 @@ const onConfirm = () => {
   cursor: pointer;
 
   &.has-value {
-    color: rgba(var(--primary-6));
+    color: rgb(var(--primary-6));
   }
 }
 </style>

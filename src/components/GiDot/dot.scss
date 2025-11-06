@@ -1,21 +1,25 @@
 .gi-dot {
   display: inline-block;
-  background: #000;
   width: 8px;
   height: 8px;
-  border-radius: 50%;
   vertical-align: middle;
+  background: #000;
+  border-radius: 50%;
 }
 
 $types: primary, success, warning, danger, info;
 
 @each $i in $types {
-  .gi-dot-#{$i} {
+  .gi-dot-#{$i}
+
+ {
     background-color: rgb(var(--#{$i}-6));
   }
 
   @if ($i ==info) {
-    .gi-dot-#{$i} {
+    .gi-dot-#{$i}
+
+ {
       background-color: rgb(var(--gray-6));
     }
   }
@@ -25,22 +29,22 @@ $types: primary, success, warning, danger, info;
   position: relative;
 }
 
-.gi-dot-processing:after {
+.gi-dot-processing::after {
   position: absolute;
-  top: 0px;
-  left: 0px;
+  top: 0;
+  left: 0;
   width: 100%;
   height: 100%;
-  border-radius: 50%;
-  background: inherit;
   content: '';
+  background: inherit;
+  border-radius: 50%;
   animation: gi-dot-animated 1.2s ease-in-out infinite;
 }
 
 @keyframes gi-dot-animated {
   0% {
-    transform: scale(0.5);
     opacity: 1;
+    transform: scale(0.5);
   }
 
   30% {
@@ -48,7 +52,7 @@ $types: primary, success, warning, danger, info;
   }
 
   100% {
-    transform: scale(2.5);
     opacity: 0;
+    transform: scale(2.5);
   }
 }

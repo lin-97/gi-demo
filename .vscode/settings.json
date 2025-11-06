@@ -6,6 +6,7 @@
   // Auto fix
   "editor.codeActionsOnSave": {
     "source.fixAll.eslint": "explicit",
+    "source.fixAll.stylelint": "explicit",
     "source.organizeImports": "never"
   },
   // Silent the stylistic rules in you IDE, but still auto fix them
@@ -84,5 +85,14 @@
     "scss",
     "pcss",
     "postcss"
-  ]
+  ],
+  // 启用 Stylelint 对 Vue/CSS/SCSS 文件的检查
+  "stylelint.validate": [
+    "css",
+    "scss",
+    "vue"
+  ],
+  // 禁用 VS Code 自带的 CSS 验证（避免与 Stylelint 冲突）
+  "css.validate": false,
+  "scss.validate": false
 }

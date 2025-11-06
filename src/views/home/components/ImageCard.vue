@@ -6,9 +6,10 @@
 
 <style lang="scss" scoped>
 .image-card {
-  padding: 20px;
   box-sizing: border-box;
+  padding: 20px;
   background: var(--color-bg-1);
+
   img {
     width: 100%;
   }

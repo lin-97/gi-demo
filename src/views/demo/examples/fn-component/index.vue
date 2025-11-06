@@ -26,12 +26,12 @@ const onError = () => {
 
 <style lang="scss" scoped>
 .fn-component {
+  box-sizing: border-box;
   flex: 1;
   height: 100%;
   padding: 16px;
-  box-sizing: border-box;
-  background-size: cover;
   background-image: url('https://www4.bing.com//th?id=OHR.MidAutumn2022_ZH-CN9825550508_1920x1080.jpg&rf=LaDigue_1920x1080.jpg&pid=hp');
+  background-size: cover;
   // background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQAQMAAAAlPW0iAAAAA3NCSVQICAjb4U/gAAAABlBMVEXMzMz////TjRV2AAAACXBIWXMAAArrAAAK6wGCiw1aAAAAHHRFWHRTb2Z0d2FyZQBBZG9iZSBGaXJld29ya3MgQ1M26LyyjAAAABFJREFUCJlj+M/AgBVhF/0PAH6/D/HkDxOGAAAAAElFTkSuQmCC);
 }
 </style>

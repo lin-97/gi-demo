@@ -53,8 +53,8 @@ const menuList = [
 <style lang="scss" scoped>
 :deep(.arco-tabs-nav-vertical.arco-tabs-nav-type-line .arco-tabs-tab) {
   padding: 0;
-  margin: 0;
   padding: 8px 16px;
+  margin: 0;
 
   &:hover {
     background: var(--color-fill-1);
@@ -67,7 +67,7 @@ const menuList = [
   }
 
   &.arco-tabs-tab-active {
-    background: rgba(var(--primary-6), 0.08);
+    background: rgb(var(--primary-6), 0.08);
   }
 }
 

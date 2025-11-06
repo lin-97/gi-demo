@@ -166,8 +166,8 @@ const handleLogout = () => {
 
 .header-right-bar {
   &__user {
-    cursor: pointer;
     color: var(--color-text-1);
+    cursor: pointer;
   }
 
   &__username {
@@ -175,8 +175,8 @@ const handleLogout = () => {
     white-space: nowrap;
 
     .arco-icon-down {
-      transition: all 0.3s;
       margin-left: 2px;
+      transition: all 0.3s;
     }
   }
 }

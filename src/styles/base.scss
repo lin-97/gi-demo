@@ -1,19 +1,14 @@
-body {
-  --margin: 14px; // 通用外边距
-  --padding: 16px; // 通用内边距
-}
-
 * {
-  margin: 0;
   padding: 0;
+  margin: 0;
 }
 
 html,
 body,
 #app {
-  margin: 0;
-  padding: 0;
   height: 100%;
+  padding: 0;
+  margin: 0;
 }
 
 html {
@@ -21,15 +16,16 @@ html {
 }
 
 body {
+
+  --margin: 14px;
+  --padding: 16px;
   overflow: hidden;
+  // font-family: "helvetica neue", helvetica, "pingfang sc", "hiragino sans gb", "microsoft yahei", "\5fae\8f6f\96c5\9ed1", "arial/sans-serif";
   color: var(--color-text-2);
-  background-color: #f5f7fd; // body背景颜色
-  -moz-osx-font-smoothing: grayscale;
+  background-color: #f5f7fd;
+  text-rendering: optimizelegibility;
   -webkit-font-smoothing: antialiased;
-  text-rendering: optimizeLegibility;
-  // font-family: Avenir, Helvetica, Arial, sans-serif;
-  // font-family: Helvetica Neue, Helvetica, PingFang SC, Hiragino Sans GB, Microsoft YaHei, \5fae\8f6f\96c5\9ed1, Arial,
-  //   sans-serif;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 body[arco-theme='dark'] {
@@ -43,14 +39,14 @@ body[arco-theme='dark'] {
 }
 
 ul {
-  list-style: none !important;
   margin-bottom: 0;
+  list-style: none !important;
 }
 
 a,
 a:focus,
 a:hover {
-  cursor: pointer;
   color: inherit;
   text-decoration: none;
+  cursor: pointer;
 }

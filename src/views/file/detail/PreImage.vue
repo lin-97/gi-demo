@@ -104,11 +104,11 @@ const handle = (value: string) => {
 }
 
 .pre-image {
+  display: flex;
+  flex-direction: column;
   width: 100%;
   height: 100%;
   overflow: hidden;
-  display: flex;
-  flex-direction: column;
 
   .viewer-box {
     flex: 1;
@@ -117,13 +117,13 @@ const handle = (value: string) => {
   }
 
   .zoom-proportion {
-    padding: 0 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     height: 100%;
+    padding: 0 12px;
     color: #fff;
     background-color: #333;
-    display: flex;
-    justify-content: center;
-    align-items: center;
     border-radius: 4px;
   }
 }

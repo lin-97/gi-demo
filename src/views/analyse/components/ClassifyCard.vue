@@ -25,13 +25,13 @@ const props = withDefaults(defineProps<Props>(), {
 
 <style lang="scss" scoped>
 .classify-card {
-  transition: transform 0.3s;
   margin-bottom: $margin;
+  transition: transform 0.3s;
 
   &:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
     cursor: pointer;
+    box-shadow: 0 2px 5px rgb(0 0 0 / 10%);
+    transform: translateY(-4px);
   }
 
   &__name {

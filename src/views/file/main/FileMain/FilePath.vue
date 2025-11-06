@@ -12,15 +12,17 @@
 
 <style lang="scss" scoped>
 .file-path {
-  padding: 10px $padding;
-  padding-bottom: 12px;
   display: flex;
   align-items: center;
+  padding: 10px $padding;
+  padding-bottom: 12px;
   cursor: pointer;
+
   .path-item {
     font-size: 12px;
+
     &:hover {
-      color: rgba(var(--primary-6));
+      color: rgb(var(--primary-6));
     }
   }
 }

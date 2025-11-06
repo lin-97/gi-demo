@@ -58,9 +58,9 @@ const handleClick = () => {
   align-items: center;
   height: 34px;
   padding: 0 5px 0 10px;
-  color: var(--color-text-2);
   font-size: 14px;
   line-height: 34px;
+  color: var(--color-text-2);
   cursor: pointer;
   user-select: none;
 

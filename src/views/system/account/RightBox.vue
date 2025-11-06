@@ -87,8 +87,8 @@ const list = [
 <style lang="scss" scoped>
 .edit-btn {
   color: #fff;
-  border-color: #fff;
   background: transparent;
+  border-color: #fff;
 
   &:hover {
     background: rgb(var(--primary-5));
@@ -97,28 +97,28 @@ const list = [
 }
 
 .right-box {
-  flex: 1;
-  background-color: var(--color-bg-1);
   display: flex;
+  flex: 1;
   flex-direction: column;
-  border-radius: 2px;
   overflow: hidden;
   overflow-y: auto;
+  background-color: var(--color-bg-1);
+  border-radius: 2px;
 
   &__header {
-    min-height: 204px;
-    height: fit-content;
     display: flex;
     flex-direction: column;
-    justify-content: center;
     align-items: center;
+    justify-content: center;
+    height: fit-content;
+    min-height: 204px;
     color: var(--color-white);
     background-color: rgb(var(--primary-6));
 
     .username {
+      margin: 10px 0;
       font-size: 16px;
       font-weight: 500;
-      margin: 10px 0;
     }
 
     .list {

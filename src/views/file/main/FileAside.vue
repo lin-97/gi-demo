@@ -74,15 +74,14 @@ const onClickItem = (item: FileTypeListItem) => {
 <style lang="scss" scoped>
 :deep(.arco-card) {
   .arco-card-header {
-    border-bottom-style: dashed;
-    margin: 0 16px;
-    padding-left: 0;
     padding-right: 0;
+    padding-left: 0;
+    margin: 0 16px;
+    border-bottom-style: dashed;
   }
 }
 
 :deep(.arco-progress) {
-
   .arco-progress-line,
   .arco-progress-line-bar-buffer,
   .arco-progress-line-bar {
@@ -91,9 +90,9 @@ const onClickItem = (item: FileTypeListItem) => {
 }
 
 .percent {
-  margin-top: 10px;
-  padding: 14px 12px;
   box-sizing: border-box;
+  padding: 14px 12px;
+  margin-top: 10px;
   background-color: var(--color-bg-1);
 }
 </style>

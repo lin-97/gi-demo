@@ -106,65 +106,62 @@ const login = async () => {
 
 <style lang="scss" scoped>
 .login {
-  height: 100%;
   display: flex;
-  justify-content: center;
   align-items: center;
+  justify-content: center;
+  height: 100%;
   background-color: var(--color-bg-5);
 
   &-box {
+    z-index: 999;
+    display: flex;
     width: 86%;
     max-width: 720px;
     height: 380px;
-    display: flex;
-    z-index: 999;
-    box-shadow: 0 2px 4px 2px rgba(0, 0, 0, 0.08);
+    box-shadow: 0 2px 4px 2px rgb(0 0 0 / 8%);
   }
 }
 
 .login-left {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   width: 100%;
   height: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  position: relative;
   overflow: hidden;
   background: linear-gradient(60deg, rgb(var(--primary-6)), rgb(var(--primary-3)));
 
   &__img {
+    position: absolute;
+    inset: 0;
     width: 100%;
     height: 100%;
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    transition: all 0.3s;
     object-fit: cover;
+    transition: all 0.3s;
   }
 }
 
 .login-right {
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   width: 100%;
   height: 100%;
-  background: var(--color-bg-1);
-  display: flex;
-  justify-content: center;
-  align-items: center;
   padding-top: 30px;
-  box-sizing: border-box;
+  background: var(--color-bg-1);
 
   &__title {
-    color: var(--color-text-1);
-    font-weight: 500;
-    font-size: 20px;
-    line-height: 32px;
-    margin-bottom: 20px;
-    text-align: center;
     display: flex;
-    justify-content: center;
     align-items: center;
+    justify-content: center;
+    margin-bottom: 20px;
+    font-size: 20px;
+    font-weight: 500;
+    line-height: 32px;
+    color: var(--color-text-1);
+    text-align: center;
 
     .logo {
       width: 32px;

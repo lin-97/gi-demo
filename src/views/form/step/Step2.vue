@@ -56,8 +56,8 @@ const prev = () => {
 
 <style lang="scss" scoped>
 .step-2 {
-  margin-top: 50px;
   display: flex;
   flex-direction: column;
+  margin-top: 50px;
 }
 </style>

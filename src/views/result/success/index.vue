@@ -27,17 +27,17 @@ defineOptions({ name: 'ResultSuccess' })
 
 <style lang="scss" scoped>
 .result-box {
-  padding: 30px;
   box-sizing: border-box;
+  padding: 30px;
   background-color: var(--color-bg-1);
 
   &__info {
-    background: var(--color-fill-2);
-    font-size: 12px;
-    padding: 24px;
     box-sizing: border-box;
     width: 100%;
     max-width: 500px;
+    padding: 24px;
+    font-size: 12px;
+    background: var(--color-fill-2);
   }
 }
 </style>

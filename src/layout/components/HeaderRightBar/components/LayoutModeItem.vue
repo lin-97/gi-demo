@@ -81,26 +81,25 @@ const appStore = useAppStore()
 <style lang="scss" scoped>
 // 布局项基础样式
 .layout-mode-item {
+  box-sizing: border-box;
+  display: flex;
   width: 100%;
   height: 50px;
   padding: 4px;
-  display: flex;
-  cursor: pointer;
   overflow: hidden;
   cursor: pointer;
-  box-sizing: border-box;
-  border-radius: 2px;
   background-color: var(--color-bg-5);
   border: 1px solid var(--color-border-2);
-  box-shadow: 0 1px 2px -2px rgba(0, 0, 0, .08),
-    0 3px 6px 0 rgba(0, 0, 0, .06),
-    0 5px 12px 4px rgba(0, 0, 0, .04);
+  border-radius: 2px;
+  box-shadow: 0 1px 2px -2px rgb(0 0 0 / 8%),
+    0 3px 6px 0 rgb(0 0 0 / 6%),
+    0 5px 12px 4px rgb(0 0 0 / 4%);
 
   &__text {
-    font-size: 12px;
     margin-top: 5px;
-    text-align: center;
+    font-size: 12px;
     color: var(--color-text-2);
+    text-align: center;
   }
 }
 
@@ -152,8 +151,8 @@ const appStore = useAppStore()
   }
 
   .block-main {
-    flex: 1;
     display: flex;
+    flex: 1;
 
     .block-left {
       width: 10px;
@@ -170,7 +169,6 @@ const appStore = useAppStore()
 
 // 双列布局样式
 .layout-mode-item__columns {
-
   .block-left {
     width: 10px;
     background-color: $color-theme;

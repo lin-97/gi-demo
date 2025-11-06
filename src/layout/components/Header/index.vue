@@ -32,15 +32,15 @@ defineOptions({ name: 'AppHeader' })
 .header {
   display: flex;
   align-items: center;
-  padding: 0 $padding;
   height: 56px;
+  padding: 0 $padding;
   background: var(--color-bg-1);
   border-bottom: 1px solid var(--color-neutral-3);
 
   &__right {
     flex: 1;
-    overflow: hidden;
     margin-left: $padding;
+    overflow: hidden;
   }
 }
 </style>

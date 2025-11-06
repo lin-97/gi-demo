@@ -23,8 +23,8 @@ const appStore = useAppStore()
 
 <style lang="scss" scoped>
 .layout-default {
-  height: 100%;
   flex-direction: row;
+  height: 100%;
 
   &__right {
     overflow: hidden;

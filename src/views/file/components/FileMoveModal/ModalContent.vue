@@ -75,11 +75,11 @@ defineExpose({ formRef, setForm })
 
 <style lang="scss" scoped>
 .tree-box {
+  box-sizing: border-box;
   width: 100%;
   height: 300px;
   padding: 10px $padding;
-  box-sizing: border-box;
-  border: 1px solid $color-border;
   overflow: auto;
+  border: 1px solid $color-border;
 }
 </style>

@@ -160,22 +160,22 @@ const onBlur = () => {
 }
 
 .cate-tree {
-  flex: 1;
-  overflow: hidden;
   position: relative;
-  display: flex;
-  flex-direction: column;
   box-sizing: border-box;
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  overflow: hidden;
 
   &__search {
     margin-bottom: 10px;
   }
 
   &__tree {
+    position: relative;
     flex: 1;
     overflow: hidden;
     background-color: var(--color-bg-1);
-    position: relative;
   }
 }
 </style>

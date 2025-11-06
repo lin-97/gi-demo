@@ -14,10 +14,10 @@ const click = () => {
 
 <style lang="scss" scoped>
 .bbb {
+  box-sizing: border-box;
   width: 400px;
   height: 400px;
-  border: 1px solid var(--color-border-2);
   padding: 16px;
-  box-sizing: border-box;
+  border: 1px solid var(--color-border-2);
 }
 </style>

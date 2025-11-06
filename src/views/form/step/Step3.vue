@@ -42,9 +42,9 @@ const again = () => {
 
 <style lang="scss" scoped>
 .step-3 {
-  margin-top: 50px;
   display: flex;
   flex-direction: column;
+  margin-top: 50px;
 
   &__info {
     padding: 20px 50px;
