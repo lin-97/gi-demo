@@ -51,22 +51,30 @@ export function useLevelMenu() {
       }
     })
     oneLevelMenus.value = showMenuList
-    console.log('oneLevelMenus.value', oneLevelMenus.value)
   }
 
   // 菜单点击事件
   function handleMenuItemClickByItem(item: RouteRecordRaw) {
-    if (item.redirect === 'noRedirect') {
-      router.replace({ path: item.children?.[0]?.path })
+    let path = (item.redirect as string) || item.path
+    if ((!item.redirect && item?.children?.length) || (item.redirect === 'noRedirect' && item?.children?.length)) {
+      path = item.children?.[0]?.path
+    }
+    if (isExternal(path)) {
+      window.open(path)
       return
     }
-    router.replace({ path: (item.redirect as string) || item.path })
+    if (item.redirect === 'noRedirect') {
+      router.replace({ path })
+      return
+    }
+    router.replace({ path })
   }
 
   // 菜单点击事件
   function handleMenuItemClickByPath(path: string) {
     if (isExternal(path)) {
       window.open(path)
+      return
     }
     const obj = oneLevelMenus.value.find((i) => i.path === path)
     if (obj?.redirect === 'noRedirect') {

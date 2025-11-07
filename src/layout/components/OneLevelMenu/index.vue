@@ -34,7 +34,7 @@ const emits = defineEmits<{
 
 const route = useRoute()
 const calcIsActive = (item: RouteRecordRaw) => {
-  return route.path.startsWith(item.path) && item.path !== '/'
+  return (route.path.startsWith(item.path) && item.path !== '/') || item.redirect === route.path
 }
 </script>
 
