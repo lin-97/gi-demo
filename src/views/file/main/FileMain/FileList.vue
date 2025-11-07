@@ -48,8 +48,6 @@
 <script setup lang="ts">
 import type { TableInstance, TableRowSelection } from '@arco-design/web-vue'
 import type { FileItem } from '@/apis/file'
-import FileImage from './FileImage.vue'
-import FileRightMenu from './FileRightMenu.vue'
 
 interface Props {
   data?: FileItem[]
@@ -68,6 +66,9 @@ const emit = defineEmits<{
   (e: 'select', record: FileItem): void
   (e: 'right-menu-click', mode: string, item: FileItem): void
 }>()
+
+const FileImage = defineAsyncComponent(() => import('./FileImage.vue'))
+const FileRightMenu = defineAsyncComponent(() => import('./FileRightMenu.vue'))
 
 const rowSelection: TableRowSelection = reactive({
   type: 'checkbox',

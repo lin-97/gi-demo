@@ -29,26 +29,26 @@
 
 <script setup lang="ts">
 import type { FileItem } from '@/apis/file'
-import FileImage from './FileImage.vue'
-import FileRightMenu from './FileRightMenu.vue'
-
-interface Props {
-  data?: FileItem[]
-  selectedFileIds?: string[]
-  isBatchMode?: boolean
-}
 
 const props = withDefaults(defineProps<Props>(), {
   data: () => [], // 文件数据
   selectedFileIds: () => [], // 批量模式下选中的文件id数组
   isBatchMode: false // 是否是批量模式
 })
-
 const emit = defineEmits<{
   (e: 'click', record: FileItem): void
   (e: 'select', record: FileItem): void
   (e: 'right-menu-click', mode: string, item: FileItem): void
 }>()
+
+const FileImage = defineAsyncComponent(() => import('./FileImage.vue'))
+const FileRightMenu = defineAsyncComponent(() => import('./FileRightMenu.vue'))
+
+interface Props {
+  data?: FileItem[]
+  selectedFileIds?: string[]
+  isBatchMode?: boolean
+}
 
 // 文件名称带后缀
 const getFileName = (item: FileItem) => {
@@ -93,6 +93,7 @@ const handleRightMenuClick = (mode: string, item: FileItem) => {
   }
 
   &:active {
+
     svg,
     img {
       transform: scale(0.9);

@@ -99,7 +99,6 @@
 
 <script setup lang="ts">
 import type { FileItem } from '@/apis/file'
-
 import { Message, Modal } from '@arco-design/web-vue'
 import { api as viewerApi } from 'v-viewer'
 import { getFileList } from '@/apis/file'
@@ -110,11 +109,11 @@ import {
   previewFileAudioModal,
   previewFileVideoModal
 } from '../../components/index'
-import FileGrid from './FileGrid.vue'
-import FilePath from './FilePath.vue'
 import useFileManage from './useFileManage'
 import 'viewerjs/dist/viewer.css'
 
+const FilePath = defineAsyncComponent(() => import('./FilePath.vue'))
+const FileGrid = defineAsyncComponent(() => import('./FileGrid.vue'))
 const FileList = defineAsyncComponent(() => import('./FileList.vue'))
 
 const route = useRoute()
