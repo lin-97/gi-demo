@@ -2,11 +2,11 @@
   <div class="layout-columns">
     <div v-show="isDesktop" class="layout-columns__left">
       <!-- 左侧一级菜单区域 -->
-      <OneLevelMenu :menus="oneLevelMenus" @menu-click="handleMenuClick"></OneLevelMenu>
+      <OneLevelMenu :menus="oneLevelMenus" @menu-click="handleMenuItemClickByItem"></OneLevelMenu>
 
       <!-- 左侧二级菜单区域 -->
-      <Menu v-if="twoLevelMenus.length > 1" class="layout-columns__menu" :menus="twoLevelMenus"
-        :menu-style="{ width: '180px' }" />
+      <Menu v-if="twoLevelMenus.length > 1 || oneLevelMenuActiveRoute?.meta?.alwaysShow === true"
+        class="layout-columns__menu" :menus="twoLevelMenus" :menu-style="{ width: '180px' }" />
     </div>
 
     <!-- 右侧内容区域 -->
@@ -19,11 +19,9 @@
 </template>
 
 <script setup lang="ts">
-import type { RouteRecordRaw } from 'vue-router'
-import { findTree, mapTree } from 'xe-utils'
 import { useDevice } from '@/hooks'
-import { useAppStore, useRouteStore } from '@/stores'
-import { filterTree } from '@/utils'
+import { useLevelMenu } from '@/layout/hooks/useLevelMenu'
+import { useAppStore } from '@/stores'
 import Header from './components/Header/index.vue'
 import Main from './components/Main.vue'
 import Menu from './components/Menu/index.vue'
@@ -32,44 +30,11 @@ import Tabs from './components/Tabs/index.vue'
 
 defineOptions({ name: 'LayoutColumns' })
 
-const route = useRoute()
-const router = useRouter()
 const appStore = useAppStore()
-const routeStore = useRouteStore()
 const { isDesktop } = useDevice()
 
-// 处理菜单路由数据
-const cloneRoutes = JSON.parse(JSON.stringify(routeStore.routes)) as RouteRecordRaw[]
-const showMenuList = filterTree(cloneRoutes, (i) => i.meta?.hidden === false) as RouteRecordRaw[]
-
-// 一级菜单
-const oneLevelMenus = ref<RouteRecordRaw[]>([])
-function getOneLevelMenus() {
-  const cloneList = JSON.parse(JSON.stringify(routeStore.routes)) as RouteRecordRaw[]
-  const formatList = mapTree(cloneList, (i) => {
-    if (i?.children?.length === 1 && i?.meta?.alwaysShow !== true) {
-      return i.children?.[0]
-    }
-    return i
-  })
-  const arr = formatList.filter((i) => i.meta?.hidden === false)
-  return arr
-}
-oneLevelMenus.value = getOneLevelMenus()
-
-// 二级菜单
-const twoLevelMenus = computed(() => {
-  const obj = findTree(showMenuList, (i) => i.path === route.path)
-  return showMenuList?.[Number(obj?.path?.[0])]?.children || []
-})
-
-function handleMenuClick(item: RouteRecordRaw) {
-  if (item.redirect === 'noRedirect') {
-    router.replace({ path: item.children?.[0]?.path })
-    return
-  }
-  router.replace({ path: (item.redirect as string) || item.path })
-}
+const { oneLevelMenus, twoLevelMenus, oneLevelMenuActiveRoute, getOneLevelMenus, handleMenuItemClickByItem } = useLevelMenu()
+getOneLevelMenus()
 </script>
 
 <style lang="scss" scoped>

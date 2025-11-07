@@ -8,7 +8,7 @@
     <section v-if="isDesktop" class="layout-mix-left" :class="{ 'app-menu-dark': appStore.menuDark }"
       :style="appStore.menuDark ? appStore.themeCSSVar : undefined">
       <Logo :collapsed="appStore.menuCollapse" />
-      <Menu :menus="leftMenus" :menu-style="{ width: '200px', flex: 1 }" />
+      <Menu :menus="twoLevelMenus" :menu-style="{ width: '200px', flex: 1 }" />
     </section>
 
     <!-- 右侧内容区域 -->
@@ -16,8 +16,8 @@
       <header class="header">
         <MenuFoldBtn />
         <a-menu v-if="isDesktop" mode="horizontal" :selected-keys="activeMenu" :auto-open-selected="false"
-          :trigger-props="menuTriggerProps" @menu-item-click="handleMenuItemClick">
-          <a-menu-item v-for="item in topMenus" :key="item.path">
+          :trigger-props="menuTriggerProps" @menu-item-click="handleMenuItemClickByPath">
+          <a-menu-item v-for="item in oneLevelMenus" :key="item.path">
             <template #icon>
               <GiSvgIcon v-if="getMenuIcon(item, 'svgIcon')" :name="getMenuIcon(item, 'svgIcon') || ''" :size="24" />
               <component :is="getMenuIcon(item, 'icon')" v-else-if="getMenuIcon(item, 'icon')" />
@@ -35,11 +35,9 @@
 
 <script setup lang="ts">
 import type { RouteRecordRaw } from 'vue-router'
-import { searchTree } from 'xe-utils'
-import { useDevice, useRouteListener } from '@/hooks'
-import { useAppStore, useRouteStore } from '@/stores'
-import { filterTree } from '@/utils'
-import { isExternal } from '@/utils/validate'
+import { useDevice } from '@/hooks'
+import { useLevelMenu } from '@/layout/hooks/useLevelMenu'
+import { useAppStore } from '@/stores'
 import HeaderRightBar from './components/HeaderRightBar/index.vue'
 import Logo from './components/Logo.vue'
 import Main from './components/Main.vue'
@@ -50,10 +48,7 @@ import Tabs from './components/Tabs/index.vue'
 /** 组件名称 */
 defineOptions({ name: 'LayoutMix' })
 
-const router = useRouter()
 const appStore = useAppStore()
-const routeStore = useRouteStore()
-const { listenerRouteChange } = useRouteListener()
 const { isDesktop } = useDevice()
 
 /** 菜单配置 */
@@ -61,52 +56,14 @@ const menuTriggerProps = {
   animationName: 'slide-dynamic-origin'
 }
 
-/** 菜单数据处理 */
-// 过滤菜单路由
-const cloneRoutes = JSON.parse(JSON.stringify(routeStore.routes)) as RouteRecordRaw[]
-const menuRoutes = filterTree(cloneRoutes, (i) => i.meta?.hidden === false)
+const { oneLevelMenus, twoLevelMenus, oneLevelMenuActiveRoute, getOneLevelMenus, handleMenuItemClickByPath } = useLevelMenu()
+getOneLevelMenus()
 
-// 顶部一级菜单
-const topMenus = ref<RouteRecordRaw[]>(JSON.parse(JSON.stringify(menuRoutes)))
+const activeMenu = computed(() => [oneLevelMenuActiveRoute.value?.path ?? ''])
 
-// 克隆菜单路由
-const cloneMenuRoutes: RouteRecordRaw[] = JSON.parse(JSON.stringify(menuRoutes))
-const activeMenu = ref<string[]>([])
-const leftMenus = ref<RouteRecordRaw[]>([])
-
-/** 获取左侧菜单 */
-const getLeftMenus = (key: string) => {
-  const foundItems = searchTree(cloneMenuRoutes, (item) => item.path === key, { children: 'children' })
-  const rootPath = foundItems.length ? foundItems[0].path : ''
-  const targetMenu = cloneMenuRoutes.find((item) => item.path === rootPath)
-
-  activeMenu.value = targetMenu ? [targetMenu.path] : ['']
-  leftMenus.value = targetMenu ? (targetMenu.children as RouteRecordRaw[]) : []
-}
-
-/** 工具函数 */
 const getMenuIcon = (item: RouteRecordRaw, key: 'svgIcon' | 'icon') => {
   return item.meta?.[key] || item.children?.[0]?.meta?.[key]
 }
-
-/** 事件处理 */
-const handleMenuItemClick = (key: string) => {
-  if (isExternal(key)) {
-    window.open(key)
-    return
-  }
-
-  setTimeout(() => getLeftMenus(key))
-  const targetMenu = topMenus.value.find((item) => item.path === key)
-  if (targetMenu?.redirect === 'noRedirect') return
-
-  router.push({ path: key })
-}
-
-/** 监听路由变化 */
-listenerRouteChange(({ to }) => {
-  getLeftMenus(to.path)
-})
 </script>
 
 <style lang="scss" scoped>

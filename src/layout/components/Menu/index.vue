@@ -15,7 +15,8 @@
 import type { CSSProperties } from 'vue'
 import type { RouteRecordRaw } from 'vue-router'
 import { useDevice } from '@/hooks'
-import { useAppStore, useRouteStore } from '@/stores'
+import { useMenu } from '@/layout/hooks/useMenu'
+import { useAppStore } from '@/stores'
 import { isExternal } from '@/utils/validate'
 import MenuItem from './MenuItem.vue'
 
@@ -43,11 +44,10 @@ const { isDesktop } = useDevice()
 const route = useRoute()
 const router = useRouter()
 const appStore = useAppStore()
-const routeStore = useRouteStore()
 
-/** 计算属性 */
+const { menuList } = useMenu()
 // 侧边栏路由
-const sidebarRoutes = computed(() => props.menus ?? routeStore.routes)
+const sidebarRoutes = computed(() => props.menus ?? menuList.value)
 
 // 菜单模式
 const menuMode = computed(() =>
