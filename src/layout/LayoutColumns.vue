@@ -60,7 +60,7 @@ oneLevelMenus.value = getOneLevelMenus()
 // 二级菜单
 const twoLevelMenus = computed(() => {
   const obj = findTree(showMenuList, (i) => i.path === route.path)
-  return showMenuList?.[Number(obj.path[0])]?.children || []
+  return showMenuList?.[Number(obj?.path?.[0])]?.children || []
 })
 
 function handleMenuClick(item: RouteRecordRaw) {
