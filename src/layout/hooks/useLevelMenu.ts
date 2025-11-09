@@ -22,7 +22,7 @@ export function useLevelMenu() {
   // 二级菜单
   const twoLevelMenus = computed(() => {
     const obj = findTree(showMenuList, (i) => i.path === route.path)
-    return showMenuList?.[Number(obj?.path?.[0])]?.children || []
+    return obj?.nodes?.[0]?.children || []
   })
 
   const oneLevelMenuActiveRoute = ref<RouteRecordRaw | null>(null)
