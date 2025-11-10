@@ -1,5 +1,5 @@
 import type { RouteRecordRaw } from 'vue-router'
-import { eachTree, findTree, searchTree } from 'xe-utils'
+import { eachTree } from 'xe-utils'
 import { useRouteListener } from '@/hooks'
 import { useRouteStore } from '@/stores'
 import { filterTree } from '@/utils'
@@ -21,19 +21,19 @@ export function useLevelMenu() {
 
   // 二级菜单
   const twoLevelMenus = computed(() => {
-    const obj = findTree(showMenuList, (i) => i.path === route.path)
-    return obj?.nodes?.[0]?.children || []
+    const path = route.matched[0].path
+    return showMenuList.find((i) => i.path === path)?.children || []
   })
 
+  // 一级菜单选中的路由
   const oneLevelMenuActiveRoute = ref<RouteRecordRaw | null>(null)
 
   const getOneLevelMenuActiveRoute = (path: string) => {
-    const arr = searchTree(showMenuList, (i) => i.path === path)
-    return arr?.[0]
+    return oneLevelMenus.value.find((i) => i.path === path) as RouteRecordRaw
   }
 
   listenerRouteChange(({ to }) => {
-    oneLevelMenuActiveRoute.value = getOneLevelMenuActiveRoute(to.path)
+    oneLevelMenuActiveRoute.value = getOneLevelMenuActiveRoute(to.matched?.[0]?.path)
   })
 
   // 获取一级菜单
