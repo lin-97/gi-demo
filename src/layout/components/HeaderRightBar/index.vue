@@ -76,12 +76,10 @@
       </a-dropdown>
     </a-space>
   </a-row>
-
-  <SettingDrawer ref="SettingDrawerRef"></SettingDrawer>
 </template>
 
 <script setup lang="ts">
-import { Message, Modal } from '@arco-design/web-vue'
+import { Drawer, Message, Modal } from '@arco-design/web-vue'
 import { useFullscreen } from '@vueuse/core'
 import { useBreakpoint } from '@/hooks'
 import { useUserStore } from '@/stores'
@@ -89,7 +87,7 @@ import { useUserStore } from '@/stores'
 /** 组件名称 */
 defineOptions({ name: 'HeaderRight' })
 const Notice = defineAsyncComponent(() => import('./Notice.vue'))
-const SettingDrawer = defineAsyncComponent(() => import('./SettingDrawer.vue'))
+const SettingDrawerPanel = defineAsyncComponent(() => import('./SettingDrawerPanel.vue'))
 
 /** 路由实例 */
 const router = useRouter()
@@ -102,9 +100,6 @@ const { breakpoint } = useBreakpoint()
 
 /** 全屏控制 */
 const { isFullscreen, toggle } = useFullscreen()
-
-/** 组件引用 */
-const SettingDrawerRef = useTemplateRef('SettingDrawerRef')
 
 /** 用户菜单配置 */
 const USER_MENUS = [
@@ -135,7 +130,12 @@ const USER_MENUS = [
 
 /** 打开设置抽屉 */
 const handleOpenSettings = () => {
-  SettingDrawerRef.value?.open()
+  Drawer.open({
+    title: '项目配置',
+    width: 300,
+    footer: false,
+    content: () => h(SettingDrawerPanel)
+  })
 }
 
 /** 处理退出登录 */

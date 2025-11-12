@@ -3,7 +3,7 @@
   @description 系统设置抽屉组件，用于配置系统主题、布局、动画等全局设置
 -->
 <template>
-  <a-drawer v-model:visible="visible" title="项目配置" width="300px" unmount-on-close :footer="false">
+  <div>
     <a-space :size="15" direction="vertical" fill>
       <section>
         <a-divider orientation="center">系统布局</a-divider>
@@ -58,7 +58,7 @@
         </a-descriptions>
       </section>
     </a-space>
-  </a-drawer>
+  </div>
 </template>
 
 <script setup lang="ts">
@@ -73,7 +73,6 @@ defineOptions({ name: 'SettingDrawer' })
 
 /** 状态管理 */
 const appStore = useAppStore()
-const visible = ref(false)
 
 type LayoutItem = { label: string, value: App.SettingConfig['layout'] }
 /** 布局选项 */
@@ -148,11 +147,6 @@ interface ColorObj {
   rgba: { r: number, g: number, b: number, a: number }
 }
 
-/** 打开设置抽屉 */
-const open = () => {
-  visible.value = true
-}
-
 /** 更改主题色 */
 const changeColor = (colorObj: ColorObj) => {
   if (!/^#[0-9A-Z]{6}/i.test(colorObj.hex)) return
@@ -163,8 +157,6 @@ const changeColor = (colorObj: ColorObj) => {
 const toggleLayout = (layout: App.SettingConfig['layout']) => {
   appStore.layout = layout
 }
-
-defineExpose({ open })
 </script>
 
 <style lang="scss" scoped>
