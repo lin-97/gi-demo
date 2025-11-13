@@ -726,7 +726,7 @@ const data: MockSystemMenuItem[] = [
     parentId: '',
     path: '/system',
     component: 'Layout',
-    redirect: 'noRedirect',
+    redirect: '/system/user',
     type: 1,
     title: '系统管理',
     svgIcon: 'menu-system',

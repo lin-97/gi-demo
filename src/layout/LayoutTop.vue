@@ -2,7 +2,10 @@
   <div class="layout-top">
     <a-row align="center" class="layout-top__header">
       <Logo></Logo>
-      <Menu class="layout-top__menu"></Menu>
+      <a-menu class="layout-top__menu" mode="horizontal" :menu-trigger-props="menuTriggerProps"
+        :selected-keys="selectedKeys" @menu-item-click="handleMenuItemClick">
+        <MenuItem v-for="(item, index) in menuList" :key="item.path + index" :item="item" />
+      </a-menu>
       <HeaderRightBar></HeaderRightBar>
     </a-row>
     <Tabs v-if="appStore.tabVisible"></Tabs>
@@ -11,16 +14,18 @@
 </template>
 
 <script setup lang="ts">
+import { useMenu } from '@/layout/hooks/useMenu'
 import { useAppStore } from '@/stores'
 import HeaderRightBar from './components/HeaderRightBar/index.vue'
 import Logo from './components/Logo.vue'
 import Main from './components/Main.vue'
-import Menu from './components/Menu/index.vue'
+import MenuItem from './components/Menu/MenuItem.vue'
 import Tabs from './components/Tabs/index.vue'
 
 defineOptions({ name: 'LayoutTop' })
 
 const appStore = useAppStore()
+const { menuList, menuTriggerProps, handleMenuItemClick, selectedKeys } = useMenu()
 </script>
 
 <style lang="scss" scoped>

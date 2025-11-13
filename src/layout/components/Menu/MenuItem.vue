@@ -1,14 +1,14 @@
 <template>
   <a-menu-item v-if="!item.children?.length" :key="item?.path">
     <template #icon>
-      <MenuIcon :svg-icon="item?.meta?.svgIcon" :icon="item?.meta?.icon"></MenuIcon>
+      <MenuIcon :item="item"></MenuIcon>
     </template>
     <span>{{ item?.meta?.title }}</span>
   </a-menu-item>
 
   <a-sub-menu v-else :key="item.path" :title="item?.meta?.title">
     <template #icon>
-      <MenuIcon :svg-icon="item?.meta?.svgIcon" :icon="item?.meta?.icon"></MenuIcon>
+      <MenuIcon :item="item"></MenuIcon>
     </template>
     <MenuItem v-for="child in item.children" :key="child.path" :item="child">
     </MenuItem>

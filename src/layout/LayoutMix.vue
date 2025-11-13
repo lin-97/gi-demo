@@ -8,22 +8,19 @@
     <section v-if="isDesktop" class="layout-mix-left" :class="{ 'app-menu-dark': appStore.menuDark }"
       :style="appStore.menuDark ? appStore.themeCSSVar : undefined">
       <Logo :collapsed="appStore.menuCollapse" />
-      <Menu :menus="twoLevelMenus" :menu-style="{ width: '200px', flex: 1 }" />
+      <a-menu mode="vertical" auto-open-selected :collapsed="shouldCollapse" :selected-keys="[twoActivePath]"
+        breakpoint="xl" :accordion="appStore.menuAccordion" :style="{ width: '200px', flex: 1 }"
+        @menu-item-click="handleTwoMenuItemClick">
+        <MenuItem v-for="(item, index) in twoLevelMenus" :key="item.path + index" :item="item" />
+      </a-menu>
     </section>
 
     <!-- 右侧内容区域 -->
     <section class="layout-mix-right">
       <header class="header">
         <MenuFoldBtn />
-        <a-menu v-if="isDesktop" mode="horizontal" :selected-keys="activeMenu" :auto-open-selected="false"
-          :trigger-props="menuTriggerProps" @menu-item-click="handleMenuItemClickByPath">
-          <a-menu-item v-for="item in oneLevelMenus" :key="item.path">
-            <template #icon>
-              <GiSvgIcon v-if="getMenuIcon(item, 'svgIcon')" :name="getMenuIcon(item, 'svgIcon') || ''" :size="24" />
-              <component :is="getMenuIcon(item, 'icon')" v-else-if="getMenuIcon(item, 'icon')" />
-            </template>
-            <span>{{ item.meta?.title || item.children?.[0]?.meta?.title || '' }}</span>
-          </a-menu-item>
+        <a-menu mode="horizontal" :selected-keys="[oneActivePath]" @menu-item-click="handleOneMenuItemClick">
+          <MenuItem v-for="(item, index) in topMenus" :key="item.path + index" :item="item" />
         </a-menu>
         <HeaderRightBar />
       </header>
@@ -34,14 +31,13 @@
 </template>
 
 <script setup lang="ts">
-import type { RouteRecordRaw } from 'vue-router'
 import { useDevice } from '@/hooks'
 import { useLevelMenu } from '@/layout/hooks/useLevelMenu'
 import { useAppStore } from '@/stores'
 import HeaderRightBar from './components/HeaderRightBar/index.vue'
 import Logo from './components/Logo.vue'
 import Main from './components/Main.vue'
-import Menu from './components/Menu/index.vue'
+import MenuItem from './components/Menu/MenuItem.vue'
 import MenuFoldBtn from './components/MenuFoldBtn.vue'
 import Tabs from './components/Tabs/index.vue'
 
@@ -51,19 +47,21 @@ defineOptions({ name: 'LayoutMix' })
 const appStore = useAppStore()
 const { isDesktop } = useDevice()
 
-/** 菜单配置 */
-const menuTriggerProps = {
-  animationName: 'slide-dynamic-origin'
-}
-
-const { oneLevelMenus, twoLevelMenus, oneLevelMenuActiveRoute, getOneLevelMenus, handleMenuItemClickByPath } = useLevelMenu()
+const { oneLevelMenus, twoLevelMenus, oneActivePath, twoActivePath, getOneLevelMenus, handleOneMenuItemClick, handleTwoMenuItemClick } = useLevelMenu()
 getOneLevelMenus()
 
-const activeMenu = computed(() => [oneLevelMenuActiveRoute.value?.path ?? ''])
+const topMenus = computed(() => {
+  const arr = JSON.parse(JSON.stringify(oneLevelMenus.value))
+  arr.forEach((i) => {
+    delete i.children
+  })
+  return arr
+})
 
-const getMenuIcon = (item: RouteRecordRaw, key: 'svgIcon' | 'icon') => {
-  return item.meta?.[key] || item.children?.[0]?.meta?.[key]
-}
+// 是否折叠菜单
+const shouldCollapse = computed(() =>
+  !isDesktop.value ? false : appStore.menuCollapse
+)
 </script>
 
 <style lang="scss" scoped>

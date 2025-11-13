@@ -1,8 +1,10 @@
 import type { RouteRecordRaw } from 'vue-router'
 import { computed } from 'vue'
 import { eachTree } from 'xe-utils'
-import { useRouteStore } from '@/stores'
+import { useDevice, useRouteListener } from '@/hooks'
+import { useAppStore, useRouteStore } from '@/stores'
 import { filterTree } from '@/utils'
+import { isExternal } from '@/utils/validate'
 
 /**
  * 菜单管理 Hooks
@@ -11,8 +13,22 @@ import { filterTree } from '@/utils'
  * @returns {object} 包含处理后菜单列表的响应式对象
  */
 export function useMenu() {
+  const router = useRouter()
   // 路由存储实例，用于获取原始路由配置
   const routeStore = useRouteStore()
+  const appStore = useAppStore()
+  const { listenerRouteChange } = useRouteListener()
+  const { isDesktop } = useDevice()
+
+  // 是否折叠菜单
+  const collapsed = computed(() =>
+    !isDesktop.value ? false : appStore.menuCollapse
+  )
+
+  // 菜单触发器配置
+  const menuTriggerProps = {
+    animationName: 'slide-dynamic-origin'
+  }
 
   /**
    * 处理后的菜单列表
@@ -46,7 +62,30 @@ export function useMenu() {
     return showMenuList
   })
 
+  const selectedKeys = ref<string[]>([])
+
+  function handleMenuItemClick(key: string) {
+    if (isExternal(key)) {
+      window.open(key)
+      return
+    }
+    selectedKeys.value = [key]
+    router.push({ path: key })
+  }
+
+  listenerRouteChange(({ to }) => {
+    if (to?.meta?.activeMenu) {
+      selectedKeys.value = [to.meta.activeMenu]
+      return
+    }
+    selectedKeys.value = [to.path]
+  })
+
   return {
-    menuList
+    menuList,
+    menuTriggerProps,
+    selectedKeys,
+    collapsed,
+    handleMenuItemClick
   }
 }

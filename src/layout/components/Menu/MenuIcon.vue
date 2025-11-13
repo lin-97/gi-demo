@@ -1,15 +1,18 @@
 <template>
-  <GiSvgIcon v-if="props.svgIcon" :name="props.svgIcon" :size="24"></GiSvgIcon>
-  <component :is="props.icon" v-else-if="props.icon"></component>
+  <GiSvgIcon v-if="item?.meta?.svgIcon" :name="item?.meta?.svgIcon" :size="24"></GiSvgIcon>
+  <component :is="item?.meta?.icon" v-else-if="item?.meta?.icon"></component>
 </template>
 
 <script lang="ts" setup>
+import type { RouteRecordRaw } from 'vue-router'
+
 interface Props {
-  svgIcon?: string
-  icon?: string
+  item?: RouteRecordRaw
 }
 
-const props = defineProps<Props>()
+withDefaults(defineProps<Props>(), {
+  item: () => ({} as RouteRecordRaw)
+})
 </script>
 
 <style lang="scss" scoped></style>

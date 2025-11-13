@@ -2,11 +2,15 @@
   <div class="layout-columns">
     <div v-show="isDesktop" class="layout-columns__left">
       <!-- 左侧一级菜单区域 -->
-      <OneLevelMenu :menus="oneLevelMenus" @menu-click="handleMenuItemClickByItem"></OneLevelMenu>
+      <OneLevelMenu :data="oneLevelMenus" :active-path="oneActivePath"
+        @menu-click="handleOneMenuItemClick($event.path)"></OneLevelMenu>
 
       <!-- 左侧二级菜单区域 -->
-      <Menu v-if="twoLevelMenus.length > 1 || oneLevelMenuActiveRoute?.meta?.alwaysShow === true"
-        class="layout-columns__menu" :menus="twoLevelMenus" :menu-style="{ width: '180px' }" />
+      <a-menu v-if="twoLevelMenus.length > 1 || oneActiveRoute?.meta?.alwaysShow === true" class="layout-columns__menu"
+        :selected-keys="[twoActivePath]" :accordion="appStore.menuAccordion" :collapsed="appStore.menuCollapse"
+        :style="{ width: '180px' }" @menu-item-click="handleTwoMenuItemClick">
+        <MenuItem v-for="(item, index) in twoLevelMenus" :key="item.path + index" :item="item" />
+      </a-menu>
     </div>
 
     <!-- 右侧内容区域 -->
@@ -24,7 +28,7 @@ import { useLevelMenu } from '@/layout/hooks/useLevelMenu'
 import { useAppStore } from '@/stores'
 import Header from './components/Header/index.vue'
 import Main from './components/Main.vue'
-import Menu from './components/Menu/index.vue'
+import MenuItem from './components/Menu/MenuItem.vue'
 import OneLevelMenu from './components/OneLevelMenu/index.vue'
 import Tabs from './components/Tabs/index.vue'
 
@@ -33,7 +37,7 @@ defineOptions({ name: 'LayoutColumns' })
 const appStore = useAppStore()
 const { isDesktop } = useDevice()
 
-const { oneLevelMenus, twoLevelMenus, oneLevelMenuActiveRoute, getOneLevelMenus, handleMenuItemClickByItem } = useLevelMenu()
+const { oneLevelMenus, twoLevelMenus, oneActiveRoute, oneActivePath, twoActivePath, getOneLevelMenus, handleOneMenuItemClick, handleTwoMenuItemClick } = useLevelMenu()
 getOneLevelMenus()
 </script>
 

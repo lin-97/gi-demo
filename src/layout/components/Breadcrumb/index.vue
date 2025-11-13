@@ -72,7 +72,12 @@ const hasRedirect = (item: RouteLocationMatched) =>
 
 /** 处理路由跳转 */
 const handleLink = (item: RouteLocationMatched) => {
-  const { redirect, path } = item
+  const { redirect, path, children } = item
+  if (redirect === 'noRedirect' && children.length) {
+    const obj = children?.[0]
+    router.push(obj?.meta?.activeMenu || obj.path)
+    return
+  }
   if (redirect) {
     router.push(redirect as string)
     return

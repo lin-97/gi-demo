@@ -17,23 +17,29 @@
     <a-drawer v-model:visible="visible" placement="left" :header="false" :footer="false" :render-to-body="false"
       :drawer-style="drawerStyle">
       <Logo :collapsed="false" />
-      <Menu class="menu w-full" @menu-item-click-after="handleMenuItemClick" />
+      <a-menu class="menu w-full" :menu-trigger-props="menuTriggerProps" :selected-keys="selectedKeys"
+        @menu-item-click="onMenuItemClick">
+        <MenuItem v-for="item in menuList" :key="item.path" :item="item">
+        </MenuItem>
+      </a-menu>
     </a-drawer>
   </div>
 </template>
 
 <script setup lang="ts">
 import { useDevice } from '@/hooks'
+import { useMenu } from '@/layout/hooks/useMenu'
 import { useAppStore } from '@/stores'
 
 /** 组件名称 */
 defineOptions({ name: 'MenuFoldBtn' })
 const Logo = defineAsyncComponent(() => import('@/layout/components/Logo.vue'))
-const Menu = defineAsyncComponent(() => import('@/layout/components/Menu/index.vue'))
+const MenuItem = defineAsyncComponent(() => import('@/layout/components/Menu/MenuItem.vue'))
 
 /** 状态管理 */
 const appStore = useAppStore()
 const { isDesktop } = useDevice()
+const { menuList, menuTriggerProps, handleMenuItemClick, selectedKeys } = useMenu()
 
 /** 抽屉可见性状态 */
 const visible = ref(false)
@@ -55,7 +61,8 @@ const handleFoldClick = () => {
 }
 
 /** 处理菜单项点击 */
-const handleMenuItemClick = () => {
+const onMenuItemClick = (key: string) => {
+  handleMenuItemClick(key)
   visible.value = false
 }
 </script>

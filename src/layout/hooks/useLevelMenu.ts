@@ -1,4 +1,4 @@
-import type { RouteRecordRaw } from 'vue-router'
+import type { RouteLocationNormalizedGeneric, RouteRecordRaw } from 'vue-router'
 import { eachTree, searchTree } from 'xe-utils'
 import { useRouteListener } from '@/hooks'
 import { useRouteStore } from '@/stores'
@@ -26,15 +26,31 @@ export function useLevelMenu() {
   })
 
   // 一级菜单选中的路由
-  const oneLevelMenuActiveRoute = ref<RouteRecordRaw | null>(null)
-
-  const getOneLevelMenuActiveRoute = (path: string) => {
+  const oneActiveRoute = ref<RouteRecordRaw | null>(null)
+  const oneActivePath = ref('')
+  const getOneActiveRoute = (to: RouteLocationNormalizedGeneric) => {
+    let path = to.path
+    if (to?.meta?.activeMenu) {
+      path = to.meta.activeMenu
+    }
     const arr = searchTree(showMenuList, (i) => i.path === path)
+    oneActivePath.value = arr?.[0]?.path
     return arr?.[0]
   }
 
+  // 二级菜单选中的路由
+  const twoActivePath = ref<string>('')
+  const getTwoActivePath = (to: RouteLocationNormalizedGeneric) => {
+    let path = to.path
+    if (to?.meta?.activeMenu) {
+      path = to.meta.activeMenu
+    }
+    return path
+  }
+
   listenerRouteChange(({ to }) => {
-    oneLevelMenuActiveRoute.value = getOneLevelMenuActiveRoute(to.path)
+    oneActiveRoute.value = getOneActiveRoute(to)
+    twoActivePath.value = getTwoActivePath(to)
   })
 
   // 获取一级菜单
@@ -54,43 +70,39 @@ export function useLevelMenu() {
     oneLevelMenus.value = showMenuList
   }
 
-  // 菜单点击事件
-  function handleMenuItemClickByItem(item: RouteRecordRaw) {
-    let path = (item.redirect as string) || item.path
-    if ((!item.redirect && item?.children?.length) || (item.redirect === 'noRedirect' && item?.children?.length)) {
-      path = item.children?.[0]?.path
-    }
+  // 一级菜单点击事件
+  function handleOneMenuItemClick(path: string) {
     if (isExternal(path)) {
       window.open(path)
       return
     }
-    if (item.redirect === 'noRedirect') {
-      router.replace({ path })
-      return
-    }
-    router.replace({ path })
-  }
-
-  // 菜单点击事件
-  function handleMenuItemClickByPath(path: string) {
-    if (isExternal(path)) {
-      window.open(path)
-      return
-    }
+    oneActivePath.value = path
     const obj = oneLevelMenus.value.find((i) => i.path === path)
-    if (obj?.redirect === 'noRedirect') {
-      router.push({ path: obj.children?.[0]?.path })
+    if (obj?.redirect === 'noRedirect' || !obj?.redirect) {
+      router.push({ path: obj?.children?.[0]?.path })
       return
     }
     router.push({ path: (obj?.redirect as string) || path })
   }
 
+  // 二级菜单点击事件
+  function handleTwoMenuItemClick(path: string) {
+    if (isExternal(path)) {
+      window.open(path)
+      return
+    }
+    twoActivePath.value = path
+    router.push({ path })
+  }
+
   return {
     oneLevelMenus,
     twoLevelMenus,
-    oneLevelMenuActiveRoute,
+    oneActiveRoute,
+    oneActivePath,
+    twoActivePath,
     getOneLevelMenus,
-    handleMenuItemClickByItem,
-    handleMenuItemClickByPath
+    handleOneMenuItemClick,
+    handleTwoMenuItemClick
   }
 }

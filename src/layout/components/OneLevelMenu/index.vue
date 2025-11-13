@@ -1,12 +1,13 @@
 <template>
-  <div class="one-level-menu">
+  <div class="one-level-menu" :class="{ 'app-menu-dark': appStore.menuDark }">
     <Logo class="one-level-menu__logo" hide-name></Logo>
     <div class="one-level-menu__wrap">
       <a-scrollbar style="height:100%;overflow: auto;" :outer-style="{ width: '100%' }">
         <ul class="one-level-menu__list">
-          <li v-for="(item) in props.menus" :key="item.path" class="one-level-menu__item"
-            :class="{ 'one-level-menu__item--active': calcIsActive(item) }" @click="emits('menu-click', item)">
-            <MenuIcon :svg-icon="item?.meta?.svgIcon" :icon="item?.meta?.icon"></MenuIcon>
+          <li v-for="(item) in props.data" :key="item.path" class="one-level-menu__item"
+            :class="{ 'one-level-menu__item--active': props.activePath === item.path }"
+            @click="emits('menu-click', item)">
+            <MenuIcon :item="item"></MenuIcon>
             <p class="one-level-menu__item__title gi_line_1" :title="item?.meta?.title">{{ item?.meta?.title }}</p>
           </li>
         </ul>
@@ -17,25 +18,25 @@
 
 <script setup lang="ts">
 import type { RouteRecordRaw } from 'vue-router'
+import { useAppStore } from '@/stores'
 import Logo from '../Logo.vue'
-import MenuIcon from './MenuIcon.vue'
+import MenuIcon from '../Menu/MenuIcon.vue'
 
 interface Props {
-  menus?: RouteRecordRaw[]
+  activePath?: string
+  data?: RouteRecordRaw[]
 }
 
 const props = withDefaults(defineProps<Props>(), {
-  menus: () => []
+  activePath: '',
+  data: () => []
 })
 
 const emits = defineEmits<{
   (e: 'menu-click', item: RouteRecordRaw): void
 }>()
 
-const route = useRoute()
-const calcIsActive = (item: RouteRecordRaw) => {
-  return (route.path.startsWith(item.path) && item.path !== '/') || item.redirect === route.path
-}
+const appStore = useAppStore()
 </script>
 
 <style lang="scss" scoped>
@@ -46,10 +47,12 @@ const calcIsActive = (item: RouteRecordRaw) => {
 .one-level-menu {
   box-sizing: border-box;
   display: flex;
+  flex-shrink: 0;
   flex-direction: column;
   width: 68px;
   height: 100%;
   overflow: hidden;
+  color: var(--color-text-2);
   background-color: var(--color-bg-1);
   border-right: 1px solid var(--color-border-2);
 
