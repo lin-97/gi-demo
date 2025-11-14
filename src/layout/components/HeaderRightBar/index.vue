@@ -83,11 +83,11 @@ import { Drawer, Message, Modal } from '@arco-design/web-vue'
 import { useFullscreen } from '@vueuse/core'
 import { useBreakpoint } from '@/hooks'
 import { useUserStore } from '@/stores'
+import Notice from './Notice.vue'
+import SettingDrawerPanel from './SettingDrawerPanel.vue'
 
 /** 组件名称 */
 defineOptions({ name: 'HeaderRight' })
-const Notice = defineAsyncComponent(() => import('./Notice.vue'))
-const SettingDrawerPanel = defineAsyncComponent(() => import('./SettingDrawerPanel.vue'))
 
 /** 路由实例 */
 const router = useRouter()
