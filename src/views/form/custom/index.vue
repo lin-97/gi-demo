@@ -16,6 +16,9 @@
       <a-tab-pane key="4" title="弹窗表单">
         <Card4></Card4>
       </a-tab-pane>
+      <a-tab-pane key="5" title="表单控制">
+        <Card5></Card5>
+      </a-tab-pane>
     </a-tabs>
   </GiPageLayout>
 </template>
@@ -25,6 +28,7 @@ import Card1 from './components/Card1.vue'
 import Card2 from './components/Card2.vue'
 import Card3 from './components/Card3.vue'
 import Card4 from './components/Card4.vue'
+import Card5 from './components/Card5.vue'
 
 defineOptions({ name: 'FormCustom' })
 </script>

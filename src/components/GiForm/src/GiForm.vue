@@ -7,8 +7,7 @@
     <a-grid class="w-full" :col-gap="8" v-bind="props.gridProps" :collapsed="collapsed">
       <!-- 表单项列表 -->
       <template v-for="item in columns" :key="item.field">
-        <a-grid-item v-if="item.show !== undefined ? isShow(item) : !isHide(item)"
-          v-bind="item.gridItemProps || defaultGridItemProps"
+        <a-grid-item v-if="!isHide(item)" v-bind="item.gridItemProps || defaultGridItemProps"
           :span="item.span || item.gridItemProps?.span || defaultGridItemProps?.span">
           <a-form-item v-bind="item.formItemProps" :field="item.field" :rules="getFormItemRules(item)"
             :disabled="isDisabled(item)">
@@ -90,7 +89,8 @@ const props = withDefaults(defineProps<Props>(), {
   gridItemProps: () => ({ span: { xs: 24, sm: 12 } }),
   searchBtnText: '搜索',
   hideFoldBtn: false,
-  suffix: true
+  suffix: true,
+  fc: () => ({})
 })
 
 /** Emits 类型定义 */
@@ -138,7 +138,8 @@ const formProps = computed(() => {
     'searchBtnText',
     'hideFoldBtn',
     'suffix',
-    'layout'
+    'layout',
+    'fc'
   ])
   return {
     layout: ((props.search ? 'inline' : 'horizontal') as FormInstance['layout']),
@@ -226,33 +227,36 @@ const getFormItemRules = (item: ColumnItem) => {
       ...(Array.isArray(item.rules) ? item.rules : [])
     ]
   }
-  return item.rules
-}
-
-/** 判断表单项是否显示 */
-const isShow = (item: ColumnItem) => {
-  if (typeof item.show === 'boolean') return item.show
-  if (typeof item.show === 'function') {
-    return item.show(props.modelValue)
+  if (props.fc?.[item.field]?.required) {
+    return [
+      {
+        required: props.fc?.[item.field]?.required,
+        message: `${item.label}为必填项`
+      },
+      ...(Array.isArray(item.rules) ? item.rules : [])
+    ]
   }
+  return item.rules
 }
 
 /** 判断表单项是否隐藏 */
 const isHide = (item: ColumnItem) => {
-  if (item.hide === undefined) return false
   if (typeof item.hide === 'boolean') return item.hide
   if (typeof item.hide === 'function') {
     return item.hide(props.modelValue)
   }
+  if (props.fc?.[item.field]?.hidden) return true
+  if (item.hide === undefined) return false
 }
 
 /** 判断表单项是否禁用 */
 const isDisabled = (item: ColumnItem) => {
-  if (item.disabled === undefined) return false
   if (typeof item.disabled === 'boolean') return item.disabled
   if (typeof item.disabled === 'function') {
     return item.disabled(props.modelValue)
   }
+  if (props.fc?.[item.field]?.disabled === true) return true
+  if (item.disabled === undefined) return item?.props?.disabled ?? false
 }
 
 /** 初始化数据字典 */

@@ -215,7 +215,6 @@ export type ColumnItemSlots = ComponentSlots
 
 /** 表单项显隐控制类型 */
 export type ColumnItemHide<F> = boolean | ((form: F) => boolean)
-export type ColumnItemShow<F> = boolean | ((form: F) => boolean)
 export type ColumnItemDisabled<F> = boolean | ((form: F) => boolean)
 
 /** 表单项数据请求相关类型 */
@@ -247,8 +246,6 @@ export interface ColumnItem<F = any> {
   slots?: ColumnItemSlots
   /** 表单项组件插槽 */
   formItemSlots?: Record<string, string | VNode | (() => VNode)>
-  /** 是否显示（支持函数） */
-  show?: boolean | ((model: F) => boolean)
   /** 是否隐藏（支持函数） */
   hide?: boolean | ((model: F) => boolean)
   /** 是否禁用（支持函数） */
@@ -305,4 +302,6 @@ export interface Props {
   hideFoldBtn?: boolean
   /** 是否显示后缀 */
   suffix?: boolean
+  /** 表单控制 */
+  fc?: Record<string, { disabled?: boolean, hidden?: boolean, required?: boolean }>
 }

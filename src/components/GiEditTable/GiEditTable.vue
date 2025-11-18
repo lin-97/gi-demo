@@ -10,8 +10,9 @@
               <template v-else>{{ col?.columnProps?.title || col.title }}</template>
             </template>
             <template #cell="{ record, rowIndex, column }">
-              <a-form-item :field="`tableData[${rowIndex}].${col.dataIndex}`" :label-col-style="{ display: 'none' }"
-                :wrapper-col-props="{ span: 24 }" v-bind="col.formItemProps"
+              <template v-if="!col.type && !col.slotName">{{ record[col.dataIndex] }}</template>
+              <a-form-item v-else :field="`tableData[${rowIndex}].${col.dataIndex}`"
+                :label-col-style="{ display: 'none' }" :wrapper-col-props="{ span: 24 }" v-bind="col.formItemProps"
                 :rules="[{ required: col.required || false, message: getRuleMessage(col) }, ...(col.rules || [])]">
                 <template v-if="col.slotName">
                   <slot :name="col.dataIndex" v-bind="{ record, rowIndex, column }"></slot>
