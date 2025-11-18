@@ -161,6 +161,24 @@
   overflow: hidden;
 }
 
+.gi_badge_primary {
+  .arco-badge-number {
+    background-color: rgb(var(--primary-5));
+  }
+}
+
+.gi_badge_success {
+  .arco-badge-number {
+    background-color: rgb(var(--success-5));
+  }
+}
+
+.gi_badge_warning {
+  .arco-badge-number {
+    background-color: rgb(var(--warning-5));
+  }
+}
+
 // 以下这些类名要放到下面，涉及到css权重优先级问题
 .gi_mt {
   margin-top: $margin;
