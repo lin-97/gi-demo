@@ -3,6 +3,7 @@
   font-style: normal;
   font-weight: normal;
   src: url('./DINPro-Bold.otf');
+  font-display: swap; /* 先显示默认字体，字体加载完成后替换 */
 }
 
 @font-face {
@@ -10,6 +11,7 @@
   font-style: normal;
   font-weight: normal;
   src: url('./DINPro-Medium.otf');
+  font-display: swap; /* 先显示默认字体，字体加载完成后替换 */
 }
 
 @font-face {
@@ -17,4 +19,5 @@
   font-style: normal;
   font-weight: normal;
   src: url('./DINPro-Regular.otf');
+  font-display: swap; /* 先显示默认字体，字体加载完成后替换 */
 }
