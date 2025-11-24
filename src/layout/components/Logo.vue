@@ -5,7 +5,7 @@
 <template>
   <section class="system-logo" :class="{ collapsed: props.collapsed }" @click="handleHomeNavigation">
     <img class="logo" src="@/assets/images/logo.gif" />
-    <span v-if="!props.hideName" class="system-name gi-line-1">Admin Pro</span>
+    <span v-if="!props.hideName" class="system-name gi_line_1">Admin Pro</span>
   </section>
 </template>
 

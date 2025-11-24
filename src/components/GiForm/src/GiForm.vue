@@ -256,7 +256,7 @@ const isDisabled = (item: ColumnItem) => {
     return item.disabled(props.modelValue)
   }
   if (props.fc?.[item.field]?.disabled === true) return true
-  if (item.disabled === undefined) return item?.props?.disabled ?? false
+  if (item.disabled === undefined) return (item?.props?.disabled as boolean) ?? false
 }
 
 /** 初始化数据字典 */

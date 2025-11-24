@@ -5,14 +5,18 @@
 <template>
   <div class="layout-mix">
     <!-- 左侧菜单区域 -->
-    <section v-if="isDesktop" class="layout-mix-left" :class="{ 'app-menu-dark': appStore.menuDark }"
+    <section v-if="isDesktop" class="layout-mix-left asider" :class="{ 'app-menu-dark': appStore.menuDark }"
       :style="appStore.menuDark ? appStore.themeCSSVar : undefined">
-      <Logo :collapsed="appStore.menuCollapse" />
-      <a-menu mode="vertical" auto-open-selected :collapsed="shouldCollapse" :selected-keys="[twoActivePath]"
-        breakpoint="xl" :accordion="appStore.menuAccordion" :style="{ width: '200px', flex: 1 }"
-        @menu-item-click="handleTwoMenuItemClick">
-        <MenuItem v-for="(item, index) in twoLevelMenus" :key="item.path + index" :item="item" />
-      </a-menu>
+      <a-layout-sider class="asider__menu" collapsible breakpoint="xl" hide-trigger :width="200"
+        :collapsed="appStore.menuCollapse">
+        <Logo :collapsed="appStore.menuCollapse" />
+        <a-scrollbar outer-class="asider__menu-scroll-view" style="height: 100%; overflow: auto">
+          <a-menu mode="vertical" auto-open-selected :collapsed="shouldCollapse" :selected-keys="[twoActivePath]"
+            breakpoint="xl" :accordion="appStore.menuAccordion" @menu-item-click="handleTwoMenuItemClick">
+            <MenuItem v-for="(item, index) in twoLevelMenus" :key="item.path + index" :item="item" />
+          </a-menu>
+        </a-scrollbar>
+      </a-layout-sider>
     </section>
 
     <!-- 右侧内容区域 -->
@@ -107,11 +111,7 @@ const shouldCollapse = computed(() =>
   overflow: hidden;
 
   &-left {
-    display: flex;
-    flex-direction: column;
     overflow: hidden;
-    background-color: var(--color-bg-1);
-    border-right: 1px solid var(--color-border);
   }
 
   &-right {
@@ -132,5 +132,32 @@ const shouldCollapse = computed(() =>
   color: var(--color-text-1);
   background: var(--color-bg-1);
   border-bottom: 1px solid var(--color-border);
+}
+
+.asider {
+  z-index: 1000;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  color: var(--color-text-1);
+  background-color: var(--color-bg-1);
+  border-right: 1px solid var(--color-border-2);
+
+  :deep(.arco-layout-sider-children) {
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+  }
+
+  &__menu {
+    flex: 1;
+    overflow: hidden;
+    background-color: inherit;
+  }
+
+  &__menu-scroll-view {
+    flex: 1;
+    overflow: hidden;
+  }
 }
 </style>
