@@ -97,6 +97,7 @@ function handleClick() {
   position: absolute;
   top: 50%;
   left: 50%;
+  z-index: 9;
   width: 16px;
   height: 100%;
   user-select: none;
