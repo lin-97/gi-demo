@@ -1,0 +1,101 @@
+# GI Demo 项目代码规范（Cursor 专用）
+
+## 项目概述与技术栈
+- Vue 3.5+（Composition API，优先 `<script setup lang="ts">`），构建工具 Vite 7。
+- TypeScript 5.9+ 严格模式，配置来自 `tsconfig.json` 与 `@vue/tsconfig`。
+- UI 使用 Arco Design Vue，状态管理 Pinia，路由 vue-router，工具库 xe-utils/dayjs/lodash-es 等。
+- 样式支持 SCSS/LESS，主题变量集中在 `src/styles`，SVG 走 `virtual:svg-icons-register`。
+- Lint 体系：ESLint 基于 `@antfu/eslint-config`，Stylelint 使用 standard/standard-scss/recommended-vue/recess-order。
+
+## 基础规范
+- 路径：使用 `@` 指向 `src`，禁止相对路径穿越上级；同级使用简洁相对路径。
+- 命名：`.vue` 文件与模板组件使用 PascalCase（`UserCard.vue` / `<UserCard />`）；样式类名推荐 kebab-case；避免无意义缩写。
+- 文件长度：单文件建议不超过 400 行，超出请拆分组件/模块。
+- 注释语言：业务注释与文档用中文，代码标识符用英文，含义清晰。
+
+## Vue 组件结构与顺序
+- 组件块顺序：`<template>` → `<script setup lang="ts">` → `<style lang="scss|less" scoped?>`（遵循 ESLint/Vue block-order 规则）。
+- Script 内推荐顺序示例：
+  1) 类型导入 `import type ...`  
+  2) 第三方组件/库（如 Arco 组件、图标）  
+  3) Vue API（`ref/reactive/computed/watch` 等）  
+  4) 项目内模块（`@/utils`/`@/hooks`/`@/components` 等）  
+  5) `defineOptions`（含组件 `name` 与缓存路由一致）  
+  6) `defineModel`（如有）  
+  7) `defineProps` + `withDefaults`  
+  8) `defineEmits`（事件名 kebab-case）  
+  9) `defineSlots`  
+  10) 常量/工具函数/Hooks 解构  
+  11) 响应式数据 `ref/reactive`  
+  12) `computed` 派生数据  
+  13) 方法（`handleX` 命名）  
+  14) 生命周期/副作用（`onMounted` 等）  
+  15) `defineExpose` 放最后（如需要）
+- 模板保持单根节点；事件/插槽名均使用 kebab-case；受控表单优先 `v-model`。
+
+## 命名规范
+- 组件名：PascalCase，全局前缀 `Gi` 仅对全局组件（如 `GiButton`）。
+- 目录：业务视图放 `src/views`，通用组件放 `src/components`，按功能子目录划分。
+- 变量/函数：camelCase；事件处理函数以 `handle` 前缀（如 `handleSubmit`）。
+- 常量：场景需要可用 UPPER_SNAKE_CASE。
+- Props/Emits：props 使用 camelCase；emits 定义使用 kebab-case 事件名。
+- 样式类名：推荐 BEM + kebab-case，如 `gi-button__icon--small`；可用已有 `Gi` 组件/`use` 系列工具生成类名（参考项目现有模式）。
+
+## TypeScript 规范
+- 类型集中：公共类型放 `src/types`，接口领域类型放 `src/apis/<domain>/type.ts`。
+- `import type` 与值分离；优先 `interface` 描述对象，`type` 用于联合/工具类型。
+- Props 默认值用 `withDefaults(defineProps<Type>(), { ... })`；避免 `any`，需要可定义显式类型。
+- Hooks/工具函数适当使用泛型提升类型安全。
+- 路由组件需 `defineOptions({ name })` 与路由表 `name` 保持一致以支持缓存。
+
+## 组件开发约定
+- 路由注册集中在 `src/router`；动态路由需对齐组件 `name`。
+- 状态放 `src/stores`，按模块拆分；持久化使用 `pinia-plugin-persistedstate`。
+- API：统一使用 `utils/http.ts`，按域放在 `src/apis/<domain>/index.ts` + `type.ts`；避免重复封装。
+- 指令集中在 `src/directives`，全局注册在 `src/main.ts`。
+- 组件导出：复用组件放 `src/components/<Name>/index.ts`（如需要复合导出），业务组件直接按视图组织。
+- 事件：自定义事件名 kebab-case；定义在 `defineEmits<{ (e: 'confirm', payload: T): void }>()`。
+- 模板属性：遵循 Arco/原生属性顺序，布尔绑定使用显式值（`v-model:visible="visible"` 等）。
+
+## 导入与排序
+- 导入分组：类型 → 第三方 → Vue/官方 → 项目内部（工具/组件/样式/资源）；同组按字母排序。
+- 路径别名：`@/*` → `src/*`；禁止 `../../../` 穿越。
+- 资源引入：SVG 走 `virtual:svg-icons-register`，样式从对应 `scss/less` 文件导入，避免内联样式。
+
+## 样式规范
+- 全局样式入口 `src/styles/index.scss`；变量/混入 `src/styles/var.scss`、`mixin.scss`；Arco 主题在 `src/styles/arco-ui`。
+- 优先 BEM/kebab-case；尽量避免 `!important`，动画/过渡放公共样式。
+- 组件样式使用 `<style lang="scss" scoped>` 或 `<style lang="less" scoped>`；若需全局样式请注明原因。
+- 颜色/尺寸优先复用已有变量，保持与 Arco 主题一致。
+
+## 目录与组织
+- `src/apis`：按域拆分 `index.ts` + `type.ts`。
+- `src/components`：通用组件，命名 PascalCase；必要时含 `index.ts` 聚合导出。
+- `src/views`：业务页面；避免巨型组件，>400 行请拆分子组件。
+- `src/utils`：通用工具（http/mitt/validate 等），避免重复实现。
+- `src/hooks`：组合式函数，命名 `useXxx`，按功能分类。
+- `src/styles`：全局/主题样式、变量、混入。
+- `public/static`：静态资源；SVG 用注册方案，避免散落。
+
+## 代码质量与 Lint
+- ESLint：`@antfu/eslint-config`，关键规则：箭头函数参数需括号；1TBS 大括号；禁止尾随逗号；Vue block 顺序 `[['script', 'template'], 'style']`；事件名 kebab-case；宏顺序 `defineOptions/defineModel/defineProps/defineEmits/defineSlots`，`defineExpose` 最后。
+- Stylelint：standard + scss + recommended-vue + recess-order，允许 SCSS/LESS；属性排序按插件输出，class 命名未强制但推荐 BEM/kebab-case。
+- TS 严格：遵循 `tsconfig`，避免关闭严格校验；必要的 `eslint-disable`/`ts-ignore` 需说明。
+
+## 最佳实践
+- 组件封装：优先复用 Arco 组件，透传 props/attrs，保持 API 兼容；复用表单/表格封装在 `components`/`views` 现有模式。
+- 类型安全：所有接口/组件 props/emits 均提供类型；善用 `Partial`/`Omit`/泛型。
+- 响应式：`ref` 处理原始值，`reactive` 处理对象，派生状态用 `computed`。
+- 性能：模板避免复杂计算；列表/大数据场景合理拆分与缓存；按需引入组件/图标。
+- 代码复用：公共逻辑抽到 hooks；工具放 `utils`；常量/枚举放 `constant`。
+
+## 提交流程与检查
+- 包管理使用 `npm`（已有 `package-lock.json`）。改动依赖需同步更新锁文件。
+- 本地建议执行：`npm run lint`、`npm run lint:style`、`npm run typecheck`；必要时再跑 `npm run build`。
+- 新文件默认带类型定义，避免 `any`；保持中文注释、英文标识符。
+
+## Cursor 使用提示
+- 生成/重构代码遵循上述目录与命名，不创建异常新目录。
+- 自动补全保持 ESLint/Stylelint 规则（箭头参数括号、1TBS、无尾随逗号、组件块序）。
+- 引入路径优先 `@/...`；新增接口类型放对应 `type.ts`；新增组件遵循结构/顺序示例。
+
