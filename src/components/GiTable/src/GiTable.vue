@@ -18,7 +18,7 @@
         <slot name="custom-extra"></slot>
 
         <!-- 表格操作按钮组 -->
-        <a-space wrap :size="[14, 0]">
+        <a-space wrap :size="[14, 0]" style="margin-bottom: 0;">
           <!-- 斑马纹开关 -->
           <a-tooltip content="斑马纹">
             <a-switch v-model="stripe" size="small" type="round" />

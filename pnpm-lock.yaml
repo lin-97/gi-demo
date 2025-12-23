@@ -16,7 +16,7 @@ importers:
         version: 0.4.0
       '@arco-themes/vue-gi-demo':
         specifier: ^0.0.51
-        version: 0.0.51(@arco-design/web-vue@2.57.0(vue@3.5.23(typescript@5.9.3)))
+        version: 0.0.51(@arco-design/web-vue@2.58.0-beta.1(vue@3.5.23(typescript@5.9.3)))
       '@codemirror/lang-javascript':
         specifier: ^6.2.4
         version: 6.2.4
@@ -115,8 +115,8 @@ importers:
         specifier: ^5.2.0
         version: 5.4.1(@vue/compiler-sfc@3.5.23)(eslint@9.39.1)(typescript@5.9.3)
       '@arco-design/web-vue':
-        specifier: ^2.56.3
-        version: 2.57.0(vue@3.5.23(typescript@5.9.3))
+        specifier: 2.58.0-beta.1
+        version: 2.58.0-beta.1(vue@3.5.23(typescript@5.9.3))
       '@types/lodash-es':
         specifier: ^4.17.12
         version: 4.17.12
@@ -262,10 +262,10 @@ packages:
   '@arco-design/color@0.4.0':
     resolution: {integrity: sha512-s7p9MSwJgHeL8DwcATaXvWT3m2SigKpxx4JA1BGPHL4gfvaQsmQfrLBDpjOJFJuJ2jG2dMt3R3P8Pm9E65q18g==}
 
-  '@arco-design/web-vue@2.57.0':
-    resolution: {integrity: sha512-R5YReC3C2sG3Jv0+YuR3B7kzkq2KdhhQNCGXD8T11xAoa0zMt6SWTP1xJQOdZcM9du+q3z6tk5mRvh4qkieRJw==}
+  '@arco-design/web-vue@2.58.0-beta.1':
+    resolution: {integrity: sha512-Q6vV+W5pffUw09nYKNv6r+J0K258rK0oT++sTjcBDPWUA1Q6tOpFy6+TDTRs3sYD7u3KHSTWVlc+NakpYnc6KA==}
     peerDependencies:
-      vue: ^3.1.0
+      vue: '>=3.1.0'
 
   '@arco-themes/vue-gi-demo@0.0.51':
     resolution: {integrity: sha512-8ud9gI2mRzcY/zvcYNJoPDZU2qI5DPRhfSQpd5sfOYsgl/YN0sDWEv5BpHJ5eQmprrBsZCfYo2NIq47qb0EtrA==}
@@ -4777,7 +4777,7 @@ snapshots:
     dependencies:
       color: 3.2.1
 
-  '@arco-design/web-vue@2.57.0(vue@3.5.23(typescript@5.9.3))':
+  '@arco-design/web-vue@2.58.0-beta.1(vue@3.5.23(typescript@5.9.3))':
     dependencies:
       '@arco-design/color': 0.4.0
       b-tween: 0.3.3
@@ -4789,9 +4789,9 @@ snapshots:
       scroll-into-view-if-needed: 2.2.31
       vue: 3.5.23(typescript@5.9.3)
 
-  '@arco-themes/vue-gi-demo@0.0.51(@arco-design/web-vue@2.57.0(vue@3.5.23(typescript@5.9.3)))':
+  '@arco-themes/vue-gi-demo@0.0.51(@arco-design/web-vue@2.58.0-beta.1(vue@3.5.23(typescript@5.9.3)))':
     dependencies:
-      '@arco-design/web-vue': 2.57.0(vue@3.5.23(typescript@5.9.3))
+      '@arco-design/web-vue': 2.58.0-beta.1(vue@3.5.23(typescript@5.9.3))
 
   '@babel/code-frame@7.27.1':
     dependencies:
