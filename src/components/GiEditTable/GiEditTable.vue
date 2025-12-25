@@ -17,7 +17,7 @@
                 <template v-if="col.slotName">
                   <slot :name="col.dataIndex" v-bind="{ record, rowIndex, column }"></slot>
                 </template>
-                <component :is="`a-${col.type}`" v-else v-bind="getComponentBindProps(col)"
+                <component :is="COMP_MAP[col.type!]" v-else-if="col.type" v-bind="getComponentBindProps(col)"
                   v-model="record[col.dataIndex]" :disabled="isDisabled({ row: record, rowIndex, col })">
                 </component>
               </a-form-item>
@@ -37,7 +37,9 @@
 
 <script lang='ts' setup generic="T extends TableData">
 import type { TableColumnData, TableData } from '@arco-design/web-vue'
+import type { Component } from 'vue'
 import type { ColumnItem, Disabled } from './type'
+import * as A from '@arco-design/web-vue'
 
 defineOptions({ name: 'GiEditTable', inheritAttrs: false })
 
@@ -63,6 +65,33 @@ interface Props {
 }
 
 const attrs = useAttrs()
+
+const COMP_MAP: Record<string, Component> = {
+  'input': A.Input,
+  'input-number': A.InputNumber,
+  'input-tag': A.InputTag,
+  'input-search': A.InputSearch,
+  'textarea': A.Textarea,
+  'select': A.Select,
+  'tree-select': A.TreeSelect,
+  'radio-group': A.RadioGroup,
+  'checkbox-group': A.CheckboxGroup,
+  'date-picker': A.DatePicker,
+  'year-picker': A.YearPicker,
+  'quarter-picker': A.QuarterPicker,
+  'month-picker': A.MonthPicker,
+  'week-picker': A.WeekPicker,
+  'time-picker': A.TimePicker,
+  'range-picker': A.RangePicker,
+  'color-picker': A.ColorPicker,
+  'rate': A.Rate,
+  'switch': A.Switch,
+  'slider': A.Slider,
+  'cascader': A.Cascader,
+  'upload': A.Upload,
+  'auto-complete': A.AutoComplete,
+  'mention': A.Mention
+}
 
 /** 表单数据 */
 const form = computed(() => ({ tableData: props.data }))

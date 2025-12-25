@@ -39,7 +39,7 @@ jobs:
 
       # 安装依赖
       - name: Install dependencies
-        run: npm ci # 使用ci命令确保依赖完全匹配package-lock.json
+        run: npm ci --legacy-peer-deps # 使用legacy-peer-deps解决peer dependency冲突
 
       # 构建项目
       - name: Build
@@ -47,7 +47,15 @@ jobs:
 
       # 检查构建结果
       - name: Check build output
-        run: ls -la ./dist # 列出dist目录内容，验证构建是否成功
+        run: |
+          echo "=== 构建文件列表 ==="
+          ls -la ./dist
+          echo ""
+          echo "=== Gzip 压缩文件统计 ==="
+          find ./dist -name "*.gz" | wc -l | xargs echo "压缩文件数量:"
+          find ./dist -name "*.gz" -exec ls -lh {} \; | head -10
+          echo ""
+          echo "=== 构建完成 ==="
 
       # 上传构建产物作为artifact
       - name: Upload artifact

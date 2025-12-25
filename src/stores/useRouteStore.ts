@@ -29,22 +29,42 @@ const Layout = () => import('@/layout/index.vue')
 const modules = import.meta.glob('@/views/**/*.vue')
 
 /**
+ * 组件路径映射缓存
+ * 将视图路径映射到对应的模块加载函数，避免每次遍历查找
+ * key: 视图路径（如 'system/user/index'）
+ * value: 模块加载函数
+ */
+const viewPathMap = new Map<string, () => Promise<any>>()
+
+/**
+ * 初始化组件路径映射
+ * @description 在模块加载时构建路径映射表，提升查找效率
+ */
+function initViewPathMap() {
+  if (viewPathMap.size > 0) return // 已初始化则跳过
+
+  for (const path in modules) {
+    // 提取视图路径：从 'src/views/system/user/index.vue' 提取 'system/user/index'
+    const dir = path.split('views/')[1]?.split('.vue')[0]
+    if (dir) {
+      viewPathMap.set(dir, () => modules[path]())
+    }
+  }
+}
+
+// 初始化路径映射
+initViewPathMap()
+
+/**
  * 加载视图组件
- * @description 根据路径加载对应的视图组件
+ * @description 根据路径加载对应的视图组件，使用 Map 缓存提升查找效率
  * @param {string} view - 组件路径（相对于 views 目录）
  * @returns {Function|undefined} 返回组件的加载函数或 undefined
  * @example
  * loadView('system/user/index')
  */
 export const loadView = (view: string) => {
-  let res
-  for (const path in modules) {
-    const dir = path.split('views/')[1].split('.vue')[0]
-    if (dir === view) {
-      res = () => modules[path]()
-    }
-  }
-  return res
+  return viewPathMap.get(view)
 }
 
 /**

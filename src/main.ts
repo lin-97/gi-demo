@@ -1,4 +1,4 @@
-import ArcoVue, { Card, Drawer, Modal } from '@arco-design/web-vue'
+import { Card, Drawer, Modal } from '@arco-design/web-vue'
 // 额外引入 Arco Design Icon图标库
 import ArcoVueIcon from '@arco-design/web-vue/es/icon'
 import { createApp } from 'vue'
@@ -13,6 +13,7 @@ import directives from './directives'
 
 import router from './router'
 
+// 导入 Arco Design 主题和自定义样式
 import '@/styles/arco-ui/index.less'
 
 // 使用动画库
@@ -36,7 +37,6 @@ Drawer._context = app._context
 
 app.use(router)
 app.use(pinia)
-app.use(ArcoVue)
 app.use(ArcoVueIcon)
 app.use(directives)
 
