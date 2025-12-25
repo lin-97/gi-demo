@@ -22,7 +22,13 @@ export default defineConfig(({ mode }) => {
       alias: {
         '~': fileURLToPath(new URL('./', import.meta.url)),
         '@': fileURLToPath(new URL('./src', import.meta.url))
-      }
+      },
+      // 确保正确解析模块
+      dedupe: ['vue', '@arco-design/web-vue']
+    },
+    // 依赖优化配置
+    optimizeDeps: {
+      include: ['@arco-design/color']
     },
     // 引入sass全局样式变量
     css: {
@@ -101,61 +107,15 @@ export default defineConfig(({ mode }) => {
     ],
     // 构建
     build: {
-      chunkSizeWarningLimit: 2000, // 消除打包大小超过500kb警告
-      rollupOptions: {
-        output: {
-          /**
-           * @name 分块策略
-           * @description 1. 注意这些包名必须存在，否则打包会报错
-           * @description 2. 如果你不想自定义 chunk 分割策略，可以直接移除这段配置
-           * @description 3. 优化代码分割，提升首次加载速度和路由切换速度
-           */
-          manualChunks: (id) => {
-            // node_modules 中的依赖
-            if (id.includes('node_modules')) {
-              // Vue 核心库
-              if (id.includes('vue') || id.includes('vue-router') || id.includes('pinia')) {
-                return 'vue-vendor'
-              }
-              // Arco Design UI 库
-              if (id.includes('@arco-design')) {
-                return 'arco-vendor'
-              }
-              // 工具库
-              if (id.includes('lodash-es') || id.includes('xe-utils') || id.includes('dayjs')) {
-                return 'utils-vendor'
-              }
-              // 其他第三方库
-              return 'vendor'
-            }
-            // views 目录下的组件按目录分割，提升路由切换速度
-            if (id.includes('/src/views/')) {
-              const match = id.match(/\/src\/views\/([^/]+)/)
-              if (match) {
-                return `views-${match[1]}`
-              }
-            }
-          },
-          // 优化 chunk 文件命名
-          chunkFileNames: (chunkInfo) => {
-            const facadeModuleId = chunkInfo.facadeModuleId
-              ? chunkInfo.facadeModuleId.split('/').pop()?.replace('.vue', '')
-              : 'chunk'
-            return `js/${facadeModuleId}-[hash].js`
-          }
-        }
-      }
+      chunkSizeWarningLimit: 2000
     },
-    // 混淆器
+    // 生产环境优化
     esbuild:
       mode === 'development'
         ? undefined
         : {
-          // 打包构建时移除 console.log
           pure: ['console.log'],
-          // 打包构建时移除 debugger
           drop: ['debugger'],
-          // 打包构建时移除所有注释
           legalComments: 'none'
         }
   }
