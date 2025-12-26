@@ -115,8 +115,8 @@ onMounted(() => {
 
 <style lang="scss" scoped>
 .tabs {
-  padding-top: 5px;
   background-color: var(--color-bg-1);
+  margin-top: -1px;
 
   &-pane__tag {
     margin: 0 4px;
@@ -140,6 +140,37 @@ onMounted(() => {
 
   &:not(.arco-tabs-nav-tab-scroll) .arco-tabs-tab:first-child {
     border-left: 0;
+  }
+}
+
+:deep(.tabs__card),
+:deep(.tabs__rounded),
+:deep(.tabs__custom2) {
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+    height: 1px;
+    background-color: var(--color-border-2);
+    z-index: 1;
+  }
+
+}
+
+:deep(.tabs__rounded) {
+  &::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+    height: 1px;
+    background-color: var(--color-border-2);
+    z-index: 1;
   }
 }
 
@@ -176,6 +207,7 @@ onMounted(() => {
 // 自定义样式2
 :deep(.tabs__custom2) {
   .arco-tabs-nav {
+    padding-top: 6px;
     padding-bottom: 6px;
   }
 
