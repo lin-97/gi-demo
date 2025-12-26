@@ -1,5 +1,5 @@
 import type { FormInstance } from '@arco-design/web-vue'
-import { Form, Modal } from '@arco-design/web-vue'
+import { Form, Input, Modal } from '@arco-design/web-vue'
 import { reactive } from 'vue'
 import * as Regexp from '@/utils/regexp'
 
@@ -35,15 +35,17 @@ export const openAddUserModal = () => {
   Modal.open({
     title: '添加用户',
     content: () => (
-      <Form ref={formRef} model={form} rules={rules}>
+      <Form ref={formRef} model={form} rules={rules} auto-label-width>
         <Form.Item label="用户名" field="name">
-          <a-input v-model={form.name} placeholder="请输入用户名" max-length={4} allow-clear />
+          <Input v-model={form.name} placeholder="请输入用户名" max-length={4} allow-clear />
         </Form.Item>
         <Form.Item label="手机号" field="phone">
-          <a-input v-model={form.phone} placeholder="请输入手机号" max-length={11} allow-clear />
+          <Input v-model={form.phone} placeholder="请输入手机号" max-length={11} allow-clear />
         </Form.Item>
       </Form>
     ),
+    width: 'calc(100% - 20px)',
+    modalStyle: { maxWidth: '450px' },
     okText: '添加',
     onBeforeOk: async () => {
       const valid = await formRef.value?.validate()

@@ -1,5 +1,5 @@
 <template>
-  <a-form ref="formRef" :model="form" :rules="rules">
+  <a-form ref="formRef" :model="form" :rules="rules" auto-label-width>
     <a-form-item label="用户名" field="name">
       <a-input v-model="form.name" placeholder="请输入用户名" :max-length="4" allow-clear />
     </a-form-item>

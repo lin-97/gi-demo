@@ -23,6 +23,8 @@ const open2 = () => {
   Modal.open({
     title: '添加用户',
     content: () => <AddUserForm ref={AddUserFormRef}></AddUserForm>,
+    width: 'calc(100% - 20px)',
+    modalStyle: { maxWidth: '450px' },
     okText: '添加',
     onBeforeOk: async () => {
       return await AddUserFormRef.value?.handleAddUser()
