@@ -7,8 +7,6 @@ import type { RouteLocationNormalized, RouteRecordName } from 'vue-router'
 import { defineStore } from 'pinia'
 import { nextTick, ref } from 'vue'
 import { useRouter } from 'vue-router'
-import { eachTree } from 'xe-utils'
-import { useRouteStore } from '@/stores'
 
 /**
  * 标签页 Store 的核心设置逻辑
@@ -36,9 +34,41 @@ const storeSetup = () => {
   const reloadFlag = ref(true)
 
   /**
+   * 判断是否为首页
+   */
+  const isHomePath = (path: string) => path === '/' || path === '/home'
+
+  /**
+   * 获取所有固定标签页
+   * @description 从路由中筛选出所有 affix: true 的固定标签页，首页排在最前面
+   */
+  const getAffixTabs = (): RouteLocationNormalized[] => {
+    const tabs = router
+      .getRoutes()
+      .filter((route) => route.meta?.affix)
+      .map((route) => route as unknown as RouteLocationNormalized)
+    // 首页排在最前面
+    tabs.sort((a, b) => Number(isHomePath(b.path)) - Number(isHomePath(a.path)))
+    return tabs
+  }
+
+  /**
+   * 更新缓存列表
+   */
+  const updateCache = (name: RouteRecordName | null | undefined, keepAlive: boolean | undefined) => {
+    if (!name) return
+    const hasCache = cacheList.value.includes(name)
+    if (keepAlive && !hasCache) {
+      cacheList.value.push(name)
+    } else if (!keepAlive && hasCache) {
+      const index = cacheList.value.findIndex((n) => n === name)
+      if (index >= 0) cacheList.value.splice(index, 1)
+    }
+  }
+
+  /**
    * 添加标签页
-   * @description 添加新的标签页，如果已存在则更新
-   * @param {RouteLocationNormalized} item - 路由对象
+   * @description 添加新的标签页，如果已存在则更新，同时处理缓存
    */
   const addTabItem = (item: RouteLocationNormalized) => {
     const index = tabList.value.findIndex((i) => i.path === item.path)
@@ -48,161 +78,130 @@ const storeSetup = () => {
       if (tabList.value[index].fullPath !== item.fullPath) {
         tabList.value[index] = item
       }
-    } else {
+      updateCache(item.name, item.meta?.keepAlive)
+    } else if (item.meta?.showInTabs ?? true) {
       // 添加新标签页
-      if (item.meta?.showInTabs ?? true) {
-        tabList.value.push(item)
-      }
+      tabList.value.push(item)
+      updateCache(item.name, item.meta?.keepAlive)
     }
-  }
-
-  /**
-   * 删除标签页
-   * @description 删除指定路径的标签页，如果是当前页则自动跳转
-   * @param {string} path - 要删除的标签页路径
-   */
-  const deleteTabItem = (path: string) => {
-    const index = tabList.value.findIndex((item) => item.path === path && !item.meta?.affix)
-    if (index < 0) return
-
-    const isActive = router.currentRoute.value.path === tabList.value[index].path
-    tabList.value.splice(index, 1)
-
-    // 如果删除的是当前页，则跳转到最后一个标签页
-    if (isActive && tabList.value.length) {
-      const lastTab = tabList.value[tabList.value.length - 1]
-      router.push(lastTab.fullPath || lastTab.path)
-    }
-  }
-
-  /**
-   * 清空标签页列表
-   * @description 清空所有标签页，保留固定的标签页（affix: true）
-   */
-  const clearTabList = () => {
-    const routeStore = useRouteStore()
-    const affixTabs: RouteLocationNormalized[] = []
-
-    eachTree(routeStore.routes, (item) => {
-      if (item.meta?.affix) {
-        affixTabs.push(item as unknown as RouteLocationNormalized)
-      }
-    })
-
-    tabList.value = affixTabs
   }
 
   /**
    * 设置标签页标题
-   * @description 修改当前标签页的标题
-   * @param {string} title - 新的标题
-   * @returns {boolean} 是否设置成功
    */
   const setTabTitle = (title: string): boolean => {
     if (!title) return false
-
     const route = router.currentRoute.value
     const path = route?.fullPath || route.path
-    const index = tabList.value.findIndex((i) => i.fullPath === path)
-
-    if (index >= 0) {
-      tabList.value[index].meta.title = title
+    const tab = tabList.value.find((i) => i.fullPath === path)
+    if (tab) {
+      tab.meta.title = title
       return true
     }
     return false
   }
 
   /**
-   * 添加缓存组件
-   * @description 将需要缓存的组件添加到 keep-alive 列表
-   * @param {RouteLocationNormalized} item - 路由对象
+   * 删除标签页并清理缓存
    */
-  const addCacheItem = (item: RouteLocationNormalized) => {
-    if (!item.name || !item.meta?.keepAlive) return
-    if (!cacheList.value.includes(item.name)) {
-      cacheList.value.push(item.name)
+  const removeTabByIndex = (index: number) => {
+    if (index < 0 || index >= tabList.value.length) return
+    const item = tabList.value[index]
+    updateCache(item.name, false) // 删除缓存
+    tabList.value.splice(index, 1)
+  }
+
+  /**
+   * 跳转到指定标签页
+   */
+  const jumpToTab = (path: string) => {
+    const tab = tabList.value.find((t) => t.path === path) ?? tabList.value[0]
+    if (tab) router.push(tab.fullPath || tab.path)
+  }
+
+  /**
+   * 获取固定标签页的缓存列表
+   */
+  const getAffixCacheList = (tabs: RouteLocationNormalized[]) => {
+    return tabs.filter((tab) => tab.name && tab.meta?.keepAlive).map((tab) => tab.name!)
+  }
+
+  /**
+   * 统一关闭标签页方法
+   * @description 根据类型关闭标签页：left(左侧)、right(右侧)、other(其他)、all(全部)、current(当前)
+   */
+  const close = (type: string, path?: string) => {
+    const currentPath = router.currentRoute.value.path
+    const targetPath = path || currentPath
+    const targetIndex = tabList.value.findIndex((i) => i.path === targetPath)
+
+    // 关闭所有
+    if (type === 'all') {
+      const affixTabs = getAffixTabs()
+      tabList.value = affixTabs
+      cacheList.value = getAffixCacheList(affixTabs)
+      router.push('/')
+      return
     }
-  }
 
-  /**
-   * 删除缓存组件
-   * @description 从 keep-alive 列表中移除指定组件
-   * @param {RouteRecordName} name - 组件名称
-   */
-  const deleteCacheItem = (name: RouteRecordName) => {
-    const index = cacheList.value.findIndex((i) => i === name)
-    if (index >= 0) {
-      cacheList.value.splice(index, 1)
+    // 关闭当前
+    if (type === 'current') {
+      if (targetIndex < 0 || tabList.value[targetIndex].meta?.affix) return
+      removeTabByIndex(targetIndex)
+      if (currentPath === targetPath && tabList.value.length) {
+        jumpToTab(tabList.value[tabList.value.length - 1].path)
+      }
+      return
     }
-  }
 
-  /**
-   * 清空缓存列表
-   * @description 清空所有 keep-alive 缓存的组件
-   */
-  const clearCacheList = () => {
-    cacheList.value = []
-  }
+    if (targetIndex < 0) return
 
-  /**
-   * 关闭当前标签页
-   * @description 关闭指定路径的标签页并清除其缓存
-   * @param {string} path - 要关闭的标签页路径
-   */
-  const closeCurrent = (path: string) => {
-    const item = tabList.value.find((i) => i.path === path)
-    if (item?.name) {
-      deleteCacheItem(item.name)
+    // 关闭左侧
+    if (type === 'left') {
+      for (let i = targetIndex - 1; i >= 0; i--) {
+        if (!tabList.value[i].meta?.affix) removeTabByIndex(i)
+      }
+      return
     }
-    deleteTabItem(path)
-  }
 
-  /**
-   * 关闭其他标签页
-   * @description 关闭除指定路径外的所有标签页
-   * @param {string} path - 要保留的标签页路径
-   */
-  const closeOther = (path: string) => {
-    const otherTabs = tabList.value.filter((i) => i.path !== path)
-    otherTabs.forEach((item) => {
-      deleteTabItem(item.path)
-      item?.name && deleteCacheItem(item.name)
-    })
-  }
+    // 关闭右侧
+    if (type === 'right') {
+      const currentIndex = tabList.value.findIndex((t) => t.path === currentPath)
+      const willDeleteCurrent = currentIndex > targetIndex && !tabList.value[currentIndex]?.meta?.affix
 
-  /**
-   * 关闭右侧标签页
-   * @description 关闭指定路径右侧的所有标签页
-   * @param {string} path - 参考标签页路径
-   */
-  const closeRight = (path: string) => {
-    const index = tabList.value.findIndex((i) => i.path === path)
-    if (index < 0) return
+      for (let i = tabList.value.length - 1; i > targetIndex; i--) {
+        if (!tabList.value[i].meta?.affix) removeTabByIndex(i)
+      }
 
-    const rightTabs = tabList.value.filter((_, n) => n > index)
-    rightTabs.forEach((item) => {
-      deleteTabItem(item.path)
-      item?.name && deleteCacheItem(item.name)
-    })
-  }
+      if (willDeleteCurrent && tabList.value.length) {
+        jumpToTab(tabList.value[targetIndex].path)
+      }
+      return
+    }
 
-  /**
-   * 关闭所有标签页
-   * @description 关闭所有标签页并跳转到首页
-   */
-  const closeAll = () => {
-    clearTabList()
-    clearCacheList()
-    router.push('/')
+    // 关闭其他
+    if (type === 'other') {
+      for (let i = tabList.value.length - 1; i >= 0; i--) {
+        const item = tabList.value[i]
+        if (item.path !== targetPath && !item.meta?.affix) {
+          removeTabByIndex(i)
+        }
+      }
+      const currentExists = tabList.value.some((t) => t.path === currentPath)
+      if (!currentExists && tabList.value.length) {
+        jumpToTab(targetPath)
+      }
+    }
   }
 
   /**
    * 重置标签页状态
-   * @description 清空标签页和缓存列表
+   * @description 清空标签页和缓存列表，保留固定标签页及其缓存
    */
   const reset = () => {
-    clearTabList()
-    clearCacheList()
+    const affixTabs = getAffixTabs()
+    tabList.value = affixTabs
+    cacheList.value = getAffixCacheList(affixTabs)
   }
 
   /**
@@ -222,12 +221,12 @@ const storeSetup = () => {
     const route = router.currentRoute.value
     if (!route.name) return
 
-    deleteCacheItem(route.name as string)
+    updateCache(route.name, false) // 删除缓存
     reloadFlag.value = false
 
     nextTick(() => {
       reloadFlag.value = true
-      addCacheItem(route)
+      updateCache(route.name, route.meta?.keepAlive) // 重新添加缓存
     })
   }
 
@@ -236,16 +235,8 @@ const storeSetup = () => {
     cacheList,
     reloadFlag,
     addTabItem,
-    deleteTabItem,
-    clearTabList,
     setTabTitle,
-    addCacheItem,
-    deleteCacheItem,
-    clearCacheList,
-    closeCurrent,
-    closeOther,
-    closeRight,
-    closeAll,
+    close,
     reset,
     init,
     reloadPage

@@ -33,7 +33,7 @@ const handleReload = () => {
   cursor: pointer;
 
   &:hover {
-    transform: rotate(360deg);
+    transform: rotate(180deg);
     transition: transform 0.3s ease-in-out;
   }
 }

@@ -5,26 +5,26 @@
 <template>
   <div class="tabs">
     <a-tabs :class="`tabs__${appStore.tab}`" :type="tabsType" :active-key="route.path" editable hide-content
-      size="medium" @tab-click="handleTabClick" @delete="tabsStore.closeCurrent($event as string)">
+      size="medium" @tab-click="handleTabClick" @delete="tabsStore.close('current', $event as string)">
       <a-tab-pane v-for="item of tabsStore.tabList" :key="item.path" :title="(item.meta?.title as string)"
         :closable="!item.meta?.affix">
         <template v-if="appStore.tab === 'custom2'" #title>
           <a-dropdown trigger="contextMenu">
             <a-tag class="tabs-pane__tag" :closable="!item.meta?.affix"
-              :color="route.path === item.path ? 'arcoblue' : undefined" @close="tabsStore.closeCurrent(item.path)">
+              :color="route.path === item.path ? 'arcoblue' : undefined" @close="tabsStore.close('current', item.path)">
               {{ item.meta?.title }}
             </a-tag>
             <template #content>
-              <a-doption @click="tabsStore.closeCurrent(item.path)">
-                <template #icon><icon-close /></template>
-                <template #default>关闭当前</template>
+              <a-doption @click="tabsStore.close('left', item.path)">
+                <template #icon><icon-left /></template>
+                <template #default>关闭左侧</template>
               </a-doption>
-              <a-doption @click="tabsStore.closeRight(item.path)">
-                <template #icon><icon-close /></template>
+              <a-doption @click="tabsStore.close('right', item.path)">
+                <template #icon><icon-right /></template>
                 <template #default>关闭右侧</template>
               </a-doption>
-              <a-doption @click="tabsStore.closeOther(item.path)">
-                <template #icon><icon-eraser /></template>
+              <a-doption @click="tabsStore.close('other', item.path)">
+                <template #icon><icon-close /></template>
                 <template #default>关闭其他</template>
               </a-doption>
             </template>
@@ -38,20 +38,20 @@
           <a-dropdown trigger="hover">
             <MagicIcon></MagicIcon>
             <template #content>
-              <a-doption @click="tabsStore.closeCurrent(route.path)">
-                <template #icon><icon-close /></template>
-                <template #default>关闭当前</template>
+              <a-doption @click="tabsStore.close('left', route.path)">
+                <template #icon><icon-left /></template>
+                <template #default>关闭左侧</template>
               </a-doption>
-              <a-doption @click="tabsStore.closeRight(route.path)">
-                <template #icon><icon-close /></template>
+              <a-doption @click="tabsStore.close('right', route.path)">
+                <template #icon><icon-right /></template>
                 <template #default>关闭右侧</template>
               </a-doption>
-              <a-doption @click="tabsStore.closeOther(route.path)">
-                <template #icon><icon-eraser /></template>
+              <a-doption @click="tabsStore.close('other', route.path)">
+                <template #icon><icon-close /></template>
                 <template #default>关闭其他</template>
               </a-doption>
-              <a-doption @click="tabsStore.closeAll">
-                <template #icon><icon-minus /></template>
+              <a-doption @click="tabsStore.close('all')">
+                <template #icon><icon-delete /></template>
                 <template #default>关闭全部</template>
               </a-doption>
             </template>
@@ -89,7 +89,6 @@ listenerRouteChange(({ to }) => {
   if (to.name) {
     const rawTo = toRaw(to)
     tabsStore.addTabItem(rawTo)
-    tabsStore.addCacheItem(rawTo)
   }
 })
 
@@ -223,9 +222,5 @@ onMounted(() => {
       background-color: transparent;
     }
   }
-}
-
-:deep(.arco-dropdown-option-icon) {
-  color: var(--color-text-3);
 }
 </style>
