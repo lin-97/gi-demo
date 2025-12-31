@@ -58,7 +58,7 @@ const messageList = ref<MessageItem[]>([
     name: 'Socrates',
     datetime: '1小时之前',
     content: 'Comment body content.',
-    avatar: 'https://lolicode.gitee.io/scui-doc/demo/img/avatar2.gif'
+    avatar: 'https://img1.baidu.com/it/u=1817951587,3188870642&fm=253&fmt=auto&app=138&f=JPEG?w=500&h=500'
   },
   {
     id: 2,
