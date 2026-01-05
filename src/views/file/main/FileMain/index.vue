@@ -232,7 +232,7 @@ const handleMulDelete = () => {
   height: 100%;
   overflow: hidden;
   background: var(--color-bg-1);
-  border-radius: $radius-box;
+  border-radius: var(--border-radius-small);
 
   &__search {
     margin: 0 $padding;
