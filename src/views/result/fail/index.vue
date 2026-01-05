@@ -48,6 +48,7 @@ defineOptions({ name: 'ResultFail' })
     padding: 24px;
     font-size: 12px;
     background: var(--color-fill-2);
+    border-radius: var(--border-radius-small);
 
     ul>li {
       display: flex;

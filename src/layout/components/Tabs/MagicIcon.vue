@@ -59,7 +59,7 @@ defineOptions({ name: 'MagicIcon' })
       width: 6px;
       height: 6px;
       content: '';
-      background: var(--color-text-3);
+      background: var(--color-text-2);
       transition: transform 0.3s ease-out;
     }
 
@@ -70,7 +70,7 @@ defineOptions({ name: 'MagicIcon' })
       width: 6px;
       height: 6px;
       content: '';
-      background: var(--color-text-3);
+      background: var(--color-text-2);
       transition: background-color 0.3s ease-out;
     }
   }
@@ -83,6 +83,7 @@ defineOptions({ name: 'MagicIcon' })
     transform: rotate(90deg);
 
     .magic-dot {
+
       &::before,
       &::after {
         background: rgb(var(--primary-6));

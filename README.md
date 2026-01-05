@@ -1355,7 +1355,7 @@ Link 组件使用场景
 **`采用下划线_，好复制`**
 
 ```scss
-.gi_line_1   .gi_line_2   .gi_margin   .gi_box
+.gi_line_1   .gi_line_2   .gi_margin
 ```
 
 ```scss
@@ -1487,13 +1487,6 @@ Link 组件使用场景
   padding: $margin;
   box-sizing: border-box;
   overflow-y: auto;
-}
-
-// 通用盒子
-.gi_box {
-  background: var(--color-bg-1);
-  border-radius: $radius-box;
-  overflow: hidden;
 }
 ```
 
