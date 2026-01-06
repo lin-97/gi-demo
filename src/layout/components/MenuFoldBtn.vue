@@ -12,8 +12,7 @@
   </a-button>
 
   <!-- 移动端抽屉菜单 -->
-  <div class="drawer" :class="{ 'app-menu-dark': appStore.menuDark }"
-    :style="appStore.menuDark ? appStore.themeCSSVar : undefined">
+  <div class="drawer" :class="{ 'app-menu-dark': appStore.menuDark }">
     <a-drawer v-model:visible="visible" placement="left" :header="false" :footer="false" :render-to-body="false"
       :drawer-style="drawerStyle">
       <Logo :collapsed="false" />

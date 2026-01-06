@@ -99,7 +99,7 @@
   }
 
   .arco-table-scroll-y {
-    border-right: 1px solid var(--color-border-table);
+    border-right: 1px solid var(--color-border-1);
   }
 
   .arco-table-tr .arco-table-td:last-child,
@@ -114,7 +114,7 @@
 
         &:not(.arco-scrollbar-both) {
           .arco-table-element {
-            border-bottom: 1px solid var(--color-border-table);
+            border-bottom: 1px solid var(--color-border-1);
           }
         }
       }

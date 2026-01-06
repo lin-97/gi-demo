@@ -1,3 +1,4 @@
+import type { CSSProperties } from 'vue'
 import type { RouteRecordRaw } from 'vue-router'
 import { computed } from 'vue'
 import { eachTree } from 'xe-utils'
@@ -29,6 +30,14 @@ export function useMenu() {
   const menuTriggerProps = {
     animationName: 'slide-dynamic-origin'
   }
+
+  // 菜单主题
+  const menuTheme = computed(() => appStore.menuDark ? 'dark' : 'light')
+
+  // 获取菜单样式
+  const getMenuStyle = computed(() => {
+    return { backgroundColor: menuTheme.value === 'dark' ? 'var(--color-menu-dark-bg)' : 'var(--color-menu-light-bg)' } as CSSProperties
+  })
 
   /**
    * 处理后的菜单列表
@@ -82,6 +91,8 @@ export function useMenu() {
   })
 
   return {
+    menuTheme,
+    getMenuStyle,
     menuList,
     menuTriggerProps,
     selectedKeys,

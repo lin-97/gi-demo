@@ -1,12 +1,12 @@
 <template>
-  <div v-if="isDesktop" class="asider" :class="{ 'app-menu-dark': appStore.menuDark }"
-    :style="appStore.menuDark ? appStore.themeCSSVar : undefined">
+  <div v-if="isDesktop" class="asider" :class="{ 'app-menu-dark': appStore.menuDark }" :style="getMenuStyle">
     <a-layout-sider class="asider__menu" collapsible breakpoint="xl" hide-trigger :width="220"
       :collapsed="appStore.menuCollapse" @collapse="handleCollapse">
       <Logo :collapsed="appStore.menuCollapse"></Logo>
       <a-scrollbar outer-class="asider__menu-scroll-view" style="height: 100%; overflow: auto">
-        <a-menu auto-open-selected :menu-trigger-props="menuTriggerProps" :selected-keys="selectedKeys"
-          :collapsed="collapsed" :accordion="appStore.menuAccordion" @menu-item-click="handleMenuItemClick">
+        <a-menu :theme="menuTheme" auto-open-selected :menu-trigger-props="menuTriggerProps"
+          :selected-keys="selectedKeys" :collapsed="collapsed" :accordion="appStore.menuAccordion"
+          @menu-item-click="handleMenuItemClick">
           <MenuItem v-for="(item, index) in menuList" :key="item.path + index" :item="item" />
         </a-menu>
       </a-scrollbar>
@@ -24,7 +24,7 @@ import MenuItem from '../Menu/MenuItem.vue'
 defineOptions({ name: 'AppAsider' })
 const appStore = useAppStore()
 const { isDesktop } = useDevice()
-const { menuList, menuTriggerProps, selectedKeys, collapsed, handleMenuItemClick } = useMenu()
+const { menuTheme, menuList, menuTriggerProps, selectedKeys, collapsed, handleMenuItemClick, getMenuStyle } = useMenu()
 
 const handleCollapse = (isCollapsed: boolean) => {
   appStore.menuCollapse = isCollapsed

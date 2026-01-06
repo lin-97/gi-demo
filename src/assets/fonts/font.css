@@ -1,23 +1,5 @@
 @font-face {
-  font-family: DINPro-Bold;
-  font-style: normal;
-  font-weight: normal;
-  src: url('./DINPro-Bold.otf');
-  font-display: swap; /* 先显示默认字体，字体加载完成后替换 */
-}
-
-@font-face {
-  font-family: DINPro-Medium;
-  font-style: normal;
-  font-weight: normal;
-  src: url('./DINPro-Medium.otf');
-  font-display: swap; /* 先显示默认字体，字体加载完成后替换 */
-}
-
-@font-face {
-  font-family: DINPro-Regular;
-  font-style: normal;
-  font-weight: normal;
-  src: url('./DINPro-Regular.otf');
+  font-family: DIGITAL;
+  src: url('./DS-DIGIT.TTF') format('truetype');
   font-display: swap; /* 先显示默认字体，字体加载完成后替换 */
 }

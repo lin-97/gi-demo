@@ -7,8 +7,8 @@
 
       <!-- 左侧二级菜单区域 -->
       <a-menu v-if="twoLevelMenus.length > 1 || oneActiveRoute?.meta?.alwaysShow === true" class="layout-columns__menu"
-        :selected-keys="[twoActivePath]" :accordion="appStore.menuAccordion" :collapsed="appStore.menuCollapse"
-        :style="{ width: '180px' }" @menu-item-click="handleTwoMenuItemClick">
+        :theme="menuTheme" :selected-keys="[twoActivePath]" :accordion="appStore.menuAccordion"
+        :collapsed="appStore.menuCollapse" :style="{ width: '180px' }" @menu-item-click="handleTwoMenuItemClick">
         <MenuItem v-for="(item, index) in twoLevelMenus" :key="item.path + index" :item="item" />
       </a-menu>
     </div>
@@ -37,7 +37,7 @@ defineOptions({ name: 'LayoutColumns' })
 const appStore = useAppStore()
 const { isDesktop } = useDevice()
 
-const { oneLevelMenus, twoLevelMenus, oneActiveRoute, oneActivePath, twoActivePath, getOneLevelMenus, handleOneMenuItemClick, handleTwoMenuItemClick } = useLevelMenu()
+const { menuTheme, oneLevelMenus, twoLevelMenus, oneActiveRoute, oneActivePath, twoActivePath, getOneLevelMenus, handleOneMenuItemClick, handleTwoMenuItemClick } = useLevelMenu()
 getOneLevelMenus()
 </script>
 

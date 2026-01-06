@@ -1,7 +1,8 @@
+import type { CSSProperties } from 'vue'
 import type { RouteLocationNormalizedGeneric, RouteRecordRaw } from 'vue-router'
 import { eachTree, searchTree } from 'xe-utils'
 import { useRouteListener } from '@/hooks'
-import { useRouteStore } from '@/stores'
+import { useAppStore, useRouteStore } from '@/stores'
 import { filterTree } from '@/utils'
 import { isExternal } from '@/utils/validate'
 
@@ -9,8 +10,16 @@ import { isExternal } from '@/utils/validate'
 export function useLevelMenu() {
   const route = useRoute()
   const router = useRouter()
+  const appStore = useAppStore()
   const routeStore = useRouteStore()
   const { listenerRouteChange } = useRouteListener()
+
+  const menuTheme = computed(() => appStore.menuDark ? 'dark' : 'light')
+
+  // 获取菜单样式
+  const getMenuStyle = computed(() => {
+    return { backgroundColor: menuTheme.value === 'dark' ? 'var(--color-menu-dark-bg)' : 'var(--color-menu-light-bg)' } as CSSProperties
+  })
 
   // 克隆一份路由，避免直接操作原始路由
   const cloneRoutes = JSON.parse(JSON.stringify(routeStore.routes)) as RouteRecordRaw[]
@@ -96,6 +105,8 @@ export function useLevelMenu() {
   }
 
   return {
+    menuTheme,
+    getMenuStyle,
     oneLevelMenus,
     twoLevelMenus,
     oneActiveRoute,

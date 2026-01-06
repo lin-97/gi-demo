@@ -6,13 +6,14 @@
   <div class="layout-mix">
     <!-- 左侧菜单区域 -->
     <section v-if="isDesktop" class="layout-mix-left asider" :class="{ 'app-menu-dark': appStore.menuDark }"
-      :style="appStore.menuDark ? appStore.themeCSSVar : undefined">
-      <a-layout-sider class="asider__menu" collapsible breakpoint="xl" hide-trigger :width="200"
+      :style="getMenuStyle">
+      <a-layout-sider - sider class=" asider__menu" collapsible breakpoint="xl" hide-trigger :width="200"
         :collapsed="appStore.menuCollapse">
         <Logo :collapsed="appStore.menuCollapse" />
         <a-scrollbar outer-class="asider__menu-scroll-view" style="height: 100%; overflow: auto">
-          <a-menu mode="vertical" auto-open-selected :collapsed="shouldCollapse" :selected-keys="[twoActivePath]"
-            breakpoint="xl" :accordion="appStore.menuAccordion" @menu-item-click="handleTwoMenuItemClick">
+          <a-menu :theme="menuTheme" mode="vertical" auto-open-selected :collapsed="shouldCollapse"
+            :selected-keys="[twoActivePath]" breakpoint="xl" :accordion="appStore.menuAccordion"
+            @menu-item-click="handleTwoMenuItemClick">
             <MenuItem v-for="(item, index) in twoLevelMenus" :key="item.path + index" :item="item" />
           </a-menu>
         </a-scrollbar>
@@ -21,9 +22,10 @@
 
     <!-- 右侧内容区域 -->
     <section class="layout-mix-right">
-      <header class="header">
+      <header class="header" :class="{ 'app-menu-dark': appStore.menuDark }" :style="getMenuStyle">
         <MenuFoldBtn />
-        <a-menu mode="horizontal" :selected-keys="[oneActivePath]" @menu-item-click="handleOneMenuItemClick">
+        <a-menu mode="horizontal" :theme="menuTheme" :selected-keys="[oneActivePath]"
+          @menu-item-click="handleOneMenuItemClick">
           <MenuItem v-for="(item, index) in topMenus" :key="item.path + index" :item="item" />
         </a-menu>
         <HeaderRightBar />
@@ -51,7 +53,7 @@ defineOptions({ name: 'LayoutMix' })
 const appStore = useAppStore()
 const { isDesktop } = useDevice()
 
-const { oneLevelMenus, twoLevelMenus, oneActivePath, twoActivePath, getOneLevelMenus, handleOneMenuItemClick, handleTwoMenuItemClick } = useLevelMenu()
+const { oneLevelMenus, twoLevelMenus, oneActivePath, twoActivePath, getOneLevelMenus, handleOneMenuItemClick, handleTwoMenuItemClick, getMenuStyle } = useLevelMenu()
 getOneLevelMenus()
 
 const topMenus = computed(() => {
@@ -66,6 +68,8 @@ const topMenus = computed(() => {
 const shouldCollapse = computed(() =>
   !isDesktop.value ? false : appStore.menuCollapse
 )
+
+const menuTheme = computed(() => appStore.menuDark ? 'dark' : 'light')
 </script>
 
 <style lang="scss" scoped>
@@ -130,7 +134,7 @@ const shouldCollapse = computed(() =>
   padding: 0 $padding;
   overflow: hidden;
   color: var(--color-text-1);
-  background: var(--color-bg-1);
+  background-color: var(--color-bg-1);
   border-bottom: 1px solid var(--color-border);
 }
 

@@ -14,7 +14,7 @@ const time = ref('')
 // 获取现在时间
 const getFormatNowTime = () => {
   const weekList = ['日', '一', '二', '三', '四', '五', '六']
-  return `${Dayjs(new Date()).format('YYYY年MM月DD日 HH:mm:ss')} 星期${weekList[Dayjs(new Date()).day()]}`
+  return `${Dayjs(new Date()).format('YYYY-MM-DD HH:mm:ss')} 星期${weekList[Dayjs(new Date()).day()]}`
 }
 
 // 初始化时间
@@ -34,8 +34,8 @@ initTime()
 .now-time {
   display: flex;
   align-items: center;
-  font-family: DINPro-Medium;
-  font-size: 14px;
+  font-family: DIGITAL;
+  font-size: 16px;
   color: var(--color-text-1);
 
   &__time {

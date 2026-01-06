@@ -1,8 +1,9 @@
 <template>
   <div class="layout-top">
-    <a-row align="center" class="layout-top__header">
+    <a-row align="center" class="layout-top__header" :class="{ 'app-menu-dark': appStore.menuDark }"
+      :style="getMenuStyle">
       <Logo></Logo>
-      <a-menu class="layout-top__menu" mode="horizontal" :menu-trigger-props="menuTriggerProps"
+      <a-menu class="layout-top__menu" mode="horizontal" :theme="menuTheme" :menu-trigger-props="menuTriggerProps"
         :selected-keys="selectedKeys" @menu-item-click="handleMenuItemClick">
         <MenuItem v-for="(item, index) in menuList" :key="item.path + index" :item="item" />
       </a-menu>
@@ -25,7 +26,7 @@ import Tabs from './components/Tabs/index.vue'
 defineOptions({ name: 'LayoutTop' })
 
 const appStore = useAppStore()
-const { menuList, menuTriggerProps, handleMenuItemClick, selectedKeys } = useMenu()
+const { menuTheme, menuList, menuTriggerProps, handleMenuItemClick, selectedKeys, getMenuStyle } = useMenu()
 </script>
 
 <style lang="scss" scoped>

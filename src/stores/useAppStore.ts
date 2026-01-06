@@ -28,23 +28,6 @@ const storeSetup = () => {
   )
 
   /**
-   * 计算深色主题下的主题色变量
-   * 生成一组主题色的 RGB 值，用于 CSS 变量
-   */
-  const themeCSSVar = computed<Record<string, string>>(() => {
-    const colorVariables: Record<string, string> = {}
-    const themeColors = generate(settingConfig.themeColor, {
-      list: true,
-      dark: true
-    }) as string[]
-
-    themeColors.forEach((color, index) => {
-      colorVariables[`--primary-${index + 1}`] = getRgbStr(color)
-    })
-    return colorVariables
-  })
-
-  /**
    * 设置主题色
    * 生成主题色的色阶并应用到 CSS 变量
    * @param color - 主题色值
@@ -103,7 +86,6 @@ const storeSetup = () => {
   return {
     ...toRefs(settingConfig),
     transitionName,
-    themeCSSVar,
     toggleTheme,
     setThemeColor,
     initTheme,

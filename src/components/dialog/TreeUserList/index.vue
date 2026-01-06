@@ -11,10 +11,7 @@
           <template #icon><icon-search /></template>
           <span>查询</span>
         </a-button>
-        <a-button @click="reset">
-          <template #icon><icon-refresh /></template>
-          <span>重置</span>
-        </a-button>
+        <a-button @click="reset">重置</a-button>
       </a-space>
     </a-row>
 
