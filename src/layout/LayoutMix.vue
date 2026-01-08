@@ -7,7 +7,7 @@
     <!-- 左侧菜单区域 -->
     <section v-if="isDesktop" class="layout-mix-left asider" :class="{ 'app-menu-dark': appStore.menuDark }"
       :style="getMenuStyle">
-      <a-layout-sider - sider class=" asider__menu" collapsible breakpoint="xl" hide-trigger :width="200"
+      <a-layout-sider class="asider__menu" collapsible breakpoint="xl" hide-trigger :width="200"
         :collapsed="appStore.menuCollapse">
         <Logo :collapsed="appStore.menuCollapse" />
         <a-scrollbar outer-class="asider__menu-scroll-view" style="height: 100%; overflow: auto">
@@ -53,7 +53,7 @@ defineOptions({ name: 'LayoutMix' })
 const appStore = useAppStore()
 const { isDesktop } = useDevice()
 
-const { oneLevelMenus, twoLevelMenus, oneActivePath, twoActivePath, getOneLevelMenus, handleOneMenuItemClick, handleTwoMenuItemClick, getMenuStyle } = useLevelMenu()
+const { menuTheme, getMenuStyle, oneLevelMenus, twoLevelMenus, oneActivePath, twoActivePath, getOneLevelMenus, handleOneMenuItemClick, handleTwoMenuItemClick } = useLevelMenu()
 getOneLevelMenus()
 
 const topMenus = computed(() => {
@@ -68,8 +68,6 @@ const topMenus = computed(() => {
 const shouldCollapse = computed(() =>
   !isDesktop.value ? false : appStore.menuCollapse
 )
-
-const menuTheme = computed(() => appStore.menuDark ? 'dark' : 'light')
 </script>
 
 <style lang="scss" scoped>
