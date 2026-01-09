@@ -10,20 +10,31 @@
 
 .arco-modal-simple {
   width: 90%;
-  max-width: 400px;
-  padding: 14px 16px;
+  max-width: 320px;
+  padding: 20px;
   box-sizing: border-box;
+
   .arco-modal-header {
+    margin-bottom: 0;
+
     .arco-modal-title {
-      // justify-content: flex-start;
       font-size: 18px;
     }
   }
+
   .arco-modal-body {
+    padding: 20px 0;
     font-size: 16px;
+    text-align: center;
   }
+
   .arco-modal-footer {
-    margin-top: 15px;
-    text-align: right;
+    margin-top: 0;
+    display: flex;
+
+    >.arco-btn {
+      flex: 1;
+      height: 34px;
+    }
   }
 }
