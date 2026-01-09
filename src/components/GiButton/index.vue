@@ -32,8 +32,8 @@ const BUTTON_MAP: Record<string, { icon: any, text: string, status?: ButtonProps
   search: { icon: IconSearch, text: '搜索' },
   reset: { icon: undefined, text: '重置', type: 'secondary' },
   upload: { icon: IconUpload, text: '上传', type: 'secondary' },
-  import: { icon: IconImport, text: '导入', type: 'outline' },
-  export: { icon: IconExport, text: '导出', type: 'outline' }
+  import: { icon: IconImport, text: '导入', type: 'secondary' },
+  export: { icon: IconExport, text: '导出', type: 'secondary' }
 }
 
 const buttonProps = computed(() => {
