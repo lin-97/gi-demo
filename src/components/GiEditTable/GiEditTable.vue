@@ -38,12 +38,12 @@
 <script lang='ts' setup generic="T extends TableData">
 import type { TableColumnData, TableData } from '@arco-design/web-vue'
 import type { Component } from 'vue'
-import type { ColumnItem, Disabled } from './type'
+import type { EditTableColumnItem, EditTableProps as Props } from './type'
 import * as A from '@arco-design/web-vue'
 
 defineOptions({ name: 'GiEditTable', inheritAttrs: false })
 
-const props = withDefaults(defineProps<Props>(), {
+const props = withDefaults(defineProps<Props<T>>(), {
   cellDisabled: false
 })
 
@@ -55,14 +55,8 @@ const emit = defineEmits<{
 
 /** 插槽定义 */
 defineSlots<{
-  [propsName: string]: (props: { record: T, rowIndex: number, column: ColumnItem }) => void
+  [propsName: string]: (props: { record: T, rowIndex: number, column: EditTableColumnItem }) => void
 }>()
-
-interface Props {
-  columns: ColumnItem[]
-  data: T[]
-  cellDisabled?: Disabled<T>
-}
 
 const attrs = useAttrs()
 
@@ -74,7 +68,9 @@ const COMP_MAP: Record<string, Component> = {
   'textarea': A.Textarea,
   'select': A.Select,
   'tree-select': A.TreeSelect,
+  'radio': A.Radio,
   'radio-group': A.RadioGroup,
+  'checkbox': A.Checkbox,
   'checkbox-group': A.CheckboxGroup,
   'date-picker': A.DatePicker,
   'year-picker': A.YearPicker,
@@ -100,12 +96,12 @@ const form = computed(() => ({ tableData: props.data }))
 const formRef = useTemplateRef('formRef')
 
 /** 获取表头必填星号*样式 */
-const headerCellClass = (col: ColumnItem) => {
+const headerCellClass = (col: EditTableColumnItem) => {
   return col.required ? 'gi_column_require' : ''
 }
 
 /** 静态配置 */
-const STATIC_PROPS = new Map<ColumnItem['type'], Partial<ColumnItem['props']>>([
+const STATIC_PROPS = new Map<EditTableColumnItem['type'], Partial<EditTableColumnItem['props']>>([
   ['input', { allowClear: true, maxLength: 20 }],
   ['textarea', { allowClear: false, maxLength: 200 }],
   ['input-tag', { allowClear: true }],
@@ -118,7 +114,7 @@ const STATIC_PROPS = new Map<ColumnItem['type'], Partial<ColumnItem['props']>>([
 ])
 
 /** 获取组件默认占位 */
-const getPlaceholder = (item: ColumnItem) => {
+const getPlaceholder = (item: EditTableColumnItem) => {
   if (!item.type) return undefined
   if (['input', 'input-tag', 'mention'].includes(item.type)) {
     return `请输入${item.title}`
@@ -139,7 +135,7 @@ const getPlaceholder = (item: ColumnItem) => {
 }
 
 /** 获取组件默认配置 */
-const getComponentBindProps = (col: ColumnItem) => {
+const getComponentBindProps = (col: EditTableColumnItem) => {
   return {
     ...STATIC_PROPS.get(col.type) || {},
     placeholder: getPlaceholder(col),
@@ -148,7 +144,7 @@ const getComponentBindProps = (col: ColumnItem) => {
 }
 
 /** 获取组件默认规则 */
-const getRuleMessage = (col: ColumnItem) => {
+const getRuleMessage = (col: EditTableColumnItem) => {
   if (['input', 'input-number', 'input-tag', 'mention'].includes(col.type ?? '')) {
     return `请输入${col.title}`
   }
@@ -159,7 +155,7 @@ const getRuleMessage = (col: ColumnItem) => {
 }
 
 /** 判断是否禁用 */
-const isDisabled: Props['cellDisabled'] = (p) => {
+const isDisabled: Props<T>['cellDisabled'] = (p) => {
   if (typeof props?.cellDisabled === 'boolean') return props.cellDisabled
   if (typeof props?.cellDisabled === 'function') return props.cellDisabled(p)
   return false

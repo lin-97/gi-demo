@@ -1,4 +1,5 @@
-import GiTable from './src/GiTable.vue'
+import Table from './GiTable.vue'
 
-export { GiTable }
-export default GiTable
+export type * from './type'
+export type TableInstance = InstanceType<typeof Table>
+export { Table as GiTable }

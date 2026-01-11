@@ -6,6 +6,8 @@
 </template>
 
 <script setup lang="ts">
+import type { SvgIconProps as Props } from './type'
+
 defineOptions({ name: 'GiSvgIcon' })
 
 const props = withDefaults(defineProps<Props>(), {
@@ -13,12 +15,6 @@ const props = withDefaults(defineProps<Props>(), {
   color: '',
   size: 20
 })
-
-interface Props {
-  name?: string
-  color?: string
-  size?: string | number
-}
 
 // 判断传入的值，是否带有单位，如果没有，就默认用px单位
 const getUnitValue = (value: string | number): string | number => {

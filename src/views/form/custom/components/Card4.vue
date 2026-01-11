@@ -27,9 +27,8 @@
 </template>
 
 <script setup lang="ts">
-import type { ColumnItem } from '@/components/GiForm'
+import type { FormColumnItem } from '@/components/index'
 import { Message, Modal } from '@arco-design/web-vue'
-import { GiForm } from '@/components/GiForm'
 import { useResetReactive } from '@/hooks'
 import * as Regexp from '@/utils/regexp'
 import CodeJson from './Card4.vue?raw'
@@ -160,7 +159,7 @@ const columns = computed(() => [
     span: 24,
     formItemProps: { extra: '这里是额外信息' }
   }
-] as ColumnItem<typeof form>[])
+] as FormColumnItem<typeof form>[])
 
 const GiFormRef = ref<InstanceType<typeof GiForm>>()
 const onAdd = () => {

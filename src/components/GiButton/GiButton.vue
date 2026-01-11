@@ -10,12 +10,9 @@
 </template>
 
 <script setup lang='ts'>
-import type { ButtonProps } from '@arco-design/web-vue'
+import type { ButtonProps as AButtonProps } from '@arco-design/web-vue'
+import type { ButtonProps as Props } from './type'
 import { IconDelete, IconEdit, IconExport, IconImport, IconPlus, IconSearch, IconUpload } from '@arco-design/web-vue/es/icon'
-
-interface Props extends Omit<ButtonProps, 'type'> {
-  type?: 'add' | 'edit' | 'delete' | 'search' | 'reset' | 'upload' | 'import' | 'export' | ''
-}
 
 const props = withDefaults(defineProps<Props>(), {
   type: ''
@@ -25,7 +22,7 @@ const emit = defineEmits<{
   (e: 'click'): void
 }>()
 
-const BUTTON_MAP: Record<string, { icon: any, text: string, status?: ButtonProps['status'], type?: ButtonProps['type'] }> = {
+const BUTTON_MAP: Record<string, { icon: any, text: string, status?: AButtonProps['status'], type?: AButtonProps['type'] }> = {
   add: { icon: IconPlus, text: '新增' },
   edit: { icon: IconEdit, text: '编辑' },
   delete: { icon: IconDelete, text: '删除', status: 'danger' },

@@ -76,11 +76,11 @@
 <script setup lang="ts">
 import type { FormInstance } from '@arco-design/web-vue'
 import type { Component } from 'vue'
-import type { ColumnItem, Props } from './type'
+import type { FormColumnItem, FormProps as Props } from './type'
 import * as A from '@arco-design/web-vue'
 import { cloneDeep, omit } from 'lodash-es'
 
-// Props 默认值
+// FormProps 默认值
 const props = withDefaults(defineProps<Props>(), {
   autoLabelWidth: true,
   scrollToFirstError: true,
@@ -158,7 +158,7 @@ const collapsed = ref(props.defaultCollapsed)
 const dicData: Record<string, any> = reactive({})
 
 /** 静态配置 */
-const STATIC_PROPS = new Map<ColumnItem['type'], Partial<ColumnItem['props']>>([
+const STATIC_PROPS = new Map<FormColumnItem['type'], Partial<FormColumnItem['props']>>([
   ['input', { allowClear: true, maxLength: 20 }],
   ['textarea', { allowClear: false, maxLength: 200 }],
   ['input-tag', { allowClear: true }],
@@ -170,10 +170,10 @@ const STATIC_PROPS = new Map<ColumnItem['type'], Partial<ColumnItem['props']>>([
   ['time-picker', { allowClear: true }]
 ])
 
-const getModelField = (item: ColumnItem) => item?.fieldName || item.field
+const getModelField = (item: FormColumnItem) => item?.fieldName || item.field
 
 /** 获取组件默认占位 */
-const getPlaceholder = (item: ColumnItem) => {
+const getPlaceholder = (item: FormColumnItem) => {
   if (!item.type || typeof item.type !== 'string') return undefined
   if (['input', 'input-tag', 'mention'].includes(item.type)) {
     return `请输入${item.label}`
@@ -194,7 +194,7 @@ const getPlaceholder = (item: ColumnItem) => {
 }
 
 /** 获取选项数据 */
-const getOptions = (item: ColumnItem): any[] | undefined => {
+const getOptions = (item: FormColumnItem): any[] | undefined => {
   if (!item.type) return undefined
   /** 需要选项数据的组件类型 */
   const arr = ['select', 'tree-select', 'cascader', 'radio-group', 'checkbox-group']
@@ -205,7 +205,7 @@ const getOptions = (item: ColumnItem): any[] | undefined => {
 }
 
 /** 获取组件绑定属性 */
-const getComponentBindProps = (item: ColumnItem) => {
+const getComponentBindProps = (item: FormColumnItem) => {
   return {
     ...STATIC_PROPS.get(item.type) || {},
     placeholder: getPlaceholder(item),
@@ -220,7 +220,7 @@ const updateValue = (value: any, field: string) => {
 }
 
 /** 获取表单项校验规则 */
-const getFormItemRules = (item: ColumnItem) => {
+const getFormItemRules = (item: FormColumnItem) => {
   if (item.required) {
     return [
       { required: true, message: `${item.label}为必填项` },
@@ -240,7 +240,7 @@ const getFormItemRules = (item: ColumnItem) => {
 }
 
 /** 判断表单项是否隐藏 */
-const isHide = (item: ColumnItem) => {
+const isHide = (item: FormColumnItem) => {
   if (typeof item.hide === 'boolean') return item.hide
   if (typeof item.hide === 'function') {
     return item.hide(props.modelValue)
@@ -250,7 +250,7 @@ const isHide = (item: ColumnItem) => {
 }
 
 /** 判断表单项是否禁用 */
-const isDisabled = (item: ColumnItem) => {
+const isDisabled = (item: FormColumnItem) => {
   if (typeof item.disabled === 'boolean') return item.disabled
   if (typeof item.disabled === 'function') {
     return item.disabled(props.modelValue)
@@ -270,7 +270,7 @@ props.columns.forEach((item) => {
 
 // 先找出有级联的项
 // 如果这个字段改变了值，那么就找出它的cascader属性对应的字段项，去请求里面的request
-const hasCascaderColumns: ColumnItem[] = []
+const hasCascaderColumns: FormColumnItem[] = []
 props.columns.forEach((item) => {
   const arr = hasCascaderColumns.map((i) => i.field)
   if (item.cascader?.length && !arr.includes(item.field)) {

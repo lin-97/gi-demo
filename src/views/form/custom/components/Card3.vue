@@ -26,11 +26,9 @@
 </template>
 
 <script setup lang="ts">
-import type { ColumnItem } from '@/components/GiForm'
+import type { FormColumnItem } from '@/components/index'
 import { Message } from '@arco-design/web-vue'
 import { getAreaList } from '@/apis/area'
-import GiCodeView from '@/components/GiCodeView/index.vue'
-import { GiForm } from '@/components/GiForm'
 import * as Regexp from '@/utils/regexp'
 import CodeJson from './Card3.vue?raw'
 
@@ -108,7 +106,7 @@ const columns = reactive([
     field: 'btns',
     span: 24
   }
-] as ColumnItem<typeof form>[])
+] as FormColumnItem<typeof form>[])
 
 const save = async () => {
   const error = await formRef.value?.formRef?.validate()

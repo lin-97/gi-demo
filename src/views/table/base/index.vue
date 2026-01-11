@@ -53,7 +53,7 @@
 
 <script setup lang="ts">
 import type { PopconfirmInstance } from '@arco-design/web-vue'
-import type { ColumnItem } from '@/components/GiForm'
+import type { FormColumnItem } from '@/components/index'
 import { baseAPI } from '@/apis/person'
 import { useTable } from '@/hooks'
 
@@ -75,7 +75,7 @@ const columns = reactive([
       maxLength: 11
     }
   }
-] as ColumnItem[])
+] as FormColumnItem[])
 
 const { tableData, pagination, search, loading } = useTable((p) => baseAPI.getList(p))
 

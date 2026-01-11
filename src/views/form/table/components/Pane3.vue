@@ -39,7 +39,7 @@
 
 <script lang='tsx' setup>
 import type { TableColumnData } from '@arco-design/web-vue'
-import type { ColumnItem, Disabled } from '@/components/GiEditTable'
+import type { EditTableCellDisabled, EditTableColumnItem } from '@/components/index'
 import { Message } from '@arco-design/web-vue'
 import { useDict } from '@/hooks/app'
 import * as Regexp from '@/utils/regexp'
@@ -56,7 +56,7 @@ const tableDataJson = computed(() => {
 })
 const GiEditTableRef = useTemplateRef('GiEditTableRef')
 
-const columns = computed<ColumnItem[]>(() => [
+const columns = computed<EditTableColumnItem[]>(() => [
   {
     type: 'input',
     title: '姓名',
@@ -157,7 +157,7 @@ const submit = async () => {
   Message.success('验证通过~')
 }
 
-const cellDisabled: Disabled<DataItem> = ({ rowIndex, col }) => {
+const cellDisabled: EditTableCellDisabled<DataItem> = ({ rowIndex, col }) => {
   if (currentCell.rowIndex === rowIndex && currentCell.dataIndex === col.dataIndex) return false
   return true
 }

@@ -34,7 +34,7 @@ import type { CateTreeItem } from '@/apis/cate'
 import { Message, Modal } from '@arco-design/web-vue'
 import { mapTree } from 'xe-utils'
 import { getCateTree } from '@/apis/cate'
-import GiSvgIcon from '@/components/GiSvgIcon/index.vue'
+import { GiSvgIcon } from '@/components/index'
 import RightMenu from './RightMenu.vue'
 
 interface Props {

@@ -11,7 +11,7 @@ import type { MergeMultiple } from '@/types/tool'
 type FormItemProps = A.FormItemInstance['$props']
 
 /** 支持的表单项类型 */
-export type ColumnItemType
+export type FormColumnItemType
   = | 'input' // 输入框
   | 'input-number' // 数字输入框
   | 'input-tag' // 标签输入框
@@ -19,7 +19,9 @@ export type ColumnItemType
   | 'textarea' // 文本域
   | 'select' // 选择器
   | 'tree-select' // 树选择器
+  | 'radio' // 单选框
   | 'radio-group' // 单选框组
+  | 'checkbox' // 复选框
   | 'checkbox-group' // 复选框组
   | 'date-picker' // 日期选择器
   | 'year-picker' // 年份选择器
@@ -40,7 +42,7 @@ export type ColumnItemType
   | Component
 
 /** 组件属性合并类型 */
-export type ComponentProps = MergeMultiple<[
+export type FormComponentProps = MergeMultiple<[
   Partial<A.InputInstance['$props']>,
   Partial<A.InputNumberInstance['$props']>,
   Partial<A.InputTagInstance['$props']>,
@@ -48,7 +50,9 @@ export type ComponentProps = MergeMultiple<[
   Partial<A.TextareaInstance['$props']>,
   Partial<A.SelectInstance['$props']>,
   Partial<A.TreeSelectInstance['$props']>,
+  Partial<A.RadioInstance['$props']>,
   Partial<A.RadioGroupInstance['$props']>,
+  Partial<A.CheckboxInstance['$props']>,
   Partial<A.CheckboxGroupInstance['$props']>,
   Partial<A.DatePickerInstance['$props']>,
   Partial<A.YearPickerInstance['$props']>,
@@ -69,17 +73,12 @@ export type ComponentProps = MergeMultiple<[
 ]>
 
 /** 选项类型定义 */
-export type ColumnItemOptions
-  = | A.SelectInstance['$props']['options']
-  | A.RadioGroupInstance['$props']['options']
-  | A.CheckboxGroupInstance['$props']['options']
-  | A.CascaderInstance['$props']['options']
+export type FormColumnItemOptions
+  = MergeMultiple<[A.SelectInstance['$props']['options'], A.RadioGroupInstance['$props']['options'], A.CheckboxGroupInstance['$props']['options'], A.CascaderInstance['$props']['options']]>
 
 /** 数据源类型定义 */
-export type ColumnItemData
-  = | A.TreeSelectInstance['$props']['data']
-  | A.AutoCompleteInstance['$props']['data']
-  | A.MentionInstance['$props']['data']
+export type FormColumnItemData
+  = MergeMultiple<[A.TreeSelectInstance['$props']['data'], A.AutoCompleteInstance['$props']['data'], A.MentionInstance['$props']['data']]>
 
 /** 自动完成组件插槽 */
 type AutoCompleteSlots = {
@@ -194,7 +193,7 @@ type MentionSlots = {
 }
 
 /** 组件插槽合并类型 */
-export type ComponentSlots = MergeMultiple<[
+export type FormComponentSlots = MergeMultiple<[
   AutoCompleteSlots,
   CascaderSlots,
   CheckboxGroupSlots,
@@ -211,18 +210,18 @@ export type ComponentSlots = MergeMultiple<[
 ]>
 
 /** 表单项插槽接口 */
-export type ColumnItemSlots = ComponentSlots
+export type FormColumnItemSlots = FormComponentSlots
 
 /** 表单项显隐控制类型 */
-export type ColumnItemHide<F> = boolean | ((form: F) => boolean)
-export type ColumnItemDisabled<F> = boolean | ((form: F) => boolean)
+export type FormColumnItemHide<F> = boolean | ((form: F) => boolean)
+export type FormColumnItemDisabled<F> = boolean | ((form: F) => boolean)
 
 /** 表单项数据请求相关类型 */
-export type ColumnItemRequest<F = any> = (form: F) => Promise<any>
-export type ColumnItemFormat<T = any> = (res: T) => ColumnItemOptions | ColumnItemData
+export type FormColumnItemRequest<F = any> = (form: F) => Promise<any>
+export type FormColumnItemFormat<T = any> = (res: T) => FormColumnItemOptions | FormColumnItemData
 
 /** 表单列配置项接口 */
-export interface ColumnItem<F = any> {
+export interface FormColumnItem<F = any> {
   /** 字段名 */
   field: string
   fieldName?: string
@@ -231,9 +230,9 @@ export interface ColumnItem<F = any> {
   /** 自定义渲染label */
   labelRender?: (() => VNode)
   /** 表单项类型 */
-  type?: ColumnItemType
+  type?: FormColumnItemType
   /** 表单项属性 */
-  props?: Partial<ComponentProps>
+  props?: Partial<FormComponentProps>
   /** 表单项校验规则 */
   rules?: FormItemProps['rules']
   /** 是否必填 */
@@ -243,7 +242,7 @@ export interface ColumnItem<F = any> {
   /** 表单项属性 */
   formItemProps?: FormItemProps
   /** 表单项插槽 */
-  slots?: ColumnItemSlots
+  slots?: FormColumnItemSlots
   /** 表单项组件插槽 */
   formItemSlots?: Record<string, string | VNode | (() => VNode)>
   /** 是否隐藏（支持函数） */
@@ -263,7 +262,7 @@ export interface ColumnItem<F = any> {
 }
 
 /** Props 类型定义 */
-export interface Props {
+export interface FormProps {
   /** 表单数据对象 */
   modelValue: any
   /** 表单布局方式 */
@@ -287,7 +286,7 @@ export interface Props {
   /** 是否滚动到第一个错误项 */
   scrollToFirstError?: A.FormInstance['scrollToFirstError']
   /** 表单列配置 */
-  columns: ColumnItem[]
+  columns: FormColumnItem[]
   /** 栅格布局属性 */
   gridProps?: A.GridProps
   /** 栅格项属性 */

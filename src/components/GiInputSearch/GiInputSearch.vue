@@ -13,11 +13,7 @@
 </template>
 
 <script setup lang="ts">
-interface Props {
-  placeholder?: string
-  disabled?: boolean
-  readonly?: boolean
-}
+import type { InputSearchProps as Props } from './type'
 
 const model = defineModel({ type: String, default: '' })
 

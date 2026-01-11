@@ -31,9 +31,8 @@
 </template>
 
 <script setup lang="ts">
-import type { ColumnItem } from '@/components/GiForm'
+import type { FormColumnItem } from '@/components/index'
 import { Message } from '@arco-design/web-vue'
-import GiCodeView from '@/components/GiCodeView/index.vue'
 import CodeJson from './Card5.vue?raw'
 
 const form = reactive({
@@ -69,7 +68,7 @@ const columns = reactive([
       ]
     }
   }
-] as ColumnItem[])
+] as FormColumnItem[])
 
 const save = async () => {
   const error = await formRef.value?.formRef?.validate()

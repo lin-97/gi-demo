@@ -20,7 +20,7 @@
 </template>
 
 <script setup lang='ts'>
-import type { CSSProperties } from 'vue'
+import type { PageLayoutProps as Props } from './type'
 import { browse } from 'xe-utils'
 import SplitButton from './SplitButton.vue'
 
@@ -59,18 +59,6 @@ const getClass = computed(() => {
     'gi-page-layout--collapsing': collapsing.value
   }
 })
-
-/** 组件属性定义 */
-interface Props {
-  size?: string
-  margin?: boolean
-  inner?: boolean
-  headerBordered?: boolean
-  leftStyle?: CSSProperties
-  headerStyle?: CSSProperties
-  bodyStyle?: CSSProperties
-  collapsed?: boolean
-}
 
 function handleClick() {
   collapsing.value = true

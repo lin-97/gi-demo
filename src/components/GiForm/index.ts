@@ -1,5 +1,5 @@
-import GiForm from './src/GiForm.vue'
+import Form from './GiForm.vue'
 
-export type * from './src/type'
-export { GiForm }
-export default GiForm
+export type * from './type'
+export type FormInstance = InstanceType<typeof Form>
+export { Form as GiForm }

@@ -10,6 +10,7 @@
 
 <script setup lang="ts">
 import type { CSSProperties } from 'vue'
+import type { SpaceProps as Props } from './type'
 import { computed } from 'vue'
 
 const props = withDefaults(defineProps<Props>(), {
@@ -28,34 +29,6 @@ const SIZE_MAP = {
   medium: 16,
   large: 24
 } as const
-
-/** 间距大小类型 */
-type SpaceSize = number | [number, number] | keyof typeof SIZE_MAP
-
-/** 排列方向类型 */
-type Direction = 'horizontal' | 'vertical'
-
-/** 水平对齐方式类型 */
-type Justify = 'start' | 'center' | 'end' | 'space-between' | 'space-around'
-
-/** 垂直对齐方式类型 */
-type Align = 'start' | 'center' | 'end' | 'baseline' | 'stretch'
-
-/** 组件属性定义 */
-interface Props {
-  /** 间距大小，可以是预设值、具体数字或者行列间距数组 */
-  size?: SpaceSize
-  /** 排列方向 */
-  direction?: Direction
-  /** 水平对齐方式 */
-  justify?: Justify
-  /** 垂直对齐方式 */
-  align?: Align
-  /** 是否自动换行 */
-  wrap?: boolean
-  /** 是否充满整行 */
-  fill?: boolean
-}
 
 /** 计算组件的 class */
 const getClass = computed(() => {

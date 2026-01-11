@@ -14,10 +14,10 @@
 </template>
 
 <script setup lang="ts">
-import type { ColumnItem } from '@/components/GiForm'
+import type { FormColumnItem } from '@/components/index'
 import { selectTreeUserListDialog, selectUserListDialog } from '@/components/dialog'
 import DialogCodeJson from '@/components/dialog/index.ts?raw'
-import GiInputSearch from '@/components/GiInputSearch/index.vue'
+import { GiInputSearch } from '@/components/index'
 import CodeJson from './index.vue?raw'
 
 const form = reactive({
@@ -121,7 +121,7 @@ const columns = reactive([
       }
     }
   }
-] as ColumnItem[])
+] as FormColumnItem[])
 </script>
 
 <style lang="scss" scoped></style>

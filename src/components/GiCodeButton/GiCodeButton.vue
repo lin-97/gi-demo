@@ -5,13 +5,9 @@
 </template>
 
 <script setup lang='ts'>
+import type { CodeButtonProps as Props } from './type'
 import { Drawer } from '@arco-design/web-vue'
-import GiCodeView from '@/components/GiCodeView/index.vue'
-
-interface Props {
-  code?: string
-  lang?: 'vue' | 'javascript'
-}
+import { GiCodeView } from '@/components/index'
 
 const props = withDefaults(defineProps<Props>(), {
   code: '',

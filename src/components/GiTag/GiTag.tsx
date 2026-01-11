@@ -4,20 +4,12 @@
  */
 
 import type { CSSProperties, PropType } from 'vue'
+import type { TagProps as Props } from './type'
 import { computed, defineComponent } from 'vue'
 import './tag.scss'
 
-/** 标签类型 */
-type TagType = 'dark' | 'light' | 'outline' | 'light-outline'
-
-/** 标签状态 */
-type TagStatus = 'primary' | 'success' | 'warning' | 'danger' | 'info'
-
-/** 标签尺寸 */
-type TagSize = 'mini' | 'small' | 'large'
-
 /** 基础颜色映射表 */
-const BASE_COLORS = {
+const BASE_COLORS: Record<string, string> = {
   red: '#FF0000',
   orangered: '#f77234',
   orange: '#ff7d00',
@@ -31,40 +23,23 @@ const BASE_COLORS = {
   gray: '#86909c'
 } as const
 
-/** 基础颜色类型 */
-type BaseColor = keyof typeof BASE_COLORS
-
-/** 组件属性定义 */
-interface TagProps {
-  /** 标签类型 */
-  type?: TagType
-  /** 标签状态 */
-  status?: TagStatus
-  /** 自定义颜色，支持预设颜色名或十六进制颜色值 */
-  color?: BaseColor | string
-  /** 标签尺寸 */
-  size?: TagSize
-  /** 是否可关闭 */
-  closable?: boolean
-}
-
 export default defineComponent({
   name: 'GiTag',
   props: {
     type: {
-      type: String as PropType<TagType>,
+      type: String as PropType<Props['type']>,
       default: 'light'
     },
     status: {
-      type: String as PropType<TagStatus>,
+      type: String as PropType<Props['status']>,
       default: 'primary'
     },
     color: {
-      type: String as PropType<BaseColor | string>,
+      type: String as PropType<Props['color'] | string>,
       default: ''
     },
     size: {
-      type: String as PropType<TagSize>,
+      type: String as PropType<Props['size']>,
       default: 'small'
     },
     closable: {
@@ -73,7 +48,7 @@ export default defineComponent({
     }
   },
   emits: ['click', 'close'],
-  setup(props: TagProps, { slots, emit }) {
+  setup(props: Props, { slots, emit }) {
     /**
      * 将十六进制颜色转换为 RGB 对象
      * @param hex - 十六进制颜色值
@@ -101,7 +76,7 @@ export default defineComponent({
     const calcStyle = computed((): CSSProperties => {
       if (!props.color) return {}
 
-      const color = BASE_COLORS[props.color as BaseColor] || props.color
+      const color = BASE_COLORS[props.color as string] || props.color
       const { r, g, b } = hexToRgb(color)
       const style: CSSProperties = {}
 

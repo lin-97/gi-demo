@@ -28,10 +28,8 @@
 </template>
 
 <script setup lang="tsx">
-import type { ColumnItem } from '@/components/GiForm'
+import type { FormColumnItem } from '@/components/index'
 import { Message } from '@arco-design/web-vue'
-import GiCodeView from '@/components/GiCodeView/index.vue'
-import { GiForm } from '@/components/GiForm'
 import { useDict } from '@/hooks/app'
 import * as Regexp from '@/utils/regexp'
 import CodeJson from './Card2.vue?raw'
@@ -252,7 +250,7 @@ const columns = computed(() => [
     field: 'btns',
     span: 24
   }
-] as ColumnItem<typeof form>[])
+] as FormColumnItem<typeof form>[])
 
 const save = async () => {
   const error = await formRef.value?.formRef?.validate()

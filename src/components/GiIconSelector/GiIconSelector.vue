@@ -52,6 +52,7 @@
 </template>
 
 <script setup lang="ts">
+import type { IconSelectorProps as Props } from './type'
 import { Message } from '@arco-design/web-vue'
 import * as ArcoIcons from '@arco-design/web-vue/es/icon'
 import { useClipboard } from '@vueuse/core'
@@ -68,12 +69,6 @@ const emit = defineEmits(['select', 'update:modelValue'])
 
 // 自定义图标模块
 const SvgIconModules = import.meta.glob('@/icons/*.svg')
-
-interface Props {
-  type?: 'arco' | 'custom'
-  modelValue?: string
-  enableCopy?: boolean
-}
 
 const searchValue = ref('') // 搜索词
 

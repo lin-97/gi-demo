@@ -14,7 +14,7 @@
 <script lang="tsx" setup>
 import type { TreeInstance } from '@arco-design/web-vue'
 import { mapTree } from 'xe-utils'
-import GiSvgIcon from '@/components/GiSvgIcon/index.vue'
+import { GiSvgIcon } from '@/components/index'
 
 const formRef = useTemplateRef('formRef')
 const form = reactive({

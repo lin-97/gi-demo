@@ -23,7 +23,7 @@
 <script setup lang="tsx">
 import type { TableColumnData } from '@arco-design/web-vue'
 import { baseAPI } from '@/apis/person'
-import GiCellStatus from '@/components/GiCell/GiCellStatus.vue'
+import { GiCellStatus } from '@/components/index'
 import { useTable } from '@/hooks'
 
 interface Props {

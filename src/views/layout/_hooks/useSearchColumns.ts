@@ -1,4 +1,4 @@
-import type { ColumnItem } from '@/components/GiForm'
+import type { FormColumnItem } from '@/components/index'
 
 export function useSearchColumns() {
   const columns = computed(() => [
@@ -36,7 +36,7 @@ export function useSearchColumns() {
       label: '地址',
       field: 'address'
     }
-  ] as ColumnItem[])
+  ] as FormColumnItem[])
 
   return { columns }
 }

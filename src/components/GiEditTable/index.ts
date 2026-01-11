@@ -1,5 +1,5 @@
-import GiEditTable from './GiEditTable.vue'
+import EditTable from './GiEditTable.vue'
 
 export type * from './type'
-
-export default GiEditTable
+export type EditTableInstance = InstanceType<typeof EditTable>
+export { EditTable as GiEditTable }

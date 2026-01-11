@@ -4,15 +4,11 @@
 </template>
 
 <script lang="ts" setup>
+import type { CodeViewProps as Props } from './type'
 import { javascript } from '@codemirror/lang-javascript'
 import { vue } from '@codemirror/lang-vue'
 import { oneDark } from '@codemirror/theme-one-dark'
 import CodeMirror from 'vue-codemirror6'
-
-interface Props {
-  type?: 'javascript' | 'vue'
-  codeJson?: string
-}
 
 const props = withDefaults(defineProps<Props>(), {
   type: 'javascript',

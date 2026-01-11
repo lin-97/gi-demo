@@ -20,17 +20,7 @@
 </template>
 
 <script setup lang="ts">
-/** 组件属性定义 */
-interface Props {
-  /** 图标名称 */
-  icon?: string
-  /** 选项文本 */
-  label?: string
-  /** 是否显示更多图标 */
-  more?: boolean
-  /** 是否激活状态 */
-  active?: boolean
-}
+import type { OptionItemProps as Props } from './type'
 
 defineOptions({ name: 'GiOptionItem' })
 

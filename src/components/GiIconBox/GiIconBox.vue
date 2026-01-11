@@ -10,6 +10,7 @@
 
 <script setup lang="ts">
 import type { CSSProperties } from 'vue'
+import type { IconBoxProps as Props } from './type'
 import { computed } from 'vue'
 
 const props = withDefaults(defineProps<Props>(), {
@@ -20,34 +21,6 @@ const props = withDefaults(defineProps<Props>(), {
 
 /** 预设状态颜色 */
 const STATUS_COLORS = ['primary', 'success', 'warning', 'danger'] as const
-
-/** 形状类型 */
-type ShapeType = 'square' | 'round'
-
-/** 颜色类型 */
-type ColorType = typeof STATUS_COLORS[number] | string
-
-/** 组件属性定义 */
-interface Props {
-  /**
-   * 背景颜色
-   * @description 支持预设状态颜色或自定义颜色值
-   * @default '#165DFF'
-   */
-  color?: ColorType
-  /**
-   * 容器尺寸
-   * @description 单位为像素
-   * @default 20
-   */
-  size?: number
-  /**
-   * 容器形状
-   * @description square-方形，round-圆形
-   * @default 'square'
-   */
-  shape?: ShapeType
-}
 
 /** 计算容器的 class */
 const getClass = computed(() => {

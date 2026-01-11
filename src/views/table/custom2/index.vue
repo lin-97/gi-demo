@@ -42,7 +42,7 @@
 <script setup lang="ts">
 import type { PopconfirmInstance, TableInstance } from '@arco-design/web-vue'
 import type * as T from '@/apis/person'
-import type { ColumnItem } from '@/components/GiForm'
+import type { FormColumnItem } from '@/components/index'
 import { Link, Message } from '@arco-design/web-vue'
 import { baseAPI } from '@/apis/person'
 import { useTable } from '@/hooks'
@@ -85,7 +85,7 @@ const searchColumns = computed(() => [
     label: '地址',
     field: 'address'
   }
-] as ColumnItem[])
+] as FormColumnItem[])
 
 const columns: TableInstance['columns'] = [
   { title: '序号', width: 66, align: 'center', render: ({ rowIndex }) => h('span', {}, rowIndex + 1) },
