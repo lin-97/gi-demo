@@ -29,6 +29,7 @@
 <script setup lang="ts">
 import type { FormColumnItem } from '@/components/index'
 import { Message, Modal } from '@arco-design/web-vue'
+import { GiForm } from '@/components/index'
 import { useResetReactive } from '@/hooks'
 import * as Regexp from '@/utils/regexp'
 import CodeJson from './Card4.vue?raw'

@@ -7,7 +7,7 @@
 // Read more: https://github.com/vuejs/core/pull/3399
 import { GlobalComponents } from 'vue'
 
-export { }
+export {}
 
 /* prettier-ignore */
 declare module 'vue' {
@@ -113,7 +113,7 @@ declare module 'vue' {
     GiSvgIcon: typeof import('./components/GiSvgIcon/GiSvgIcon.vue')['default']
     GiTable: typeof import('./components/GiTable/GiTable.vue')['default']
     GiTag: typeof import('./components/GiTag/GiTag.tsx')['default']
-    GiThemeBtn: typeof import('./components/GiThemeBtn/index.vue')['default']
+    GiThemeBtn: typeof import('./components/GiThemeBtn/GiThemeBtn.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
     SplitButton: typeof import('./components/GiPageLayout/SplitButton.vue')['default']
