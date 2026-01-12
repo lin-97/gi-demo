@@ -222,15 +222,15 @@ export type FormColumnItemFormat<T = any> = (res: T) => FormColumnItemOptions | 
 
 /** 表单列配置项接口 */
 export interface FormColumnItem<F = any> {
+  /** 表单项类型 */
+  type?: FormColumnItemType
+  /** 标签名 */
+  label?: string
   /** 字段名 */
   field: string
   fieldName?: string
-  /** 标签名 */
-  label?: string
   /** 自定义渲染label */
   labelRender?: (() => VNode)
-  /** 表单项类型 */
-  type?: FormColumnItemType
   /** 表单项属性 */
   props?: Partial<FormComponentProps>
   /** 表单项校验规则 */
@@ -251,14 +251,6 @@ export interface FormColumnItem<F = any> {
   disabled?: boolean | ((model: F) => boolean)
   /** 栅格跨度 */
   span?: number | Record<string, number>
-  /** 数据请求函数 */
-  request?: (params: any) => Promise<any>
-  /** 是否初始化请求 */
-  init?: boolean
-  /** 结果格式化函数 */
-  resultFormat?: (res: any) => any[]
-  /** 级联字段 */
-  cascader?: string[]
 }
 
 /** Props 类型定义 */

@@ -10,9 +10,9 @@
 
     <GiPageLayout collapsed>
       <template #header>
-        <GiForm v-model="form" search :columns="columns"
-          :grid-item-props="{ span: { xs: 24, sm: 24, md: 24, lg: 12, xl: 8, xxl: 8 } }" @search="TableRef?.search"
-          @reset="TableRef?.search">
+        <GiForm :model-value="form" search :columns="columns"
+          :grid-item-props="{ span: { xs: 24, sm: 24, md: 24, lg: 12, xl: 8, xxl: 8 } }"
+          @update:model-value="Object.assign(form, $event)" @search="TableRef?.search" @reset="TableRef?.search">
         </GiForm>
       </template>
       <template #left>

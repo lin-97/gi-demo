@@ -78,7 +78,7 @@ import type { FormInstance } from '@arco-design/web-vue'
 import type { Component } from 'vue'
 import type { FormColumnItem, FormProps as Props } from './type'
 import * as A from '@arco-design/web-vue'
-import { cloneDeep, omit } from 'lodash-es'
+import { omit } from 'lodash-es'
 
 // FormProps 默认值
 const props = withDefaults(defineProps<Props>(), {
@@ -216,7 +216,7 @@ const getComponentBindProps = (item: FormColumnItem) => {
 
 /** 表单数据更新处理 */
 const updateValue = (value: any, field: string) => {
-  emit('update:modelValue', Object.assign(props.modelValue, { [field]: value }))
+  emit('update:modelValue', { ...props.modelValue, [field]: value })
 }
 
 /** 获取表单项校验规则 */
@@ -258,54 +258,6 @@ const isDisabled = (item: FormColumnItem) => {
   if (props.fc?.[item.field]?.disabled === true) return true
   if (item.disabled === undefined) return (item?.props?.disabled as boolean) ?? false
 }
-
-/** 初始化数据字典 */
-props.columns.forEach((item) => {
-  if (item.request && typeof item.request === 'function' && item?.init) {
-    item.request(props.modelValue).then((res) => {
-      dicData[item.field] = item.resultFormat ? item.resultFormat(res) : res.data
-    })
-  }
-})
-
-// 先找出有级联的项
-// 如果这个字段改变了值，那么就找出它的cascader属性对应的字段项，去请求里面的request
-const hasCascaderColumns: FormColumnItem[] = []
-props.columns.forEach((item) => {
-  const arr = hasCascaderColumns.map((i) => i.field)
-  if (item.cascader?.length && !arr.includes(item.field)) {
-    hasCascaderColumns.push(item)
-  }
-})
-
-/** 监听表单数据变化，处理级联更新 */
-const cloneForm = computed(() => cloneDeep(props.modelValue))
-
-watch(cloneForm as any, (newVal, oldVal) => {
-  hasCascaderColumns.forEach((item) => {
-    if (newVal[item.field] !== oldVal[item.field]) {
-      const cascaderItems = props.columns.filter((a) => item?.cascader?.includes(a.field))
-      cascaderItems.forEach((i) => {
-        if (i.request && Boolean(newVal[item.field])) {
-          i.request(props.modelValue).then((res) => {
-            dicData[i.field] = i.resultFormat ? i.resultFormat(res) : res.data
-            // 如果当前值不在选项中，重置字段值
-            if (!dicData[i.field].map((opt: any) => opt.value).includes(props.modelValue[i.field])) {
-              emit('update:modelValue', Object.assign(props.modelValue, {
-                [i.field]: Array.isArray(props.modelValue[i.field]) ? [] : ''
-              }))
-            }
-          })
-        } else if (i.request && !newVal[item.field]) {
-          dicData[i.field] = []
-          emit('update:modelValue', Object.assign(props.modelValue, {
-            [i.field]: Array.isArray(props.modelValue[i.field]) ? [] : ''
-          }))
-        }
-      })
-    }
-  })
-})
 
 defineExpose({ formRef })
 </script>

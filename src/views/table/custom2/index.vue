@@ -1,7 +1,8 @@
 <template>
   <GiPageLayout margin>
-    <GiForm v-model="form" search :columns="searchColumns"
-      :grid-item-props="{ span: { xs: 24, sm: 12, md: 8, lg: 8, xl: 6, xxl: 6 } }" @search="search" @reset="search">
+    <GiForm :model-value="form" search :columns="searchColumns"
+      :grid-item-props="{ span: { xs: 24, sm: 12, md: 8, lg: 8, xl: 6, xxl: 6 } }"
+      @update:model-value="Object.assign(form, $event)" @search="search" @reset="search">
     </GiForm>
 
     <GiTable row-key="id" :loading="loading" :columns="columns" :data="tableData"

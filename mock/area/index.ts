@@ -5,7 +5,7 @@ import { getDelayTime, resultSuccess } from '../_utils'
 
 export default defineMock([
   {
-    url: '/area/getAreaList',
+    url: '/area/getProvinceCityArea',
     method: 'get',
     timeout: getDelayTime(),
     response: ({ query }) => {

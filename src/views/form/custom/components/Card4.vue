@@ -21,7 +21,7 @@
 
     <a-drawer v-model:visible="visible" :title="isEdit ? '编辑' : '新增'" width="100%"
       :drawer-style="{ maxWidth: '600px' }">
-      <GiForm v-model="form" :columns="columns"></GiForm>
+      <GiForm :model-value="form" :columns="columns" @update:model-value="Object.assign(form, $event)"></GiForm>
     </a-drawer>
   </a-card>
 </template>

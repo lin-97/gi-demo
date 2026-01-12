@@ -5,7 +5,8 @@
     </template>
     <a-row :gutter="30" class="gi_mb">
       <a-col :xs="24" :sm="24" :md="12">
-        <GiForm ref="formRef" v-model="form" :columns="columns" :fc="fc">
+        <GiForm ref="formRef" :model-value="form" :columns="columns" :fc="fc"
+          @update:model-value="Object.assign(form, $event)">
         </GiForm>
         <a-row justify="end" class="w-full">
           <a-space>

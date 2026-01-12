@@ -8,7 +8,7 @@
     </template>
     <a-row :gutter="30">
       <a-col :xs="24" :sm="24" :md="12">
-        <GiForm ref="formRef" v-model="form" :columns="columns">
+        <GiForm ref="formRef" :model-value="form" :columns="columns" @update:model-value="Object.assign(form, $event)">
           <template #test="{ disabled }"> 自定义插槽-禁用状态：{{ disabled }} </template>
           <template #btns>
             <a-row justify="end" class="w-full">
@@ -44,7 +44,7 @@ const form = reactive({
   sort: 0,
   sex: '',
   birthday: '',
-  hobbys: [],
+  hobby: [],
   status: 1,
   mark: 0,
   hide: false,
@@ -117,7 +117,7 @@ const columns = computed(() => [
   {
     type: 'checkbox-group',
     label: '爱好',
-    field: 'hobbys',
+    field: 'hobby',
     span: 24,
     props: {
       options: [
