@@ -3,6 +3,8 @@ import { fileURLToPath, URL } from 'node:url'
 import vue from '@vitejs/plugin-vue'
 import vueJsx from '@vitejs/plugin-vue-jsx'
 import AutoImport from 'unplugin-auto-import/vite'
+import IconsResolver from 'unplugin-icons/resolver'
+import Icons from 'unplugin-icons/vite'
 import { ArcoResolver } from 'unplugin-vue-components/resolvers'
 import Components from 'unplugin-vue-components/vite'
 import { defineConfig, loadEnv } from 'vite'
@@ -73,8 +75,20 @@ export default defineConfig(({ mode }) => {
         resolvers: [
           ArcoResolver({
             sideEffect: false
+          }),
+          // Iconify 图标按需导入
+          IconsResolver({
+            prefix: 'icon',
+            enabledCollections: ['icon-park-outline']
           })
         ]
+      }),
+      // Iconify 图标插件配置
+      Icons({
+        compiler: 'vue3',
+        autoInstall: true,
+        defaultClass: 'iconify-icon',
+        defaultStyle: 'vertical-align: middle;'
       }),
       createSvgIconsPlugin({
         // 指定需要缓存的图标文件夹

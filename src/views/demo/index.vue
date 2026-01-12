@@ -23,6 +23,7 @@ import GiIconBoxDemo from './examples/gi-icon-box-demo/index.vue'
 import GiIconSelectorDemo from './examples/gi-icon-selector-demo/index.vue'
 import GiSpaceDemo from './examples/gi-space-demo/index.vue'
 import GiTagDemo from './examples/gi-tag-demo/index.vue'
+import IconDemo from './examples/icon-demo/index.vue'
 import JSModal from './examples/js-modal/index.vue'
 import Map from './examples/map/index.vue'
 import Mitt from './examples/mitt/index.vue'
@@ -40,6 +41,7 @@ const menuList = [
   { name: 'GiIconBox', value: GiIconBoxDemo },
   { name: 'GiDot', value: GiDotDemo },
   { name: 'GiIconSelector', value: GiIconSelectorDemo },
+  { name: 'IconPark图标', value: IconDemo },
   { name: '函数调用模态框', value: JSModal },
   { name: '横向树表格', value: RowTreeTable },
   { name: '省市区', value: Area },
