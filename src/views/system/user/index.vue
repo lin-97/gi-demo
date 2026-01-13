@@ -65,8 +65,8 @@
         <a-table-column title="部门" data-index="deptName" :width="180"></a-table-column>
         <a-table-column title="类型" :width="100" align="center">
           <template #cell="{ record }">
-            <a-tag v-if="record.type === 1" size="small">系统内置</a-tag>
-            <a-tag v-if="record.type === 2" size="small">自定义</a-tag>
+            <a-tag v-if="record.type === 1">系统内置</a-tag>
+            <a-tag v-if="record.type === 2">自定义</a-tag>
           </template>
         </a-table-column>
         <a-table-column title="描述" :width="200" data-index="description" :ellipsis="true"

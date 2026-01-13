@@ -27,7 +27,7 @@
         </a-table-column>
         <a-table-column title="角色" :width="100" align="center">
           <template #cell>
-            <a-tag size="small" color="#7816ff">普通用户</a-tag>
+            <a-tag color="#7816ff">普通用户</a-tag>
           </template>
         </a-table-column>
         <a-table-column title="状态" :width="100" align="center">
