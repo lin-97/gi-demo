@@ -1,17 +1,19 @@
 <template>
-  <GiSvgIcon v-if="item?.meta?.svgIcon" :name="item?.meta?.svgIcon" :size="24"></GiSvgIcon>
-  <component :is="item?.meta?.icon" v-else-if="item?.meta?.icon"></component>
+  <Icon v-if="props?.icon && props?.icon?.startsWith('icon-park')" :icon="props?.icon" :width="16" :height="16"></Icon>
+  <component :is="props?.icon" v-else-if="props?.icon && props?.icon?.startsWith('icon')" :size="24">
+  </component>
+  <GiSvgIcon v-else-if="props?.icon" :name="props?.icon" :size="24"></GiSvgIcon>
 </template>
 
 <script lang="ts" setup>
-import type { RouteRecordRaw } from 'vue-router'
+import { Icon } from '@iconify/vue'
 
 interface Props {
-  item?: RouteRecordRaw
+  icon?: string
 }
 
-withDefaults(defineProps<Props>(), {
-  item: () => ({} as RouteRecordRaw)
+const props = withDefaults(defineProps<Props>(), {
+  icon: ''
 })
 </script>
 

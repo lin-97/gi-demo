@@ -7,7 +7,7 @@
           <li v-for="(item) in props.data" :key="item.path" class="one-level-menu__item"
             :class="{ 'one-level-menu__item--active': props.activePath === item.path }"
             @click="emits('menu-click', item)">
-            <MenuIcon :item="item"></MenuIcon>
+            <MenuIcon :icon="item?.meta?.icon"></MenuIcon>
             <p class="one-level-menu__item__title gi_line_1" :title="item?.meta?.title">{{ item?.meta?.title }}</p>
           </li>
         </ul>

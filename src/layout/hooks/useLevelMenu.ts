@@ -70,7 +70,6 @@ export function useLevelMenu() {
       if (i?.children?.length === 1 && i?.meta?.alwaysShow !== true) {
         if (i.meta) {
           i.meta.title = i.meta?.title || i.children?.[0]?.meta?.title
-          i.meta.svgIcon = i.meta?.svgIcon || i.children?.[0]?.meta?.svgIcon
           i.meta.icon = i.meta?.icon || i.children?.[0]?.meta?.icon
         }
         delete i.children

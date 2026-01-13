@@ -1,7 +1,7 @@
 <template>
   <a-menu-item v-if="!item.children?.length" :key="item?.path">
     <template #icon>
-      <MenuIcon :item="item"></MenuIcon>
+      <MenuIcon :icon="item?.meta?.icon"></MenuIcon>
     </template>
     <a-row v-if="menuBadgeStore.badgeMap[item.path] !== undefined" justify="space-between" align="center"
       style="flex-wrap: nowrap;">
@@ -14,7 +14,7 @@
 
   <a-sub-menu v-else :key="item.path" :title="item?.meta?.title">
     <template #icon>
-      <MenuIcon :item="item"></MenuIcon>
+      <MenuIcon :icon="item?.meta?.icon"></MenuIcon>
     </template>
     <MenuItem v-for="child in item.children" :key="child.path" :item="child">
     </MenuItem>

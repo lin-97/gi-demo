@@ -19,21 +19,15 @@
           }" />
       </a-form-item>
 
-      <a-row v-if="[1, 2].includes(form.type)" :gutter="16">
-        <a-col v-bind="col2Props">
-          <a-form-item label="自定义图标" field="svgIcon">
-            <GiIconSelector v-model="form.svgIcon" type="custom"></GiIconSelector>
-            <a-tooltip content="优先显示">
-              <icon-question-circle-fill :size="18" style=" margin-left: 8px;color: rgb(var(--warning-6))" />
-            </a-tooltip>
-          </a-form-item>
-        </a-col>
-        <a-col v-bind="col2Props">
-          <a-form-item label="菜单图标" field="icon">
-            <GiIconSelector v-model="form.icon"></GiIconSelector>
-          </a-form-item>
-        </a-col>
-      </a-row>
+      <a-form-item v-if="[1, 2].includes(form.type)" label="菜单图标" field="icon">
+        <a-input-group>
+          <a-select v-model="iconType" placeholder="请选择图标类型" style="width: 150px" @change="handleChangeIconType">
+            <a-option value="arco">Arco</a-option>
+            <a-option value="custom">Custom</a-option>
+          </a-select>
+          <GiIconSelector :key="iconType" v-model="form.icon" :type="iconType"></GiIconSelector>
+        </a-input-group>
+      </a-form-item>
 
       <a-form-item label="菜单标题" field="title">
         <a-input v-model.trim="form.title" placeholder="请输入菜单标题" allow-clear :max-length="10" />
@@ -150,7 +144,6 @@ const menuSelectTree = computed(() => {
   return arr
 })
 
-const col2Props: ColProps = { xs: 24, sm: 24, md: 12, lg: 12, xl: 12, xxl: 12 }
 const col3Props: ColProps = { xs: 12, sm: 12, md: 8, lg: 8, xl: 8, xxl: 8 }
 
 const formRef = useTemplateRef('formRef')
@@ -160,10 +153,11 @@ const isEdit = computed(() => !!menuId.value)
 const title = computed(() => (isEdit.value ? '编辑菜单' : '新增菜单'))
 
 const isExternalUrl = ref(false)
+const iconType = ref<'arco' | 'custom'>('arco')
+
 const [form, resetForm] = useResetReactive({
   type: 1, // 类型 1目录 2菜单 3按钮
   icon: '', // arco 图标名称
-  svgIcon: '', // 自定义图标名称
   title: '', // 菜单或目录的名称
   sort: 0, // 排序
   status: 1, // 状态 0禁用 1启用
@@ -176,7 +170,12 @@ const [form, resetForm] = useResetReactive({
   breadcrumb: true, // 显示在面包屑
   showInTabs: true, // 显示在页签
   alwaysShow: false, // 总是显示
-  permission: ''
+  permission: '',
+  activeMenu: '',
+  children: [],
+  id: '',
+  roles: [],
+  affix: false
 } as T.ListItem)
 
 const routeName = computed(() => transformPathToName(form.path))
@@ -199,6 +198,10 @@ const formRules = computed(() => {
   }
   return {}
 })
+
+const handleChangeIconType = () => {
+  form.icon = ''
+}
 
 // 切换类型清除校验
 const onChangeType = () => {

@@ -129,7 +129,6 @@ const formatAsyncRoutes = (menus: ListItem[]) => {
         hidden: item.hidden, // 是否在菜单中隐藏
         keepAlive: item.keepAlive, // 是否缓存该路由
         title: item.title, // 路由标题，用于显示在菜单和标签页
-        svgIcon: item.svgIcon, // SVG 图标
         icon: item.icon, // 图标
         affix: item.affix, // 是否固定在标签页
         breadcrumb: item.breadcrumb, // 是否显示在面包屑

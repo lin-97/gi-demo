@@ -62,7 +62,6 @@ export interface MockSystemMenuItem {
   redirect: string
   type: 1 | 2 | 3
   title: string
-  svgIcon: string
   icon: string
   keepAlive: boolean
   hidden: boolean

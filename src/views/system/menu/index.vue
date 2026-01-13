@@ -12,7 +12,7 @@
           </a-button>
         </a-tooltip>
         <a-tooltip content="查看数据结构">
-          <GiCodeButton :code="JSON.stringify(menuList, null, '\t')"></GiCodeButton>
+          <GiCodeButton lang="javascript" :code="JSON.stringify(menuList, null, '\t')"></GiCodeButton>
         </a-tooltip>
       </a-space>
 
@@ -54,10 +54,7 @@
         <a-table-column title="权限标识" data-index="permission"> </a-table-column>
         <a-table-column title="菜单图标" data-index="icon" :width="100" align="center">
           <template #cell="{ record }">
-            <GiSvgIcon v-if="record.svgIcon" :size="24" :name="record.svgIcon"></GiSvgIcon>
-            <template v-else>
-              <component :is="record.icon" v-if="record.icon" :size="24"></component>
-            </template>
+            <MenuIcon :icon="record?.icon"></MenuIcon>
           </template>
         </a-table-column>
         <a-table-column title="状态" :width="80" align="center">
@@ -108,6 +105,7 @@ import type * as T from '@/apis/system/menu'
 import { baseAPI } from '@/apis/system/menu'
 import { useTable } from '@/hooks'
 import { useDict } from '@/hooks/app'
+import MenuIcon from '@/layout/components/Menu/MenuIcon.vue'
 import { transformPathToName } from '@/utils'
 import { isExternal } from '@/utils/validate'
 import AddMenuModal from './AddMenuModal.vue'

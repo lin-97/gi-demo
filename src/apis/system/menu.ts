@@ -19,7 +19,6 @@ export interface ListItem {
   showInTabs: boolean
   sort: number
   status: Status
-  svgIcon: string
   title: string
   type: 1 | 2 | 3
   affix: boolean
