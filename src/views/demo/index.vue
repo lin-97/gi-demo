@@ -1,5 +1,5 @@
 <template>
-  <GiPageLayout margin :body-style="{ overflowY: 'auto' }">
+  <GiPageLayout margin :size="200" :body-style="{ overflowY: 'auto' }">
     <template #left>
       <a-tabs v-model:active-key="selectedKey" position="left" hide-content>
         <a-tab-pane v-for="(item, index) in menuList" :key="index" :title="item.name"></a-tab-pane>

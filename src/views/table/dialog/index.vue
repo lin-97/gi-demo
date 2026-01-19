@@ -15,7 +15,7 @@
 
 <script setup lang="ts">
 import type { FormColumnItem } from '@/components/index'
-import { selectTreeUserListDialog, selectUserListDialog } from '@/components/dialog'
+import { SelectTreeUserListDialog, SelectUserListDialog } from '@/components/dialog'
 import DialogCodeJson from '@/components/dialog/index.ts?raw'
 import { GiInputSearch } from '@/components/index'
 import CodeJson from './index.vue?raw'
@@ -40,7 +40,7 @@ const columns = reactive([
     props: {
       allowClear: true,
       onSearch: () => {
-        selectUserListDialog({
+        SelectUserListDialog({
           onOk: (data) => {
             form.radioId = data[0].id
             form.radioName = data[0].name
@@ -61,7 +61,7 @@ const columns = reactive([
     props: {
       allowClear: true,
       onSearch: () => {
-        selectUserListDialog({
+        SelectUserListDialog({
           multiple: true,
           onOk: (data) => {
             form.checkboxId = data.map((i) => i.id).join(',')
@@ -83,7 +83,7 @@ const columns = reactive([
     props: {
       allowClear: true,
       onSearch: () => {
-        selectUserListDialog({
+        SelectUserListDialog({
           multiple: true,
           onBeforeOk: async (data) => {
             await new Promise((resolve) => setTimeout(() => resolve(true), 1000))
@@ -107,7 +107,7 @@ const columns = reactive([
     props: {
       allowClear: true,
       onSearch: () => {
-        selectTreeUserListDialog({
+        SelectTreeUserListDialog({
           multiple: true,
           onOk: (data) => {
             form.demoId = data.map((i) => i.id).join(',')

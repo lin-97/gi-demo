@@ -35,7 +35,7 @@
             <GiCellStatus :status="record.status"></GiCellStatus>
           </template>
         </a-table-column>
-        <a-table-column title="创建时间" data-index="createTime" ellipsis tooltip
+        <a-table-column title="创建时间" data-index="createTime" :width="180" ellipsis tooltip
           :sortable="{ sortDirections: ['ascend', 'descend'] }"></a-table-column>
         <a-table-column title="地址" data-index="address" ellipsis tooltip></a-table-column>
         <a-table-column title="操作" :width="180" align="center">

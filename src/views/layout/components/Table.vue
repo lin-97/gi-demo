@@ -70,6 +70,7 @@ const columns: TableInstance['columns'] = [
   {
     title: '创建时间',
     dataIndex: 'createTime',
+    width: 180,
     ellipsis: true,
     tooltip: true,
     sortable: {
