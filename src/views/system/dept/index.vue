@@ -8,7 +8,8 @@
 
       <a-space wrap>
         <a-input-group>
-          <a-select v-model="queryParams.status" :options="options" placeholder="部门状态" style="width: 120px"></a-select>
+          <a-select v-model="queryParams.status" :options="dictData.STATUS" placeholder="部门状态"
+            style="width: 120px"></a-select>
           <a-input v-model="queryParams.name" placeholder="输入部门名称搜索" allow-clear style="width: 250px">
             <template #prefix><icon-search /></template>
           </a-input>
@@ -60,13 +61,13 @@
 import type * as T from '@/apis/system/dept'
 import { Message } from '@arco-design/web-vue'
 import { baseAPI } from '@/apis/system/dept'
-import { useTable } from '@/hooks'
-import { useDict } from '@/hooks/app'
+import { useDict, useTable } from '@/hooks'
+
 import AddDeptModal from './AddDeptModal.vue'
 
 defineOptions({ name: 'SystemDept' })
 
-const { data: options } = useDict({ code: 'status' })
+const { dictData } = useDict(['STATUS'])
 const AddDeptModalRef = useTemplateRef('AddDeptModalRef')
 const tableRef = useTemplateRef('tableRef')
 

@@ -8,7 +8,7 @@
 
       <a-space wrap>
         <a-input-group>
-          <a-select v-model="queryParams.status" :options="options" placeholder="状态" allow-clear
+          <a-select v-model="queryParams.status" :options="dictData.STATUS" placeholder="状态" allow-clear
             style="width: 120px"></a-select>
           <a-input v-model="queryParams.name" placeholder="字典类型名称/编码" allow-clear style="width: 250px"></a-input>
         </a-input-group>
@@ -60,14 +60,13 @@
 import type * as T from '@/apis/system/dict'
 import { Message } from '@arco-design/web-vue'
 import { baseAPI } from '@/apis/system/dict'
-import { useTable } from '@/hooks'
-import { useDict } from '@/hooks/app'
+import { useDict, useTable } from '@/hooks'
 import AddDictModal from './AddDictModal.vue'
 import DictDataModal from './DictDataModal/index.vue'
 
 defineOptions({ name: 'SystemRole' })
 
-const { data: options } = useDict({ code: 'status' })
+const { dictData } = useDict(['STATUS'])
 const AddDictModalRef = useTemplateRef('AddDictModalRef')
 const DictDataModalRef = useTemplateRef('DictDataModalRef')
 

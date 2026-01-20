@@ -40,13 +40,13 @@
 <script lang='tsx' setup>
 import type { EditTableCellDisabled, EditTableColumnItem } from '@/components/index'
 import { Message } from '@arco-design/web-vue'
-import { useDict } from '@/hooks/app'
+import { useDict } from '@/hooks'
 import * as Regexp from '@/utils/regexp'
 import CodeJson from './Pane2.vue?raw'
 
 defineOptions({ name: 'FormTable' })
 
-const { data: status_options } = useDict({ code: 'status' })
+const { dictData } = useDict(['STATUS'])
 
 const currentRowIndex = ref(-1) // 当前编辑的行
 
@@ -57,7 +57,7 @@ const tableDataJson = computed(() => {
 })
 const GiEditTableRef = useTemplateRef('GiEditTableRef')
 
-const columns = computed<EditTableColumnItem[]>(() => [
+const columns = computed(() => [
   {
     type: 'input',
     title: '姓名',
@@ -76,7 +76,7 @@ const columns = computed<EditTableColumnItem[]>(() => [
     title: '状态',
     dataIndex: 'status',
     props: {
-      options: status_options.value
+      options: dictData.value.STATUS
     }
   },
   {
@@ -122,7 +122,7 @@ const columns = computed<EditTableColumnItem[]>(() => [
       contentClass: 'arco-table-cell-align-center'
     }
   }
-])
+] as EditTableColumnItem[])
 
 const addTableRow = () => {
   data.value.push({ name: '', phone: '', address: '', rate: 0, status: 0, num: 0 })

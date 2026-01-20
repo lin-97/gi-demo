@@ -18,7 +18,8 @@
 
       <a-space wrap>
         <a-input-group>
-          <a-select v-model="queryParams.status" :options="options" placeholder="菜单状态" style="width: 120px"></a-select>
+          <a-select v-model="queryParams.status" :options="dictData.STATUS" placeholder="菜单状态"
+            style="width: 120px"></a-select>
           <a-input v-model="queryParams.name" placeholder="输入菜单名称搜索" allow-clear style="width: 250px"></a-input>
         </a-input-group>
         <GiButton type="search" @click="search"></GiButton>
@@ -103,8 +104,7 @@
 <script setup lang="ts">
 import type * as T from '@/apis/system/menu'
 import { baseAPI } from '@/apis/system/menu'
-import { useTable } from '@/hooks'
-import { useDict } from '@/hooks/app'
+import { useDict, useTable } from '@/hooks'
 import MenuIcon from '@/layout/components/Menu/MenuIcon.vue'
 import { transformPathToName } from '@/utils'
 import { isExternal } from '@/utils/validate'
@@ -112,7 +112,7 @@ import AddMenuModal from './AddMenuModal.vue'
 
 defineOptions({ name: 'SystemMenu' })
 
-const { data: options } = useDict({ code: 'status' })
+const { dictData } = useDict(['STATUS'])
 const AddMenuModalRef = useTemplateRef('AddMenuModalRef')
 
 const tableRef = useTemplateRef('tableRef')

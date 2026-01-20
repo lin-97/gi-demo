@@ -13,7 +13,7 @@
       </a-space>
 
       <a-space wrap>
-        <a-select v-model="form.status" class="gi_select_input" :options="options" placeholder="请选择"
+        <a-select v-model="form.status" class="gi_select_input" :options="dictData.STATUS" placeholder="请选择"
           allow-clear></a-select>
         <a-input-group>
           <a-input v-model="form.name" placeholder="请输入搜索关键词" allow-clear> </a-input>
@@ -67,8 +67,8 @@
 import type * as T from '@/apis/person'
 import { Message } from '@arco-design/web-vue'
 import { baseAPI } from '@/apis/person'
-import { useTable } from '@/hooks'
-import { useDict } from '@/hooks/app'
+import { useDict, useTable } from '@/hooks'
+
 import { useTabsStore } from '@/stores'
 import CateTree from './CateTree/index.vue'
 import CodeJson from './Pane1.vue?raw'
@@ -76,7 +76,7 @@ import CodeJson from './Pane1.vue?raw'
 const router = useRouter()
 const { setTabTitle } = useTabsStore()
 
-const { data: options } = useDict({ code: 'status' })
+const { dictData } = useDict(['STATUS'])
 const form = reactive({
   name: '',
   status: ''

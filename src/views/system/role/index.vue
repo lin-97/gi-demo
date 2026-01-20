@@ -8,7 +8,7 @@
 
       <a-space wrap>
         <a-input-group>
-          <a-select v-model="queryParams.status" :options="options" placeholder="角色状态" allow-clear
+          <a-select v-model="queryParams.status" :options="dictData.STATUS" placeholder="角色状态" allow-clear
             style="width: 120px"></a-select>
           <a-input v-model="queryParams.name" placeholder="输入角色名搜索" allow-clear style="width: 250px"></a-input>
         </a-input-group>
@@ -60,14 +60,14 @@
 import type * as T from '@/apis/system/role'
 import { Message } from '@arco-design/web-vue'
 import { baseAPI } from '@/apis/system/role'
-import { useTable } from '@/hooks'
-import { useDict } from '@/hooks/app'
+import { useDict, useTable } from '@/hooks'
+
 import AddRoleModal from './AddRoleModal.vue'
 import PermModal from './PermModal.vue'
 
 defineOptions({ name: 'SystemRole' })
 
-const { data: options } = useDict({ code: 'status' })
+const { dictData } = useDict(['STATUS'])
 const AddRoleModalRef = useTemplateRef('AddRoleModalRef')
 const PermModalRef = useTemplateRef('PermModalRef')
 

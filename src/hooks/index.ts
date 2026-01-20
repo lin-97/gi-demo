@@ -1,6 +1,7 @@
 export * from './useBreakpoint'
 export * from './useChart'
 export * from './useDevice'
+export * from './useDict'
 export * from './useLoading'
 export * from './usePagination'
 export * from './useRequest'

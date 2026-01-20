@@ -30,12 +30,12 @@
 <script setup lang="tsx">
 import type { FormColumnItem } from '@/components/index'
 import { Message } from '@arco-design/web-vue'
-import { useDict } from '@/hooks/app'
+import { useDict } from '@/hooks'
 import * as Regexp from '@/utils/regexp'
 import CodeJson from './Card2.vue?raw'
 import { cityOptions, deptData } from './data'
 
-const { data: status_options } = useDict({ code: 'status' })
+const { dictData } = useDict(['STATUS'])
 const isNameRequired = ref(true)
 
 const form = reactive({
@@ -157,7 +157,7 @@ const columns = computed(() => [
     ),
     field: 'status',
     props: {
-      options: status_options.value // 这里使用了字典
+      options: dictData.value.STATUS // 这里使用了字典
     }
   },
   {

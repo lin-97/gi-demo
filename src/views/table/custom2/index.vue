@@ -46,12 +46,12 @@ import type * as T from '@/apis/person'
 import type { FormColumnItem } from '@/components/index'
 import { Link, Message } from '@arco-design/web-vue'
 import { baseAPI } from '@/apis/person'
-import { useTable } from '@/hooks'
-import { useDict } from '@/hooks/app'
+import { useDict, useTable } from '@/hooks'
+
 import CodeJson from './index.vue?raw'
 
 defineOptions({ name: 'TableCustom2' })
-const { data: statusOptions } = useDict({ code: 'status' })
+const { dictData } = useDict(['STATUS'])
 const form = reactive({})
 
 const searchColumns = computed(() => [
@@ -73,7 +73,7 @@ const searchColumns = computed(() => [
     label: '类型',
     field: 'status',
     props: {
-      options: statusOptions.value
+      options: dictData.value.STATUS
     }
   },
   {

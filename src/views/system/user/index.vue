@@ -23,7 +23,7 @@
       </a-space>
       <a-space wrap>
         <a-input-group>
-          <a-select v-model="queryParams.status" :options="options" placeholder="用户状态" allow-clear
+          <a-select v-model="queryParams.status" :options="dictData.STATUS" placeholder="用户状态" allow-clear
             style="width: 150px"></a-select>
           <a-input v-model="queryParams.username" placeholder="输入用户名搜索" allow-clear style="max-width: 250px">
           </a-input>
@@ -94,14 +94,14 @@
 import type * as T from '@/apis/system/user'
 import { Message } from '@arco-design/web-vue'
 import { baseAPI } from '@/apis/system/user'
-import { useTable } from '@/hooks'
-import { useDept, useDict } from '@/hooks/app'
+import { useDict, useTable } from '@/hooks'
+import { useDept } from '@/hooks/app'
 import AddUserModal from './AddUserModal.vue'
 import UserDetailDrawer from './UserDetailDrawer.vue'
 
 defineOptions({ name: 'SystemUser' })
 
-const { data: options } = useDict({ code: 'status' })
+const { dictData } = useDict(['STATUS'])
 const treeRef = useTemplateRef('treeRef')
 const AddUserModalRef = useTemplateRef('AddUserModalRef')
 const UserDetailDrawerRef = useTemplateRef('UserDetailDrawerRef')

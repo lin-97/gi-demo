@@ -48,7 +48,8 @@
           <a-range-picker v-model="form.rangDate" allow-clear />
         </a-form-item>
         <a-form-item label="爱好" field="hobbys" extra="这里的数据采用了数据字典">
-          <a-select v-model="form.hobbys" :options="options" placeholder="请选择爱好" multiple allow-clear></a-select>
+          <a-select v-model="form.hobbys" :options="dictData.HOBBYS" placeholder="请选择爱好" multiple
+            allow-clear></a-select>
         </a-form-item>
         <a-form-item field="isRead">
           <a-checkbox v-model="form.isRead">我已阅读</a-checkbox>
@@ -70,12 +71,12 @@
 <script setup lang="ts">
 import type { FormInstance } from '@arco-design/web-vue'
 import { Message } from '@arco-design/web-vue'
-import { useDict } from '@/hooks/app'
+import { useDict } from '@/hooks'
 import { isMobile } from '@/utils'
 import * as Regexp from '@/utils/regexp'
 
 defineOptions({ name: 'FormBase' })
-const { data: options } = useDict({ code: 'hobbys' })
+const { dictData } = useDict(['HOBBYS'])
 
 const treeData = ref([
   {
