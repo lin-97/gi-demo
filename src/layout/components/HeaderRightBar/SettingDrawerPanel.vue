@@ -64,6 +64,7 @@
 <script setup lang="ts">
 import { ColorPicker } from 'vue-color-kit'
 import AppSetting from '@/config/setting.json'
+import { useTheme } from '@/hooks'
 import { useAppStore } from '@/stores'
 import LayoutModeItem from './components/LayoutModeItem.vue'
 import 'vue-color-kit/dist/vue-color-kit.css'
@@ -73,6 +74,7 @@ defineOptions({ name: 'SettingDrawer' })
 
 /** 状态管理 */
 const appStore = useAppStore()
+const { setThemeColor } = useTheme()
 
 type LayoutItem = { label: string, value: App.SettingConfig['layout'] }
 /** 布局选项 */
@@ -150,7 +152,7 @@ interface ColorObj {
 /** 更改主题色 */
 const changeColor = (colorObj: ColorObj) => {
   if (!/^#[0-9A-Z]{6}/i.test(colorObj.hex)) return
-  appStore.setThemeColor(colorObj.hex)
+  setThemeColor(colorObj.hex)
 }
 
 /** 切换布局 */

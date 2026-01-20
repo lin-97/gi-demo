@@ -1,7 +1,6 @@
 declare namespace App {
   /** 系统配置 */
   interface SettingConfig {
-    theme: 'light' | 'dark' // 主题
     themeColor: string // 主题色
     tab: 'card' | 'card-gutter' | 'rounded' | 'custom1' | 'custom2' // 页签风格
     tabVisible: boolean // 是否显示页签

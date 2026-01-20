@@ -8,11 +8,14 @@
 </template>
 
 <script setup lang="ts">
-import { useAppStore, useDictStore } from '@/stores'
+import { useTheme } from '@/hooks'
+import { useDictStore } from '@/stores'
 
 defineOptions({ name: 'App' })
-const appStore = useAppStore()
-appStore.initTheme()
+
+const { initThemeColor } = useTheme()
+initThemeColor()
+
 const dictStore = useDictStore()
 dictStore.getDictData()
 </script>

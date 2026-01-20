@@ -3,7 +3,7 @@
     <WorkCard></WorkCard>
 
     <a-row class="home__content">
-      <a-col :xs="24" :sm="24" :md="24" :lg="14" :xl="14" :xxl="16">
+      <a-col :xs="24" :sm="24" :md="24" :lg="14" :xl="14" :xxl="14">
         <div class="home__item">
           <ProjectCard></ProjectCard>
         </div>
@@ -11,7 +11,7 @@
           <MessageCard></MessageCard>
         </div>
       </a-col>
-      <a-col :xs="24" :sm="24" :md="24" :lg="10" :xl="10" :xxl="8">
+      <a-col :xs="24" :sm="24" :md="24" :lg="10" :xl="10" :xxl="10">
         <div class="home__item">
           <FastCard></FastCard>
         </div>
