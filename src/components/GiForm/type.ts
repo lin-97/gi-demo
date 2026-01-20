@@ -13,33 +13,33 @@ type FormItemProps = A.FormItemInstance['$props']
 /** 支持的表单项类型 */
 export type FormColumnItemType
   = | 'input' // 输入框
-  | 'input-number' // 数字输入框
-  | 'input-tag' // 标签输入框
-  | 'input-search' // 搜索框
-  | 'textarea' // 文本域
-  | 'select' // 选择器
-  | 'tree-select' // 树选择器
-  | 'radio' // 单选框
-  | 'radio-group' // 单选框组
-  | 'checkbox' // 复选框
-  | 'checkbox-group' // 复选框组
-  | 'date-picker' // 日期选择器
-  | 'year-picker' // 年份选择器
-  | 'quarter-picker' // 季度选择器
-  | 'month-picker' // 月份选择器
-  | 'week-picker' // 周选择器
-  | 'time-picker' // 时间选择器
-  | 'range-picker' // 范围选择器
-  | 'color-picker' // 颜色选择器
-  | 'rate' // 评分
-  | 'switch' // 开关
-  | 'slider' // 滑块
-  | 'cascader' // 级联选择器
-  | 'upload' // 上传
-  | 'auto-complete' // 自动完成
-  | 'mention' // 提及
-  | 'group-title' // 分组标题
-  | Component
+    | 'input-number' // 数字输入框
+    | 'input-tag' // 标签输入框
+    | 'input-search' // 搜索框
+    | 'textarea' // 文本域
+    | 'select' // 选择器
+    | 'tree-select' // 树选择器
+    | 'radio' // 单选框
+    | 'radio-group' // 单选框组
+    | 'checkbox' // 复选框
+    | 'checkbox-group' // 复选框组
+    | 'date-picker' // 日期选择器
+    | 'year-picker' // 年份选择器
+    | 'quarter-picker' // 季度选择器
+    | 'month-picker' // 月份选择器
+    | 'week-picker' // 周选择器
+    | 'time-picker' // 时间选择器
+    | 'range-picker' // 范围选择器
+    | 'color-picker' // 颜色选择器
+    | 'rate' // 评分
+    | 'switch' // 开关
+    | 'slider' // 滑块
+    | 'cascader' // 级联选择器
+    | 'upload' // 上传
+    | 'auto-complete' // 自动完成
+    | 'mention' // 提及
+    | 'group-title' // 分组标题
+    | Component
 
 /** 组件属性合并类型 */
 export type FormComponentProps = MergeMultiple<[

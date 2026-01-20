@@ -51,7 +51,7 @@
     "xgplayer": "^2.31.6"
   },
   "devDependencies": {
-    "@antfu/eslint-config": "^5.2.0",
+    "@antfu/eslint-config": "^7.0.1",
     "@arco-design/web-vue": "^2.58.0-beta.1",
     "@iconify-json/icon-park-outline": "^1.2.4",
     "@types/lodash-es": "^4.17.12",
@@ -59,7 +59,7 @@
     "@vitejs/plugin-vue": "^6.0.1",
     "@vitejs/plugin-vue-jsx": "^5.0.1",
     "@vue/tsconfig": "^0.7.0",
-    "eslint": "^9.0.0",
+    "eslint": "^9.5.0",
     "less": "^4.4.0",
     "less-loader": "^12.3.0",
     "postcss": "^8.5.6",
