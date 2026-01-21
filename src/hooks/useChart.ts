@@ -1,24 +1,30 @@
 import type { EChartsOption } from 'echarts'
 import { computed } from 'vue'
-import { useAppStore } from '@/stores'
-
-// 获取代码提示
-// 从'echarts'中导入{ SeriesOption };
-// 因为配置项太多，这提供了一个相对方便的代码提示。
-// 当使用vue时，注意反应性问题。需要保证对应的函数可以被触发，TypeScript不会报错，代码编写方便。
+import { useTheme } from '@/hooks'
 
 interface Options {
-  (isDark: boolean): EChartsOption
+  (isDark?: boolean): EChartsOption
 }
 
+/**
+ * 用于集中管理 ECharts 配置，提供完整类型提示
+ * @param sourceOption - ECharts 配置项
+ * @returns { option: ComputedRef<EChartsOption>, theme: ComputedRef<string> } - 返回 ECharts 配置项和主题
+ */
 export function useChart(sourceOption: Options) {
-  const appStore = useAppStore()
-  const isDark = computed(() => appStore.theme === 'dark')
+  const { isDark } = useTheme()
 
   // echarts support https://echarts.apache.org/zh/theme-builder.html
   const option = computed<EChartsOption>(() => {
     return sourceOption(isDark.value)
   })
 
-  return { option }
+  const theme = computed(() => isDark.value ? 'dark' : undefined)
+
+  return {
+    /** ECharts 配置项 */
+    option,
+    /** ECharts 主题 */
+    theme
+  }
 }

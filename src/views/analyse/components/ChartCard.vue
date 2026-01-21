@@ -7,7 +7,7 @@
         <a-radio value="3">订单量</a-radio>
       </a-radio-group>
     </template>
-    <VCharts :option="option" autoresize :style="{ height: '300px' }"></VCharts>
+    <VCharts :option="option" :theme="theme" autoresize :style="{ height: '300px' }"></VCharts>
   </a-card>
 </template>
 
@@ -19,22 +19,9 @@ import { useChart } from '@/hooks'
 const xData = ref<string[]>([])
 const yData = ref<number[]>([])
 
-function graphicFactory(side: AnyObject) {
+const { option, theme } = useChart(() => {
   return {
-    type: 'text',
-    bottom: '8',
-    ...side,
-    style: {
-      text: '',
-      textAlign: 'center',
-      fill: '#4E5969',
-      fontSize: 12
-    }
-  }
-}
-const graphicElements = ref([graphicFactory({ left: '2.6%' }), graphicFactory({ right: 0 })])
-const { option } = useChart(() => {
-  return {
+    backgroundColor: 'transparent',
     grid: {
       left: '40',
       right: '0',
@@ -47,11 +34,10 @@ const { option } = useChart(() => {
       data: xData.value,
       boundaryGap: false,
       axisLabel: {
-        color: '#4E5969',
-        formatter(value: number, idx: number) {
+        formatter(value: string, idx: number) {
           if (idx === 0) return ''
           if (idx === xData.value.length - 1) return ''
-          return `${value}`
+          return value
         }
       },
       axisLine: {
@@ -68,7 +54,7 @@ const { option } = useChart(() => {
           return true
         },
         lineStyle: {
-          color: '#E5E8EF'
+          // color: '#E5E8EF'
         }
       },
       axisPointer: {
@@ -93,8 +79,8 @@ const { option } = useChart(() => {
       splitLine: {
         show: true,
         lineStyle: {
-          type: 'dashed',
-          color: '#E5E8EF'
+          type: 'dashed'
+          // color: '#E5E8EF'
         }
       }
     },
@@ -105,14 +91,11 @@ const { option } = useChart(() => {
         return `<div>
             <p class="tooltip-title">${firstElement.axisValueLabel}</p>
             <div class="content-panel"><span>总内容量</span><span class="tooltip-value">${(
-              Number(firstElement.value) * 10000
-            ).toLocaleString()}</span></div>
+            Number(firstElement.value) * 10000
+          ).toLocaleString()}</span></div>
           </div>`
       },
       className: 'echarts-tooltip-diy'
-    },
-    graphic: {
-      elements: graphicElements.value
     },
     series: [
       {
@@ -171,15 +154,9 @@ const getChartData = () => {
     const month = m >= 10 ? m : `0${m}`
     return { y: i, x: `${year}-${month}` }
   })
-  data.forEach((item: any, index: number) => {
+  data.forEach((item) => {
     xData.value.push(item.x)
     yData.value.push(item.y)
-    if (index === 0) {
-      graphicElements.value[0].style.text = item.x
-    }
-    if (index === data.length - 1) {
-      graphicElements.value[1].style.text = item.x
-    }
   })
 }
 getChartData()
