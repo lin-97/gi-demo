@@ -32,7 +32,7 @@ export default defineConfig(({ mode }) => {
     optimizeDeps: {
       include: ['@arco-design/color']
     },
-    // 引入sass全局样式变量
+    // 引入scss全局样式变量
     css: {
       preprocessorOptions: {
         scss: {
@@ -128,9 +128,9 @@ export default defineConfig(({ mode }) => {
       mode === 'development'
         ? undefined
         : {
-          pure: ['console.log'],
-          drop: ['debugger'],
-          legalComments: 'none'
-        }
+            pure: ['console.log'],
+            drop: ['debugger'],
+            legalComments: 'none'
+          }
   }
 })

@@ -78,8 +78,8 @@ defineExpose({ formRef, setForm })
   box-sizing: border-box;
   width: 100%;
   height: 300px;
-  padding: 10px $padding;
+  padding: 10px var(--padding);
   overflow: auto;
-  border: 1px solid $color-border;
+  border: 1px solid var(--color-border);
 }
 </style>

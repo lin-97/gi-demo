@@ -114,7 +114,7 @@ const appStore = useAppStore()
 .layout-mode-item__left {
   .block-left {
     width: 10px;
-    background-color: $color-theme;
+    background-color: rgb(var(--primary-6));
   }
 
   .block-right {
@@ -130,7 +130,7 @@ const appStore = useAppStore()
 
   .block-top {
     height: 8px;
-    background-color: $color-theme;
+    background-color: rgb(var(--primary-6));
   }
 
   .block-bottom {
@@ -147,7 +147,7 @@ const appStore = useAppStore()
   .block-top {
     height: 8px;
     margin-bottom: 3px;
-    background-color: $color-theme;
+    background-color: rgb(var(--primary-6));
   }
 
   .block-main {
@@ -156,7 +156,7 @@ const appStore = useAppStore()
 
     .block-left {
       width: 10px;
-      background-color: $color-theme;
+      background-color: rgb(var(--primary-6));
     }
 
     .block-right {
@@ -171,7 +171,7 @@ const appStore = useAppStore()
 .layout-mode-item__columns {
   .block-left {
     width: 10px;
-    background-color: $color-theme;
+    background-color: rgb(var(--primary-6));
   }
 
   .block-right {

@@ -33,13 +33,13 @@ defineOptions({ name: 'AppHeader' })
   display: flex;
   align-items: center;
   height: 56px;
-  padding: 0 $padding;
+  padding: 0 var(--padding);
   background: var(--color-bg-1);
   border-bottom: 1px solid var(--color-neutral-3);
 
   &__right {
     flex: 1;
-    margin-left: $padding;
+    margin-left: var(--padding);
     overflow: hidden;
   }
 }

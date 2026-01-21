@@ -235,7 +235,7 @@ const handleMulDelete = () => {
   border-radius: var(--border-radius-small);
 
   &__search {
-    margin: 0 $padding;
+    margin: 0 var(--padding);
     border-bottom: 1px dashed var(--color-border-3);
   }
 
@@ -244,7 +244,7 @@ const handleMulDelete = () => {
     display: flex;
     flex: 1;
     flex-direction: column;
-    padding: 0 $padding $padding;
+    padding: 0 var(--padding) var(--padding);
     overflow: hidden;
   }
 }

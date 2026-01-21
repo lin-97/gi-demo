@@ -93,7 +93,7 @@ const back = () => {
 .file-detail {
   box-sizing: border-box;
   flex: 1;
-  padding: $padding;
+  padding: var(--padding);
   padding-bottom: 0;
   overflow: hidden;
   overflow-y: auto;
@@ -105,7 +105,7 @@ const back = () => {
   &__left,
   &__right {
     box-sizing: border-box;
-    padding: $padding;
+    padding: var(--padding);
     overflow: hidden;
     background-color: var(--color-bg-1);
   }
@@ -118,7 +118,7 @@ const back = () => {
     .view-box {
       flex: 1;
       min-height: 400px;
-      margin-top: $margin;
+      margin-top: var(--margin);
       overflow: hidden;
     }
   }
@@ -126,7 +126,7 @@ const back = () => {
   &__right {
     // width: 300px;
     // height: fit-content;
-    // margin: $margin;
+    // margin: var(--margin);
     // margin-left: 0;
   }
 }

@@ -66,19 +66,19 @@ const userStore = useUserStore()
 }
 
 .card {
-  margin-top: $margin;
+  margin-top: var(--margin);
 
   .content {
     padding: 8px 20px;
 
     .welcome {
       margin: 8px 0;
-      color: $color-text-3;
+      color: var(--color-text-3);
 
       .hello {
         margin-bottom: 10px;
         font-size: 1.25rem;
-        color: $color-text-1;
+        color: var(--color-text-1);
       }
 
       .gi-demo-star {

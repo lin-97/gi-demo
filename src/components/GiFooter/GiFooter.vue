@@ -16,7 +16,7 @@ const year = Dayjs(new Date()).format('YYYY')
   display: flex;
   align-items: center;
   justify-content: center;
-  padding-top: $padding;
+  padding-top: var(--padding);
   margin-top: 12px;
   font-size: 12px;
   color: var(--color-text-3);

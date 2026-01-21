@@ -291,7 +291,7 @@ defineExpose({ tableRef })
     position: fixed;
     inset: 0;
     z-index: 1001;
-    padding: $padding;
+    padding: var(--padding);
   }
 
   &__container {

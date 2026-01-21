@@ -19,7 +19,7 @@ defineOptions({ name: 'FileIndex' })
 <style lang="scss" scoped>
 .file-manage {
   flex: 1;
-  padding: $margin;
+  padding: var(--margin);
   overflow: hidden;
 }
 </style>

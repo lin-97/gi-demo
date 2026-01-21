@@ -87,7 +87,7 @@ const close = () => {
   position: fixed;
   z-index: 9999;
   width: 300px;
-  background: linear-gradient(to right, $color-theme, rgb(var(--primary-2)));
+  background: linear-gradient(to right, rgb(var(--primary-6)), rgb(var(--primary-2)));
   border-radius: 8px;
   box-shadow: 0 2px 12px 0 rgb(0 0 0 / 10%);
 

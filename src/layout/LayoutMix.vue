@@ -129,7 +129,7 @@ const shouldCollapse = computed(() =>
   align-items: center;
   justify-content: space-between;
   height: 56px;
-  padding: 0 $padding;
+  padding: 0 var(--padding);
   overflow: hidden;
   color: var(--color-text-1);
   background-color: var(--color-bg-1);

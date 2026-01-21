@@ -62,7 +62,7 @@ provide(STEP_FORM_KEY, { form, resetForm, current })
   display: flex;
   justify-content: center;
   min-height: 560px;
-  padding: $padding;
+  padding: var(--padding);
   background: var(--color-bg-1);
 }
 

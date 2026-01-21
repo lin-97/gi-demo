@@ -127,7 +127,7 @@ function handleClick() {
 }
 
 .gi-page-layout--margin {
-  margin: $margin;
+  margin: var(--margin);
 }
 
 .gi-page-layout--inner {
@@ -165,13 +165,13 @@ function handleClick() {
   display: flex;
   flex-direction: column;
   height: 100%;
-  padding: $padding;
+  padding: var(--padding);
   overflow: hidden;
 }
 
 .gi-page-layout__header {
   box-sizing: border-box;
-  padding: $padding;
+  padding: var(--padding);
   padding-bottom: 0;
 }
 
@@ -180,7 +180,7 @@ function handleClick() {
   display: flex;
   flex: 1;
   flex-direction: column;
-  padding: $padding;
+  padding: var(--padding);
   overflow: hidden;
 }
 </style>

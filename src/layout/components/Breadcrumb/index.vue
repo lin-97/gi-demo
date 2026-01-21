@@ -124,7 +124,7 @@ const lastTitle = computed(() => {
 
   &:hover {
     font-weight: 600;
-    color: $color-theme;
+    color: rgb(var(--primary-6));
   }
 }
 </style>

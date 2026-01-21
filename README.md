@@ -1394,11 +1394,11 @@ Link 组件使用场景
 }
 
 .gi_padding {
-  padding: $padding;
+  padding: var(--padding);
 }
 
 .gi_margin {
-  margin: $margin;
+  margin: var(--margin);
 }
 
 .gi_relative {
@@ -1426,27 +1426,27 @@ Link 组件使用场景
 }
 
 .gi_mt {
-  margin-top: $margin;
+  margin-top: var(--margin);
 }
 
 .gi_mb {
-  margin-bottom: $margin;
+  margin-bottom: var(--margin);
 }
 
 .gi_ml {
-  margin-left: $margin;
+  margin-left: var(--margin);
 }
 
 .gi_mr {
-  margin-right: $margin;
+  margin-right: var(--margin);
 }
 
 .gi_mx {
-  margin: 0 $margin;
+  margin: 0 var(--margin);
 }
 
 .gi_my {
-  margin: $margin 0;
+  margin: var(--margin) 0;
 }
 
 .gi_m0 {
@@ -1454,27 +1454,27 @@ Link 组件使用场景
 }
 
 .gi_pt {
-  padding-top: $margin;
+  padding-top: var(--margin);
 }
 
 .gi_pb {
-  padding-bottom: $margin;
+  padding-bottom: var(--margin);
 }
 
 .gi_pl {
-  padding-left: $margin;
+  padding-left: var(--margin);
 }
 
 .gi_pr {
-  padding-right: $margin;
+  padding-right: var(--margin);
 }
 
 .gi_px {
-  padding: 0 $padding;
+  padding: 0 var(--padding);
 }
 
 .gi_py {
-  padding: $padding 0;
+  padding: var(--padding) 0;
 }
 
 .gi_p0 {
@@ -1484,44 +1484,20 @@ Link 组件使用场景
 // 使用场景，页面内容超出高度会自动滚动
 .gi_page {
   flex: 1;
-  padding: $margin;
+  padding: var(--margin);
   box-sizing: border-box;
   overflow-y: auto;
 }
 ```
 
-#### 全局 scss 变量-命名规范
-
-```scss
-$color-theme: rgb(var(--primary-6)); // 主题色
-$color-primary: rgb(var(--primary-6)); // 主题色
-$color-success: rgb(var(--success-6));
-$color-warning: rgb(var(--warning-6));
-$color-danger: rgb(var(--danger-6));
-$color-info: rgb(var(--gray-6));
-
-$title-color: xxx; // 已弃用，写起来繁琐，易忘
-$text-color: xxx; // 已弃用
-$text-sub-color: xxx; // 已弃用
-$text-sup-color: xxx; // 已弃用
-
-// 借鉴了Arco Design命名规则
-$color-text-1: var(--color-text-1); // 标题、重点文本字体颜色
-$color-text-2: var(--color-text-2); // 文本-全局默认字体颜色
-$color-text-3: var(--color-text-3); // 二级文本颜色
-$color-text-4: var(--color-text-4); // 辅助文本颜色
-
-$margin: 16px; // 盒子间距
-$padding: 16px; // 盒子和内容的间距
-```
 
 如下图：
 
-位置 1： 使用 $margin 全局 scss 变量
+位置 1： 使用 var(--margin) 全局 css 变量
 
-位置 2：使用 $padding 全局 scss 变量
+位置 2：使用 var(--padding) 全局 css 变量
 
-建议尽量使用全局 scss 变量来开发，可以有效提高效率和团队协作
+建议尽量使用全局 css 变量来开发，可以有效提高效率和团队协作
 
 <img src="https://gitee.com/lin0716/gi-image/raw/master/gap.png" />
 

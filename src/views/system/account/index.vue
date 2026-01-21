@@ -83,7 +83,7 @@ const userStore = useUserStore()
   box-sizing: border-box;
   width: 100%;
   height: fit-content;
-  padding: $padding;
+  padding: var(--padding);
   background: var(--color-bg-1);
   border-radius: 2px;
 
@@ -98,12 +98,12 @@ const userStore = useUserStore()
       font-size: 20px;
       font-weight: bolder;
       line-height: 1.5;
-      color: $color-text-1;
+      color: var(--color-text-1);
     }
 
     .desc {
       font-size: 12px;
-      color: $color-text-3;
+      color: var(--color-text-3);
     }
   }
 }

@@ -68,7 +68,7 @@
 .gi_page {
   box-sizing: border-box;
   flex: 1;
-  padding: $margin;
+  padding: var(--margin);
   overflow-y: auto;
 }
 
@@ -181,29 +181,29 @@
 
 // 以下这些类名要放到下面，涉及到css权重优先级问题
 .gi_mt {
-  margin-top: $margin;
+  margin-top: var(--margin);
 }
 
 .gi_mb {
-  margin-bottom: $margin;
+  margin-bottom: var(--margin);
 }
 
 .gi_ml {
-  margin-left: $margin;
+  margin-left: var(--margin);
 }
 
 .gi_mr {
-  margin-right: $margin;
+  margin-right: var(--margin);
 }
 
 .gi_mx {
-  margin-right: $margin;
-  margin-left: $margin;
+  margin-right: var(--margin);
+  margin-left: var(--margin);
 }
 
 .gi_my {
-  margin-top: $margin;
-  margin-bottom: $margin;
+  margin-top: var(--margin);
+  margin-bottom: var(--margin);
 }
 
 .gi_m0 {
@@ -211,29 +211,29 @@
 }
 
 .gi_pt {
-  padding-top: $margin;
+  padding-top: var(--margin);
 }
 
 .gi_pb {
-  padding-bottom: $margin;
+  padding-bottom: var(--margin);
 }
 
 .gi_pl {
-  padding-left: $margin;
+  padding-left: var(--margin);
 }
 
 .gi_pr {
-  padding-right: $margin;
+  padding-right: var(--margin);
 }
 
 .gi_px {
-  padding-right: $padding;
-  padding-left: $padding;
+  padding-right: var(--padding);
+  padding-left: var(--padding);
 }
 
 .gi_py {
-  padding-top: $padding;
-  padding-bottom: $padding;
+  padding-top: var(--padding);
+  padding-bottom: var(--padding);
 }
 
 .gi_p0 {
@@ -288,12 +288,12 @@
 
 // 通用外边距
 .gi_margin {
-  margin: $margin;
+  margin: var(--margin);
 }
 
 // 通用内边距
 .gi_padding {
-  padding: $padding;
+  padding: var(--padding);
 }
 
 .gi_relative {

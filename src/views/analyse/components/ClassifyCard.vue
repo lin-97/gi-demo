@@ -25,7 +25,7 @@ const props = withDefaults(defineProps<Props>(), {
 
 <style lang="scss" scoped>
 .classify-card {
-  margin-bottom: $margin;
+  margin-bottom: var(--margin);
   transition: transform 0.3s;
 
   &:hover {

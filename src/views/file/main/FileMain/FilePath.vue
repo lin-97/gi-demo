@@ -14,7 +14,7 @@
 .file-path {
   display: flex;
   align-items: center;
-  padding: 10px $padding;
+  padding: 10px var(--padding);
   padding-bottom: 12px;
   cursor: pointer;
 

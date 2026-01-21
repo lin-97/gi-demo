@@ -78,7 +78,7 @@ const handleHomeNavigation = () => {
     transition: color 0.3s;
 
     &:hover {
-      color: $color-theme;
+      color: rgb(var(--primary-6));
     }
   }
 }

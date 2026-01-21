@@ -145,7 +145,7 @@ const list = [
       margin-bottom: 15px;
 
       .text {
-        color: $color-text-2;
+        color: var(--color-text-2);
       }
     }
   }

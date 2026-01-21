@@ -72,7 +72,7 @@ const onTreeSelect: TreeInstance['onSelect'] = (selectedKeys, data) => {
     height: 34px;
 
     &:not(.arco-menu-selected) {
-      color: $color-text-1;
+      color: var(--color-text-1);
     }
 
     &:last-child {
