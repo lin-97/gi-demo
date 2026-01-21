@@ -37,7 +37,7 @@ const buttonProps = computed(() => {
   const type = ['primary', 'secondary', 'outline', 'dashed', 'text', undefined].includes(props.type) ? props.type : BUTTON_MAP[props.type].type || 'primary'
   return {
     ...props,
-    type: type as ButtonProps['type'],
+    type: type as AButtonProps['type'],
     status: BUTTON_MAP[props.type].status || 'normal'
   }
 })

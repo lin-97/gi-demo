@@ -94,5 +94,8 @@
   ],
   // 禁用 VS Code 自带的 CSS 验证（避免与 Stylelint 冲突）
   "css.validate": false,
-  "scss.validate": false
+  "scss.validate": false,
+  "cssVariables.lookupFiles": [
+    "node_modules/@arco-themes/vue-gi-demo/theme.css"
+  ]
 }
