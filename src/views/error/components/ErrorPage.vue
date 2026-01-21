@@ -39,14 +39,16 @@ const IconMap: Record<number, Component> = {
 }
 
 const countDownTime = ref(5)
-let timer: NodeJS.Timer
+let timer: ReturnType<typeof setInterval> | undefined
 
 onMounted(() => {
   onCountDownTime()
 })
 
 onBeforeUnmount(() => {
-  clearInterval(timer)
+  if (timer) {
+    clearInterval(timer)
+  }
 })
 
 // 返回页面
@@ -61,7 +63,10 @@ function onCountDownTime() {
       countDownTime.value--
     } else {
       // back()
-      clearInterval(timer)
+      if (timer) {
+        clearInterval(timer)
+        timer = undefined
+      }
     }
   }, 1000)
 }

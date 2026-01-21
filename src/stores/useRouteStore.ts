@@ -10,7 +10,6 @@ import { defineStore } from 'pinia'
 import { ref } from 'vue'
 import { mapTree } from 'xe-utils'
 import { getUserRoutes } from '@/apis/user'
-import ParentView from '@/components/ParentView/index.vue'
 import { constantRoutes } from '@/router'
 import { transformPathToName } from '@/utils'
 import Message from '@/views/demo/examples/fn-component/Message/Message.vue'
@@ -79,8 +78,6 @@ export const loadView = (view: string) => {
 const transformComponentView = (component: string) => {
   if (component === 'Layout') {
     return Layout as never
-  } else if (component === 'ParentView') {
-    return ParentView as never
   } else {
     return loadView(component) as never
   }

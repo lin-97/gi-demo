@@ -29,7 +29,6 @@ interface UseRequestOptions<T = any> {
  *   data: Ref<T>, // 响应数据的响应式引用
  *   error: Ref<any>, // 错误信息的响应式引用
  *   run: () => Promise<void>, // 手动触发请求的函数
- *   refresh: () => Promise<void> // 刷新请求的函数（等同于 run）
  * }}
  * @example
  * // 基础用法 - 立即执行
