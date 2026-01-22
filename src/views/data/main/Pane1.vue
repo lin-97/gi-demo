@@ -5,14 +5,14 @@
     </template>
 
     <a-row justify="space-between">
-      <a-space wrap>
+      <a-space wrap class="gi_mb_base">
         <GiButton type="add" @click="onAdd"></GiButton>
         <GiButton type="delete" @click="onMulDelete"></GiButton>
         <GiButton type="export" @click="onExport"></GiButton>
         <GiCodeButton :code="CodeJson"></GiCodeButton>
       </a-space>
 
-      <a-space wrap>
+      <a-space wrap class="gi_mb_base">
         <a-select v-model="form.status" class="gi_select_input" :options="dictData.STATUS" placeholder="请选择"
           allow-clear></a-select>
         <a-input-group>

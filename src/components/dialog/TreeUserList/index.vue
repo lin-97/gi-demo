@@ -4,7 +4,7 @@
       <Tree @node-click="search" />
     </template>
     <a-row justify="end">
-      <a-space wrap>
+      <a-space wrap class="gi_mb_base">
         <a-input v-model="searchParams.username" placeholder="输入用户名搜索" allow-clear style="max-width: 250px">
         </a-input>
         <a-button type="primary" @click="search">

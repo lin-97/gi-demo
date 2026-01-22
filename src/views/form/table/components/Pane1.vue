@@ -1,7 +1,7 @@
 <template>
   <GiPageLayout :body-style="{ overflowY: 'auto' }">
     <a-row justify="end">
-      <a-space wrap>
+      <a-space wrap class="gi_mb_base">
         <a-button type="primary" :status="isReadOnly ? 'success' : 'warning'" @click="toggleReadOnly">
           {{ isReadOnly ? '编辑' : '只读' }}
         </a-button>

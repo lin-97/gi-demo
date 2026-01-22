@@ -1,19 +1,19 @@
-<template>
-  <GiPageLayout>
-    <a-row justify="end" align="center" wrap>
-      <a-space wrap>
-        <GiButton type="import"></GiButton>
-        <GiCodeButton :code="CodeJson"></GiCodeButton>
-      </a-space>
-    </a-row>
+  <template>
+    <GiPageLayout>
+      <a-row justify="end" align="center" wrap>
+        <a-space wrap class="gi_mb_base">
+          <GiButton type="import"></GiButton>
+          <GiCodeButton :code="CodeJson"></GiCodeButton>
+        </a-space>
+      </a-row>
 
-    <a-table class="gi_table" row-key="id" :loading="loading" :bordered="{ cell: true }" :columns="columns"
-      :data="tableData" :scroll="{ x: '100%', y: '100%', minWidth: 1000 }"
-      :row-selection="{ type: 'checkbox', showCheckedAll: true }" :pagination="pagination" @select="select"
-      @select-all="selectAll">
-    </a-table>
-  </GiPageLayout>
-</template>
+      <a-table class="gi_table" row-key="id" :loading="loading" :bordered="{ cell: true }" :columns="columns"
+        :data="tableData" :scroll="{ x: '100%', y: '100%', minWidth: 1000 }"
+        :row-selection="{ type: 'checkbox', showCheckedAll: true }" :pagination="pagination" @select="select"
+        @select-all="selectAll">
+      </a-table>
+    </GiPageLayout>
+  </template>
 
 <script lang="tsx" setup>
 import type { TableColumnData, TableInstance } from '@arco-design/web-vue'

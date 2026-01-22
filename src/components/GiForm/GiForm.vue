@@ -7,8 +7,8 @@
     <a-grid class="w-full" :col-gap="8" v-bind="props.gridProps" :collapsed="collapsed">
       <!-- 表单项列表 -->
       <template v-for="item in columns" :key="item.field">
-        <a-grid-item v-if="!isHide(item)" v-bind="item.gridItemProps || defaultGridItemProps"
-          :span="item.span || item.gridItemProps?.span || defaultGridItemProps?.span">
+        <a-grid-item v-if="!isHide(item)" v-bind="item.gridItemProps || props.gridItemProps"
+          :span="item.span || item.gridItemProps?.span || props.gridItemProps?.span">
           <a-form-item v-bind="item.formItemProps" :field="item.field" :rules="getFormItemRules(item)"
             :disabled="isDisabled(item)">
             <!-- 表单项标签 -->
@@ -18,10 +18,10 @@
             </template>
 
             <!-- 表单项内容 -->
-            <slot v-if="!['group-title'].includes((typeof item.type === 'string' ? item.type : ''))" :name="item.field"
+            <slot v-if="getStringType(item.type) !== 'group-title'" :name="item.field"
               v-bind="{ disabled: isDisabled(item) }">
-              <component :is="(COMP_MAP[(typeof item.type === 'string' ? item.type : '')] || item.type)"
-                v-bind="getComponentBindProps(item)" :model-value="modelValue[getModelField(item)]"
+              <component :is="(COMP_MAP[getStringType(item.type)] || item.type)" v-bind="getComponentBindProps(item)"
+                :model-value="modelValue[getModelField(item)]"
                 @update:model-value="updateValue($event, getModelField(item))">
                 <!-- 组件插槽 -->
                 <template v-for="(slotValue, slotKey) in item?.slots" :key="slotKey" #[slotKey]="scope">
@@ -34,7 +34,7 @@
             </slot>
 
             <!-- 分组标题 -->
-            <slot v-else name="group-title">
+            <slot v-else :name="item.field">
               <a-alert>{{ item.label }}</a-alert>
             </slot>
 
@@ -48,10 +48,9 @@
       </template>
 
       <!-- 搜索按钮组 -->
-      <a-grid-item v-if="props.search" :key="!props.suffix ? String(collapsed) : undefined"
-        v-bind="defaultGridItemProps" :span="defaultGridItemProps?.span"
-        :suffix="props.search && (props.suffix || (!props.suffix && collapsed))">
-        <a-space wrap>
+      <a-grid-item v-if="props.search" :key="!props.suffix ? String(collapsed) : undefined" v-bind="props.gridItemProps"
+        :span="props.gridItemProps?.span" :suffix="props.search && (props.suffix || (!props.suffix && collapsed))">
+        <a-space wrap style="margin-bottom: 8px">
           <slot name="suffix">
             <a-button type="primary" @click="emit('search')">
               <template #icon><icon-search /></template>
@@ -95,7 +94,7 @@ const props = withDefaults(defineProps<Props>(), {
 
 /** Emits 类型定义 */
 const emit = defineEmits<{
-  (e: 'update:modelValue', value: any): void
+  (e: 'update:modelValue', value: Record<string, any>): void
   (e: 'search'): void
   (e: 'reset'): void
 }>()
@@ -147,15 +146,12 @@ const formProps = computed(() => {
   }
 })
 
-/** 默认栅格项属性 */
-const defaultGridItemProps = computed(() => props.gridItemProps)
-
 /** 组件状态 */
 const formRef = useTemplateRef('formRef')
 /** 是否折叠 */
 const collapsed = ref(props.defaultCollapsed)
-/** 数据字典 */
-const dicData: Record<string, any> = reactive({})
+/** 数据字典（预留功能：用于动态加载选项数据，可通过 request 和 format 配置项加载） */
+const dicData: Record<string, unknown> = reactive({})
 
 /** 静态配置 */
 const STATIC_PROPS = new Map<FormColumnItem['type'], Partial<FormColumnItem['props']>>([
@@ -170,31 +166,37 @@ const STATIC_PROPS = new Map<FormColumnItem['type'], Partial<FormColumnItem['pro
   ['time-picker', { allowClear: true }]
 ])
 
+/** 占位符映射表 */
+const PLACEHOLDER_MAP: Record<string, (label?: string) => string | undefined> = {
+  'input': (label) => `请输入${label}`,
+  'input-tag': (label) => `请输入${label}`,
+  'mention': (label) => `请输入${label}`,
+  'textarea': (label) => `请填写${label}`,
+  'select': (label) => `请选择${label}`,
+  'input-search': (label) => `请选择${label}`,
+  'tree-select': (label) => `请选择${label}`,
+  'cascader': (label) => `请选择${label}`,
+  'date-picker': () => '请选择日期',
+  'time-picker': () => '请选择时间'
+}
+
+/** 获取字符串类型的表单项类型 */
+const getStringType = (type: FormColumnItem['type']): string => {
+  return typeof type === 'string' ? type : ''
+}
+
+/** 获取模型字段名 */
 const getModelField = (item: FormColumnItem) => item?.fieldName || item.field
 
 /** 获取组件默认占位 */
 const getPlaceholder = (item: FormColumnItem) => {
   if (!item.type || typeof item.type !== 'string') return undefined
-  if (['input', 'input-tag', 'mention'].includes(item.type)) {
-    return `请输入${item.label}`
-  }
-  if (['textarea'].includes(item.type)) {
-    return `请填写${item.label}`
-  }
-  if (['select', 'input-search', 'tree-select', 'cascader'].includes(item.type)) {
-    return `请选择${item.label}`
-  }
-  if (['date-picker'].includes(item.type)) {
-    return '请选择日期'
-  }
-  if (['time-picker'].includes(item.type)) {
-    return '请选择时间'
-  }
-  return undefined
+  const placeholderFn = PLACEHOLDER_MAP[item.type]
+  return placeholderFn ? placeholderFn(item.label) : undefined
 }
 
 /** 获取选项数据 */
-const getOptions = (item: FormColumnItem): any[] | undefined => {
+const getOptions = (item: FormColumnItem) => {
   if (!item.type) return undefined
   /** 需要选项数据的组件类型 */
   const arr = ['select', 'tree-select', 'cascader', 'radio-group', 'checkbox-group']
@@ -215,8 +217,9 @@ const getComponentBindProps = (item: FormColumnItem) => {
 }
 
 /** 表单数据更新处理 */
-const updateValue = (value: any, field: string) => {
-  emit('update:modelValue', { ...props.modelValue, [field]: value })
+const updateValue = (value: unknown, field: string) => {
+  const newValue = { ...props.modelValue, [field]: value }
+  emit('update:modelValue', newValue)
 }
 
 /** 获取表单项校验规则 */
@@ -246,7 +249,7 @@ const isHide = (item: FormColumnItem) => {
     return item.hide(props.modelValue)
   }
   if (props.fc?.[item.field]?.hidden) return true
-  if (item.hide === undefined) return false
+  return false
 }
 
 /** 判断表单项是否禁用 */

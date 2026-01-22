@@ -39,3 +39,11 @@ export type TableProps = {
   scrollbar?: TableInstance['$props']['scrollbar']
   showEmptyTree?: TableInstance['$props']['showEmptyTree']
 }
+
+/** 列设置项类型 */
+export interface TableSettingColumnItem {
+  title: string
+  key: string
+  show: boolean
+  disabled: boolean
+}

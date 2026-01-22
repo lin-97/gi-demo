@@ -3,7 +3,7 @@
     <a-alert>此示例基于GiEditTable实现了双击单元格编辑</a-alert>
 
     <a-row class="gi_mt" justify="end">
-      <a-space wrap>
+      <a-space wrap class="gi_mb_base">
         <a-button type="primary" @click="addTableRow">
           <template #icon><icon-plus /></template>
           <span>新增</span>

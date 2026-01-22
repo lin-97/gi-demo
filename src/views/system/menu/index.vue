@@ -1,7 +1,7 @@
 <template>
   <GiPageLayout margin>
     <a-row justify="space-between">
-      <a-space wrap>
+      <a-space wrap class="gi_mb_base">
         <GiButton type="add" @click="onAdd"></GiButton>
         <a-tooltip content="展开/折叠">
           <a-button type="primary" status="success" @click="onExpanded">
@@ -16,7 +16,7 @@
         </a-tooltip>
       </a-space>
 
-      <a-space wrap>
+      <a-space wrap class="gi_mb_base">
         <a-input-group>
           <a-select v-model="queryParams.status" :options="dictData.STATUS" placeholder="菜单状态"
             style="width: 120px"></a-select>

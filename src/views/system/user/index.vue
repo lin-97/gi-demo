@@ -17,11 +17,11 @@
     </template>
 
     <a-row justify="space-between">
-      <a-space wrap>
+      <a-space wrap class="gi_mb_base">
         <GiButton type="add" @click="onAdd"></GiButton>
         <GiButton type="delete" @click="onMulDelete"></GiButton>
       </a-space>
-      <a-space wrap>
+      <a-space wrap class="gi_mb_base">
         <a-input-group>
           <a-select v-model="queryParams.status" :options="dictData.STATUS" placeholder="用户状态" allow-clear
             style="width: 150px"></a-select>

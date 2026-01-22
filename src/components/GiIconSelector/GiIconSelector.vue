@@ -2,18 +2,16 @@
   <a-popover trigger="click">
     <a-input placeholder="请选择图标" :model-value="modelValue" allow-clear readonly @clear="emit('update:modelValue', '')">
       <template #prefix>
-        <template v-if="modelValue">
-          <component :is="modelValue" v-if="props.type === 'arco'" :size="16" />
-          <GiSvgIcon v-if="modelValue" :size="16" :name="modelValue" />
-        </template>
+        <component :is="modelValue" v-if="modelValue && props.type === 'arco'" :size="16" />
+        <GiSvgIcon v-else-if="modelValue && props.type === 'custom'" :size="16" :name="modelValue" />
         <icon-search v-else />
       </template>
     </a-input>
 
     <template #content>
-      <div class="container" :class="{ 'is-list': !isGridView }">
+      <div class="gi-icon-selector" :class="{ 'gi-icon-selector--list': !isGridView }">
         <a-row>
-          <section style="flex: 1; margin-right: 8px">
+          <section class="gi-icon-selector__search">
             <a-input v-model="searchValue" placeholder="搜索图标名称" allow-clear size="small" @input="search"
               @clear="search">
               <template #prefix>
@@ -30,22 +28,25 @@
           </a-button>
         </a-row>
 
-        <section class="icon-list">
+        <section class="gi-icon-selector__icon-list">
           <a-row wrap :gutter="4">
             <a-col v-for="item of currentPageIconList" :key="item" :span="isGridView ? 4 : 8">
-              <div class="icon-item" :class="{ active: modelValue === item }" @click="handleSelectedIcon(item)">
+              <div class="gi-icon-selector__icon-item"
+                :class="{ 'gi-icon-selector__icon-item--active': modelValue === item }"
+                @click="handleSelectedIcon(item)">
                 <component :is="item" v-if="props.type === 'arco'" :size="20" />
                 <GiSvgIcon v-if="props.type === 'custom'" :name="item" :size="20"></GiSvgIcon>
-                <div class="gi_line_1 icon-name">{{ item }}</div>
+                <div class="gi_line_1 gi-icon-selector__icon-name">{{ item }}</div>
               </div>
             </a-col>
           </a-row>
         </section>
 
-        <a-row justify="center" align="center">
-          <a-pagination size="mini" :page-size="pageSize" :total="total" :show-size-changer="false"
-            @change="onPageChange"></a-pagination>
+        <a-row v-if="total > 0" justify="center" align="center">
+          <a-pagination v-model:current="current" size="mini" :page-size="pageSize" :total="total"
+            :show-size-changer="false"></a-pagination>
         </a-row>
+        <a-empty v-else description="未找到匹配的图标" :image-size="80" />
       </div>
     </template>
   </a-popover>
@@ -65,72 +66,79 @@ const props = withDefaults(defineProps<Props>(), {
   enableCopy: false
 })
 
-const emit = defineEmits(['select', 'update:modelValue'])
+/** Emits 类型定义 */
+const emit = defineEmits<{
+  (e: 'select', icon: string): void
+  (e: 'update:modelValue', icon: string): void
+}>()
 
 // 自定义图标模块
 const SvgIconModules = import.meta.glob('@/icons/*.svg')
 
-const searchValue = ref('') // 搜索词
-
-// 图标列表
+/** 搜索词 */
+const searchValue = ref('')
+/** 是否网格视图 */
 const isGridView = ref(true)
-
-let IconList: string[] = []
-if (props.type === 'arco') {
-  IconList = Object.keys(ArcoIcons).filter((i) => i !== 'default')
-}
-if (props.type === 'custom') {
-  for (const path in SvgIconModules) {
-    const name = path.replace('/src/icons/', '').replace('.svg', '')
-    IconList.push(name)
-  }
-}
-
-const pageSize = 42
+/** 当前页码 */
 const current = ref(1)
-const total = ref(IconList.length) // 图标总数
+/** 每页显示数量 */
+const pageSize = 42
 
-// 当前页的图标列表
-const currentPageIconList = ref(IconList.slice(0, pageSize))
-// 搜索列表
-const searchList = ref<string[]>([])
-
-// 页码改变
-const onPageChange = (page: number) => {
-  current.value = page
-  if (!searchList.value.length) {
-    currentPageIconList.value = IconList.slice((page - 1) * pageSize, page * pageSize)
-  } else {
-    currentPageIconList.value = searchList.value.slice((page - 1) * pageSize, page * pageSize)
+/** 图标列表（根据类型计算） */
+const IconList = computed(() => {
+  if (props.type === 'arco') {
+    return Object.keys(ArcoIcons).filter((i) => i !== 'default')
   }
-}
+  if (props.type === 'custom') {
+    const list: string[] = []
+    for (const path in SvgIconModules) {
+      const name = path.replace('/src/icons/', '').replace('.svg', '')
+      list.push(name)
+    }
+    return list
+  }
+  return []
+})
 
-// 搜索
+/** 过滤后的图标列表（搜索时使用） */
+const filteredIconList = computed(() => {
+  if (!searchValue.value.trim()) {
+    return IconList.value
+  }
+  const temp = searchValue.value.toLowerCase().trim()
+  const searchKey = temp.startsWith('icon') ? temp : `icon${temp}`
+  return IconList.value.filter((item) => {
+    return item.toLowerCase().startsWith(searchKey)
+  })
+})
+
+/** 图标总数 */
+const total = computed(() => filteredIconList.value.length)
+
+/** 当前页的图标列表 */
+const currentPageIconList = computed(() => {
+  const start = (current.value - 1) * pageSize
+  const end = start + pageSize
+  return filteredIconList.value.slice(start, end)
+})
+
+/** 搜索处理（重置页码） */
 const search = () => {
-  if (searchValue.value) {
-    const temp = searchValue.value.toLowerCase()
-    searchList.value = IconList.filter((item) => {
-      return item.toLowerCase().startsWith((temp.startsWith('icon') ? '' : 'icon') + temp)
-    })
-    total.value = searchList.value.length
-    currentPageIconList.value = searchList.value.slice(0, pageSize)
-  } else {
-    searchList.value = []
-    total.value = IconList.length
-    currentPageIconList.value = IconList.slice((current.value - 1) * pageSize, current.value * pageSize)
-  }
+  current.value = 1
 }
 
-// 点击选择图标
+/** 点击选择图标 */
 const handleSelectedIcon = async (icon: string) => {
   emit('select', icon)
   emit('update:modelValue', icon)
   if (props.enableCopy) {
-    const { isSupported, copied, copy } = useClipboard()
+    const { isSupported, copy } = useClipboard()
     if (isSupported) {
-      await copy(`<${icon} />`)
-      if (copied) {
+      try {
+        await copy(`<${icon} />`)
         Message.success(`已选择并且复制成功 ${icon} 图标`)
+      } catch (error) {
+        console.error('复制失败:', error)
       }
     }
   }
@@ -138,65 +146,69 @@ const handleSelectedIcon = async (icon: string) => {
 </script>
 
 <style lang="scss" scoped>
-.container {
+.gi-icon-selector {
   width: 300px;
   overflow: hidden;
 
-  .icon-list {
+  &__search {
+    flex: 1;
+    margin-right: 8px;
+  }
+
+  &__icon-list {
     margin-top: 10px;
     margin-bottom: 10px;
+  }
 
-    .icon-item {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      height: 30px;
-      margin-bottom: 4px;
-      overflow: hidden;
-      cursor: pointer;
-      border: 1px dashed var(--color-bg-1);
+  &__icon-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 30px;
+    margin-bottom: 4px;
+    overflow: hidden;
+    cursor: pointer;
+    border: 1px dashed var(--color-bg-1);
 
-      .icon-name {
-        display: none;
-      }
+    &--active {
+      background-color: rgb(var(--primary-6), 0.05);
+      border: 1px dashed rgb(var(--primary-3));
+    }
 
-      &.active {
-        background-color: rgb(var(--primary-6), 0.05);
-        border: 1px dashed rgb(var(--primary-3));
-      }
-
-      &:not(.active) {
-        &:hover {
-          border-color: var(--color-border-3);
-        }
+    &:not(.gi-icon-selector__icon-item--active) {
+      &:hover {
+        border-color: var(--color-border-3);
       }
     }
   }
-}
 
-.is-list {
-  min-width: 400px;
+  &__icon-name {
+    display: none;
+  }
 
-  .icon-list {
-    height: 300px;
-    overflow: hidden;
-    overflow-y: auto;
+  &--list {
+    min-width: 400px;
 
-    .icon-item {
+    .gi-icon-selector__icon-list {
+      height: 300px;
+      overflow: hidden;
+      overflow-y: auto;
+    }
+
+    .gi-icon-selector__icon-item {
       box-sizing: border-box;
-      display: flex;
       flex-direction: row;
       align-items: center;
       justify-content: flex-start;
       padding-left: 4px;
+    }
 
-      .icon-name {
-        display: block;
-        margin-left: 6px;
-        font-size: 12px;
-        color: var(--color-text-2);
-      }
+    .gi-icon-selector__icon-name {
+      display: block;
+      margin-left: 6px;
+      font-size: 12px;
+      color: var(--color-text-2);
     }
   }
 }

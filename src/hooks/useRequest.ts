@@ -12,7 +12,7 @@ interface UseRequestOptions<T = any> {
   /** 初始加载状态，默认为 true */
   isLoading?: boolean
   /** 请求成功回调 */
-  onSuccess?: (data: any) => void
+  onSuccess?: (data: T) => void
   /** 请求失败回调 */
   onError?: (error: any) => void
 }

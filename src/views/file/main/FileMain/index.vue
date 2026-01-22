@@ -5,7 +5,7 @@
 
     <a-row justify="space-between" class="file-main__search">
       <!-- 左侧区域 -->
-      <a-space wrap>
+      <a-space wrap class="gi_mb_base">
         <a-dropdown>
           <a-button type="primary" shape="round">
             <template #icon><icon-upload /></template>
@@ -45,7 +45,7 @@
       </a-space>
 
       <!-- 右侧区域 -->
-      <a-space wrap>
+      <a-space wrap class="gi_mb_base">
         <a-button v-if="isBatchMode" :disabled="!selectedFileIds.length" type="primary" status="danger"
           @click="handleMulDelete">
           <template #icon><icon-delete /></template>

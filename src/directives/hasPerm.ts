@@ -1,5 +1,5 @@
 import type { Directive, DirectiveBinding } from 'vue'
-import { hasPermOr } from '@/utils/has'
+import { hasPermOr } from '@/utils/permission'
 
 /**
  * 权限检查函数
