@@ -1,5 +1,5 @@
 <template>
-  <a-button size="mini" class="gi_hover_btn" @click="toggleTheme">
+  <a-button size="mini" class="gi-hover-btn" @click="toggleTheme">
     <template #icon>
       <icon-sun-fill v-if="!isDark" :size="18" />
       <icon-moon-fill v-else :size="18" />

@@ -1,5 +1,5 @@
 <template>
-  <a-card title="快捷操作" :bordered="false" size="medium" class="card gi_card_title">
+  <a-card title="快捷操作" :bordered="false" size="medium" class="card gi-card-title">
     <a-card-grid v-for="(item, index) in list" :key="item.name" class="card-grid-item" :style="{ width: '33.33%' }">
       <a-card :bordered="false" hoverable>
         <a-row justify="center" align="center" :class="`animated-fade-up-${index + 1}`">

@@ -1,18 +1,18 @@
 <template>
-  <a-card title="配置表单-弹窗" :bordered="true" class="gi_margin">
+  <a-card title="配置表单-弹窗" :bordered="true" class="gi-margin">
     <template #extra>
       <GiCodeButton :code="CodeJson"></GiCodeButton>
     </template>
 
     <a-alert>此示例编辑模式会禁用状态、是否隐藏</a-alert>
-    <a-card title="表单-模态框" :bordered="true" class="gi_mt">
+    <a-card title="表单-模态框" :bordered="true" class="gi-mt">
       <a-space>
         <a-button type="primary" @click="onAdd">新增</a-button>
         <a-button type="primary" status="success" @click="onEdit">编辑</a-button>
       </a-space>
     </a-card>
 
-    <a-card title="表单-抽屉" :bordered="true" class="gi_mt">
+    <a-card title="表单-抽屉" :bordered="true" class="gi-mt">
       <a-space>
         <a-button type="primary" @click="onAddDrawer">新增</a-button>
         <a-button type="primary" status="success" @click="onEditDrawer">编辑</a-button>

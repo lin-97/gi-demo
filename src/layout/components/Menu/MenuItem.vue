@@ -5,8 +5,8 @@
     </template>
     <a-row v-if="menuBadgeStore.badgeMap[item.path] !== undefined" justify="space-between" align="center"
       style="flex-wrap: nowrap;">
-      <div class="gi_line_1">{{ item?.meta?.title }}</div>
-      <a-badge class="gi_ml" :count="menuBadgeStore.badgeMap[item.path]"
+      <div class="gi-line-1">{{ item?.meta?.title }}</div>
+      <a-badge class="gi-ml" :count="menuBadgeStore.badgeMap[item.path]"
         v-bind="menuBadgeStore.BadgePropsMap[item.path]" />
     </a-row>
     <template v-else>{{ item?.meta?.title }}</template>

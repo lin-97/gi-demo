@@ -1,5 +1,5 @@
 <template>
-  <a-card title="配置表单-动态级联" :bordered="true" class="gi_margin">
+  <a-card title="配置表单-动态级联" :bordered="true" class="gi-margin">
     <template #extra>
       <GiCodeButton :code="CodeJson"></GiCodeButton>
     </template>
@@ -19,7 +19,7 @@
         </GiForm>
       </a-col>
       <a-col :xs="24" :sm="24" :md="12">
-        <a-alert type="warning" class="gi_mb">具体配置看源码</a-alert>
+        <a-alert type="warning" class="gi-mb">具体配置看源码</a-alert>
         <GiCodeView :code-json="JSON.stringify(form, null, '\t')"></GiCodeView>
       </a-col>
     </a-row>

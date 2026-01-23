@@ -3,9 +3,9 @@
     <!-- 文件路径 -->
     <FilePath></FilePath>
 
-    <a-row justify="space-between" class="file-main__search">
+    <a-row justify="space-between" class="file-main__search gi-row-tool">
       <!-- 左侧区域 -->
-      <a-space wrap class="gi_mb_base">
+      <a-space wrap>
         <a-dropdown>
           <a-button type="primary" shape="round">
             <template #icon><icon-upload /></template>
@@ -45,7 +45,7 @@
       </a-space>
 
       <!-- 右侧区域 -->
-      <a-space wrap class="gi_mb_base">
+      <a-space wrap>
         <a-button v-if="isBatchMode" :disabled="!selectedFileIds.length" type="primary" status="danger"
           @click="handleMulDelete">
           <template #icon><icon-delete /></template>
@@ -235,8 +235,7 @@ const handleMulDelete = () => {
   border-radius: var(--border-radius-small);
 
   &__search {
-    margin: 0 var(--padding);
-    border-bottom: 1px dashed var(--color-border-3);
+    padding: 0 var(--padding);
   }
 
   &__list {

@@ -1,8 +1,8 @@
 <template>
   <a-modal v-model:visible="visible" title="字典数据" width="calc(100% - 20px)" :mask-closable="false"
     :modal-style="{ maxWidth: '680px' }">
-    <a-row>
-      <a-space wrap class="gi_mb_base">
+    <a-row class="gi-row-tool">
+      <a-space wrap>
         <a-button type="primary" @click="onAdd">
           <template #icon><icon-plus /></template>
           <span>新增</span>

@@ -5,7 +5,7 @@
       @update:model-value="Object.assign(form, $event)" @search="search" @reset="search">
     </GiForm>
 
-    <a-table class="gi_full_table" row-key="id" page-position="bottom" :bordered="{ cell: true }" :loading="loading"
+    <a-table class="gi-full-table" row-key="id" page-position="bottom" :bordered="{ cell: true }" :loading="loading"
       :data="tableData" :scroll="{ x: '100%', y: '100%', minWidth: 1400 }" :pagination="pagination">
       <template #columns>
         <a-table-column title="序号" :width="60" align="center" fixed="left">

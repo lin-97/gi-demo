@@ -2,8 +2,8 @@
   <GiPageLayout :body-style="{ overflowY: 'auto' }">
     <a-alert>此示例基于GiEditTable实现了行编辑，以及行双击编辑</a-alert>
 
-    <a-row class="gi_mt" justify="end">
-      <a-space wrap class="gi_mb_base">
+    <a-row class="gi-mt gi-row-tool" justify="end">
+      <a-space wrap>
         <a-button type="primary" @click="addTableRow">
           <template #icon><icon-plus /></template>
           <span>新增</span>
@@ -27,7 +27,7 @@
       </template>
     </gi-edit-table>
 
-    <a-row justify="end" class="gi_mt">
+    <a-row justify="end" class="gi-my">
       <a-space wrap>
         <a-button @click="reset">重置</a-button>
         <a-button type="primary" @click="submit">验证并提交</a-button>

@@ -1,5 +1,5 @@
 <template>
-  <a-card title="数据图表" :bordered="false" class="gi_card_title">
+  <a-card title="数据图表" :bordered="false" class="gi-card-title">
     <template #extra>
       <a-radio-group type="button" size="small" default-value="1">
         <a-radio value="1">访问量</a-radio>

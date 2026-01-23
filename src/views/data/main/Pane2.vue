@@ -1,13 +1,13 @@
   <template>
     <GiPageLayout>
-      <a-row justify="end" align="center" wrap>
-        <a-space wrap class="gi_mb_base">
+      <a-row justify="end" align="center" wrap class="gi-row-tool">
+        <a-space wrap>
           <GiButton type="import"></GiButton>
           <GiCodeButton :code="CodeJson"></GiCodeButton>
         </a-space>
       </a-row>
 
-      <a-table class="gi_table" row-key="id" :loading="loading" :bordered="{ cell: true }" :columns="columns"
+      <a-table class="gi-table" row-key="id" :loading="loading" :bordered="{ cell: true }" :columns="columns"
         :data="tableData" :scroll="{ x: '100%', y: '100%', minWidth: 1000 }"
         :row-selection="{ type: 'checkbox', showCheckedAll: true }" :pagination="pagination" @select="select"
         @select-all="selectAll">

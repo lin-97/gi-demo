@@ -8,7 +8,7 @@
             :class="{ 'one-level-menu__item--active': props.activePath === item.path }"
             @click="emits('menu-click', item)">
             <MenuIcon :icon="item?.meta?.icon"></MenuIcon>
-            <p class="one-level-menu__item__title gi_line_1" :title="item?.meta?.title">{{ item?.meta?.title }}</p>
+            <p class="one-level-menu__item__title gi-line-1" :title="item?.meta?.title">{{ item?.meta?.title }}</p>
           </li>
         </ul>
       </a-scrollbar>

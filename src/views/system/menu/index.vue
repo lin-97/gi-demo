@@ -1,7 +1,7 @@
 <template>
   <GiPageLayout margin>
-    <a-row justify="space-between">
-      <a-space wrap class="gi_mb_base">
+    <a-row justify="space-between" class="gi-row-tool">
+      <a-space wrap>
         <GiButton type="add" @click="onAdd"></GiButton>
         <a-tooltip content="展开/折叠">
           <a-button type="primary" status="success" @click="onExpanded">
@@ -16,7 +16,7 @@
         </a-tooltip>
       </a-space>
 
-      <a-space wrap class="gi_mb_base">
+      <a-space wrap>
         <a-input-group>
           <a-select v-model="queryParams.status" :options="dictData.STATUS" placeholder="菜单状态"
             style="width: 120px"></a-select>
@@ -27,7 +27,7 @@
       </a-space>
     </a-row>
 
-    <a-table ref="tableRef" class="gi_table" row-key="id" :data="menuList" :loading="loading" :bordered="{ cell: true }"
+    <a-table ref="tableRef" class="gi-table" row-key="id" :data="menuList" :loading="loading" :bordered="{ cell: true }"
       :scroll="{ x: '100%', y: '100%', minWidth: 1700 }" :pagination="false" size="mini">
       <template #expand-icon="{ expanded }">
         <IconDown v-if="expanded" />

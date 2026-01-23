@@ -99,7 +99,6 @@ const handleRightMenuClick = (mode: string, item: FileItem) => {
 
 .file-list {
   width: 100%;
-  padding-top: 12px;
   overflow: hidden;
 
   .file-name {

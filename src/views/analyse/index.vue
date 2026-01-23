@@ -52,7 +52,7 @@
       </a-col>
     </a-row>
 
-    <a-row :gutter="14" class="gi_mt">
+    <a-row :gutter="14" class="gi-mt">
       <a-col v-for="(item, index) in list" :key="item.name" :class="`animated-fade-up-${index}`" :xs="12" :sm="8"
         :md="4" :lg="4" :xl="3" :xxl="3">
         <ClassifyCard :name="item.name" :icon="item.icon" :color="item.color"></ClassifyCard>

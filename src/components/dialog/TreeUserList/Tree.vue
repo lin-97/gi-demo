@@ -1,6 +1,6 @@
 <template>
-  <a-spin :loading="loading" class="gi_full_column">
-    <a-input-search class="gi_mb" placeholder="请输入关键词" allow-clear />
+  <a-spin :loading="loading" class="gi-full-column">
+    <a-input-search class="gi-mb" placeholder="请输入关键词" allow-clear />
 
     <a-scrollbar style="height: 100%; overflow: auto" outer-style="flex: 1;overflow: hidden">
       <a-tree ref="treeRef" show-line size="mini" :data="(treeData as unknown as TreeNodeData[])"

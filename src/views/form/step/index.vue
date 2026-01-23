@@ -1,5 +1,5 @@
 <template>
-  <a-card title="分步表单" class="gi_page_card" :body-style="{ overflowY: 'auto' }">
+  <a-card title="分步表单" class="gi-page-card" :body-style="{ overflowY: 'auto' }">
     <template #extra>
       <a-button>返回</a-button>
     </template>

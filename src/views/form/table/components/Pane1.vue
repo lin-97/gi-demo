@@ -1,7 +1,7 @@
 <template>
   <GiPageLayout :body-style="{ overflowY: 'auto' }">
-    <a-row justify="end">
-      <a-space wrap class="gi_mb_base">
+    <a-row justify="end" class="gi-row-tool">
+      <a-space wrap>
         <a-button type="primary" :status="isReadOnly ? 'success' : 'warning'" @click="toggleReadOnly">
           {{ isReadOnly ? '编辑' : '只读' }}
         </a-button>
@@ -24,7 +24,7 @@
       </template>
     </gi-edit-table>
 
-    <a-row justify="end" class="gi_mt">
+    <a-row justify="end" class="gi-my">
       <a-space wrap>
         <a-button @click="reset">重置</a-button>
         <a-button type="primary" @click="submit">验证并提交</a-button>

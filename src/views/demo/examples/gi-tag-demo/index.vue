@@ -29,7 +29,7 @@
       </a-space>
     </a-card>
 
-    <a-card title="基础颜色" :bordered="true" class="gi_mt">
+    <a-card title="基础颜色" :bordered="true" class="gi-mt">
       <a-space direction="vertical">
         <a-space wrap fill>
           <gi-tag color="red" closable>red</gi-tag>
@@ -86,7 +86,7 @@
       </a-space>
     </a-card>
 
-    <a-card title="自定义颜色" :bordered="true" class="gi_mt">
+    <a-card title="自定义颜色" :bordered="true" class="gi-mt">
       <a-space direction="vertical">
         <a-space wrap fill>
           <gi-tag color="#4E6EF2" closable>#4E6EF2</gi-tag>

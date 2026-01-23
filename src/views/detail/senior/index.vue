@@ -1,5 +1,5 @@
 <template>
-  <div ref="containerRef" class="gi_page gi_p0">
+  <div ref="containerRef" class="gi-page gi-p0">
     <a-affix :target="containerRef ?? undefined">
       <a-page-header title="详情" subtitle="Detail Page">
         <template #extra>
@@ -8,7 +8,7 @@
       </a-page-header>
     </a-affix>
 
-    <a-card title="基本信息" :bordered="false" class="gi_mx gi_my">
+    <a-card title="基本信息" :bordered="false" class="gi-mx gi-my">
       <a-descriptions table-layout="fixed" layout="inline-horizontal"
         :column="{ xs: 1, sm: 2, md: 2, lg: 2, xl: 3, xxl: 3 }">
         <a-descriptions-item label="姓名">Lin</a-descriptions-item>
@@ -37,7 +37,7 @@
       </a-descriptions>
     </a-card>
 
-    <a-card title="基本信息" :bordered="false" class="gi_mx gi_my">
+    <a-card title="基本信息" :bordered="false" class="gi-mx gi-my">
       <a-row justify="space-between">
         <a-col :xs="24" :sm="8" :md="8" :lg="6" :xl="6" :xxl="6" style="margin-bottom: 20px">
           <a-steps :current="2" direction="vertical">
@@ -80,7 +80,7 @@
             </a-descriptions-item>
           </a-descriptions>
 
-          <a-descriptions class="gi_mt" table-layout="fixed" layout="inline-horizontal" bordered
+          <a-descriptions class="gi-mt" table-layout="fixed" layout="inline-horizontal" bordered
             :column="{ xs: 1, sm: 2, md: 2, lg: 2, xl: 3, xxl: 3 }">
             <a-descriptions-item label="姓名">Lin</a-descriptions-item>
             <a-descriptions-item label="性别">男</a-descriptions-item>
@@ -110,7 +110,7 @@
       </a-row>
     </a-card>
 
-    <a-card title="审批流程" :bordered="false" class="gi_mx gi_my">
+    <a-card title="审批流程" :bordered="false" class="gi-mx gi-my">
       <a-steps :current="2" style="margin: 20px 0">
         <a-step description="申请人:Lin">申请</a-step>
         <a-step description="Mark">
@@ -123,7 +123,7 @@
       </a-steps>
     </a-card>
 
-    <a-card title="其他信息" :bordered="false" class="gi_mx gi_my">
+    <a-card title="其他信息" :bordered="false" class="gi-mx gi-my">
       <a-descriptions :column="1" :data="data"> </a-descriptions>
     </a-card>
   </div>

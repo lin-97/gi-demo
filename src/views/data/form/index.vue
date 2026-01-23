@@ -1,5 +1,5 @@
 <template>
-  <a-card title="表单新增编辑页" class="gi_card gi_margin flex-1">
+  <a-card title="表单新增编辑页" class="gi-card gi-margin flex-1">
     <template #extra>
       <a-button @click="router.back()">返回</a-button>
     </template>

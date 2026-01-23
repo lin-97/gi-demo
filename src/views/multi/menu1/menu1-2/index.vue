@@ -1,5 +1,5 @@
 <template>
-  <a-card :title="route.meta.title" class="gi_page_card">
+  <a-card :title="route.meta.title" class="gi-page-card">
     <a-alert type="normal">
       <template #icon>
         <icon-exclamation-circle-fill />

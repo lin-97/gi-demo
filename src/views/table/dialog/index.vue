@@ -1,6 +1,6 @@
 <template>
   <GiPageLayout margin :body-style="{ overflowY: 'auto' }">
-    <a-row align="center" class="gi_mb">
+    <a-row align="center" class="gi-mb">
       <a-alert style="flex: 1;margin-right: 8px">通过函数调用表格弹窗</a-alert>
       <GiCodeButton :code="CodeJson"></GiCodeButton>
     </a-row>
@@ -8,7 +8,7 @@
     <GiForm :model-value="form" :columns="columns" @update:model-value="Object.assign(form, $event)">
     </GiForm>
 
-    <a-alert type="normal" class="gi_mb">通过以下方式可以快速构建表格选择弹窗</a-alert>
+    <a-alert type="normal" class="gi-mb">通过以下方式可以快速构建表格选择弹窗</a-alert>
     <GiCodeView :code-json="DialogCodeJson"></GiCodeView>
   </GiPageLayout>
 </template>

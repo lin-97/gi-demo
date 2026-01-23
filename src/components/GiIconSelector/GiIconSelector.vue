@@ -36,7 +36,7 @@
                 @click="handleSelectedIcon(item)">
                 <component :is="item" v-if="props.type === 'arco'" :size="20" />
                 <GiSvgIcon v-if="props.type === 'custom'" :name="item" :size="20"></GiSvgIcon>
-                <div class="gi_line_1 gi-icon-selector__icon-name">{{ item }}</div>
+                <div class="gi-line-1 gi-icon-selector__icon-name">{{ item }}</div>
               </div>
             </a-col>
           </a-row>

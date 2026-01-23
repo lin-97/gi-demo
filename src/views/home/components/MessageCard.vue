@@ -1,5 +1,5 @@
 <template>
-  <a-card title="消息" :bordered="false" size="medium" class="gi_card_title">
+  <a-card title="消息" :bordered="false" size="medium" class="gi-card-title">
     <template #extra>
       <a-link>更多</a-link>
     </template>

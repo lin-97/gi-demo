@@ -1,5 +1,5 @@
 <template>
-  <div ref="containerRef" class="gi_page gi_p0">
+  <div ref="containerRef" class="gi-page gi-p0">
     <a-affix :target="containerRef ?? undefined">
       <a-page-header title="详情" @back="back">
         <template #extra>
@@ -8,7 +8,7 @@
       </a-page-header>
     </a-affix>
 
-    <a-card title="基本信息" class="gi_mx gi_my">
+    <a-card title="基本信息" class="gi-mx gi-my">
       <a-descriptions table-layout="fixed" :label-style="{ width: '60px' }"
         :column="{ xs: 1, sm: 1, md: 2, lg: 2, xl: 3, xxl: 3 }">
         <a-descriptions-item label="姓名">Lin</a-descriptions-item>
@@ -37,7 +37,7 @@
       </a-descriptions>
     </a-card>
 
-    <a-card title="其他信息" class="gi_mx gi_my">
+    <a-card title="其他信息" class="gi-mx gi-my">
       <a-descriptions :column="1">
         <a-descriptions-item label="姓名">Lin</a-descriptions-item>
         <a-descriptions-item label="性别">男</a-descriptions-item>

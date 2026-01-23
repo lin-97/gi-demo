@@ -2,7 +2,7 @@
 @use './var.scss' as *;
 
 // hover按钮
-.gi_hover_btn {
+.gi-hover-btn {
   background-color: transparent;
   border: 0 !important;
 
@@ -16,7 +16,7 @@
 }
 
 // 卡片组件，使body的高度自动撑满
-.gi_card {
+.gi-card {
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
@@ -32,7 +32,7 @@
 }
 
 // 页面卡片，右侧有返回按钮
-.gi_page_card {
+.gi-page-card {
   box-sizing: border-box;
   display: flex;
   flex: 1;
@@ -50,7 +50,7 @@
 }
 
 // 卡片标题，标题左侧的伪类样式
-.gi_card_title {
+.gi-card-title {
   .arco-card-header-title::before {
     position: absolute;
     top: 50%;
@@ -65,7 +65,7 @@
 }
 
 // 使用场景，页面内容超出高度会自动滚动
-.gi_page {
+.gi-page {
   box-sizing: border-box;
   flex: 1;
   padding: var(--margin);
@@ -73,7 +73,7 @@
 }
 
 // 表格类名 高度自适应
-.gi_table {
+.gi-table {
   display: flex;
   flex: 1;
   flex-direction: column;
@@ -87,7 +87,7 @@
 }
 
 // 表格类名，高度自适应，分页始终固定在最底部
-.gi_full_table {
+.gi-full-table {
   display: flex;
   flex: 1;
   flex-direction: column;
@@ -122,7 +122,7 @@
   }
 }
 
-.gi_full_tabs {
+.gi-full-tabs {
   display: flex;
   flex: 1;
   flex-direction: column;
@@ -143,7 +143,7 @@
 }
 
 // 编辑表格，表头的必填红色星号
-.gi_column_require {
+.gi-column-require {
   .arco-table-th-title {
     &::before {
       padding-right: 2px;
@@ -153,7 +153,7 @@
   }
 }
 
-.gi_full_column {
+.gi-full-column {
   box-sizing: border-box;
   display: flex;
   flex: 1;
@@ -161,111 +161,92 @@
   overflow: hidden;
 }
 
-.gi_badge_primary {
+.gi-badge-primary {
   .arco-badge-number {
     background-color: rgb(var(--primary-5));
   }
 }
 
-.gi_badge_success {
+.gi-badge-success {
   .arco-badge-number {
     background-color: rgb(var(--success-5));
   }
 }
 
-.gi_badge_warning {
+.gi-badge-warning {
   .arco-badge-number {
     background-color: rgb(var(--warning-5));
   }
 }
 
-// 以下这些类名要放到下面，涉及到css权重优先级问题
-.gi_mt {
-  margin-top: var(--margin);
-}
-
-.gi_mb {
-  margin-bottom: var(--margin);
-}
-
-.gi_mb_base {
+.gi-row-tool {
+  gap: 8px;
   margin-bottom: 12px;
 }
 
-.gi_ml {
+// 以下这些类名要放到下面，涉及到css权重优先级问题
+.gi-mt {
+  margin-top: var(--margin);
+}
+
+.gi-mb {
+  margin-bottom: var(--margin);
+}
+
+.gi-ml {
   margin-left: var(--margin);
 }
 
-.gi_mr {
+.gi-mr {
   margin-right: var(--margin);
 }
 
-.gi_mx {
+.gi-mx {
   margin-right: var(--margin);
   margin-left: var(--margin);
 }
 
-.gi_my {
+.gi-my {
   margin-top: var(--margin);
   margin-bottom: var(--margin);
 }
 
-.gi_m0 {
+.gi-m0 {
   margin: 0;
 }
 
-.gi_pt {
+.gi-pt {
   padding-top: var(--margin);
 }
 
-.gi_pb {
+.gi-pb {
   padding-bottom: var(--margin);
 }
 
-.gi_pl {
+.gi-pl {
   padding-left: var(--margin);
 }
 
-.gi_pr {
+.gi-pr {
   padding-right: var(--margin);
 }
 
-.gi_px {
+.gi-px {
   padding-right: var(--padding);
   padding-left: var(--padding);
 }
 
-.gi_py {
+.gi-py {
   padding-top: var(--padding);
   padding-bottom: var(--padding);
 }
 
-.gi_p0 {
+.gi-p0 {
   padding: 0;
 }
 
-.gi_round {
+.gi-round {
   border-radius: 100px;
-}
-
-.gi_bg_1 {
-  background-color: var(--color-bg-1);
-}
-
-.gi_bg_2 {
-  background-color: var(--color-bg-2);
-}
-
-.gi_bg_3 {
-  background-color: var(--color-bg-3);
-}
-
-.gi_bg_4 {
-  background-color: var(--color-bg-4);
-}
-
-.gi_bg_5 {
-  background-color: var(--color-bg-5);
 }
 
 .w-full {
@@ -291,77 +272,53 @@
 }
 
 // 通用外边距
-.gi_margin {
+.gi-margin {
   margin: var(--margin);
 }
 
 // 通用内边距
-.gi_padding {
+.gi-padding {
   padding: var(--padding);
 }
 
-.gi_relative {
-  position: relative;
-}
-
-.gi_absolute {
-  position: absolute;
-}
-
-.gi_rotate_90deg {
-  transform: rotate(90deg);
-}
-
-.gi_rotate_-90deg {
-  transform: rotate(-90deg);
-}
-
-.gi_rotate_180deg {
-  transform: rotate(180deg);
-}
-
-.gi_rotate_-180deg {
-  transform: rotate(-180deg);
-}
-
-.gi_select_input {
+.gi-select-input {
   width: 120px !important;
 }
 
-.gi_search_input {
+.gi-search-input {
   width: 250px !important;
 }
 
-.gi_line_1 {
+.gi-line-1 {
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
 }
 
-.gi_line_2 {
+.gi-line-2 {
   -webkit-line-clamp: 2;
   line-clamp: 2;
 }
 
-.gi_line_3 {
+.gi-line-3 {
   -webkit-line-clamp: 3;
   line-clamp: 3;
 }
 
-.gi_line_4 {
+.gi-line-4 {
   -webkit-line-clamp: 4;
   line-clamp: 4;
 }
 
-.gi_line_5 {
+.gi-line-5 {
   -webkit-line-clamp: 5;
   line-clamp: 5;
 }
 
-.gi_line_2,
-.gi_line_3,
-.gi_line_4,
-.gi_line_5 {
+.gi-line-2,
+.gi-line-3,
+.gi-line-4,
+.gi-line-5 {
   display: -webkit-box; // 弹性伸缩盒
   overflow: hidden;
   text-overflow: ellipsis;

@@ -5,16 +5,16 @@
 <template>
   <div class="gi-table" :class="{ 'gi-table--fullscreen': isFullscreen }">
     <!-- 表格头部区域 -->
-    <a-row justify="space-between">
+    <a-row justify="space-between" align="center" class="gi-row-tool">
       <!-- 左侧标题区域 -->
-      <a-space wrap class="gi_mb_base">
+      <a-space wrap>
         <slot name="custom-title">
           <div class="gi-table__title">{{ props.title }}</div>
         </slot>
       </a-space>
 
       <!-- 表格操作按钮组 -->
-      <a-space wrap class="gi_mb_base">
+      <a-space wrap>
         <slot name="custom-extra"></slot>
         <!-- 斑马纹开关 -->
         <a-tooltip content="斑马纹">
@@ -23,14 +23,14 @@
 
         <!-- 刷新按钮 -->
         <a-tooltip content="刷新">
-          <a-button size="mini" class="gi_hover_btn" @click="handleRefresh">
+          <a-button size="mini" class="gi-hover-btn" @click="handleRefresh">
             <template #icon><icon-refresh :size="18" /></template>
           </a-button>
         </a-tooltip>
 
         <!-- 全屏按钮 -->
         <a-tooltip content="全屏">
-          <a-button size="mini" class="gi_hover_btn" @click="toggleFullscreen">
+          <a-button size="mini" class="gi-hover-btn" @click="toggleFullscreen">
             <template #icon>
               <icon-fullscreen v-if="!isFullscreen" :size="18" />
               <icon-fullscreen-exit v-else :size="18" />
@@ -40,7 +40,7 @@
 
         <!-- 边框显示按钮 -->
         <a-tooltip content="显示边框">
-          <a-button size="mini" class="gi_hover_btn" @click="toggleBorder">
+          <a-button size="mini" class="gi-hover-btn" @click="toggleBorder">
             <template #icon>
               <IconBorders />
             </template>
@@ -50,7 +50,7 @@
         <!-- 表格尺寸设置 -->
         <a-dropdown @select="handleSizeChange">
           <a-tooltip content="表格尺寸">
-            <a-button size="mini" class="gi_hover_btn">
+            <a-button size="mini" class="gi-hover-btn">
               <template #icon>
                 <IconTableSize />
               </template>

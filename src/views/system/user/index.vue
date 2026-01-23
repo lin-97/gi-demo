@@ -4,7 +4,7 @@
       <a-input v-model="treeInputValue" placeholder="输入部门名称搜索" allow-clear :style="{ marginBottom: '8px' }">
         <template #prefix><icon-search /></template>
       </a-input>
-      <div class="gi_full_column">
+      <div class="gi-full-column">
         <a-scrollbar style="height: 100%; overflow: auto" outer-style="height: 100%">
           <a-tree ref="treeRef" block-node show-line default-expand-all :data="deptList" :field-names="{
             key: 'id',
@@ -16,12 +16,12 @@
       </div>
     </template>
 
-    <a-row justify="space-between">
-      <a-space wrap class="gi_mb_base">
+    <a-row justify="space-between" class="gi-row-tool">
+      <a-space wrap>
         <GiButton type="add" @click="onAdd"></GiButton>
         <GiButton type="delete" @click="onMulDelete"></GiButton>
       </a-space>
-      <a-space wrap class="gi_mb_base">
+      <a-space wrap>
         <a-input-group>
           <a-select v-model="queryParams.status" :options="dictData.STATUS" placeholder="用户状态" allow-clear
             style="width: 150px"></a-select>
@@ -33,7 +33,7 @@
       </a-space>
     </a-row>
 
-    <a-table class="gi_table" row-key="id" :loading="loading" :data="userList" :bordered="{ cell: true }"
+    <a-table class="gi-table" row-key="id" :loading="loading" :data="userList" :bordered="{ cell: true }"
       :scroll="{ x: '100%', y: '100%', minWidth: 1700 }" :pagination="pagination"
       :row-selection="{ type: 'checkbox', showCheckedAll: true }" :selected-keys="selectedKeys" @select="select"
       @select-all="selectAll">

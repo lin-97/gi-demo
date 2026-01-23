@@ -4,7 +4,7 @@
 -->
 <template>
   <!-- 折叠按钮 -->
-  <a-button size="mini" class="gi_hover_btn menu-fold-btn" @click="handleFoldClick">
+  <a-button size="mini" class="gi-hover-btn menu-fold-btn" @click="handleFoldClick">
     <template #icon>
       <icon-menu-fold v-if="!appStore.menuCollapse" :size="18" :stroke-width="3" />
       <icon-menu-unfold v-else :size="18" :stroke-width="3" />

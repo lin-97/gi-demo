@@ -1,5 +1,5 @@
 <template>
-  <div class="gi_page account">
+  <div class="gi-page account">
     <a-row :gutter="14">
       <a-col :xs="24" :sm="24" :md="24" :lg="10" :xl="8" :xxl="7">
         <section class="user-card">

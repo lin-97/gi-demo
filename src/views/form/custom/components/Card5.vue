@@ -3,7 +3,7 @@
     <template #extra>
       <GiCodeButton :code="CodeJson"></GiCodeButton>
     </template>
-    <a-row :gutter="30" class="gi_mb">
+    <a-row :gutter="30" class="gi-mb">
       <a-col :xs="24" :sm="24" :md="12">
         <GiForm ref="formRef" :model-value="form" :columns="columns" :fc="fc"
           @update:model-value="Object.assign(form, $event)">
@@ -20,7 +20,7 @@
       </a-col>
     </a-row>
 
-    <a-row :gutter="30" class="gi_mb">
+    <a-row :gutter="30" class="gi-mb">
       <a-col :xs="24" :sm="24" :md="12">
         <gi-edit-table :columns="tableColumns" :data="data" size="small" class="gi-mb"></gi-edit-table>
       </a-col>

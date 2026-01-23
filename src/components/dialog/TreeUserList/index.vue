@@ -3,8 +3,8 @@
     <template #left>
       <Tree @node-click="search" />
     </template>
-    <a-row justify="end">
-      <a-space wrap class="gi_mb_base">
+    <a-row justify="end" class="gi-row-tool">
+      <a-space wrap>
         <a-input v-model="searchParams.username" placeholder="输入用户名搜索" allow-clear style="max-width: 250px">
         </a-input>
         <a-button type="primary" @click="search">
@@ -15,7 +15,7 @@
       </a-space>
     </a-row>
 
-    <a-table class="gi_table" row-key="id" :loading="loading" :bordered="{ cell: true }" :columns="columns"
+    <a-table class="gi-table" row-key="id" :loading="loading" :bordered="{ cell: true }" :columns="columns"
       :data="tableData" :scroll="{ x: '100%', y: '100%' }"
       :row-selection="{ type: props.multiple ? 'checkbox' : 'radio', showCheckedAll: true }" :pagination="pagination"
       @select="select" @select-all="selectAll">

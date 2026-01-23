@@ -1,12 +1,12 @@
 <template>
   <GiPageLayout margin>
-    <a-row justify="space-between">
-      <a-space wrap class="gi_mb_base">
+    <a-row justify="space-between" class="gi-row-tool">
+      <a-space wrap>
         <GiButton type="add" @click="onAdd"></GiButton>
         <GiButton type="delete" @click="onMulDelete"></GiButton>
       </a-space>
 
-      <a-space wrap class="gi_mb_base">
+      <a-space wrap>
         <a-input-group>
           <a-select v-model="queryParams.status" :options="dictData.STATUS" placeholder="状态" allow-clear
             style="width: 120px"></a-select>
@@ -17,7 +17,7 @@
       </a-space>
     </a-row>
 
-    <a-table class="gi_table" row-key="id" :data="dictList" :bordered="{ cell: true }" :loading="loading"
+    <a-table class="gi-table" row-key="id" :data="dictList" :bordered="{ cell: true }" :loading="loading"
       :scroll="{ x: '100%', y: '100%', minWidth: 1000 }" :pagination="pagination"
       :row-selection="{ type: 'checkbox', showCheckedAll: true }" :selected-keys="selectedKeys" @select="select"
       @select-all="selectAll">

@@ -7,7 +7,7 @@
     <a-space size="medium">
       <!-- 项目配置按钮 -->
       <a-tooltip content="项目配置" position="bl">
-        <a-button size="mini" class="gi_hover_btn" @click="handleOpenSettings">
+        <a-button size="mini" class="gi-hover-btn" @click="handleOpenSettings">
           <template #icon>
             <icon-settings :size="18" />
           </template>
@@ -17,7 +17,7 @@
       <!-- 消息通知下拉框 -->
       <a-popover position="bottom" trigger="click">
         <a-badge :count="9" dot>
-          <a-button size="mini" class="gi_hover_btn">
+          <a-button size="mini" class="gi-hover-btn">
             <template #icon>
               <icon-notification :size="18" />
             </template>
@@ -30,7 +30,7 @@
 
       <!-- 全屏切换按钮 -->
       <a-tooltip v-if="!['xs', 'sm'].includes(breakpoint)" content="全屏切换" position="bottom">
-        <a-button size="mini" class="gi_hover_btn" @click="toggle">
+        <a-button size="mini" class="gi-hover-btn" @click="toggle">
           <template #icon>
             <icon-fullscreen v-if="!isFullscreen" :size="18" />
             <icon-fullscreen-exit v-else :size="18" />

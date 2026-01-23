@@ -33,7 +33,7 @@
         </a-statistic>
       </a-row>
 
-      <a-space :key="selectedKey" size="mini" fill direction="vertical" class="gi_mt">
+      <a-space :key="selectedKey" size="mini" fill direction="vertical" class="gi-mt">
         <a-progress v-for="i in filePercentList" :key="i.label" :percent="i.value" :stroke-width="8" :color="i.color"
           :animation="true">
           <template #text>{{ i.label }}</template>
@@ -46,10 +46,9 @@
 <script setup lang="ts">
 import type { FileTypeListItem } from '@/constant/file'
 import { FILE_TYPE_LIST } from '@/constant/file'
-import { useRouteListener } from '@/hooks'
 
+const route = useRoute()
 const router = useRouter()
-const { listenerRouteChange } = useRouteListener()
 
 const selectedKey = ref('0')
 const filePercentList = [
@@ -61,12 +60,13 @@ const filePercentList = [
 ]
 const showPercent = ref(false)
 
-listenerRouteChange(({ to }) => {
-  selectedKey.value = to.query.fileType as string || '0'
-})
+if (route.query.fileType) {
+  selectedKey.value = route.query.fileType as string || '0'
+}
 
 // 点击事件
 const onClickItem = (item: FileTypeListItem) => {
+  selectedKey.value = item.value
   router.replace({ path: '/file', query: { fileType: item.value } })
 }
 </script>
@@ -82,6 +82,7 @@ const onClickItem = (item: FileTypeListItem) => {
 }
 
 :deep(.arco-progress) {
+
   .arco-progress-line,
   .arco-progress-line-bar-buffer,
   .arco-progress-line-bar {

@@ -1,5 +1,5 @@
 <template>
-  <div class="gi_page">
+  <div class="gi-page">
     <section class="result-box">
       <a-result status="success" title="操作成功">
         <template #subtitle>表单提交成功！</template>

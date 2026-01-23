@@ -1,5 +1,5 @@
 <template>
-  <div class="gi_page">
+  <div class="gi-page">
     <a-watermark content="gi.admin.pro">
       <a-card title="基本信息" :bordered="false">
         <template #extra>
@@ -33,7 +33,7 @@
         </a-descriptions>
       </a-card>
 
-      <a-card title="其他信息" :bordered="false" class="gi_mt">
+      <a-card title="其他信息" :bordered="false" class="gi-mt">
         <a-descriptions :column="1">
           <a-descriptions-item label="姓名">Lin</a-descriptions-item>
           <a-descriptions-item label="性别">男</a-descriptions-item>

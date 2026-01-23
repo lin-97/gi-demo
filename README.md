@@ -1352,40 +1352,38 @@ Link 组件使用场景
 
 #### CSS 全局类名-命名规范
 
-**`采用下划线_，好复制`**
-
 ```scss
-.gi_line_1   .gi_line_2   .gi_margin
+.gi-line-1   .gi-line-2   .gi-margin
 ```
 
 ```scss
 // 文件位置: @/styles/global.scss
-.gi_line_1 {
+.gi-line-1 {
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
 }
 
-.gi_line_2 {
+.gi-line-2 {
   -webkit-line-clamp: 2;
 }
 
-.gi_line_3 {
+.gi-line-3 {
   -webkit-line-clamp: 3;
 }
 
-.gi_line_4 {
+.gi-line-4 {
   -webkit-line-clamp: 4;
 }
 
-.gi_line_5 {
+.gi-line-5 {
   -webkit-line-clamp: 5;
 }
 
-.gi_line_2,
-.gi_line_3,
-.gi_line_4,
-.gi_line_5 {
+.gi-line-2,
+.gi-line-3,
+.gi-line-4,
+.gi-line-5 {
   overflow: hidden;
   word-break: break-all;
   text-overflow: ellipsis;
@@ -1393,96 +1391,72 @@ Link 组件使用场景
   -webkit-box-orient: vertical; // 设置伸缩盒子元素排列方式
 }
 
-.gi_padding {
+.gi-padding {
   padding: var(--padding);
 }
 
-.gi_margin {
+.gi-margin {
   margin: var(--margin);
 }
 
-.gi_relative {
-  position: relative;
-}
-
-.gi_absolute {
-  position: absolute;
-}
-
-.gi_rotate_90deg {
-  transform: rotate(90deg);
-}
-
-.gi_rotate_-90deg {
-  transform: rotate(-90deg);
-}
-
-.gi_rotate_180deg {
-  transform: rotate(180deg);
-}
-
-.gi_rotate_-180deg {
-  transform: rotate(-180deg);
-}
-
-.gi_mt {
+.gi-mt {
   margin-top: var(--margin);
 }
 
-.gi_mb {
+.gi-mb {
   margin-bottom: var(--margin);
 }
 
-.gi_ml {
+.gi-ml {
   margin-left: var(--margin);
 }
 
-.gi_mr {
+.gi-mr {
   margin-right: var(--margin);
 }
 
-.gi_mx {
+.gi-mx {
   margin: 0 var(--margin);
 }
 
-.gi_my {
+.gi-my {
   margin: var(--margin) 0;
 }
 
-.gi_m0 {
+.gi-m0 {
   margin: 0;
 }
 
-.gi_pt {
+.gi-pt {
   padding-top: var(--margin);
 }
 
-.gi_pb {
+.gi-pb {
   padding-bottom: var(--margin);
 }
 
-.gi_pl {
+.gi-pl {
   padding-left: var(--margin);
 }
 
-.gi_pr {
+.gi-pr {
   padding-right: var(--margin);
 }
 
-.gi_px {
+.gi-px {
   padding: 0 var(--padding);
 }
 
-.gi_py {
+.gi-py {
   padding: var(--padding) 0;
 }
 
-.gi_p0 {
+.gi-p0 {
   padding: 0;
 }
 
 // 使用场景，页面内容超出高度会自动滚动
-.gi_page {
+.gi-page {
   flex: 1;
   padding: var(--margin);
   box-sizing: border-box;
