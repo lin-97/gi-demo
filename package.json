@@ -16,7 +16,7 @@
   "dependencies": {
     "@amap/amap-jsapi-loader": "^1.0.1",
     "@arco-design/color": "^0.4.0",
-    "@arco-themes/vue-gi-demo": "^0.0.57",
+    "@arco-themes/vue-gi-demo": "^0.0.58",
     "@codemirror/lang-javascript": "^6.2.4",
     "@codemirror/lang-vue": "^0.1.3",
     "@codemirror/theme-one-dark": "^6.1.3",
