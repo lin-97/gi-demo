@@ -7,7 +7,7 @@
     <a-row justify="space-between" class="gi-row-tool">
       <a-space wrap>
         <GiButton type="add" @click="onAdd"></GiButton>
-        <GiButton type="delete" @click="onMulDelete"></GiButton>
+        <GiButton type="delete" @click="onBatchDelete"></GiButton>
         <GiButton type="export" @click="onExport"></GiButton>
         <GiCodeButton :code="CodeJson"></GiCodeButton>
       </a-space>
@@ -83,9 +83,9 @@ const form = reactive({
 })
 
 // 这里使用了表格hooks：useTable, 节省了大量代码
-const { loading, tableData, getTableData, pagination, selectedKeys, select, selectAll, handleDelete, fixed } = useTable(
+const { loading, tableData, getTableData, pagination, selectedKeys, select, selectAll, onDelete, onBatchDelete, fixed } = useTable(
   (page) => baseAPI.getList({ ...form, ...page }),
-  { immediate: false, formatResult: (data) => data.map((i) => ({ ...i, isEdit: false })) }
+  { immediate: false, rowKey: 'id', formatResult: (data) => data.map((i) => ({ ...i, isEdit: false })), deleteAPI: (ids) => baseAPI.delete({ ids }) }
 )
 
 // 比例进度条颜色
@@ -110,19 +110,6 @@ const onEdit = async () => {
 
 const onDetail = (item: T.ListItem) => {
   router.push({ name: 'DataDetailId', params: { id: item.id } })
-}
-
-// 删除
-const onDelete = (item: T.ListItem) => {
-  return handleDelete(() => baseAPI.delete({ ids: [item.id] }), { content: `是否删除-${item.name}?`, showModal: false })
-}
-
-// 批量删除
-const onMulDelete = () => {
-  if (!selectedKeys.value.length) {
-    return Message.warning('请选择删除项！')
-  }
-  handleDelete(() => baseAPI.delete({ ids: selectedKeys.value as string[] }), { successTip: '批量删除成功！' })
 }
 
 const onExport = () => {

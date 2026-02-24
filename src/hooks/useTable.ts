@@ -7,6 +7,7 @@ interface Options<T, U> {
   onSuccess?: () => void
   immediate?: boolean
   rowKey?: keyof T
+  deleteAPI?: (ids: string[]) => Promise<ApiRes<unknown>>
 }
 
 /** 分页参数类型 */
@@ -56,7 +57,7 @@ interface DeleteOptions {
  * })
  */
 export function useTable<T extends U, U = T>(api: Api<T>, options?: Options<T, U>) {
-  const { formatResult, onSuccess, immediate = true, rowKey = 'id' } = options || {}
+  const { formatResult, onSuccess, immediate = true, rowKey = 'id', deleteAPI } = options || {}
 
   // 分页相关
   const { pagination, setTotal } = usePagination(() => getTableData())
@@ -174,6 +175,39 @@ export function useTable<T extends U, U = T>(api: Api<T>, options?: Options<T, U
     })
   }
 
+  /**
+   * 删除单条数据
+   * @description 需在 options 中配置 deleteAPI
+   * @param row - 要删除的行数据
+   */
+  const onDelete = (row: U) => {
+    if (!deleteAPI) {
+      Message.error('deleteAPI 没有配置')
+      return
+    }
+    const ids = String(row[rowKey as keyof U])
+    return handleDelete(() => deleteAPI([ids]), { showModal: false })
+  }
+
+  /**
+   * 批量删除数据
+   * @description 需在 options 中配置 deleteAPI
+   */
+  const onBatchDelete = () => {
+    if (!deleteAPI) {
+      Message.error('deleteAPI 没有配置')
+      return
+    }
+    if (!selectedKeys.value.length) {
+      Message.error('请选择要删除的数据')
+      return
+    }
+    handleDelete(() => deleteAPI(selectedKeys.value as string[]), {
+      title: '批量删除',
+      content: `确定要删除选中的 ${selectedKeys.value.length} 条数据吗？`
+    })
+  }
+
   // 响应式处理表格操作列固定状态
   const { breakpoint } = useBreakpoint()
   const fixed = computed(() => !['xs', 'sm'].includes(breakpoint.value) ? 'right' : undefined)
@@ -199,6 +233,10 @@ export function useTable<T extends U, U = T>(api: Api<T>, options?: Options<T, U
     getSelectedData,
     /** 处理删除、批量删除 */
     handleDelete,
+    /** 删除单条数据，需配置 deleteAPI */
+    onDelete,
+    /** 批量删除数据，需配置 deleteAPI */
+    onBatchDelete,
     /** 刷新表格数据，页码会缓存 */
     refresh,
     /** 操作列在小屏场景下不固定在右侧 */
