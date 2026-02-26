@@ -78,7 +78,7 @@ const columns = reactive([
   }
 ] as FormColumnItem[])
 
-const { tableData, pagination, search, loading } = useTable((p) => baseAPI.getList(p))
+const { tableData, pagination, search, loading } = useTable({ listAPI: (p) => baseAPI.getList(p) })
 
 const onDelete: PopconfirmInstance['onBeforeOk'] = () => {
   return new Promise((resolve) => setTimeout(() => resolve(true), 300))

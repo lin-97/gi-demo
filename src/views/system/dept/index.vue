@@ -76,16 +76,8 @@ const queryParams = reactive({
   status: ''
 })
 
-const {
-  loading,
-  tableData: deptList,
-  selectedKeys,
-  search,
-  select,
-  selectAll,
-  fixed,
-  handleDelete
-} = useTable(() => baseAPI.getList({ ...queryParams }), {
+const { loading, tableData: deptList, selectedKeys, search, select, selectAll, fixed, handleDelete } = useTable({
+  listAPI: () => baseAPI.getList({ ...queryParams }),
   immediate: true,
   onSuccess: () => {
     nextTick(() => {

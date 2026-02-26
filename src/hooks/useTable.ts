@@ -7,19 +7,9 @@ interface Options<T, U> {
   onSuccess?: () => void
   immediate?: boolean
   rowKey?: keyof T
+  listAPI: (params: { page: number, size: number }) => Promise<ApiRes<PageRes<T[]>>> | Promise<ApiRes<T[]>>
   deleteAPI?: (ids: string[]) => Promise<ApiRes<unknown>>
 }
-
-/** 分页参数类型 */
-type PaginationParams = {
-  /** 当前页码 */
-  page: number
-  /** 每页数量 */
-  size: number
-}
-
-/** API 函数类型 */
-type Api<T> = (params: PaginationParams) => Promise<ApiRes<PageRes<T[]>>> | Promise<ApiRes<T[]>>
 
 /** 删除操作的配置选项 */
 interface DeleteOptions {
@@ -38,7 +28,6 @@ interface DeleteOptions {
  * @description 提供表格数据管理的响应式 Hook，支持分页、搜索、刷新、删除等功能
  * @template T - 原始数据类型
  * @template U - 格式化后的数据类型
- * @param api - 获取表格数据的 API 函数
  * @param options - 表格配置选项
  * @returns 表格相关的状态和方法
  * @example
@@ -50,14 +39,15 @@ interface DeleteOptions {
  *   search,
  *   refresh,
  *   handleDelete
- * } = useTable(getTableApi, {
+ * } = useTable({
+ *   listAPI: (p) => getTableApi(p),
  *   formatResult: (data) => data.map(formatData),
  *   immediate: true,
  *   rowKey: 'id'
  * })
  */
-export function useTable<T extends U, U = T>(api: Api<T>, options?: Options<T, U>) {
-  const { formatResult, onSuccess, immediate = true, rowKey = 'id', deleteAPI } = options || {}
+export function useTable<T extends U, U = T>(options: Options<T, U>) {
+  const { formatResult, onSuccess, immediate = true, rowKey = 'id', listAPI, deleteAPI } = options || {}
 
   // 分页相关
   const { pagination, setTotal } = usePagination(() => getTableData())
@@ -71,7 +61,7 @@ export function useTable<T extends U, U = T>(api: Api<T>, options?: Options<T, U
   async function getTableData() {
     try {
       loading.value = true
-      const res = await api({ page: pagination.current, size: pagination.pageSize })
+      const res = await listAPI({ page: pagination.current, size: pagination.pageSize })
       // 处理返回的数据结构可能是分页或数组的情况
       const data = !Array.isArray(res.data) ? res.data.records : res.data
       tableData.value = formatResult ? formatResult(data) : data
@@ -207,6 +197,14 @@ export function useTable<T extends U, U = T>(api: Api<T>, options?: Options<T, U
       content: `确定要删除选中的 ${selectedKeys.value.length} 条数据吗？`
     })
   }
+
+  // 自定义扩展...
+  // 导入
+  // const onImport = () => {}
+  // 导出
+  // const onExport = () => {}
+  // 下载模板
+  // const onDownloadTemplate = () => {}
 
   // 响应式处理表格操作列固定状态
   const { breakpoint } = useBreakpoint()

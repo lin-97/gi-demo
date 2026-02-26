@@ -116,7 +116,7 @@ const columns: TableInstance['columns'] = [
   { title: '操作', width: 200, slotName: 'action', align: 'center' }
 ]
 
-const { tableData, getTableData, pagination, search, loading } = useTable((p) => baseAPI.getList(p))
+const { tableData, getTableData, pagination, search, loading } = useTable({ listAPI: (p) => baseAPI.getList(p) })
 
 function onClickName(record: T.ListItem) {
   Message.success(`点击了${record.name}`)

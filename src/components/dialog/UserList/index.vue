@@ -73,15 +73,10 @@ const columns = [
   }
 ] as TableColumnData[]
 
-const {
-  loading,
-  tableData,
-  pagination,
-  search,
-  select,
-  selectAll,
-  getSelectedData
-} = useTable((page) => baseAPI.getList({ ...page, ...searchParams, ...props.queryParams }), { immediate: true })
+const { loading, tableData, pagination, search, select, selectAll, getSelectedData } = useTable({
+  listAPI: (page) => baseAPI.getList({ ...page, ...searchParams, ...props.queryParams }),
+  immediate: true
+})
 
 const reset = () => {
   searchParams.username = ''

@@ -81,7 +81,7 @@ const columns: TableColumnData[] = [
   }
 ]
 
-const { tableData, getTableData, pagination, loading } = useTable((p) => baseAPI.getList(p))
+const { tableData, getTableData, pagination, loading } = useTable({ listAPI: (p) => baseAPI.getList(p) })
 
 onActivated(() => {
   getTableData()

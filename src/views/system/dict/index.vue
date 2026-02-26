@@ -75,17 +75,10 @@ const queryParams = reactive({
   status: ''
 })
 
-const {
-  loading,
-  tableData: dictList,
-  pagination,
-  selectedKeys,
-  search,
-  select,
-  selectAll,
-  fixed,
-  handleDelete
-} = useTable((page) => baseAPI.getList({ ...page, ...queryParams }), { immediate: true })
+const { loading, tableData: dictList, pagination, selectedKeys, search, select, selectAll, fixed, handleDelete } = useTable({
+  listAPI: (page) => baseAPI.getList({ ...page, ...queryParams }),
+  immediate: true
+})
 
 const reset = () => {
   queryParams.name = ''

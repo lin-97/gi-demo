@@ -70,7 +70,7 @@ import CodeJson from './index.vue?raw'
 
 defineOptions({ name: 'TableCustom' })
 
-const { tableData, getTableData, pagination, loading } = useTable((p) => baseAPI.getList(p))
+const { tableData, getTableData, pagination, loading } = useTable({ listAPI: (p) => baseAPI.getList(p) })
 
 const onClickName = (record: T.ListItem) => {
   Message.success(`点击了${record.name}`)

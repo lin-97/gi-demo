@@ -118,17 +118,10 @@ getDeptList()
 
 const queryParams = reactive({ status: '', username: '' })
 
-const {
-  loading,
-  tableData: userList,
-  pagination,
-  selectedKeys,
-  search,
-  select,
-  selectAll,
-  fixed,
-  handleDelete
-} = useTable((page) => baseAPI.getList({ ...page, ...queryParams }), { immediate: true })
+const { loading, tableData: userList, pagination, selectedKeys, search, select, selectAll, fixed, handleDelete } = useTable({
+  listAPI: (page) => baseAPI.getList({ ...page, ...queryParams }),
+  immediate: true
+})
 
 const reset = () => {
   queryParams.status = ''

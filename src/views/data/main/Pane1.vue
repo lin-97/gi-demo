@@ -83,10 +83,13 @@ const form = reactive({
 })
 
 // 这里使用了表格hooks：useTable, 节省了大量代码
-const { loading, tableData, getTableData, pagination, selectedKeys, select, selectAll, onDelete, onBatchDelete, fixed } = useTable(
-  (page) => baseAPI.getList({ ...form, ...page }),
-  { immediate: false, rowKey: 'id', formatResult: (data) => data.map((i) => ({ ...i, isEdit: false })), deleteAPI: (ids) => baseAPI.delete({ ids }) }
-)
+const { loading, tableData, getTableData, pagination, selectedKeys, select, selectAll, onDelete, onBatchDelete, fixed } = useTable({
+  immediate: false,
+  rowKey: 'id',
+  listAPI: (page) => baseAPI.getList({ ...form, ...page }),
+  formatResult: (data) => data.map((i) => ({ ...i, isEdit: false })),
+  deleteAPI: (ids) => baseAPI.delete({ ids })
+})
 
 // 比例进度条颜色
 const getProportionColor = (proportion: number) => {

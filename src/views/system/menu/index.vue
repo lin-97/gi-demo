@@ -124,13 +124,10 @@ const onExpanded = () => {
 
 const queryParams = reactive({ name: '', status: '' })
 
-const {
-  loading,
-  tableData: menuList,
-  search,
-  fixed,
-  handleDelete
-} = useTable(() => baseAPI.getList({ ...queryParams }), { immediate: true })
+const { loading, tableData: menuList, search, fixed, handleDelete } = useTable({
+  listAPI: () => baseAPI.getList({ ...queryParams }),
+  immediate: true
+})
 
 const reset = () => {
   queryParams.name = ''

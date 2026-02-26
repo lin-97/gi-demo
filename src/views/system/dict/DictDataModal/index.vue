@@ -58,10 +58,10 @@ const AddDictDataModalRef = useTemplateRef('AddDictDataModalRef')
 
 const dictCode = ref('')
 
-const { loading, tableData, pagination, selectedKeys, search, select, selectAll } = useTable(
-  (page) => getDictDataList({ ...page, code: dictCode.value }),
-  { immediate: false }
-)
+const { loading, tableData, pagination, selectedKeys, search, select, selectAll } = useTable({
+  listAPI: (page) => getDictDataList({ ...page, code: dictCode.value }),
+  immediate: false
+})
 
 const open = (data: { code: string }) => {
   tableData.value = []
