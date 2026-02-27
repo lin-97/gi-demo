@@ -86,6 +86,7 @@ const form = reactive({
 const { loading, tableData, getTableData, pagination, selectedKeys, select, selectAll, onDelete, onBatchDelete, fixed } = useTable({
   immediate: false,
   rowKey: 'id',
+  crossPageSelect: true,
   listAPI: (page) => baseAPI.getList({ ...form, ...page }),
   formatResult: (data) => data.map((i) => ({ ...i, isEdit: false })),
   deleteAPI: (ids) => baseAPI.delete({ ids })

@@ -7,6 +7,8 @@ interface Options<T, U> {
   onSuccess?: () => void
   immediate?: boolean
   rowKey?: keyof T
+  /** 是否开启跨页多选，开启后切换分页会保留已选中的 key */
+  crossPageSelect?: boolean
   listAPI: (params: { page: number, size: number }) => Promise<ApiRes<PageRes<T[]>>> | Promise<ApiRes<T[]>>
   deleteAPI?: (ids: string[]) => Promise<ApiRes<unknown>>
 }
@@ -47,7 +49,8 @@ interface DeleteOptions {
  * })
  */
 export function useTable<T extends U, U = T>(options: Options<T, U>) {
-  const { formatResult, onSuccess, immediate = true, rowKey = 'id', listAPI, deleteAPI } = options || {}
+  const { formatResult, onSuccess, immediate = true, rowKey = 'id', crossPageSelect = false, listAPI, deleteAPI } =
+    options || {}
 
   // 分页相关
   const { pagination, setTotal } = usePagination(() => getTableData())
@@ -80,12 +83,23 @@ export function useTable<T extends U, U = T>(options: Options<T, U>) {
   // 多选
   const selectedKeys = ref<(string | number)[]>([])
 
+  /** 当前页所有行的 key（用于跨页多选时合并） */
+  function getCurrentPageKeys() {
+    return (tableData.value as TableData[]).map((i) => i[rowKey as string])
+  }
+
   /**
    * 行选择回调
-   * @param rowKeys - 选中的行 key 数组
+   * @param rowKeys - 当前页选中的行 key 数组
    */
   const select: TableInstance['onSelect'] = (rowKeys) => {
-    selectedKeys.value = rowKeys
+    if (crossPageSelect) {
+      const pageKeys = getCurrentPageKeys()
+      const rest = selectedKeys.value.filter((k) => !pageKeys.includes(k))
+      selectedKeys.value = [...rest, ...rowKeys]
+    } else {
+      selectedKeys.value = rowKeys
+    }
   }
 
   /**
@@ -94,7 +108,17 @@ export function useTable<T extends U, U = T>(options: Options<T, U>) {
    */
   const selectAll: TableInstance['onSelectAll'] = (checked) => {
     const arr = (tableData.value as TableData[]).filter((i) => !(i?.disabled ?? false))
-    selectedKeys.value = checked ? arr.map((i) => i[rowKey as string]) : []
+    const pageKeys = arr.map((i) => i[rowKey as string])
+    if (crossPageSelect) {
+      if (checked) {
+        const rest = selectedKeys.value.filter((k) => !pageKeys.includes(k))
+        selectedKeys.value = [...rest, ...pageKeys]
+      } else {
+        selectedKeys.value = selectedKeys.value.filter((k) => !pageKeys.includes(k))
+      }
+    } else {
+      selectedKeys.value = checked ? pageKeys : []
+    }
   }
 
   /** 获取选中的数据 */
