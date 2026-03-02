@@ -1420,8 +1420,8 @@ const data: MockSystemMenuItem[] = [
       {
         id: '1302',
         parentId: '13',
-        path: '/detail/senior',
-        component: 'detail/senior/index',
+        path: '/detail/general',
+        component: 'detail/general/index',
         redirect: '',
         type: 2,
         title: '普通详情',
