@@ -38,7 +38,7 @@ import { hidePhone } from '@/utils'
 import CateTree from './CateTree.vue'
 import CodeJson from './index.vue?raw'
 
-defineOptions({ name: 'DataIndex' })
+defineOptions({ name: 'CrudIndex' })
 const router = useRouter()
 const { setTabTitle } = useTabsStore()
 
@@ -63,16 +63,16 @@ onActivated(() => {
 })
 
 const onAdd = () => {
-  router.push({ path: '/data/form' })
+  router.push({ path: '/crud/form' })
 }
 
 const onEdit = (row: T.ListItem) => {
-  router.push({ path: '/data/form', query: { id: row.id } })
+  router.push({ path: '/crud/form', query: { id: row.id } })
   setTabTitle('编辑')
 }
 
 const onDetail = (item: T.ListItem) => {
-  router.push({ name: 'DataDetailId', params: { id: item.id } })
+  router.push({ name: 'CrudDetailId', params: { id: item.id } })
 }
 
 const columns = computed<TableColumnData[]>(() => [

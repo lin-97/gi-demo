@@ -25,7 +25,7 @@ import { useDict } from '@/hooks'
 import * as Regexp from '@/utils/regexp'
 import CodeJson from './index.vue?raw'
 
-defineOptions({ name: 'DataForm' })
+defineOptions({ name: 'CrudForm' })
 
 const route = useRoute()
 const router = useRouter()

@@ -45,7 +45,7 @@ import { baseAPI } from '@/apis/person'
 import { GiCellGender, GiCellStatus } from '@/components/index'
 import { hidePhone } from '@/utils'
 
-defineOptions({ name: 'DataDetailId' })
+defineOptions({ name: 'CrudDetailId' })
 
 const route = useRoute()
 const router = useRouter()

@@ -228,7 +228,7 @@ export function randomHex(): string {
  * @example
  * /system => System
  * /system/menu => SystemMenu
- * /data-manage/detail => DataManageDetail
+ * /crud/detail => CrudDetail
  */
 export function transformPathToName(path: string): string {
   if (!path || isExternal(path)) return ''

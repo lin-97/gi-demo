@@ -4,7 +4,7 @@ import { defineStore } from 'pinia'
 const storeSetup = () => {
   // 菜单角标
   const badgeMap: Record<string, number> = reactive({
-    '/data/index': 6,
+    '/crud/index': 6,
     '/form/base': 3,
     '/form/step': 5,
     '/table/dialog': 8
@@ -12,7 +12,7 @@ const storeSetup = () => {
 
   // 菜单角标属性
   const BadgePropsMap: Record<string, BadgeInstance['$props']> = {
-    '/data/index': {
+    '/crud/index': {
       status: 'success'
     },
     '/form/base': {
