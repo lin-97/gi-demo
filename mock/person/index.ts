@@ -29,18 +29,19 @@ function getHobbysList(num: number): string[] {
 /** 使用 Mock 生成单条数据（在 seed 下结果固定） */
 function createMockItem() {
   return Mock.mock({
-    id: '@guid',
-    name: '@cname',
-    account: '@string("lower", 5)',
-    phone: '1557872@integer(1000, 9999)',
+    'id': '@guid',
+    'name': '@cname',
+    'account': '@string("lower", 5)',
+    'phone': '1557872@integer(1000, 9999)',
     'gender|1-3': 1,
-    email: '155****8810@qq.com',
-    createTime: '@datetime',
-    address: '@county(true)',
-    avatar: () => AVATARS[Random.integer(0, AVATARS.length - 1)],
-    'proportion|1-100': 10,
+    'email': '@email',
+    'createTime': '@datetime',
+    'address': '@county(true)',
+    'avatar': () => AVATARS[Random.integer(0, AVATARS.length - 1)],
+    'age|18-60': 25,
     'status|0-1': 0,
-    hobbys: () => getHobbysList(Random.integer(1, 9))
+    'hobbys': () => getHobbysList(Random.integer(1, 9)),
+    'remark': ''
   })
 }
 
@@ -57,20 +58,39 @@ function buildFixedPersonList() {
 }
 
 const FIXED_PERSON_LIST = buildFixedPersonList()
-const TOTAL = FIXED_PERSON_LIST.length
 
 export default defineMock([
   ...getBaseApi({
     baseUrl: '/person',
-    getListData: (query: { page?: string | number; size?: string | number }) => {
+    getListData: (query: { page?: string | number, size?: string | number, name?: string, status?: string }) => {
       const page = Number(query?.page) || 1
       const size = Number(query?.size) || 10
+      const name = query?.name?.trim()
+      const status = query?.status
+
+      // 先按 name、status 过滤
+      let filtered = FIXED_PERSON_LIST
+      if (name) {
+        filtered = filtered.filter((i) => (i.name ?? '').includes(name))
+      }
+      if (status !== undefined && status !== '' && status !== null) {
+        const statusNum = Number(status)
+        filtered = filtered.filter((i) => i.status === statusNum)
+      }
+
+      const total = filtered.length
       const start = (page - 1) * size
-      const records = FIXED_PERSON_LIST.slice(start, start + size)
+      const records = filtered.slice(start, start + size)
       return resultSuccess({
-        total: TOTAL,
+        total,
         records
       })
+    },
+    getDetailData: (query: { id?: string }) => {
+      const id = query?.id
+      if (!id) return resultSuccess(null)
+      const item = FIXED_PERSON_LIST.find((i) => i.id === id)
+      return resultSuccess(item ?? null)
     }
   })
 ])

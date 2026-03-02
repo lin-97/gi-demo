@@ -49,8 +49,8 @@ interface DeleteOptions {
  * })
  */
 export function useTable<T extends U, U = T>(options: Options<T, U>) {
-  const { formatResult, onSuccess, immediate = true, rowKey = 'id', crossPageSelect = false, listAPI, deleteAPI } =
-    options || {}
+  const { formatResult, onSuccess, immediate = true, rowKey = 'id', crossPageSelect = false, listAPI, deleteAPI }
+    = options || {}
 
   // 分页相关
   const { pagination, setTotal } = usePagination(() => getTableData())
@@ -90,13 +90,15 @@ export function useTable<T extends U, U = T>(options: Options<T, U>) {
 
   /**
    * 行选择回调
-   * @param rowKeys - 当前页选中的行 key 数组
+   * @param rowKeys - 表格传入的选中行 key（可能仅为当前页，也可能含跨页；以当前页 key 为准做合并避免重复）
    */
   const select: TableInstance['onSelect'] = (rowKeys) => {
     if (crossPageSelect) {
       const pageKeys = getCurrentPageKeys()
       const rest = selectedKeys.value.filter((k) => !pageKeys.includes(k))
-      selectedKeys.value = [...rest, ...rowKeys]
+      // 只合并当前页的选中：避免表格传入的 rowKeys 含其它页时造成重复
+      const currentPageSelected = rowKeys.filter((k) => pageKeys.includes(k))
+      selectedKeys.value = [...new Set([...rest, ...currentPageSelected])]
     } else {
       selectedKeys.value = rowKeys
     }
@@ -213,7 +215,7 @@ export function useTable<T extends U, U = T>(options: Options<T, U>) {
       return
     }
     if (!selectedKeys.value.length) {
-      Message.error('请选择要删除的数据')
+      Message.warning('请选择要删除的数据')
       return
     }
     handleDelete(() => deleteAPI(selectedKeys.value as string[]), {
@@ -224,9 +226,13 @@ export function useTable<T extends U, U = T>(options: Options<T, U>) {
 
   // 自定义扩展...
   // 导入
-  // const onImport = () => {}
+  const onImport = () => {
+    Message.warning('点击了导入')
+  }
   // 导出
-  // const onExport = () => {}
+  const onExport = () => {
+    Message.success('点击了导出')
+  }
   // 下载模板
   // const onDownloadTemplate = () => {}
 
@@ -262,6 +268,10 @@ export function useTable<T extends U, U = T>(options: Options<T, U>) {
     /** 刷新表格数据，页码会缓存 */
     refresh,
     /** 操作列在小屏场景下不固定在右侧 */
-    fixed
+    fixed,
+    /** 导入 */
+    onImport,
+    /** 导出 */
+    onExport
   }
 }

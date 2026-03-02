@@ -1,86 +1,83 @@
 <template>
-  <div ref="containerRef" class="gi-page gi-p0">
-    <a-affix :target="containerRef ?? undefined">
-      <a-page-header title="详情" @back="back">
-        <template #extra>
-          <a-button @click="back">返回</a-button>
-        </template>
-      </a-page-header>
-    </a-affix>
-
+  <a-spin :loading="loading" class="w-full">
     <a-card title="基本信息" class="gi-mx gi-my">
-      <a-descriptions table-layout="fixed" :label-style="{ width: '60px' }"
-        :column="{ xs: 1, sm: 1, md: 2, lg: 2, xl: 3, xxl: 3 }">
-        <a-descriptions-item label="姓名">Lin</a-descriptions-item>
-        <a-descriptions-item label="性别">男</a-descriptions-item>
-        <a-descriptions-item label="生日">07月16日</a-descriptions-item>
-        <a-descriptions-item label="城市">广州市</a-descriptions-item>
-        <a-descriptions-item label="手机号">199 **** 6962</a-descriptions-item>
-        <a-descriptions-item label="邮箱">326010228@qq.com</a-descriptions-item>
-        <a-descriptions-item label="星座">双鱼座</a-descriptions-item>
-        <a-descriptions-item label="爱好">
-          <a-space :size="5">
-            <a-tag color="purple">王者荣耀</a-tag>
-            <a-tag color="magenta">打疫苗</a-tag>
-          </a-space>
-        </a-descriptions-item>
-        <a-descriptions-item label="座右铭">优雅永不过时</a-descriptions-item>
-        <a-descriptions-item label="标签">
-          <a-space :size="5" wrap>
-            <a-tag color="#f53f3f">vue3</a-tag>
-            <a-tag color="#7816ff">pinia</a-tag>
-            <a-tag color="#00b42a">vite</a-tag>
-            <a-tag color="#165dff">ts</a-tag>
-            <a-tag color="#ff7d00">arco design</a-tag>
-          </a-space>
-        </a-descriptions-item>
-      </a-descriptions>
+      <template #extra>
+        <a-button @click="back">返回</a-button>
+      </template>
+      <template v-if="detail">
+        <a-descriptions table-layout="fixed" :label-style="{ width: '80px' }"
+          :column="{ xs: 1, sm: 1, md: 2, lg: 2, xl: 3, xxl: 3 }">
+          <a-descriptions-item label="姓名">{{ detail.name }}</a-descriptions-item>
+          <a-descriptions-item v-if="detail.avatar" label="头像">
+            <a-avatar :size="24" shape="circle">
+              <img :src="detail.avatar" alt="头像">
+            </a-avatar>
+          </a-descriptions-item>
+          <a-descriptions-item label="账户">{{ detail.account }}</a-descriptions-item>
+          <a-descriptions-item label="手机号">{{ detail.phone ? hidePhone(detail.phone) : '-' }}</a-descriptions-item>
+          <a-descriptions-item label="性别">
+            <GiCellGender :gender="detail.gender" />
+          </a-descriptions-item>
+          <a-descriptions-item label="邮箱">{{ detail.email || '-' }}</a-descriptions-item>
+          <a-descriptions-item label="年龄">{{ detail.age ?? '-' }}</a-descriptions-item>
+          <a-descriptions-item label="爱好" :span="2">
+            <a-space v-if="detail.hobbys?.length" :size="5" wrap>
+              <a-tag v-for="(item, i) in detail.hobbys" :key="i">{{ item }}</a-tag>
+            </a-space>
+            <span v-else>-</span>
+          </a-descriptions-item>
+          <a-descriptions-item label="状态">
+            <GiCellStatus :status="detail.status" />
+          </a-descriptions-item>
+          <a-descriptions-item label="创建时间">{{ detail.createTime || '-' }}</a-descriptions-item>
+          <a-descriptions-item label="地址">{{ detail.address || '-' }}</a-descriptions-item>
+          <a-descriptions-item label="备注" :span="3">{{ detail.remark || '-' }}</a-descriptions-item>
+        </a-descriptions>
+      </template>
+      <a-empty v-else-if="!loading" description="暂无数据" />
     </a-card>
-
-    <a-card title="其他信息" class="gi-mx gi-my">
-      <a-descriptions :column="1">
-        <a-descriptions-item label="姓名">Lin</a-descriptions-item>
-        <a-descriptions-item label="性别">男</a-descriptions-item>
-        <a-descriptions-item label="生日">07月16日</a-descriptions-item>
-        <a-descriptions-item label="城市">广州市</a-descriptions-item>
-        <a-descriptions-item label="手机号">199 **** 6962</a-descriptions-item>
-        <a-descriptions-item label="邮箱">326010228@qq.com</a-descriptions-item>
-        <a-descriptions-item label="星座">双鱼座</a-descriptions-item>
-        <a-descriptions-item label="爱好">
-          <a-space :size="5">
-            <a-tag color="purple">王者荣耀</a-tag>
-            <a-tag color="magenta">打疫苗</a-tag>
-          </a-space>
-        </a-descriptions-item>
-        <a-descriptions-item label="座右铭">优雅永不过时</a-descriptions-item>
-        <a-descriptions-item label="图像">
-          <a-image width="100%"
-            src="https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fi0.hdslb.com%2Fbfs%2Farticle%2F09fc753c76d4a8575c105452c81b76ba563c0d8d.jpg&refer=http%3A%2F%2Fi0.hdslb.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=auto?sec=1652531003&t=100230590302237a20f8e136de146f6b"
-            style="max-width: 400px"></a-image>
-        </a-descriptions-item>
-        <a-descriptions-item label="标签">
-          <a-space :size="5" wrap>
-            <a-tag color="#f53f3f">vue3</a-tag>
-            <a-tag color="#7816ff">pinia</a-tag>
-            <a-tag color="#00b42a">vite</a-tag>
-            <a-tag color="#165dff">ts</a-tag>
-            <a-tag color="#ff7d00">arco design</a-tag>
-          </a-space>
-        </a-descriptions-item>
-      </a-descriptions>
-    </a-card>
-  </div>
+  </a-spin>
 </template>
 
 <script setup lang="ts">
+import type * as T from '@/apis/person'
+import { baseAPI } from '@/apis/person'
+import { GiCellGender, GiCellStatus } from '@/components/index'
+import { hidePhone } from '@/utils'
+
 defineOptions({ name: 'DataDetailId' })
 
+const route = useRoute()
 const router = useRouter()
-const containerRef = useTemplateRef('containerRef')
+
+const loading = ref(false)
+const detail = ref<T.ListItem | null>(null)
+
+const detailId = computed(() => (route.params.id as string) || (route.query.id as string))
+
+async function fetchDetail() {
+  const id = detailId.value
+  if (!id) return
+  try {
+    loading.value = true
+    const res = await baseAPI.getDetail({ id })
+    detail.value = res.data ?? null
+  } finally {
+    loading.value = false
+  }
+}
 
 const back = () => {
   router.back()
 }
+
+watch(
+  detailId,
+  (id) => {
+    if (id) fetchDetail()
+  },
+  { immediate: true }
+)
 </script>
 
 <style lang="scss" scoped></style>

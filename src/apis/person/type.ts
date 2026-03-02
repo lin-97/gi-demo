@@ -9,7 +9,8 @@ export interface ListItem {
   email: string
   createTime: string
   address: string
-  proportion: number
+  age: number
   status: Status
   hobbys: string[]
+  remark: string
 }

@@ -13,7 +13,7 @@
 import type { ButtonProps as AButtonProps } from '@arco-design/web-vue'
 import type { Component } from 'vue'
 import type { ButtonProps as Props } from './type'
-import { IconDelete, IconEdit, IconExport, IconImport, IconPlus, IconSearch, IconUpload } from '@arco-design/web-vue/es/icon'
+import { IconDelete, IconDownload, IconEdit, IconImport, IconPlus, IconSearch, IconUpload } from '@arco-design/web-vue/es/icon'
 import { computed } from 'vue'
 
 defineOptions({
@@ -45,7 +45,7 @@ const BUTTON_MAP: Record<string, ButtonConfig> = {
   reset: { icon: undefined, text: '重置', type: 'secondary' },
   upload: { icon: IconUpload, text: '上传', type: 'secondary' },
   import: { icon: IconImport, text: '导入', type: 'secondary' },
-  export: { icon: IconExport, text: '导出', type: 'secondary' }
+  export: { icon: IconDownload, text: '导出', type: 'secondary' }
 }
 
 /** Arco 原生按钮类型 */

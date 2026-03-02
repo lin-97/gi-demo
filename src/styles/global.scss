@@ -282,11 +282,13 @@
 }
 
 .gi-select-input {
-  width: 120px !important;
+  width: 100px;
+  flex-shrink: 0;
 }
 
 .gi-search-input {
-  width: 250px !important;
+  width: 250px;
+  flex-shrink: 0;
 }
 
 .gi-line-1 {
@@ -319,9 +321,9 @@
 .gi-line-3,
 .gi-line-4,
 .gi-line-5 {
-  display: -webkit-box; // 弹性伸缩盒
+  display: -webkit-box; /* 弹性伸缩盒 */
   overflow: hidden;
   text-overflow: ellipsis;
   word-break: break-all;
-  -webkit-box-orient: vertical; // 设置伸缩盒子元素排列方式
+  -webkit-box-orient: vertical; /* 设置伸缩盒子元素排列方式 */
 }
