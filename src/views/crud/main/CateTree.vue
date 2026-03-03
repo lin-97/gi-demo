@@ -42,7 +42,7 @@ const emit = defineEmits<{
 }>()
 
 interface TreeCateItem extends CateTreeItem {
-  icon: (node: TreeCateItem) => VNode
+  switcherIcon: (node: TreeCateItem) => VNode
 }
 
 const loading = ref(false)
@@ -61,7 +61,7 @@ const getTreeData = async () => {
     const res = await getCateTree()
     treeData.value = mapTree(res.data, (i) => ({
       ...i,
-      icon: (node: any) => {
+      switcherIcon: (node: any) => {
         if (node.expanded && !node.isLeaf) return <GiSvgIcon name="file-open" size={16}></GiSvgIcon>
         if (!node.expanded && !node.isLeaf) return <GiSvgIcon name="file-close" size={16}></GiSvgIcon>
         return <GiSvgIcon name="file" size={16}></GiSvgIcon>
@@ -80,6 +80,10 @@ getTreeData()
 <style lang="scss" scoped>
 :deep(.arco-tree-node-title-text) {
   white-space: nowrap;
+}
+
+:deep(.arco-tree-node-switcher-icon svg) {
+  transform: none;
 }
 
 .cate-tree {
