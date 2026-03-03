@@ -1,0 +1,17 @@
+{
+  "Vue3 SFC TS Setup": {
+    "prefix": "v3",
+    "body": [
+      "<template>",
+      "  <div>代码片段</div>",
+      "</template>",
+      "",
+      "<script setup lang=\"ts\">",
+      "",
+      "</script>",
+      "",
+      "<style scoped lang=\"scss\"></style>"
+    ],
+    "description": "Vue3 <script setup> + TS + scoped SCSS 模板"
+  }
+}

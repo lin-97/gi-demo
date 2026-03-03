@@ -1,5 +1,5 @@
 <template>
-  <a-modal v-model:visible="visible" :title="title" width="calc(100% - 20px)" :modal-style="{ maxWidth: '500px' }"
+  <a-modal v-model:visible="visible" :title="title" width="calc(100% - 20px)" :modal-style="{ maxWidth: '600px' }"
     :mask-closable="true" :body-style="{ maxHeight: '500px' }" @ok="save">
     <a-tree ref="treeRef" v-model:checked-keys="menuIds" size="mini" checkable :check-strictly="true" :data="treeData"
       :field-names="{ key: 'id' }"></a-tree>

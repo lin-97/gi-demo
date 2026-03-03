@@ -1,30 +1,12 @@
 <template>
-  <div class="right-box">
-    <section class="right-box__header">
-      <a-avatar :size="60" :trigger-icon-style="{ color: '#3491FA' }">
-        <img :src="userStore.avatar" />
-        <template #trigger-icon>
-          <IconCamera />
-        </template>
-      </a-avatar>
-      <section class="username">{{ userStore.name }}</section>
-      <ul class="list">
-        <li><icon-user /><span>前端开发工程师</span></li>
-        <li><icon-safe /><span>前端</span></li>
-        <li><icon-location /><span>广州</span></li>
-      </ul>
-      <a-button type="primary" class="edit-btn">
-        <template #icon> <icon-edit /> </template>编辑信息
-      </a-button>
-    </section>
-
+  <div class="account-right-content">
     <a-tabs hide-content default-active-key="1">
       <a-tab-pane key="1" title="文章"></a-tab-pane>
       <a-tab-pane key="2" title="项目"></a-tab-pane>
       <a-tab-pane key="3" title="应用（3）"></a-tab-pane>
     </a-tabs>
 
-    <section class="right-box__comment">
+    <section class="account-right-content__comment">
       <a-comment v-for="(item, index) in list" :key="index" :author="item.name" :avatar="item.avatar"
         :content="item.content" datetime="1个小时之前" align="right" class="comment-item">
         <template #actions>
@@ -46,9 +28,7 @@
 </template>
 
 <script setup lang="ts">
-import { useUserStore } from '@/stores'
-
-const userStore = useUserStore()
+defineOptions({ name: 'AccountRightContent' })
 
 const list = [
   {
@@ -73,7 +53,7 @@ const list = [
     avatar:
       'https://img0.baidu.com/it/u=2746352008,2041591833&fm=253&fmt=auto&app=138&f=JPEG?w=360&h=360',
     name: 'Lin',
-    content: '⽐你优秀的⼈都⽐你努⼒，你努力还有什么用'
+    content: '比你优秀的人都比你努力，你努力还有什么用'
   },
   {
     avatar:
@@ -85,18 +65,7 @@ const list = [
 </script>
 
 <style lang="scss" scoped>
-.edit-btn {
-  color: #fff;
-  background: transparent;
-  border-color: #fff;
-
-  &:hover {
-    background: rgb(var(--primary-5));
-    border-color: rgb(var(--primary-5));
-  }
-}
-
-.right-box {
+.account-right-content {
   display: flex;
   flex: 1;
   flex-direction: column;
@@ -104,36 +73,6 @@ const list = [
   overflow-y: auto;
   background-color: var(--color-bg-1);
   border-radius: 2px;
-
-  &__header {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    height: fit-content;
-    min-height: 204px;
-    color: var(--color-white);
-    background-color: rgb(var(--primary-6));
-
-    .username {
-      margin: 10px 0;
-      font-size: 16px;
-      font-weight: 500;
-    }
-
-    .list {
-      display: flex;
-      margin-bottom: 10px;
-
-      >li {
-        margin-right: 15px;
-
-        span {
-          margin-left: 2px;
-        }
-      }
-    }
-  }
 
   &__comment {
     flex: 1;

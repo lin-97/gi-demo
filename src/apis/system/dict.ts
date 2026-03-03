@@ -19,6 +19,7 @@ export type DictDataItem = {
   id: string
   name: string
   value: string | number
+  sort: number
   status: Status
 }
 

@@ -18,7 +18,8 @@
             </template>
 
             <!-- 表单项内容 -->
-            <slot v-if="getStringType(item.type) !== 'group-title'" :name="item.field"
+            <slot v-if="getStringType(item.type) === 'slot'" :name="item.field"></slot>
+            <slot v-else-if="getStringType(item.type) !== 'group-title'" :name="item.field"
               v-bind="{ disabled: isDisabled(item) }">
               <component :is="(COMP_MAP[getStringType(item.type)] || item.type)" v-bind="getComponentBindProps(item)"
                 :model-value="modelValue[getModelField(item)]"

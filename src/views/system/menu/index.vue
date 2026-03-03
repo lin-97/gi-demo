@@ -97,7 +97,7 @@
       </template>
     </a-table>
 
-    <AddMenuModal ref="AddMenuModalRef" :menus="menuList" @save-success="search"></AddMenuModal>
+    <MenuFormModal ref="MenuFormModalRef" :menus="menuList" @save-success="search"></MenuFormModal>
   </GiPageLayout>
 </template>
 
@@ -108,12 +108,12 @@ import { useDict, useTable } from '@/hooks'
 import MenuIcon from '@/layout/components/Menu/MenuIcon.vue'
 import { transformPathToName } from '@/utils'
 import { isExternal } from '@/utils/validate'
-import AddMenuModal from './AddMenuModal.vue'
+import MenuFormModal from './MenuFormModal.vue'
 
 defineOptions({ name: 'SystemMenu' })
 
 const { dictData } = useDict(['STATUS'])
-const AddMenuModalRef = useTemplateRef('AddMenuModalRef')
+const MenuFormModalRef = useTemplateRef('MenuFormModalRef')
 
 const tableRef = useTemplateRef('tableRef')
 const isExpanded = ref(false)
@@ -136,11 +136,11 @@ const reset = () => {
 }
 
 const onAdd = () => {
-  AddMenuModalRef.value?.add()
+  MenuFormModalRef.value?.add()
 }
 
 const onEdit = (item: T.ListItem) => {
-  AddMenuModalRef.value?.edit(item.id)
+  MenuFormModalRef.value?.edit(item.id)
 }
 
 const onDelete = (item: T.ListItem) => {

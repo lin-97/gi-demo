@@ -816,7 +816,7 @@ const data: MockSystemMenuItem[] = [
         component: 'system/account/index',
         redirect: '',
         type: 2,
-        title: '用户账户',
+        title: '账户管理',
         icon: 'icon-park-outline:setting-config',
         keepAlive: false,
         hidden: false,

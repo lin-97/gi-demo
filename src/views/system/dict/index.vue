@@ -3,7 +3,7 @@
     <a-row justify="space-between" class="gi-row-tool">
       <a-space wrap>
         <GiButton type="add" @click="onAdd"></GiButton>
-        <GiButton type="delete" @click="onMulDelete"></GiButton>
+        <GiButton type="delete" @click="onBatchDelete"></GiButton>
       </a-space>
 
       <a-space wrap>
@@ -17,57 +17,30 @@
       </a-space>
     </a-row>
 
-    <a-table class="gi-table" row-key="id" :data="dictList" :bordered="{ cell: true }" :loading="loading"
-      :scroll="{ x: '100%', y: '100%', minWidth: 1000 }" :pagination="pagination"
+    <a-table class="gi-table" row-key="id" :data="dictList" :columns="tableColumns" :bordered="{ cell: true }"
+      :loading="loading" :scroll="{ x: '100%', y: '100%', minWidth: 1000 }" :pagination="pagination"
       :row-selection="{ type: 'checkbox', showCheckedAll: true }" :selected-keys="selectedKeys" @select="select"
       @select-all="selectAll">
-      <template #columns>
-        <a-table-column title="序号" :width="68" align="center">
-          <template #cell="cell">{{ cell.rowIndex + 1 }}</template>
-        </a-table-column>
-        <a-table-column title="字典名称" data-index="name"></a-table-column>
-        <a-table-column title="字典编码" data-index="code"></a-table-column>
-        <a-table-column title="状态" :width="100" align="center">
-          <template #cell="{ record }">
-            <GiCellStatus :status="record.status"></GiCellStatus>
-          </template>
-        </a-table-column>
-        <a-table-column title="描述" data-index="description" :ellipsis="true" :tooltip="true"></a-table-column>
-        <a-table-column title="创建时间" data-index="createTime" :width="180"></a-table-column>
-        <a-table-column title="操作" :width="280" align="center" :fixed="fixed">
-          <template #cell="{ record }">
-            <a-space>
-              <a-button type="primary" status="success" size="mini" @click="onViewDictData(record)">
-                <template #icon><icon-storage /></template>
-                <span>字典数据</span>
-              </a-button>
-              <GiButton type="edit" size="mini" :disabled="record.disabled" @click="onEdit(record)"></GiButton>
-              <a-popconfirm type="warning" content="确定删除该角色吗?" @before-ok="onDelete(record)">
-                <GiButton type="delete" size="mini" :disabled="record.disabled"></GiButton>
-              </a-popconfirm>
-            </a-space>
-          </template>
-        </a-table-column>
-      </template>
     </a-table>
 
-    <AddDictModal ref="AddDictModalRef" @save-success="search"></AddDictModal>
+    <DictFormModal ref="DictFormModalRef" @save-success="search"></DictFormModal>
     <DictDataModal ref="DictDataModalRef"></DictDataModal>
   </GiPageLayout>
 </template>
 
-<script setup lang="ts">
+<script setup lang="tsx">
+import type { TableColumnData } from '@arco-design/web-vue'
 import type * as T from '@/apis/system/dict'
-import { Message } from '@arco-design/web-vue'
+import { Button, Popconfirm, Space } from '@arco-design/web-vue'
 import { baseAPI } from '@/apis/system/dict'
 import { useDict, useTable } from '@/hooks'
-import AddDictModal from './AddDictModal.vue'
 import DictDataModal from './DictDataModal/index.vue'
+import DictFormModal from './DictFormModal.vue'
 
-defineOptions({ name: 'SystemRole' })
+defineOptions({ name: 'SystemDict' })
 
 const { dictData } = useDict(['STATUS'])
-const AddDictModalRef = useTemplateRef('AddDictModalRef')
+const DictFormModalRef = useTemplateRef('DictFormModalRef')
 const DictDataModalRef = useTemplateRef('DictDataModalRef')
 
 const queryParams = reactive({
@@ -75,8 +48,9 @@ const queryParams = reactive({
   status: ''
 })
 
-const { loading, tableData: dictList, pagination, selectedKeys, search, select, selectAll, fixed, handleDelete } = useTable({
+const { loading, tableData: dictList, pagination, selectedKeys, search, select, selectAll, fixed, onDelete, onBatchDelete } = useTable({
   listAPI: (page) => baseAPI.getList({ ...page, ...queryParams }),
+  deleteAPI: (ids) => baseAPI.delete({ ids }),
   immediate: true
 })
 
@@ -87,28 +61,58 @@ const reset = () => {
 }
 
 const onAdd = () => {
-  AddDictModalRef.value?.add()
+  DictFormModalRef.value?.add()
 }
 
 const onEdit = (item: T.ListItem) => {
-  AddDictModalRef.value?.edit(item.id)
-}
-
-const onDelete = (item: T.ListItem) => {
-  return handleDelete(() => baseAPI.delete({ ids: [item.id] }), { showModal: false })
-}
-
-// 批量删除
-const onMulDelete = () => {
-  if (!selectedKeys.value.length) {
-    return Message.warning('请选择字典！')
-  }
-  return handleDelete(() => baseAPI.delete({ ids: selectedKeys.value as string[] }))
+  DictFormModalRef.value?.edit(item.id)
 }
 
 const onViewDictData = (item: T.ListItem) => {
-  DictDataModalRef.value?.open({ code: item.code })
+  DictDataModalRef.value?.open({ code: item.code, name: item.name })
 }
+
+const tableColumns: TableColumnData[] = [
+  {
+    title: '序号',
+    width: 68,
+    align: 'center',
+    render: ({ rowIndex }) => <span>{rowIndex + 1}</span>
+  },
+  { title: '字典名称', dataIndex: 'name' },
+  { title: '字典编码', dataIndex: 'code' },
+  {
+    title: '状态',
+    width: 100,
+    align: 'center',
+    render: ({ record }) => <GiCellStatus status={record.status} />
+  },
+  { title: '描述', dataIndex: 'description', ellipsis: true, tooltip: true },
+  { title: '创建时间', dataIndex: 'createTime', width: 180 },
+  {
+    title: '操作',
+    width: 280,
+    align: 'center',
+    fixed: fixed.value,
+    render: ({ record }) => (
+      <Space>
+        <Button
+          type="primary"
+          status="success"
+          size="mini"
+          v-slots={{ icon: () => <icon-storage /> }}
+          onClick={() => onViewDictData(record as T.ListItem)}
+        >
+          字典数据
+        </Button>
+        <GiButton type="edit" size="mini" disabled={record.disabled} onClick={() => onEdit(record as T.ListItem)} />
+        <Popconfirm type="warning" content="确定删除该字典吗?" onBeforeOk={() => onDelete(record as T.ListItem)}>
+          <GiButton type="delete" size="mini" disabled={record.disabled} />
+        </Popconfirm>
+      </Space>
+    )
+  }
+]
 </script>
 
 <style lang="scss" scoped></style>

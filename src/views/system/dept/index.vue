@@ -3,7 +3,7 @@
     <a-row justify="space-between" class="gi-row-tool">
       <a-space wrap>
         <GiButton type="add" @click="onAdd"></GiButton>
-        <GiButton type="delete" @click="onMulDelete"></GiButton>
+        <GiButton type="delete" @click="onBatchDelete"></GiButton>
       </a-space>
 
       <a-space wrap>
@@ -20,55 +20,32 @@
     </a-row>
 
     <a-table ref="tableRef" class="gi-table" row-key="id" :bordered="{ cell: true }" :data="deptList" :loading="loading"
-      :scroll="{ x: '100%', y: '100%', minWidth: 1000 }" :pagination="false"
+      :columns="tableColumns" :scroll="{ x: '100%', y: '100%', minWidth: 1000 }" :pagination="false"
       :row-selection="{ type: 'checkbox', showCheckedAll: false }" :selected-keys="selectedKeys" @select="select"
       @select-all="selectAll">
       <template #expand-icon="{ expanded }">
         <IconDown v-if="expanded" />
         <IconRight v-else />
       </template>
-      <template #columns>
-        <a-table-column title="部门名称" data-index="name" :width="160"></a-table-column>
-        <a-table-column title="排序" data-index="sort" :width="100" align="center"></a-table-column>
-        <a-table-column title="状态" :width="100" align="center">
-          <template #cell="{ record }">
-            <GiCellStatus :status="record.status"></GiCellStatus>
-          </template>
-        </a-table-column>
-        <a-table-column title="描述" data-index="description" :width="250" :ellipsis="true"
-          :tooltip="true"></a-table-column>
-        <a-table-column title="创建时间" data-index="createTime" :width="200"></a-table-column>
-        <a-table-column title="操作" :width="200" align="center" :fixed="fixed">
-          <template #cell="{ record }">
-            <a-space>
-              <GiButton type="edit" size="mini" :disabled="record.disabled" @click="onEdit(record)"></GiButton>
-              <GiButton v-if="record.parentId" type="add" size="mini" status="success" :disabled="record.disabled"
-                @click="onAdd()"></GiButton>
-              <a-popconfirm type="warning" content="您确定要删除该项吗?" @before-ok="onDelete(record)">
-                <GiButton type="delete" size="mini" :disabled="record.disabled"></GiButton>
-              </a-popconfirm>
-            </a-space>
-          </template>
-        </a-table-column>
-      </template>
     </a-table>
 
-    <AddDeptModal ref="AddDeptModalRef" @save-success="search"></AddDeptModal>
+    <DeptFormModal ref="DeptFormModalRef" @save-success="search"></DeptFormModal>
   </GiPageLayout>
 </template>
 
-<script setup lang="ts">
+<script setup lang="tsx">
+import type { TableColumnData } from '@arco-design/web-vue'
 import type * as T from '@/apis/system/dept'
-import { Message } from '@arco-design/web-vue'
+import { Popconfirm, Space } from '@arco-design/web-vue'
 import { baseAPI } from '@/apis/system/dept'
 import { useDict, useTable } from '@/hooks'
 
-import AddDeptModal from './AddDeptModal.vue'
+import DeptFormModal from './DeptFormModal.vue'
 
 defineOptions({ name: 'SystemDept' })
 
 const { dictData } = useDict(['STATUS'])
-const AddDeptModalRef = useTemplateRef('AddDeptModalRef')
+const DeptFormModalRef = useTemplateRef('DeptFormModalRef')
 const tableRef = useTemplateRef('tableRef')
 
 const queryParams = reactive({
@@ -76,8 +53,9 @@ const queryParams = reactive({
   status: ''
 })
 
-const { loading, tableData: deptList, selectedKeys, search, select, selectAll, fixed, handleDelete } = useTable({
+const { loading, tableData: deptList, selectedKeys, search, select, selectAll, fixed, onDelete, onBatchDelete } = useTable({
   listAPI: () => baseAPI.getList({ ...queryParams }),
+  deleteAPI: (ids) => baseAPI.delete({ ids }),
   immediate: true,
   onSuccess: () => {
     nextTick(() => {
@@ -93,23 +71,42 @@ const reset = () => {
 }
 
 const onAdd = () => {
-  AddDeptModalRef.value?.add()
+  DeptFormModalRef.value?.add()
 }
 
 const onEdit = (item: T.ListItem) => {
-  AddDeptModalRef.value?.edit(item.id)
+  DeptFormModalRef.value?.edit(item.id)
 }
 
-const onDelete = (item: T.ListItem) => {
-  return handleDelete(() => baseAPI.delete({ ids: [item.id] }), { showModal: false })
-}
-
-const onMulDelete = () => {
-  if (!selectedKeys.value.length) {
-    return Message.warning('请选择部门')
+const tableColumns: TableColumnData[] = [
+  { title: '部门名称', dataIndex: 'name', width: 160 },
+  { title: '排序', dataIndex: 'sort', width: 100, align: 'center' },
+  {
+    title: '状态',
+    width: 100,
+    align: 'center',
+    render: ({ record }) => <GiCellStatus status={record.status} />
+  },
+  { title: '描述', dataIndex: 'description', width: 250, ellipsis: true, tooltip: true },
+  { title: '创建时间', dataIndex: 'createTime', width: 200 },
+  {
+    title: '操作',
+    width: 200,
+    align: 'center',
+    fixed: fixed.value,
+    render: ({ record }) => (
+      <Space>
+        <GiButton type="edit" size="mini" disabled={record.disabled} onClick={() => onEdit(record as T.ListItem)} />
+        {record.parentId && (
+          <GiButton type="add" size="mini" status="success" disabled={record.disabled} onClick={() => onAdd()} />
+        )}
+        <Popconfirm type="warning" content="您确定要删除该项吗?" onBeforeOk={() => onDelete(record as T.ListItem)}>
+          <GiButton type="delete" size="mini" disabled={record.disabled} />
+        </Popconfirm>
+      </Space>
+    )
   }
-  return handleDelete(() => baseAPI.delete({ ids: selectedKeys.value as string[] }))
-}
+]
 </script>
 
 <style lang="scss" scoped></style>

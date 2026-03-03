@@ -1,5 +1,5 @@
 <template>
-  <a-modal v-model:visible="visible" title="字典数据" width="calc(100% - 20px)" :mask-closable="false"
+  <a-modal v-model:visible="visible" :title="`字典数据-(${dictName})`" width="calc(100% - 20px)" :mask-closable="false"
     :modal-style="{ maxWidth: '680px' }">
     <a-row class="gi-row-tool">
       <a-space wrap>
@@ -14,47 +14,26 @@
       </a-space>
     </a-row>
 
-    <a-table row-key="id" :data="tableData" :bordered="{ cell: true }" :loading="loading"
+    <a-table row-key="id" :data="tableData" :columns="tableColumns" :bordered="{ cell: true }" :loading="loading"
       :scroll="{ x: '100%', y: '100%', minWidth: 600 }" :pagination="{ ...pagination }"
       :row-selection="{ type: 'checkbox', showCheckedAll: true }" :selected-keys="selectedKeys" @select="select"
       @select-all="selectAll">
-      <template #columns>
-        <a-table-column title="序号" :width="64">
-          <template #cell="cell">{{ cell.rowIndex + 1 }}</template>
-        </a-table-column>
-        <a-table-column title="字典名" data-index="name"></a-table-column>
-        <a-table-column title="字典值" data-index="value"></a-table-column>
-        <a-table-column title="状态" :width="100" align="center">
-          <template #cell="{ record }">
-            <GiCellStatus :status="record.status"></GiCellStatus>
-          </template>
-        </a-table-column>
-        <a-table-column title="操作" :width="140" align="center">
-          <template #cell="{ record }">
-            <a-space>
-              <a-button type="primary" size="mini" @click="onEdit(record)">编辑</a-button>
-              <a-popconfirm type="warning" content="确定删除该角色吗?">
-                <a-button type="primary" status="danger" size="mini">删除</a-button>
-              </a-popconfirm>
-            </a-space>
-          </template>
-        </a-table-column>
-      </template>
     </a-table>
 
-    <AddDictDataModal ref="AddDictDataModalRef" @save-success="search"></AddDictDataModal>
+    <DictDataFormModal ref="DictDataFormModalRef" @save-success="search"></DictDataFormModal>
   </a-modal>
 </template>
 
-<script lang="ts" setup>
+<script lang="tsx" setup>
+import type { TableColumnData } from '@arco-design/web-vue'
 import type { DictDataItem } from '@/apis/system/dict'
-import { Message } from '@arco-design/web-vue'
+import { Button, Message, Popconfirm, Space } from '@arco-design/web-vue'
 import { getDictDataList } from '@/apis/system/dict'
 import { useTable } from '@/hooks'
-import AddDictDataModal from './AddDictDataModal.vue'
+import DictDataFormModal from './DictDataFormModal.vue'
 
 const visible = ref(false)
-const AddDictDataModalRef = useTemplateRef('AddDictDataModalRef')
+const DictDataFormModalRef = useTemplateRef('DictDataFormModalRef')
 
 const dictCode = ref('')
 
@@ -63,14 +42,16 @@ const { loading, tableData, pagination, selectedKeys, search, select, selectAll 
   immediate: false
 })
 
-const open = (data: { code: string }) => {
+const dictName = ref('')
+
+const open = (data: { code: string, name: string }) => {
   tableData.value = []
   dictCode.value = data.code
+  dictName.value = data.name
   visible.value = true
   search()
 }
 
-// 批量删除
 const onMulDelete = () => {
   if (!selectedKeys.value.length) {
     return Message.warning('请选择字典数据！')
@@ -78,12 +59,49 @@ const onMulDelete = () => {
 }
 
 const onAdd = () => {
-  AddDictDataModalRef.value?.add()
+  DictDataFormModalRef.value?.add()
 }
 
 const onEdit = (item: DictDataItem) => {
-  AddDictDataModalRef.value?.edit({ id: item.id, code: dictCode.value })
+  DictDataFormModalRef.value?.edit({ id: item.id, code: dictCode.value })
 }
+
+const onDelete = (_item: DictDataItem) => {
+  return Promise.resolve()
+}
+
+const tableColumns: TableColumnData[] = [
+  {
+    title: '序号',
+    width: 64,
+    render: ({ rowIndex }) => <span>{rowIndex + 1}</span>
+  },
+  { title: '字典名', dataIndex: 'name' },
+  { title: '字典值', dataIndex: 'value' },
+  {
+    title: '状态',
+    width: 100,
+    align: 'center',
+    render: ({ record }) => <GiCellStatus status={record.status} />
+  },
+  {
+    title: '操作',
+    width: 140,
+    align: 'center',
+    render: ({ record }) => (
+      <Space>
+        <Button type="primary" size="mini" onClick={() => onEdit(record as DictDataItem)}>
+          编辑
+        </Button>
+        <Popconfirm type="warning" content="确定删除该字典数据吗?" onBeforeOk={() => onDelete(record as DictDataItem)}>
+          <Button type="primary" status="danger" size="mini">
+            删除
+          </Button>
+        </Popconfirm>
+      </Space>
+    )
+  }
+]
 
 defineExpose({ open })
 </script>

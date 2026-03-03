@@ -39,6 +39,7 @@ export type FormColumnItemType
     | 'auto-complete' // 自动完成
     | 'mention' // 提及
     | 'group-title' // 分组标题
+    | 'slot' // 插槽，由父组件通过具名插槽渲染内容
     | Component
 
 /** 组件属性合并类型 */

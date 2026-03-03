@@ -3,7 +3,7 @@
     <a-row justify="space-between" class="gi-row-tool">
       <a-space wrap>
         <GiButton type="add" @click="onAdd"></GiButton>
-        <GiButton type="delete" @click="onMulDelete"></GiButton>
+        <GiButton type="delete" @click="onBatchDelete"></GiButton>
       </a-space>
 
       <a-space wrap>
@@ -17,67 +17,41 @@
       </a-space>
     </a-row>
 
-    <a-table class="gi-table" row-key="id" :data="roleList" :bordered="{ cell: true }" :loading="loading"
-      :scroll="{ x: '100%', y: '100%', minWidth: 1200 }" :pagination="pagination"
+    <a-table class="gi-table" row-key="id" :data="roleList" :columns="tableColumns" :bordered="{ cell: true }"
+      :loading="loading" :scroll="{ x: '100%', y: '100%', minWidth: 1200 }" :pagination="pagination"
       :row-selection="{ type: 'checkbox', showCheckedAll: true }" :selected-keys="selectedKeys" @select="select"
       @select-all="selectAll">
-      <template #columns>
-        <a-table-column title="序号" :width="68" align="center">
-          <template #cell="cell">{{ cell.rowIndex + 1 }}</template>
-        </a-table-column>
-        <a-table-column title="角色名称" data-index="name"></a-table-column>
-        <a-table-column title="角色编码" data-index="code" :width="150"></a-table-column>
-        <a-table-column title="状态" :width="100" align="center">
-          <template #cell="{ record }">
-            <GiCellStatus :status="record.status"></GiCellStatus>
-          </template>
-        </a-table-column>
-        <a-table-column title="描述" data-index="description" :ellipsis="true" :tooltip="true"></a-table-column>
-        <a-table-column title="创建时间" data-index="createTime" :width="180"></a-table-column>
-        <a-table-column title="操作" :width="280" align="center" :fixed="fixed">
-          <template #cell="{ record }">
-            <a-space>
-              <GiButton type="edit" size="mini" :disabled="record.disabled" @click="onEdit(record)"></GiButton>
-              <a-button type="primary" status="success" size="mini" :disabled="record.disabled" @click="onPerm(record)">
-                <template #icon><icon-safe /></template>
-                <template #default>分配权限</template>
-              </a-button>
-              <a-popconfirm type="warning" content="确定删除该角色吗?" @before-ok="onDelete(record)">
-                <GiButton type="delete" size="mini" :disabled="record.disabled"></GiButton>
-              </a-popconfirm>
-            </a-space>
-          </template>
-        </a-table-column>
-      </template>
     </a-table>
 
-    <AddRoleModal ref="AddRoleModalRef" @save-success="search"></AddRoleModal>
-    <PermModal ref="PermModalRef"></PermModal>
+    <RoleFormModal ref="RoleFormModalRef" @save-success="search"></RoleFormModal>
+    <RolePermModal ref="RolePermModalRef"></RolePermModal>
   </GiPageLayout>
 </template>
 
-<script setup lang="ts">
+<script setup lang="tsx">
+import type { TableColumnData } from '@arco-design/web-vue'
 import type * as T from '@/apis/system/role'
-import { Message } from '@arco-design/web-vue'
+import { Button, Popconfirm, Space } from '@arco-design/web-vue'
 import { baseAPI } from '@/apis/system/role'
 import { useDict, useTable } from '@/hooks'
 
-import AddRoleModal from './AddRoleModal.vue'
-import PermModal from './PermModal.vue'
+import RoleFormModal from './RoleFormModal.vue'
+import RolePermModal from './RolePermModal.vue'
 
 defineOptions({ name: 'SystemRole' })
 
 const { dictData } = useDict(['STATUS'])
-const AddRoleModalRef = useTemplateRef('AddRoleModalRef')
-const PermModalRef = useTemplateRef('PermModalRef')
+const RoleFormModalRef = useTemplateRef('RoleFormModalRef')
+const RolePermModalRef = useTemplateRef('RolePermModalRef')
 
 const queryParams = reactive({
   name: '',
   status: ''
 })
 
-const { loading, tableData: roleList, pagination, selectedKeys, search, select, selectAll, fixed, handleDelete } = useTable({
+const { loading, tableData: roleList, pagination, selectedKeys, search, select, selectAll, fixed, onDelete, onBatchDelete } = useTable({
   listAPI: (page) => baseAPI.getList({ ...page, ...queryParams }),
+  deleteAPI: (ids) => baseAPI.delete({ ids }),
   immediate: true
 })
 
@@ -88,28 +62,59 @@ const reset = () => {
 }
 
 const onAdd = () => {
-  AddRoleModalRef.value?.add()
+  RoleFormModalRef.value?.add()
 }
 
 const onEdit = (item: T.ListItem) => {
-  AddRoleModalRef.value?.edit(item.id)
-}
-
-const onDelete = (item: T.ListItem) => {
-  return handleDelete(() => baseAPI.delete({ ids: [item.id] }), { showModal: false })
-}
-
-// 批量删除
-const onMulDelete = () => {
-  if (!selectedKeys.value.length) {
-    return Message.warning('请选择角色！')
-  }
-  handleDelete(() => baseAPI.delete({ ids: selectedKeys.value as string[] }))
+  RoleFormModalRef.value?.edit(item.id)
 }
 
 const onPerm = (item: T.ListItem) => {
-  PermModalRef.value?.open({ code: item.code, title: item.name })
+  RolePermModalRef.value?.open({ code: item.code, title: item.name })
 }
+
+const tableColumns: TableColumnData[] = [
+  {
+    title: '序号',
+    width: 68,
+    align: 'center',
+    render: ({ rowIndex }) => <span>{rowIndex + 1}</span>
+  },
+  { title: '角色名称', dataIndex: 'name' },
+  { title: '角色编码', dataIndex: 'code', width: 150 },
+  {
+    title: '状态',
+    width: 100,
+    align: 'center',
+    render: ({ record }) => <GiCellStatus status={record.status} />
+  },
+  { title: '描述', dataIndex: 'description', ellipsis: true, tooltip: true },
+  { title: '创建时间', dataIndex: 'createTime', width: 180 },
+  {
+    title: '操作',
+    width: 280,
+    align: 'center',
+    fixed: fixed.value,
+    render: ({ record }) => (
+      <Space>
+        <GiButton type="edit" size="mini" disabled={record.disabled} onClick={() => onEdit(record as T.ListItem)} />
+        <Button
+          type="primary"
+          status="success"
+          size="mini"
+          disabled={record.disabled}
+          v-slots={{ icon: () => <icon-safe /> }}
+          onClick={() => onPerm(record as T.ListItem)}
+        >
+          分配权限
+        </Button>
+        <Popconfirm type="warning" content="确定删除该角色吗?" onBeforeOk={() => onDelete(record as T.ListItem)}>
+          <GiButton type="delete" size="mini" disabled={record.disabled} />
+        </Popconfirm>
+      </Space>
+    )
+  }
+]
 </script>
 
 <style lang="scss" scoped></style>

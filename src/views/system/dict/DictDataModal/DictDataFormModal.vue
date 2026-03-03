@@ -2,33 +2,24 @@
   <a-modal v-model:visible="visible" :title="title" width="calc(100% - 20px)" :mask-closable="false"
     :modal-style="{ maxWidth: '520px' }" @before-ok="save" @close="close">
     <a-spin :loading="loading" class="w-full">
-      <a-form ref="formRef" :model="form" :rules="rules" size="medium" auto-label-width>
-        <a-form-item label="字典名" field="name">
-          <a-input v-model.trim="form.name" placeholder="请输入字典名" allow-clear :max-length="10"></a-input>
-        </a-form-item>
-        <a-form-item label="字典值" field="value">
-          <a-input v-model.trim="form.value" placeholder="请输入字典值" allow-clear :max-length="10"></a-input>
-        </a-form-item>
-        <a-form-item label="状态" field="status">
-          <a-switch v-model="form.status" type="round" :checked-value="1" :unchecked-value="0" checked-text="正常"
-            unchecked-text="禁用" />
-        </a-form-item>
-      </a-form>
+      <GiForm ref="GiFormRef" :model-value="form" :columns="formColumns" :grid-item-props="{ span: 24 }"
+        @update:model-value="Object.assign(form, $event)" />
     </a-spin>
   </a-modal>
 </template>
 
 <script setup lang="ts">
-import type { FormInstance } from '@arco-design/web-vue'
+import type { FormColumnItem } from '@/components/index'
 import { Message } from '@arco-design/web-vue'
 import { getDictDataDetail } from '@/apis/system/dict'
+import { GiForm } from '@/components/index'
 import { useResetReactive } from '@/hooks'
 
 const emit = defineEmits<{
   (e: 'save-success'): void
 }>()
 
-const formRef = useTemplateRef('formRef')
+const GiFormRef = useTemplateRef<InstanceType<typeof GiForm>>('GiFormRef')
 const dictDataId = ref('')
 const isEdit = computed(() => !!dictDataId.value)
 const title = computed(() => (isEdit.value ? '编辑字典数据' : '新增字典数据'))
@@ -38,17 +29,51 @@ const loading = ref(false)
 const [form, resetForm] = useResetReactive({
   name: '',
   value: '',
+  sort: 0,
   status: 1
 })
 
-const rules: FormInstance['rules'] = {
-  name: [{ required: true, message: '请输入字典名' }],
-  value: [
-    { required: true, message: '请输入字典值' },
-    { match: /^\w*$/, message: '格式不对！只能包含英文数字下划线' }
-  ],
-  status: [{ required: true }]
-}
+const formColumns = computed<FormColumnItem[]>(() => [
+  {
+    type: 'input',
+    label: '字典名',
+    field: 'name',
+    required: true,
+    rules: [{ required: true, message: '请输入字典名' }],
+    props: { maxLength: 10 }
+  },
+  {
+    type: 'input',
+    label: '字典值',
+    field: 'value',
+    required: true,
+    rules: [
+      { match: /^\w*$/, message: '格式不对！只能包含英文数字下划线' }
+    ],
+    props: { maxLength: 10 }
+  },
+  {
+    type: 'input-number',
+    label: '排序',
+    field: 'sort',
+    props: { min: 0, style: { width: '120px' } },
+    span: 12
+  },
+  {
+    type: 'switch',
+    label: '状态',
+    field: 'status',
+    required: true,
+    props: {
+      type: 'round',
+      checkedValue: 1,
+      uncheckedValue: 0,
+      checkedText: '正常',
+      uncheckedText: '禁用'
+    },
+    span: 12
+  }
+])
 
 const add = () => {
   dictDataId.value = ''
@@ -61,17 +86,18 @@ const edit = async (data: { id: string, code: string }) => {
   loading.value = true
   const res = await getDictDataDetail(data)
   Object.assign(form, res.data)
+  form.value = res.data.value != null ? String(res.data.value) : ''
   loading.value = false
 }
 
 const close = () => {
-  formRef.value?.resetFields()
+  GiFormRef.value?.formRef?.resetFields()
   resetForm()
 }
 
 const save = async () => {
   try {
-    const valid = await formRef.value?.validate()
+    const valid = await GiFormRef.value?.formRef?.validate()
     if (valid) return false
     const res = await new Promise((resolve) => setTimeout(() => resolve(true), 300))
     if (res) {

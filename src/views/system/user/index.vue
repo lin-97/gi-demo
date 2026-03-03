@@ -19,7 +19,7 @@
     <a-row justify="space-between" class="gi-row-tool">
       <a-space wrap>
         <GiButton type="add" @click="onAdd"></GiButton>
-        <GiButton type="delete" @click="onMulDelete"></GiButton>
+        <GiButton type="delete" @click="onBatchDelete"></GiButton>
       </a-space>
       <a-space wrap>
         <a-input-group>
@@ -33,77 +33,32 @@
       </a-space>
     </a-row>
 
-    <a-table class="gi-table" row-key="id" :loading="loading" :data="userList" :bordered="{ cell: true }"
-      :scroll="{ x: '100%', y: '100%', minWidth: 1700 }" :pagination="pagination"
+    <a-table class="gi-table" row-key="id" :loading="loading" :data="userList" :columns="tableColumns"
+      :bordered="{ cell: true }" :scroll="{ x: '100%', y: '100%', minWidth: 1700 }" :pagination="pagination"
       :row-selection="{ type: 'checkbox', showCheckedAll: true }" :selected-keys="selectedKeys" @select="select"
       @select-all="selectAll">
-      <template #columns>
-        <a-table-column title="序号" :width="68" align="center">
-          <template #cell="cell">{{ cell.rowIndex + 1 }}</template>
-        </a-table-column>
-        <a-table-column title="用户名" data-index="username" :width="120">
-          <template #cell="{ record }">
-            <a-link @click="onDetail(record)">{{ record.username }}</a-link>
-          </template>
-        </a-table-column>
-        <a-table-column title="昵称" data-index="nickname" :width="150">
-          <template #cell="{ record }">
-            <GiCellAvatar :avatar="record.avatar" :name="record.nickname"></GiCellAvatar>
-          </template>
-        </a-table-column>
-        <a-table-column title="状态" :width="100" align="center">
-          <template #cell="{ record }">
-            <GiCellStatus :status="record.status"></GiCellStatus>
-          </template>
-        </a-table-column>
-        <a-table-column title="性别" data-index="gender" :width="80" align="center">
-          <template #cell="{ record }">
-            <GiCellGender :gender="record.gender"></GiCellGender>
-          </template>
-        </a-table-column>
-        <a-table-column title="联系方式" data-index="phone" :width="180"></a-table-column>
-        <a-table-column title="部门" data-index="deptName" :width="180"></a-table-column>
-        <a-table-column title="类型" :width="100" align="center">
-          <template #cell="{ record }">
-            <a-tag v-if="record.type === 1">系统内置</a-tag>
-            <a-tag v-if="record.type === 2">自定义</a-tag>
-          </template>
-        </a-table-column>
-        <a-table-column title="描述" :width="200" data-index="description" :ellipsis="true"
-          :tooltip="true"></a-table-column>
-        <a-table-column title="创建时间" data-index="createTime" :width="200"></a-table-column>
-        <a-table-column title="操作" :width="180" align="center" :fixed="fixed">
-          <template #cell="{ record }">
-            <a-space>
-              <GiButton type="edit" size="mini" :disabled="record.disabled" @click="onEdit(record)"></GiButton>
-              <a-popconfirm type="warning" content="确定删除该用户吗?" @before-ok="onDelete(record)">
-                <GiButton type="delete" size="mini" :disabled="record.disabled"></GiButton>
-              </a-popconfirm>
-            </a-space>
-          </template>
-        </a-table-column>
-      </template>
     </a-table>
 
-    <AddUserModal ref="AddUserModalRef" @save-success="search"></AddUserModal>
+    <UserFormModal ref="UserFormModalRef" @save-success="search"></UserFormModal>
     <UserDetailDrawer ref="UserDetailDrawerRef"></UserDetailDrawer>
   </GiPageLayout>
 </template>
 
-<script setup lang="ts">
+<script setup lang="tsx">
+import type { TableColumnData } from '@arco-design/web-vue'
 import type * as T from '@/apis/system/user'
-import { Message } from '@arco-design/web-vue'
+import { Link, Popconfirm, Space, Tag } from '@arco-design/web-vue'
 import { baseAPI } from '@/apis/system/user'
 import { useDict, useTable } from '@/hooks'
 import { useDept } from '@/hooks/app'
-import AddUserModal from './AddUserModal.vue'
 import UserDetailDrawer from './UserDetailDrawer.vue'
+import UserFormModal from './UserFormModal.vue'
 
 defineOptions({ name: 'SystemUser' })
 
 const { dictData } = useDict(['STATUS'])
 const treeRef = useTemplateRef('treeRef')
-const AddUserModalRef = useTemplateRef('AddUserModalRef')
+const UserFormModalRef = useTemplateRef('UserFormModalRef')
 const UserDetailDrawerRef = useTemplateRef('UserDetailDrawerRef')
 const treeInputValue = ref('')
 
@@ -118,8 +73,9 @@ getDeptList()
 
 const queryParams = reactive({ status: '', username: '' })
 
-const { loading, tableData: userList, pagination, selectedKeys, search, select, selectAll, fixed, handleDelete } = useTable({
+const { loading, tableData: userList, pagination, selectedKeys, search, select, selectAll, fixed, onDelete, onBatchDelete } = useTable({
   listAPI: (page) => baseAPI.getList({ ...page, ...queryParams }),
+  deleteAPI: (ids) => baseAPI.delete({ ids }),
   immediate: true
 })
 
@@ -130,28 +86,88 @@ const reset = () => {
 }
 
 const onAdd = () => {
-  AddUserModalRef.value?.add()
+  UserFormModalRef.value?.add()
 }
 
 const onEdit = (item: T.ListItem) => {
-  AddUserModalRef.value?.edit(item.id)
-}
-
-const onDelete = (item: T.ListItem) => {
-  return handleDelete(() => baseAPI.delete({ ids: [item.id] }), { showModal: false })
-}
-
-// 批量删除
-const onMulDelete = () => {
-  if (!selectedKeys.value.length) {
-    return Message.warning('请选择用户！')
-  }
-  return handleDelete(() => baseAPI.delete({ ids: selectedKeys.value as string[] }))
+  UserFormModalRef.value?.edit(item.id)
 }
 
 const onDetail = (item: T.ListItem) => {
   UserDetailDrawerRef.value?.open(item.id)
 }
+
+const tableColumns: TableColumnData[] = [
+  {
+    title: '序号',
+    width: 68,
+    align: 'center',
+    render: ({ rowIndex }) => (<span>{rowIndex + 1}</span>)
+  },
+  {
+    title: '用户名',
+    dataIndex: 'username',
+    width: 120,
+    render: ({ record }) => (
+      <Link onClick={() => onDetail(record as T.ListItem)}>{record.username}</Link>
+    )
+  },
+  {
+    title: '昵称',
+    dataIndex: 'nickname',
+    width: 150,
+    render: ({ record }) => (
+      <GiCellAvatar avatar={record.avatar} name={record.nickname} />
+    )
+  },
+  {
+    title: '状态',
+    width: 100,
+    align: 'center',
+    render: ({ record }) => <GiCellStatus status={record.status} />
+  },
+  {
+    title: '性别',
+    dataIndex: 'gender',
+    width: 80,
+    align: 'center',
+    render: ({ record }) => <GiCellGender gender={record.gender} />
+  },
+  { title: '联系方式', dataIndex: 'phone', width: 180 },
+  { title: '部门', dataIndex: 'deptName', width: 180 },
+  {
+    title: '类型',
+    width: 100,
+    align: 'center',
+    render: ({ record }) => (
+      <>
+        {record.type === 1 && <Tag>系统内置 </Tag>}
+        {record.type === 2 && <Tag>自定义 </Tag>}
+      </>
+    )
+  },
+  { title: '描述', dataIndex: 'description', width: 200, ellipsis: true, tooltip: true },
+  { title: '创建时间', dataIndex: 'createTime', width: 200 },
+  {
+    title: '操作',
+    width: 180,
+    align: 'center',
+    fixed: fixed.value,
+    render: ({ record }) => (
+      <Space>
+        <GiButton
+          type="edit"
+          size="mini"
+          disabled={record.disabled}
+          onClick={() => onEdit(record as T.ListItem)}
+        />
+        <Popconfirm type="warning" content="确定删除该用户吗?" onBeforeOk={() => onDelete(record as T.ListItem)}>
+          <GiButton type="delete" size="mini" disabled={record.disabled} />
+        </Popconfirm>
+      </Space>
+    )
+  }
+]
 </script>
 
 <style lang="scss" scoped></style>
