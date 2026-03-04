@@ -5,9 +5,66 @@
       border-right: 0;
     }
   }
+
   .arco-input-append {
     .arco-btn {
       border-left: 0;
     }
+  }
+}
+
+.arco-input-number-mode-embed {
+  padding-right: 0;
+  overflow: hidden;
+
+  &.arco-input-wrapper:not(.arco-input-focus) .arco-input-number-step-button:not(.arco-input-number-step-button-disabled):hover {
+    background-color: var(--color-fill-2);
+  }
+
+  .arco-input-number-step {
+    top: 0;
+    right: 0;
+    bottom: 0;
+    position: static;
+    display: flex;
+    flex-direction: column;
+    width: 34px;
+    height: 100%;
+    opacity: 1;
+    visibility: visible;
+    transform: none;
+    border-left: 1px solid var(--color-border-2);
+  }
+
+  .arco-input-number-step-button {
+    display: flex;
+    flex: 1;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: auto;
+    min-height: 0;
+    border-left: 1px solid var(--color-border-2);
+
+    &:not(.arco-input-number-step-button-disabled) {
+      &:hover {
+        .arco-icon {
+          color: rgb(var(--primary-6));
+        }
+      }
+    }
+
+    &:hover,
+    &:active {
+      background-color: var(--color-fill-2);
+    }
+  }
+
+  .arco-input-number-step-button+.arco-input-number-step-button {
+    border-top: 1px solid var(--color-border-2);
+  }
+
+  .arco-input-number-input {
+    padding-right: 34px;
   }
 }

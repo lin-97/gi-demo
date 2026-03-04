@@ -80,8 +80,8 @@ type LayoutItem = { label: string, value: App.SettingConfig['layout'] }
 /** 布局选项 */
 const LAYOUT_OPTIONS: LayoutItem[] = [
   { label: '默认布局', value: 'left' },
-  { label: '混合布局', value: 'mix' },
   { label: '顶部布局', value: 'top' },
+  { label: '混合布局', value: 'mix' },
   { label: '双列布局', value: 'columns' }
 ]
 
