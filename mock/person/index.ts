@@ -26,9 +26,9 @@ function getHobbysList(num: number): string[] {
   return arr
 }
 
-/** 使用 Mock 生成单条数据（在 seed 下结果固定） */
+/** 使用 Mock 生成单条数据（在 seed 下结果固定），gender/status 与字典值一致为字符串 */
 function createMockItem() {
-  return Mock.mock({
+  const item = Mock.mock({
     'id': '@guid',
     'name': '@cname',
     'account': '@string("lower", 5)',
@@ -43,6 +43,7 @@ function createMockItem() {
     'hobbys': () => getHobbysList(Random.integer(1, 9)),
     'remark': ''
   })
+  return { ...item, gender: String(item.gender), status: String(item.status) }
 }
 
 /**
@@ -74,8 +75,7 @@ export default defineMock([
         filtered = filtered.filter((i) => (i.name ?? '').includes(name))
       }
       if (status !== undefined && status !== '' && status !== null) {
-        const statusNum = Number(status)
-        filtered = filtered.filter((i) => i.status === statusNum)
+        filtered = filtered.filter((i) => i.status === status)
       }
 
       const total = filtered.length

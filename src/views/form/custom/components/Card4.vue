@@ -39,7 +39,7 @@ const isEdit = ref(false)
 const [form, resetForm] = useResetReactive({
   name: '',
   remark: '这是备注这是备注',
-  status: 1
+  status: '1' as Status
 })
 
 const columns = computed(() => [

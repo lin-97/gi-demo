@@ -30,7 +30,7 @@ defineOptions({ name: 'CrudForm' })
 const route = useRoute()
 const router = useRouter()
 
-const { dictData } = useDict(['STATUS'])
+const { dictData } = useDict(['STATUS', 'GENDER'])
 
 const hobbyOptions = [
   { label: '篮球', value: '篮球' },
@@ -57,13 +57,13 @@ const form = reactive({
   name: '',
   account: '',
   avatar: '',
-  gender: 1 as 1 | 2 | 3,
+  gender: '1' as Gender,
   phone: '',
   email: '',
   createTime: '',
   address: '',
   age: 0,
-  status: 0 as 0 | 1,
+  status: '0' as Status,
   hobbys: [] as string[],
   remark: ''
 })
@@ -94,13 +94,7 @@ const formColumns = computed<FormColumnItem[]>(() => [
     type: 'radio-group',
     label: '性别',
     field: 'gender',
-    props: {
-      options: [
-        { label: '男', value: 1 },
-        { label: '女', value: 2 },
-        { label: '未知', value: 3 }
-      ]
-    }
+    props: { options: dictData.value.GENDER }
   },
   {
     type: 'input',
@@ -116,10 +110,10 @@ const formColumns = computed<FormColumnItem[]>(() => [
     rules: [{ type: 'number', min: 1, max: 150, message: '年龄范围为 1-150' }]
   },
   {
-    type: 'select',
+    type: 'switch',
     label: '状态',
     field: 'status',
-    props: { options: dictData.value.STATUS }
+    props: { checkedValue: '1', uncheckedValue: '0' }
   },
   {
     type: 'select',

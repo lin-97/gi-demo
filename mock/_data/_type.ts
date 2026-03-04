@@ -22,19 +22,19 @@ export interface MockCateTreeItem {
   children?: MockCateTreeItem[]
 }
 
-/** 系统部门数据类型 */
+/** 系统部门数据类型，status 与字典 STATUS 一致为字符串 */
 export interface MockSystemDeptItem {
   id: string
   parentId: string
   name: string
   sort: number
-  status: 0 | 1
+  status: Status
   createTime: string
   description: string
   children?: MockSystemDeptItem[]
 }
 
-/** 系统字典数据类型 */
+/** 系统字典数据类型，status 与字典一致为字符串 */
 export interface MockSystemDictItem {
   id: string
   createUserString: string
@@ -42,14 +42,14 @@ export interface MockSystemDictItem {
   name: string
   code: string
   sort: number
-  status: 0 | 1
+  status: Status
   description: string
   list: {
     id: string
     name: string
     value: string | number
     sort: number
-    status: number
+    status: Status
     color?: string
   }[]
 }
@@ -69,7 +69,7 @@ export interface MockSystemMenuItem {
   sort: number
   activeMenu: string
   breadcrumb: boolean
-  status: 0 | 1
+  status: Status
   roles: string[]
   permission: string
   showInTabs: boolean
@@ -87,12 +87,12 @@ export interface MockSystemRoleItem {
   name: string
   code: string
   sort: number
-  status: 0 | 1
+  status: Status
   type: number
   description: string
 }
 
-/** 系统用户数据类型 */
+/** 系统用户数据类型，gender/status 与字典一致为字符串 */
 export interface MockSystemUserItem {
   id: string
   createUserString: string
@@ -100,11 +100,11 @@ export interface MockSystemUserItem {
   disabled: boolean
   username: string
   nickname: string
-  gender: 1 | 2
+  gender: Gender
   avatar: string
   email: string
   phone: string
-  status: 0 | 1
+  status: Status
   type: number
   description: string
   roleIds: string[]

@@ -62,7 +62,7 @@ const [form, resetForm] = useResetReactive({
   iconType: 'arco' as 'arco' | 'custom',
   title: '',
   sort: 0,
-  status: 1,
+  status: '1' as Status,
   path: '',
   component: '',
   keepAlive: false,

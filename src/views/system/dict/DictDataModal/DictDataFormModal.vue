@@ -30,7 +30,7 @@ const [form, resetForm] = useResetReactive({
   name: '',
   value: '',
   sort: 0,
-  status: 1
+  status: '1' as Status
 })
 
 const formColumns = computed<FormColumnItem[]>(() => [

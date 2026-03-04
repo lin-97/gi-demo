@@ -32,7 +32,7 @@ const [form, resetForm] = useResetReactive({
   parentId: '',
   name: '',
   sort: 0,
-  status: 1,
+  status: '1' as Status,
   description: ''
 })
 

@@ -45,7 +45,7 @@ const form = reactive({
   sex: '',
   birthday: '',
   hobby: [],
-  status: 1,
+  status: '1' as Status,
   mark: 0,
   hide: false,
   grade: 0,
@@ -163,7 +163,7 @@ const columns = computed(() => [
   {
     label: '测试',
     field: 'test',
-    disabled: (i) => i.status === 0,
+    disabled: (i) => i.status === '0',
     formItemProps: { extra: '查看这里效果请切换状态' }
   },
   {
@@ -206,7 +206,7 @@ const columns = computed(() => [
     props: {
       options: cityOptions
     },
-    disabled: (i) => i.status === 0
+    disabled: (i) => i.status === '0'
   },
   {
     type: 'tree-select',
@@ -215,7 +215,7 @@ const columns = computed(() => [
     props: {
       data: deptData
     },
-    disabled: (i) => i.status === 0
+    disabled: (i) => i.status === '0'
   },
   {
     type: 'group-title',

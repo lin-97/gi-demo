@@ -9,12 +9,12 @@
       </a-descriptions-item> -->
       <a-descriptions-item label="角色">{{ user?.roleNames }}</a-descriptions-item>
       <a-descriptions-item label="状态">
-        <a-tag v-if="user?.status === 1" color="green">正常</a-tag>
-        <a-tag v-if="user?.status === 0" color="red">禁用</a-tag>
+        <a-tag v-if="user?.status === '1'" color="green">正常</a-tag>
+        <a-tag v-if="user?.status === '0'" color="red">禁用</a-tag>
       </a-descriptions-item>
       <a-descriptions-item label="性别">
-        <span v-if="user?.gender === 1">男</span>
-        <span v-if="user?.gender === 2">女</span>
+        <span v-if="user?.gender === '1'">男</span>
+        <span v-if="user?.gender === '2'">女</span>
       </a-descriptions-item>
       <a-descriptions-item label="部门">{{ user?.deptName }}</a-descriptions-item>
       <a-descriptions-item label="联系方式">{{ user?.phone }}</a-descriptions-item>

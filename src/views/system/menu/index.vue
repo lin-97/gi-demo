@@ -60,7 +60,7 @@
         </a-table-column>
         <a-table-column title="状态" :width="80" align="center">
           <template #cell="{ record }">
-            <a-switch type="round" size="small" :model-value="record.status" :checked-value="1" :unchecked-value="0" />
+            <a-switch type="round" size="small" :model-value="record.status" checked-value="1" unchecked-value="0" />
           </template>
         </a-table-column>
         <a-table-column title="是否缓存" :width="100" align="center">

@@ -28,7 +28,7 @@ const visible = ref(false)
 const [form, resetForm] = useResetReactive({
   name: '',
   code: '',
-  status: 1,
+  status: '1' as Status,
   description: ''
 })
 

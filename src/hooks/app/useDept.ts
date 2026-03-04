@@ -14,7 +14,7 @@ export function useDept(options?: { onSuccess?: () => void }) {
       const res = await baseAPI.getList()
       deptList.value = mapTree(res.data, (i) => {
         if (i.children?.length) {
-          i.children = i.children.filter((i) => i.status === 1)
+          i.children = i.children.filter((i) => i.status === '1')
         }
         return i
       })

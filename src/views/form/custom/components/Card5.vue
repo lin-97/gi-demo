@@ -39,7 +39,7 @@ import CodeJson from './Card5.vue?raw'
 const form = reactive({
   name: '',
   phone: '',
-  status: 1
+  status: '1' as Status
 })
 
 const formRef = useTemplateRef('formRef')

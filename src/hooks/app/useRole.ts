@@ -11,7 +11,7 @@ export function useRole() {
     try {
       loading.value = true
       const res = await baseAPI.getList({ page: 1, size: 99 })
-      roleList.value = res.data.records.filter((i) => i.status === 1)
+      roleList.value = res.data.records.filter((i) => i.status === '1')
       total.value = res.data.total
     } finally {
       loading.value = false

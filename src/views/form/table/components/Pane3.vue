@@ -49,8 +49,8 @@ defineOptions({ name: 'FormTable' })
 
 const { dictData } = useDict(['STATUS'])
 
-type DataItem = { name: string, phone: string, address: string, rate: number, status: 1 | 0, num: number }
-const data = ref<DataItem[]>([{ name: '张三', phone: '', address: '广州市', rate: 3, status: 0, num: 0 }])
+type DataItem = { name: string, phone: string, address: string, rate: number, status: Status, num: number }
+const data = ref<DataItem[]>([{ name: '张三', phone: '', address: '广州市', rate: 3, status: '0', num: 0 }])
 const tableDataJson = computed(() => {
   return JSON.stringify(data.value, null, '\t')
 })
@@ -124,7 +124,7 @@ const columns = computed(() => [
 ] as EditTableColumnItem[])
 
 const addTableRow = () => {
-  data.value.push({ name: '', phone: '', address: '', rate: 0, status: 0, num: 0 })
+  data.value.push({ name: '', phone: '', address: '', rate: 0, status: '0', num: 0 })
 }
 
 const currentCell = reactive({ rowIndex: -1, dataIndex: '' })
