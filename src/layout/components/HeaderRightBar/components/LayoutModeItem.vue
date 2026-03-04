@@ -137,21 +137,11 @@ const appStore = useAppStore()
   background-color: var(--color-bg-1);
   border: 2px solid var(--color-border-2);
   border-radius: 6px;
-  transition: box-shadow 0.25s ease;
-
-  // &:not(.is-active):hover {
-  //   border: 1px solid var(--color-border-3);
-  //   box-shadow: 0 0 0 1px rgb(0 0 0 / 6%), 0 0 10px rgb(0 0 0 / 4%);
-  // }
+  transition: border-color 0.25s ease, box-shadow 0.25s ease;
 
   &.is-active {
-    border: 2px solid transparent;
-    background:
-      linear-gradient(var(--color-bg-1), var(--color-bg-1)) padding-box,
-      linear-gradient(90deg, #5b8ff9, #36cfc9, #73d13d, #ffc53d, #ff7875, #b37feb, #5b8ff9) border-box;
-    background-size: 100% 100%, 300% 100%;
-    animation: layout-mode-border-flow 2.4s linear infinite;
-    box-shadow: 0 0 0 1px rgb(91 143 249 / 22%), 0 0 10px rgb(91 143 249 / 18%);
+    border-color: rgb(var(--primary-6));
+    box-shadow: 0 0 5px 3px rgb(var(--primary-2));
   }
 
   &__text {
@@ -275,16 +265,6 @@ const appStore = useAppStore()
   .preview-main .preview-content {
     justify-content: center;
     padding-top: 0;
-  }
-}
-
-@keyframes layout-mode-border-flow {
-  0% {
-    background-position: 0 0, 0 0;
-  }
-
-  100% {
-    background-position: 0 0, 300% 0;
   }
 }
 </style>
