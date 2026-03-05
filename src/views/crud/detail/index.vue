@@ -21,8 +21,8 @@
           <a-descriptions-item label="邮箱">{{ detail.email || '-' }}</a-descriptions-item>
           <a-descriptions-item label="年龄">{{ detail.age ?? '-' }}</a-descriptions-item>
           <a-descriptions-item label="爱好" :span="2">
-            <a-space v-if="detail.hobbys?.length" :size="5" wrap>
-              <a-tag v-for="(item, i) in detail.hobbys" :key="i">{{ item }}</a-tag>
+            <a-space v-if="detail.hobby?.length" :size="5" wrap>
+              <a-tag v-for="(item, i) in detail.hobby" :key="i">{{ item }}</a-tag>
             </a-space>
             <span v-else>-</span>
           </a-descriptions-item>

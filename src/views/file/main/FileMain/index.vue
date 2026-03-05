@@ -102,7 +102,7 @@ import type { FileItem } from '@/apis/file'
 import { Message, Modal } from '@arco-design/web-vue'
 import { api as viewerApi } from 'v-viewer'
 import { getFileList } from '@/apis/file'
-import { FILE_TYPE_LIST, IMAGE_TYPES } from '@/constant/file'
+import { FILE_TYPE_LIST, IMAGE_TYPES } from '@/utils/file'
 import {
   openFileMoveModal,
   openFileRenameModal,

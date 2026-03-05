@@ -11,6 +11,6 @@ export interface ListItem {
   address: string
   age: number
   status: Status
-  hobbys: string[]
+  hobby: string[]
   remark: string
 }

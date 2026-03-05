@@ -10,7 +10,7 @@
       :pagination="pagination" :disabled-column-keys="['序号', 'name']" @refresh="getTableData">
       <template #custom-title>
         <GiButton type="add" @click="onAdd"></GiButton>
-        <GiButton type="delete" @click="onMulDelete"></GiButton>
+        <GiButton type="delete" @click="onBatchDelete"></GiButton>
         <GiButton type="import" @click="onImport"></GiButton>
         <GiCodeButton :code="CodeJson"></GiCodeButton>
       </template>
@@ -25,11 +25,11 @@
       <template #status="{ record }">
         <GiCellStatus :status="record.status"></GiCellStatus>
       </template>
-      <template #action>
+      <template #action="{ record }">
         <a-space>
           <a-button type="primary" size="mini">修改</a-button>
           <a-button size="mini">详情</a-button>
-          <a-popconfirm type="warning" content="您确定要删除该项吗?" @before-ok="onDelete">
+          <a-popconfirm type="warning" content="您确定要删除该项吗?" @before-ok="onDelete(record)">
             <a-button type="primary" status="danger" size="mini">删除</a-button>
           </a-popconfirm>
         </a-space>
@@ -41,7 +41,7 @@
 </template>
 
 <script setup lang="ts">
-import type { PopconfirmInstance, TableInstance } from '@arco-design/web-vue'
+import type { TableInstance } from '@arco-design/web-vue'
 import type * as T from '@/apis/person'
 import type { FormColumnItem } from '@/components/index'
 import { Link, Message } from '@arco-design/web-vue'
@@ -116,7 +116,11 @@ const columns: TableInstance['columns'] = [
   { title: '操作', width: 200, slotName: 'action', align: 'center' }
 ]
 
-const { tableData, getTableData, pagination, search, loading } = useTable({ listAPI: (p) => baseAPI.getList(p) })
+const { tableData, getTableData, pagination, search, loading, onDelete, onBatchDelete, onImport } = useTable({
+  listAPI: (p) => baseAPI.getList(p),
+  deleteAPI: (ids) => baseAPI.delete({ ids }),
+  immediate: true
+})
 
 function onClickName(record: T.ListItem) {
   Message.success(`点击了${record.name}`)
@@ -124,18 +128,6 @@ function onClickName(record: T.ListItem) {
 
 const onAdd = () => {
   Message.info('点击了新增')
-}
-
-const onMulDelete = () => {
-  Message.error('点击了批量删除')
-}
-
-const onImport = () => {
-  Message.warning('点击了导入')
-}
-
-const onDelete: PopconfirmInstance['onBeforeOk'] = () => {
-  return new Promise((resolve) => setTimeout(() => resolve(true), 300))
 }
 </script>
 

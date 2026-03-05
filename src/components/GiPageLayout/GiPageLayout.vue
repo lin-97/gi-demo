@@ -34,7 +34,8 @@ const props = withDefaults(defineProps<Props>(), {
   leftStyle: () => ({}),
   headerStyle: () => ({}),
   bodyStyle: () => ({}),
-  collapsed: false
+  collapsed: false,
+  bgTransparent: false
 })
 
 /** 组件插槽定义 */
@@ -56,7 +57,8 @@ const getClass = computed(() => {
     'gi-page-layout--inner': props.inner,
     'gi-page-layout--has-header': slots.header,
     'gi-page-layout--header-bordered': props.headerBordered,
-    'gi-page-layout--collapsing': collapsing.value
+    'gi-page-layout--collapsing': collapsing.value,
+    'gi-page-layout--bg-transparent': props.bgTransparent
   }
 })
 
@@ -124,6 +126,10 @@ function handleClick() {
   height: 100%;
   overflow: hidden;
   background-color: var(--color-bg-1);
+}
+
+.gi-page-layout--bg-transparent {
+  background-color: transparent;
 }
 
 .gi-page-layout--margin {

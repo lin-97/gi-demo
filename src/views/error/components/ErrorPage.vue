@@ -9,7 +9,7 @@
         <div class="error__tip--a">抱歉!</div>
         <div class="error__tip--b">当前页面不存在...</div>
         <div class="error__tip--c">请检查您输入的网址是否正确，或点击下面的按钮返回首页</div>
-        <a-button type="primary" shape="round" size="large" @click="back">{{ countDownTime }} 返回首页</a-button>
+        <a-button type="primary" shape="round" size="large" @click="back">{{ countDownTime || '' }} 返回首页</a-button>
       </div>
     </section>
   </div>

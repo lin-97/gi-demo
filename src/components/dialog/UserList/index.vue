@@ -1,5 +1,5 @@
 <template>
-  <GiPageLayout>
+  <GiPageLayout bg-transparent>
     <a-row justify="end" class="gi-row-tool">
       <a-space wrap>
         <a-input v-model="searchParams.username" placeholder="输入用户名搜索" allow-clear style="max-width: 250px">

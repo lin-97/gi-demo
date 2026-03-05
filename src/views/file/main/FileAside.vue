@@ -44,8 +44,8 @@
 </template>
 
 <script setup lang="ts">
-import type { FileTypeListItem } from '@/constant/file'
-import { FILE_TYPE_LIST } from '@/constant/file'
+import type { FileTypeListItem } from '@/utils/file'
+import { FILE_TYPE_LIST } from '@/utils/file'
 
 const route = useRoute()
 const router = useRouter()

@@ -28,20 +28,20 @@
             <GiCellGender :gender="record.gender"></GiCellGender>
           </template>
         </a-table-column>
-        <a-table-column title="爱好" data-index="hobbys">
+        <a-table-column title="爱好" data-index="hobby">
           <template #cell="{ record }">
-            <GiCellTags :data="record.hobbys"></GiCellTags>
+            <GiCellTags :data="record.hobby"></GiCellTags>
           </template>
         </a-table-column>
         <a-table-column title="创建时间" data-index="createTime" :width="180"
           :sortable="{ sortDirections: ['ascend', 'descend'] }"></a-table-column>
         <a-table-column title="地址" data-index="address" ellipsis tooltip></a-table-column>
         <a-table-column title="操作" :width="200" align="center" fixed="right">
-          <template #cell>
+          <template #cell="{ record }">
             <a-space>
               <a-button type="primary" size="mini">编辑</a-button>
               <a-button size="mini">详情</a-button>
-              <a-popconfirm type="warning" content="您确定要删除该项吗?" @before-ok="onDelete">
+              <a-popconfirm type="warning" content="您确定要删除该项吗?" @before-ok="onDelete(record)">
                 <a-button type="primary" status="danger" size="mini">删除</a-button>
               </a-popconfirm>
             </a-space>
@@ -53,7 +53,6 @@
 </template>
 
 <script setup lang="ts">
-import type { PopconfirmInstance } from '@arco-design/web-vue'
 import type { FormColumnItem } from '@/components/index'
 import { baseAPI } from '@/apis/person'
 import { useTable } from '@/hooks'
@@ -78,11 +77,11 @@ const columns = reactive([
   }
 ] as FormColumnItem[])
 
-const { tableData, pagination, search, loading } = useTable({ listAPI: (p) => baseAPI.getList(p) })
-
-const onDelete: PopconfirmInstance['onBeforeOk'] = () => {
-  return new Promise((resolve) => setTimeout(() => resolve(true), 300))
-}
+const { tableData, pagination, search, loading, onDelete } = useTable({
+  listAPI: (p) => baseAPI.getList(p),
+  deleteAPI: (ids) => baseAPI.delete({ ids }),
+  immediate: true
+})
 </script>
 
 <style lang="scss" scoped></style>

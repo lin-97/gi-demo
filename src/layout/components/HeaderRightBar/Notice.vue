@@ -5,7 +5,7 @@
 <template>
   <div class="message">
     <!-- 消息标签页 -->
-    <a-tabs :active-key="activeTab" @change="handleTabChange">
+    <a-tabs :active-key="activeTab" style="background-color: transparent;" @change="handleTabChange">
       <a-tab-pane v-for="tab in tabs" :key="tab.key">
         <template #title>{{ tab.title }}({{ tab.count }})</template>
       </a-tab-pane>

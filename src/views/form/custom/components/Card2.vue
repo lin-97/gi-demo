@@ -35,7 +35,7 @@ import * as Regexp from '@/utils/regexp'
 import CodeJson from './Card2.vue?raw'
 import { cityOptions, deptData } from './data'
 
-const { dictData } = useDict(['STATUS'])
+const { dictData } = useDict(['STATUS', 'HOBBY'])
 const isNameRequired = ref(true)
 
 const form = reactive({
@@ -119,14 +119,7 @@ const columns = computed(() => [
     label: '爱好',
     field: 'hobby',
     span: 24,
-    props: {
-      options: [
-        { label: '电影', value: '01' },
-        { label: '音乐', value: '02' },
-        { label: '旅行', value: '03' },
-        { label: '游戏', value: '04' }
-      ]
-    },
+    props: { options: dictData.value.HOBBY },
     slots: {
       label: ({ data }) => (
         <span style={{ color: 'red' }}>

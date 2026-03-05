@@ -15,9 +15,12 @@ const AVATARS = [
   'https://s1.ax1x.com/2022/06/14/XhtakQ.jpg'
 ]
 
-const HOBBYS = ['篮球', '羽毛球', '足球', '音乐', '电影', '旅行', '高尔夫', '爬山', '游泳', '健身']
+const HOBBYS = [
+  '篮球', '羽毛球', '足球', '音乐', '电影', '旅行', '高尔夫', '爬山', '游泳', '健身',
+  '阅读', '摄影', '绘画', '书法', '舞蹈', '跑步', '骑行', '瑜伽', '钓鱼', '桌游', '烹饪', '园艺', '露营', '滑雪'
+]
 
-function getHobbysList(num: number): string[] {
+function getHobbyList(num: number): string[] {
   const arr: string[] = []
   while (arr.length < num) {
     const item = HOBBYS[Random.integer(0, HOBBYS.length - 1)]
@@ -40,8 +43,19 @@ function createMockItem() {
     'avatar': () => AVATARS[Random.integer(0, AVATARS.length - 1)],
     'age|18-60': 25,
     'status|0-1': 0,
-    'hobbys': () => getHobbysList(Random.integer(1, 9)),
-    'remark': ''
+    'hobby': () => getHobbyList(Random.integer(1, 9)),
+    'remark': () => {
+      const n = Random.integer(0, 5)
+      if (n === 0) return ''
+      if (n === 1) return Mock.mock('@cparagraph(1, 3)')
+      return Random.pick([
+        '暂无备注',
+        '表现良好，学习态度认真，可多加关注。',
+        '性格开朗，与同学关系融洽，适合担任班级干部。',
+        '近期成绩有进步，建议继续保持当前学习节奏。',
+        '需多与家长沟通，配合督促完成课后作业。'
+      ])
+    }
   })
   return { ...item, gender: String(item.gender), status: String(item.status) }
 }

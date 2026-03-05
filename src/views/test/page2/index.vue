@@ -1,34 +1,41 @@
 <template>
   <GiPageLayout margin :body-style="{ overflowY: 'auto' }">
     <a-alert>
-      <span>当前页面 </span>
-      <a-tag color="green">超级管理员角色</a-tag> 和 <a-tag color="green">普通用户角色</a-tag>
-      <span> 能看</span>
+      <a-space>
+        <span>当前页面</span>
+        <a-tag color="green">超级管理员角色</a-tag>
+        <span>和</span>
+        <a-tag color="green">普通用户角色</a-tag>
+        <span>能看</span>
+      </a-space>
     </a-alert>
 
-    <a-typography-title :heading="5">当前用户权限</a-typography-title>
-    <GiCodeView :code-json="JSON.stringify(userStore.permissions)"></GiCodeView>
-
-    <a-typography-title :heading="5">当前页面角色权限</a-typography-title>
-    <GiCodeView :code-json="JSON.stringify(['role_admin', 'role_user'])"></GiCodeView>
-
-    <section class="gi-mt">
-      <GiCodeView type="vue" :code-json="pre1"></GiCodeView>
-      <a-space class="gi-mt">
-        <a-button v-hasPerm="['test:btn:add']" type="primary">新增</a-button>
-        <a-button v-hasPerm="['test:btn:edit']" type="primary" status="success">编辑</a-button>
-        <a-button v-hasPerm="['test:btn:delete']" type="primary" status="danger">删除</a-button>
-      </a-space>
-    </section>
-
-    <section class="gi-mt">
-      <GiCodeView type="vue" :code-json="pre2"></GiCodeView>
-      <a-space class="gi-mt">
-        <a-button v-hasPerm="['user:btn:add']" type="primary">新增</a-button>
-        <a-button v-hasPerm="['user:btn:edit']" type="primary" status="success">编辑</a-button>
-        <a-button v-hasPerm="['user:btn:delete']" type="primary" status="danger">删除</a-button>
-      </a-space>
-    </section>
+    <a-space direction="vertical" size="large">
+      <div>
+        <a-typography-title :heading="6">当前用户权限</a-typography-title>
+        <GiCodeView :code-json="JSON.stringify(userStore.permissions)"></GiCodeView>
+      </div>
+      <div>
+        <a-typography-title :heading="6" style="margin-top: 0">当前页面角色权限</a-typography-title>
+        <GiCodeView :code-json="JSON.stringify(['role_admin', 'role_user'])"></GiCodeView>
+      </div>
+      <div>
+        <GiCodeView type="vue" :code-json="pre1"></GiCodeView>
+        <a-space class="gi-mt">
+          <a-button v-hasPerm="['test:btn:add']" type="primary">新增</a-button>
+          <a-button v-hasPerm="['test:btn:edit']" type="primary" status="success">编辑</a-button>
+          <a-button v-hasPerm="['test:btn:delete']" type="primary" status="danger">删除</a-button>
+        </a-space>
+      </div>
+      <div>
+        <GiCodeView type="vue" :code-json="pre2"></GiCodeView>
+        <a-space class="gi-mt">
+          <a-button v-hasPerm="['user:btn:add']" type="primary">新增</a-button>
+          <a-button v-hasPerm="['user:btn:edit']" type="primary" status="success">编辑</a-button>
+          <a-button v-hasPerm="['user:btn:delete']" type="primary" status="danger">删除</a-button>
+        </a-space>
+      </div>
+    </a-space>
   </GiPageLayout>
 </template>
 

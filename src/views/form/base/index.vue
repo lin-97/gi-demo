@@ -47,8 +47,8 @@
         <a-form-item label="在校日期范围" field="rangDate">
           <a-range-picker v-model="form.rangDate" allow-clear />
         </a-form-item>
-        <a-form-item label="爱好" field="hobbys" extra="这里的数据采用了数据字典">
-          <a-select v-model="form.hobbys" :options="dictData.HOBBYS" placeholder="请选择爱好" multiple
+        <a-form-item label="爱好" field="hobby" extra="这里的数据采用了数据字典">
+          <a-select v-model="form.hobby" :options="dictData.HOBBY" placeholder="请选择爱好" multiple
             allow-clear></a-select>
         </a-form-item>
         <a-form-item field="isRead">
@@ -76,7 +76,7 @@ import { isMobile } from '@/utils'
 import * as Regexp from '@/utils/regexp'
 
 defineOptions({ name: 'FormBase' })
-const { dictData } = useDict(['HOBBYS'])
+const { dictData } = useDict(['HOBBY'])
 
 const treeData = ref([
   {
@@ -104,7 +104,7 @@ const form = reactive({
   education: 1,
   rangDate: [],
   dept: [],
-  hobbys: [],
+  hobby: [],
   isRead: false
 })
 

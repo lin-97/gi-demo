@@ -30,20 +30,7 @@ defineOptions({ name: 'CrudForm' })
 const route = useRoute()
 const router = useRouter()
 
-const { dictData } = useDict(['STATUS', 'GENDER'])
-
-const hobbyOptions = [
-  { label: '篮球', value: '篮球' },
-  { label: '羽毛球', value: '羽毛球' },
-  { label: '足球', value: '足球' },
-  { label: '音乐', value: '音乐' },
-  { label: '电影', value: '电影' },
-  { label: '旅行', value: '旅行' },
-  { label: '高尔夫', value: '高尔夫' },
-  { label: '爬山', value: '爬山' },
-  { label: '游泳', value: '游泳' },
-  { label: '健身', value: '健身' }
-]
+const { dictData } = useDict(['STATUS', 'GENDER', 'HOBBY'])
 
 const giFormRef = useTemplateRef<InstanceType<typeof GiForm>>('giFormRef')
 
@@ -64,7 +51,7 @@ const form = reactive({
   address: '',
   age: 0,
   status: '0' as Status,
-  hobbys: [] as string[],
+  hobby: [] as string[],
   remark: ''
 })
 
@@ -113,13 +100,13 @@ const formColumns = computed<FormColumnItem[]>(() => [
     type: 'switch',
     label: '状态',
     field: 'status',
-    props: { checkedValue: '1', uncheckedValue: '0' }
+    props: { checkedValue: '1', uncheckedValue: '0', checkedText: '正常', uncheckedText: '禁用', uncheckedColor: 'rgb(var(--danger-6))' }
   },
   {
     type: 'select',
     label: '爱好',
-    field: 'hobbys',
-    props: { options: hobbyOptions, multiple: true }
+    field: 'hobby',
+    props: { options: dictData.value.HOBBY, multiple: true }
   },
   {
     type: 'input',

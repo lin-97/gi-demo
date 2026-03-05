@@ -28,7 +28,7 @@ const data: MockSystemUserItem[] = [
     disabled: false,
     username: 'user',
     nickname: '木糖醇',
-    gender: 2,
+    gender: '2',
     avatar: 'https://img1.baidu.com/it/u=1817951587,3188870642&fm=253&fmt=auto&app=138&f=JPEG?w=500&h=500',
     email: '15500008810@qq.com',
     phone: '15500008810',

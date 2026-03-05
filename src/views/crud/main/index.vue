@@ -1,7 +1,7 @@
 <template>
   <GiPageLayout collapsed margin>
     <template #left>
-      <CateTree placeholder="请输入搜索关键词" @node-click="pagination.onChange(1)"></CateTree>
+      <CateTree placeholder="请输入搜索关键词" @node-click="search"></CateTree>
     </template>
 
     <a-row justify="space-between" class="gi-row-tool">

@@ -1,5 +1,5 @@
 <template>
-  <GiPageLayout>
+  <GiPageLayout bg-transparent>
     <template #left>
       <Tree @node-click="search" />
     </template>

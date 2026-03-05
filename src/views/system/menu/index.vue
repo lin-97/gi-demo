@@ -124,8 +124,9 @@ const onExpanded = () => {
 
 const queryParams = reactive({ name: '', status: '' })
 
-const { loading, tableData: menuList, search, fixed, handleDelete } = useTable({
+const { loading, tableData: menuList, search, fixed, onDelete } = useTable({
   listAPI: () => baseAPI.getList({ ...queryParams }),
+  deleteAPI: (ids) => baseAPI.delete({ ids }),
   immediate: true
 })
 
@@ -141,10 +142,6 @@ const onAdd = () => {
 
 const onEdit = (item: T.ListItem) => {
   MenuFormModalRef.value?.edit(item.id)
-}
-
-const onDelete = (item: T.ListItem) => {
-  return handleDelete(() => baseAPI.delete({ ids: [item.id] }), { showModal: false })
 }
 </script>
 

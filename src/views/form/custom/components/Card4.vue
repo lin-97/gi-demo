@@ -30,16 +30,18 @@
 import type { FormColumnItem } from '@/components/index'
 import { Message, Modal } from '@arco-design/web-vue'
 import { GiForm } from '@/components/index'
-import { useResetReactive } from '@/hooks'
+import { useDict, useResetReactive } from '@/hooks'
 import * as Regexp from '@/utils/regexp'
 import CodeJson from './Card4.vue?raw'
 import { cityOptions, deptData } from './data'
 
+const { dictData } = useDict(['HOBBY'])
 const isEdit = ref(false)
 const [form, resetForm] = useResetReactive({
   name: '',
   remark: '这是备注这是备注',
-  status: '1' as Status
+  status: '1' as Status,
+  hobby: [] as string[]
 })
 
 const columns = computed(() => [
@@ -87,16 +89,9 @@ const columns = computed(() => [
   {
     type: 'checkbox-group',
     label: '爱好',
-    field: 'hobbys',
+    field: 'hobby',
     span: 24,
-    props: {
-      options: [
-        { label: '电影', value: '01' },
-        { label: '音乐', value: '02' },
-        { label: '旅行', value: '03' },
-        { label: '游戏', value: '04' }
-      ]
-    }
+    props: { options: dictData.value.HOBBY }
   },
   {
     type: 'input-number',

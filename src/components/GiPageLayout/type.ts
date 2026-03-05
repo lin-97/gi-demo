@@ -10,4 +10,5 @@ export interface PageLayoutProps {
   headerStyle?: CSSProperties
   bodyStyle?: CSSProperties
   collapsed?: boolean
+  bgTransparent?: boolean
 }

@@ -5,7 +5,7 @@
 
 <script setup lang="ts">
 import type { FileItem } from '@/apis/file'
-import { FILE_ICON_MAP, IMAGE_TYPES } from '@/constant/file'
+import { FILE_ICON_MAP, IMAGE_TYPES } from '@/utils/file'
 
 interface Props {
   data: FileItem
