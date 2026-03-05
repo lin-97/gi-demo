@@ -33,14 +33,13 @@ import type * as T from '@/apis/person'
 import { baseAPI } from '@/apis/person'
 import { GiCellAvatar, GiCellGender, GiCellStatus } from '@/components/index'
 import { useDict, useTable } from '@/hooks'
-import { useTabsStore } from '@/stores'
+
 import { hidePhone } from '@/utils'
 import CateTree from './CateTree.vue'
 import CodeJson from './index.vue?raw'
 
 defineOptions({ name: 'CrudIndex' })
 const router = useRouter()
-const { setTabTitle } = useTabsStore()
 
 const { dictData } = useDict(['STATUS'])
 const form = reactive({
@@ -68,7 +67,6 @@ const onAdd = () => {
 
 const onEdit = (row: T.ListItem) => {
   router.push({ path: '/crud/form', query: { id: row.id } })
-  setTabTitle('编辑')
 }
 
 const onDetail = (item: T.ListItem) => {

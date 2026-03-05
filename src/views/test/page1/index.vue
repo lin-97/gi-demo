@@ -1,7 +1,7 @@
 <template>
   <GiPageLayout margin :body-style="{ overflowY: 'auto' }">
     <a-alert>
-      <a-space>
+      <a-space wrap>
         <span>当前页面</span>
         <a-tag color="green">超级管理员角色</a-tag>
         <span>能看,</span>

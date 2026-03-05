@@ -22,6 +22,7 @@ import type { FormColumnItem } from '@/components/index'
 import { Message } from '@arco-design/web-vue'
 import { baseAPI } from '@/apis/person'
 import { useDict } from '@/hooks'
+import { useTabsStore } from '@/stores'
 import * as Regexp from '@/utils/regexp'
 import CodeJson from './index.vue?raw'
 
@@ -29,6 +30,7 @@ defineOptions({ name: 'CrudForm' })
 
 const route = useRoute()
 const router = useRouter()
+const { setTabTitle } = useTabsStore()
 
 const { dictData } = useDict(['STATUS', 'GENDER', 'HOBBY'])
 
@@ -164,6 +166,8 @@ watch(
   },
   { immediate: true }
 )
+
+if (isEdit.value) setTabTitle('编辑')
 </script>
 
 <style lang="scss" scoped></style>
