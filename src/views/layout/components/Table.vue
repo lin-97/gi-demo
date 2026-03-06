@@ -8,17 +8,6 @@
       <GiButton type="import" @click="onImport"></GiButton>
       <GiCodeButton :code="CodeJson"></GiCodeButton>
     </template>
-    <template #avatar="{ record }">
-      <a-avatar :size="28" shape="circle">
-        <img :src="record.avatar" />
-      </a-avatar>
-    </template>
-    <template #gender="{ record }">
-      <GiCellGender :gender="record.gender"></GiCellGender>
-    </template>
-    <template #status="{ record }">
-      <GiCellStatus :status="record.status"></GiCellStatus>
-    </template>
     <template #action="{ record }">
       <a-space>
         <a-button type="primary" size="mini">修改</a-button>
@@ -34,8 +23,9 @@
 <script lang="ts" setup>
 import type { TableInstance } from '@arco-design/web-vue'
 import type * as T from '@/apis/person'
-import { Link, Message } from '@arco-design/web-vue'
+import { Message } from '@arco-design/web-vue'
 import { baseAPI } from '@/apis/person'
+import { GiCellAvatar, GiCellGender, GiCellStatus } from '@/components/GiCell'
 import { useTable } from '@/hooks'
 import Demo1Code from '../demo1/index.vue?raw'
 import Demo2Code from '../demo2/index.vue?raw'
@@ -60,13 +50,12 @@ const columns: TableInstance['columns'] = [
     dataIndex: 'name',
     width: 120,
     render: ({ record }) =>
-      h(Link, { onClick: () => onClickName(record as T.ListItem) }, { default: () => record.name })
+      h(GiCellAvatar, { isLink: true, avatar: record.avatar, name: record.name, onClick: () => onClickName(record as T.ListItem) })
   },
-  { title: '头像', width: 80, align: 'center', slotName: 'avatar' },
   { title: '手机号', dataIndex: 'phone', width: 150 },
-  { title: '性别', dataIndex: 'gender', width: 100, align: 'center', slotName: 'gender' },
+  { title: '性别', dataIndex: 'gender', width: 100, align: 'center', render: ({ record }) => h(GiCellGender, { gender: record.gender }) },
   { title: '账户', dataIndex: 'account', width: 120 },
-  { title: '状态', width: 100, slotName: 'status', align: 'center' },
+  { title: '状态', width: 100, align: 'center', render: ({ record }) => h(GiCellStatus, { status: record.status }) },
   {
     title: '创建时间',
     dataIndex: 'createTime',

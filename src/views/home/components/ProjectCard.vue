@@ -56,7 +56,7 @@ const list = [
     icon: 'item-react'
   },
   {
-    name: 'Js',
+    name: 'JavaScript',
     desc: '路是走出来的 而不是空想出来的',
     source: '架构组',
     icon: 'item-js'

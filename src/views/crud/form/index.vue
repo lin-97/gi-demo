@@ -11,7 +11,7 @@
     </template>
 
     <a-spin :loading="loading" class="w-full">
-      <GiForm ref="giFormRef" :model-value="form" :columns="formColumns" :grid-item-props="{ span: { xs: 24, sm: 12 } }"
+      <GiForm ref="GiFormRef" :model-value="form" :columns="formColumns" :grid-item-props="{ span: { xs: 24, sm: 12 } }"
         @update:model-value="Object.assign(form, $event)" />
     </a-spin>
   </a-card>
@@ -34,7 +34,7 @@ const { setTabTitle } = useTabsStore()
 
 const { dictData } = useDict(['STATUS', 'GENDER', 'HOBBY'])
 
-const giFormRef = useTemplateRef<InstanceType<typeof GiForm>>('giFormRef')
+const GiFormRef = useTemplateRef<InstanceType<typeof GiForm>>('GiFormRef')
 
 const isEdit = computed(() => Boolean(route.query.id))
 
@@ -140,7 +140,7 @@ async function fetchDetail() {
 }
 
 async function submit() {
-  const valid = await giFormRef.value?.formRef?.validate()
+  const valid = await GiFormRef.value?.formRef?.validate()
   if (valid) return
   try {
     submitLoading.value = true
