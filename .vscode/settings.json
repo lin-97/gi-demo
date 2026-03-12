@@ -97,5 +97,27 @@
   "scss.validate": false,
   "cssVariables.lookupFiles": [
     "node_modules/@arco-themes/vue-gi-demo/theme.css"
+  ],
+  "cSpell.words": [
+    "popconfirm",
+    "echarts",
+    "autoresize",
+    "arcoblue",
+    "cascader",
+    "vueuse",
+    "doption",
+    "asider",
+    "sider",
+    "iconify",
+    "persistedstate",
+    "hoverable",
+    "pinia",
+    "vite",
+    "wechat",
+    "backtop",
+    "wangeditor",
+    "amap",
+    "jsapi",
+    "xgplayer"
   ]
 }

@@ -33,7 +33,6 @@ import type * as T from '@/apis/person'
 import { baseAPI } from '@/apis/person'
 import { GiCellAvatar, GiCellGender, GiCellStatus } from '@/components/index'
 import { useDict, useTable } from '@/hooks'
-
 import { hidePhone } from '@/utils'
 import CateTree from './CateTree.vue'
 import CodeJson from './index.vue?raw'
