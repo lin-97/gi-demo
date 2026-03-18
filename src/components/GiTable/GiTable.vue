@@ -66,7 +66,7 @@
 
         <!-- 列设置按钮 -->
         <a-popover v-if="showSettingColumnBtn" trigger="click" position="br"
-          :content-style="{ minWidth: '120px', padding: '6px 8px 10px' }">
+          :content-style="{ minWidth: '160px', padding: '6px 8px 10px' }">
           <a-button type="primary" size="mini">
             <template #icon><icon-settings /></template>
           </a-button>
@@ -82,6 +82,16 @@
                   <a-checkbox v-model:model-value="item.show" :disabled="item.disabled">
                     {{ item.title }}
                   </a-checkbox>
+                  <div class="gi-table__draggable-item-fixed">
+                    <span class="gi-table__pin-btn" :class="{ 'is-active': item.fixedLeft }"
+                      @click.stop="toggleFixedLeft(item.key)">
+                      <icon-pushpin />
+                    </span>
+                    <span class="gi-table__pin-btn gi-table__pin-btn--right" :class="{ 'is-active': item.fixedRight }"
+                      @click.stop="toggleFixedRight(item.key)">
+                      <icon-pushpin />
+                    </span>
+                  </div>
                 </div>
               </VueDraggable>
             </div>
@@ -218,7 +228,7 @@ const showSettingColumnBtn = computed(() => {
 })
 
 /** 获取列的 key */
-const getColumnKey = (column: TableColumnData, index?: number): string => {
+const getColumnKey = (column: TableColumnData, index?: number) => {
   if (column.dataIndex) return String(column.dataIndex)
   if (typeof column.title === 'string' && column.title) return column.title
   // 使用索引作为后备，确保唯一性
@@ -232,11 +242,14 @@ const initialSettingColumns = computed<TableSettingColumnItem[]>(() => {
   const columns = Array.isArray(props.columns) ? props.columns : []
   return columns.map((column, index) => {
     const key = getColumnKey(column, index)
+    const fixed = column.fixed
     return {
       key,
       title: typeof column.title === 'string' ? column.title : '',
       show: true,
-      disabled: props.disabledColumnKeys.includes(key)
+      disabled: props.disabledColumnKeys.includes(key),
+      fixedLeft: fixed === 'left',
+      fixedRight: fixed === 'right'
     }
   })
 })
@@ -270,6 +283,33 @@ const resetSettingColumns = () => {
   settingColumnList.value = [...initialSettingColumns.value]
 }
 
+/** 确保列设置列表已初始化（首次点击或拖拽前可能为空） */
+const ensureSettingColumnList = () => {
+  if (settingColumnList.value.length === 0 && initialSettingColumns.value.length > 0) {
+    settingColumnList.value = initialSettingColumns.value.map((item) => ({ ...item }))
+  }
+}
+
+/** 切换列固定左侧：图标高亮且当前列固定到左侧 */
+const toggleFixedLeft = (key: string) => {
+  ensureSettingColumnList()
+  settingColumnList.value = settingColumnList.value.map((item) =>
+    item.key === key
+      ? { ...item, fixedLeft: !item.fixedLeft, fixedRight: false }
+      : item
+  )
+}
+
+/** 切换列固定右侧：图标高亮且当前列固定到右侧 */
+const toggleFixedRight = (key: string) => {
+  ensureSettingColumnList()
+  settingColumnList.value = settingColumnList.value.map((item) =>
+    item.key === key
+      ? { ...item, fixedRight: !item.fixedRight, fixedLeft: false }
+      : item
+  )
+}
+
 /** 监听 columns 变化，自动重置列设置 */
 watch(() => props.columns, () => {
   // 列结构变化时，如果用户设置不匹配，自动重置
@@ -278,13 +318,29 @@ watch(() => props.columns, () => {
   }
 }, { deep: true })
 
-/** 计算显示的列 */
+/** 计算显示的列（含固定列设置）：固定左 → 不固定 → 固定右 */
 const visibleColumns = computed(() => {
   if (!props.columns) return []
 
-  return currentSettingColumns.value
-    .filter((item) => item.show)
-    .map((item) => columnMap.value.get(item.key))
+  const shown = currentSettingColumns.value.filter((item) => item.show)
+  const leftFixed: typeof shown = []
+  const noFixed: typeof shown = []
+  const rightFixed: typeof shown = []
+  for (const item of shown) {
+    if (item.fixedLeft) leftFixed.push(item)
+    else if (item.fixedRight) rightFixed.push(item)
+    else noFixed.push(item)
+  }
+  const ordered = [...leftFixed, ...noFixed, ...rightFixed]
+
+  return ordered
+    .map((item) => {
+      const col = columnMap.value.get(item.key)
+      if (!col) return null
+      // 以列配置为准：未勾选固定时不再回退到 props 的 fixed，以便用户能取消固定
+      const fixed = item.fixedRight ? 'right' : item.fixedLeft ? 'left' : undefined
+      return { ...col, fixed }
+    })
     .filter(Boolean) as TableColumnData[]
 })
 
@@ -339,14 +395,46 @@ defineExpose({ tableRef })
       cursor: move;
     }
 
+    &-fixed {
+      display: flex;
+      flex-shrink: 0;
+      align-items: center;
+      margin-left: auto;
+      gap: 4px;
+    }
+
     :deep(.arco-checkbox) {
-      width: 100%;
+      flex: 1;
+      min-width: 0;
       font-size: 12px;
 
       .arco-checkbox-icon {
         width: 14px;
         height: 14px;
       }
+    }
+  }
+
+  &__pin-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2px;
+    cursor: pointer;
+    font-size: 14px;
+    color: var(--color-text-3);
+    transition: color 0.2s;
+
+    &:hover {
+      color: var(--color-text-2);
+    }
+
+    &.is-active {
+      color: rgb(var(--primary-6));
+    }
+
+    &--right {
+      transform: scaleX(-1);
     }
   }
 }

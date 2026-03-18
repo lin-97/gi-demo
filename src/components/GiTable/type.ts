@@ -46,4 +46,8 @@ export interface TableSettingColumnItem {
   key: string
   show: boolean
   disabled: boolean
+  /** 固定左侧 */
+  fixedLeft?: boolean
+  /** 固定右侧 */
+  fixedRight?: boolean
 }

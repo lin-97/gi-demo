@@ -102,7 +102,7 @@ const columns: TableInstance['columns'] = [
     }
   },
   { title: '地址', dataIndex: 'address', ellipsis: true, tooltip: true },
-  { title: '操作', width: 200, slotName: 'action', align: 'center' }
+  { title: '操作', width: 200, slotName: 'action', align: 'center', fixed: 'right' }
 ]
 
 const { tableData, getTableData, pagination, search, loading, onDelete, onBatchDelete, onImport } = useTable({
