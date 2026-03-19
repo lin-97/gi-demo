@@ -18,6 +18,7 @@ import Area from './examples/area-demo/index.vue'
 import Button from './examples/button/index.vue'
 import Editor from './examples/editor/index.vue'
 import FnComponent from './examples/fn-component/index.vue'
+import GiButtonDemo from './examples/gi-button-demo/index.vue'
 import GiDotDemo from './examples/gi-dot-demo/index.vue'
 import GiIconBoxDemo from './examples/gi-icon-box-demo/index.vue'
 import GiIconSelectorDemo from './examples/gi-icon-selector-demo/index.vue'
@@ -36,6 +37,7 @@ const selectedKey = ref(0)
 const menuList = [
   { name: '接口测试', value: ApiTest },
   { name: '按钮', value: Button },
+  { name: 'GiButton', value: GiButtonDemo },
   { name: 'GiTag', value: GiTagDemo },
   { name: 'GiSpace', value: GiSpaceDemo },
   { name: 'GiIconBox', value: GiIconBoxDemo },
