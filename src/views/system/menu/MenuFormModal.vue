@@ -4,13 +4,7 @@
     <GiForm ref="GiFormRef" :model-value="form" :columns="formColumns" :grid-item-props="{ span: 24 }"
       @update:model-value="Object.assign(form, $event)">
       <template #icon>
-        <a-input-group>
-          <a-select v-model="form.iconType" placeholder="请选择图标类型" style="width: 150px" @change="handleChangeIconType">
-            <a-option value="arco">Arco</a-option>
-            <a-option value="custom">自定义</a-option>
-          </a-select>
-          <GiIconSelector :key="form.iconType" v-model="form.icon" :type="form.iconType" />
-        </a-input-group>
+        <GiIconSelector v-model="form.icon" />
       </template>
     </GiForm>
   </a-modal>
@@ -59,7 +53,6 @@ const title = computed(() => (isEdit.value ? '编辑菜单' : '新增菜单'))
 const [form, resetForm] = useResetReactive({
   type: 1,
   icon: '',
-  iconType: 'arco' as 'arco' | 'custom',
   title: '',
   sort: 0,
   status: '1' as Status,
@@ -79,19 +72,11 @@ const [form, resetForm] = useResetReactive({
   id: '',
   roles: [],
   affix: false
-} as T.ListItem & { iconType: 'arco' | 'custom', isExternalUrl: boolean })
+} as T.ListItem & { isExternalUrl: boolean })
 
 const routeName = computed(() => transformPathToName(form.path))
 
 const col3Span = { xs: 24, sm: 12, md: 8, lg: 8, xl: 8, xxl: 8 }
-
-const handleChangeIconType = () => {
-  form.icon = ''
-}
-
-watch(() => form.iconType, () => {
-  form.icon = ''
-})
 
 watch(() => form.type, () => {
   GiFormRef.value?.formRef?.clearValidate()
