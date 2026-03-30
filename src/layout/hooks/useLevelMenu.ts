@@ -6,8 +6,12 @@ import { useAppStore, useRouteStore } from '@/stores'
 import { filterTree } from '@/utils'
 import { isExternal } from '@/utils/validate'
 
+type Options = {
+  oneActivePathChange?: (path: string) => void
+}
+
 /** 获取一级菜单，二级菜单的hooks */
-export function useLevelMenu() {
+export function useLevelMenu(options?: Options) {
   const route = useRoute()
   const router = useRouter()
   const appStore = useAppStore()
@@ -84,6 +88,7 @@ export function useLevelMenu() {
       window.open(path)
       return
     }
+    options?.oneActivePathChange?.(path)
     oneActivePath.value = path
     const obj = oneLevelMenus.value.find((i) => i.path === path)
     if (obj?.redirect === 'noRedirect' || !obj?.redirect) {

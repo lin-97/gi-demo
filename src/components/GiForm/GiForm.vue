@@ -4,7 +4,7 @@
 -->
 <template>
   <a-form ref="formRef" v-bind="formProps" :model="modelValue">
-    <a-grid class="w-full" :col-gap="8" v-bind="props.gridProps" :collapsed="collapsed">
+    <a-grid class="w-full" :col-gap="8" v-bind="props.gridProps" :collapsed="collapsed && search">
       <!-- 表单项列表 -->
       <template v-for="item in columns" :key="item.field">
         <a-grid-item v-if="!isHide(item)" v-bind="item.gridItemProps || props.gridItemProps"
@@ -84,7 +84,7 @@ import { omit } from 'lodash-es'
 const props = withDefaults(defineProps<Props>(), {
   autoLabelWidth: true,
   scrollToFirstError: true,
-  defaultCollapsed: false,
+  defaultCollapsed: true,
   search: false,
   gridItemProps: () => ({ span: { xs: 24, sm: 12 } }),
   searchBtnText: '搜索',

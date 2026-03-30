@@ -6,9 +6,10 @@
         @menu-click="handleOneMenuItemClick($event.path)"></OneLevelMenu>
 
       <!-- 左侧二级菜单区域 -->
-      <a-menu v-if="twoLevelMenus.length > 1 || oneActiveRoute?.meta?.alwaysShow === true" class="layout-columns__menu"
-        :theme="menuTheme" :selected-keys="[twoActivePath]" :accordion="appStore.menuAccordion"
-        :collapsed="appStore.menuCollapse" :style="{ width: '180px' }" @menu-item-click="handleTwoMenuItemClick">
+      <a-menu v-if="twoLevelMenus.length > 1 || oneActiveRoute?.meta?.alwaysShow === true" :key="twoLevelMenuKey"
+        class="layout-columns__menu" :theme="menuTheme" :selected-keys="[twoActivePath]"
+        :accordion="appStore.menuAccordion" auto-open-selected :collapsed="appStore.menuCollapse"
+        :style="{ width: '180px' }" @menu-item-click="handleTwoMenuItemClick">
         <MenuItem v-for="(item, index) in twoLevelMenus" :key="item.path + index" :item="item" />
       </a-menu>
     </div>
@@ -37,7 +38,14 @@ defineOptions({ name: 'LayoutColumns' })
 const appStore = useAppStore()
 const { isDesktop } = useDevice()
 
-const { menuTheme, oneLevelMenus, twoLevelMenus, oneActiveRoute, oneActivePath, twoActivePath, getOneLevelMenus, handleOneMenuItemClick, handleTwoMenuItemClick } = useLevelMenu()
+const twoLevelMenuKey = ref(false)
+const { menuTheme, oneLevelMenus, twoLevelMenus, oneActiveRoute, oneActivePath, twoActivePath, getOneLevelMenus, handleOneMenuItemClick, handleTwoMenuItemClick } = useLevelMenu({
+  oneActivePathChange: () => {
+    setTimeout(() => {
+      twoLevelMenuKey.value = !twoLevelMenuKey.value
+    }, 300)
+  }
+})
 getOneLevelMenus()
 </script>
 
