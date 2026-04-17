@@ -56,7 +56,7 @@ const homeRoute: RouteRecordRaw = {
       name: 'HomeIndex',
       meta: {
         title: '首页',
-        icon: 'menu-home',
+        icon: 'icon-park-outline:workbench',
         affix: true,
         hidden: false,
         breadcrumb: false
