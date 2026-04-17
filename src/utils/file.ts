@@ -15,7 +15,7 @@ export interface FileTypeListItem {
  * @description 定义系统中支持的文件类型分类
  */
 export const FILE_TYPE_LIST: FileTypeListItem[] = [
-  { name: '全部', value: '0', menuIcon: 'menu-file', icon: 'icon-stamp' },
+  { name: '全部', value: '0', menuIcon: 'file-all', icon: 'icon-stamp' },
   { name: '图片', value: '1', menuIcon: 'file-image', icon: 'icon-file-image' },
   { name: '文档', value: '2', menuIcon: 'file-txt', icon: 'icon-file' },
   { name: '视频', value: '3', menuIcon: 'file-video', icon: 'icon-video-camera' },
