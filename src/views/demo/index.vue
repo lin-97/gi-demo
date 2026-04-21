@@ -20,9 +20,9 @@ import Editor from './examples/editor/index.vue'
 import FnComponent from './examples/fn-component/index.vue'
 import GiButtonDemo from './examples/gi-button-demo/index.vue'
 import GiDotDemo from './examples/gi-dot-demo/index.vue'
+import GiFlexDemo from './examples/gi-flex-demo/index.vue'
 import GiIconBoxDemo from './examples/gi-icon-box-demo/index.vue'
 import GiIconSelectorDemo from './examples/gi-icon-selector-demo/index.vue'
-import GiSpaceDemo from './examples/gi-space-demo/index.vue'
 import GiTagDemo from './examples/gi-tag-demo/index.vue'
 import IconDemo from './examples/icon-demo/index.vue'
 import JSModal from './examples/js-modal/index.vue'
@@ -39,7 +39,7 @@ const menuList = [
   { name: '按钮', value: Button },
   { name: 'GiButton', value: GiButtonDemo },
   { name: 'GiTag', value: GiTagDemo },
-  { name: 'GiSpace', value: GiSpaceDemo },
+  { name: 'GiFlex', value: GiFlexDemo },
   { name: 'GiIconBox', value: GiIconBoxDemo },
   { name: 'GiDot', value: GiDotDemo },
   { name: 'GiIconSelector', value: GiIconSelectorDemo },
