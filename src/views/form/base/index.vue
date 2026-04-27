@@ -1,5 +1,5 @@
 <template>
-  <a-card title="基础表单" class="gi-page-card" :body-style="{ overflowY: 'auto' }">
+  <a-card title="基础表单" class="g-page-card" :body-style="{ overflowY: 'auto' }">
     <template #extra>
       <a-button>返回</a-button>
     </template>
@@ -48,8 +48,7 @@
           <a-range-picker v-model="form.rangDate" allow-clear />
         </a-form-item>
         <a-form-item label="爱好" field="hobby" extra="这里的数据采用了数据字典">
-          <a-select v-model="form.hobby" :options="dictData.HOBBY" placeholder="请选择爱好" multiple
-            allow-clear></a-select>
+          <a-select v-model="form.hobby" :options="dictData.HOBBY" placeholder="请选择爱好" multiple allow-clear></a-select>
         </a-form-item>
         <a-form-item field="isRead">
           <a-checkbox v-model="form.isRead">我已阅读</a-checkbox>

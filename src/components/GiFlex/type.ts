@@ -23,6 +23,7 @@ export interface FlexProps {
   | 'stretch'
   /** 是否自动换行 */
   wrap?: boolean
-  gap?: number | string
+  /** `boolean` 须写在联合类型最前，否则模板里单独写 `gap` 会被解析成 `""` 而不是 `true` */
+  gap?: boolean | number | string
   flex?: number | string
 }

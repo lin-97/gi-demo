@@ -9,7 +9,7 @@
     </a-affix>
 
     <!-- 下单用户信息 -->
-    <a-card title="下单用户信息" :bordered="false" class="g-mx g-my">
+    <a-card title="下单用户信息" :bordered="false" class="g-margin">
       <a-descriptions bordered table-layout="fixed" :column="{ xs: 1, sm: 2, md: 2, lg: 2, xl: 2, xxl: 2 }"
         :label-style="{ width: '120px' }">
         <a-descriptions-item label="用户名">{{ orderDetail.user.name }}</a-descriptions-item>
@@ -22,7 +22,7 @@
     </a-card>
 
     <!-- 收货和物流信息 -->
-    <a-card title="收货和物流信息" :bordered="false" class="g-mx g-my">
+    <a-card title="收货和物流信息" :bordered="false" class="g-margin">
       <a-descriptions bordered table-layout="fixed" :column="{ xs: 1, sm: 2, md: 2, lg: 2, xl: 2, xxl: 2 }"
         :label-style="{ width: '120px' }">
         <a-descriptions-item label="收货人">{{ orderDetail.shipping.receiver }}</a-descriptions-item>
@@ -45,7 +45,7 @@
     </a-card>
 
     <!-- 订单信息 -->
-    <a-card title="订单信息" :bordered="false" class="g-mx g-my">
+    <a-card title="订单信息" :bordered="false" class="g-margin">
       <a-row justify="space-between" align="center" class="g-mb">
         <a-space :size="24">
           <a-typography-text>订单号: {{ orderDetail.orderNo }}</a-typography-text>

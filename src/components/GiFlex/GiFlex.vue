@@ -12,9 +12,9 @@ import { computed } from 'vue'
 const props = withDefaults(defineProps<Props>(), {
   column: false,
   justify: 'start',
-  align: 'center',
+  align: 'start',
   wrap: true,
-  gap: 0
+  gap: false
 })
 
 /** 计算组件的 class */
@@ -35,7 +35,12 @@ const getStyle = computed((): CSSProperties => {
     'justify-content': props.justify,
     'align-items': props.align
   }
-  if (typeof props.gap === 'number') {
+  // 联合类型中若 boolean 不在最前，裸写 `gap` 会得到 `""`；与「开启主题间距」语义一致
+  if (props.gap === true || props.gap === '') {
+    style.gap = 'var(--margin)'
+  } else if (props.gap === false) {
+    style.gap = undefined
+  } else if (typeof props.gap === 'number') {
     style.gap = `${props.gap}px`
   } else {
     style.gap = props.gap
