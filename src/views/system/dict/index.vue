@@ -1,6 +1,6 @@
 <template>
   <GiPageLayout margin>
-    <a-row justify="space-between" class="gi-row-tool">
+    <a-row justify="space-between" class="g-row-tool">
       <a-space wrap>
         <GiButton type="add" @click="onAdd"></GiButton>
         <GiButton type="delete" @click="onBatchDelete"></GiButton>
@@ -17,7 +17,7 @@
       </a-space>
     </a-row>
 
-    <a-table class="gi-table" row-key="id" :data="dictList" :columns="tableColumns" :bordered="{ cell: true }"
+    <a-table class="g-table" row-key="id" :data="dictList" :columns="tableColumns" :bordered="{ cell: true }"
       :loading="loading" :scroll="{ x: '100%', y: '100%', minWidth: 1000 }" :pagination="pagination"
       :row-selection="{ type: 'checkbox', showCheckedAll: true }" :selected-keys="selectedKeys" @select="select"
       @select-all="selectAll">

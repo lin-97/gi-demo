@@ -8,10 +8,10 @@
       <div v-for="(item, index) in breadcrumbList" :key="item.path + index">
         <a-breadcrumb-item v-bind="attrs">
           <template v-if="isLastItem(index) && !hasRedirect(item)">
-            <span class="gi-line-1">{{ lastTitle || item.meta.title }}</span>
+            <span class="g-line-1">{{ lastTitle || item.meta.title }}</span>
           </template>
           <template v-else>
-            <span class="gi-line-1 breadcrumb__item-title" @click="handleLink(item)">
+            <span class="g-line-1 breadcrumb__item-title" @click="handleLink(item)">
               {{ item.meta.title }}
             </span>
           </template>

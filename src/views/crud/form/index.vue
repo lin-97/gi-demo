@@ -1,5 +1,5 @@
 <template>
-  <a-card :title="isEdit ? '编辑' : '新增'" class="gi-card gi-margin flex-1">
+  <a-card :title="isEdit ? '编辑' : '新增'" class="g-card g-margin flex-1">
     <template #extra>
       <a-space>
         <GiCodeButton :code="CodeJson"></GiCodeButton>

@@ -42,7 +42,7 @@
                   <component :is="item" v-if="selectedType === 'arco'" :size="20" />
                   <GiSvgIcon v-else-if="selectedType === 'custom'" :name="item" :size="20" />
                   <Icon v-else-if="selectedType === 'iconpark'" :icon="item" :width="20" :height="20" />
-                  <div class="gi-line-1 gi-icon-selector__icon-name">
+                  <div class="g-line-1 gi-icon-selector__icon-name">
                     {{ item }}
                   </div>
                 </div>
@@ -179,8 +179,8 @@ async function handleSelectedIcon(icon: string) {
 
 <style lang="scss" scoped>
 :deep(.gi-icon-selector__type-select) {
-  width: 108px;
   flex: none;
+  width: 108px;
 }
 
 .gi-icon-selector {
@@ -198,6 +198,7 @@ async function handleSelectedIcon(icon: string) {
   }
 
   &__icon-item {
+    box-sizing: border-box;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -206,10 +207,9 @@ async function handleSelectedIcon(icon: string) {
     margin-bottom: 4px;
     overflow: hidden;
     cursor: pointer;
-    border-style: dashed;
     border: 1px dashed var(--color-bg-1);
+    border-style: dashed;
     border-radius: 4px;
-    box-sizing: border-box;
 
     &--active {
       background-color: rgb(var(--primary-1));
@@ -218,8 +218,8 @@ async function handleSelectedIcon(icon: string) {
 
     &:not(.gi-icon-selector__icon-item--active) {
       &:hover {
-        border-color: var(--color-border-4);
         background-color: var(--color-fill-2);
+        border-color: var(--color-border-4);
       }
     }
   }

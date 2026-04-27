@@ -1,5 +1,5 @@
 <template>
-  <div class="gi-page">
+  <div class="g-page">
     <section class="result-box">
       <a-result status="error" title="操作失败">
         <template #subtitle>表单提交失败，请重试</template>

@@ -29,7 +29,7 @@
       </a-form-item>
     </a-form>
 
-    <a-card class="gi-card" :bordered="true" :header-style="{ display: 'none' }">
+    <a-card class="g-card" :bordered="true" :header-style="{ display: 'none' }">
       <GiFlex :column="flexConfig.column" :justify="flexConfig.justify" :align="flexConfig.align" :gap="flexConfig.gap">
         <a-button type="primary">Primary</a-button>
         <a-button type="primary">Primary</a-button>

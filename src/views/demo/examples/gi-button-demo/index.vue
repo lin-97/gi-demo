@@ -1,7 +1,7 @@
 <template>
   <div>
     <a-typography-text type="secondary">提供常用的图标按钮，不支持的场景使用回a-button组件</a-typography-text>
-    <a-card title="基本类型" :bordered="true" class="gi-my">
+    <a-card title="基本类型" :bordered="true" class="g-my">
       <template #extra>
         <GiCodeButton :code="CodeJson"></GiCodeButton>
       </template>
@@ -20,7 +20,7 @@
       </a-space>
     </a-card>
 
-    <a-card title="尺寸大小" :bordered="true" class="gi-mb">
+    <a-card title="尺寸大小" :bordered="true" class="g-mb">
       <a-space wrap>
         <GiButton type="add" size="mini"></GiButton>
         <GiButton type="edit" size="small"></GiButton>

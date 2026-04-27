@@ -9,7 +9,7 @@
               <div class="file-icon">
                 <FileImage :data="item"></FileImage>
               </div>
-              <p class="gi-line-1 file-name">{{ getFileName(item) }}</p>
+              <p class="g-line-1 file-name">{{ getFileName(item) }}</p>
             </section>
             <!-- 勾选模式 -->
             <section v-show="props.isBatchMode" class="check-mode"

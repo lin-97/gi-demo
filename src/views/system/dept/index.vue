@@ -1,6 +1,6 @@
 <template>
   <GiPageLayout margin>
-    <a-row justify="space-between" class="gi-row-tool">
+    <a-row justify="space-between" class="g-row-tool">
       <a-space wrap>
         <GiButton type="add" @click="onAdd"></GiButton>
         <GiButton type="delete" @click="onBatchDelete"></GiButton>
@@ -19,7 +19,7 @@
       </a-space>
     </a-row>
 
-    <a-table ref="tableRef" class="gi-table" row-key="id" :bordered="{ cell: true }" :data="deptList" :loading="loading"
+    <a-table ref="tableRef" class="g-table" row-key="id" :bordered="{ cell: true }" :data="deptList" :loading="loading"
       :columns="tableColumns" :scroll="{ x: '100%', y: '100%', minWidth: 1000 }" :pagination="false"
       :row-selection="{ type: 'checkbox', showCheckedAll: false }" :selected-keys="selectedKeys" @select="select"
       @select-all="selectAll">

@@ -1,5 +1,5 @@
 <template>
-  <a-card title="项目" :bordered="false" size="medium" class="gi-card-title" style="overflow: hidden">
+  <a-card title="项目" :bordered="false" size="medium" class="g-card-title" style="overflow: hidden">
     <a-row align="stretch">
       <a-col v-for="(item, index) in list" :key="item.name" :xs="12" :sm="8" :md="8">
         <a-card-grid class="w-full h-full">
@@ -7,12 +7,12 @@
             <section class="item">
               <div class="item__header">
                 <GiSvgIcon :size="30" :name="item.icon"></GiSvgIcon>
-                <span class="item__name gi-line-1">{{ item.name }}</span>
+                <span class="item__name g-line-1">{{ item.name }}</span>
               </div>
               <div class="item__middle">
-                <p class="item__desc gi-line-2">{{ item.desc }}</p>
+                <p class="item__desc g-line-2">{{ item.desc }}</p>
               </div>
-              <p class="item__footer gi-line-1">{{ item.source }} {{ Dayjs(new Date()).format('YYYY-MM-DD') }}</p>
+              <p class="item__footer g-line-1">{{ item.source }} {{ Dayjs(new Date()).format('YYYY-MM-DD') }}</p>
             </section>
           </a-card>
         </a-card-grid>

@@ -1,6 +1,6 @@
 <template>
-  <div class="gi-page">
-    <a-space direction="vertical" :size="[20, 8]" fill class="about gi-padding">
+  <div class="g-page">
+    <a-space direction="vertical" :size="[20, 8]" fill class="about g-padding">
       <a-alert>生产依赖</a-alert>
       <a-descriptions bordered table-layout="fixed" :column="{ xs: 1, sm: 1, md: 2, lg: 3 }">
         <a-descriptions-item v-for="(item, index) of data.dependencies" :key="index" :label="index">

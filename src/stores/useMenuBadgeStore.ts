@@ -20,11 +20,11 @@ const storeSetup = () => {
     },
     '/form/step': {
       style: { transform: 'scale(0.8)' },
-      class: 'gi-badge-primary'
+      class: 'g-badge-primary'
     },
     '/table/dialog': {
       style: { transform: 'scale(0.8)' },
-      class: 'gi-badge-success'
+      class: 'g-badge-success'
     }
   }
 

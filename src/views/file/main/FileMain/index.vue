@@ -3,7 +3,7 @@
     <!-- 文件路径 -->
     <FilePath></FilePath>
 
-    <a-row justify="space-between" class="file-main__search gi-row-tool">
+    <a-row justify="space-between" class="file-main__search g-row-tool">
       <!-- 左侧区域 -->
       <a-space wrap>
         <a-dropdown>

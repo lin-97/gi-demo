@@ -1,7 +1,7 @@
 <template>
   <a-modal v-model:visible="visible" :title="`字典数据-(${dictName})`" width="calc(100% - 20px)" :mask-closable="false"
     :modal-style="{ maxWidth: '680px' }">
-    <a-row class="gi-row-tool">
+    <a-row class="g-row-tool">
       <a-space wrap>
         <a-button type="primary" @click="onAdd">
           <template #icon><icon-plus /></template>

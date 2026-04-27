@@ -1,5 +1,5 @@
 <template>
-  <div class="gi-page">
+  <div class="g-page">
     <a-watermark content="gi.admin.pro">
       <a-card title="基本信息" :bordered="false">
         <template #extra>
@@ -33,7 +33,7 @@
         </a-descriptions>
       </a-card>
 
-      <a-card title="其他信息" :bordered="false" class="gi-mt">
+      <a-card title="其他信息" :bordered="false" class="g-mt">
         <a-descriptions :column="1">
           <a-descriptions-item label="姓名">Lin</a-descriptions-item>
           <a-descriptions-item label="性别">男</a-descriptions-item>
@@ -50,8 +50,7 @@
           </a-descriptions-item>
           <a-descriptions-item label="座右铭">哈哈哈</a-descriptions-item>
           <a-descriptions-item label="图像">
-            <img style="width: 100%; max-width: 400px"
-              src="https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fi0.hdslb.com%2Fbfs%2Farticle%2F09fc753c76d4a8575c105452c81b76ba563c0d8d.jpg&refer=http%3A%2F%2Fi0.hdslb.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=auto?sec=1652531003&t=100230590302237a20f8e136de146f6b" />
+            <img style="width: 100%; max-width: 400px" src="https://s1.ax1x.com/2022/06/14/XhNRDf.jpg" />
           </a-descriptions-item>
           <a-descriptions-item label="标签">
             <a-space :size="5" wrap>

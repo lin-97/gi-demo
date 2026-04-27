@@ -4,7 +4,7 @@
       <CateTree placeholder="请输入搜索关键词" @node-click="search"></CateTree>
     </template>
 
-    <a-row justify="space-between" class="gi-row-tool">
+    <a-row justify="space-between" class="g-row-tool">
       <a-space wrap>
         <GiButton type="add" @click="onAdd"></GiButton>
         <GiButton type="delete" @click="onBatchDelete"></GiButton>
@@ -12,14 +12,14 @@
         <GiCodeButton :code="CodeJson"></GiCodeButton>
       </a-space>
       <a-input-group>
-        <a-select v-model="form.status" class="gi-select-input" :options="dictData.STATUS" placeholder="请选择"
+        <a-select v-model="form.status" class="g-select-input" :options="dictData.STATUS" placeholder="请选择"
           allow-clear></a-select>
         <a-input v-model="form.name" placeholder="请输入搜索关键词" allow-clear> </a-input>
         <GiButton type="search" @click="search"></GiButton>
       </a-input-group>
     </a-row>
 
-    <a-table class="gi-table" row-key="id" :loading="loading" :bordered="{ cell: true }" :columns="columns"
+    <a-table class="g-table" row-key="id" :loading="loading" :bordered="{ cell: true }" :columns="columns"
       :data="tableData" :scroll="{ x: '100%', y: '100%', minWidth: 1000 }"
       :row-selection="{ type: 'checkbox', showCheckedAll: true }" :pagination="pagination" :selected-keys="selectedKeys"
       @select="select" @select-all="selectAll">

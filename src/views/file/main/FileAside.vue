@@ -33,7 +33,7 @@
         </a-statistic>
       </a-row>
 
-      <a-space :key="selectedKey" size="mini" fill direction="vertical" class="gi-mt">
+      <a-space :key="selectedKey" size="mini" fill direction="vertical" class="g-mt">
         <a-progress v-for="i in filePercentList" :key="i.label" :percent="i.value" :stroke-width="8" :color="i.color"
           :animation="true">
           <template #text>{{ i.label }}</template>

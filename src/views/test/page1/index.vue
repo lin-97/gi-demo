@@ -21,7 +21,7 @@
       </div>
       <div>
         <GiCodeView type="vue" :code-json="pre1"></GiCodeView>
-        <a-space class="gi-mt">
+        <a-space class="g-mt">
           <a-button v-hasPerm="['test:btn:add']" type="primary">新增</a-button>
           <a-button v-hasPerm="['test:btn:edit']" type="primary" status="success">编辑</a-button>
           <a-button v-hasPerm="['test:btn:delete']" type="primary" status="danger">删除</a-button>
@@ -29,7 +29,7 @@
       </div>
       <div>
         <GiCodeView type="vue" :code-json="pre2"></GiCodeView>
-        <a-space class="gi-mt">
+        <a-space class="g-mt">
           <a-button v-hasPerm="['user:btn:add']" type="primary">新增</a-button>
           <a-button v-hasPerm="['user:btn:edit']" type="primary" status="success">编辑</a-button>
           <a-button v-hasPerm="['user:btn:delete']" type="primary" status="danger">删除</a-button>

@@ -1,6 +1,6 @@
 <template>
   <GiPageLayout margin>
-    <a-row justify="space-between" class="gi-row-tool">
+    <a-row justify="space-between" class="g-row-tool">
       <a-space wrap>
         <GiButton type="add" @click="onAdd"></GiButton>
         <a-tooltip content="展开/折叠">
@@ -27,7 +27,7 @@
       </a-space>
     </a-row>
 
-    <a-table ref="tableRef" class="gi-table" row-key="id" :data="menuList" :loading="loading" :bordered="{ cell: true }"
+    <a-table ref="tableRef" class="g-table" row-key="id" :data="menuList" :loading="loading" :bordered="{ cell: true }"
       :scroll="{ x: '100%', y: '100%', minWidth: 1700 }" :pagination="false" size="mini">
       <template #expand-icon="{ expanded }">
         <IconDown v-if="expanded" />

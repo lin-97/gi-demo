@@ -1,6 +1,6 @@
 <template>
   <a-spin :loading="loading" class="w-full">
-    <a-card title="基本信息" class="gi-mx gi-my">
+    <a-card title="基本信息" class="g-mx g-my">
       <template #extra>
         <a-button @click="back">返回</a-button>
       </template>

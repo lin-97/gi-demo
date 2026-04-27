@@ -97,7 +97,7 @@ const formRef = useTemplateRef('formRef')
 
 /** 获取表头必填星号*样式 */
 const headerCellClass = (col: EditTableColumnItem) => {
-  return col.required ? 'gi-column-require' : ''
+  return col.required ? 'g-column-require' : ''
 }
 
 /** 静态配置 */

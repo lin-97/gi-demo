@@ -1,6 +1,6 @@
 <template>
   <GiPageLayout margin :body-style="{ padding: 0 }">
-    <a-tabs class="gi-full-tabs" default-active-key="1" size="large">
+    <a-tabs class="g-full-tabs" default-active-key="1" size="large">
       <template #extra>
         <a-button>返回</a-button>
       </template>
