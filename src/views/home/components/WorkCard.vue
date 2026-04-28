@@ -1,16 +1,17 @@
 <template>
-  <a-card title="工作台" :bordered="false" size="medium" class="card">
+  <a-card title="工作台" :bordered="false" size="medium" class="g-base-card g-card-title work-card">
     <template #extra>
       <NowTime></NowTime>
     </template>
-    <a-row align="center" wrap :gutter="[{ xs: 0, sm: 14, md: 14, lg: 14, xl: 14, xxl: 14 }, 16]" class="content">
+    <a-row align="center" wrap :gutter="[{ xs: 0, sm: 14, md: 14, lg: 14, xl: 14, xxl: 14 }, 16]"
+      class="work-card__content">
       <a-col :xs="24" :sm="24" :md="14" :lg="16" :xl="16" :xxl="18">
         <a-space size="medium">
           <a-avatar :size="68">
             <img :src="userStore.avatar" />
           </a-avatar>
-          <div class="welcome">
-            <p class="hello">
+          <div class="work-card__welcome">
+            <p class="work-card__hello">
               <span>{{ goodTimeText() }}！{{ userStore.name }}，开始您一天的工作吧！</span>
               <img class="gi-demo-star" src="https://gitee.com/lin0716/gi-demo/badge/star.svg?theme=dark">
             </p>
@@ -65,26 +66,24 @@ const userStore = useUserStore()
   margin-bottom: 0;
 }
 
-.card {
-  margin-top: var(--margin);
-
-  .content {
+.work-card {
+  &__content {
     padding: 8px 20px;
+  }
 
-    .welcome {
-      margin: 8px 0;
-      color: var(--color-text-3);
+  &__welcome {
+    margin: 8px 0;
+    color: var(--color-text-3);
+  }
 
-      .hello {
-        margin-bottom: 10px;
-        font-size: 1.25rem;
-        color: var(--color-text-1);
-      }
+  &__hello {
+    margin-bottom: 10px;
+    font-size: 1.25rem;
+    color: var(--color-text-1);
+  }
 
-      .gi-demo-star {
-        vertical-align: middle;
-      }
-    }
+  .gi-demo-star {
+    vertical-align: middle;
   }
 }
 </style>

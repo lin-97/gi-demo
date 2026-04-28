@@ -49,6 +49,26 @@
   }
 }
 
+.g-base-card {
+  border-radius: 8px;
+
+  .arco-card-header {
+    height: auto;
+    padding-top: 16px;
+    padding-bottom: 16px;
+    border-bottom: none;
+  }
+
+  .arco-card-header-title {
+    font-size: 16px;
+    font-weight: 600;
+  }
+
+  .arco-card-body {
+    padding-top: 0;
+  }
+}
+
 // 卡片标题，标题左侧的伪类样式
 .g-card-title {
   .arco-card-header-title::before {
@@ -56,7 +76,7 @@
     top: 50%;
     left: 0;
     width: 4px;
-    height: 50%;
+    height: 22px;
     content: '';
     background-color: rgb(var(--warning-5));
     border-radius: 0 4px 4px 0;

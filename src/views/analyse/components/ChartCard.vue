@@ -1,5 +1,5 @@
 <template>
-  <a-card title="数据图表" :bordered="false" class="g-card-title">
+  <a-card title="数据图表" :bordered="false" class="g-base-card">
     <template #extra>
       <a-radio-group type="button" size="small" default-value="1">
         <a-radio value="1">访问量</a-radio>
@@ -7,7 +7,7 @@
         <a-radio value="3">订单量</a-radio>
       </a-radio-group>
     </template>
-    <VCharts :option="option" :theme="theme" autoresize :style="{ height: '300px' }"></VCharts>
+    <VCharts :option="option" :theme="theme" autoresize :style="{ height: '380px' }"></VCharts>
   </a-card>
 </template>
 

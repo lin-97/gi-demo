@@ -1,7 +1,8 @@
 <template>
-  <div v-if="time" class="now-time">
-    <GiSvgIcon name="time" :size="20"></GiSvgIcon>
-    <p class="now-time__time g-line-1">{{ time }}</p>
+  <div v-if="state.time" class="now-time">
+    <icon-schedule />
+    <p class="now-time__time g-line-1">{{ state.time }}</p>
+    <a-tag class="now-time__week" size="small">{{ state.week }}</a-tag>
   </div>
 </template>
 
@@ -9,19 +10,25 @@
 import Dayjs from 'dayjs'
 
 defineOptions({ name: 'NowTime' })
-const time = ref('')
+const state = ref({
+  time: '',
+  week: ''
+})
 
 // 获取现在时间
 const getFormatNowTime = () => {
   const weekList = ['日', '一', '二', '三', '四', '五', '六']
-  return `${Dayjs(new Date()).format('YYYY-MM-DD HH:mm:ss')} 星期${weekList[Dayjs(new Date()).day()]}`
+  return {
+    time: Dayjs(new Date()).format('YYYY-MM-DD HH:mm:ss'),
+    week: `星期${weekList[Dayjs(new Date()).day()]}`
+  }
 }
 
 // 初始化时间
 const initTime = () => {
-  time.value = getFormatNowTime()
+  state.value = getFormatNowTime()
   setInterval(() => {
-    time.value = getFormatNowTime()
+    state.value = getFormatNowTime()
   }, 1000)
 }
 
@@ -34,11 +41,16 @@ initTime()
 .now-time {
   display: flex;
   align-items: center;
-  font-family: DIGITAL;
+
   font-size: 16px;
   color: var(--color-text-1);
 
   &__time {
+    margin-left: 4px;
+    font-family: DIGITAL;
+  }
+
+  &__week {
     margin-left: 6px;
   }
 }

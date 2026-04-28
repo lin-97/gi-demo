@@ -37,9 +37,14 @@ const getClass = computed(() => {
 const getStyle = computed((): CSSProperties => {
   const style: CSSProperties = {}
 
-  // 处理自定义颜色
+  // 处理自定义颜色（纯色或 linear-gradient / radial-gradient）
   if (!STATUS_COLORS.includes(props.color as typeof STATUS_COLORS[number])) {
-    style.backgroundColor = props.color
+    const c = String(props.color)
+    if (/gradient\(/i.test(c)) {
+      style.background = c
+    } else {
+      style.backgroundColor = c
+    }
   }
 
   // 处理自定义尺寸

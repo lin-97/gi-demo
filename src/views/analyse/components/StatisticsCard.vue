@@ -1,79 +1,70 @@
 <template>
-  <a-card :title="props.title" :bordered="false" class="statistics-card h-full">
-    <template #extra>
-      <a-tag :color="TAG_COLOR_MAP[props?.extra || '']" bordered>{{ props?.extra }}</a-tag>
-    </template>
-    <a-row justify="space-between" class="statistics-card__content">
-      <div class="statistics-card__content-left">
-        <slot>
-          <a-statistic :value="props.value" :value-from="0" :start="true" animation show-group-separator></a-statistic>
-        </slot>
-        <div class="statistics-card__content-tip">
-          <slot name="content-tip"></slot>
-        </div>
+  <a-row justify="space-between" :wrap="false" class="statistics-card">
+    <div class="statistics-card__left">
+      <slot>
+        <a-statistic :title="props.title" :value="props.value" :value-from="0" :start="true" animation
+          show-group-separator></a-statistic>
+      </slot>
+      <div class="statistics-card__extra">
+        <slot name="extra"></slot>
       </div>
-      <div class="statistics-card__content-right">
-        <slot name="content-right"></slot>
-      </div>
-    </a-row>
-    <a-divider :margin="16"></a-divider>
-    <a-row justify="space-between">
-      <a-typography-text type="secondary">{{ props.footerLabel }}</a-typography-text>
-      <a-typography-text type="secondary">{{ props.footerValue }}</a-typography-text>
-    </a-row>
-  </a-card>
+    </div>
+    <div class="statistics-card__right">
+      <GiIconBox :color="iconBgColor" :size="48" style="border-radius: 10px;">
+        <Icon class="statistics-card__right__icon" :icon="props.icon" :width="24" :height="24"
+          :style="{ color: props.color }" />
+      </GiIconBox>
+    </div>
+  </a-row>
 </template>
 
 <script setup lang="ts">
+import { Icon } from '@iconify/vue'
+import { hexToRgb } from '@/utils'
+
 interface Props {
   title?: string
-  extra?: '日' | '月' | '季' | '周' | undefined
   value?: number
-  footerLabel?: string
-  footerValue?: string
+  color?: string
+  icon?: string
 }
 
 const props = withDefaults(defineProps<Props>(), {
   title: '',
-  extra: undefined,
   value: 0,
-  footerLabel: '',
-  footerValue: ''
+  color: '#377DFF',
+  icon: ''
 })
 
-const TAG_COLOR_MAP: Record<string, string> = {
-  日: 'green',
-  月: 'arcoblue',
-  季: 'orange',
-  周: 'purple'
-}
+const iconBgColor = computed(() => {
+  return `rgba(${hexToRgb(props.color)}, 0.15)`
+})
 </script>
 
 <style lang="scss" scoped>
-:deep(.arco-card-body) {
-  display: flex;
-  flex: 1;
-  flex-direction: column;
-}
-
-:deep(.arco-tag-size-medium) {
-  justify-content: center;
-  width: 24px;
-  padding: 0;
-}
-
 .statistics-card {
-  display: flex;
-  flex-direction: column;
+  box-sizing: border-box;
+  height: 100%;
+  padding: var(--padding);
+  overflow: hidden;
+  background-color: var(--color-bg-1);
+  border-radius: var(--border-radius-small);
 
-  &__content {
-    flex: 1;
-  }
-
-  &__content-tip {
+  &__tip {
     display: flex;
     align-items: center;
     height: 30px;
+  }
+
+  &__right {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+
+    &__icon {
+      display: block;
+    }
   }
 }
 </style>

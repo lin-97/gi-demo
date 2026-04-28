@@ -212,6 +212,23 @@ export function rgbToHex(r: number, g: number, b: number): string {
 }
 
 /**
+ * 十六进制颜色转 RGB
+ * @param {string} hex - 十六进制颜色，如 #377DFF、377DFF、#FFF
+ * @returns {string} rgb(r, g, b) 格式字符串
+ */
+export function hexToRgb(hex: string): string {
+  hex = hex.replace(/^#/, '')
+  if (hex.length === 3) {
+    hex = hex[0] + hex[0] + hex[1] + hex[1] + hex[2] + hex[2]
+  }
+  const r = Number.parseInt(hex.substring(0, 2), 16)
+  const g = Number.parseInt(hex.substring(2, 4), 16)
+  const b = Number.parseInt(hex.substring(4, 6), 16)
+
+  return `${r}, ${g}, ${b}`
+}
+
+/**
  * 获取随机十六进制颜色
  * @returns 随机颜色值
  */
