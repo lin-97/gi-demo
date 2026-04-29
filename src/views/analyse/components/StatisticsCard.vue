@@ -1,5 +1,5 @@
 <template>
-  <a-row justify="space-between" :wrap="false" class="statistics-card">
+  <a-row justify="space-between" :wrap="false" class="statistics-card g-gradient-bg">
     <div class="statistics-card__left">
       <slot>
         <a-statistic :title="props.title" :value="props.value" :value-from="0" :start="true" animation
@@ -48,7 +48,7 @@ const iconBgColor = computed(() => {
   padding: var(--padding);
   overflow: hidden;
   background-color: var(--color-bg-1);
-  border-radius: var(--border-radius-small);
+  border-radius: 12px;
 
   &__tip {
     display: flex;

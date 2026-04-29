@@ -3,8 +3,8 @@
     <VCharts :option="option" :theme="theme" autoresize :style="{ height: '180px' }"></VCharts>
     <div class="data-chart__list">
       <div v-for="(item, index) in listData" :key="index" class="data-chart__list-item">
-        <GiIconBox :color="item.color" :size="40">
-          <Icon :icon="item.icon" :width="18" :height="18" />
+        <GiIconBox :color="item.color" :size="42" style="border-radius: 10px;">
+          <Icon :icon="item.icon" :width="20" :height="20" />
         </GiIconBox>
         <div class="data-chart__list-item-content">
           <div class="data-chart__list-item-title g-line-1">{{ item.title }}</div>
@@ -62,7 +62,7 @@ const { option, theme } = useChart(() => {
     grid: {
       left: '5%',
       right: '5%',
-      top: '5%',
+      top: '10%',
       bottom: '5%',
       containLabel: true
     },
@@ -133,7 +133,7 @@ const { option, theme } = useChart(() => {
   height: 100%;
   padding: var(--padding);
   background-color: var(--color-bg-1);
-  border-radius: var(--border-radius-small);
+  border-radius: 12px;
 
   &__list-item {
     display: flex;

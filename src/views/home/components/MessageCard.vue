@@ -1,5 +1,5 @@
 <template>
-  <a-card title="消息" :bordered="false" class="g-base-card">
+  <a-card title="消息" :bordered="false" class="g-base-card message-card">
     <template #extra>
       <a-link>更多</a-link>
     </template>
@@ -51,5 +51,9 @@ const list = [
 
 :deep(.arco-comment-datetime) {
   color: var(--color-text-4);
+}
+
+.message-card {
+  // empty
 }
 </style>

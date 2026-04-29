@@ -50,7 +50,7 @@
 }
 
 .g-base-card {
-  border-radius: 8px;
+  border-radius: 12px;
 
   .arco-card-header {
     height: auto;
@@ -67,6 +67,12 @@
   .arco-card-body {
     padding-top: 0;
   }
+}
+
+.g-gradient-bg {
+  background-image: linear-gradient(to right top, transparent, transparent,
+  color-mix(in oklab, rgb(var(--primary-6)) 12%, transparent),
+  color-mix(in oklab, rgb(var(--primary-6)) 12%, transparent));
 }
 
 // 卡片标题，标题左侧的伪类样式

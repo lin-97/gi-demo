@@ -37,6 +37,7 @@ const isNegative = computed(() => props?.value && props.value < 0
   flex-wrap: wrap;
   gap: 4px;
   align-items: center;
+  font-size: 12px;
 
   &__value {
     font-weight: 600;

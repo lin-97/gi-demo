@@ -8,7 +8,7 @@
 
         <a-row :gutter="[14, 14]">
           <a-col :xs="24" :sm="24" :md="24" :lg="10" :xl="8" :xxl="8">
-            <TargetCard class="g-mb"></TargetCard>
+            <TrendCard class="g-mb"></TrendCard>
             <OverviewCard></OverviewCard>
           </a-col>
           <a-col :xs="24" :sm="24" :md="24" :lg="14" :xl="16" :xxl="16">
@@ -32,7 +32,7 @@ import MessageCard from './components/MessageCard.vue'
 import NoticeCard from './components/NoticeCard.vue'
 import OverviewCard from './components/OverviewCard.vue'
 import ReportCard from './components/ReportCard.vue'
-import TargetCard from './components/TargetCard.vue'
+import TrendCard from './components/TrendCard.vue'
 import WorkCard from './components/WorkCard.vue'
 
 defineOptions({ name: 'Home' })

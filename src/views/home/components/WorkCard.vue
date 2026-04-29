@@ -73,11 +73,12 @@ const userStore = useUserStore()
 
   &__welcome {
     margin: 8px 0;
+    line-height: 1.38;
     color: var(--color-text-3);
   }
 
   &__hello {
-    margin-bottom: 10px;
+    margin-bottom: 6px;
     font-size: 1.25rem;
     color: var(--color-text-1);
   }

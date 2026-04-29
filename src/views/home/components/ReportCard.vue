@@ -3,7 +3,7 @@
     <template #extra>
       <a-button type="primary" size="small">新建报告</a-button>
     </template>
-    <a-table class="g-table" row-key="id" :data="list" :scroll="{ x: '100%', y: '100%', minWidth: 500 }"
+    <a-table class="g-table" row-key="id" :data="list" :scroll="{ x: '100%', y: '100%', minWidth: 600 }"
       :pagination="false" :bordered="false" size="small">
       <template #columns>
         <a-table-column title="报告标题" :ellipsis="true" :tooltip="true">

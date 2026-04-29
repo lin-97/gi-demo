@@ -14,7 +14,9 @@
                   <a-avatar :style="{ backgroundColor: '#FFC72E' }">Design</a-avatar>
                 </a-avatar-group>
                 <template v-else>
-                  <GiTrend v-for="(i, n) in item.list" :key="n" :label="i.label" :value="i.value" :unit="i.unit" />
+                  <a-space :size="4" wrap>
+                    <GiTrend v-for="(i, n) in item.list" :key="n" :label="i.label" :value="i.value" :unit="i.unit" />
+                  </a-space>
                 </template>
               </template>
             </StatisticsCard>
@@ -54,7 +56,7 @@ const leftColProps = { xs: 24, sm: 24, md: 24, lg: 16, xl: 16, xxl: 18 }
 const rightColProps = { xs: 24, sm: 24, md: 24, lg: 8, xl: 8, xxl: 6 }
 
 const statisticsColProps = { xs: 12, sm: 12, md: 12, lg: 6, xl: 6, xxl: 6 }
-const classifyColProps = { xs: 12, sm: 12, md: 6, lg: 4, xl: 4, xxl: 3 }
+const classifyColProps = { xs: 12, sm: 6, md: 6, lg: 6, xl: 3, xxl: 3 }
 
 const statisticsList = [
   {
@@ -63,7 +65,7 @@ const statisticsList = [
     color: '#377DFF',
     icon: 'icon-park-outline:preview-open',
     list: [
-      { label: '日同比', value: 12.5, unit: '%' },
+      { label: '日同比', value: 12, unit: '%' },
       { label: '周同比', value: -5, unit: '%' }
     ]
   },

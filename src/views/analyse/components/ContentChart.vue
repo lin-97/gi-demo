@@ -1,6 +1,6 @@
 <template>
   <div class="content-chart">
-    <VCharts :option="option" autoresize :style="{ height: '210px' }" />
+    <VCharts :option="option" autoresize :style="{ height: '230px' }" />
   </div>
 </template>
 
@@ -103,5 +103,6 @@ const { option } = useChart((isDark) => {
   width: 100%;
   padding: var(--padding);
   background-color: var(--color-bg-1);
+  border-radius: 12px;
 }
 </style>

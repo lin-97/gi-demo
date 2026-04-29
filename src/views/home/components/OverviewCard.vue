@@ -3,7 +3,7 @@
     <a-row :gutter="[14, 14]">
       <a-col v-for="(item, index) in statistics" :key="index" :span="12">
         <div class="overview-card__item">
-          <a-statistic :title="item.title" :value="item.value" :precision="1" />
+          <a-statistic :title="item.title" :value="item.value" :precision="1" animation />
         </div>
       </a-col>
     </a-row>
@@ -27,6 +27,7 @@ const statistics: StatItem[] = [
 <style lang="scss" scoped>
 :deep(.arco-statistic-content .arco-statistic-value) {
   line-height: 1;
+  color: rgb(var(--primary-6));
 }
 
 .overview-card {

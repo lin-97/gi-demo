@@ -1,5 +1,5 @@
 <template>
-  <a-card title="工作完成度" :bordered="false" class="g-base-card finish-card">
+  <a-card title="工作完成度" :bordered="false" class="g-base-card g-gradient-bg finish-card">
     <template #extra>
       <a-radio-group type="button" size="small" default-value="1">
         <a-radio value="1">今日</a-radio>
@@ -10,7 +10,7 @@
       <a-progress :width="80" :percent="0.6" type="circle" animation :stroke-width="12"
         track-color="var(--color-primary-light-1)" />
 
-      <a-statistic title="较昨天" :value="30.52" :precision="2" :value-style="{ color: '#0fbf60' }">
+      <a-statistic title="较昨天" :value="30.52" :precision="2" animation :value-style="{ color: '#0fbf60' }">
         <template #prefix>
           <icon-arrow-rise />
         </template>
