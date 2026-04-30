@@ -1,5 +1,5 @@
 <template>
-  <a-card title="数据概览" :bordered="false" class="g-base-card g-card-title overview-card">
+  <a-card title="数据概览" :bordered="false" class="g-base-card overview-card">
     <a-row :gutter="[14, 14]">
       <a-col v-for="(item, index) in statistics" :key="index" :span="12">
         <div class="overview-card__item">

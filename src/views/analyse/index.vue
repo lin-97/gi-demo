@@ -55,8 +55,8 @@ defineOptions({ name: 'AnalyseIndex' })
 const leftColProps = { xs: 24, sm: 24, md: 24, lg: 16, xl: 16, xxl: 18 }
 const rightColProps = { xs: 24, sm: 24, md: 24, lg: 8, xl: 8, xxl: 6 }
 
-const statisticsColProps = { xs: 12, sm: 12, md: 12, lg: 6, xl: 6, xxl: 6 }
-const classifyColProps = { xs: 12, sm: 6, md: 6, lg: 6, xl: 3, xxl: 3 }
+const statisticsColProps = { xs: 12, sm: 12, md: 12, lg: 12, xl: 12, xxl: 6 }
+const classifyColProps = { xs: 12, sm: 6, md: 6, lg: 6, xl: 6, xxl: 3 }
 
 const statisticsList = [
   {

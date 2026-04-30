@@ -47,7 +47,7 @@ const visible = ref(false)
 const drawerStyle = {
   borderRight: '1px solid var(--color-border-2)',
   boxSizing: 'border-box',
-  backgroundColor: 'var(--color-bg-1)'
+  backgroundColor: 'var(--color-bg-2)'
 } as const
 
 /** 处理折叠按钮点击 */

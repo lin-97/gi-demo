@@ -1,5 +1,5 @@
 <template>
-  <a-card title="趋势分析" :bordered="false" class="g-base-card g-card-title trend-card">
+  <a-card title="趋势分析" :bordered="false" class="g-base-card trend-card">
     <template #extra>
       <a-radio-group type="button" size="small" default-value="1">
         <a-radio value="1">访问量</a-radio>

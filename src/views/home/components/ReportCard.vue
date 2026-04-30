@@ -1,5 +1,5 @@
 <template>
-  <a-card title="工作报告" :bordered="false" class="g-base-card g-card-title report-card">
+  <a-card title="工作报告" :bordered="false" class="g-base-card report-card">
     <template #extra>
       <a-button type="primary" size="small">新建报告</a-button>
     </template>
@@ -49,7 +49,7 @@ type ReportItem = {
 const names = ['张三', '李四', '王五', '赵六', '孙七', '周八', '吴九', '郑十']
 const list = ref<ReportItem[]>([])
 
-Array.from({ length: 8 }).forEach((_, index) => {
+Array.from({ length: names.length }).forEach((_, index) => {
   list.value.push({
     id: index + 1,
     title: `${Dayjs().subtract(index, 'day').format('YYYY-MM-DD')}工作日报`,

@@ -100,6 +100,7 @@ const noticeList = ref<NoticeItem[]>([
     padding: 8px 0;
     overflow: hidden;
     font-size: 12px;
+    cursor: pointer;
   }
 
   &__date {
