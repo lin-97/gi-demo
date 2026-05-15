@@ -27,14 +27,28 @@ export default defineMock([
     method: 'get',
     timeout: getDelayTime(),
     response: ({ query }) => {
-      const { code } = query
+      const { code, name, status, page = 1, size = 10 } = query
       const obj = dictData.find((i) => i.code === code)
-      if (obj) {
-        return resultSuccess({
-          total: obj.list.length,
-          records: obj.list
-        })
+      if (!obj) {
+        return resultError(null, '无法查找数据！', 403)
       }
+      let records = [...obj.list]
+      if (name) {
+        const n = String(name).trim()
+        records = records.filter((i) => i.name.includes(n))
+      }
+      if (status !== undefined && status !== '') {
+        records = records.filter((i) => String(i.status) === String(status))
+      }
+      const total = records.length
+      const p = Number(page) || 1
+      const s = Number(size) || 10
+      const start = (p - 1) * s
+      records = records.slice(start, start + s)
+      return resultSuccess({
+        total,
+        records
+      })
     }
   },
   {

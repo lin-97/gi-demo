@@ -21,13 +21,15 @@ export type DictDataItem = {
   value: string | number
   sort: number
   status: Status
+  remark?: string
+  createTime?: string
 }
 
 /** 字典模块 */
 export const baseAPI = getBaseApi<ListItem>({ baseUrl: '/system/dict' })
 
 /** 字典数据列表 */
-export function getDictDataList(params: { code: string } & Pagination) {
+export function getDictDataList(params: { code: string, name?: string, status?: string } & Pagination) {
   return http.get<PageRes<DictDataItem[]>>('/system/dict/getDictDataList', params)
 }
 

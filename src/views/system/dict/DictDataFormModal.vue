@@ -21,8 +21,12 @@ const emit = defineEmits<{
 
 const GiFormRef = useTemplateRef<InstanceType<typeof GiForm>>('GiFormRef')
 const dictDataId = ref('')
+const dictTypeCode = ref('')
 const isEdit = computed(() => !!dictDataId.value)
-const title = computed(() => (isEdit.value ? '编辑字典数据' : '新增字典数据'))
+const title = computed(() => {
+  const t = isEdit.value ? '编辑-字典数据' : '新增-字典数据'
+  return dictTypeCode.value ? `${t} (${dictTypeCode.value})` : t
+})
 const visible = ref(false)
 const loading = ref(false)
 
@@ -30,21 +34,22 @@ const [form, resetForm] = useResetReactive({
   name: '',
   value: '',
   sort: 0,
-  status: '1' as Status
+  status: '1' as Status,
+  remark: ''
 })
 
 const formColumns = computed<FormColumnItem[]>(() => [
   {
     type: 'input',
-    label: '字典名',
+    label: '数据标签',
     field: 'name',
     required: true,
-    rules: [{ required: true, message: '请输入字典名' }],
+    rules: [{ required: true, message: '请输入数据标签' }],
     props: { maxLength: 10 }
   },
   {
     type: 'input',
-    label: '字典值',
+    label: '数据键值',
     field: 'value',
     required: true,
     rules: [
@@ -72,15 +77,23 @@ const formColumns = computed<FormColumnItem[]>(() => [
       uncheckedText: '禁用'
     },
     span: 12
+  },
+  {
+    type: 'input',
+    label: '备注',
+    field: 'remark',
+    props: { maxLength: 100 }
   }
 ])
 
-const add = () => {
+const add = (code: string) => {
+  dictTypeCode.value = code
   dictDataId.value = ''
   visible.value = true
 }
 
 const edit = async (data: { id: string, code: string }) => {
+  dictTypeCode.value = data.code
   visible.value = true
   dictDataId.value = data.id
   loading.value = true
@@ -93,6 +106,7 @@ const edit = async (data: { id: string, code: string }) => {
 const close = () => {
   GiFormRef.value?.formRef?.resetFields()
   resetForm()
+  dictTypeCode.value = ''
 }
 
 const save = async () => {

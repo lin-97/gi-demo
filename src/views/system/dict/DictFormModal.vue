@@ -1,8 +1,7 @@
 <template>
-  <a-modal v-model:visible="visible" :title="title" width="calc(100% - 20px)" :mask-closable="false"
+  <a-modal v-model:visible="visible" :title="title" width="calc(100% - 20px)" :mask-closable="true"
     :modal-style="{ maxWidth: '520px' }" @before-ok="save" @close="close">
-    <GiForm ref="GiFormRef" :model-value="form" :columns="formColumns"
-      :grid-item-props="{ span: 24 }"
+    <GiForm ref="GiFormRef" :model-value="form" :columns="formColumns" :grid-item-props="{ span: 24 }"
       @update:model-value="Object.assign(form, $event)" />
   </a-modal>
 </template>
@@ -49,7 +48,7 @@ const formColumns = computed<FormColumnItem[]>(() => [
     rules: [
       { match: Regexp.OnlyEn, message: '格式不对！只能是英文' }
     ],
-    props: { maxLength: 10 }
+    props: { maxLength: 10, disabled: isEdit.value }
   },
   {
     type: 'textarea',

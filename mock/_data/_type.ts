@@ -51,6 +51,8 @@ export interface MockSystemDictItem {
     sort: number
     status: Status
     color?: string
+    remark?: string
+    createTime?: string
   }[]
 }
 
