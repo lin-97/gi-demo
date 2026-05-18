@@ -1,9 +1,9 @@
 <template>
   <a-config-provider update-at-scroll>
     <router-view></router-view>
-    <template #loading>
+    <!-- <template #loading>
       <img src="/static/images/loading.gif" class="loading-icon" />
-    </template>
+    </template> -->
   </a-config-provider>
 </template>
 
