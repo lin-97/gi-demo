@@ -382,6 +382,27 @@ const data: MockSystemMenuItem[] = [
         affix: false
       },
       {
+        id: '05035',
+        parentId: '05',
+        path: '/table/custom3',
+        component: 'table/custom3/index',
+        redirect: '',
+        type: 2,
+        title: '配置化表格2',
+        icon: 'icon-park-outline:table-file',
+        keepAlive: false,
+        hidden: false,
+        sort: 0,
+        activeMenu: '',
+        breadcrumb: true,
+        status: '1',
+        roles: ['role_admin', 'role_user'],
+        permission: '',
+        showInTabs: true,
+        alwaysShow: false,
+        affix: false
+      },
+      {
         id: '0504',
         parentId: '05',
         path: '/table/dialog',
