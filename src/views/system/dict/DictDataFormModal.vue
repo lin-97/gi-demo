@@ -3,7 +3,8 @@
     :modal-style="{ maxWidth: '520px' }" @before-ok="save" @close="close">
     <a-spin :loading="loading" class="w-full">
       <GiForm ref="GiFormRef" :model-value="form" :columns="formColumns" :grid-item-props="{ span: 24 }"
-        @update:model-value="Object.assign(form, $event)" />
+        @update:model-value="Object.assign(form, $event)">
+      </GiForm>
     </a-spin>
   </a-modal>
 </template>
@@ -35,8 +36,26 @@ const [form, resetForm] = useResetReactive({
   value: '',
   sort: 0,
   status: '1' as Status,
+  color: '',
   remark: ''
 })
+
+const COLOR_OPTIONS = [
+  { label: '默认', value: '' },
+  { label: 'red', value: 'red' },
+  { label: 'orangered', value: 'orangered' },
+  { label: 'orange', value: 'orange' },
+  { label: 'gold', value: 'gold' },
+  { label: 'lime', value: 'lime' },
+  { label: 'green', value: 'green' },
+  { label: 'cyan', value: 'cyan' },
+  { label: 'blue', value: 'blue' },
+  { label: 'arcoblue', value: 'arcoblue' },
+  { label: 'purple', value: 'purple' },
+  { label: 'pinkpurple', value: 'pinkpurple' },
+  { label: 'magenta', value: 'magenta' },
+  { label: 'gray', value: 'gray' }
+]
 
 const formColumns = computed<FormColumnItem[]>(() => [
   {
@@ -79,7 +98,19 @@ const formColumns = computed<FormColumnItem[]>(() => [
     span: 12
   },
   {
-    type: 'input',
+    type: 'select',
+    label: '颜色',
+    field: 'color',
+    props: {
+      allowCreate: true,
+      allowClear: true,
+      placeholder: '请选择（支持hex）',
+      options: COLOR_OPTIONS
+    },
+    span: 24
+  },
+  {
+    type: 'textarea',
     label: '备注',
     field: 'remark',
     props: { maxLength: 100 }

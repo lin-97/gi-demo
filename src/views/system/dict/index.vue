@@ -32,7 +32,7 @@
 <script setup lang="tsx">
 import type { TableColumnData } from '@arco-design/web-vue'
 import type * as T from '@/apis/system/dict'
-import { Message, Popconfirm, Space } from '@arco-design/web-vue'
+import { Message, Popconfirm, Space, Switch } from '@arco-design/web-vue'
 import { getDictDataList } from '@/apis/system/dict'
 import { useDict, useTable } from '@/hooks'
 import DictDataFormModal from './DictDataFormModal.vue'
@@ -126,7 +126,7 @@ const dataTableColumns: TableColumnData[] = [
     title: '状态',
     width: 100,
     align: 'center',
-    render: ({ record }) => <GiCellStatus status={record.status} />
+    render: ({ record }) => <Switch checkedValue="1" uncheckedValue="0" checkedText="启用" uncheckedText="禁用" checkedColor="#00B42A" uncheckedColor="#F53F3F" modelValue={record.status} onUpdate:modelValue={(value) => record.status = value as Status} />
   },
   { title: '备注', dataIndex: 'remark', ellipsis: true, tooltip: true, width: 140 },
   { title: '创建时间', dataIndex: 'createTime', width: 180 },

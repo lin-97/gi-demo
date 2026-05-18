@@ -8,11 +8,16 @@
         <GiButton type="delete" size="mini" :disabled="!selectedType" />
       </Popconfirm>
     </a-space>
+    <a-radio-group v-model="statusFilter" type="button" size="small">
+      <a-radio value="1">启用</a-radio>
+      <a-radio value="0">禁用</a-radio>
+    </a-radio-group>
     <a-spin :loading="typeLoading" class="left-dict-list__spin">
       <div class="left-dict-list__scroll">
         <div v-for="item in filteredTypeList" :key="item.id" class="left-dict-list__item"
           :class="{ 'left-dict-list__item--active': selectedType?.id === item.id }" @click="selectType(item)">
-          <icon-folder class="left-dict-list__item-icon" />
+          <icon-folder v-if="item.status === '1'" class="left-dict-list__item-icon" />
+          <icon-stop v-else class="left-dict-list__item-icon"></icon-stop>
           <span class="left-dict-list__item-text">{{ item.name }} ({{ item.code }})</span>
         </div>
         <a-empty v-if="!filteredTypeList.length" description="暂无字典类型" />
@@ -42,14 +47,12 @@ const typeLoading = ref(false)
 const typeList = ref<T.ListItem[]>([])
 const typeSearch = ref('')
 const selectedType = ref<T.ListItem | null>(null)
-
+const statusFilter = ref('1')
 const filteredTypeList = computed(() => {
   const q = typeSearch.value.trim().toLowerCase()
   if (!q)
-    return typeList.value
-  return typeList.value.filter(
-    (i) => i.name.toLowerCase().includes(q) || i.code.toLowerCase().includes(q)
-  )
+    return typeList.value.filter((i) => i.status === statusFilter.value)
+  return typeList.value.filter((i) => i.name.toLowerCase().includes(q) || i.code.toLowerCase().includes(q) || i.status === statusFilter.value)
 })
 
 const emitRefresh = () => {
