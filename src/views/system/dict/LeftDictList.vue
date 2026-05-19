@@ -132,7 +132,7 @@ const onDictFormSaved = async () => {
 }
 
 .left-dict-list__scroll {
-  max-height: 100%;
+  height: 100%;
   overflow-y: auto;
 }
 
