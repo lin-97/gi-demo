@@ -80,10 +80,10 @@ const features: FeatureItem[] = [
 ]
 
 const bottomItems: BottomItem[] = [
-  { title: '快速集成', subtitle: '零配置即可启动', icon: 'icon-park-outline:hexagon-strip' },
-  { title: '个性风格', subtitle: '轻松定制主题', icon: 'icon-park-outline:degree-hat' },
-  { title: '多元场景', subtitle: '满足各类业务', icon: 'icon-park-outline:system' },
-  { title: '持续更新', subtitle: '紧跟技术趋势', icon: 'icon-park-outline:link-cloud' }
+  { title: '快速集成', subtitle: '零配置即可启动', icon: 'icon-park-outline:setting-two' },
+  { title: '个性风格', subtitle: '轻松定制主题', icon: 'icon-park-outline:theme' },
+  { title: '多元场景', subtitle: '满足各类业务', icon: 'icon-park-outline:three-hexagons' },
+  { title: '持续更新', subtitle: '紧跟技术趋势', icon: 'icon-park-outline:upload-one' }
 ]
 </script>
 
@@ -154,7 +154,7 @@ const bottomItems: BottomItem[] = [
     height: 40px;
     padding: 4px;
     line-height: 1;
-    border: 1px solid rgb(var(--primary-6), 0.12);
+    border: 1px solid var(--color-border-2);
     border-radius: 10px;
 
     img {

@@ -5,11 +5,14 @@
         <LoginLeft />
       </a-col>
       <a-col :xs="24" :sm="24" :md="10" :lg="10" :xl="9" class="h-full">
-        <div class="login-box">
-          <GiThemeBtn class="theme-btn"></GiThemeBtn>
-          <div class="login-box-content">
-            <h3 class="title">欢迎回来</h3>
-            <p class="sub-title">输入您的账号和密码登录</p>
+        <div class="login__panel">
+          <a-space class="login__toolbar">
+            <LoginPalette />
+            <GiThemeBtn />
+          </a-space>
+          <div class="login__content">
+            <h3 class="login__title">欢迎回来</h3>
+            <p class="login__subtitle">输入您的账号和密码登录</p>
             <a-form ref="formRef" size="large" :model="form" :rules="rules" layout="vertical"
               :label-col-props="{ style: { marginBottom: '0' } }">
               <a-form-item field="username" label="账号">
@@ -33,7 +36,7 @@
                   <a-button type="primary" size="large" long :loading="loading" @click="login">
                     登录
                   </a-button>
-                  <a-button type="text" size="large" long class="register-btn">
+                  <a-button type="text" size="large" long class="login__register">
                     注册账号
                   </a-button>
                 </a-space>
@@ -53,6 +56,7 @@ import { useLoading } from '@/hooks'
 import { useTabsStore, useUserStore } from '@/stores'
 import * as Regexp from '@/utils/regexp'
 import LoginLeft from './LoginLeft.vue'
+import LoginPalette from './LoginPalette.vue'
 
 defineOptions({ name: 'Login' })
 const router = useRouter()
@@ -103,62 +107,62 @@ const login = async () => {
 </script>
 
 <style lang="scss" scoped>
-:deep(.arco-input-wrapper),
-:deep(.arco-btn-size-large) {
-  height: 40px;
-}
-
 .login {
   display: flex;
   align-items: center;
   justify-content: center;
   height: 100%;
   background-color: var(--color-bg-5);
-}
 
-.login-box {
-  position: relative;
-  box-sizing: border-box;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  height: 100%;
-  padding-top: 30px;
-  background: var(--color-bg-1);
+  :deep(.arco-input-wrapper),
+  :deep(.arco-btn-size-large) {
+    height: 40px;
+  }
 
-  &-content {
+  &__panel {
+    position: relative;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    padding-top: 30px;
+    background: var(--color-bg-1);
+  }
+
+  &__toolbar {
+    position: absolute;
+    top: 20px;
+    right: 30px;
+    z-index: 9999;
+  }
+
+  &__content {
     box-sizing: border-box;
     width: 100%;
     max-width: 450px;
     padding: 20px;
-
-    .title {
-      margin-bottom: 12px;
-      font-size: 36px;
-      font-weight: 700;
-      line-height: 1.2;
-      color: var(--color-text-1);
-    }
-
-    .sub-title {
-      margin-bottom: 12px;
-      font-size: 14px;
-      line-height: 20px;
-      color: var(--color-text-3);
-    }
   }
-}
 
-.register-btn,
-.register-btn:hover {
-  color: var(--color-text-2);
-}
+  &__title {
+    margin-bottom: 12px;
+    font-size: clamp(20px, 2.8vw, 36px);
+    font-weight: 700;
+    line-height: 1.2;
+    color: var(--color-text-1);
+  }
 
-.theme-btn {
-  position: absolute;
-  top: 20px;
-  right: 30px;
-  z-index: 9999;
+  &__subtitle {
+    margin-bottom: 12px;
+    font-size: clamp(13px, 1.4vw, 15px);
+    line-height: 20px;
+    color: var(--color-text-3);
+  }
+
+  &__register,
+  &__register:hover {
+    color: var(--color-text-2);
+  }
 }
 </style>
