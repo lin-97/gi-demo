@@ -1,16 +1,11 @@
 <template>
   <div class="login">
     <a-row align="stretch" class="w-full h-full">
-      <a-col :xs="0" :sm="0" :md="12" :lg="12" :xl="15" class="h-full">
-        <div class="login-left animate__animated animate__fadeInLeft">
-          <div class="login-left-name">
-            <h3 class="system-name">Gi Admin Pro</h3>
-            <!-- <p>美观实用的界面，经过视觉优化，确保卓越的用户体验</p> -->
-          </div>
-        </div>
+      <a-col :xs="0" :sm="0" :md="14" :lg="14" :xl="15" class="h-full">
+        <LoginLeft />
       </a-col>
-      <a-col :xs="24" :sm="24" :md="12" :lg="12" :xl="9" class="h-full">
-        <div class="login-box animate__animated animate__fadeInRight">
+      <a-col :xs="24" :sm="24" :md="10" :lg="10" :xl="9" class="h-full">
+        <div class="login-box">
           <GiThemeBtn class="theme-btn"></GiThemeBtn>
           <div class="login-box-content">
             <h3 class="title">欢迎回来</h3>
@@ -57,6 +52,7 @@ import { Message } from '@arco-design/web-vue'
 import { useLoading } from '@/hooks'
 import { useTabsStore, useUserStore } from '@/stores'
 import * as Regexp from '@/utils/regexp'
+import LoginLeft from './LoginLeft.vue'
 
 defineOptions({ name: 'Login' })
 const router = useRouter()
@@ -120,60 +116,36 @@ const login = async () => {
   background-color: var(--color-bg-5);
 }
 
-.login-left {
-  width: 100%;
-  height: 100%;
-  background-image: url('@/assets/images/login-bg.jpg');
-  background-size: cover;
-  background-position: left;
-  background-repeat: no-repeat;
-  position: relative;
-
-  &-name {
-    position: absolute;
-    top: 20px;
-    left: 30px;
-    color: #666;
-  }
-
-  .system-name {
-    font-size: 24px;
-    font-weight: 700;
-    line-height: 1.5;
-    color: #212121;
-  }
-}
-
 .login-box {
-  height: 100%;
+  position: relative;
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
+  justify-content: center;
+  height: 100%;
   padding-top: 30px;
   background: var(--color-bg-1);
-  position: relative;
 
   &-content {
+    box-sizing: border-box;
     width: 100%;
     max-width: 450px;
     padding: 20px;
-    box-sizing: border-box;
 
     .title {
+      margin-bottom: 12px;
       font-size: 36px;
       font-weight: 700;
       line-height: 1.2;
       color: var(--color-text-1);
-      margin-bottom: 12px;
     }
 
     .sub-title {
+      margin-bottom: 12px;
       font-size: 14px;
       line-height: 20px;
       color: var(--color-text-3);
-      margin-bottom: 12px;
     }
   }
 }
