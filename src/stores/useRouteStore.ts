@@ -5,6 +5,7 @@
 
 import type { RouteRecordRaw } from 'vue-router'
 import type { ListItem } from '@/apis/system/menu'
+import { Message } from '@arco-design/web-vue'
 import { cloneDeep } from 'lodash-es'
 import { defineStore } from 'pinia'
 import { ref } from 'vue'
@@ -12,7 +13,6 @@ import { mapTree } from 'xe-utils'
 import { getUserRoutes } from '@/apis/user'
 import { constantRoutes } from '@/router'
 import { transformPathToName } from '@/utils'
-import Message from '@/views/demo/examples/fn-component/Message/Message.vue'
 
 /**
  * 布局组件
