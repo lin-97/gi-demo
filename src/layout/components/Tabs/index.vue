@@ -3,63 +3,63 @@
   @description 系统标签页组件，支持多种标签样式、右键菜单和快捷操作
 -->
 <template>
-  <div class="tabs">
-    <a-tabs :class="`tabs__${appStore.tab}`" :type="tabsType" :active-key="route.path" editable hide-content
-      size="medium" @tab-click="handleTabClick" @delete="tabsStore.close('current', $event as string)">
-      <a-tab-pane v-for="item of tabsStore.tabList" :key="item.path" :title="(item.meta?.title as string)"
-        :closable="!item.meta?.affix">
-        <template v-if="appStore.tab === 'custom2'" #title>
-          <a-dropdown trigger="contextMenu">
-            <a-tag class="tabs-pane__tag" :closable="!item.meta?.affix"
-              :color="route.path === item.path ? 'arcoblue' : undefined" @close="tabsStore.close('current', item.path)">
-              {{ item.meta?.title }}
-            </a-tag>
-            <template #content>
-              <a-doption @click="tabsStore.close('left', item.path)">
-                <template #icon><icon-left /></template>
-                <template #default>关闭左侧</template>
-              </a-doption>
-              <a-doption @click="tabsStore.close('right', item.path)">
-                <template #icon><icon-right /></template>
-                <template #default>关闭右侧</template>
-              </a-doption>
-              <a-doption @click="tabsStore.close('other', item.path)">
-                <template #icon><icon-close /></template>
-                <template #default>关闭其他</template>
-              </a-doption>
-            </template>
-          </a-dropdown>
-        </template>
-      </a-tab-pane>
-
-      <template #extra>
-        <a-space size="medium">
-          <ReloadIcon></ReloadIcon>
-          <a-dropdown trigger="hover">
-            <MagicIcon></MagicIcon>
-            <template #content>
-              <a-doption @click="tabsStore.close('left', route.path)">
-                <template #icon><icon-left /></template>
-                <template #default>关闭左侧</template>
-              </a-doption>
-              <a-doption @click="tabsStore.close('right', route.path)">
-                <template #icon><icon-right /></template>
-                <template #default>关闭右侧</template>
-              </a-doption>
-              <a-doption @click="tabsStore.close('other', route.path)">
-                <template #icon><icon-close /></template>
-                <template #default>关闭其他</template>
-              </a-doption>
-              <a-doption @click="tabsStore.close('all')">
-                <template #icon><icon-delete /></template>
-                <template #default>关闭全部</template>
-              </a-doption>
-            </template>
-          </a-dropdown>
-        </a-space>
+  <a-tabs :key="appStore.tabStyle" :class="`tabs--${appStore.tabStyle}`" :type="tabsType" :active-key="route.path"
+    editable hide-content size="medium" scroll-position="center" @tab-click="handleTabClick"
+    @delete="tabsStore.close('current', $event as string)">
+    <a-tab-pane v-for="item of tabsStore.tabList" :key="item.path" :title="(item.meta?.title as string)"
+      :closable="!item.meta?.affix">
+      <template v-if="appStore.tabStyle === 'custom2'" #title>
+        <a-dropdown trigger="contextMenu">
+          <a-tag class="tabs-pane__tag" :closable="!item.meta?.affix"
+            :color="route.path === item.path ? 'rgb(var(--primary-6))' : undefined"
+            :bordered="route.path === item.path ? false : true" @close="tabsStore.close('current', item.path)">
+            {{ item.meta?.title }}
+          </a-tag>
+          <template #content>
+            <a-doption @click="tabsStore.close('left', item.path)">
+              <template #icon><icon-left /></template>
+              <template #default>关闭左侧</template>
+            </a-doption>
+            <a-doption @click="tabsStore.close('right', item.path)">
+              <template #icon><icon-right /></template>
+              <template #default>关闭右侧</template>
+            </a-doption>
+            <a-doption @click="tabsStore.close('other', item.path)">
+              <template #icon><icon-close /></template>
+              <template #default>关闭其他</template>
+            </a-doption>
+          </template>
+        </a-dropdown>
       </template>
-    </a-tabs>
-  </div>
+    </a-tab-pane>
+
+    <template #extra>
+      <a-space size="medium">
+        <ReloadIcon></ReloadIcon>
+        <a-dropdown trigger="hover">
+          <MagicIcon></MagicIcon>
+          <template #content>
+            <a-doption @click="tabsStore.close('left', route.path)">
+              <template #icon><icon-left /></template>
+              <template #default>关闭左侧</template>
+            </a-doption>
+            <a-doption @click="tabsStore.close('right', route.path)">
+              <template #icon><icon-right /></template>
+              <template #default>关闭右侧</template>
+            </a-doption>
+            <a-doption @click="tabsStore.close('other', route.path)">
+              <template #icon><icon-close /></template>
+              <template #default>关闭其他</template>
+            </a-doption>
+            <a-doption @click="tabsStore.close('all')">
+              <template #icon><icon-delete /></template>
+              <template #default>关闭全部</template>
+            </a-doption>
+          </template>
+        </a-dropdown>
+      </a-space>
+    </template>
+  </a-tabs>
 </template>
 
 <script setup lang="ts">
@@ -78,7 +78,7 @@ const appStore = useAppStore()
 const tabsStore = useTabsStore()
 const { listenerRouteChange } = useRouteListener()
 const tabsType = computed(() => {
-  return (['custom1', 'custom2'].includes(appStore.tab) ? 'card' : appStore.tab) as unknown as TabsInstance['type']
+  return (['custom1', 'custom2'].includes(appStore.tabStyle) ? 'card' : appStore.tabStyle) as unknown as TabsInstance['type']
 })
 
 /** 初始化标签页 */
@@ -113,16 +113,10 @@ onMounted(() => {
 </script>
 
 <style lang="scss" scoped>
-.tabs {
+:deep(.arco-tabs) {
   background-color: var(--color-bg-1);
-  margin-top: -1px;
-
-  &-pane__tag {
-    margin: 0 4px;
-  }
 }
 
-// 标签页导航样式
 :deep(.arco-tabs-nav-tab) {
   .arco-tabs-tab {
     border-bottom-color: transparent !important;
@@ -136,46 +130,53 @@ onMounted(() => {
       width: 1em;
     }
   }
+}
 
-  &:not(.arco-tabs-nav-tab-scroll) .arco-tabs-tab:first-child {
-    border-left: 0;
+.tabs--card {
+  :deep(.arco-tabs-nav-type-card) {
+    &::before {
+      z-index: 9;
+    }
+
+    .arco-tabs-tab {
+      border-top: none;
+    }
+
+    &:not(.arco-tabs-nav-tab-scroll) .arco-tabs-tab:first-child {
+      border-left: 0;
+    }
   }
 }
 
-:deep(.tabs__card),
-:deep(.tabs__rounded),
-:deep(.tabs__custom2) {
-  &::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    width: 100%;
-    height: 1px;
-    background-color: var(--color-border-2);
-    z-index: 1;
-  }
-
+.tabs--card-gutter {
+  padding-top: 4px;
+  padding-left: 4px;
 }
 
-:deep(.tabs__rounded) {
+.tabs--rounded {
   &::after {
-    content: '';
     position: absolute;
+    right: 0;
     bottom: 0;
     left: 0;
-    right: 0;
+    z-index: 1;
     width: 100%;
     height: 1px;
+    content: '';
     background-color: var(--color-border-2);
-    z-index: 1;
+  }
+
+  :deep(.arco-tabs-nav-type-rounded .arco-tabs-tab) {
+    padding: 2px 12px;
+    margin: 5px;
   }
 }
 
 // 自定义样式1
-:deep(.tabs__custom1) {
-  .arco-tabs-nav-tab {
+.tabs--custom1 {
+  padding-top: 4px;
+
+  :deep(.arco-tabs-nav-tab) {
     .arco-tabs-tab {
       padding: 5px 20px;
       border: none;
@@ -186,7 +187,7 @@ onMounted(() => {
     }
   }
 
-  .arco-tabs-nav-tab-list {
+  :deep(.arco-tabs-nav-tab-list) {
     .arco-tabs-tab-active {
       padding: 5px 20px;
       background-color: rgb(var(--primary-6), 0.1);
@@ -204,22 +205,33 @@ onMounted(() => {
 }
 
 // 自定义样式2
-:deep(.tabs__custom2) {
-  .arco-tabs-nav {
-    padding-top: 6px;
-    padding-bottom: 6px;
-  }
+.tabs--custom2 {
+  :deep(.arco-tabs-nav) {
+    padding-top: 8px;
+    padding-bottom: 8px;
+    padding-left: 6px;
 
-  .arco-tabs-tab {
-    padding: 0;
-    border: 0;
-
-    .arco-tabs-tab-close-btn {
-      display: none;
+    .arco-tabs-nav-tab-list {
+      display: flex;
+      gap: 0 8px;
     }
 
-    &:hover {
-      background-color: transparent;
+    .arco-tabs-tab {
+      padding: 0;
+      border: 0;
+
+      .arco-tabs-tab-close-btn {
+        display: none;
+      }
+
+      &:hover {
+        background-color: transparent;
+      }
+    }
+
+    .tabs-pane__tag {
+      height: 26px;
+      border-radius: 2px;
     }
   }
 }

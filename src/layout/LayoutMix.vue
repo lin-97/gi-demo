@@ -5,14 +5,14 @@
 <template>
   <div class="layout-mix">
     <!-- 左侧菜单区域 -->
-    <section v-if="isDesktop" class="layout-mix-left asider" :class="{ 'app-menu-dark': appStore.menuDark }"
+    <section v-if="isDesktop" class="layout-mix-left asider" :class="{ 'app-menu-dark': appStore.isMenuDark }"
       :style="getMenuStyle">
       <a-layout-sider class="asider__menu" collapsible breakpoint="xl" hide-trigger :width="200"
-        :collapsed="appStore.menuCollapse">
-        <Logo :collapsed="appStore.menuCollapse" />
+        :collapsed="appStore.isMenuCollapsed">
+        <Logo :collapsed="appStore.isMenuCollapsed" />
         <a-scrollbar outer-class="asider__menu-scroll-view" style="height: 100%; overflow: auto">
           <a-menu :theme="menuTheme" mode="vertical" auto-open-selected :collapsed="shouldCollapse"
-            :selected-keys="[twoActivePath]" breakpoint="xl" :accordion="appStore.menuAccordion"
+            :selected-keys="[twoActivePath]" breakpoint="xl" :accordion="appStore.isMenuAccordion"
             @menu-item-click="handleTwoMenuItemClick">
             <MenuItem v-for="(item, index) in twoLevelMenus" :key="item.path + index" :item="item" />
           </a-menu>
@@ -22,7 +22,7 @@
 
     <!-- 右侧内容区域 -->
     <section class="layout-mix-right">
-      <header class="header" :class="{ 'app-menu-dark': appStore.menuDark }" :style="getMenuStyle">
+      <header class="header" :class="{ 'app-menu-dark': appStore.isMenuDark }" :style="getMenuStyle">
         <MenuFoldBtn />
         <a-menu mode="horizontal" :theme="menuTheme" :selected-keys="[oneActivePath]"
           @menu-item-click="handleOneMenuItemClick">
@@ -30,7 +30,7 @@
         </a-menu>
         <HeaderRightBar />
       </header>
-      <Tabs v-if="appStore.tabVisible" />
+      <Tabs v-if="appStore.isTabVisible" />
       <Main />
     </section>
   </div>
@@ -66,7 +66,7 @@ const topMenus = computed(() => {
 
 // 是否折叠菜单
 const shouldCollapse = computed(() =>
-  !isDesktop.value ? false : appStore.menuCollapse
+  !isDesktop.value ? false : appStore.isMenuCollapsed
 )
 </script>
 

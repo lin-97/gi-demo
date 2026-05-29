@@ -6,13 +6,13 @@
   <!-- 折叠按钮 -->
   <a-button size="mini" class="g-hover-btn menu-fold-btn" @click="handleFoldClick">
     <template #icon>
-      <icon-menu-fold v-if="!appStore.menuCollapse" :size="18" :stroke-width="3" />
+      <icon-menu-fold v-if="!appStore.isMenuCollapsed" :size="18" :stroke-width="3" />
       <icon-menu-unfold v-else :size="18" :stroke-width="3" />
     </template>
   </a-button>
 
   <!-- 移动端抽屉菜单 -->
-  <div class="drawer" :class="{ 'app-menu-dark': appStore.menuDark }">
+  <div class="drawer" :class="{ 'app-menu-dark': appStore.isMenuDark }">
     <a-drawer v-model:visible="visible" placement="left" :header="false" :footer="false" :render-to-body="false"
       :drawer-style="drawerStyle">
       <Logo :collapsed="false" />
@@ -53,7 +53,7 @@ const drawerStyle = {
 /** 处理折叠按钮点击 */
 const handleFoldClick = () => {
   if (isDesktop.value) {
-    appStore.setMenuCollapse(!appStore.menuCollapse)
+    appStore.setMenuCollapse(!appStore.isMenuCollapsed)
   } else {
     visible.value = !visible.value
   }

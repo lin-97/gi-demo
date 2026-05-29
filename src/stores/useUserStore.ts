@@ -3,39 +3,38 @@
 import type { UserInfo } from '@/apis/user'
 import { defineStore } from 'pinia'
 import { computed, reactive, ref } from 'vue'
-import { getUserInfo as getUserInfoApi, login as loginApi, logout as logoutApi } from '@/apis/user'
+import { useRouter } from 'vue-router'
+import { getUserInfo as getUserInfoApi, getUserRoutes, login as loginApi, logout as logoutApi } from '@/apis/user'
 import { resetRouter } from '@/router'
 import { clearToken, getToken, setToken } from '@/utils/auth'
+import { isHttp } from '@/utils/validate'
+import { useRouteStore } from './useRouteStore'
 
 /** 登录参数接口 */
-interface LoginParams {
-  username: string
-  password: string
-  code?: string
-}
+type LoginParams = Parameters<typeof loginApi>[0]
 
 /** 用户 Store 的核心设置逻辑 - 管理用户相关的状态和操作 */
 const storeSetup = () => {
+  const routeStore = useRouteStore()
+  const router = useRouter()
   /** 用户基本信息 */
-  const userInfo = reactive<Pick<UserInfo, 'nickname' | 'avatar'>>({
+  const userInfo: UserInfo = reactive({
+    id: '',
     nickname: '',
-    avatar: ''
+    avatar: '',
+    roles: [],
+    permissions: []
   })
-
   /** 用户昵称 */
   const name = computed(() => userInfo.nickname)
-
   /** 用户头像 */
   const avatar = computed(() => userInfo.avatar)
-
-  /** 用户令牌 */
-  const token = ref<string>(getToken() || '')
-
   /** 用户角色列表 */
-  const roles = ref<string[]>([])
-
+  const roles = computed(() => userInfo.roles)
   /** 用户权限列表 */
-  const permissions = ref<string[]>([])
+  const permissions = computed(() => userInfo.permissions)
+  /** 用户令牌 */
+  const token = ref(getToken() || '')
 
   /** 重置用户令牌 - 清除令牌并重置路由权限标志 */
   const resetToken = () => {
@@ -71,8 +70,6 @@ const storeSetup = () => {
       await logoutApi()
       // 清除用户状态
       token.value = ''
-      roles.value = []
-      permissions.value = []
       resetToken()
       resetRouter()
       return true
@@ -87,34 +84,32 @@ const storeSetup = () => {
    * @description 获取用户详细信息，包括角色和权限
    * @throws {Error} 当获取用户信息失败时抛出错误
    */
-  const getInfo = async (): Promise<void> => {
+  const fetchUserInfo = async (): Promise<boolean> => {
     try {
       const res = await getUserInfoApi()
-      const { nickname, avatar: userAvatar, roles: userRoles, permissions: userPermissions } = res.data
-
-      // 更新用户基本信息
-      userInfo.nickname = nickname
-      userInfo.avatar = userAvatar
-
-      // 更新用户角色和权限
-      if (userRoles?.length) {
-        roles.value = userRoles
-        permissions.value = userPermissions || []
-      }
+      Object.assign(userInfo, res.data)
+      return true
     } catch (error) {
       console.error('获取用户信息失败:', error)
       throw error
     }
   }
 
-  /**
-   * 更新令牌（仅用于开发测试）
-   * @description 用于模拟令牌过期场景
-   * @param {string} value - 新的令牌值
-   */
-  const editToken = (value: string): void => {
-    token.value = value
-    setToken(value)
+  const generateRoutes = async (): Promise<boolean> => {
+    try {
+      await fetchUserInfo()
+      const res = await getUserRoutes()
+      routeStore.setRoutes(res.data)
+      routeStore.asyncRoutes.forEach((item) => {
+        if (!isHttp(item.path)) {
+          router.addRoute(item)
+        }
+      })
+      return true
+    } catch (error) {
+      console.error('生成路由失败:', error)
+      throw error
+    }
   }
 
   return {
@@ -126,9 +121,9 @@ const storeSetup = () => {
     permissions,
     login,
     logout,
-    getInfo,
+    fetchUserInfo,
     resetToken,
-    editToken
+    generateRoutes
   }
 }
 

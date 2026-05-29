@@ -3,7 +3,7 @@
     <Asider></Asider>
     <a-layout class="layout-default__right">
       <Header></Header>
-      <Tabs v-if="appStore.tabVisible"></Tabs>
+      <Tabs v-if="appStore.isTabVisible"></Tabs>
       <Main></Main>
     </a-layout>
   </a-layout>

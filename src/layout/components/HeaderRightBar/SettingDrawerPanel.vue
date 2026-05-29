@@ -29,31 +29,31 @@
         <a-descriptions :column="1" :align="{ value: 'right' }" :value-style="{ paddingRight: 0 }">
           <!-- 页签设置 -->
           <a-descriptions-item label="页签显示">
-            <a-switch v-model="appStore.tabVisible" />
+            <a-switch v-model="appStore.isTabVisible" />
           </a-descriptions-item>
           <a-descriptions-item label="页签风格">
-            <a-select v-model="appStore.tab" placeholder="请选择" :options="TAB_MODE_OPTIONS"
-              :disabled="!appStore.tabVisible" :trigger-props="{ autoFitPopupMinWidth: true }"
+            <a-select v-model="appStore.tabStyle" placeholder="请选择" :options="TAB_MODE_OPTIONS"
+              :disabled="!appStore.isTabVisible" :trigger-props="{ autoFitPopupMinWidth: true }"
               :style="{ width: '120px' }">
             </a-select>
           </a-descriptions-item>
 
           <!-- 动画设置 -->
           <a-descriptions-item label="动画显示">
-            <a-switch v-model="appStore.animateVisible" />
+            <a-switch v-model="appStore.isTransitionEnabled" />
           </a-descriptions-item>
           <a-descriptions-item label="动画效果">
-            <a-select v-model="appStore.animate" placeholder="请选择" :options="ANIMATE_MODE_OPTIONS"
-              :disabled="!appStore.animateVisible" :style="{ width: '120px' }">
+            <a-select v-model="appStore.transitionName" placeholder="请选择" :options="ANIMATE_MODE_OPTIONS"
+              :disabled="!appStore.isTransitionEnabled" :style="{ width: '120px' }">
             </a-select>
           </a-descriptions-item>
 
           <!-- 菜单设置 -->
           <a-descriptions-item label="深色菜单">
-            <a-switch v-model="appStore.menuDark" />
+            <a-switch v-model="appStore.isMenuDark" />
           </a-descriptions-item>
           <a-descriptions-item label="手风琴效果">
-            <a-switch v-model="appStore.menuAccordion" />
+            <a-switch v-model="appStore.isMenuAccordion" />
           </a-descriptions-item>
         </a-descriptions>
       </section>
@@ -85,7 +85,7 @@ const LAYOUT_OPTIONS: LayoutItem[] = [
   { label: '双列布局', value: 'columns' }
 ]
 
-type TabItem = { label: string, value: App.SettingConfig['tab'] }
+type TabItem = { label: string, value: App.SettingConfig['tabStyle'] }
 /** 页签模式选项 */
 const TAB_MODE_OPTIONS: TabItem[] = [
   { label: '卡片', value: 'card' },
@@ -95,7 +95,7 @@ const TAB_MODE_OPTIONS: TabItem[] = [
   { label: '自定义2', value: 'custom2' }
 ]
 
-type AnimateItem = { label: string, value: App.SettingConfig['animate'] }
+type AnimateItem = { label: string, value: App.SettingConfig['transitionName'] }
 /** 动画模式选项 */
 const ANIMATE_MODE_OPTIONS: AnimateItem[] = [
   { label: '默认', value: 'zoom-fade' },
@@ -112,12 +112,12 @@ const initSetting = () => {
     appStore.layout = AppSetting.layout as App.SettingConfig['layout']
   }
   const tabs = TAB_MODE_OPTIONS.map((i) => i.value)
-  if (!tabs.includes(appStore.tab)) {
-    appStore.tab = AppSetting.tab as App.SettingConfig['tab']
+  if (!tabs.includes(appStore.tabStyle)) {
+    appStore.tabStyle = AppSetting.tabStyle as App.SettingConfig['tabStyle']
   }
   const animates = ANIMATE_MODE_OPTIONS.map((i) => i.value)
-  if (!animates.includes(appStore.animate)) {
-    appStore.animate = AppSetting.animate as App.SettingConfig['animate']
+  if (!animates.includes(appStore.transitionName)) {
+    appStore.transitionName = AppSetting.transitionName as App.SettingConfig['transitionName']
   }
 }
 initSetting()

@@ -18,7 +18,7 @@ export function useLevelMenu(options?: Options) {
   const routeStore = useRouteStore()
   const { listenerRouteChange } = useRouteListener()
 
-  const menuTheme = computed(() => appStore.menuDark ? 'dark' : 'light')
+  const menuTheme = computed(() => appStore.isMenuDark ? 'dark' : 'light')
 
   // 获取菜单样式
   const getMenuStyle = computed(() => {

@@ -4,13 +4,10 @@
  */
 
 import type { RouteRecordRaw } from 'vue-router'
-import type { ListItem } from '@/apis/system/menu'
-import { Message } from '@arco-design/web-vue'
-import { cloneDeep } from 'lodash-es'
+import type { UserRouteItem } from '@/apis/user'
 import { defineStore } from 'pinia'
 import { ref } from 'vue'
 import { mapTree } from 'xe-utils'
-import { getUserRoutes } from '@/apis/user'
 import { constantRoutes } from '@/router'
 import { transformPathToName } from '@/utils'
 
@@ -103,7 +100,7 @@ const transformComponentView = (component: string) => {
  *   }
  * ])
  */
-const formatAsyncRoutes = (menus: ListItem[]) => {
+const formatAsyncRoutes = (menus: UserRouteItem[]) => {
   if (!menus.length) return []
 
   // 对顶层菜单进行排序
@@ -160,34 +157,16 @@ const storeSetup = () => {
    * @description 将动态路由与常驻路由合并
    * @param {RouteRecordRaw[]} data - 动态路由配置
    */
-  const setRoutes = (data: RouteRecordRaw[]) => {
-    routes.value = constantRoutes.concat(data)
-    asyncRoutes.value = data
-  }
-
-  /**
-   * 生成路由配置
-   * @description 获取用户路由权限并生成路由配置
-   * @returns {Promise<RouteRecordRaw[]>} 返回生成的路由配置
-   * @throws {Error} 当路由生成失败时返回空数组
-   */
-  const generateRoutes = async (): Promise<RouteRecordRaw[]> => {
-    try {
-      // 获取用户路由权限数据
-      const res = await getUserRoutes()
-      const asyncRoutes = formatAsyncRoutes(res.data)
-      setRoutes(asyncRoutes)
-      return cloneDeep(asyncRoutes)
-    } catch (error) {
-      Message.error(`路由生成失败-${error}`)
-      return []
-    }
+  const setRoutes = (data: UserRouteItem[]) => {
+    const formattedRoutes = formatAsyncRoutes(data)
+    routes.value = constantRoutes.concat(formattedRoutes)
+    asyncRoutes.value = formattedRoutes
   }
 
   return {
     routes,
     asyncRoutes,
-    generateRoutes
+    setRoutes
   }
 }
 

@@ -1,5 +1,5 @@
 <template>
-  <div class="one-level-menu" :class="{ 'app-menu-dark': appStore.menuDark }">
+  <div class="one-level-menu" :class="{ 'app-menu-dark': appStore.isMenuDark }">
     <Logo class="one-level-menu__logo" hide-name></Logo>
     <div class="one-level-menu__wrap">
       <a-scrollbar style="height:100%;overflow: auto;" :outer-style="{ width: '100%' }">

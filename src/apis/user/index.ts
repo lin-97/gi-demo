@@ -1,5 +1,4 @@
 import type * as T from './type'
-import type { ListItem } from '@/apis/system/menu'
 import http from '@/utils/http'
 
 export type * from './type'
@@ -21,5 +20,5 @@ export const getUserInfo = () => {
 
 /** 获取用户路由信息 */
 export const getUserRoutes = () => {
-  return http.get<ListItem[]>('/user/getUserRoutes')
+  return http.get<T.UserRouteItem[]>('/user/getUserRoutes')
 }

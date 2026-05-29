@@ -1,11 +1,11 @@
 <template>
-  <div v-if="isDesktop" class="asider" :class="{ 'app-menu-dark': appStore.menuDark }" :style="getMenuStyle">
+  <div v-if="isDesktop" class="asider" :class="{ 'app-menu-dark': appStore.isMenuDark }" :style="getMenuStyle">
     <a-layout-sider class="asider__menu" collapsible breakpoint="xl" hide-trigger :width="220"
-      :collapsed="appStore.menuCollapse" @collapse="handleCollapse">
-      <Logo :collapsed="appStore.menuCollapse"></Logo>
+      :collapsed="appStore.isMenuCollapsed" @collapse="handleCollapse">
+      <Logo :collapsed="appStore.isMenuCollapsed"></Logo>
       <a-scrollbar outer-class="asider__menu-scroll-view" style="height: 100%; overflow: auto">
         <a-menu :theme="menuTheme" auto-open-selected :menu-trigger-props="menuTriggerProps"
-          :selected-keys="selectedKeys" :collapsed="collapsed" :accordion="appStore.menuAccordion"
+          :selected-keys="selectedKeys" :collapsed="collapsed" :accordion="appStore.isMenuAccordion"
           @menu-item-click="handleMenuItemClick">
           <MenuItem v-for="(item, index) in menuList" :key="item.path + index" :item="item" />
         </a-menu>
@@ -27,7 +27,7 @@ const { isDesktop } = useDevice()
 const { menuTheme, menuList, menuTriggerProps, selectedKeys, collapsed, handleMenuItemClick, getMenuStyle } = useMenu()
 
 const handleCollapse = (isCollapsed: boolean) => {
-  appStore.menuCollapse = isCollapsed
+  appStore.isMenuCollapsed = isCollapsed
 }
 </script>
 

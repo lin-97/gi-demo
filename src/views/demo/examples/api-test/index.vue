@@ -3,7 +3,6 @@
     <a-space fill wrap>
       <a-button type="primary" @click="success">成功接口请求</a-button>
       <a-button type="primary" status="danger" @click="fail">失败接口请求</a-button>
-      <a-button type="primary" status="warning" @click="setTokenExpired">设置token过期</a-button>
     </a-space>
     <a-space fill wrap>
       <a-input v-model="currentTabTitle" placeholder="输入当前tab页签名称"></a-input>
@@ -15,9 +14,7 @@
 <script lang="ts" setup>
 import { Message } from '@arco-design/web-vue'
 import { getTestFail, getTestSuccess } from '@/apis/test'
-import { useTabsStore, useUserStore } from '@/stores'
-
-const userStore = useUserStore()
+import { useTabsStore } from '@/stores'
 
 const result = ref('')
 const success = async () => {
@@ -29,11 +26,6 @@ const success = async () => {
 const fail = async () => {
   await getTestFail()
   Message.success('请求成功') // 如果await后面的语句时失败的promise，那么这行代码以及往下的代码都不会执行
-}
-
-const setTokenExpired = () => {
-  userStore.editToken('token123456')
-  Message.info('token已过期, 请刷新页面, 登录成功会返回此页面')
 }
 
 const { setTabTitle } = useTabsStore()

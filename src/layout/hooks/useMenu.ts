@@ -23,7 +23,7 @@ export function useMenu() {
 
   // 是否折叠菜单
   const collapsed = computed(() =>
-    !isDesktop.value ? false : appStore.menuCollapse
+    !isDesktop.value ? false : appStore.isMenuCollapsed
   )
 
   // 菜单触发器配置
@@ -32,7 +32,7 @@ export function useMenu() {
   }
 
   // 菜单主题
-  const menuTheme = computed(() => appStore.menuDark ? 'dark' : 'light')
+  const menuTheme = computed(() => appStore.isMenuDark ? 'dark' : 'light')
 
   // 获取菜单样式
   const getMenuStyle = computed(() => {

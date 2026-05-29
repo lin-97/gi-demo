@@ -8,7 +8,7 @@
       <!-- 左侧二级菜单区域 -->
       <a-menu v-if="twoLevelMenus.length > 1 || oneActiveRoute?.meta?.alwaysShow === true" :key="twoLevelMenuKey"
         class="layout-columns__menu" :theme="menuTheme" :selected-keys="[twoActivePath]"
-        :accordion="appStore.menuAccordion" auto-open-selected :collapsed="appStore.menuCollapse"
+        :accordion="appStore.isMenuAccordion" auto-open-selected :collapsed="appStore.isMenuCollapsed"
         :style="{ width: '180px' }" @menu-item-click="handleTwoMenuItemClick">
         <MenuItem v-for="(item, index) in twoLevelMenus" :key="item.path + index" :item="item" />
       </a-menu>
@@ -17,7 +17,7 @@
     <!-- 右侧内容区域 -->
     <section class="layout-columns__content">
       <Header />
-      <Tabs v-if="appStore.tabVisible" />
+      <Tabs v-if="appStore.isTabVisible" />
       <Main />
     </section>
   </div>

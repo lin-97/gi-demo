@@ -2,12 +2,11 @@
 
 import type { RouteLocationNormalized, Router } from 'vue-router'
 import { Message } from '@arco-design/web-vue'
-import { useRouteStore, useUserStore } from '@/stores'
+import { useUserStore } from '@/stores'
 import { getToken } from '@/utils/auth'
-import { isHttp } from '@/utils/validate'
 
 /** 免登录白名单路径 */
-const whiteList = ['/login', '/register']
+const WHITE_LIST = ['/login', '/404']
 
 /** 是否已生成动态路由 */
 let isDynamicRoutesGenerated = false
@@ -22,25 +21,11 @@ async function handleDynamicRoutes(
   to: RouteLocationNormalized
 ): Promise<{ path: string, query?: any, replace: boolean }> {
   const userStore = useUserStore()
-  const routeStore = useRouteStore()
 
   try {
-    // 获取用户信息和权限
-    await userStore.getInfo()
-
-    // 生成可访问的路由表
-    const accessRoutes = await routeStore.generateRoutes()
-
-    // 动态添加可访问路由
-    accessRoutes.forEach((route) => {
-      if (!isHttp(route.path)) {
-        router.addRoute(route)
-      }
-    })
-
+    await userStore.generateRoutes()
     // 标记动态路由已生成
     isDynamicRoutesGenerated = true
-
     // 确保路由添加完成后返回目标路由
     return { ...to, replace: true }
   } catch (error) {
@@ -92,7 +77,7 @@ export const setupPermissionGuard = (router: Router): void => {
     // 未登录状态时重置路由生成标志
     isDynamicRoutesGenerated = false
 
-    if (whiteList.includes(to.path)) {
+    if (WHITE_LIST.includes(to.path)) {
       // 白名单路径直接访问
       next()
       return

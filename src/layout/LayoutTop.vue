@@ -1,6 +1,6 @@
 <template>
   <div class="layout-top">
-    <a-row align="center" class="layout-top__header" :class="{ 'app-menu-dark': appStore.menuDark }"
+    <a-row align="center" class="layout-top__header" :class="{ 'app-menu-dark': appStore.isMenuDark }"
       :style="getMenuStyle">
       <Logo></Logo>
       <a-menu class="layout-top__menu" mode="horizontal" :theme="menuTheme" :menu-trigger-props="menuTriggerProps"
@@ -9,7 +9,7 @@
       </a-menu>
       <HeaderRightBar></HeaderRightBar>
     </a-row>
-    <Tabs v-if="appStore.tabVisible"></Tabs>
+    <Tabs v-if="appStore.isTabVisible"></Tabs>
     <Main></Main>
   </div>
 </template>
