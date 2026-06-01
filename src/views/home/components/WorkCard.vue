@@ -1,5 +1,5 @@
 <template>
-  <a-card title="工作台" :bordered="false" size="medium" class="g-base-card work-card">
+  <a-card title="工作台" :bordered="false" size="medium" class="g-card-title work-card">
     <template #extra>
       <NowTime></NowTime>
     </template>
