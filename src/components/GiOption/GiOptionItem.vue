@@ -8,7 +8,7 @@
     <div class="gi-option-item__wrapper">
       <span class="gi-option-item__icon">
         <slot name="icon">
-          <GiSvgIcon :name="props.icon" />
+          <Icon v-if="props.icon" :icon="props.icon" :width="16" :height="16" />
         </slot>
       </span>
       <slot>
@@ -21,6 +21,7 @@
 
 <script setup lang="ts">
 import type { OptionItemProps as Props } from './type'
+import { Icon } from '@iconify/vue'
 
 defineOptions({ name: 'GiOptionItem' })
 

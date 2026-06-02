@@ -25,7 +25,7 @@
           <a-statistic :value="16" :value-from="0" :start="true" animation>
             <template #title>
               <a-space>
-                <GiSvgIcon name="icon-num"></GiSvgIcon>
+                <Icon icon="custom:icon-num" :width="20" :height="20" />
                 <span>项目数</span>
               </a-space>
             </template>
@@ -33,7 +33,7 @@
           <a-statistic :value="3" :value-from="0" :start="true" animation>
             <template #title>
               <a-space>
-                <GiSvgIcon name="icon-wait"></GiSvgIcon>
+                <Icon icon="custom:icon-wait" :width="20" :height="20" />
                 <span>待办</span>
               </a-space>
             </template>
@@ -42,7 +42,7 @@
           <a-statistic :value="35" :value-from="0" :start="true" animation>
             <template #title>
               <a-space>
-                <GiSvgIcon name="icon-msg"></GiSvgIcon>
+                <Icon icon="custom:icon-msg" :width="20" :height="20" />
                 <span>消息</span>
               </a-space>
             </template>
@@ -54,6 +54,7 @@
 </template>
 
 <script setup lang="ts">
+import { Icon } from '@iconify/vue'
 import { useUserStore } from '@/stores'
 import { goodTimeText } from '@/utils'
 import NowTime from './NowTime/index.vue'

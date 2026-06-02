@@ -1,5 +1,5 @@
 <template>
-  <GiOption :class="{ shadow: props.shadow }">
+  <GiOption :class="{ 'right-menu__shadow': props.shadow }">
     <GiOptionItem label="重命名" @click="onClickItem('rename')">
       <template #icon>
         <GiIconBox color="#4F6BF6"><icon-edit /></GiIconBox>
@@ -66,7 +66,7 @@ const onClickItem = (mode: string) => {
 </script>
 
 <style lang="scss" scoped>
-.shadow {
+.right-menu__shadow {
   box-sizing: border-box;
   overflow: hidden;
   background: var(--color-bg-popup);

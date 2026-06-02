@@ -4,7 +4,7 @@
 - Vue 3.5+（Composition API，优先 `<script setup lang="ts">`），构建工具 Vite 7。
 - TypeScript 5.9+ 严格模式，配置来自 `tsconfig.json` 与 `@vue/tsconfig`。
 - UI 使用 Arco Design Vue，状态管理 Pinia，路由 vue-router，工具库 xe-utils/dayjs/lodash-es 等。
-- 样式支持 SCSS/LESS，主题变量集中在 `src/styles`，SVG 走 `virtual:svg-icons-register`。
+- 样式支持 SCSS/LESS，主题变量集中在 `src/styles`，自定义图标走 `src/icons/custom-icons.json`（Iconify `custom:` 前缀）。
 - Lint 体系：ESLint 基于 `@antfu/eslint-config`，Stylelint 使用 standard/standard-scss/recommended-vue/recess-order。
 
 ## 基础规范
@@ -60,7 +60,7 @@
 ## 导入与排序
 - 导入分组：类型 → 第三方 → Vue/官方 → 项目内部（工具/组件/样式/资源）；同组按字母排序。
 - 路径别名：`@/*` → `src/*`；禁止 `../../../` 穿越。
-- 资源引入：SVG 走 `virtual:svg-icons-register`，样式从对应 `scss/less` 文件导入，避免内联样式。
+- 资源引入：自定义图标使用 `@iconify/vue` 的 `Icon` 组件，样式从对应 `scss/less` 文件导入，避免内联样式。
 
 ## 样式规范
 - 全局样式入口 `src/styles/index.scss`；变量/混入 `src/styles/var.scss`、`mixin.scss`；Arco 主题在 `src/styles/arco-ui`。

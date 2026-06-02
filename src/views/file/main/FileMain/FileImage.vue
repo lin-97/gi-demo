@@ -1,10 +1,11 @@
 <template>
   <img v-if="isImage" class="file-image" :src="props.data.src" />
-  <GiSvgIcon v-else size="100%" :name="getFileImg"></GiSvgIcon>
+  <Icon v-else :icon="`custom:${getFileImg}`" width="100%" height="100%" />
 </template>
 
 <script setup lang="ts">
 import type { FileItem } from '@/apis/file'
+import { Icon } from '@iconify/vue'
 import { FILE_ICON_MAP, IMAGE_TYPES } from '@/utils/file'
 
 interface Props {

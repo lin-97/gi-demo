@@ -70,7 +70,7 @@ import LayoutModeItem from './components/LayoutModeItem.vue'
 import 'vue-color-kit/dist/vue-color-kit.css'
 
 /** 组件名称 */
-defineOptions({ name: 'SettingDrawer' })
+defineOptions({ name: 'SettingDrawerPanel' })
 
 /** 状态管理 */
 const appStore = useAppStore()

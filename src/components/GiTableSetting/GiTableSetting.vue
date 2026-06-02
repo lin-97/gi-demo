@@ -11,25 +11,25 @@
         <slot name="custom-extra" />
 
         <a-tooltip content="导出">
-          <a-button type="text" size="mini" @click="emit('export')">
+          <a-button class="gi-table-setting__btn" type="text" size="mini" @click="emit('export')">
             <template #icon><icon-download :size="18" /></template>
           </a-button>
         </a-tooltip>
 
         <a-tooltip content="斑马纹">
-          <a-button type="text" size="mini" @click="stripe = !stripe">
+          <a-button class="gi-table-setting__btn" type="text" size="mini" @click="stripe = !stripe">
             <template #icon><icon-brush :size="18" /></template>
           </a-button>
         </a-tooltip>
 
         <a-tooltip content="刷新">
-          <a-button type="text" size="mini" @click="emit('refresh')">
+          <a-button class="gi-table-setting__btn" type="text" size="mini" @click="emit('refresh')">
             <template #icon><icon-refresh :size="18" /></template>
           </a-button>
         </a-tooltip>
 
         <a-tooltip :content="isFullscreen ? '退出全屏' : '全屏'">
-          <a-button type="text" size="mini" @click="toggleFullscreen">
+          <a-button class="gi-table-setting__btn" type="text" size="mini" @click="toggleFullscreen">
             <template #icon>
               <icon-fullscreen v-if="!isFullscreen" :size="18" />
               <icon-fullscreen-exit v-else :size="18" />
@@ -38,14 +38,14 @@
         </a-tooltip>
 
         <a-tooltip content="显示边框">
-          <a-button type="text" size="mini" @click="toggleBorder">
+          <a-button class="gi-table-setting__btn" type="text" size="mini" @click="toggleBorder">
             <template #icon><icon-apps :size="18" /></template>
           </a-button>
         </a-tooltip>
 
         <a-dropdown @select="handleSizeChange">
           <a-tooltip content="表格尺寸">
-            <a-button type="text" size="mini">
+            <a-button class="gi-table-setting__btn" type="text" size="mini">
               <template #icon>
                 <icon-font-colors :size="18" />
               </template>
@@ -61,7 +61,7 @@
 
         <a-popover v-if="showSettingColumnBtn" trigger="click" position="br"
           :content-style="{ minWidth: '160px', padding: '6px 8px 10px' }">
-          <a-button type="text" size="mini">
+          <a-button class="gi-table-setting__btn" type="text" size="mini">
             <template #icon><icon-settings :size="18" /></template>
           </a-button>
           <template #content>
@@ -205,6 +205,10 @@ function toggleBorder() {
     z-index: 1001;
     box-sizing: border-box;
     padding: var(--padding);
+  }
+
+  &__btn {
+    color: var(--color-text-1);
   }
 
   &__title {

@@ -231,7 +231,7 @@ onMounted(() => {
 
     .tabs-pane__tag {
       height: 26px;
-      border-radius: 2px;
+      border-radius: 3px;
     }
   }
 }

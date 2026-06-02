@@ -25,10 +25,16 @@ const storeSetup = () => {
     settingConfig.isMenuCollapsed = collapsed
   }
 
+  /** 恢复为 setting.json 中的默认配置 */
+  const resetSettings = () => {
+    Object.assign(settingConfig, defaultSettings)
+  }
+
   return {
     ...toRefs(settingConfig),
     pageTransitionName,
-    setMenuCollapse
+    setMenuCollapse,
+    resetSettings
   }
 }
 

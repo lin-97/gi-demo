@@ -8,7 +8,8 @@
         @clear="emit('update:modelValue', '')">
         <template #prefix>
           <component :is="modelValue" v-if="modelValue && selectedType === 'arco'" :size="16" />
-          <GiSvgIcon v-else-if="modelValue && selectedType === 'custom'" :size="16" :name="modelValue" />
+          <Icon v-else-if="modelValue && selectedType === 'custom'" :icon="toCustomIcon(modelValue)" :width="16"
+            :height="16" />
           <Icon v-else-if="modelValue && selectedType === 'iconpark'" :icon="modelValue" :width="16" :height="16" />
           <icon-search v-else />
         </template>
@@ -40,7 +41,7 @@
                   'gi-icon-selector__icon-item--active': modelValue === item,
                 }" @click="handleSelectedIcon(item)">
                   <component :is="item" v-if="selectedType === 'arco'" :size="20" />
-                  <GiSvgIcon v-else-if="selectedType === 'custom'" :name="item" :size="20" />
+                  <Icon v-else-if="selectedType === 'custom'" :icon="toCustomIcon(item)" :width="20" :height="20" />
                   <Icon v-else-if="selectedType === 'iconpark'" :icon="item" :width="20" :height="20" />
                   <div class="g-line-1 gi-icon-selector__icon-name">
                     {{ item }}
@@ -69,6 +70,7 @@ import IconParkOutlineIcons from '@iconify-json/icon-park-outline/icons.json'
 import { Icon } from '@iconify/vue'
 import { useClipboard } from '@vueuse/core'
 import { computed, ref, watch } from 'vue'
+import CustomIcons from '@/icons/custom-icons.json'
 
 defineOptions({ name: 'GiIconSelector' })
 
@@ -84,13 +86,6 @@ const emit = defineEmits<{
 
 /** Arco 图标名列表（构建期固定，模块级缓存） */
 const ARCO_ICON_NAMES = Object.keys(ArcoIcons).filter((k) => k !== 'default')
-
-const SvgIconModules = import.meta.glob('@/icons/*.svg')
-
-/** 自定义 SVG 文件名列表（构建期固定，模块级缓存） */
-const CUSTOM_ICON_NAMES = Object.keys(SvgIconModules)
-  .map((path) => path.match(/([^/\\]+)\.svg$/i)?.[1] ?? '')
-  .filter(Boolean)
 
 const iconParkIcons = (
   IconParkOutlineIcons as { icons?: Record<string, unknown> }
@@ -119,6 +114,8 @@ const pagination = reactive({
 const selectedType = ref<IconSourceType>('arco')
 
 const { copy, isSupported } = useClipboard()
+
+const CUSTOM_ICON_NAMES = Object.keys(CustomIcons.icons)
 
 const IconList = computed(() => {
   switch (selectedType.value) {

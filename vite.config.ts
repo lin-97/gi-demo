@@ -1,4 +1,3 @@
-import path from 'node:path'
 import { fileURLToPath, URL } from 'node:url'
 import vue from '@vitejs/plugin-vue'
 import vueJsx from '@vitejs/plugin-vue-jsx'
@@ -10,7 +9,6 @@ import Components from 'unplugin-vue-components/vite'
 import { defineConfig, loadEnv } from 'vite'
 import vitePluginCompression from 'vite-plugin-compression'
 import { viteMockServe } from 'vite-plugin-mock'
-import { createSvgIconsPlugin } from 'vite-plugin-svg-icons'
 import VueDevTools from 'vite-plugin-vue-devtools'
 
 export default defineConfig(({ mode }) => {
@@ -90,12 +88,6 @@ export default defineConfig(({ mode }) => {
         defaultClass: 'iconify-icon',
         defaultStyle: 'vertical-align: middle;'
       }),
-      createSvgIconsPlugin({
-        // 指定需要缓存的图标文件夹
-        iconDirs: [path.resolve(process.cwd(), 'src/icons')],
-        // 指定symbolId格式
-        symbolId: 'icon-[dir]-[name]'
-      }),
       viteMockServe({
         mockPath: 'mock', // 目录位置
         logger: true, //  是否在控制台显示请求日志
@@ -128,9 +120,9 @@ export default defineConfig(({ mode }) => {
       mode === 'development'
         ? undefined
         : {
-            pure: ['console.log'],
-            drop: ['debugger'],
-            legalComments: 'none'
-          }
+          pure: ['console.log'],
+          drop: ['debugger'],
+          legalComments: 'none'
+        }
   }
 })

@@ -14,13 +14,13 @@
           <template #content>
             <a-doption>
               <template #icon>
-                <GiSvgIcon name="upload-file" />
+                <Icon icon="custom:upload-file" :width="20" :height="20" />
               </template>
               <span>上传文件</span>
             </a-doption>
             <a-doption>
               <template #icon>
-                <GiSvgIcon name="upload-folder" />
+                <Icon icon="custom:upload-folder" :width="20" :height="20" />
               </template>
               <span>上传文件夹</span>
             </a-doption>
@@ -100,6 +100,7 @@
 <script setup lang="ts">
 import type { FileItem } from '@/apis/file'
 import { Message, Modal } from '@arco-design/web-vue'
+import { Icon } from '@iconify/vue'
 import { api as viewerApi } from 'v-viewer'
 import { getFileList } from '@/apis/file'
 import { FILE_TYPE_LIST, IMAGE_TYPES } from '@/utils/file'
@@ -109,12 +110,11 @@ import {
   previewFileAudioModal,
   previewFileVideoModal
 } from '../../components/index'
+import FileGrid from './FileGrid.vue'
+import FileList from './FileList.vue'
+import FilePath from './FilePath.vue'
 import useFileManage from './useFileManage'
 import 'viewerjs/dist/viewer.css'
-
-const FilePath = defineAsyncComponent(() => import('./FilePath.vue'))
-const FileGrid = defineAsyncComponent(() => import('./FileGrid.vue'))
-const FileList = defineAsyncComponent(() => import('./FileList.vue'))
 
 const route = useRoute()
 const router = useRouter()

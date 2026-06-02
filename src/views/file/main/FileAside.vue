@@ -14,7 +14,7 @@
           <template #title>文件类型</template>
           <a-menu-item v-for="item in FILE_TYPE_LIST" :key="item.value.toString()" @click="onClickItem(item)">
             <template #icon>
-              <GiSvgIcon :size="28" :name="item.menuIcon"></GiSvgIcon>
+              <Icon :icon="`custom:${item.menuIcon}`" :width="28" :height="28" />
             </template>
             <span>{{ item.name }}</span>
           </a-menu-item>
@@ -45,6 +45,7 @@
 
 <script setup lang="ts">
 import type { FileTypeListItem } from '@/utils/file'
+import { Icon } from '@iconify/vue'
 import { FILE_TYPE_LIST } from '@/utils/file'
 
 const route = useRoute()

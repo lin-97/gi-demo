@@ -12,7 +12,7 @@
           <a-select v-model="form.payType" style="width: 150px">
             <a-option v-for="item in PAY_METHODS" :key="item.icon" :value="item.value">
               <template #icon>
-                <GiSvgIcon :name="item.icon"></GiSvgIcon>
+                <Icon icon="custom:{{ item.icon }}" :width="20" :height="20" />
               </template>
               <span>{{ item.label }}</span>
             </a-option>
@@ -38,6 +38,7 @@
 <script setup lang="ts">
 import type { FormInstance } from '@arco-design/web-vue'
 import type { StepState } from './type'
+import { Icon } from '@iconify/vue'
 import { STEP_FORM_KEY } from './util'
 
 defineOptions({ name: 'Step1' })

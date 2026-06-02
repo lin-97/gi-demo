@@ -42,7 +42,7 @@
         <a-tooltip content="显示边框">
           <a-button size="mini" class="g-hover-btn" @click="toggleBorder">
             <template #icon>
-              <IconBorders />
+              <Icon icon="custom:borders" :width="18" :height="18" />
             </template>
           </a-button>
         </a-tooltip>
@@ -52,7 +52,7 @@
           <a-tooltip content="表格尺寸">
             <a-button size="mini" class="g-hover-btn">
               <template #icon>
-                <IconTableSize />
+                <Icon icon="custom:table-size" :width="17" :height="17" />
               </template>
             </a-button>
           </a-tooltip>
@@ -122,11 +122,10 @@
 <script setup lang="ts" generic="T extends TableData">
 import type { DropdownInstance, TableColumnData, TableData, TableInstance } from '@arco-design/web-vue'
 import type { TableProps, TableSettingColumnItem } from './type'
+import { Icon } from '@iconify/vue'
 import { omit } from 'lodash-es'
 import { computed, ref, watch } from 'vue'
 import { VueDraggable } from 'vue-draggable-plus'
-import IconBorders from '@/components/icons/IconBorders.vue'
-import IconTableSize from '@/components/icons/IconTableSize.vue'
 
 defineOptions({ name: 'GiTable' })
 

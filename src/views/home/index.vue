@@ -14,12 +14,13 @@
     </a-row>
 
     <a-back-top :visible-height="100" target-container="#home">
-      <GiSvgIcon name="backtop" :size="50" class="backtop-icon"></GiSvgIcon>
+      <Icon icon="custom:backtop" :width="50" :height="50" class="backtop-icon" />
     </a-back-top>
   </div>
 </template>
 
 <script setup lang="ts">
+import { Icon } from '@iconify/vue'
 import FastCard from './components/FastCard.vue'
 import ImageCard from './components/ImageCard.vue'
 import MessageCard from './components/MessageCard.vue'

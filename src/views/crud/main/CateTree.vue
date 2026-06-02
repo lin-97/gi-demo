@@ -23,9 +23,9 @@
 <script setup lang="tsx">
 import type { TreeNodeData } from '@arco-design/web-vue'
 import type { CateTreeItem } from '@/apis/cate'
+import { Icon } from '@iconify/vue'
 import { mapTree } from 'xe-utils'
 import { getCateTree } from '@/apis/cate'
-import { GiSvgIcon } from '@/components/index'
 
 interface Props {
   type?: number
@@ -62,9 +62,13 @@ const getTreeData = async () => {
     treeData.value = mapTree(res.data, (i) => ({
       ...i,
       switcherIcon: (node: any) => {
-        if (node.expanded && !node.isLeaf) return <GiSvgIcon name="file-open" size={16}></GiSvgIcon>
-        if (!node.expanded && !node.isLeaf) return <GiSvgIcon name="file-close" size={16}></GiSvgIcon>
-        return <GiSvgIcon name="file" size={16}></GiSvgIcon>
+        if (node.expanded && !node.isLeaf) {
+          return <Icon icon="custom:file-open" width={16} height={16} />
+        }
+        if (!node.expanded && !node.isLeaf) {
+          return <Icon icon="custom:file-close" width={16} height={16} />
+        }
+        return <Icon icon="custom:file" width={16} height={16} />
       }
     }))
     nextTick(() => {

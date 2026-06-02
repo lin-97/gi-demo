@@ -79,10 +79,10 @@
 </template>
 
 <script setup lang="ts">
-import { Drawer, Message, Modal } from '@arco-design/web-vue'
+import { Button, Drawer, Message, Modal } from '@arco-design/web-vue'
 import { useFullscreen } from '@vueuse/core'
-import { useBreakpoint } from '@/hooks'
-import { useUserStore } from '@/stores'
+import { useBreakpoint, useTheme } from '@/hooks'
+import { useAppStore, useUserStore } from '@/stores'
 import Notice from './Notice.vue'
 import SettingDrawerPanel from './SettingDrawerPanel.vue'
 
@@ -94,6 +94,8 @@ const router = useRouter()
 
 /** 状态管理 */
 const userStore = useUserStore()
+const appStore = useAppStore()
+const { setThemeColor } = useTheme()
 
 /** 响应式断点 */
 const { breakpoint } = useBreakpoint()
@@ -128,13 +130,20 @@ const USER_MENUS = [
   }
 ]
 
+/** 恢复默认项目配置 */
+const handleResetSettings = () => {
+  appStore.resetSettings()
+  setThemeColor(appStore.themeColor)
+  Message.success('已恢复默认配置')
+}
+
 /** 打开设置抽屉 */
 const handleOpenSettings = () => {
   Drawer.open({
     title: '项目配置',
     width: 300,
-    footer: false,
-    content: () => h(SettingDrawerPanel)
+    content: () => h(SettingDrawerPanel),
+    footer: () => h(Button, { type: 'primary', long: true, style: { margin: 0 }, onClick: handleResetSettings }, { default: () => '恢复默认配置' })
   })
 }
 

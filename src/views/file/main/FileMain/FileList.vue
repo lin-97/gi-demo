@@ -8,11 +8,11 @@
           <template #cell="{ record }">
             <a-trigger trigger="contextMenu" align-point animation-name="slide-dynamic-origin" auto-fit-transform-origin
               position="bl" update-at-scroll scroll-to-close>
-              <section class="file-name">
-                <div class="file-image">
+              <section class="file-list__name">
+                <div class="file-list__icon">
                   <FileImage :data="record"></FileImage>
                 </div>
-                <span>{{ record.name }}</span>
+                <span class="file-list__label">{{ record.name }}</span>
               </section>
               <template #content>
                 <FileRightMenu :data="record" @click="handleRightMenuClick($event, record)"></FileRightMenu>
@@ -49,6 +49,8 @@
 import type { TableInstance, TableRowSelection } from '@arco-design/web-vue'
 import type { FileItem } from '@/apis/file'
 
+defineOptions({ name: 'FileList' })
+
 interface Props {
   data?: FileItem[]
   selectedFileIds?: string[]
@@ -56,9 +58,9 @@ interface Props {
 }
 
 const props = withDefaults(defineProps<Props>(), {
-  data: () => [], // 文件数据
+  data: () => [],
   selectedFileIds: () => [],
-  isBatchMode: false // 是否是批量模式
+  isBatchMode: false
 })
 
 const emit = defineEmits<{
@@ -75,45 +77,47 @@ const rowSelection: TableRowSelection = reactive({
   showCheckedAll: true
 })
 
-// 多选
 const select: TableInstance['onSelect'] = (rowKeys, rowKey, record) => {
   emit('select', record as unknown as FileItem)
 }
 
-// 行点击事件
 const handleRowClick: TableInstance['onRowClick'] = (record) => {
   emit('click', record as unknown as FileItem)
 }
 
-// 右键菜单点击事件
 const handleRightMenuClick = (mode: string, item: FileItem) => {
   emit('right-menu-click', mode, item)
 }
 </script>
 
 <style lang="scss" scoped>
-:deep(.arco-table-td .arco-table-cell) {
-  padding-top: 0;
-  padding-bottom: 0;
-}
-
 .file-list {
   width: 100%;
   overflow: hidden;
 
-  .file-name {
+  :deep(.arco-table-td .arco-table-cell) {
+    padding-top: 0;
+    padding-bottom: 0;
+  }
+
+  &__name {
     display: flex;
     align-items: center;
     height: 100%;
-    padding-top: 6px;
-    padding-bottom: 6px;
+    padding: 6px 0;
     cursor: pointer;
   }
 
-  .file-image {
+  &__icon {
+    flex-shrink: 0;
     width: 30px;
     height: 30px;
     margin-right: 10px;
+  }
+
+  &__label {
+    flex: 1;
+    min-width: 0;
   }
 }
 </style>

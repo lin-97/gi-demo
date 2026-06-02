@@ -1,8 +1,6 @@
 import { Card, Drawer, Modal } from '@arco-design/web-vue'
 // 额外引入 Arco Design Icon图标库
 import ArcoVueIcon from '@arco-design/web-vue/es/icon'
-import IconParkOutlineIcons from '@iconify-json/icon-park-outline/icons.json'
-import { addCollection } from '@iconify/vue'
 // import '@arco-themes/vue-gi-demo/index.less'
 // import '@arco-design/web-vue/dist/arco.css'
 import { createApp } from 'vue'
@@ -20,10 +18,8 @@ import 'animate.css/animate.min.css'
 import '@/styles/css/transition.css'
 // 导入全局scss主文件
 import '@/styles/index.scss'
-// 支持SVG
-import 'virtual:svg-icons-register'
 // 注册离线图标集
-addCollection(IconParkOutlineIcons)
+import '@/icons/index'
 
 // 对特定组件进行默认配置
 Card.props.bordered = false

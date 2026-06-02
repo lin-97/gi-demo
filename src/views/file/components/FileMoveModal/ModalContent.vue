@@ -13,8 +13,8 @@
 
 <script lang="tsx" setup>
 import type { TreeInstance } from '@arco-design/web-vue'
+import { Icon } from '@iconify/vue'
 import { mapTree } from 'xe-utils'
-import { GiSvgIcon } from '@/components/index'
 
 const formRef = useTemplateRef('formRef')
 const form = reactive({
@@ -59,10 +59,9 @@ treeData.value = mapTree(treeData.value, (i) => ({
   ...i,
   icon: (node: any) => {
     if (node.expanded) {
-      return <GiSvgIcon name="file-open" size={16}></GiSvgIcon>
-    } else {
-      return <GiSvgIcon name="file-close" size={16}></GiSvgIcon>
+      return <Icon icon="custom:file-open" width={16} height={16} />
     }
+    return <Icon icon="custom:file-close" width={16} height={16} />
   }
 }))
 
