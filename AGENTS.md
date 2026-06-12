@@ -1,6 +1,6 @@
 # AGENTS.md
 
-面向 AI 编码助手的项目指南。本项目是基于 Vue 3 + Vite + TypeScript + Arco Design Vue 的中后台管理模板，开发时优先复用现有 `Gi*` 组件与 `hooks`，保持与参考页面一致的风格。
+面向 AI 编码助手的项目指南。规范以 `.agents/` 为唯一来源；Cursor / OpenCode / Codex 等工具通过各自适配层读取。
 
 ## 技术栈
 
@@ -8,7 +8,7 @@
 |------|------|
 | 框架 | Vue 3.5 + TypeScript + `<script setup>` |
 | 构建 | Vite 7 |
-| UI | Arco Design Vue（按需自动导入） |
+| UI | Arco Design Vue（按需自动导入）+ `Gi*` 组件 |
 | 状态 | Pinia + pinia-plugin-persistedstate |
 | 路由 | Vue Router 4（Hash 模式） |
 | 工具 | @vueuse/core、lodash-es、dayjs、xe-utils |
@@ -70,41 +70,14 @@ mock/              # vite-plugin-mock
 - `Pagination`：`{ page, size }`
 - `ApiRes<T>`、`PageRes<T>`：统一接口响应（见 `api.d.ts`）
 
-## 编码约定
+## 规范文档（`.agents/rules/`）
 
-### Vue 页面
-
-- 使用 **Composition API** + `<script setup lang="ts">`；表格列复杂时用 `lang="tsx"`。
-- 每个页面组件设置：`defineOptions({ name: 'ModuleFeature' })`（如 `SystemUser`）。
-- 列表页常用样式类：`g-row-tool`、`g-table`、`g-full-column`、`g-mb`。
-
-### 标准 CRUD 列表页
-
-1. 布局：`GiPageLayout`（可选 `#left` 树/分类）。
-2. 数据：`useTable({ listAPI, deleteAPI, immediate, rowKey })`。
-3. 工具栏/操作列：`GiButton`（`add` | `edit` | `delete` | `search` | `reset` 等）。
-4. 表格：`a-table`，`row-key="id"`，列用 `TableColumnData[]` + TSX `render`。
-5. 状态展示：`GiCellStatus` / `GiCellGender` 等；字典用 `useDict(['STATUS'] as const)`。
-6. 表单弹窗：子组件 `GiForm` + `defineExpose({ add, edit })`，保存后 `emit('save-success')` 并 `search()`。
-
-### API 层
-
-- 每模块一个文件，如 `src/apis/system/user.ts`。
-- 标准 CRUD：`export const baseAPI = getBaseApi<ListItem>({ baseUrl: '/system/user' })`。
-- 路径约定：`getList` | `getDetail` | `add` | `update` | `delete`（见 `src/apis/base.ts`）。
-- 非标准接口用 `http.get/post` 单独声明。
-- 请求封装：`src/utils/http.ts`，`baseURL` = `VITE_API_PREFIX`；Token 头字段 `token`；`success === false` 会提示并 reject；401 跳转登录。
-
-### Mock
-
-- 开发环境 `VITE_API_PREFIX = '/mock'`（`.env.development`）。
-- 新模块：`mock/{module}/{name}.ts` 使用 `defineMock` + `getBaseApi`，列表返回 `{ total, records }`。
-- 静态数据放 `mock/_data/`；URL 与前端 `baseUrl` 保持一致。
-
-### 状态与字典
-
-- 业务状态字段与字典编码对齐（如 `status` 配 `STATUS`）。
-- 空字符串查询条件传 API 前建议转为 `undefined`。
+| 文件 | 内容 |
+|------|------|
+| `.agents/rules/agent-behavior.md` | AI Agent 通用行为准则 |
+| `.agents/rules/coding-standards.md` | Vue 3 + TS 通用命名、类型、Lint 约定 |
+| `.agents/rules/vue.md` | Vue 3 通用 SFC、Emits、Ref、Composition API 约定 |
+| `.agents/rules/css.md` | Vue 3 通用 CSS/BEM/Stylelint 约定 |
 
 ## 参考实现（改代码前先读）
 
@@ -117,32 +90,13 @@ mock/              # vite-plugin-mock
 | API + baseAPI | `src/apis/system/user.ts` |
 | Mock CRUD | `mock/system/user.ts` |
 
-## 深入文档（按需阅读）
-
-仓库内 Cursor 技能（比本文更细）：
+## 技能文档（按需阅读，勿预加载）
 
 | 场景 | 文件 |
 |------|------|
-| 项目总览 | `.cursor/skills/project/SKILL.md` |
-| CRUD 列表/表单 | `.cursor/skills/crud-page/SKILL.md` |
-| API 与 Mock | `.cursor/skills/api-mock/SKILL.md` |
-
-## Agent 行为准则
-
-**应当：**
-
-- 改动范围最小化，只改与任务相关的文件。
-- 优先复用 `Gi*`、`hooks`、`getBaseApi`、现有 mock 工具，不重复造轮子。
-- 新增页面/接口时对齐参考页与 `getBaseApi` 路径约定。
-- 改完后在合适时运行 `pnpm typecheck` / `pnpm lint`（若任务涉及类型或规范）。
-
-**不应：**
-
-- 擅自新增说明性 Markdown 文档（除非用户明确要求）。
-- 为已自动导入的 API/组件写冗余 import。
-- 引入与项目风格不符的 UI 库或全新抽象层。
-- 猜测不存在的 API 路径或响应结构；以 `src/apis`、`mock` 与类型定义为准。
-- 在未要求时执行 `git commit`、推远程或修改 git 配置。
+| 项目总览 | `.agents/skills/project/SKILL.md` |
+| CRUD 列表/表单 | `.agents/skills/crud-page/SKILL.md` |
+| API 与 Mock | `.agents/skills/api-mock/SKILL.md` |
 
 ## 环境与联调
 
