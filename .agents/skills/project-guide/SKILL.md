@@ -1,23 +1,17 @@
 ---
-name: project
+name: project-guide
 description: 后台管理模板的项目总览与前端强制规范。涵盖 Vue 3 + Arco Design + Gi 组件库、目录结构、自动导入、CRUD/API 约定与代码风格。在当前仓库内开发、新增页面、查阅架构或不确定项目规范时使用。
 ---
 
 # 项目开发指南
 
-> **适用范围**：本仓库 `src/**`、`mock/**`  
-> **规范来源**：`.agents/rules/`（常驻）与本 skill（任务细节）
-
-## 通用要求
-
-详见 `.agents/rules/agent-behavior.md`；本项目补充见下文「本项目 Agent 约定」。
+> **适用范围**：本仓库 `src/**`、`mock/**`
+> **规范来源**：`AGENTS.md` 常驻行为准则 + 本 skill（项目细节）；编码规范按需读 `code-vue` / `code-css` / `code-ts` skill
 
 ## 本项目 Agent 约定
-
-- 与用户沟通使用**简体中文**。
 - 优先复用 `Gi*`、`hooks`、`getBaseApi`、现有 mock 工具；新增页面/接口对齐参考页与 `getBaseApi` 约定。
 - API / Mock 以 `src/apis`、`mock` 与类型定义为准，不要猜测路径。
-- 涉及 CRUD、API、Mock 时按需读取 `.agents/skills/` 对应 skill。
+- 涉及 CRUD、API、Mock 时按需读取对应 skill；写 `.vue` / 样式 / TS 前读取 [code-vue](../code-vue/SKILL.md)、[code-css](../code-css/SKILL.md)、[code-ts](../code-ts/SKILL.md)。
 - 改动后视情况运行 `pnpm typecheck`、`pnpm lint`、`pnpm lint:style`。
 
 ## 技术栈
@@ -33,7 +27,7 @@ description: 后台管理模板的项目总览与前端强制规范。涵盖 Vue
 | 工具 | @vueuse/core、lodash-es、dayjs、xe-utils |
 | Mock | vite-plugin-mock + mockjs（开发默认启用） |
 
-每个 SFC 必须 `defineOptions({ name: 'XxxYyy' })`；通用 Vue 规范见 `.agents/rules/vue.md`，本项目约定见下文「本项目 Vue 约定」。
+每个 SFC 必须 `defineOptions({ name: 'XxxYyy' })`；通用 Vue 规范见 [code-vue](../code-vue/SKILL.md)，本项目补充见下文「本项目 Vue 约定」。
 
 ## 路径别名
 
@@ -79,7 +73,7 @@ mock/{module}/{name}.ts                # 与 API 路径一致的 Mock
 - 参考实现：`src/views/system/user/index.vue`、`UserFormModal.vue`
 - Hook：`@/hooks/useTable`
 - API 模板：`src/apis/system/user.ts` + `getBaseApi`
-- 详细步骤：读取并遵循 [crud-page](../crud-page/SKILL.md)
+- 详细步骤：读取并遵循 [project-crud](../project-crud/SKILL.md)
 
 核心结构：
 
@@ -89,7 +83,7 @@ mock/{module}/{name}.ts                # 与 API 路径一致的 Mock
 4. `useTable` 绑定 `listAPI` 与 `deleteAPI`
 5. `XxxFormModal` ref，`defineExpose({ add, edit })`，`@save-success="search"`
 
-分页类型：`PageRes<T>`（`records` + `total`）。Mock 与接口详见 [api-mock](../api-mock/SKILL.md)。
+分页类型：`PageRes<T>`（`records` + `total`）。Mock 与接口详见 [project-api](../project-api/SKILL.md)。
 
 ## API 层模板
 
@@ -120,7 +114,7 @@ export function customAction(params: Pagination) {
 - 遵循 `@antfu/eslint-config`（`eslint.config.js`）：箭头参数括号、1TBS、无尾随逗号；Vue block 顺序 `[['script', 'template'], 'style']`；宏顺序 `defineOptions/defineModel/defineProps/defineEmits/defineSlots`，`defineExpose` 最后。
 - 布局放 `src/layout/`，Gi 组件放 `src/components/Gi*`，业务 Hook 放 `hooks/` 或 `hooks/app/`。
 - 空字符串查询条件传 API 前建议转为 `undefined`。
-- 通用规范见 `.agents/rules/coding-standards.md`、`vue.md`、`css.md`；本项目补充见下文。
+- 通用编码规范见 [code-ts](../code-ts/SKILL.md)、[code-vue](../code-vue/SKILL.md)、[code-css](../code-css/SKILL.md)；本项目补充见下文。
 
 ## 本项目编码约定
 
@@ -157,8 +151,11 @@ export function customAction(params: Pagination) {
 
 | 场景 | 技能 |
 |------|------|
-| 新建 CRUD 列表页、表格、弹窗表单 | [crud-page](../crud-page/SKILL.md) |
-| 新增接口、Mock、baseAPI | [api-mock](../api-mock/SKILL.md) |
+| Vue SFC、Emits、Ref | [code-vue](../code-vue/SKILL.md) |
+| 样式、BEM | [code-css](../code-css/SKILL.md) |
+| TS 命名、导入 | [code-ts](../code-ts/SKILL.md) |
+| 新建 CRUD 列表页、表格、弹窗表单 | [project-crud](../project-crud/SKILL.md) |
+| 新增接口、Mock、baseAPI | [project-api](../project-api/SKILL.md) |
 
 ## 参考页面
 
@@ -167,20 +164,8 @@ export function customAction(params: Pagination) {
 - GiTableSetting + a-table：`src/views/table/custom3/index.vue`
 - 表单弹窗：`src/views/system/user/UserFormModal.vue`
 
-通用 Agent / 编码规范见 `.agents/rules/`；本项目参考页见上文。
-
-## 开发命令
-
-```bash
-pnpm dev          # 开发（Mock 已启用）
-pnpm build        # 构建
-pnpm typecheck    # 类型检查
-pnpm lint         # ESLint
-pnpm lint:style   # Stylelint
-```
-
 ## 禁止事项
 
 - ❌ 绕过 `@/utils/http` 直接裸用 axios
 - ❌ 表格页自行实现分页/删除逻辑，而不使用 `useTable`
-- ❌ 新建列表页不参考 `system/user` 与 [crud-page](../crud-page/SKILL.md) 约定
+- ❌ 新建列表页不参考 `system/user` 与 [project-crud](../project-crud/SKILL.md) 约定

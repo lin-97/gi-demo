@@ -1,9 +1,11 @@
 ---
-name: crud-page
+name: project-crud
 description: 在本模板项目中创建或修改 CRUD 列表页、表格列、搜索区、表单弹窗。使用 GiPageLayout、useTable、GiButton、a-table、GiForm、useDict 时加载本技能。
 ---
 
 # CRUD 列表页开发
+
+> 写/改 `.vue` 前先读 [code-vue](../code-vue/SKILL.md)；写样式前读 [code-css](../code-css/SKILL.md)。
 
 ## 标准页面结构
 

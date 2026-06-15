@@ -1,5 +1,5 @@
 ---
-name: api-mock
+name: project-api
 description: 在本模板项目中新增或修改 API 接口、类型定义与 vite-plugin-mock 模拟数据。涉及 getBaseApi、http、baseAPI、mock 目录、分页响应格式时使用。
 ---
 

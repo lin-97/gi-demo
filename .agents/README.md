@@ -6,23 +6,24 @@
 
 ```
 .agents/
-├── rules/              # 常驻规则（纯 Markdown）
-│   ├── agent-behavior.md
-│   ├── coding-standards.md
-│   ├── vue.md
-│   └── css.md
-└── skills/             # 按需加载的任务型技能（Agent Skills 标准）
-    ├── project/SKILL.md
-    ├── crud-page/SKILL.md
-    └── api-mock/SKILL.md
+├── rules/
+│   └── agent.md                # 唯一常驻规则（Cursor 经 AGENTS.md 内联注入）
+└── skills/                   # 按需加载
+    ├── code-ts/SKILL.md
+    ├── code-vue/SKILL.md
+    ├── code-css/SKILL.md
+    ├── project-guide/SKILL.md
+    ├── project-crud/SKILL.md
+    ├── project-api/SKILL.md
+    └── git-commit/SKILL.md
 ```
 
 ## 工具适配
 
 | 工具 | 适配方式 |
 |------|----------|
-| Cursor | 根目录 `AGENTS.md` + `.agents/rules/` + `.agents/skills/` |
-| OpenCode | 根目录 `AGENTS.md` + `opencode.json` |
-| Codex | 根目录 `AGENTS.md` + `.agents/skills/` |
+| Cursor | `AGENTS.md`（内联 behavior 规则 + 技能索引）+ `.agents/skills/`（按需） |
+| OpenCode | `AGENTS.md` + `opencode.json` + `.agents/rules/` + `.agents/skills/` |
+| Codex | `AGENTS.md` + `.agents/skills/` |
 
-修改规范时**只改本目录**及根目录 `AGENTS.md`，不要改各工具适配层中的重复内容。
+修改 `agent.md` 后请同步 `AGENTS.md` 的「常驻规则」一节；编码规范改对应 skill，不要重复写入 `AGENTS.md`。
